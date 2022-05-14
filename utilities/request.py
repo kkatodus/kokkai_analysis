@@ -30,12 +30,16 @@ while gettable:
     try:
         request_url = base_url+f"startRecord={starting_point}&"+condition_link
         print(request_url)
+        
         response = requests.get(request_url)
         response = response.json()
+        
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
+        
         with open(f"{output_dir}\\request_data&starting={starting_point}_{condition_link}.json", "w", encoding = "utf-8") as f:
             json.dump(response, f, ensure_ascii=False, indent=4)
+        
         starting_point = response["nextRecordPosition"]
         time.sleep(10)
     except: 
