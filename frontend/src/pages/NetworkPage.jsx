@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/network.css"
 
-function Network(props) {
+function NetworkPage(props) {
     return (
         <div className="network-page">
             Network
@@ -9,4 +9,4 @@ function Network(props) {
     );
 }
 
-export default Network;
+export default NetworkPage;
