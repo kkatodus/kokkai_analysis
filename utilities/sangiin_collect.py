@@ -1,10 +1,11 @@
 
 import json
+from unicodedata import name
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import os
-import re
+import time
 output_dir = "..\\data_sangiin\\"
 chromedriver_path = "..\\chromedriver.exe"
 main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html"
@@ -72,6 +73,30 @@ def collect_whole_party_vote(party_caption, party_dict):
     party_dict["member_num"] = party_mem_num
     return party_dict, party_name
 
+def collect_individual_party_vote(party_dict, party_vote_tbody_dom):
+    party_vote_tr_doms = party_vote_tbody_dom.find_elements(By.TAG_NAME, "tr")
+    votes = {}
+    for party_vote_tr_dom in party_vote_tr_doms[1:len(party_vote_tr_doms)-1]:
+        party_vote_pros = party_vote_tr_dom.find_elements(By.CLASS_NAME, "pro")
+        party_vote_cons = party_vote_tr_dom.find_elements(By.CLASS_NAME, "con")
+        party_vote_nams = party_vote_tr_dom.find_elements(By.XPATH, "//td[@class='nam']//tt")
+        for pro, con, nam in zip(party_vote_pros, party_vote_cons, party_vote_nams):
+            vote = ""
+            try:
+                pro.find_element(By.TAG_NAME, "img")
+                vote = "yay"
+            except:
+                try:
+                    con.find_element(By.TAG_NAME, "img")
+                    vote = "nay"
+                except:
+                    vote = "abstain"
+            name_str = nam.text
+            name_str = name_str.replace("\u3000", "")
+            votes[name_str] = vote
+    party_dict["votes"] = votes.copy()
+    return party_dict
+
 def collect_individual_votes(one_topic_dict):
     whole_result = driver.find_element(By.XPATH, whole_result_num_xpath)
     whole_result = whole_result.text.split("　　　")
@@ -86,10 +111,12 @@ def collect_individual_votes(one_topic_dict):
     party_votes = driver.find_elements(By.XPATH, party_vote_xpath)
 
     #collecting individual voting results for each party
-    for party_name, party_vote in zip(party_names, party_votes):
+    for party_name, party_vote_tbody_dom in zip(party_names, party_votes):
         party_dict = party_vote_results_layout.copy()
         party_dict, party_name = collect_whole_party_vote(party_name, party_dict)
+        party_dict = collect_individual_party_vote(party_dict, party_vote_tbody_dom)
         one_topic_dict["voting_results"][party_name] = party_dict
+
 
     one_topic_dict["whole_result"] = whole_result_dict
     return one_topic_dict
