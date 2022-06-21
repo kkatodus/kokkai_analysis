@@ -24,29 +24,31 @@ xpath_to_voting_row = "//div[@id='KIZI']/following-sibling::table//tr"
     
 
 
-def obtain_politician_voting_info():
+def obtain_politician_voting_info(politician_name):
     global driver
-    voting_rows = driver.find_elements(By.XPATH, xpath_to_voting_row)
     next_page = True
+    print(politician_name)
     while next_page:
+        voting_rows = driver.find_elements(By.XPATH, xpath_to_voting_row)
+        
+        for voting_row in voting_rows[1:]:
+            voting_topic = voting_row.find_element(By.TAG_NAME, "a")
+            cols = voting_row.find_elements(By.TAG_NAME, "td")
+            yay_col = cols[2]
+            nay_col = cols[3]
+            abstain_col = cols[4]
+            if yay_col.text == "○":
+                vote = "Yay"
+            elif nay_col.text == "×":
+                vote = "Nay"
+            else:
+                vote = "Abstain"
+            print(voting_topic.text, vote)
         try:
-            for voting_row in voting_rows[1:]:
-                voting_topic = voting_row.find_element(By.TAG_NAME, "a")
-                cols = voting_row.find_elements(By.TAG_NAME, "td")
-                yay_col = cols[2]
-                nay_col = cols[3]
-                abstain_col = cols[4]
-                if yay_col.text == "○":
-                    vote = "Yay"
-                elif nay_col.text == "×":
-                    vote = "Nay"
-                else:
-                    vote = "Abstain"
-                print(voting_topic.text, vote)
-
             next_link = driver.find_element(By.LINK_TEXT, ">")
             next_link.click()
-        except:
+        except Exception as e:
+            print("_______________________Next Politician_________________________________")
             next_page = False
 
 
@@ -62,10 +64,11 @@ def sangiin_collect():
         area_link = driver.find_element(By.LINK_TEXT, area)
         area_link.click()
         politician_links = driver.find_elements(By.XPATH, xpath_to_politician_list)
-        politician_links = [politician.get_attribute("href") for politician in politician_links]
-        for idx, link in enumerate(politician_links[:-3]):
+        politician_names = [politician_link.text for politician_link in politician_links][:-3]
+        politician_links = [politician.get_attribute("href") for politician in politician_links][:-3]
+        for name, link in zip(politician_names, politician_links):
             driver.get(link)
-            obtain_politician_voting_info()
+            obtain_politician_voting_info(name)
         time.sleep(5)
 
 if __name__ == "__main__":
