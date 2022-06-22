@@ -73,13 +73,17 @@ def collect_whole_party_vote(party_caption, party_dict):
     party_dict["member_num"] = party_mem_num
     return party_dict, party_name
 
-def collect_individual_party_vote(party_dict, party_vote_tbody_dom):
+def collect_individual_party_vote(party_vote_tbody_dom):
     party_vote_tr_doms = party_vote_tbody_dom.find_elements(By.TAG_NAME, "tr")
+    #print(len(party_vote_tr_doms))
     votes = {}
     for party_vote_tr_dom in party_vote_tr_doms[1:len(party_vote_tr_doms)-1]:
         party_vote_pros = party_vote_tr_dom.find_elements(By.CLASS_NAME, "pro")
         party_vote_cons = party_vote_tr_dom.find_elements(By.CLASS_NAME, "con")
-        party_vote_nams = party_vote_tr_dom.find_elements(By.XPATH, "//td[@class='nam']//tt")
+        party_vote_nams = party_vote_tr_dom.find_elements(By.TAG_NAME, "tt")
+        # print(len(party_vote_pros))
+        # print(len(party_vote_cons))
+        # print(len(party_vote_nams))
         for pro, con, nam in zip(party_vote_pros, party_vote_cons, party_vote_nams):
             vote = ""
             try:
@@ -92,10 +96,12 @@ def collect_individual_party_vote(party_dict, party_vote_tbody_dom):
                 except:
                     vote = "abstain"
             name_str = nam.text
+            # print(name_str)
             name_str = name_str.replace("\u3000", "")
-            votes[name_str] = vote
-    party_dict["votes"] = votes.copy()
-    return party_dict
+            name_str = name_str.replace(" ", "")
+            if name_str != "":
+                votes[name_str] = vote
+    return votes
 
 def collect_individual_votes(one_topic_dict):
     whole_result = driver.find_element(By.XPATH, whole_result_num_xpath)
@@ -114,7 +120,8 @@ def collect_individual_votes(one_topic_dict):
     for party_name, party_vote_tbody_dom in zip(party_names, party_votes):
         party_dict = party_vote_results_layout.copy()
         party_dict, party_name = collect_whole_party_vote(party_name, party_dict)
-        party_dict = collect_individual_party_vote(party_dict, party_vote_tbody_dom)
+        votes = collect_individual_party_vote(party_vote_tbody_dom)
+        party_dict["votes"] = votes
         one_topic_dict["voting_results"][party_name] = party_dict
 
 
