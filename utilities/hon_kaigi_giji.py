@@ -7,12 +7,12 @@ import sys
 
 base_url = "https://kokkai.ndl.go.jp/api/meeting?"
 year = int(sys.argv[1])
-output_dir = f"C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data\\{year}"
+output_dir = f"C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data_sangiin\\{year}"
 
 conditions_list = [
 f"from={year}-01-01",
 f"until={year}-12-31",
-"nameofHouse=衆議院",
+"nameofHouse=参議院",
 "recordPacking=json"
 ]
 
