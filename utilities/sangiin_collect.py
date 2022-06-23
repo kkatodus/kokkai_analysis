@@ -1,6 +1,5 @@
 
 import json
-from unicodedata import name
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -14,6 +13,7 @@ main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.h
 #necessary xpath
 meeting_period_xpath = "//font[contains(text(), '年')]"
 topic_xpath = "//tr//td//p//tt//font//a"
+topic_dates_xpath = "//tbody//tr//td//div//p//tt//font"
 whole_result_xpath = "//font//b"
 party_vote_xpath = "//caption[@class='party']/following-sibling::tbody"
 party_names_xpath = "//caption[@class='party']"
@@ -27,6 +27,7 @@ meeting_layout = {
 
 topic_layout = {
             "topic_title":"",
+            "topic_date":"",
             "individual_voting_results":None,
             "whole_result":"",
             "voting_results":{}
@@ -152,6 +153,9 @@ def iterate_topics(meeting_dict):
 
         topic_dict = topic_layout.copy()
         topic_dict["topic_title"] = topic_name
+        topic_date_str = driver.find_element(By.XPATH, topic_dates_xpath).text
+        topic_date_str = topic_date_str.split("\n")[1]
+        topic_dict["topic_date"] = topic_date_str
         
         if individual_votes:
             topic_dict["individual_voting_results"] = True

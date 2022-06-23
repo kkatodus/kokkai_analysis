@@ -6,13 +6,14 @@ import sys
 #some parameters
 
 base_url = "https://kokkai.ndl.go.jp/api/meeting?"
-year = int(sys.argv[1])
-output_dir = f"C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data_sangiin\\{year}"
+session_num = int(sys.argv[1])
+output_dir = f"C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data_sangiin\\{session_num}"
 
 conditions_list = [
-f"from={year}-01-01",
-f"until={year}-12-31",
+#f"from={year}-01-01",
+#f"until={year}-12-31",
 "nameofHouse=参議院",
+f"sessionFrom={session_num}",
 "recordPacking=json"
 ]
 
