@@ -9,6 +9,8 @@ output_dir = "..\\data_sangiin\\"
 chromedriver_path = "..\\chromedriver.exe"
 main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html"
 
+skip_first_n_meetings = len([file_name for file_name in os.listdir(output_dir) if ".json" in file_name])
+
 
 #necessary xpath
 meeting_period_xpath = "//font[contains(text(), '年')]"
@@ -18,6 +20,7 @@ whole_result_xpath = "//font//b"
 party_vote_xpath = "//caption[@class='party']/following-sibling::tbody"
 party_names_xpath = "//caption[@class='party']"
 whole_result_num_xpath = "//*[contains(text(), '投票総数')]"
+
 
 meeting_layout = {
     "period":"",
@@ -177,8 +180,8 @@ def iterate_meetings():
     driver.get(main_website_url)
     #get links to the different meetings
     meeting_links = driver.find_elements(By.PARTIAL_LINK_TEXT, "常会")
-    meeting_names = [meeting_link.text for meeting_link in meeting_links]
-    meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links]
+    meeting_names = [meeting_link.text for meeting_link in meeting_links][skip_first_n_meetings:]
+    meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links][skip_first_n_meetings:]
     for meeting_name, meeting_url in zip(meeting_names, meeting_urls):
         #jump to meeting page
         driver.get(meeting_url)
