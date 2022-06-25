@@ -5,8 +5,8 @@ import os
 
 class MeetingConvoCollector:
 
-    def __init__(self):
-        self.base_url = "https://kokkai.ndl.go.jp/api/meeting?"
+    def __init__(self, base_url):
+        self.base_url = base_url
 
     def make_requests(self, conditions_list, output_dir):
         #format the conditions for the request
