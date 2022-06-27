@@ -26,7 +26,7 @@ class MeetingConvoCollector:
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
                 
-                with open(f"{output_dir}\\{conditions_link}.json", "w", encoding = "utf-8") as f:
+                with open(f"{output_dir}\\start_point={starting_point}_{conditions_link}.json", "w", encoding = "utf-8") as f:
                     json.dump(response, f, ensure_ascii=False, indent=4)
                 
                 starting_point = next_position

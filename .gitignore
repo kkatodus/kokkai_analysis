@@ -2,3 +2,4 @@ kokkai_venv/
 data/
 *.exe
 data_sangiin/
+__pycache__/
