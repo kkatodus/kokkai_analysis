@@ -1,7 +1,7 @@
 from api_requests.meeting_convo_collector import MeetingConvoCollector
 
 base_url = "https://kokkai.ndl.go.jp/api/speech?"
-output_dir = f"..\\data_sangiin\\"
+output_dir = f"..\\test\\"
 
 conditions_list = [
 f"from={2021}-06-14",

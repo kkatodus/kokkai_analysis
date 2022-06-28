@@ -192,6 +192,7 @@ def iterate_meetings():
         #create dict or load from pre-existing json file
         meeting_dict = create_meeting_dict_or_load_json(meeting_name)
         meeting_dict["period"] = meeting_period
+        meeting_dict["topics"] = []
         meeting_dict = iterate_topics(meeting_dict)
         meeting_file_name = f"{meeting_name}.json"
         meeting_path = os.path.join(output_dir, meeting_file_name)

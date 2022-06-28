@@ -7,7 +7,8 @@ class FileReadWriter:
 
     def read_json(self, path):
         if os.path.exists(path):
-            meeting_dict = json.load(path)
+            with open(path, "r", encoding="utf-8") as j:
+                meeting_dict = json.load(j)
         else:
             raise Exception("Target file does not exist")
         return meeting_dict
