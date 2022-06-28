@@ -7,7 +7,7 @@ conditions_list = [
 f"from={2021}-06-14",
 f"until={2021}-06-18",
 "nameOfHouse=参議院",
-"any=重要施設周辺及び国境離島等",
+#"any=重要施設周辺及び国境離島等",
 "searchRange=本文",
 "recordPacking=json"
 ]

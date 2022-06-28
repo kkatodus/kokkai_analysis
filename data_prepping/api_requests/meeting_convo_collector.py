@@ -14,6 +14,8 @@ class MeetingConvoCollector:
         starting_point = 1
 
         gettable = True
+
+        request_dicts_list = []
         while gettable:
             try:
                 request_url = self.base_url+f"startRecord={starting_point}&"+conditions_link
@@ -23,15 +25,12 @@ class MeetingConvoCollector:
                 response = response.json()
                 
                 next_position = response["nextRecordPosition"]
-                if not os.path.exists(output_dir):
-                    os.makedirs(output_dir)
-                
-                with open(f"{output_dir}\\start_point={starting_point}_{conditions_link}.json", "w", encoding = "utf-8") as f:
-                    json.dump(response, f, ensure_ascii=False, indent=4)
+                request_dicts_list.append(response)
                 
                 starting_point = next_position
-                time.sleep(10)
+                time.sleep(5)
             except: 
                 gettable = False
                 print("No more records")
 
+        return request_dicts_list
