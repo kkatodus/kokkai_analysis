@@ -23,9 +23,7 @@ def main():
             break
         sangiin_data_filepath = os.path.join(meeting_data_dir, meeting_filename)
         sangiin_meeting_dict = frw.read_json(sangiin_data_filepath)
-        parties = ig.get_list_of_parties(sangiin_meeting_dict)
-        print("Party names")
-        print(set(parties))
+        party_list = set(ig.get_list_of_parties(sangiin_meeting_dict))
       
         for topic_idx, topic_dict in enumerate(sangiin_meeting_dict["topics"]):
             topic_title = topic_dict["topic_title"]
@@ -54,8 +52,11 @@ def main():
                     break
             for idx, search_request in enumerate(search_requests):
                 file_name = f"topic_idx={topic_idx}_start_from={idx}_{'_'.join(conditions_list)}.json"
-                file_path = os.path.join(party_opinions_dir, file_name)
-                frw.write_json(search_request, file_path)
+                file_path = os.path.join(party_opinions_dir, topic_title_cleaned + ".json")
+                #frw.write_json(search_request, file_path)
+                party_opinions = ig.extract_party_opinions(search_request, party_list)
+                frw.write_json(party_opinions, file_path)
+
 
 
 if __name__ == "__main__":
