@@ -58,8 +58,8 @@ def main():
                     break
             meeting_party_opinion_dict[topic_title] = topic_party_opinions_dict
 
-        file_path = os.path.join(party_opinions_dir, meeting_filename)
-        frw.write_json(meeting_party_opinion_dict, file_path)
+            file_path = os.path.join(party_opinions_dir, meeting_filename)
+            frw.write_json(meeting_party_opinion_dict, file_path)
 
 
 if __name__ == "__main__":
