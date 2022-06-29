@@ -40,9 +40,10 @@ class StringProcessor:
         split_string_list = wakati.parse(original_string).split()
         return split_string_list
 
-    def create_search_words(self, topic_title_separated):
+    def create_search_words(self, topic_title_separated, topic_title_cleaned):
         search_candidates = []
-        
+        topic_title_split = topic_title_cleaned.split("、")
+        search_candidates += topic_title_split
         for i in range(int(len(topic_title_separated)*0.5),int(len(topic_title_separated)*0.8)):
             search_candidates.append("".join(topic_title_separated[:i]))
 
