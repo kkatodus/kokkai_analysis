@@ -5,13 +5,11 @@ import WordCloudPage from './pages/WordCloudPage';
 import NetworkPage from './pages/NetworkPage';
 function App() {
   return (
-    <div>
-      <Routes>
-          <Route exact path="/" element = {<LandingPage/>}/>
-          <Route exact path="wordcloud" element={<WordCloudPage/>}/>
-          <Route exact path="network" element={<NetworkPage/>}/>
-      </Routes>
-    </div>
+    <Routes>
+        <Route exact path="/" element = {<LandingPage/>}/>
+        <Route exact path="wordcloud" element={<WordCloudPage/>}/>
+        <Route exact path="network" element={<NetworkPage/>}/>
+    </Routes>
     
   );
 }

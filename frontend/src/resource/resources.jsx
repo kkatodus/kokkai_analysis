@@ -1,0 +1,1 @@
+export var data_dir_path = "..\\"

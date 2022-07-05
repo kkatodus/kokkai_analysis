@@ -1,0 +1,17 @@
+.page-title-container{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title{
+}
+
+.page-menu-container{
+    height: 100%;
+    width: 100%;
+    background-color: red;
+}
