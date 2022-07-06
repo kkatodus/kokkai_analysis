@@ -1,1 +1,1 @@
-export var data_dir_path = "..\\"
+export var sangiin_data_dir_path = "C:'\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data_sangiin"

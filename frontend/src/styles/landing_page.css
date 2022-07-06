@@ -8,10 +8,36 @@
 }
 
 .page-title{
+    font-size: 200px;
 }
 
 .page-menu-container{
     height: 100%;
     width: 100%;
-    background-color: red;
+    display: flex;
+    justify-content: center;    align-items: center;
+}
+
+.menu-icon-container{
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 200ms;
+}
+
+.menu-icon-container:hover{
+    transform: scale(1.05);
+    transition: transform 200ms;
+    cursor: pointer;
+}
+
+
+.menu-icon{
+    font-size: 100px;  
 }
