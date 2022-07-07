@@ -1,7 +1,3 @@
-a{
-    color: black;
-}
-
 .full-page-container{
     height: 100vh;
     width: 100%;
@@ -22,4 +18,14 @@ a{
     scroll-snap-align: start;
 }
 
+.header-section{
+    height: 20%;
+    background-color: grey;
+
+}
+
+.content-section{
+    height: 80%;
+
+}
 
