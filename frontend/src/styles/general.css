@@ -26,6 +26,11 @@
 
 .content-section{
     height: 80%;
-
 }
 
+
+/* cursor stuff */
+.pointer-cursor-on-hover:hover{
+    cursor: pointer;
+
+}

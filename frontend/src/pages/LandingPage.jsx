@@ -1,10 +1,8 @@
 
 import { Link } from "react-router-dom";
-import NetworkPage from "./NetworkPage"
-import WordCloudPage from "./WordCloudPage";
 import {RiGovernmentLine} from "react-icons/ri"
 import "../styles/general.css"
-import "../styles/landing_page.css"
+import "../styles/pages/landing_page.css"
 function LandingPage(){
     return(
         <div className="full-page-container scroll-snap-container">

@@ -1,0 +1,19 @@
+.grow-on-hover-small{
+    transition:200ms;
+}
+
+.grow-on-hover-small:hover{
+    transform:scale(1.03);
+    transition: transform 200ms;
+    cursor: pointer;
+}
+
+.grow-on-hover-medium{
+    transition: 200ms;
+}
+
+.grow-on-hover-medium:hover{
+    transform: scale(1.07);
+    transition: transform 200ms;
+    cursor: pointer;
+}
