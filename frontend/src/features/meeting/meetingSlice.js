@@ -1,16 +1,20 @@
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk, createEntityAdapter, createSelector} from "@reduxjs/toolkit";
 import { sangiin_votes_endpoint } from "../../resource/resources";
 import axios from "axios";
 
-const initialState={
-    meeting_votings:[],
+const initialState = {
     status:"idle",
-    error:null
+    error:null,
+    meeting_votings:[]
 }
 
 export const fetchMeetingVotings = createAsyncThunk("meetings/fetchMeetingVotings", async () => {
-    const response = await axios.get(sangiin_votes_endpoint)
-    return [...response.data]
+    try {
+        const response = await axios.get(sangiin_votes_endpoint)
+        return [...response.data]   
+    } catch(err){
+        return err.message;
+    }
 })
 
 
@@ -36,7 +40,11 @@ const meetingVotingsSlice = createSlice({
     }
 })
 
-export const selectAllMeetingVotings = state => state.meeting.meeting_votings;
+
+export const selectAllMeetingVotings = (state) => state.meeting.meeting_votings;
+
+export const selectMeetingByName = (state, meeting_id) =>
+    state.meeting.meeting_votings.find(meeting_voting => meeting_voting.meeting_name === meeting_id);
 
 export const getMeetingStatus = state => state.meeting.status;
 export const getMeetingError = state => state.meeting.error

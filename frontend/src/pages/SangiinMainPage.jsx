@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 //redux stuff
 import {useSelector, useDispatch } from "react-redux";
-import {fetchMeetingVotings, getMeetingError, getMeetingStatus, selectAllMeetingVotings} from "../features/meeting/meetingSlice";
+import {fetchMeetingVotings, getMeetingError, getMeetingStatus, selectAllMeetingVotings } from "../features/meeting/meetingSlice";
 
 import "../styles/sanitize.css"
 import "../styles/general.css"

@@ -1,0 +1,23 @@
+.meeting-detail-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30vh;
+}
+
+.user-input-container{
+    margin-top: 20vh;
+    height: 10vh;
+    width: 100%;
+    position: fixed;
+    background-color: blue;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.topic-filter-input{
+    height: 80%;
+    width: 300px;
+}
