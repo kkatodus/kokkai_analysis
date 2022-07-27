@@ -19,7 +19,7 @@ function TopicCard(props) {
 
     if (individual_voting_results){
         const data = [
-            { name: "NE Send", yay: whole_result.yay, nay: whole_result.nay},
+            { name: "投票結果", "賛成": whole_result.yay, "反対": whole_result.nay},
         ];
         var content = 
             <ResponsiveContainer height={200} width={"100%"}>
@@ -37,24 +37,19 @@ function TopicCard(props) {
                         fontSize={12}
                     />
                     <Tooltip/>
-                    <Bar dataKey="nay" fill="#dd7876" stackId="a">
+                    <Bar dataKey="反対" fill="#dd7876" stackId="a">
                     <LabelList
-                        dataKey="nay"
+                        dataKey="反対"
                         position="center"
                     />
                     </Bar>
-                    <Bar dataKey="yay" fill="#82ba7f" stackId="a">
+                    <Bar dataKey="賛成" fill="#82ba7f" stackId="a">
                     <LabelList
-                        dataKey="yay"
+                        dataKey="賛成"
                         position="center"
                     />
                     </Bar>
-                    <Bar dataKey="inprogress" fill="#76a8dd" stackId="a">
-                    <LabelList
-                        dataKey="inprogress"
-                        position="center"
-                    />
-                    </Bar>
+                    
                 </BarChart>
 
             </ResponsiveContainer>;
