@@ -1,17 +1,9 @@
 import React, { PureComponent } from 'react';
-import { 
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    ResponsiveContainer,
-    Tooltip,
-    Label,
-    LabelList } from 'recharts';
+import StackedBarChart from './StackedBarChart';
+
 
 import "../styles/components/topic_card.css";
 import "../styles/other/animations.css";
-
 
 function TopicCard(props) {
     var topic = props.topic;
@@ -21,48 +13,33 @@ function TopicCard(props) {
         const data = [
             { name: "投票結果", "賛成": whole_result.yay, "反対": whole_result.nay},
         ];
-        var content = 
-            <ResponsiveContainer height={200} width={"100%"}>
-                <BarChart
-                    layout='vertical'
-                    data={data}
-                    stackOffset="expand"
-                >
-                    <XAxis hide type="number"/>
-                    <YAxis 
-                        hide
-                        type="category"
-                        dataKey="name"
-                        stroke="#FFFFF"
-                        fontSize={12}
-                    />
-                    <Tooltip/>
-                    <Bar dataKey="反対" fill="#dd7876" stackId="a">
-                    <LabelList
-                        dataKey="反対"
-                        position="center"
-                    />
-                    </Bar>
-                    <Bar dataKey="賛成" fill="#82ba7f" stackId="a">
-                    <LabelList
-                        dataKey="賛成"
-                        position="center"
-                    />
-                    </Bar>
-                    
-                </BarChart>
+        var whole_result_chart = <StackedBarChart data={data} height={200} width={"100%"}/>
+        var party_voting_chart = Object.entries(voting_results).map(([key, value])=>{
+            var party_voting_data = [{name: key, "賛成": value.yay, "反対": value.nay}]
+            return(
+                <div key={topic_title+key} className="party-vote-result-container">
+                    <h4>{key}</h4>
+                    <StackedBarChart data={party_voting_data} width={"100%"} height={100}/>
 
-            </ResponsiveContainer>;
+                </div>
+                
+            )
+        })
+            
     }else{
-        var content = <h3>{whole_result}</h3>
+        var whole_result_chart = <h3>{whole_result}</h3>
+        var party_voting_chart = ""
     }
     return ( 
         <div className="topic-card">
             <div className="topic-card-header">
-                {topic_title}
+                <h3>{topic_title}</h3>
             </div>
             <div className="topic-card-content">
-                {content}
+                {whole_result_chart}
+                {party_voting_chart}
+        
+                
             </div>
         </div>
      );

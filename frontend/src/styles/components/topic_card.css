@@ -14,4 +14,18 @@
 
 .topic-card-content{
     width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.party-vote-result-container{
+    position: relative;
+    width:45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+        
 }
