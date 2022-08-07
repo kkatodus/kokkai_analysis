@@ -13,7 +13,8 @@ export const fetchMeetingVotings = createAsyncThunk("meetings/fetchMeetingVoting
         const response = await axios.get(sangiin_votes_endpoint)
         return [...response.data]   
     } catch(err){
-        return err.message;
+        console.log(err.message)
+        return [];
     }
 })
 

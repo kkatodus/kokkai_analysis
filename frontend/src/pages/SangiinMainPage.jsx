@@ -20,7 +20,11 @@ function SangiinMainPage() {
 
         //get the meetings if the array is empty in store
         if (meetings.length == 0){
-            dispatch(fetchMeetingVotings())
+            try{
+                dispatch(fetchMeetingVotings())
+            }catch{
+                meetings = []
+            }
         }
     },[])
 
