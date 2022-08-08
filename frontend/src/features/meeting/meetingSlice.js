@@ -1,4 +1,4 @@
-import { createSlice, nanoid, createAsyncThunk, createEntityAdapter, createSelector} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import { sangiin_votes_endpoint } from "../../resource/resources";
 import axios from "axios";
 

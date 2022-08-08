@@ -17,5 +17,10 @@ class FileReadWriter:
         with open(path, "w", encoding="utf-8") as j:
             json.dump(dict_obj, j, ensure_ascii=False, indent=4)
 
+    @staticmethod
+    def create_dir(path):
+        if not os.path.exists(path):
+            os.makedirs(path)
+
 
     

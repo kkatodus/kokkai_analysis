@@ -3,11 +3,13 @@ import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from file_handling.file_read_writer import FileReadWriter
 import os
 import time
-output_dir = "..\\data_sangiin\\"
-chromedriver_path = "..\\chromedriver.exe"
+output_dir = "C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\data_sangiin"
+chromedriver_path = "C:\\Users\\katok\\Documents\\Projects\\kokkai_analysis\\chromedriver.exe"
 main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html"
+FileReadWriter.create_dir(output_dir)
 
 skip_first_n_meetings = len([file_name for file_name in os.listdir(output_dir) if ".json" in file_name])
 
@@ -33,10 +35,11 @@ topic_layout = {
             "topic_date":"",
             "individual_voting_results":None,
             "whole_result":"",
-            "voting_results":{}
+            "voting_results":[]
             }
 
 party_vote_results_layout = {
+    "party_name":"",
     "member_num":None, 
     "yay":None,
     "nay":None,
@@ -107,11 +110,18 @@ def collect_individual_party_vote(party_vote_tbody_dom):
                 votes[name_str] = vote
     return votes
 
-def collect_individual_votes(one_topic_dict):
+def collect_individual_votes():
     whole_result = driver.find_element(By.XPATH, whole_result_num_xpath)
     whole_result = whole_result.text.split("　　　")
     whole_result_dict = {}
 
+    one_topic_dict = {
+        "topic_title":"",
+        "topic_date":"",
+        "individual_voting_results":None,
+        "whole_result":"",
+        "voting_results":[]
+    }
     #getting the entire voting result of the house
     keys = ["total_votes", "yay", "nay"]
     for key, result in zip(keys, whole_result):
@@ -119,20 +129,28 @@ def collect_individual_votes(one_topic_dict):
         whole_result_dict[key] = result
     party_names = driver.find_elements(By.XPATH, party_names_xpath)
     party_votes = driver.find_elements(By.XPATH, party_vote_xpath)
-
+    party_voting_array = []
     #collecting individual voting results for each party
     for party_name, party_vote_tbody_dom in zip(party_names, party_votes):
-        party_dict = party_vote_results_layout.copy()
+        party_dict = {
+            "party_name":"",
+            "member_num":None, 
+            "yay":None,
+            "nay":None,
+            "votes":[]
+            }
         party_dict, party_name = collect_whole_party_vote(party_name, party_dict)
+        party_dict["party_name"] = party_name
         votes = collect_individual_party_vote(party_vote_tbody_dom)
-        party_dict["votes"] = votes
-        one_topic_dict["voting_results"][party_name] = party_dict
+        party_dict["votes"] = votes.copy()
+        party_voting_array.append(party_dict)
+    one_topic_dict["voting_results"] = party_voting_array
 
-
-    one_topic_dict["whole_result"] = whole_result_dict
+    one_topic_dict["whole_result"] = whole_result_dict.copy()
     return one_topic_dict
 
-def collect_whole_result(topic_dict):
+def collect_whole_result():
+    topic_dict = topic_layout.copy()
     whole_result = driver.find_element(By.XPATH, whole_result_xpath).text
     topic_dict["whole_result"] = whole_result
     topic_dict["voting_results"] = None
@@ -150,23 +168,26 @@ def iterate_topics(meeting_dict):
     topic_urls = [topic_link.get_attribute("href") for topic_link in topic_links]
     topic_names = [topic_link.text for topic_link in topic_links]
     meeting_dict["num_topics"] = len(topic_urls)
+    first_topic = None
     for topic_name, topic_url in zip(topic_names, topic_urls):
+        if len(meeting_dict["topics"]) > 0:
+            first_topic = meeting_dict["topics"][0]
         driver.get(topic_url)
         individual_votes = check_for_individual_votes()
 
-        topic_dict = topic_layout.copy()
+        if individual_votes:
+            topic_dict = collect_individual_votes()
+            topic_dict["individual_voting_results"] = True
+            print("individual")
+        else:
+            topic_dict = collect_whole_result()
+            topic_dict["individual_voting_results"] = False
+
         topic_dict["topic_title"] = topic_name
         topic_date_str = driver.find_element(By.XPATH, topic_dates_xpath).text
         topic_date_str = topic_date_str.split("\n")[1]
         topic_dict["topic_date"] = topic_date_str
         
-        if individual_votes:
-            topic_dict["individual_voting_results"] = True
-            topic_dict = collect_individual_votes(topic_dict)
-        else:
-            topic_dict["individual_voting_results"] = False
-            topic_dict = collect_whole_result(topic_dict)
-
         meeting_dict["topics"].append(topic_dict)
     return meeting_dict
 
@@ -179,7 +200,11 @@ def iterate_meetings():
     driver = webdriver.Chrome(service=service)
     driver.get(main_website_url)
     #get links to the different meetings
-    meeting_links = driver.find_elements(By.PARTIAL_LINK_TEXT, "常会")
+    meeting_links = []
+    meeting_types = ["常会","臨時会"]
+    for meeting_type in meeting_types:
+        one_meeting_links = driver.find_elements(By.PARTIAL_LINK_TEXT, meeting_type)
+        meeting_links += one_meeting_links
     meeting_names = [meeting_link.text for meeting_link in meeting_links][skip_first_n_meetings:]
     meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links][skip_first_n_meetings:]
     for meeting_name, meeting_url in zip(meeting_names, meeting_urls):
