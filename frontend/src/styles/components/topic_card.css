@@ -9,7 +9,11 @@
 }
 
 .topic-card-header{
+    position: relative;
     background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .topic-card-content{
@@ -29,3 +33,21 @@
     flex-direction: column;
         
 }
+
+.jump-to-topic-detail-icon-link{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    margin: 10px;
+    padding:5px;
+    height: 50%;
+    transition: 200ms;
+}
+
+.jump-to-topic-detail-icon-link:hover{
+    cursor: pointer;
+    transition: 200ms;
+    border-radius: 50%;
+}
+
+

@@ -21,7 +21,7 @@
 .header-section{
     top: 0;
     width:100%;
-    height:20vh;
+    height:10vh;
     background-color: grey;
     display: flex;
     align-items: center;
@@ -33,8 +33,8 @@
 
 .content-section{
     padding-top: 5px;
-    margin-top: 20vh;
-    height: 80vh;
+    margin-top: 15vh;
+    height: 85vh;
 }
 
 

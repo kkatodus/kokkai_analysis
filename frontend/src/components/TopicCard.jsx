@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import StackedBarChart from './StackedBarChart';
+import { Link } from 'react-router-dom';
 
+import {GrLinkNext} from "react-icons/gr"
 
 import "../styles/components/topic_card.css";
 import "../styles/other/animations.css";
@@ -15,10 +17,10 @@ function TopicCard(props) {
         ];
         var whole_result_chart = <StackedBarChart data={data} height={200} width={"100%"}/>
         var party_voting_chart = Object.entries(voting_results).map(([key, value])=>{
-            var party_voting_data = [{name: key, "賛成": value.yay, "反対": value.nay}]
+            var party_voting_data = [{name: value.party_name, "賛成": value.yay, "反対": value.nay}]
             return(
-                <div key={topic_title+key} className="party-vote-result-container">
-                    <h4>{key}</h4>
+                <div key={topic_title+value.party_name} className="party-vote-result-container">
+                    <h4>{value.party_name}</h4>
                     <StackedBarChart data={party_voting_data} width={"100%"} height={100}/>
 
                 </div>
@@ -33,7 +35,15 @@ function TopicCard(props) {
     return ( 
         <div className="topic-card">
             <div className="topic-card-header">
-                <h3>{topic_title}</h3>
+                <Link to={"/topic_details/"+topic_date+topic_title}>
+                    <h3>{topic_title}</h3>
+                
+                </Link>
+                <Link className={"jump-to-topic-detail-icon-link"} to={"/topic_details/"+topic_date+topic_title}>
+                
+                    <GrLinkNext className='jump-icon'/>
+                </Link>
+
             </div>
             <div className="topic-card-content">
                 {whole_result_chart}

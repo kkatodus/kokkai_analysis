@@ -1,8 +1,5 @@
 kokkai_venv/
-data/
 *.exe
 data_sangiin/
 __pycache__/
 test/
-*.json
-data_sangiin_test/
