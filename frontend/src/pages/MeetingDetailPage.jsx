@@ -15,11 +15,11 @@ function MeetingDetailPage() {
         var meeting_topic_cards = meeting.topics.map(topic=>{
             if (topicFilterText === ""){
                 return(
-                    <TopicCard key={topic.topic_title + topic.topic_date} topic={topic}/>
+                    <TopicCard key={topic.topic_title + topic.topic_date} meeting_id ={meeting_id} topic={topic}/>
                 )
             }else if(topic.topic_title.includes(topicFilterText)){
                 return(
-                    <TopicCard key={topic.topic_title + topic.topic_date} topic={topic}/>
+                    <TopicCard key={topic.topic_title + topic.topic_date} meeting_id={meeting_id} topic={topic}/>
                 )
             }
             
@@ -30,7 +30,6 @@ function MeetingDetailPage() {
         //gets called on mount of the component
         const fetchMeeting = async () =>{
             const meeting_url = sangiin_endpoint + "sangiin_meeting_votes/" + meeting_id
-            console.log(meeting_url)
             const meeting_data = await fetch(meeting_url)
             const meeting_json = await meeting_data.json()
             setMeeting(meeting_json)

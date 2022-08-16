@@ -9,6 +9,7 @@ import "../styles/other/animations.css";
 
 function TopicCard(props) {
     var topic = props.topic;
+    var meeting_id = props.meeting_id;
     var { topic_title, topic_date, individual_voting_results, whole_result, voting_results } = topic;
 
     if (individual_voting_results){
@@ -39,7 +40,7 @@ function TopicCard(props) {
                     <h3>{topic_title}</h3>
                 
                 </Link>
-                <Link className={"jump-to-topic-detail-icon-link"} to={"/topic_details/"+topic_date+topic_title}>
+                <Link className={"jump-to-topic-detail-icon-link"} to={"/topic_details/"+meeting_id+'/'+topic_title}>
                 
                     <GrLinkNext className='jump-icon'/>
                 </Link>
