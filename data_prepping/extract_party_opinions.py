@@ -19,12 +19,13 @@ def main():
     num_meetings = 3
     meeting_json_files = [filename for filename in os.listdir(meeting_data_dir) if ".json" in filename]
     for idx, meeting_filename in enumerate(meeting_json_files):
+        meeting_name = meeting_filename[:meeting_filename.index(".")]
         if idx == num_meetings:
             break
+        meeting_party_opinion_dict = {} 
         sangiin_data_filepath = os.path.join(meeting_data_dir, meeting_filename)
         sangiin_meeting_dict = frw.read_json(sangiin_data_filepath)
         party_list = set(ig.get_list_of_parties(sangiin_meeting_dict))
-        meeting_party_opinion_dict = {}
       
         for topic_idx, topic_dict in enumerate(sangiin_meeting_dict["topics"]):
             topic_title = topic_dict["topic_title"]
@@ -56,11 +57,10 @@ def main():
                     topic_party_opinions_dict.update(party_opinions)
                 if topic_party_opinions_dict != {}:
                     break
-            meeting_party_opinion_dict[topic_title] = topic_party_opinions_dict
+            meeting_party_opinion_dict[f"{meeting_name}_{topic_title}"] = topic_party_opinions_dict
 
             file_path = os.path.join(party_opinions_dir, meeting_filename)
             frw.write_json(meeting_party_opinion_dict, file_path)
-
 
 if __name__ == "__main__":
     main()

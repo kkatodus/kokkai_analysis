@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { selectMeetingByName, selectAllMeetingVotings, fetchMeetingVotings } from "../features/meeting/meetingSlice"
 
+import { sangiin_endpoint } from "../resource/resources";
 import "../styles/general.css"
 import "../styles/pages/meeting_detail_page.css"
 import TopicCard from "../components/TopicCard";
 
 function MeetingDetailPage() {
     const [topicFilterText, setTopicFilterText ] = useState("")
-    const dispatch = useDispatch()
-    const meetings = useSelector(selectAllMeetingVotings)
+    const [meeting, setMeeting] = useState({topics:[]})
     var { meeting_id } = useParams()
-    var meeting = useSelector((state) =>selectMeetingByName(state, meeting_id))
     if(meeting){
         var meeting_period = meeting.period
         var meeting_topic_cards = meeting.topics.map(topic=>{
@@ -31,11 +28,20 @@ function MeetingDetailPage() {
     var main_content = meeting? meeting_topic_cards:<h1>Loading</h1>
     useEffect(()=>{
         //gets called on mount of the component
-    
-        //get the meetings if the array is empty in store
-        if (meetings.length === 0){
-            dispatch(fetchMeetingVotings())
+        const fetchMeeting = async () =>{
+            const meeting_url = sangiin_endpoint + "sangiin_meeting_votes/" + meeting_id
+            console.log(meeting_url)
+            const meeting_data = await fetch(meeting_url)
+            const meeting_json = await meeting_data.json()
+            setMeeting(meeting_json)
         }
+        
+        fetchMeeting()
+            .catch(()=>{
+                console.error()
+                setMeeting({})
+            })
+        //get the meetings if the array is empty in store
     },[])
 
     var handleTopicFilterInputChange=e=>{

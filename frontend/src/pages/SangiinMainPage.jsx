@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-//redux stuff
-import {useSelector, useDispatch } from "react-redux";
-import {fetchMeetingVotings, getMeetingError, getMeetingStatus, selectAllMeetingVotings } from "../features/meeting/meetingSlice";
+import axios from "axios";
+
+import {sangiin_endpoint} from "../resource/resources"
 
 import "../styles/sanitize.css"
 import "../styles/general.css"
@@ -10,24 +10,25 @@ import MeetingCard from "../components/meetingCard";
 
 
 function SangiinMainPage() {
-    const meetings = useSelector(selectAllMeetingVotings)
-    const meeting_status = useSelector(getMeetingStatus)
-    const meeting_error = useSelector(getMeetingError)
-    const dispatch = useDispatch()
+    const [meeting_names, setMeetingNames] = useState([])
 
     useEffect(()=>{
         //gets called on mount of the component
 
+        const fetchMeetingNames = async () =>{
+            const meeting_names_data = await fetch(sangiin_endpoint + "meeting_names")
+            const meeting_names_json = await meeting_names_data.json()
+            setMeetingNames(meeting_names_json["meetings"])
+        }
         //get the meetings if the array is empty in store
-        if (meetings.length == 0){
-            try{
-                dispatch(fetchMeetingVotings())
-            }catch{
-                meetings = []
-            }
+        if (meeting_names.length == 0){
+            fetchMeetingNames()
+                .catch(()=>{
+                    console.error()
+                    setMeetingNames([])
+                })
         }
     },[])
-
     return ( 
         <div className="full-page-container">
             <div className="header-section ">
@@ -35,9 +36,9 @@ function SangiinMainPage() {
 
             </div>
             <div className="content-section">
-                {meetings.map(meeting=>{
+                {meeting_names.map(meeting_name=>{
                     return(
-                        <MeetingCard key={meeting.meeting_name} {...meeting}/>
+                        <MeetingCard key={meeting_name["meeting_name"]} {...meeting_name}/>
                     )
                 })}
 

@@ -10,7 +10,7 @@ class InfoGetter:
             if topic["individual_voting_results"]:
                 party_info_topic = topic
                 break
-        parties = list(party_info_topic["voting_results"].keys())
+        parties = [party_voting_result["party_name"] for party_voting_result in party_info_topic["voting_results"]]
         parties_ret = []
         for party_name in parties:
             party_name_sp = party_name.split("・")
