@@ -1,5 +1,13 @@
 # About this project
 
-In this project I am exploring how I can enhance the transparency of Japanese politics further by collecting the data related to the voting patterns of the politicians as well as visualizing these voting patterns. 
+In this project I am exploring how I can enhance the transparency of Japanese politics further by collecting the data related to the voting patterns of the politicians as well as visualizing these voting patterns.
 
-Currently I am using selenium to crawl the website of the House of Councillors in the Japanese Diet to generate .json files to source my data from. The code for this can be found in /data_prepping directory.
+So far I have,
+
+* Scraped the voting patters of the different parties using selenium from the Sangiin website.(https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html)
+
+* Fetched the arguments of the parties(答弁) from the api provided by the National Diet Library.(https://kokkai.ndl.go.jp/api.html)
+
+* Created an API hosting the above information and deployed it on heroku
+
+* Currently working on the react frontend to visually represent the data hosted on the API
