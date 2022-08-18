@@ -48,13 +48,13 @@ function MeetingDetailPage() {
     }
 
     return ( 
-        <div className="full-page-container">
+        <div className="meeting-detail-page">
             <div className="header-section">
                 <h1>{meeting_id}</h1>
                 <h2>{meeting_period}</h2>
             </div>
             <div className="user-input-container">
-                <label>フィルタ: </label>
+                <label className="input-label">フィルタ: </label>
                 <input className="topic-filter-input" onChange={handleTopicFilterInputChange}></input>
 
             </div>

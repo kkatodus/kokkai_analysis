@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import {RiGovernmentLine} from "react-icons/ri"
+import {RiInformationLine} from "react-icons/ri"
 import "../styles/general.css"
 import "../styles/pages/landing_page.css"
 function LandingPage(){
@@ -13,6 +14,11 @@ function LandingPage(){
                 <Link to="/sangiin_main">
                     <div className="menu-icon-container">
                         <RiGovernmentLine className="menu-icon"/>
+                    </div>
+                </Link>
+                <Link to="/page_info">
+                    <div className="menu-icon-container">
+                        <RiInformationLine className="menu-icon"/>
                     </div>
                 </Link>
             </section>
