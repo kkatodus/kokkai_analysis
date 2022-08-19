@@ -11,6 +11,9 @@ import MeetingCard from "../components/meetingCard";
 
 function SangiinMainPage() {
     const [meeting_names, setMeetingNames] = useState([])
+    var [isloading, setIsLoading] = useState(true)
+    var [loadFailed, setLoadFailed] = useState(false)
+    var [meeting_name_cards, setCards] = useState("")
 
     useEffect(() => {
         //gets called on mount of the component
@@ -21,14 +24,35 @@ function SangiinMainPage() {
             setMeetingNames(meeting_names_json["meetings"])
         }
         //get the meetings if the array is empty in store
-        if (meeting_names.length == 0) {
-            fetchMeetingNames()
-                .catch(() => {
-                    console.error()
-                    setMeetingNames([])
-                })
+        setIsLoading(true)
+        fetchMeetingNames()
+            .catch(() => {
+                console.error()
+                setLoadFailed(true)
+        })
+        setIsLoading(false)
+        
+        if (meeting_names.length === 0){
+            setLoadFailed(true)
+        }else{
+            setLoadFailed(false)
         }
     }, [])
+
+    useEffect(()=>{
+        if (meeting_names.length === 0){
+            setLoadFailed(true)
+        }else{
+            setLoadFailed(false)
+            var cards = meeting_names.map(meeting_name => {
+                return (
+                    <MeetingCard key={meeting_name["meeting_name"]} {...meeting_name} />
+                )
+            })
+            setCards(cards)
+        }
+
+    },[meeting_names])
     return (
         <div className="full-page-container">
             <div className="header-section ">
@@ -36,11 +60,7 @@ function SangiinMainPage() {
 
             </div>
             <div className="content-section">
-                {meeting_names.map(meeting_name => {
-                    return (
-                        <MeetingCard key={meeting_name["meeting_name"]} {...meeting_name} />
-                    )
-                })}
+                {isloading?<h1>Loading</h1>:loadFailed?<h1>Load failed</h1>:meeting_name_cards}
 
             </div>
         </div>

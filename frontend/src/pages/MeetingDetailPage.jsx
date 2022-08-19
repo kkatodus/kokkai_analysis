@@ -8,11 +8,37 @@ import TopicCard from "../components/TopicCard";
 
 function MeetingDetailPage() {
     const [topicFilterText, setTopicFilterText ] = useState("")
-    const [meeting, setMeeting] = useState({topics:[]})
+    const [meeting, setMeeting] = useState({"topics":[]})
+    const [meeting_period, setPeriod] = useState("")
+    const [isloading, setIsLoading] = useState(true)
+    const [loadFailed, setLoadFailed] = useState(false)
+    const [topic_cards, setCards] = useState("")
+
     var { meeting_id } = useParams()
     if(meeting){
-        var meeting_period = meeting.period
-        var meeting_topic_cards = meeting.topics.map(topic=>{
+        
+    }
+    useEffect(()=>{
+        //gets called on mount of the component
+        const fetchMeeting = async () =>{
+            const meeting_url = sangiin_endpoint + "sangiin_meeting_votes/" + meeting_id
+            const meeting_data = await fetch(meeting_url)
+            const meeting_json = await meeting_data.json()
+            setMeeting(meeting_json)
+        }
+        setIsLoading(true)
+        fetchMeeting()
+            .catch(()=>{
+                console.error()
+                setLoadFailed(true)
+            })
+        setIsLoading(false)
+    },[])
+
+    useEffect(()=>{
+        
+        setPeriod(meeting.period)
+        var cards = meeting.topics.map(topic=>{
             if (topicFilterText === ""){
                 return(
                     <TopicCard key={topic.topic_title + topic.topic_date} meeting_id ={meeting_id} topic={topic}/>
@@ -24,24 +50,14 @@ function MeetingDetailPage() {
             }
             
         })
-    }
-    var main_content = meeting? meeting_topic_cards:<h1>Loading</h1>
-    useEffect(()=>{
-        //gets called on mount of the component
-        const fetchMeeting = async () =>{
-            const meeting_url = sangiin_endpoint + "sangiin_meeting_votes/" + meeting_id
-            const meeting_data = await fetch(meeting_url)
-            const meeting_json = await meeting_data.json()
-            setMeeting(meeting_json)
+        setCards(cards)
+        if(meeting.topics.length === 0){
+        }else{
+            setLoadFailed(false)
+           
         }
-        
-        fetchMeeting()
-            .catch(()=>{
-                console.error()
-                setMeeting({})
-            })
-        //get the meetings if the array is empty in store
-    },[])
+
+    },[meeting, topicFilterText])
 
     var handleTopicFilterInputChange=e=>{
         setTopicFilterText(e.target.value)
@@ -59,7 +75,7 @@ function MeetingDetailPage() {
 
             </div>
             <div className="content-section meeting-detail-content">
-                {main_content}
+                {isloading?<h1>Loading</h1>:loadFailed?<h1>Load failed</h1>:topic_cards}
             </div>
         </div>
     );

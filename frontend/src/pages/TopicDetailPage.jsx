@@ -11,8 +11,7 @@ import PartyOpinionCard from "../components/PartyOpinionCard";
 function TopicDetailPage() {
     const [topic, setTopic] = useState({})
     var [isloading, setIsLoading] = useState(true)
-    var [noOpinions, setNoOpinions] = useState(true)
-    var [party_opinions, setPartyOpinions] = useState([])
+    var [noOpinions, setNoOpinions] = useState(false)
     var {meeting_id, topic_id} = useParams()
     useEffect(()=>{
         const fetchTopic = async () =>{

@@ -2,6 +2,12 @@
     margin-top: 10vh;
 }
 
-.info-subtitle{
+.info-content{
+    margin-top: 20px;
     margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
