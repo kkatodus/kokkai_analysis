@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import StackedBarChart from './StackedBarChart';
 import { Link } from 'react-router-dom';
 

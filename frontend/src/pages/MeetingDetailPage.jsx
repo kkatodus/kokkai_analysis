@@ -15,9 +15,6 @@ function MeetingDetailPage() {
     const [topic_cards, setCards] = useState("")
 
     var { meeting_id } = useParams()
-    if(meeting){
-        
-    }
     useEffect(()=>{
         //gets called on mount of the component
         const fetchMeeting = async () =>{

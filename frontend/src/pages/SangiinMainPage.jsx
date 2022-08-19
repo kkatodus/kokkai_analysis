@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import { sangiin_endpoint } from "../resource/resources"
 
@@ -12,7 +11,6 @@ import MeetingCard from "../components/meetingCard";
 function SangiinMainPage() {
     const [meeting_names, setMeetingNames] = useState([])
     var [isloading, setIsLoading] = useState(true)
-    var [loadFailed, setLoadFailed] = useState(false)
     var [meeting_name_cards, setCards] = useState("")
 
     useEffect(() => {
@@ -28,22 +26,15 @@ function SangiinMainPage() {
         fetchMeetingNames()
             .catch(() => {
                 console.error()
-                setLoadFailed(true)
+                setIsLoading(true)
         })
-        setIsLoading(false)
-        
-        if (meeting_names.length === 0){
-            setLoadFailed(true)
-        }else{
-            setLoadFailed(false)
-        }
     }, [])
 
     useEffect(()=>{
         if (meeting_names.length === 0){
-            setLoadFailed(true)
+            setIsLoading(true)
         }else{
-            setLoadFailed(false)
+            setIsLoading(false)
             var cards = meeting_names.map(meeting_name => {
                 return (
                     <MeetingCard key={meeting_name["meeting_name"]} {...meeting_name} />
@@ -60,7 +51,7 @@ function SangiinMainPage() {
 
             </div>
             <div className="content-section">
-                {isloading?<h1>Loading</h1>:loadFailed?<h1>Load failed</h1>:meeting_name_cards}
+                {isloading?<h1>Loading</h1>:meeting_name_cards}
 
             </div>
         </div>

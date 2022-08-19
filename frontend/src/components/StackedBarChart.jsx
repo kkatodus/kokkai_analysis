@@ -5,7 +5,6 @@ import {
     YAxis,
     ResponsiveContainer,
     Tooltip,
-    Label,
     LabelList } from 'recharts';
 
 function StackedBarChart(props) {
