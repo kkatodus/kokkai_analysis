@@ -36,7 +36,7 @@ function TopicCard(props) {
     return ( 
         <div className="topic-card">
             <div className="topic-card-header">
-                <Link to={"/topic_details/"+topic_date+topic_title}>
+                <Link to={"/topic_details/"+meeting_id+'/'+topic_title}>
                     <h3>{topic_title}</h3>
                 
                 </Link>

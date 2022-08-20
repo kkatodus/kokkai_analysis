@@ -10,4 +10,4 @@ So far I have,
 
 * Created an API hosting the above information and deployed it on heroku.(<https://sangiin-api.herokuapp.com/>)
 
-* Currently working on the react frontend to visually represent the data hosted on the API.
+* Created a frontend displaying the collected data and deployed it on heroku(<https://sangiin-frontend.herokuapp.com/>)
