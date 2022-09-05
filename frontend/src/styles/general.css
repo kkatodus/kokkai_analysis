@@ -40,6 +40,10 @@
     height: 85vh;
 }
 
+.back-icon{
+    font-size: 2rem;
+}
+
 
 /* cursor stuff */
 .pointer-cursor-on-hover:hover{

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {MdOutlineArrowBack} from "react-icons/md"
+import {Link} from "react-router-dom"
 
 import { sangiin_endpoint } from "../resource/resources";
 import "../styles/general.css"
@@ -63,6 +65,9 @@ function MeetingDetailPage() {
     return ( 
         <div className="meeting-detail-page">
             <div className="header-section">
+                <Link className="back-icon" to="/sangiin_main">
+                    <MdOutlineArrowBack/>
+                </Link>
                 <h2>{meeting_id}</h2>
                 <h3>{meeting_period}</h3>
             </div>

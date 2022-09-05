@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import {Link} from "react-router-dom";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 import { sangiin_endpoint } from "../resource/resources";
 import "../styles/general.css"
 import '../styles/pages/topic_detail_page.css'
 import PartyOpinionCard from "../components/PartyOpinionCard";
+
 
 
 function TopicDetailPage() {
@@ -54,7 +57,12 @@ function TopicDetailPage() {
 
     return ( 
         <div className="topic-detail-page">
+            
             <div className="topic-name">
+                {/* <Link className="back-icon" to={"/meeting_page/"+meeting_id}>
+                        <MdOutlineArrowBack/>
+                </Link> */}
+                
                 <p>{topic_id}</p>
             </div>
             <div className="content-section topic-detail-content">
