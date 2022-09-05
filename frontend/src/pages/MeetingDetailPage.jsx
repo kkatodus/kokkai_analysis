@@ -63,8 +63,8 @@ function MeetingDetailPage() {
     return ( 
         <div className="meeting-detail-page">
             <div className="header-section">
-                <h1>{meeting_id}</h1>
-                <h2>{meeting_period}</h2>
+                <h2>{meeting_id}</h2>
+                <h3>{meeting_period}</h3>
             </div>
             <div className="user-input-container">
                 <label className="input-label">フィルタ: </label>

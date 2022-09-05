@@ -54,7 +54,7 @@ function TopicDetailPage() {
 
     return ( 
         <div className="topic-detail-page">
-            <div className="header-section">
+            <div className="topic-name">
                 <p>{topic_id}</p>
             </div>
             <div className="content-section topic-detail-content">

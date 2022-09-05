@@ -1,16 +1,19 @@
-.page-title-container{
-    height: 100%;
-    width: 100%;
+
+
+.landing-page-container{
     position: relative;
-    display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
-
 .page-title{
-    font-size: 200px;
+    font-size: 4rem;
 }
 
+.icons-menu{
+    display: flex;
+}
 .page-menu-container{
     height: 100%;
     width: 100%;
@@ -24,8 +27,8 @@
     border-style: solid;
     border-color: black;
     border-radius: 50%;
-    height: 120px;
-    width: 120px;
+    height: 5rem;
+    width: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +41,6 @@
     cursor: pointer;
 }
 
-
 .menu-icon{
-    font-size: 100px;  
+    font-size: 4rem;  
 }

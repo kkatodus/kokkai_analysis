@@ -1,7 +1,10 @@
-.topic-detail-page{
-    
-}
-
-.topic-detail-content{
-
+.topic-name{
+    overflow-y: scroll;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: #C6C5B9;
+    position: fixed;
+    padding: 10px;
+    z-index: 100;
 }

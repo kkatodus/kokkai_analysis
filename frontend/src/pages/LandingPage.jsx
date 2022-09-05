@@ -6,11 +6,9 @@ import "../styles/general.css"
 import "../styles/pages/landing_page.css"
 function LandingPage(){
     return(
-        <div className="full-page-container scroll-snap-container">
-            <section className="page-title-container scroll-snap-element">
-                <h1 className="page-title" >KOKKAI DOC</h1>
-            </section>
-            <section className="page-menu-container scroll-snap-element">
+        <div className="full-page-container landing-page-container">
+            <h1 className="page-title" >KOKKAI DOC</h1>
+            <div className='icons-menu'>    
                 <Link to="/sangiin_main">
                     <div className="menu-icon-container">
                         <RiGovernmentLine className="menu-icon"/>
@@ -21,7 +19,8 @@ function LandingPage(){
                         <RiInformationLine className="menu-icon"/>
                     </div>
                 </Link>
-            </section>
+            </div>
+
 
 
             {/* <Link to = "/wordcloud">Word Cloud</Link>

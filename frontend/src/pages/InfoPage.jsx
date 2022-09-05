@@ -17,6 +17,7 @@ function InfoPage() {
                 <h2 className="info-subtitle">引用</h2>
                 
                     <table>
+                        <tbody>
                         <tr>
                             <th>
                                情報 
@@ -43,6 +44,7 @@ function InfoPage() {
                                 
                             </td>
                         </tr>
+                        </tbody>
                     </table>
 
                 </div>
