@@ -13,7 +13,6 @@ FileReadWriter.create_dir(output_dir)
 
 skip_first_n_meetings = len([file_name for file_name in os.listdir(output_dir) if ".json" in file_name])
 
-
 #necessary xpath
 meeting_period_xpath = "//font[contains(text(), '年')]"
 topic_xpath = "//tr//td//p//tt//font//a"
