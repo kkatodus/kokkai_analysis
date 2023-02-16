@@ -1,13 +1,14 @@
 
 import json
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from file_handling.file_read_writer import FileReadWriter
 import os
-from params.paths import ROOT_DIR
 
-output_dir = os.path.join(ROOT_DIR, "sangiin_voting_data")
+from params.paths import ROOT_DIR
+output_dir = os.path.join(ROOT_DIR, "bills_with_voting_results")
 chromedriver_path = os.path.join(ROOT_DIR, "chromedriver")
 main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html"
 FileReadWriter.create_dir(output_dir)
@@ -163,33 +164,24 @@ def check_for_individual_votes():
     except:
         return False
 
-def iterate_topics(meeting_dict):
+def iterate_topics():
     topic_links = driver.find_elements(By.XPATH, topic_xpath)
     topic_urls = [topic_link.get_attribute("href") for topic_link in topic_links]
     topic_names = [topic_link.text for topic_link in topic_links]
-    meeting_dict["num_topics"] = len(topic_urls)
-    first_topic = None
+    topics_with_individual_votes = []
     for topic_name, topic_url in zip(topic_names, topic_urls):
-        if len(meeting_dict["topics"]) > 0:
-            first_topic = meeting_dict["topics"][0]
+        
         driver.get(topic_url)
         individual_votes = check_for_individual_votes()
 
         if individual_votes:
-            topic_dict = collect_individual_votes()
-            topic_dict["individual_voting_results"] = True
+            topics_with_individual_votes.append(topic_name)
             print("individual")
-        else:
-            topic_dict = collect_whole_result()
-            topic_dict["individual_voting_results"] = False
 
-        topic_dict["topic_title"] = topic_name
         topic_date_str = driver.find_element(By.XPATH, topic_dates_xpath).text
         topic_date_str = topic_date_str.split("\n")[1]
-        topic_dict["topic_date"] = topic_date_str
         
-        meeting_dict["topics"].append(topic_dict)
-    return meeting_dict
+    return topics_with_individual_votes
 
 def iterate_meetings():
     global driver
@@ -207,6 +199,8 @@ def iterate_meetings():
         meeting_links += one_meeting_links
     meeting_names = [meeting_link.text for meeting_link in meeting_links][skip_first_n_meetings:]
     meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links][skip_first_n_meetings:]
+    output_file = open(os.path.join(output_dir, f"topics_with_votes.csv"), "a", encoding="utf-8")
+    output_file.write("meeting_name,topic_name\n")
     for meeting_name, meeting_url in zip(meeting_names, meeting_urls):
         #jump to meeting page
         driver.get(meeting_url)
@@ -218,12 +212,9 @@ def iterate_meetings():
         meeting_dict = create_meeting_dict_or_load_json(meeting_name)
         meeting_dict["period"] = meeting_period
         meeting_dict["topics"] = []
-        meeting_dict = iterate_topics(meeting_dict)
-        meeting_file_name = f"{meeting_name}.json"
-        meeting_path = os.path.join(output_dir, meeting_file_name)
-        print("Saving Json")
-        save_json(meeting_dict, meeting_path)
-
+        topics_w_ind_v = iterate_topics()
+        for topic_name in topics_w_ind_v:
+            output_file.write(f"{meeting_name},{topic_name}\n")
     
 if __name__ == "__main__":
     iterate_meetings()
