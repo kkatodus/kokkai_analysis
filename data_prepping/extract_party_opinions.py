@@ -2,6 +2,7 @@ from data_process.string_processor import StringProcessor
 from file_handling.file_read_writer import FileReadWriter
 from api_requests.meeting_convo_collector import MeetingConvoCollector
 from data_process.info_getter import InfoGetter
+from params.paths import paths
 import os
 from datetime import datetime, timedelta
 
