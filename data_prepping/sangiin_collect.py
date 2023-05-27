@@ -7,12 +7,11 @@ from file_handling.file_read_writer import FileReadWriter
 import os
 from params.paths import ROOT_DIR
 
-output_dir = os.path.join(ROOT_DIR, "sangiin_voting_data")
+output_dir = os.path.join(ROOT_DIR, "data_prepping","data_sangiin","voting_results")
 chromedriver_path = os.path.join(ROOT_DIR, "chromedriver")
 main_website_url = "https://www.sangiin.go.jp/japanese/touhyoulist/touhyoulist.html"
 FileReadWriter.create_dir(output_dir)
 
-skip_first_n_meetings = len([file_name for file_name in os.listdir(output_dir) if ".json" in file_name])
 
 #necessary xpath
 meeting_period_xpath = "//font[contains(text(), '年')]"
@@ -205,9 +204,13 @@ def iterate_meetings():
     for meeting_type in meeting_types:
         one_meeting_links = driver.find_elements(By.PARTIAL_LINK_TEXT, meeting_type)
         meeting_links += one_meeting_links
-    meeting_names = [meeting_link.text for meeting_link in meeting_links][skip_first_n_meetings:]
-    meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links][skip_first_n_meetings:]
+    meeting_names = [meeting_link.text for meeting_link in meeting_links]
+    meeting_urls = [meeting_link.get_attribute("href") for meeting_link in meeting_links]
+    meeting_files = os.listdir(output_dir)
     for meeting_name, meeting_url in zip(meeting_names, meeting_urls):
+        if meeting_name + ".json" in meeting_files:
+            print("Skipping " + meeting_name)
+            continue
         #jump to meeting page
         driver.get(meeting_url)
         meeting_dates = driver.find_elements(By.XPATH, meeting_period_xpath)
