@@ -167,10 +167,11 @@ def iterate_topics(meeting_dict):
     topic_urls = [topic_link.get_attribute("href") for topic_link in topic_links]
     topic_names = [topic_link.text for topic_link in topic_links]
     meeting_dict["num_topics"] = len(topic_urls)
-    first_topic = None
     for topic_name, topic_url in zip(topic_names, topic_urls):
-        if len(meeting_dict["topics"]) > 0:
-            first_topic = meeting_dict["topics"][0]
+        if "PDF" in topic_name:
+            #some times the voting results is just a pdf file
+            meeting_dict["topics"].append({"topic_title":topic_name, "topic_date":"", "individual_voting_results":False, "whole_result":"pdf", "voting_results":topic_url,})
+            continue
         driver.get(topic_url)
         individual_votes = check_for_individual_votes()
 
