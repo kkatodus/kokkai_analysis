@@ -135,7 +135,7 @@ def scrape_lower_repr_list():
                 out_dict["reprs"].append(repr_dict)
     
     #saving json
-    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, f"{date_up2date}_repr_list.json")
+    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, f"{date_up2date[:-2]}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
 
