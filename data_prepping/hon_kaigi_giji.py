@@ -1,4 +1,5 @@
 import os
+import re
 from api_requests.meeting_convo_collector import MeetingConvoCollector
 from params.paths import ROOT_DIR
 from scrape.general_scraper import GeneralScraper
@@ -116,12 +117,19 @@ def scrape_lower_repr_list():
         out_dict["meeting_period"] = date_up2date
         for name, yomikata, kaiha, district, period in zip(name_texts, yomikata_text,
                                                                     kaiha_text, district_text, period_text):
+                split_period = list(filter(None, re.split("（|）|参", period)))
+                if len(split_period) == 2:
+                    terms_in_upper = int(split_period[-1])
+                else:
+                    terms_in_upper = 0
+                terms_in_lower = int(split_period[0])
                 repr_dict = {
                     "name":name,
                     "yomikata":yomikata,
                     "kaiha":kaiha,
                     "district":district,
-                    "number_of_terms":period,
+                    "number_of_terms_lower":terms_in_lower,
+                    "number_of_terms_upper":terms_in_upper,
                 }
         
                 out_dict["reprs"].append(repr_dict)
