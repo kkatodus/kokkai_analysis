@@ -168,6 +168,7 @@ def iterate_topics(meeting_dict):
     topic_names = [topic_link.text for topic_link in topic_links]
     meeting_dict["num_topics"] = len(topic_urls)
     for topic_name, topic_url in zip(topic_names, topic_urls):
+        
         if "PDF" in topic_name:
             #some times the voting results is just a pdf file
             meeting_dict["topics"].append({"topic_title":topic_name, "topic_date":"", "individual_voting_results":False, "whole_result":"pdf", "voting_results":topic_url,})
@@ -182,10 +183,10 @@ def iterate_topics(meeting_dict):
         else:
             topic_dict = collect_whole_result()
             topic_dict["individual_voting_results"] = False
-
-        topic_dict["topic_title"] = topic_name
+        
         topic_date_str = driver.find_element(By.XPATH, topic_dates_xpath).text
         topic_date_str = topic_date_str.split("\n")[1]
+        topic_dict["topic_title"] = topic_name
         topic_dict["topic_date"] = topic_date_str
         
         meeting_dict["topics"].append(topic_dict)
