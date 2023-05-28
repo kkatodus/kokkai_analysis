@@ -14,8 +14,7 @@ def write_json(dict_obj, path):
         json.dump(dict_obj, j, ensure_ascii=False, indent=4)
 
 def create_dir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    os.makedirs(path, exist_ok=True)
 
 
     
