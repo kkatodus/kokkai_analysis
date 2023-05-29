@@ -1,5 +1,6 @@
 import os
 import re
+from selenium.common.exceptions import NoSuchElementException
 from api_requests.meeting_convo_collector import MeetingConvoCollector
 from params.paths import ROOT_DIR
 from scrape.general_scraper import GeneralScraper
@@ -8,22 +9,32 @@ from file_handling.file_read_writer import read_json, write_json, create_dir
 
 ## URLS
 GIJI_URL = "https://kokkai.ndl.go.jp/api/speech?"
+
 UPPER_REPR_LIST_URL = "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm"
 LOWER_REPR_LIST_URL = "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/syu/1giin.htm"
+
+UPPER_MEETING_INFO_PAGE_URL = "https://www.sangiin.go.jp/japanese/kon_kokkaijyoho/index.html"
+LOWER_MEETING_INFO_PAGE_URL = "https://www.shugiin.go.jp/internet/itdb_iinkai.nsf/html/iinkai/list.htm"
+
+
 ## PATHS
 UPPER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_sangiin")
 LOWER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_shugiin")
+
 UPPER_SPEECH_OUTPUT_DIR = os.path.join(UPPER_OUTPUT_DIR, "speeches")
 LOWER_SPEECH_OUTPUT_DIR = os.path.join(LOWER_OUTPUT_DIR, "speeches")
+
 create_dir(UPPER_OUTPUT_DIR)
 create_dir(LOWER_OUTPUT_DIR)
 create_dir(UPPER_SPEECH_OUTPUT_DIR)
 create_dir(LOWER_SPEECH_OUTPUT_DIR)
+
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = False
 SCRAPE_LOWER_REPR_LIST = False
+SCRAPE_UPPER_MEETING_INFO = True
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -133,6 +144,45 @@ def scrape_lower_repr_list():
     repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{date_up2date[:-2]}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
+def collect_upper_meetings_info():
+    gs.get_url(UPPER_MEETING_INFO_PAGE_URL)
+    meeting_period = gs.get_site_components_by(By.XPATH, "//p[@class='subtitle']")[0].text
+    #getting the link to all the meeting member lists
+    meeting_member_link_components = gs.get_site_components_by(By.LINK_TEXT, "委員名簿")
+    meeting_member_links = [link.get_attribute("href") for link in meeting_member_link_components]
+    meeting_member_dict = {"meeting_period":meeting_period, "meetings":{}}
+    for link in meeting_member_links:
+        gs.get_url(link)
+        meeting_name = gs.get_site_components_by(By.TAG_NAME, "h3")[0].text
+        meeting_table_elements = gs.get_site_components_by(By.TAG_NAME, "td")
+        role_components = meeting_table_elements[0::4]
+        role_texts = [role.text for role in role_components]
+        try:
+            name_components = [name.find_element(By.TAG_NAME, "a") for name in meeting_table_elements[1::4]]
+        except NoSuchElementException:
+            name_components = meeting_table_elements[1::4]
+        name_texts = [name.text for name in name_components]
+        name_links = [name.get_attribute("href") for name in name_components]
+
+        party_components = meeting_table_elements[2::4]
+        party_texts = [party.text for party in party_components]
+        for role, name, link, party in zip(role_texts, name_texts, name_links, party_texts):
+            member_dict = {
+                "role":role,
+                "name":name,
+                "link":link,
+                "party":party
+            }
+            if not meeting_name in meeting_member_dict['meetings'].keys():
+                meeting_member_dict['meetings'][meeting_name] = []
+            meeting_member_dict['meetings'][meeting_name].append(member_dict)
+    
+    #saving json
+    output_dir = os.path.join(UPPER_OUTPUT_DIR, "meeting_member_lists")
+    create_dir(output_dir)
+    meeting_member_json_path = os.path.join(output_dir, f"{meeting_period}.json")
+    write_json(meeting_member_dict, meeting_member_json_path)
+
 
 def main():
     #declaring global variables
@@ -143,12 +193,16 @@ def main():
         scrape_upper_repr_list()
     if SCRAPE_LOWER_REPR_LIST:
         scrape_lower_repr_list()
+    if SCRAPE_UPPER_MEETING_INFO:
+        collect_upper_meetings_info()
 
     #choose which repr list to use
-    upper_house_repr_list_file = [file for file in os.listdir(UPPER_OUTPUT_DIR) if file.endswith("json")][0]
-    repr_list = read_json(os.path.join(UPPER_OUTPUT_DIR, upper_house_repr_list_file))
+    upper_house_repr_list_dir = os.path.join(UPPER_OUTPUT_DIR, "repr_list")
+    upper_house_repr_list_file = [file for file in os.listdir(upper_house_repr_list_dir) if file.endswith("json")][0]
+    repr_list = read_json(os.path.join(upper_house_repr_list_dir, upper_house_repr_list_file))
     gs.close_driver()
 
+    return
     #Collecting the meeting speeches
     mcc = MeetingConvoCollector(base_url = GIJI_URL)
     # getting rid of the space so that we have a match in all of the name
