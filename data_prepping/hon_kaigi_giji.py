@@ -13,13 +13,17 @@ LOWER_REPR_LIST_URL = "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/st
 ## PATHS
 UPPER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_sangiin")
 LOWER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_shugiin")
+UPPER_SPEECH_OUTPUT_DIR = os.path.join(UPPER_OUTPUT_DIR, "speeches")
+LOWER_SPEECH_OUTPUT_DIR = os.path.join(LOWER_OUTPUT_DIR, "speeches")
 create_dir(UPPER_OUTPUT_DIR)
 create_dir(LOWER_OUTPUT_DIR)
+create_dir(UPPER_SPEECH_OUTPUT_DIR)
+create_dir(LOWER_SPEECH_OUTPUT_DIR)
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = False
-SCRAPE_LOWER_REPR_LIST = True
+SCRAPE_LOWER_REPR_LIST = False
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -29,15 +33,6 @@ REPR_LIST_LAYOUT = {
 
 ## XPATHS
 REPR_TABLE_ELEMENT_XPATH = "//td"
-
-conditions_list = [
-f"from={2021}-06-14",
-f"until={2021}-06-18",
-"nameOfHouse=参議院",
-#"any=重要施設周辺及び国境離島等",
-"searchRange=本文",
-"recordPacking=json"
-]
 
 def scrape_upper_repr_list():
      # scraping the list of representatives in upper house
@@ -82,7 +77,7 @@ def scrape_upper_repr_list():
         out_dict["reprs"].append(repr_dict)
     
     #saving json
-    repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, f"{meeting_period_text}_repr_list.json")
+    repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, "repr_list",f"{meeting_period_text}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
 def scrape_lower_repr_list():
@@ -135,7 +130,7 @@ def scrape_lower_repr_list():
                 out_dict["reprs"].append(repr_dict)
     
     #saving json
-    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, f"{date_up2date[:-2]}_repr_list.json")
+    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{date_up2date[:-2]}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
 
@@ -148,10 +143,29 @@ def main():
         scrape_upper_repr_list()
     if SCRAPE_LOWER_REPR_LIST:
         scrape_lower_repr_list()
-    #creating a list of dictionaries
-    # mcc = MeetingConvoCollector(base_url = GIJI_URL)
-    # request = mcc.make_requests(conditions_list, OUTPUT_DIR)
-    # print(request)
+
+    #choose which repr list to use
+    upper_house_repr_list_file = [file for file in os.listdir(UPPER_OUTPUT_DIR) if file.endswith("json")][0]
+    repr_list = read_json(os.path.join(UPPER_OUTPUT_DIR, upper_house_repr_list_file))
+    gs.close_driver()
+
+    #Collecting the meeting speeches
+    mcc = MeetingConvoCollector(base_url = GIJI_URL)
+    # getting rid of the space so that we have a match in all of the name
+    for speaker in repr_list['reprs']:
+        speaker_name = "".join(speaker["name"].split())
+        conditions_list = [
+            f"from={2022}-01-14",
+            # f"until={2021}-06-18",
+            f"speaker={speaker_name}",
+            "nameOfHouse=参議院",
+            "searchRange=本文",
+            "recordPacking=json"
+        ]
+        requests = mcc.make_requests(conditions_list)
+        write_json(requests, os.path.join(UPPER_SPEECH_OUTPUT_DIR, f'{speaker_name}.json'))
+        print("got requests")
+
 
 if __name__ == "__main__":
     main()

@@ -14,4 +14,7 @@ class GeneralScraper:
     def get_site_components_by(self, by, name):
         components = self.driver.find_elements(by, name)
         return components
+    
+    def close_driver(self):
+        self.driver.close()
         
