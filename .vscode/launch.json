@@ -11,6 +11,14 @@
             "program": "data_prepping\\sangiin_collect.py",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Python: Analyze voting pattern debug",
+            "type": "python",
+            "request": "launch",
+            "program": "data_prepping\\analyze_voting_patterns.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
