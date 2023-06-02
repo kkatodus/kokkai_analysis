@@ -34,7 +34,7 @@ CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = False
 SCRAPE_LOWER_REPR_LIST = False
-SCRAPE_UPPER_MEETING_INFO = False
+SCRAPE_UPPER_MEETING_MEMBER_LIST = False
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -144,7 +144,7 @@ def scrape_lower_repr_list():
     repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{date_up2date[:-2]}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
-def collect_upper_meetings_info():
+def scrape_upper_meeting_member_list():
     gs.get_url(UPPER_MEETING_INFO_PAGE_URL)
     meeting_period = gs.get_site_components_by(By.XPATH, "//p[@class='subtitle']")[0].text
     #getting the link to all the meeting member lists
@@ -183,6 +183,14 @@ def collect_upper_meetings_info():
     meeting_member_json_path = os.path.join(output_dir, f"{meeting_period}.json")
     write_json(meeting_member_dict, meeting_member_json_path)
 
+def scrape_lower_meeting_member_list():
+    #TODO implement
+    pass
+ 
+def scrape_upper_meeting_bills_info():
+    pass
+
+
 
 def main():
     #declaring global variables
@@ -193,8 +201,8 @@ def main():
         scrape_upper_repr_list()
     if SCRAPE_LOWER_REPR_LIST:
         scrape_lower_repr_list()
-    if SCRAPE_UPPER_MEETING_INFO:
-        collect_upper_meetings_info()
+    if SCRAPE_UPPER_MEETING_MEMBER_LIST:
+        scrape_upper_meeting_member_list()
 
     #choose which repr list to use
     upper_house_repr_list_dir = os.path.join(UPPER_OUTPUT_DIR, "repr_list")
