@@ -15,6 +15,7 @@ function TopicDetailPage() {
   const [isloading, setIsLoading] = useState(true);
   const [noOpinions, setNoOpinions] = useState(false);
   const {meetingId, topicId} = useParams();
+
   useEffect(()=>{
     const fetchTopic = async () =>{
       const topicUrl = sangiinEndpoint +
@@ -37,7 +38,7 @@ function TopicDetailPage() {
     } else {
       setNoOpinions(true);
     }
-  }, [meetingId, topic, topicId]);
+  }, [meetingId]);
 
   useEffect(()=>{
     if (Object.keys(topic).length !== 0) {
@@ -45,7 +46,7 @@ function TopicDetailPage() {
     } else {
       setNoOpinions(true);
     }
-  }, [topic]);
+  }, []);
 
   const partyOpinionCards = Object.entries(topic).map(
       ([key, value]) => {
@@ -57,10 +58,6 @@ function TopicDetailPage() {
   return (
     <div className="topic-detail-page">
       <div className="topic-name">
-        {/* <Link className="back-icon" to={"/meeting_page/"+meetingId}>
-                        <MdOutlineArrowBack/>
-                </Link> */}
-
         <p>{topicId}</p>
       </div>
       <div className="content-section topic-detail-content">
@@ -68,8 +65,6 @@ function TopicDetailPage() {
         <h1>Loading</h1>:noOpinions?
         <h1>該当する答弁がありません</h1>:partyOpinionCards}
       </div>
-
-
     </div>
   );
 }

@@ -16,10 +16,10 @@ function App() {
       <Route exact path="/" element={<LandingPage />} />
       <Route exact path="sangiin_main" element={<SangiinMainPage />} />
       <Route exact
-        path="meeting_page/:meeting_id"
+        path="meeting_page/:meetingId"
         element={<MeetingDetailPage />} />
       <Route exact
-        path="topic_details/:meeting_id/:topic_id"
+        path="topic_details/:meeting_id/:topicId"
         element={<TopicDetailPage />} />
       <Route exact path="/page_info" element={<InfoPage />} />
     </Routes>

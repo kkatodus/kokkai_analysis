@@ -18,11 +18,12 @@ function MeetingDetailPage() {
   const [isloading, setIsLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
   const [topicCards, setCards] = useState('');
-
+  // eslint-disable-next-line camelcase
   const {meetingId} = useParams();
   useEffect(()=>{
     // gets called on mount of the component
     const fetchMeeting = async () =>{
+      // eslint-disable-next-line max-len, camelcase
       const meetingUrl = sangiinEndpoint + 'sangiin_meeting_votes/' + meetingId;
       const meetingData = await fetch(meetingUrl);
       const meetingJson = await meetingData.json();

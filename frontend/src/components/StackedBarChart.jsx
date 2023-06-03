@@ -7,6 +7,7 @@ import {
   Tooltip,
   LabelList} from 'recharts';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @param {object} props
@@ -48,9 +49,9 @@ function StackedBarChart(props) {
   );
 }
 StackedBarChart.propTypes = {
-  data: Object,
-  width: String,
-  height: Number,
+  data: PropTypes.arrayOf(PropTypes.object),
+  width: PropTypes.string,
+  height: PropTypes.number,
 };
 
 export default StackedBarChart;

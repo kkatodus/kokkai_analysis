@@ -2,6 +2,7 @@ import '../styles/components/meeting_card.css';
 import React from 'react';
 import '../styles/other/animations.css';
 import {Link} from 'react-router-dom';
+import Proptypes from 'prop-types';
 
 /**
  * @param {object} props
@@ -17,8 +18,8 @@ function MeetingCard(props) {
     </Link> );
 }
 MeetingCard.propTypes ={
-  meeting_name: String,
-  period: String,
+  meeting_name: Proptypes.string,
+  period: Proptypes.string,
 };
 
 export default MeetingCard;
