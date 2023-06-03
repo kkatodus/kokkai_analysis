@@ -1,32 +1,23 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "engines":{
-    "node":"14.x"
+  "engines": {
+    "node": "20.x"
   },
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.3",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.27.2",
-    "d3": "^7.4.4",
-    "heroku": "^7.69.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-icons": "^4.4.0",
-    "react-redux": "^8.0.2",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "react-wordcloud": "^1.2.7",
-    "recharts": "^2.1.13",
-    "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1",
-    "web-vitals": "^2.1.4"
-  },
-  "overrides": {
-     "got": "^12.1.0"
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "heroku": "^8.1.7",
+    "react": "^18",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
+    "react-redux": "^8.0.7",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
