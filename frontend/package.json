@@ -25,6 +25,9 @@
     "redux-thunk": "^2.4.1",
     "web-vitals": "^2.1.4"
   },
+  "overrides": {
+     "got": "^12.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
