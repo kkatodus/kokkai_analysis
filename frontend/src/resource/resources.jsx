@@ -1,1 +1,1 @@
-export var sangiin_endpoint = "https://sangiin-api.herokuapp.com/"
+export const sangiinEndpoint = 'https://sangiin-api.herokuapp.com/';
