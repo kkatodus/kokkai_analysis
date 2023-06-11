@@ -1,1989 +1,2009 @@
 {
     "meeting_period": "第211回国会（常会）（令和5年1月23日～　）",
-    "reprs": [
-        {
-            "name": "足立  敏之",
-            "yomikata": "あだち としゆき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016001.htm"
-        },
-        {
-            "name": "阿達  雅志",
-            "yomikata": "あだち まさし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7014002.htm"
-        },
-        {
-            "name": "青木   愛",
-            "yomikata": "あおき あい",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007006.htm"
-        },
-        {
-            "name": "青木  一彦",
-            "yomikata": "あおき かずひこ",
-            "kaiha": "自民",
-            "district": "鳥取・島根",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010001.htm"
-        },
-        {
-            "name": "青島  健太",
-            "yomikata": "あおしま けんた",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm"
-        },
-        {
-            "name": "青山  繁晴",
-            "yomikata": "あおやま しげはる",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016002.htm"
-        },
-        {
-            "name": "赤池  誠章",
-            "yomikata": "あかいけ まさあき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm"
-        },
-        {
-            "name": "赤松   健",
-            "yomikata": "あかまつ けん",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022003.htm"
-        },
-        {
-            "name": "秋野  公造",
-            "yomikata": "あきの こうぞう",
-            "kaiha": "公明",
-            "district": "福岡",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010003.htm"
-        },
-        {
-            "name": "浅尾 慶一郎",
-            "yomikata": "あさお けいいちろう",
-            "kaiha": "自民",
-            "district": "神奈川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998003.htm"
-        },
-        {
-            "name": "浅田   均",
-            "yomikata": "あさだ  ひとし",
-            "kaiha": "維新",
-            "district": "大阪",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016003.htm"
-        },
-        {
-            "name": "朝日 健太郎",
-            "yomikata": "あさひ けんたろう",
-            "kaiha": "自民",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016004.htm"
-        },
-        {
-            "name": "東    徹",
-            "yomikata": "あずま とおる",
-            "kaiha": "維新",
-            "district": "大阪",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013005.htm"
-        },
-        {
-            "name": "有村  治子",
-            "yomikata": "ありむら はるこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001006.htm"
-        },
-        {
-            "name": "井上  哲士",
-            "yomikata": "いのうえ さとし",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm"
-        },
-        {
-            "name": "井上  義行",
-            "yomikata": "いのうえ よしゆき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm"
-        },
-        {
-            "name": "伊藤   岳",
-            "yomikata": "いとう がく",
-            "kaiha": "共産",
-            "district": "埼玉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019002.htm"
-        },
-        {
-            "name": "伊藤  孝江",
-            "yomikata": "いとう たかえ",
-            "kaiha": "公明",
-            "district": "兵庫",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm"
-        },
-        {
-            "name": "伊藤  孝恵",
-            "yomikata": "いとう たかえ",
-            "kaiha": "民主",
-            "district": "愛知",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm"
-        },
-        {
-            "name": "伊波  洋一",
-            "yomikata": "いは よういち",
-            "kaiha": "沖縄",
-            "district": "沖縄",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm"
-        },
-        {
-            "name": "生稲  晃子 [佐山  晃子]",
-            "yomikata": "いくいな あきこ",
-            "kaiha": "自民",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022004.htm"
-        },
-        {
-            "name": "石井   章",
-            "yomikata": "いしい あきら",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016008.htm"
-        },
-        {
-            "name": "石井  準一",
-            "yomikata": "いしい じゅんいち",
-            "kaiha": "自民",
-            "district": "千葉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007007.htm"
-        },
-        {
-            "name": "石井  浩郎",
-            "yomikata": "いしい ひろお",
-            "kaiha": "自民",
-            "district": "秋田",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm"
-        },
-        {
-            "name": "石井  正弘",
-            "yomikata": "いしい まさひろ",
-            "kaiha": "自民",
-            "district": "岡山",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013008.htm"
-        },
-        {
-            "name": "石井  苗子",
-            "yomikata": "いしい みつこ",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm"
-        },
-        {
-            "name": "石垣 のりこ [小川 のり子]",
-            "yomikata": "いしがき のりこ",
-            "kaiha": "立憲",
-            "district": "宮城",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019003.htm"
-        },
-        {
-            "name": "石川  大我",
-            "yomikata": "いしかわ たいが",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019004.htm"
-        },
-        {
-            "name": "石川  博崇",
-            "yomikata": "いしかわ ひろたか",
-            "kaiha": "公明",
-            "district": "大阪",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010006.htm"
-        },
-        {
-            "name": "石田  昌宏",
-            "yomikata": "いしだ まさひろ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013010.htm"
-        },
-        {
-            "name": "石橋  通宏",
-            "yomikata": "いしばし みちひろ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010007.htm"
-        },
-        {
-            "name": "磯崎  仁彦",
-            "yomikata": "いそざき よしひこ",
-            "kaiha": "自民",
-            "district": "香川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm"
-        },
-        {
-            "name": "礒崎  哲史",
-            "yomikata": "いそざき てつじ",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm"
-        },
-        {
-            "name": "猪口  邦子",
-            "yomikata": "いのぐち くにこ",
-            "kaiha": "自民",
-            "district": "千葉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010009.htm"
-        },
-        {
-            "name": "猪瀬  直樹",
-            "yomikata": "いのせ なおき",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022005.htm"
-        },
-        {
-            "name": "今井 絵理子",
-            "yomikata": "いまい えりこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016010.htm"
-        },
-        {
-            "name": "岩渕   友",
-            "yomikata": "いわぶち とも",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm"
-        },
-        {
-            "name": "岩本  剛人",
-            "yomikata": "いわもと つよひと",
-            "kaiha": "自民",
-            "district": "北海道",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm"
-        },
-        {
-            "name": "上田   勇",
-            "yomikata": "うえだ いさむ",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm"
-        },
-        {
-            "name": "上田  清司",
-            "yomikata": "うえだ きよし",
-            "kaiha": "民主",
-            "district": "埼玉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm"
-        },
-        {
-            "name": "上野  通子",
-            "yomikata": "うえの みちこ",
-            "kaiha": "自民",
-            "district": "栃木",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010013.htm"
-        },
-        {
-            "name": "臼井  正一",
-            "yomikata": "うすい しょういち",
-            "kaiha": "自民",
-            "district": "千葉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm"
-        },
-        {
-            "name": "打越 さく良 [村木 さく良]",
-            "yomikata": "うちこし さくら",
-            "kaiha": "立憲",
-            "district": "新潟",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019006.htm"
-        },
-        {
-            "name": "梅村   聡",
-            "yomikata": "うめむら さとし",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007013.htm"
-        },
-        {
-            "name": "梅村 みずほ",
-            "yomikata": "うめむら みずほ",
-            "kaiha": "維新",
-            "district": "大阪",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm"
-        },
-        {
-            "name": "江島   潔",
-            "yomikata": "えじま きよし",
-            "kaiha": "自民",
-            "district": "山口",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013001.htm"
-        },
-        {
-            "name": "衛藤  晟一",
-            "yomikata": "えとう せいいち",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007014.htm"
-        },
-        {
-            "name": "小沢  雅仁",
-            "yomikata": "おざわ まさひと",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm"
-        },
-        {
-            "name": "小沼   巧",
-            "yomikata": "おぬま たくみ",
-            "kaiha": "立憲",
-            "district": "茨城",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019009.htm"
-        },
-        {
-            "name": "小野田 紀美",
-            "yomikata": "おのだ きみ",
-            "kaiha": "自民",
-            "district": "岡山",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016013.htm"
-        },
-        {
-            "name": "尾辻  秀久",
-            "yomikata": "おつじ ひでひさ",
-            "kaiha": "無所属",
-            "district": "鹿児島",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5989018.htm"
-        },
-        {
-            "name": "越智  俊之",
-            "yomikata": "おち としゆき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022008.htm"
-        },
-        {
-            "name": "大家  敏志",
-            "yomikata": "おおいえ さとし",
-            "kaiha": "自民",
-            "district": "福岡",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010018.htm"
-        },
-        {
-            "name": "大島 九州男",
-            "yomikata": "おおしま くすお",
-            "kaiha": "れ新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm"
-        },
-        {
-            "name": "大塚  耕平",
-            "yomikata": "おおつか こうへい",
-            "kaiha": "民主",
-            "district": "愛知",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001013.htm"
-        },
-        {
-            "name": "大椿 ゆうこ [大椿  裕子]",
-            "yomikata": "おおつばき ゆうこ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023003.htm"
-        },
-        {
-            "name": "大野  泰正",
-            "yomikata": "おおの やすただ",
-            "kaiha": "自民",
-            "district": "岐阜",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013013.htm"
-        },
-        {
-            "name": "太田  房江 [齊藤  房江]",
-            "yomikata": "おおた ふさえ",
-            "kaiha": "自民",
-            "district": "大阪",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm"
-        },
-        {
-            "name": "岡田  直樹",
-            "yomikata": "おかだ なおき",
-            "kaiha": "自民",
-            "district": "石川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004012.htm"
-        },
-        {
-            "name": "音喜多  駿",
-            "yomikata": "おときた しゅん",
-            "kaiha": "維新",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019010.htm"
-        },
-        {
-            "name": "鬼木   誠",
-            "yomikata": "おにき まこと",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022009.htm"
-        },
-        {
-            "name": "加田  裕之",
-            "yomikata": "かだ ひろゆき",
-            "kaiha": "自民",
-            "district": "兵庫",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019011.htm"
-        },
-        {
-            "name": "加藤  明良",
-            "yomikata": "かとう あきよし",
-            "kaiha": "自民",
-            "district": "茨城",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022010.htm"
-        },
-        {
-            "name": "嘉田 由紀子",
-            "yomikata": "かだ ゆきこ",
-            "kaiha": "民主",
-            "district": "滋賀",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019012.htm"
-        },
-        {
-            "name": "梶原  大介",
-            "yomikata": "かじはら だいすけ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022012.htm"
-        },
-        {
-            "name": "片山 さつき",
-            "yomikata": "かたやま さつき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm"
-        },
-        {
-            "name": "片山  大介",
-            "yomikata": "かたやま だいすけ",
-            "kaiha": "維新",
-            "district": "兵庫",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016014.htm"
-        },
-        {
-            "name": "勝部  賢志",
-            "yomikata": "かつべ けんじ",
-            "kaiha": "立憲",
-            "district": "北海道",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019013.htm"
-        },
-        {
-            "name": "金子  道仁",
-            "yomikata": "かねこ みちひと",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022013.htm"
-        },
-        {
-            "name": "神谷  宗幣",
-            "yomikata": "かみや そうへい",
-            "kaiha": "無所属",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm"
-        },
-        {
-            "name": "神谷  政幸",
-            "yomikata": "かみや まさゆき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022015.htm"
-        },
-        {
-            "name": "紙   智子 [内山  智子]",
-            "yomikata": "かみ ともこ",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001010.htm"
-        },
-        {
-            "name": "川合  孝典",
-            "yomikata": "かわい たかのり",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm"
-        },
-        {
-            "name": "川田  龍平",
-            "yomikata": "かわだ りゅうへい",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007025.htm"
-        },
-        {
-            "name": "河野  義博",
-            "yomikata": "かわの よしひろ",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm"
-        },
-        {
-            "name": "木村  英子",
-            "yomikata": "きむら えいこ",
-            "kaiha": "れ新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm"
-        },
-        {
-            "name": "吉良 よし子 [吉良  佳子]",
-            "yomikata": "きら よしこ",
-            "kaiha": "共産",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm"
-        },
-        {
-            "name": "岸  真紀子",
-            "yomikata": "きし まきこ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019016.htm"
-        },
-        {
-            "name": "北村  経夫",
-            "yomikata": "きたむら つねお",
-            "kaiha": "自民",
-            "district": "山口",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm"
-        },
-        {
-            "name": "串田  誠一",
-            "yomikata": "くしだ せいいち",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022016.htm"
-        },
-        {
-            "name": "窪田  哲也",
-            "yomikata": "くぼた てつや",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022017.htm"
-        },
-        {
-            "name": "熊谷  裕人",
-            "yomikata": "くまがい ひろと",
-            "kaiha": "立憲",
-            "district": "埼玉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019017.htm"
-        },
-        {
-            "name": "倉林  明子",
-            "yomikata": "くらばやし あきこ",
-            "kaiha": "共産",
-            "district": "京都",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013020.htm"
-        },
-        {
-            "name": "こやり 隆史 [小鑓  隆史]",
-            "yomikata": "こやり たかし",
-            "kaiha": "自民",
-            "district": "滋賀",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016017.htm"
-        },
-        {
-            "name": "小池   晃",
-            "yomikata": "こいけ あきら",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998022.htm"
-        },
-        {
-            "name": "小西  洋之",
-            "yomikata": "こにし ひろゆき",
-            "kaiha": "立憲",
-            "district": "千葉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010024.htm"
-        },
-        {
-            "name": "小林  一大",
-            "yomikata": "こばやし かずひろ",
-            "kaiha": "自民",
-            "district": "新潟",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022018.htm"
-        },
-        {
-            "name": "古賀  千景",
-            "yomikata": "こが ちかげ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm"
-        },
-        {
-            "name": "古賀 友一郎",
-            "yomikata": "こが ゆういちろう",
-            "kaiha": "自民",
-            "district": "長崎",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013021.htm"
-        },
-        {
-            "name": "古賀  之士",
-            "yomikata": "こが ゆきひと",
-            "kaiha": "立憲",
-            "district": "福岡",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm"
-        },
-        {
-            "name": "古庄  玄知",
-            "yomikata": "こしょう はるとも",
-            "kaiha": "自民",
-            "district": "大分",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022020.htm"
-        },
-        {
-            "name": "上月  良祐",
-            "yomikata": "こうづき りょうすけ",
-            "kaiha": "自民",
-            "district": "茨城",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm"
-        },
-        {
-            "name": "佐々木 さやか [山口 さやか]",
-            "yomikata": "ささき さやか",
-            "kaiha": "公明",
-            "district": "神奈川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013023.htm"
-        },
-        {
-            "name": "佐藤   啓",
-            "yomikata": "さとう けい",
-            "kaiha": "自民",
-            "district": "奈良",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm"
-        },
-        {
-            "name": "佐藤  信秋",
-            "yomikata": "さとう のぶあき",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007028.htm"
-        },
-        {
-            "name": "佐藤  正久",
-            "yomikata": "さとう まさひさ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm"
-        },
-        {
-            "name": "斎藤  嘉隆",
-            "yomikata": "さいとう よしたか",
-            "kaiha": "立憲",
-            "district": "愛知",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010027.htm"
-        },
-        {
-            "name": "齊藤 健一郎",
-            "yomikata": "さいとう けんいちろう",
-            "kaiha": "女子",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm"
-        },
-        {
-            "name": "酒井  庸行",
-            "yomikata": "さかい やすゆき",
-            "kaiha": "自民",
-            "district": "愛知",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013024.htm"
-        },
-        {
-            "name": "櫻井   充",
-            "yomikata": "さくらい みつる",
-            "kaiha": "自民",
-            "district": "宮城",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998030.htm"
-        },
-        {
-            "name": "里見  隆治",
-            "yomikata": "さとみ りゅうじ",
-            "kaiha": "公明",
-            "district": "愛知",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm"
-        },
-        {
-            "name": "山東  昭子",
-            "yomikata": "さんとう あきこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5974040.htm"
-        },
-        {
-            "name": "清水  貴之",
-            "yomikata": "しみず たかゆき",
-            "kaiha": "維新",
-            "district": "兵庫",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013025.htm"
-        },
-        {
-            "name": "清水  真人",
-            "yomikata": "しみず まさと",
-            "kaiha": "自民",
-            "district": "群馬",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm"
-        },
-        {
-            "name": "自見 はなこ [橋本  英子]",
-            "yomikata": "じみ はなこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm"
-        },
-        {
-            "name": "塩田  博昭",
-            "yomikata": "しおた ひろあき",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm"
-        },
-        {
-            "name": "塩村 あやか [塩村  文夏]",
-            "yomikata": "しおむら あやか",
-            "kaiha": "立憲",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019020.htm"
-        },
-        {
-            "name": "柴   愼一",
-            "yomikata": "しば しんいち",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022021.htm"
-        },
-        {
-            "name": "柴田   巧",
-            "yomikata": "しばた たくみ",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010029.htm"
-        },
-        {
-            "name": "島村   大",
-            "yomikata": "しまむら だい",
-            "kaiha": "自民",
-            "district": "神奈川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013027.htm"
-        },
-        {
-            "name": "下野  六太",
-            "yomikata": "しもの ろくた",
-            "kaiha": "公明",
-            "district": "福岡",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019021.htm"
-        },
-        {
-            "name": "白坂  亜紀 [中山  亜紀]",
-            "yomikata": "しらさか あき",
-            "kaiha": "自民",
-            "district": "大分",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm"
-        },
-        {
-            "name": "進藤 金日子",
-            "yomikata": "しんどう かねひこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm"
-        },
-        {
-            "name": "榛葉 賀津也",
-            "yomikata": "しんば かづや",
-            "kaiha": "民主",
-            "district": "静岡",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm"
-        },
-        {
-            "name": "須藤  元気",
-            "yomikata": "すどう げんき",
-            "kaiha": "無所属",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019022.htm"
-        },
-        {
-            "name": "末松  信介",
-            "yomikata": "すえまつ しんすけ",
-            "kaiha": "自民",
-            "district": "兵庫",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004033.htm"
-        },
-        {
-            "name": "杉   久武",
-            "yomikata": "すぎ ひさたけ",
-            "kaiha": "公明",
-            "district": "大阪",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013028.htm"
-        },
-        {
-            "name": "杉尾  秀哉",
-            "yomikata": "すぎお ひでや",
-            "kaiha": "立憲",
-            "district": "長野",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016023.htm"
-        },
-        {
-            "name": "鈴木  宗男",
-            "yomikata": "すずき むねお",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019023.htm"
-        },
-        {
-            "name": "世耕  弘成",
-            "yomikata": "せこう ひろしげ",
-            "kaiha": "自民",
-            "district": "和歌山",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998069.htm"
-        },
-        {
-            "name": "関口  昌一",
-            "yomikata": "せきぐち まさかず",
-            "kaiha": "自民",
-            "district": "埼玉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7003005.htm"
-        },
-        {
-            "name": "田島 麻衣子",
-            "yomikata": "たじま まいこ",
-            "kaiha": "立憲",
-            "district": "愛知",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019024.htm"
-        },
-        {
-            "name": "田中  昌史",
-            "yomikata": "たなか まさし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm"
-        },
-        {
-            "name": "田名部 匡代",
-            "yomikata": "たなぶ まさよ",
-            "kaiha": "立憲",
-            "district": "青森",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016025.htm"
-        },
-        {
-            "name": "田村  智子",
-            "yomikata": "たむら ともこ",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010031.htm"
-        },
-        {
-            "name": "田村  まみ [田村  麻美]",
-            "yomikata": "たむら まみ",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm"
-        },
-        {
-            "name": "高木 かおり [高木 佳保里]",
-            "yomikata": "たかぎ かおり",
-            "kaiha": "維新",
-            "district": "大阪",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm"
-        },
-        {
-            "name": "高木  真理",
-            "yomikata": "たかぎ まり",
-            "kaiha": "立憲",
-            "district": "埼玉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022023.htm"
-        },
-        {
-            "name": "高野 光二郎",
-            "yomikata": "たかの こうじろう",
-            "kaiha": "自民",
-            "district": "徳島・高知",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013029.htm"
-        },
-        {
-            "name": "高橋  克法",
-            "yomikata": "たかはし かつのり",
-            "kaiha": "自民",
-            "district": "栃木",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013030.htm"
-        },
-        {
-            "name": "高橋 はるみ",
-            "yomikata": "たかはし はるみ",
-            "kaiha": "自民",
-            "district": "北海道",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019026.htm"
-        },
-        {
-            "name": "高橋  光男",
-            "yomikata": "たかはし みつお",
-            "kaiha": "公明",
-            "district": "兵庫",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm"
-        },
-        {
-            "name": "高良  鉄美",
-            "yomikata": "たから てつみ",
-            "kaiha": "沖縄",
-            "district": "沖縄",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019028.htm"
-        },
-        {
-            "name": "滝沢   求",
-            "yomikata": "たきさわ もとめ",
-            "kaiha": "自民",
-            "district": "青森",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013031.htm"
-        },
-        {
-            "name": "滝波  宏文",
-            "yomikata": "たきなみ ひろふみ",
-            "kaiha": "自民",
-            "district": "福井",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013032.htm"
-        },
-        {
-            "name": "竹内  真二",
-            "yomikata": "たけうち しんじ",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7017001.htm"
-        },
-        {
-            "name": "竹詰   仁",
-            "yomikata": "たけづめ ひとし",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm"
-        },
-        {
-            "name": "竹谷 とし子 [菊地 とし子]",
-            "yomikata": "たけや としこ",
-            "kaiha": "公明",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm"
-        },
-        {
-            "name": "武見  敬三",
-            "yomikata": "たけみ けいぞう",
-            "kaiha": "自民",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995043.htm"
-        },
-        {
-            "name": "谷合  正明",
-            "yomikata": "たにあい まさあき",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm"
-        },
-        {
-            "name": "柘植  芳文",
-            "yomikata": "つげ よしふみ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013034.htm"
-        },
-        {
-            "name": "辻元  清美",
-            "yomikata": "つじもと きよみ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022025.htm"
-        },
-        {
-            "name": "鶴保  庸介",
-            "yomikata": "つるほ ようすけ",
-            "kaiha": "自民",
-            "district": "和歌山",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm"
-        },
-        {
-            "name": "寺田   静",
-            "yomikata": "てらた しずか",
-            "kaiha": "無所属",
-            "district": "秋田",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019030.htm"
-        },
-        {
-            "name": "天畠  大輔",
-            "yomikata": "てんばた だいすけ",
-            "kaiha": "れ新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022026.htm"
-        },
-        {
-            "name": "堂故   茂",
-            "yomikata": "どうこ しげる",
-            "kaiha": "自民",
-            "district": "富山",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013035.htm"
-        },
-        {
-            "name": "堂込 麻紀子",
-            "yomikata": "どうごみ まきこ",
-            "kaiha": "無所属",
-            "district": "茨城",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022027.htm"
-        },
-        {
-            "name": "徳永  エリ [鈴木  エリ]",
-            "yomikata": "とくなが えり",
-            "kaiha": "立憲",
-            "district": "北海道",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010036.htm"
-        },
-        {
-            "name": "友納  理緒 [土肥  理緒]",
-            "yomikata": "とものう りお",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022028.htm"
-        },
-        {
-            "name": "豊田  俊郎",
-            "yomikata": "とよだ としろう",
-            "kaiha": "自民",
-            "district": "千葉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013036.htm"
-        },
-        {
-            "name": "ながえ 孝子 [永江  孝子]",
-            "yomikata": "ながえ たかこ",
-            "kaiha": "無所属",
-            "district": "愛媛",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019031.htm"
-        },
-        {
-            "name": "中条 きよし [下村   清]",
-            "yomikata": "なかじょう きよし",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022029.htm"
-        },
-        {
-            "name": "中曽根 弘文",
-            "yomikata": "なかそね ひろふみ",
-            "kaiha": "自民",
-            "district": "群馬",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5986024.htm"
-        },
-        {
-            "name": "中田   宏",
-            "yomikata": "なかだ ひろし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022001.htm"
-        },
-        {
-            "name": "中西  祐介",
-            "yomikata": "なかにし ゆうすけ",
-            "kaiha": "自民",
-            "district": "徳島・高知",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010038.htm"
-        },
-        {
-            "name": "永井   学",
-            "yomikata": "ながい まなぶ",
-            "kaiha": "自民",
-            "district": "山梨",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022030.htm"
-        },
-        {
-            "name": "長浜  博行",
-            "yomikata": "ながはま ひろゆき",
-            "kaiha": "無所属",
-            "district": "千葉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007041.htm"
-        },
-        {
-            "name": "長峯   誠",
-            "yomikata": "ながみね まこと",
-            "kaiha": "自民",
-            "district": "宮崎",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013039.htm"
-        },
-        {
-            "name": "仁比  聡平",
-            "yomikata": "にひ そうへい",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004045.htm"
-        },
-        {
-            "name": "新妻  秀規",
-            "yomikata": "にいづま ひでき",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm"
-        },
-        {
-            "name": "西田  昌司",
-            "yomikata": "にしだ しょうじ",
-            "kaiha": "自民",
-            "district": "京都",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007044.htm"
-        },
-        {
-            "name": "西田  実仁",
-            "yomikata": "にしだ まこと",
-            "kaiha": "公明",
-            "district": "埼玉",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004043.htm"
-        },
-        {
-            "name": "野上 浩太郎",
-            "yomikata": "のがみ こうたろう",
-            "kaiha": "自民",
-            "district": "富山",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001037.htm"
-        },
-        {
-            "name": "野田  国義",
-            "yomikata": "のだ くによし",
-            "kaiha": "立憲",
-            "district": "福岡",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013042.htm"
-        },
-        {
-            "name": "野村  哲郎",
-            "yomikata": "のむら てつろう",
-            "kaiha": "自民",
-            "district": "鹿児島",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004046.htm"
-        },
-        {
-            "name": "羽田  次郎",
-            "yomikata": "はた じろう",
-            "kaiha": "立憲",
-            "district": "長野",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021002.htm"
-        },
-        {
-            "name": "羽生田  俊",
-            "yomikata": "はにゅうだ たかし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm"
-        },
-        {
-            "name": "芳賀  道也",
-            "yomikata": "はが みちや",
-            "kaiha": "民主",
-            "district": "山形",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm"
-        },
-        {
-            "name": "長谷川  岳",
-            "yomikata": "はせがわ がく",
-            "kaiha": "自民",
-            "district": "北海道",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010043.htm"
-        },
-        {
-            "name": "長谷川 英晴",
-            "yomikata": "はせがわ ひではる",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022031.htm"
-        },
-        {
-            "name": "馬場  成志",
-            "yomikata": "ばば せいし",
-            "kaiha": "自民",
-            "district": "熊本",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013044.htm"
-        },
-        {
-            "name": "橋本  聖子 [石崎  聖子]",
-            "yomikata": "はしもと せいこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995054.htm"
-        },
-        {
-            "name": "浜口   誠",
-            "yomikata": "はまぐち まこと",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm"
-        },
-        {
-            "name": "浜田   聡",
-            "yomikata": "はまだ さとし",
-            "kaiha": "女子",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019041.htm"
-        },
-        {
-            "name": "浜野  喜史",
-            "yomikata": "はまの よしふみ",
-            "kaiha": "民主",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm"
-        },
-        {
-            "name": "比嘉 奈津美",
-            "yomikata": "ひが なつみ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021003.htm"
-        },
-        {
-            "name": "平木  大作",
-            "yomikata": "ひらき だいさく",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013046.htm"
-        },
-        {
-            "name": "平山 佐知子",
-            "yomikata": "ひらやま さちこ",
-            "kaiha": "無所属",
-            "district": "静岡",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016033.htm"
-        },
-        {
-            "name": "広瀬 めぐみ",
-            "yomikata": "ひろせ めぐみ",
-            "kaiha": "自民",
-            "district": "岩手",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022032.htm"
-        },
-        {
-            "name": "福岡  資麿",
-            "yomikata": "ふくおか たかまろ",
-            "kaiha": "自民",
-            "district": "佐賀",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010045.htm"
-        },
-        {
-            "name": "福島 みずほ [福島  瑞穂]",
-            "yomikata": "ふくしま みずほ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998049.htm"
-        },
-        {
-            "name": "福山  哲郎",
-            "yomikata": "ふくやま てつろう",
-            "kaiha": "立憲",
-            "district": "京都",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm"
-        },
-        {
-            "name": "藤井  一博",
-            "yomikata": "ふじい かずひろ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022033.htm"
-        },
-        {
-            "name": "藤川  政人",
-            "yomikata": "ふじかわ まさひと",
-            "kaiha": "自民",
-            "district": "愛知",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010046.htm"
-        },
-        {
-            "name": "藤木  眞也",
-            "yomikata": "ふじき しんや",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm"
-        },
-        {
-            "name": "舟山  康江",
-            "yomikata": "ふなやま やすえ",
-            "kaiha": "民主",
-            "district": "山形",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007052.htm"
-        },
-        {
-            "name": "舩後  靖彦",
-            "yomikata": "ふなご やすひこ",
-            "kaiha": "れ新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019033.htm"
-        },
-        {
-            "name": "船橋  利実",
-            "yomikata": "ふなはし としみつ",
-            "kaiha": "自民",
-            "district": "北海道",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022034.htm"
-        },
-        {
-            "name": "古川  俊治",
-            "yomikata": "ふるかわ としはる",
-            "kaiha": "自民",
-            "district": "埼玉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007053.htm"
-        },
-        {
-            "name": "星   北斗",
-            "yomikata": "ほし ほくと",
-            "kaiha": "自民",
-            "district": "福島",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022035.htm"
-        },
-        {
-            "name": "堀井   巌",
-            "yomikata": "ほりい いわお",
-            "kaiha": "自民",
-            "district": "奈良",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013048.htm"
-        },
-        {
-            "name": "本田  顕子",
-            "yomikata": "ほんだ あきこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm"
-        },
-        {
-            "name": "舞立  昇治",
-            "yomikata": "まいたち しょうじ",
-            "kaiha": "自民",
-            "district": "鳥取・島根",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013049.htm"
-        },
-        {
-            "name": "牧野 たかお [牧野  京夫]",
-            "yomikata": "まきの たかお",
-            "kaiha": "自民",
-            "district": "静岡",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007054.htm"
-        },
-        {
-            "name": "牧山 ひろえ [牧山  弘惠]",
-            "yomikata": "まきやま ひろえ",
-            "kaiha": "立憲",
-            "district": "神奈川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm"
-        },
-        {
-            "name": "松川  るい [新居  るい]",
-            "yomikata": "まつかわ るい",
-            "kaiha": "自民",
-            "district": "大阪",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016035.htm"
-        },
-        {
-            "name": "松沢  成文",
-            "yomikata": "まつざわ しげふみ",
-            "kaiha": "維新",
-            "district": "神奈川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm"
-        },
-        {
-            "name": "松下  新平",
-            "yomikata": "まつした しんぺい",
-            "kaiha": "自民",
-            "district": "宮崎",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004056.htm"
-        },
-        {
-            "name": "松野  明美 [前田  明美]",
-            "yomikata": "まつの あけみ",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022036.htm"
-        },
-        {
-            "name": "松村  祥史",
-            "yomikata": "まつむら よしふみ",
-            "kaiha": "自民",
-            "district": "熊本",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004057.htm"
-        },
-        {
-            "name": "松山  政司",
-            "yomikata": "まつやま まさじ",
-            "kaiha": "自民",
-            "district": "福岡",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001046.htm"
-        },
-        {
-            "name": "丸川  珠代 [大塚  珠代]",
-            "yomikata": "まるかわ たまよ",
-            "kaiha": "自民",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007058.htm"
-        },
-        {
-            "name": "三浦  信祐",
-            "yomikata": "みうら のぶひろ",
-            "kaiha": "公明",
-            "district": "神奈川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm"
-        },
-        {
-            "name": "三浦   靖",
-            "yomikata": "みうら やすし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019035.htm"
-        },
-        {
-            "name": "三上  えり [川堀  絵里]",
-            "yomikata": "みかみ えり",
-            "kaiha": "立憲",
-            "district": "広島",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022037.htm"
-        },
-        {
-            "name": "三原 じゅん子 [中根  順子]",
-            "yomikata": "みはら じゅんこ",
-            "kaiha": "自民",
-            "district": "神奈川",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010048.htm"
-        },
-        {
-            "name": "三宅  伸吾",
-            "yomikata": "みやけ しんご",
-            "kaiha": "自民",
-            "district": "香川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013052.htm"
-        },
-        {
-            "name": "水岡  俊一",
-            "yomikata": "みずおか しゅんいち",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004058.htm"
-        },
-        {
-            "name": "水野  素子",
-            "yomikata": "みずの もとこ",
-            "kaiha": "立憲",
-            "district": "神奈川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022038.htm"
-        },
-        {
-            "name": "宮口  治子 [福田  治子]",
-            "yomikata": "みやぐち はるこ",
-            "kaiha": "立憲",
-            "district": "広島",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021001.htm"
-        },
-        {
-            "name": "宮崎  雅夫",
-            "yomikata": "みやざき まさお",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm"
-        },
-        {
-            "name": "宮崎   勝",
-            "yomikata": "みやざき まさる",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm"
-        },
-        {
-            "name": "宮沢  洋一",
-            "yomikata": "みやざわ よういち",
-            "kaiha": "自民",
-            "district": "広島",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm"
-        },
-        {
-            "name": "宮本  周司",
-            "yomikata": "みやもと しゅうじ",
-            "kaiha": "自民",
-            "district": "石川",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013053.htm"
-        },
-        {
-            "name": "村田  享子",
-            "yomikata": "むらた きょうこ",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022039.htm"
-        },
-        {
-            "name": "室井  邦彦",
-            "yomikata": "むろい くにひこ",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007062.htm"
-        },
-        {
-            "name": "森  まさこ [三好  雅子]",
-            "yomikata": "もり まさこ",
-            "kaiha": "自民",
-            "district": "福島",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007061.htm"
-        },
-        {
-            "name": "森本  真治",
-            "yomikata": "もりもと しんじ",
-            "kaiha": "立憲",
-            "district": "広島",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013054.htm"
-        },
-        {
-            "name": "森屋   隆",
-            "yomikata": "もりや たかし",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019037.htm"
-        },
-        {
-            "name": "森屋   宏",
-            "yomikata": "もりや ひろし",
-            "kaiha": "自民",
-            "district": "山梨",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm"
-        },
-        {
-            "name": "矢倉  克夫",
-            "yomikata": "やくら かつお",
-            "kaiha": "公明",
-            "district": "埼玉",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013056.htm"
-        },
-        {
-            "name": "安江  伸夫",
-            "yomikata": "やすえ のぶお",
-            "kaiha": "公明",
-            "district": "愛知",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019038.htm"
-        },
-        {
-            "name": "柳ヶ瀬 裕文",
-            "yomikata": "やながせ ひろふみ",
-            "kaiha": "維新",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm"
-        },
-        {
-            "name": "山口 那津男",
-            "yomikata": "やまぐち なつお",
-            "kaiha": "公明",
-            "district": "東京",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001049.htm"
-        },
-        {
-            "name": "山崎  正昭",
-            "yomikata": "やまざき まさあき",
-            "kaiha": "自民",
-            "district": "福井",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5992051.htm"
-        },
-        {
-            "name": "山下  雄平",
-            "yomikata": "やました ゆうへい",
-            "kaiha": "自民",
-            "district": "佐賀",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm"
-        },
-        {
-            "name": "山下  芳生",
-            "yomikata": "やました よしき",
-            "kaiha": "共産",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995071.htm"
-        },
-        {
-            "name": "山添   拓",
-            "yomikata": "やまぞえ たく",
-            "kaiha": "共産",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm"
-        },
-        {
-            "name": "山田  太郎",
-            "yomikata": "やまだ たろう",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7012005.htm"
-        },
-        {
-            "name": "山田  俊男",
-            "yomikata": "やまだ としお",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007067.htm"
-        },
-        {
-            "name": "山田   宏",
-            "yomikata": "やまだ ひろし",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016043.htm"
-        },
-        {
-            "name": "山谷 えり子 [小川 惠里子]",
-            "yomikata": "やまたに えりこ",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004013.htm"
-        },
-        {
-            "name": "山本  香苗 [池田  香苗]",
-            "yomikata": "やまもと かなえ",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001051.htm"
-        },
-        {
-            "name": "山本  啓介",
-            "yomikata": "やまもと けいすけ",
-            "kaiha": "自民",
-            "district": "長崎",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm"
-        },
-        {
-            "name": "山本 佐知子",
-            "yomikata": "やまもと さちこ",
-            "kaiha": "自民",
-            "district": "三重",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022041.htm"
-        },
-        {
-            "name": "山本  順三",
-            "yomikata": "やまもと じゅんぞう",
-            "kaiha": "自民",
-            "district": "愛媛",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004062.htm"
-        },
-        {
-            "name": "山本  太郎",
-            "yomikata": "やまもと たろう",
-            "kaiha": "れ新",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013062.htm"
-        },
-        {
-            "name": "山本  博司",
-            "yomikata": "やまもと ひろし",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm"
-        },
-        {
-            "name": "横沢  高徳",
-            "yomikata": "よこさわ たかのり",
-            "kaiha": "立憲",
-            "district": "岩手",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019040.htm"
-        },
-        {
-            "name": "横山  信一",
-            "yomikata": "よこやま しんいち",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010052.htm"
-        },
-        {
-            "name": "吉井   章",
-            "yomikata": "よしい あきら",
-            "kaiha": "自民",
-            "district": "京都",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022042.htm"
-        },
-        {
-            "name": "吉川  沙織",
-            "yomikata": "よしかわ さおり",
-            "kaiha": "立憲",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm"
-        },
-        {
-            "name": "吉川 ゆうみ [吉川  有美]",
-            "yomikata": "よしかわ ゆうみ",
-            "kaiha": "自民",
-            "district": "三重",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013063.htm"
-        },
-        {
-            "name": "蓮舫 [齊藤  蓮舫]",
-            "yomikata": "れんほう",
-            "kaiha": "立憲",
-            "district": "東京",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004060.htm"
-        },
-        {
-            "name": "和田  政宗",
-            "yomikata": "わだ まさむね",
-            "kaiha": "自民",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm"
-        },
-        {
-            "name": "若林  洋平",
-            "yomikata": "わかばやし ようへい",
-            "kaiha": "自民",
-            "district": "静岡",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm"
-        },
-        {
-            "name": "若松  謙維",
-            "yomikata": "わかまつ かねしげ",
-            "kaiha": "公明",
-            "district": "比例",
-            "period": "令和7年7月28日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013065.htm"
-        },
-        {
-            "name": "渡辺  猛之",
-            "yomikata": "わたなべ たけゆき",
-            "kaiha": "自民",
-            "district": "岐阜",
-            "period": "令和10年7月25日",
-            "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010055.htm"
-        }
-    ]
+    "reprs": {
+        "自民": [
+            {
+                "name": "足立  敏之",
+                "yomikata": "あだち としゆき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016001.htm"
+            },
+            {
+                "name": "阿達  雅志",
+                "yomikata": "あだち まさし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7014002.htm"
+            },
+            {
+                "name": "青木  一彦",
+                "yomikata": "あおき かずひこ",
+                "kaiha": "自民",
+                "district": "鳥取・島根",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010001.htm"
+            },
+            {
+                "name": "青山  繁晴",
+                "yomikata": "あおやま しげはる",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016002.htm"
+            },
+            {
+                "name": "赤池  誠章",
+                "yomikata": "あかいけ まさあき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm"
+            },
+            {
+                "name": "赤松   健",
+                "yomikata": "あかまつ けん",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022003.htm"
+            },
+            {
+                "name": "浅尾 慶一郎",
+                "yomikata": "あさお けいいちろう",
+                "kaiha": "自民",
+                "district": "神奈川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998003.htm"
+            },
+            {
+                "name": "朝日 健太郎",
+                "yomikata": "あさひ けんたろう",
+                "kaiha": "自民",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016004.htm"
+            },
+            {
+                "name": "有村  治子",
+                "yomikata": "ありむら はるこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001006.htm"
+            },
+            {
+                "name": "井上  義行",
+                "yomikata": "いのうえ よしゆき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm"
+            },
+            {
+                "name": "生稲  晃子 [佐山  晃子]",
+                "yomikata": "いくいな あきこ",
+                "kaiha": "自民",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022004.htm"
+            },
+            {
+                "name": "石井  準一",
+                "yomikata": "いしい じゅんいち",
+                "kaiha": "自民",
+                "district": "千葉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007007.htm"
+            },
+            {
+                "name": "石井  浩郎",
+                "yomikata": "いしい ひろお",
+                "kaiha": "自民",
+                "district": "秋田",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm"
+            },
+            {
+                "name": "石井  正弘",
+                "yomikata": "いしい まさひろ",
+                "kaiha": "自民",
+                "district": "岡山",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013008.htm"
+            },
+            {
+                "name": "石田  昌宏",
+                "yomikata": "いしだ まさひろ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013010.htm"
+            },
+            {
+                "name": "磯崎  仁彦",
+                "yomikata": "いそざき よしひこ",
+                "kaiha": "自民",
+                "district": "香川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm"
+            },
+            {
+                "name": "猪口  邦子",
+                "yomikata": "いのぐち くにこ",
+                "kaiha": "自民",
+                "district": "千葉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010009.htm"
+            },
+            {
+                "name": "今井 絵理子",
+                "yomikata": "いまい えりこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016010.htm"
+            },
+            {
+                "name": "岩本  剛人",
+                "yomikata": "いわもと つよひと",
+                "kaiha": "自民",
+                "district": "北海道",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm"
+            },
+            {
+                "name": "上野  通子",
+                "yomikata": "うえの みちこ",
+                "kaiha": "自民",
+                "district": "栃木",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010013.htm"
+            },
+            {
+                "name": "臼井  正一",
+                "yomikata": "うすい しょういち",
+                "kaiha": "自民",
+                "district": "千葉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm"
+            },
+            {
+                "name": "江島   潔",
+                "yomikata": "えじま きよし",
+                "kaiha": "自民",
+                "district": "山口",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013001.htm"
+            },
+            {
+                "name": "衛藤  晟一",
+                "yomikata": "えとう せいいち",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007014.htm"
+            },
+            {
+                "name": "小野田 紀美",
+                "yomikata": "おのだ きみ",
+                "kaiha": "自民",
+                "district": "岡山",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016013.htm"
+            },
+            {
+                "name": "越智  俊之",
+                "yomikata": "おち としゆき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022008.htm"
+            },
+            {
+                "name": "大家  敏志",
+                "yomikata": "おおいえ さとし",
+                "kaiha": "自民",
+                "district": "福岡",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010018.htm"
+            },
+            {
+                "name": "大野  泰正",
+                "yomikata": "おおの やすただ",
+                "kaiha": "自民",
+                "district": "岐阜",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013013.htm"
+            },
+            {
+                "name": "太田  房江 [齊藤  房江]",
+                "yomikata": "おおた ふさえ",
+                "kaiha": "自民",
+                "district": "大阪",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm"
+            },
+            {
+                "name": "岡田  直樹",
+                "yomikata": "おかだ なおき",
+                "kaiha": "自民",
+                "district": "石川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004012.htm"
+            },
+            {
+                "name": "加田  裕之",
+                "yomikata": "かだ ひろゆき",
+                "kaiha": "自民",
+                "district": "兵庫",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019011.htm"
+            },
+            {
+                "name": "加藤  明良",
+                "yomikata": "かとう あきよし",
+                "kaiha": "自民",
+                "district": "茨城",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022010.htm"
+            },
+            {
+                "name": "梶原  大介",
+                "yomikata": "かじはら だいすけ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022012.htm"
+            },
+            {
+                "name": "片山 さつき",
+                "yomikata": "かたやま さつき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm"
+            },
+            {
+                "name": "神谷  政幸",
+                "yomikata": "かみや まさゆき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022015.htm"
+            },
+            {
+                "name": "北村  経夫",
+                "yomikata": "きたむら つねお",
+                "kaiha": "自民",
+                "district": "山口",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm"
+            },
+            {
+                "name": "こやり 隆史 [小鑓  隆史]",
+                "yomikata": "こやり たかし",
+                "kaiha": "自民",
+                "district": "滋賀",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016017.htm"
+            },
+            {
+                "name": "小林  一大",
+                "yomikata": "こばやし かずひろ",
+                "kaiha": "自民",
+                "district": "新潟",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022018.htm"
+            },
+            {
+                "name": "古賀 友一郎",
+                "yomikata": "こが ゆういちろう",
+                "kaiha": "自民",
+                "district": "長崎",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013021.htm"
+            },
+            {
+                "name": "古庄  玄知",
+                "yomikata": "こしょう はるとも",
+                "kaiha": "自民",
+                "district": "大分",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022020.htm"
+            },
+            {
+                "name": "上月  良祐",
+                "yomikata": "こうづき りょうすけ",
+                "kaiha": "自民",
+                "district": "茨城",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm"
+            },
+            {
+                "name": "佐藤   啓",
+                "yomikata": "さとう けい",
+                "kaiha": "自民",
+                "district": "奈良",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm"
+            },
+            {
+                "name": "佐藤  信秋",
+                "yomikata": "さとう のぶあき",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007028.htm"
+            },
+            {
+                "name": "佐藤  正久",
+                "yomikata": "さとう まさひさ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm"
+            },
+            {
+                "name": "酒井  庸行",
+                "yomikata": "さかい やすゆき",
+                "kaiha": "自民",
+                "district": "愛知",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013024.htm"
+            },
+            {
+                "name": "櫻井   充",
+                "yomikata": "さくらい みつる",
+                "kaiha": "自民",
+                "district": "宮城",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998030.htm"
+            },
+            {
+                "name": "山東  昭子",
+                "yomikata": "さんとう あきこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5974040.htm"
+            },
+            {
+                "name": "清水  真人",
+                "yomikata": "しみず まさと",
+                "kaiha": "自民",
+                "district": "群馬",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm"
+            },
+            {
+                "name": "自見 はなこ [橋本  英子]",
+                "yomikata": "じみ はなこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm"
+            },
+            {
+                "name": "島村   大",
+                "yomikata": "しまむら だい",
+                "kaiha": "自民",
+                "district": "神奈川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013027.htm"
+            },
+            {
+                "name": "白坂  亜紀 [中山  亜紀]",
+                "yomikata": "しらさか あき",
+                "kaiha": "自民",
+                "district": "大分",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm"
+            },
+            {
+                "name": "進藤 金日子",
+                "yomikata": "しんどう かねひこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm"
+            },
+            {
+                "name": "末松  信介",
+                "yomikata": "すえまつ しんすけ",
+                "kaiha": "自民",
+                "district": "兵庫",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004033.htm"
+            },
+            {
+                "name": "世耕  弘成",
+                "yomikata": "せこう ひろしげ",
+                "kaiha": "自民",
+                "district": "和歌山",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998069.htm"
+            },
+            {
+                "name": "関口  昌一",
+                "yomikata": "せきぐち まさかず",
+                "kaiha": "自民",
+                "district": "埼玉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7003005.htm"
+            },
+            {
+                "name": "田中  昌史",
+                "yomikata": "たなか まさし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm"
+            },
+            {
+                "name": "高野 光二郎",
+                "yomikata": "たかの こうじろう",
+                "kaiha": "自民",
+                "district": "徳島・高知",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013029.htm"
+            },
+            {
+                "name": "高橋  克法",
+                "yomikata": "たかはし かつのり",
+                "kaiha": "自民",
+                "district": "栃木",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013030.htm"
+            },
+            {
+                "name": "高橋 はるみ",
+                "yomikata": "たかはし はるみ",
+                "kaiha": "自民",
+                "district": "北海道",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019026.htm"
+            },
+            {
+                "name": "滝沢   求",
+                "yomikata": "たきさわ もとめ",
+                "kaiha": "自民",
+                "district": "青森",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013031.htm"
+            },
+            {
+                "name": "滝波  宏文",
+                "yomikata": "たきなみ ひろふみ",
+                "kaiha": "自民",
+                "district": "福井",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013032.htm"
+            },
+            {
+                "name": "武見  敬三",
+                "yomikata": "たけみ けいぞう",
+                "kaiha": "自民",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995043.htm"
+            },
+            {
+                "name": "柘植  芳文",
+                "yomikata": "つげ よしふみ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013034.htm"
+            },
+            {
+                "name": "鶴保  庸介",
+                "yomikata": "つるほ ようすけ",
+                "kaiha": "自民",
+                "district": "和歌山",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm"
+            },
+            {
+                "name": "堂故   茂",
+                "yomikata": "どうこ しげる",
+                "kaiha": "自民",
+                "district": "富山",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013035.htm"
+            },
+            {
+                "name": "友納  理緒 [土肥  理緒]",
+                "yomikata": "とものう りお",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022028.htm"
+            },
+            {
+                "name": "豊田  俊郎",
+                "yomikata": "とよだ としろう",
+                "kaiha": "自民",
+                "district": "千葉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013036.htm"
+            },
+            {
+                "name": "中曽根 弘文",
+                "yomikata": "なかそね ひろふみ",
+                "kaiha": "自民",
+                "district": "群馬",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5986024.htm"
+            },
+            {
+                "name": "中田   宏",
+                "yomikata": "なかだ ひろし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022001.htm"
+            },
+            {
+                "name": "中西  祐介",
+                "yomikata": "なかにし ゆうすけ",
+                "kaiha": "自民",
+                "district": "徳島・高知",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010038.htm"
+            },
+            {
+                "name": "永井   学",
+                "yomikata": "ながい まなぶ",
+                "kaiha": "自民",
+                "district": "山梨",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022030.htm"
+            },
+            {
+                "name": "長峯   誠",
+                "yomikata": "ながみね まこと",
+                "kaiha": "自民",
+                "district": "宮崎",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013039.htm"
+            },
+            {
+                "name": "西田  昌司",
+                "yomikata": "にしだ しょうじ",
+                "kaiha": "自民",
+                "district": "京都",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007044.htm"
+            },
+            {
+                "name": "野上 浩太郎",
+                "yomikata": "のがみ こうたろう",
+                "kaiha": "自民",
+                "district": "富山",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001037.htm"
+            },
+            {
+                "name": "野村  哲郎",
+                "yomikata": "のむら てつろう",
+                "kaiha": "自民",
+                "district": "鹿児島",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004046.htm"
+            },
+            {
+                "name": "羽生田  俊",
+                "yomikata": "はにゅうだ たかし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm"
+            },
+            {
+                "name": "長谷川  岳",
+                "yomikata": "はせがわ がく",
+                "kaiha": "自民",
+                "district": "北海道",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010043.htm"
+            },
+            {
+                "name": "長谷川 英晴",
+                "yomikata": "はせがわ ひではる",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022031.htm"
+            },
+            {
+                "name": "馬場  成志",
+                "yomikata": "ばば せいし",
+                "kaiha": "自民",
+                "district": "熊本",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013044.htm"
+            },
+            {
+                "name": "橋本  聖子 [石崎  聖子]",
+                "yomikata": "はしもと せいこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995054.htm"
+            },
+            {
+                "name": "比嘉 奈津美",
+                "yomikata": "ひが なつみ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021003.htm"
+            },
+            {
+                "name": "広瀬 めぐみ",
+                "yomikata": "ひろせ めぐみ",
+                "kaiha": "自民",
+                "district": "岩手",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022032.htm"
+            },
+            {
+                "name": "福岡  資麿",
+                "yomikata": "ふくおか たかまろ",
+                "kaiha": "自民",
+                "district": "佐賀",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010045.htm"
+            },
+            {
+                "name": "藤井  一博",
+                "yomikata": "ふじい かずひろ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022033.htm"
+            },
+            {
+                "name": "藤川  政人",
+                "yomikata": "ふじかわ まさひと",
+                "kaiha": "自民",
+                "district": "愛知",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010046.htm"
+            },
+            {
+                "name": "藤木  眞也",
+                "yomikata": "ふじき しんや",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm"
+            },
+            {
+                "name": "船橋  利実",
+                "yomikata": "ふなはし としみつ",
+                "kaiha": "自民",
+                "district": "北海道",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022034.htm"
+            },
+            {
+                "name": "古川  俊治",
+                "yomikata": "ふるかわ としはる",
+                "kaiha": "自民",
+                "district": "埼玉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007053.htm"
+            },
+            {
+                "name": "星   北斗",
+                "yomikata": "ほし ほくと",
+                "kaiha": "自民",
+                "district": "福島",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022035.htm"
+            },
+            {
+                "name": "堀井   巌",
+                "yomikata": "ほりい いわお",
+                "kaiha": "自民",
+                "district": "奈良",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013048.htm"
+            },
+            {
+                "name": "本田  顕子",
+                "yomikata": "ほんだ あきこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm"
+            },
+            {
+                "name": "舞立  昇治",
+                "yomikata": "まいたち しょうじ",
+                "kaiha": "自民",
+                "district": "鳥取・島根",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013049.htm"
+            },
+            {
+                "name": "牧野 たかお [牧野  京夫]",
+                "yomikata": "まきの たかお",
+                "kaiha": "自民",
+                "district": "静岡",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007054.htm"
+            },
+            {
+                "name": "松川  るい [新居  るい]",
+                "yomikata": "まつかわ るい",
+                "kaiha": "自民",
+                "district": "大阪",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016035.htm"
+            },
+            {
+                "name": "松下  新平",
+                "yomikata": "まつした しんぺい",
+                "kaiha": "自民",
+                "district": "宮崎",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004056.htm"
+            },
+            {
+                "name": "松村  祥史",
+                "yomikata": "まつむら よしふみ",
+                "kaiha": "自民",
+                "district": "熊本",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004057.htm"
+            },
+            {
+                "name": "松山  政司",
+                "yomikata": "まつやま まさじ",
+                "kaiha": "自民",
+                "district": "福岡",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001046.htm"
+            },
+            {
+                "name": "丸川  珠代 [大塚  珠代]",
+                "yomikata": "まるかわ たまよ",
+                "kaiha": "自民",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007058.htm"
+            },
+            {
+                "name": "三浦   靖",
+                "yomikata": "みうら やすし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019035.htm"
+            },
+            {
+                "name": "三原 じゅん子 [中根  順子]",
+                "yomikata": "みはら じゅんこ",
+                "kaiha": "自民",
+                "district": "神奈川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010048.htm"
+            },
+            {
+                "name": "三宅  伸吾",
+                "yomikata": "みやけ しんご",
+                "kaiha": "自民",
+                "district": "香川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013052.htm"
+            },
+            {
+                "name": "宮崎  雅夫",
+                "yomikata": "みやざき まさお",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm"
+            },
+            {
+                "name": "宮沢  洋一",
+                "yomikata": "みやざわ よういち",
+                "kaiha": "自民",
+                "district": "広島",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm"
+            },
+            {
+                "name": "宮本  周司",
+                "yomikata": "みやもと しゅうじ",
+                "kaiha": "自民",
+                "district": "石川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013053.htm"
+            },
+            {
+                "name": "森  まさこ [三好  雅子]",
+                "yomikata": "もり まさこ",
+                "kaiha": "自民",
+                "district": "福島",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007061.htm"
+            },
+            {
+                "name": "森屋   宏",
+                "yomikata": "もりや ひろし",
+                "kaiha": "自民",
+                "district": "山梨",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm"
+            },
+            {
+                "name": "山崎  正昭",
+                "yomikata": "やまざき まさあき",
+                "kaiha": "自民",
+                "district": "福井",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5992051.htm"
+            },
+            {
+                "name": "山下  雄平",
+                "yomikata": "やました ゆうへい",
+                "kaiha": "自民",
+                "district": "佐賀",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm"
+            },
+            {
+                "name": "山田  太郎",
+                "yomikata": "やまだ たろう",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7012005.htm"
+            },
+            {
+                "name": "山田  俊男",
+                "yomikata": "やまだ としお",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007067.htm"
+            },
+            {
+                "name": "山田   宏",
+                "yomikata": "やまだ ひろし",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016043.htm"
+            },
+            {
+                "name": "山谷 えり子 [小川 惠里子]",
+                "yomikata": "やまたに えりこ",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004013.htm"
+            },
+            {
+                "name": "山本  啓介",
+                "yomikata": "やまもと けいすけ",
+                "kaiha": "自民",
+                "district": "長崎",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm"
+            },
+            {
+                "name": "山本 佐知子",
+                "yomikata": "やまもと さちこ",
+                "kaiha": "自民",
+                "district": "三重",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022041.htm"
+            },
+            {
+                "name": "山本  順三",
+                "yomikata": "やまもと じゅんぞう",
+                "kaiha": "自民",
+                "district": "愛媛",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004062.htm"
+            },
+            {
+                "name": "吉井   章",
+                "yomikata": "よしい あきら",
+                "kaiha": "自民",
+                "district": "京都",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022042.htm"
+            },
+            {
+                "name": "吉川 ゆうみ [吉川  有美]",
+                "yomikata": "よしかわ ゆうみ",
+                "kaiha": "自民",
+                "district": "三重",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013063.htm"
+            },
+            {
+                "name": "和田  政宗",
+                "yomikata": "わだ まさむね",
+                "kaiha": "自民",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm"
+            },
+            {
+                "name": "若林  洋平",
+                "yomikata": "わかばやし ようへい",
+                "kaiha": "自民",
+                "district": "静岡",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm"
+            },
+            {
+                "name": "渡辺  猛之",
+                "yomikata": "わたなべ たけゆき",
+                "kaiha": "自民",
+                "district": "岐阜",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010055.htm"
+            }
+        ],
+        "立憲": [
+            {
+                "name": "青木   愛",
+                "yomikata": "あおき あい",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007006.htm"
+            },
+            {
+                "name": "石垣 のりこ [小川 のり子]",
+                "yomikata": "いしがき のりこ",
+                "kaiha": "立憲",
+                "district": "宮城",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019003.htm"
+            },
+            {
+                "name": "石川  大我",
+                "yomikata": "いしかわ たいが",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019004.htm"
+            },
+            {
+                "name": "石橋  通宏",
+                "yomikata": "いしばし みちひろ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010007.htm"
+            },
+            {
+                "name": "打越 さく良 [村木 さく良]",
+                "yomikata": "うちこし さくら",
+                "kaiha": "立憲",
+                "district": "新潟",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019006.htm"
+            },
+            {
+                "name": "小沢  雅仁",
+                "yomikata": "おざわ まさひと",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm"
+            },
+            {
+                "name": "小沼   巧",
+                "yomikata": "おぬま たくみ",
+                "kaiha": "立憲",
+                "district": "茨城",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019009.htm"
+            },
+            {
+                "name": "大椿 ゆうこ [大椿  裕子]",
+                "yomikata": "おおつばき ゆうこ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023003.htm"
+            },
+            {
+                "name": "鬼木   誠",
+                "yomikata": "おにき まこと",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022009.htm"
+            },
+            {
+                "name": "勝部  賢志",
+                "yomikata": "かつべ けんじ",
+                "kaiha": "立憲",
+                "district": "北海道",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019013.htm"
+            },
+            {
+                "name": "川田  龍平",
+                "yomikata": "かわだ りゅうへい",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007025.htm"
+            },
+            {
+                "name": "岸  真紀子",
+                "yomikata": "きし まきこ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019016.htm"
+            },
+            {
+                "name": "熊谷  裕人",
+                "yomikata": "くまがい ひろと",
+                "kaiha": "立憲",
+                "district": "埼玉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019017.htm"
+            },
+            {
+                "name": "小西  洋之",
+                "yomikata": "こにし ひろゆき",
+                "kaiha": "立憲",
+                "district": "千葉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010024.htm"
+            },
+            {
+                "name": "古賀  千景",
+                "yomikata": "こが ちかげ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm"
+            },
+            {
+                "name": "古賀  之士",
+                "yomikata": "こが ゆきひと",
+                "kaiha": "立憲",
+                "district": "福岡",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm"
+            },
+            {
+                "name": "斎藤  嘉隆",
+                "yomikata": "さいとう よしたか",
+                "kaiha": "立憲",
+                "district": "愛知",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010027.htm"
+            },
+            {
+                "name": "塩村 あやか [塩村  文夏]",
+                "yomikata": "しおむら あやか",
+                "kaiha": "立憲",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019020.htm"
+            },
+            {
+                "name": "柴   愼一",
+                "yomikata": "しば しんいち",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022021.htm"
+            },
+            {
+                "name": "杉尾  秀哉",
+                "yomikata": "すぎお ひでや",
+                "kaiha": "立憲",
+                "district": "長野",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016023.htm"
+            },
+            {
+                "name": "田島 麻衣子",
+                "yomikata": "たじま まいこ",
+                "kaiha": "立憲",
+                "district": "愛知",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019024.htm"
+            },
+            {
+                "name": "田名部 匡代",
+                "yomikata": "たなぶ まさよ",
+                "kaiha": "立憲",
+                "district": "青森",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016025.htm"
+            },
+            {
+                "name": "高木  真理",
+                "yomikata": "たかぎ まり",
+                "kaiha": "立憲",
+                "district": "埼玉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022023.htm"
+            },
+            {
+                "name": "辻元  清美",
+                "yomikata": "つじもと きよみ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022025.htm"
+            },
+            {
+                "name": "徳永  エリ [鈴木  エリ]",
+                "yomikata": "とくなが えり",
+                "kaiha": "立憲",
+                "district": "北海道",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010036.htm"
+            },
+            {
+                "name": "野田  国義",
+                "yomikata": "のだ くによし",
+                "kaiha": "立憲",
+                "district": "福岡",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013042.htm"
+            },
+            {
+                "name": "羽田  次郎",
+                "yomikata": "はた じろう",
+                "kaiha": "立憲",
+                "district": "長野",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021002.htm"
+            },
+            {
+                "name": "福島 みずほ [福島  瑞穂]",
+                "yomikata": "ふくしま みずほ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998049.htm"
+            },
+            {
+                "name": "福山  哲郎",
+                "yomikata": "ふくやま てつろう",
+                "kaiha": "立憲",
+                "district": "京都",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm"
+            },
+            {
+                "name": "牧山 ひろえ [牧山  弘惠]",
+                "yomikata": "まきやま ひろえ",
+                "kaiha": "立憲",
+                "district": "神奈川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm"
+            },
+            {
+                "name": "三上  えり [川堀  絵里]",
+                "yomikata": "みかみ えり",
+                "kaiha": "立憲",
+                "district": "広島",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022037.htm"
+            },
+            {
+                "name": "水岡  俊一",
+                "yomikata": "みずおか しゅんいち",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004058.htm"
+            },
+            {
+                "name": "水野  素子",
+                "yomikata": "みずの もとこ",
+                "kaiha": "立憲",
+                "district": "神奈川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022038.htm"
+            },
+            {
+                "name": "宮口  治子 [福田  治子]",
+                "yomikata": "みやぐち はるこ",
+                "kaiha": "立憲",
+                "district": "広島",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021001.htm"
+            },
+            {
+                "name": "村田  享子",
+                "yomikata": "むらた きょうこ",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022039.htm"
+            },
+            {
+                "name": "森本  真治",
+                "yomikata": "もりもと しんじ",
+                "kaiha": "立憲",
+                "district": "広島",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013054.htm"
+            },
+            {
+                "name": "森屋   隆",
+                "yomikata": "もりや たかし",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019037.htm"
+            },
+            {
+                "name": "横沢  高徳",
+                "yomikata": "よこさわ たかのり",
+                "kaiha": "立憲",
+                "district": "岩手",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019040.htm"
+            },
+            {
+                "name": "吉川  沙織",
+                "yomikata": "よしかわ さおり",
+                "kaiha": "立憲",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm"
+            },
+            {
+                "name": "蓮舫 [齊藤  蓮舫]",
+                "yomikata": "れんほう",
+                "kaiha": "立憲",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004060.htm"
+            }
+        ],
+        "維新": [
+            {
+                "name": "青島  健太",
+                "yomikata": "あおしま けんた",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm"
+            },
+            {
+                "name": "浅田   均",
+                "yomikata": "あさだ  ひとし",
+                "kaiha": "維新",
+                "district": "大阪",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016003.htm"
+            },
+            {
+                "name": "東    徹",
+                "yomikata": "あずま とおる",
+                "kaiha": "維新",
+                "district": "大阪",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013005.htm"
+            },
+            {
+                "name": "石井   章",
+                "yomikata": "いしい あきら",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016008.htm"
+            },
+            {
+                "name": "石井  苗子",
+                "yomikata": "いしい みつこ",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm"
+            },
+            {
+                "name": "猪瀬  直樹",
+                "yomikata": "いのせ なおき",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022005.htm"
+            },
+            {
+                "name": "梅村   聡",
+                "yomikata": "うめむら さとし",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007013.htm"
+            },
+            {
+                "name": "梅村 みずほ",
+                "yomikata": "うめむら みずほ",
+                "kaiha": "維新",
+                "district": "大阪",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm"
+            },
+            {
+                "name": "音喜多  駿",
+                "yomikata": "おときた しゅん",
+                "kaiha": "維新",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019010.htm"
+            },
+            {
+                "name": "片山  大介",
+                "yomikata": "かたやま だいすけ",
+                "kaiha": "維新",
+                "district": "兵庫",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016014.htm"
+            },
+            {
+                "name": "金子  道仁",
+                "yomikata": "かねこ みちひと",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022013.htm"
+            },
+            {
+                "name": "串田  誠一",
+                "yomikata": "くしだ せいいち",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022016.htm"
+            },
+            {
+                "name": "清水  貴之",
+                "yomikata": "しみず たかゆき",
+                "kaiha": "維新",
+                "district": "兵庫",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013025.htm"
+            },
+            {
+                "name": "柴田   巧",
+                "yomikata": "しばた たくみ",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010029.htm"
+            },
+            {
+                "name": "鈴木  宗男",
+                "yomikata": "すずき むねお",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019023.htm"
+            },
+            {
+                "name": "高木 かおり [高木 佳保里]",
+                "yomikata": "たかぎ かおり",
+                "kaiha": "維新",
+                "district": "大阪",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm"
+            },
+            {
+                "name": "中条 きよし [下村   清]",
+                "yomikata": "なかじょう きよし",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022029.htm"
+            },
+            {
+                "name": "松沢  成文",
+                "yomikata": "まつざわ しげふみ",
+                "kaiha": "維新",
+                "district": "神奈川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm"
+            },
+            {
+                "name": "松野  明美 [前田  明美]",
+                "yomikata": "まつの あけみ",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022036.htm"
+            },
+            {
+                "name": "室井  邦彦",
+                "yomikata": "むろい くにひこ",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007062.htm"
+            },
+            {
+                "name": "柳ヶ瀬 裕文",
+                "yomikata": "やながせ ひろふみ",
+                "kaiha": "維新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm"
+            }
+        ],
+        "公明": [
+            {
+                "name": "秋野  公造",
+                "yomikata": "あきの こうぞう",
+                "kaiha": "公明",
+                "district": "福岡",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010003.htm"
+            },
+            {
+                "name": "伊藤  孝江",
+                "yomikata": "いとう たかえ",
+                "kaiha": "公明",
+                "district": "兵庫",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm"
+            },
+            {
+                "name": "石川  博崇",
+                "yomikata": "いしかわ ひろたか",
+                "kaiha": "公明",
+                "district": "大阪",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010006.htm"
+            },
+            {
+                "name": "上田   勇",
+                "yomikata": "うえだ いさむ",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm"
+            },
+            {
+                "name": "河野  義博",
+                "yomikata": "かわの よしひろ",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm"
+            },
+            {
+                "name": "窪田  哲也",
+                "yomikata": "くぼた てつや",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022017.htm"
+            },
+            {
+                "name": "佐々木 さやか [山口 さやか]",
+                "yomikata": "ささき さやか",
+                "kaiha": "公明",
+                "district": "神奈川",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013023.htm"
+            },
+            {
+                "name": "里見  隆治",
+                "yomikata": "さとみ りゅうじ",
+                "kaiha": "公明",
+                "district": "愛知",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm"
+            },
+            {
+                "name": "塩田  博昭",
+                "yomikata": "しおた ひろあき",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm"
+            },
+            {
+                "name": "下野  六太",
+                "yomikata": "しもの ろくた",
+                "kaiha": "公明",
+                "district": "福岡",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019021.htm"
+            },
+            {
+                "name": "杉   久武",
+                "yomikata": "すぎ ひさたけ",
+                "kaiha": "公明",
+                "district": "大阪",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013028.htm"
+            },
+            {
+                "name": "高橋  光男",
+                "yomikata": "たかはし みつお",
+                "kaiha": "公明",
+                "district": "兵庫",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm"
+            },
+            {
+                "name": "竹内  真二",
+                "yomikata": "たけうち しんじ",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7017001.htm"
+            },
+            {
+                "name": "竹谷 とし子 [菊地 とし子]",
+                "yomikata": "たけや としこ",
+                "kaiha": "公明",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm"
+            },
+            {
+                "name": "谷合  正明",
+                "yomikata": "たにあい まさあき",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm"
+            },
+            {
+                "name": "新妻  秀規",
+                "yomikata": "にいづま ひでき",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm"
+            },
+            {
+                "name": "西田  実仁",
+                "yomikata": "にしだ まこと",
+                "kaiha": "公明",
+                "district": "埼玉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004043.htm"
+            },
+            {
+                "name": "平木  大作",
+                "yomikata": "ひらき だいさく",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013046.htm"
+            },
+            {
+                "name": "三浦  信祐",
+                "yomikata": "みうら のぶひろ",
+                "kaiha": "公明",
+                "district": "神奈川",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm"
+            },
+            {
+                "name": "宮崎   勝",
+                "yomikata": "みやざき まさる",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm"
+            },
+            {
+                "name": "矢倉  克夫",
+                "yomikata": "やくら かつお",
+                "kaiha": "公明",
+                "district": "埼玉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013056.htm"
+            },
+            {
+                "name": "安江  伸夫",
+                "yomikata": "やすえ のぶお",
+                "kaiha": "公明",
+                "district": "愛知",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019038.htm"
+            },
+            {
+                "name": "山口 那津男",
+                "yomikata": "やまぐち なつお",
+                "kaiha": "公明",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001049.htm"
+            },
+            {
+                "name": "山本  香苗 [池田  香苗]",
+                "yomikata": "やまもと かなえ",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001051.htm"
+            },
+            {
+                "name": "山本  博司",
+                "yomikata": "やまもと ひろし",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm"
+            },
+            {
+                "name": "横山  信一",
+                "yomikata": "よこやま しんいち",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010052.htm"
+            },
+            {
+                "name": "若松  謙維",
+                "yomikata": "わかまつ かねしげ",
+                "kaiha": "公明",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013065.htm"
+            }
+        ],
+        "共産": [
+            {
+                "name": "井上  哲士",
+                "yomikata": "いのうえ さとし",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm"
+            },
+            {
+                "name": "伊藤   岳",
+                "yomikata": "いとう がく",
+                "kaiha": "共産",
+                "district": "埼玉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019002.htm"
+            },
+            {
+                "name": "岩渕   友",
+                "yomikata": "いわぶち とも",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm"
+            },
+            {
+                "name": "紙   智子 [内山  智子]",
+                "yomikata": "かみ ともこ",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001010.htm"
+            },
+            {
+                "name": "吉良 よし子 [吉良  佳子]",
+                "yomikata": "きら よしこ",
+                "kaiha": "共産",
+                "district": "東京",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm"
+            },
+            {
+                "name": "倉林  明子",
+                "yomikata": "くらばやし あきこ",
+                "kaiha": "共産",
+                "district": "京都",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013020.htm"
+            },
+            {
+                "name": "小池   晃",
+                "yomikata": "こいけ あきら",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998022.htm"
+            },
+            {
+                "name": "田村  智子",
+                "yomikata": "たむら ともこ",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010031.htm"
+            },
+            {
+                "name": "仁比  聡平",
+                "yomikata": "にひ そうへい",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004045.htm"
+            },
+            {
+                "name": "山下  芳生",
+                "yomikata": "やました よしき",
+                "kaiha": "共産",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995071.htm"
+            },
+            {
+                "name": "山添   拓",
+                "yomikata": "やまぞえ たく",
+                "kaiha": "共産",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm"
+            }
+        ],
+        "民主": [
+            {
+                "name": "伊藤  孝恵",
+                "yomikata": "いとう たかえ",
+                "kaiha": "民主",
+                "district": "愛知",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm"
+            },
+            {
+                "name": "礒崎  哲史",
+                "yomikata": "いそざき てつじ",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm"
+            },
+            {
+                "name": "上田  清司",
+                "yomikata": "うえだ きよし",
+                "kaiha": "民主",
+                "district": "埼玉",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm"
+            },
+            {
+                "name": "大塚  耕平",
+                "yomikata": "おおつか こうへい",
+                "kaiha": "民主",
+                "district": "愛知",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001013.htm"
+            },
+            {
+                "name": "嘉田 由紀子",
+                "yomikata": "かだ ゆきこ",
+                "kaiha": "民主",
+                "district": "滋賀",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019012.htm"
+            },
+            {
+                "name": "川合  孝典",
+                "yomikata": "かわい たかのり",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm"
+            },
+            {
+                "name": "榛葉 賀津也",
+                "yomikata": "しんば かづや",
+                "kaiha": "民主",
+                "district": "静岡",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm"
+            },
+            {
+                "name": "田村  まみ [田村  麻美]",
+                "yomikata": "たむら まみ",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm"
+            },
+            {
+                "name": "竹詰   仁",
+                "yomikata": "たけづめ ひとし",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm"
+            },
+            {
+                "name": "芳賀  道也",
+                "yomikata": "はが みちや",
+                "kaiha": "民主",
+                "district": "山形",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm"
+            },
+            {
+                "name": "浜口   誠",
+                "yomikata": "はまぐち まこと",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm"
+            },
+            {
+                "name": "浜野  喜史",
+                "yomikata": "はまの よしふみ",
+                "kaiha": "民主",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm"
+            },
+            {
+                "name": "舟山  康江",
+                "yomikata": "ふなやま やすえ",
+                "kaiha": "民主",
+                "district": "山形",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007052.htm"
+            }
+        ],
+        "沖縄": [
+            {
+                "name": "伊波  洋一",
+                "yomikata": "いは よういち",
+                "kaiha": "沖縄",
+                "district": "沖縄",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm"
+            },
+            {
+                "name": "高良  鉄美",
+                "yomikata": "たから てつみ",
+                "kaiha": "沖縄",
+                "district": "沖縄",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019028.htm"
+            }
+        ],
+        "無所属": [
+            {
+                "name": "尾辻  秀久",
+                "yomikata": "おつじ ひでひさ",
+                "kaiha": "無所属",
+                "district": "鹿児島",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5989018.htm"
+            },
+            {
+                "name": "神谷  宗幣",
+                "yomikata": "かみや そうへい",
+                "kaiha": "無所属",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm"
+            },
+            {
+                "name": "須藤  元気",
+                "yomikata": "すどう げんき",
+                "kaiha": "無所属",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019022.htm"
+            },
+            {
+                "name": "寺田   静",
+                "yomikata": "てらた しずか",
+                "kaiha": "無所属",
+                "district": "秋田",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019030.htm"
+            },
+            {
+                "name": "堂込 麻紀子",
+                "yomikata": "どうごみ まきこ",
+                "kaiha": "無所属",
+                "district": "茨城",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022027.htm"
+            },
+            {
+                "name": "ながえ 孝子 [永江  孝子]",
+                "yomikata": "ながえ たかこ",
+                "kaiha": "無所属",
+                "district": "愛媛",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019031.htm"
+            },
+            {
+                "name": "長浜  博行",
+                "yomikata": "ながはま ひろゆき",
+                "kaiha": "無所属",
+                "district": "千葉",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007041.htm"
+            },
+            {
+                "name": "平山 佐知子",
+                "yomikata": "ひらやま さちこ",
+                "kaiha": "無所属",
+                "district": "静岡",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016033.htm"
+            }
+        ],
+        "れ新": [
+            {
+                "name": "大島 九州男",
+                "yomikata": "おおしま くすお",
+                "kaiha": "れ新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm"
+            },
+            {
+                "name": "木村  英子",
+                "yomikata": "きむら えいこ",
+                "kaiha": "れ新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm"
+            },
+            {
+                "name": "天畠  大輔",
+                "yomikata": "てんばた だいすけ",
+                "kaiha": "れ新",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022026.htm"
+            },
+            {
+                "name": "舩後  靖彦",
+                "yomikata": "ふなご やすひこ",
+                "kaiha": "れ新",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019033.htm"
+            },
+            {
+                "name": "山本  太郎",
+                "yomikata": "やまもと たろう",
+                "kaiha": "れ新",
+                "district": "東京",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013062.htm"
+            }
+        ],
+        "女子": [
+            {
+                "name": "齊藤 健一郎",
+                "yomikata": "さいとう けんいちろう",
+                "kaiha": "女子",
+                "district": "比例",
+                "period": "令和10年7月25日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm"
+            },
+            {
+                "name": "浜田   聡",
+                "yomikata": "はまだ さとし",
+                "kaiha": "女子",
+                "district": "比例",
+                "period": "令和7年7月28日",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019041.htm"
+            }
+        ]
+    }
 }
