@@ -32,14 +32,14 @@ create_dir(LOWER_SPEECH_OUTPUT_DIR)
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 
 ## PARAMS
-SCRAPE_UPPER_REPR_LIST = False
+SCRAPE_UPPER_REPR_LIST = True
 SCRAPE_LOWER_REPR_LIST = False
 SCRAPE_UPPER_MEETING_MEMBER_LIST = False
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
     "meeting_period":"",
-    "reprs":[]
+    "reprs":{}
 }
 
 ## XPATHS
@@ -84,8 +84,10 @@ def scrape_upper_repr_list():
             "period":period,
             "link":link
         }
-
-        out_dict["reprs"].append(repr_dict)
+        if not kaiha in out_dict["reprs"].keys():
+            out_dict["reprs"][kaiha] = []
+        
+        out_dict["reprs"][kaiha].append(repr_dict)
     
     #saving json
     repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, "repr_list",f"{meeting_period_text}_repr_list.json")
