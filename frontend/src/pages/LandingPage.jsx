@@ -1,33 +1,36 @@
 
-import {Link} from 'react-router-dom';
-import React from 'react';
-import {RiGovernmentLine} from 'react-icons/ri';
-import {RiInformationLine} from 'react-icons/ri';
-import '../styles/general.css';
-import '../styles/pages/landing_page.css';
+import React from 'react'
+import { RiGovernmentLine, RiInformationLine, RiGovernmentFill } from 'react-icons/ri'
+import '../styles/general.css'
+import '../styles/pages/landing_page.css'
+import BaseMenuLayout from '../layouts/BaseMenuLayout'
+
+const LandingMenuIcon = [
+  {
+    link: '/sangiin_menu',
+    icon: <RiGovernmentLine className="menu-icon"/>,
+    title: '参議院'
+  },
+  {
+    link: '/shugiin_menu',
+    icon: <RiGovernmentFill className="menu-icon"/>,
+    title: '衆議院'
+  },
+  {
+    link: '/page_info',
+    icon: <RiInformationLine className="menu-icon"/>,
+    title: ''
+  }
+
+]
 /**
  *
  * @return {JSX.Element}
  */
-function LandingPage() {
+function LandingPage () {
   return (
-    <div className="full-page-container landing-page-container">
-      <h1 className="page-title" >KOKKAI DOC</h1>
-      <div className='icons-menu'>
-        <Link to="/sangiin_main">
-          <div className="menu-icon-container">
-            <RiGovernmentLine className="menu-icon"/>
-          </div>
-        </Link>
-        <Link to="/page_info">
-          <div className="menu-icon-container">
-            <RiInformationLine className="menu-icon"/>
-          </div>
-        </Link>
-      </div>
-    </div>
-  );
+    <BaseMenuLayout backTo='' MenuTitle='KOKKAI DOC' Links={LandingMenuIcon}/>
+  )
 }
 
-
-export default LandingPage;
+export default LandingPage

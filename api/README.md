@@ -1,1 +1,1 @@
-# sangiin_api
+# Kokkai Doc API

@@ -1,77 +1,78 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
-import {MdOutlineArrowBack} from 'react-icons/md';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { MdOutlineArrowBack } from "react-icons/md";
 
-import {sangiinEndpoint} from '../resource/resources';
-import '../styles/general.css';
-import '../styles/pages/meeting_detail_page.css';
-import TopicCard from '../components/TopicCard';
+import { sangiinEndpoint } from "../resource/resources";
+import "../styles/general.css";
+import "../styles/pages/meeting_detail_page.css";
+import TopicCard from "../components/TopicCard";
 /**
  *
  * @return {JSX.Element}
  */
 function MeetingDetailPage() {
-  const [topicFilterText, setTopicFilterText] = useState('');
-  const [meeting, setMeeting] = useState({'topics': []});
-  const [meetingPeriod, setPeriod] = useState('');
+  const [topicFilterText, setTopicFilterText] = useState("");
+  const [meeting, setMeeting] = useState({ topics: [] });
+  const [meetingPeriod, setPeriod] = useState("");
   const [isloading, setIsLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
-  const [topicCards, setCards] = useState('');
+  const [topicCards, setCards] = useState("");
   // eslint-disable-next-line camelcase
-  const {meetingId} = useParams();
-  useEffect(()=>{
+  const { meetingId } = useParams();
+  useEffect(() => {
     // gets called on mount of the component
-    const fetchMeeting = async () =>{
+    const fetchMeeting = async () => {
       // eslint-disable-next-line max-len, camelcase
-      const meetingUrl = sangiinEndpoint + 'sangiin_meeting_votes/' + meetingId;
+      const meetingUrl = sangiinEndpoint + "sangiin_meeting_votes/" + meetingId;
       const meetingData = await fetch(meetingUrl);
       const meetingJson = await meetingData.json();
       setMeeting(meetingJson);
     };
     setIsLoading(true);
-    fetchMeeting()
-        .catch(()=>{
-          console.error();
-          setLoadFailed(true);
-        });
+    fetchMeeting().catch(() => {
+      console.error();
+      setLoadFailed(true);
+    });
     setIsLoading(false);
   }, [meetingId]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setPeriod(meeting.period);
-    const cards = meeting.topics.map((topic)=>{
-      if (topicFilterText === '') {
+    const cards = meeting.topics.map((topic) => {
+      if (topicFilterText === "") {
         return (
           <TopicCard
             key={topic.topic_title + topic.topic_date}
-            meetingId ={meetingId} topic={topic}/>
+            meetingId={meetingId}
+            topic={topic}
+          />
         );
       } else if (topic.topic_title.includes(topicFilterText)) {
         return (
           <TopicCard
             key={topic.topic_title + topic.topic_date}
-            meetingId={meetingId} topic={topic}/>
+            meetingId={meetingId}
+            topic={topic}
+          />
         );
       }
-      return '';
+      return "";
     });
     setCards(cards);
-    if (meeting.topics.length === 0) {
-    } else {
+    if (meeting.topics.length !== 0) {
       setLoadFailed(false);
     }
   }, [meeting, topicFilterText, meetingId]);
 
-  const handleTopicFilterInputChange=(e)=>{
+  const handleTopicFilterInputChange = (e) => {
     setTopicFilterText(e.target.value);
   };
 
   return (
     <div className="meeting-detail-page">
       <div className="header-section">
-        <Link className="back-icon" to="/sangiin_main">
-          <MdOutlineArrowBack/>
+        <Link className="back-icon" to="/sangiin_meetings">
+          <MdOutlineArrowBack />
         </Link>
         <h2>{meetingId}</h2>
         <h3>{meetingPeriod}</h3>
@@ -80,11 +81,17 @@ function MeetingDetailPage() {
         <label className="input-label">フィルタ: </label>
         <input
           className="topic-filter-input"
-          onChange={handleTopicFilterInputChange}></input>
-
+          onChange={handleTopicFilterInputChange}
+        ></input>
       </div>
       <div className="content-section meeting-detail-content">
-        {isloading?<h1>Loading</h1>:loadFailed?<h1>Load failed</h1>:topicCards}
+        {isloading ? (
+          <h1>Loading</h1>
+        ) : loadFailed ? (
+          <h1>Load failed</h1>
+        ) : (
+          topicCards
+        )}
       </div>
     </div>
   );
