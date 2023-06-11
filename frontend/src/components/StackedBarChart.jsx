@@ -6,9 +6,9 @@ import {
   ResponsiveContainer,
   Tooltip,
   LabelList,
-} from "recharts";
-import React from "react";
-import PropTypes from "prop-types";
+} from 'recharts';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @param {object} props
@@ -38,8 +38,14 @@ function StackedBarChart(props) {
     </ResponsiveContainer>
   );
 }
+
+StackedBarChart.defaultProps = {
+  data: [],
+  width: '100%',
+  height: 50,
+};
 StackedBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.element),
   width: PropTypes.string,
   height: PropTypes.number,
 };

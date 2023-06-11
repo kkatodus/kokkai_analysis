@@ -1,14 +1,13 @@
-import "../styles/components/party_opinion_card.css";
-import React from "react";
-import Proptypes from "prop-types";
+import '../styles/components/party_opinion_card.css';
+import React from 'react';
+import Proptypes from 'prop-types';
 /**
  *
  * @param {object} props
  * @return {JSX.Element}
  */
 function PartyOpinionCard(props) {
-  const partyOpinion = props.party_opinion.speech;
-  const partyName = props.party_name;
+  const { partyOpinion, partyName } = props;
   return (
     <div className="party-opinion-card">
       <h1>{partyName}</h1>
@@ -16,9 +15,13 @@ function PartyOpinionCard(props) {
     </div>
   );
 }
+PartyOpinionCard.defaultProps = {
+  partyOpinion: '',
+  partyName: '',
+};
 PartyOpinionCard.propTypes = {
-  party_opinion: Proptypes.oneOfType([Proptypes.string, Proptypes.object]),
-  party_name: Proptypes.string,
+  partyOpinion: Proptypes.oneOfType([Proptypes.string, Proptypes.object]),
+  partyName: Proptypes.string,
 };
 
 export default PartyOpinionCard;

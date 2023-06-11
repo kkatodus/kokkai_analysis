@@ -1,26 +1,28 @@
-import "../styles/components/meeting_card.css";
-import React from "react";
-import "../styles/other/animations.css";
-import { Link } from "react-router-dom";
-import Proptypes from "prop-types";
+import '../styles/components/meeting_card.css';
+import React from 'react';
+import '../styles/other/animations.css';
+import { Link } from 'react-router-dom';
+import Proptypes from 'prop-types';
 
 /**
  * @param {object} props
  * @return {JSX.Element}
  */
 function MeetingCard(props) {
+  const { MeetingName, Period } = props;
   return (
-    <Link to={"/sangiin_meetings/" + props.meeting_name}>
+    <Link to={`/sangiin_meetings/${MeetingName}`}>
       <div className="meeting-card-container grow-on-hover-small">
-        <h1>{props.meeting_name}</h1>
-        <h2>{props.period}</h2>
+        <h1>{MeetingName}</h1>
+        <h2>{Period}</h2>
       </div>
     </Link>
   );
 }
+
 MeetingCard.propTypes = {
-  meeting_name: Proptypes.string,
-  period: Proptypes.string,
+  MeetingName: Proptypes.string.isRequired,
+  Period: Proptypes.string.isRequired,
 };
 
 export default MeetingCard;

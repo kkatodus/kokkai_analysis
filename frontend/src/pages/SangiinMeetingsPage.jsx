@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import BasePageLayout from "../layouts/BasePageLayout";
+import React, { useEffect, useState } from 'react';
+import BasePageLayout from '../layouts/BasePageLayout';
 
-import { sangiinEndpoint } from "../resource/resources";
+import { sangiinEndpoint } from '../resource/resources';
 
-import "../styles/sanitize.css";
-import "../styles/general.css";
+import '../styles/sanitize.css';
+import '../styles/general.css';
 
-import MeetingCard from "../components/meetingCard";
+import MeetingCard from '../components/meetingCard';
 
 /**
  * @return {JSX.Element}
@@ -14,13 +14,13 @@ import MeetingCard from "../components/meetingCard";
 function SangiinMeetingsPage() {
   const [meetingNames, setMeetingNames] = useState([]);
   const [isloading, setIsLoading] = useState(true);
-  const [meetingNameCards, setCards] = useState("");
+  const [meetingNameCards, setCards] = useState('');
 
   useEffect(() => {
     // gets called on mount of the component
 
     const fetchMeetingNames = async () => {
-      const meetingNamesData = await fetch(sangiinEndpoint + "meeting_names");
+      const meetingNamesData = await fetch(`${sangiinEndpoint}meeting_names`);
       const meetingNamesJson = await meetingNamesData.json();
       setMeetingNames(meetingNamesJson.meetings.reverse());
     };
@@ -37,9 +37,14 @@ function SangiinMeetingsPage() {
       setIsLoading(true);
     } else {
       setIsLoading(false);
-      const cards = meetingNames.map((meetingName) => {
-        return <MeetingCard key={meetingName.meeting_name} {...meetingName} />;
-      });
+      const cards = meetingNames.map((meetingName) => (
+        <MeetingCard
+          key={meetingName.meeting_name}
+          MeetingName={meetingName.meeting_name}
+          Period={meetingName.period}
+        />
+      ));
+
       setCards(cards);
     }
   }, [meetingNames]);

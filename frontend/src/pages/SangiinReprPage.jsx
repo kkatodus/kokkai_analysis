@@ -1,44 +1,40 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { sangiinEndpoint } from "../resource/resources";
-import BasePageLayout from "../layouts/BasePageLayout";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { sangiinEndpoint } from '../resource/resources';
+import BasePageLayout from '../layouts/BasePageLayout';
+import Accordion from '../components/basic/Accordion';
 
 export default function SangiinReprPage() {
   //  eslint-disable-next-line no-unused-vars
   const [reps, setReps] = useState([]);
   //  eslint-disable-next-line no-unused-vars
-  const [period, setPeriod] = useState("");
-	const [kaihas, setKaihas] = useState([]);
+  const [period, setPeriod] = useState('');
+  const [kaihas, setKaihas] = useState([]);
 
   useEffect(() => {
     axios({
-      method: "get",
-      url: sangiinEndpoint + "repr",
+      method: 'get',
+      url: `${sangiinEndpoint}repr`,
     }).then((res) => {
       console.log(res);
       setReps(res.data.reprs);
       setPeriod(res.data.meeting_period);
+      setKaihas(Object.keys(res.data.reprs));
     });
   }, []);
+  console.log('reps', reps);
+  console.log('period', period);
+  console.log('kaihas', kaihas);
+  const kaihaAccordions = kaihas.map((kaiha) => {
+    const kaihaReps = reps[kaiha];
 
-  const reprs = reps.map((rep) => {
-    const { name, yomikata, kaiha, district, period, link } = rep;
-    return (
-      <div key={name}>
-        <h1>{name}</h1>
-        <h2>{yomikata}</h2>
-        <h3>{kaiha}</h3>
-        <h4>{district}</h4>
-        <h5>{period}</h5>
-        <a href={link}>link</a>
-      </div>
-    );
+    return <Accordion title={kaiha} content={kaihaReps} />;
   });
   return (
     <BasePageLayout
       backTo="/sangiin_menu"
       pageTitle="議員一覧"
-      MainContent={reprs}
+      MainContent={kaihaAccordions}
     />
   );
 }

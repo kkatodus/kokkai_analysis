@@ -1,27 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { MdOutlineArrowBack } from 'react-icons/md'
-import Proptypes from 'prop-types'
-import { colors } from '../resource/styling'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { MdOutlineArrowBack } from 'react-icons/md';
+import Proptypes from 'prop-types';
+import { colors } from '../resource/styling';
 
-export default function BasePageLayout (props) {
+export default function BasePageLayout(props) {
+  const { pageTitle, backTo, MainContent } = props;
   return (
-  <div className='flex flex-col h-screen'>
-    <div className={'h-1/6 flex items-center ' + colors.primary}>
-      <Link className="back-icon" to={props.backTo}>
-        <MdOutlineArrowBack/>
-      </Link>
-      <h1 className='text-4xl px-3 '>{props.pageTitle}</h1>
+    <div className="flex flex-col h-screen">
+      <div className={`h-1/6 flex items-center ${colors.primary}`}>
+        <Link className="back-icon" to={backTo}>
+          <MdOutlineArrowBack />
+        </Link>
+        <h1 className="text-4xl px-3 ">{pageTitle}</h1>
+      </div>
+      <div
+        className={`h-5/6 overflow-y-scroll bg-slate-300 ${colors.secondary}`}
+      >
+        {MainContent}
+      </div>
     </div>
-    <div className={'h-5/6 overflow-y-scroll bg-slate-300' + colors.secondary}>
-      {props.MainContent}
-    </div>
-  </div>
-  )
+  );
 }
+
+BasePageLayout.defaultProps = {
+  backTo: '/',
+};
 
 BasePageLayout.propTypes = {
-  pageTitle: Proptypes.string,
+  pageTitle: Proptypes.string.isRequired,
   backTo: Proptypes.string,
-  MainContent: Proptypes.element
-}
+  MainContent: Proptypes.element.isRequired,
+};

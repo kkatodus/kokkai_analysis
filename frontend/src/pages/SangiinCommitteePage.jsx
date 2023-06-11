@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { sangiinEndpoint } from "../resource/resources";
-import BasePageLayout from "../layouts/BasePageLayout";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { sangiinEndpoint } from '../resource/resources';
+import BasePageLayout from '../layouts/BasePageLayout';
 
 export default function SangiinCommitteePage() {
   //  eslint-disable-next-line no-unused-vars
   const [coms, setComs] = useState([]);
   //  eslint-disable-next-line no-unused-vars
-  const [period, setPeriod] = useState("");
+  const [period, setPeriod] = useState('');
   useEffect(() => {
     axios({
-      method: "get",
-      url: sangiinEndpoint + "commitee",
+      method: 'get',
+      url: `${sangiinEndpoint}commitee`,
     }).then((res) => {
       setComs(res.data.meetings);
       setPeriod(res.data.meeting_period);

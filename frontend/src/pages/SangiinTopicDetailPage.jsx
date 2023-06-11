@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { sangiinEndpoint } from "../resource/resources";
-import "../styles/general.css";
-import "../styles/pages/topic_detail_page.css";
-import PartyOpinionCard from "../components/PartyOpinionCard";
+import { sangiinEndpoint } from '../resource/resources';
+import '../styles/general.css';
+import '../styles/pages/topic_detail_page.css';
+import PartyOpinionCard from '../components/PartyOpinionCard';
+
+/* eslint-disable no-nested-ternary */
 
 /**
  * @return {JSX.Element}
@@ -17,8 +19,7 @@ function SangiinTopicDetailPage() {
 
   useEffect(() => {
     const fetchTopic = async () => {
-      const topicUrl =
-        sangiinEndpoint + "sangiin_party_opinions/" + meetingId + "/" + topicId;
+      const topicUrl = `${sangiinEndpoint}sangiin_party_opinions/${meetingId}/${topicId}`;
       const topicData = await fetch(topicUrl);
       const topicJson = await topicData.json();
       setTopic(topicJson);
@@ -45,11 +46,9 @@ function SangiinTopicDetailPage() {
     }
   }, [topic]);
 
-  const partyOpinionCards = Object.entries(topic).map(([key, value]) => {
-    return (
-      <PartyOpinionCard key={key} party_opinion={value} party_name={key} />
-    );
-  });
+  const partyOpinionCards = Object.entries(topic).map(([key, value]) => (
+    <PartyOpinionCard key={key} partyOpinion={value} partyName={key} />
+  ));
 
   return (
     <div className="topic-detail-page">
