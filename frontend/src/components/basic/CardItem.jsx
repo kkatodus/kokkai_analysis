@@ -8,12 +8,12 @@ export default function CardItem(props) {
   const { cardTitle, cardContent, cardImage } = props;
   return (
     <div
-      className={`w-5/6 h-auto p-2 m-2 flex flex-col items-center ${colors.primary}`}
+      className={`w-5/6 h-auto p-2 m-2 flex flex-col items-center rounded-xl ${colors.primary}`}
     >
       <div className="relative ">
         <BsFillPersonFill className="text-7xl" />
       </div>
-      <div className={`flex w-full `}>
+      <div className={`w-full `}>
         <h1 className="text-2xl">{cardTitle}</h1>
         <div>{cardContent}</div>
       </div>
@@ -31,6 +31,7 @@ CardItem.propTypes = {
   cardContent: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.string,
+    PropTypes.element,
   ]),
   cardImage: PropTypes.string,
 };

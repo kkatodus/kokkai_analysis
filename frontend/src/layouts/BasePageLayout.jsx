@@ -7,7 +7,7 @@ import { colors } from '../resource/styling';
 export default function BasePageLayout(props) {
   const { pageTitle, backTo, MainContent } = props;
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen relative">
       <div className={`h-1/6 flex items-center ${colors.primary}`}>
         <Link className="back-icon" to={backTo}>
           <MdOutlineArrowBack />

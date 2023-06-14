@@ -25,6 +25,7 @@ export default function SangiinReprPage() {
   }, []);
   const kaihaAccordions = kaihas.map((oneKaiha) => {
     const kaihaReps = reps[oneKaiha];
+    const numReps = kaihaReps.length;
     const kaihaRepsComponents = kaihaReps.map((rep) => {
       const { name, yomikata, kaiha, district, period } = rep;
       return (
@@ -42,7 +43,7 @@ export default function SangiinReprPage() {
     return (
       <Accordion
         key={oneKaiha}
-        title={SangiinAbbrev2Kaiha[oneKaiha]}
+        title={`${SangiinAbbrev2Kaiha[oneKaiha]}（${numReps}）`}
         content={kaihaRepsComponents}
         extraStyles={{ title: '', content: 'card-container' }}
       />
