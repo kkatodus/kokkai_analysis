@@ -25,13 +25,14 @@ function MeetingDetailPage() {
     // gets called on mount of the component
     const fetchMeeting = async () => {
       // eslint-disable-next-line max-len, camelcase
-      const meetingUrl = `${sangiinEndpoint}"sangiin_meeting_votes/${meetingId}`;
+      const meetingUrl = `${sangiinEndpoint}sangiin_meeting_votes/${meetingId}`;
       const meetingData = await fetch(meetingUrl);
       const meetingJson = await meetingData.json();
       setMeeting(meetingJson);
     };
     setIsLoading(true);
     fetchMeeting().catch(() => {
+      /* eslint-disable no-console */
       console.error();
       setLoadFailed(true);
     });

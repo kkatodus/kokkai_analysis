@@ -27,6 +27,7 @@ function SangiinTopicDetailPage() {
 
     setIsLoading(true);
     fetchTopic().catch(() => {
+      /* eslint-disable no-console */
       console.error();
       setTopic({});
     });

@@ -1,7 +1,7 @@
-import React from "react";
-import "../styles/general.css";
-import "../styles/pages/info_page.css";
-import BasePageLayout from "../layouts/BasePageLayout";
+import React from 'react';
+import '../styles/general.css';
+import '../styles/pages/info_page.css';
+import BasePageLayout from '../layouts/BasePageLayout';
 /**
  *
  * @return {JSX.Element}

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.card-container {
+  @apply grid grid-flow-row gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-auto-fit;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,7 +14,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root{
+#root {
   height: 100vh;
   width: 100%;
 }

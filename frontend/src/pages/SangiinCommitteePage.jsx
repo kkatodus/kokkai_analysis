@@ -15,9 +15,6 @@ export default function SangiinCommitteePage() {
     }).then((res) => {
       setComs(res.data.meetings);
       setPeriod(res.data.meeting_period);
-      console.log(res);
-      console.log(coms);
-      console.log(period);
     });
   }, []);
 

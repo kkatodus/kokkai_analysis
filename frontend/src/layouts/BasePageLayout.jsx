@@ -15,7 +15,7 @@ export default function BasePageLayout(props) {
         <h1 className="text-4xl px-3 ">{pageTitle}</h1>
       </div>
       <div
-        className={`h-5/6 overflow-y-scroll bg-slate-300 ${colors.secondary}`}
+        className={`flex flex-col items-center relative h-5/6 overflow-y-scroll bg-slate-300 ${colors.secondary}`}
       >
         {MainContent}
       </div>
@@ -30,5 +30,8 @@ BasePageLayout.defaultProps = {
 BasePageLayout.propTypes = {
   pageTitle: Proptypes.string.isRequired,
   backTo: Proptypes.string,
-  MainContent: Proptypes.element.isRequired,
+  MainContent: Proptypes.oneOfType([
+    Proptypes.element,
+    Proptypes.arrayOf(Proptypes.element),
+  ]).isRequired,
 };

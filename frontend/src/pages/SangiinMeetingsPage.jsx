@@ -27,6 +27,7 @@ function SangiinMeetingsPage() {
     // get the meetings if the array is empty in store
     setIsLoading(true);
     fetchMeetingNames().catch(() => {
+      /* eslint-disable no-console */
       console.error();
       setIsLoading(true);
     });

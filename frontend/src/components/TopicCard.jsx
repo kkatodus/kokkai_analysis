@@ -31,7 +31,9 @@ function TopicCard(props) {
       <StackedBarChart data={data} height={50} width="100%" />
     );
     // eslint-disable-next-line
-    var partyVotingResults = Object.entries(voting_results).map(([value]) => {
+    var partyVotingResults = Object.entries(voting_results).map((entry) => {
+      // eslint-disable-next-line no-unused-vars
+      const [index, value] = entry;
       const partyVotingData = [
         { name: value.party_name, 賛成: value.yay, 反対: value.nay },
       ];

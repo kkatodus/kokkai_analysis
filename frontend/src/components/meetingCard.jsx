@@ -3,6 +3,7 @@ import React from 'react';
 import '../styles/other/animations.css';
 import { Link } from 'react-router-dom';
 import Proptypes from 'prop-types';
+import { colors } from '../resource/styling';
 
 /**
  * @param {object} props
@@ -11,11 +12,12 @@ import Proptypes from 'prop-types';
 function MeetingCard(props) {
   const { MeetingName, Period } = props;
   return (
-    <Link to={`/sangiin_meetings/${MeetingName}`}>
-      <div className="meeting-card-container grow-on-hover-small">
-        <h1>{MeetingName}</h1>
-        <h2>{Period}</h2>
-      </div>
+    <Link
+      to={`/sangiin_meetings/${MeetingName}`}
+      className={`transition hover:scale-105 w-11/12 m-5 rounded-lg p-2 ${colors.tertiary}`}
+    >
+      <h1>{MeetingName}</h1>
+      <h2>{Period}</h2>
     </Link>
   );
 }
