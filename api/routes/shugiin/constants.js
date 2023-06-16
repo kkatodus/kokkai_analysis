@@ -1,0 +1,1 @@
+export const SHUGIIN_DATA_DIR = "./data_shugiin/";

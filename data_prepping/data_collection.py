@@ -32,9 +32,10 @@ create_dir(LOWER_SPEECH_OUTPUT_DIR)
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 
 ## PARAMS
-SCRAPE_UPPER_REPR_LIST = True
+SCRAPE_UPPER_REPR_LIST = False
 SCRAPE_LOWER_REPR_LIST = False
 SCRAPE_UPPER_MEETING_MEMBER_LIST = False
+SCRAPE_LOWER_MEETING_MEMBER_LIST = True
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -186,9 +187,40 @@ def scrape_upper_meeting_member_list():
     write_json(meeting_member_dict, meeting_member_json_path)
 
 def scrape_lower_meeting_member_list():
-    #TODO implement
-    pass
- 
+    gs.get_url(LOWER_MEETING_INFO_PAGE_URL)
+    meetings_link_components = gs.get_site_components_by(By.PARTIAL_LINK_TEXT, "会")[1:]
+    meetings_links = [link.get_attribute("href") for link in meetings_link_components]
+    meeting_names = [link.text for link in meetings_link_components]
+    meeting_member_dict = {"meetings":{}}
+    for meeting_link, meeting_name in zip(meetings_links, meeting_names):
+        if not meeting_link:
+            continue
+        gs.get_url(meeting_link)
+        meeting_table_elements = gs.get_site_components_by(By.TAG_NAME, "td")
+        role_components = meeting_table_elements[0::4]
+        role_texts = [role.text for role in role_components]
+        name_components = meeting_table_elements[1::4]
+        name_texts = [name.text for name in name_components]
+        yomikata_components = meeting_table_elements[2::4]
+        yomikata_texts = [yomikata.text for yomikata in yomikata_components]
+        party_components = meeting_table_elements[3::4]
+        party_texts = [party.text for party in party_components]
+        for role, name, yomikata, party in zip(role_texts, name_texts, yomikata_texts, party_texts):
+            name = name.replace("\u3000", " ")
+            member_dict = {
+				"role":role,
+				"name":name,
+				"yomikata":yomikata,
+				"party":party
+			}
+            if not meeting_name in meeting_member_dict['meetings'].keys():
+                meeting_member_dict['meetings'][meeting_name] = []
+            meeting_member_dict['meetings'][meeting_name].append(member_dict)
+    output_dir = os.path.join(LOWER_OUTPUT_DIR, "meeting_member_lists")
+    create_dir(output_dir)
+    meeting_member_json_path = os.path.join(output_dir, f"meeting_member_list.json")
+    write_json(meeting_member_dict, meeting_member_json_path)
+            
 def scrape_upper_meeting_bills_info():
     pass
 
@@ -205,6 +237,8 @@ def main():
         scrape_lower_repr_list()
     if SCRAPE_UPPER_MEETING_MEMBER_LIST:
         scrape_upper_meeting_member_list()
+    if SCRAPE_LOWER_MEETING_MEMBER_LIST:
+        scrape_lower_meeting_member_list()
 
     #choose which repr list to use
     upper_house_repr_list_dir = os.path.join(UPPER_OUTPUT_DIR, "repr_list")

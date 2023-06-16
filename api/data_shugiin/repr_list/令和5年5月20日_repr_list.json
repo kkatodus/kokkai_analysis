@@ -1,0 +1,3717 @@
+{
+    "meeting_period": "令和5年5月20日現在",
+    "reprs": [
+        {
+            "name": "逢沢  一郎君",
+            "yomikata": "あいさわ  いちろう",
+            "kaiha": "自民",
+            "district": "岡山1",
+            "number_of_terms_lower": 12,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "青柳  仁士君",
+            "yomikata": "あおやぎ  ひとし",
+            "kaiha": "維新",
+            "district": "大阪14",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "青柳 陽一郎君",
+            "yomikata": "あおやぎ  よういちろう",
+            "kaiha": "立憲",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "青山  周平君",
+            "yomikata": "あおやま  しゅうへい",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "青山  大人君",
+            "yomikata": "あおやま  やまと",
+            "kaiha": "立憲",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "赤木  正幸君",
+            "yomikata": "あかぎ  まさゆき",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "赤澤  亮正君",
+            "yomikata": "あかざわ  りょうせい",
+            "kaiha": "自民",
+            "district": "鳥取2",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "赤羽  一嘉君",
+            "yomikata": "あかば  かずよし",
+            "kaiha": "公明",
+            "district": "兵庫2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "あかま 二郎君",
+            "yomikata": "あかま  じろう",
+            "kaiha": "自民",
+            "district": "神奈川14",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "赤嶺  政賢君",
+            "yomikata": "あかみね  せいけん",
+            "kaiha": "共産",
+            "district": "沖縄1",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "秋葉  賢也君",
+            "yomikata": "あきば  けんや",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "秋本  真利君",
+            "yomikata": "あきもと  まさとし",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浅川  義治君",
+            "yomikata": "あさかわ  よしはる",
+            "kaiha": "維新",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浅野   哲君",
+            "yomikata": "あさの  さとし",
+            "kaiha": "国民",
+            "district": "茨城5",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "東   国幹君",
+            "yomikata": "あずま  くによし",
+            "kaiha": "自民",
+            "district": "北海道6",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "安住   淳君",
+            "yomikata": "あずみ  じゅん",
+            "kaiha": "立憲",
+            "district": "宮城5",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "畦元  将吾君",
+            "yomikata": "あぜもと  しょうご",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "麻生  太郎君",
+            "yomikata": "あそう  たろう",
+            "kaiha": "自民",
+            "district": "福岡8",
+            "number_of_terms_lower": 14,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "足立  康史君",
+            "yomikata": "あだち  やすし",
+            "kaiha": "維新",
+            "district": "大阪9",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "阿部   司君",
+            "yomikata": "あべ  つかさ",
+            "kaiha": "維新",
+            "district": "（比）東京",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "あべ  俊子君",
+            "yomikata": "あべ  としこ",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "阿部  知子君",
+            "yomikata": "あべ  ともこ",
+            "kaiha": "立憲",
+            "district": "神奈川12",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "阿部  弘樹君",
+            "yomikata": "あべ  ひろき",
+            "kaiha": "維新",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "甘利   明君",
+            "yomikata": "あまり  あきら",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 13,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "荒井   優君",
+            "yomikata": "あらい  ゆたか",
+            "kaiha": "立憲",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "新垣  邦男君",
+            "yomikata": "あらかき  くにお",
+            "kaiha": "立憲",
+            "district": "沖縄2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "五十嵐  清君",
+            "yomikata": "いがらし  きよし",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "池下   卓君",
+            "yomikata": "いけした  たく",
+            "kaiha": "維新",
+            "district": "大阪10",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "池田  佳隆君",
+            "yomikata": "いけだ  よしたか",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "池畑 浩太朗君",
+            "yomikata": "いけはた  こうたろう",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊佐  進一君",
+            "yomikata": "いさ  しんいち",
+            "kaiha": "公明",
+            "district": "大阪6",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井坂  信彦君",
+            "yomikata": "いさか  のぶひこ",
+            "kaiha": "立憲",
+            "district": "兵庫1",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石井  啓一君",
+            "yomikata": "いしい  けいいち",
+            "kaiha": "公明",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石井   拓君",
+            "yomikata": "いしい  たく",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石川  昭政君",
+            "yomikata": "いしかわ  あきまさ",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石川  香織君",
+            "yomikata": "いしかわ  かおり",
+            "kaiha": "立憲",
+            "district": "北海道11",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石田  真敏君",
+            "yomikata": "いしだ  まさとし",
+            "kaiha": "自民",
+            "district": "和歌山2",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石破   茂君",
+            "yomikata": "いしば  しげる",
+            "kaiha": "自民",
+            "district": "鳥取1",
+            "number_of_terms_lower": 12,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石橋 林太郎君",
+            "yomikata": "いしばし  りんたろう",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石原  宏高君",
+            "yomikata": "いしはら  ひろたか",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "石原  正敬君",
+            "yomikata": "いしはら  まさたか",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "泉   健太君",
+            "yomikata": "いずみ  けんた",
+            "kaiha": "立憲",
+            "district": "京都3",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "泉田  裕彦君",
+            "yomikata": "いずみだ  ひろひこ",
+            "kaiha": "自民",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "一谷 勇一郎君",
+            "yomikata": "いちたに  ゆういちろう",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "市村 浩一郎君",
+            "yomikata": "いちむら  こういちろう",
+            "kaiha": "維新",
+            "district": "兵庫6",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井出  庸生君",
+            "yomikata": "いで  ようせい",
+            "kaiha": "自民",
+            "district": "長野3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊藤  俊輔君",
+            "yomikata": "いとう  しゅんすけ",
+            "kaiha": "立憲",
+            "district": "（比）東京",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊藤 信太郎君",
+            "yomikata": "いとう  しんたろう",
+            "kaiha": "自民",
+            "district": "宮城4",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊藤  忠彦君",
+            "yomikata": "いとう  ただひこ",
+            "kaiha": "自民",
+            "district": "愛知8",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊藤  達也君",
+            "yomikata": "いとう  たつや",
+            "kaiha": "自民",
+            "district": "東京22",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊東  信久君",
+            "yomikata": "いとう  のぶひさ",
+            "kaiha": "維新",
+            "district": "大阪19",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊東  良孝君",
+            "yomikata": "いとう  よしたか",
+            "kaiha": "自民",
+            "district": "北海道7",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伊藤   渉君",
+            "yomikata": "いとう  わたる",
+            "kaiha": "公明",
+            "district": "（比）東海",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "稲田  朋美君",
+            "yomikata": "いなだ  ともみ",
+            "kaiha": "自民",
+            "district": "福井1",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "稲津   久君",
+            "yomikata": "いなつ  ひさし",
+            "kaiha": "公明",
+            "district": "北海道10",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "稲富  修二君",
+            "yomikata": "いなとみ  しゅうじ",
+            "kaiha": "立憲",
+            "district": "（比）九州",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井野  俊郎君",
+            "yomikata": "いの  としろう",
+            "kaiha": "自民",
+            "district": "群馬2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井上  信治君",
+            "yomikata": "いのうえ  しんじ",
+            "kaiha": "自民",
+            "district": "東京25",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井上  貴博君",
+            "yomikata": "いのうえ  たかひろ",
+            "kaiha": "自民",
+            "district": "福岡1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井上  英孝君",
+            "yomikata": "いのうえ  ひでたか",
+            "kaiha": "維新",
+            "district": "大阪1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井林  辰憲君",
+            "yomikata": "いばやし  たつのり",
+            "kaiha": "自民",
+            "district": "静岡2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "井原   巧君",
+            "yomikata": "いはら  たくみ",
+            "kaiha": "自民",
+            "district": "愛媛3",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "今枝 宗一郎君",
+            "yomikata": "いまえだ  そういちろう",
+            "kaiha": "自民",
+            "district": "愛知14",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "今村  雅弘君",
+            "yomikata": "いまむら  まさひろ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岩田  和親君",
+            "yomikata": "いわた  かずちか",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岩谷  良平君",
+            "yomikata": "いわたに  りょうへい",
+            "kaiha": "維新",
+            "district": "大阪13",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岩屋   毅君",
+            "yomikata": "いわや  たけし",
+            "kaiha": "自民",
+            "district": "大分3",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "上杉 謙太郎君",
+            "yomikata": "うえすぎ  けんたろう",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "上田  英俊君",
+            "yomikata": "うえだ  えいしゅん",
+            "kaiha": "自民",
+            "district": "富山2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "上野 賢一郎君",
+            "yomikata": "うえの  けんいちろう",
+            "kaiha": "自民",
+            "district": "滋賀2",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浮島  智子君",
+            "yomikata": "うきしま  ともこ",
+            "kaiha": "公明",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "梅谷   守君",
+            "yomikata": "うめたに  まもる",
+            "kaiha": "立憲",
+            "district": "新潟6",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浦野  靖人君",
+            "yomikata": "うらの  やすと",
+            "kaiha": "維新",
+            "district": "大阪15",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "漆間  譲司君",
+            "yomikata": "うるま  じょうじ",
+            "kaiha": "維新",
+            "district": "大阪8",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "江崎  鐵磨君",
+            "yomikata": "えさき  てつま",
+            "kaiha": "自民",
+            "district": "愛知10",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "江田  憲司君",
+            "yomikata": "えだ  けんじ",
+            "kaiha": "立憲",
+            "district": "神奈川8",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "枝野  幸男君",
+            "yomikata": "えだの  ゆきお",
+            "kaiha": "立憲",
+            "district": "埼玉5",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "江渡  聡徳君",
+            "yomikata": "えと  あきのり",
+            "kaiha": "自民",
+            "district": "青森1",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "衛藤 征士郎君",
+            "yomikata": "えとう  せいしろう",
+            "kaiha": "自民",
+            "district": "大分2",
+            "number_of_terms_lower": 13,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "江藤   拓君",
+            "yomikata": "えとう  たく",
+            "kaiha": "自民",
+            "district": "宮崎2",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "英利アルフィヤ君",
+            "yomikata": "えり  あるふぃや",
+            "kaiha": "自民",
+            "district": "千葉5",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "遠藤   敬君",
+            "yomikata": "えんどう  たかし",
+            "kaiha": "維新",
+            "district": "大阪18",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "遠藤  利明君",
+            "yomikata": "えんどう  としあき",
+            "kaiha": "自民",
+            "district": "山形1",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "遠藤  良太君",
+            "yomikata": "えんどう  りょうた",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大石 あきこ君",
+            "yomikata": "おおいし  あきこ",
+            "kaiha": "れ新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大岡  敏孝君",
+            "yomikata": "おおおか  としたか",
+            "kaiha": "自民",
+            "district": "滋賀1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大河原まさこ君",
+            "yomikata": "おおかわら  まさこ",
+            "kaiha": "立憲",
+            "district": "（比）東京",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "大串  博志君",
+            "yomikata": "おおぐし  ひろし",
+            "kaiha": "立憲",
+            "district": "佐賀2",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大串  正樹君",
+            "yomikata": "おおぐし  まさき",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大口  善徳君",
+            "yomikata": "おおぐち  よしのり",
+            "kaiha": "公明",
+            "district": "（比）東海",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "逢坂  誠二君",
+            "yomikata": "おおさか  せいじ",
+            "kaiha": "立憲",
+            "district": "北海道8",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大島   敦君",
+            "yomikata": "おおしま  あつし",
+            "kaiha": "立憲",
+            "district": "埼玉6",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大塚   拓君",
+            "yomikata": "おおつか  たく",
+            "kaiha": "自民",
+            "district": "埼玉9",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "おおつき紅葉君",
+            "yomikata": "おおつき  くれは",
+            "kaiha": "立憲",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大西  健介君",
+            "yomikata": "おおにし  けんすけ",
+            "kaiha": "立憲",
+            "district": "愛知13",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大西  英男君",
+            "yomikata": "おおにし  ひでお",
+            "kaiha": "自民",
+            "district": "東京16",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "大野 敬太郎君",
+            "yomikata": "おおの  けいたろう",
+            "kaiha": "自民",
+            "district": "香川3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岡田  克也君",
+            "yomikata": "おかだ  かつや",
+            "kaiha": "立憲",
+            "district": "三重3",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "緒方 林太郎君",
+            "yomikata": "おがた  りんたろう",
+            "kaiha": "有志",
+            "district": "福岡9",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岡本 あき子君",
+            "yomikata": "おかもと  あきこ",
+            "kaiha": "立憲",
+            "district": "（比）東北",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岡本  三成君",
+            "yomikata": "おかもと  みつなり",
+            "kaiha": "公明",
+            "district": "東京12",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小川  淳也君",
+            "yomikata": "おがわ  じゅんや",
+            "kaiha": "立憲",
+            "district": "香川1",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "奥下  剛光君",
+            "yomikata": "おくした  たけみつ",
+            "kaiha": "維新",
+            "district": "大阪7",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "奥野  信亮君",
+            "yomikata": "おくの  しんすけ",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "奥野 総一郎君",
+            "yomikata": "おくの  そういちろう",
+            "kaiha": "立憲",
+            "district": "千葉9",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小熊  慎司君",
+            "yomikata": "おぐま  しんじ",
+            "kaiha": "立憲",
+            "district": "福島4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "小倉  將信君",
+            "yomikata": "おぐら  まさのぶ",
+            "kaiha": "自民",
+            "district": "東京23",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "尾崎  正直君",
+            "yomikata": "おざき  まさなお",
+            "kaiha": "自民",
+            "district": "高知2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小里  泰弘君",
+            "yomikata": "おざと  やすひろ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小沢  一郎君",
+            "yomikata": "おざわ  いちろう",
+            "kaiha": "立憲",
+            "district": "（比）東北",
+            "number_of_terms_lower": 18,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小田原  潔君",
+            "yomikata": "おだわら  きよし",
+            "kaiha": "自民",
+            "district": "東京21",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "越智  隆雄君",
+            "yomikata": "おち  たかお",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "落合  貴之君",
+            "yomikata": "おちあい  たかゆき",
+            "kaiha": "立憲",
+            "district": "東京6",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鬼木   誠君",
+            "yomikata": "おにき  まこと",
+            "kaiha": "自民",
+            "district": "福岡2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小野  泰輔君",
+            "yomikata": "おの  たいすけ",
+            "kaiha": "維新",
+            "district": "（比）東京",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小野寺 五典君",
+            "yomikata": "おのでら  いつのり",
+            "kaiha": "自民",
+            "district": "宮城6",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小渕  優子君",
+            "yomikata": "おぶち  ゆうこ",
+            "kaiha": "自民",
+            "district": "群馬5",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "尾身  朝子君",
+            "yomikata": "おみ  あさこ",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "海江田 万里君",
+            "yomikata": "かいえだ  ばんり",
+            "kaiha": "無",
+            "district": "（比）東京",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "柿沢  未途君",
+            "yomikata": "かきざわ  みと",
+            "kaiha": "自民",
+            "district": "東京15",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "笠井   亮君",
+            "yomikata": "かさい  あきら",
+            "kaiha": "共産",
+            "district": "（比）東京",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "河西  宏一君",
+            "yomikata": "かさい  こういち",
+            "kaiha": "公明",
+            "district": "（比）東京",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "梶山  弘志君",
+            "yomikata": "かじやま  ひろし",
+            "kaiha": "自民",
+            "district": "茨城4",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "勝俣  孝明君",
+            "yomikata": "かつまた  たかあき",
+            "kaiha": "自民",
+            "district": "静岡6",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "勝目   康君",
+            "yomikata": "かつめ  やすし",
+            "kaiha": "自民",
+            "district": "京都1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "加藤  鮎子君",
+            "yomikata": "かとう  あゆこ",
+            "kaiha": "自民",
+            "district": "山形3",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "加藤  勝信君",
+            "yomikata": "かとう  かつのぶ",
+            "kaiha": "自民",
+            "district": "岡山5",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "加藤  竜祥君",
+            "yomikata": "かとう  りゅうしょう",
+            "kaiha": "自民",
+            "district": "長崎2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "門山  宏哲君",
+            "yomikata": "かどやま  ひろあき",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "金子  恵美君",
+            "yomikata": "かねこ  えみ",
+            "kaiha": "立憲",
+            "district": "福島1",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "金子  俊平君",
+            "yomikata": "かねこ  しゅんぺい",
+            "kaiha": "自民",
+            "district": "岐阜4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "金子  恭之君",
+            "yomikata": "かねこ  やすし",
+            "kaiha": "自民",
+            "district": "熊本4",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "金田  勝年君",
+            "yomikata": "かねだ  かつとし",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "金村  龍那君",
+            "yomikata": "かねむら  りゅうな",
+            "kaiha": "維新",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鎌田 さゆり君",
+            "yomikata": "かまた  さゆり",
+            "kaiha": "立憲",
+            "district": "宮城2",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "上川  陽子君",
+            "yomikata": "かみかわ  ようこ",
+            "kaiha": "自民",
+            "district": "静岡1",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "神谷   裕君",
+            "yomikata": "かみや  ひろし",
+            "kaiha": "立憲",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "亀岡  偉民君",
+            "yomikata": "かめおか  よしたみ",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "川崎 ひでと君",
+            "yomikata": "かわさき  ひでと",
+            "kaiha": "自民",
+            "district": "三重2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "菅   直人君",
+            "yomikata": "かん  なおと",
+            "kaiha": "立憲",
+            "district": "東京18",
+            "number_of_terms_lower": 14,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "菅家  一郎君",
+            "yomikata": "かんけ  いちろう",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "神田  憲次君",
+            "yomikata": "かんだ  けんじ",
+            "kaiha": "自民",
+            "district": "愛知5",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "神田  潤一君",
+            "yomikata": "かんだ  じゅんいち",
+            "kaiha": "自民",
+            "district": "青森2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "城井   崇君",
+            "yomikata": "きい  たかし",
+            "kaiha": "立憲",
+            "district": "福岡10",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "城内   実君",
+            "yomikata": "きうち  みのる",
+            "kaiha": "自民",
+            "district": "静岡7",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "黄川田 仁志君",
+            "yomikata": "きかわだ  ひとし",
+            "kaiha": "自民",
+            "district": "埼玉3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "菊田 真紀子君",
+            "yomikata": "きくた  まきこ",
+            "kaiha": "立憲",
+            "district": "新潟4",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岸  信千世君",
+            "yomikata": "きし  のぶちよ",
+            "kaiha": "自民",
+            "district": "山口2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岸田  文雄君",
+            "yomikata": "きしだ  ふみお",
+            "kaiha": "自民",
+            "district": "広島1",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "北神  圭朗君",
+            "yomikata": "きたがみ  けいろう",
+            "kaiha": "有志",
+            "district": "京都4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "北側  一雄君",
+            "yomikata": "きたがわ  かずお",
+            "kaiha": "公明",
+            "district": "大阪16",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "木原  誠二君",
+            "yomikata": "きはら  せいじ",
+            "kaiha": "自民",
+            "district": "東京20",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "木原   稔君",
+            "yomikata": "きはら  みのる",
+            "kaiha": "自民",
+            "district": "熊本1",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "木村  次郎君",
+            "yomikata": "きむら  じろう",
+            "kaiha": "自民",
+            "district": "青森3",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉良  州司君",
+            "yomikata": "きら  しゅうじ",
+            "kaiha": "有志",
+            "district": "大分1",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "金城  泰邦君",
+            "yomikata": "きんじょう  やすくに",
+            "kaiha": "公明",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "日下  正喜君",
+            "yomikata": "くさか  まさき",
+            "kaiha": "公明",
+            "district": "（比）中国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "櫛渕  万里君",
+            "yomikata": "くしぶち  まり",
+            "kaiha": "れ新",
+            "district": "（比）東京",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "工藤  彰三君",
+            "yomikata": "くどう  しょうぞう",
+            "kaiha": "自民",
+            "district": "愛知4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "国定  勇人君",
+            "yomikata": "くにさだ  いさと",
+            "kaiha": "自民",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "國重   徹君",
+            "yomikata": "くにしげ  とおる",
+            "kaiha": "公明",
+            "district": "大阪5",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "国光 あやの君",
+            "yomikata": "くにみつ  あやの",
+            "kaiha": "自民",
+            "district": "茨城6",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "熊田  裕通君",
+            "yomikata": "くまだ  ひろみち",
+            "kaiha": "自民",
+            "district": "愛知1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "玄葉 光一郎君",
+            "yomikata": "げんば  こういちろう",
+            "kaiha": "立憲",
+            "district": "福島3",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "源馬 謙太郎君",
+            "yomikata": "げんま  けんたろう",
+            "kaiha": "立憲",
+            "district": "静岡8",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小泉 進次郎君",
+            "yomikata": "こいずみ  しんじろう",
+            "kaiha": "自民",
+            "district": "神奈川11",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小泉  龍司君",
+            "yomikata": "こいずみ  りゅうじ",
+            "kaiha": "自民",
+            "district": "埼玉11",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "神津 たけし君",
+            "yomikata": "こうづ  たけし",
+            "kaiha": "立憲",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "河野  太郎君",
+            "yomikata": "こうの  たろう",
+            "kaiha": "自民",
+            "district": "神奈川15",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高村  正大君",
+            "yomikata": "こうむら  まさひろ",
+            "kaiha": "自民",
+            "district": "山口1",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古賀   篤君",
+            "yomikata": "こが  あつし",
+            "kaiha": "自民",
+            "district": "福岡3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "穀田  恵二君",
+            "yomikata": "こくた  けいじ",
+            "kaiha": "共産",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "國場 幸之助君",
+            "yomikata": "こくば  こうのすけ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小島  敏文君",
+            "yomikata": "こじま  としふみ",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "輿水  恵一君",
+            "yomikata": "こしみず  けいいち",
+            "kaiha": "公明",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小寺  裕雄君",
+            "yomikata": "こてら  ひろお",
+            "kaiha": "自民",
+            "district": "滋賀4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "後藤  茂之君",
+            "yomikata": "ごとう  しげゆき",
+            "kaiha": "自民",
+            "district": "長野4",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "後藤  祐一君",
+            "yomikata": "ごとう  ゆういち",
+            "kaiha": "立憲",
+            "district": "神奈川16",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小林  茂樹君",
+            "yomikata": "こばやし  しげき",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小林  鷹之君",
+            "yomikata": "こばやし  たかゆき",
+            "kaiha": "自民",
+            "district": "千葉2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小林  史明君",
+            "yomikata": "こばやし  ふみあき",
+            "kaiha": "自民",
+            "district": "広島7",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小宮山 泰子君",
+            "yomikata": "こみやま  やすこ",
+            "kaiha": "立憲",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小森  卓郎君",
+            "yomikata": "こもり  たくお",
+            "kaiha": "自民",
+            "district": "石川1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "小山  展弘君",
+            "yomikata": "こやま  のぶひろ",
+            "kaiha": "立憲",
+            "district": "静岡3",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "近藤  和也君",
+            "yomikata": "こんどう  かずや",
+            "kaiha": "立憲",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "近藤  昭一君",
+            "yomikata": "こんどう  しょういち",
+            "kaiha": "立憲",
+            "district": "愛知3",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "斎藤アレックス君",
+            "yomikata": "さいとう  あれっくす",
+            "kaiha": "国民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "齋藤   健君",
+            "yomikata": "さいとう  けん",
+            "kaiha": "自民",
+            "district": "千葉7",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "斉藤  鉄夫君",
+            "yomikata": "さいとう  てつお",
+            "kaiha": "公明",
+            "district": "広島3",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "斎藤  洋明君",
+            "yomikata": "さいとう  ひろあき",
+            "kaiha": "自民",
+            "district": "新潟3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "坂井   学君",
+            "yomikata": "さかい  まなぶ",
+            "kaiha": "自民",
+            "district": "神奈川5",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "坂本  哲志君",
+            "yomikata": "さかもと  てつし",
+            "kaiha": "自民",
+            "district": "熊本3",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "坂本 祐之輔君",
+            "yomikata": "さかもと  ゆうのすけ",
+            "kaiha": "立憲",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "櫻井   周君",
+            "yomikata": "さくらい  しゅう",
+            "kaiha": "立憲",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "櫻田  義孝君",
+            "yomikata": "さくらだ  よしたか",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "笹川  博義君",
+            "yomikata": "ささがわ  ひろよし",
+            "kaiha": "自民",
+            "district": "群馬3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "佐々木  紀君",
+            "yomikata": "ささき  はじめ",
+            "kaiha": "自民",
+            "district": "石川2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "佐藤  公治君",
+            "yomikata": "さとう  こうじ",
+            "kaiha": "立憲",
+            "district": "広島6",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "佐藤  茂樹君",
+            "yomikata": "さとう  しげき",
+            "kaiha": "公明",
+            "district": "大阪3",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "佐藤   勉君",
+            "yomikata": "さとう  つとむ",
+            "kaiha": "自民",
+            "district": "栃木4",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "佐藤  英道君",
+            "yomikata": "さとう  ひでみち",
+            "kaiha": "公明",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "沢田   良君",
+            "yomikata": "さわだ  りょう",
+            "kaiha": "維新",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "志位  和夫君",
+            "yomikata": "しい  かずお",
+            "kaiha": "共産",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "塩川  鉄也君",
+            "yomikata": "しおかわ  てつや",
+            "kaiha": "共産",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "塩崎  彰久君",
+            "yomikata": "しおざき  あきひさ",
+            "kaiha": "自民",
+            "district": "愛媛1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "塩谷   立君",
+            "yomikata": "しおのや  りゅう",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "重徳  和彦君",
+            "yomikata": "しげとく  かずひこ",
+            "kaiha": "立憲",
+            "district": "愛知12",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "階    猛君",
+            "yomikata": "しな  たけし",
+            "kaiha": "立憲",
+            "district": "岩手1",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "篠原   豪君",
+            "yomikata": "しのはら  ごう",
+            "kaiha": "立憲",
+            "district": "神奈川1",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "篠原   孝君",
+            "yomikata": "しのはら  たかし",
+            "kaiha": "立憲",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "柴山  昌彦君",
+            "yomikata": "しばやま  まさひこ",
+            "kaiha": "自民",
+            "district": "埼玉8",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "島尻 安伊子君",
+            "yomikata": "しまじり  あいこ",
+            "kaiha": "自民",
+            "district": "沖縄3",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "下条  みつ君",
+            "yomikata": "しもじょう  みつ",
+            "kaiha": "立憲",
+            "district": "長野2",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "下村  博文君",
+            "yomikata": "しもむら  はくぶん",
+            "kaiha": "自民",
+            "district": "東京11",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "庄子  賢一君",
+            "yomikata": "しょうじ  けんいち",
+            "kaiha": "公明",
+            "district": "（比）東北",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "白石  洋一君",
+            "yomikata": "しらいし  よういち",
+            "kaiha": "立憲",
+            "district": "（比）四国",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "新谷  正義君",
+            "yomikata": "しんたに  まさよし",
+            "kaiha": "自民",
+            "district": "広島4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "新藤  義孝君",
+            "yomikata": "しんどう  よしたか",
+            "kaiha": "自民",
+            "district": "埼玉2",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "末次  精一君",
+            "yomikata": "すえつぐ  せいいち",
+            "kaiha": "立憲",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "末松  義規君",
+            "yomikata": "すえまつ  よしのり",
+            "kaiha": "立憲",
+            "district": "東京19",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "菅   義偉君",
+            "yomikata": "すが  よしひで",
+            "kaiha": "自民",
+            "district": "神奈川2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "杉田  水脈君",
+            "yomikata": "すぎた  みお",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "杉本  和巳君",
+            "yomikata": "すぎもと  かずみ",
+            "kaiha": "維新",
+            "district": "（比）東海",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木   敦君",
+            "yomikata": "すずき  あつし",
+            "kaiha": "国民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  英敬君",
+            "yomikata": "すずき  えいけい",
+            "kaiha": "自民",
+            "district": "三重4",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  馨祐君",
+            "yomikata": "すずき  けいすけ",
+            "kaiha": "自民",
+            "district": "神奈川7",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  俊一君",
+            "yomikata": "すずき  しゅんいち",
+            "kaiha": "自民",
+            "district": "岩手2",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  淳司君",
+            "yomikata": "すずき  じゅんじ",
+            "kaiha": "自民",
+            "district": "愛知7",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  貴子君",
+            "yomikata": "すずき  たかこ",
+            "kaiha": "自民",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  憲和君",
+            "yomikata": "すずき  のりかず",
+            "kaiha": "自民",
+            "district": "山形2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  隼人君",
+            "yomikata": "すずき  はやと",
+            "kaiha": "自民",
+            "district": "東京10",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  庸介君",
+            "yomikata": "すずき  ようすけ",
+            "kaiha": "立憲",
+            "district": "（比）東京",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鈴木  義弘君",
+            "yomikata": "すずき  よしひろ",
+            "kaiha": "国民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "住吉  寛紀君",
+            "yomikata": "すみよし  ひろき",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "関   芳弘君",
+            "yomikata": "せき  よしひろ",
+            "kaiha": "自民",
+            "district": "兵庫3",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "瀬戸  隆一君",
+            "yomikata": "せと  たかかず",
+            "kaiha": "自民",
+            "district": "（比）四国",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "空本  誠喜君",
+            "yomikata": "そらもと  せいき",
+            "kaiha": "維新",
+            "district": "（比）中国",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平   将明君",
+            "yomikata": "たいら  まさあき",
+            "kaiha": "自民",
+            "district": "東京4",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高市  早苗君",
+            "yomikata": "たかいち  さなえ",
+            "kaiha": "自民",
+            "district": "奈良2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高階 恵美子君",
+            "yomikata": "たかがい  えみこ",
+            "kaiha": "自民",
+            "district": "（比）中国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "高木   啓君",
+            "yomikata": "たかぎ  けい",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高木   毅君",
+            "yomikata": "たかぎ  つよし",
+            "kaiha": "自民",
+            "district": "福井2",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高木  宏壽君",
+            "yomikata": "たかぎ  ひろひさ",
+            "kaiha": "自民",
+            "district": "北海道3",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高木  陽介君",
+            "yomikata": "たかぎ  ようすけ",
+            "kaiha": "公明",
+            "district": "（比）東京",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高鳥  修一君",
+            "yomikata": "たかとり  しゅういち",
+            "kaiha": "自民",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高橋 千鶴子君",
+            "yomikata": "たかはし  ちづこ",
+            "kaiha": "共産",
+            "district": "（比）東北",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高橋  英明君",
+            "yomikata": "たかはし  ひであき",
+            "kaiha": "維新",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "高見  康裕君",
+            "yomikata": "たかみ  やすひろ",
+            "kaiha": "自民",
+            "district": "島根2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "たがや  亮君",
+            "yomikata": "たがや  りょう",
+            "kaiha": "れ新",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "武井  俊輔君",
+            "yomikata": "たけい  しゅんすけ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "竹内   譲君",
+            "yomikata": "たけうち  ゆずる",
+            "kaiha": "公明",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "武田  良太君",
+            "yomikata": "たけだ  りょうた",
+            "kaiha": "自民",
+            "district": "福岡11",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "武部   新君",
+            "yomikata": "たけべ  あらた",
+            "kaiha": "自民",
+            "district": "北海道12",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "武村  展英君",
+            "yomikata": "たけむら  のぶひで",
+            "kaiha": "自民",
+            "district": "滋賀3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田嶋   要君",
+            "yomikata": "たじま  かなめ",
+            "kaiha": "立憲",
+            "district": "千葉1",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "橘  慶一郎君",
+            "yomikata": "たちばな  けいいちろう",
+            "kaiha": "自民",
+            "district": "富山3",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田所  嘉徳君",
+            "yomikata": "たどころ  よしのり",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田中  和徳君",
+            "yomikata": "たなか  かずのり",
+            "kaiha": "自民",
+            "district": "神奈川10",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田中   健君",
+            "yomikata": "たなか  けん",
+            "kaiha": "国民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田中  英之君",
+            "yomikata": "たなか  ひでゆき",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田中  良生君",
+            "yomikata": "たなか  りょうせい",
+            "kaiha": "自民",
+            "district": "埼玉15",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "棚橋  泰文君",
+            "yomikata": "たなはし  やすふみ",
+            "kaiha": "自民",
+            "district": "岐阜2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "谷   公一君",
+            "yomikata": "たに  こういち",
+            "kaiha": "自民",
+            "district": "兵庫5",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "谷川  とむ君",
+            "yomikata": "たにがわ  とむ",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "谷川  弥一君",
+            "yomikata": "たにがわ  やいち",
+            "kaiha": "自民",
+            "district": "長崎3",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田野瀬 太道君",
+            "yomikata": "たのせ  たいどう",
+            "kaiha": "自民",
+            "district": "奈良3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田畑  裕明君",
+            "yomikata": "たばた  ひろあき",
+            "kaiha": "自民",
+            "district": "富山1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "玉木 雄一郎君",
+            "yomikata": "たまき  ゆういちろう",
+            "kaiha": "国民",
+            "district": "香川2",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田村  貴昭君",
+            "yomikata": "たむら  たかあき",
+            "kaiha": "共産",
+            "district": "（比）九州",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "田村  憲久君",
+            "yomikata": "たむら  のりひさ",
+            "kaiha": "自民",
+            "district": "三重1",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "塚田  一郎君",
+            "yomikata": "つかだ  いちろう",
+            "kaiha": "自民",
+            "district": "(比)北陸信越",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "辻   清人君",
+            "yomikata": "つじ  きよと",
+            "kaiha": "自民",
+            "district": "東京2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "津島   淳君",
+            "yomikata": "つしま  じゅん",
+            "kaiha": "自民",
+            "district": "（比）東北",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "土田   慎君",
+            "yomikata": "つちだ  しん",
+            "kaiha": "自民",
+            "district": "東京13",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "土屋  品子君",
+            "yomikata": "つちや  しなこ",
+            "kaiha": "自民",
+            "district": "埼玉13",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "堤  かなめ君",
+            "yomikata": "つつみ  かなめ",
+            "kaiha": "立憲",
+            "district": "福岡5",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "角田  秀穂君",
+            "yomikata": "つのだ  ひでお",
+            "kaiha": "公明",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "手塚  仁雄君",
+            "yomikata": "てづか  よしお",
+            "kaiha": "立憲",
+            "district": "東京5",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "寺田   学君",
+            "yomikata": "てらた  まなぶ",
+            "kaiha": "立憲",
+            "district": "（比）東北",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "寺田   稔君",
+            "yomikata": "てらだ  みのる",
+            "kaiha": "自民",
+            "district": "広島5",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "土井   亨君",
+            "yomikata": "どい  とおる",
+            "kaiha": "自民",
+            "district": "宮城1",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "渡海 紀三朗君",
+            "yomikata": "とかい  きさぶろう",
+            "kaiha": "自民",
+            "district": "兵庫10",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "冨樫  博之君",
+            "yomikata": "とがし  ひろゆき",
+            "kaiha": "自民",
+            "district": "秋田1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "徳永  久志君",
+            "yomikata": "とくなが  ひさし",
+            "kaiha": "立憲",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "永岡  桂子君",
+            "yomikata": "ながおか  けいこ",
+            "kaiha": "自民",
+            "district": "茨城7",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中川  貴元君",
+            "yomikata": "なかがわ  たかもと",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中川  宏昌君",
+            "yomikata": "なかがわ  ひろまさ",
+            "kaiha": "公明",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中川  正春君",
+            "yomikata": "なかがわ  まさはる",
+            "kaiha": "立憲",
+            "district": "（比）東海",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中川  康洋君",
+            "yomikata": "なかがわ  やすひろ",
+            "kaiha": "公明",
+            "district": "（比）東海",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中川  郁子君",
+            "yomikata": "なかがわ  ゆうこ",
+            "kaiha": "自民",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "長坂  康正君",
+            "yomikata": "ながさか  やすまさ",
+            "kaiha": "自民",
+            "district": "愛知9",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "長島  昭久君",
+            "yomikata": "ながしま  あきひさ",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中島  克仁君",
+            "yomikata": "なかじま  かつひと",
+            "kaiha": "立憲",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中曽根 康隆君",
+            "yomikata": "なかそね  やすたか",
+            "kaiha": "自民",
+            "district": "群馬1",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中谷  一馬君",
+            "yomikata": "なかたに  かずま",
+            "kaiha": "立憲",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中谷   元君",
+            "yomikata": "なかたに  げん",
+            "kaiha": "自民",
+            "district": "高知1",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中谷  真一君",
+            "yomikata": "なかたに  しんいち",
+            "kaiha": "自民",
+            "district": "山梨1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中司   宏君",
+            "yomikata": "なかつか  ひろし",
+            "kaiha": "維新",
+            "district": "大阪11",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "長妻   昭君",
+            "yomikata": "ながつま  あきら",
+            "kaiha": "立憲",
+            "district": "東京7",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "長友  慎治君",
+            "yomikata": "ながとも  しんじ",
+            "kaiha": "国民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中西  健治君",
+            "yomikata": "なかにし  けんじ",
+            "kaiha": "自民",
+            "district": "神奈川3",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "中根  一幸君",
+            "yomikata": "なかね  かずゆき",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中野  英幸君",
+            "yomikata": "なかの  ひでゆき",
+            "kaiha": "自民",
+            "district": "埼玉7",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中野  洋昌君",
+            "yomikata": "なかの  ひろまさ",
+            "kaiha": "公明",
+            "district": "兵庫8",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中村 喜四郎君",
+            "yomikata": "なかむら  きしろう",
+            "kaiha": "立憲",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 15,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中村  裕之君",
+            "yomikata": "なかむら  ひろゆき",
+            "kaiha": "自民",
+            "district": "北海道4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "中山  展宏君",
+            "yomikata": "なかやま  のりひろ",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "二階  俊博君",
+            "yomikata": "にかい  としひろ",
+            "kaiha": "自民",
+            "district": "和歌山3",
+            "number_of_terms_lower": 13,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "仁木  博文君",
+            "yomikata": "にき  ひろぶみ",
+            "kaiha": "有志",
+            "district": "徳島1",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西岡  秀子君",
+            "yomikata": "にしおか  ひでこ",
+            "kaiha": "国民",
+            "district": "長崎1",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西田  昭二君",
+            "yomikata": "にしだ  しょうじ",
+            "kaiha": "自民",
+            "district": "石川3",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西野  太亮君",
+            "yomikata": "にしの  だいすけ",
+            "kaiha": "自民",
+            "district": "熊本2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西村  明宏君",
+            "yomikata": "にしむら  あきひろ",
+            "kaiha": "自民",
+            "district": "宮城3",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西村 智奈美君",
+            "yomikata": "にしむら  ちなみ",
+            "kaiha": "立憲",
+            "district": "新潟1",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西村  康稔君",
+            "yomikata": "にしむら  やすとし",
+            "kaiha": "自民",
+            "district": "兵庫9",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "西銘 恒三郎君",
+            "yomikata": "にしめ  こうさぶろう",
+            "kaiha": "自民",
+            "district": "沖縄4",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "丹羽  秀樹君",
+            "yomikata": "にわ  ひでき",
+            "kaiha": "自民",
+            "district": "愛知6",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "額賀 福志郎君",
+            "yomikata": "ぬかが  ふくしろう",
+            "kaiha": "自民",
+            "district": "茨城2",
+            "number_of_terms_lower": 13,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "根本   匠君",
+            "yomikata": "ねもと  たくみ",
+            "kaiha": "自民",
+            "district": "福島2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "根本  幸典君",
+            "yomikata": "ねもと  ゆきのり",
+            "kaiha": "自民",
+            "district": "愛知15",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "野田  聖子君",
+            "yomikata": "のだ  せいこ",
+            "kaiha": "自民",
+            "district": "岐阜1",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "野田  佳彦君",
+            "yomikata": "のだ  よしひこ",
+            "kaiha": "立憲",
+            "district": "千葉4",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "野中   厚君",
+            "yomikata": "のなか  あつし",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "野間   健君",
+            "yomikata": "のま  たけし",
+            "kaiha": "立憲",
+            "district": "鹿児島3",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "萩生田 光一君",
+            "yomikata": "はぎうだ  こういち",
+            "kaiha": "自民",
+            "district": "東京24",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "橋本   岳君",
+            "yomikata": "はしもと  がく",
+            "kaiha": "自民",
+            "district": "岡山4",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "長谷川 淳二君",
+            "yomikata": "はせがわ  じゅんじ",
+            "kaiha": "自民",
+            "district": "愛媛4",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鳩山  二郎君",
+            "yomikata": "はとやま  じろう",
+            "kaiha": "自民",
+            "district": "福岡6",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "葉梨  康弘君",
+            "yomikata": "はなし  やすひろ",
+            "kaiha": "自民",
+            "district": "茨城3",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "馬場  伸幸君",
+            "yomikata": "ばば  のぶゆき",
+            "kaiha": "維新",
+            "district": "大阪17",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "馬場  雄基君",
+            "yomikata": "ばば  ゆうき",
+            "kaiha": "立憲",
+            "district": "（比）東北",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浜田  靖一君",
+            "yomikata": "はまだ  やすかず",
+            "kaiha": "自民",
+            "district": "千葉12",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "浜地  雅一君",
+            "yomikata": "はまち  まさかず",
+            "kaiha": "公明",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "早坂   敦君",
+            "yomikata": "はやさか  あつし",
+            "kaiha": "維新",
+            "district": "（比）東北",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "林   幹雄君",
+            "yomikata": "はやし  もとお",
+            "kaiha": "自民",
+            "district": "千葉10",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "林   佑美君",
+            "yomikata": "はやし  ゆみ",
+            "kaiha": "維新",
+            "district": "和歌山1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "林   芳正君",
+            "yomikata": "はやし  よしまさ",
+            "kaiha": "自民",
+            "district": "山口3",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 5
+        },
+        {
+            "name": "原口  一博君",
+            "yomikata": "はらぐち  かずひろ",
+            "kaiha": "立憲",
+            "district": "佐賀1",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "伴野   豊君",
+            "yomikata": "ばんの  ゆたか",
+            "kaiha": "立憲",
+            "district": "（比）東海",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平井  卓也君",
+            "yomikata": "ひらい  たくや",
+            "kaiha": "自民",
+            "district": "（比）四国",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平口   洋君",
+            "yomikata": "ひらぐち  ひろし",
+            "kaiha": "自民",
+            "district": "広島2",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平沢  勝栄君",
+            "yomikata": "ひらさわ  かつえい",
+            "kaiha": "自民",
+            "district": "東京17",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平沼 正二郎君",
+            "yomikata": "ひらぬま  しょうじろう",
+            "kaiha": "自民",
+            "district": "岡山3",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "平林   晃君",
+            "yomikata": "ひらばやし  あきら",
+            "kaiha": "公明",
+            "district": "（比）中国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "深澤  陽一君",
+            "yomikata": "ふかざわ  よういち",
+            "kaiha": "自民",
+            "district": "静岡4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "福重  隆浩君",
+            "yomikata": "ふくしげ  たかひろ",
+            "kaiha": "公明",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "福島  伸享君",
+            "yomikata": "ふくしま  のぶゆき",
+            "kaiha": "有志",
+            "district": "茨城1",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "福田  昭夫君",
+            "yomikata": "ふくだ  あきお",
+            "kaiha": "立憲",
+            "district": "栃木2",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "福田  達夫君",
+            "yomikata": "ふくだ  たつお",
+            "kaiha": "自民",
+            "district": "群馬4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤井 比早之君",
+            "yomikata": "ふじい  ひさゆき",
+            "kaiha": "自民",
+            "district": "兵庫4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤岡  隆雄君",
+            "yomikata": "ふじおか  たかお",
+            "kaiha": "立憲",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤田  文武君",
+            "yomikata": "ふじた  ふみたけ",
+            "kaiha": "維新",
+            "district": "大阪12",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤巻  健太君",
+            "yomikata": "ふじまき  けんた",
+            "kaiha": "維新",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤丸   敏君",
+            "yomikata": "ふじまる  さとし",
+            "kaiha": "自民",
+            "district": "福岡7",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "藤原   崇君",
+            "yomikata": "ふじわら  たかし",
+            "kaiha": "自民",
+            "district": "岩手3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "太   栄志君",
+            "yomikata": "ふとり  ひでし",
+            "kaiha": "立憲",
+            "district": "神奈川13",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "船田   元君",
+            "yomikata": "ふなだ  はじめ",
+            "kaiha": "自民",
+            "district": "栃木1",
+            "number_of_terms_lower": 13,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古川  直季君",
+            "yomikata": "ふるかわ  なおき",
+            "kaiha": "自民",
+            "district": "神奈川6",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古川  元久君",
+            "yomikata": "ふるかわ  もとひさ",
+            "kaiha": "国民",
+            "district": "愛知2",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古川   康君",
+            "yomikata": "ふるかわ  やすし",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古川  禎久君",
+            "yomikata": "ふるかわ  よしひさ",
+            "kaiha": "自民",
+            "district": "宮崎3",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古屋  圭司君",
+            "yomikata": "ふるや  けいじ",
+            "kaiha": "自民",
+            "district": "岐阜5",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "古屋  範子君",
+            "yomikata": "ふるや  のりこ",
+            "kaiha": "公明",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "穂坂   泰君",
+            "yomikata": "ほさか  やすし",
+            "kaiha": "自民",
+            "district": "埼玉4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "星野  剛士君",
+            "yomikata": "ほしの  つよし",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "細田  健一君",
+            "yomikata": "ほそだ  けんいち",
+            "kaiha": "自民",
+            "district": "新潟2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "細田  博之君",
+            "yomikata": "ほそだ  ひろゆき",
+            "kaiha": "無",
+            "district": "島根1",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "細野  豪志君",
+            "yomikata": "ほその  ごうし",
+            "kaiha": "自民",
+            "district": "静岡5",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "掘井  健智君",
+            "yomikata": "ほりい  けんじ",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "堀井   学君",
+            "yomikata": "ほりい  まなぶ",
+            "kaiha": "自民",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "堀内  詔子君",
+            "yomikata": "ほりうち  のりこ",
+            "kaiha": "自民",
+            "district": "山梨2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "堀場  幸子君",
+            "yomikata": "ほりば  さちこ",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "本庄  知史君",
+            "yomikata": "ほんじょう  さとし",
+            "kaiha": "立憲",
+            "district": "千葉8",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "本田  太郎君",
+            "yomikata": "ほんだ  たろう",
+            "kaiha": "自民",
+            "district": "京都5",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "前川  清成君",
+            "yomikata": "まえかわ  きよしげ",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 2
+        },
+        {
+            "name": "前原  誠司君",
+            "yomikata": "まえはら  せいじ",
+            "kaiha": "国民",
+            "district": "京都2",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "牧   義夫君",
+            "yomikata": "まき  よしお",
+            "kaiha": "立憲",
+            "district": "（比）東海",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "牧島 かれん君",
+            "yomikata": "まきしま  かれん",
+            "kaiha": "自民",
+            "district": "神奈川17",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "牧原  秀樹君",
+            "yomikata": "まきはら  ひでき",
+            "kaiha": "自民",
+            "district": "（比）北関東",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松木けんこう君",
+            "yomikata": "まつき  けんこう",
+            "kaiha": "立憲",
+            "district": "北海道2",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松島 みどり君",
+            "yomikata": "まつしま  みどり",
+            "kaiha": "自民",
+            "district": "東京14",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松野  博一君",
+            "yomikata": "まつの  ひろかず",
+            "kaiha": "自民",
+            "district": "千葉3",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松原   仁君",
+            "yomikata": "まつばら  じん",
+            "kaiha": "立憲",
+            "district": "東京3",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松本  剛明君",
+            "yomikata": "まつもと  たけあき",
+            "kaiha": "自民",
+            "district": "兵庫11",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松本   尚君",
+            "yomikata": "まつもと  ひさし",
+            "kaiha": "自民",
+            "district": "千葉13",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "松本  洋平君",
+            "yomikata": "まつもと  ようへい",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "馬淵  澄夫君",
+            "yomikata": "まぶち  すみお",
+            "kaiha": "立憲",
+            "district": "奈良1",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "三木  圭恵君",
+            "yomikata": "みき  けえ",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "岬   麻紀君",
+            "yomikata": "みさき  まき",
+            "kaiha": "維新",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "三反園  訓君",
+            "yomikata": "みたぞの  さとし",
+            "kaiha": "自民",
+            "district": "鹿児島2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "三谷  英弘君",
+            "yomikata": "みたに  ひでひろ",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "道下  大樹君",
+            "yomikata": "みちした  だいき",
+            "kaiha": "立憲",
+            "district": "北海道1",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "三ッ林 裕巳君",
+            "yomikata": "みつばやし  ひろみ",
+            "kaiha": "自民",
+            "district": "埼玉14",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "緑川  貴士君",
+            "yomikata": "みどりかわ  たかし",
+            "kaiha": "立憲",
+            "district": "秋田2",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "美延  映夫君",
+            "yomikata": "みのべ  てるお",
+            "kaiha": "維新",
+            "district": "大阪4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "御法川 信英君",
+            "yomikata": "みのりかわ  のぶひで",
+            "kaiha": "自民",
+            "district": "秋田3",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮内  秀樹君",
+            "yomikata": "みやうち  ひでき",
+            "kaiha": "自民",
+            "district": "福岡4",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮崎  政久君",
+            "yomikata": "みやざき  まさひさ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮澤  博行君",
+            "yomikata": "みやざわ  ひろゆき",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮路  拓馬君",
+            "yomikata": "みやじ  たくま",
+            "kaiha": "自民",
+            "district": "鹿児島1",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮下  一郎君",
+            "yomikata": "みやした  いちろう",
+            "kaiha": "自民",
+            "district": "長野5",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宮本  岳志君",
+            "yomikata": "みやもと  たけし",
+            "kaiha": "共産",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "宮本   徹君",
+            "yomikata": "みやもと  とおる",
+            "kaiha": "共産",
+            "district": "（比）東京",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "務台  俊介君",
+            "yomikata": "むたい  しゅんすけ",
+            "kaiha": "自民",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "武藤  容治君",
+            "yomikata": "むとう  ようじ",
+            "kaiha": "自民",
+            "district": "岐阜3",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "宗清  皇一君",
+            "yomikata": "むねきよ  こういち",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "村井  英樹君",
+            "yomikata": "むらい  ひでき",
+            "kaiha": "自民",
+            "district": "埼玉1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "村上 誠一郎君",
+            "yomikata": "むらかみ  せいいちろう",
+            "kaiha": "自民",
+            "district": "愛媛2",
+            "number_of_terms_lower": 12,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "茂木  敏充君",
+            "yomikata": "もてぎ  としみつ",
+            "kaiha": "自民",
+            "district": "栃木5",
+            "number_of_terms_lower": 10,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "本村  伸子君",
+            "yomikata": "もとむら  のぶこ",
+            "kaiha": "共産",
+            "district": "（比）東海",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "森   英介君",
+            "yomikata": "もり  えいすけ",
+            "kaiha": "自民",
+            "district": "千葉11",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "守島   正君",
+            "yomikata": "もりしま  ただし",
+            "kaiha": "維新",
+            "district": "大阪2",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "森田  俊和君",
+            "yomikata": "もりた  としかず",
+            "kaiha": "立憲",
+            "district": "埼玉12",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "森山   裕君",
+            "yomikata": "もりやま  ひろし",
+            "kaiha": "自民",
+            "district": "鹿児島4",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "森山  浩行君",
+            "yomikata": "もりやま  ひろゆき",
+            "kaiha": "立憲",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "盛山  正仁君",
+            "yomikata": "もりやま  まさひと",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "八木  哲也君",
+            "yomikata": "やぎ  てつや",
+            "kaiha": "自民",
+            "district": "愛知11",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "保岡  宏武君",
+            "yomikata": "やすおか  ひろたけ",
+            "kaiha": "自民",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "谷田川  元君",
+            "yomikata": "やたがわ  はじめ",
+            "kaiha": "立憲",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "簗   和生君",
+            "yomikata": "やな  かずお",
+            "kaiha": "自民",
+            "district": "栃木3",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "柳本   顕君",
+            "yomikata": "やなぎもと  あきら",
+            "kaiha": "自民",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山岡  達丸君",
+            "yomikata": "やまおか  たつまる",
+            "kaiha": "立憲",
+            "district": "北海道9",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山岸  一生君",
+            "yomikata": "やまぎし  いっせい",
+            "kaiha": "立憲",
+            "district": "東京9",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山際 大志郎君",
+            "yomikata": "やまぎわ  だいしろう",
+            "kaiha": "自民",
+            "district": "神奈川18",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山口  俊一君",
+            "yomikata": "やまぐち  しゅんいち",
+            "kaiha": "自民",
+            "district": "徳島2",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山口   晋君",
+            "yomikata": "やまぐち  すすむ",
+            "kaiha": "自民",
+            "district": "埼玉10",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山口   壯君",
+            "yomikata": "やまぐち  つよし",
+            "kaiha": "自民",
+            "district": "兵庫12",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山崎   誠君",
+            "yomikata": "やまざき  まこと",
+            "kaiha": "立憲",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山崎  正恭君",
+            "yomikata": "やまさき  まさやす",
+            "kaiha": "公明",
+            "district": "（比）四国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山下  貴司君",
+            "yomikata": "やました  たかし",
+            "kaiha": "自民",
+            "district": "岡山2",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山田  勝彦君",
+            "yomikata": "やまだ  かつひこ",
+            "kaiha": "立憲",
+            "district": "(比)九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山田  賢司君",
+            "yomikata": "やまだ  けんじ",
+            "kaiha": "自民",
+            "district": "兵庫7",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山田  美樹君",
+            "yomikata": "やまだ  みき",
+            "kaiha": "自民",
+            "district": "東京1",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山井  和則君",
+            "yomikata": "やまのい  かずのり",
+            "kaiha": "立憲",
+            "district": "京都6",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山本  剛正君",
+            "yomikata": "やまもと  ごうせい",
+            "kaiha": "維新",
+            "district": "（比）九州",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山本  左近君",
+            "yomikata": "やまもと  さこん",
+            "kaiha": "自民",
+            "district": "（比）東海",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山本ともひろ君",
+            "yomikata": "やまもと  ともひろ",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "山本  有二君",
+            "yomikata": "やまもと  ゆうじ",
+            "kaiha": "自民",
+            "district": "（比）四国",
+            "number_of_terms_lower": 11,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "柚木  道義君",
+            "yomikata": "ゆのき  みちよし",
+            "kaiha": "立憲",
+            "district": "（比）中国",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "湯原  俊二君",
+            "yomikata": "ゆはら  しゅんじ",
+            "kaiha": "立憲",
+            "district": "（比）中国",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "義家  弘介君",
+            "yomikata": "よしいえ  ひろゆき",
+            "kaiha": "自民",
+            "district": "（比）南関東",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "吉川   赳君",
+            "yomikata": "よしかわ  たける",
+            "kaiha": "無",
+            "district": "（比）東海",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉川   元君",
+            "yomikata": "よしかわ  はじめ",
+            "kaiha": "立憲",
+            "district": "（比）九州",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田 久美子君",
+            "yomikata": "よしだ  くみこ",
+            "kaiha": "公明",
+            "district": "（比）九州",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田  真次君",
+            "yomikata": "よしだ  しんじ",
+            "kaiha": "自民",
+            "district": "山口4",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田  統彦君",
+            "yomikata": "よしだ  つねひこ",
+            "kaiha": "立憲",
+            "district": "（比）東海",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田 とも代君",
+            "yomikata": "よしだ  ともよ",
+            "kaiha": "維新",
+            "district": "（比）四国",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田  豊史君",
+            "yomikata": "よしだ  とよふみ",
+            "kaiha": "無",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田  宣弘君",
+            "yomikata": "よしだ  のぶひろ",
+            "kaiha": "公明",
+            "district": "（比）九州",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉田 はるみ君",
+            "yomikata": "よしだ  はるみ",
+            "kaiha": "立憲",
+            "district": "東京8",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "吉野  正芳君",
+            "yomikata": "よしの  まさよし",
+            "kaiha": "自民",
+            "district": "福島5",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "米山  隆一君",
+            "yomikata": "よねやま  りゅういち",
+            "kaiha": "立憲",
+            "district": "新潟5",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "笠   浩史君",
+            "yomikata": "りゅう  ひろふみ",
+            "kaiha": "立憲",
+            "district": "神奈川9",
+            "number_of_terms_lower": 7,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "若林  健太君",
+            "yomikata": "わかばやし  けんた",
+            "kaiha": "自民",
+            "district": "長野1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 1
+        },
+        {
+            "name": "若宮  健嗣君",
+            "yomikata": "わかみや  けんじ",
+            "kaiha": "自民",
+            "district": "（比）東京",
+            "number_of_terms_lower": 5,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鷲尾 英一郎君",
+            "yomikata": "わしお  えいいちろう",
+            "kaiha": "自民",
+            "district": "（比）北陸信越",
+            "number_of_terms_lower": 6,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "早稲田 ゆき君",
+            "yomikata": "わせだ  ゆき",
+            "kaiha": "立憲",
+            "district": "神奈川4",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "和田 有一朗君",
+            "yomikata": "わだ  ゆういちろう",
+            "kaiha": "維新",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "和田  義明君",
+            "yomikata": "わだ  よしあき",
+            "kaiha": "自民",
+            "district": "北海道5",
+            "number_of_terms_lower": 3,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "渡辺  孝一君",
+            "yomikata": "わたなべ  こういち",
+            "kaiha": "自民",
+            "district": "（比）北海道",
+            "number_of_terms_lower": 4,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "渡辺   周君",
+            "yomikata": "わたなべ  しゅう",
+            "kaiha": "立憲",
+            "district": "（比）東海",
+            "number_of_terms_lower": 9,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "渡辺   創君",
+            "yomikata": "わたなべ  そう",
+            "kaiha": "立憲",
+            "district": "宮崎1",
+            "number_of_terms_lower": 1,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "渡辺  博道君",
+            "yomikata": "わたなべ  ひろみち",
+            "kaiha": "自民",
+            "district": "千葉6",
+            "number_of_terms_lower": 8,
+            "number_of_terms_upper": 0
+        },
+        {
+            "name": "鰐淵  洋子君",
+            "yomikata": "わにぶち  ようこ",
+            "kaiha": "公明",
+            "district": "（比）近畿",
+            "number_of_terms_lower": 2,
+            "number_of_terms_upper": 1
+        }
+    ]
+}

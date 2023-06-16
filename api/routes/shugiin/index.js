@@ -1,6 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-router.get('', (request, response) => {response.send("Hello, world!")})
+//endpoint for commitee names and members
+router.get('/commitee', getCommiteeNames)
+//endpoint for returning all the representatives
+router.get('/repr', getRepresentatives);
 
 export default router;

@@ -16,6 +16,8 @@ var api_guide = {
   "sangiin vote results": "sangiin/sangiin_meeting_votes/:meeting_name",
   "sangiin party opinions":
     "sangiin/sangiin_party_opinions/:meeting_name/:topic_name",
+  "shugiin commitees": "shugiin/commitee",
+  "shugiin representatives": "shugiin/repr",
 };
 
 app.get("", (request, response) => {
