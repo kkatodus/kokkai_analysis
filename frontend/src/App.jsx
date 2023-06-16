@@ -10,6 +10,8 @@ import SangiinMenuPage from './pages/SangiinMenuPage';
 import SangiinReprPage from './pages/SangiinReprPage';
 import SangiinCommitteePage from './pages/SangiinCommitteePage';
 import ShugiinMenuPage from './pages/ShugiinMenuPage';
+import ShugiinCommitteePage from './pages/ShugiinCommitteePage';
+import ShugiinReprPage from './pages/ShugiinReprPage';
 /**
  *
  * @return {JSX.Element}
@@ -38,6 +40,8 @@ function App() {
         element={<SangiinTopicDetailPage />}
       />
       <Route exact path="shugiin_menu" element={<ShugiinMenuPage />} />
+      <Route exact path="shugiin_repr" element={<ShugiinReprPage />} />
+      <Route exact path="shugiin_commitee" element={<ShugiinCommitteePage />} />
     </Routes>
   );
 }

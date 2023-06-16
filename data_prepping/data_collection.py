@@ -33,9 +33,9 @@ CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = False
-SCRAPE_LOWER_REPR_LIST = False
+SCRAPE_LOWER_REPR_LIST = True
 SCRAPE_UPPER_MEETING_MEMBER_LIST = False
-SCRAPE_LOWER_MEETING_MEMBER_LIST = True
+SCRAPE_LOWER_MEETING_MEMBER_LIST = False
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -99,6 +99,9 @@ def scrape_lower_repr_list():
     #iterating through hiragana links
     hiragana_links = gs.get_site_components_by(By.XPATH, "//div[@id='mainlayout']//p//a")
     hiragana_links = [link.get_attribute("href") for link in hiragana_links]
+    out_dict = REPR_LIST_LAYOUT.copy()
+    out_dict["meeting_period"] = ''
+    out_dict["reprs"] = {}
     for link in hiragana_links:
         gs.get_url(link)
         table_elements = gs.get_site_components_by(By.TAG_NAME, 'td')
@@ -122,27 +125,26 @@ def scrape_lower_repr_list():
         period_text = [period.text for period in period_doms]
 
         #storing all the info in json format
-        out_dict = REPR_LIST_LAYOUT.copy()
-        out_dict["meeting_period"] = date_up2date
-        for name, yomikata, kaiha, district, period in zip(name_texts, yomikata_text,
-                                                                    kaiha_text, district_text, period_text):
-                split_period = list(filter(None, re.split("（|）|参", period)))
-                if len(split_period) == 2:
-                    terms_in_upper = int(split_period[-1])
-                else:
-                    terms_in_upper = 0
-                terms_in_lower = int(split_period[0])
-                repr_dict = {
-                    "name":name,
-                    "yomikata":yomikata,
-                    "kaiha":kaiha,
-                    "district":district,
-                    "number_of_terms_lower":terms_in_lower,
-                    "number_of_terms_upper":terms_in_upper,
-                }
         
-                out_dict["reprs"].append(repr_dict)
-    
+        for name, yomikata, kaiha, district, period in zip(name_texts, yomikata_text,kaiha_text, district_text, period_text):
+               split_period = list(filter(None, re.split("（|）|参", period)))
+               if len(split_period) == 2:
+                    terms_in_upper = int(split_period[-1])
+               else:
+                    terms_in_upper = 0
+               terms_in_lower = int(split_period[0])
+               repr_dict = {
+					"name":name,
+					"yomikata":yomikata,
+					"kaiha":kaiha,
+					"district":district,
+					"number_of_terms_lower":terms_in_lower,
+					"number_of_terms_upper":terms_in_upper,
+				}
+               if not kaiha in out_dict["reprs"].keys():
+                    out_dict["reprs"][kaiha] = []
+               out_dict["reprs"][kaiha].append(repr_dict)
+		
     #saving json
     repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{date_up2date[:-2]}_repr_list.json")
     write_json(out_dict, repr_list_json_path)

@@ -1,4 +1,5 @@
 export const sangiinEndpoint = 'https://sangiin-api.herokuapp.com/sangiin/';
+export const shugiinEndpoint = 'https://sangiin-api.herokuapp.com/shugiin/';
 
 export const SangiinAbbrev2Kaiha = {
   自民: '自由民主党',
