@@ -53,7 +53,7 @@ export default function ShugiinCommitteePage() {
 
   return (
     <BasePageLayout
-      backTo="/sangiin_menu"
+      backTo="/shugiin_menu"
       pageTitle="委員会一覧"
       MainContent={comAccordions}
     />

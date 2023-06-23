@@ -18,7 +18,6 @@ export default function ShugiinReprPage() {
       method: 'get',
       url: `${shugiinEndpoint}repr`,
     }).then((res) => {
-      console.log('res', res.data);
       setReps(res.data.reprs);
       setPeriod(res.data.meeting_period);
       setKaihas(Object.keys(res.data.reprs));
@@ -28,7 +27,16 @@ export default function ShugiinReprPage() {
     const kaihaReps = reps[oneKaiha];
     const numReps = kaihaReps.length;
     const kaihaRepsComponents = kaihaReps.map((rep) => {
-      const { name, yomikata, kaiha, district, period } = rep;
+      /* eslint-disable camelcase */
+      const {
+        name,
+        yomikata,
+        kaiha,
+        district,
+        period,
+        number_of_terms_lower,
+        number_of_terms_upper,
+      } = rep;
       return (
         <ReprCard
           key={`${name}-${kaiha}`}
@@ -37,6 +45,8 @@ export default function ShugiinReprPage() {
           kaiha={kaiha}
           district={district}
           period={period}
+          numberOfTermsLower={number_of_terms_lower}
+          numberofTermsUpper={number_of_terms_upper}
         />
       );
     });
@@ -44,7 +54,11 @@ export default function ShugiinReprPage() {
     return (
       <Accordion
         key={oneKaiha}
-        title={`${SangiinAbbrev2Kaiha[oneKaiha]}（${numReps}）`}
+        title={`${
+          Object.keys(SangiinAbbrev2Kaiha).includes(oneKaiha)
+            ? SangiinAbbrev2Kaiha[oneKaiha]
+            : oneKaiha
+        }（${numReps}）`}
         content={kaihaRepsComponents}
         extraStyles={{ title: '', content: 'card-container' }}
       />
