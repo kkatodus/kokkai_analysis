@@ -66,7 +66,7 @@ export default function ShugiinReprPage() {
   });
   return (
     <BasePageLayout
-      backTo="/sangiin_menu"
+      backTo="/shugiin_menu"
       pageTitle="議員一覧"
       MainContent={kaihaAccordions}
     />
