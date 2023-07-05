@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120404889X00920210317_137",
+                "issueID": "120404889X00920210317",
+                "imageKind": "会議録",
+                "searchObject": 137,
+                "session": 204,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "内閣委員会",
+                "issue": "第9号",
+                "date": "2021-03-17",
+                "closing": null,
+                "speechOrder": 137,
+                "speaker": "平井卓也",
+                "speakerYomi": "ひらいたくや",
+                "speakerGroup": "自由民主党・無所属の会",
+                "speakerPosition": "内閣府特命担当大臣（マイナンバー制度）",
+                "speakerRole": null,
+                "speech": "○平井国務大臣　例えば、ＬＧＢＴ等々のことだというふうに想像しております。",
+                "startPage": 19,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120404889X00920210317/137",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120404889X00920210317",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120404889X00920210317/19"
+            }
+        ]
+    }
+]

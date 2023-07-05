@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121105270X00220230221_166",
+                "issueID": "121105270X00220230221",
+                "imageKind": "会議録",
+                "searchObject": 166,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "予算委員会第四分科会",
+                "issue": "第2号",
+                "date": "2023-02-21",
+                "closing": null,
+                "speechOrder": 166,
+                "speaker": "本村伸子",
+                "speakerYomi": "もとむらのぶこ",
+                "speakerGroup": "日本共産党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○本村分科員　学校が抱えている問題をほかの部署に移すだけということになり、新たな行政サービスの低下を招きかねないということも大変危惧をされております。やはり保護者の方々の負担軽減、無償化という方向こそ力を注ぐべきではないかというふうに思っております。\r\n　三月までに少子化対策のたたき台をまとめるということですけれども、やはり子育て世帯の方々への支援にもなるし、教職員の方々の負担軽減にもなる無償化を進めるべきだというふうに思います。しっかりとこのたたき台に給食の無償化を位置づけるべきだ、そして、学校給食法の改正、保護者負担というのを削除するということが必要だと思いますけれども、大臣の見解を伺いたいと思います。",
+                "startPage": 26,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121105270X00220230221/166",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121105270X00220230221",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121105270X00220230221/26"
+            }
+        ]
+    }
+]

@@ -1,0 +1,56 @@
+[
+    {
+        "numberOfRecords": 2,
+        "numberOfReturn": 2,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120405254X03020210601_003",
+                "issueID": "120405254X03020210601",
+                "imageKind": "会議録",
+                "searchObject": 3,
+                "session": 204,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "本会議",
+                "issue": "第30号",
+                "date": "2021-06-01",
+                "closing": null,
+                "speechOrder": 3,
+                "speaker": "あかま二郎",
+                "speakerYomi": "あかまじろう",
+                "speakerGroup": "自由民主党・無所属の会",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○あかま二郎君　ただいま議題となりました承認を求めるの件につきまして、国土交通委員会における審査の経過及び結果を御報告申し上げます。\r\n　本件は、北朝鮮船籍の全ての船舶、北朝鮮に寄港した第三国籍船舶、国際連合安全保障理事会の決定等に基づき制裁措置の対象とされた船舶及び北朝鮮に寄港した日本籍船舶について、本年四月十三日まで入港を禁止することとした閣議決定を、我が国を取り巻く国際情勢に鑑み、本年四月六日の閣議において令和五年四月十三日まで二年延長することとしたため、特定船舶の入港の禁止に関する特別措置法第五条第一項の規定に基づき、入港禁止の実施につき国会の承認を求めるものであります。\r\n　本件は、去る五月二十五日本委員会に付託され、翌二十六日、赤羽国土交通大臣から趣旨の説明を聴取した後、直ちに採決いたしましたところ、全会一致をもって承認すべきものと議決した次第であります。\r\n　以上、御報告申し上げます。（拍手）\r\n　　　　―――――――――――――",
+                "startPage": 1,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120405254X03020210601/3",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120405254X03020210601",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120405254X03020210601/1"
+            },
+            {
+                "speechID": "119604889X00220180309_072",
+                "issueID": "119604889X00220180309",
+                "imageKind": "会議録",
+                "searchObject": 72,
+                "session": 196,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "内閣委員会",
+                "issue": "第2号",
+                "date": "2018-03-09",
+                "closing": null,
+                "speechOrder": 72,
+                "speaker": "あかま二郎",
+                "speakerYomi": "あかまじろう",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": "内閣府副大臣",
+                "speakerRole": null,
+                "speech": "○あかま副大臣　お答えいたします。\r\n　今それぞれ三谷委員の御指摘、御示唆の中にあって、政府のＩＴ機器調達等においては、国家安全保障上のリスク、これを十分に踏まえろということでございますけれども、大事な点は、まず国内外の関係組織、これがしっかりと情報連携を行うこと、加えて、国際動向であるとかサイバーセキュリティーに係る技術の進展、これを踏まえなければならないというふうにも思っておりますし、多層的なサイバーセキュリティー対策、これが肝要なんだろうというふうに思っておりますので、これからも政府一丸となって取り組んでまいりたい、そう思っております。\r\n　以上です。",
+                "startPage": 13,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119604889X00220180309/72",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119604889X00220180309",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119604889X00220180309/13"
+            }
+        ]
+    }
+]

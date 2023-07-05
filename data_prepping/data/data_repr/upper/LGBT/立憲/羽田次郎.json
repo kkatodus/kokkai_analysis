@@ -1,0 +1,56 @@
+[
+    {
+        "numberOfRecords": 2,
+        "numberOfReturn": 2,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121113950X00920230420_066",
+                "issueID": "121113950X00920230420",
+                "imageKind": "会議録",
+                "searchObject": 66,
+                "session": 211,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "外交防衛委員会",
+                "issue": "第9号",
+                "date": "2023-04-20",
+                "closing": null,
+                "speechOrder": 66,
+                "speaker": "羽田次郎",
+                "speakerYomi": "はたじろう",
+                "speakerGroup": "立憲民主・社民",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○羽田次郎君　この第三者を明かせないというのは分かるんですけど、この深刻なコストというのは、むしろ抑止の意味でははっきり表明された方がいいような気もするんですが、いずれにしても、まだその広島のＧ７サミットに向けて詳細は詰めているということですので、またその際の発表というのをお待ちしたいと思います。\r\n　共同声明の中にジェンダー平等についても盛り込まれていましたが、Ｇ７で唯一ＬＧＢＴＱに基づく差別を禁ずる法令がないこの議長国日本に対して各国から様々な要請があったのではないかと推察しております。\r\n　今後、どのように御対応されるお考えか、林大臣に伺いたいと思います。",
+                "startPage": 0,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121113950X00920230420/66",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121113950X00920230420",
+                "pdfURL": null
+            },
+            {
+                "speechID": "121114103X00220230403_163",
+                "issueID": "121114103X00220230403",
+                "imageKind": "会議録",
+                "searchObject": 163,
+                "session": 211,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "決算委員会",
+                "issue": "第2号",
+                "date": "2023-04-03",
+                "closing": null,
+                "speechOrder": 163,
+                "speaker": "羽田次郎",
+                "speakerYomi": "はたじろう",
+                "speakerGroup": "立憲民主・社民",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○羽田次郎君　姿勢とかそうした議論というのは大変重要なことだと思いますが、ただ、防衛費の倍増ですとか、原発稼働期間の延長ですとか、そうした国論を二分する方針については総理のリーダーシップで閣議決定でどんどんと進んでいっておりますので、そういう意味ではＬＧＢＴＱについても総理のリーダーシップを発揮していただけないでしょうかと思いますが、いかがでしょう。",
+                "startPage": 24,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121114103X00220230403/163",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121114103X00220230403",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121114103X00220230403/24"
+            }
+        ]
+    }
+]

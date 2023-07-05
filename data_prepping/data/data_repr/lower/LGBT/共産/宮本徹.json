@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121105261X01520230228_159",
+                "issueID": "121105261X01520230228",
+                "imageKind": "会議録",
+                "searchObject": 159,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "予算委員会",
+                "issue": "第15号",
+                "date": "2023-02-28",
+                "closing": null,
+                "speechOrder": 159,
+                "speaker": "宮本徹",
+                "speakerYomi": "みやもととおる",
+                "speakerGroup": "日本共産党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○宮本（徹）委員　是非、当事者の話を聞いて判断をしていただきたいと思います。\r\n　その上で、最後ですけれども、同性婚、ＬＧＢＴ差別禁止についてお伺いしたいと思います。\r\n　総理も、当事者のお話を聞いて、この間、認識を深められていることだと思います。\r\n　総理、同性カップルに法的な結婚を認めないというのは、国が同性愛者を差別している、こういう認識はございますか。",
+                "startPage": 18,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121105261X01520230228/159",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121105261X01520230228",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121105261X01520230228/18"
+            }
+        ]
+    }
+]

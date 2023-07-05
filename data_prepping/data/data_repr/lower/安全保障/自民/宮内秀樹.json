@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119604319X01320180511_054",
+                "issueID": "119604319X01320180511",
+                "imageKind": "会議録",
+                "searchObject": 54,
+                "session": 196,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "国土交通委員会",
+                "issue": "第13号",
+                "date": "2018-05-11",
+                "closing": null,
+                "speechOrder": 54,
+                "speaker": "宮内秀樹",
+                "speakerYomi": "みやうちひでき",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○宮内委員　なかなかの確率の高い結果が出ているのかなというふうには思いますけれども、やはり国民の税金も使ってのことでございますから、こういう活動をしてこういう結果が出たということを国民の方々にもいい意味で理解をしていただいて、それによって民間企業がもっともっと意欲的になっていただくという取組が、結果的に、この目的と同時に、日本の外交や安全保障にとってもいろいろな意味の効果があることだというふうに思いますので、戦略も戦略で大切でありますし、その結果、そして国民に対する、理解をしていただくということに努めていただきまして、この取組が成果をどんどんと生んでいくということにつなげていただきたいと思います。\r\n　ありがとうございました。",
+                "startPage": 8,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119604319X01320180511/54",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119604319X01320180511",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119604319X01320180511/8"
+            }
+        ]
+    }
+]

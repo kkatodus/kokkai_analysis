@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121105262X00120230216_141",
+                "issueID": "121105262X00120230216",
+                "imageKind": "会議録",
+                "searchObject": 141,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "予算委員会公聴会",
+                "issue": "第1号",
+                "date": "2023-02-16",
+                "closing": null,
+                "speechOrder": 141,
+                "speaker": "吉田はるみ",
+                "speakerYomi": "よしだはるみ",
+                "speakerGroup": "立憲民主党・無所属",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○吉田（は）委員　ありがとうございます。\r\n　本当に、国民の皆様からお預かりしている大切な税金を使っての国の支出だと思っておりますので、ここは真剣に我々考えなければいけないところだと思います。\r\n　その意味で、先ほど北岡先生の方からも、予算の使い方の検証、この重要性も教えていただきました。ただ、安全保障の話になって、今、ずっと私も予算委員会に籍をいただいて安全保障の話を聞いている中で、いろいろ私たちも知りたいんですけれども、どうしても政府の答弁の中には、外交上の問題がありますから、安全保障上の問題がありますからという前置きがあって、例えば一般的な例でもいいんですけれども教えてくださいという声になかなか十分な説明をしていただいていないように思うんですが、やはりこういうのは難しいものでしょうか。",
+                "startPage": 36,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121105262X00120230216/141",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121105262X00120230216",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121105262X00120230216/36"
+            }
+        ]
+    }
+]

@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "118515007X00320131112_016",
+                "issueID": "118515007X00320131112",
+                "imageKind": "会議録",
+                "searchObject": 16,
+                "session": 185,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "農林水産委員会",
+                "issue": "第3号",
+                "date": "2013-11-12",
+                "closing": null,
+                "speechOrder": 16,
+                "speaker": "馬場成志",
+                "speakerYomi": "ばばせいし",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○馬場成志君　我が国の地球温暖化対策を進める上では、今、エネルギー問題などによって産業界等の排出削減自体もう厳しい状態になっているかというふうに思っておりますが、そうであれば森林吸収源対策の重要性はますます高まっていくものだというふうに思っております。\r\n　平成二十四年の十月から地球温暖化対策のための税がスタートしております。まさに、我が国の地球温暖化対策を進めるための税財源措置であります。まず最初に、この税の税収額、使途についてお聞かせをいただきたいと思います。",
+                "startPage": 3,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/118515007X00320131112/16",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/118515007X00320131112",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/118515007X00320131112/3"
+            }
+        ]
+    }
+]

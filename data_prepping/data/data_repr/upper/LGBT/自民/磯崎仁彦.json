@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121113950X00420230317_034",
+                "issueID": "121113950X00420230317",
+                "imageKind": "会議録",
+                "searchObject": 34,
+                "session": 211,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "外交防衛委員会",
+                "issue": "第4号",
+                "date": "2023-03-17",
+                "closing": null,
+                "speechOrder": 34,
+                "speaker": "磯崎仁彦",
+                "speakerYomi": "いそざきよしひこ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": "内閣官房副長官",
+                "speakerRole": null,
+                "speech": "○内閣官房副長官（磯崎仁彦君）　Ｇ７の各国とは、このＬＧＢＴの問題を含めまして様々なやり取りをしているのは事実でございますけれども、その一つ一つについて明らかにすることは差し控えさせていただきたいというふうに思っております。\r\n　本年Ｇ７議長を務める日本政府としましては、こうしたことをしっかりと国の内外に対して丁寧に説明していく努力を続けてまいりたいというふうに思っております。",
+                "startPage": 6,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121113950X00420230317/34",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121113950X00420230317",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121113950X00420230317/6"
+            }
+        ]
+    }
+]

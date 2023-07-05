@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120805206X00220220301_056",
+                "issueID": "120805206X00220220301",
+                "imageKind": "会議録",
+                "searchObject": 56,
+                "session": 208,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第2号",
+                "date": "2022-03-01",
+                "closing": null,
+                "speechOrder": 56,
+                "speaker": "古川禎久",
+                "speakerYomi": "ふるかわよしひさ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": "法務大臣",
+                "speakerRole": null,
+                "speech": "○古川国務大臣　人というものは、もう人それぞれであります。それぞれが個性を持っておるわけですね。ですからこそ、その違いをお互い認め合って、尊重し合って、助け合って生きていく、これすなわち共生社会だという思いを持っております。\r\n　今委員の御質問、私が申し上げた他者の尊重、共生社会という言葉の中に、ＬＧＢＴＱの方々や外国人など含めて、これは多様性を包摂する趣旨で申し上げております。",
+                "startPage": 8,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120805206X00220220301/56",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120805206X00220220301",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120805206X00220220301/8"
+            }
+        ]
+    }
+]

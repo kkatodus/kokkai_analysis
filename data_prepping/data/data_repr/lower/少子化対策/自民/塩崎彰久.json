@@ -1,0 +1,56 @@
+[
+    {
+        "numberOfRecords": 2,
+        "numberOfReturn": 2,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120804889X02420220511_225",
+                "issueID": "120804889X02420220511",
+                "imageKind": "会議録",
+                "searchObject": 225,
+                "session": 208,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "内閣委員会",
+                "issue": "第24号",
+                "date": "2022-05-11",
+                "closing": null,
+                "speechOrder": 225,
+                "speaker": "塩崎彰久",
+                "speakerYomi": "しおざきあきひさ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○塩崎議員　緒方委員の御質問にお答えをいたします。\r\n　少子化対策とはどういうものかということについての御質問でございますが、我々の提出しておりますこども基本法案、こちらの二条二項二号の中では、子育てに伴う喜びを実感できる社会を実現するために、就労、結婚、妊娠、出産、育児等の各段階に応じて行われる支援という形で、これらのものを全て子供施策という形で包含をしております。\r\n　こういったものと一体的に実施することによって、少子化対策も併せて、これまで以上に推進できるものというふうに考えております。\r\n　以上です。",
+                "startPage": 34,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120804889X02420220511/225",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120804889X02420220511",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120804889X02420220511/34"
+            },
+            {
+                "speechID": "120804889X02420220511_229",
+                "issueID": "120804889X02420220511",
+                "imageKind": "会議録",
+                "searchObject": 229,
+                "session": 208,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "内閣委員会",
+                "issue": "第24号",
+                "date": "2022-05-11",
+                "closing": null,
+                "speechOrder": 229,
+                "speaker": "塩崎彰久",
+                "speakerYomi": "しおざきあきひさ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○塩崎議員　緒方委員の御懸念というか問題意識ですね、少子化対策というものが、日本の政策の中で非常に優先順位が高い、まさに喫緊の非常に大きな問題であるということを私も同じように考えております。\r\n　ただ、政策としては、野田大臣からもお話がありましたように、まさに、子供を持ちたいけれども持てない方がたくさんいる中で、その理由も様々であり、また、解決の政策も、まさに先ほど申し上げたような、妊娠に至るような対策、又は妊娠に至る前の段階の就労環境の整備であったり、又は教育の問題だったり、様々な多元的な政策が必要なものでございまして、こういったものをパッケージでどのように育てていくか、支援していくか、これが、今回まさにこども基本法案ということで、縦割りを超えた形での基本法として定める意義ではないかというふうに考えております。",
+                "startPage": 35,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120804889X02420220511/229",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120804889X02420220511",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120804889X02420220511/35"
+            }
+        ]
+    }
+]

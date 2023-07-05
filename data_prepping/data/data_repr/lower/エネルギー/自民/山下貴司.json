@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120805271X00220220217_195",
+                "issueID": "120805271X00220220217",
+                "imageKind": "会議録",
+                "searchObject": 195,
+                "session": 208,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "予算委員会第七分科会",
+                "issue": "第2号",
+                "date": "2022-02-17",
+                "closing": null,
+                "speechOrder": 195,
+                "speaker": "山下貴司",
+                "speakerYomi": "やましたたかし",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○山下分科員　このほか、下請取引の適正化など、あるいはエネルギー問題、様々な難しい課題に取り組んでおられると思います。\r\n　どうか、萩生田大臣の強いリーダーシップで、日本の国内投資の活性化を含め、日本経済の活性化、是非実現していただきたいと思います。\r\n　ありがとうございました。",
+                "startPage": 35,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120805271X00220220217/195",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120805271X00220220217",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120805271X00220220217/35"
+            }
+        ]
+    }
+]
