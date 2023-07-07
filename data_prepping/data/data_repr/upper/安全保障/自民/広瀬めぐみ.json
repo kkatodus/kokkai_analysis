@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121115261X01120230320_033",
+                "issueID": "121115261X01120230320",
+                "imageKind": "会議録",
+                "searchObject": 33,
+                "session": 211,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "予算委員会",
+                "issue": "第11号",
+                "date": "2023-03-20",
+                "closing": null,
+                "speechOrder": 33,
+                "speaker": "広瀬めぐみ",
+                "speakerYomi": "ひろせめぐみ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○広瀬めぐみ君　ありがとうございます。よろしくお願いいたします。\r\n　農林水産省にお聞きします。\r\n　食の安全保障の観点から、麦、大豆などの国内生産を拡大しつつ、主食である米の需要拡大を行い、生産と消費の両基盤を強化する必要があると思います。米粉の活用の推進や、海外にプラットフォームをつくり現地としっかりとつながった輸出の促進などはその一例と思いますが、今後どのような計画があるのか、お聞きいたします。",
+                "startPage": 5,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121115261X01120230320/33",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121115261X01120230320",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121115261X01120230320/5"
+            }
+        ]
+    }
+]

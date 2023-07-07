@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121104080X00920230407_118",
+                "issueID": "121104080X00920230407",
+                "imageKind": "会議録",
+                "searchObject": 118,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "経済産業委員会",
+                "issue": "第9号",
+                "date": "2023-04-07",
+                "closing": null,
+                "speechOrder": 118,
+                "speaker": "井野俊郎",
+                "speakerYomi": "いのとしろう",
+                "speakerGroup": "自由民主党・無所属の会",
+                "speakerPosition": "防衛副大臣・内閣府副大臣",
+                "speakerRole": null,
+                "speech": "○井野副大臣　はい。\r\n　総合的に勘案した上で配備をしているところであります。\r\n　その上で、多様な経空脅威に対しては、固定レーダーサイトによる探知、戦闘機による確認、監視、空対空ミサイル、地対空ミサイルなどによる迎撃などの対処をしているところであります。\r\n　加えて、ドローン攻撃に対しても、万全な対応を期すために、ジャミング器材の、ドローン対処器材の取得や指向性エネルギー技術の研究といった各種取組を進めているところでございます。",
+                "startPage": 11,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121104080X00920230407/118",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121104080X00920230407",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121104080X00920230407/11"
+            }
+        ]
+    }
+]

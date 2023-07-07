@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "120414889X02220210527_060",
+                "issueID": "120414889X02220210527",
+                "imageKind": "会議録",
+                "searchObject": 60,
+                "session": 204,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "内閣委員会",
+                "issue": "第22号",
+                "date": "2021-05-27",
+                "closing": null,
+                "speechOrder": 60,
+                "speaker": "横沢高徳",
+                "speakerYomi": "よこさわたかのり",
+                "speakerGroup": "立憲民主・社民",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○横沢高徳君　やはり障害当事者の要望だけじゃなくて、やはり事業者も障害当事者も対立するのじゃなくて、同じ方向を向いて、そうだよねというところに是非持っていっていただきたいと思います。\r\n　それでは、次の質問に移らせていただきます。\r\n　障害のある女性や子供やＬＧＢＴの複合差別の解消についてお伺いをいたします。\r\n　二〇一九年に国連権利委員会が日本政府に出した事前質問事項では、障害のある女子の権利を主流化する一般的な男女平等政策及び障害のある女子の権利を実現するための特別の立法措置、政策及び行政措置、障害者差別解消法が、直接差別、間接差別、複合差別及び交差差別であれ、障害のある女子に対するものを含め、生活のあらゆる分野において障害に基づくあらゆる差別を禁止しているかどうかを本委員会に対しお知らせ願いたいと国連の方からあります。\r\n　国連が注目している内容と言えますが、この点について、国際社会の動きと現在の日本の取組の現状など、佐藤参考人に是非お話を伺いたいと思います。",
+                "startPage": 7,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/120414889X02220210527/60",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/120414889X02220210527",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/120414889X02220210527/7"
+            }
+        ]
+    }
+]

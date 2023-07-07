@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119705206X00920181210_001",
+                "issueID": "119705206X00920181210",
+                "imageKind": "会議録",
+                "searchObject": 1,
+                "session": 197,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第9号",
+                "date": "2018-12-10",
+                "closing": null,
+                "speechOrder": 1,
+                "speaker": "葉梨康弘",
+                "speakerYomi": "はなしやすひろ",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○葉梨委員長　これより会議を開きます。\r\n　この際、御報告いたします。\r\n　本会期中、当委員会に付託になりました請願は五十二件であります。各請願の取扱いにつきましては、先ほどの理事会において慎重に協議いたしましたが、委員会の採否の決定は保留することになりましたので、御了承願います。\r\n　なお、お手元に配付しておりますとおり、当委員会に参考送付されました陳情書は、改めて裁判所速記官の養成再開を求めることに関する陳情書外二十一件、また、地方自治法第九十九条の規定に基づく意見書は、ＬＧＢＴなどの性的マイノリティへの理解と社会環境整備の促進を求める意見書外十三件であります。\r\n　　　　　————◇—————",
+                "startPage": 1,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119705206X00920181210/1",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119705206X00920181210",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119705206X00920181210/1"
+            }
+        ]
+    }
+]

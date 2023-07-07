@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121105261X01320230222_201",
+                "issueID": "121105261X01320230222",
+                "imageKind": "会議録",
+                "searchObject": 201,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "予算委員会",
+                "issue": "第13号",
+                "date": "2023-02-22",
+                "closing": null,
+                "speechOrder": 201,
+                "speaker": "本庄知史",
+                "speakerYomi": "ほんじょうさとし",
+                "speakerGroup": "立憲民主党・無所属",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○本庄委員　なぜ私がここにこだわっているか。そもそも存立危機事態というものの定義が非常に曖昧だということです。\r\n　その端的な事例を申し上げます。パネル四のホルムズ海峡の事例ですが、このホルムズ海峡での武力行使、機雷掃海がなぜ許容されているかというと、本来は他国領域では日本は武力行使をしないというのが憲法上の大原則で、その例外です。\r\n　なぜその例外が認められるか。存立危機事態だからなんですが、武力攻撃を受けていないにもかかわらずこれが認められている理由は、深刻なエネルギー危機、あるいは国民生活への死活的な影響、石油が途絶するとそういうことになってしまって日本は大変なことになる、だから、日本自身は攻撃を受けていないんだけれども武力の行使ができる、こういう論理なんですよ。こういう論理なんですね。\r\n　したがって、エネルギー危機や生活の死活的な影響ということをもって反撃能力を認められる、法理上は。こういう話になるんですが、総理、それでよろしいですか。",
+                "startPage": 29,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121105261X01320230222/201",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121105261X01320230222",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/121105261X01320230222/29"
+            }
+        ]
+    }
+]

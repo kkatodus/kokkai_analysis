@@ -1,5 +1,5 @@
 import MeCab
-
+import unidic
 
 class StringProcessor:
 
@@ -35,10 +35,26 @@ class StringProcessor:
 
         return topic_title
 
-    def divide_string(self, original_string):
-        wakati = MeCab.Tagger("-Owakati")
-        split_string_list = wakati.parse(original_string).split()
-        return split_string_list
+    def divide_string(self, original_string, exclusions=None):
+        wakati = MeCab.Tagger(f"-d {unidic.DICDIR}")
+        parsed = wakati.parse(original_string)
+        split_string_list = [parse_item.split('\t')[0] for parse_item in parsed.split("\n")]
+        extra = [parse_item.split('\t')[-1] for parse_item in parsed.split("\n")]
+        final_str_list = []
+        final_extra = []
+        if exclusions:
+            for string, ext in zip(split_string_list, extra):
+                type_of_word = ext.split(',')[0]
+                if type_of_word in exclusions:
+                      continue
+                else:
+                    final_str_list.append(string)
+                    final_extra.append(ext)
+        else:
+            final_str_list = split_string_list
+            final_extra = extra
+                 
+        return final_str_list, final_extra
 
     def create_search_words(self, topic_title_separated, topic_title_cleaned):
         search_candidates = []

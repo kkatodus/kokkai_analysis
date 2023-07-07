@@ -1,0 +1,56 @@
+[
+    {
+        "numberOfRecords": 2,
+        "numberOfReturn": 2,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119305206X02120170607_248",
+                "issueID": "119305206X02120170607",
+                "imageKind": "会議録",
+                "searchObject": 248,
+                "session": 193,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第21号",
+                "date": "2017-06-07",
+                "closing": null,
+                "speechOrder": 248,
+                "speaker": "逢坂誠二",
+                "speakerYomi": "おおさかせいじ",
+                "speakerGroup": "民進党・無所属クラブ",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○逢坂委員　この点、実は私自身もまだ勉強がちょっと十分ではないのでありますけれども、そういうケースは実際に多分あるんだろうなというふうに思われますので、こうしたところもこれからまだまだ詰めていかなければいけないポイントの一つだと私は思っています。\r\n　それでは、次に、ちょっと話題をかえまして、きょうは豊田内閣府大臣政務官にお越しをいただいておりますけれども、ワンストップ支援センターについてお伺いをしたいんです。\r\n　ワンストップ支援センターについては、先ほど来答弁がありましたとおり、全国の全ての都道府県に設置ができるようにということで準備を進めているということでありますけれども、現在想定されているワンストップ支援センターの仕組みというのは、対象者というのは誰を想定されているのか。例えば、成人女性被害者だけを想定しているのか、あるいは、そうではない、男性、女性を問わず、ＬＧＢＴの方々といった幅広い対象者を想定されているのか、このあたりについていかがでしょうか。もし想定されていないというのであれば、現時点ではまだそこまで明確には想定していないんだということであれば、それはそれで構いません。",
+                "startPage": 32,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119305206X02120170607/248",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119305206X02120170607",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119305206X02120170607/32"
+            },
+            {
+                "speechID": "119305206X02120170607_250",
+                "issueID": "119305206X02120170607",
+                "imageKind": "会議録",
+                "searchObject": 250,
+                "session": 193,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第21号",
+                "date": "2017-06-07",
+                "closing": null,
+                "speechOrder": 250,
+                "speaker": "逢坂誠二",
+                "speakerYomi": "おおさかせいじ",
+                "speakerGroup": "民進党・無所属クラブ",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○逢坂委員　性別は問わないと。\r\n　それから、ＬＧＢＴなどの被害者の方についても、これは対象になるということでよろしいですか、性別を問わないということであれば。",
+                "startPage": 32,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119305206X02120170607/250",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119305206X02120170607",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119305206X02120170607/32"
+            }
+        ]
+    }
+]

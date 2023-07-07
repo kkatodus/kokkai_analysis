@@ -16,5 +16,8 @@ def write_json(dict_obj, path):
 def create_dir(path):
     os.makedirs(path, exist_ok=True)
 
+def write_file(path, string):
+    with open(path, "w", encoding="utf-8") as f:
+         f.write(string)
 
     

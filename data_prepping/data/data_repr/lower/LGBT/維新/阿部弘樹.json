@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121105206X01820230524_052",
+                "issueID": "121105206X01820230524",
+                "imageKind": "会議録",
+                "searchObject": 52,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第18号",
+                "date": "2023-05-24",
+                "closing": null,
+                "speechOrder": 52,
+                "speaker": "阿部弘樹",
+                "speakerYomi": "あべひろき",
+                "speakerGroup": "日本維新の会",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○阿部（弘）委員　精神医学では、性同一性障害という病名はまだ残っております。しかし、分類として、ＷＨＯが採用するＩＣＤ11では、性別不合ということで、精神疾患から外れておるわけでございます。あるいはアメリカも、アメリカは、精神医学、大きく言って精神医学には心理学と医学という二つの分野がありまして、先に心理学の方が精神疾患から外そうということを決めまして、ＤＳＭ―５では、性同一性障害という名前は消えまして、ジェンダーディスフォリアということで、やはり性別不適合といいますか、不合という分類に変わっておるわけでございます。\r\n　今、国会でも議論されるＬＧＢＴＱ法案についてでございますが、ネットでは、性自認と性同一性という言葉が、同じように使うんだというふうに、政府の、あるいは政府に近い方々からお話ししてありますが、性自認と性同一性というものが同じなんですか。内閣の方、お答えください。",
+                "startPage": 0,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121105206X01820230524/52",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121105206X01820230524",
+                "pdfURL": null
+            }
+        ]
+    }
+]

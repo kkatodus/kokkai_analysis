@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119605206X02220180720_005",
+                "issueID": "119605206X02220180720",
+                "imageKind": "会議録",
+                "searchObject": 5,
+                "session": 196,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "法務委員会",
+                "issue": "第22号",
+                "date": "2018-07-20",
+                "closing": null,
+                "speechOrder": 5,
+                "speaker": "平口洋",
+                "speakerYomi": "ひらぐちひろし",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○平口委員長　なお、お手元に配付してありますとおり、当委員会に参考送付されました陳情書は、死刑執行に関する陳情書外三十一件、また、地方自治法第九十九条の規定に基づく意見書は、ＬＧＢＴ（同性愛や性同一性障害）を含む性的少数者のための社会環境整備を求める意見書外五十三件であります。\r\n　　　　　————◇—————",
+                "startPage": 4,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119605206X02220180720/5",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119605206X02220180720",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119605206X02220180720/4"
+            }
+        ]
+    }
+]

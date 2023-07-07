@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121104319X01020230419_123",
+                "issueID": "121104319X01020230419",
+                "imageKind": "会議録",
+                "searchObject": 123,
+                "session": 211,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "国土交通委員会",
+                "issue": "第10号",
+                "date": "2023-04-19",
+                "closing": null,
+                "speechOrder": 123,
+                "speaker": "鈴木敦",
+                "speakerYomi": "すずきあつし",
+                "speakerGroup": "国民民主党・無所属クラブ",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○鈴木（敦）委員　ちょっと大臣に伺いたいと思いますが、この四％で運用してきた間、いろいろなこと、確かにありました、局長が今言ったとおり。この間に、四％の割引率で計算したことによって、どれぐらいの数の公共事業ができなかったと思いますか。橋や道路の将来にわたっての価値を四％で計算してしまったせいで、特に少子高齢化があったり工期が延びたり、いろいろな要因はありますけれども、社会的な割引率がもっと低ければ、もっと公共事業ができて国土強靱化が実現できたと、大臣、思いませんか。",
+                "startPage": 0,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121104319X01020230419/123",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121104319X01020230419",
+                "pdfURL": null
+            }
+        ]
+    }
+]

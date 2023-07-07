@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119005124X00520160420_016",
+                "issueID": "119005124X00520160420",
+                "imageKind": "会議録",
+                "searchObject": 16,
+                "session": 190,
+                "nameOfHouse": "衆議院",
+                "nameOfMeeting": "文部科学委員会",
+                "issue": "第5号",
+                "date": "2016-04-20",
+                "closing": null,
+                "speechOrder": 16,
+                "speaker": "菊田真紀子",
+                "speakerYomi": "きくたまきこ",
+                "speakerGroup": "民進党・無所属クラブ",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○菊田委員　ありがとうございました。\r\n　ＬＧＢＴについてお聞かせいただきたいと思います。\r\n　東京オリンピック・パラリンピックでは、世界のアスリートやオリンピック関係者が日本の性的マイノリティー、いわゆるＬＧＢＴ対応に注目をしています。ロンドン・オリンピックの際、イギリスはＬＧＢＴ支援を積極的に打ち出し、国際的評価をさらに高めたと承知をしていますが、こうした配慮は世界の潮流であって、二〇一四年十二月、国際オリンピック委員会も、総会において、オリンピック憲章に性的指向による差別禁止を盛り込むと決議をしています。\r\n　多くの外国人観光客に来日してもらい、日本の魅力を発信する際にも、ＬＧＢＴの視点は必要ではないでしょうか。二〇二〇年に向けて、この問題に関する啓発を含め、政府としてどのような施策を考えているのでしょうか。また、この問題に取り組んでいるＮＧＯがありますけれども、そうしたＮＧＯ等とどのように連携していくおつもりですか。遠藤大臣にお伺いします。",
+                "startPage": 4,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119005124X00520160420/16",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119005124X00520160420",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119005124X00520160420/4"
+            }
+        ]
+    }
+]

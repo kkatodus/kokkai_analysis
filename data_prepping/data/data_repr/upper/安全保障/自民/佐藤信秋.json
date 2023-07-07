@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "117114319X01020090416_025",
+                "issueID": "117114319X01020090416",
+                "imageKind": "会議録",
+                "searchObject": 25,
+                "session": 171,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "国土交通委員会",
+                "issue": "第10号",
+                "date": "2009-04-16",
+                "closing": null,
+                "speechOrder": 25,
+                "speaker": "佐藤信秋",
+                "speakerYomi": "さとうのぶあき",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○佐藤信秋君　そこで、石田先生にお伺いしたいんですが、道路のＢバイＣが一あるかないかということでいろいろ判断するというのは問題あるんじゃないかというふうに先生の方でお書きいただいていて、御主張いただいていて、そして公平性の基準であるとか安全保障とか、公平性というのは今の町づくりも含めてと、こういう御議論になるんだと思うんですが、そういう意味では道路の投資の効果という点について、今現実に計測され得るＢバイＣが一かどうかという議論がまさしくなされて十八の事業が取りあえず止まったと、こういうことになっているんですが、これについて石田先生の御意見がもちろんおありだと思うので、お聞かせいただければと思います。",
+                "startPage": 9,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/117114319X01020090416/25",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/117114319X01020090416",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/117114319X01020090416/9"
+            }
+        ]
+    }
+]

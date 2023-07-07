@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "121114370X01020230525_059",
+                "issueID": "121114370X01020230525",
+                "imageKind": "会議録",
+                "searchObject": 59,
+                "session": 211,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "財政金融委員会",
+                "issue": "第10号",
+                "date": "2023-05-25",
+                "closing": null,
+                "speechOrder": 59,
+                "speaker": "柴愼一",
+                "speakerYomi": "しばしんいち",
+                "speakerGroup": "立憲民主・社民",
+                "speakerPosition": null,
+                "speakerRole": null,
+                "speech": "○柴愼一君　改めて、ただ、全体パッケージとして再提案するべきだということは改めて求めたいというふうに思います。\r\n　政府は、戦後最も厳しく複雑な安全保障環境に直面しているとして、今回の防衛力の抜本的な強化とそのための財源確保が必要というふうにしていますが、我が国が直面している課題というのは、少子化や社会保障制度の持続性、またエネルギー、環境問題、また政府債務など、西田先生は心配ないと言っていますが、政府債務など、どれを取っても厳しく複雑な状況にあるというふうに思いますが、このことについての政府の見解をお聞かせください。",
+                "startPage": 0,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/121114370X01020230525/59",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/121114370X01020230525",
+                "pdfURL": null
+            }
+        ]
+    }
+]

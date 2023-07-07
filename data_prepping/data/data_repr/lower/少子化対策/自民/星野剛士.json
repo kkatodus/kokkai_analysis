@@ -1,0 +1,33 @@
+[
+    {
+        "numberOfRecords": 1,
+        "numberOfReturn": 1,
+        "startRecord": 1,
+        "nextRecordPosition": null,
+        "speechRecord": [
+            {
+                "speechID": "119014370X00820160329_067",
+                "issueID": "119014370X00820160329",
+                "imageKind": "会議録",
+                "searchObject": 67,
+                "session": 190,
+                "nameOfHouse": "参議院",
+                "nameOfMeeting": "財政金融委員会",
+                "issue": "第8号",
+                "date": "2016-03-29",
+                "closing": null,
+                "speechOrder": 67,
+                "speaker": "星野剛士",
+                "speakerYomi": "ほしのつよし",
+                "speakerGroup": "自由民主党",
+                "speakerPosition": "経済産業大臣政務官・内閣府大臣政務官・復興大臣政務官",
+                "speakerRole": null,
+                "speech": "○大臣政務官（星野剛士君）　お答え申し上げます。\r\n　経済産業省では、平成二十七年度補正予算一・二億円を活用して、準天頂衛星による高精度測位を活用した無人航空機物流の実証実験を実施しているところでございます。本事業は、人口減少、少子高齢化等の社会課題の解決のため、準天頂衛星を活用した離島などへの比較的長距離の無人航空機物流の実現に向けて、必要な機器、システムの開発及び飛行データの収集を行うものでございます。\r\n　二〇一八年の準天頂衛星四機体制によります本格サービスの開始に向けて、準天頂衛星を活用した無人航空機物流を実現するため、本事業を通じて、速やかに技術的、制度的な課題を洗い出していく考えでございます。その上で、関係省庁と連携しつつ、所要の研究開発や制度改革に取り組んでまいりたいと思います。\r\n　以上です。",
+                "startPage": 9,
+                "speechURL": "https://kokkai.ndl.go.jp/txt/119014370X00820160329/67",
+                "meetingURL": "https://kokkai.ndl.go.jp/txt/119014370X00820160329",
+                "pdfURL": "https://kokkai.ndl.go.jp/img/119014370X00820160329/9"
+            }
+        ]
+    }
+]
