@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage';
 // import SangiinMeetingDetailPage from './pages/MeetingDetailPage';
 // import SangiinTopicDetailPage from './pages/SangiinTopicDetailPage';
 import InfoPage from './pages/InfoPage';
-import SangiinMenuPage from './pages/SangiinMenuPage';
+// import SangiinMenuPage from './pages/SangiinMenuPage';
 // import SangiinReprPage from './pages/SangiinReprPage';
 // import SangiinCommitteePage from './pages/SangiinCommitteePage';
 // import ShugiinMenuPage from './pages/ShugiinMenuPage';
