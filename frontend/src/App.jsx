@@ -2,16 +2,16 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import React from 'react';
 import LandingPage from './pages/LandingPage';
-import SangiinMeetingsPage from './pages/SangiinMeetingsPage';
-import SangiinMeetingDetailPage from './pages/MeetingDetailPage';
-import SangiinTopicDetailPage from './pages/SangiinTopicDetailPage';
+// import SangiinMeetingsPage from './pages/SangiinMeetingsPage';
+// import SangiinMeetingDetailPage from './pages/MeetingDetailPage';
+// import SangiinTopicDetailPage from './pages/SangiinTopicDetailPage';
 import InfoPage from './pages/InfoPage';
 import SangiinMenuPage from './pages/SangiinMenuPage';
-import SangiinReprPage from './pages/SangiinReprPage';
-import SangiinCommitteePage from './pages/SangiinCommitteePage';
-import ShugiinMenuPage from './pages/ShugiinMenuPage';
-import ShugiinCommitteePage from './pages/ShugiinCommitteePage';
-import ShugiinReprPage from './pages/ShugiinReprPage';
+// import SangiinReprPage from './pages/SangiinReprPage';
+// import SangiinCommitteePage from './pages/SangiinCommitteePage';
+// import ShugiinMenuPage from './pages/ShugiinMenuPage';
+// import ShugiinCommitteePage from './pages/ShugiinCommitteePage';
+// import ShugiinReprPage from './pages/ShugiinReprPage';
 /**
  *
  * @return {JSX.Element}
