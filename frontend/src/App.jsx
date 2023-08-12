@@ -12,6 +12,8 @@ import SangiinCommitteePage from './pages/SangiinCommitteePage';
 import ShugiinMenuPage from './pages/ShugiinMenuPage';
 import ShugiinCommitteePage from './pages/ShugiinCommitteePage';
 import ShugiinReprPage from './pages/ShugiinReprPage';
+import ReprOpinionMenuPage from './pages/ReprOpinionMenuPage';
+import ReprOpinionPage from './pages/ReprOpinionPage';
 /**
  *
  * @return {JSX.Element}
@@ -42,6 +44,8 @@ function App() {
       <Route exact path="shugiin_menu" element={<ShugiinMenuPage />} />
       <Route exact path="shugiin_repr" element={<ShugiinReprPage />} />
       <Route exact path="shugiin_commitee" element={<ShugiinCommitteePage />} />
+      <Route exact path="repr_analysis" element={<ReprOpinionMenuPage />} />
+      <Route exact path="repr_analysis/:topic" element={<ReprOpinionPage />} />
     </Routes>
   );
 }

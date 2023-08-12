@@ -16,14 +16,19 @@ export default function BaseMenuLayout(props) {
   ));
   return (
     <div
-      className={`h-screen w-screen relative flex justify-center items-center ${colors.secondary}`}
+      className={`h-screen w-screen relative flex justify-center items-center ${colors.secondary} `}
     >
-      <Link className="back-icon absolute top-0 left-0 p-2" to={backTo}>
-        <MdOutlineArrowBack className="menu-icon" />
-      </Link>
-      <div className="h-3/5 w-3/5 flex flex-col items-center justify-center">
+      {backTo && (
+        <Link className="back-icon absolute top-0 left-0 p-2" to={backTo}>
+          <MdOutlineArrowBack className="menu-icon" />
+        </Link>
+      )}
+
+      <div className="h-3/5 w-screen flex flex-col items-center justify-center">
         <h1 className="text-5xl">{MenuTitle}</h1>
-        <div className="flex item-center justify-center">{linksComponents}</div>
+        <div className="flex item-center justify-center flex-wrap">
+          {linksComponents}
+        </div>
       </div>
     </div>
   );

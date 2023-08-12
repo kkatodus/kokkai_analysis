@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 .card-container {
-  @apply grid grid-flow-row gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-auto-fit;
+  @apply grid grid-flow-row gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-auto-fit;
+}
+
+.h-1\/8 {
+  height: 12.5%;
+}
+.h-7\/8 {
+  height: 87.5%;
 }
 body {
   margin: 0;
