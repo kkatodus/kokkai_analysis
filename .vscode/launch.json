@@ -1,24 +1,32 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Sangiin collect debug",
-            "type": "python",
-            "request": "launch",
-            "program": "data_prepping\\sangiin_collect.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "Python: Analyze voting pattern debug",
-            "type": "python",
-            "request": "launch",
-            "program": "data_prepping\\analyze_voting_patterns.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Sangiin collect debug",
+      "type": "python",
+      "request": "launch",
+      "program": "data_prepping\\sangiin_collect.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Analyze voting pattern debug",
+      "type": "python",
+      "request": "launch",
+      "program": "data_prepping\\analyze_voting_patterns.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Analyze repr speeches",
+      "type": "python",
+      "request": "launch",
+      "program": "data_prepping/analyze_politician_speeches.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
 }

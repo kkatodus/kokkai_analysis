@@ -5,20 +5,17 @@ import Proptypes from 'prop-types';
 import { colors } from '../resource/styling';
 
 export default function BasePageLayout(props) {
-  const { pageTitle, backTo, MainContent, extraStyles } = props;
+  const { pageTitle, backTo, MainContent } = props;
   return (
-    <div className="flex flex-col h-screen relative overflow-hidden">
-      <div className={`flex items-center h-1/8 ${colors.primary}`}>
-        {backTo && (
-          <Link className="back-icon" to={backTo}>
-            <MdOutlineArrowBack />
-          </Link>
-        )}
-
-        <h1 className="text-3xl">{pageTitle}</h1>
+    <div className="flex flex-col h-screen relative">
+      <div className={`h-1/6 flex items-center ${colors.primary}`}>
+        <Link className="back-icon" to={backTo}>
+          <MdOutlineArrowBack />
+        </Link>
+        <h1 className="text-4xl px-3 ">{pageTitle}</h1>
       </div>
       <div
-        className={`flex flex-col items-center relative h-7/8 overflow-y-scroll ${colors.secondary} ${extraStyles.content}`}
+        className={`flex flex-col items-center relative h-5/6 overflow-y-scroll bg-slate-300 ${colors.secondary}`}
       >
         {MainContent}
       </div>
@@ -27,8 +24,7 @@ export default function BasePageLayout(props) {
 }
 
 BasePageLayout.defaultProps = {
-  backTo: undefined,
-  extraStyles: { content: '' },
+  backTo: '/',
 };
 
 BasePageLayout.propTypes = {
@@ -38,7 +34,4 @@ BasePageLayout.propTypes = {
     Proptypes.element,
     Proptypes.arrayOf(Proptypes.element),
   ]).isRequired,
-  extraStyles: Proptypes.shape({
-    content: Proptypes.string,
-  }),
 };

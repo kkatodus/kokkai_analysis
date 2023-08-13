@@ -29,5 +29,5 @@ class MeetingConvoCollector:
                 request_dicts_list.append(response)
                 
                 starting_point = next_position
-                time.sleep(5)
+                time.sleep(10)
         return request_dicts_list
