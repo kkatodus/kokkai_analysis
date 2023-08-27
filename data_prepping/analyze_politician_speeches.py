@@ -63,7 +63,7 @@ def extract_opinions(speech, target_class = ['意見文']):
 	return extracted_segments
 
 def iterate_speeches(request):
-
+	output_array = []
 	for record in request:
 		if record['numberOfRecords'] == 0:
 			continue
@@ -77,7 +77,9 @@ def iterate_speeches(request):
 			speaker_group = speech['speakerGroup']
 			extracted_opinions = extract_opinions(speech_text)
 			if len(extracted_opinions) > 0:
-				yield {'speech_id': speech_id, 'house_name': house_name, 'meeting_name': meeting_name, 'date': date, 'speech_text': speech_text, 'speech_url': speech_url, 'speaker_group':speaker_group,'extracted_opinions': extracted_opinions}
+				speech_dict = {'speech_id': speech_id, 'house_name': house_name, 'meeting_name': meeting_name, 'date': date, 'speech_text': speech_text, 'speech_url': speech_url, 'speaker_group':speaker_group,'extracted_opinions': extracted_opinions}
+				output_array.append(speech_dict)
+	return output_array
 
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
@@ -95,7 +97,7 @@ for topic in topics:
 			print(f"Collecting speeches for {repr_name}")
 			conditions_list = [f"any={topic}",f"speaker={repr_name}",'recordPacking=json','maximumRecords=100']
 			speeches = mcc.make_requests(conditions_list)
-			speeches = list(iterate_speeches(speeches))
+			speeches = iterate_speeches(speeches)
 			output_json = {'repr_name': repr_name, 'speeches': speeches}
 			write_json(output_json, os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json"))
 		
