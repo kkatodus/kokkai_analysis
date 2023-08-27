@@ -5,6 +5,7 @@ import { sangiinEndpoint } from '../resource/resources';
 import '../styles/general.css';
 import '../styles/pages/meeting_detail_page.css';
 import BasePageLayout from '../layouts/BasePageLayout';
+import TopicCard from '../components/TopicCard';
 // import TopicCard from '../components/TopicCard';
 
 /* eslint-disable no-nested-ternary */
@@ -16,7 +17,6 @@ function MeetingDetailPage() {
   const [meeting, setMeeting] = useState({ topics: [] });
   const [isloading, setIsLoading] = useState(true);
   const [loadFailed, setLoadFailed] = useState(false);
-  console.log(meeting);
   // eslint-disable-next-line camelcase
   const { meetingId } = useParams();
   useEffect(() => {
@@ -37,21 +37,26 @@ function MeetingDetailPage() {
     setIsLoading(false);
   }, [meetingId]);
 
-  const content = (
-    <div className="content-section meeting-detail-content">
-      {isloading ? (
-        <h1>Loading</h1>
-      ) : loadFailed ? (
-        <h1>Load failed</h1>
-      ) : (
-        <div>something</div>
-      )}
+  const content = isloading ? (
+    <h1>Loading</h1>
+  ) : loadFailed ? (
+    <h1>Load failed</h1>
+  ) : (
+    <div className="card-container ">
+      {meeting.topics.map((topic) => (
+        <TopicCard
+          key={topic.topic_title + topic.topic_date}
+          meetingId={meetingId}
+          topic={topic}
+        />
+      ))}
     </div>
   );
 
   return (
     <BasePageLayout
-      pageTitle={meetingId}
+      pageTitle={`${meetingId}`}
+      pageSubtitle={meeting.period}
       MainContent={content}
       backTo="/sangiin_meetings"
     />

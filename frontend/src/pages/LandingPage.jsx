@@ -3,6 +3,7 @@ import {
   RiGovernmentLine,
   RiInformationLine,
   RiGovernmentFill,
+  RiUserSearchFill,
 } from 'react-icons/ri';
 import '../styles/general.css';
 import '../styles/pages/landing_page.css';
@@ -20,6 +21,11 @@ const LandingMenuIcon = [
     title: '衆議院',
   },
   {
+    link: '/repr_analysis',
+    icon: <RiUserSearchFill className="menu-icon" />,
+    title: '議員分析',
+  },
+  {
     link: '/page_info',
     icon: <RiInformationLine className="menu-icon" />,
     title: '',
@@ -30,9 +36,7 @@ const LandingMenuIcon = [
  * @return {JSX.Element}
  */
 function LandingPage() {
-  return (
-    <BaseMenuLayout backTo="" MenuTitle="KOKKAI DOC" Links={LandingMenuIcon} />
-  );
+  return <BaseMenuLayout MenuTitle="KOKKAI DOC" Links={LandingMenuIcon} />;
 }
 
 export default LandingPage;

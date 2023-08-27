@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Proptypes from 'prop-types';
-import { GrLinkNext } from 'react-icons/gr';
 import StackedBarChart from './StackedBarChart';
 
 import '../styles/components/topic_card.css';
 import '../styles/other/animations.css';
+import { colors } from '../resource/styling';
 
 /* eslint-disable camelcase */
 /* eslint-disable no-var */
@@ -16,7 +15,7 @@ import '../styles/other/animations.css';
  * @return {JSX.Element}
  */
 function TopicCard(props) {
-  const { topic, meetingId } = props;
+  const { topic } = props;
   const {
     topic_title,
     individual_voting_results,
@@ -41,9 +40,9 @@ function TopicCard(props) {
         // eslint-disable-next-line camelcase
         <div
           key={topic_title + value.party_name}
-          className="party-vote-result-container"
+          className={`w-5/12 flex items-center flex-col ${colors.secondary} my-2 rounded-sm`}
         >
-          <h4>{value.party_name}</h4>
+          <h4 className="text-xs">{value.party_name}</h4>
           <StackedBarChart data={partyVotingData} width="100%" height={20} />
         </div>
       );
@@ -55,22 +54,16 @@ function TopicCard(props) {
     var partyVotingResults = '';
   }
   return (
-    <div className="topic-card">
-      <div className="topic-card-header">
+    <div
+      className={`${colors.tertiary} mt-1 mb-1 ms-2 p-1 rounded-lg relative`}
+    >
+      <div
+        className={`${colors.primary} rounded-lg p-2 h-20 overflow-y-scroll`}
+      >
         {/* eslint-disable-next-line camelcase */}
-        <Link to={`/sangiin_topic_details/${meetingId}/${topic_title}`}>
-          {/* eslint-disable-next-line camelcase */}
-          <h3>{topic_title}</h3>
-        </Link>
-        {/* eslint-disable-next-line camelcase, max-len */}
-        <Link
-          className="jump-to-topic-detail-icon-link"
-          to={`/topic_details/${meetingId}/${topic_title}`}
-        >
-          <GrLinkNext className="jump-icon" />
-        </Link>
+        <h4 className="text-sm">{topic_title}</h4>
       </div>
-      <div className="topic-card-content">
+      <div className="pt-2 justify-around flex flex-wrap">
         {wholeResultChart}
         {partyVotingResults}
       </div>
@@ -86,6 +79,5 @@ TopicCard.propTypes = {
     whole_result: Proptypes.oneOfType([Proptypes.string, Proptypes.element]),
     voting_results: Proptypes.arrayOf(Proptypes.element),
   }).isRequired,
-  meetingId: Proptypes.string.isRequired,
 };
 export default TopicCard;

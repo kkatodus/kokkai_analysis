@@ -84,18 +84,19 @@ def clean_repr_name(repr_name):
 	return repr_name
 
 for topic in topics:
-	create_dir(os.path.join(OUTPUT_DIR, topic))
 	for party in repr_dict.keys():
 		for repr in repr_dict[party]:
 			repr_name = repr['name']
 			repr_name = clean_repr_name(repr_name)
+			create_dir(os.path.join(OUTPUT_DIR, repr_name))
+			if os.path.exists(os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json")):
+				print('Already collected', repr_name, topic, party)
+				continue
 			print(f"Collecting speeches for {repr_name}")
 			conditions_list = [f"any={topic}",f"speaker={repr_name}",'recordPacking=json','maximumRecords=100']
 			speeches = mcc.make_requests(conditions_list)
 			speeches = list(iterate_speeches(speeches))
-			if len(speeches) == 0:
-				continue
 			output_json = {'repr_name': repr_name, 'speeches': speeches}
-			write_json(output_json, os.path.join(OUTPUT_DIR, topic, f"{repr_name}.json"))
+			write_json(output_json, os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json"))
 		
 # %%
