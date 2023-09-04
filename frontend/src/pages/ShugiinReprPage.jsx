@@ -69,6 +69,7 @@ export default function ShugiinReprPage() {
       backTo="/shugiin_menu"
       pageTitle="議員一覧"
       MainContent={kaihaAccordions}
+      extraStyles={{ content: 'flex flex-col items-center' }}
     />
   );
 }

@@ -5,6 +5,7 @@ import StackedBarChart from './StackedBarChart';
 import '../styles/components/topic_card.css';
 import '../styles/other/animations.css';
 import { colors } from '../resource/styling';
+import { getSangiinHoureiLink } from '../resource/resources';
 
 /* eslint-disable camelcase */
 /* eslint-disable no-var */
@@ -15,7 +16,7 @@ import { colors } from '../resource/styling';
  * @return {JSX.Element}
  */
 function TopicCard(props) {
-  const { topic } = props;
+  const { topic, meetingId } = props;
   const {
     topic_title,
     individual_voting_results,
@@ -54,7 +55,8 @@ function TopicCard(props) {
     var partyVotingResults = '';
   }
   return (
-    <div
+    <a
+      href={getSangiinHoureiLink(meetingId.substring(1, 4))}
       className={`${colors.tertiary} mt-1 mb-1 ms-2 p-1 rounded-lg relative`}
     >
       <div
@@ -67,7 +69,7 @@ function TopicCard(props) {
         {wholeResultChart}
         {partyVotingResults}
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -76,8 +78,12 @@ TopicCard.propTypes = {
     individual_voting_results: Proptypes.bool,
     topic_title: Proptypes.string,
     topic_data: Proptypes.string,
-    whole_result: Proptypes.oneOfType([Proptypes.string, Proptypes.element]),
-    voting_results: Proptypes.arrayOf(Proptypes.element),
+    whole_result: Proptypes.oneOfType([Proptypes.string, Proptypes.object]),
+    voting_results: Proptypes.oneOfType([
+      Proptypes.arrayOf(Proptypes.object),
+      Proptypes.number,
+    ]),
   }).isRequired,
+  meetingId: Proptypes.string.isRequired,
 };
 export default TopicCard;

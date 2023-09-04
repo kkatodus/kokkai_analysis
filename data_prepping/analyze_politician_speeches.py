@@ -43,11 +43,11 @@ lower_house_meeting_dict = read_json(os.path.join(lower_repr_dir, lower_repr_fil
 upper_repr_dir = os.path.join(UPPER_HOUSE_DATA_DIR, 'repr_list')
 upper_repr_file = os.listdir(upper_repr_dir)[0]
 upper_house_meeting_dict = read_json(os.path.join(upper_repr_dir, upper_repr_file))
+repr_dict = lower_house_meeting_dict['reprs']
 # %%
 #collecting the speeches for each politician
 mcc = MeetingConvoCollector("https://kokkai.ndl.go.jp/api/speech?")
 topics = ['防衛', '少子化', 'LGBT', '移民', 'エネルギー']
-repr_dict = lower_house_meeting_dict['reprs']
 
 def extract_opinions(speech, target_class = ['意見文']):
 	speech_segments = speech.split('。')
@@ -84,7 +84,7 @@ def iterate_speeches(request):
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
 	return repr_name
-
+# %%
 for topic in topics:
 	for party in repr_dict.keys():
 		for repr in repr_dict[party]:
@@ -97,8 +97,25 @@ for topic in topics:
 			print(f"Collecting speeches for {repr_name}")
 			conditions_list = [f"any={topic}",f"speaker={repr_name}",'recordPacking=json','maximumRecords=100']
 			speeches = mcc.make_requests(conditions_list)
+			print('iterating speeches')
 			speeches = iterate_speeches(speeches)
+			print('iterated speeches')
 			output_json = {'repr_name': repr_name, 'speeches': speeches}
 			write_json(output_json, os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json"))
 		
+# %%
+#create a summary json for the repr opinions data
+summary_dict = {'reprs':[]}
+for party in repr_dict.keys():
+	for repr in repr_dict[party]:
+		repr_name = repr['name']
+		repr_name = clean_repr_name(repr_name)
+		repr_dir_path = os.path.join(OUTPUT_DIR, repr_name)
+		if not os.path.exists(repr_dir_path):
+			continue
+		tags = [filename.split('.')[0] for filename in os.listdir(repr_dir_path)]
+		if len(tags) == 0:
+			continue
+		summary_dict['reprs'].append({'name': repr_name, 'tags': tags, 'party': party})
+write_json(summary_dict, os.path.join(OUTPUT_DIR, 'summary.json'))
 # %%

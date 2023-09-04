@@ -15,3 +15,6 @@ export const SangiinAbbrev2Kaiha = {
   無: '無所属',
   国民: '国民民主党',
 };
+
+export const getSangiinHoureiLink = (meetingNum) =>
+  `https://www.shugiin.go.jp/internet/itdb_housei.nsf/html/housei/kaiji${meetingNum}_l.htm`;

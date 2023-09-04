@@ -56,6 +56,7 @@ export default function SangiinCommitteePage() {
       backTo="/sangiin_menu"
       pageTitle="委員会一覧"
       MainContent={comAccordions}
+      extraStyles={{ content: 'flex flex-col items-center' }}
     />
   );
 }

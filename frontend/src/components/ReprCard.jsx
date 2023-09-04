@@ -1,6 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import CardItem from './basic/CardItem';
+import TagsContainer from './basic/Tag/TagContainer';
 
 function ReprCard(props) {
   /* eslint-disable no-unused-vars */
@@ -15,6 +16,7 @@ function ReprCard(props) {
     link,
     numberOfTermsLower,
     numberofTermsUpper,
+    tags,
   } = props;
   const cardContent = (
     <div>
@@ -25,11 +27,13 @@ function ReprCard(props) {
       {period ? <p>任期満了：{period}</p> : ''}
       {numberOfTermsLower ? <p>衆議院当選回数：{numberOfTermsLower}</p> : ''}
       {numberofTermsUpper ? <p>参議院当選回数：{numberofTermsUpper}</p> : ''}
+      {tags ? <TagsContainer tags={tags} /> : ''}
     </div>
   );
   return (
     <CardItem
       key={`${kaiha}-${name}-${district}`}
+      link={link}
       cardTitle={name}
       cardContent={cardContent}
     />
@@ -46,6 +50,7 @@ ReprCard.defaultProps = {
   link: null,
   numberOfTermsLower: null,
   numberofTermsUpper: null,
+  tags: [],
 };
 ReprCard.propTypes = {
   kaiha: Proptypes.string,
@@ -58,5 +63,6 @@ ReprCard.propTypes = {
   link: Proptypes.string,
   numberOfTermsLower: Proptypes.number,
   numberofTermsUpper: Proptypes.number,
+  tags: Proptypes.arrayOf(Proptypes.string),
 };
 export default ReprCard;

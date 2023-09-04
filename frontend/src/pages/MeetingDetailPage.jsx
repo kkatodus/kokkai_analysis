@@ -59,6 +59,7 @@ function MeetingDetailPage() {
       pageSubtitle={meeting.period}
       MainContent={content}
       backTo="/sangiin_meetings"
+      extraStyles={{ content: 'items-center' }}
     />
   );
 }

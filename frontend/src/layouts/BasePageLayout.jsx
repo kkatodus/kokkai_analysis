@@ -18,7 +18,7 @@ export default function BasePageLayout(props) {
         </div>
       </div>
       <div
-        className={`flex flex-col items-center relative h-7/8 overflow-y-scroll ${colors.secondary} ${extraStyles.content}`}
+        className={`relative h-7/8 overflow-y-scroll ${colors.secondary} ${extraStyles.content}`}
       >
         {MainContent}
       </div>

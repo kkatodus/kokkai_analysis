@@ -1,7 +1,5 @@
 import express from "express";
 import cors from "cors";
-import serverless from "serverless-http";
-
 const app = express();
 
 var listener = app.listen(process.env.PORT || 5000, function () {
@@ -31,5 +29,3 @@ app.use("/sangiin", sangiinRouter);
 
 import shugiinRouter from "./routes/shugiin/index.js";
 app.use("/shugiin", shugiinRouter);
-
-export const handler = serverless(app);

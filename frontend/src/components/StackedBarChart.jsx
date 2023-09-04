@@ -45,7 +45,13 @@ StackedBarChart.defaultProps = {
   height: 50,
 };
 StackedBarChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.element),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      反対: PropTypes.number,
+      賛成: PropTypes.number,
+    })
+  ),
   width: PropTypes.string,
   height: PropTypes.number,
 };

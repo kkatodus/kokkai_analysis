@@ -54,6 +54,7 @@ export default function SangiinReprPage() {
       backTo="/sangiin_menu"
       pageTitle="議員一覧"
       MainContent={kaihaAccordions}
+      extraStyles={{ content: 'flex flex-col items-center' }}
     />
   );
 }

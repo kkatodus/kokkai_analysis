@@ -34,6 +34,8 @@ export default function BaseMenuLayout(props) {
   );
 }
 
+BaseMenuLayout.defaultProps = { backTo: null };
+
 BaseMenuLayout.propTypes = {
   MenuTitle: Proptypes.string.isRequired,
   Links: Proptypes.arrayOf(
@@ -43,5 +45,5 @@ BaseMenuLayout.propTypes = {
       title: Proptypes.string,
     })
   ).isRequired,
-  backTo: Proptypes.string.isRequired,
+  backTo: Proptypes.string,
 };
