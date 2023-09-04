@@ -2,28 +2,34 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BasePageLayout from '../layouts/BasePageLayout';
 import ReprCard from '../components/ReprCard';
-import { speechEndpoint, SpeechAbbrev2Kaiha } from '../resource/resources';
+import { speechEndpoint } from '../resource/resources';
 
 function ReprOpinionMenuPage() {
   // eslint-disable-next-line no-unused-vars
-  const [reprs, setReprs] = useState([]);
+  const [summary, setSummary] = useState(null);
   useEffect(() => {
     axios({
       method: 'get',
       url: `${speechEndpoint}`,
     }).then((res) => {
-      setReprs(res.data.reprs);
+      setSummary(res.data);
     });
   }, []);
+  const parties = summary ? Object.keys(summary.reprs) : [];
 
-  const pageContent = reprs.map((repr) => (
-    <ReprCard
-      name={repr.name}
-      party={SpeechAbbrev2Kaiha[repr.party]}
-      tags={repr.tags}
-      link={`${repr.party}/${repr.name}`}
-    />
-  ));
+  const pageContent = parties.map((party) => {
+    const partyDict = summary.reprs[party];
+    const partyReprs = Object.keys(partyDict);
+    const reprCards = partyReprs.map((repr) => (
+      <ReprCard
+        name={repr}
+        party={party}
+        tags={partyDict[repr].tags}
+        link={`${party}/${repr}`}
+      />
+    ));
+    return reprCards;
+  });
   return (
     <BasePageLayout
       pageTitle="議員分析"

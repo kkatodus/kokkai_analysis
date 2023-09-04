@@ -59,6 +59,10 @@ function InfoPage() {
           よって、当サイトの内容を管理者の承諾を得ずに使用することは禁止します。
         </p>
       </div>
+      <div className="info-content">
+        <h2 className="info-subtitle">お問い合わせ</h2>
+        <p>kokkai.doc[アット]gmail.com</p>
+      </div>
     </div>
   );
   return (

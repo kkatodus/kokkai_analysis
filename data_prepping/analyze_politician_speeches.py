@@ -64,9 +64,12 @@ def extract_opinions(speech, target_class = ['意見文']):
 
 def iterate_speeches(request):
 	output_array = []
-	for record in request:
+	print(f'Got {len(request)} records')
+	for idx, record in enumerate(request):
+		print(f"Processing record {idx+1} of {len(request)}")
 		if record['numberOfRecords'] == 0:
 			continue
+		print('speech record length', len(record['speechRecord']))
 		for speech in record['speechRecord']:
 			speech_id = speech['speechID']
 			house_name = speech['nameOfHouse']
@@ -79,7 +82,11 @@ def iterate_speeches(request):
 			if len(extracted_opinions) > 0:
 				speech_dict = {'speech_id': speech_id, 'house_name': house_name, 'meeting_name': meeting_name, 'date': date, 'speech_text': speech_text, 'speech_url': speech_url, 'speaker_group':speaker_group,'extracted_opinions': extracted_opinions}
 				output_array.append(speech_dict)
-	return output_array
+			if len(output_array) > 0 and len(output_array) % 80 == 0:
+				print('yielding')
+				yield output_array
+				output_array = []
+	yield output_array
 
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
@@ -90,34 +97,42 @@ for party in repr_dict.keys():
 		for topic in topics:
 			repr_name = repr['name']
 			repr_name = clean_repr_name(repr_name)
-			create_dir(os.path.join(OUTPUT_DIR, repr_name))
-			if os.path.exists(os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json")):
+			if os.path.exists(os.path.join(OUTPUT_DIR, party, repr_name, topic)):
 				print('Already collected', repr_name, topic, party)
 				continue
+			
 			print(f"Collecting speeches for {repr_name}")
 			conditions_list = [f"any={topic}",f"speaker={repr_name}",'recordPacking=json','maximumRecords=100']
-			speeches = mcc.make_requests(conditions_list)
+			speeches = mcc.make_requests(conditions_list)[:100]
 			print('iterating speeches')
-			speeches = iterate_speeches(speeches)
-			if len(speeches) == 0:
-				continue
-			print('iterated speeches')
-			output_json = {'repr_name': repr_name, 'speeches': speeches}
-			write_json(output_json, os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json"))
+			for idx, speeches in enumerate(iterate_speeches(speeches)):
+				if len(speeches) == 0:
+					continue
+				create_dir(os.path.join(OUTPUT_DIR, party, repr_name, topic))
+				output_json = {'repr_name': repr_name, 'speeches': speeches}
+				print(f"Writing {idx}th file for {repr_name}")
+				write_json(output_json, os.path.join(OUTPUT_DIR,party,  repr_name, topic, f"{idx}.json"))
 		
 # %%
 #create a summary json for the repr opinions data
-summary_dict = {'reprs':[]}
+summary_dict = {'reprs':{}}
 for party in repr_dict.keys():
+	summary_dict['reprs'][party] = {}
 	for repr in repr_dict[party]:
 		repr_name = repr['name']
 		repr_name = clean_repr_name(repr_name)
-		repr_dir_path = os.path.join(OUTPUT_DIR, repr_name)
+		repr_dir_path = os.path.join(OUTPUT_DIR,party, repr_name)
 		if not os.path.exists(repr_dir_path):
 			continue
-		tags = [filename.split('.')[0] for filename in os.listdir(repr_dir_path)]
+		tags = [dirname for dirname in os.listdir(repr_dir_path)]
 		if len(tags) == 0:
 			continue
-		summary_dict['reprs'].append({'name': repr_name, 'tags': tags, 'party': party})
+		summary_dict['reprs'][party][repr_name] = {}
+		summary_dict['reprs'][party][repr_name]['tags'] = tags
+		summary_dict['reprs'][party][repr_name]['number_of_files'] = {}
+		for tag in tags:
+			topic_dir = os.path.join(repr_dir_path, tag)
+			number_of_files = len(os.listdir(topic_dir))
+			summary_dict['reprs'][party][repr_name]['number_of_files'][tag] = number_of_files
 write_json(summary_dict, os.path.join(OUTPUT_DIR, 'summary.json'))
 # %%

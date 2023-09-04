@@ -6,28 +6,31 @@ import ReprTopicOpinionCard from '../components/ReprTopicOpinionCard';
 import { speechEndpoint } from '../resource/resources';
 
 function ReprOpinionPage() {
-  const { reprId } = useParams();
-  const [reprOpinions, setReprOpinions] = useState({});
-
+  const { reprId, party } = useParams();
+  const [reprSummary, setReprSummary] = useState(undefined);
+  console.log(reprSummary);
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${speechEndpoint}/opinion/${reprId}`,
+      url: `${speechEndpoint}/${party}/${reprId}`,
     })
       .then((res) => {
-        setReprOpinions(res.data);
+        setReprSummary(res.data);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
       });
   }, []);
-  console.log('reprOpinions', reprOpinions);
 
-  const pageContent = reprOpinions.opinions?.map((opinion) => {
-    console.log('opinion', opinion);
-    return <ReprTopicOpinionCard opinionsByTopic={opinion} />;
-  });
+  const pageContent = reprSummary?.tags.map((tag) => (
+    <ReprTopicOpinionCard
+      party={party}
+      reprName={reprId}
+      idxOptions={reprSummary.number_of_files[tag]}
+      topic={tag}
+    />
+  ));
 
   return (
     <BasePageLayout

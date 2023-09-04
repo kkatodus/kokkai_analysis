@@ -8,7 +8,7 @@ class MeetingConvoCollector:
     def __init__(self, base_url):
         self.base_url = base_url
 
-    def make_requests(self, conditions_list):
+    def make_requests(self, conditions_list, max_length=500):
         #format the conditions for the request
         conditions_link = "&".join(conditions_list)
         starting_point = 1
