@@ -1,81 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BasePageLayout from '../layouts/BasePageLayout';
 import ReprTopicOpinionCard from '../components/ReprTopicOpinionCard';
+import { speechEndpoint } from '../resource/resources';
 
 function ReprOpinionPage() {
-  const { reprId, party } = useParams();
+  const { reprId } = useParams();
+  const [reprOpinions, setReprOpinions] = useState({});
 
-  console.log(reprId, party);
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${speechEndpoint}/opinion/${reprId}`,
+    })
+      .then((res) => {
+        setReprOpinions(res.data);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+  }, []);
+  console.log('reprOpinions', reprOpinions);
 
-  const mockData = {
-    opinions: [
-      {
-        topic: '安全保障',
-        speeches: [
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-        ],
-      },
-      {
-        topic: '安全保障',
-        speeches: [
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-        ],
-      },
-      {
-        topic: '安全保障',
-        speeches: [
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-          {
-            speechLink: '',
-            opinions: ['sohlfjadkls', 'fjkdaskfjlkasd'],
-            date: '2021-01-01',
-          },
-        ],
-      },
-    ],
-  };
-
-  const pageContent = mockData.opinions.map((opinion) => (
-    <ReprTopicOpinionCard opinionsByTopic={opinion} />
-  ));
+  const pageContent = reprOpinions.opinions?.map((opinion) => {
+    console.log('opinion', opinion);
+    return <ReprTopicOpinionCard opinionsByTopic={opinion} />;
+  });
 
   return (
     <BasePageLayout

@@ -85,9 +85,9 @@ def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
 	return repr_name
 # %%
-for topic in topics:
-	for party in repr_dict.keys():
-		for repr in repr_dict[party]:
+for party in repr_dict.keys():
+	for repr in repr_dict[party]:
+		for topic in topics:
 			repr_name = repr['name']
 			repr_name = clean_repr_name(repr_name)
 			create_dir(os.path.join(OUTPUT_DIR, repr_name))
@@ -99,6 +99,8 @@ for topic in topics:
 			speeches = mcc.make_requests(conditions_list)
 			print('iterating speeches')
 			speeches = iterate_speeches(speeches)
+			if len(speeches) == 0:
+				continue
 			print('iterated speeches')
 			output_json = {'repr_name': repr_name, 'speeches': speeches}
 			write_json(output_json, os.path.join(OUTPUT_DIR, repr_name, f"{topic}.json"))

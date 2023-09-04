@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BasePageLayout from '../layouts/BasePageLayout';
 import ReprCard from '../components/ReprCard';
-import { sangiinEndpoint } from '../resource/resources';
+import { speechEndpoint, SpeechAbbrev2Kaiha } from '../resource/resources';
 
 function ReprOpinionMenuPage() {
   // eslint-disable-next-line no-unused-vars
@@ -10,67 +10,16 @@ function ReprOpinionMenuPage() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${sangiinEndpoint}commitee`,
+      url: `${speechEndpoint}`,
     }).then((res) => {
-      setReprs(res.data);
+      setReprs(res.data.reprs);
     });
   }, []);
-  const placeholder = [
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-    {
-      name: '山田太郎',
-      party: '自民党',
-      tags: ['安全保障', '外交', '経済'],
-    },
-  ];
-  const pageContent = placeholder.map((repr) => (
+
+  const pageContent = reprs.map((repr) => (
     <ReprCard
       name={repr.name}
-      party={repr.party}
+      party={SpeechAbbrev2Kaiha[repr.party]}
       tags={repr.tags}
       link={`${repr.party}/${repr.name}`}
     />
