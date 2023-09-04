@@ -18,6 +18,7 @@ var api_guide = {
     "sangiin/sangiin_party_opinions/:meeting_name/:topic_name",
   "shugiin commitees": "shugiin/commitee",
   "shugiin representatives": "shugiin/repr",
+  "speech summary": "speeches",
 };
 
 app.get("", (request, response) => {
@@ -29,3 +30,6 @@ app.use("/sangiin", sangiinRouter);
 
 import shugiinRouter from "./routes/shugiin/index.js";
 app.use("/shugiin", shugiinRouter);
+
+import speechRouter from "./routes/speeches/index.js";
+app.use("/speeches", speechRouter);
