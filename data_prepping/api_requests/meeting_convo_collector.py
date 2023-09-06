@@ -13,7 +13,6 @@ class MeetingConvoCollector:
         conditions_link = "&".join(conditions_list)
         starting_point = 1
 
-
         request_dicts_list = []
         while True:
                 request_url = self.base_url+f"startRecord={starting_point}&"+conditions_link
@@ -31,3 +30,16 @@ class MeetingConvoCollector:
                 starting_point = next_position
                 time.sleep(10)
         return request_dicts_list
+        
+    def make_one_request(self, conditions_list, starting_point=1):
+        conditions_link = "&".join(conditions_list)
+        request_url = self.base_url+f"startRecord={starting_point}&"+conditions_link
+        print(request_url)
+        response = requests.get(request_url)
+        response = response.json()
+        if "nextRecordPosition" not in response.keys():
+          print("No more records")
+          return response, None
+        next_position = response["nextRecordPosition"]
+        return response, next_position
+		

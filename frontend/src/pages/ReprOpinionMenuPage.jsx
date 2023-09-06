@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BasePageLayout from '../layouts/BasePageLayout';
 import ReprCard from '../components/ReprCard';
-import { speechEndpoint } from '../resource/resources';
+import { SpeechAbbrev2Kaiha, speechEndpoint } from '../resource/resources';
 
 function ReprOpinionMenuPage() {
   // eslint-disable-next-line no-unused-vars
@@ -23,7 +23,7 @@ function ReprOpinionMenuPage() {
     const reprCards = partyReprs.map((repr) => (
       <ReprCard
         name={repr}
-        party={party}
+        party={SpeechAbbrev2Kaiha[party]}
         tags={partyDict[repr].tags}
         link={`${party}/${repr}`}
       />

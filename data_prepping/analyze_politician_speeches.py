@@ -62,31 +62,24 @@ def extract_opinions(speech, target_class = ['意見文']):
 			extracted_segments.append(sentence)
 	return extracted_segments
 
-def iterate_speeches(request):
+def iterate_speeches(record):
 	output_array = []
-	print(f'Got {len(request)} records')
-	for idx, record in enumerate(request):
-		print(f"Processing record {idx+1} of {len(request)}")
-		if record['numberOfRecords'] == 0:
-			continue
-		print('speech record length', len(record['speechRecord']))
-		for speech in record['speechRecord']:
-			speech_id = speech['speechID']
-			house_name = speech['nameOfHouse']
-			meeting_name = speech['nameOfMeeting']
-			date = speech['date']
-			speech_text = speech['speech']
-			speech_url = speech['speechURL']
-			speaker_group = speech['speakerGroup']
-			extracted_opinions = extract_opinions(speech_text)
-			if len(extracted_opinions) > 0:
-				speech_dict = {'speech_id': speech_id, 'house_name': house_name, 'meeting_name': meeting_name, 'date': date, 'speech_text': speech_text, 'speech_url': speech_url, 'speaker_group':speaker_group,'extracted_opinions': extracted_opinions}
-				output_array.append(speech_dict)
-			if len(output_array) > 0 and len(output_array) % 80 == 0:
-				print('yielding')
-				yield output_array
-				output_array = []
-	yield output_array
+	if record['numberOfRecords'] == 0:
+		return output_array
+	print('speech record length', len(record['speechRecord']))
+	for speech in record['speechRecord']:
+		speech_id = speech['speechID']
+		house_name = speech['nameOfHouse']
+		meeting_name = speech['nameOfMeeting']
+		date = speech['date']
+		speech_text = speech['speech']
+		speech_url = speech['speechURL']
+		speaker_group = speech['speakerGroup']
+		extracted_opinions = extract_opinions(speech_text)
+		if len(extracted_opinions) > 0:
+			speech_dict = {'speech_id': speech_id, 'house_name': house_name, 'meeting_name': meeting_name, 'date': date, 'speech_text': speech_text, 'speech_url': speech_url, 'speaker_group':speaker_group,'extracted_opinions': extracted_opinions}
+			output_array.append(speech_dict)
+	return output_array
 
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
@@ -96,22 +89,26 @@ for party in repr_dict.keys():
 	for repr in repr_dict[party]:
 		for topic in topics:
 			repr_name = repr['name']
-			repr_name = clean_repr_name(repr_name)
-			if os.path.exists(os.path.join(OUTPUT_DIR, party, repr_name, topic)):
-				print('Already collected', repr_name, topic, party)
-				continue
-			
+			repr_name = clean_repr_name(repr_name)			
 			print(f"Collecting speeches for {repr_name}")
 			conditions_list = [f"any={topic}",f"speaker={repr_name}",'recordPacking=json','maximumRecords=100']
-			speeches = mcc.make_requests(conditions_list)[:100]
-			print('iterating speeches')
-			for idx, speeches in enumerate(iterate_speeches(speeches)):
+			start_point = 1
+			idx = 0
+			while True:
+				if start_point is None:
+					break
+				speeches, start_point = mcc.make_one_request(conditions_list, starting_point=start_point)[:100]
+				
+				print('iterating speeches')
+				speeches = iterate_speeches(speeches)
 				if len(speeches) == 0:
 					continue
 				create_dir(os.path.join(OUTPUT_DIR, party, repr_name, topic))
 				output_json = {'repr_name': repr_name, 'speeches': speeches}
 				print(f"Writing {idx}th file for {repr_name}")
-				write_json(output_json, os.path.join(OUTPUT_DIR,party,  repr_name, topic, f"{idx}.json"))
+				write_json(output_json, os.path.join(OUTPUT_DIR,party, repr_name, topic, f"{idx}.json"))
+				
+				idx += 1
 		
 # %%
 #create a summary json for the repr opinions data

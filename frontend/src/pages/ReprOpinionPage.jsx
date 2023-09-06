@@ -8,7 +8,6 @@ import { speechEndpoint } from '../resource/resources';
 function ReprOpinionPage() {
   const { reprId, party } = useParams();
   const [reprSummary, setReprSummary] = useState(undefined);
-  console.log(reprSummary);
   useEffect(() => {
     axios({
       method: 'get',

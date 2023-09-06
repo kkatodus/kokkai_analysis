@@ -1,1 +1,1 @@
-export const SPEECHES_DATA_DIR = "./data_speech/";
+export const SPEECHES_DATA_DIR = "./data_repr/";

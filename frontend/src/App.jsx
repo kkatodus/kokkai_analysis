@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import LandingPage from './pages/LandingPage';
 import SangiinMeetingsPage from './pages/SangiinMeetingsPage';
-import SangiinMeetingDetailPage from './pages/MeetingDetailPage';
+import SangiinMeetingDetailPage from './pages/SangiinMeetingDetailPage';
 import SangiinTopicDetailPage from './pages/SangiinTopicDetailPage';
 import InfoPage from './pages/InfoPage';
 import SangiinMenuPage from './pages/SangiinMenuPage';
