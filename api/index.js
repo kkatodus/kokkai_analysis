@@ -19,6 +19,7 @@ var api_guide = {
   "shugiin commitees": "shugiin/commitee",
   "shugiin representatives": "shugiin/repr",
   "speech summary": "speeches",
+  "position stats": "stats/position",
 };
 
 app.get("", (request, response) => {
@@ -33,3 +34,6 @@ app.use("/shugiin", shugiinRouter);
 
 import speechRouter from "./routes/speeches/index.js";
 app.use("/speeches", speechRouter);
+
+import statsRouter from "./routes/stats/index.js";
+app.use("/stats", statsRouter);
