@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 
 class GeneralScraper:
     def __init__(self, chromedriver_path):

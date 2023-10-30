@@ -1,4 +1,5 @@
 import React from 'react';
+import Div100vh from 'react-div-100vh';
 import { Link } from 'react-router-dom';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import Proptypes from 'prop-types';
@@ -7,22 +8,24 @@ import { colors } from '../resource/styling';
 export default function BasePageLayout(props) {
   const { pageTitle, backTo, MainContent, pageSubtitle, extraStyles } = props;
   return (
-    <div className="flex flex-col h-screen relative">
-      <div className={`h-1/6 flex items-center ${colors.primary}`}>
-        <Link className="back-icon" to={backTo}>
-          <MdOutlineArrowBack />
-        </Link>
-        <div>
-          <h1 className="text-2xl px-3 ">{pageTitle}</h1>
-          <h3 className="text-lg">{pageSubtitle}</h3>
+    <Div100vh>
+      <div className="flex flex-col h-[99%] relative">
+        <div className={`h-1/6 flex items-center ${colors.primary}`}>
+          <Link className="back-icon" to={backTo}>
+            <MdOutlineArrowBack />
+          </Link>
+          <div>
+            <h1 className="text-2xl px-3 ">{pageTitle}</h1>
+            <h3 className="text-lg">{pageSubtitle}</h3>
+          </div>
+        </div>
+        <div
+          className={`relative h-7/8 overflow-y-scroll ${colors.secondary} ${extraStyles.content}`}
+        >
+          {MainContent}
         </div>
       </div>
-      <div
-        className={`relative h-7/8 overflow-y-scroll ${colors.secondary} ${extraStyles.content}`}
-      >
-        {MainContent}
-      </div>
-    </div>
+    </Div100vh>
   );
 }
 

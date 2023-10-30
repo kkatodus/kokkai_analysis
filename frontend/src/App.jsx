@@ -16,13 +16,19 @@ import ShugiinCommitteePage from './pages/ShugiinCommitteePage';
 import ShugiinReprPage from './pages/ShugiinReprPage';
 import ReprOpinonMenuPage from './pages/ReprOpinionMenuPage';
 import ReprOpinionPage from './pages/ReprOpinionPage';
-import DeckPlayground from './pages/DeckPlayground';
-import StatsPage from './pages/StatsPage';
+import StatsMenuPage from './pages/StatsMenuPage';
+import PopulationPage from './pages/StatPages/PopulationPage';
 /**
  *
  * @return {JSX.Element}
  */
 function App() {
+  const appHeight = () => {
+    const doc = document.documentElement;
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+  };
+  window.addEventListener('resize', appHeight);
+  appHeight();
   return (
     <Routes>
       <Route exact path="/" element={<LandingPage />} />
@@ -49,8 +55,8 @@ function App() {
         path="repr_analysis/:party/:reprId"
         element={<ReprOpinionPage />}
       />
-      <Route exact path="deckPlayground" element={<DeckPlayground />} />
-      <Route exact path="statspage" element={<StatsPage />} />
+      <Route exact path="stats" element={<StatsMenuPage />} />
+      <Route exact path="stats/population" element={<PopulationPage />} />
     </Routes>
   );
 }

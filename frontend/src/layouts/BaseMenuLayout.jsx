@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Div100vh from 'react-div-100vh';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import Proptypes from 'prop-types';
 import { colors } from '../resource/styling';
@@ -17,22 +18,24 @@ export default function BaseMenuLayout(props) {
     </Link>
   ));
   return (
-    <div
-      className={`h-screen w-screen relative flex justify-center items-center ${colors.secondary} `}
-    >
-      {backTo && (
-        <Link className="back-icon absolute top-0 left-0 p-2" to={backTo}>
-          <MdOutlineArrowBack className="menu-icon" />
-        </Link>
-      )}
+    <Div100vh>
+      <div
+        className={`h-[99%] w-[100%] relative flex justify-center items-center ${colors.secondary} `}
+      >
+        {backTo && (
+          <Link className="back-icon absolute top-0 left-0 p-2" to={backTo}>
+            <MdOutlineArrowBack className="menu-icon" />
+          </Link>
+        )}
 
-      <div className="h-3/5 w-screen flex flex-col items-center justify-center">
-        <h1 className="text-5xl">{MenuTitle}</h1>
-        <div className="flex item-center justify-center flex-wrap">
-          {linksComponents}
+        <div className="h-3/5 w-screen flex flex-col items-center justify-center">
+          <h1 className="text-5xl">{MenuTitle}</h1>
+          <div className="flex item-center justify-center flex-wrap">
+            {linksComponents}
+          </div>
         </div>
       </div>
-    </div>
+    </Div100vh>
   );
 }
 

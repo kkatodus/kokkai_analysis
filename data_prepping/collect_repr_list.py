@@ -29,7 +29,7 @@ create_dir(LOWER_OUTPUT_DIR)
 create_dir(UPPER_SPEECH_OUTPUT_DIR)
 create_dir(LOWER_SPEECH_OUTPUT_DIR)
 
-CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
+CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")	
 
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = False

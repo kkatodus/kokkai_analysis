@@ -5,6 +5,7 @@ import {
   RiGovernmentFill,
   RiUserSearchFill,
 } from 'react-icons/ri';
+import { BsClipboardDataFill } from 'react-icons/bs';
 import BaseMenuLayout from '../../layouts/BaseMenuLayout';
 
 const LandingMenuIcon = [
@@ -22,6 +23,11 @@ const LandingMenuIcon = [
     link: '/repr_analysis',
     icon: <RiUserSearchFill className="menu-icon" />,
     title: '議員分析',
+  },
+  {
+    link: '/stats',
+    icon: <BsClipboardDataFill className="menu-icon" />,
+    title: '統計',
   },
   {
     link: '/page_info',
