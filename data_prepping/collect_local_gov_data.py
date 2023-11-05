@@ -16,10 +16,9 @@ gs = GeneralScraper()
 scraping_resource_path = os.path.join(RESOURCE_DIR, 'local_gov_repr_scrape.json')
 scraping_resource = read_json(scraping_resource_path)
 
-def prepare_urls_for_city(city_name):
+def all_reprs_on_one_page():
 	urls = []
 	xpath = ''
-	gs.get_url('https://www.google.com/search?q=' + city_name + '議会議員')
 	while True:
 		url = input('Get all the urls and press 0 when you are done. You can also press x to change the xpath.If you leave the input black, the city will be skipped.')
 		if url == '0':
@@ -29,6 +28,23 @@ def prepare_urls_for_city(city_name):
 			continue
 		urls.append(url)
 	return urls, xpath
+
+def all_reprs_on_multiple_pages():
+	urls_to_main_pages = []
+	xpath_to_individual_pages = ''
+	xpath_to_repr_info = ''
+	while True:
+		url = input('Get all the urls and press 0 when you are done. \nYou can also type "xind" to change the xpath to the links to individual pages. \n You can also type "xpage" to enter the xpath to repr info. If you leave the list empty the city will be skipped')
+		if url == '0':
+			break
+		if url == 'xind':
+			xpath_to_individual_pages = input('Enter the xpath for the links to individual pages.')
+			continue
+		if url == 'xpage':
+			xpath_to_repr_info = input('Enter the xpath for the representative info.')
+			continue
+		urls_to_main_pages.append(url)
+	return urls_to_main_pages, xpath_to_individual_pages, xpath_to_repr_info
 
 def get_text_from_local_repr_page(city_name):
 	city_resource = scraping_resource[city_name]
@@ -44,15 +60,31 @@ def get_text_from_local_repr_page(city_name):
 
 #%%
 for idx, city_name in enumerate(scraping_resource.keys()):
+	do_it_again = False
+	while True:
 
-	print(city_name, f'{idx}/{len(scraping_resource.keys())}')
-	if 'urls' in scraping_resource[city_name].keys():
-		continue
-	urls, xpath = prepare_urls_for_city(city_name)
-	if urls == []:
-		continue
-	scraping_resource[city_name]['urls'] = urls
-	scraping_resource[city_name]['reprs_xpath'] = xpath
+		print(city_name, f'{idx}/{len(scraping_resource.keys())}')
+		if 'urls' in scraping_resource[city_name].keys() and not do_it_again:
+			break
+		gs.get_url('https://www.google.com/search?q=' + city_name + '議会議員')
+		if input('They have individual pages for reprs, type "ind", otherwise press enter') == 'ind':
+			urls_to_main_pages, xpath_to_individual_pages, xpath_to_repr_info = all_reprs_on_multiple_pages()
+			scraping_resource[city_name]['multiple_pages'] = True
+			scraping_resource[city_name]['urls'] = urls_to_main_pages
+			scraping_resource[city_name]['ind_reprs_xpath'] = xpath_to_individual_pages
+			scraping_resource[city_name]['ind_reprs_info_xpath'] = xpath_to_repr_info
+
+		else:
+			urls, xpath = all_reprs_on_one_page()
+			scraping_resource[city_name]['urls'] = urls
+			scraping_resource[city_name]['reprs_xpath'] = xpath
+		approved = input(f'The following is the final result\n {city_name}\n{scraping_resource[city_name]}\nDo you want to continue?(y/n)') 
+		if approved == 'y' or approved == '':
+			break
+		else:
+			print('Please enter the information again.')
+			do_it_again = True
+			continue
 	write_json(scraping_resource, scraping_resource_path)
 
 #%%

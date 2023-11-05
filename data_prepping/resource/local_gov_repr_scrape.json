@@ -769,7 +769,9 @@
         "lat": 42.980407,
         "long": 140.611175,
         "building": "共和町役場",
-        "address": "岩内郡共和町南幌似38-2"
+        "address": "岩内郡共和町南幌似38-2",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "北海道　岩内町": {
         "lat": 42.979761,
@@ -785,7 +787,9 @@
         "lat": 43.063212,
         "long": 140.498857,
         "building": "泊村役場",
-        "address": "古宇郡泊村大字茅沼村字臼別191-7"
+        "address": "古宇郡泊村大字茅沼村字臼別191-7",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "北海道　神恵内村": {
         "lat": 43.143365,
@@ -1162,13 +1166,17 @@
         "lat": 44.725096,
         "long": 142.262458,
         "building": "音威子府村役場",
-        "address": "中川郡音威子府村字音威子府444-1"
+        "address": "中川郡音威子府村字音威子府444-1",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "北海道　中川町": {
         "lat": 44.811488,
         "long": 142.071409,
         "building": "中川町役場",
-        "address": "中川郡中川町字中川337"
+        "address": "中川郡中川町字中川337",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "北海道　幌加内町": {
         "lat": 44.009812,
@@ -2024,7 +2032,6 @@
         "building": "つがる市役所",
         "address": "つがる市木造若緑61-1",
         "urls": [
-            "https://www.city.tsugaru.aomori.jp/soshiki/shigikai/syoukai/1860.html",
             "https://www.city.tsugaru.aomori.jp/soshiki/shigikai/syoukai/1860.html"
         ],
         "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
@@ -2243,7 +2250,9 @@
         "lat": 41.522388,
         "long": 140.90483,
         "building": "大間町役場",
-        "address": "下北郡大間町大字大間字奥戸下道20-4"
+        "address": "下北郡大間町大字大間字奥戸下道20-4",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "青森県　東通村": {
         "lat": 41.277726,
@@ -2269,7 +2278,9 @@
         "lat": 41.429718,
         "long": 140.859175,
         "building": "佐井村役場",
-        "address": "下北郡佐井村大字佐井字糠森20"
+        "address": "下北郡佐井村大字佐井字糠森20",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "青森県　三戸町": {
         "lat": 40.378423,
@@ -2346,1303 +2357,2219 @@
         "lat": 39.639554,
         "long": 141.946115,
         "building": "宮古市役所",
-        "address": "宮古市宮町1-1-30"
+        "address": "宮古市宮町1-1-30",
+        "urls": [
+            "https://www.city.miyako.iwate.jp/gikai/giin_meibo.html"
+        ],
+        "reprs_xpath": "/html/body/table/tbody/tr/td/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[1]/table/tbody/tr/td/div[2]/table/tbody"
     },
     "岩手県　大船渡市": {
         "lat": 39.081901,
         "long": 141.708547,
         "building": "大船渡市役所",
-        "address": "大船渡市盛町字宇津野沢15"
+        "address": "大船渡市盛町字宇津野沢15",
+        "urls": [
+            "https://www.city.ofunato.iwate.jp/uploaded/attachment/33361.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　花巻市": {
         "lat": 39.388609,
         "long": 141.116854,
         "building": "花巻市役所",
-        "address": "花巻市花城町9-30"
+        "address": "花巻市花城町9-30",
+        "urls": [
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004012.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004013.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004014.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004015.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004016.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004017.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004018.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004019.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004020.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004021.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004022.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004023.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004024.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004025.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004026.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004027.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004028.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004029.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004030.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004031.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004032.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004033.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004034.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004035.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1004036.html",
+            "https://www.city.hanamaki.iwate.jp/shigikai/1004008/1004011/1017072.html"
+        ],
+        "reprs_xpath": "//*[@id=\"voice\"]"
     },
     "岩手県　北上市": {
         "lat": 39.286817,
         "long": 141.113157,
         "building": "北上市役所",
-        "address": "北上市芳町1-1"
+        "address": "北上市芳町1-1",
+        "urls": [
+            "https://www.city.kitakami.iwate.jp/life/kitakamishigikai/giinnoshokai/16723.html",
+            "https://www.city.kitakami.iwate.jp/life/kitakamishigikai/giinnoshokai/16724.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "岩手県　久慈市": {
         "lat": 40.190466,
         "long": 141.775644,
         "building": "久慈市役所",
-        "address": "久慈市川崎町1-1"
+        "address": "久慈市川崎町1-1",
+        "urls": [
+            "https://www.city.kuji.iwate.jp/gikai/member/member/index.html"
+        ],
+        "reprs_xpath": "//*[@id=\"Main\"]/div[3]/div/div/div[1]/section/div[2]/ul"
     },
     "岩手県　遠野市": {
         "lat": 39.331014,
         "long": 141.532352,
         "building": "遠野市役所",
-        "address": "遠野市中央通り9-1"
+        "address": "遠野市中央通り9-1",
+        "urls": [
+            "https://www.city.tono.iwate.jp/index.cfm/49,13513,266,557,html"
+        ],
+        "reprs_xpath": "//*[@id=\"CenterArea\"]/div[1]/section/div[1]/div/table/tbody"
     },
     "岩手県　一関市": {
         "lat": 38.934754,
         "long": 141.126759,
         "building": "一関市役所",
-        "address": "一関市竹山町7-2"
+        "address": "一関市竹山町7-2",
+        "urls": [
+            "https://www.city.ichinoseki.iwate.jp/index.cfm/41,0,250,800,html"
+        ],
+        "reprs_xpath": "//*[@id=\"CenterArea\"]/div[2]"
     },
     "岩手県　陸前高田市": {
         "lat": 39.020413,
         "long": 141.633321,
         "building": "陸前高田市役所",
-        "address": "陸前高田市高田町字下和野100番地"
+        "address": "陸前高田市高田町字下和野100番地",
+        "urls": [
+            "https://www.city.rikuzentakata.iwate.jp/soshiki/gikaijimukyoku/3/6026.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[2]/div/table"
     },
     "岩手県　釜石市": {
         "lat": 39.27581,
         "long": 141.885716,
         "building": "釜石市役所",
-        "address": "釜石市只越町3-9-13"
+        "address": "釜石市只越町3-9-13",
+        "urls": [
+            "https://www.city.kamaishi.iwate.jp/shigikai/docs/2023090600033/"
+        ],
+        "reprs_xpath": "//*[@id=\"content\"]/article/div[2]/div"
     },
     "岩手県　二戸市": {
         "lat": 40.271193,
         "long": 141.304805,
         "building": "二戸市役所",
-        "address": "二戸市福岡字川又47"
+        "address": "二戸市福岡字川又47",
+        "urls": [
+            "https://www.city.ninohe.lg.jp/Link/Pdf/2882"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　八幡平市": {
         "lat": 39.956511,
         "long": 141.07112,
         "building": "八幡平市役所",
-        "address": "八幡平市野駄21-170"
+        "address": "八幡平市野駄21-170",
+        "urls": [
+            "https://www.city.hachimantai.lg.jp/site/gikai/1400.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_a\"]"
     },
     "岩手県　奥州市": {
         "lat": 39.144506,
         "long": 141.139116,
         "building": "奥州市役所",
-        "address": "奥州市水沢大手町1-1"
+        "address": "奥州市水沢大手町1-1",
+        "urls": [
+            "https://www.city.oshu.iwate.jp/gikai/meibo/1243.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[2]/div/table"
     },
     "岩手県　滝沢市": {
         "lat": 39.734739,
         "long": 141.077065,
         "building": "滝沢市役所",
-        "address": "滝沢市中鵜飼55"
+        "address": "滝沢市中鵜飼55",
+        "urls": [
+            "https://www.city.takizawa.iwate.jp/var/rev0/0133/3758/takizawa.giin.meibo.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　雫石町": {
         "lat": 39.696319,
         "long": 140.975779,
         "building": "雫石町役場",
-        "address": "岩手郡雫石町千刈田5-1"
+        "address": "岩手郡雫石町千刈田5-1",
+        "urls": [
+            "https://www.town.shizukuishi.iwate.jp/tag/%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF/"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　葛巻町": {
         "lat": 40.040086,
         "long": 141.438203,
         "building": "葛巻町役場",
-        "address": "岩手郡葛巻町葛巻16-1-1"
+        "address": "岩手郡葛巻町葛巻16-1-1",
+        "urls": [
+            "https://www.town.kuzumaki.iwate.jp/docs/2015111700143/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentContainer\"]"
     },
     "岩手県　岩手町": {
         "lat": 39.972768,
         "long": 141.212166,
         "building": "岩手町役場",
-        "address": "岩手郡岩手町大字五日市10-44"
+        "address": "岩手郡岩手町大字五日市10-44",
+        "urls": [
+            "https://town.iwate.iwate.jp/gikai/introduction/names/"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "岩手県　紫波町": {
         "lat": 39.554536,
         "long": 141.155796,
         "building": "紫波町役場",
-        "address": "紫波郡紫波町紫波中央駅前2-3-1"
+        "address": "紫波郡紫波町紫波中央駅前2-3-1",
+        "urls": [
+            "https://img.japandx.co.jp/shiwatown/shiwa-town/material/files/group/23/R5meibo.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　矢巾町": {
         "lat": 39.606006,
         "long": 141.143001,
         "building": "矢巾町役場",
-        "address": "紫波郡矢巾町大字南矢幅第13地割123番地"
+        "address": "紫波郡矢巾町大字南矢幅第13地割123番地",
+        "urls": [
+            "https://www.town.yahaba.iwate.jp/gikai/2023061600024/files/giin_meibo_R050701.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　西和賀町": {
         "lat": 39.317906,
         "long": 140.778754,
         "building": "西和賀町役場",
-        "address": "和賀郡西和賀町川尻40地割40番地71"
+        "address": "和賀郡西和賀町川尻40地割40番地71",
+        "urls": [
+            "https://www.town.nishiwaga.lg.jp/gyosei_shigoto_sangyo/chogikai/2/1877.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[2]/div/table/caption/div/table/tbody"
     },
     "岩手県　金ケ崎町": {
         "lat": 39.195687,
         "long": 141.116408,
         "building": "金ケ崎町役場",
-        "address": "胆沢郡金ケ崎町西根南町22-1"
+        "address": "胆沢郡金ケ崎町西根南町22-1",
+        "urls": [
+            "https://www.town.kanegasaki.iwate.jp/gikai/files/kousei.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　平泉町": {
         "lat": 38.986781,
         "long": 141.11398,
         "building": "平泉町役場",
-        "address": "西磐井郡平泉町平泉字志羅山45-2"
+        "address": "西磐井郡平泉町平泉字志羅山45-2",
+        "urls": [
+            "https://www.town.hiraizumi.iwate.jp/index.cfm/27,0,135,294,html"
+        ],
+        "reprs_xpath": "//*[@id=\"CenterArea\"]/div[1]/div[1]/div/div[3]/table"
     },
     "岩手県　住田町": {
         "lat": 39.142209,
         "long": 141.575052,
         "building": "住田町役場",
-        "address": "気仙郡住田町世田米字川向88-1"
+        "address": "気仙郡住田町世田米字川向88-1",
+        "urls": [
+            "https://www.town.sumita.iwate.jp/docs/2015021700073/",
+            "//*[@id=\"contentBody\"]/div/div[2]/table/tbody"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　大槌町": {
         "lat": 39.358196,
         "long": 141.899731,
         "building": "大槌町役場",
-        "address": "上閉伊郡大槌町上町1番3号"
+        "address": "上閉伊郡大槌町上町1番3号",
+        "urls": [
+            "https://www.town.otsuchi.iwate.jp/gyosei/docs/447039.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/article"
     },
     "岩手県　山田町": {
         "lat": 39.467619,
         "long": 141.948923,
         "building": "山田町役場",
-        "address": "下閉伊郡山田町八幡町3-20"
+        "address": "下閉伊郡山田町八幡町3-20",
+        "urls": [
+            "https://www.town.yamada.iwate.jp/docs/164.html"
+        ],
+        "reprs_xpath": "//*[@id=\"content\"]/article"
     },
     "岩手県　岩泉町": {
         "lat": 39.843204,
         "long": 141.796675,
         "building": "岩泉町役場",
-        "address": "下閉伊郡岩泉町岩泉字惣畑59-5"
+        "address": "下閉伊郡岩泉町岩泉字惣畑59-5",
+        "urls": [
+            "https://www.town.iwaizumi.lg.jp/docs/2016021700179/"
+        ],
+        "reprs_xpath": "//*[@id=\"content\"]/article/div[3]/div/div/table"
     },
     "岩手県　田野畑村": {
         "lat": 39.930454,
         "long": 141.888864,
         "building": "田野畑村役場",
-        "address": "下閉伊郡田野畑村田野畑143-1"
+        "address": "下閉伊郡田野畑村田野畑143-1",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "岩手県　普代村": {
         "lat": 40.005164,
         "long": 141.886014,
         "building": "普代村役場",
-        "address": "下閉伊郡普代村第9地割字銅屋13-2"
+        "address": "下閉伊郡普代村第9地割字銅屋13-2",
+        "urls": [
+            "https://www.vill.fudai.iwate.jp/fs/3/7/5/3/_/R5.6.26____.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　軽米町": {
         "lat": 40.326678,
         "long": 141.460349,
         "building": "軽米町役場",
-        "address": "九戸郡軽米町大字軽米10-85"
+        "address": "九戸郡軽米町大字軽米10-85",
+        "urls": [
+            "http://www.town.karumai.iwate.jp/article/docs/%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　野田村": {
         "lat": 40.110272,
         "long": 141.817674,
         "building": "野田村役場",
-        "address": "九戸郡野田村大字野田第20地割14"
+        "address": "九戸郡野田村大字野田第20地割14",
+        "urls": [
+            "https://www.vill.noda.iwate.jp/material/files/group/28/giinmeibo0509.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　九戸村": {
         "lat": 40.211356,
         "long": 141.418982,
         "building": "九戸村役場",
-        "address": "九戸郡九戸村大字伊保内第10地割11番地6"
+        "address": "九戸郡九戸村大字伊保内第10地割11番地6",
+        "urls": [
+            "https://vill.kunohe.iwate.jp/fs/8/4/8/2/_/%E4%B9%9D%E6%88%B8%E6%9D%91%E8%AD%B0%E4%BC%9A%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF(R5.7.1).pdf"
+        ],
+        "reprs_xpath": ""
     },
     "岩手県　洋野町": {
         "lat": 40.408298,
         "long": 141.71865,
         "building": "洋野町役場",
-        "address": "九戸郡洋野町種市23-27"
+        "address": "九戸郡洋野町種市23-27",
+        "urls": [
+            "https://www.town.hirono.iwate.jp/doc/2022012700028/"
+        ],
+        "reprs_xpath": "//*[@id=\"content\"]/article/div[2]/div/div/table/tbody"
     },
     "岩手県　一戸町": {
         "lat": 40.212733,
         "long": 141.29546,
         "building": "一戸町役場",
-        "address": "二戸郡一戸町高善寺字大川鉢24-9"
+        "address": "二戸郡一戸町高善寺字大川鉢24-9",
+        "urls": [
+            "https://www.town.ichinohe.iwate.jp/soshikikarasagasu/gikaijimukyoku/chogikai/373.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div/div/table/tbody"
     },
     "宮城県　仙台市": {
         "lat": 38.268008,
         "long": 140.869617,
         "building": "仙台市役所",
-        "address": "仙台市青葉区国分町3-7-1"
+        "address": "仙台市青葉区国分町3-7-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/aoba/index.html",
+            "https://www.gikai.city.sendai.jp/list/district/miyagino/index.html",
+            "https://www.gikai.city.sendai.jp/list/district/wakabayashi/index.html",
+            "https://www.gikai.city.sendai.jp/list/district/taihaku/index.html",
+            "https://www.gikai.city.sendai.jp/list/district/izumi/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article"
     },
     "宮城県　仙台市青葉区": {
         "lat": 38.269087,
         "long": 140.870378,
         "building": "仙台市青葉区役所",
-        "address": "仙台市青葉区上杉1-5-1"
+        "address": "仙台市青葉区上杉1-5-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/aoba/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article"
     },
     "宮城県　仙台市宮城野区": {
         "lat": 38.266189,
         "long": 140.909841,
         "building": "仙台市宮城野区役所",
-        "address": "仙台市宮城野区五輪2-12-35"
+        "address": "仙台市宮城野区五輪2-12-35",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/miyagino/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article/div"
     },
     "宮城県　仙台市若林区": {
         "lat": 38.24418,
         "long": 140.900748,
         "building": "仙台市若林区役所",
-        "address": "仙台市若林区保春院前丁3-1"
+        "address": "仙台市若林区保春院前丁3-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/wakabayashi/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article/div"
     },
     "宮城県　仙台市太白区": {
         "lat": 38.224395,
         "long": 140.877212,
         "building": "仙台市太白区役所",
-        "address": "仙台市太白区長町南3-1-15"
+        "address": "仙台市太白区長町南3-1-15",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/taihaku/index.html",
+            "//*[@id=\"main\"]/article/div/ul/li/a"
+        ],
+        "ind_reprs_xpath": "",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article/div"
     },
     "宮城県　仙台市泉区": {
         "lat": 38.326361,
         "long": 140.881615,
         "building": "仙台市泉区役所",
-        "address": "仙台市泉区泉中央2-1-1"
+        "address": "仙台市泉区泉中央2-1-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.gikai.city.sendai.jp/list/district/izumi/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/article/div"
     },
     "宮城県　石巻市": {
         "lat": 38.434457,
         "long": 141.302906,
         "building": "石巻市役所",
-        "address": "石巻市穀町14-1"
+        "address": "石巻市穀町14-1",
+        "urls": [
+            "https://www.city.ishinomaki.lg.jp/cont/30101000/0014/0100/0400/20220510100021.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[2]"
     },
     "宮城県　塩竈市": {
         "lat": 38.31436,
         "long": 141.02203,
         "building": "塩竈市役所",
-        "address": "塩竈市旭町1-1"
+        "address": "塩竈市旭町1-1",
+        "urls": [
+            "https://www.city.shiogama.miyagi.jp/soshiki/2/25732.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div[1]/div/div/table/tbody"
     },
     "宮城県　気仙沼市": {
         "lat": 38.908127,
         "long": 141.570044,
         "building": "気仙沼市役所",
-        "address": "気仙沼市八日町1-1-1"
+        "address": "気仙沼市八日町1-1-1",
+        "urls": [
+            "https://www.kesennuma.miyagi.jp/sec/s154/010/010/020/020/20170421093921.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[1]"
     },
     "宮城県　白石市": {
         "lat": 38.002467,
         "long": 140.619888,
         "building": "白石市役所",
-        "address": "白石市大手町1-1"
+        "address": "白石市大手町1-1",
+        "urls": [
+            "https://www.city.shiroishi.miyagi.jp/site/gikai/504.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]"
     },
     "宮城県　名取市": {
         "lat": 38.171501,
         "long": 140.891849,
         "building": "名取市役所",
-        "address": "名取市増田字柳田80"
+        "address": "名取市増田字柳田80",
+        "urls": [
+            "https://www.city.natori.miyagi.jp/soshiki/gikaijimu/meibo/giinmeibo_r020201"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div/div/div/div/div[2]/table/tbody"
     },
     "宮城県　角田市": {
         "lat": 37.977016,
         "long": 140.781543,
         "building": "角田市役所",
-        "address": "角田市角田字大坊41"
+        "address": "角田市角田字大坊41",
+        "urls": [
+            "https://www.city.kakuda.lg.jp/soshiki/19/88.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]"
     },
     "宮城県　多賀城市": {
         "lat": 38.293803,
         "long": 141.004369,
         "building": "多賀城市役所",
-        "address": "多賀城市中央2-1-1"
+        "address": "多賀城市中央2-1-1",
+        "urls": [
+            "https://www.city.tagajo.miyagi.jp/gikai/shise/shigikai/shokai/gin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tmp_contents\"]/table/tbody"
     },
     "宮城県　岩沼市": {
         "lat": 38.104303,
         "long": 140.869949,
         "building": "岩沼市役所",
-        "address": "岩沼市桜1-6-20"
+        "address": "岩沼市桜1-6-20",
+        "urls": [
+            "http://www.gikai-iwanuma.jp/meibo/giin_ichiran.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "宮城県　登米市": {
         "lat": 38.691856,
         "long": 141.18772,
         "building": "登米市役所",
-        "address": "登米市迫町佐沼字中江2-6-1"
+        "address": "登米市迫町佐沼字中江2-6-1",
+        "urls": [
+            "https://www.city.tome.miyagi.jp/gikaijimu/shisejoho/gyose/shigikai/ginshokai/giinnmeibo4/index.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tmp_wrap_main\"]"
     },
     "宮城県　栗原市": {
         "lat": 38.730062,
         "long": 141.021508,
         "building": "栗原市役所",
-        "address": "栗原市築館薬師1-7-1"
+        "address": "栗原市築館薬師1-7-1",
+        "urls": [
+            "https://www.kuriharacity.jp/w032/010/010/050/050/302.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div/article/div"
     },
     "宮城県　東松島市": {
         "lat": 38.426134,
         "long": 141.210278,
         "building": "東松島市役所",
-        "address": "東松島市矢本字上河戸36-1"
+        "address": "東松島市矢本字上河戸36-1",
+        "urls": [
+            "https://www.city.higashimatsushima.miyagi.jp/gikai/giinmeibo/giinmeibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[1]"
     },
     "宮城県　大崎市": {
         "lat": 38.577132,
         "long": 140.955565,
         "building": "大崎市役所",
-        "address": "大崎市古川七日町1-1"
+        "address": "大崎市古川七日町1-1",
+        "urls": [
+            "https://www.city.osaki.miyagi.jp/shisei/soshikikarasagasu/gikaijimukyoku/2/9555.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "宮城県　富谷市": {
         "lat": 38.399918,
         "long": 140.895485,
         "building": "富谷市役所",
-        "address": "富谷市富谷坂松田30"
+        "address": "富谷市富谷坂松田30",
+        "urls": [
+            "https://www.tomiya-city.miyagi.jp/shisei/shigikai/giinmeibo/gmeibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"wrap\"]/section[1]/div"
     },
     "宮城県　蔵王町": {
         "lat": 38.098128,
         "long": 140.65868,
         "building": "蔵王町役場",
-        "address": "刈田郡蔵王町大字円田字西浦北10"
+        "address": "刈田郡蔵王町大字円田字西浦北10",
+        "urls": [
+            "https://www.town.zao.miyagi.jp/kurashi_guide/gikai_senkyo/gikai/giin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"wrap\"]"
     },
     "宮城県　七ケ宿町": {
         "lat": 37.993063,
         "long": 140.441615,
         "building": "七ケ宿町役場",
-        "address": "刈田郡七ケ宿町字関126"
+        "address": "刈田郡七ケ宿町字関126",
+        "urls": [
+            "http://town.shichikashuku.miyagi.jp/town/gikai/giin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "宮城県　大河原町": {
         "lat": 38.049412,
         "long": 140.730774,
         "building": "大河原町役場",
-        "address": "柴田郡大河原町字新南19"
+        "address": "柴田郡大河原町字新南19",
+        "urls": [
+            "https://www.town.ogawara.miyagi.jp/1491.htm"
+        ],
+        "reprs_xpath": "//*[@id=\"ContentPane\"]"
     },
     "宮城県　村田町": {
         "lat": 38.118589,
         "long": 140.722404,
         "building": "村田町役場",
-        "address": "柴田郡村田町大字村田字迫6"
+        "address": "柴田郡村田町大字村田字迫6",
+        "urls": [
+            "http://www.town.murata.miyagi.jp/cyosei/gikai/meibo/index.html"
+        ],
+        "reprs_xpath": "//*[@id=\"wrap\"]/div[2]"
     },
     "宮城県　柴田町": {
         "lat": 38.056599,
         "long": 140.765798,
         "building": "柴田町役場",
-        "address": "柴田郡柴田町船岡中央2-3-45"
+        "address": "柴田郡柴田町船岡中央2-3-45",
+        "urls": [
+            "https://www.town.shibata.miyagi.jp/index.cfm/82,27339,169,html"
+        ],
+        "reprs_xpath": "//*[@id=\"Main\"]/div[2]/section/div[1]/div/table/tbody"
     },
     "宮城県　川崎町": {
         "lat": 38.177751,
         "long": 140.643188,
         "building": "川崎町役場",
-        "address": "柴田郡川崎町大字前川字裏丁175-1"
+        "address": "柴田郡川崎町大字前川字裏丁175-1",
+        "urls": [
+            "https://www.town.kawasaki.miyagi.jp/site/gikai/348.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]"
     },
     "宮城県　丸森町": {
         "lat": 37.911536,
         "long": 140.765365,
         "building": "丸森町役場",
-        "address": "伊具郡丸森町字鳥屋120"
+        "address": "伊具郡丸森町字鳥屋120",
+        "urls": [
+            "https://www.town.marumori.miyagi.jp/common/img/content/content_20211224_164549.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "宮城県　亘理町": {
         "lat": 38.044263,
         "long": 140.867924,
         "building": "亘理町役場",
-        "address": "亘理郡亘理町字悠里1"
+        "address": "亘理郡亘理町字悠里1",
+        "urls": [
+            "https://www.town.watari.miyagi.jp/common/img/content/content_20221206_131145.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "宮城県　山元町": {
         "lat": 37.962706,
         "long": 140.878052,
         "building": "山元町役場",
-        "address": "亘理郡山元町浅生原字作田山32"
+        "address": "亘理郡山元町浅生原字作田山32",
+        "urls": [
+            "https://www.town.yamamoto.miyagi.jp/uploaded/attachment/14517.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "宮城県　松島町": {
         "lat": 38.380149,
         "long": 141.067291,
         "building": "松島町役場",
-        "address": "宮城郡松島町高城字帰命院下一19-1"
+        "address": "宮城郡松島町高城字帰命院下一19-1",
+        "urls": [],
+        "reprs_xpath": "//*[@id=\"Main\"]/div[2]/section"
     },
     "宮城県　七ヶ浜町": {
         "lat": 38.304554,
         "long": 141.059143,
         "building": "七ヶ浜町役場",
-        "address": "宮城郡七ヶ浜町東宮浜字丑谷辺5-1"
+        "address": "宮城郡七ヶ浜町東宮浜字丑谷辺5-1",
+        "urls": [
+            "https://www.shichigahama.com/benricho/oshirase/sanka3-050-11233.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div/div/div[2]"
     },
     "宮城県　利府町": {
         "lat": 38.330355,
         "long": 140.975793,
         "building": "利府町役場",
-        "address": "宮城郡利府町利府字新並松4"
+        "address": "宮城郡利府町利府字新並松4",
+        "urls": [
+            "https://www.town.rifu.miyagi.jp/gyosei/soshikikarasagasu/gikai/1/4/4810.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "宮城県　大和町": {
         "lat": 38.43733,
         "long": 140.886309,
         "building": "大和町役場",
-        "address": "黒川郡大和町吉岡まほろば1-1-1"
+        "address": "黒川郡大和町吉岡まほろば1-1-1",
+        "urls": [
+            "https://www.town.taiwa.miyagi.jp/site/gikai/18177.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]"
     },
     "宮城県　大郷町": {
         "lat": 38.424244,
         "long": 141.00446,
         "building": "大郷町役場",
-        "address": "黒川郡大郷町粕川字西長崎5-8"
+        "address": "黒川郡大郷町粕川字西長崎5-8",
+        "urls": [
+            "https://www.town.miyagi-osato.lg.jp/soshiki/gikai/giin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]"
     },
     "宮城県　大衡村": {
         "lat": 38.467278,
         "long": 140.879982,
         "building": "大衡村役場",
-        "address": "黒川郡大衡村大衡字平林62"
+        "address": "黒川郡大衡村大衡字平林62",
+        "urls": [
+            "https://www.village.ohira.miyagi.jp/site/gikai/6985.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_a\"]"
     },
     "宮城県　色麻町": {
         "lat": 38.548921,
         "long": 140.849876,
         "building": "色麻町役場",
-        "address": "加美郡色麻町四竃字北谷地41"
+        "address": "加美郡色麻町四竃字北谷地41",
+        "urls": [
+            "https://www.town.shikama.miyagi.jp/soshiki/gikai/1/1/613.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "宮城県　加美町": {
         "lat": 38.57177,
         "long": 140.854759,
         "building": "加美町役場",
-        "address": "加美郡加美町字西田3-5"
+        "address": "加美郡加美町字西田3-5",
+        "urls": [
+            "https://www.town.kami.miyagi.jp/soshikikarasagasu/gikaijimukyoku/kamimachigikai/583.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "宮城県　涌谷町": {
         "lat": 38.539704,
         "long": 141.128105,
         "building": "涌谷町役場",
-        "address": "遠田郡涌谷町字新町裏153-2"
+        "address": "遠田郡涌谷町字新町裏153-2",
+        "urls": [
+            "http://www.town.wakuya.miyagi.jp/gyose/gikai/gin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tmp_contents\"]"
     },
     "宮城県　美里町": {
         "lat": 38.5444,
         "long": 141.056717,
         "building": "美里町役場",
-        "address": "遠田郡美里町北浦字駒米13"
+        "address": "遠田郡美里町北浦字駒米13",
+        "urls": [
+            "https://www.town.misato.miyagi.jp/15tyogikai/151guide/2006-1101-1357-8.html"
+        ],
+        "reprs_xpath": "//*[@id=\"cont_cha\"]/div[2]/table/tbody"
     },
     "宮城県　女川町": {
         "lat": 38.445388,
         "long": 141.442693,
         "building": "女川町役場",
-        "address": "牡鹿郡女川町女川1-1-1"
+        "address": "牡鹿郡女川町女川1-1-1",
+        "urls": [
+            "https://gikai-town-onagawa.jp/meibo.html"
+        ],
+        "reprs_xpath": "/html/body/div[3]/div/div[3]/div/div[1]/div"
     },
     "宮城県　南三陸町": {
         "lat": 38.680666,
         "long": 141.462492,
         "building": "南三陸町役場",
-        "address": "本吉郡南三陸町志津川字沼田101"
+        "address": "本吉郡南三陸町志津川字沼田101",
+        "urls": [
+            "https://www.town.minamisanriku.miyagi.jp/index.cfm/18,35939,52,369,html"
+        ],
+        "reprs_xpath": "//*[@id=\"CenterArea\"]/div[1]"
     },
     "秋田県　秋田市": {
         "lat": 39.719929,
         "long": 140.102512,
         "building": "秋田市役所",
-        "address": "秋田市山王1-1-1"
+        "address": "秋田市山王1-1-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.akita.lg.jp/shigikai/giin/1009503/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"voice\"]/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"voice\"]"
     },
     "秋田県　能代市": {
         "lat": 40.212131,
         "long": 140.026641,
         "building": "能代市役所",
-        "address": "能代市上町1-3"
+        "address": "能代市上町1-3",
+        "urls": [
+            "https://www.city.noshiro.lg.jp/city/gikai/meibo/1386"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/article/div/table"
     },
     "秋田県　横手市": {
         "lat": 39.313777,
         "long": 140.566636,
         "building": "横手市役所",
-        "address": "横手市中央町8-2"
+        "address": "横手市中央町8-2",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.yokote.lg.jp/shigikai/1001547/1005517/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"voice\"]/ul[3]/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"voice\"]"
     },
     "秋田県　大館市": {
         "lat": 40.271685,
         "long": 140.565241,
         "building": "大館市役所",
-        "address": "大館市字中城20"
+        "address": "大館市字中城20",
+        "urls": [
+            "https://www.city.odate.lg.jp/gikai_meibo"
+        ],
+        "reprs_xpath": "//*[@id=\"page_content\"]/div[2]/div/div[2]/table/tbody"
     },
     "秋田県　男鹿市": {
         "lat": 39.886721,
         "long": 139.8475,
         "building": "男鹿市役所",
-        "address": "男鹿市船川港船川字泉台66-1"
+        "address": "男鹿市船川港船川字泉台66-1",
+        "urls": [
+            "https://www.city.oga.akita.jp/material/files/group/16/220502ogashigikaigiinnmeibo.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "秋田県　湯沢市": {
         "lat": 39.164074,
         "long": 140.494683,
         "building": "湯沢市役所",
-        "address": "湯沢市佐竹町1-1"
+        "address": "湯沢市佐竹町1-1",
+        "urls": [
+            "https://www.city-yuzawa.jp/site/gikai/580.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_a\"]"
     },
     "秋田県　鹿角市": {
         "lat": 40.215789,
         "long": 140.788519,
         "building": "鹿角市役所",
-        "address": "鹿角市花輪字荒田4-1"
+        "address": "鹿角市花輪字荒田4-1",
+        "urls": [
+            "https://www.city.kazuno.akita.jp/soshiki/gikai/gyomu/1/3/2/7389.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "秋田県　由利本荘市": {
         "lat": 39.385814,
         "long": 140.048819,
         "building": "由利本荘市役所",
-        "address": "由利本荘市尾崎17"
+        "address": "由利本荘市尾崎17",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.yurihonjo.lg.jp/1001571/1001641/1001762/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"voice\"]/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"voice\"]"
     },
     "秋田県　潟上市": {
         "lat": 39.857288,
         "long": 140.013049,
         "building": "潟上市役所",
-        "address": "潟上市天王字棒沼台226-1"
+        "address": "潟上市天王字棒沼台226-1",
+        "urls": [
+            "https://www.city.katagami.lg.jp/soshiki/gikaijimukyoku/giimmeibo/1039.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[3]/div/table"
     },
     "秋田県　大仙市": {
         "lat": 39.45309,
         "long": 140.475448,
         "building": "大仙市役所",
-        "address": "大仙市大曲花園町1-1"
+        "address": "大仙市大曲花園町1-1",
+        "urls": [
+            "https://www.city.daisen.lg.jp/docs/2013100800058/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentBody\"]/article/div[2]/div/table/tbody"
     },
     "秋田県　北秋田市": {
         "lat": 40.226046,
         "long": 140.370728,
         "building": "北秋田市役所",
-        "address": "北秋田市花園町19-1"
+        "address": "北秋田市花園町19-1",
+        "urls": [
+            "https://www.city.kitaakita.akita.jp/archive/contents-118"
+        ],
+        "reprs_xpath": "//*[@id=\"skip-link\"]/div[2]/div/section/div[2]"
     },
     "秋田県　にかほ市": {
         "lat": 39.203067,
         "long": 139.907649,
         "building": "にかほ市役所",
-        "address": "にかほ市象潟町字浜ノ田1"
+        "address": "にかほ市象潟町字浜ノ田1",
+        "urls": [
+            "https://www.nikahoshigikai.akita.jp/members.html"
+        ],
+        "reprs_xpath": "//*[@id=\"assemblylist\"]"
     },
     "秋田県　仙北市": {
         "lat": 39.700044,
         "long": 140.730728,
         "building": "仙北市役所",
-        "address": "仙北市田沢湖生保内字宮ノ後30"
+        "address": "仙北市田沢湖生保内字宮ノ後30",
+        "urls": [
+            "https://www.city.semboku.akita.jp/government/assembly/giin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"top\"]/main/article/div/div/div/div[1]/section/div"
     },
     "秋田県　小坂町": {
         "lat": 40.332926,
         "long": 140.736191,
         "building": "小坂町役場",
-        "address": "鹿角郡小坂町小坂字上谷地41-1"
+        "address": "鹿角郡小坂町小坂字上谷地41-1",
+        "urls": [
+            "https://www.town.kosaka.akita.jp/machinososhiki/gikaijimukyoku/123.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div/div[1]/table"
     },
     "秋田県　上小阿仁村": {
         "lat": 40.063263,
         "long": 140.295736,
         "building": "上小阿仁村役場",
-        "address": "北秋田郡上小阿仁村小沢田字向川原118"
+        "address": "北秋田郡上小阿仁村小沢田字向川原118",
+        "urls": [
+            "https://www.vill.kamikoani.akita.jp/info/7"
+        ],
+        "reprs_xpath": "/html/body/form/div[2]/section/div[3]/div"
     },
     "秋田県　藤里町": {
         "lat": 40.278399,
         "long": 140.261879,
         "building": "藤里町役場",
-        "address": "山本郡藤里町藤琴字藤琴8"
+        "address": "山本郡藤里町藤琴字藤琴8",
+        "urls": [
+            "https://www.town.fujisato.akita.jp/up/files/town/c613/meibo/giinmeibo.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "秋田県　三種町": {
         "lat": 40.101615,
         "long": 140.004981,
         "building": "三種町役場",
-        "address": "山本郡三種町鵜川字岩谷子8"
+        "address": "山本郡三種町鵜川字岩谷子8",
+        "urls": [
+            "https://www.town.mitane.akita.jp/soshikikarasagasu/gikaijimukyoku/1/545.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "秋田県　八峰町": {
         "lat": 40.318715,
         "long": 140.038618,
         "building": "八峰町役場",
-        "address": "山本郡八峰町峰浜目名潟字目長田118"
+        "address": "山本郡八峰町峰浜目名潟字目長田118",
+        "urls": [
+            "https://www.town.happo.lg.jp/archive/contents-823"
+        ],
+        "reprs_xpath": "//*[@id=\"top\"]/main/article/div[2]/div/section[3]/div/table"
     },
     "秋田県　五城目町": {
         "lat": 39.943895,
         "long": 140.111309,
         "building": "五城目町役場",
-        "address": "南秋田郡五城目町西磯ノ目1-1-1"
+        "address": "南秋田郡五城目町西磯ノ目1-1-1",
+        "urls": [
+            "https://www.town.gojome.akita.jp/town/gikai/gikaioshirase/1334"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/article/div[1]/table/tbody"
     },
     "秋田県　八郎潟町": {
         "lat": 39.949023,
         "long": 140.073358,
         "building": "八郎潟町役場",
-        "address": "南秋田郡八郎潟町字大道80"
+        "address": "南秋田郡八郎潟町字大道80",
+        "urls": [
+            "https://www.town.hachirogata.akita.jp/_res/projects/default_project/_page_/001/001/901/1001901_001.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "秋田県　井川町": {
         "lat": 39.914188,
         "long": 140.081265,
         "building": "井川町役場",
-        "address": "南秋田郡井川町北川尻字海老沢樋ノ口78-1"
+        "address": "南秋田郡井川町北川尻字海老沢樋ノ口78-1",
+        "urls": [
+            "http://www.town.ikawa.akita.jp/docs/2015040300018/file_contents/ikawaGiinMeibo20210324.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "秋田県　大潟村": {
         "lat": 40.017788,
         "long": 139.960064,
         "building": "大潟村役場",
-        "address": "南秋田郡大潟村字中央1-1"
+        "address": "南秋田郡大潟村字中央1-1",
+        "urls": [
+            "https://www.vill.ogata.akita.jp/archive/member"
+        ],
+        "reprs_xpath": "//*[@id=\"top\"]/div/main/div[2]/div/div/div[1]/section/table[1]"
     },
     "秋田県　美郷町": {
         "lat": 39.461633,
         "long": 140.582127,
         "building": "美郷町役場",
-        "address": "仙北郡美郷町土崎字上野乙170-10"
+        "address": "仙北郡美郷町土崎字上野乙170-10",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.town.misato.akita.jp/giinnmeibo/3280"
+        ],
+        "ind_reprs_xpath": "//a[contains(@href, 'https://www.town.misato.akita.jp/giinnmeibo/')]",
+        "ind_reprs_info_xpath": "//*[@id=\"idx8\"]/div/table/tbody"
     },
     "秋田県　羽後町": {
         "lat": 39.199323,
         "long": 140.412881,
         "building": "羽後町役場",
-        "address": "雄勝郡羽後町西馬音内字中野177"
+        "address": "雄勝郡羽後町西馬音内字中野177",
+        "urls": [
+            "https://www.town.ugo.lg.jp/uploads/user/gikaijimu/File/2020/4%E6%9C%88%E8%87%A8%E6%99%82%E4%BC%9A/r2%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "秋田県　東成瀬村": {
         "lat": 39.179185,
         "long": 140.648892,
         "building": "東成瀬村役場",
-        "address": "雄勝郡東成瀬村田子内字仙人下30-1"
+        "address": "雄勝郡東成瀬村田子内字仙人下30-1",
+        "urls": [
+            "https://vill.higashinaruse.lg.jp/villager/village_government/gikai/post-23260/"
+        ],
+        "reprs_xpath": "//*[@id=\"page-single\"]/div/article/div/figure/table"
     },
     "山形県　山形市": {
         "lat": 38.255436,
         "long": 140.339605,
         "building": "山形市役所",
-        "address": "山形市旅篭町2-3-25"
+        "address": "山形市旅篭町2-3-25",
+        "urls": [
+            "https://www.city.yamagata-yamagata.lg.jp/gikai/giin/1001203.html"
+        ],
+        "reprs_xpath": "//*[@id=\"voice\"]"
     },
     "山形県　米沢市": {
         "lat": 37.921869,
         "long": 140.11614,
         "building": "米沢市役所",
-        "address": "米沢市金池5-2-25"
+        "address": "米沢市金池5-2-25",
+        "urls": [
+            "https://www.city.yonezawa.yamagata.jp/1709.html"
+        ],
+        "reprs_xpath": "//*[@id=\"LeftPane\"]/div[1]/div/table/tbody"
     },
     "山形県　鶴岡市": {
         "lat": 38.727183,
         "long": 139.826725,
         "building": "鶴岡市役所",
-        "address": "鶴岡市馬場町9-25"
+        "address": "鶴岡市馬場町9-25",
+        "urls": [
+            "https://www.city.tsuruoka.lg.jp/shisei/gikai/giinsyokai/giinitiran.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　酒田市": {
         "lat": 38.914386,
         "long": 139.836513,
         "building": "酒田市役所",
-        "address": "酒田市本町2-2-45"
+        "address": "酒田市本町2-2-45",
+        "urls": [
+            "https://www.city.sakata.lg.jp/shisei/shigikai/giin/syokai.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　新庄市": {
         "lat": 38.76496,
         "long": 140.301664,
         "building": "新庄市役所",
-        "address": "新庄市沖の町10-37"
+        "address": "新庄市沖の町10-37",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.shinjo.yamagata.jp/s015/010/20190830090505.html"
+        ],
+        "ind_reprs_xpath": "//td/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/div[2]/article/div[2]/div"
     },
     "山形県　寒河江市": {
         "lat": 38.380954,
         "long": 140.276068,
         "building": "寒河江市役所",
-        "address": "寒河江市中央1-9-45"
+        "address": "寒河江市中央1-9-45",
+        "urls": [
+            "https://www.city.sagae.yamagata.jp/shigikai/giininfo/giin-syokai.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　上山市": {
         "lat": 38.149562,
         "long": 140.26783,
         "building": "上山市役所",
-        "address": "上山市河崎1-1-10"
+        "address": "上山市河崎1-1-10",
+        "urls": [
+            "https://www.city.kaminoyama.yamagata.jp/site/gikai/gisekibangouzyun.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div[2]/div/div/table/tbody"
     },
     "山形県　村山市": {
         "lat": 38.483352,
         "long": 140.38038,
         "building": "村山市役所",
-        "address": "村山市中央1-3-6"
+        "address": "村山市中央1-3-6",
+        "urls": [
+            "https://www.city.murayama.lg.jp/shisei/gikai/nougyouiin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　長井市": {
         "lat": 38.106088,
         "long": 140.033947,
         "building": "長井市役所",
-        "address": "長井市栄町1-1"
+        "address": "長井市栄町1-1",
+        "urls": [
+            "https://www.city.nagai.yamagata.jp/shigikai/1/12415.html"
+        ],
+        "reprs_xpath": "//*[@id=\"container-in\"]"
     },
     "山形県　天童市": {
         "lat": 38.362177,
         "long": 140.377802,
         "building": "天童市役所",
-        "address": "天童市老野森1-1-1"
+        "address": "天童市老野森1-1-1",
+        "urls": [
+            "https://www.city.tendo.yamagata.jp/congress/giin/shigikaigiinn--syoukai.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_content_2nd_main\"]/div"
     },
     "山形県　東根市": {
         "lat": 38.431292,
         "long": 140.391021,
         "building": "東根市役所",
-        "address": "東根市中央1-1-1"
+        "address": "東根市中央1-1-1",
+        "urls": [
+            "https://www.city.higashine.yamagata.jp/section_list/section018/1891"
+        ],
+        "reprs_xpath": "//*[@id=\"page-honbun\"]/div/div"
     },
     "山形県　尾花沢市": {
         "lat": 38.60062,
         "long": 140.405693,
         "building": "尾花沢市役所",
-        "address": "尾花沢市若葉町1-2-3"
+        "address": "尾花沢市若葉町1-2-3",
+        "urls": [
+            "https://www.city.obanazawa.yamagata.jp/files/original/20230810134209055906044fe.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "山形県　南陽市": {
         "lat": 38.055116,
         "long": 140.148309,
         "building": "南陽市役所",
-        "address": "南陽市三間通436-1"
+        "address": "南陽市三間通436-1",
+        "urls": [
+            "http://www.city.nanyo.yamagata.jp/meibo/121"
+        ],
+        "reprs_xpath": "//*[@id=\"body\"]/div[1]"
     },
     "山形県　山辺町": {
         "lat": 38.289217,
         "long": 140.26218,
         "building": "山辺町役場",
-        "address": "東村山郡山辺町緑ヶ丘5"
+        "address": "東村山郡山辺町緑ヶ丘5",
+        "urls": [
+            "https://www.town.yamanobe.yamagata.jp/uploaded/life/7745_30186_misc.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "山形県　中山町": {
         "lat": 38.333122,
         "long": 140.283051,
         "building": "中山町役場",
-        "address": "東村山郡中山町長崎120"
+        "address": "東村山郡中山町長崎120",
+        "urls": [
+            "https://www.town.nakayama.yamagata.jp/gikai/syokai/1250.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "山形県　河北町": {
         "lat": 38.426632,
         "long": 140.31459,
         "building": "河北町役場",
-        "address": "西村山郡河北町谷地戊81"
+        "address": "西村山郡河北町谷地戊81",
+        "urls": [
+            "https://www.town.kahoku.yamagata.jp/soshiki/gikai/gizi/1089.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "山形県　西川町": {
         "lat": 38.426487,
         "long": 140.147661,
         "building": "西川町役場",
-        "address": "西村山郡西川町大字海味510"
+        "address": "西村山郡西川町大字海味510",
+        "urls": [
+            "https://www.town.nishikawa.yamagata.jp/chogikai/chogikai21020002.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tempright_box\"]/table[2]/tbody"
     },
     "山形県　朝日町": {
         "lat": 38.299293,
         "long": 140.145924,
         "building": "朝日町役場",
-        "address": "西村山郡朝日町大字宮宿1115"
+        "address": "西村山郡朝日町大字宮宿1115",
+        "urls": [
+            "https://www.town.asahi.yamagata.jp/portal/administration/asahimachigikai/giinshokai/8924.html"
+        ],
+        "reprs_xpath": "//*[@id=\"container\"]"
     },
     "山形県　大江町": {
         "lat": 38.380713,
         "long": 140.206793,
         "building": "大江町役場",
-        "address": "西村山郡大江町大字左沢882-1"
+        "address": "西村山郡大江町大字左沢882-1",
+        "urls": [
+            "https://www.town.oe.yamagata.jp/government/chousei/council/114"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[2]/div"
     },
     "山形県　大石田町": {
         "lat": 38.593877,
         "long": 140.372647,
         "building": "大石田町役場",
-        "address": "北村山郡大石田町緑町1"
+        "address": "北村山郡大石田町緑町1",
+        "urls": [
+            "https://www.town.oishida.yamagata.jp/chousei/chousei/gikai/giinnmeibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[4]/table/tbody"
     },
     "山形県　金山町": {
         "lat": 38.88344,
         "long": 140.339367,
         "building": "金山町役場",
-        "address": "最上郡金山町大字金山324-1"
+        "address": "最上郡金山町大字金山324-1",
+        "urls": [
+            "https://www.town.kaneyama.yamagata.jp/machinososhiki/gikaijimukyoku/1/1198.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "山形県　最上町": {
         "lat": 38.758467,
         "long": 140.519359,
         "building": "最上町役場",
-        "address": "最上郡最上町向町644"
+        "address": "最上郡最上町向町644",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "山形県　舟形町": {
         "lat": 38.691417,
         "long": 140.319988,
         "building": "舟形町役場",
-        "address": "最上郡舟形町舟形263"
+        "address": "最上郡舟形町舟形263",
+        "urls": [
+            "https://www.town.funagata.yamagata.jp/s027/gikai/040/220/20200111020000.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]/div[2]/div[2]/article/div/div[2]/table/tbody"
     },
     "山形県　真室川町": {
         "lat": 38.856918,
         "long": 140.251564,
         "building": "真室川町役場",
-        "address": "最上郡真室川町大字新町124番4"
+        "address": "最上郡真室川町大字新町124番4",
+        "urls": [
+            "https://www.town.mamurogawa.yamagata.jp/docs/2021051800010/file_contents/R05_.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "山形県　大蔵村": {
         "lat": 38.704121,
         "long": 140.230368,
         "building": "大蔵村役場",
-        "address": "最上郡大蔵村大字清水2528"
+        "address": "最上郡大蔵村大字清水2528",
+        "urls": [
+            "https://www.vill.ohkura.yamagata.jp/soshikikarasagasu/gikaijimukyoku/gyomuannai/1/680.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "山形県　鮭川村": {
         "lat": 38.796455,
         "long": 140.222007,
         "building": "鮭川村役場",
-        "address": "最上郡鮭川村大字佐渡2003-7"
+        "address": "最上郡鮭川村大字佐渡2003-7",
+        "urls": [
+            "https://www.vill.sakegawa.yamagata.jp/council/giin-meibo/47"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　戸沢村": {
         "lat": 38.737601,
         "long": 140.143569,
         "building": "戸沢村役場",
-        "address": "最上郡戸沢村大字古口270"
+        "address": "最上郡戸沢村大字古口270",
+        "urls": [
+            "http://www.vill.tozawa.yamagata.jp/gikai/giinmeibo/"
+        ],
+        "reprs_xpath": "//*[@id=\"LayerContentsBody\"]"
     },
     "山形県　高畠町": {
         "lat": 38.002745,
         "long": 140.189113,
         "building": "高畠町役場",
-        "address": "東置賜郡高畠町大字高畠436"
+        "address": "東置賜郡高畠町大字高畠436",
+        "urls": [
+            "https://www.town.takahata.yamagata.jp/soshikiichiran/gikaijimukyoku/1/530.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div/div/table"
     },
     "山形県　川西町": {
         "lat": 38.005203,
         "long": 140.053181,
         "building": "川西町役場",
-        "address": "東置賜郡川西町大字上小松977番地1"
+        "address": "東置賜郡川西町大字上小松977番地1",
+        "urls": [
+            "https://www.town.kawanishi.yamagata.jp/gikai/gikaisoshiki.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "山形県　小国町": {
         "lat": 38.061391,
         "long": 139.743333,
         "building": "小国町役場",
-        "address": "西置賜郡小国町大字小国小坂町2-70"
+        "address": "西置賜郡小国町大字小国小坂町2-70",
+        "urls": [
+            "https://www.town.oguni.yamagata.jp/site/gikai/1251.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]"
     },
     "山形県　白鷹町": {
         "lat": 38.183069,
         "long": 140.098571,
         "building": "白鷹町役場",
-        "address": "西置賜郡白鷹町大字荒砥甲833"
+        "address": "西置賜郡白鷹町大字荒砥甲833",
+        "urls": [
+            "https://www.town.shirataka.lg.jp/1133.htm"
+        ],
+        "reprs_xpath": "//*[@id=\"Middle\"]/div"
     },
     "山形県　飯豊町": {
         "lat": 38.045714,
         "long": 139.987617,
         "building": "飯豊町役場",
-        "address": "西置賜郡飯豊町大字椿2888"
+        "address": "西置賜郡飯豊町大字椿2888",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "山形県　三川町": {
         "lat": 38.794529,
         "long": 139.849612,
         "building": "三川町役場",
-        "address": "東田川郡三川町大字横山字西田85"
+        "address": "東田川郡三川町大字横山字西田85",
+        "urls": [
+            "https://www.town.mikawa.yamagata.jp/gikai/meibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　庄内町": {
         "lat": 38.849558,
         "long": 139.904036,
         "building": "庄内町役場",
-        "address": "東田川郡庄内町余目字町132-1"
+        "address": "東田川郡庄内町余目字町132-1",
+        "urls": [
+            "https://www.town.shonai.lg.jp/gyousei/gikai/gikai/giinnitiranh30.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main\"]"
     },
     "山形県　遊佐町": {
         "lat": 39.014836,
         "long": 139.908662,
         "building": "遊佐町役場",
-        "address": "飽海郡遊佐町遊佐字舞鶴202番地"
+        "address": "飽海郡遊佐町遊佐字舞鶴202番地",
+        "urls": [
+            "https://www.town.yuza.yamagata.jp/ou/gikai/gikai/20190701giineibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"content\"]/div/div[1]/table/tbody"
     },
     "福島県　福島市": {
         "lat": 37.76083,
         "long": 140.474747,
         "building": "福島市役所",
-        "address": "福島市五老内町3-1"
+        "address": "福島市五老内町3-1",
+        "urls": [
+            "https://www.city.fukushima.fukushima.jp/gi-soumu/shise/shigikai/5443/5444/index.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tmp_contents\"]/table"
     },
     "福島県　会津若松市": {
         "lat": 37.494842,
         "long": 139.929707,
         "building": "会津若松市役所",
-        "address": "会津若松市東栄町3-46"
+        "address": "会津若松市東栄町3-46",
+        "urls": [
+            "https://www.city.aizuwakamatsu.fukushima.jp/docs/2023080400025/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentBody\"]/div/div[2]/div[2]/table/tbody"
     },
     "福島県　郡山市": {
         "lat": 37.400455,
         "long": 140.35965,
         "building": "郡山市役所",
-        "address": "郡山市朝日1-23-7"
+        "address": "郡山市朝日1-23-7",
+        "urls": [
+            "https://www.city.koriyama.lg.jp/uploaded/attachment/66679.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "福島県　いわき市": {
         "lat": 37.050456,
         "long": 140.887687,
         "building": "いわき市役所",
-        "address": "いわき市平字梅本21"
+        "address": "いわき市平字梅本21",
+        "urls": [
+            "https://www.city.iwaki.lg.jp/www/contents/1698280269285/index.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main-contents\"]/div[1]/div/div/div[2]/div/table"
     },
     "福島県　白河市": {
         "lat": 37.126379,
         "long": 140.210923,
         "building": "白河市役所",
-        "address": "白河市八幡小路7-1"
+        "address": "白河市八幡小路7-1",
+        "urls": [
+            "https://www.city.shirakawa.fukushima.jp/page/page000826.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/div/table/tbody"
     },
     "福島県　須賀川市": {
         "lat": 37.286504,
         "long": 140.372655,
         "building": "須賀川市役所",
-        "address": "須賀川市八幡町135"
+        "address": "須賀川市八幡町135",
+        "urls": [
+            "http://gikai.city.sukagawa.fukushima.jp/g07_giinlistP.asp"
+        ],
+        "reprs_xpath": "//*[@id=\"AreaGikaidoc\"]/table"
     },
     "福島県　喜多方市": {
         "lat": 37.651134,
         "long": 139.874484,
         "building": "喜多方市役所",
-        "address": "喜多方市字御清水東7244-2"
+        "address": "喜多方市字御清水東7244-2",
+        "urls": [
+            "https://www.city.kitakata.fukushima.jp/site/gikai/1722.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/table/tbody"
     },
     "福島県　相馬市": {
         "lat": 37.797353,
         "long": 140.918937,
         "building": "相馬市役所",
-        "address": "相馬市中村字北町63-3"
+        "address": "相馬市中村字北町63-3",
+        "urls": [
+            "https://www.city.soma.fukushima.jp/shinososhiki/gikaijimukyoku/somashigikai/1/1297.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[2]/div/table"
     },
     "福島県　二本松市": {
         "lat": 37.584783,
         "long": 140.431199,
         "building": "二本松市役所",
-        "address": "二本松市金色403-1"
+        "address": "二本松市金色403-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.nihonmatsu.lg.jp/gikai/meibo/"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"contents\"]/div/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "福島県　田村市": {
         "lat": 37.440621,
         "long": 140.57631,
         "building": "田村市役所",
-        "address": "田村市船引町船引字畑添76-2"
+        "address": "田村市船引町船引字畑添76-2",
+        "urls": [
+            "https://www.city.tamura.lg.jp/soshiki/27/assets/%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF_4.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "福島県　南相馬市": {
         "lat": 37.642197,
         "long": 140.957237,
         "building": "南相馬市役所",
-        "address": "南相馬市原町区本町2-27"
+        "address": "南相馬市原町区本町2-27",
+        "urls": [
+            "https://www.city.minamisoma.lg.jp/portal/sections/70/7010/70101/3585.html"
+        ],
+        "reprs_xpath": "//*[@id=\"wrapper-in2\"]"
     },
     "福島県　伊達市": {
         "lat": 37.819095,
         "long": 140.562894,
         "building": "伊達市役所",
-        "address": "伊達市保原町字舟橋180"
+        "address": "伊達市保原町字舟橋180",
+        "urls": [
+            "https://www.city.fukushima-date.lg.jp/site/gikai/1005.html"
+        ],
+        "reprs_xpath": "/html/body/div[2]/div[3]/div/div[1]"
     },
     "福島県　本宮市": {
         "lat": 37.513162,
         "long": 140.393877,
         "building": "本宮市役所",
-        "address": "本宮市本宮字万世212"
+        "address": "本宮市本宮字万世212",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.motomiya.lg.jp/site/gikai/438.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table/tbody/tr/td/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main_body\"]/div[3]/table/tbody"
     },
     "福島県　桑折町": {
         "lat": 37.85472,
         "long": 140.520851,
         "building": "桑折町役場",
-        "address": "伊達郡桑折町大字谷地字道下22番地7"
+        "address": "伊達郡桑折町大字谷地字道下22番地7",
+        "urls": [
+            "https://www.town.koori.fukushima.jp/kurashi/gikai/6/13886.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]"
     },
     "福島県　国見町": {
         "lat": 37.87681,
         "long": 140.549273,
         "building": "国見町役場",
-        "address": "伊達郡国見町大字藤田字一丁田二1-7"
+        "address": "伊達郡国見町大字藤田字一丁田二1-7",
+        "urls": [
+            "https://www.town.kunimi.fukushima.jp/uploaded/attachment/11237.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "福島県　川俣町": {
         "lat": 37.664989,
         "long": 140.598244,
         "building": "川俣町役場",
-        "address": "伊達郡川俣町字五百田30"
+        "address": "伊達郡川俣町字五百田30",
+        "urls": [
+            "https://www.town.kawamata.lg.jp/site/gikai/giin-meibo-2.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table/tbody"
     },
     "福島県　大玉村": {
         "lat": 37.534362,
         "long": 140.371058,
         "building": "大玉村役場",
-        "address": "安達郡大玉村玉井字星内70"
+        "address": "安達郡大玉村玉井字星内70",
+        "urls": [
+            "https://www.vill.otama.fukushima.jp/otama_songikai/meibo/"
+        ],
+        "reprs_xpath": "//*[@id=\"article\"]"
     },
     "福島県　鏡石町": {
         "lat": 37.252858,
         "long": 140.343405,
         "building": "鏡石町役場",
-        "address": "岩瀬郡鏡石町不時沼345"
+        "address": "岩瀬郡鏡石町不時沼345",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "福島県　天栄村": {
         "lat": 37.255576,
         "long": 140.247165,
         "building": "天栄村役場",
-        "address": "岩瀬郡天栄村大字下松本字原畑78"
+        "address": "岩瀬郡天栄村大字下松本字原畑78",
+        "urls": [
+            "https://www.vill.tenei.fukushima.jp/site/gikai/giinnmeibo.html"
+        ],
+        "reprs_xpath": "/html/body/div[8]/div[2]/div/div[3]/div[2]/table/tbody"
     },
     "福島県　下郷町": {
         "lat": 37.255571,
         "long": 139.872084,
         "building": "下郷町役場",
-        "address": "南会津郡下郷町大字塩生字大石1000"
+        "address": "南会津郡下郷町大字塩生字大石1000",
+        "urls": [
+            "https://www.town.shimogo.fukushima.jp/organization/gikai/1/231.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[1]/div/table"
     },
     "福島県　檜枝岐村": {
         "lat": 37.024141,
         "long": 139.388941,
         "building": "檜枝岐村役場",
-        "address": "南会津郡檜枝岐村字下ノ原880"
+        "address": "南会津郡檜枝岐村字下ノ原880",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "福島県　只見町": {
         "lat": 37.348657,
         "long": 139.315789,
         "building": "只見町役場",
-        "address": "南会津郡只見町大字只見字雨堤1039"
+        "address": "南会津郡只見町大字只見字雨堤1039",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "福島県　南会津町": {
         "lat": 37.200389,
         "long": 139.773215,
         "building": "南会津町役場",
-        "address": "南会津郡南会津町田島字後原甲3531-1"
+        "address": "南会津郡南会津町田島字後原甲3531-1",
+        "urls": [
+            "https://www.town.minamiaizu.lg.jp/official/soshikikarasagasu/gikaijimukyoku/minamiaizumachigikai/4/776.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div/div[2]/div/table"
     },
     "福島県　北塩原村": {
         "lat": 37.655673,
         "long": 139.937383,
         "building": "北塩原村役場",
-        "address": "耶麻郡北塩原村大字北山字姥ヶ作3151"
+        "address": "耶麻郡北塩原村大字北山字姥ヶ作3151",
+        "urls": [
+            "https://www.vill.kitashiobara.fukushima.jp/gikai/meibo/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentBody\"]/div/div/table[2]/tbody"
     },
     "福島県　西会津町": {
         "lat": 37.587396,
         "long": 139.649301,
         "building": "西会津町役場",
-        "address": "耶麻郡西会津町野沢字下小屋上乙3308"
+        "address": "耶麻郡西会津町野沢字下小屋上乙3308",
+        "urls": [
+            "https://www.town.nishiaizu.fukushima.jp/site/gikai/908.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/div/div/div/table"
     },
     "福島県　磐梯町": {
         "lat": 37.562099,
         "long": 139.988766,
         "building": "磐梯町役場",
-        "address": "耶麻郡磐梯町大字磐梯字中ノ橋1855"
+        "address": "耶麻郡磐梯町大字磐梯字中ノ橋1855",
+        "urls": [
+            "https://www.town.bandai.fukushima.jp/site/gikai/gikai-gaiyo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table[2]/tbody"
     },
     "福島県　猪苗代町": {
         "lat": 37.557799,
         "long": 140.104794,
         "building": "猪苗代町役場",
-        "address": "耶麻郡猪苗代町字城南100"
+        "address": "耶麻郡猪苗代町字城南100",
+        "urls": [
+            "https://www.town.inawashiro.fukushima.jp/cb/hpc/Article-22893.html"
+        ],
+        "reprs_xpath": "/html/body/div[5]/div[1]/div[1]"
     },
     "福島県　会津坂下町": {
         "lat": 37.561457,
         "long": 139.821732,
         "building": "会津坂下町役場",
-        "address": "河沼郡会津坂下町字市中三番甲3662"
+        "address": "河沼郡会津坂下町字市中三番甲3662",
+        "urls": [
+            "https://www.town.aizubange.fukushima.jp/site/gikai/meibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table[1]/tbody"
     },
     "福島県　湯川村": {
         "lat": 37.565351,
         "long": 139.886756,
         "building": "湯川村役場",
-        "address": "河沼郡湯川村大字清水田字長瀞18"
+        "address": "河沼郡湯川村大字清水田字長瀞18",
+        "urls": [
+            "https://www.vill.yugawa.fukushima.jp/gikai/gikai_member.html"
+        ],
+        "reprs_xpath": "/html/body/div[2]/div/div[2]/div/div/div/div[2]/div[2]/div/div[2]/table/tbody"
     },
     "福島県　柳津町": {
         "lat": 37.526035,
         "long": 139.719552,
         "building": "柳津町役場",
-        "address": "河沼郡柳津町大字柳津字下平乙234"
+        "address": "河沼郡柳津町大字柳津字下平乙234",
+        "urls": [
+            "https://www.town.yanaizu.fukushima.jp/docs/2015022400064/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentBody\"]/article/div[2]/div/table"
     },
     "福島県　三島町": {
         "lat": 37.470292,
         "long": 139.644441,
         "building": "三島町役場",
-        "address": "大沼郡三島町大字宮下字宮下350"
+        "address": "大沼郡三島町大字宮下字宮下350",
+        "urls": [
+            "https://www.town.mishima.fukushima.jp/soshiki/gikai/302.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div[1]/div/div/table"
     },
     "福島県　金山町": {
         "lat": 37.453735,
         "long": 139.524524,
         "building": "金山町役場",
-        "address": "大沼郡金山町大字川口字谷地393"
+        "address": "大沼郡金山町大字川口字谷地393",
+        "urls": [
+            "https://www.town.kaneyama.fukushima.jp/site/gikai/gikai-soshiki-kousei2.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]"
     },
     "福島県　昭和村": {
         "lat": 37.335446,
         "long": 139.610666,
         "building": "昭和村役場",
-        "address": "大沼郡昭和村大字下中津川字中島652"
+        "address": "大沼郡昭和村大字下中津川字中島652",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "福島県　会津美里町": {
         "lat": 37.464985,
         "long": 139.834177,
         "building": "会津美里町役場",
-        "address": "大沼郡会津美里町字新布才地1番地"
+        "address": "大沼郡会津美里町字新布才地1番地",
+        "urls": [
+            "https://www.town.aizumisato.fukushima.jp/material/files/group/11/20230419gikaikousei.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "福島県　西郷村": {
         "lat": 37.141767,
         "long": 140.155299,
         "building": "西郷村役場",
-        "address": "西白河郡西郷村大字熊倉字折口原40"
+        "address": "西白河郡西郷村大字熊倉字折口原40",
+        "urls": [
+            "https://www.vill.nishigo.fukushima.jp/soshiki/gikaijimukyoku/nishigomuragikai/3/717.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "福島県　泉崎村": {
         "lat": 37.153784,
         "long": 140.303363,
         "building": "泉崎村役場",
-        "address": "西白河郡泉崎村大字泉崎字八丸145"
+        "address": "西白河郡泉崎村大字泉崎字八丸145",
+        "urls": [
+            "https://www.vill.izumizaki.fukushima.jp/page/page000127.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/div[2]/table/tbody"
     },
     "福島県　中島村": {
         "lat": 37.148756,
         "long": 140.35023,
         "building": "中島村役場",
-        "address": "西白河郡中島村大字滑津字中島西11-1"
+        "address": "西白河郡中島村大字滑津字中島西11-1",
+        "urls": [
+            "https://www.vill-nakajima.jp/page/page000207.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainContents\"]"
     },
     "福島県　矢吹町": {
         "lat": 37.201221,
         "long": 140.338493,
         "building": "矢吹町役場",
-        "address": "西白河郡矢吹町一本木101"
+        "address": "西白河郡矢吹町一本木101",
+        "urls": [
+            "https://www.town.yabuki.fukushima.jp/page/page000739.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainContents\"]"
     },
     "福島県　棚倉町": {
         "lat": 37.029867,
         "long": 140.379591,
         "building": "棚倉町役場",
-        "address": "東白川郡棚倉町大字棚倉字中居野33"
+        "address": "東白川郡棚倉町大字棚倉字中居野33",
+        "urls": [
+            "https://www.town.tanagura.fukushima.jp/page/page000369.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table[2]/tbody"
     },
     "福島県　矢祭町": {
         "lat": 36.871334,
         "long": 140.424755,
         "building": "矢祭町役場",
-        "address": "東白川郡矢祭町大字東舘字舘本66"
+        "address": "東白川郡矢祭町大字東舘字舘本66",
+        "urls": [
+            "https://www.town.yamatsuri.fukushima.jp/page/page000061.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainContents\"]"
     },
     "福島県　塙町": {
         "lat": 36.957238,
         "long": 140.409647,
         "building": "塙町役場",
-        "address": "東白川郡塙町大字塙字大町3-21"
+        "address": "東白川郡塙町大字塙字大町3-21",
+        "urls": [
+            "https://www.town.hanawa.fukushima.jp/page/page000630.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "福島県　鮫川村": {
         "lat": 37.042229,
         "long": 140.509699,
         "building": "鮫川村役場",
-        "address": "東白川郡鮫川村大字赤坂中野字新宿39-5"
+        "address": "東白川郡鮫川村大字赤坂中野字新宿39-5",
+        "urls": [
+            "https://www.vill.samegawa.fukushima.jp/page/page000516.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table[1]"
     },
     "福島県　石川町": {
         "lat": 37.157072,
         "long": 140.446775,
         "building": "石川町役場",
-        "address": "石川郡石川町字長久保185-4"
+        "address": "石川郡石川町字長久保185-4",
+        "urls": [
+            "https://www.town.ishikawa.fukushima.jp/admin/parliament/09.html"
+        ],
+        "reprs_xpath": "//*[@id=\"ColorID01\"]/section[4]/div/table/tbody"
     },
     "福島県　玉川村": {
         "lat": 37.210718,
         "long": 140.408939,
         "building": "玉川村役場",
-        "address": "石川郡玉川村大字小高字中畷9"
+        "address": "石川郡玉川村大字小高字中畷9",
+        "urls": [
+            "https://www.vill.tamakawa.fukushima.jp/guide/assembly/000231.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainBody\"]/div[2]/div[2]/div[2]/div/div[2]/table"
     },
     "福島県　平田村": {
         "lat": 37.221995,
         "long": 140.575655,
         "building": "平田村役場",
-        "address": "石川郡平田村大字永田字切田116"
+        "address": "石川郡平田村大字永田字切田116",
+        "urls": [
+            "https://www.vill.hirata.fukushima.jp/site/gikai/25.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div/div[1]/div[1]/div[1]/div/div/div/table/tbody"
     },
     "福島県　浅川町": {
         "lat": 37.080947,
         "long": 140.412852,
         "building": "浅川町役場",
-        "address": "石川郡浅川町大字浅川字背戸谷地112-15"
+        "address": "石川郡浅川町大字浅川字背戸谷地112-15",
+        "urls": [
+            "http://www.town.asakawa.fukushima.jp/gikai/meibo/"
+        ],
+        "reprs_xpath": "/html/body/div[2]/main/section[2]/div"
     },
     "福島県　古殿町": {
         "lat": 37.089182,
         "long": 140.555692,
         "building": "古殿町役場",
-        "address": "石川郡古殿町大字松川字新桑原31"
+        "address": "石川郡古殿町大字松川字新桑原31",
+        "urls": [
+            "https://www.town.furudono.fukushima.jp/file/4385/giinmeibo.pdf"
+        ],
+        "reprs_xpath": ""
     },
     "福島県　三春町": {
         "lat": 37.4405,
         "long": 140.493389,
         "building": "三春町役場",
-        "address": "田村郡三春町字大町1-2"
+        "address": "田村郡三春町字大町1-2",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.town.miharu.fukushima.jp/site/gikai/giinmeibo_r5.html"
+        ],
+        "ind_reprs_xpath": "//td/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main_body\"]/div/div/div[1]/table/tbody"
     },
     "福島県　小野町": {
         "lat": 37.286823,
         "long": 140.62628,
         "building": "小野町役場",
-        "address": "田村郡小野町大字小野新町字舘廻92"
+        "address": "田村郡小野町大字小野新町字舘廻92",
+        "urls": [
+            "https://www.town.ono.fukushima.jp/soshiki/10/gikai-giin.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div"
     },
     "福島県　広野町": {
         "lat": 37.214403,
         "long": 140.994561,
         "building": "広野町役場",
-        "address": "双葉郡広野町大字下北迫字苗代替35"
+        "address": "双葉郡広野町大字下北迫字苗代替35",
+        "urls": [
+            "https://www.town.hirono.fukushima.jp/chousei/gikai/1001617/1002267.html"
+        ],
+        "reprs_xpath": "//*[@id=\"voice\"]/div[2]/table"
     },
     "福島県　楢葉町": {
         "lat": 37.282605,
         "long": 140.993465,
         "building": "楢葉町役場",
-        "address": "双葉郡楢葉町大字北田字鐘突堂5-6"
+        "address": "双葉郡楢葉町大字北田字鐘突堂5-6",
+        "urls": [
+            "https://www.town.naraha.lg.jp/admin/cat341/cat342/005639.html"
+        ],
+        "reprs_xpath": "/html/body/div[3]/div[2]/div/div[1]/div/table/tbody"
     },
     "福島県　富岡町": {
         "lat": 37.345496,
         "long": 141.008652,
         "building": "富岡町役場",
-        "address": "双葉郡富岡町大字本岡字王塚622-1"
+        "address": "双葉郡富岡町大字本岡字王塚622-1",
+        "urls": [
+            "https://www.tomioka-town.jp/chosei/tomiokachougikai/gikaigiinnoshokai/1134.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "福島県　川内村": {
         "lat": 37.33768,
         "long": 140.809266,
         "building": "川内村役場",
-        "address": "双葉郡川内村大字上川内字早渡11-24"
+        "address": "双葉郡川内村大字上川内字早渡11-24",
+        "urls": [
+            "http://www.kawauchimura.jp/page/page000035.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "福島県　大熊町": {
         "lat": 37.382087,
         "long": 140.958264,
         "building": "大熊町役場",
-        "address": "双葉郡大熊町大字大川原字南平1717"
+        "address": "双葉郡大熊町大字大川原字南平1717",
+        "urls": [
+            "https://www.town.okuma.fukushima.jp/site/gikai/12928.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table[2]"
     },
     "福島県　双葉町": {
         "lat": 37.452904,
         "long": 141.006374,
         "building": "双葉町役場",
-        "address": "双葉郡双葉町大字長塚字町西73-4"
+        "address": "双葉郡双葉町大字長塚字町西73-4",
+        "urls": [
+            "https://www.town.fukushima-futaba.lg.jp/2643.htm"
+        ],
+        "reprs_xpath": "//*[@id=\"ContentPane\"]/div[2]/div/table[1]"
     },
     "福島県　浪江町": {
         "lat": 37.494594,
         "long": 141.000746,
         "building": "浪江町役場",
-        "address": "双葉郡浪江町大字幾世橋字六反田7-2"
+        "address": "双葉郡浪江町大字幾世橋字六反田7-2",
+        "urls": [
+            "https://www.town.namie.fukushima.jp/site/gikai/giinmeibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[2]/div/div/div/table"
     },
     "福島県　葛尾村": {
         "lat": 37.503547,
         "long": 140.764518,
         "building": "葛尾村役場",
-        "address": "双葉郡葛尾村大字落合字落合16"
+        "address": "双葉郡葛尾村大字落合字落合16",
+        "urls": [
+            "https://www.katsurao.org/site/gikai/gikai-02.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div/div/div/table/tbody"
     },
     "福島県　新地町": {
         "lat": 37.876379,
         "long": 140.919591,
         "building": "新地町役場",
-        "address": "相馬郡新地町谷地小屋字樋掛田30"
+        "address": "相馬郡新地町谷地小屋字樋掛田30",
+        "urls": [
+            "https://www.shinchi-town.jp/site/gikai/gikai-meibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[3]/table/tbody"
     },
     "福島県　飯舘村": {
         "lat": 37.678947,
         "long": 140.735091,
         "building": "飯舘村役場",
-        "address": "相馬郡飯舘村伊丹沢字伊丹沢580-1"
+        "address": "相馬郡飯舘村伊丹沢字伊丹沢580-1",
+        "urls": [
+            "https://www.vill.iitate.fukushima.jp/site/gikai/13.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div/div/div/table"
     },
     "茨城県　水戸市": {
         "lat": 36.365861,
         "long": 140.471222,
         "building": "水戸市役所",
-        "address": "水戸市中央1-4-1"
+        "address": "水戸市中央1-4-1",
+        "urls": [
+            "https://www.city.mito.lg.jp/site/gikai/21048.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[1]/div/div/div/table/tbody"
     },
     "茨城県　日立市": {
         "lat": 36.599016,
         "long": 140.651546,
         "building": "日立市役所",
-        "address": "日立市助川町1-1-1"
+        "address": "日立市助川町1-1-1",
+        "urls": [
+            "https://www.city.hitachi.lg.jp/gikai/page/p095356.html"
+        ],
+        "reprs_xpath": "//*[@id=\"info-main\"]/div[1]/table/tbody"
     },
     "茨城県　土浦市": {
         "lat": 36.078391,
         "long": 140.204143,
         "building": "土浦市役所",
-        "address": "土浦市大和町9-1"
+        "address": "土浦市大和町9-1",
+        "urls": [
+            "https://www.city.tsuchiura.lg.jp/page/page018542.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainContents\"]"
     },
     "茨城県　古河市": {
         "lat": 36.178228,
         "long": 139.755371,
         "building": "古河市役所",
-        "address": "古河市下大野2248"
+        "address": "古河市下大野2248",
+        "urls": [
+            "https://www.city.ibaraki-koga.lg.jp/soshiki/shigikaijimukyoku/3/899.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "茨城県　石岡市": {
         "lat": 36.19084,
         "long": 140.287242,
         "building": "石岡市役所",
-        "address": "石岡市石岡1-1-1"
+        "address": "石岡市石岡1-1-1",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.ishioka-shigikai.jp/shinshi/giin/05_05_01_09_04_30.html"
+        ],
+        "ind_reprs_xpath": "//tbody/tr/td/a",
+        "ind_reprs_info_xpath": "/html/body/table"
     },
     "茨城県　結城市": {
         "lat": 36.289625,
         "long": 139.87147,
         "building": "結城市役所",
-        "address": "結城市中央町2丁目3番地"
+        "address": "結城市中央町2丁目3番地",
+        "urls": [
+            "https://www.city.yuki.lg.jp/assembly/giinmeibo/page000019.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table[2]/tbody"
     },
     "茨城県　龍ケ崎市": {
         "lat": 35.911594,
         "long": 140.182265,
         "building": "龍ケ崎市役所",
-        "address": "龍ケ崎市3710"
+        "address": "龍ケ崎市3710",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.ryugasaki.ibaraki.jp/shigikai/memberlist/giin/index.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"main\"]/div[2]/ul/li/a",
+        "ind_reprs_info_xpath": "//*[@id=\"main\"]/div[2]/div[2]/table/tbody"
     },
     "茨城県　下妻市": {
         "lat": 36.184516,
         "long": 139.967374,
         "building": "下妻市役所",
-        "address": "下妻市大字本城町2-22"
+        "address": "下妻市大字本城町2-22",
+        "urls": [
+            "https://www.city.shimotsuma.lg.jp/shisei/gikai/page000407.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "茨城県　常総市": {
         "lat": 36.023563,
         "long": 139.993934,
         "building": "常総市役所",
-        "address": "常総市水海道諏訪町3222-3"
+        "address": "常総市水海道諏訪町3222-3",
+        "urls": [
+            "https://www.city.joso.lg.jp/kurashi_gyousei/shisei/gikai/meibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "茨城県　常陸太田市": {
         "lat": 36.538227,
         "long": 140.530929,
         "building": "常陸太田市役所",
-        "address": "常陸太田市金井町3690"
+        "address": "常陸太田市金井町3690",
+        "urls": [
+            "https://www.city.hitachiota.ibaraki.jp/page/page004977.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　高萩市": {
         "lat": 36.713674,
         "long": 140.709506,
         "building": "高萩市役所",
-        "address": "高萩市本町1-100-1"
+        "address": "高萩市本町1-100-1",
+        "urls": [
+            "https://www.city.takahagi.ibaraki.jp/gyousei/gikai/page001982.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]"
     },
     "茨城県　北茨城市": {
         "lat": 36.801892,
         "long": 140.751032,
         "building": "北茨城市役所",
-        "address": "北茨城市磯原町磯原1630"
+        "address": "北茨城市磯原町磯原1630",
+        "urls": [
+            "https://www.city.kitaibaraki.lg.jp/docs/2015022300494/"
+        ],
+        "reprs_xpath": "//*[@id=\"contentBody\"]/article/div[2]/div/table/tbody"
     },
     "茨城県　笠間市": {
         "lat": 36.345128,
         "long": 140.304232,
         "building": "笠間市役所",
-        "address": "笠間市中央3-2-1"
+        "address": "笠間市中央3-2-1",
+        "urls": [
+            "https://www.city.kasama.lg.jp/page/page003284.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　取手市": {
         "lat": 35.911474,
         "long": 140.050305,
         "building": "取手市役所",
-        "address": "取手市寺田5139"
+        "address": "取手市寺田5139",
+        "urls": [
+            "https://www.city.toride.ibaraki.jp/gikai/shise/shicho/shigikai/gaiyo/mebo-new.html"
+        ],
+        "reprs_xpath": "//*[@id=\"tmp_contents\"]/table/tbody"
     },
     "茨城県　牛久市": {
         "lat": 35.979397,
         "long": 140.149532,
         "building": "牛久市役所",
-        "address": "牛久市中央3-15-1"
+        "address": "牛久市中央3-15-1",
+        "urls": [
+            "https://www.city.ushiku.lg.jp/page/page007614.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　つくば市": {
         "lat": 36.08356,
         "long": 140.076473,
         "building": "つくば市役所",
-        "address": "つくば市研究学園1-1-1"
+        "address": "つくば市研究学園1-1-1",
+        "urls": [
+            "https://www.city.tsukuba.lg.jp/soshikikarasagasu/gikaikyokugikaisomuka/gyomuannai/1/3/1002604.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-in\"]/div[1]/div"
     },
     "茨城県　ひたちなか市": {
         "lat": 36.396615,
         "long": 140.534676,
         "building": "ひたちなか市役所",
-        "address": "ひたちなか市東石川2-10-1"
+        "address": "ひたちなか市東石川2-10-1",
+        "urls": [],
+        "reprs_xpath": ""
     },
     "茨城県　鹿嶋市": {
         "lat": 35.965721,
         "long": 140.644852,
         "building": "鹿嶋市役所",
-        "address": "鹿嶋市大字平井1187-1"
+        "address": "鹿嶋市大字平井1187-1",
+        "urls": [
+            "https://city.kashima.ibaraki.jp/site/19gikai/3294.html"
+        ],
+        "reprs_xpath": "//*[@id=\"main_body\"]/div[2]/div/div/div/table/tbody"
     },
     "茨城県　潮来市": {
         "lat": 35.947134,
         "long": 140.555364,
         "building": "潮来市役所",
-        "address": "潮来市辻626"
+        "address": "潮来市辻626",
+        "urls": [
+            "https://www.city.itako.lg.jp/page/page004919.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/div/table"
     },
     "茨城県　守谷市": {
         "lat": 35.951327,
         "long": 139.975465,
         "building": "守谷市役所",
-        "address": "守谷市大柏950-1"
+        "address": "守谷市大柏950-1",
+        "urls": [
+            "https://www.city.moriya.ibaraki.jp/smph/gikai/meibo/giinmeibo.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents-area\"]"
     },
     "茨城県　常陸大宮市": {
         "lat": 36.542592,
         "long": 140.411012,
         "building": "常陸大宮市役所",
-        "address": "常陸大宮市中富町3135-6"
+        "address": "常陸大宮市中富町3135-6",
+        "urls": [
+            "https://www.city.hitachiomiya.lg.jp/gikai/page000389.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　那珂市": {
         "lat": 36.457424,
         "long": 140.486726,
         "building": "那珂市役所",
-        "address": "那珂市福田1819-5"
+        "address": "那珂市福田1819-5",
+        "urls": [
+            "https://www.city.naka.lg.jp/page/page004073.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　筑西市": {
         "lat": 36.305263,
         "long": 139.979417,
         "building": "筑西市役所",
-        "address": "筑西市丙360"
+        "address": "筑西市丙360",
+        "urls": [
+            "https://www.city.chikusei.lg.jp/page/page010396.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　坂東市": {
         "lat": 36.048363,
         "long": 139.88868,
         "building": "坂東市役所",
-        "address": "坂東市岩井4365"
+        "address": "坂東市岩井4365",
+        "urls": [
+            "https://www.city.bando.lg.jp/page/page005053.html"
+        ],
+        "reprs_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　稲敷市": {
         "lat": 35.972927,
         "long": 140.303583,
         "building": "稲敷市役所",
-        "address": "稲敷市犬塚1570-1"
+        "address": "稲敷市犬塚1570-1",
+        "urls": [
+            "https://www.city.inashiki.lg.jp/page/page005729.html"
+        ],
+        "reprs_xpath": "//*[@id=\"mainContents\"]"
     },
     "茨城県　かすみがうら市": {
         "lat": 36.151812,
         "long": 140.237006,
         "building": "かすみがうら市役所",
-        "address": "かすみがうら市上土田461"
+        "address": "かすみがうら市上土田461",
+        "multiple_pages": true,
+        "urls": [
+            "https://www.city.kasumigaura.lg.jp/page/page003216.html"
+        ],
+        "ind_reprs_xpath": "//*[@id=\"contents\"]/p/a",
+        "ind_reprs_info_xpath": "//*[@id=\"contents\"]/table/tbody"
     },
     "茨城県　桜川市": {
         "lat": 36.327273,
