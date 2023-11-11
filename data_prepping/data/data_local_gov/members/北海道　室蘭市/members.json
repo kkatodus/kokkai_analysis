@@ -1,0 +1,254 @@
+{
+    "members": [
+        {
+            "name_kana": "はやかわしょうぞう",
+            "name_kanji": "早川昇三",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [],
+            "term": 4,
+            "district": "不明"
+        },
+        {
+            "name_kana": "おざわゆう",
+            "name_kanji": "小澤悠",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務常任委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "たきぐちひろこ",
+            "name_kanji": "滝口紘子",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2,
+            "district": "不明"
+        },
+        {
+            "name_kana": "いとうつとむ",
+            "name_kanji": "伊藤勉",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "はだちひでみつ",
+            "name_kanji": "羽立秀光",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 12,
+            "district": "不明"
+        },
+        {
+            "name_kana": "こばやしゆみ",
+            "name_kanji": "小林由美",
+            "party": "なし",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務常任委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "みなみかわたつひこ",
+            "name_kanji": "南川達彦",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "不明"
+        },
+        {
+            "name_kana": "ひぬまじゅんこ",
+            "name_kanji": "日沼順子",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "ながおかみつひろ",
+            "name_kanji": "長岡充洋",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2,
+            "district": "不明"
+        },
+        {
+            "name_kana": "たかはしなおみ",
+            "name_kanji": "髙橋直美",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "不明"
+        },
+        {
+            "name_kana": "にしおかただひろ",
+            "name_kanji": "西岡忠広",
+            "party": "公明党室蘭市議会",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "はだちのりひろ",
+            "name_kanji": "羽立典弘",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "わたなべふさよ",
+            "name_kanji": "渡辺房代",
+            "party": "日本共産党室蘭市議団",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務常任委員会",
+                "広報特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "ときわいしげき",
+            "name_kanji": "常磐井茂樹",
+            "party": "日本共産党室蘭市議団",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 7,
+            "district": "不明"
+        },
+        {
+            "name_kana": "わがつましずお",
+            "name_kanji": "我妻静夫",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 7,
+            "district": "不明"
+        },
+        {
+            "name_kana": "はやさかひろし",
+            "name_kanji": "早坂博",
+            "party": "市政結和",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 7,
+            "district": "不明"
+        },
+        {
+            "name_kana": "みずえかずひろ",
+            "name_kanji": "水江一弘",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 8,
+            "district": "不明"
+        },
+        {
+            "name_kana": "こだまともあき",
+            "name_kanji": "児玉智明",
+            "party": "市民ネット・むろらん",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 5,
+            "district": "不明"
+        },
+        {
+            "name_kana": "かしわぎたかひさ",
+            "name_kanji": "柏木隆寿",
+            "party": "公明党室蘭市議会",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 5,
+            "district": "不明"
+        },
+        {
+            "name_kana": "すなだなおこ",
+            "name_kanji": "砂田尚子",
+            "party": "公明党室蘭市議会",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 7,
+            "district": "不明"
+        }
+    ]
+}

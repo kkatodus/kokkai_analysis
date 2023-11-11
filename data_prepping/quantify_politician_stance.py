@@ -8,6 +8,7 @@ from file_handling.file_read_writer import read_json, write_json, create_dir, wr
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'data_prepping', 'data', 'data_repr')
 # %%
 model_name = "kkatodus/jp-speech-classifier"
+model_name = 'meta-llama/Llama-2-7b-chat-hf'
 from sentence_transformers import SentenceTransformer
 sentence_transformer = SentenceTransformer(model_name)
 sentence_embedding = sentence_transformer.encode("そのことを踏まえて、総務省とすれば、御案内のとおり、ローカル一万プロジェクトや分散型エネルギーインフラプロジェクト、これらを活用してまいりたいというふうに考えております")

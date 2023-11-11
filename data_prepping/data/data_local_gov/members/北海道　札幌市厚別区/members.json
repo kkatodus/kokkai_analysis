@@ -1,0 +1,71 @@
+{
+    "members": [
+        {
+            "name_kana": "こじま　ゆみ",
+            "name_kanji": "こじま　ゆみ",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "female",
+            "commitee": [
+                "厚生委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": 5,
+            "district": "不明"
+        },
+        {
+            "name_kana": "かわた　ただひさ",
+            "name_kanji": "川田　ただひさ",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "male",
+            "commitee": [
+                "経済観光委員会",
+                "議会運営委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": 4,
+            "district": "不明"
+        },
+        {
+            "name_kana": "まつばら　じゅんじ",
+            "name_kanji": "松原　淳二",
+            "party": "民主市民連合",
+            "age": "不明",
+            "gender": "male",
+            "commitee": [
+                "建設委員会",
+                "議会運営委員会",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": 3,
+            "district": "不明"
+        },
+        {
+            "name_kana": "もり　きよのり",
+            "name_kanji": "森　基誉則",
+            "party": "民主市民連合",
+            "age": "不明",
+            "gender": "male",
+            "commitee": [
+                "経済観光委員会",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": 1,
+            "district": "不明"
+        },
+        {
+            "name_kana": "まるやま　ひでき",
+            "name_kanji": "丸山　秀樹",
+            "party": "公明党",
+            "age": "不明",
+            "gender": "male",
+            "commitee": [
+                "経済観光委員会",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": 4,
+            "district": "不明"
+        }
+    ]
+}

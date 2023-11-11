@@ -8,13 +8,17 @@ from secrets.api_keys import OPENAI_API_KEY
 from file_handling.file_read_writer import read_json, write_json, create_dir
 from params.paths import ROOT_DIR
 RESOURCE_DIR = os.path.join(ROOT_DIR, 'resource')
+DATA_DIR = os.path.join(ROOT_DIR, 'data')
+LOCAL_DATA_DIR = os.path.join(DATA_DIR, 'data_local_gov')
+os.makedirs(LOCAL_DATA_DIR, exist_ok=True)
 
 openai.organization = "org-KwrqfnvZUjabTOAFL3QUAhk2"
 openai.api_key = OPENAI_API_KEY
-#%%
-gs = GeneralScraper()
 scraping_resource_path = os.path.join(RESOURCE_DIR, 'local_gov_repr_scrape.json')
 scraping_resource = read_json(scraping_resource_path)
+gs = GeneralScraper(firefox=True)
+
+#%%
 
 def all_reprs_on_one_page():
 	urls = []
@@ -59,6 +63,7 @@ def get_text_from_local_repr_page(city_name):
 
 
 #%%
+## code to create the scraping resource file 
 for idx, city_name in enumerate(scraping_resource.keys()):
 	do_it_again = False
 	while True:
@@ -87,27 +92,3 @@ for idx, city_name in enumerate(scraping_resource.keys()):
 			continue
 	write_json(scraping_resource, scraping_resource_path)
 
-#%%
-city_name = '広島県　安芸高田市'
-city_resource = scraping_resource[city_name]
-gs.get_url(city_resource['url'])
-reprs_component = gs.get_site_components_by(By.XPATH, city_resource['reprs_xpath'])
-print(reprs_component[0].text)
-#%%
-
-request_text = '以下のテキストから議員の情報を辞書のリスト形式で取得してください。抽出する情報は名前（漢字）、名前（フリガナ）、会派、年齢、所属委員会、名前から推定される性別、です。\n' + reprs_component[0].text
-
-completion = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
-    {"role": "user", "content": request_text}
-  ]
-)
-#%%
-print(completion.choices[0].message)
-
-# %%
-print(completion)
-write_json(json.loads(completion.choices[0].message.content), 'test.json')
-
-# %%

@@ -1,0 +1,108 @@
+{
+    "members": [
+        {
+            "name_kana": "とくたに　やすのり",
+            "name_kanji": "徳谷　康憲",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "夕張市紅葉山"
+        },
+        {
+            "name_kana": "あらい　しゅうじ",
+            "name_kanji": "荒井　周司",
+            "party": "無所属",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "夕張市清水沢"
+        },
+        {
+            "name_kana": "くどう　まさのり",
+            "name_kanji": "工藤　政則",
+            "party": "無所属",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "夕張市滝ノ上"
+        },
+        {
+            "name_kana": "きみじま　たかお",
+            "name_kanji": "君島　孝夫",
+            "party": "無所属",
+            "age": 102,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "夕張市鹿の谷"
+        },
+        {
+            "name_kana": "さくらい　あき",
+            "name_kanji": "櫻井　暁",
+            "party": "日本共産党",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "夕張市南清水沢"
+        },
+        {
+            "name_kana": "ちば　まさる",
+            "name_kanji": "千葉　勝",
+            "party": "無所属",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "監査委員",
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "夕張市紅葉山"
+        },
+        {
+            "name_kana": "たかま　すみこ",
+            "name_kanji": "高間　澄子",
+            "party": "公明党",
+            "age": 97,
+            "gender": "female",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 5,
+            "district": "夕張市沼ノ沢"
+        },
+        {
+            "name_kana": "おおやま　しゅうじ",
+            "name_kanji": "大山　修二",
+            "party": "無所属",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "議長"
+            ],
+            "term": 4,
+            "district": "夕張市清水沢"
+        }
+    ]
+}

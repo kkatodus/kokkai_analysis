@@ -1,0 +1,105 @@
+{
+    "members": [
+        {
+            "name_kana": "のと なおき",
+            "name_kanji": "能 登 直 樹",
+            "party": "公明党",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 1
+        },
+        {
+            "name_kana": "さとう よしはる",
+            "name_kanji": "佐 藤 良 治",
+            "party": "無所属",
+            "age": 48,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "やまざき みずき",
+            "name_kanji": "山 崎 瑞 紀",
+            "party": "無所属",
+            "age": 39,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会",
+                "行政常任委員会"
+            ],
+            "term": 3,
+            "district": 3
+        },
+        {
+            "name_kana": "まつい けいどう",
+            "name_kanji": "松 井 敬 道",
+            "party": "無所属",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "行政常任委員会"
+            ],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "かわの としお",
+            "name_kanji": "川 野 敏 夫",
+            "party": "無所属",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "監査委員",
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 5,
+            "district": 5
+        },
+        {
+            "name_kana": "めが さとし",
+            "name_kanji": "女 鹿 聡",
+            "party": "日本共産党",
+            "age": 47,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会"
+            ],
+            "term": 4,
+            "district": 6
+        },
+        {
+            "name_kana": "しもやま のりよし",
+            "name_kanji": "下 山 則 義",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "行政常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 6,
+            "district": 7
+        },
+        {
+            "name_kana": "ほんだ かつこ",
+            "name_kanji": "本 田 加津子",
+            "party": "立憲民主党",
+            "age": 60,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": 8
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+{
+    "members": [
+        {
+            "name_kana": "みかみ　ひでひこ",
+            "name_kanji": "三神　英彦",
+            "party": "自由民主党",
+            "age": "35",
+            "gender": "male",
+            "commitee": [
+                "経済観光委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "こすだ　ともひろ",
+            "name_kanji": "小須田　大拓",
+            "party": "自由民主党",
+            "age": "42",
+            "gender": "male",
+            "commitee": [
+                "建設委員会委員長",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "あおい　ひろみ",
+            "name_kanji": "あおい　ひろみ",
+            "party": "民主市民連合",
+            "age": "39",
+            "gender": "female",
+            "commitee": [
+                "文教委員会副委員長",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "わたなべ　やすゆき",
+            "name_kanji": "わたなべ　泰行",
+            "party": "公明党",
+            "age": "47",
+            "gender": "male",
+            "commitee": [
+                "総務委員会",
+                "議会運営委員会",
+                "総合交通政策調査特別委員会委員長"
+            ],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "わきもと　しげゆき",
+            "name_kanji": "脇元　繁之",
+            "party": "大地さっぽろ",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "建設委員会",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": 1,
+            "district": ""
+        }
+    ]
+}
