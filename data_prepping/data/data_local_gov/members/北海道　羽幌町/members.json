@@ -1,0 +1,114 @@
+{
+    "members": [
+        {
+            "name_kana": "さとう　みつる",
+            "name_kanji": "佐藤　　満",
+            "party": "",
+            "age": 32,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "かなき　なおふみ",
+            "name_kanji": "金木　直文",
+            "party": "",
+            "age": 33,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": 2
+        },
+        {
+            "name_kana": "あべ　かずや",
+            "name_kanji": "阿部　和也",
+            "party": "",
+            "age": 28,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 3
+        },
+        {
+            "name_kana": "おおさか　てるお",
+            "name_kanji": "逢坂　照雄",
+            "party": "",
+            "age": 36,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 4
+        },
+        {
+            "name_kana": "むらかみ　ゆうや",
+            "name_kanji": "村上　雄也",
+            "party": "",
+            "age": 26,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "こでら　こういち",
+            "name_kanji": "小寺　光一",
+            "party": "",
+            "age": 32,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 6
+        },
+        {
+            "name_kana": "いその　すなお",
+            "name_kanji": "磯野　直",
+            "party": "",
+            "age": 37,
+            "gender": "male",
+            "commitee": [],
+            "term": 8,
+            "district": 7
+        },
+        {
+            "name_kana": "ふなみ　としあき",
+            "name_kanji": "舟見　俊明",
+            "party": "",
+            "age": 33,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 8
+        },
+        {
+            "name_kana": "くどう　まさゆき",
+            "name_kanji": "工藤　正幸",
+            "party": "",
+            "age": 33,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 9
+        },
+        {
+            "name_kana": "ひらやま　みちこ",
+            "name_kanji": "平山美知子",
+            "party": "",
+            "age": 37,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": 10
+        },
+        {
+            "name_kana": "むらた　さだひと",
+            "name_kanji": "村田　定人",
+            "party": "",
+            "age": 31,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 11
+        }
+    ]
+}

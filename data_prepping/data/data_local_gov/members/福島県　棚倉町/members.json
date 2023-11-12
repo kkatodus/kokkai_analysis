@@ -1,0 +1,64 @@
+{
+    "members": [
+        {
+            "name_kana": "ふじた みつこ",
+            "name_kanji": "藤田光子",
+            "party": "総務",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "ちかとう まさみつ",
+            "name_kanji": "近藤正光",
+            "party": "総務",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "わちゆき ひろよし",
+            "name_kanji": "和知裕喜",
+            "party": "総務",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "総務"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "きくち ただじ",
+            "name_kanji": "菊池忠二",
+            "party": "総務",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "わちゆき よしのり",
+            "name_kanji": "和知良則",
+            "party": null,
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "広報編集"
+            ],
+            "term": null,
+            "district": null
+        }
+    ]
+}

@@ -1,0 +1,166 @@
+{
+    "members": [
+        {
+            "name_kana": "よしだ よしゆき",
+            "name_kanji": "吉田 好之",
+            "party": "無所属",
+            "age": 6,
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "総務経済常任委員会"
+            ],
+            "term": 12,
+            "district": null
+        },
+        {
+            "name_kana": "さんぼんまつ かずよし",
+            "name_kanji": "三本松 和美",
+            "party": "無所属",
+            "age": 6,
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "文教厚生常任委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 11,
+            "district": 1
+        },
+        {
+            "name_kana": "おおた きよみ",
+            "name_kanji": "太田 清実",
+            "party": "無所属",
+            "age": 2,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "文教厚生常任委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "ながせ しげもと",
+            "name_kanji": "永瀬 成元",
+            "party": "無所属",
+            "age": 2,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会",
+                "議会運営委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 3,
+            "district": 3
+        },
+        {
+            "name_kana": "みずの かずひこ",
+            "name_kanji": "水野 一彦",
+            "party": "無所属",
+            "age": 1,
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "議会運営委員会",
+                "議会広報特別委員会",
+                "公立小野町地方綜合病院企業団議会議員"
+            ],
+            "term": 4,
+            "district": null
+        },
+        {
+            "name_kana": "かとおの ひろかつ",
+            "name_kanji": "上遠野 廣一",
+            "party": "無所属",
+            "age": 4,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会",
+                "監査委員",
+                "須賀川広域消防組合議会議員"
+            ],
+            "term": 5,
+            "district": null
+        },
+        {
+            "name_kana": "たかはし ななえ",
+            "name_kanji": "高橋 七重",
+            "party": "日本共産党",
+            "age": 5,
+            "gender": "female",
+            "commitee": [
+                "議会広報特別委員会",
+                "総務経済常任委員会",
+                "議会運営委員会",
+                "石川地方生活環境施設組合議員"
+            ],
+            "term": 6,
+            "district": null
+        },
+        {
+            "name_kana": "さとう たかお",
+            "name_kanji": "佐藤 孝雄",
+            "party": "無所属",
+            "age": 4,
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会"
+            ],
+            "term": 7,
+            "district": null
+        },
+        {
+            "name_kana": "かとおの けんのすけ",
+            "name_kanji": "上遠野 健之助",
+            "party": "無所属",
+            "age": 7,
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会"
+            ],
+            "term": 8,
+            "district": null
+        },
+        {
+            "name_kana": "あべ きよし",
+            "name_kanji": "阿部 清",
+            "party": "無所属",
+            "age": 7,
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会"
+            ],
+            "term": 9,
+            "district": null
+        },
+        {
+            "name_kana": "あらかわ ひでよし",
+            "name_kanji": "荒川 英義",
+            "party": "無所属",
+            "age": 1,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会",
+                "議会広報特別委員会",
+                "石川地方生活環境施設組合議員"
+            ],
+            "term": 10,
+            "district": null
+        },
+        {
+            "name_kana": "えんどう まさひこ",
+            "name_kanji": "遠藤 正彦",
+            "party": "無所属",
+            "age": 1,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務経済常任委員会",
+                "石川地方生活環境施設組合議員"
+            ],
+            "term": 11,
+            "district": null
+        }
+    ]
+}

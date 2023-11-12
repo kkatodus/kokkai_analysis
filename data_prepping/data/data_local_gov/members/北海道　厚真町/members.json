@@ -1,0 +1,164 @@
+{
+    "members": [
+        {
+            "name_kana": "さわぐち　ちさと",
+            "name_kanji": "澤口　千里",
+            "party": "共和",
+            "age": 31,
+            "gender": "female",
+            "commitee": [
+                "常任",
+                "議会運営",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "無"
+        },
+        {
+            "name_kana": "てらさか　やすお",
+            "name_kanji": "寺坂　康生",
+            "party": "京町",
+            "age": 41,
+            "gender": "male",
+            "commitee": [
+                "所属委員会",
+                "常任",
+                "議会運営",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "無"
+        },
+        {
+            "name_kana": "おりさか　やすひろ",
+            "name_kanji": "折坂　泰宏",
+            "party": "軽舞",
+            "age": 50,
+            "gender": "male",
+            "commitee": [
+                "常任",
+                "議会運営",
+                "地震復興"
+            ],
+            "term": 1,
+            "district": "無"
+        },
+        {
+            "name_kana": "すがはら　ふみこ",
+            "name_kanji": "菅原　文子",
+            "party": "本郷",
+            "age": 62,
+            "gender": "female",
+            "commitee": [
+                "所属委員会",
+                "常任",
+                "議会運営",
+                "議会広報",
+                "地震復興"
+            ],
+            "term": 1,
+            "district": "無"
+        },
+        {
+            "name_kana": "あきなが　とおる",
+            "name_kanji": "秋永　徹",
+            "party": "富里",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "常任",
+                "議会運営",
+                "議会広報",
+                "地震復興"
+            ],
+            "term": 2,
+            "district": "無"
+        },
+        {
+            "name_kana": "はしもと　ゆたか",
+            "name_kanji": "橋本　豊",
+            "party": "高丘",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "常任",
+                "議会運営",
+                "議会広報",
+                "地震復興"
+            ],
+            "term": 2,
+            "district": "無"
+        },
+        {
+            "name_kana": "いとう　とみお",
+            "name_kanji": "伊藤富志夫",
+            "party": "豊沢",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "常任",
+                "議会運営",
+                "議会広報",
+                "地震復興",
+                "新庁舎整備"
+            ],
+            "term": 3,
+            "district": "共"
+        },
+        {
+            "name_kana": "たかだ　よしかず",
+            "name_kanji": "髙田　芳和",
+            "party": "新町",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "所属委員会",
+                "常任",
+                "議会運営",
+                "議会広報",
+                "地震復興"
+            ],
+            "term": 3,
+            "district": "無"
+        },
+        {
+            "name_kana": "みくに　かずえ",
+            "name_kanji": "三國　和江",
+            "party": "京町",
+            "age": 73,
+            "gender": "female",
+            "commitee": [
+                "所属委員会",
+                "常任",
+                "議会運営"
+            ],
+            "term": 5,
+            "district": "無"
+        },
+        {
+            "name_kana": "よしおか　しげき",
+            "name_kanji": "吉岡　茂樹",
+            "party": "豊丘",
+            "age": 69,
+            "gender": "male",
+            "commitee": [
+                "所属委員会",
+                "常任",
+                "議会運営",
+                "新庁舎整備"
+            ],
+            "term": 4,
+            "district": "無"
+        },
+        {
+            "name_kana": "わたなべ　たかき",
+            "name_kanji": "渡部　孝樹",
+            "party": "共栄",
+            "age": 57,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": "無"
+        }
+    ]
+}

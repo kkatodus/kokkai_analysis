@@ -1,0 +1,376 @@
+{
+    "members": [
+        {
+            "name_kana": "あべ　たろう",
+            "name_kanji": "安倍　太郎",
+            "party": "無会派",
+            "age": "34",
+            "gender": "male",
+            "commitee": [
+                "環境教育委員会"
+            ],
+            "term": 5,
+            "district": "小船越字沢田山"
+        },
+        {
+            "name_kana": "おくやま　ひろゆき",
+            "name_kanji": "奥山　浩幸",
+            "party": "ニュー石巻",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "環境教育委員会"
+            ],
+            "term": 3,
+            "district": "新栄二丁目"
+        },
+        {
+            "name_kana": "はらだ　ゆたか",
+            "name_kanji": "原田　豊",
+            "party": "ニュー石巻",
+            "age": "32",
+            "gender": "male",
+            "commitee": [
+                "保健福祉委員会"
+            ],
+            "term": 1,
+            "district": "築山一丁目"
+        },
+        {
+            "name_kana": "かつまた　かずのり",
+            "name_kanji": "勝又　和宣",
+            "party": "ニュー石巻",
+            "age": "29",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務企画委員会",
+                "地域交通対策特別委員会",
+                "広報広聴委員会"
+            ],
+            "term": 1,
+            "district": "のぞみ野五丁目"
+        },
+        {
+            "name_kana": "きむら　よしてる",
+            "name_kanji": "木村　美輝",
+            "party": "ニュー石巻",
+            "age": "36",
+            "gender": "male",
+            "commitee": [
+                "産業建設委員会",
+                "少子化対策特別委員会"
+            ],
+            "term": 1,
+            "district": "給分浜羽黒下"
+        },
+        {
+            "name_kana": "あがつま　くみこ",
+            "name_kanji": "我妻　久美子",
+            "party": "石巻颯の会",
+            "age": "37",
+            "gender": "female",
+            "commitee": [
+                "環境教育委員会",
+                "少子化対策特別委員会"
+            ],
+            "term": 1,
+            "district": "須江字瓦山"
+        },
+        {
+            "name_kana": "たに　ゆうすけ",
+            "name_kanji": "谷　祐輔",
+            "party": "石巻颯の会",
+            "age": "30",
+            "gender": "male",
+            "commitee": [
+                "保健福祉委員会",
+                "少子化対策特別委員会"
+            ],
+            "term": 1,
+            "district": "貞山三丁目"
+        },
+        {
+            "name_kana": "とこう　まりこ",
+            "name_kanji": "都甲　マリ子",
+            "party": "日高見会",
+            "age": "39",
+            "gender": "female",
+            "commitee": [
+                "環境教育委員会",
+                "少子化対策特別委員会"
+            ],
+            "term": 1,
+            "district": "開北一丁目"
+        },
+        {
+            "name_kana": "はやかわ　としひろ",
+            "name_kanji": "早川　俊弘",
+            "party": "ニュー石巻",
+            "age": "35",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "環境教育委員会",
+                "地域交通対策特別委員会",
+                "広報広聴委員会"
+            ],
+            "term": 1,
+            "district": "渡波字栄田"
+        },
+        {
+            "name_kana": "ちば　まさゆき",
+            "name_kanji": "千葉　正幸",
+            "party": "ニュー石巻",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "保健福祉委員会"
+            ],
+            "term": 2,
+            "district": "桃生町神取"
+        },
+        {
+            "name_kana": "あべ　ひろあき",
+            "name_kanji": "阿部　浩章",
+            "party": "ニュー石巻",
+            "age": "40",
+            "gender": "male",
+            "commitee": [
+                "総務企画委員会",
+                "議会運営委員会",
+                "広報広聴委員会"
+            ],
+            "term": 3,
+            "district": "貞山三丁目"
+        },
+        {
+            "name_kana": "たかはし　けんえつ",
+            "name_kanji": "高橋　憲悦",
+            "party": "ニュー石巻",
+            "age": "42",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "広報広聴委員会",
+                "保健福祉委員会",
+                "総合防災対策特別委員会"
+            ],
+            "term": 3,
+            "district": "大瓜字小福地"
+        },
+        {
+            "name_kana": "たていし　みつひろ",
+            "name_kanji": "楯石　光弘",
+            "party": "ニュー石巻",
+            "age": "37",
+            "gender": "male",
+            "commitee": [
+                "少子化対策特別委員会",
+                "総務企画委員会"
+            ],
+            "term": 3,
+            "district": "前谷地字八幡山"
+        },
+        {
+            "name_kana": "あべ　かずよし",
+            "name_kanji": "阿部　和芳",
+            "party": "日高見会",
+            "age": "34",
+            "gender": "male",
+            "commitee": [
+                "産業建設委員会",
+                "地域交通対策特別委員会"
+            ],
+            "term": 5,
+            "district": "小積浜字田ノ入山"
+        },
+        {
+            "name_kana": "うつのみや　ひろかず",
+            "name_kanji": "宇都宮　弘和",
+            "party": "石巻颯の会",
+            "age": "36",
+            "gender": "male",
+            "commitee": [
+                "地域交通対策特別委員会",
+                "産業建設委員会"
+            ],
+            "term": 1,
+            "district": "小船越字舟形"
+        },
+        {
+            "name_kana": "やまぐち　そういちろう",
+            "name_kanji": "山口　荘一郎",
+            "party": "石巻颯の会",
+            "age": "39",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "広報広聴委員会",
+                "環境教育委員会",
+                "総合防災対策特別委員会"
+            ],
+            "term": 4,
+            "district": "錦町"
+        },
+        {
+            "name_kana": "ほし　まさとし",
+            "name_kanji": "星　雅俊",
+            "party": "日高見会",
+            "age": "38",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務企画委員会",
+                "総合防災対策特別委員会",
+                "広報広聴委員会"
+            ],
+            "term": 2,
+            "district": "末広町"
+        },
+        {
+            "name_kana": "さいとう　すみこ",
+            "name_kanji": "齋藤　澄子",
+            "party": "無会派",
+            "age": "40",
+            "gender": "female",
+            "commitee": [
+                "少子化対策特別委員会",
+                "保健福祉委員会"
+            ],
+            "term": 2,
+            "district": "調整中"
+        },
+        {
+            "name_kana": "えんどう　ひろあき",
+            "name_kanji": "遠藤　宏昭",
+            "party": "ニュー石巻",
+            "age": "45",
+            "gender": "male",
+            "commitee": [
+                "環境教育委員会"
+            ],
+            "term": 4,
+            "district": "丸井戸三丁目"
+        },
+        {
+            "name_kana": "おおもり　しゅういち",
+            "name_kanji": "大森　秀一",
+            "party": "ニュー石巻",
+            "age": "46",
+            "gender": "male",
+            "commitee": [
+                "環境教育委員会",
+                "総合防災対策特別委員会"
+            ],
+            "term": 6,
+            "district": "桃生町樫崎字荒戸"
+        },
+        {
+            "name_kana": "あべ　きゅういち",
+            "name_kanji": "阿部　久一",
+            "party": "ニュー石巻",
+            "age": "44",
+            "gender": "male",
+            "commitee": [
+                "地域交通対策特別委員会",
+                "産業建設委員会"
+            ],
+            "term": 5,
+            "district": "雄勝町大須字大須"
+        },
+        {
+            "name_kana": "たんの　きよし",
+            "name_kanji": "丹野　清",
+            "party": "ニュー石巻",
+            "age": "52",
+            "gender": "male",
+            "commitee": [
+                "保健福祉委員会",
+                "総合防災対策特別委員会"
+            ],
+            "term": 6,
+            "district": "渡波町二丁目"
+        },
+        {
+            "name_kana": "わたなべ　たくろう",
+            "name_kanji": "渡辺　拓朗",
+            "party": "公明会",
+            "age": "47",
+            "gender": "male",
+            "commitee": [
+                "総務企画委員会"
+            ],
+            "term": 6,
+            "district": "蛇田字小斎"
+        },
+        {
+            "name_kana": "すずき　よしひろ",
+            "name_kanji": "鈴木　良広",
+            "party": "公明会",
+            "age": "39",
+            "gender": "male",
+            "commitee": [
+                "環境教育委員会",
+                "地域交通対策特別委員会"
+            ],
+            "term": 2,
+            "district": "幸町"
+        },
+        {
+            "name_kana": "さくらだ　せいこ",
+            "name_kanji": "櫻田　誠子",
+            "party": "公明会",
+            "age": "46",
+            "gender": "female",
+            "commitee": [
+                "産業建設委員会",
+                "議会運営委員会",
+                "広報広聴委員会"
+            ],
+            "term": 6,
+            "district": "日和が丘一丁目"
+        },
+        {
+            "name_kana": "あべ　まさとし",
+            "name_kanji": "阿部　正敏",
+            "party": "石巻颯の会",
+            "age": "45",
+            "gender": "male",
+            "commitee": [
+                "保健福祉委員会",
+                "地域交通対策特別委員会"
+            ],
+            "term": 4,
+            "district": "新橋一番"
+        },
+        {
+            "name_kana": "さいじょう　まさあき",
+            "name_kanji": "西條　正昭",
+            "party": "石巻颯の会",
+            "age": "52",
+            "gender": "male",
+            "commitee": [
+                "総合防災対策特別委員会",
+                "総務企画委員会"
+            ],
+            "term": 6,
+            "district": "北上町十三浜字崎山"
+        },
+        {
+            "name_kana": "ごとう　かずひこ",
+            "name_kanji": "後藤　兼位",
+            "party": "石巻颯の会",
+            "age": "48",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "産業建設委員会",
+                "地域交通対策特別委員会",
+                "広報広聴委員会"
+            ],
+            "term": 6,
+            "district": "のぞみ野四丁目"
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+{
+    "members": [
+        {
+            "name_kanji": "河田 宙",
+            "name_kana": "かわだ そら",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業常任副委員長",
+                "議会運営委員"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "1"
+        },
+        {
+            "name_kanji": "島田 博輝",
+            "name_kana": "しまだ ひろき",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業委員",
+                "議会運営委員"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "2"
+        },
+        {
+            "name_kanji": "大友 浩芳",
+            "name_kana": "おおとも ひろよし",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業委員",
+                "議会運営委員会副委員長"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "3"
+        },
+        {
+            "name_kanji": "大原 敏彦",
+            "name_kana": "おおはら としひこ",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業委員",
+                "議会運営委員"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "4"
+        },
+        {
+            "name_kanji": "吉水 一男",
+            "name_kana": "よしみず かずお",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業委員",
+                "議会運営委員会委員長"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "5"
+        },
+        {
+            "name_kanji": "佐久間 純一",
+            "name_kana": "さくま じゅんいち",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業常任委員長",
+                "議会運営委員"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "6"
+        },
+        {
+            "name_kanji": "森田 英一",
+            "name_kana": "もりた えいいち",
+            "party": "総務産業",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "総務産業委員"
+            ],
+            "term": "令和5年5月1日〜令和9年4月30日",
+            "district": "7"
+        }
+    ]
+}

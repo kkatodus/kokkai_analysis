@@ -1,0 +1,118 @@
+{
+    "members": [
+        {
+            "name_kana": "おもて　えいじ",
+            "name_kanji": "面　栄次",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業文教常任委員",
+                "議会運営委員"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "わたなべ　かずま",
+            "name_kanji": "渡辺　一馬",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業文教常任委員",
+                "議会運営委員"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "やまうち　かずひろ",
+            "name_kanji": "山内　一弘",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務福祉常任委員"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "つちだ　つよし",
+            "name_kanji": "土田　剛",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業文教常任副委員長"
+            ],
+            "term": 5,
+            "district": 5
+        },
+        {
+            "name_kana": "みた　まみ",
+            "name_kanji": "三田　真美",
+            "party": "なし",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "産業文教常任委員長",
+                "議会運営副委員長"
+            ],
+            "term": 5,
+            "district": 6
+        },
+        {
+            "name_kana": "こまつ　まさよし",
+            "name_kanji": "小松　正義",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営委員長",
+                "総務福祉常任委員"
+            ],
+            "term": 5,
+            "district": 7
+        },
+        {
+            "name_kana": "ただき　さなえ",
+            "name_kanji": "但木　早苗",
+            "party": "日本共産党",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務福祉常任委員長",
+                "議会運営委員"
+            ],
+            "term": 7,
+            "district": "なし"
+        },
+        {
+            "name_kana": "たかはし　のりひさ",
+            "name_kanji": "髙橋　紀久",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "副議長",
+                "総務福祉常任副委員長"
+            ],
+            "term": 3,
+            "district": "なし"
+        },
+        {
+            "name_kana": "さとう　あきお",
+            "name_kanji": "佐藤　昭男",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議長"
+            ],
+            "term": 7,
+            "district": "なし"
+        }
+    ]
+}

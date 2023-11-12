@@ -1,0 +1,133 @@
+{
+    "members": [
+        {
+            "name_kana": "かなか じゅんいち",
+            "name_kanji": "鹿中 順一",
+            "party": "議長",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "産業福祉常任委員会"
+            ],
+            "term": "9回",
+            "district": ""
+        },
+        {
+            "name_kana": "やまうち ひとし",
+            "name_kanji": "山内 彬",
+            "party": "副議長",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": "4回",
+            "district": ""
+        },
+        {
+            "name_kana": "しのはら まちこ",
+            "name_kanji": "篠原 眞稚子",
+            "party": "議会選出監査委員",
+            "age": "",
+            "gender": "female",
+            "commitee": [
+                "産業福祉常任委員会"
+            ],
+            "term": "8回",
+            "district": ""
+        },
+        {
+            "name_kana": "わたなべ なおき",
+            "name_kanji": "渡邊 直樹",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "産業福祉常任委員会",
+                "議会広報常任委員会"
+            ],
+            "term": "2回",
+            "district": ""
+        },
+        {
+            "name_kana": "こばやし のりゆき",
+            "name_kanji": "小林 教行",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "産業福祉常任委員会",
+                "議会広報常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "2回",
+            "district": ""
+        },
+        {
+            "name_kana": "むらた まさよし",
+            "name_kanji": "村田 政義",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "4回",
+            "district": ""
+        },
+        {
+            "name_kana": "やまだ ひでたか",
+            "name_kanji": "山田 英孝",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "産業福祉常任委員会",
+                "議会広報常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "1回",
+            "district": ""
+        },
+        {
+            "name_kana": "ともえ てるまさ",
+            "name_kanji": "巴 光政",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報常任委員会"
+            ],
+            "term": "2回",
+            "district": ""
+        },
+        {
+            "name_kana": "さとう ひさや",
+            "name_kanji": "佐藤 久哉",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": "4回",
+            "district": ""
+        },
+        {
+            "name_kana": "たかはし つよし",
+            "name_kanji": "高橋 剛",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "2回",
+            "district": ""
+        }
+    ]
+}

@@ -1,0 +1,151 @@
+{
+    "members": [
+        {
+            "name_kana": "まつもと みんぺい",
+            "name_kanji": "松　本　明　平",
+            "party": null,
+            "age": 35,
+            "gender": "male",
+            "commitee": [
+                "経済福祉常任委員会",
+                "原子力発電所安全対策常任委員会",
+                "双葉地方広域市町村圏組合議会議員（消防・厚生）"
+            ],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "さとう　つとむ",
+            "name_kanji": "佐　藤　　　努",
+            "party": null,
+            "age": 38,
+            "gender": "male",
+            "commitee": [
+                "原子力発電所安全対策常任委員会",
+                "総務環境常任委員会",
+                "双葉地方広域市町村圏組合議会議員（保健・衛生）"
+            ],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "さかもと ひろし",
+            "name_kanji": "坂　本　　　洋",
+            "party": null,
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "原子力発電所安全対策常任委員会（委員長）",
+                "経済福祉常任委員会（副委員長）",
+                "双葉地方水道企業団議会議員"
+            ],
+            "term": 2,
+            "district": null
+        },
+        {
+            "name_kana": "いわま　たかみ",
+            "name_kanji": "岩　間　尊　弥",
+            "party": null,
+            "age": 39,
+            "gender": "male",
+            "commitee": [
+                "議員選出監査委員",
+                "総務環境常任委員会",
+                "原子力発電所安全対策常任委員会"
+            ],
+            "term": 2,
+            "district": null
+        },
+        {
+            "name_kana": "せきもと のりさだ",
+            "name_kanji": "関　本　範　貞",
+            "party": null,
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "経済福祉常任委員会（委員長）",
+                "議会運営委員会",
+                "双葉地方水道企業団議会議員"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "すずき　つねお",
+            "name_kanji": "鈴　木　恒　男",
+            "party": null,
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "総務環境常任委員会（委員長）",
+                "原子力発電所安全対策常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "うさみ　まさお",
+            "name_kanji": "宇佐見　雅　夫",
+            "party": null,
+            "age": 55,
+            "gender": "male",
+            "commitee": [
+                "総務環境常任委員会（副委員長）"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "いがり　まもる",
+            "name_kanji": "猪　狩　　　守",
+            "party": null,
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会（副委員長）",
+                "総務環境常任委員会"
+            ],
+            "term": 5,
+            "district": null
+        },
+        {
+            "name_kana": "ゆうき まさしげ",
+            "name_kanji": "結　城　政　重",
+            "party": null,
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会（委員長）",
+                "経済福祉常任委員会"
+            ],
+            "term": 8,
+            "district": null
+        },
+        {
+            "name_kana": "くさの　きみお",
+            "name_kanji": "草　野　公　雄",
+            "party": null,
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "経済福祉常任委員会"
+            ],
+            "term": 4,
+            "district": null
+        },
+        {
+            "name_kana": "あおき　もとい",
+            "name_kanji": "青　木　　　基",
+            "party": null,
+            "age": 58,
+            "gender": "male",
+            "commitee": [
+                "双葉地方広域市町村圏組合議会議員（総務）"
+            ],
+            "term": 4,
+            "district": null
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+{
+    "members": [
+        {
+            "name_kana": "はまだ まさし",
+            "name_kanji": "濱田 正志",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "産業",
+                "議運"
+            ],
+            "term": 1,
+            "district": "一部事務組合議員"
+        },
+        {
+            "name_kana": "みわ しゅんぺい",
+            "name_kanji": "三輪 隼平",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "総務",
+                "議運"
+            ],
+            "term": 2,
+            "district": "一部事務組合議員"
+        },
+        {
+            "name_kana": "わたなべ さんぎ",
+            "name_kanji": "渡辺 三義",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "産業",
+                "議運"
+            ],
+            "term": 3,
+            "district": "一部事務組合議員"
+        },
+        {
+            "name_kana": "くどう てつお",
+            "name_kanji": "工藤 哲男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "産業",
+                "議運"
+            ],
+            "term": 1,
+            "district": "一部事務組合議員"
+        },
+        {
+            "name_kana": "なかむら よしこ",
+            "name_kanji": "中村 佳代子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務",
+                "産業",
+                "議運"
+            ],
+            "term": 3,
+            "district": "一部事務組合議員"
+        },
+        {
+            "name_kana": "たに いくじ",
+            "name_kanji": "谷 郁司",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "産業"
+            ],
+            "term": 6,
+            "district": "日本共産党 十勝圏複合事務組合とかち広域消防事務組合"
+        },
+        {
+            "name_kana": "くぼ ひろゆき",
+            "name_kanji": "久保 広幸",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "とかち広域消防事務組合"
+        }
+    ]
+}

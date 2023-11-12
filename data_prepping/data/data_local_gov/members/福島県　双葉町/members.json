@@ -1,0 +1,86 @@
+{
+    "members": [
+        {
+            "name_kana": "やまね たつひろ",
+            "name_kanji": "山根 辰洋",
+            "party": "無所属",
+            "age": "1",
+            "gender": "male",
+            "commitee": [],
+            "term": "1",
+            "district": "議席1"
+        },
+        {
+            "name_kana": "おがわ たかなが",
+            "name_kanji": "小川 貴永",
+            "party": "無所属",
+            "age": "",
+            "gender": "male",
+            "commitee": [],
+            "term": "2",
+            "district": "議席2"
+        },
+        {
+            "name_kana": "さくもと しんいち",
+            "name_kanji": "作本 信一",
+            "party": "無所属",
+            "age": "",
+            "gender": "male",
+            "commitee": [],
+            "term": "3",
+            "district": "議席3"
+        },
+        {
+            "name_kana": "いしだ つばさ",
+            "name_kanji": "石田 翼",
+            "party": "無所属",
+            "age": "3",
+            "gender": "male",
+            "commitee": [],
+            "term": "4",
+            "district": "議席4"
+        },
+        {
+            "name_kana": "かんの ひろき",
+            "name_kanji": "菅野 博紀",
+            "party": "無所属",
+            "age": "5",
+            "gender": "male",
+            "commitee": [],
+            "term": "5",
+            "district": "議席5"
+        },
+        {
+            "name_kana": "いわもと ひさと",
+            "name_kanji": "岩本 久人",
+            "party": "無所属",
+            "age": "",
+            "gender": "male",
+            "commitee": [],
+            "term": "6",
+            "district": "議席6"
+        },
+        {
+            "name_kana": "たかはぎ ふみのり",
+            "name_kanji": "高萩 文孝",
+            "party": "無所属",
+            "age": "",
+            "gender": "male",
+            "commitee": [],
+            "term": "7",
+            "district": "議席7",
+            "position": "副議長"
+        },
+        {
+            "name_kana": "いとう てつお",
+            "name_kanji": "伊藤 哲雄",
+            "party": "無所属",
+            "age": "1",
+            "gender": "male",
+            "commitee": [],
+            "term": "8",
+            "district": "議席8",
+            "position": "議長"
+        }
+    ]
+}

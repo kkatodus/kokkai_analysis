@@ -1,0 +1,43 @@
+{
+    "members": [
+        {
+            "name_kana": "あべ しんぞう",
+            "name_kanji": "安倍 晋三",
+            "party": "自由民主党",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "特定秘密保護法に関する特別委員会",
+                "安全保障関連法制に関する特別委員会"
+            ],
+            "term": "3",
+            "district": "山口4区"
+        },
+        {
+            "name_kana": "かのう ひろこ",
+            "name_kanji": "菅野 博子",
+            "party": "立憲民主党",
+            "age": 51,
+            "gender": "female",
+            "commitee": [
+                "内閣委員会",
+                "文部科学委員会"
+            ],
+            "term": "3",
+            "district": "比例東海ブロック"
+        },
+        {
+            "name_kana": "すずき ゆうぞう",
+            "name_kanji": "鈴木 雄三",
+            "party": "公明党",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "衆議院選挙法及び地方自治法に関する臨時委員会",
+                "政治倫理の確立及び公職選挙法等の改正に関する特別委員会"
+            ],
+            "term": "5",
+            "district": "比例東日本ブロック"
+        }
+    ]
+}

@@ -1,0 +1,308 @@
+{
+    "members": [
+        {
+            "name_kana": "くろきのぶこ",
+            "name_kanji": "黒木のぶ子",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "予算",
+                "総務企画",
+                "交通体系",
+                "議会運営",
+                "龍ケ崎地方衛生組合議会"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "いしはらゆきお",
+            "name_kanji": "石原幸雄",
+            "party": "自民党うしく21",
+            "age": 21,
+            "gender": "male",
+            "commitee": [
+                "総務企画",
+                "環境建設",
+                "議会改革",
+                "3組合統合",
+                "議会運営"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "やないてつや",
+            "name_kanji": "柳井哲也",
+            "party": "うしく未来プロジェクト",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "保健福祉",
+                "環境建設",
+                "3組合統合",
+                "茨城県南水道企業団議会"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "えんどうのりこ",
+            "name_kanji": "遠藤憲子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務企画",
+                "保健福祉",
+                "議会改革",
+                "議会運営"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "すどうきょうこ",
+            "name_kanji": "須藤京子（副議長）",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "予算",
+                "保健福祉",
+                "広聴"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "すぎもりひろゆき",
+            "name_kanji": "杉森弘之",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務企画",
+                "教育文化",
+                "議会改革",
+                "3組合統合",
+                "議会運営"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "こまつざきしん",
+            "name_kanji": "小松崎伸",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "環境建設",
+                "3組合統合",
+                "議会運営"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "ふじたなおみ",
+            "name_kanji": "藤田尚美",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "教育文化",
+                "保健福祉",
+                "3組合統合",
+                "議会運営"
+            ],
+            "term": "牛久市・阿見町斎場組合議会"
+        },
+        {
+            "name_kana": "もろはしたいちろう",
+            "name_kanji": "諸橋太一郎（議長）",
+            "party": "自民党うしく21",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務企画"
+            ],
+            "term": "龍ケ崎地方衛生組合議会"
+        },
+        {
+            "name_kana": "やまもとのぶこ",
+            "name_kanji": "山本伸子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "予算",
+                "総務企画",
+                "広報",
+                "交通体系"
+            ],
+            "term": "茨城県南水道企業団議会"
+        },
+        {
+            "name_kana": "いけべとみお",
+            "name_kanji": "池辺己実夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "総務企画",
+                "3組合統合"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "いとうゆういち",
+            "name_kanji": "伊藤裕一",
+            "party": "日本維新の会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "教育文化",
+                "広聴",
+                "議会運営"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "かいとくのすけ",
+            "name_kanji": "甲斐徳之助",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "教育文化",
+                "保健福祉",
+                "交通体系",
+                "広聴"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "すずきかつとし",
+            "name_kanji": "鈴木勝利",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "総務企画",
+                "議会改革",
+                "広聴"
+            ],
+            "term": "茨城県南水道企業団議会"
+        },
+        {
+            "name_kana": "いそやまかずお",
+            "name_kanji": "磯山和男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務企画",
+                "広報",
+                "議会改革",
+                "広聴"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "おおもりかずお",
+            "name_kanji": "大森和夫",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "教育文化",
+                "広報",
+                "3組合統合"
+            ],
+            "term": "稲敷地方広域市町村圏事務組合議会"
+        },
+        {
+            "name_kana": "つかはらまさひこ",
+            "name_kanji": "塚原正彦",
+            "party": "うしく未来プロジェクト",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "環境建設",
+                "交通体系",
+                "議会運営"
+            ],
+            "term": "牛久市・阿見町斎場組合議会"
+        },
+        {
+            "name_kana": "いとうともこ",
+            "name_kanji": "伊藤知子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "環境建設",
+                "広報",
+                "交通体系"
+            ],
+            "term": "龍ケ崎地方衛生組合議会"
+        },
+        {
+            "name_kana": "いずみだい",
+            "name_kanji": "出澤大",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "保健福祉",
+                "広報",
+                "交通体系"
+            ],
+            "term": "茨城県南水道企業団議会"
+        },
+        {
+            "name_kana": "みずなしのぶあき",
+            "name_kanji": "水梨伸晃",
+            "party": "日本維新の会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "教育文化",
+                "広報",
+                "議会改革"
+            ],
+            "term": "一部事務組合議会"
+        },
+        {
+            "name_kana": "かとうまさゆき",
+            "name_kanji": "加藤政之",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "保健福祉",
+                "環境建設",
+                "広聴"
+            ],
+            "term": "牛久市・阿見町斎場組合議会"
+        },
+        {
+            "name_kana": "たかしまもとき",
+            "name_kanji": "髙嶋基樹",
+            "party": "自民党うしく21",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "予算",
+                "教育文化",
+                "広報",
+                "交通体系",
+                "広聴"
+            ],
+            "term": "龍ケ崎地方衛生組合議会"
+        }
+    ]
+}

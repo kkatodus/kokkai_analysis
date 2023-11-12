@@ -1,0 +1,292 @@
+{
+    "members": [
+        {
+            "name_kana": "ひとみ　たけお",
+            "name_kanji": "人見 武男",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "なし"
+            ],
+            "term": "4回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "やまのうち　はじめ",
+            "name_kanji": "山之内 肇",
+            "party": "なし",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "なし"
+            ],
+            "term": "不明",
+            "district": "不明"
+        },
+        {
+            "name_kana": "こじま　つよし",
+            "name_kanji": "小島 強",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "1回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "いしわた　ひろあき",
+            "name_kanji": "石渡 宏明",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "2回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "いいじま　ひでき",
+            "name_kanji": "飯島 英規",
+            "party": "無会派",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "6回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "うたしろ　こうじ",
+            "name_kanji": "歌代 公司",
+            "party": "無会派",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "2回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "わたなべ　ひとし",
+            "name_kanji": "渡辺 恒",
+            "party": "日本共産党議員団",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "3回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "せきぐち　なおひさ",
+            "name_kanji": "関口 直久",
+            "party": "日本共産党議員団",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "8回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "くどう　ひでひと",
+            "name_kanji": "工藤 英人",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "3回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "そのだ　もとひろ",
+            "name_kanji": "園田 基博",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "3回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "きたがわ　ひさと",
+            "name_kanji": "北川 久人",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "4回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "くぼた　ゆういち",
+            "name_kanji": "久保田 裕一",
+            "party": "そうぞう未来",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "3回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "こんどう　めい",
+            "name_kanji": "近藤 芽衣",
+            "party": "そうぞう未来",
+            "age": "不明",
+            "gender": "女性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "2回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "たじま　ちゅういち",
+            "name_kanji": "田島 忠一",
+            "party": "政策研究会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "4回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "にわ　たかし",
+            "name_kanji": "丹羽 孝志",
+            "party": "公明クラブ",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "2回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "やまのうち　はじめ",
+            "name_kanji": "山之内 肇",
+            "party": "公明クラブ",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "4回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "ひとみ　たけお",
+            "name_kanji": "人見 武男",
+            "party": "一心会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "4回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "つじ　まさお",
+            "name_kanji": "辻 正男",
+            "party": "そうぞう未来",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "3回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "あらい　たつお",
+            "name_kanji": "新井 達夫",
+            "party": "そうぞう未来",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "5回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "おかべ　すみお",
+            "name_kanji": "岡部 純朗",
+            "party": "そうぞう未来",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "7回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "ふくしま　けんいち",
+            "name_kanji": "福島 賢一",
+            "party": "政策研究会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済建設委員会"
+            ],
+            "term": "5回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "さとう　みつよし",
+            "name_kanji": "佐藤 光好",
+            "party": "政策研究会",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "10回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "かわらい　はじめ",
+            "name_kanji": "河原井 始",
+            "party": "クラブ21",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会"
+            ],
+            "term": "5回",
+            "district": "不明"
+        },
+        {
+            "name_kana": "しゅうとう　まさひこ",
+            "name_kanji": "周藤 雅彦",
+            "party": "クラブ21",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "教育民生委員会"
+            ],
+            "term": "6回",
+            "district": "不明"
+        }
+    ]
+}

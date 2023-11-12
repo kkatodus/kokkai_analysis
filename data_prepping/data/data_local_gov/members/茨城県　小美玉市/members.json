@@ -1,0 +1,231 @@
+{
+    "members": [
+        {
+            "name_kana": "やまざきはるお",
+            "name_kanji": "山崎晴生",
+            "party": "無所属",
+            "age": "36",
+            "gender": "男",
+            "commitee": [
+                "文教福祉"
+            ],
+            "term": "1回",
+            "district": "幡谷"
+        },
+        {
+            "name_kana": "まいえいさお",
+            "name_kanji": "真家功",
+            "party": "無所属",
+            "age": "43",
+            "gender": "男",
+            "commitee": [
+                "総務",
+                "広報・百里基地対策・議会活性化",
+                "茨城空港周辺地域振興対策・議会活性化",
+                "議員定数等調査研究"
+            ],
+            "term": "1回",
+            "district": "飯前"
+        },
+        {
+            "name_kana": "とだあきら",
+            "name_kanji": "戸田見良",
+            "party": "無所属",
+            "age": "48",
+            "gender": "男",
+            "commitee": [
+                "総務",
+                "広報・百里基地対策・議会活性化"
+            ],
+            "term": "1回",
+            "district": "上玉里"
+        },
+        {
+            "name_kana": "かとりけんいち",
+            "name_kanji": "香取憲一",
+            "party": "無所属",
+            "age": "55",
+            "gender": "男",
+            "commitee": [
+                "総務",
+                "広報・百里基地対策・議会活性化"
+            ],
+            "term": "1回",
+            "district": "小川"
+        },
+        {
+            "name_kana": "ながつとしゆき",
+            "name_kanji": "長津智之",
+            "party": "無所属",
+            "age": "68",
+            "gender": "男",
+            "commitee": [
+                "産業建設",
+                "広報・茨城空港周辺地域振興対策",
+                "議会活性化",
+                "議員定数等調査研究"
+            ],
+            "term": "1回",
+            "district": "上高崎"
+        },
+        {
+            "name_kana": "しまだせいいちろう",
+            "name_kanji": "島田清一郎",
+            "party": "無所属",
+            "age": "71",
+            "gender": "男",
+            "commitee": [
+                "文教福祉"
+            ],
+            "term": "1回",
+            "district": "羽鳥"
+        },
+        {
+            "name_kana": "すずきしゅんいち",
+            "name_kanji": "鈴木俊一",
+            "party": "無所属",
+            "age": "73",
+            "gender": "男",
+            "commitee": [
+                "文教福祉"
+            ],
+            "term": "2回",
+            "district": "堅倉"
+        },
+        {
+            "name_kana": "むらたはるき",
+            "name_kanji": "村田春樹",
+            "party": "自由民主党",
+            "age": "60",
+            "gender": "男",
+            "commitee": [
+                "文教福祉"
+            ],
+            "term": "2回",
+            "district": "十二所"
+        },
+        {
+            "name_kana": "いしいあきら",
+            "name_kanji": "石井旭",
+            "party": "無所属",
+            "age": "85",
+            "gender": "男",
+            "commitee": [
+                "総務"
+            ],
+            "term": "2回",
+            "district": "佐才"
+        },
+        {
+            "name_kana": "やなかかずお",
+            "name_kanji": "谷仲和雄",
+            "party": "無所属",
+            "age": "78",
+            "gender": "男",
+            "commitee": [
+                "文教福祉"
+            ],
+            "term": "3回",
+            "district": "眼町"
+        },
+        {
+            "name_kana": "ながしまゆきお",
+            "name_kanji": "長島幸男",
+            "party": "無所属",
+            "age": "91",
+            "gender": "男",
+            "commitee": [
+                "産業建設",
+                "百里基地対策"
+            ],
+            "term": "3回",
+            "district": "外之内"
+        },
+        {
+            "name_kana": "いわもとよしお",
+            "name_kanji": "岩本好夫",
+            "party": "無所属",
+            "age": "84",
+            "gender": "男",
+            "commitee": [
+                "総務",
+                "文教福祉"
+            ],
+            "term": "4回",
+            "district": "駅前"
+        },
+        {
+            "name_kana": "ふくしまやよひ",
+            "name_kanji": "福島ヤヨヒ",
+            "party": "日本共産党",
+            "age": "101",
+            "gender": "女",
+            "commitee": [
+                "総務",
+                "文教福祉"
+            ],
+            "term": "4回(1回)",
+            "district": "駅前"
+        },
+        {
+            "name_kana": "おがわけんじ",
+            "name_kanji": "小川賢治",
+            "party": "無所属",
+            "age": "104",
+            "gender": "男",
+            "commitee": [
+                "産業建設",
+                "百里基地対策"
+            ],
+            "term": "4回(1回)",
+            "district": "花野井"
+        },
+        {
+            "name_kana": "おおつきよしあき",
+            "name_kanji": "大槻良明",
+            "party": "無所属",
+            "age": "68",
+            "gender": "男",
+            "commitee": [
+                "産業建設",
+                "茨城空港周辺地域振興対策"
+            ],
+            "term": "3回(3回)",
+            "district": "下高崎"
+        },
+        {
+            "name_kana": "たむらまさお",
+            "name_kanji": "田村 昌男",
+            "party": "無所属",
+            "age": "106",
+            "gender": "男",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "4回",
+            "district": "竹原中郷"
+        },
+        {
+            "name_kana": "あらかわかずひで",
+            "name_kanji": "荒川一秀",
+            "party": "無所属",
+            "age": "99",
+            "gender": "男",
+            "commitee": [],
+            "term": "5回",
+            "district": "堅倉"
+        },
+        {
+            "name_kana": "のむらたけかつ",
+            "name_kanji": "野村武勝",
+            "party": "無所属",
+            "age": "104",
+            "gender": "男",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "8回",
+            "district": "堅倉"
+        }
+    ]
+}

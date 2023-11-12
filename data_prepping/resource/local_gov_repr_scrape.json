@@ -346,7 +346,6 @@
     "building": "深川市役所",
     "address": "深川市2条17-17",
     "urls": [
-      "",
       "https://www.city.fukagawa.lg.jp/gikai/giin/i1r7hk00000002z9.html"
     ],
     "reprs_xpath": "//*[@id=\"main\"]/div"
@@ -356,7 +355,7 @@
     "long": 142.383405,
     "building": "富良野市役所",
     "address": "富良野市弥生町1-1",
-    "urls": ["https://www.city.furano.hokkaido.jp/shigikai/docs/9307.html", ""],
+    "urls": ["https://www.city.furano.hokkaido.jp/shigikai/docs/9307.html"],
     "reprs_xpath": "//*[@id=\"main\"]/div/article/div[2]/table"
   },
   "北海道　登別市": {
@@ -2490,10 +2489,9 @@
     "address": "仙台市太白区長町南3-1-15",
     "multiple_pages": true,
     "urls": [
-      "https://www.gikai.city.sendai.jp/list/district/taihaku/index.html",
-      "//*[@id=\"main\"]/article/div/ul/li/a"
+      "https://www.gikai.city.sendai.jp/list/district/taihaku/index.html"
     ],
-    "ind_reprs_xpath": "",
+    "ind_reprs_xpath": "//*[@id=\"main\"]/article/div/ul/li/a",
     "ind_reprs_info_xpath": "//*[@id=\"main\"]/article/div"
   },
   "宮城県　仙台市泉区": {
@@ -4505,8 +4503,7 @@
       "https://www.city.takasaki.gunma.jp/docs/2016072000037/"
     ],
     "ind_reprs_xpath": "//*[@id=\"contentBody\"]/div/div[2]/table[2]/tbody/tr/td/a",
-    "ind_reprs_info_xpath": "",
-    "reprs_xpath": "//*[@id=\"contentBody\"]/div/div[2]"
+    "ind_reprs_info_xpath": "//*[@id=\"contentBody\"]/div/div[2]"
   },
   "群馬県　桐生市": {
     "lat": 36.40521,

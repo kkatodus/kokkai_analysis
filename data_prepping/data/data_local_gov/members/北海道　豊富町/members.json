@@ -1,0 +1,141 @@
+{
+    "members": [
+        {
+            "name_kana": "ちば　ひさし",
+            "name_kanji": "千葉　　久",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": "7回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "かまくら　かずお",
+            "name_kanji": "鎌倉　和雄",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員",
+                "広報広聴常任委員"
+            ],
+            "term": "9回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "みとべ　まさひろ",
+            "name_kanji": "水戸部　正博",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員長",
+                "予算決算常任委員",
+                "広報広聴常任委員",
+                "議会運営委委員"
+            ],
+            "term": "2回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "たけなか　たかひろ",
+            "name_kanji": "竹中　隆浩",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任副委員長",
+                "広報広聴常任委員長",
+                "議会運営委員"
+            ],
+            "term": "2回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "おがさわら　てるみ",
+            "name_kanji": "小笠原　照美",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員長",
+                "広報広聴常任副委員長",
+                "議会運営委員"
+            ],
+            "term": "3回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "ささき　まこと",
+            "name_kanji": "佐々木　誠",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員"
+            ],
+            "term": "3回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "ささき　まさよし",
+            "name_kanji": "佐々木　政義",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任副委員長",
+                "予算決算常任委員",
+                "広報広聴常任委員",
+                "議会運営委員長"
+            ],
+            "term": "4回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "まえだ　こういち",
+            "name_kanji": "前田　孝一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員"
+            ],
+            "term": "4回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "おおしま　のりあき",
+            "name_kanji": "大島　憲昭",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員"
+            ],
+            "term": "4回",
+            "district": "なし"
+        },
+        {
+            "name_kana": "たたら　まさる",
+            "name_kanji": "多々良　勝",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "予算決算常任委員",
+                "議会運営副委員長"
+            ],
+            "term": "9回",
+            "district": "なし"
+        }
+    ]
+}

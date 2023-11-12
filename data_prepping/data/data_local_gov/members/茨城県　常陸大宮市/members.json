@@ -1,0 +1,197 @@
+{
+    "members": [
+        {
+            "name_kana": "オガワラ　リイチロウ",
+            "name_kanji": "小河原　利一郎",
+            "party": "無所属",
+            "age": 645,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "山方"
+        },
+        {
+            "name_kana": "ミツギ　マサコ",
+            "name_kanji": "三次　雅子",
+            "party": "無所属",
+            "age": 938,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": "山方"
+        },
+        {
+            "name_kana": "クラタ　トシユキ",
+            "name_kanji": "倉田　稔之",
+            "party": "無所属",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "経済建設副委員長",
+                "広報広聴副委員長"
+            ],
+            "term": 2,
+            "district": "北町"
+        },
+        {
+            "name_kana": "アクツ　シイチ",
+            "name_kanji": "圷　司一",
+            "party": "無所属",
+            "age": 1419,
+            "gender": "male",
+            "commitee": [
+                "総務副委員長"
+            ],
+            "term": 2,
+            "district": "国長"
+        },
+        {
+            "name_kana": "タカムラ　イサオ",
+            "name_kanji": "高村　功",
+            "party": "日本共産党",
+            "age": 3298,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "抽ヶ台町"
+        },
+        {
+            "name_kana": "オバラ　アキヒコ",
+            "name_kanji": "小原　明彦",
+            "party": "公明党",
+            "age": 1,
+            "gender": "male",
+            "commitee": [
+                "総務委員長",
+                "予算決算副委員長"
+            ],
+            "term": 3,
+            "district": "小場"
+        },
+        {
+            "name_kana": "オカザキ　キンヤ",
+            "name_kanji": "岡﨑　欣也",
+            "party": "無所属",
+            "age": 815,
+            "gender": "male",
+            "commitee": [
+                "文教福祉副委員長"
+            ],
+            "term": 3,
+            "district": "小貫"
+        },
+        {
+            "name_kana": "ミツギ　ヒロフミ",
+            "name_kanji": "三次　弘史",
+            "party": "無所属",
+            "age": 221,
+            "gender": "male",
+            "commitee": [
+                "予算決算委員長"
+            ],
+            "term": 3,
+            "district": "西野内"
+        },
+        {
+            "name_kana": "トミヤマ　カズオ",
+            "name_kanji": "冨山　和男",
+            "party": "無所属",
+            "age": 1995,
+            "gender": "male",
+            "commitee": [
+                "経済建設委員長"
+            ],
+            "term": 3,
+            "district": "上村田"
+        },
+        {
+            "name_kana": "オオヌキ　ミチオ",
+            "name_kanji": "大貫　道夫",
+            "party": "無所属",
+            "age": 1383,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "西塩子"
+        },
+        {
+            "name_kana": "コモリ　ケイタロウ",
+            "name_kanji": "小森　敬太郎",
+            "party": "無所属",
+            "age": 2971,
+            "gender": "male",
+            "commitee": [
+                "議運委員長"
+            ],
+            "term": 5,
+            "district": "野上"
+        },
+        {
+            "name_kana": "キッカワ　ミホ",
+            "name_kanji": "𠮷川　美保",
+            "party": "公明党",
+            "age": 2104,
+            "gender": "female",
+            "commitee": [
+                "副議長",
+                "広報広聴委員長"
+            ],
+            "term": 5,
+            "district": "鷹巣"
+        },
+        {
+            "name_kana": "タケイシ　トシナガ",
+            "name_kanji": "武石　寿長",
+            "party": "無所属",
+            "age": 2502,
+            "gender": "male",
+            "commitee": [
+                "議長"
+            ],
+            "term": 5,
+            "district": "氷之沢"
+        },
+        {
+            "name_kana": "タカムラ　カズオ",
+            "name_kanji": "高村　和郎",
+            "party": "無所属",
+            "age": 1972,
+            "gender": "male",
+            "commitee": [
+                "監査委員"
+            ],
+            "term": 5,
+            "district": "長田"
+        },
+        {
+            "name_kana": "ヨドカワ　シゲキ",
+            "name_kanji": "淀川　茂樹",
+            "party": "無所属",
+            "age": 994,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "長倉"
+        },
+        {
+            "name_kana": "カケフダ　ユキオ",
+            "name_kanji": "掛札　行雄",
+            "party": "無所属",
+            "age": 4917,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "上小瀬"
+        },
+        {
+            "name_kana": "アキヤマ　ノブオ",
+            "name_kanji": "秋山　信夫",
+            "party": "自民党",
+            "age": 565,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "根本"
+        }
+    ]
+}

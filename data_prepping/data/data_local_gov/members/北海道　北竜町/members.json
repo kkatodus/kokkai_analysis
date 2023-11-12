@@ -1,0 +1,96 @@
+{
+    "members": [
+        {
+            "name_kana": "ササキ ヤスヒロ",
+            "name_kanji": "佐々木 康宏",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "議長"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "ナカムラ ショウイチ",
+            "name_kanji": "中村 尚一",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "副議長",
+                "まちづくり等調査特別委員会委員長",
+                "北竜町農業の未来を考える特別委員会副委員長"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "テラガキ ノブアキ",
+            "name_kanji": "寺垣 信晃",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "議会運営委員会委員長",
+                "広報特別委員会委員長",
+                "災害対策特別委員会副委員長"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "サトウ ミノル",
+            "name_kanji": "佐藤 稔",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "監査委員"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "キムラ カズオ",
+            "name_kanji": "木村 和雄",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "北竜町農業の未来を考える特別委員会委員長",
+                "議会運営委員会副委員長",
+                "広報特別委員会副委員長"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "オザキ ケイコ",
+            "name_kanji": "尾﨑 圭子",
+            "party": "無所属",
+            "age": null,
+            "gender": "女性",
+            "commitee": [
+                "総務産業常任委員会委員長",
+                "まちづくり等調査特別委員会副委員長"
+            ],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "マツナガ ツヨシ",
+            "name_kanji": "松永 毅",
+            "party": "無所属",
+            "age": null,
+            "gender": "男性",
+            "commitee": [
+                "災害対策特別委員会委員長",
+                "総務産業常任委員会副委員長"
+            ],
+            "term": null,
+            "district": null
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "members": [
+        {
+            "name_kana": "カワイタツオ",
+            "name_kanji": "合羽井達男",
+            "party": "無所属",
+            "age": 71,
+            "gender": "男",
+            "commitee": [],
+            "term": 2,
+            "district": 1
+        },
+        {
+            "name_kana": "カワシママサル",
+            "name_kanji": "川島　優",
+            "party": "無所属",
+            "age": 71,
+            "gender": "男",
+            "commitee": [],
+            "term": 2,
+            "district": 2
+        },
+        {
+            "name_kana": "サカイミチアキ",
+            "name_kanji": "酒井倫明",
+            "party": "無所属",
+            "age": 68,
+            "gender": "男",
+            "commitee": [],
+            "term": 3,
+            "district": 3
+        },
+        {
+            "name_kana": "オオイキミエ",
+            "name_kanji": "大井紀美惠",
+            "party": "無所属",
+            "age": 69,
+            "gender": "女",
+            "commitee": [],
+            "term": 3,
+            "district": 4
+        },
+        {
+            "name_kana": "ウエノツヨシ",
+            "name_kanji": "上野　剛",
+            "party": "無所属",
+            "age": 60,
+            "gender": "男",
+            "commitee": [],
+            "term": 5,
+            "district": 5
+        },
+        {
+            "name_kana": "スガワラユキヒロ",
+            "name_kanji": "菅原幸弘",
+            "party": "無所属",
+            "age": 68,
+            "gender": "男",
+            "commitee": [],
+            "term": 5,
+            "district": 6
+        },
+        {
+            "name_kana": "オダミドリ",
+            "name_kanji": "小田　緑",
+            "party": "無所属",
+            "age": 59,
+            "gender": "女",
+            "commitee": [],
+            "term": 6,
+            "district": 7
+        },
+        {
+            "name_kana": "イワサキシュンイチ",
+            "name_kanji": "岩崎俊一",
+            "party": "無所属",
+            "age": 73,
+            "gender": "男",
+            "commitee": [],
+            "term": 8,
+            "district": 8
+        },
+        {
+            "name_kana": "マツクラキヨミチ",
+            "name_kanji": "松倉清道",
+            "party": "無所属",
+            "age": 43,
+            "gender": "男",
+            "commitee": [],
+            "term": 4,
+            "district": 9
+        },
+        {
+            "name_kana": "トビナイシンゴ",
+            "name_kanji": "飛内眞吾",
+            "party": "無所属",
+            "age": 66,
+            "gender": "男",
+            "commitee": [],
+            "term": 6,
+            "district": 10
+        }
+    ]
+}

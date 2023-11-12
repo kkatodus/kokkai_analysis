@@ -1,0 +1,244 @@
+{
+    "members": [
+        {
+            "name_kana": "かなざわかつひと",
+            "name_kanji": "金澤克仁",
+            "party": "創和会",
+            "age": 47,
+            "gender": "male",
+            "committee": [],
+            "term": 14,
+            "district": ""
+        },
+        {
+            "name_kana": "おちあいしんたろう",
+            "name_kanji": "落合信太郎",
+            "party": "公明党",
+            "age": 56,
+            "gender": "male",
+            "committee": [],
+            "term": 11,
+            "district": ""
+        },
+        {
+            "name_kana": "すぎやまたかのぶ",
+            "name_kanji": "杉山尊宣",
+            "party": "創和会",
+            "age": 40,
+            "gender": "male",
+            "committee": [],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "さのたいち",
+            "name_kanji": "佐野太一",
+            "party": "日本共産党",
+            "age": 54,
+            "gender": "male",
+            "committee": [],
+            "term": 2,
+            "district": "井野3-19-5"
+        },
+        {
+            "name_kana": "すだみつお",
+            "name_kanji": "須田光雄",
+            "party": "みらい",
+            "age": 46,
+            "gender": "male",
+            "committee": [],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "かいとうかずひろ",
+            "name_kanji": "海東一弘",
+            "party": "創和会",
+            "age": 49,
+            "gender": "male",
+            "committee": [],
+            "term": 4,
+            "district": ""
+        },
+        {
+            "name_kana": "ねぎしゆみこ",
+            "name_kanji": "根岸裕美子",
+            "party": "",
+            "age": 53,
+            "gender": "female",
+            "committee": [],
+            "term": 5,
+            "district": "藤代南1-7-9"
+        },
+        {
+            "name_kana": "くぼたますみ",
+            "name_kanji": "久保田真澄",
+            "party": "公明党",
+            "age": 61,
+            "gender": "male",
+            "committee": [],
+            "term": 6,
+            "district": ""
+        },
+        {
+            "name_kana": "すずきみつお",
+            "name_kanji": "鈴木三男",
+            "party": "創和会",
+            "age": 72,
+            "gender": "male",
+            "committee": [],
+            "term": 7,
+            "district": ""
+        },
+        {
+            "name_kana": "せきかわかける",
+            "name_kanji": "関川翔",
+            "party": "みらい",
+            "age": 37,
+            "gender": "male",
+            "committee": [],
+            "term": 8,
+            "district": ""
+        },
+        {
+            "name_kana": "こづつみおさむ",
+            "name_kanji": "小堤修",
+            "party": "創和会",
+            "age": 61,
+            "gender": "male",
+            "committee": [],
+            "term": 9,
+            "district": ""
+        },
+        {
+            "name_kana": "いわさわしん",
+            "name_kanji": "岩澤信",
+            "party": "創和会",
+            "age": 50,
+            "gender": "male",
+            "committee": [],
+            "term": 10,
+            "district": ""
+        },
+        {
+            "name_kana": "せきどいさむ",
+            "name_kanji": "関戸勇",
+            "party": "日本共産党",
+            "age": 78,
+            "gender": "male",
+            "committee": [],
+            "term": 12,
+            "district": "戸頭7-7-17-103"
+        },
+        {
+            "name_kana": "いしいめぐみ",
+            "name_kanji": "根本めぐみ",
+            "party": "みらい",
+            "age": 43,
+            "gender": "female",
+            "committee": [],
+            "term": 13,
+            "district": "片町244"
+        },
+        {
+            "name_kana": "ほそやのりお",
+            "name_kanji": "細谷典男",
+            "party": "みらい",
+            "age": 72,
+            "gender": "male",
+            "committee": [],
+            "term": 15,
+            "district": "新町3-4-19"
+        },
+        {
+            "name_kana": "やまのいたかし",
+            "name_kanji": "山野井隆",
+            "party": "みらい",
+            "age": 48,
+            "gender": "male",
+            "committee": [],
+            "term": 16,
+            "district": "白山2-10-11"
+        },
+        {
+            "name_kana": "そめやかずひろ",
+            "name_kanji": "染谷和博",
+            "party": "公明党",
+            "age": 62,
+            "gender": "male",
+            "committee": [],
+            "term": 17,
+            "district": "新町4-10-24"
+        },
+        {
+            "name_kana": "さとうりゅうじ",
+            "name_kanji": "佐藤隆治",
+            "party": "創和会",
+            "age": 52,
+            "gender": "male",
+            "committee": [],
+            "term": 18,
+            "district": "谷中69-2"
+        },
+        {
+            "name_kana": "いりえよういち",
+            "name_kanji": "入江洋一",
+            "party": "みらい",
+            "age": 64,
+            "gender": "male",
+            "committee": [],
+            "term": 19,
+            "district": "新取手3-42-13"
+        },
+        {
+            "name_kana": "ゆうきしげる",
+            "name_kanji": "結城繁",
+            "party": "みらい",
+            "age": 65,
+            "gender": "male",
+            "committee": [],
+            "term": 20,
+            "district": "新町1-5-28新町第10ビル2階"
+        },
+        {
+            "name_kana": "さいとうひさよ",
+            "name_kanji": "齋藤久代",
+            "party": "公明党",
+            "age": 66,
+            "gender": "female",
+            "committee": [],
+            "term": 21,
+            "district": "新町6-10-14"
+        },
+        {
+            "name_kana": "あかばなおいち",
+            "name_kanji": "赤羽直一",
+            "party": "創和会",
+            "age": 75,
+            "gender": "male",
+            "committee": [],
+            "term": 22,
+            "district": "山王200"
+        },
+        {
+            "name_kana": "とおやまちえこ",
+            "name_kanji": "遠山智恵子",
+            "party": "日本共産党",
+            "age": 69,
+            "gender": "female",
+            "committee": [],
+            "term": 23,
+            "district": "藤代144-6"
+        },
+        {
+            "name_kana": "かぞうみつこ",
+            "name_kanji": "加増充子",
+            "party": "日本共産党",
+            "age": 70,
+            "gender": "female",
+            "committee": [],
+            "term": 24,
+            "district": "井野3-18-5"
+        }
+    ]
+}

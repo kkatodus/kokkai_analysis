@@ -1,0 +1,137 @@
+{
+    "members": [
+        {
+            "name_kana": "ふかみ すすむ",
+            "name_kanji": "深見 迪",
+            "party": "日本共産党",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "さくらい かずたか",
+            "name_kanji": "櫻井 一隆",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "ほんだ こうへい",
+            "name_kanji": "本多 耕平",
+            "party": "無所属",
+            "age": 98,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "すずき ひろみ",
+            "name_kanji": "鈴木 裕美",
+            "party": "立憲民主党",
+            "age": 93,
+            "gender": "female",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "こうのいけ ともこ",
+            "name_kanji": "鴻池 智子",
+            "party": "公明党",
+            "age": 88,
+            "gender": "female",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "さいとう しょういち",
+            "name_kanji": "齊藤 昇一",
+            "party": "無所属",
+            "age": 78,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会"
+            ]
+        },
+        {
+            "name_kana": "くろぬま としゆき",
+            "name_kanji": "黒沼 俊幸",
+            "party": "無所属",
+            "age": 103,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会"
+            ]
+        },
+        {
+            "name_kana": "ながお のりたか",
+            "name_kanji": "長尾 式宮",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "まつした てつや",
+            "name_kanji": "松下 哲也",
+            "party": "無所属",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会"
+            ]
+        },
+        {
+            "name_kana": "わたなべ さだゆき",
+            "name_kanji": "渡邊 定之",
+            "party": "日本共産党",
+            "age": 93,
+            "gender": "male",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会"
+            ]
+        },
+        {
+            "name_kana": "るいせ みつのぶ",
+            "name_kanji": "類瀨 光信",
+            "party": "無所属",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "厚生文教委員会",
+                "広報委員会",
+                "議会運営委員会"
+            ]
+        },
+        {
+            "name_kana": "きくち よしみち",
+            "name_kanji": "菊地 誠道",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,213 @@
+{
+    "members": [
+        {
+            "name_kana": "えんどう　のりこ",
+            "name_kanji": "遠藤　典子",
+            "party": "公明党",
+            "age": 91,
+            "gender": "female",
+            "commitee": [],
+            "term": 2,
+            "district": "厚田区虹が原",
+            "phone_number": "66-3799"
+        },
+        {
+            "name_kana": "あべ　ゆみこ",
+            "name_kanji": "阿部　裕美子",
+            "party": "公明党",
+            "age": 90,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": "樽川",
+            "phone_number": "72-6717"
+        },
+        {
+            "name_kana": "やまもと　ゆみこ",
+            "name_kanji": "山本 由美子",
+            "party": "公明党",
+            "age": 72,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": "花畔",
+            "phone_number": "080-4040-5051"
+        },
+        {
+            "name_kana": "はちや たかうみ",
+            "name_kanji": "蜂谷 高海",
+            "party": "日本共産党",
+            "age": 64,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "浜益区群別",
+            "phone_number": "79-3440"
+        },
+        {
+            "name_kana": "まつもと　きくえ",
+            "name_kanji": "松本 喜久枝",
+            "party": "日本共産党",
+            "age": 89,
+            "gender": "female",
+            "commitee": [],
+            "term": 2,
+            "district": "花川",
+            "phone_number": "73-7158"
+        },
+        {
+            "name_kana": "やまざき さちこ",
+            "name_kanji": "山崎 祥子",
+            "party": "日本共産党",
+            "age": 66,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": "石狩市",
+            "phone_number": "090-9521-9519"
+        },
+        {
+            "name_kana": "くましろ ちかこ",
+            "name_kanji": "神代 知花子",
+            "party": "無所属（｢やさしい社会｣をつくる市民の会）",
+            "age": 69,
+            "gender": "female",
+            "commitee": [],
+            "term": 3,
+            "district": "花川",
+            "phone_number": "090-9753-3226"
+        },
+        {
+            "name_kana": "かなや　さとし",
+            "name_kanji": "金谷　聡",
+            "party": "改革市民会議",
+            "age": 73,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "樽川",
+            "phone_number": "090-6440-0332"
+        },
+        {
+            "name_kana": "かみむら さとし",
+            "name_kanji": "上村 賢",
+            "party": "改革市民会議",
+            "age": 78,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "花川",
+            "phone_number": "67-3013"
+        },
+        {
+            "name_kana": "かたひら かずよし",
+            "name_kanji": "片平　一義",
+            "party": "改革市民会議",
+            "age": 93,
+            "gender": "male",
+            "commitee": [],
+            "term": 10,
+            "district": "花川",
+            "phone_number": "74-1655"
+        },
+        {
+            "name_kana": "やまもと けんじ",
+            "name_kanji": "山本　健司",
+            "party": "石政会",
+            "age": 58,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "花川",
+            "phone_number": "080-5597-0927"
+        },
+        {
+            "name_kana": "やまだ　としひと",
+            "name_kanji": "山田　敏人",
+            "party": "石政会",
+            "age": 91,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "花川",
+            "phone_number": "74-7068"
+        },
+        {
+            "name_kana": "はなだ　かずひこ",
+            "name_kanji": "花田　和彦",
+            "party": "無所属",
+            "age": 89,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "弁天町",
+            "phone_number": "62-3006"
+        },
+        {
+            "name_kana": "かとう　やすひろ",
+            "name_kanji": "加藤 泰博",
+            "party": "石政会",
+            "age": 98,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": "厚田区聚富",
+            "phone_number": "66-4208"
+        },
+        {
+            "name_kana": "すずき　けいいち",
+            "name_kanji": "鈴木 圭一",
+            "party": "石政会",
+            "age": 67,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "花川",
+            "phone_number": "73-0989"
+        },
+        {
+            "name_kana": "たかだ　しずお",
+            "name_kanji": "高田　静夫",
+            "party": "石政会",
+            "age": 99,
+            "gender": "male",
+            "commitee": [],
+            "term": 8,
+            "district": "花川",
+            "phone_number": "73-4160"
+        },
+        {
+            "name_kana": "いとう　かずはる",
+            "name_kanji": "伊藤　一治",
+            "party": "石政会",
+            "age": 96,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": "厚田区厚田",
+            "phone_number": "78-2844"
+        },
+        {
+            "name_kana": "あおやま　ゆうじ",
+            "name_kanji": "青山 祐司",
+            "party": "石政会",
+            "age": 80,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "緑苑台東",
+            "phone_number": "72-0728"
+        },
+        {
+            "name_kana": "くさかべ　かつよし",
+            "name_kanji": "日下部　勝義",
+            "party": "石政会",
+            "age": 93,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "生振",
+            "phone_number": "64-0189"
+        }
+    ]
+}

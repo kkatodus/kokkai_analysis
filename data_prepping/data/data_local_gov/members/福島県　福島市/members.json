@@ -1,0 +1,436 @@
+{
+    "members": [
+        {
+            "name_kana": "みうら ゆみこ",
+            "name_kanji": "三浦由美子",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道"
+            ],
+            "term": null,
+            "district": "小倉寺字町畑13番地"
+        },
+        {
+            "name_kana": "たかぎ なおと",
+            "name_kanji": "高木直人",
+            "party": "公明党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉（副）"
+            ],
+            "term": null,
+            "district": "天神町7番6号 ベルハウスE101号室"
+        },
+        {
+            "name_kana": "うらの ようたろう",
+            "name_kanji": "浦野洋太朗",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務"
+            ],
+            "term": null,
+            "district": "複合市民施設 野田町三丁目10番23号"
+        },
+        {
+            "name_kana": "さとう せい",
+            "name_kanji": "佐藤勢",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "複合市民施設 北町1番13号"
+        },
+        {
+            "name_kana": "ななしま なお",
+            "name_kanji": "七島奈緒",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "議会運営 腰浜町4番21号"
+        },
+        {
+            "name_kana": "やまだ ひろし",
+            "name_kanji": "山田裕",
+            "party": "日本共産党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務（副）",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "郷野目字仲35番地の15"
+        },
+        {
+            "name_kana": "たんじ まこと",
+            "name_kanji": "丹治誠",
+            "party": "公明党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "野田町三丁目11番80号"
+        },
+        {
+            "name_kana": "えんどう こういち",
+            "name_kanji": "遠藤幸一",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "矢剣町16番29-7号 メゾンドボヌール203号室"
+        },
+        {
+            "name_kana": "さはら まき",
+            "name_kanji": "佐原真紀",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生",
+                "複合市民施設（副）"
+            ],
+            "term": null,
+            "district": "笹谷字三本松4番地の4"
+        },
+        {
+            "name_kana": "すがわら みちこ",
+            "name_kanji": "菅原美智子",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "本内字西河原52番地の2"
+        },
+        {
+            "name_kana": "ねもと まさあき",
+            "name_kanji": "根本雅昭",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生（正）"
+            ],
+            "term": null,
+            "district": "複合市民施設 渡利字七社宮39番地の1"
+        },
+        {
+            "name_kana": "さいとう まさおみ",
+            "name_kanji": "斎藤正臣",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道",
+                "議会運営（副）"
+            ],
+            "term": null,
+            "district": "渡利字七社宮5番地の1 ヴェルードーネ七社宮301"
+        },
+        {
+            "name_kana": "にかいどう としえ",
+            "name_kanji": "二階堂利枝",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生（副）",
+                "複合市民施設"
+            ],
+            "term": null,
+            "district": "上野寺字道上13番地の3"
+        },
+        {
+            "name_kana": "いしやま はえ",
+            "name_kanji": "石山波恵",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道（副）",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "置賜町8番18号 KST・タツミ402号"
+        },
+        {
+            "name_kana": "しらかわ としあき",
+            "name_kanji": "白川敏明",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "飯坂町字中原36番地"
+        },
+        {
+            "name_kana": "ささき ゆう",
+            "name_kanji": "佐々木優",
+            "party": "日本共産党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "佐原字入左原50番地の1"
+        },
+        {
+            "name_kana": "ごとう よしつぐ",
+            "name_kanji": "後藤善次",
+            "party": "公明党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "複合市民施設 成川字久保前12番地の4"
+        },
+        {
+            "name_kana": "さわい かずひろ",
+            "name_kanji": "沢井和宏",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道（正）",
+                "複合市民施設"
+            ],
+            "term": null,
+            "district": "大森字中町35番地の3"
+        },
+        {
+            "name_kana": "いしはら ようざぶろう",
+            "name_kanji": "石原洋三郎",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "八木田字井戸上112番地の8"
+        },
+        {
+            "name_kana": "かわまた やすひこ",
+            "name_kanji": "川又康彦",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉（正）",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "飯坂町字湯町25番地"
+        },
+        {
+            "name_kana": "すずき まさみ",
+            "name_kanji": "鈴木正実",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務（正）"
+            ],
+            "term": null,
+            "district": "飯坂町平野字林添1番地の101"
+        },
+        {
+            "name_kana": "にかいどう たけふみ",
+            "name_kanji": "二階堂武文",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "副議長",
+                "総務"
+            ],
+            "term": null,
+            "district": "町庭坂字内町51番地の2"
+        },
+        {
+            "name_kana": "はぎわら たろう",
+            "name_kanji": "萩原太郎",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "議長"
+            ],
+            "term": null,
+            "district": "山口字下屋敷28番地の2"
+        },
+        {
+            "name_kana": "おおひら ひろと",
+            "name_kanji": "大平洋人",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "議会運営 八島田字東本庄町4番地の27"
+        },
+        {
+            "name_kana": "こまつ よしゆき",
+            "name_kanji": "小松良行",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道"
+            ],
+            "term": null,
+            "district": "複合市民施設（正） 瀬上町字東町二丁目6番地の10"
+        },
+        {
+            "name_kana": "むらやま くにこ",
+            "name_kanji": "村山国子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "複合市民施設 田沢字桜台7番地の18"
+        },
+        {
+            "name_kana": "おの きょうこ",
+            "name_kanji": "小野京子",
+            "party": "公明党",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道"
+            ],
+            "term": null,
+            "district": "本内字荒田14番地の2"
+        },
+        {
+            "name_kana": "はた ふさお",
+            "name_kanji": "羽田房男",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "北沢又字清水12番地の2"
+        },
+        {
+            "name_kana": "たかぎ かつひろ",
+            "name_kanji": "高木克尚",
+            "party": "市民21",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務"
+            ],
+            "term": null,
+            "district": "笹谷字三本松6番地の7"
+        },
+        {
+            "name_kana": "おがた たけし",
+            "name_kanji": "尾形武",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道"
+            ],
+            "term": null,
+            "district": "松川町浅川字大古内9番地"
+        },
+        {
+            "name_kana": "さぬだ ひろし",
+            "name_kanji": "真田広志",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "経済民生"
+            ],
+            "term": null,
+            "district": "複合市民施設 松浪町1番15号"
+        },
+        {
+            "name_kana": "ししど いっしょう",
+            "name_kanji": "宍戸一照",
+            "party": "真結の会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "荒井字上町裏10番地"
+        },
+        {
+            "name_kana": "はんざわ まさのり",
+            "name_kanji": "半沢正典",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "文教福祉"
+            ],
+            "term": null,
+            "district": "上鳥渡字寺北28番地の3"
+        },
+        {
+            "name_kana": "くろさわ じん",
+            "name_kanji": "黒沢仁",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "建設水道"
+            ],
+            "term": null,
+            "district": "複合市民施設 飯野町大久保字谷津44番地"
+        },
+        {
+            "name_kana": "わたなべ としひこ",
+            "name_kanji": "渡辺敏彦",
+            "party": "真政会",
+            "age": null,
+            "gender": null,
+            "committee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": null,
+            "district": "松川町字青麻山3番地"
+        }
+    ]
+}

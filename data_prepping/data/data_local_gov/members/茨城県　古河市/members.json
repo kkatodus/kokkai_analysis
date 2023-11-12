@@ -1,0 +1,294 @@
+{
+    "members": [
+        {
+            "name_kana": "いんで しんや",
+            "name_kanji": "印出 慎也",
+            "party": "政友会",
+            "age": "45",
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "1回",
+            "district": "上辺見"
+        },
+        {
+            "name_kana": "たちかわ とおる",
+            "name_kanji": "立川 徹",
+            "party": "市民ベースの会",
+            "age": "39",
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "1回",
+            "district": "本町三丁目"
+        },
+        {
+            "name_kana": "こばやし とみこ",
+            "name_kanji": "小林 登美子",
+            "party": "政友会",
+            "age": "42",
+            "gender": "female",
+            "committee": [
+                "総務常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "1回",
+            "district": "雷電町"
+        },
+        {
+            "name_kana": "ささき ひでのり",
+            "name_kanji": "佐々木 英徳",
+            "party": "古河市公明党",
+            "age": "48",
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会"
+            ],
+            "term": "1回",
+            "district": "坂間"
+        },
+        {
+            "name_kana": "せきぐち かずお",
+            "name_kanji": "関口 和男",
+            "party": "市民ベースの会",
+            "age": "37",
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "1回",
+            "district": "上砂井"
+        },
+        {
+            "name_kana": "こもりや ひろゆき",
+            "name_kanji": "小森谷 博之",
+            "party": "政友会",
+            "age": "50",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会"
+            ],
+            "term": "2回",
+            "district": "女沼"
+        },
+        {
+            "name_kana": "ふるかわ かずみ",
+            "name_kanji": "古川 一美",
+            "party": "－",
+            "age": "47",
+            "gender": "female",
+            "committee": [
+                "文教厚生常任委員会"
+            ],
+            "term": "2回",
+            "district": "南町"
+        },
+        {
+            "name_kana": "すずき つとむ",
+            "name_kanji": "鈴木 務",
+            "party": "政友会",
+            "age": "53",
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会"
+            ],
+            "term": "2回",
+            "district": "東山田"
+        },
+        {
+            "name_kana": "あくつ よしこ",
+            "name_kanji": "阿久津 佳子",
+            "party": "市民ベースの会",
+            "age": "61",
+            "gender": "female",
+            "committee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "3回",
+            "district": "葛生"
+        },
+        {
+            "name_kana": "いなば たかひろ",
+            "name_kanji": "稲葉 貴大",
+            "party": "真政会",
+            "age": "49",
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "3回",
+            "district": "前林"
+        },
+        {
+            "name_kana": "つるみ くみこ",
+            "name_kanji": "つる見 久美子",
+            "party": "古河市公明党",
+            "age": "55",
+            "gender": "female",
+            "committee": [
+                "産業建設常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": "4回",
+            "district": "上片田"
+        },
+        {
+            "name_kana": "あきば しげる",
+            "name_kanji": "秋庭 繁",
+            "party": "－",
+            "age": "58",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会"
+            ],
+            "term": "4回",
+            "district": "茶屋新田"
+        },
+        {
+            "name_kana": "たかはし ひであき",
+            "name_kanji": "高橋 秀彰",
+            "party": "古河市公明党",
+            "age": "62",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "5回",
+            "district": "平和町"
+        },
+        {
+            "name_kana": "さとう みのる",
+            "name_kanji": "佐藤 稔",
+            "party": "古河市公明党",
+            "age": "65",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会"
+            ],
+            "term": "5回",
+            "district": "諸川"
+        },
+        {
+            "name_kana": "さとう いずみ",
+            "name_kanji": "佐藤 泉",
+            "party": "政友会",
+            "age": "34",
+            "gender": "female",
+            "committee": [
+                "文教厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "6回（1回）",
+            "district": "東本町三丁目"
+        },
+        {
+            "name_kana": "おちあい やすゆき",
+            "name_kanji": "落合 康之",
+            "party": "市民ベースの会",
+            "age": "39",
+            "gender": "male",
+            "committee": [
+                "副議長",
+                "文教厚生常任委員会"
+            ],
+            "term": "6回（1回）",
+            "district": "東本町一丁目"
+        },
+        {
+            "name_kana": "あおき かずお",
+            "name_kanji": "青木 和夫",
+            "party": "真政会",
+            "age": "57",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会"
+            ],
+            "term": "6回（4回）",
+            "district": "上辺見"
+        },
+        {
+            "name_kana": "すずき たかし",
+            "name_kanji": "鈴木 隆",
+            "party": "政友会",
+            "age": "55",
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "6回（1回）",
+            "district": "仁連"
+        },
+        {
+            "name_kana": "そのべ ますじ",
+            "name_kanji": "園部 増治",
+            "party": "真政会",
+            "age": "61",
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "7回（2回）",
+            "district": "大堤"
+        },
+        {
+            "name_kana": "あかさか いくお",
+            "name_kanji": "赤坂 育男",
+            "party": "政友会",
+            "age": "59",
+            "gender": "male",
+            "committee": [
+                "議長",
+                "総務常任委員会"
+            ],
+            "term": "7回（2回）",
+            "district": "西町"
+        },
+        {
+            "name_kana": "ますだ さとる",
+            "name_kanji": "増田 悟",
+            "party": "市民ベースの会",
+            "age": "53",
+            "gender": "male",
+            "committee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "7回（2回）",
+            "district": "恩名"
+        },
+        {
+            "name_kana": "わたなべ すみお",
+            "name_kanji": "渡邊 澄夫",
+            "party": "政友会",
+            "age": "64",
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会"
+            ],
+            "term": "8回（3回）",
+            "district": "鴻巣"
+        },
+        {
+            "name_kana": "くろかわ てるお",
+            "name_kanji": "黒川 輝男",
+            "party": "真政会",
+            "age": "70",
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会"
+            ],
+            "term": "10回（5回）",
+            "district": "葛生"
+        }
+    ]
+}

@@ -1,0 +1,204 @@
+{
+    "members": [
+        {
+            "name_kana": "さくい　しげき",
+            "name_kanji": "作井　繁樹",
+            "party": "清流クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": "４回",
+            "district": "議長"
+        },
+        {
+            "name_kana": "さかい　みほ",
+            "name_kanji": "坂井　美穂",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": "３回",
+            "district": "副議長"
+        },
+        {
+            "name_kana": "きむら　せいこ",
+            "name_kanji": "木村　聖子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務常任副委員長",
+                "羊蹄山ろく消防組合議会議員"
+            ],
+            "term": "３回",
+            "district": null
+        },
+        {
+            "name_kana": "やぶなか　さとし",
+            "name_kanji": "藪中　聡史",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "厚生文教常任委員",
+                "羊蹄山麓環境衛生組合議会議員"
+            ],
+            "term": "１回",
+            "district": null
+        },
+        {
+            "name_kana": "きむら　しゅんいち",
+            "name_kanji": "木村　俊一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "羊蹄山ろく消防組合議会議員"
+            ],
+            "term": "１回",
+            "district": null
+        },
+        {
+            "name_kana": "からさわ　たかひろ",
+            "name_kanji": "唐澤　隆博",
+            "party": "創政会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "議会運営委員"
+            ],
+            "term": "１回",
+            "district": null
+        },
+        {
+            "name_kana": "はやかわ　たかし",
+            "name_kanji": "早川　貴士",
+            "party": "創政会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員",
+                "議会運営委員"
+            ],
+            "term": "１回",
+            "district": null
+        },
+        {
+            "name_kana": "なみかた　まこと",
+            "name_kanji": "波方　真如",
+            "party": "清流クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "厚生文教常任委員長",
+                "議会運営委員"
+            ],
+            "term": "２回",
+            "district": null
+        },
+        {
+            "name_kana": "かさはら　けいじ",
+            "name_kanji": "笠原 　啓仁",
+            "party": "自治研究会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員",
+                "議会運営委員長"
+            ],
+            "term": "７回",
+            "district": null
+        },
+        {
+            "name_kana": "さとう　ひでとし",
+            "name_kanji": "佐藤　英俊",
+            "party": "自治研究会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "議会運営委員"
+            ],
+            "term": "２回",
+            "district": "羊蹄山麓環境衛生組合議会議員"
+        },
+        {
+            "name_kana": "ふるや　しんじ",
+            "name_kanji": "古谷　眞司",
+            "party": "創政会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員長",
+                "議会運営委員"
+            ],
+            "term": "３回",
+            "district": "後志広域連合議会議員"
+        },
+        {
+            "name_kana": "もり　よしき",
+            "name_kanji": "森　　禎樹",
+            "party": "清流クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員長",
+                "議会運営副委員長"
+            ],
+            "term": "２回",
+            "district": null
+        },
+        {
+            "name_kana": "かどた　じゅん",
+            "name_kanji": "門田　　淳",
+            "party": "創政会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "厚生文教常任副委員長"
+            ],
+            "term": "３回",
+            "district": null
+        },
+        {
+            "name_kana": "もりた　かつみ",
+            "name_kanji": "盛多　勝美",
+            "party": "清流クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員",
+                "議会運営委員"
+            ],
+            "term": "６回",
+            "district": null
+        },
+        {
+            "name_kana": "おがわ　ふきゅう",
+            "name_kanji": "小川　不朽",
+            "party": "立憲民主党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "厚生文教常任委員"
+            ],
+            "term": "３回",
+            "district": null
+        },
+        {
+            "name_kana": "はらだ　よしお",
+            "name_kanji": "原田　芳男",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任副委員長",
+                "後志教育研修センター組合議会議員"
+            ],
+            "term": "１０回",
+            "district": null
+        }
+    ]
+}

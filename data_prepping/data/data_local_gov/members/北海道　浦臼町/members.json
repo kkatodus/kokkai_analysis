@@ -1,0 +1,97 @@
+{
+    "members": [
+        {
+            "data": [
+                {
+                    "name_kana": "スナバ アキラ",
+                    "name_kanji": "砂場　明",
+                    "party": "無所属",
+                    "age": 52,
+                    "gender": "male",
+                    "commitee": [
+                        "総務産業常任委員会",
+                        "議会運営委員会"
+                    ]
+                },
+                {
+                    "name_kana": "ツチヤ シンイチ",
+                    "name_kanji": "土屋　慎一",
+                    "party": "無所属",
+                    "age": 54,
+                    "gender": "male",
+                    "commitee": [
+                        "総務産業常任委員会",
+                        "広報特別委員会"
+                    ]
+                },
+                {
+                    "name_kana": "タカダ ヒデトシ",
+                    "name_kanji": "髙田　英利",
+                    "party": "無所属",
+                    "age": 57,
+                    "gender": "male",
+                    "commitee": [
+                        "総務産業常任委員会",
+                        "議会運営委員会",
+                        "広報特別委員会"
+                    ]
+                },
+                {
+                    "name_kana": "ノザキ ヨシノブ",
+                    "name_kanji": "野崎　敬恭",
+                    "party": "無所属",
+                    "age": 73,
+                    "gender": "male",
+                    "commitee": [
+                        "総務産業常任委員会",
+                        "議会運営委員会"
+                    ]
+                },
+                {
+                    "name_kana": "ナカガワ キヨミ",
+                    "name_kanji": "中川　清美",
+                    "party": "無所属",
+                    "age": 63,
+                    "gender": "female",
+                    "commitee": [
+                        "総務産業常任委員会",
+                        "議会運営委員会"
+                    ]
+                },
+                {
+                    "name_kana": "シズカワ ヒロミ",
+                    "name_kanji": "静川　広巳",
+                    "party": "無所属",
+                    "age": 66,
+                    "gender": "male",
+                    "commitee": [
+                        "議選監査委員",
+                        "総務産業常任委員会",
+                        "広報特別委員会"
+                    ]
+                },
+                {
+                    "name_kana": "シバタ ノリオ",
+                    "name_kanji": "柴田　典男",
+                    "party": "無所属",
+                    "age": 68,
+                    "gender": "male",
+                    "commitee": [
+                        "副議長",
+                        "総務産業常任委員会"
+                    ]
+                },
+                {
+                    "name_kana": "コマツ マサトシ",
+                    "name_kanji": "小松　正年",
+                    "party": "無所属",
+                    "age": 67,
+                    "gender": "male",
+                    "commitee": [
+                        "議長"
+                    ]
+                }
+            ]
+        }
+    ]
+}

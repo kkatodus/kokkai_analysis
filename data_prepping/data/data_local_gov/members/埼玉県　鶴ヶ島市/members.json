@@ -1,0 +1,228 @@
+{
+    "members": [
+        {
+            "name_kana": "おおた　ただよし",
+            "name_kanji": "太田　忠芳",
+            "party": "日本共産党",
+            "age": "98",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "1"
+        },
+        {
+            "name_kana": "こじま　ゆきひろ",
+            "name_kanji": "小島　幸広",
+            "party": "日本共産党",
+            "age": "95",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "2"
+        },
+        {
+            "name_kana": "おがわ　ひろみ",
+            "name_kanji": "小川　尋海",
+            "party": "無会派",
+            "age": "28",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "3"
+        },
+        {
+            "name_kana": "こんの　ゆういち",
+            "name_kanji": "今野　雄一",
+            "party": "公明党",
+            "age": "71",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "4"
+        },
+        {
+            "name_kana": "こばやし　ひとみ",
+            "name_kanji": "小林　ひとみ",
+            "party": "公明党",
+            "age": "81",
+            "gender": "female",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "5"
+        },
+        {
+            "name_kana": "やまなか　もとみつ",
+            "name_kanji": "山中　基充",
+            "party": "公明党",
+            "age": "84",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "6"
+        },
+        {
+            "name_kana": "いずも　びんたろう",
+            "name_kanji": "出雲　敏太郎",
+            "party": "つるがしま未来",
+            "age": "67",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "7"
+        },
+        {
+            "name_kana": "おがわ　しげる",
+            "name_kanji": "小川　茂",
+            "party": "新政クラブ",
+            "age": "94",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "8"
+        },
+        {
+            "name_kana": "ふくしま　めぐみ",
+            "name_kanji": "福島　恵美",
+            "party": "無会派",
+            "age": "66",
+            "gender": "female",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "9"
+        },
+        {
+            "name_kana": "たきしま　まさのり",
+            "name_kanji": "瀧嶋　正紀",
+            "party": "新政クラブ",
+            "age": "74",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "10"
+        },
+        {
+            "name_kana": "むらかみ　しんきち",
+            "name_kanji": "村上　信吉",
+            "party": "新政クラブ",
+            "age": "79",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "11"
+        },
+        {
+            "name_kana": "たかしの　まさひろ",
+            "name_kanji": "高篠　雅洋",
+            "party": "つるがしま未来",
+            "age": "89",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "12"
+        },
+        {
+            "name_kana": "すぎた　やすゆき",
+            "name_kanji": "杉田　恭之",
+            "party": "新政クラブ",
+            "age": "95",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "13"
+        },
+        {
+            "name_kana": "おおの　ひろこ",
+            "name_kanji": "大野　洋子",
+            "party": "無会派",
+            "age": "84",
+            "gender": "female",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "14",
+            "district": "広域静苑組合議会"
+        },
+        {
+            "name_kana": "うちの　よしひろ",
+            "name_kanji": "内野　嘉広",
+            "party": "つるがしま未来",
+            "age": "81",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "15"
+        },
+        {
+            "name_kana": "たかはし　けんじ",
+            "name_kanji": "高橋　剣ニ",
+            "party": "新政クラブ",
+            "age": "73",
+            "gender": "male",
+            "commitee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "16"
+        },
+        {
+            "name_kana": "はせがわ　きよし",
+            "name_kanji": "長谷川　清",
+            "party": "無会派",
+            "age": "85",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "17"
+        },
+        {
+            "name_kana": "おおそね　ひであき",
+            "name_kanji": "大曽根　英明",
+            "party": "つるがしま未来",
+            "age": "85",
+            "gender": "male",
+            "commitee": [
+                "総務産業建設常任委員会",
+                "予算決算常任委員会"
+            ],
+            "term": "18"
+        }
+    ]
+}

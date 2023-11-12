@@ -1,0 +1,126 @@
+{
+    "members": [
+        {
+            "name_kana": "さかい　おさむ",
+            "name_kanji": "酒井　　修",
+            "party": "無所属",
+            "age": "58",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "総務厚生常任委員長",
+                "議会広報特別委員会副委員長"
+            ],
+            "term": "2",
+            "district": "1"
+        },
+        {
+            "name_kana": "たけうち　よしあき",
+            "name_kanji": "竹内　佳明",
+            "party": "無所属",
+            "age": "60",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "産建文教副常任委員長",
+                "議会広報特別委員会委員"
+            ],
+            "term": "1",
+            "district": "2"
+        },
+        {
+            "name_kana": "さおとめ　てるたか",
+            "name_kanji": "早乙女 晃隆",
+            "party": "無所属",
+            "age": "44",
+            "gender": "male",
+            "commitee": [
+                "議選監査委員",
+                "総務厚生常任委員"
+            ],
+            "term": "1",
+            "district": "3"
+        },
+        {
+            "name_kana": "おか　やすてる",
+            "name_kanji": "岡　康照",
+            "party": "無所属",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "議会運営副委員長",
+                "産建文教常任委員長",
+                "議会広報特別委員会委員長"
+            ],
+            "term": "2",
+            "district": "4"
+        },
+        {
+            "name_kana": "うしろ　きよし",
+            "name_kanji": "卯城　規伊",
+            "party": "無所属",
+            "age": "63",
+            "gender": "male",
+            "commitee": [
+                "議会運営委員長",
+                "総務厚生常任委員",
+                "議会広報特別委員会委員"
+            ],
+            "term": "5",
+            "district": "5"
+        },
+        {
+            "name_kana": "さとう　ひろかず",
+            "name_kanji": "佐藤　宏和",
+            "party": "無所属",
+            "age": "56",
+            "gender": "male",
+            "commitee": [
+                "産建文教常任委員"
+            ],
+            "term": "1",
+            "district": "6"
+        },
+        {
+            "name_kana": "むらかみ　ちせ",
+            "name_kanji": "村上　知世",
+            "party": "無所属",
+            "age": "48",
+            "gender": "female",
+            "commitee": [
+                "総務厚生副常任委員長",
+                "議会広報特別委員会委員"
+            ],
+            "term": "1",
+            "district": "7"
+        },
+        {
+            "name_kana": "おおさわ　ひであき",
+            "name_kanji": "大澤　秀明",
+            "party": "無所属",
+            "age": "31",
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "議会運営委員",
+                "総務厚生常任委員",
+                "産建文教常任委員"
+            ],
+            "term": "3",
+            "district": "8"
+        },
+        {
+            "name_kana": "たかはし　たけし",
+            "name_kanji": "髙橋　　毅",
+            "party": "無所属",
+            "age": "70",
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "産建文教常任委員"
+            ],
+            "term": "6",
+            "district": "9"
+        }
+    ]
+}

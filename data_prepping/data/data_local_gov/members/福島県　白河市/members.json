@@ -1,0 +1,307 @@
+{
+    "members": [
+        {
+            "name_kana": "つつい たかみち",
+            "name_kanji": "筒井 孝充",
+            "party": "無",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "建設水道",
+                "議会報編集"
+            ],
+            "term": 7,
+            "district": "市5回・旧市2回"
+        },
+        {
+            "name_kana": "さがわ きょうこ",
+            "name_kanji": "佐川 京子",
+            "party": "無",
+            "age": 85,
+            "gender": "female",
+            "commitee": [
+                "教育福祉",
+                "議会報編集"
+            ],
+            "term": 6,
+            "district": "市5回・旧市1回"
+        },
+        {
+            "name_kana": "ながやま ひとし",
+            "name_kanji": "永山 均",
+            "party": "無",
+            "age": 80,
+            "gender": "male",
+            "commitee": [
+                "市民産業",
+                "議会運営"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "えんどう きみひこ",
+            "name_kanji": "遠藤 公彦",
+            "party": "自由民主党",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "建設水道"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "うえむら よしひろ",
+            "name_kanji": "植村 美洋",
+            "party": "無",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "市民産業",
+                "議会運営"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "おおき えり",
+            "name_kanji": "大木 絵理",
+            "party": "無",
+            "age": 60,
+            "gender": "female",
+            "commitee": [
+                "総務"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "よしみ ゆういちろう",
+            "name_kanji": "吉見 優一郎",
+            "party": "無",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "教育福祉"
+            ],
+            "term": 2,
+            "district": "市4回・旧村1回"
+        },
+        {
+            "name_kana": "すずき ゆうや",
+            "name_kanji": "鈴木 裕哉",
+            "party": "無",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "建設水道",
+                "議会運営"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "たかはた ゆたか",
+            "name_kanji": "高畠 裕",
+            "party": "無",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "市民産業"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "とぐら ひろかづ",
+            "name_kanji": "戸倉 宏一",
+            "party": "無",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "議会運営",
+                "議会報編集"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "ねもと けんいち",
+            "name_kanji": "根本 建一",
+            "party": "無",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "市民産業",
+                "議会運営",
+                "議会報編集"
+            ],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "むろい しんいち",
+            "name_kanji": "室井 伸一",
+            "party": "公明党",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": ""
+        },
+        {
+            "name_kana": "みどりかわ せつお",
+            "name_kanji": "緑川 摂生",
+            "party": "無",
+            "age": 88,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 4,
+            "district": ""
+        },
+        {
+            "name_kana": "しばはら たかお",
+            "name_kanji": "柴原 隆夫",
+            "party": "無",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "教育福祉"
+            ],
+            "term": 4,
+            "district": ""
+        },
+        {
+            "name_kana": "すがわら しゅういち",
+            "name_kanji": "菅原 修一",
+            "party": "自由民主党",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "教育福祉",
+                "議会運営"
+            ],
+            "term": 5,
+            "district": ""
+        },
+        {
+            "name_kana": "きたの ただみち",
+            "name_kanji": "北野 唯道",
+            "party": "無",
+            "age": 107,
+            "gender": "male",
+            "commitee": [
+                "建設水道"
+            ],
+            "term": 5,
+            "district": "市4回・旧村1回"
+        },
+        {
+            "name_kana": "みずのや まさのり",
+            "name_kanji": "水野谷 正則",
+            "party": "無",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "建設水道"
+            ],
+            "term": 6,
+            "district": "市5回・旧村1回"
+        },
+        {
+            "name_kana": "さがわ きょうこ",
+            "name_kanji": "佐川 京子",
+            "party": "政研かがやき",
+            "age": 85,
+            "gender": "female",
+            "commitee": [
+                "教育福祉",
+                "議会報編集"
+            ],
+            "term": 6,
+            "district": "市5回・旧市1回"
+        },
+        {
+            "name_kana": "ふじた ふみお",
+            "name_kanji": "藤田 文夫",
+            "party": "無",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "市民産業"
+            ],
+            "term": 6,
+            "district": "市5回・旧村1回"
+        },
+        {
+            "name_kana": "おおはな つとむ",
+            "name_kanji": "大花 務",
+            "party": "無",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "建設水道"
+            ],
+            "term": 6,
+            "district": "市5回・旧市1回"
+        },
+        {
+            "name_kana": "いしな くにみつ",
+            "name_kanji": "石名 国光",
+            "party": "政研かがやき（立憲民主党）",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "市民産業",
+                "議会運営"
+            ],
+            "term": 6,
+            "district": "市5回・旧市1回"
+        },
+        {
+            "name_kana": "たかはし みつお",
+            "name_kanji": "高橋 光雄",
+            "party": "自由民主党",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "市民産業"
+            ],
+            "term": 6,
+            "district": "市5回・旧市1回"
+        },
+        {
+            "name_kana": "おおたけ こういち",
+            "name_kanji": "大竹 功一",
+            "party": "めざす会",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "議会運営",
+                "議会報編集"
+            ],
+            "term": 7,
+            "district": "市5回・旧市2回"
+        },
+        {
+            "name_kana": "ふかや ひろし",
+            "name_kanji": "深谷 弘",
+            "party": "めざす会（日本共産党）",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "教育福祉"
+            ],
+            "term": 8,
+            "district": "市5回・旧市3回"
+        }
+    ]
+}

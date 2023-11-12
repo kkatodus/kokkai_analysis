@@ -1,0 +1,104 @@
+{
+    "members": [
+        {
+            "name_kana": "わたなべゆうじ",
+            "name_kanji": "渡邊裕治",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "ひらがたたまお",
+            "name_kanji": "平形玉緒",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "からさわとくじ",
+            "name_kanji": "唐澤徳治",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "まついはるひ",
+            "name_kanji": "松井陽威",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "いいづかたけひさ",
+            "name_kanji": "飯塚武久",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "ごとうあきひろ",
+            "name_kanji": "後藤明宏",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "さとうはるお",
+            "name_kanji": "佐藤晴夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 7
+        },
+        {
+            "name_kana": "ごとうはじめ",
+            "name_kanji": "後藤肇",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 8
+        },
+        {
+            "name_kana": "ひらがたふじお",
+            "name_kanji": "平形富二夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 9
+        },
+        {
+            "name_kana": "やまぐちひでし",
+            "name_kanji": "山口英司",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 10
+        }
+    ]
+}

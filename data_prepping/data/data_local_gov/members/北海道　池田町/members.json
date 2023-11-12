@@ -1,0 +1,128 @@
+{
+    "members": [
+        {
+            "name_kana": "さかもとかずひろ",
+            "name_kanji": "坂本和啓",
+            "party": "無",
+            "age": 77,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "西1条10丁目2番地の８"
+        },
+        {
+            "name_kana": "もんまひでとし",
+            "name_kanji": "門馬英寿",
+            "party": "無",
+            "age": 88,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "利別本町22番地の24"
+        },
+        {
+            "name_kana": "かたやまよしひろ",
+            "name_kanji": "片山喜博",
+            "party": "無",
+            "age": 63,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "西1条9丁目15番地の11"
+        },
+        {
+            "name_kana": "いながきおさむ",
+            "name_kanji": "稲垣　修",
+            "party": "無",
+            "age": 76,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭町5丁目16番地の5"
+        },
+        {
+            "name_kana": "くろだともき",
+            "name_kanji": "黒田知樹",
+            "party": "無",
+            "age": 61,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "西２条３丁目９番地"
+        },
+        {
+            "name_kana": "ふくだひでとし",
+            "name_kanji": "福田秀利",
+            "party": "無",
+            "age": 91,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "川合266番地の2"
+        },
+        {
+            "name_kana": "こばやしやすお",
+            "name_kanji": "小林靖夫",
+            "party": "無",
+            "age": 91,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "近牛64番地の55"
+        },
+        {
+            "name_kana": "あかまさとる",
+            "name_kanji": "赤間 敏",
+            "party": "無",
+            "age": 95,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "利別東町１００番地"
+        },
+        {
+            "name_kana": "すがわらのりお",
+            "name_kanji": "菅原典雄",
+            "party": "無",
+            "age": 100,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "旭町5丁目5番地の2"
+        },
+        {
+            "name_kana": "くぼたとよみつ",
+            "name_kanji": "窪田豊満",
+            "party": "共産",
+            "age": 97,
+            "gender": "male",
+            "commitee": [],
+            "term": 10,
+            "district": "清見10番地の1"
+        },
+        {
+            "name_kana": "はるいよしお",
+            "name_kanji": "春井良夫",
+            "party": "無",
+            "age": 100,
+            "gender": "male",
+            "commitee": [
+                "副議長"
+            ],
+            "term": 5,
+            "district": "旭町5丁目14番地の16"
+        },
+        {
+            "name_kana": "にわやすひこ",
+            "name_kanji": "丹羽泰彦",
+            "party": "無",
+            "age": 88,
+            "gender": "male",
+            "commitee": [
+                "議長"
+            ],
+            "term": 4,
+            "district": "千代田380番地の3"
+        }
+    ]
+}

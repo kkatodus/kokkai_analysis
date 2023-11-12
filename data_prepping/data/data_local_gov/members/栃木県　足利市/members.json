@@ -1,0 +1,306 @@
+{
+    "members": [
+        {
+            "name_kana": "おにくぼ あやこ",
+            "name_kanji": "鬼久保 綾子",
+            "party": "無所属",
+            "age": 37,
+            "gender": "female",
+            "commitee": [
+                "教育経済建設常任委員会"
+            ],
+            "term": 1,
+            "district": "通三丁目"
+        },
+        {
+            "name_kana": "いしの じゅんこ",
+            "name_kanji": "石野 純子",
+            "party": "公明党",
+            "age": 42,
+            "gender": "female",
+            "commitee": [
+                "民生環境水道常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 1,
+            "district": "千歳町7-3"
+        },
+        {
+            "name_kana": "えびぬま としまさ",
+            "name_kanji": "海老沼 利昌",
+            "party": "無所属",
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "教育経済建設常任委員会"
+            ],
+            "term": 1,
+            "district": "小俣町"
+        },
+        {
+            "name_kana": "やまもと ひとみ",
+            "name_kanji": "山本 仁美",
+            "party": "無所属",
+            "age": 44,
+            "gender": "female",
+            "commitee": [
+                "教育経済建設常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 1,
+            "district": "朝倉町三丁目13-10"
+        },
+        {
+            "name_kana": "こぬま みつよ",
+            "name_kanji": "小沼 光代",
+            "party": "無所属",
+            "age": 48,
+            "gender": "female",
+            "commitee": [
+                "教育経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "通二丁目2738"
+        },
+        {
+            "name_kana": "いとや みちよ",
+            "name_kanji": "糸谷 道代",
+            "party": "公明党",
+            "age": 52,
+            "gender": "female",
+            "commitee": [
+                "総務企画防災常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 1,
+            "district": "福富町"
+        },
+        {
+            "name_kana": "みた けんぞう",
+            "name_kanji": "三田 研三",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務企画防災常任委員会"
+            ],
+            "term": 1,
+            "district": "本人希望により非公表"
+        },
+        {
+            "name_kana": "いいじま かずひろ",
+            "name_kanji": "飯島 一弘",
+            "party": "無所属",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "民生環境水道常任委員会"
+            ],
+            "term": 2,
+            "district": "藤本町570"
+        },
+        {
+            "name_kana": "ふじもと ひでき",
+            "name_kanji": "藤本 秀樹",
+            "party": "公明党",
+            "age": 54,
+            "gender": "male",
+            "commitee": [
+                "教育経済建設常任委員会"
+            ],
+            "term": 2,
+            "district": "大正町871-13"
+        },
+        {
+            "name_kana": "とりい やすこ",
+            "name_kanji": "鳥井 康子",
+            "party": "日本共産党",
+            "age": 55,
+            "gender": "female",
+            "commitee": [
+                "総務企画防災常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 2,
+            "district": "八幡町二丁目7-9"
+        },
+        {
+            "name_kana": "なかじま まゆみ",
+            "name_kanji": "中島 真弓",
+            "party": "自由民主党",
+            "age": 34,
+            "gender": "female",
+            "commitee": [
+                "民生環境水道常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "本城一丁目1601"
+        },
+        {
+            "name_kana": "つるがい だいすけ",
+            "name_kanji": "鶴貝 大祐",
+            "party": "自由民主党",
+            "age": 56,
+            "gender": "male",
+            "commitee": [
+                "民生環境水道常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 3,
+            "district": "大月町210-3"
+        },
+        {
+            "name_kana": "すえよし としひろ",
+            "name_kanji": "末吉 利啓",
+            "party": "自由民主党",
+            "age": 40,
+            "gender": "male",
+            "commitee": [
+                "民生環境水道常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "福富町1839-10"
+        },
+        {
+            "name_kana": "すだ みずほ",
+            "name_kanji": "須田 瑞穂",
+            "party": "自由民主党",
+            "age": 39,
+            "gender": "female",
+            "commitee": [
+                "民生環境水道常任委員会"
+            ],
+            "term": 3,
+            "district": "小俣町565-1"
+        },
+        {
+            "name_kana": "かねこ ひろみ",
+            "name_kanji": "金子 裕美",
+            "party": "自由民主党",
+            "age": 40,
+            "gender": "female",
+            "commitee": [
+                "総務企画防災常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 4,
+            "district": "伊勢町二丁目"
+        },
+        {
+            "name_kana": "こばやし たかひろ",
+            "name_kanji": "小林 貴浩",
+            "party": "自由民主党",
+            "age": 54,
+            "gender": "male",
+            "commitee": [
+                "総務企画防災常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "大前町1345"
+        },
+        {
+            "name_kana": "よこやま いくお",
+            "name_kanji": "横山 育男",
+            "party": "自由民主党",
+            "age": 59,
+            "gender": "male",
+            "commitee": [
+                "総務企画防災常任委員会"
+            ],
+            "term": 4,
+            "district": "伊勢町四丁目4-27"
+        },
+        {
+            "name_kana": "よしだ はるのぶ",
+            "name_kanji": "吉田 晴信",
+            "party": "立憲民主党",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "総務企画防災常任委員会"
+            ],
+            "term": 4,
+            "district": "借宿町415-2"
+        },
+        {
+            "name_kana": "さいとう まさゆき",
+            "name_kanji": "斎藤 昌之",
+            "party": "自由民主党",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "民生環境水道常任委員会"
+            ],
+            "term": 5,
+            "district": "山川町935-1"
+        },
+        {
+            "name_kana": "くりはら おさむ",
+            "name_kanji": "栗原 収",
+            "party": "自由民主党",
+            "age": 59,
+            "gender": "male",
+            "commitee": [
+                "教育経済建設常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 5,
+            "district": "八幡町一丁目2-8"
+        },
+        {
+            "name_kana": "おぎわら ひさお",
+            "name_kanji": "荻原 久雄",
+            "party": "自由民主党",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "教育経済建設常任委員会"
+            ],
+            "term": 5,
+            "district": "福居町550-1"
+        },
+        {
+            "name_kana": "わたなべ さとる",
+            "name_kanji": "渡辺 悟",
+            "party": "自由民主党",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "教育経済建設常任委員会"
+            ],
+            "term": 7,
+            "district": "田島町一丁目5-45"
+        },
+        {
+            "name_kana": "おぜき えいこ",
+            "name_kanji": "尾関 栄子",
+            "party": "日本共産党",
+            "age": 69,
+            "gender": "female",
+            "commitee": [
+                "民生環境水道常任委員会"
+            ],
+            "term": 7,
+            "district": "南大町195-6"
+        },
+        {
+            "name_kana": "くろかわ よしお",
+            "name_kanji": "黒川 貫男",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務企画防災常任委員会"
+            ],
+            "term": 7,
+            "district": "葉鹿町304-1"
+        }
+    ]
+}

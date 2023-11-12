@@ -1,0 +1,151 @@
+{
+    "members": [
+        {
+            "name_kana": "さとう　だい",
+            "name_kanji": "佐藤　大",
+            "party": "無所属",
+            "age": 56,
+            "gender": "male",
+            "commitee": [
+                "総務厚生",
+                "広報公聴"
+            ],
+            "term": "1",
+            "district": "",
+            "address": "990-0703 間沢177番地４",
+            "phone": "74-2550"
+        },
+        {
+            "name_kana": "いいの　みきお",
+            "name_kanji": "飯野　幹夫",
+            "party": "無所属",
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "産業建設",
+                "広報公聴"
+            ],
+            "term": "2",
+            "district": "",
+            "address": "990-0713 沼山340番地６",
+            "phone": "74-4233"
+        },
+        {
+            "name_kana": "ごとう　かずお",
+            "name_kanji": "後藤　一夫",
+            "party": "無所属",
+            "age": 49,
+            "gender": "male",
+            "commitee": [
+                "総務厚生",
+                "広報公聴"
+            ],
+            "term": "3",
+            "district": "",
+            "address": "990-0702 海味376番地１",
+            "phone": "74-3988"
+        },
+        {
+            "name_kana": "あらき　としお",
+            "name_kanji": "荒木　俊夫",
+            "party": "無所属",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "総務厚生",
+                "広報公聴"
+            ],
+            "term": "4",
+            "district": "",
+            "address": "990-0711 吉川1878番地２",
+            "phone": "74-2503"
+        },
+        {
+            "name_kana": "さとう　じん",
+            "name_kanji": "佐藤　仁",
+            "party": "無所属",
+            "age": 57,
+            "gender": "male",
+            "commitee": [
+                "産業建設",
+                "広報公聴"
+            ],
+            "term": "5",
+            "district": "",
+            "address": "990-0701 睦合甲167番地２",
+            "phone": "74-2214"
+        },
+        {
+            "name_kana": "さとう　みつやす",
+            "name_kanji": "佐藤　光康",
+            "party": "日本共産党",
+            "age": 42,
+            "gender": "male",
+            "commitee": [
+                "総務厚生",
+                "広報公聴"
+            ],
+            "term": "6",
+            "district": "",
+            "address": "990-0714 入間297番地",
+            "phone": "74-4392"
+        },
+        {
+            "name_kana": "おおいずみ　なみ",
+            "name_kanji": "大泉　奈美",
+            "party": "無所属",
+            "age": 36,
+            "gender": "female",
+            "commitee": [
+                "産業建設",
+                "広報公聴"
+            ],
+            "term": "7",
+            "district": "",
+            "address": "990-0714 入間252番地１",
+            "phone": "74-4606"
+        },
+        {
+            "name_kana": "さとう　こうじ",
+            "name_kanji": "佐藤　耕二",
+            "party": "無所属",
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "8",
+            "district": "",
+            "address": "990-0721 大井沢1152番地",
+            "phone": "76-2110"
+        },
+        {
+            "name_kana": "ふるさわ　しゅんいち",
+            "name_kanji": "古澤　俊一",
+            "party": "無所属",
+            "age": 50,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "9",
+            "district": "",
+            "address": "990-0741 綱取158番地",
+            "phone": "74-3414"
+        },
+        {
+            "name_kana": "すがの　くにひこ",
+            "name_kanji": "菅野　邦比克",
+            "party": "無所属",
+            "age": 48,
+            "gender": "male",
+            "commitee": [
+                "総務厚生"
+            ],
+            "term": "10",
+            "district": "",
+            "address": "990-0702 海味525番５号地",
+            "phone": "74-4097"
+        }
+    ]
+}

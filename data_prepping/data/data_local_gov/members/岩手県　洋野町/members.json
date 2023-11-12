@@ -1,0 +1,203 @@
+{
+    "members": [
+        {
+            "name_kanji": "水上 和男",
+            "name_kana": "みずかみ かずお",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "洋野町中野6-36-3"
+        },
+        {
+            "name_kanji": "吹切 功一",
+            "name_kana": "ふっきり こういち",
+            "party": "無所属",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "教育民生常任委員会委員",
+                "町政調査会副会長"
+            ],
+            "term": 4,
+            "district": "洋野町種市4-18-1"
+        },
+        {
+            "name_kanji": "久慈 裕子",
+            "name_kana": "くじ ゆうこ",
+            "party": "日本共産党",
+            "age": 73,
+            "gender": "female",
+            "commitee": [
+                "教育民生常任委員会委員",
+                "久慈広域連合議会議員"
+            ],
+            "term": 6,
+            "district": "洋野町大野64-11"
+        },
+        {
+            "name_kanji": "大光 栄子",
+            "name_kana": "だいこう えいこ",
+            "party": "無所属",
+            "age": 68,
+            "gender": "female",
+            "commitee": [
+                "教育民生常任委員会委員長",
+                "議会運営委員会副委員長",
+                "町政調査会理事"
+            ],
+            "term": 3,
+            "district": "洋野町種市22-98-1"
+        },
+        {
+            "name_kanji": "信田 義朋",
+            "name_kana": "のぶた よしとも",
+            "party": "無所属",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会副委員長",
+                "久慈広域連合議会議員",
+                "町政調査会監事"
+            ],
+            "term": 2,
+            "district": "洋野町種市35-38"
+        },
+        {
+            "name_kanji": "柾谷 照保",
+            "name_kana": "まさや てるやす",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員長"
+            ],
+            "term": 6,
+            "district": "洋野町中野4-14"
+        },
+        {
+            "name_kanji": "下舘 岩吉",
+            "name_kana": "しもだて いわきち",
+            "party": "無所属",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会委員",
+                "岩手県後期高齢者医療広域連合議会議員",
+                "町政調査会会長"
+            ],
+            "term": 9,
+            "district": "洋野町帯島7-199"
+        },
+        {
+            "name_kanji": "明戸 実",
+            "name_kana": "あけと みのる",
+            "party": "無所属",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "教育民生常任委員会委員",
+                "議会運営委員会委員長",
+                "町政調査会理事"
+            ],
+            "term": 7,
+            "district": "洋野町種市27-69-1"
+        },
+        {
+            "name_kanji": "金沢 秀男",
+            "name_kana": "かなざわ ひでお",
+            "party": "無所属",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "議会運営委員会委員",
+                "町政調査会理事"
+            ],
+            "term": 6,
+            "district": "洋野町種市32-8"
+        },
+        {
+            "name_kanji": "南 一郎",
+            "name_kana": "みなみ いちろう",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "教育民生常任委員会副委員長",
+                "久慈広域連合議会議員",
+                "町政調査会監事"
+            ],
+            "term": 3,
+            "district": "洋野町大野55-38-8"
+        },
+        {
+            "name_kanji": "大下 文男",
+            "name_kana": "おおした ふみお",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "議会運営委員会委員",
+                "町政調査会理事"
+            ],
+            "term": 4,
+            "district": "洋野町種市25-4-2"
+        },
+        {
+            "name_kanji": "上小路 喜作",
+            "name_kana": "かみしょうじ きさく",
+            "party": "無所属",
+            "age": 76,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会委員",
+                "久慈広域連合議会議員"
+            ],
+            "term": 1,
+            "district": "洋野町阿子木6-6-3"
+        },
+        {
+            "name_kanji": "日當 博治",
+            "name_kana": "ひなた ひろはる",
+            "party": "無所属",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会副委員長",
+                "議会運営委員会委員",
+                "町政調査会理事"
+            ],
+            "term": 1,
+            "district": "洋野町種市1-70-1"
+        },
+        {
+            "name_kanji": "大村 文雄",
+            "name_kana": "おおむら ふみお",
+            "party": "無所属",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会委員長",
+                "議会運営委員会委員"
+            ],
+            "term": 3,
+            "district": "洋野町種市42-120-3"
+        },
+        {
+            "name_kanji": "長坂 敦夫",
+            "name_kana": "ながさか あつお",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会委員",
+                "町政調査会理事"
+            ],
+            "term": 1,
+            "district": "洋野町小子内7-45-4"
+        }
+    ]
+}

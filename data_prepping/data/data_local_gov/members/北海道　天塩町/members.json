@@ -1,0 +1,140 @@
+{
+    "members": [
+        {
+            "name_kana": "よこやま　あつし",
+            "name_kanji": "横山　敦",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会運営"
+            ],
+            "term": [
+                4
+            ],
+            "district": 9
+        },
+        {
+            "name_kana": "わたなべ　のぶかつ",
+            "name_kanji": "渡辺　修勝",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教"
+            ],
+            "term": [
+                7
+            ],
+            "district": 8
+        },
+        {
+            "name_kana": "くさかり　ゆきお",
+            "name_kanji": "草刈　幸男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": [
+                9
+            ],
+            "district": 7
+        },
+        {
+            "name_kana": "ごとう　しのぶ",
+            "name_kanji": "後藤　忍",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会広報",
+                "議会運営"
+            ],
+            "term": [
+                8
+            ],
+            "district": 6
+        },
+        {
+            "name_kana": "いしやま　なおつぐ",
+            "name_kanji": "石山　直継",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営"
+            ],
+            "term": [
+                7
+            ],
+            "district": 5
+        },
+        {
+            "name_kana": "きくち　さとし",
+            "name_kanji": "菊地　敏",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会広報",
+                "議会運営"
+            ],
+            "term": [
+                6
+            ],
+            "district": 4
+        },
+        {
+            "name_kana": "やまもと　はるみつ",
+            "name_kanji": "山本　春光",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会運営",
+                "議会広報"
+            ],
+            "term": [
+                3
+            ],
+            "district": 3
+        },
+        {
+            "name_kana": "ながやま　しずこ",
+            "name_kanji": "長山　志津子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務文教",
+                "議会広報",
+                "議会運営"
+            ],
+            "term": [
+                1
+            ],
+            "district": 2
+        },
+        {
+            "name_kana": "くわた　たかひこ",
+            "name_kanji": "桑田　孝彦",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会運営",
+                "議会広報"
+            ],
+            "term": [
+                1
+            ],
+            "district": 1
+        }
+    ]
+}

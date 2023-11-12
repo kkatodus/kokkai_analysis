@@ -1,0 +1,129 @@
+{
+    "members": [
+        {
+            "name_kana": "ふるきし　みきお",
+            "name_kanji": "古樫　幹夫",
+            "party": "無所属",
+            "age": 8,
+            "gender": "male",
+            "commitee": [
+                "産業建設文教"
+            ],
+            "term": "農業",
+            "district": 1
+        },
+        {
+            "name_kana": "あんどう　よしひこ",
+            "name_kanji": "安東　義彦",
+            "party": "無所属",
+            "age": 8,
+            "gender": "male",
+            "commitee": [
+                "総務社会"
+            ],
+            "term": "無職",
+            "district": 2
+        },
+        {
+            "name_kana": "ほうじょう　たかみつ",
+            "name_kanji": "北條　隆光",
+            "party": "無所属",
+            "age": 11,
+            "gender": "male",
+            "commitee": [
+                "総務社会",
+                "議会運営委員"
+            ],
+            "term": "無職",
+            "district": 3
+        },
+        {
+            "name_kana": "はらだ　かずお",
+            "name_kanji": "原田　一男",
+            "party": "無所属",
+            "age": 3,
+            "gender": "male",
+            "commitee": [
+                "産業建設文教",
+                "議会運営委員"
+            ],
+            "term": "農業",
+            "district": 4
+        },
+        {
+            "name_kana": "まえの　ひとし",
+            "name_kanji": "前野　仁志",
+            "party": "無所属",
+            "age": 4,
+            "gender": "male",
+            "commitee": [
+                "総務社会",
+                "議会運営委員"
+            ],
+            "term": "商店経営",
+            "district": 5
+        },
+        {
+            "name_kana": "たかはし　みつお",
+            "name_kanji": "高橋　光夫",
+            "party": "無所属",
+            "age": 3,
+            "gender": "male",
+            "commitee": [
+                "産業建設文教"
+            ],
+            "term": "無職",
+            "district": 6
+        },
+        {
+            "name_kana": "おかもと　しんいち",
+            "name_kanji": "岡本　伸一",
+            "party": "無所属",
+            "age": 1,
+            "gender": "male",
+            "commitee": [
+                "総務社会",
+                "議会運営委員"
+            ],
+            "term": "農業",
+            "district": 7
+        },
+        {
+            "name_kana": "さとう　わさぞう",
+            "name_kanji": "佐藤　和三",
+            "party": "共産党",
+            "age": 10,
+            "gender": "male",
+            "commitee": [
+                "総務社会"
+            ],
+            "term": "農業",
+            "district": 8
+        },
+        {
+            "name_kana": "てらおか　ゆうこ",
+            "name_kanji": "寺岡　祐子",
+            "party": "無所属",
+            "age": 2,
+            "gender": "female",
+            "commitee": [
+                "産業建設文教",
+                "議会運営委員"
+            ],
+            "term": "団体職員",
+            "district": 9
+        },
+        {
+            "name_kana": "いしがみ　たたやす",
+            "name_kanji": "石神　唯安",
+            "party": "無所属",
+            "age": 4,
+            "gender": "male",
+            "commitee": [
+                "産業建設文教"
+            ],
+            "term": "農業",
+            "district": 10
+        }
+    ]
+}

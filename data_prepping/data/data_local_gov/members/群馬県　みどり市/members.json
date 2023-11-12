@@ -1,0 +1,236 @@
+{
+    "members": [
+        {
+            "name_kana": "イシハラ　マリコ",
+            "name_kanji": "石原　真理子",
+            "party": "",
+            "age": "",
+            "gender": "female",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": "議席1",
+            "district": "笠懸町阿左美"
+        },
+        {
+            "name_kana": "ミヤザキ　タケシ",
+            "name_kanji": "宮﨑　武",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "経済建設"
+            ],
+            "term": "議席2",
+            "district": "笠懸町鹿"
+        },
+        {
+            "name_kana": "ナカムラ　マサヨシ",
+            "name_kanji": "中村　正義",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "経済建設",
+                "議会広報"
+            ],
+            "term": "議席3",
+            "district": "笠懸町阿左美"
+        },
+        {
+            "name_kana": "フカサワ　テルヒコ",
+            "name_kanji": "深澤　輝彦",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "市民福祉",
+                "議会広報"
+            ],
+            "term": "議席4",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "カネコ　ユウト",
+            "name_kanji": "金子　勇人",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": "議席5",
+            "district": "笠懸町阿左美"
+        },
+        {
+            "name_kana": "ホリウチ　トシユキ",
+            "name_kanji": "堀内　利之",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "市民福祉",
+                "議会広報"
+            ],
+            "term": "議席6",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "シオノ　ヒロヤ",
+            "name_kanji": "塩野　央弥",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "市民福祉",
+                "議会広報"
+            ],
+            "term": "議席7",
+            "district": "笠懸町久宮"
+        },
+        {
+            "name_kana": "タカクサギ　ヒロコ",
+            "name_kanji": "髙草木　弘子",
+            "party": "",
+            "age": "",
+            "gender": "female",
+            "commitee": [
+                "議会運営",
+                "市民福祉"
+            ],
+            "term": "議席8",
+            "district": "大間々町高津戸"
+        },
+        {
+            "name_kana": "フジウ　ヨシアキ",
+            "name_kanji": "藤生　吉顕",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": "議席9",
+            "district": "笠懸町阿左美"
+        },
+        {
+            "name_kana": "マツイ　アツシ",
+            "name_kanji": "松井　篤",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "経済建設"
+            ],
+            "term": "議席10",
+            "district": "笠懸町西鹿田"
+        },
+        {
+            "name_kana": "シバザキ　ノリヨシ",
+            "name_kanji": "柴﨑　訓佳",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "総務文教"
+            ],
+            "term": "議席11",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "スナガ　ノブオ",
+            "name_kanji": "須永　信雄",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "総務文教"
+            ],
+            "term": "議席12",
+            "district": "笠懸町久宮"
+        },
+        {
+            "name_kana": "シイナ　ユウジ",
+            "name_kanji": "椎名　祐司",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "経済建設"
+            ],
+            "term": "議席13",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "アザミ　マモル",
+            "name_kanji": "阿左美　守",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "経済建設"
+            ],
+            "term": "議席14",
+            "district": "笠懸町西鹿田"
+        },
+        {
+            "name_kana": "カミオカ　カツミ",
+            "name_kanji": "上岡　克己",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "市民福祉"
+            ],
+            "term": "議席15",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "ストウ　ヒメヨ",
+            "name_kanji": "須藤　日米代",
+            "party": "",
+            "age": "",
+            "gender": "female",
+            "commitee": [
+                "議会運営",
+                "経済建設"
+            ],
+            "term": "議席16",
+            "district": "大間々町大間々"
+        },
+        {
+            "name_kana": "コタジマ　カズシゲ",
+            "name_kanji": "古田島　和茂",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "市民福祉"
+            ],
+            "term": "議席17",
+            "district": "東町沢入"
+        },
+        {
+            "name_kana": "スギヤマ　ヒデユキ",
+            "name_kanji": "杉山　英行",
+            "party": "",
+            "age": "",
+            "gender": "male",
+            "commitee": [
+                "総務文教"
+            ],
+            "term": "議席18",
+            "district": "笠懸町鹿"
+        }
+    ]
+}

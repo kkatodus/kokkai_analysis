@@ -1,0 +1,216 @@
+{
+    "members": [
+        {
+            "name_kana": "てらかど いさお",
+            "name_kanji": "寺門 勲",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "はらだ ようこ",
+            "name_kanji": "原田 陽子",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "広報編集"
+            ],
+            "term": 2,
+            "district": null
+        },
+        {
+            "name_kana": "こいけ まさお",
+            "name_kanji": "小池 正夫",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営",
+                "広報編集"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "はぎや としゆき",
+            "name_kanji": "萩谷 俊行",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": null
+        },
+        {
+            "name_kana": "いしかわ よしみつ",
+            "name_kanji": "石川 義光",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "広報編集"
+            ],
+            "term": 5,
+            "district": null
+        },
+        {
+            "name_kana": "せき まもる",
+            "name_kanji": "關 守",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "原子力安全対策"
+            ],
+            "term": 6,
+            "district": null
+        },
+        {
+            "name_kana": "おおわだ かずお",
+            "name_kanji": "大和田 和男",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "教育厚生",
+                "原子力安全対策",
+                "広報編集"
+            ],
+            "term": 7,
+            "district": null
+        },
+        {
+            "name_kana": "とみやま つよし",
+            "name_kanji": "冨山 豪",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "原子力安全対策",
+                "議会運営"
+            ],
+            "term": 8,
+            "district": null
+        },
+        {
+            "name_kana": "はなしま すすむ",
+            "name_kanji": "花島 進",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "原子力安全対策"
+            ],
+            "term": 9,
+            "district": null
+        },
+        {
+            "name_kana": "てらかど あつし",
+            "name_kanji": "寺門 厚",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営"
+            ],
+            "term": 10,
+            "district": null
+        },
+        {
+            "name_kana": "きの ひろのぶ",
+            "name_kanji": "木野 広宣",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "広報編集"
+            ],
+            "term": 11,
+            "district": null
+        },
+        {
+            "name_kana": "ふるかわ よういち",
+            "name_kanji": "古川 洋一",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営"
+            ],
+            "term": 12,
+            "district": null
+        },
+        {
+            "name_kana": "かつむら あきお",
+            "name_kanji": "勝村 晃夫",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営"
+            ],
+            "term": 13,
+            "district": null
+        },
+        {
+            "name_kana": "むとう ひろみつ",
+            "name_kanji": "武藤 博光",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "原子力安全対策"
+            ],
+            "term": 14,
+            "district": null
+        },
+        {
+            "name_kana": "ささじま たけし",
+            "name_kanji": "笹島 猛",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "原子力安全対策"
+            ],
+            "term": 15,
+            "district": null
+        },
+        {
+            "name_kana": "きみじま としお",
+            "name_kanji": "君嶋 寿男",
+            "party": "総務生活",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営"
+            ],
+            "term": 16,
+            "district": null
+        },
+        {
+            "name_kana": "えんどう まこと",
+            "name_kanji": "遠藤 実",
+            "party": "教育厚生",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 17,
+            "district": null
+        },
+        {
+            "name_kana": "ふくだ こうしろう",
+            "name_kanji": "福田 耕四郎",
+            "party": "産業建設",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 18,
+            "district": null
+        }
+    ]
+}

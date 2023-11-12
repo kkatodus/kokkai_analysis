@@ -1,0 +1,141 @@
+{
+    "members": [
+        {
+            "name_kana": "堀本典明",
+            "name_kanji": "堀本典明",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会運営委員会",
+                "議会広報特別委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 3,
+            "district": 1
+        },
+        {
+            "name_kana": "佐藤教宏",
+            "name_kanji": "佐藤教宏",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報特別委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "佐藤啓憲",
+            "name_kanji": "佐藤啓憲",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会広報特別委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "渡辺正道",
+            "name_kanji": "渡辺正道",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会運営委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "高野匠美",
+            "name_kanji": "高野匠美",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報特別委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 2,
+            "district": 5
+        },
+        {
+            "name_kana": "遠藤一善",
+            "name_kanji": "遠藤一善",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 3,
+            "district": 6
+        },
+        {
+            "name_kana": "安藤正純",
+            "name_kanji": "安藤正純",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会運営委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "宇佐神幸一",
+            "name_kanji": "宇佐神幸一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 3,
+            "district": 8
+        },
+        {
+            "name_kana": "渡辺三男",
+            "name_kanji": "渡辺三男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "原子力発電所等に関する特別委員会"
+            ],
+            "term": 7,
+            "district": 9
+        },
+        {
+            "name_kana": "高橋実",
+            "name_kanji": "高橋実",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": 7,
+            "district": 10
+        }
+    ]
+}

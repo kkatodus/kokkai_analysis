@@ -1,0 +1,366 @@
+{
+    "members": [
+        {
+            "name_kana": "アカヒラユウト",
+            "name_kanji": "赤平勇人",
+            "party": "日本共産党",
+            "age": 32,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員",
+                "民生環境常任委員会委員長",
+                "雪対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "アズハタミドリ",
+            "name_kanji": "小豆畑緑",
+            "party": "自民クラブ",
+            "age": 77,
+            "gender": "female",
+            "commitee": [
+                "民生環境常任委員会委員",
+                "雪対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "アマナイシンヤ",
+            "name_kanji": "天内慎也",
+            "party": "日本共産党",
+            "age": 49,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員",
+                "都市建設常任委員会委員",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "エビナカズコ",
+            "name_kanji": "蛯名和子",
+            "party": "無所属",
+            "age": 69,
+            "gender": "female",
+            "commitee": [
+                "都市建設常任委員会委員",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "オオヤタモツ",
+            "name_kanji": "大矢保",
+            "party": "自民クラブ",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "総務企画常任委員会委員",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "オグマヒトミ",
+            "name_kanji": "小熊ひと美",
+            "party": "無所属",
+            "age": 67,
+            "gender": "female",
+            "commitee": [
+                "文教経済常任委員会委員",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "オグラタカヒロ",
+            "name_kanji": "小倉尚裕",
+            "party": "創青会",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "文教経済常任委員会委員",
+                "雪対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "カキザキコウジ",
+            "name_kanji": "柿崎孝治",
+            "party": "自民クラブ",
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "文教経済常任委員会委員",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "カルマイチカコ",
+            "name_kanji": "軽米智雅子",
+            "party": "公明党",
+            "age": 61,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会委員",
+                "都市建設常任委員会委員",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "キドキミオ",
+            "name_kanji": "木戸喜美男",
+            "party": "創青会",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会委員",
+                "雪対策特別委員会委員",
+                "副議長"
+            ]
+        },
+        {
+            "name_kana": "キノシタヤスシ",
+            "name_kanji": "木下靖",
+            "party": "市民クラブ",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "都市建設常任委員会委員",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "キムラジュンジ",
+            "name_kanji": "木村淳司",
+            "party": "創青会",
+            "age": 31,
+            "gender": "male",
+            "commitee": [
+                "都市建設常任委員会副委員長",
+                "議会だより編集会議委員"
+            ]
+        },
+        {
+            "name_kana": "クドウケン",
+            "name_kanji": "工藤健",
+            "party": "市民クラブ",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "文教経済常任委員会委員長",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "クドウユウスケ",
+            "name_kanji": "工藤夕介",
+            "party": "公明党",
+            "age": 49,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会副委員長",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "サトムラセイエツ",
+            "name_kanji": "里村誠悦",
+            "party": "創青会",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "総務企画常任委員会委員",
+                "議会だより編集会議副会長"
+            ]
+        },
+        {
+            "name_kana": "シブタニヨウコ",
+            "name_kanji": "澁谷洋子",
+            "party": "自民クラブ",
+            "age": 40,
+            "gender": "female",
+            "commitee": [
+                "総務企画常任委員会委員長",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "セキタカミツ",
+            "name_kanji": "関貴光",
+            "party": "自民クラブ",
+            "age": 31,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員",
+                "民生環境常任委員会委員",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "ソウマジュンコ",
+            "name_kanji": "相馬純子",
+            "party": "日本共産党",
+            "age": 63,
+            "gender": "female",
+            "commitee": [
+                "文教経済常任委員会委員",
+                "雪対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "タケヤマヨシトラ",
+            "name_kanji": "竹山美虎",
+            "party": "市民クラブ",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会副委員長",
+                "民生環境常任委員会委員",
+                "雪対策特別委員会副委員長"
+            ]
+        },
+        {
+            "name_kana": "タテヤマヨシヤ",
+            "name_kanji": "舘山善也",
+            "party": "創青会",
+            "age": 55,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員",
+                "総務企画常任委員会委員",
+                "雪対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "ナカタヤスヒト",
+            "name_kanji": "中田靖人",
+            "party": "自民クラブ",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員",
+                "都市建設常任委員会委員",
+                "危機管理対策特別委員会副委員長"
+            ]
+        },
+        {
+            "name_kana": "ナカムラミツオ",
+            "name_kanji": "中村美津緒",
+            "party": "あおもり令和の会",
+            "age": 49,
+            "gender": "female",
+            "commitee": [
+                "民生環境常任委員会委員",
+                "危機管理対策特別委員会委員長"
+            ]
+        },
+        {
+            "name_kana": "ナラヨシタカ",
+            "name_kanji": "奈良祥孝",
+            "party": "市民クラブ",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "総務企画常任委員会委員",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "ナラオカタカシ",
+            "name_kanji": "奈良岡隆",
+            "party": "あおもり令和の会",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "文教経済常任委員会委員",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "ハセガワショウエツ",
+            "name_kanji": "長谷川章悦",
+            "party": "自民クラブ",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "総務企画常任委員会副委員長",
+                "議会広報広聴推進会議会長"
+            ]
+        },
+        {
+            "name_kana": "ハナダアキヒト",
+            "name_kanji": "花田明仁",
+            "party": "自民クラブ",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "都市建設常任委員会委員長",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "フジタマコト",
+            "name_kanji": "藤田誠",
+            "party": "あおもり令和の会",
+            "age": 69,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員長",
+                "都市建設常任委員会委員",
+                "議会広報広聴推進会議委員"
+            ]
+        },
+        {
+            "name_kana": "マントクナオコ",
+            "name_kanji": "万徳なお子",
+            "party": "日本共産党",
+            "age": 59,
+            "gender": "female",
+            "commitee": [
+                "文教経済常任委員会副委員長",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "ムラカワミドリ",
+            "name_kanji": "村川みどり",
+            "party": "日本共産党",
+            "age": 50,
+            "gender": "female",
+            "commitee": [
+                "総務企画常任委員会委員",
+                "議会広報広聴推進会議副会長"
+            ]
+        },
+        {
+            "name_kana": "ヤマダチサト",
+            "name_kanji": "山田千里",
+            "party": "日本共産党",
+            "age": 54,
+            "gender": "female",
+            "commitee": [
+                "民生環境常任委員会委員",
+                "危機管理対策特別委員会委員"
+            ]
+        },
+        {
+            "name_kana": "ヤマモトタケトモ",
+            "name_kanji": "山本武朝",
+            "party": "公明党",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "文教経済常任委員会委員",
+                "雪対策特別委員会委員長"
+            ]
+        },
+        {
+            "name_kana": "ワタナベノブヒロ",
+            "name_kanji": "渡部伸広",
+            "party": "公明党",
+            "age": 55,
+            "gender": "male",
+            "commitee": [
+                "総務企画常任委員会委員",
+                "議会だより編集会議会長"
+            ]
+        }
+    ]
+}

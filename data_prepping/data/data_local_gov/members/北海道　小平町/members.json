@@ -1,0 +1,131 @@
+{
+    "members": [
+        {
+            "name_kana": "さかや　みつぐ",
+            "name_kanji": "酒谷　貢",
+            "party": "無所属",
+            "age": 68,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会ICT特別委員会",
+                "留萌南部衛生組合"
+            ],
+            "term": 3,
+            "district": "小平町",
+            "occupation": "漁業"
+        },
+        {
+            "name_kana": "いたがき　りょうじ",
+            "name_kanji": "板垣　良二",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会運営委員会",
+                "議会ICT特別委員会",
+                "留萌消防組合"
+            ],
+            "term": 3,
+            "district": "小平町",
+            "occupation": "無職"
+        },
+        {
+            "name_kana": "すぎもと　ひろゆき",
+            "name_kanji": "杉本　弘幸",
+            "party": "無所属",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会運営委員会",
+                "議会広報発行特別委員会",
+                "議会ICT特別委員会",
+                "留萌南部衛生組合"
+            ],
+            "term": 1,
+            "district": "小平町",
+            "occupation": "無職"
+        },
+        {
+            "name_kana": "たかの　けんいち",
+            "name_kanji": "髙野　謙市",
+            "party": "無所属",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会広報発行特別委員会",
+                "議会ICT特別委員会",
+                "留萌南部衛生組合"
+            ],
+            "term": 2,
+            "district": "小平町",
+            "occupation": "農業"
+        },
+        {
+            "name_kana": "たきかわ　つかさ",
+            "name_kanji": "瀧川　司",
+            "party": "無所属",
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会運営委員会",
+                "議会広報発行特別委員会",
+                "議会ICT特別委員会",
+                "留萌消防組合"
+            ],
+            "term": 1,
+            "district": "小平町",
+            "occupation": "神職"
+        },
+        {
+            "name_kana": "ふじた　みつぐ",
+            "name_kanji": "藤田　貢",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会ICT特別委員会",
+                "議会選出監査委員"
+            ],
+            "term": 7,
+            "district": "小平町",
+            "occupation": "水産加工業"
+        },
+        {
+            "name_kana": "にしむら　けんいち",
+            "name_kanji": "西村　健一",
+            "party": "無所属",
+            "age": 42,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会運営委員会",
+                "議会広報発行特別委員会",
+                "議会ICT特別委員会",
+                "留萌消防組合"
+            ],
+            "term": 2,
+            "district": "小平町",
+            "occupation": "会社役員"
+        },
+        {
+            "name_kana": "にし　ひろし",
+            "name_kanji": "西博志",
+            "party": "無所属",
+            "age": 55,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会",
+                "議会ICT特別委員会"
+            ],
+            "term": 3,
+            "district": "小平町",
+            "occupation": "自営業"
+        }
+    ]
+}

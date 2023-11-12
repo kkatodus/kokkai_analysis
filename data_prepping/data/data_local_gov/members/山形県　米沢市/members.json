@@ -1,0 +1,282 @@
+{
+    "members": [
+        {
+            "name_kanji": "佐野 洋平",
+            "name_kana": "サノ ヨウヘイ",
+            "party": "一新会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "1"
+        },
+        {
+            "name_kanji": "成澤 和音",
+            "name_kana": "ナリサワ カズネ",
+            "party": "一新会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "2"
+        },
+        {
+            "name_kanji": "高橋 千夏",
+            "name_kana": "タカハシ チナカ",
+            "party": "一新会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "3"
+        },
+        {
+            "name_kanji": "関谷 幸子",
+            "name_kana": "セキヤ サチコ",
+            "party": "一新会",
+            "age": "32",
+            "gender": "female",
+            "commitee": [
+                "民生"
+            ],
+            "term": "4"
+        },
+        {
+            "name_kanji": "高橋 英夫",
+            "name_kana": "タカハシ ヒデオ",
+            "party": "日本共産党市議団",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "5"
+        },
+        {
+            "name_kanji": "高橋 壽",
+            "name_kana": "タカハシ トシ",
+            "party": "日本共産党市議団",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "6"
+        },
+        {
+            "name_kanji": "小久保 広信",
+            "name_kana": "コクボ ヒロノブ",
+            "party": "市民平和クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "7"
+        },
+        {
+            "name_kanji": "影澤 政夫",
+            "name_kana": "カゲサワ マサオ",
+            "party": "市民平和クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "8"
+        },
+        {
+            "name_kanji": "山村 明",
+            "name_kana": "ヤマムラ アキラ",
+            "party": "米沢爽風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "9"
+        },
+        {
+            "name_kanji": "堤 郁雄",
+            "name_kana": "ツツミ イクオ",
+            "party": "米沢爽風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "10"
+        },
+        {
+            "name_kanji": "植松 美穂",
+            "name_kana": "ウエマツ ミホ",
+            "party": "至誠会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "11"
+        },
+        {
+            "name_kanji": "古山 悠生",
+            "name_kana": "コヤマ ユウセイ",
+            "party": "至誠会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "12"
+        },
+        {
+            "name_kanji": "島貫 宏幸",
+            "name_kana": "シマヌキ ヒロユキ",
+            "party": "至誠会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "13"
+        },
+        {
+            "name_kanji": "木村 芳浩",
+            "name_kana": "キムラ ヨシヒロ",
+            "party": "至誠会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "14"
+        },
+        {
+            "name_kanji": "相田 克平",
+            "name_kana": "アイダ カッペイ",
+            "party": "至誠会",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": "15"
+        },
+        {
+            "name_kanji": "遠藤 隆一",
+            "name_kana": "エンドウ リュウイチ",
+            "party": "米沢爽風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "16"
+        },
+        {
+            "name_kanji": "太田 克典",
+            "name_kana": "オオタ カツノリ",
+            "party": "市民平和クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "17"
+        },
+        {
+            "name_kanji": "我妻 德雄",
+            "name_kana": "ワガ ノリオ",
+            "party": "市民平和クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "18"
+        },
+        {
+            "name_kanji": "山田富佐子",
+            "name_kana": "ヤマダ フサコ",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "19"
+        },
+        {
+            "name_kanji": "佐藤 弘司",
+            "name_kana": "サトウ ヒロシ",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "20"
+        },
+        {
+            "name_kanji": "鳥海 隆太",
+            "name_kana": "トリウミ リュウタ",
+            "party": "一新会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "21"
+        },
+        {
+            "name_kanji": "島軒 純一",
+            "name_kana": "シマノケン ジュンイチ",
+            "party": "一新会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生"
+            ],
+            "term": "22"
+        },
+        {
+            "name_kanji": "齋藤千惠子",
+            "name_kana": "サイトウ チエコ",
+            "party": "一新会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務",
+                "文教"
+            ],
+            "term": "23"
+        },
+        {
+            "name_kanji": "工藤 正雄",
+            "name_kana": "クドウ マサオ",
+            "party": "一新会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業",
+                "建設"
+            ],
+            "term": "24"
+        }
+    ]
+}

@@ -1,0 +1,141 @@
+{
+    "members": [
+        {
+            "name_kana": "しどうまりこ",
+            "name_kanji": "紫藤眞理子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "なかがわひさと",
+            "name_kanji": "仲川久人",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済常任委員会副委員長",
+                "農業公社設立調査特別委員会委員長"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "はせがわただし",
+            "name_kanji": "長谷川正",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "うえのえみこ",
+            "name_kanji": "上野恵美子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "広報広聴常任委員会委員長"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "こばやしまさひろ",
+            "name_kanji": "小林雅弘",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会副委員長"
+            ],
+            "term": 2,
+            "district": 5
+        },
+        {
+            "name_kana": "あらうみまさと",
+            "name_kanji": "荒海正人",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会委員長"
+            ],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "はたさだつぐ",
+            "name_kanji": "秦貞継",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "広報広聴常任委員会副委員長"
+            ],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "いとうかずお",
+            "name_kanji": "伊藤一男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議長"
+            ],
+            "term": 4,
+            "district": 8
+        },
+        {
+            "name_kana": "みとめまさよし",
+            "name_kanji": "三留正義",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済常任委員会委員長",
+                "議会運営委員会副委員長",
+                "農業公社設立調査特別委員会副委員長"
+            ],
+            "term": 4,
+            "district": 9
+        },
+        {
+            "name_kana": "いのまたつねぞう",
+            "name_kanji": "猪俣常三",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [],
+            "term": 4
+        },
+        {
+            "name_kana": "あおきてるお",
+            "name_kanji": "青木照夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 6
+        },
+        {
+            "name_kana": "むとうみちひろ",
+            "name_kanji": "武藤道廣",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会委員長"
+            ],
+            "term": 8
+        }
+    ]
+}

@@ -1,0 +1,139 @@
+{
+    "members": [
+        {
+            "name_kana": "はやさか きよみつ",
+            "name_kanji": "早坂　清光",
+            "party": "無所属",
+            "age": "51",
+            "gender": "male",
+            "commitee": [
+                "産業経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": 1
+        },
+        {
+            "name_kana": "まつおか さとみ",
+            "name_kanji": "松岡　聡美",
+            "party": "無所属",
+            "age": "45",
+            "gender": "female",
+            "commitee": [
+                "産業経済建設常任委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "さいとう あきひろ",
+            "name_kanji": "斉藤　明宏",
+            "party": "無所属",
+            "age": "49",
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 3
+        },
+        {
+            "name_kana": "なかむら てつろう",
+            "name_kanji": "中村　哲郎",
+            "party": "無所属",
+            "age": "47",
+            "gender": "male",
+            "commitee": [
+                "産業経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "たなべ しずか",
+            "name_kanji": "田邊　静香",
+            "party": "参政党",
+            "age": "40",
+            "gender": "female",
+            "commitee": [
+                "総務文教厚生常任委員会"
+            ],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "やまもと かずこ",
+            "name_kanji": "山本　和子",
+            "party": "日本共産党",
+            "age": "55",
+            "gender": "female",
+            "commitee": [
+                "総務文教厚生常任委員会"
+            ],
+            "term": 9,
+            "district": 6
+        },
+        {
+            "name_kana": "わたなべ しんいち",
+            "name_kanji": "渡部　信一",
+            "party": "無所属",
+            "age": "58",
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生常任委員会"
+            ],
+            "term": 9,
+            "district": 7
+        },
+        {
+            "name_kana": "ばば としよし",
+            "name_kanji": "馬場　敏美",
+            "party": "無所属",
+            "age": "46",
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 8
+        },
+        {
+            "name_kana": "にしはら まさゆき",
+            "name_kanji": "西原　正行",
+            "party": "無所属",
+            "age": "43",
+            "gender": "male",
+            "commitee": [
+                "産業経済建設常任委員会"
+            ],
+            "term": 1,
+            "district": 9
+        },
+        {
+            "name_kana": "えばと あきら",
+            "name_kanji": "江波戸　明",
+            "party": "無所属",
+            "age": "49",
+            "gender": "male",
+            "commitee": [
+                "産業経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 10
+        },
+        {
+            "name_kana": "おぐら しげあき",
+            "name_kanji": "小椋　茂明",
+            "party": "無所属",
+            "age": "47",
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": null
+        }
+    ]
+}

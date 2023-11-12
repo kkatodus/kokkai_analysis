@@ -1,0 +1,288 @@
+{
+    "members": [
+        {
+            "name_kana": "いけ ゆうや",
+            "name_kanji": "小池 佑弥",
+            "party": "上尾同志会",
+            "age": 37,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "たじま じゅん",
+            "name_kanji": "田島 純",
+            "party": "上尾同志会",
+            "age": 51,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "はらだ よしあき",
+            "name_kanji": "原田 嘉明",
+            "party": "上尾同志会",
+            "age": 58,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "さとう えりこ",
+            "name_kanji": "佐藤 恵理子",
+            "party": "会派に属さない議員",
+            "age": 36,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "あきやま かほる",
+            "name_kanji": "秋山 かほる",
+            "party": "会派に属さない議員",
+            "age": 67,
+            "gender": "female",
+            "commitee": [],
+            "term": 5,
+            "district": 6
+        },
+        {
+            "name_kana": "しんどう りゅういち",
+            "name_kanji": "新道 龍一",
+            "party": "上尾同志会",
+            "age": 38,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 8
+        },
+        {
+            "name_kana": "おがわ あきひと",
+            "name_kanji": "小川 明仁",
+            "party": "彩の会",
+            "age": 49,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 9
+        },
+        {
+            "name_kana": "いのうえ とものり",
+            "name_kanji": "井上 智則",
+            "party": "公明党上尾市議団",
+            "age": 46,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 10
+        },
+        {
+            "name_kana": "ひぐち あつし",
+            "name_kanji": "樋口 敦",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 42,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 11
+        },
+        {
+            "name_kana": "あらかわ まさすけ",
+            "name_kanji": "荒川 昌佑",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 34,
+            "gender": "male",
+            "commitee": [
+                "立憲民主党"
+            ],
+            "term": 1,
+            "district": 12
+        },
+        {
+            "name_kana": "やぐち ゆたお",
+            "name_kanji": "矢口 豊人",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 43,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 13
+        },
+        {
+            "name_kana": "とどろき しんいち",
+            "name_kanji": "轟 信一",
+            "party": "日本共産党上尾市議団",
+            "age": 53,
+            "gender": "male",
+            "commitee": [
+                "日本共産党"
+            ],
+            "term": 1,
+            "district": 14
+        },
+        {
+            "name_kana": "しんどう たかこ",
+            "name_kanji": "新藤 孝子",
+            "party": "日本共産党上尾市議団",
+            "age": 67,
+            "gender": "female",
+            "commitee": [],
+            "term": 2,
+            "district": 15
+        },
+        {
+            "name_kana": "とぐち さいち",
+            "name_kanji": "戸口 佐一",
+            "party": "日本共産党上尾市議団",
+            "age": 72,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 16
+        },
+        {
+            "name_kana": "たなか かずたか",
+            "name_kanji": "田中 一崇",
+            "party": "上尾同志会",
+            "age": 40,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 17
+        },
+        {
+            "name_kana": "わたなべ こういち",
+            "name_kanji": "渡辺 綱一",
+            "party": "上尾同志会",
+            "age": 71,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 18
+        },
+        {
+            "name_kana": "ほしの よしゆき",
+            "name_kanji": "星野 良行",
+            "party": "彩の会",
+            "age": 60,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 19
+        },
+        {
+            "name_kana": "まえじま るり",
+            "name_kanji": "前島 るり",
+            "party": "公明党上尾市議団",
+            "age": 66,
+            "gender": "female",
+            "commitee": [
+                "公明党"
+            ],
+            "term": 3,
+            "district": 21
+        },
+        {
+            "name_kana": "えびはら なおや",
+            "name_kanji": "海老原 直矢",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 35,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 22
+        },
+        {
+            "name_kana": "すずき しげる",
+            "name_kanji": "鈴木 茂",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 67,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 23
+        },
+        {
+            "name_kana": "いけだ たつお",
+            "name_kanji": "池田 達生",
+            "party": "日本共産党上尾市議団",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "日本共産党"
+            ],
+            "term": 2,
+            "district": 24
+        },
+        {
+            "name_kana": "ひらた みちこ",
+            "name_kanji": "平田 通子",
+            "party": "日本共産党上尾市議団",
+            "age": 66,
+            "gender": "female",
+            "commitee": [
+                "日本共産党"
+            ],
+            "term": 3,
+            "district": 25
+        },
+        {
+            "name_kana": "おおむろ ひさし",
+            "name_kanji": "大室 尚",
+            "party": "彩の会",
+            "age": 61,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 26
+        },
+        {
+            "name_kana": "ながさわ じゅん",
+            "name_kanji": "長沢 純",
+            "party": "公明党上尾市議団",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "公明党"
+            ],
+            "term": 4,
+            "district": 27
+        },
+        {
+            "name_kana": "みちした ふみお",
+            "name_kanji": "道下 文男",
+            "party": "公明党上尾市議団",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "公明党"
+            ],
+            "term": 5,
+            "district": 28
+        },
+        {
+            "name_kana": "うらわ さぶろう",
+            "name_kanji": "浦和 三郎",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 73,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 29
+        },
+        {
+            "name_kana": "いのうえ しげる",
+            "name_kanji": "井上 茂",
+            "party": "政策フォーラム・市民の声あげお",
+            "age": 70,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 30
+        }
+    ]
+}

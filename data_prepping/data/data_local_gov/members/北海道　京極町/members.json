@@ -1,0 +1,112 @@
+{
+    "members": [
+        {
+            "name_kana": "こやなぎ みつよし",
+            "name_kanji": "小柳 光義",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "なかむら あつこ",
+            "name_kanji": "中村 厚子",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "female",
+            "committee": [],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "むらかみ あつし",
+            "name_kanji": "村上 敦",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "ふかざわ まさゆき",
+            "name_kanji": "深澤 正之",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "きくち あつし",
+            "name_kanji": "菊地 篤志",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務常任委員会",
+                "議会運営委員会",
+                "議会選出監査委員"
+            ],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "わたなべ あきら",
+            "name_kanji": "渡邊 昭",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "おおの としあき",
+            "name_kanji": "大野 利明",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会",
+                "議会運営委員会",
+                "羊蹄山ろく消防組合議会議員",
+                "羊蹄山麓環境衛生組合議会議員",
+                "後志広域連合議会議員"
+            ],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "じょうだ ゆきとし",
+            "name_kanji": "城田 幸俊",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和９年4月30日",
+            "district": null
+        },
+        {
+            "name_kana": "ふなば ひでお",
+            "name_kanji": "船場 英雄",
+            "party": "町議会議員",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "産業建設常任委員会"
+            ],
+            "term": "令和９年4月30日",
+            "district": null
+        }
+    ]
+}

@@ -1,0 +1,197 @@
+{
+    "members": [
+        {
+            "name_kana": "ながさわ ちょううえもん",
+            "name_kanji": "長澤　長右衛門",
+            "party": "蔵王",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "小倉70番地"
+        },
+        {
+            "name_kana": "おがた みちこ",
+            "name_kanji": "尾形 みち子",
+            "party": "蔵王",
+            "age": 96,
+            "gender": "female",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 6,
+            "district": "金生西二丁目7番31号"
+        },
+        {
+            "name_kana": "たにえ まさてる",
+            "name_kanji": "谷江　正照",
+            "party": "蔵王",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "石崎二丁目1番33号"
+        },
+        {
+            "name_kana": "きむら ひろゆき",
+            "name_kanji": "木村　泰之",
+            "party": "孝山会",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": 1,
+            "district": "南町7番10号"
+        },
+        {
+            "name_kana": "こまつ まさかず",
+            "name_kanji": "小松　正和",
+            "party": "孝山会",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 1,
+            "district": "金生西一丁目11番30号"
+        },
+        {
+            "name_kana": "たかはし よういち",
+            "name_kanji": "髙橋　要市",
+            "party": "孝山会",
+            "age": 80,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": "牧野1921番地"
+        },
+        {
+            "name_kana": "えだまつ なおき",
+            "name_kanji": "枝松　直樹",
+            "party": "市民クラブ",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会"
+            ],
+            "term": 5,
+            "district": "金生西一丁目7番19号"
+        },
+        {
+            "name_kana": "なかがわ とみこ",
+            "name_kanji": "中川　とみ子",
+            "party": "市民クラブ",
+            "age": 88,
+            "gender": "female",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "矢来三丁目7番11-3号"
+        },
+        {
+            "name_kana": "さとう のぼる",
+            "name_kanji": "佐藤 昇",
+            "party": "市民クラブ",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 2,
+            "district": "下生居130番地"
+        },
+        {
+            "name_kana": "かわぐち ゆたか",
+            "name_kanji": "川口 豊",
+            "party": "なし",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 2,
+            "district": "蔵王字蔵王山2843番地1"
+        },
+        {
+            "name_kana": "もりおか ひとし",
+            "name_kanji": "守岡　等",
+            "party": "なし",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 3,
+            "district": "鶴脛町一丁目3番20号"
+        },
+        {
+            "name_kana": "かわぐち ひろみ",
+            "name_kanji": "川口　宏美",
+            "party": "なし",
+            "age": 80,
+            "gender": "female",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 1,
+            "district": "旭町一丁目9番21号"
+        },
+        {
+            "name_kana": "たない ゆういち",
+            "name_kanji": "棚井 裕一",
+            "party": "孝山会",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "産業厚生常任委員会",
+                "議会だより編集委員会"
+            ],
+            "term": 3,
+            "district": "矢来四丁目8番1号"
+        },
+        {
+            "name_kana": "かわさき ともみ",
+            "name_kanji": "川崎 朋巳",
+            "party": "孝山会",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "長清水一丁目19番18号"
+        },
+        {
+            "name_kana": "おおさわ よしとも",
+            "name_kanji": "大沢 芳朋",
+            "party": "孝山会",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": 4,
+            "district": "金生西一丁目11番41号"
+        }
+    ]
+}

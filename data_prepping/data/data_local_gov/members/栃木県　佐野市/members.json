@@ -1,0 +1,287 @@
+{
+    "members": [
+        {
+            "name_kana": "ながはま なるひと",
+            "name_kanji": "長浜 成仁",
+            "party": "政友みらい",
+            "age": 30,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市閑馬町2109"
+        },
+        {
+            "name_kana": "はぎわら まさお",
+            "name_kanji": "蘒原 政夫",
+            "party": "政友みらい",
+            "age": 57,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市小中町978"
+        },
+        {
+            "name_kana": "じんぐうじ ひでき",
+            "name_kanji": "神宮次 秀樹",
+            "party": "政友みらい",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市船越町1253"
+        },
+        {
+            "name_kana": "こもり りゅういち",
+            "name_kanji": "小森 隆一",
+            "party": "公明党議員会",
+            "age": 59,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市大橋町1021-33"
+        },
+        {
+            "name_kana": "はやかわ たかみつ",
+            "name_kanji": "早川 貴光",
+            "party": "会派に属さない議員",
+            "age": 47,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": 2,
+            "district": "佐野市天神町"
+        },
+        {
+            "name_kana": "おぐら けんいち",
+            "name_kanji": "小倉 健一",
+            "party": "志翔会",
+            "age": 49,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会"
+            ],
+            "term": 2,
+            "district": "佐野市出流原町2120"
+        },
+        {
+            "name_kana": "かねこ やすとし",
+            "name_kanji": "金子 保利",
+            "party": "志翔会",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市高萩町1206-6"
+        },
+        {
+            "name_kana": "けいの つねお",
+            "name_kanji": "慶野 常夫",
+            "party": "政友みらい",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "建設常任委員会"
+            ],
+            "term": 2,
+            "district": "佐野市下羽田町1025"
+        },
+        {
+            "name_kana": "かわしま かいち",
+            "name_kanji": "川嶋 嘉一",
+            "party": "政友みらい",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": 3,
+            "district": "佐野市関川町906-29"
+        },
+        {
+            "name_kana": "すがわら とおる",
+            "name_kanji": "菅原 達",
+            "party": "公明党議員会",
+            "age": 57,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "厚生常任委員会"
+            ],
+            "term": 3,
+            "district": "佐野市堀米町110-5"
+        },
+        {
+            "name_kana": "きむら ひさお",
+            "name_kanji": "木村 久雄",
+            "party": "公明党議員会",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 3,
+            "district": "佐野市閑馬町1000-1"
+        },
+        {
+            "name_kana": "たどころ よしお",
+            "name_kanji": "田所 良夫",
+            "party": "新政クラブ",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会"
+            ],
+            "term": 3,
+            "district": "佐野市赤見町3256"
+        },
+        {
+            "name_kana": "すずき やすひろ",
+            "name_kanji": "鈴木 靖宏",
+            "party": "新政クラブ",
+            "age": 57,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": 4,
+            "district": "佐野市越名町313"
+        },
+        {
+            "name_kana": "くぼ たかひろ",
+            "name_kanji": "久保 貴洋",
+            "party": "大樹会",
+            "age": 81,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "経済文教常任委員会"
+            ],
+            "term": 3,
+            "district": "佐野市閑馬町1669"
+        },
+        {
+            "name_kana": "さわだ ひろゆき",
+            "name_kanji": "澤田 裕之",
+            "party": "大樹会",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市作原町976"
+        },
+        {
+            "name_kana": "たきた ようこ",
+            "name_kanji": "滝田 洋子",
+            "party": "日本共産党議員団",
+            "age": 73,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会",
+                "経済文教常任委員会"
+            ],
+            "term": 1,
+            "district": "佐野市関川町905-12"
+        },
+        {
+            "name_kana": "つるみ よしあき",
+            "name_kanji": "鶴見 義明",
+            "party": "日本共産党議員団",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市会沢町536-1"
+        },
+        {
+            "name_kana": "こぐれ ひろし",
+            "name_kanji": "小暮 博志",
+            "party": "政友みらい",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": 4,
+            "district": "佐野市馬門町1597"
+        },
+        {
+            "name_kana": "やますげ なおみ",
+            "name_kanji": "山菅 直己",
+            "party": "政友みらい",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市葛生西3-12-7"
+        },
+        {
+            "name_kana": "はるやま としあき",
+            "name_kanji": "春山 敏明",
+            "party": "新風",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市赤坂町65-4"
+        },
+        {
+            "name_kana": "よこい ただゆき",
+            "name_kanji": "横井 帝之",
+            "party": "新風",
+            "age": 52,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "厚生常任委員会"
+            ],
+            "term": 2,
+            "district": "佐野市浅沼町831-1"
+        },
+        {
+            "name_kana": "いいだ まさひろ",
+            "name_kanji": "飯田 昌弘",
+            "party": "大樹会",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市堀米町81-7"
+        },
+        {
+            "name_kana": "たかはし いさお",
+            "name_kanji": "高橋 功",
+            "party": "大樹会",
+            "age": 96,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 5,
+            "district": "佐野市仙波町2845"
+        }
+    ]
+}

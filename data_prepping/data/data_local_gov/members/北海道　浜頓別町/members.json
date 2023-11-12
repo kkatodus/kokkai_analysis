@@ -1,0 +1,104 @@
+{
+    "members": [
+        {
+            "name_kana": "やまだ　ひでかず",
+            "name_kanji": "山田　秀和",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "もりつぐ　けいいち",
+            "name_kanji": "森次　敬一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "もうり　ひでたか",
+            "name_kanji": "毛利　秀敬",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 3
+        },
+        {
+            "name_kana": "すぎもと　なおひろ",
+            "name_kanji": "杉本　直啓",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "すずき　よしひろ",
+            "name_kanji": "鈴木　芳博",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 5
+        },
+        {
+            "name_kana": "あべ　とみお",
+            "name_kanji": "阿部　富夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 6
+        },
+        {
+            "name_kana": "みやざき　みちこ",
+            "name_kanji": "宮﨑　美智子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "おおの　みつひろ",
+            "name_kanji": "大野　充博",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": 8
+        },
+        {
+            "name_kana": "なかむら　ただかつ",
+            "name_kanji": "中村　忠勝",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 10,
+            "district": 9
+        },
+        {
+            "name_kana": "えらだ　すすむ",
+            "name_kanji": "恵良田　将",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": 10
+        }
+    ]
+}
