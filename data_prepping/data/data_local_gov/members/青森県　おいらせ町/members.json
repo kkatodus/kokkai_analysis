@@ -1,0 +1,214 @@
+{
+    "members": [
+        {
+            "name_kana": "こむかい　こうすけ",
+            "name_kanji": "小向　幸祐",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "おおうら　ようこ",
+            "name_kanji": "大浦　陽子",
+            "party": null,
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "おがさわら　しんや",
+            "name_kanji": "小笠原　伸也",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "さわお　ひろゆき",
+            "name_kanji": "沢尾　宏之",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会運営委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "かしわざき　つとむ",
+            "name_kanji": "柏﨑　勉",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "ささき　まさる",
+            "name_kanji": "佐々木　　勝",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "さわかみ　さとし",
+            "name_kanji": "澤上　訓",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "十和田地域広域事務組合議会議員"
+            ],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "きむら　ちゅういち",
+            "name_kanji": "木村　忠一",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "十和田地域広域事務組合議会議員"
+            ],
+            "term": 3,
+            "district": 8
+        },
+        {
+            "name_kana": "たなか　しょういち",
+            "name_kanji": "田中　正一",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": 9
+        },
+        {
+            "name_kana": "ひのぐち　かずこ",
+            "name_kanji": "日野口　和子",
+            "party": null,
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会広報編集調査特別委員会"
+            ],
+            "term": 4,
+            "district": 10
+        },
+        {
+            "name_kana": "ひらの　としひこ",
+            "name_kanji": "平野　敏彦",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "八戸地域広域市町村圏事務組合議会議員"
+            ],
+            "term": 4,
+            "district": 11
+        },
+        {
+            "name_kana": "ならやま　ただし",
+            "name_kanji": "楢山　忠",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会"
+            ],
+            "term": 4,
+            "district": 12
+        },
+        {
+            "name_kana": "かわぐち　ひろじ",
+            "name_kanji": "川口　弘治",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 6,
+            "district": 13
+        },
+        {
+            "name_kana": "にしだて　よしのぶ",
+            "name_kanji": "西館　芳信",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員会",
+                "議会運営委員会",
+                "上北地方教育・福祉事務組合議会議員"
+            ],
+            "term": 8,
+            "district": 14
+        },
+        {
+            "name_kana": "よしむら　としぶみ",
+            "name_kanji": "吉村　敏文",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "産業民生常任委員会"
+            ],
+            "term": 7,
+            "district": 15
+        },
+        {
+            "name_kana": "まつばやし　よしみつ",
+            "name_kanji": "松林　義光",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "総務文教常任委員会"
+            ],
+            "term": 11,
+            "district": 16
+        }
+    ]
+}

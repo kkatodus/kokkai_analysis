@@ -1,0 +1,190 @@
+{
+    "members": [
+        {
+            "name_kana": "きくち ひろみ",
+            "name_kanji": "菊地 弘已",
+            "party": "議長",
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員"
+            ],
+            "term": "14",
+            "district": "門字横道67番地"
+        },
+        {
+            "name_kana": "やえがし りゅうすけ",
+            "name_kanji": "八重樫 龍介",
+            "party": "副議長",
+            "age": 41,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "総務常任委員",
+                "広報広聴常任委員"
+            ],
+            "term": "13",
+            "district": "岩泉字三本松14番地9"
+        },
+        {
+            "name_kana": "ちば やすひこ",
+            "name_kanji": "千葉 泰彦",
+            "party": "議員",
+            "age": 39,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員",
+                "広報広聴常任委員",
+                "基本条例推進委員",
+                "政務調査会幹事",
+                "宮古地区広域行政組合議会議員"
+            ],
+            "term": "1",
+            "district": "中島字中島4番地"
+        },
+        {
+            "name_kana": "さとう やすみ",
+            "name_kanji": "佐藤 安美",
+            "party": "議員",
+            "age": 36,
+            "gender": "male",
+            "commitee": [
+                "産業常任委員",
+                "広報広聴常任副委員長",
+                "基本条例推進委員",
+                "政務調査会監事"
+            ],
+            "term": "2",
+            "district": "大川字上外山69番地"
+        },
+        {
+            "name_kana": "はたけやま まさのり",
+            "name_kanji": "畠山 昌典",
+            "party": "議員",
+            "age": 42,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "総務常任委員長",
+                "広報広聴常任委員",
+                "基本条例推進委員",
+                "政務調査会幹事"
+            ],
+            "term": "3",
+            "district": "袰綿字山本49番地26"
+        },
+        {
+            "name_kana": "はたけやま かずひで",
+            "name_kanji": "畠山 和英",
+            "party": "議員",
+            "age": 38,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員長",
+                "産業常任副委員長",
+                "広報広聴常任委員",
+                "基本条例推進委員長",
+                "政務調査会幹事",
+                "宮古地区広域行政組合議会議員"
+            ],
+            "term": "4",
+            "district": "大川字下町向134番地"
+        },
+        {
+            "name_kana": "みたち ひさし",
+            "name_kanji": "三田地 久志",
+            "party": "議員",
+            "age": 44,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "産業常任委員長",
+                "基本条例推進副委員長",
+                "政務調査会幹事",
+                "宮古地区広域行政組合議会議員"
+            ],
+            "term": "6",
+            "district": "岩泉字沢廻27番地"
+        },
+        {
+            "name_kana": "はやしざき きょうじろう",
+            "name_kanji": "林﨑 竟次郎",
+            "party": "議員",
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員",
+                "産業常任委員",
+                "岩手県後期高齢者医療広域連合議会議員"
+            ],
+            "term": "7",
+            "district": "岩泉字太田１番地３"
+        },
+        {
+            "name_kana": "さかもと のぼる",
+            "name_kanji": "坂本 昇",
+            "party": "議員",
+            "age": 42,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員",
+                "広報広聴常任委員",
+                "政務調査会長",
+                "岩泉町監査委員（議会選出）"
+            ],
+            "term": "8",
+            "district": "岩泉字太田36番地"
+        },
+        {
+            "name_kana": "はやかわ けんこ",
+            "name_kanji": "早川 ケン子",
+            "party": "議員",
+            "age": 35,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員"
+            ],
+            "term": "9",
+            "district": "袰綿字稲荷16番地"
+        },
+        {
+            "name_kana": "みたち かずひこ",
+            "name_kanji": "三田地 和彦",
+            "party": "議員",
+            "age": 38,
+            "gender": "male",
+            "commitee": [
+                "産業常任委員",
+                "政務調査会監事"
+            ],
+            "term": "10",
+            "district": "小本字家の向65番地"
+        },
+        {
+            "name_kana": "あいしゃ たけし",
+            "name_kanji": "合砂 丈司",
+            "party": "議員",
+            "age": 41,
+            "gender": "male",
+            "commitee": [
+                "議会運営副委員長",
+                "総務常任委員",
+                "政務調査会副会長"
+            ],
+            "term": "11",
+            "district": "安家字大平281番地"
+        },
+        {
+            "name_kana": "みたち やすまさ",
+            "name_kanji": "三田地 泰正",
+            "party": "議員",
+            "age": 42,
+            "gender": "male",
+            "commitee": [
+                "産業常任委員"
+            ],
+            "term": "12",
+            "district": "岩泉字鼠入川61番地"
+        }
+    ]
+}

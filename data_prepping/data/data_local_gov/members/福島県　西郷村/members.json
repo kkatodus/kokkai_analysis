@@ -1,0 +1,200 @@
+{
+    "members": [
+        {
+            "name_kana": "おざわ ゆうた",
+            "name_kanji": "小澤 佑太",
+            "party": "無所属",
+            "age": 35,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "すとう まさき",
+            "name_kanji": "須藤 正樹",
+            "party": "無所属",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "やまざき のぼる",
+            "name_kanji": "山崎 昇",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 1,
+            "district": ""
+        },
+        {
+            "name_kana": "すずき しょうじ",
+            "name_kanji": "鈴木 昭司",
+            "party": "無所属",
+            "age": 47,
+            "gender": "male",
+            "commitee": [
+                "文教厚生",
+                "議会運営"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "おおたけ ゆうこ",
+            "name_kanji": "大竹 憂子",
+            "party": "無所属",
+            "age": 54,
+            "gender": "female",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "すずき おさむ",
+            "name_kanji": "鈴木 修",
+            "party": "無所属",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "文教厚生",
+                "議会運営"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "きみしま えいいち",
+            "name_kanji": "君島 栄一",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "産業建設",
+                "議会運営"
+            ],
+            "term": 2,
+            "district": ""
+        },
+        {
+            "name_kana": "すずき たけお",
+            "name_kanji": "鈴木 武男",
+            "party": "無所属",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "かわにし みつじ",
+            "name_kanji": "河西 美次",
+            "party": "無所属",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "産業建設",
+                "議会運営"
+            ],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "まふね まさやす",
+            "name_kanji": "真船 正康",
+            "party": "無所属",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 3,
+            "district": ""
+        },
+        {
+            "name_kana": "すずき かつひさ",
+            "name_kanji": "鈴木 勝久",
+            "party": "無所属",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": ""
+        },
+        {
+            "name_kana": "ふじた せつお",
+            "name_kanji": "藤田 節夫",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": 5,
+            "district": ""
+        },
+        {
+            "name_kana": "うえだ ひでと",
+            "name_kanji": "上田 秀人",
+            "party": "無所属",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "議会運営"
+            ],
+            "term": 7,
+            "district": ""
+        },
+        {
+            "name_kana": "おおいし せつお",
+            "name_kanji": "大石 雪雄",
+            "party": "無所属",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": 10,
+            "district": ""
+        },
+        {
+            "name_kana": "やぶき としお",
+            "name_kanji": "矢吹 利夫",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 7,
+            "district": ""
+        },
+        {
+            "name_kana": "まぶね まさあき",
+            "name_kanji": "真船 正晃",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": ""
+        }
+    ]
+}

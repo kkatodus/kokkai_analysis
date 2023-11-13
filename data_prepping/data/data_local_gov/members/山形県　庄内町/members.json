@@ -1,0 +1,198 @@
+{
+    "members": [
+        {
+            "議員一覧": [
+                {
+                    "name_kana": "よしみや　しげる",
+                    "name_kanji": "吉宮　茂",
+                    "party": "",
+                    "age": 93,
+                    "gender": "男性",
+                    "commitee": [
+                        "産業建設常任委員会"
+                    ],
+                    "term": 6,
+                    "district": "鉢子"
+                },
+                {
+                    "name_kana": "くどう　のりこ",
+                    "name_kanji": "工藤　範子",
+                    "party": "",
+                    "age": 94,
+                    "gender": "女性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "酒田地区広域行政組合議会議員",
+                        "都市計画審議会委員"
+                    ],
+                    "term": 7,
+                    "district": "南口"
+                },
+                {
+                    "name_kana": "おの　かずはる",
+                    "name_kanji": "小野　一晴",
+                    "party": "",
+                    "age": 86,
+                    "gender": "男性",
+                    "commitee": [
+                        "議会運営委員会",
+                        "産業建設常任委員会"
+                    ],
+                    "term": 7,
+                    "district": "桑田"
+                },
+                {
+                    "name_kana": "いがらし　けいいち",
+                    "name_kanji": "五十嵐　啓一",
+                    "party": "",
+                    "age": 93,
+                    "gender": "男性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "監査委員"
+                    ],
+                    "term": 4,
+                    "district": "島田"
+                },
+                {
+                    "name_kana": "うえの　ゆきみ",
+                    "name_kanji": "上野　幸美",
+                    "party": "",
+                    "age": 88,
+                    "gender": "女性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "議会運営委員会",
+                        "酒田地区広域行政組合議会議員"
+                    ],
+                    "term": 5,
+                    "district": "吉方"
+                },
+                {
+                    "name_kana": "わたなべ　いくこ",
+                    "name_kanji": "渡部　伊君子",
+                    "party": "",
+                    "age": 86,
+                    "gender": "女性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "議会広報常任委員会"
+                    ],
+                    "term": 1,
+                    "district": "猿田町"
+                },
+                {
+                    "name_kana": "おくやま　やすひろ",
+                    "name_kanji": "奥山　康宏",
+                    "party": "",
+                    "age": 75,
+                    "gender": "男性",
+                    "commitee": [
+                        "産業建設常任委員会",
+                        "議会広報常任委員会"
+                    ],
+                    "term": 1,
+                    "district": "古関"
+                },
+                {
+                    "name_kana": "あべ　としかつ",
+                    "name_kanji": "阿部　利勝",
+                    "party": "",
+                    "age": 79,
+                    "gender": "男性",
+                    "commitee": [
+                        "議会広報常任委員会",
+                        "産業建設常任委員会",
+                        "議会運営委員会"
+                    ],
+                    "term": 2,
+                    "district": "西野"
+                },
+                {
+                    "name_kana": "かとう　かつのぶ",
+                    "name_kanji": "加藤　將展",
+                    "party": "",
+                    "age": 82,
+                    "gender": "男性",
+                    "commitee": [
+                        "産業建設常任委員会",
+                        "議会運営委員会",
+                        "土地開発公社理事"
+                    ],
+                    "term": 2,
+                    "district": "興屋"
+                },
+                {
+                    "name_kana": "いとう　かずみ",
+                    "name_kanji": "伊藤　和美",
+                    "party": "",
+                    "age": 74,
+                    "gender": "女性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "議会広報常任委員会",
+                        "都市計画審議会委員"
+                    ],
+                    "term": 1,
+                    "district": "西袋"
+                },
+                {
+                    "name_kana": "するたん　ぬーる",
+                    "name_kanji": "スルタン　ヌール",
+                    "party": "",
+                    "age": 75,
+                    "gender": "男性",
+                    "commitee": [
+                        "総務文教厚生常任委員会",
+                        "議会広報常任委員会"
+                    ],
+                    "term": 2,
+                    "district": "松野木"
+                },
+                {
+                    "name_kana": "いしかわ たけとし",
+                    "name_kanji": "石川　武利",
+                    "party": "",
+                    "age": 91,
+                    "gender": "男性",
+                    "commitee": [
+                        "議会運営委員会",
+                        "総務文教厚生常任委員会",
+                        "議会広報常任委員会",
+                        "酒田地区広域行政組合議会議員"
+                    ],
+                    "term": 5,
+                    "district": "主殿新田"
+                },
+                {
+                    "name_kana": "さいとう　ひでき",
+                    "name_kanji": "齋藤　秀紀",
+                    "party": "",
+                    "age": 86,
+                    "gender": "男性",
+                    "commitee": [
+                        "副議長",
+                        "産業建設常任委員会",
+                        "議会運営委員会"
+                    ],
+                    "term": 4,
+                    "district": "吹払"
+                },
+                {
+                    "name_kana": "いしかわ　たもつ",
+                    "name_kanji": "石川　保",
+                    "party": "",
+                    "age": 89,
+                    "gender": "男性",
+                    "commitee": [
+                        "議長",
+                        "庄内広域行政組合議会議員",
+                        "山形県後期高齢者医療広域連合議会議員"
+                    ],
+                    "term": 6,
+                    "district": "主殿新田"
+                }
+            ]
+        }
+    ]
+}

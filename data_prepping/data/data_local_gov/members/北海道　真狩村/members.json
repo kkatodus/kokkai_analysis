@@ -1,0 +1,113 @@
+{
+    "members": [
+        {
+            "name_kana": "さいき　ひでのり",
+            "name_kanji": "佐伯　秀範",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": "4回",
+            "district": null
+        },
+        {
+            "name_kana": "いんの　ゆういち",
+            "name_kanji": "陰能　裕一",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "議会運営委員会委員長",
+                "広報編集委員会委員長",
+                "後志広域連合議会議員"
+            ],
+            "term": "3回",
+            "district": null
+        },
+        {
+            "name_kana": "ふくだ　けいこ",
+            "name_kanji": "福田　恵子",
+            "party": null,
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務産業常任委員会委員長",
+                "議会運営委員"
+            ],
+            "term": "5回",
+            "district": null
+        },
+        {
+            "name_kana": "むかい　ただゆき",
+            "name_kanji": "向井　忠幸",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "議会運営委員会委員長",
+                "議員会会長"
+            ],
+            "term": "5回",
+            "district": null
+        },
+        {
+            "name_kana": "ささき　よしみつ",
+            "name_kanji": "佐々木　義光",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "広報編集委員"
+            ],
+            "term": "3回",
+            "district": null
+        },
+        {
+            "name_kana": "あんどう　よしあき",
+            "name_kanji": "安藤　義明",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員会副委員長",
+                "議会運営委員",
+                "広報編集委員会副委員長",
+                "羊蹄山麓環境衛生組合議会議員",
+                "羊蹄山ろく消防組合議会議員"
+            ],
+            "term": "2回",
+            "district": null
+        },
+        {
+            "name_kana": "おおまち　とおる",
+            "name_kanji": "大町　徹",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "広報編集委員",
+                "羊蹄山麓環境衛生組合議会議員",
+                "羊蹄山ろく消防組合議会議員"
+            ],
+            "term": "2回",
+            "district": null
+        },
+        {
+            "name_kana": "おおひら　しんいちろう",
+            "name_kanji": "大平　愼一郎",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務産業常任委員",
+                "議員会副会長"
+            ],
+            "term": "1回",
+            "district": null
+        }
+    ]
+}

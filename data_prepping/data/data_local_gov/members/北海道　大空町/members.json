@@ -1,0 +1,166 @@
+{
+    "members": [
+        {
+            "name_kana": "げんほん てつき",
+            "name_kanji": "原本 哲己",
+            "party": "無所属",
+            "age": 93,
+            "gender": "male",
+            "committee": [],
+            "term": "議長",
+            "district": "12番"
+        },
+        {
+            "name_kana": "さいとう ひろし",
+            "name_kanji": "齋藤 宏司",
+            "party": "無所属",
+            "age": 92,
+            "gender": "male",
+            "committee": [
+                "産業建設文教常任委員会委員"
+            ],
+            "term": "副議長",
+            "district": "11番"
+        },
+        {
+            "name_kana": "おおいずみ とものり",
+            "name_kanji": "大泉 知功",
+            "party": "無所属",
+            "age": 67,
+            "gender": "male",
+            "committee": [
+                "総務厚生常任委員会委員",
+                "議会広報常任委員会委員",
+                "網走地区消防組合議会議員"
+            ],
+            "term": "議員",
+            "district": "1番"
+        },
+        {
+            "name_kana": "かわむら じゅん",
+            "name_kanji": "川村 淳",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "committee": [
+                "産業建設文教常任委員会副委員長",
+                "議員会監事"
+            ],
+            "term": "議員",
+            "district": "2番"
+        },
+        {
+            "name_kana": "ふくだ じゅんいち",
+            "name_kanji": "福田 淳一",
+            "party": "無所属",
+            "age": 80,
+            "gender": "male",
+            "committee": [
+                "産業建設文教常任委員会委員",
+                "議会広報常任委員会委員",
+                "議員会副会長"
+            ],
+            "term": "議員",
+            "district": "3番"
+        },
+        {
+            "name_kana": "もりが ゆうじ",
+            "name_kanji": "森賀 祐司",
+            "party": "無所属",
+            "age": 85,
+            "gender": "male",
+            "committee": [
+                "産業建設文教常任委員会委員",
+                "議会広報常任委員会委員",
+                "議員会理事"
+            ],
+            "term": "議員",
+            "district": "4番"
+        },
+        {
+            "name_kana": "すずき ひでゆき",
+            "name_kanji": "鈴木 秀之",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "committee": [
+                "議会広報常任委員会委員長",
+                "総務厚生常任委員会委員",
+                "議会運営委員会委員",
+                "網走地区消防組合議会議員"
+            ],
+            "term": "議員",
+            "district": "5番"
+        },
+        {
+            "name_kana": "いわはら しげる",
+            "name_kanji": "岩原 繁",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "committee": [
+                "総務厚生常任委員会副委員長",
+                "議員会理事"
+            ],
+            "term": "議員",
+            "district": "6番"
+        },
+        {
+            "name_kana": "ごとう しのぶ",
+            "name_kanji": "後藤 忍",
+            "party": "無所属",
+            "age": 76,
+            "gender": "male",
+            "committee": [
+                "産業建設文教常任委員会委員長",
+                "議会運営委員会委員"
+            ],
+            "term": "議員",
+            "district": "7番"
+        },
+        {
+            "name_kana": "さんじょう ゆきお",
+            "name_kanji": "三條 幸夫",
+            "party": "無所属",
+            "age": 98,
+            "gender": "male",
+            "committee": [
+                "総務厚生常任委員会委員長",
+                "議会運営委員会委員",
+                "網走地区消防組合議会議員",
+                "議員会会長"
+            ],
+            "term": "議員",
+            "district": "8番"
+        },
+        {
+            "name_kana": "うえち ふみたか",
+            "name_kanji": "上地 史隆",
+            "party": "無所属",
+            "age": 67,
+            "gender": "male",
+            "committee": [
+                "議会運営委員会委員長",
+                "総務厚生常任委員会委員",
+                "議会広報常任委員会副委員長",
+                "網走地区消防組合議会議員",
+                "議員会理事"
+            ],
+            "term": "議員",
+            "district": "9番"
+        },
+        {
+            "name_kana": "まつおか かつみ",
+            "name_kanji": "松岡 克美",
+            "party": "無所属",
+            "age": 95,
+            "gender": "male",
+            "committee": [
+                "議会運営委員会副委員長",
+                "産業建設文教常任委員会委員"
+            ],
+            "term": "議員",
+            "district": "10番"
+        }
+    ]
+}

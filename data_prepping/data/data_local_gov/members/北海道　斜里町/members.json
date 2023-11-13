@@ -1,0 +1,170 @@
+{
+    "members": [
+        {
+            "name_kana": "わかぎ まさみ",
+            "name_kanji": "若木　雅美",
+            "party": "無所属",
+            "age": 56,
+            "gender": "female",
+            "commitee": [
+                "産業厚生",
+                "議会運営"
+            ],
+            "term": 3,
+            "district": "朝日町24-15"
+        },
+        {
+            "name_kana": "こぐれ ちあき",
+            "name_kanji": "小暮　千秋",
+            "party": "無所属",
+            "age": 53,
+            "gender": "female",
+            "commitee": [
+                "産業厚生",
+                "議会広報"
+            ],
+            "term": 2,
+            "district": "中斜里22－105"
+        },
+        {
+            "name_kana": "きむら こういちろう",
+            "name_kanji": "木村　耕一郎",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会運営"
+            ],
+            "term": 11,
+            "district": "文光町35-12"
+        },
+        {
+            "name_kana": "ささき けんすけ",
+            "name_kanji": "佐々木　健佑",
+            "party": "無所属",
+            "age": 39,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": "新光町18-8"
+        },
+        {
+            "name_kana": "いしい ひろみ",
+            "name_kanji": "石井　博美",
+            "party": "無所属",
+            "age": 66,
+            "gender": "female",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "青葉町37-31"
+        },
+        {
+            "name_kana": "いまい ちはる",
+            "name_kanji": "今井　千春",
+            "party": "無所属",
+            "age": 69,
+            "gender": "female",
+            "commitee": [
+                "総務文教",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": "新光町2-1"
+        },
+        {
+            "name_kana": "わたなべ まこと",
+            "name_kanji": "渡邉　誠",
+            "party": "無所属",
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "ウトロ香川100"
+        },
+        {
+            "name_kana": "さとう ひろゆき",
+            "name_kanji": "佐藤　広之",
+            "party": "無所属",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "朝日町30-6"
+        },
+        {
+            "name_kana": "かなもり のりお",
+            "name_kanji": "金盛　典夫",
+            "party": "無所属",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": "青葉町42-22"
+        },
+        {
+            "name_kana": "あらき としのり",
+            "name_kanji": "荒木　敏則",
+            "party": "無所属",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "青葉町55－5"
+        },
+        {
+            "name_kana": "くの せいいち",
+            "name_kanji": "久野　聖一",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会運営"
+            ],
+            "term": 4,
+            "district": "文光町23－18"
+        },
+        {
+            "name_kana": "かいどう とおる",
+            "name_kanji": "海道　徹",
+            "party": "無所属",
+            "age": 69,
+            "gender": "male",
+            "commitee": [
+                "総務文教",
+                "議会広報"
+            ],
+            "term": 4,
+            "district": "本町23-18"
+        },
+        {
+            "name_kana": "すだ しゅういちろう",
+            "name_kanji": "須田　修一郎",
+            "party": "無所属",
+            "age": 68,
+            "gender": "male",
+            "term": 8,
+            "district": "光陽町12-1",
+            "position": "議長"
+        }
+    ]
+}

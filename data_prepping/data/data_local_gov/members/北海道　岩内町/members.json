@@ -1,0 +1,178 @@
+{
+    "members": [
+        {
+            "name_kanji": "Masaki Nakaya",
+            "name_kana": "Nakaya Masaki",
+            "age": 56,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "Social education (chairperson)",
+                "council management"
+            ],
+            "term": 3,
+            "district": "Administrative scrivener"
+        },
+        {
+            "name_kanji": "Hideyuki Kuribayashi",
+            "name_kana": "Kuribayashi Hideyuki",
+            "age": 61,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "Construction industry (chairman)",
+                "council management"
+            ],
+            "term": 3,
+            "district": "Company executive"
+        },
+        {
+            "name_kanji": "Takeaki Murata",
+            "name_kana": "Murata Takeaki",
+            "age": 45,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "Assembly management (vice chairperson)",
+                "general affairs"
+            ],
+            "term": 2,
+            "district": "Company executive"
+        },
+        {
+            "name_kanji": "Miki Iwaki",
+            "name_kana": "Iwaki Tsuyoshi",
+            "age": 64,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "General affairs"
+            ],
+            "term": 1,
+            "district": "Unemployed"
+        },
+        {
+            "name_kanji": "Tsutomu Ota",
+            "name_kana": "Ota Tsutomu",
+            "age": 72,
+            "party": "Independent",
+            "gender": "male",
+            "commitee": [
+                "Social literature"
+            ],
+            "term": 6,
+            "district": "self-employed"
+        },
+        {
+            "name_kanji": "Hideyuki Sato",
+            "name_kana": "Sato Hideyuki",
+            "age": 73,
+            "party": "Independent",
+            "gender": "male",
+            "commitee": [
+                "Construction industry (vice chair)"
+            ],
+            "term": 4,
+            "district": "Unemployed"
+        },
+        {
+            "name_kanji": "Masashi Taniguchi",
+            "name_kana": "Taniguchi Masashi",
+            "age": 66,
+            "party": "Komeito",
+            "gender": "male",
+            "commitee": [
+                "Vice Chair, Social Studies"
+            ],
+            "term": 5,
+            "district": "self-employed"
+        },
+        {
+            "name_kanji": "Hatsue Nara",
+            "name_kana": "Nara Hatsue",
+            "age": 69,
+            "party": "Komeito",
+            "gender": "female",
+            "commitee": [
+                "Social Studies (Vice Chair)",
+                "Assembly Management"
+            ],
+            "term": 2,
+            "district": "Unemployed"
+        },
+        {
+            "name_kanji": "Akira Nagai",
+            "name_kana": "Nagai Akira",
+            "age": 73,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "Chairperson, Social Studies"
+            ],
+            "term": 8,
+            "district": "Company executive"
+        },
+        {
+            "name_kanji": "Mitsuyuki Ikeda",
+            "name_kana": "Ikeda Mitsuyuki",
+            "age": 63,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "General affairs (chairman)"
+            ],
+            "term": 4,
+            "district": "group officer"
+        },
+        {
+            "name_kanji": "Katsumi Honma",
+            "name_kana": "Honma Katsumi",
+            "age": 68,
+            "party": "Shimasa Club",
+            "gender": "male",
+            "commitee": [
+                "Assembly management (chairman)",
+                "construction industry"
+            ],
+            "term": 3,
+            "district": "Unemployed"
+        },
+        {
+            "name_kanji": "Miyuki Oishi",
+            "name_kana": "Oishi Miyuki",
+            "age": 75,
+            "party": "Independent",
+            "gender": "female",
+            "commitee": [
+                "general affairs"
+            ],
+            "term": 3,
+            "district": "self-employed"
+        },
+        {
+            "name_kanji": "Noboru Shiga",
+            "name_kana": "Shiga Noboru",
+            "age": 74,
+            "party": "Shinsei Club",
+            "gender": "male",
+            "commitee": [
+                "Construction industry",
+                "council management"
+            ],
+            "term": 4,
+            "district": "Unemployed"
+        },
+        {
+            "name_kanji": "Shizuo Kanazawa",
+            "name_kana": "Kanazawa Shizuo",
+            "age": 75,
+            "party": "Shinsei Club",
+            "gender": "male",
+            "commitee": [
+                "construction industry"
+            ],
+            "term": 8,
+            "district": "fishing"
+        }
+    ]
+}

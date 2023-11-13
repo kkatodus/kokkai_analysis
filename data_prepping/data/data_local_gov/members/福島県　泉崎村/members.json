@@ -1,0 +1,123 @@
+{
+    "members": [
+        {
+            "name_kana": "おかべひでお",
+            "name_kanji": "岡部英夫",
+            "party": "議会議長",
+            "age": "10",
+            "gender": "male",
+            "commitee": [
+                "総務厚生常任委員会委員"
+            ],
+            "term": "議会議長",
+            "district": ""
+        },
+        {
+            "name_kana": "のざきたかし",
+            "name_kanji": "野崎隆",
+            "party": "議会副議長",
+            "age": "9",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会委員",
+                "議会運営委員会委員"
+            ],
+            "term": "議会副議長",
+            "district": ""
+        },
+        {
+            "name_kana": "えんやりょういち",
+            "name_kanji": "円谷亮一",
+            "party": "議会議員",
+            "age": "1",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会副委員長",
+                "議会運営委員会委員長"
+            ],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "しらいしまさお",
+            "name_kanji": "白石正雄",
+            "party": "議会議員",
+            "age": "2",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会委員"
+            ],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "すずきよしお",
+            "name_kanji": "鈴木義男",
+            "party": "議会議員",
+            "age": "3",
+            "gender": "male",
+            "commitee": [],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "きのうちさとる",
+            "name_kanji": "木野内悟",
+            "party": "議会議員",
+            "age": "4",
+            "gender": "male",
+            "commitee": [],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "かとうけいこ",
+            "name_kanji": "加藤恵子",
+            "party": "議会議員",
+            "age": "5",
+            "gender": "female",
+            "commitee": [
+                "総務厚生常任委員会委員会副委員長",
+                "議会運営委員会"
+            ],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "すずきやすひと",
+            "name_kanji": "鈴木保仁",
+            "party": "議会議員",
+            "age": "6",
+            "gender": "male",
+            "commitee": [
+                "総務厚生常任委員会委員"
+            ],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "あんどうあかね",
+            "name_kanji": "安藤茜",
+            "party": "議会議員",
+            "age": "7",
+            "gender": "female",
+            "commitee": [
+                "経済文教常任委員会委員・議会運営委員会副委員長"
+            ],
+            "term": "議会議員",
+            "district": ""
+        },
+        {
+            "name_kana": "ながくぼたかゆき",
+            "name_kanji": "長久保孝行",
+            "party": "議会議員",
+            "age": "8",
+            "gender": "male",
+            "commitee": [
+                "総務厚生常任委会委員・議会選任監査委員"
+            ],
+            "term": "議会議員",
+            "district": ""
+        }
+    ]
+}

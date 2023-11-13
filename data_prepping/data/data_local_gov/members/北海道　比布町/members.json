@@ -1,0 +1,121 @@
+{
+    "members": [
+        {
+            "name_kana": "さとう　やすのり",
+            "name_kanji": "佐藤　康則",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "いまい　あきのぶ",
+            "name_kanji": "今井　明信",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "おおくま　かつゆき",
+            "name_kanji": "大熊　勝幸",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会",
+                "総務常任委員会",
+                "議会運営委員会",
+                "議会広報特別委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "たにぐち　まさひろ",
+            "name_kanji": "谷口　雅浩",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会広報特別委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "やまき　よしひろ",
+            "name_kanji": "八巻　良博",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "しぶや　こうじ",
+            "name_kanji": "澁谷　興二",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "えんどう　はるこ",
+            "name_kanji": "遠藤　ハル子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会",
+                "産業建設常任委員会",
+                "議会運営委員会",
+                "議会広報特別委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "さとう　よしひこ",
+            "name_kanji": "佐藤　良彦",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会",
+                "議会広報特別委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        },
+        {
+            "name_kana": "うえにし　こういち",
+            "name_kanji": "植西　浩一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会",
+                "議会広報特別委員会"
+            ],
+            "term": "令和5年5月1日～令和9年4月30日",
+            "district": "本町"
+        }
+    ]
+}

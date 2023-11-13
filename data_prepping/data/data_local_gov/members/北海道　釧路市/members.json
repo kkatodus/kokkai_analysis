@@ -1,0 +1,162 @@
+{
+    "members": [
+        {
+            "name_kana": "いしわり　むねひと",
+            "name_kanji": "石割　宗仁",
+            "party": "自民市政クラブ",
+            "age": 56,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員",
+                "予算決算常任委員",
+                "釧路広域連合議会議員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "なつぼり　めぐみ",
+            "name_kanji": "夏堀　めぐみ",
+            "party": "自民市政クラブ",
+            "age": 36,
+            "gender": "female",
+            "commitee": [
+                "民生福祉常任委員",
+                "予算決算常任委員",
+                "議会広報特別委員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "さいとう　たかゆき",
+            "name_kanji": "齋藤　賢之",
+            "party": "自民市政クラブ",
+            "age": 58,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "予算決算常任委員",
+                "石炭対策特別委員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "いとう　しょうご",
+            "name_kanji": "伊東　尚悟",
+            "party": "自民市政クラブ",
+            "age": 41,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "予算決算常任委員",
+                "議会運営委員",
+                "都心部市街地整備特別委員長"
+            ],
+            "term": 3,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "おおさわ　けいすけ",
+            "name_kanji": "大澤　恵介",
+            "party": "自民市政クラブ",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員",
+                "予算決算常任委員",
+                "議会運営委員"
+            ],
+            "term": 4,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "やまぐち　みつのぶ",
+            "name_kanji": "山口　光信",
+            "party": "自民市政クラブ",
+            "age": 38,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員",
+                "予算決算常任委員",
+                "石炭対策特別委員長"
+            ],
+            "term": 4,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "かなやす　じゅんこ",
+            "name_kanji": "金安　潤子",
+            "party": "自民市政クラブ",
+            "age": 64,
+            "gender": "female",
+            "commitee": [
+                "総務文教常任委員",
+                "予算決算常任委員",
+                "釧路公立大学事務組合議会議員"
+            ],
+            "term": 4,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "たかはし　かずひこ",
+            "name_kanji": "髙橋　一彦",
+            "party": "自民市政クラブ",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "監査委員",
+                "総務文教常任委員",
+                "予算決算常任委員"
+            ],
+            "term": 6,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "ふじい　わかな",
+            "name_kanji": "藤井　若菜",
+            "party": "創志会",
+            "age": 36,
+            "gender": "female",
+            "commitee": [
+                "総務文教常任委員",
+                "予算決算常任委員",
+                "議会広報特別委員",
+                "釧路公立大学事務組合議会議員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "いがらし　まこと",
+            "name_kanji": "五十嵐　誠",
+            "party": "創志会",
+            "age": 46,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任副委員長",
+                "予算決算常任委員",
+                "石炭対策特別委員",
+                "釧路広域連合議会議員",
+                "都市計画審議会委員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        },
+        {
+            "name_kana": "きむら　はやと",
+            "name_kanji": "木村　隼人",
+            "party": "無所属",
+            "age": 40,
+            "gender": "male",
+            "commitee": [
+                "総務文教常任委員",
+                "予算決算常任委員",
+                "釧路広域連合議会議員"
+            ],
+            "term": 1,
+            "district": "釧路市"
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+{
+    "members": [
+        {
+            "name_kana": "きょうたに さくえもん",
+            "name_kanji": "京谷 作右衛門",
+            "party": "無",
+            "age": 79,
+            "gender": "male",
+            "commitee": [],
+            "term": 9,
+            "district": 9
+        },
+        {
+            "name_kana": "はなだ えいいち",
+            "name_kanji": "花田 英一",
+            "party": "無",
+            "age": 72,
+            "gender": "male",
+            "commitee": [],
+            "term": 8,
+            "district": 8
+        },
+        {
+            "name_kana": "かたいし てつひこ",
+            "name_kanji": "片石 鉄彦",
+            "party": "無",
+            "age": 76,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": 7
+        },
+        {
+            "name_kana": "ふくはら けんたく",
+            "name_kanji": "福原 賢孝",
+            "party": "無",
+            "age": 75,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": 6
+        },
+        {
+            "name_kana": "ひさまつ よしき",
+            "name_kanji": "久末 善輝",
+            "party": "無",
+            "age": 75,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": 5
+        },
+        {
+            "name_kana": "かわしま ちゅうじ",
+            "name_kanji": "川島 忠治",
+            "party": "日本共産党",
+            "age": 74,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 4
+        },
+        {
+            "name_kana": "なかさわ よしひこ",
+            "name_kanji": "仲澤 嘉彦",
+            "party": "無",
+            "age": 63,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 3
+        },
+        {
+            "name_kana": "いわた やすし",
+            "name_kanji": "岩田 靖",
+            "party": "無",
+            "age": 59,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 2
+        },
+        {
+            "name_kana": "こま ひとし",
+            "name_kanji": "小間 均",
+            "party": "無",
+            "age": 65,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        }
+    ]
+}

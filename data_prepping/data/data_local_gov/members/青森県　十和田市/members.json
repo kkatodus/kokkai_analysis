@@ -1,0 +1,224 @@
+{
+    "members": [
+        {
+            "name_kana": "やまはた　みきこ",
+            "name_kanji": "山端　美樹子",
+            "party": "自民公明クラブ",
+            "age": 69,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "おやまだ　たけし",
+            "name_kanji": "小山田　剛士",
+            "party": "黎明親和会",
+            "age": 70,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 1
+        },
+        {
+            "name_kana": "おおた　まさゆき",
+            "name_kanji": "太田　正幸",
+            "party": "立憲農民クラブ",
+            "age": 72,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": 1
+        },
+        {
+            "name_kana": "たけしま　なおき",
+            "name_kanji": "竹島　直樹",
+            "party": "柊の会",
+            "age": 80,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 1
+        },
+        {
+            "name_kana": "ささぶち　みねたか",
+            "name_kanji": "笹渕　峰尚",
+            "party": "黎明親和会",
+            "age": 70,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": 1
+        },
+        {
+            "name_kana": "やまだ　ようこ",
+            "name_kanji": "山田　洋子",
+            "party": "柊の会",
+            "age": 71,
+            "gender": "female",
+            "commitee": [],
+            "term": 6,
+            "district": 1
+        },
+        {
+            "name_kana": "いまいずみ　のぶあき",
+            "name_kanji": "今泉　信明",
+            "party": "立憲農民クラブ",
+            "age": 85,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": 1
+        },
+        {
+            "name_kana": "なかじま　ひでかず",
+            "name_kanji": "中嶋　秀一",
+            "party": "自民公明クラブ",
+            "age": 88,
+            "gender": "male",
+            "commitee": [],
+            "term": 8,
+            "district": 1
+        },
+        {
+            "name_kana": "なかお　りか",
+            "name_kanji": "中尾　利香",
+            "party": "自民公明クラブ",
+            "age": 88,
+            "gender": "female",
+            "commitee": [],
+            "term": 9,
+            "district": 1
+        },
+        {
+            "name_kana": "おがさわら　りょうこ",
+            "name_kanji": "小笠原　良子",
+            "party": "日本共産党",
+            "age": 97,
+            "gender": "female",
+            "commitee": [],
+            "term": 10,
+            "district": 1
+        },
+        {
+            "name_kana": "やまはた　ひろし",
+            "name_kanji": "山端　博",
+            "party": "明政一心会",
+            "age": 59,
+            "gender": "male",
+            "commitee": [],
+            "term": 11,
+            "district": 1
+        },
+        {
+            "name_kana": "さくらだ　ゆりこ",
+            "name_kanji": "櫻田　百合子",
+            "party": "黎明親和会",
+            "age": 79,
+            "gender": "female",
+            "commitee": [],
+            "term": 12,
+            "district": 1
+        },
+        {
+            "name_kana": "きだ　りょうこ",
+            "name_kanji": "氣田　量子",
+            "party": "自民公明クラブ",
+            "age": 81,
+            "gender": "female",
+            "commitee": [],
+            "term": 13,
+            "district": 1
+        },
+        {
+            "name_kana": "さいとう　しげみ",
+            "name_kanji": "斉藤　重美",
+            "party": "自民公明クラブ",
+            "age": 90,
+            "gender": "female",
+            "commitee": [],
+            "term": 14,
+            "district": 1
+        },
+        {
+            "name_kana": "くじ　としかず",
+            "name_kanji": "久慈　年和",
+            "party": "立憲農民クラブ",
+            "age": 95,
+            "gender": "male",
+            "commitee": [],
+            "term": 15,
+            "district": 1
+        },
+        {
+            "name_kana": "えと　のぶたか",
+            "name_kanji": "江渡　信貴",
+            "party": "自民公明クラブ",
+            "age": 83,
+            "gender": "male",
+            "commitee": [],
+            "term": 16,
+            "district": 1
+        },
+        {
+            "name_kana": "せきのはた　のりお",
+            "name_kanji": "堰野端　展雄",
+            "party": "黎明親和会",
+            "age": 78,
+            "gender": "male",
+            "commitee": [],
+            "term": 17,
+            "district": 1
+        },
+        {
+            "name_kana": "くどう　まさひろ",
+            "name_kanji": "工藤　正廣",
+            "party": "明政一心会",
+            "age": 97,
+            "gender": "male",
+            "commitee": [],
+            "term": 18,
+            "district": 1
+        },
+        {
+            "name_kana": "おがわ　ようへい",
+            "name_kanji": "小川　洋平",
+            "party": "自民公明クラブ",
+            "age": 97,
+            "gender": "male",
+            "commitee": [],
+            "term": 19,
+            "district": 1
+        },
+        {
+            "name_kana": "とよかわ　たいいち",
+            "name_kanji": "豊川　泰市",
+            "party": "明政一心会",
+            "age": 100,
+            "gender": "male",
+            "commitee": [],
+            "term": 20,
+            "district": 1
+        },
+        {
+            "name_kana": "へらい　つとう",
+            "name_kanji": "戸来　伝",
+            "party": "柊の会",
+            "age": 95,
+            "gender": "male",
+            "commitee": [],
+            "term": 21,
+            "district": 1
+        },
+        {
+            "name_kana": "いしばし　よしお",
+            "name_kanji": "石橋　義雄",
+            "party": "自民公明クラブ",
+            "age": 96,
+            "gender": "male",
+            "commitee": [],
+            "term": 22,
+            "district": 1
+        }
+    ]
+}

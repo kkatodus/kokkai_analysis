@@ -1,0 +1,84 @@
+{
+    "members": [
+        {
+            "name_kana": "いしだ こうじ",
+            "name_kanji": "石田 浩二",
+            "party": "無所属",
+            "age": 48,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "1"
+        },
+        {
+            "name_kana": "くらね たかし",
+            "name_kanji": "藏根 高史",
+            "party": "立憲民主党",
+            "age": 61,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "2"
+        },
+        {
+            "name_kana": "ささき えみこ",
+            "name_kanji": "笹木 笑子",
+            "party": "無所属",
+            "age": 67,
+            "gender": "female",
+            "commitee": [],
+            "term": 2,
+            "district": "3"
+        },
+        {
+            "name_kana": "おざわ かずふみ",
+            "name_kanji": "小澤 一文",
+            "party": "公明党",
+            "age": 61,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "4"
+        },
+        {
+            "name_kana": "えちぜん ひとし",
+            "name_kanji": "越前 等",
+            "party": "日本共産党",
+            "age": 66,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "5"
+        },
+        {
+            "name_kana": "いとう みつあき",
+            "name_kanji": "伊藤 充章",
+            "party": "無所属",
+            "age": 51,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "6"
+        },
+        {
+            "name_kana": "よしかわ ひろし",
+            "name_kanji": "吉川 洋",
+            "party": "無所属",
+            "age": 69,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "7"
+        },
+        {
+            "name_kana": "たかはし しげかず",
+            "name_kanji": "高橋 成和",
+            "party": "無所属",
+            "age": 48,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": "8"
+        }
+    ]
+}

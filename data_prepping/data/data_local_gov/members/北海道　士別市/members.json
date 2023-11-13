@@ -1,0 +1,211 @@
+{
+    "members": [
+        {
+            "name_kana": "むらかみ のりかず",
+            "name_kanji": "村上 緑一",
+            "party": "副議長",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 3,
+            "district": 1
+        },
+        {
+            "name_kana": "いしかわ ようすけ",
+            "name_kanji": "石川 陽介",
+            "party": "新生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "予算決算常任委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "みなと ゆうすけ",
+            "name_kanji": "湊 祐介",
+            "party": "公生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "予算決算常任委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "なかやま よしたか",
+            "name_kanji": "中山 義隆",
+            "party": "公生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "かのう ゆみこ",
+            "name_kanji": "加納 由美子",
+            "party": "高志会",
+            "age": null,
+            "gender": "female",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "おくやま かおり",
+            "name_kanji": "奥山 かおり",
+            "party": "民政クラブ",
+            "age": null,
+            "gender": "female",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "にしかわ たけし",
+            "name_kanji": "西川 剛",
+            "party": "民政クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 2,
+            "district": 7
+        },
+        {
+            "name_kana": "さとう ただし",
+            "name_kanji": "佐藤 正",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 2,
+            "district": 8
+        },
+        {
+            "name_kana": "しんぽ まこと",
+            "name_kanji": "真保 誠",
+            "party": "新生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 2,
+            "district": 9
+        },
+        {
+            "name_kana": "きた たけひこ",
+            "name_kanji": "喜多 武彦",
+            "party": "新生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会改革検討特別委員会",
+                "議会広報特別委員会"
+            ],
+            "term": 3,
+            "district": 10
+        },
+        {
+            "name_kana": "たに まもる",
+            "name_kanji": "谷 守",
+            "party": "公生クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "文教厚生常任委員会",
+                "予算決算常任委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 3,
+            "district": 11
+        },
+        {
+            "name_kana": "おおにし あきら",
+            "name_kanji": "大西 陽",
+            "party": "高志会",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "予算決算常任委員会",
+                "議会運営委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 3,
+            "district": 12
+        },
+        {
+            "name_kana": "そごう つよし",
+            "name_kanji": "十河 剛志",
+            "party": "民政クラブ",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "総務産業常任委員会",
+                "議会改革検討特別委員会"
+            ],
+            "term": 4,
+            "district": 13
+        },
+        {
+            "name_kana": "やまい ただあき",
+            "name_kanji": "山居 忠彰",
+            "party": "議長",
+            "age": null,
+            "gender": "male",
+            "committee": [
+                "議会改革検討特別委員会"
+            ],
+            "term": 7,
+            "district": 15
+        }
+    ]
+}

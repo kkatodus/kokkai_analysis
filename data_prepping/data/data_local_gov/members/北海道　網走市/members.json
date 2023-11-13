@@ -1,0 +1,157 @@
+{
+    "members": [
+        {
+            "name_kana": "イシガキ ナオキ",
+            "name_kanji": "石垣 直樹",
+            "party": "希政会",
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会"
+            ],
+            "term": "２期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "イド タツヤ",
+            "name_kanji": "井戸 達也",
+            "party": "研政会",
+            "age": 53,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会委員長"
+            ],
+            "term": "４期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "オダベ ショウ",
+            "name_kanji": "小田部 照",
+            "party": "同志会",
+            "age": 47,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会"
+            ],
+            "term": "３期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "クリタ マサオ",
+            "name_kanji": "栗田 政男",
+            "party": "同志会",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "文教民生委員会",
+                "広報委員会"
+            ],
+            "term": "５期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "サトミ テツヤ",
+            "name_kanji": "里見 哲也",
+            "party": "希政会",
+            "age": 59,
+            "gender": "male",
+            "commitee": [
+                "文教民生委員会",
+                "広報委員会副委員長"
+            ],
+            "term": "１期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "サワタニ ジュンコ",
+            "name_kanji": "澤谷 淳子",
+            "party": "公明クラブ",
+            "age": 62,
+            "gender": "female",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会",
+                "広報委員会"
+            ],
+            "term": "２期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "ナガモト ヒロコ",
+            "name_kanji": "永本 浩子",
+            "party": "公明クラブ",
+            "age": 66,
+            "gender": "female",
+            "commitee": [
+                "文教民生委員会委員長"
+            ],
+            "term": "３期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "ヒラガ タカユキ",
+            "name_kanji": "平賀 貴幸",
+            "party": "民主市民ネット",
+            "age": 50,
+            "gender": "male",
+            "commitee": [],
+            "term": "５期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "フカツ ハルエ",
+            "name_kanji": "深津 晴江",
+            "party": "民主市民ネット",
+            "age": 60,
+            "gender": "female",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会",
+                "広報委員会"
+            ],
+            "term": "１期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "フルツ ノブヒロ",
+            "name_kanji": "古都 宣裕",
+            "party": "無会派",
+            "age": 40,
+            "gender": "male",
+            "commitee": [
+                "文教民生委員会",
+                "広報委員会委員長"
+            ],
+            "term": "３期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "マツウラ トシジ",
+            "name_kanji": "松浦 敏司",
+            "party": "日本共産党議員団",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "総務経済委員会",
+                "議会運営委員会"
+            ],
+            "term": "７期",
+            "district": "網走市"
+        },
+        {
+            "name_kana": "ムラツバ トシアキ",
+            "name_kanji": "村椿 敏章",
+            "party": "日本共産党議員団",
+            "age": 59,
+            "gender": "male",
+            "commitee": [
+                "文教民生委員会",
+                "広報委員会"
+            ],
+            "term": "２期",
+            "district": "網走市"
+        }
+    ]
+}

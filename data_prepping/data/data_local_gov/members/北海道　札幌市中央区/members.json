@@ -1,0 +1,110 @@
+{
+    "members": [
+        {
+            "name_kana": "おさない　なおや",
+            "name_kanji": "長内　直也",
+            "party": "自由民主党",
+            "age": "54",
+            "gender": "male",
+            "commitee": [
+                "文教委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "7",
+            "district": ""
+        },
+        {
+            "name_kana": "ほそかわ　まさと",
+            "name_kanji": "細川　正人",
+            "party": "自由民主党",
+            "age": "49",
+            "gender": "male",
+            "commitee": [
+                "財政市民委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "6",
+            "district": ""
+        },
+        {
+            "name_kana": "なかがわ　けんいち",
+            "name_kanji": "中川　賢一",
+            "party": "自由民主党",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "総務委員会",
+                "議会運営委員会",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": "3",
+            "district": ""
+        },
+        {
+            "name_kana": "むらかみ　ゆうこ",
+            "name_kanji": "村上　ゆうこ",
+            "party": "民主市民連合",
+            "age": "47",
+            "gender": "female",
+            "commitee": [
+                "総務委員会",
+                "議会運営委員会副委員長",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "4",
+            "district": ""
+        },
+        {
+            "name_kana": "たけのうち　ゆみ",
+            "name_kanji": "たけのうち　有美",
+            "party": "民主市民連合",
+            "age": "35",
+            "gender": "female",
+            "commitee": [
+                "建設委員会",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "2",
+            "district": ""
+        },
+        {
+            "name_kana": "くまがい　せいいち",
+            "name_kanji": "熊谷　誠一",
+            "party": "公明党",
+            "age": "39",
+            "gender": "male",
+            "commitee": [
+                "建設委員会副委員長",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "2",
+            "district": ""
+        },
+        {
+            "name_kana": "おがた　かおり",
+            "name_kanji": "小形　香織",
+            "party": "日本共産党",
+            "age": "42",
+            "gender": "female",
+            "commitee": [
+                "文教委員会",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": "5",
+            "district": ""
+        },
+        {
+            "name_kana": "はだ　だいせん",
+            "name_kanji": "波田　大専",
+            "party": "日本維新の会",
+            "age": "45",
+            "gender": "male",
+            "commitee": [
+                "厚生委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "1",
+            "district": ""
+        }
+    ]
+}

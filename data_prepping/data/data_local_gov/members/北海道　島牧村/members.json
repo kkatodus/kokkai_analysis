@@ -1,0 +1,97 @@
+{
+    "members": [
+        {
+            "name_kana": "はまの かつお",
+            "name_kanji": "濱野 勝男",
+            "party": "無",
+            "age": 79,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会"
+            ],
+            "term": 7,
+            "district": "漁業"
+        },
+        {
+            "name_kana": "ごとう さとし",
+            "name_kanji": "後藤 諭",
+            "party": "無",
+            "age": 78,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "建設",
+                "議会運営"
+            ],
+            "term": 7,
+            "district": "会社役員"
+        },
+        {
+            "name_kana": "たかしま のりひこ",
+            "name_kanji": "髙島 紀彦",
+            "party": "無",
+            "age": 66,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会"
+            ],
+            "term": 5,
+            "district": "会社役員"
+        },
+        {
+            "name_kana": "ふじた かずやす",
+            "name_kanji": "藤田 和康",
+            "party": "無",
+            "age": 66,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会",
+                "産業"
+            ],
+            "term": 1,
+            "district": "無職"
+        },
+        {
+            "name_kana": "さかした はつお",
+            "name_kanji": "坂下 初雄",
+            "party": "無",
+            "age": 80,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会"
+            ],
+            "term": 3,
+            "district": "農業"
+        },
+        {
+            "name_kana": "さとう せいじ",
+            "name_kanji": "佐藤 清司",
+            "party": "無",
+            "age": 67,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会"
+            ],
+            "term": 4,
+            "district": "漁業"
+        },
+        {
+            "name_kana": "なかた ひとし",
+            "name_kanji": "中田 仁史",
+            "party": "無",
+            "age": 68,
+            "gender": "男性",
+            "committee": [
+                "総務",
+                "社会"
+            ],
+            "term": 9,
+            "district": "会社役員"
+        }
+    ]
+}

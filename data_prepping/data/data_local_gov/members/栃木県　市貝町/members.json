@@ -1,0 +1,124 @@
+{
+    "members": [
+        {
+            "name_kana": "かわほりてつお",
+            "name_kanji": "川堀哲男",
+            "party": "議長",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "田野辺"
+        },
+        {
+            "name_kana": "とよだいさお",
+            "name_kanji": "豊田功",
+            "party": "副議長",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "市塙"
+        },
+        {
+            "name_kana": "たかはしまさのり",
+            "name_kanji": "髙橋政則",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "市塙"
+        },
+        {
+            "name_kana": "やまぐちこうゆう",
+            "name_kanji": "山口幸佑",
+            "party": "議員",
+            "age": 81,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "市塙"
+        },
+        {
+            "name_kana": "あらいかずいち",
+            "name_kanji": "荒井和一",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "続谷"
+        },
+        {
+            "name_kana": "いしいゆたか",
+            "name_kanji": "石井豊",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "上根"
+        },
+        {
+            "name_kana": "そのべひろこ",
+            "name_kanji": "園部弘子",
+            "party": "議員",
+            "age": 81,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": "赤羽"
+        },
+        {
+            "name_kana": "おざわいわお",
+            "name_kanji": "小沢岩夫",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "刈生田"
+        },
+        {
+            "name_kana": "こばなわひとし",
+            "name_kanji": "小塙斉",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "赤羽"
+        },
+        {
+            "name_kana": "たかとくよしお",
+            "name_kanji": "髙徳義男",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "続谷"
+        },
+        {
+            "name_kana": "こいずみえいいち",
+            "name_kanji": "小泉栄一",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "赤羽"
+        },
+        {
+            "name_kana": "やまかわひでお",
+            "name_kanji": "山川英男",
+            "party": "議員",
+            "age": 68,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "杉山"
+        }
+    ]
+}

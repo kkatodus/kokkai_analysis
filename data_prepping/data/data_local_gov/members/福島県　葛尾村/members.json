@@ -1,0 +1,112 @@
+{
+    "members": [
+        {
+            "name_kana": "すぎもと　よしのぶ",
+            "name_kanji": "杉本　宜信",
+            "party": "経済・土木常任委員会",
+            "age": 35,
+            "gender": "male",
+            "commitee": [
+                "経済",
+                "土木"
+            ],
+            "term": 8,
+            "district": "村"
+        },
+        {
+            "name_kana": "なかむら　たけひこ",
+            "name_kanji": "中村　健彦",
+            "party": "経済・土木常任委員会",
+            "age": 20,
+            "gender": "male",
+            "commitee": [
+                "経済",
+                "土木"
+            ],
+            "term": 3,
+            "district": "農業"
+        },
+        {
+            "name_kana": "まつもと　しずお",
+            "name_kanji": "松本　静男",
+            "party": "経済・土木常任委員会",
+            "age": 25,
+            "gender": "male",
+            "commitee": [
+                "経済",
+                "土木"
+            ],
+            "term": 3,
+            "district": "農業"
+        },
+        {
+            "name_kana": "よしだ　よしのり",
+            "name_kanji": "吉田　義則",
+            "party": "総務・文教・厚生常任委員会",
+            "age": 24,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教",
+                "厚生"
+            ],
+            "term": 6,
+            "district": "損保代理店"
+        },
+        {
+            "name_kana": "かんの　しょういち",
+            "name_kanji": "菅野　正一",
+            "party": "総務・文教・厚生常任委員会",
+            "age": 25,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教",
+                "厚生"
+            ],
+            "term": 1,
+            "district": "農業"
+        },
+        {
+            "name_kana": "まつもと　さおり",
+            "name_kanji": "松本　操",
+            "party": "総務・文教・厚生常任委員会",
+            "age": 24,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教",
+                "厚生"
+            ],
+            "term": 2,
+            "district": "農業"
+        },
+        {
+            "name_kana": "みかめ　じんいち",
+            "name_kanji": "三瓶　仁一",
+            "party": "経済・土木常任委員会",
+            "age": 26,
+            "gender": "male",
+            "commitee": [
+                "経済",
+                "土木"
+            ],
+            "term": 1,
+            "district": "無職"
+        },
+        {
+            "name_kana": "さくま　てつじ",
+            "name_kanji": "佐久間　哲次",
+            "party": "総務・文教・厚生常任委員会",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "文教",
+                "厚生"
+            ],
+            "term": 3,
+            "district": "酪農業"
+        }
+    ]
+}

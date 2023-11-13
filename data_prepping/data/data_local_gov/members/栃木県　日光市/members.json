@@ -1,0 +1,252 @@
+{
+    "members": [
+        {
+            "name_kana": "かわむらひさとし",
+            "name_kanji": "川村寿利",
+            "party": "無所属",
+            "age": "98",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市大桑町220番地1"
+        },
+        {
+            "name_kana": "たむらこうさく",
+            "name_kanji": "田村耕作",
+            "party": "無所属",
+            "age": "83",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市今市570番地"
+        },
+        {
+            "name_kana": "たけださちお",
+            "name_kanji": "武田幸雄",
+            "party": "無所属",
+            "age": "85",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市今市1295番地7"
+        },
+        {
+            "name_kana": "ふくだえつこ",
+            "name_kanji": "福田悦子",
+            "party": "日本共産党",
+            "age": "96",
+            "gender": "female",
+            "commitee": [],
+            "term": null,
+            "district": "日光市久次良町1794番地9"
+        },
+        {
+            "name_kana": "さいとうまさみ",
+            "name_kanji": "齊藤正三",
+            "party": "無所属",
+            "age": "93",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市足尾町3066番地1"
+        },
+        {
+            "name_kana": "やまこしきょうたろう",
+            "name_kanji": "山越享太郎",
+            "party": "無所属",
+            "age": "29",
+            "gender": "male",
+            "commitee": [
+                "https://mobile.twitter.com/kyotaro318"
+            ],
+            "term": null,
+            "district": "日光市森友1520番地51"
+        },
+        {
+            "name_kana": "つついいわお",
+            "name_kanji": "筒井巌",
+            "party": "無所属",
+            "age": "86",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市鬼怒川温泉大原1403番地16"
+        },
+        {
+            "name_kana": "むらかみまさあき",
+            "name_kanji": "村上正明",
+            "party": "無所属",
+            "age": "66",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市室瀬456番地1"
+        },
+        {
+            "name_kana": "たかみなおき",
+            "name_kanji": "髙見尚希",
+            "party": "無所属",
+            "age": "64",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市丹勢626番地88"
+        },
+        {
+            "name_kana": "あらかわれいこ",
+            "name_kanji": "荒川礼子",
+            "party": "公明党",
+            "age": "83",
+            "gender": "female",
+            "commitee": [],
+            "term": null,
+            "district": "日光市猪倉929番地102"
+        },
+        {
+            "name_kana": "さいとうひさゆき",
+            "name_kanji": "斎藤久幸",
+            "party": "立憲民主党",
+            "age": "76",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市藤原1122番地1"
+        },
+        {
+            "name_kana": "わだきみのぶ",
+            "name_kanji": "和田公伸",
+            "party": "無所属",
+            "age": "73",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市小林521番地"
+        },
+        {
+            "name_kana": "かわしまのりあき",
+            "name_kanji": "川島憲朗",
+            "party": "無所属",
+            "age": "78",
+            "gender": "male",
+            "commitee": [
+                "info@noriaki.online",
+                "https://www.noriaki.online"
+            ],
+            "term": null,
+            "district": "日光市安川町10番8号"
+        },
+        {
+            "name_kana": "さいとうのぶゆき",
+            "name_kanji": "斎藤伸幸",
+            "party": "無所属",
+            "age": "97",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市沢又543番地"
+        },
+        {
+            "name_kana": "あおたよしひと",
+            "name_kanji": "青田兆史",
+            "party": "無所属",
+            "age": "83",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市清滝二丁目6番7号"
+        },
+        {
+            "name_kana": "やまこしていいち",
+            "name_kanji": "山越梯一",
+            "party": "無所属",
+            "age": "102",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市日蔭263番地"
+        },
+        {
+            "name_kana": "なまいいちろう",
+            "name_kanji": "生井一郎",
+            "party": "無所属",
+            "age": "93",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市小倉818番地"
+        },
+        {
+            "name_kana": "さいとうふみあき",
+            "name_kanji": "齋藤文明",
+            "party": "無所属",
+            "age": "93",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市大室1535番地"
+        },
+        {
+            "name_kana": "かめいたかゆき",
+            "name_kanji": "亀井崇幸",
+            "party": "無所属",
+            "age": "73",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市豊田144番地16"
+        },
+        {
+            "name_kana": "しまだまさのり",
+            "name_kanji": "嶋田正法",
+            "party": "公明党",
+            "age": "71",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市今市1659番地33"
+        },
+        {
+            "name_kana": "おおしまひろし",
+            "name_kanji": "大島浩",
+            "party": "無所属",
+            "age": "80",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市並木町8番地9"
+        },
+        {
+            "name_kana": "さいとうひろあき",
+            "name_kanji": "斎藤宏明",
+            "party": "無所属",
+            "age": "79",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市文挾町383番地"
+        },
+        {
+            "name_kana": "せたかてつお",
+            "name_kanji": "瀬高哲雄",
+            "party": "無所属",
+            "age": "66",
+            "gender": "male",
+            "commitee": [
+                "setakatetsuo@outlook.com",
+                "tetsuo45.exblog.jp"
+            ],
+            "term": null,
+            "district": "日光市七里696番地1"
+        },
+        {
+            "name_kana": "みよしくにあき",
+            "name_kanji": "三好國章",
+            "party": "自由民主党",
+            "age": "105",
+            "gender": "male",
+            "commitee": [],
+            "term": null,
+            "district": "日光市相生町19番地3"
+        }
+    ]
+}

@@ -1,10 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.firefox.service import Service as FirefoxService
 
 class GeneralScraper:
-    def __init__(self, chromedriver_path):
-        service = Service(executable_path=chromedriver_path)
-        driver = webdriver.Chrome(service=service)
+    def __init__(self, firefox=False):
+        if firefox:
+            driver = webdriver.Firefox(executable_path='./geckodriver')
+        else:
+            ChromeOptions = webdriver.ChromeOptions()
+            ChromeOptions.add_argument('--disable-browser-side-navigation')
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options = ChromeOptions)
         self.driver = driver
     
     def get_url(self, url):

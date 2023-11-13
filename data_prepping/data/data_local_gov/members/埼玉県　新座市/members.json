@@ -1,0 +1,330 @@
+{
+    "members": [
+        {
+            "name_kana": "しらい　ただお",
+            "name_kanji": "白井 忠雄",
+            "party": "公明党",
+            "age": 57,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会"
+            ],
+            "term": "昭和40年",
+            "district": "新座市新座二丁目"
+        },
+        {
+            "name_kana": "すずき　ひでいち",
+            "name_kanji": "鈴木 秀一",
+            "party": "公明党",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和32年",
+            "district": "新座市栗原四丁目"
+        },
+        {
+            "name_kana": "いとう　ちさこ",
+            "name_kanji": "伊藤 智砂子",
+            "party": "公明党",
+            "age": 59,
+            "gender": "female",
+            "commitee": [
+                "文教生活常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和38年",
+            "district": "新座市新堀一丁目"
+        },
+        {
+            "name_kana": "さとう　しげただ",
+            "name_kanji": "佐藤 重忠",
+            "party": "公明党",
+            "age": 53,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "昭和43年",
+            "district": "新座市西堀二丁目"
+        },
+        {
+            "name_kana": "やちだ　ようこ",
+            "name_kanji": "谷地田 庸子",
+            "party": "公明党",
+            "age": 60,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "昭和37年",
+            "district": "新座市野火止八丁目"
+        },
+        {
+            "name_kana": "のなか　やよい",
+            "name_kanji": "野中 弥生",
+            "party": "公明党",
+            "age": 59,
+            "gender": "female",
+            "commitee": [
+                "建設常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和38年",
+            "district": "新座市畑中三丁目"
+        },
+        {
+            "name_kana": "たきもと　やすゆき",
+            "name_kanji": "滝本 恭雪",
+            "party": "公明党",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "昭和33年",
+            "district": "新座市栄五丁目"
+        },
+        {
+            "name_kana": "あらい　のりゆき",
+            "name_kanji": "荒井 規行",
+            "party": "無所属（由臨会）",
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "昭和53年",
+            "district": "新座市野寺三丁目"
+        },
+        {
+            "name_kana": "すずき　よしむね",
+            "name_kanji": "鈴木 芳宗",
+            "party": "無所属（由臨会）",
+            "age": 46,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会"
+            ],
+            "term": "昭和51年",
+            "district": "新座市片山一丁目"
+        },
+        {
+            "name_kana": "たかむら　ともや",
+            "name_kanji": "高邑 朋矢",
+            "party": "無所属（市民と語る会）",
+            "age": 68,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会"
+            ],
+            "term": "昭和29年",
+            "district": "新座市石神三丁目"
+        },
+        {
+            "name_kana": "とみなが　たかこ",
+            "name_kanji": "富永 孝子",
+            "party": "無所属（市民と語る会）",
+            "age": 55,
+            "gender": "female",
+            "commitee": [
+                "厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "昭和42年",
+            "district": "新座市野火止四丁目"
+        },
+        {
+            "name_kana": "いしじま　ようこ",
+            "name_kanji": "石島 陽子",
+            "party": "日本共産党",
+            "age": 60,
+            "gender": "female",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "昭和37年",
+            "district": "新座市大和田五丁目"
+        },
+        {
+            "name_kana": "しまだ　よしえ",
+            "name_kanji": "嶋田 好枝",
+            "party": "日本共産党",
+            "age": 71,
+            "gender": "female",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "昭和32年",
+            "district": "新座市大和田五丁目"
+        },
+        {
+            "name_kana": "くろだ　みき",
+            "name_kanji": "黒田 実樹",
+            "party": "日本共産党",
+            "age": 46,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会"
+            ],
+            "term": "昭和51年",
+            "district": "新座市野火止一丁目"
+        },
+        {
+            "name_kana": "おの　ゆみこ",
+            "name_kanji": "小野 由美子",
+            "party": "日本共産党",
+            "age": 57,
+            "gender": "female",
+            "commitee": [
+                "建設常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和39年",
+            "district": "新座市馬場二丁目"
+        },
+        {
+            "name_kana": "かさはら　すすむ",
+            "name_kanji": "笠原 進",
+            "party": "日本共産党",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和23年",
+            "district": "新座市石神三丁目"
+        },
+        {
+            "name_kana": "おの　だいすけ",
+            "name_kanji": "小野 大輔",
+            "party": "日本共産党",
+            "age": 43,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "昭和54年",
+            "district": "新座市新座三丁目"
+        },
+        {
+            "name_kana": "うえだ　みさえ",
+            "name_kanji": "上田 美小枝",
+            "party": "無所属（由臨会）",
+            "age": 79,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "昭和18年",
+            "district": "新座市東北二丁目"
+        },
+        {
+            "name_kana": "しまだ　くによ",
+            "name_kanji": "島田 久仁代",
+            "party": "無所属（由臨会）",
+            "age": 48,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "昭和49年",
+            "district": "新座市大和田一丁目"
+        },
+        {
+            "name_kana": "よねはし　ゆうた",
+            "name_kanji": "米橋 結太",
+            "party": "無所属（由臨会）",
+            "age": 37,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "昭和59年",
+            "district": "新座市馬場四丁目"
+        },
+        {
+            "name_kana": "すけがわ　のぼる",
+            "name_kanji": "助川 昇",
+            "party": "無所属（政和会）",
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和52年",
+            "district": "新座市野火止五丁目"
+        },
+        {
+            "name_kana": "おのざわ　たけし",
+            "name_kanji": "小野澤 健至",
+            "party": "無所属（政和会）",
+            "age": 52,
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "昭和45年",
+            "district": "新座市北野三丁目"
+        },
+        {
+            "name_kana": "すずき　あきこ",
+            "name_kanji": "鈴木 明子",
+            "party": "無所属（政和会）",
+            "age": 59,
+            "gender": "female",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "昭和37年",
+            "district": "新座市東二丁目"
+        },
+        {
+            "name_kana": "いけだ　さだお",
+            "name_kanji": "池田 貞雄",
+            "party": "無所属（政和会）",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和32年",
+            "district": "新座市野火止七丁目"
+        },
+        {
+            "name_kana": "しまの　かよ",
+            "name_kanji": "嶋野 加代",
+            "party": "無所属（政和会）",
+            "age": 68,
+            "gender": "female",
+            "commitee": [
+                "建設常任委員会",
+                "議会運営委員会",
+                "都市高速鉄道12号線特別委員会"
+            ],
+            "term": "昭和28年",
+            "district": "新座市石神二丁目"
+        },
+        {
+            "name_kana": "ひらの　しげる",
+            "name_kanji": "平野 茂",
+            "party": "無所属（政和会）",
+            "age": 53,
+            "gender": "male",
+            "commitee": [
+                "文教生活常任委員会"
+            ],
+            "term": "昭和43年",
+            "district": "新座市栗原六丁目"
+        }
+    ]
+}

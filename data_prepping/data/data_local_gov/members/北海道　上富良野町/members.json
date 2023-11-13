@@ -1,0 +1,182 @@
+{
+    "members": [
+        {
+            "name_kana": "さとう　だいすけ",
+            "name_kanji": "佐藤　大輔",
+            "party": "総務",
+            "age": 49,
+            "gender": "male",
+            "commitee": [
+                "委員",
+                "委員長"
+            ],
+            "term": 2,
+            "district": "広報"
+        },
+        {
+            "name_kana": "あらなお　ひろかず",
+            "name_kanji": "荒生　博一",
+            "party": "産建",
+            "age": 54,
+            "gender": "male",
+            "commitee": [
+                "委員長",
+                "委員"
+            ],
+            "term": 3,
+            "district": "総務"
+        },
+        {
+            "name_kana": "ゆかわ　ちえつこ",
+            "name_kanji": "湯川　千悦子",
+            "party": "厚生",
+            "age": 62,
+            "gender": "female",
+            "commitee": [
+                "委員",
+                "委員"
+            ],
+            "term": 1,
+            "district": "文教"
+        },
+        {
+            "name_kana": "よねざわ　よしひで",
+            "name_kanji": "米澤　義英",
+            "party": "総務",
+            "age": 70,
+            "gender": "male",
+            "commitee": [
+                "委員",
+                "委員長"
+            ],
+            "term": 11,
+            "district": "運営"
+        },
+        {
+            "name_kana": "かねこ　ますぞう",
+            "name_kanji": "金子　益三",
+            "party": "広報",
+            "age": 54,
+            "gender": "male",
+            "commitee": [
+                "委員",
+                "副委員長"
+            ],
+            "term": 6,
+            "district": "議会"
+        },
+        {
+            "name_kana": "はやし　たかなが",
+            "name_kanji": "林　敬永",
+            "party": "産建",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "副委員長",
+                "委員"
+            ],
+            "term": 1,
+            "district": "総務"
+        },
+        {
+            "name_kana": "ちゃや　ともひろ",
+            "name_kanji": "茶谷　朋弘",
+            "party": "厚生",
+            "age": 32,
+            "gender": "male",
+            "commitee": [
+                "委員"
+            ],
+            "term": 1,
+            "district": "文教"
+        },
+        {
+            "name_kana": "なかせ　さねる",
+            "name_kanji": "中瀬　実",
+            "party": "広報",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "委員",
+                "委員"
+            ],
+            "term": 3,
+            "district": "議会"
+        },
+        {
+            "name_kana": "しまだ　まさし",
+            "name_kanji": "島田　政志",
+            "party": "総務",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "委員"
+            ],
+            "term": 1,
+            "district": "運営"
+        },
+        {
+            "name_kana": "いむら　えつじょう",
+            "name_kanji": "井村　悦丈",
+            "party": "産建",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "委員",
+                "副委員長"
+            ],
+            "term": 1,
+            "district": "議会"
+        },
+        {
+            "name_kana": "ほうじょう　たかお",
+            "name_kanji": "北條　隆男",
+            "party": "厚生",
+            "age": 68,
+            "gender": "male",
+            "commitee": [
+                "副委員長",
+                "委員"
+            ],
+            "term": 3,
+            "district": "総務"
+        },
+        {
+            "name_kana": "こばやし　けいた",
+            "name_kanji": "小林　啓太",
+            "party": "総務",
+            "age": 39,
+            "gender": "male",
+            "commitee": [
+                "委員長",
+                "委員"
+            ],
+            "term": 2,
+            "district": "総務"
+        },
+        {
+            "name_kana": "おかもと　やすひろ",
+            "name_kanji": "岡本　康裕",
+            "party": "議会",
+            "age": 58,
+            "gender": "male",
+            "commitee": [
+                "委員"
+            ],
+            "term": 5,
+            "district": "産建"
+        },
+        {
+            "name_kana": "なかざわ よしたか",
+            "name_kanji": "中澤 良隆",
+            "party": "運営",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "委員"
+            ],
+            "term": 4,
+            "district": "広報"
+        }
+    ]
+}

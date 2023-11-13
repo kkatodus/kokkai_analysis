@@ -1,0 +1,244 @@
+{
+    "members": [
+        {
+            "name_kana": "いまいけいいちろう",
+            "name_kanji": "今井慶一郎",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 8,
+            "district": "深谷市寿町156番地201"
+        },
+        {
+            "name_kana": "おかひとし",
+            "name_kanji": "岡仁",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 2,
+            "district": "深谷市田中763番地"
+        },
+        {
+            "name_kana": "かきざわゆうすけ",
+            "name_kanji": "柿澤祐介",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 3,
+            "district": "深谷市新井302番地1"
+        },
+        {
+            "name_kana": "かとうとしえ",
+            "name_kanji": "加藤利江",
+            "party": "元氣会",
+            "age": null,
+            "gender": "女性",
+            "commitee": [],
+            "term": 21,
+            "district": "深谷市上柴町東3丁目5番地20"
+        },
+        {
+            "name_kana": "こいずみまこと",
+            "name_kanji": "小泉誠",
+            "party": "無会派",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 4,
+            "district": "深谷市常盤町55番地77"
+        },
+        {
+            "name_kana": "こばやしまこと",
+            "name_kanji": "小林真",
+            "party": "小林ミルク",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 11,
+            "district": "深谷市上増田293番地"
+        },
+        {
+            "name_kana": "ごまくみこ",
+            "name_kanji": "五間くみ子",
+            "party": "公明党",
+            "age": null,
+            "gender": "女性",
+            "commitee": [],
+            "term": 22,
+            "district": "深谷市上野台2352番地 ダイアパレスBW深谷812号"
+        },
+        {
+            "name_kana": "さかもとひろし",
+            "name_kanji": "坂本博",
+            "party": "公明党",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 13,
+            "district": "深谷市萱場46番地1"
+        },
+        {
+            "name_kana": "さくまなな",
+            "name_kanji": "佐久間奈々",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "女性",
+            "commitee": [],
+            "term": 5,
+            "district": "深谷市武蔵野3995番地7"
+        },
+        {
+            "name_kana": "しみずけんいち",
+            "name_kanji": "清水健一",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 15,
+            "district": "深谷市小前田2406番地8"
+        },
+        {
+            "name_kana": "すずきみつお",
+            "name_kanji": "鈴木三男",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 6,
+            "district": "深谷市上野台50番地13"
+        },
+        {
+            "name_kana": "たかだひろゆき",
+            "name_kanji": "高田博之",
+            "party": "深和会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 24,
+            "district": "深谷市上敷免322番地"
+        },
+        {
+            "name_kana": "たぐちひでお",
+            "name_kanji": "田口英夫",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 16,
+            "district": "深谷市東方町1丁目5番地1"
+        },
+        {
+            "name_kana": "たじまひでおき",
+            "name_kanji": "田島秀興",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 1,
+            "district": "深谷市武蔵野2338番地2"
+        },
+        {
+            "name_kana": "つなぎゆか",
+            "name_kanji": "繋由香",
+            "party": "公明党",
+            "age": null,
+            "gender": "女性",
+            "commitee": [],
+            "term": 14,
+            "district": "深谷市東方2059番地6"
+        },
+        {
+            "name_kana": "つのだよしのり",
+            "name_kanji": "角田義徳",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 17,
+            "district": "深谷市後榛沢436番地2"
+        },
+        {
+            "name_kana": "とみたまさる",
+            "name_kanji": "富田勝",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 18,
+            "district": "深谷市武蔵野3400番地"
+        },
+        {
+            "name_kana": "ながたかつひこ",
+            "name_kanji": "永田勝彦",
+            "party": "深和会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 23,
+            "district": "深谷市長在家198番地"
+        },
+        {
+            "name_kana": "はちすよしのり",
+            "name_kanji": "八須由憲",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 10,
+            "district": "深谷市北阿賀野309番地3"
+        },
+        {
+            "name_kana": "ふくしまひでき",
+            "name_kanji": "福島秀樹",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 7,
+            "district": "深谷市岡2655番地6"
+        },
+        {
+            "name_kana": "むらかわのりひろ",
+            "name_kanji": "村川徳浩",
+            "party": "小林ミルク",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 20,
+            "district": "深谷市東方2603番地"
+        },
+        {
+            "name_kana": "もてぎいちろう",
+            "name_kanji": "茂木一郎",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 19,
+            "district": "深谷市岡2635番地1"
+        },
+        {
+            "name_kana": "やまでひであき",
+            "name_kanji": "山出秀明",
+            "party": "元氣会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 12,
+            "district": "深谷市西島町2丁目17番地6"
+        },
+        {
+            "name_kana": "ゆもとてつあき",
+            "name_kanji": "湯本哲昭",
+            "party": "深谷同志会",
+            "age": null,
+            "gender": "男性",
+            "commitee": [],
+            "term": 9,
+            "district": "深谷市蓮沼856番地1"
+        }
+    ]
+}

@@ -1,0 +1,226 @@
+{
+    "members": [
+        {
+            "name_kana": "ささきしん",
+            "name_kanji": "佐々木伸",
+            "party": "かがやき",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "1",
+            "district": "富岡市岡本544番地1"
+        },
+        {
+            "name_kana": "おかのひろみ",
+            "name_kanji": "岡野尋実",
+            "party": "たおやか",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "社会常任委員会"
+            ],
+            "term": "1",
+            "district": "富岡市中高瀬58番地6"
+        },
+        {
+            "name_kana": "なかむらよしお",
+            "name_kanji": "中村喜雄",
+            "party": "かがやき",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "社会常任委員会"
+            ],
+            "term": "1",
+            "district": "富岡市下黒岩382番地12"
+        },
+        {
+            "name_kana": "こまつたかゆき",
+            "name_kanji": "小松隆行",
+            "party": "爽政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "1",
+            "district": "富岡市田篠1546番地2"
+        },
+        {
+            "name_kana": "いりさわめぐみ",
+            "name_kanji": "入澤めぐみ",
+            "party": "参政会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "社会常任委員会"
+            ],
+            "term": "1",
+            "district": "富岡市七日市780番地2"
+        },
+        {
+            "name_kana": "きたじまとおる",
+            "name_kanji": "北島徹",
+            "party": "旗風",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "1",
+            "district": "富岡市宮崎347番地2"
+        },
+        {
+            "name_kana": "みつぎまゆみ",
+            "name_kanji": "三ツ木真由美",
+            "party": "かがやき",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "社会常任委員会"
+            ],
+            "term": "2",
+            "district": "富岡市下丹生1225番地2"
+        },
+        {
+            "name_kana": "たむらこうじゅ",
+            "name_kanji": "田村浩壽",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "2",
+            "district": "富岡市妙義町行沢61番地2"
+        },
+        {
+            "name_kana": "たかたひとし",
+            "name_kanji": "髙田仁志",
+            "party": "かがやき",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": "2",
+            "district": "富岡市富岡1070番地2"
+        },
+        {
+            "name_kana": "きだよしゆき",
+            "name_kanji": "木田嘉之",
+            "party": "かがやき",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "3",
+            "district": "富岡市富岡1013番地1"
+        },
+        {
+            "name_kana": "やのまさひと",
+            "name_kanji": "矢野勅仁",
+            "party": "かがやき",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": "4",
+            "district": "富岡市妙義町下高田786番地2"
+        },
+        {
+            "name_kana": "さとうのぶじ",
+            "name_kanji": "佐藤信次",
+            "party": "光風",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "4",
+            "district": "富岡市神農原728番地3"
+        },
+        {
+            "name_kana": "ほりこしひでお",
+            "name_kanji": "堀越英雄",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "5",
+            "district": "富岡市内匠873番地"
+        },
+        {
+            "name_kana": "みやざわのぶひこ",
+            "name_kanji": "宮澤展彦",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "5",
+            "district": "富岡市黒川548-1"
+        },
+        {
+            "name_kana": "かべたけんじ",
+            "name_kanji": "壁田賢二",
+            "party": "こうめい",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": "5",
+            "district": "富岡市妙義町諸戸1185番地1"
+        },
+        {
+            "name_kana": "あいかわもとむ",
+            "name_kanji": "相川求",
+            "party": "市民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": "5",
+            "district": "富岡市南蛇井2366番地"
+        },
+        {
+            "name_kana": "もはらまさひで",
+            "name_kanji": "茂原正秀",
+            "party": "新しい富岡市を築く会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "社会常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "6",
+            "district": "富岡市一ノ宮1627番地3"
+        },
+        {
+            "name_kana": "たかはしそういちろう",
+            "name_kanji": "高橋總一郎",
+            "party": "爽政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "社会常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "6",
+            "district": "富岡市七日市894番地"
+        }
+    ]
+}

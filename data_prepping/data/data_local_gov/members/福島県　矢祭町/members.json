@@ -1,0 +1,230 @@
+{
+    "members": [
+        {
+            "議長及び副議長": [
+                {
+                    "name_kana": "ふじた げんお",
+                    "name_kanji": "藤 田 玄 夫",
+                    "party": "議長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "みどりかわ ひろゆき",
+                    "name_kanji": "緑 川 裕 之",
+                    "party": "副議長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "総務常任委員会": [
+                {
+                    "name_kana": "こうじ ひろこ",
+                    "name_kanji": "郡司 浩子",
+                    "party": "委員長",
+                    "age": null,
+                    "gender": "female",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "ふじい りゅうじ",
+                    "name_kanji": "藤井 隆治",
+                    "party": "副委員長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "すずきまさよし",
+                    "name_kanji": "鈴木正 美",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "すずき はじめ",
+                    "name_kanji": "鈴木　一",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "みどりかわ ひろゆき",
+                    "name_kanji": "緑川 裕之",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "産業常任委員会": [
+                {
+                    "name_kana": "かたの かずや",
+                    "name_kanji": "片野 一也",
+                    "party": "委員長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "ほんだ ゆうや",
+                    "name_kanji": "本多 勇也",
+                    "party": "副委員長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "おおもり やすゆき",
+                    "name_kanji": "大森 泰幸",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "すずき としお",
+                    "name_kanji": "鈴木 敏男",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "ふじた げんお",
+                    "name_kanji": "藤田 玄夫",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "議会運営委員会": [
+                {
+                    "name_kana": "すずき はじめ",
+                    "name_kanji": "鈴木 一",
+                    "party": "委員長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "おおもり やすゆき",
+                    "name_kanji": "大森 泰幸",
+                    "party": "副委員長",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "ふじい りゅうじ",
+                    "name_kanji": "藤井 隆治",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "すずきまさよし",
+                    "name_kanji": "鈴木 正美",
+                    "party": "委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "白河広域市町村圏整備組合議員": [
+                {
+                    "name_kana": "ふじた げんお",
+                    "name_kanji": "藤田 玄夫",
+                    "party": "白河広域市町村圏整備組合議員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "みどりかわ ひろゆき",
+                    "name_kanji": "緑川 裕之",
+                    "party": "白河広域市町村圏整備組合議員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "東白衛生組合議員": [
+                {
+                    "name_kana": "ほんだ ゆうや",
+                    "name_kanji": "本多 勇也",
+                    "party": "東白衛生組合議員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                },
+                {
+                    "name_kana": "すずき としお",
+                    "name_kanji": "鈴木 敏男",
+                    "party": "東白衛生組合議員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ],
+            "監査委員": [
+                {
+                    "name_kana": "すずき はじめ",
+                    "name_kanji": "鈴木 一",
+                    "party": "監査委員",
+                    "age": null,
+                    "gender": "male",
+                    "commitee": [],
+                    "term": null,
+                    "district": null
+                }
+            ]
+        }
+    ]
+}

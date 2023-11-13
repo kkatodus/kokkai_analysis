@@ -1,0 +1,69 @@
+{
+    "members": [
+        {
+            "name_kana": "きたむら　こういちろう",
+            "name_kanji": "北村　光一郎",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務委員会",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "4期",
+            "district": "-"
+        },
+        {
+            "name_kana": "やまだ　ひろあき",
+            "name_kanji": "山田　洋聡",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "財政市民委員会副委員長",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "1期",
+            "district": "-"
+        },
+        {
+            "name_kana": "おんむら　けんたろう",
+            "name_kanji": "おんむら　健太郎",
+            "party": "民主市民連合",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "経済観光委員会副委員長",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "2期",
+            "district": "-"
+        },
+        {
+            "name_kana": "たけうち　たかよ",
+            "name_kanji": "竹内　孝代",
+            "party": "公明党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "文教委員会委員長",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "3期",
+            "district": "-"
+        },
+        {
+            "name_kana": "よしおか　ひろこ",
+            "name_kanji": "吉岡　弘子",
+            "party": "日本共産党",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "建設委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "2期",
+            "district": "-"
+        }
+    ]
+}

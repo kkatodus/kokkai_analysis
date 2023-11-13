@@ -1,0 +1,303 @@
+{
+    "members": [
+        {
+            "name_kana": "たかはし まさし",
+            "name_kanji": "高　橋　征　志",
+            "party": "無会派",
+            "age": 62,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 1,
+            "district": "むつ市文京町"
+        },
+        {
+            "name_kana": "すぎうら ひろき",
+            "name_kanji": "杉　浦　弘　樹",
+            "party": "無会派",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "広報広聴委員会副委員長",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市脇野沢本村"
+        },
+        {
+            "name_kana": "さとう たけし",
+            "name_kanji": "佐　藤　　　武",
+            "party": "無会派",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市田名部字南椛山"
+        },
+        {
+            "name_kana": "くどう　しょうこ",
+            "name_kanji": "工　藤　祥　子",
+            "party": "無会派",
+            "age": 99,
+            "gender": "female",
+            "commitee": [
+                "民生福祉常任委員会副委員長"
+            ],
+            "term": 3,
+            "district": "むつ市川内町家ノ辺"
+        },
+        {
+            "name_kana": "はまだ　えいこ",
+            "name_kanji": "濵　田　栄　子",
+            "party": "無会派",
+            "age": 102,
+            "gender": "female",
+            "commitee": [
+                "総務教育常任委員会委員"
+            ],
+            "term": 6,
+            "district": "むつ市大畑町庚申堂"
+        },
+        {
+            "name_kana": "さくらだ　ひでお",
+            "name_kanji": "櫻　田　秀　夫",
+            "party": "公明・自由",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会副委員長",
+                "広報広聴委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 1,
+            "district": "むつ市金曲二丁目"
+        },
+        {
+            "name_kana": "すみよし　としひろ",
+            "name_kanji": "住　吉　年　広",
+            "party": "公明・自由",
+            "age": 81,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会委員",
+                "議会運営委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市大曲二丁目"
+        },
+        {
+            "name_kana": "しらい　じろう",
+            "name_kanji": "白　井　二　郎",
+            "party": "公明・自由",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 7,
+            "district": "むつ市横迎町一丁目"
+        },
+        {
+            "name_kana": "とみおか　なおや",
+            "name_kanji": "富　岡　直　哉",
+            "party": "陸奥未来",
+            "age": 58,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員長",
+                "議会運営委員会委員",
+                "広報広聴委員会委員長",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市中央二丁目"
+        },
+        {
+            "name_kana": "むらなか ひろあき",
+            "name_kanji": "村　中　浩　明",
+            "party": "陸奥未来",
+            "age": 79,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会委員長",
+                "議会運営委員会委員",
+                "広報広聴委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市桜木町"
+        },
+        {
+            "name_kana": "のなか　たかゆき",
+            "name_kanji": "野　中　貴　健",
+            "party": "市誠クラブ",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会委員長",
+                "議会運営委員会委員",
+                "広報広聴委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市大畑町中島"
+        },
+        {
+            "name_kana": "さとう　ひろまさ",
+            "name_kanji": "佐　藤　広　政",
+            "party": "市誠クラブ",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会委員",
+                "広報広聴委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市並川町"
+        },
+        {
+            "name_kana": "あずま　けんじ",
+            "name_kanji": "東　　健　而",
+            "party": "市誠クラブ",
+            "age": 100,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 5,
+            "district": "むつ市川内町桧川川代"
+        },
+        {
+            "name_kana": "なかむら　まさし",
+            "name_kanji": "中　村　正　志",
+            "party": "自民クラブ",
+            "age": 78,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会委員",
+                "議会運営委員会委員長",
+                "広報広聴委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 6,
+            "district": "むつ市小川町二丁目"
+        },
+        {
+            "name_kana": "いだ　しげき",
+            "name_kanji": "井　田　茂　樹",
+            "party": "自民クラブ",
+            "age": 79,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会副委員長",
+                "議会運営委員会副委員長",
+                "広報広聴委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 2,
+            "district": "むつ市大字奥内字坊主流"
+        },
+        {
+            "name_kana": "あさり　たけじろう",
+            "name_kanji": "浅　利　竹二郎",
+            "party": "自民クラブ",
+            "age": 104,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 6,
+            "district": "むつ市大湊新町"
+        },
+        {
+            "name_kana": "おかざき　けんご",
+            "name_kanji": "岡　崎　健　吾",
+            "party": "陸奥未来",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "むつ市議会副議長",
+                "民生福祉常任委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 5,
+            "district": "むつ市川内町川内"
+        },
+        {
+            "name_kana": "ささき　たかのり",
+            "name_kanji": "佐々木　隆　徳",
+            "party": "陸奥未来",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 7,
+            "district": "むつ市脇野沢本村"
+        },
+        {
+            "name_kana": "さが　ひでお",
+            "name_kanji": "佐　賀　英　生",
+            "party": "市誠クラブ",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "議会運営委員会委員",
+                "一部事務組合下北医療センター議会議員"
+            ],
+            "term": 6,
+            "district": "むつ市大畑町上野"
+        },
+        {
+            "name_kana": "おおたき　つぎお",
+            "name_kanji": "大　瀧　次　男",
+            "party": "市誠クラブ",
+            "age": 96,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員"
+            ],
+            "term": 5,
+            "district": "むつ市栗山町"
+        },
+        {
+            "name_kana": "ささき　はじめ",
+            "name_kanji": "佐々木　　肇",
+            "party": "自民クラブ",
+            "age": 105,
+            "gender": "male",
+            "commitee": [
+                "産業建設常任委員会委員",
+                "下北地域広域行政事務組合議会議員"
+            ],
+            "term": 12,
+            "district": "むつ市大曲三丁目"
+        },
+        {
+            "name_kana": "とみおか　ゆきお",
+            "name_kanji": "冨　岡　幸　夫",
+            "party": "自民クラブ",
+            "age": 96,
+            "gender": "male",
+            "commitee": [
+                "むつ市議会議長",
+                "総務教育常任委員会委員"
+            ],
+            "term": 7,
+            "district": "むつ市上川町"
+        }
+    ]
+}

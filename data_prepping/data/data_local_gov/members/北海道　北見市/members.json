@@ -1,0 +1,334 @@
+{
+    "members": [
+        {
+            "name_kana": "みうら とおる",
+            "name_kanji": "三浦 亨",
+            "party": "市民・連合クラブ",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "くぼた たかゆき",
+            "name_kanji": "久保田 貴行",
+            "party": "市民・連合クラブ",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "福祉民生常任委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "よしだ さとし",
+            "name_kanji": "吉田 哲",
+            "party": "次代",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "福祉民生常任委員会"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "はやし ゆたか",
+            "name_kanji": "林 裕",
+            "party": "次代",
+            "age": 79,
+            "gender": "male",
+            "commitee": [
+                "産業経済常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "たかはし よしつぐ",
+            "name_kanji": "髙橋 宜嗣",
+            "party": "次代",
+            "age": 78,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "たかだ ゆうしゅう",
+            "name_kanji": "髙田 有修",
+            "party": "次代",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "産業経済常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 1,
+            "district": 6
+        },
+        {
+            "name_kana": "きむら のりお",
+            "name_kanji": "木村 則夫",
+            "party": "市政みらい",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "産業経済常任委員会",
+                "議会運営委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 2,
+            "district": 7
+        },
+        {
+            "name_kana": "たむら としえ",
+            "name_kanji": "田村 淑江",
+            "party": "市政みらい",
+            "age": 86,
+            "gender": "female",
+            "commitee": [
+                "建設上下水道常任委員会"
+            ],
+            "term": 3,
+            "district": 8
+        },
+        {
+            "name_kana": "おの たくや",
+            "name_kanji": "小野 卓也",
+            "party": "市民・連合クラブ",
+            "age": 75,
+            "gender": "male",
+            "commitee": [
+                "福祉民生常任委員会",
+                "議会運営委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 2,
+            "district": 9
+        },
+        {
+            "name_kana": "かわしま あきのり",
+            "name_kanji": "川島 章則",
+            "party": "市民・連合クラブ",
+            "age": 93,
+            "gender": "male",
+            "commitee": [
+                "建設上下水道常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 3,
+            "district": 10
+        },
+        {
+            "name_kana": "いいだ しゅうじ",
+            "name_kanji": "飯田 修司",
+            "party": "市民・連合クラブ",
+            "age": 87,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": 11
+        },
+        {
+            "name_kana": "たかはし よしはる",
+            "name_kanji": "高橋 善治",
+            "party": "次代",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 2,
+            "district": 12
+        },
+        {
+            "name_kana": "にしがきうち よしあき",
+            "name_kanji": "西垣内 義章",
+            "party": "北見を元気にする会",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "建設上下水道常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 2,
+            "district": 13
+        },
+        {
+            "name_kana": "もりや たかふみ",
+            "name_kanji": "森谷 隆文",
+            "party": "かけはし",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 3,
+            "district": 14
+        },
+        {
+            "name_kana": "さくらい ゆみこ",
+            "name_kanji": "桜井 由美子",
+            "party": "日本共産党北見市議団",
+            "age": 89,
+            "gender": "female",
+            "commitee": [
+                "建設上下水道常任委員会"
+            ],
+            "term": 2,
+            "district": 15
+        },
+        {
+            "name_kana": "きくち ごういち",
+            "name_kanji": "菊池 豪一",
+            "party": "日本共産党北見市議団",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 5,
+            "district": 16
+        },
+        {
+            "name_kana": "あんどう のりひこ",
+            "name_kanji": "安藤 憲彦",
+            "party": "市政みらい",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "福祉民生常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 3,
+            "district": 17
+        },
+        {
+            "name_kana": "たかはし かつひろ",
+            "name_kanji": "高橋 克博",
+            "party": "市政みらい",
+            "age": 89,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会"
+            ],
+            "term": 5,
+            "district": 18
+        },
+        {
+            "name_kana": "ちょうなん さちこ",
+            "name_kanji": "長南 幸子",
+            "party": "市民・連合クラブ",
+            "age": 88,
+            "gender": "female",
+            "commitee": [
+                "産業経済常任委員会",
+                "議会運営委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 4,
+            "district": 19
+        },
+        {
+            "name_kana": "うらにし たかひろ",
+            "name_kanji": "浦西 孝浩",
+            "party": "市民・連合クラブ",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "産業経済常任委員会"
+            ],
+            "term": 4,
+            "district": 20
+        },
+        {
+            "name_kana": "かしろ ひろし",
+            "name_kanji": "加城 博志",
+            "party": "次代",
+            "age": 81,
+            "gender": "male",
+            "commitee": [
+                "建設上下水道常任委員会",
+                "議会運営委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 3,
+            "district": 21
+        },
+        {
+            "name_kana": "なかざき たかとし",
+            "name_kanji": "中崎 孝俊",
+            "party": "次代",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "建設上下水道常任委員会"
+            ],
+            "term": 5,
+            "district": 22
+        },
+        {
+            "name_kana": "さいとう あきとし",
+            "name_kanji": "斎藤 昭利",
+            "party": "公明党",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会"
+            ],
+            "term": 4,
+            "district": 23
+        },
+        {
+            "name_kana": "ごうだ えつこ",
+            "name_kanji": "合田 悦子",
+            "party": "公明党",
+            "age": 93,
+            "gender": "female",
+            "commitee": [
+                "福祉民生常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 4,
+            "district": 24
+        },
+        {
+            "name_kana": "すずき たてお",
+            "name_kanji": "鈴木 建夫",
+            "party": "市民クラブ",
+            "age": 93,
+            "gender": "male",
+            "commitee": [
+                "産業経済常任委員会"
+            ],
+            "term": 4,
+            "district": 25
+        },
+        {
+            "name_kana": "まつたに りゅういち",
+            "name_kanji": "松谷 隆一",
+            "party": "市民クラブ",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "福祉民生常任委員会",
+                "議会改革特別委員会"
+            ],
+            "term": 5,
+            "district": 26
+        }
+    ]
+}

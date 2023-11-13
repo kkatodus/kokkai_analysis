@@ -1,0 +1,316 @@
+{
+    "members": [
+        {
+            "name_kana": "ささき　まもる",
+            "name_kanji": "佐々木　護",
+            "party": "北上まほろばクラブ",
+            "age": 29,
+            "gender": "male",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": "1期1年目",
+            "district": "大通り2-6-11-604レーベン北上"
+        },
+        {
+            "name_kana": "いこま　つとむ",
+            "name_kanji": "居駒　勉",
+            "party": "新清会",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "1期4年目",
+            "district": "和賀町岩崎新田真栄256-29"
+        },
+        {
+            "name_kana": "たかはし　くみこ",
+            "name_kanji": "髙橋　久美子",
+            "party": "日本共産党北上市議団",
+            "age": 83,
+            "gender": "female",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": "1期4年目",
+            "district": "和賀町竪川目1-182-39"
+        },
+        {
+            "name_kana": "ふじた　たみお",
+            "name_kanji": "藤田　民生",
+            "party": "北政会",
+            "age": 89,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "1期4年目",
+            "district": "上江釣子2-5-2"
+        },
+        {
+            "name_kana": "おおた　よういち",
+            "name_kanji": "太田　洋市",
+            "party": "北政会",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": "1期4年目",
+            "district": "和賀町長沼5-200-4"
+        },
+        {
+            "name_kana": "ふじわら　つねお",
+            "name_kanji": "藤原　常雄",
+            "party": "新清会",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": "1期4年目",
+            "district": "和賀町竪川目1-235-11"
+        },
+        {
+            "name_kana": "しとう　みちお",
+            "name_kanji": "司東　道雄",
+            "party": "無所属",
+            "age": 80,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": "2期7年目",
+            "district": "稲瀬町上台205"
+        },
+        {
+            "name_kana": "きくち　まさる",
+            "name_kanji": "菊池　勝",
+            "party": "新清会",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "2期8年目",
+            "district": "下江釣子16-55"
+        },
+        {
+            "name_kana": "こんの　まさゆき",
+            "name_kanji": "昆野　将之",
+            "party": "新清会",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": "2期8年目",
+            "district": "口内町森220"
+        },
+        {
+            "name_kana": "たかはし　あきひろ",
+            "name_kanji": "高橋　晃大",
+            "party": "北政会",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "2期8年目",
+            "district": "鬼柳町堰合54-1"
+        },
+        {
+            "name_kana": "ひらの　あきのり",
+            "name_kanji": "平野　明紀",
+            "party": "北上まほろばクラブ",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "2期8年目",
+            "district": "上野町一丁目30-8"
+        },
+        {
+            "name_kana": "くまがい　こうき",
+            "name_kanji": "熊谷　浩紀",
+            "party": "無所属",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": "2期8年目",
+            "district": "芳町7-24"
+        },
+        {
+            "name_kana": "こだしま　とくゆき",
+            "name_kanji": "小田島　徳幸",
+            "party": "北新ネット",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": "2期8年目",
+            "district": "二子町高屋320-2"
+        },
+        {
+            "name_kana": "おばら　きょうこ",
+            "name_kanji": "小原　享子",
+            "party": "無所属",
+            "age": 90,
+            "gender": "female",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": 12,
+            "district": "和賀町横川目6-142"
+        },
+        {
+            "name_kana": "さとう　けいこ",
+            "name_kanji": "佐藤　惠子",
+            "party": "北政会",
+            "age": 96,
+            "gender": "female",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": 12,
+            "district": "新穀町一丁目3-22"
+        },
+        {
+            "name_kana": "ふじもと　きんじゅ",
+            "name_kanji": "藤本　金樹",
+            "party": "新清会",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": 13,
+            "district": "更木36-55"
+        },
+        {
+            "name_kana": "みやけ　やすし",
+            "name_kanji": "三宅　靖",
+            "party": "北上まほろばクラブ",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 16,
+            "district": "相去町相去28"
+        },
+        {
+            "name_kana": "あべ　まきお",
+            "name_kanji": "阿部　眞希男",
+            "party": "北新ネット",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 16,
+            "district": "花園町二丁目1-8"
+        },
+        {
+            "name_kana": "たけだ　まさる",
+            "name_kanji": "武田　勝",
+            "party": "無所属",
+            "age": 98,
+            "gender": "male",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": 16,
+            "district": "和賀町煤孫17-47"
+        },
+        {
+            "name_kana": "うめき　しのぶ",
+            "name_kanji": "梅木　忍",
+            "party": "北上まほろばクラブ",
+            "age": 86,
+            "gender": "female",
+            "commitee": [
+                "教育民生"
+            ],
+            "term": 17,
+            "district": "村崎野16-2-44"
+        },
+        {
+            "name_kana": "あんとく　すみこ",
+            "name_kanji": "安徳　壽美子",
+            "party": "日本共産党北上市議団",
+            "age": 89,
+            "gender": "female",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 17,
+            "district": "黒沢尻一丁目5-20"
+        },
+        {
+            "name_kana": "ほし　あつこ",
+            "name_kanji": "星　敦子",
+            "party": "無所属",
+            "age": 88,
+            "gender": "female",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 20,
+            "district": "藤沢19-114-6"
+        },
+        {
+            "name_kana": "おばら　としみち",
+            "name_kanji": "小原　敏道",
+            "party": "北新ネット",
+            "age": 89,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 20,
+            "district": "和賀町横川目8-66"
+        },
+        {
+            "name_kana": "たかはし　こうじ",
+            "name_kanji": "高橋　孝二",
+            "party": "北政会",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 31,
+            "district": "里分6-102-59"
+        },
+        {
+            "name_kana": "すずき　けんじろう",
+            "name_kanji": "鈴木　健二郎",
+            "party": "日本共産党北上市議団",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 32,
+            "district": "上野町五丁目24-5"
+        },
+        {
+            "name_kana": "やえがし　しちろう",
+            "name_kanji": "八重樫　七郎",
+            "party": "無所属",
+            "age": 100,
+            "gender": "male",
+            "commitee": [
+                "なし（議長のため）"
+            ],
+            "term": 20,
+            "district": "立花4-78"
+        }
+    ]
+}

@@ -1,0 +1,88 @@
+{
+    "members": [
+        {
+            "name_kana": "いとう　ひであき",
+            "name_kanji": "伊藤 秀明",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "committee": [
+                "議長"
+            ],
+            "term": 8,
+            "district": "上小阿仁村仏社字高橋"
+        },
+        {
+            "name_kana": "さとう　しんじ",
+            "name_kanji": "佐藤 真二",
+            "party": "無所属",
+            "age": 90,
+            "gender": "male",
+            "committee": [
+                "副議長"
+            ],
+            "term": 2,
+            "district": "上小阿仁村大林字谷地"
+        },
+        {
+            "name_kana": "きたばやし　よしたか",
+            "name_kanji": "北林 義髙",
+            "party": "無所属",
+            "age": 96,
+            "gender": "male",
+            "committee": [],
+            "term": 1,
+            "district": "上小阿仁村五反沢字上ノ山"
+        },
+        {
+            "name_kana": "かわむら　よしみつ",
+            "name_kanji": "河村 良満",
+            "party": "無所属",
+            "age": 92,
+            "gender": "male",
+            "committee": [],
+            "term": 3,
+            "district": "上小阿仁村沖田面字野中"
+        },
+        {
+            "name_kana": "ながい　なおと",
+            "name_kanji": "長井 直人",
+            "party": "無所属",
+            "age": 77,
+            "gender": "male",
+            "committee": [],
+            "term": 4,
+            "district": "上小阿仁村沖田面字屋布"
+        },
+        {
+            "name_kana": "おおきど　つやこ",
+            "name_kanji": "大城戸 ツヤ子",
+            "party": "無所属",
+            "age": 98,
+            "gender": "female",
+            "committee": [],
+            "term": 5,
+            "district": "上小阿仁村小沢田字古川布"
+        },
+        {
+            "name_kana": "はぎの　よしのり",
+            "name_kanji": "萩野 芳紀",
+            "party": "無所属",
+            "age": 99,
+            "gender": "male",
+            "committee": [],
+            "term": 6,
+            "district": "上小阿仁村堂川字山根"
+        },
+        {
+            "name_kana": "さいとう　てつこ",
+            "name_kanji": "齊藤 鉄子",
+            "party": "無所属",
+            "age": 98,
+            "gender": "female",
+            "committee": [],
+            "term": 7,
+            "district": "上小阿仁村仏社字小沢口"
+        }
+    ]
+}

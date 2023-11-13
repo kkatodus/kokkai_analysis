@@ -1,0 +1,126 @@
+{
+    "members": [
+        {
+            "name_kana": "まつい しゅんじ",
+            "name_kanji": "松井 俊治",
+            "party": "無所属",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会",
+                "産業常任委員会",
+                "広報広聴常任委員会",
+                "釧路北部消防事務組合議会"
+            ],
+            "term": 2,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "いた ひろや",
+            "name_kanji": "板 宏哉",
+            "party": "無所属",
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "広報広聴常任委員会",
+                "総務常任委員会",
+                "産業常任委員会",
+                "釧路北部消防事務組合議会"
+            ],
+            "term": 1,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "よしだ やすひろ",
+            "name_kanji": "𠮷田 保博",
+            "party": "無所属",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会",
+                "釧路北部消防事務組合議会"
+            ],
+            "term": 5,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "おおつ やすのり",
+            "name_kanji": "大津 泰則",
+            "party": "無所属",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 7,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "おいかわ みちひろ",
+            "name_kanji": "及川 滿浩",
+            "party": "共産党",
+            "age": 86,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "産業常任委員会"
+            ],
+            "term": 4,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "あづま たかゆき",
+            "name_kanji": "東 隆行",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "産業常任委員会",
+                "議会運営委員会",
+                "釧路広域連合議会"
+            ],
+            "term": 5,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "さとう よしひと",
+            "name_kanji": "佐藤 吉人",
+            "party": "無所属",
+            "age": 94,
+            "gender": "male",
+            "commitee": [
+                "広報広聴常任委員会",
+                "議会運営委員会",
+                "釧路広域連合議会"
+            ],
+            "term": 4,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "まつい ひろかず",
+            "name_kanji": "松井 洋和",
+            "party": "無所属",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "産業常任委員会",
+                "広報広聴常任委員会",
+                "釧路公立大学事務組合議会"
+            ],
+            "term": 4,
+            "district": "釧路北部"
+        },
+        {
+            "name_kana": "まつい ひろみち",
+            "name_kanji": "松井 廣道",
+            "party": "無所属",
+            "age": 98,
+            "gender": "male",
+            "commitee": [],
+            "term": 8,
+            "district": "釧路北部"
+        }
+    ]
+}

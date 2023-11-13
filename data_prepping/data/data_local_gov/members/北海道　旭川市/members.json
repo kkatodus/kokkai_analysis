@@ -1,0 +1,344 @@
+{
+    "members": [
+        {
+            "name_kana": "のむらぱたーそん かずたか",
+            "name_kanji": "のむらパターソン 和孝",
+            "party": "無党派G",
+            "age": 37,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "よこやま けいいち",
+            "name_kanji": "横山 啓一",
+            "party": "無所属",
+            "age": 61,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "かさい まなみ",
+            "name_kanji": "笠井 まなみ",
+            "party": "自民党・市民会議",
+            "age": 28,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "あべ なお",
+            "name_kanji": "あべ なお",
+            "party": "自民党・市民会議",
+            "age": 37,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "うえの かずゆき",
+            "name_kanji": "上野 和幸",
+            "party": "無党派G",
+            "age": 62,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "なかむら みなこ",
+            "name_kanji": "中村 みなこ",
+            "party": "日本共産党",
+            "age": 52,
+            "gender": "female",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "こばやし ゆうき",
+            "name_kanji": "小林 ゆうき",
+            "party": "民主・市民連合",
+            "age": 28,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "うえき だいすけ",
+            "name_kanji": "植木 だいすけ",
+            "party": "民主・市民連合",
+            "age": 50,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "えがわ あや",
+            "name_kanji": "江川 あや",
+            "party": "民主・市民連合",
+            "age": 39,
+            "gender": "female",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "こまき おさみ",
+            "name_kanji": "駒木 おさみ",
+            "party": "公明党",
+            "age": 44,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "みながわ ゆきたけ",
+            "name_kanji": "皆川 ゆきたけ",
+            "party": "公明党",
+            "age": 49,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たけいし よういち",
+            "name_kanji": "たけいし よういち",
+            "party": "自民党・市民会議",
+            "age": 51,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "いしかわ まさゆき",
+            "name_kanji": "石川 まさゆき",
+            "party": "自民党・市民会議",
+            "age": 42,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "ぬまざき まさゆき",
+            "name_kanji": "沼﨑 雅之",
+            "party": "自民党・市民会議",
+            "age": 39,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "かなや みなこ",
+            "name_kanji": "金谷 美奈子",
+            "party": "無党派G",
+            "age": 62,
+            "gender": "female",
+            "commitee": [],
+            "term": 6,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "まじま たかひで",
+            "name_kanji": "まじま 隆英",
+            "party": "日本共産党",
+            "age": 57,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "しおじり ひであき",
+            "name_kanji": "塩尻 英明",
+            "party": "民主・市民連合",
+            "age": 42,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たかはし のりひろ",
+            "name_kanji": "髙橋 紀博",
+            "party": "民主・市民連合",
+            "age": 57,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たかぎ ひろたか",
+            "name_kanji": "高木 ひろたか",
+            "party": "民主・市民連合",
+            "age": 57,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "なかの ひろゆき",
+            "name_kanji": "中野 ひろゆき",
+            "party": "公明党",
+            "age": 49,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "えびな やすのぶ",
+            "name_kanji": "えびな 安信",
+            "party": "自民党・市民会議",
+            "age": 39,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たかはし ひでとし",
+            "name_kanji": "高橋 ひでとし",
+            "party": "自民党・市民会議",
+            "age": 53,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "すがわら のりあき",
+            "name_kanji": "菅原 範明",
+            "party": "自民党・市民会議",
+            "age": 64,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "さとう さだお",
+            "name_kanji": "佐藤 さだお",
+            "party": "自民党・市民会議",
+            "age": 66,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "いしかわ あつこ",
+            "name_kanji": "石川 厚子",
+            "party": "日本共産党",
+            "age": 61,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "のとや しげる",
+            "name_kanji": "能登谷 繁",
+            "party": "日本共産党",
+            "age": 64,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "しなだ ときえ",
+            "name_kanji": "品田 ときえ",
+            "party": "民主・市民連合",
+            "age": 61,
+            "gender": "female",
+            "commitee": [],
+            "term": 3,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たかみ かずのり",
+            "name_kanji": "高見 一典",
+            "party": "民主・市民連合",
+            "age": 63,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "たかはな えいこ",
+            "name_kanji": "高花 えいこ",
+            "party": "公明党",
+            "age": 58,
+            "gender": "female",
+            "commitee": [],
+            "term": 4,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "なかむら のりゆき",
+            "name_kanji": "中村 のりゆき",
+            "party": "公明党",
+            "age": 59,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "まつだ たくや",
+            "name_kanji": "松田 たくや",
+            "party": "自民党・市民会議",
+            "age": 58,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "ふくい ひでお",
+            "name_kanji": "福居 ひでお",
+            "party": "自民党・市民会議",
+            "age": 64,
+            "gender": "male",
+            "commitee": [],
+            "term": 6,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "やすだ よしまさ",
+            "name_kanji": "安田 よしまさ",
+            "party": "自民党・市民会議",
+            "age": 56,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": "旭川市"
+        },
+        {
+            "name_kana": "すぎやま まさたか",
+            "name_kanji": "杉山 允孝",
+            "party": "自民党・市民会議",
+            "age": 79,
+            "gender": "male",
+            "commitee": [],
+            "term": 11,
+            "district": "旭川市"
+        }
+    ]
+}

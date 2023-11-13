@@ -1,0 +1,64 @@
+{
+    "members": [
+        {
+            "name_kana": "ひやましげあき",
+            "name_kanji": "檜山重昭",
+            "party": "無所属",
+            "age": 87,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "くまがいじゅいち",
+            "name_kanji": "熊谷壽一",
+            "party": "無所属",
+            "age": 96,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "さいとうあきら",
+            "name_kanji": "齊藤晃",
+            "party": "無所属",
+            "age": 76,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 3
+        },
+        {
+            "name_kana": "みかみきんいち",
+            "name_kanji": "三上金一",
+            "party": "無所属",
+            "age": 91,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "みうらきよのり",
+            "name_kanji": "三浦清則",
+            "party": "無所属",
+            "age": 93,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": 5
+        },
+        {
+            "name_kana": "さとうふじこ",
+            "name_kanji": "佐藤ふじ子",
+            "party": "無所属",
+            "age": 97,
+            "gender": "female",
+            "commitee": [],
+            "term": 7,
+            "district": 6
+        }
+    ]
+}

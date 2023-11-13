@@ -1,0 +1,114 @@
+{
+    "members": [
+        {
+            "name_kana": "たかはしとおる",
+            "name_kanji": "高橋 透",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "監査委員（議会選出）",
+                "総務経済常任委員会（委員）",
+                "議会広報特別委員会（副委員長）",
+                "南宗谷衛生施設組合（議会議員）"
+            ],
+            "term": 3,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "かさいてつや",
+            "name_kanji": "笠井 哲哉",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会（委員長）",
+                "議会運営委員会（副委員）",
+                "稚内地区消防事務組合（議会議員）"
+            ],
+            "term": 3,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "のむらまさお",
+            "name_kanji": "野村雅男",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会（委員）",
+                "議会運営委員会（委員長）"
+            ],
+            "term": 7,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "すずきとおる",
+            "name_kanji": "鈴木 徹",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会（委員）",
+                "議会運営委員会（委員）",
+                "稚内地区消防事務組合（議会議員）"
+            ],
+            "term": 1,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "しょうざきひろし",
+            "name_kanji": "庄崎裕史",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務経済常任委員会（委員）",
+                "南宗谷衛生施設組合（議会議員）"
+            ],
+            "term": 1,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "こやまうちこういち",
+            "name_kanji": "小山内浩一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "総務経済常任委員会（副委員長）",
+                "議会運営委員会（委員）",
+                "議会広報特別委員会（委員長）"
+            ],
+            "term": 5,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "かさいさとえ",
+            "name_kanji": "笠井里恵",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務経済常任委員会（委員）",
+                "議会広報特別委員会（委員）"
+            ],
+            "term": 1,
+            "district": "猿払村"
+        },
+        {
+            "name_kana": "やまもりきよし",
+            "name_kanji": "山森清志",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "総務経済常任委員会（委員）"
+            ],
+            "term": 4,
+            "district": "猿払村"
+        }
+    ]
+}

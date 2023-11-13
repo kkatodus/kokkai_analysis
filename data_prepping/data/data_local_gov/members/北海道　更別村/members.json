@@ -1,0 +1,111 @@
+{
+    "members": [
+        {
+            "name_kana": "おおた　つなき",
+            "name_kanji": "太田　綱基",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "議会運営委員会",
+                "総務厚生常任委員会"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "やすむら　としひろ",
+            "name_kanji": "安村　敏博",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "産業文教常任委員会",
+                "議会運営委員会",
+                "総務厚生常任委員会",
+                "議選監査委員"
+            ],
+            "term": 3,
+            "district": null
+        },
+        {
+            "name_kana": "さいとう　けん",
+            "name_kanji": "斎藤　憲",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "産業文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "おりゅう　ようこ",
+            "name_kanji": "尾立　要子",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "産業文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "こたに　ふみこ",
+            "name_kanji": "小谷　文子",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "総務厚生常任委員会",
+                "産業文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": null
+        },
+        {
+            "name_kana": "おぎはら　ただし",
+            "name_kanji": "荻原　正",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "総務厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": null
+        },
+        {
+            "name_kana": "たかぎ　しゅういち",
+            "name_kanji": "髙木　修一",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "副議長",
+                "総務厚生常任委員会",
+                "産業文教常任委員会"
+            ],
+            "term": 4,
+            "district": null
+        },
+        {
+            "name_kana": "おだ　ただし",
+            "name_kanji": "織田　忠司",
+            "party": "無所属",
+            "age": null,
+            "gender": null,
+            "commitee": [
+                "議長"
+            ],
+            "term": 3,
+            "district": null
+        }
+    ]
+}

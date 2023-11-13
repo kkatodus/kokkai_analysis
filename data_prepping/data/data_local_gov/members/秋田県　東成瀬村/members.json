@@ -1,0 +1,114 @@
+{
+    "members": [
+        {
+            "name_kana": "ささき　えつお",
+            "name_kanji": "佐々木　悦男",
+            "party": "副議長",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "1"
+        },
+        {
+            "name_kana": "たかはし　としあき",
+            "name_kanji": "髙橋　登志明",
+            "party": "2",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "2"
+        },
+        {
+            "name_kana": "さとう　かずと",
+            "name_kanji": "佐藤　一人",
+            "party": "3",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "3"
+        },
+        {
+            "name_kana": "いせや　かつみ",
+            "name_kanji": "伊勢谷　勝美",
+            "party": "4",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "4"
+        },
+        {
+            "name_kana": "すずき　みのる",
+            "name_kanji": "鈴木　実",
+            "party": "5",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "5"
+        },
+        {
+            "name_kana": "たかはし　けん",
+            "name_kanji": "高橋　健",
+            "party": "6",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "6"
+        },
+        {
+            "name_kana": "たかはし　せいいち",
+            "name_kanji": "髙橋　清一",
+            "party": "7",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "7"
+        },
+        {
+            "name_kana": "すぎやま　あきら",
+            "name_kanji": "杉山　彰",
+            "party": "8",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "8"
+        },
+        {
+            "name_kana": "さとう　ひとし",
+            "name_kanji": "佐藤　仁",
+            "party": "9",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "9"
+        },
+        {
+            "name_kana": "ささき　おさむ",
+            "name_kanji": "佐々木　修",
+            "party": "10",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "10"
+        },
+        {
+            "name_kana": null,
+            "name_kanji": null,
+            "party": "議長",
+            "age": null,
+            "gender": null,
+            "commitee": [],
+            "term": 1,
+            "district": null
+        }
+    ]
+}

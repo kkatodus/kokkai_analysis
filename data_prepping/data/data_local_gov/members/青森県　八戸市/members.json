@@ -1,0 +1,354 @@
+{
+    "members": [
+        {
+            "name_kana": "つちみね なおき",
+            "name_kanji": "土嶺 直樹",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "1期",
+            "district": "南白山台二丁目"
+        },
+        {
+            "name_kana": "はせがわ ひろゆき",
+            "name_kanji": "長谷川 ひろゆき",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "民生環境常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "1期",
+            "district": "小中野五丁目"
+        },
+        {
+            "name_kana": "やまのうち ゆう",
+            "name_kanji": "山之内 悠",
+            "party": "自由民主・無所属クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "建設企業常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "2期",
+            "district": "吹上二丁目"
+        },
+        {
+            "name_kana": "まえだ ゆみ",
+            "name_kanji": "前田 由美",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "建設企業常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "1期",
+            "district": "城下三丁目"
+        },
+        {
+            "name_kana": "よしだ こうりゅう",
+            "name_kanji": "吉田 洸龍",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "2期",
+            "district": "市川町字桔梗野上"
+        },
+        {
+            "name_kana": "たなぶ ひろみ",
+            "name_kanji": "田名部 裕美",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会",
+                "経済常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "2期",
+            "district": "石堂二丁目"
+        },
+        {
+            "name_kana": "たかはし まさと",
+            "name_kanji": "高橋 正人",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "建設企業常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "2期",
+            "district": "大久保字沢目"
+        },
+        {
+            "name_kana": "あいだ もりひと",
+            "name_kanji": "間 盛仁",
+            "party": "自由民主・無所属クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "2期",
+            "district": "大久保字坂ノ脇"
+        },
+        {
+            "name_kana": "くぼ ももえ",
+            "name_kanji": "久保 百恵",
+            "party": "自由民主・無所属クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "3期",
+            "district": "長苗代四丁目"
+        },
+        {
+            "name_kana": "とまべち あつこ",
+            "name_kanji": "苫米地 あつ子",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "建設企業常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "3期",
+            "district": "江陽二丁目"
+        },
+        {
+            "name_kana": "みうら ひろし",
+            "name_kanji": "三浦 博司",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "建設企業常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "長苗代二丁目"
+        },
+        {
+            "name_kana": "いしばし あつし",
+            "name_kanji": "石橋 充志",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "根城五丁目"
+        },
+        {
+            "name_kana": "なかむら ますのり",
+            "name_kanji": "中村 益則",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "3期",
+            "district": "江陽四丁目"
+        },
+        {
+            "name_kana": "おかだ たけし",
+            "name_kanji": "岡田 英",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "3期",
+            "district": "長苗代字天狗柳"
+        },
+        {
+            "name_kana": "ひなた まさお",
+            "name_kanji": "日當 正男",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "建設企業常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "3期",
+            "district": "鮫町字西子沢"
+        },
+        {
+            "name_kana": "ふじかわ ゆり",
+            "name_kanji": "藤川 優里",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会",
+                "建設企業常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "西白山台三丁目"
+        },
+        {
+            "name_kana": "みぶ やそひろ",
+            "name_kanji": "壬生 八十博",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "経済常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "6期",
+            "district": "南郷市野沢字市野沢"
+        },
+        {
+            "name_kana": "うえじょう ゆきや",
+            "name_kanji": "上条 幸哉",
+            "party": "自由民主・無所属クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "新井田字長塚"
+        },
+        {
+            "name_kana": "もりぞの しゅういち",
+            "name_kanji": "森園 秀一",
+            "party": "自由民主・無所属クラブ(会長)",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会",
+                "デジタル化推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "糠塚字下屋敷"
+        },
+        {
+            "name_kana": "こやしき たかし",
+            "name_kanji": "小屋敷 孝",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "5期",
+            "district": "湊高台二丁目"
+        },
+        {
+            "name_kana": "とよだ みよ",
+            "name_kanji": "豊田 美好",
+            "party": "自由民主・無所属クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "6期",
+            "district": "吹上五丁目"
+        },
+        {
+            "name_kana": "やまな ふみよ",
+            "name_kanji": "山名 文世",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "民生環境常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "6期",
+            "district": "石手洗字前河原"
+        },
+        {
+            "name_kana": "てらち のりゆき",
+            "name_kanji": "寺地 則行",
+            "party": "きずなクラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議会運営委員会",
+                "総務常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "7期",
+            "district": "田向字向平"
+        },
+        {
+            "name_kana": "いとう のりこ",
+            "name_kanji": "伊藤 圓子",
+            "party": "新緑・無所属の会(代表)",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "議会運営委員会",
+                "民生環境常任委員会",
+                "観光文化スポーツ推進特別委員会"
+            ],
+            "term": "9期",
+            "district": "新井田字長塚森"
+        },
+        {
+            "name_kana": "たちばな たかゆき",
+            "name_kanji": "立花 敬之",
+            "party": "自民クラブ（会長）",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "まちづくり推進特別委員会"
+            ],
+            "term": "7期",
+            "district": "売市字観音下"
+        },
+        {
+            "name_kana": "さかもと よしひろ",
+            "name_kanji": "坂本 美洋",
+            "party": "自民クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生環境常任委員会",
+                "広域連携推進特別委員会"
+            ],
+            "term": "11期",
+            "district": "多賀台二丁目"
+        }
+    ]
+}

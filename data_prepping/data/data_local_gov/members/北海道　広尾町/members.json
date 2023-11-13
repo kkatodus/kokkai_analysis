@@ -1,0 +1,166 @@
+{
+    "members": [
+        {
+            "name_kana": "まつだけんじ",
+            "name_kanji": "松田健司",
+            "party": "無所属",
+            "age": 53,
+            "gender": "male",
+            "committee": [
+                "産業常任委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 1
+        },
+        {
+            "name_kana": "はまのたかし",
+            "name_kanji": "浜野隆",
+            "party": "無所属",
+            "age": 68,
+            "gender": "male",
+            "committee": [
+                "総務常任委員",
+                "議会運営副委員長"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 2
+        },
+        {
+            "name_kana": "まきやまちずこ",
+            "name_kanji": "萬亀山ちず子",
+            "party": "無所属",
+            "age": 73,
+            "gender": "female",
+            "committee": [
+                "総務常任副委員長",
+                "議会運営委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 3
+        },
+        {
+            "name_kana": "まえざきしげる",
+            "name_kanji": "前崎茂",
+            "party": "日本共産党",
+            "age": 73,
+            "gender": "male",
+            "committee": [
+                "総務常任委員長",
+                "議会運営委員",
+                "議会広報特別委員",
+                "南十勝複合事務組合議会委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 4
+        },
+        {
+            "name_kana": "きたふじとしみち",
+            "name_kanji": "北藤利通",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "committee": [
+                "産業常任委員",
+                "議会広報特別委員長",
+                "南十勝複合事務組合議会議員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 5
+        },
+        {
+            "name_kana": "しむらくにあき",
+            "name_kanji": "志村國昭",
+            "party": "無所属",
+            "age": 71,
+            "gender": "male",
+            "committee": [
+                "産業常任委員",
+                "議会広報特別委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 6
+        },
+        {
+            "name_kana": "ほしかひろやす",
+            "name_kanji": "星加廣保",
+            "party": "無所属",
+            "age": 84,
+            "gender": "male",
+            "committee": [
+                "産業常任委員",
+                "議会運営委員",
+                "議会広報特別委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 7
+        },
+        {
+            "name_kana": "わたなべふくま",
+            "name_kanji": "渡辺富久馬",
+            "party": "無所属",
+            "age": 80,
+            "gender": "male",
+            "committee": [
+                "総務常任委員",
+                "議会運営委員長",
+                "議会広報特別委員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 9
+        },
+        {
+            "name_kana": "おだまさじ",
+            "name_kanji": "小田雅二",
+            "party": "無所属",
+            "age": 72,
+            "gender": "male",
+            "committee": [
+                "産業常任委員長"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 10
+        },
+        {
+            "name_kana": "はたてけいこ",
+            "name_kanji": "旗手恵子",
+            "party": "日本共産党",
+            "age": 74,
+            "gender": "female",
+            "committee": [
+                "産業常任副委員長"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 11
+        },
+        {
+            "name_kana": "やまやてるお",
+            "name_kanji": "山谷照夫",
+            "party": "無所属",
+            "age": 77,
+            "gender": "male",
+            "committee": [
+                "副議長",
+                "総務常任委員",
+                "議会運営委員",
+                "議会広報特別副委員長",
+                "とかち広域消防事務組合議会議員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 12
+        },
+        {
+            "name_kana": "ほりたしげお",
+            "name_kanji": "堀田成郎",
+            "party": "無所属",
+            "age": 55,
+            "gender": "male",
+            "committee": [
+                "議長",
+                "十勝圏複合事務組合議会議員",
+                "とかち広域消防事務組合議会議員"
+            ],
+            "term": "令和2年4月30日～令和6年4月29日",
+            "district": 13
+        }
+    ]
+}

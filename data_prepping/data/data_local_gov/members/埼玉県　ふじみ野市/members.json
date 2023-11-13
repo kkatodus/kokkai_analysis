@@ -1,0 +1,293 @@
+{
+    "members": [
+        {
+            "name_kana": "ふるこし たかこ",
+            "name_kanji": "古越 孝子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市仲1-1-30"
+        },
+        {
+            "name_kana": "かねはま こうけん",
+            "name_kanji": "金濱 高顕",
+            "party": "自由民主党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務・教育常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 2,
+            "district": "ふじみ野市清見2-3-14"
+        },
+        {
+            "name_kana": "つぼた としたか",
+            "name_kanji": "坪田 敏孝",
+            "party": "自由民主党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "市民・都市常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 2,
+            "district": "ふじみ野市駒林元町3-2-20-101"
+        },
+        {
+            "name_kana": "すずき みえ",
+            "name_kanji": "鈴木 美恵",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2,
+            "district": "ふじみ野市亀久保1763-13"
+        },
+        {
+            "name_kana": "かわしま ひでお",
+            "name_kanji": "川島 秀男",
+            "party": "参政党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務・教育常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市新田2-3-31"
+        },
+        {
+            "name_kana": "まえだ ひろこ",
+            "name_kanji": "前田 広子",
+            "party": "日本維新の会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務・教育常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市大井中央2-8-30-602"
+        },
+        {
+            "name_kana": "すずき ひろき",
+            "name_kanji": "鈴木 宏樹",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "市民・都市常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市松山2-5-14"
+        },
+        {
+            "name_kana": "いたくら あつし",
+            "name_kanji": "板倉 篤",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市亀久保3-12-37"
+        },
+        {
+            "name_kana": "すずき けいたろう",
+            "name_kanji": "鈴木 啓太郎",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 6,
+            "district": "ふじみ野市上福岡4-12-1-405"
+        },
+        {
+            "name_kana": "こんどう よしのり",
+            "name_kanji": "近藤 善則",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務・教育常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 4,
+            "district": "ふじみ野市中ノ島1-3-1"
+        },
+        {
+            "name_kana": "あだち しづこ",
+            "name_kanji": "足立 志津子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 8,
+            "district": "ふじみ野市築地3-3-8"
+        },
+        {
+            "name_kana": "たなか さなえ",
+            "name_kanji": "田中 早苗",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "市民・都市常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 1,
+            "district": "ふじみ野市元福岡2-14-6"
+        },
+        {
+            "name_kana": "かわばた きょうこ",
+            "name_kanji": "川畑 京子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務・教育常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "ふじみ野市南台2-3-21"
+        },
+        {
+            "name_kana": "しまだ いずみ",
+            "name_kanji": "島田 和泉",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "市民・都市常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 3,
+            "district": "ふじみ野市亀久保2-21-10"
+        },
+        {
+            "name_kana": "はらだ ゆういち",
+            "name_kanji": "原田 雄一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 2,
+            "district": "ふじみ野市福岡373"
+        },
+        {
+            "name_kana": "かとう けいいち",
+            "name_kanji": "加藤 恵一",
+            "party": "自由民主党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "市民・都市常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "ふじみ野市上福岡3-7-16-301"
+        },
+        {
+            "name_kana": "こばやし のりひと",
+            "name_kanji": "小林 憲人",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "生活・福祉常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "ふじみ野市南台1-8-15-103"
+        },
+        {
+            "name_kana": "やまだ としお",
+            "name_kanji": "山田 敏夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務・教育常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 4,
+            "district": "ふじみ野市滝3-3-65"
+        },
+        {
+            "name_kana": "みんぶ かよ",
+            "name_kanji": "民部 佳代",
+            "party": "立憲民主党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "市民・都市常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会"
+            ],
+            "term": 5,
+            "district": "ふじみ野市市沢3-2-3-405"
+        },
+        {
+            "name_kana": "とこい よしのり",
+            "name_kanji": "床井 紀範",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務・教育常任委員会",
+                "議会広報常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": "ふじみ野市上福岡6-3-1-105"
+        },
+        {
+            "name_kana": "つかこし よういち",
+            "name_kanji": "塚越 洋一",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "市民・都市常任委員会",
+                "予算・決算常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 11,
+            "district": "ふじみ野市大井中央2-5-14"
+        }
+    ]
+}

@@ -1,0 +1,340 @@
+{
+    "members": [
+        {
+            "name_kana": "かわた　しゅんすけ",
+            "name_kanji": "川田　俊介",
+            "party": "真政クラブ",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 1,
+            "district": "大平町下皆川2025-3"
+        },
+        {
+            "name_kana": "こだち　たかゆき",
+            "name_kanji": "小太刀　孝之",
+            "party": "創政会",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 1,
+            "district": "大平町新1448-4"
+        },
+        {
+            "name_kana": "いちむら　たかし",
+            "name_kanji": "市村　隆",
+            "party": "真政クラブ",
+            "age": 88,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 1,
+            "district": "岩舟町静850-4"
+        },
+        {
+            "name_kana": "あめみや　しげき",
+            "name_kanji": "雨宮　茂樹",
+            "party": "公明党議員会",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 1,
+            "district": "大宮町2607-6"
+        },
+        {
+            "name_kana": "もりと　まさたか",
+            "name_kanji": "森戸　雅孝",
+            "party": "真政クラブ",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2,
+            "district": "川原田町618"
+        },
+        {
+            "name_kana": "あさの　たかゆき",
+            "name_kanji": "浅野　貴之",
+            "party": "かがやき",
+            "age": 121,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2,
+            "district": "岩舟町静3438-1"
+        },
+        {
+            "name_kana": "こだいら　けいすけ",
+            "name_kanji": "小平　啓佑",
+            "party": "自民未来",
+            "age": 68,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 2,
+            "district": "川原田町1313-1"
+        },
+        {
+            "name_kana": "おおうら　かねまさ",
+            "name_kanji": "大浦　兼政",
+            "party": "自民未来",
+            "age": 72,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2,
+            "district": "平井町208-2"
+        },
+        {
+            "name_kana": "はりがい　いくぞう",
+            "name_kanji": "針谷　育造",
+            "party": "創志会",
+            "age": 102,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 3,
+            "district": "岩舟町古江792"
+        },
+        {
+            "name_kana": "ふるさわ　ちいこ",
+            "name_kanji": "古沢　ちい子",
+            "party": "公明党議員会",
+            "age": 85,
+            "gender": "female",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 3,
+            "district": "柳橋町12-22"
+        },
+        {
+            "name_kana": "おおや　こういち",
+            "name_kanji": "大谷　好一",
+            "party": "自民未来",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 3,
+            "district": "皆川城内町2016"
+        },
+        {
+            "name_kana": "ばんどう　かずとし",
+            "name_kanji": "坂東　一敏",
+            "party": "かがやき",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 3,
+            "district": "城内町2-39-2"
+        },
+        {
+            "name_kana": "うつみ　まさかず",
+            "name_kanji": "内海　まさかず",
+            "party": "創志会",
+            "age": 78,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 3,
+            "district": "祝町3-26"
+        },
+        {
+            "name_kana": "こくぼ　かおる",
+            "name_kanji": "小久保　かおる",
+            "party": "公明党議員会",
+            "age": 86,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 3,
+            "district": "大平町上高島120-3"
+        },
+        {
+            "name_kana": "あおき　かずお",
+            "name_kanji": "青木　一男",
+            "party": "自民未来",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 3,
+            "district": "岩舟町下津原358-4"
+        },
+        {
+            "name_kana": "まつもと　きいち",
+            "name_kanji": "松本　喜一",
+            "party": "自民未来",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 4,
+            "district": "大宮町1618-1"
+        },
+        {
+            "name_kana": "うめざわ　よねみつ",
+            "name_kanji": "梅澤　米満",
+            "party": "真政クラブ",
+            "age": 97,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 4,
+            "district": "藤岡町大田和285"
+        },
+        {
+            "name_kana": "あまがい　ひろあき",
+            "name_kanji": "天谷　浩明",
+            "party": "無会派",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 4,
+            "district": "沼和田町41-34"
+        },
+        {
+            "name_kana": "はりがい　まさお",
+            "name_kanji": "針谷　正夫",
+            "party": "かがやき",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 4,
+            "district": "西方町金崎734-2"
+        },
+        {
+            "name_kana": "ひろせ　よしあき",
+            "name_kanji": "広瀬　義明",
+            "party": "自民未来",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 4,
+            "district": "大平町富田330-6"
+        },
+        {
+            "name_kana": "うじいえ　あきら",
+            "name_kanji": "氏家　晃",
+            "party": "自民未来",
+            "age": 81,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 4,
+            "district": "都賀町深沢460"
+        },
+        {
+            "name_kana": "ふくとみ　よしあき",
+            "name_kanji": "福富　善明",
+            "party": "真政クラブ",
+            "age": 93,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 4,
+            "district": "藤岡町中根353-8"
+        },
+        {
+            "name_kana": "ふくだ　ゆうじ",
+            "name_kanji": "福田　裕司",
+            "party": "創政会",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 4,
+            "district": "大平町真弓1608-3"
+        },
+        {
+            "name_kana": "なかじま　かつのり",
+            "name_kanji": "中島　克訓",
+            "party": "無会派",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 4,
+            "district": "都賀町合戦場768"
+        },
+        {
+            "name_kana": "おおあく　いわと",
+            "name_kanji": "大阿久　岩人",
+            "party": "真政クラブ",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": 4,
+            "district": "柏倉町888-1"
+        },
+        {
+            "name_kana": "こぼり　よしえ",
+            "name_kanji": "小堀　良江",
+            "party": "真政クラブ",
+            "age": 74,
+            "gender": "female",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 4,
+            "district": "吹上町1389-3"
+        },
+        {
+            "name_kana": "しらいし　みきお",
+            "name_kanji": "白石　幹男",
+            "party": "無会派",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 4,
+            "district": "鍋山町137-21"
+        },
+        {
+            "name_kana": "せきぐち　まごいちろう",
+            "name_kanji": "関口　孫一郎",
+            "party": "自民未来",
+            "age": 93,
+            "gender": "male",
+            "commitee": [
+                "産業教育常任委員会"
+            ],
+            "term": 4,
+            "district": "藤岡町藤岡5776-1"
+        }
+    ]
+}

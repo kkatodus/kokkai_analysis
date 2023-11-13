@@ -1,0 +1,68 @@
+{
+    "members": [
+        {
+            "name_kana": "ホンゴウ ヨシカツ",
+            "name_kanji": "本郷 良克",
+            "party": "無所属",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "議長"
+            ],
+            "term": 4,
+            "district": "今別町大字大川平字村元135-46"
+        },
+        {
+            "name_kana": "タナカ テツヤ",
+            "name_kanji": "田中 哲也",
+            "party": "無所属",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "副議長"
+            ],
+            "term": 2,
+            "district": "今別町大字大川平字村元115"
+        },
+        {
+            "name_kana": "ホンマ トウシ",
+            "name_kanji": "本間 闘士",
+            "party": "無所属",
+            "age": 37,
+            "gender": "male",
+            "commitee": [],
+            "term": 1,
+            "district": "今別町大字浜名字中宇田1‐1"
+        },
+        {
+            "name_kana": "オグラ ジュンジ",
+            "name_kanji": "小倉 潤二",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "今別町大字袰月字袰村元35-1"
+        },
+        {
+            "name_kana": "ナリタ セイイチ",
+            "name_kanji": "成田 精市",
+            "party": "無所属",
+            "age": 70,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "今別町大字今別字今別100"
+        },
+        {
+            "name_kana": "フクシ カズヒコ",
+            "name_kanji": "福士 和比古",
+            "party": "無所属",
+            "age": 73,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "今別町大字今別字西田220"
+        }
+    ]
+}

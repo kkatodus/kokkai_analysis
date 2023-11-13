@@ -1,0 +1,153 @@
+{
+    "members": [
+        {
+            "name_kana": "みやもとやよい",
+            "name_kanji": "宮本やよい",
+            "party": "無",
+            "age": 44,
+            "gender": "female",
+            "commitee": [
+                "総務",
+                "広報広聴"
+            ],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "かとうてつき",
+            "name_kanji": "加藤徹己",
+            "party": "無",
+            "age": 69,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "広報広聴"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "うしわかひろゆき",
+            "name_kanji": "丑若浩行",
+            "party": "無",
+            "age": 60,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "広報広聴"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "みずたにれいこ",
+            "name_kanji": "水谷令子",
+            "party": "無",
+            "age": 65,
+            "gender": "female",
+            "commitee": [
+                "総務"
+            ],
+            "term": 2,
+            "district": 4
+        },
+        {
+            "name_kana": "うめむらともひで",
+            "name_kanji": "梅村智秀",
+            "party": "無",
+            "age": 46,
+            "gender": "male",
+            "commitee": [
+                "産業厚生"
+            ],
+            "term": 2,
+            "district": 5
+        },
+        {
+            "name_kana": "いしやまけんじ",
+            "name_kanji": "石山憲司",
+            "party": "無",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "産業厚生"
+            ],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "ふじたなおみ",
+            "name_kanji": "藤田直美",
+            "party": "無",
+            "age": 56,
+            "gender": "female",
+            "commitee": [
+                "産業厚生"
+            ],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "ほうかわいちろう",
+            "name_kanji": "方川一郎",
+            "party": "無",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 7,
+            "district": 8
+        },
+        {
+            "name_kana": "たかはしたかかつ",
+            "name_kanji": "高橋利勝",
+            "party": "無",
+            "age": 73,
+            "gender": "male",
+            "commitee": [
+                "総務"
+            ],
+            "term": 9,
+            "district": 9
+        },
+        {
+            "name_kana": "あぼしずお",
+            "name_kanji": "阿保静夫",
+            "party": "共産",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "産業厚生",
+                "広報広聴"
+            ],
+            "term": 9,
+            "district": 10
+        },
+        {
+            "name_kana": "かしわざきひでゆき",
+            "name_kanji": "柏崎秀行",
+            "party": "無",
+            "age": 50,
+            "gender": "male",
+            "commitee": [
+                "総務",
+                "広報広聴"
+            ],
+            "term": 2,
+            "district": 11
+        },
+        {
+            "name_kana": "しのはらよしひこ",
+            "name_kanji": "篠原義彦",
+            "party": "無",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "－"
+            ],
+            "term": 3,
+            "district": 12
+        }
+    ]
+}

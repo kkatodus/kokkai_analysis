@@ -1,0 +1,357 @@
+{
+    "members": [
+        {
+            "name_kana": "すとう えりか",
+            "name_kanji": "須藤 江利加",
+            "party": "日本共産党",
+            "age": "35",
+            "gender": "female",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "若党町"
+        },
+        {
+            "name_kana": "くどう ゆうすけ",
+            "name_kanji": "工藤 裕介",
+            "party": "弘前さくら未来",
+            "age": "42",
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "ひろさき市議会だより編集",
+                "特別委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "宮園四丁目14番地2"
+        },
+        {
+            "name_kana": "しむら ようこ",
+            "name_kanji": "志村 洋子",
+            "party": "創和・公明",
+            "age": "37",
+            "gender": "female",
+            "commitee": [
+                "厚生常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "宮園四丁目8番地12"
+        },
+        {
+            "name_kana": "みうら こう",
+            "name_kanji": "三浦 行",
+            "party": "日本共産党",
+            "age": "39",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "ひろさき市議会だより編集",
+                "特別委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "茂森新町一丁目7番地8"
+        },
+        {
+            "name_kana": "あかひら やすえい",
+            "name_kanji": "赤平 泰衛",
+            "party": "弘前さくら未来",
+            "age": "41",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "城南一丁目7番地7"
+        },
+        {
+            "name_kana": "くどう けんせい",
+            "name_kanji": "工藤 賢生",
+            "party": "櫻鳴会",
+            "age": "40",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "十腰内字猿沢134番地"
+        },
+        {
+            "name_kana": "たけうち ひろゆき",
+            "name_kanji": "竹内 博之",
+            "party": "弘前さくら未来",
+            "age": "46",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "末広五丁目7番地2"
+        },
+        {
+            "name_kana": "といかわ あつこ",
+            "name_kanji": "樋川 篤子",
+            "party": "弘前さくら未来",
+            "age": "45",
+            "gender": "female",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "小比内三丁目2番地3"
+        },
+        {
+            "name_kana": "たけなみ あつし",
+            "name_kanji": "竹浪 敦",
+            "party": "創和・公明",
+            "age": "44",
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "ひろさき市議会だより編集",
+                "特別委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "青女子字桜苅317番地"
+        },
+        {
+            "name_kana": "なりた だいすけ",
+            "name_kanji": "成田 大介",
+            "party": "弘前さくら未来",
+            "age": "47",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "賀田字大浦12番地2"
+        },
+        {
+            "name_kana": "さかもと たかし",
+            "name_kanji": "坂本 崇",
+            "party": "櫻鳴会",
+            "age": "48",
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "ひろさき市議会だより編集",
+                "特別委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "青山四丁目3番地6"
+        },
+        {
+            "name_kana": "さいとう つよし",
+            "name_kanji": "齋藤 豪",
+            "party": "櫻鳴会",
+            "age": "50",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "一野渡字岡本65番地1"
+        },
+        {
+            "name_kana": "えびな まさき",
+            "name_kanji": "蛯名 正樹",
+            "party": "創和・公明",
+            "age": "49",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "青山二丁目5番地11"
+        },
+        {
+            "name_kana": "はたやま さとし",
+            "name_kanji": "畑山 聡",
+            "party": "創和・公明",
+            "age": "49",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "城東中央三丁目9番地11"
+        },
+        {
+            "name_kana": "いしやま たかし",
+            "name_kanji": "石山 敬",
+            "party": "創和・公明",
+            "age": "52",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "小沢字広野10番地1"
+        },
+        {
+            "name_kana": "きむら たかひろ",
+            "name_kanji": "木村 隆洋",
+            "party": "創和・公明",
+            "age": "52",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "清野袋四丁目4番地9"
+        },
+        {
+            "name_kana": "ちば こうき",
+            "name_kanji": "千葉 浩規",
+            "party": "日本共産党",
+            "age": "53",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "川先三丁目9番地9"
+        },
+        {
+            "name_kana": "のむら たろう",
+            "name_kanji": "野村 太郎",
+            "party": "無所属（東雲）",
+            "age": "54",
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "ひろさき市議会だより編集",
+                "特別委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "桔梗野二丁目5番地17"
+        },
+        {
+            "name_kana": "とのさき かつやす",
+            "name_kanji": "外崎 勝康",
+            "party": "創和・公明",
+            "age": "55",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "桔梗野五丁目12番地9"
+        },
+        {
+            "name_kana": "おざき じゅいち",
+            "name_kanji": "尾﨑 寿一",
+            "party": "",
+            "age": "56",
+            "gender": "male",
+            "commitee": [],
+            "term": "令和9年4月30日まで",
+            "district": "原ケ平一丁目6番地9"
+        },
+        {
+            "name_kana": "まかなえ ひろひで",
+            "name_kanji": "蒔苗 博英",
+            "party": "創和・公明",
+            "age": "57",
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "蒔苗字独狐森71番地1"
+        },
+        {
+            "name_kana": "まつはし たけし",
+            "name_kanji": "松橋 武史",
+            "party": "櫻鳴会",
+            "age": "58",
+            "gender": "male",
+            "commitee": [
+                "厚生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "宮園五丁目34番地7"
+        },
+        {
+            "name_kana": "いしおか ちづこ",
+            "name_kanji": "石岡 千鶴子",
+            "party": "無所属（りんごの会）",
+            "age": "59",
+            "gender": "female",
+            "commitee": [
+                "経済文教常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "下湯口字青柳54番地"
+        },
+        {
+            "name_kana": "みかみ あきお",
+            "name_kanji": "三上 秋雄",
+            "party": "櫻鳴会",
+            "age": "60",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "中別所字葛野96番地5"
+        },
+        {
+            "name_kana": "さとう さとし",
+            "name_kanji": "佐藤 哲",
+            "party": "櫻鳴会",
+            "age": "60",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "新岡字萩流8番地1"
+        },
+        {
+            "name_kana": "くどう みつし",
+            "name_kanji": "工藤 光志",
+            "party": "無所属（弘心）",
+            "age": "62",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "十腰内字猿沢187番地"
+        },
+        {
+            "name_kana": "せいの かずえい",
+            "name_kanji": "清野 一榮",
+            "party": "創和・公明",
+            "age": "63",
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "紙漉沢字堰根156番地"
+        },
+        {
+            "name_kana": "たなか げん",
+            "name_kanji": "田中 元",
+            "party": "櫻鳴会",
+            "age": "64",
+            "gender": "male",
+            "commitee": [
+                "建設常任委員会"
+            ],
+            "term": "令和9年4月30日まで",
+            "district": "新岡字萩流49番地"
+        }
+    ]
+}

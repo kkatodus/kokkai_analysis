@@ -1,0 +1,111 @@
+{
+    "members": [
+        {
+            "name_kana": "なかはら　こういち",
+            "name_kanji": "中原浩一",
+            "party": "無所属",
+            "age": "86",
+            "gender": "男性",
+            "commitee": [
+                "総務経済常任委員",
+                "議会運営委員"
+            ],
+            "term": 6,
+            "district": "議長"
+        },
+        {
+            "name_kana": "いしたとし美",
+            "name_kanji": "石田利美",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "副議長",
+                "総務経済常任委員",
+                "議会運営委員"
+            ],
+            "term": 7,
+            "district": "なし"
+        },
+        {
+            "name_kana": "さこうつとむ",
+            "name_kanji": "酒向勤",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "議会運営委員長",
+                "総務経済常任委員"
+            ],
+            "term": 6,
+            "district": "なし"
+        },
+        {
+            "name_kana": "くぼたゆうじ",
+            "name_kanji": "窪田裕二",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "総務経済常任委員長",
+                "議会運営委員"
+            ],
+            "term": 5,
+            "district": "なし"
+        },
+        {
+            "name_kana": "おのだくみこ",
+            "name_kanji": "小野田久美子",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "総務経済常任副委員長",
+                "議会広報委員長"
+            ],
+            "term": 4,
+            "district": "なし"
+        },
+        {
+            "name_kana": "むらおかとしいち",
+            "name_kanji": "村岡敏一",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "総務経済常任委員",
+                "議会広報委員",
+                "監査委員（議選）"
+            ],
+            "term": 3,
+            "district": "なし"
+        },
+        {
+            "name_kana": "いけざわてつや",
+            "name_kanji": "池澤哲也",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "議会運営副委員長",
+                "総務経済常任委員",
+                "議会広報委員"
+            ],
+            "term": 2,
+            "district": "なし"
+        },
+        {
+            "name_kana": "とおやまゆうた",
+            "name_kanji": "遠山優太",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "不明",
+            "commitee": [
+                "議会広報副委員長",
+                "総務経済常任委員"
+            ],
+            "term": 1,
+            "district": "なし"
+        }
+    ]
+}

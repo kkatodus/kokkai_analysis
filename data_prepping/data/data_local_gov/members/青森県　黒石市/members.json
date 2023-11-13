@@ -1,0 +1,214 @@
+{
+    "members": [
+        {
+            "name_kana": "くどう　かずゆき",
+            "name_kanji": "工藤　和行",
+            "party": "黒石自民クラブ",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 4
+        },
+        {
+            "name_kana": "みかみ　こうだい",
+            "name_kanji": "三上　廣大",
+            "party": "黒石自民クラブ",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会改革推進特別委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 9
+        },
+        {
+            "name_kana": "ごとう　たかお",
+            "name_kanji": "後藤　隆夫",
+            "party": "自民・公明クラブ",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会運営委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 1
+        },
+        {
+            "name_kana": "はちのへ　みのる",
+            "name_kanji": "八戸　実",
+            "party": "黒志クラブ",
+            "age": 77,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 2
+        },
+        {
+            "name_kana": "なりた　こうき",
+            "name_kanji": "成田　浩基",
+            "party": "黒石茶話会",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 3
+        },
+        {
+            "name_kana": "くどう　ていこ",
+            "name_kanji": "工藤　禎子",
+            "party": "日本共産党",
+            "age": 91,
+            "gender": "female",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 5
+        },
+        {
+            "name_kana": "おおくぼ　ともやす",
+            "name_kanji": "大久保　朝泰",
+            "party": "自民・公明クラブ",
+            "age": 79,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会運営委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 6
+        },
+        {
+            "name_kana": "おおみぞ　まさあき",
+            "name_kanji": "大溝　雅昭",
+            "party": "自民・公明クラブ",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 7
+        },
+        {
+            "name_kana": "くろいし　ななこ",
+            "name_kanji": "黒石　ナナ子",
+            "party": "黒石自民クラブ",
+            "age": 99,
+            "gender": "female",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 8
+        },
+        {
+            "name_kana": "こん　だいすけ",
+            "name_kanji": "今　大介",
+            "party": "黒石自民クラブ",
+            "age": 69,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会運営委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 10
+        },
+        {
+            "name_kana": "くどう　としひろ",
+            "name_kanji": "工藤　俊広",
+            "party": "自民・公明クラブ",
+            "age": 84,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会運営委員会",
+                "議会だより編集特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 11
+        },
+        {
+            "name_kana": "きたやま　かずえ",
+            "name_kanji": "北山　一衛",
+            "party": "自民・公明クラブ",
+            "age": 80,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 12
+        },
+        {
+            "name_kana": "なかた　ひろふみ",
+            "name_kanji": "中田　博文",
+            "party": "自民・公明クラブ",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 13
+        },
+        {
+            "name_kana": "ささき　ゆたか",
+            "name_kanji": "佐々木　隆",
+            "party": "黒石市民倶楽部",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 14
+        },
+        {
+            "name_kana": "むらかみ けいじ",
+            "name_kanji": "村上 　啓二",
+            "party": "黒石自民クラブ",
+            "age": 99,
+            "gender": "male",
+            "commitee": [
+                "総務教育常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 15
+        },
+        {
+            "name_kana": "むらかみ　たかあき",
+            "name_kanji": "村上　隆昭",
+            "party": "黒石自民クラブ",
+            "age": 104,
+            "gender": "male",
+            "commitee": [
+                "民生福祉常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "令和9年4月30日",
+            "district": 16
+        }
+    ]
+}

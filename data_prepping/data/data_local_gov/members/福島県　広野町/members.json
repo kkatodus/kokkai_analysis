@@ -1,0 +1,104 @@
+{
+    "members": [
+        {
+            "name_kana": "あべ けんいち",
+            "name_kanji": "阿部 憲一",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "1"
+        },
+        {
+            "name_kana": "きたごう はくひろ",
+            "name_kanji": "北郷 伯弘",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 2,
+            "district": "2"
+        },
+        {
+            "name_kana": "えんどう ひろし",
+            "name_kanji": "遠藤 浩",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 3,
+            "district": "3"
+        },
+        {
+            "name_kana": "きたごう みきお",
+            "name_kanji": "北郷 幹夫",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "4"
+        },
+        {
+            "name_kana": "かどま まりえ",
+            "name_kanji": "門馬 まりえ",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": 3,
+            "district": "5"
+        },
+        {
+            "name_kana": "はたなか おおこ",
+            "name_kanji": "畑中 大子",
+            "party": "共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [],
+            "term": 3,
+            "district": "6"
+        },
+        {
+            "name_kana": "こいそ としお",
+            "name_kanji": "小磯 利雄",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 4,
+            "district": "7"
+        },
+        {
+            "name_kana": "かどま たくみ",
+            "name_kanji": "門馬 巧",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "8"
+        },
+        {
+            "name_kana": "わたなべ まさとし",
+            "name_kanji": "渡邉 正俊",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "9"
+        },
+        {
+            "name_kana": "くろだ まさのり",
+            "name_kanji": "黒田 政徳",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [],
+            "term": 5,
+            "district": "10"
+        }
+    ]
+}

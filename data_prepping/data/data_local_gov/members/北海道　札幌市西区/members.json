@@ -1,0 +1,93 @@
+{
+    "members": [
+        {
+            "name_kana": "かつき　はやと",
+            "name_kanji": "勝木　勇人",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "経済観光委員会",
+                "総合交通政策調査特別委員会"
+            ],
+            "term": "8期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "いいじま　ひろゆき",
+            "name_kanji": "飯島　弘之",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [],
+            "term": "5期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "むらやま　たくじ",
+            "name_kanji": "村山　拓司",
+            "party": "自由民主党",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "厚生委員会",
+                "議会運営委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "3期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "なかむら　たけし",
+            "name_kanji": "中村　たけし",
+            "party": "民主市民連合",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "厚生委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "4期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "さだもり　ひかる",
+            "name_kanji": "定森　光",
+            "party": "民主市民連合",
+            "age": "不明",
+            "gender": "不明",
+            "committee": [
+                "財政市民委員会",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "1期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "もりやま　ゆみこ",
+            "name_kanji": "森山　由美子",
+            "party": "公明党",
+            "age": "不明",
+            "gender": "女性",
+            "committee": [
+                "財政市民委員会",
+                "冬季オリンピック・パラリンピック調査特別委員会"
+            ],
+            "term": "2期",
+            "district": "不明"
+        },
+        {
+            "name_kana": "たなか　けいすけ",
+            "name_kanji": "田中　啓介",
+            "party": "日本共産党",
+            "age": "不明",
+            "gender": "男性",
+            "committee": [
+                "総務委員会副委員長",
+                "大都市税財政制度・DX推進調査特別委員会"
+            ],
+            "term": "3期",
+            "district": "不明"
+        }
+    ]
+}

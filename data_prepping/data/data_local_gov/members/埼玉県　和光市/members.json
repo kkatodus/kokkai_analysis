@@ -1,0 +1,227 @@
+{
+    "members": [
+        {
+            "name_kana": "まつながやすえ",
+            "name_kanji": "松永靖恵",
+            "party": "やさしい未来へ歩む会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "1",
+            "district": null
+        },
+        {
+            "name_kana": "やすほみちひろ",
+            "name_kanji": "安保友博",
+            "party": "やさしい未来へ歩む会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境",
+                "議会運営"
+            ],
+            "term": "2",
+            "district": null
+        },
+        {
+            "name_kana": "とりかいまさし",
+            "name_kanji": "鳥飼雅司",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境",
+                "議会運営"
+            ],
+            "term": "3",
+            "district": null
+        },
+        {
+            "name_kana": "よしだかつよ",
+            "name_kanji": "吉田活世",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "4",
+            "district": null
+        },
+        {
+            "name_kana": "さいとうゆきこ",
+            "name_kanji": "齋藤幸子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務環境"
+            ],
+            "term": "5",
+            "district": null
+        },
+        {
+            "name_kana": "いとうたえこ",
+            "name_kanji": "伊藤妙子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "文教厚生",
+                "議会運営"
+            ],
+            "term": "6",
+            "district": null
+        },
+        {
+            "name_kana": "わたなべたつゆき",
+            "name_kanji": "渡邉竜幸",
+            "party": "緑風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境"
+            ],
+            "term": "7",
+            "district": null
+        },
+        {
+            "name_kana": "かたやまよしひさ",
+            "name_kanji": "片山義久",
+            "party": "緑風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "8",
+            "district": null
+        },
+        {
+            "name_kana": "こじまともこ",
+            "name_kanji": "小嶋智子",
+            "party": "やさしい未来へ歩む会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務環境"
+            ],
+            "term": "9",
+            "district": null
+        },
+        {
+            "name_kana": "はぎわらけいいち",
+            "name_kanji": "萩原圭一",
+            "party": "改革会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "10",
+            "district": null
+        },
+        {
+            "name_kana": "あかまつゆうぞう",
+            "name_kanji": "赤松祐造",
+            "party": "和光・まちづくり市民の会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "11",
+            "district": null
+        },
+        {
+            "name_kana": "まちどりみつみつ",
+            "name_kanji": "待鳥美光",
+            "party": "新しい風・希望",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境",
+                "議会運営"
+            ],
+            "term": "12",
+            "district": null
+        },
+        {
+            "name_kana": "すがわらみつる",
+            "name_kanji": "菅原満",
+            "party": "新しい風・希望",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生",
+                "議会運営"
+            ],
+            "term": "13",
+            "district": null
+        },
+        {
+            "name_kana": "かまだやすはる",
+            "name_kanji": "鎌田泰春",
+            "party": "国民民主党・日本維新の会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "文教厚生",
+                "議会運営"
+            ],
+            "term": "14",
+            "district": null
+        },
+        {
+            "name_kana": "いわさわゆうせい",
+            "name_kanji": "岩澤侑生",
+            "party": "国民民主党・日本維新の会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境"
+            ],
+            "term": "15",
+            "district": null
+        },
+        {
+            "name_kana": "とみさわけいじ",
+            "name_kanji": "富澤啓二",
+            "party": null,
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境"
+            ],
+            "term": "16",
+            "district": null
+        },
+        {
+            "name_kana": "うちやまけいこ",
+            "name_kanji": "内山恵子",
+            "party": "緑風会",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": "17",
+            "district": null
+        },
+        {
+            "name_kana": "よしだたけし",
+            "name_kanji": "吉田武司",
+            "party": "緑風会",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務環境",
+                "議会運営"
+            ],
+            "term": "18",
+            "district": null
+        }
+    ]
+}

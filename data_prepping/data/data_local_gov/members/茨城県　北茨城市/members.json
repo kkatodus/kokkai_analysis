@@ -1,0 +1,232 @@
+{
+    "members": [
+        {
+            "name_kana": "くつざわ　かずひこ",
+            "name_kanji": "沓沢和彦",
+            "party": "なし",
+            "age": 83,
+            "gender": "男性",
+            "committee": [
+                "総務"
+            ],
+            "term": 1,
+            "district": "関本町富士ケ丘701-2"
+        },
+        {
+            "name_kana": "たき　あやひろ",
+            "name_kanji": "滝文裕",
+            "party": "なし",
+            "age": 86,
+            "gender": "男性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 1,
+            "district": "中郷町小野矢指239"
+        },
+        {
+            "name_kana": "すずき　たくみ",
+            "name_kanji": "鈴木卓實",
+            "party": "なし",
+            "age": 92,
+            "gender": "男性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 1,
+            "district": "中郷町日棚333"
+        },
+        {
+            "name_kana": "わだ　よしたけ",
+            "name_kanji": "和田喜武",
+            "party": "なし",
+            "age": 77,
+            "gender": "男性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 2,
+            "district": "中郷町松井1947-2"
+        },
+        {
+            "name_kana": "しばた　きくえ",
+            "name_kanji": "柴田キクエ",
+            "party": "なし",
+            "age": 78,
+            "gender": "女性",
+            "committee": [
+                "総務"
+            ],
+            "term": 2,
+            "district": "華川町下小津田554"
+        },
+        {
+            "name_kana": "くまだ　さかえ",
+            "name_kanji": "熊田栄",
+            "party": "なし",
+            "age": 71,
+            "gender": "男性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 3,
+            "district": "中郷町石岡865"
+        },
+        {
+            "name_kana": "うえがや　ひでのり",
+            "name_kanji": "上神谷英典",
+            "party": "なし",
+            "age": 86,
+            "gender": "男性",
+            "committee": [
+                "総務"
+            ],
+            "term": 3,
+            "district": "磯原町豊田1026-1"
+        },
+        {
+            "name_kana": "まつもと　まさはる",
+            "name_kanji": "松本正春",
+            "party": "なし",
+            "age": 91,
+            "gender": "男性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 4,
+            "district": "大津町北町1321"
+        },
+        {
+            "name_kana": "いまい　みちえ",
+            "name_kanji": "今井路江",
+            "party": "なし",
+            "age": 71,
+            "gender": "女性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 5,
+            "district": "中郷町松井113-61"
+        },
+        {
+            "name_kana": "たき　ひろし",
+            "name_kanji": "滝広嗣",
+            "party": "なし",
+            "age": 57,
+            "gender": "男性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 5,
+            "district": "中郷町下桜井944"
+        },
+        {
+            "name_kana": "とよだ　ひろとし",
+            "name_kanji": "豊田弘俊",
+            "party": "なし",
+            "age": 63,
+            "gender": "男性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 5,
+            "district": "中郷町粟野30-11"
+        },
+        {
+            "name_kana": "はしだ　ちかこ",
+            "name_kanji": "蛭田千香子",
+            "party": "なし",
+            "age": 71,
+            "gender": "女性",
+            "committee": [
+                "総務"
+            ],
+            "term": 5,
+            "district": "大津町北町1306-39"
+        },
+        {
+            "name_kana": "すずき　けいいち",
+            "name_kanji": "鈴木啓一",
+            "party": "なし",
+            "age": 76,
+            "gender": "男性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 5,
+            "district": "華川町上小津田296"
+        },
+        {
+            "name_kana": "すずき　かずえ",
+            "name_kanji": "鈴木和栄",
+            "party": "なし",
+            "age": 71,
+            "gender": "女性",
+            "committee": [
+                "文教厚生"
+            ],
+            "term": 6,
+            "district": "平潟町385-12"
+        },
+        {
+            "name_kana": "すずき　やすこ",
+            "name_kanji": "鈴木康子",
+            "party": "なし",
+            "age": 69,
+            "gender": "女性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 7,
+            "district": "磯原町木皿1399"
+        },
+        {
+            "name_kana": "まえだ　としかつ",
+            "name_kanji": "前田利勝",
+            "party": "なし",
+            "age": 81,
+            "gender": "男性",
+            "committee": [
+                "総務"
+            ],
+            "term": 7,
+            "district": "大津町北町2-7-2"
+        },
+        {
+            "name_kana": "とよだ　かいよう",
+            "name_kanji": "豊田海洋",
+            "party": "なし",
+            "age": 104,
+            "gender": "男性",
+            "committee": [
+                "総務"
+            ],
+            "term": 8,
+            "district": "大津町北町1-3-4"
+        },
+        {
+            "name_kana": "すずき　のぶお",
+            "name_kanji": "鈴木信男",
+            "party": "なし",
+            "age": 107,
+            "gender": "男性",
+            "committee": [
+                "総務"
+            ],
+            "term": 9,
+            "district": "関本町八反96"
+        },
+        {
+            "name_kana": "おおひら　ひろゆき",
+            "name_kanji": "大平博之",
+            "party": "なし",
+            "age": 106,
+            "gender": "男性",
+            "committee": [
+                "産業建設"
+            ],
+            "term": 13,
+            "district": "磯原町豊田1130"
+        }
+    ]
+}

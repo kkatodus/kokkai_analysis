@@ -1,0 +1,231 @@
+{
+    "members": [
+        {
+            "name_kana": "いしもり やすあき",
+            "name_kanji": "石森 靖明",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "総務",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "柴田町大字上名生字新宮前18"
+        },
+        {
+            "name_kana": "いとう じゅん",
+            "name_kanji": "伊東 潤",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "文教厚生",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "柴田町西船迫4丁目1-134"
+        },
+        {
+            "name_kana": "よしだ きよし",
+            "name_kanji": "吉田 清",
+            "party": "公明党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "柴田町大字船岡字新生町30-2"
+        },
+        {
+            "name_kana": "おたべ みねゆき",
+            "name_kanji": "小田部 峰之",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業建設",
+                "議会広報"
+            ],
+            "term": 1,
+            "district": "柴田町槻木白幡2丁目4-7"
+        },
+        {
+            "name_kana": "もり ゆうき",
+            "name_kanji": "森 裕樹",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "文教"
+            ],
+            "term": 2,
+            "district": "柴田町槻木下町3丁目11－10"
+        },
+        {
+            "name_kana": "かとう しげる",
+            "name_kanji": "加藤 滋",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "文教厚生",
+                "議会広報"
+            ],
+            "term": 2,
+            "district": "柴田町槻木下町2丁目1－14"
+        },
+        {
+            "name_kana": "あんどう よしのり",
+            "name_kanji": "安藤 義憲",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 2,
+            "district": "柴田町大字本船迫字上町51"
+        },
+        {
+            "name_kana": "さくま みつひろ",
+            "name_kanji": "佐久間 光洋",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "産業建設"
+            ],
+            "term": 2,
+            "district": "柴田町大字船岡字若葉町9-1"
+        },
+        {
+            "name_kana": "ひらま ゆきひろ",
+            "name_kanji": "平間 幸弘",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "文教厚生",
+                "議会広報"
+            ],
+            "term": 3,
+            "district": "柴田町大字上川名字舘山89"
+        },
+        {
+            "name_kana": "さくらば まさゆき",
+            "name_kanji": "桜場 政行",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "総務"
+            ],
+            "term": 3,
+            "district": "柴田町船岡中央3丁目14－5"
+        },
+        {
+            "name_kana": "よしだ かずお",
+            "name_kanji": "吉田 和夫",
+            "party": "公明党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "産業建設"
+            ],
+            "term": 3,
+            "district": "柴田町槻木下町2丁目3－15"
+        },
+        {
+            "name_kana": "あきもと よしのり",
+            "name_kanji": "秋本 好則",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "産業建設"
+            ],
+            "term": 3,
+            "district": "柴田町槻木白幡1丁目6－37"
+        },
+        {
+            "name_kana": "おおさか みつお",
+            "name_kanji": "大坂 三男",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": 3,
+            "district": "柴田町船岡東1丁目10-34-2"
+        },
+        {
+            "name_kana": "ささき ゆうこ",
+            "name_kanji": "佐々木 裕子",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "総務"
+            ],
+            "term": 4,
+            "district": "柴田町船岡西1丁目10－6"
+        },
+        {
+            "name_kana": "ひろさわ まこと",
+            "name_kanji": "広沢 真",
+            "party": "日本共産党",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [
+                "議会運営",
+                "総務"
+            ],
+            "term": 5,
+            "district": "柴田町船岡西2丁目4－34"
+        },
+        {
+            "name_kana": "しらうち えみこ",
+            "name_kanji": "白内 恵美子",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "文教厚生"
+            ],
+            "term": 6,
+            "district": "柴田町西船迫1丁目15－34"
+        },
+        {
+            "name_kana": "ひらま なおみ",
+            "name_kanji": "平間 奈緒美",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "女性",
+            "commitee": [
+                "産業建設",
+                "議会広報"
+            ],
+            "term": 4,
+            "district": "柴田町船岡中央3丁目19－2"
+        },
+        {
+            "name_kana": "たかはし たいこ",
+            "name_kanji": "高橋太子, 高橋太河",
+            "party": "無所属",
+            "age": "不明",
+            "gender": "男性",
+            "commitee": [],
+            "term": 4,
+            "district": "柴田町大字入間田字大畑21"
+        }
+    ]
+}

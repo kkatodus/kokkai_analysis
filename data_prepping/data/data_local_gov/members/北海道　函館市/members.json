@@ -1,0 +1,337 @@
+{
+    "members": [
+        {
+            "name_kana": "あらきあけみ",
+            "name_kanji": "荒木　明美",
+            "party": "無所属",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市松風町"
+        },
+        {
+            "name_kana": "いけがめむつこ",
+            "name_kanji": "池亀　睦子",
+            "party": "公明党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市北美原２丁目"
+        },
+        {
+            "name_kana": "いたくらかずゆき",
+            "name_kanji": "板倉　一幸",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市神山２丁目"
+        },
+        {
+            "name_kana": "いちのへゆたか",
+            "name_kanji": "市戸　ゆたか",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市神山１丁目"
+        },
+        {
+            "name_kana": "かなざわひろゆき",
+            "name_kanji": "金澤　浩幸",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市亀田港町"
+        },
+        {
+            "name_kana": "かわさけけいた",
+            "name_kanji": "川﨑　啓太",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市若松町"
+        },
+        {
+            "name_kana": "くどうあつし",
+            "name_kanji": "工藤　　篤",
+            "party": "無所属",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市古武井町"
+        },
+        {
+            "name_kana": "くどうえみ",
+            "name_kanji": "工藤　恵美",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市山の手１丁目"
+        },
+        {
+            "name_kana": "こばやしよしゆき",
+            "name_kanji": "小林　芳幸",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市鍛治２丁目"
+        },
+        {
+            "name_kana": "こんたによしたか",
+            "name_kanji": "紺谷　克孝",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市赤川町"
+        },
+        {
+            "name_kana": "さいとうさちこ",
+            "name_kanji": "斉藤　佐知子",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市深堀町"
+        },
+        {
+            "name_kana": "さとうとめよし",
+            "name_kanji": "佐藤　留義",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市美原２丁目"
+        },
+        {
+            "name_kana": "しばいみのる",
+            "name_kanji": "芝井　　穣",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市木直町"
+        },
+        {
+            "name_kana": "しままさゆき",
+            "name_kanji": "島　　昌之",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市川原町"
+        },
+        {
+            "name_kana": "たかはしちあき",
+            "name_kanji": "髙橋　千晶",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市上野町"
+        },
+        {
+            "name_kana": "でむらゆかり",
+            "name_kanji": "出村　ゆかり",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市花園町"
+        },
+        {
+            "name_kana": "とみやまえつこ",
+            "name_kanji": "富山　悦子",
+            "party": "日本共産党",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市湯浜町"
+        },
+        {
+            "name_kana": "なかやまおさむ",
+            "name_kanji": "中山　　治",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市青柳町"
+        },
+        {
+            "name_kana": "のざわともゆき",
+            "name_kanji": "野沢　友志",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市戸倉町"
+        },
+        {
+            "name_kana": "はまのゆきこ",
+            "name_kanji": "浜野　幸子",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "female",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市神山３丁目"
+        },
+        {
+            "name_kana": "ふくしまきょうじ",
+            "name_kanji": "福島　恭二",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市日吉町２丁目"
+        },
+        {
+            "name_kana": "まつみやけんじ",
+            "name_kanji": "松宮　健治",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市万代町"
+        },
+        {
+            "name_kana": "みちはたかつお",
+            "name_kanji": "道畑　克雄",
+            "party": "民主・市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 2023,
+            "district": "函館市亀田本町"
+        },
+        {
+            "name_kana": "みつけひろやす",
+            "name_kanji": "見付　宗弥",
+            "party": "民主･市民ネット",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "副議長",
+                "民生常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市人見町"
+        },
+        {
+            "name_kana": "もぎおさむ",
+            "name_kanji": "茂木　　修",
+            "party": "公明党",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市湯川町２丁目"
+        },
+        {
+            "name_kana": "やまぐちかつひこ",
+            "name_kanji": "山口　勝彦",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "経済建設常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市北美原１丁目"
+        },
+        {
+            "name_kana": "よしだたかひと",
+            "name_kanji": "吉田　崇仁",
+            "party": "新市政クラブ",
+            "age": null,
+            "gender": "male",
+            "commitee": [
+                "議長",
+                "総務常任委員会"
+            ],
+            "term": 2023,
+            "district": "函館市小安町"
+        }
+    ]
+}

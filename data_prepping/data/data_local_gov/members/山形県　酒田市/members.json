@@ -1,0 +1,326 @@
+{
+    "members": [
+        {
+            "name_kana": "たかはしちよお",
+            "name_kanji": "高橋 千代夫",
+            "party": "所属なし",
+            "age": 91,
+            "gender": "male",
+            "commitee": [],
+            "term": "令和3年11月18日から",
+            "district": "酒田市浜中乙96"
+        },
+        {
+            "name_kana": "いけだひろお",
+            "name_kanji": "池田 博夫",
+            "party": "志友会",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "令和4年12月15日から",
+            "district": "酒田市新青渡字村立27"
+        },
+        {
+            "name_kana": "おおかべようへい",
+            "name_kanji": "大壁洋平",
+            "party": "令和会",
+            "age": 61,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会改革推進特別委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市高砂三丁目6-35"
+        },
+        {
+            "name_kana": "いちむらこういち",
+            "name_kanji": "市村浩一",
+            "party": "令和会",
+            "age": 86,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市みずほ一丁目18-13"
+        },
+        {
+            "name_kana": "さとうひろし",
+            "name_kanji": "佐藤弘",
+            "party": "市政研究会",
+            "age": 92,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市緑町10-31"
+        },
+        {
+            "name_kana": "えんたとしこ",
+            "name_kanji": "遠田敏子",
+            "party": "新政会",
+            "age": 82,
+            "gender": "female",
+            "commitee": [
+                "民生常任委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市北仁田字広面10-12"
+        },
+        {
+            "name_kana": "いとうきんや",
+            "name_kanji": "伊藤欣哉",
+            "party": "新政会",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会運営委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市広野字大渕33"
+        },
+        {
+            "name_kana": "さとうよしのり",
+            "name_kanji": "佐藤喜紀",
+            "party": "新政会",
+            "age": 71,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "",
+            "district": "酒田市穂積字下市神146"
+        },
+        {
+            "name_kana": "とがしゆきひろ",
+            "name_kanji": "富樫幸宏",
+            "party": "無会派",
+            "age": 91,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市山居町二丁目11-18"
+        },
+        {
+            "name_kana": "たけだけいこ",
+            "name_kanji": "武田恵子",
+            "party": "市民の会",
+            "age": 91,
+            "gender": "female",
+            "commitee": [
+                "総務常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市亀ケ崎四丁目4-1"
+        },
+        {
+            "name_kana": "ごとういずみ",
+            "name_kanji": "後藤泉",
+            "party": "市民の会",
+            "age": 92,
+            "gender": "female",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市麓字楯ノ腰28"
+        },
+        {
+            "name_kana": "さいとうよしあき",
+            "name_kanji": "齋藤美昭",
+            "party": "市政研究会",
+            "age": 81,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市若宮町二丁目15-2"
+        },
+        {
+            "name_kana": "ごとうひらく",
+            "name_kanji": "後藤啓",
+            "party": "志友会",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会運営委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市下青沢字山添178"
+        },
+        {
+            "name_kana": "とがしさとる",
+            "name_kanji": "冨樫覚",
+            "party": "志友会",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "",
+            "district": "酒田市東泉町六丁目6-9"
+        },
+        {
+            "name_kana": "まつもとくにひろ",
+            "name_kanji": "松本国博",
+            "party": "新政会",
+            "age": 76,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会運営委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市亀ケ崎三丁目3-31"
+        },
+        {
+            "name_kana": "あんどうひろお",
+            "name_kanji": "安藤浩夫",
+            "party": "新政会",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市寺田字横枕153-1"
+        },
+        {
+            "name_kana": "さいとうなおし",
+            "name_kanji": "齋藤直",
+            "party": "新政会",
+            "age": 83,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会"
+            ],
+            "term": "",
+            "district": "酒田市緑ケ丘一丁目11-9"
+        },
+        {
+            "name_kana": "さいとうひろし",
+            "name_kanji": "斎藤周",
+            "party": "新政会",
+            "age": 86,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会改革推進特別委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市北千日町6-6"
+        },
+        {
+            "name_kana": "いちはらえいこ",
+            "name_kanji": "市原栄子",
+            "party": "日本共産党酒田市議会議員団",
+            "age": 85,
+            "gender": "female",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市末広町21-17"
+        },
+        {
+            "name_kana": "たなかひとし",
+            "name_kanji": "田中斉",
+            "party": "志友会",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市宮野浦二丁目1-41"
+        },
+        {
+            "name_kana": "たなかひろし",
+            "name_kanji": "田中廣",
+            "party": "志友会",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "総務常任委員会",
+                "議会運営委員会",
+                "議会改革推進特別委員会",
+                "議会報編集委員会"
+            ],
+            "term": "",
+            "district": "酒田市山寺字宅地196"
+        },
+        {
+            "name_kana": "ごとうひとみ",
+            "name_kanji": "後藤仁",
+            "party": "志友会",
+            "age": 95,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市砂越緑町二丁目22"
+        },
+        {
+            "name_kana": "さとうしんじ",
+            "name_kanji": "佐藤伸二",
+            "party": "新政会",
+            "age": 85,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会"
+            ],
+            "term": "",
+            "district": "酒田市中牧田字前田47"
+        },
+        {
+            "name_kana": "しんどうあきら",
+            "name_kanji": "進藤晃",
+            "party": "新政会",
+            "age": 87,
+            "gender": "male",
+            "commitee": [
+                "民生常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市東泉町二丁目14-15"
+        },
+        {
+            "name_kana": "さとうたけし",
+            "name_kanji": "佐藤猛",
+            "party": "新政会",
+            "age": 90,
+            "gender": "male",
+            "commitee": [
+                "建設経済常任委員会",
+                "議会改革推進特別委員会"
+            ],
+            "term": "",
+            "district": "酒田市大宮甲47-1"
+        }
+    ]
+}

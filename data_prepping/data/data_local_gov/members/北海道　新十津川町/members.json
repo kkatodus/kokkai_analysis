@@ -1,0 +1,150 @@
+{
+    "members": [
+        {
+            "name_kana": "かとう　としあき",
+            "name_kanji": "加藤　敏晃",
+            "party": "れいわ新選組",
+            "age": 51,
+            "gender": "male",
+            "commitee": [
+                "総務民生常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "くどう　けん",
+            "name_kanji": "工藤　健",
+            "party": "無所属",
+            "age": 82,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": 2
+        },
+        {
+            "name_kana": "ふかせ　みなこ",
+            "name_kanji": "深瀬　美奈子",
+            "party": "無所属",
+            "age": 39,
+            "gender": "female",
+            "commitee": [
+                "経済文教常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "みつもろ　ゆみ",
+            "name_kanji": "三師　優美",
+            "party": "無所属",
+            "age": 56,
+            "gender": "female",
+            "commitee": [
+                "総務民生常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "おおはた　みつたか",
+            "name_kanji": "大畠　光敬",
+            "party": "無所属",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 1,
+            "district": 5
+        },
+        {
+            "name_kana": "",
+            "name_kanji": "（欠員）",
+            "party": "",
+            "age": null,
+            "gender": "",
+            "commitee": [],
+            "term": null,
+            "district": null
+        },
+        {
+            "name_kana": "すぎもと はつみ",
+            "name_kanji": "杉本　初美",
+            "party": "無所属",
+            "age": 79,
+            "gender": "female",
+            "commitee": [
+                "総務民生常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 3,
+            "district": 7
+        },
+        {
+            "name_kana": "すずい やすひろ",
+            "name_kanji": "鈴井　康裕",
+            "party": "無所属",
+            "age": 66,
+            "gender": "male",
+            "commitee": [
+                "経済文教常任委員会",
+                "広報広聴常任委員会",
+                "議会運営委員会"
+            ],
+            "term": 3,
+            "district": 8
+        },
+        {
+            "name_kana": "ひさか　さとこ",
+            "name_kanji": "樋坂　里子",
+            "party": "日本共産党",
+            "age": 82,
+            "gender": "female",
+            "commitee": [
+                "総務民生常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 8,
+            "district": 9
+        },
+        {
+            "name_kana": "にしうち ひろみ",
+            "name_kanji": "西内　陽美",
+            "party": "無所属",
+            "age": 66,
+            "gender": "female",
+            "commitee": [
+                "総務民生常任委員会",
+                "経済文教常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 4,
+            "district": 10
+        },
+        {
+            "name_kana": "こだま ひろたか",
+            "name_kanji": "小玉　博崇",
+            "party": "無所属",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "総務民生常任委員会",
+                "経済文教常任委員会",
+                "広報広聴常任委員会"
+            ],
+            "term": 3,
+            "district": 11
+        }
+    ]
+}

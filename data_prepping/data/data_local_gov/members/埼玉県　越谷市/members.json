@@ -1,0 +1,17 @@
+{
+    "members": [
+        {
+            "name_kana": "やまだ たろう",
+            "name_kanji": "山田太郎",
+            "party": "自由党",
+            "age": 45,
+            "gender": "male",
+            "commitee": [
+                "国防委員会",
+                "外交委員会"
+            ],
+            "term": "5期",
+            "district": "東京1区"
+        }
+    ]
+}

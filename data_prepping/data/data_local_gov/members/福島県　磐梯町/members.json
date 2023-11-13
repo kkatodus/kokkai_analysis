@@ -1,0 +1,122 @@
+{
+    "members": [
+        {
+            "name_kana": "たかはし こうじ",
+            "name_kanji": "高橋　浩次",
+            "party": "",
+            "age": 64,
+            "gender": "male",
+            "commitee": [
+                "経済環境"
+            ],
+            "term": 1,
+            "district": 1
+        },
+        {
+            "name_kana": "あなざわ いちろう",
+            "name_kanji": "穴澤　一郎",
+            "party": "",
+            "age": 65,
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生"
+            ],
+            "term": 2,
+            "district": 2
+        },
+        {
+            "name_kana": "すずき つばさ",
+            "name_kanji": "鈴木　　翼",
+            "party": "",
+            "age": 37,
+            "gender": "male",
+            "commitee": [
+                "経済環境"
+            ],
+            "term": 1,
+            "district": 3
+        },
+        {
+            "name_kana": "いがらし ひろし",
+            "name_kanji": "五十嵐大将",
+            "party": "",
+            "age": 63,
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生"
+            ],
+            "term": 1,
+            "district": 4
+        },
+        {
+            "name_kana": "こばやし しゅうじ",
+            "name_kanji": "小林　修治",
+            "party": "",
+            "age": 74,
+            "gender": "male",
+            "commitee": [
+                "経済環境"
+            ],
+            "term": 3,
+            "district": 5
+        },
+        {
+            "name_kana": "まつざか たかひろ",
+            "name_kanji": "松坂　隆洋",
+            "party": "",
+            "age": 50,
+            "gender": "male",
+            "commitee": [
+                "総務文教厚生"
+            ],
+            "term": 2,
+            "district": 6
+        },
+        {
+            "name_kana": "なかじま たかこ",
+            "name_kanji": "中嶋　貴子",
+            "party": "",
+            "age": 44,
+            "gender": "female",
+            "commitee": [
+                "総務文教厚生"
+            ],
+            "term": 1,
+            "district": 7
+        },
+        {
+            "name_kana": "さとう たかのり",
+            "name_kanji": "佐藤　孝則",
+            "party": "",
+            "age": 67,
+            "gender": "male",
+            "commitee": [
+                "経済環境"
+            ],
+            "term": 4,
+            "district": 8
+        },
+        {
+            "name_kana": "ふるかわ あや",
+            "name_kanji": "古川　　綾",
+            "party": "",
+            "age": 45,
+            "gender": "female",
+            "commitee": [
+                "総務文教厚生"
+            ],
+            "term": 3,
+            "district": 9
+        },
+        {
+            "name_kana": "すずき きゅういち",
+            "name_kanji": "鈴木　久一",
+            "party": "",
+            "age": 71,
+            "gender": "male",
+            "commitee": [],
+            "term": 7,
+            "district": 10
+        }
+    ]
+}

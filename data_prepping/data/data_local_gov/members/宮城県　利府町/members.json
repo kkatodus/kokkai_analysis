@@ -1,0 +1,164 @@
+{
+    "members": [
+        {
+            "name_kana": "ごうこん ゆうご",
+            "name_kanji": "郷右近 佑悟",
+            "party": "花と円",
+            "age": "20",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "青葉台三丁目"
+        },
+        {
+            "name_kana": "あべ ひこただ",
+            "name_kanji": "阿部 彦忠",
+            "party": "チーム リスペクト",
+            "age": "35",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "森郷"
+        },
+        {
+            "name_kana": "すだ あきひろ",
+            "name_kanji": "須田 聡宏",
+            "party": "チーム リスペクト",
+            "age": "28",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "菅谷台三丁目"
+        },
+        {
+            "name_kana": "たかぎ りょうこ",
+            "name_kanji": "高木 綾子",
+            "party": "チーム リスペクト",
+            "age": "32",
+            "gender": "female",
+            "commitee": [],
+            "term": "1期",
+            "district": "菅谷台一丁目"
+        },
+        {
+            "name_kana": "みなかわ ゆうじ",
+            "name_kanji": "皆川 祐治",
+            "party": "公明党",
+            "age": "40",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "加瀬"
+        },
+        {
+            "name_kana": "すずき はるこ",
+            "name_kanji": "鈴木 晴子",
+            "party": "公明党",
+            "age": "45",
+            "gender": "female",
+            "commitee": [],
+            "term": "3期",
+            "district": "花園三丁目"
+        },
+        {
+            "name_kana": "こんまん ふみお",
+            "name_kanji": "金萬 文雄",
+            "party": "日本共産党利府町議員団",
+            "age": "38",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "加瀬"
+        },
+        {
+            "name_kana": "つちむら ひでとし",
+            "name_kanji": "土村 秀俊",
+            "party": "日本共産党利府町議員団",
+            "age": "60",
+            "gender": "male",
+            "commitee": [],
+            "term": "7期",
+            "district": "青山四丁目"
+        },
+        {
+            "name_kana": "あさかわ のりあき",
+            "name_kanji": "浅川 紀明",
+            "party": "高志会",
+            "age": "30",
+            "gender": "male",
+            "commitee": [],
+            "term": "1期",
+            "district": "しらかし台三丁目"
+        },
+        {
+            "name_kana": "こんの たかゆき",
+            "name_kanji": "今野 隆之",
+            "party": "ガンバ利府",
+            "age": "42",
+            "gender": "male",
+            "commitee": [],
+            "term": "2期",
+            "district": "菅谷台三丁目"
+        },
+        {
+            "name_kana": "おぶち よういちろう",
+            "name_kanji": "小渕 洋一郎",
+            "party": "虹",
+            "age": "48",
+            "gender": "male",
+            "commitee": [],
+            "term": "2期",
+            "district": "花園三丁目"
+        },
+        {
+            "name_kana": "たかく ときお",
+            "name_kanji": "高久 時男",
+            "party": "陽明の会",
+            "age": "50",
+            "gender": "male",
+            "commitee": [],
+            "term": "4期",
+            "district": "しらかし台三丁目"
+        },
+        {
+            "name_kana": "いとう つかさ",
+            "name_kanji": "伊藤 司",
+            "party": "21世紀クラブ",
+            "age": "47",
+            "gender": "male",
+            "commitee": [],
+            "term": "3期",
+            "district": "菅谷"
+        },
+        {
+            "name_kana": "はがわ よしとみ",
+            "name_kanji": "羽川 喜冨",
+            "party": "21世紀クラブ",
+            "age": "55",
+            "gender": "male",
+            "commitee": [],
+            "term": "5期",
+            "district": "花園三丁目"
+        },
+        {
+            "name_kana": "ながの わたる",
+            "name_kanji": "永野 渉",
+            "party": "フォワード",
+            "age": "57",
+            "gender": "male",
+            "commitee": [],
+            "term": "5期",
+            "district": "森郷"
+        },
+        {
+            "name_kana": "すずき ただみ",
+            "name_kanji": "鈴木 忠美",
+            "party": "21世紀クラブ",
+            "age": "52",
+            "gender": "male",
+            "commitee": [],
+            "term": "4期",
+            "district": "中央三丁目"
+        }
+    ]
+}
