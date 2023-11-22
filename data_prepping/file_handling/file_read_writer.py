@@ -23,3 +23,12 @@ def create_dir(path):
 def write_file(path, string):
     with open(path, "w", encoding="utf-8") as f:
          f.write(string)
+
+def read_hdf5_file(path):
+    
+    with h5py.File(path, 'r') as f:
+        out_dict = {}
+        for key in f.keys():
+            value = f[key][:]
+            out_dict[key] = value
+        return out_dict
