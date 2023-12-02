@@ -8,6 +8,5 @@ So far I have,
 
 - Fetched the arguments of the parties(討論) from the api provided by the National Diet Library.(<https://kokkai.ndl.go.jp/api.html/>)
 
-- Created an API hosting the above information and deployed it on heroku.(<https://sangiin-api.herokuapp.com/>)
-
-- Created a frontend displaying the collected data and deployed it on heroku(<https://kokkai-doc.netlify.app//>)
+- Created an API hosting the above information and deployed it on heroku.
+- Created a frontend displaying the collected data and deployed it on the web.
