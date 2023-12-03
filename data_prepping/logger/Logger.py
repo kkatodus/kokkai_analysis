@@ -3,7 +3,7 @@ class Logger:
 		self.verbose = verbose
 		self.path = path
 		if path is not None:
-			self.log = open(path, 'w', encoding='utf-8')
+			self.log = open(path, 'a', encoding='utf-8')
 		else:
 			self.log = None
 

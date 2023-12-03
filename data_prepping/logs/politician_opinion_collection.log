@@ -1,0 +1,70 @@
+2023-12-03 17:03:13,903 - searching for 逢沢一郎 with search word 性的指向 in LGBTQ
+2023-12-03 17:03:13,905 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:15,640 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%80%A7%E7%9A%84%E6%8C%87%E5%90%91&speaker=%E9%80%A2%E6%B2%A2%E4%B8%80%E9%83%8E&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:15,642 - searching for 逢沢一郎 with search word 性的少数者 in LGBTQ
+2023-12-03 17:03:15,645 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:17,088 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%80%A7%E7%9A%84%E5%B0%91%E6%95%B0%E8%80%85&speaker=%E9%80%A2%E6%B2%A2%E4%B8%80%E9%83%8E&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:17,090 - searching for 逢沢一郎 with search word LGBT in LGBTQ
+2023-12-03 17:03:17,092 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:17,911 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=LGBT&speaker=%E9%80%A2%E6%B2%A2%E4%B8%80%E9%83%8E&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:17,913 - searching for 逢沢一郎 with search word 同性愛 in LGBTQ
+2023-12-03 17:03:17,914 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:18,742 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E5%90%8C%E6%80%A7%E6%84%9B&speaker=%E9%80%A2%E6%B2%A2%E4%B8%80%E9%83%8E&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:18,744 - searching for 逢沢一郎 with search word パートナーシップ in LGBTQ
+2023-12-03 17:03:18,745 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:20,433 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%82%B7%E3%83%83%E3%83%97&speaker=%E9%80%A2%E6%B2%A2%E4%B8%80%E9%83%8E&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:20,954 - no opinion found for in speech segments with search word パートナーシップ
+
+
+
+2023-12-03 17:03:20,955 - searching for 青山周平 with search word 性的指向 in LGBTQ
+2023-12-03 17:03:20,956 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:21,832 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%80%A7%E7%9A%84%E6%8C%87%E5%90%91&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:21,833 - searching for 青山周平 with search word 性的少数者 in LGBTQ
+2023-12-03 17:03:21,835 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:22,814 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%80%A7%E7%9A%84%E5%B0%91%E6%95%B0%E8%80%85&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:22,815 - searching for 青山周平 with search word LGBT in LGBTQ
+2023-12-03 17:03:22,817 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:23,708 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=LGBT&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:23,710 - searching for 青山周平 with search word 同性愛 in LGBTQ
+2023-12-03 17:03:23,711 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:24,590 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E5%90%8C%E6%80%A7%E6%84%9B&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:24,591 - searching for 青山周平 with search word パートナーシップ in LGBTQ
+2023-12-03 17:03:24,592 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:25,686 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%82%B7%E3%83%83%E3%83%97&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:25,688 - searching for 青山周平 with search word 温室効果ガス in 気候変動
+2023-12-03 17:03:25,690 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:26,533 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%B8%A9%E5%AE%A4%E5%8A%B9%E6%9E%9C%E3%82%AC%E3%82%B9&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:26,534 - searching for 青山周平 with search word 気候変動 in 気候変動
+2023-12-03 17:03:26,536 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:27,505 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%B0%97%E5%80%99%E5%A4%89%E5%8B%95&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:27,506 - searching for 青山周平 with search word 温暖化 in 気候変動
+2023-12-03 17:03:27,508 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:28,391 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%B8%A9%E6%9A%96%E5%8C%96&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:28,392 - searching for 青山周平 with search word 海面上昇 in 気候変動
+2023-12-03 17:03:28,393 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:29,265 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E6%B5%B7%E9%9D%A2%E4%B8%8A%E6%98%87&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:29,267 - searching for 青山周平 with search word 再生可能エネルギ in 気候変動
+2023-12-03 17:03:29,269 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:30,295 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E5%86%8D%E7%94%9F%E5%8F%AF%E8%83%BD%E3%82%A8%E3%83%8D%E3%83%AB%E3%82%AE&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:30,297 - searching for 青山周平 with search word 環境保護 in 気候変動
+2023-12-03 17:03:30,299 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:31,222 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E7%92%B0%E5%A2%83%E4%BF%9D%E8%AD%B7&speaker=%E9%9D%92%E5%B1%B1%E5%91%A8%E5%B9%B3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:31,224 - searching for 赤澤亮正 with search word 出生率 in 少子化
+2023-12-03 17:03:31,225 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:32,235 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E5%87%BA%E7%94%9F%E7%8E%87&speaker=%E8%B5%A4%E6%BE%A4%E4%BA%AE%E6%AD%A3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:32,843 - no opinion found for in speech segments with search word 出生率
+
+
+
+2023-12-03 17:03:39,871 - searching for 赤澤亮正 with search word 少子化 in 少子化
+2023-12-03 17:03:39,875 - Starting new HTTPS connection (1): kokkai.ndl.go.jp:443
+2023-12-03 17:03:40,970 - https://kokkai.ndl.go.jp:443 "GET /api/speech?startRecord=1&any=%E5%B0%91%E5%AD%90%E5%8C%96&speaker=%E8%B5%A4%E6%BE%A4%E4%BA%AE%E6%AD%A3&recordPacking=json&maximumRecords=50 HTTP/1.1" 200 None
+2023-12-03 17:03:41,743 - no opinion found for in speech segments with search word 少子化
+
+
+
+2023-12-03 17:03:42,705 - no opinion found for in speech segments with search word 少子化
+
+
+
