@@ -1,0 +1,47 @@
+{
+    "party": "自民",
+    "repr_name": "高市早苗",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105254X00520230209_012",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2023-02-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105254X00520230209/12",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　もとより、性的指向や性自認を理由とする不当な差別や偏見はあってはならないと考えております"
+            ]
+        },
+        {
+            "speech_id": "121105261X00920230209_028",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X00920230209/28",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○高市国務大臣　性的指向ですとか、また性自認に関して、偏見があるというようなことはあってはならないと思っております"
+            ]
+        },
+        {
+            "speech_id": "121105261X00920230209_038",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X00920230209/38",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　そしてまた、いわゆる性的指向ですとか、また性自認の問題、これにつきましては、私は、それをもって不当に何か差別をされたり偏見を受けるということはあってはならない、だから、理解を増進するということについては大いに賛成でございます"
+            ]
+        }
+    ]
+}

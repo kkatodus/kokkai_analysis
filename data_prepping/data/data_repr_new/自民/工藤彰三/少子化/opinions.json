@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "工藤彰三",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120804889X02120220422_382",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-04-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X02120220422/382",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "まあ、少子化ですから税が増えるということはあり得ません"
+            ]
+        }
+    ]
+}

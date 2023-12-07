@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "小里泰弘",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117405261X01720100226_197",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2010-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117405261X01720100226/197",
+            "speaker_group": "自由民主党・改革クラブ",
+            "extracted_opinions": [
+                "\r\n　そこで、私どもが考えるのは、そういった子育て支援における給付金、これは確かに大事なものであります"
+            ]
+        }
+    ]
+}
