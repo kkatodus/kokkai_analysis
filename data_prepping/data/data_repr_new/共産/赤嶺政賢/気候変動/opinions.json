@@ -1,0 +1,48 @@
+{
+    "party": "共産",
+    "repr_name": "赤嶺政賢",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118003815X00220120316_179",
+            "house_name": "衆議院",
+            "meeting_name": "安全保障委員会",
+            "date": "2012-03-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118003815X00220120316/179",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　外務大臣に聞きますが、緑の同盟といいますけれども、要するに、やっていることは、米軍が国内の事情から求められている再生可能エネルギーの導入を思いやり予算で日本に肩がわりさせる、そういうことではありませんか"
+            ]
+        },
+        {
+            "speech_id": "116905254X01020080318_019",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2008-03-18",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116905254X01020080318/19",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "基地建設と環境保護は両立しないのです"
+            ]
+        },
+        {
+            "speech_id": "115604080X01020030402_259",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2003-04-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115604080X01020030402/259",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　ＣＤＭは、日本の温暖化ガス排出量の削減につながらないだけでなく、発展途上国での排出抑制への貢献を理由に、国内排出削減努力の緩和を容認するものです"
+            ]
+        }
+    ]
+}

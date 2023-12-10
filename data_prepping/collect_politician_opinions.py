@@ -75,18 +75,29 @@ class ReprTopicOpinionCollector:
 			if search_word in string:
 				return True
 		return False
+	
+	def create_mini_batches_from_sentences(self, sentences, batch_size=200):
+		mini_batches = []
+		for i in range(0, len(sentences), batch_size):
+			mini_batches.append(sentences[i:i+batch_size])
+		return mini_batches
 
 	def extract_opinions(self, speech, target_class = ['意見文']):
 		speech_segments = speech.split('。')
-		encoded = self.tokenizer(speech_segments, return_tensors="pt", padding=True, truncation=True, max_length=512)
-		with torch.no_grad():
-			logits = self.model(**encoded).logits
-		predicted_class_id = logits.argmax(dim=1)
-		classes = [self.model.config.id2label[pred_id.item()] for pred_id in list(predicted_class_id)]
+		segment_batches = self.create_mini_batches_from_sentences(speech_segments)
+		self.logger.info(f"Created {len(segment_batches)} speech segment batches of length {[len(batch) for batch in segment_batches]}")
 		extracted_segments = []
-		for idx, (sentence, pred_class) in enumerate(zip(speech_segments, classes)):
-			if pred_class in target_class and self.check_search_words_in_string(sentence):
-				extracted_segments.append(sentence)
+		for idx, segment_batch in enumerate(segment_batches):
+			self.logger.info(f"Encoding {len(segment_batch)} speech segments")
+			encoded = self.tokenizer(segment_batch, return_tensors="pt", padding=True, truncation=True, max_length=512)
+			with torch.no_grad():
+				self.logger.info(f"Predicting {len(segment_batch)} speech segments")
+				logits = self.model(**encoded).logits
+			predicted_class_id = logits.argmax(dim=1)
+			classes = [self.model.config.id2label[pred_id.item()] for pred_id in list(predicted_class_id)]
+			for idx, (sentence, pred_class) in enumerate(zip(segment_batch, classes)):
+				if pred_class in target_class and self.check_search_words_in_string(sentence):
+					extracted_segments.extend([sentence])
 		if len(extracted_segments) == 0:
 			self.logger.info(f"no opinion found for in speech segments with search word {self.current_search_word}\n\n\n")
 		
@@ -96,7 +107,8 @@ class ReprTopicOpinionCollector:
 		output_array = []
 		if record['numberOfRecords'] == 0:
 			return output_array
-		for speech in record['speechRecord']:
+		for idx, speech in enumerate(record['speechRecord']):
+			self.logger.info(f"Working on {idx}/{len(record['speechRecord'])} speech record")
 			speech_id = speech['speechID']
 			house_name = speech['nameOfHouse']
 			meeting_name = speech['nameOfMeeting']
@@ -113,16 +125,21 @@ class ReprTopicOpinionCollector:
 
 	def add_processed_speeches(self):
 		conditions_list = [f"any={self.current_search_word}",f"speaker={self.current_repr_name}",'recordPacking=json','maximumRecords=50']
-		self.logger.info(f"searching for {self.current_repr_name} with search word {self.current_search_word} in {self.current_topic}")
 		start_point = 1
+		self.logger.info(f"searching for {self.current_repr_name} with search word {self.current_search_word} in {self.current_topic} with start point {start_point}")
+
 		while True:
 			if start_point is None:
 				break
-			speeches, start_point = self.mcc.make_one_request(conditions_list, starting_point=start_point)
-			speeches = self.iterate_speeches(speeches)
-			if len(speeches) == 0:
+			self.logger.info(f"Making one request with start point {start_point}")
+			speech_records, start_point = self.mcc.make_one_request(conditions_list, starting_point=start_point)
+			self.logger.info(f"Got {speech_records['numberOfRecords']} speeches records")
+			processed_speeches = self.iterate_speeches(speech_records)
+			if len(processed_speeches) == 0:
+				self.logger.info("No processed_speeches found for speech record")
 				continue
-			self.current_speeches_dict_for_repr_for_topic.extend(speeches)
+			self.current_speeches_dict_for_repr_for_topic.extend(processed_speeches)
+			self.logger.info(f"Added {len(processed_speeches)} speeches to the list with {len(self.current_speeches_dict_for_repr_for_topic)} speeches in total")
 
 	def collect(self):
 		for party in repr_dict.keys():
@@ -138,7 +155,7 @@ class ReprTopicOpinionCollector:
 					if os.path.exists(topic_file_path):
 						print('Already collected speeches for',party, self.current_repr_name, topic)
 						continue
-					print(f"Collecting speeches for {self.current_repr_name}")
+					print(f"Collecting speeches for {self.current_repr_name} with topic {self.current_topic}")
 					for search_word in search_words:
 						self.current_search_word = search_word
 						self.add_processed_speeches()

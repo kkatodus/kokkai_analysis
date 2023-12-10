@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "大串博志",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119305254X00220170123_013",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2017-01-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119305254X00220170123/13",
+            "speaker_group": "民進党・無所属クラブ",
+            "extracted_opinions": [
+                "\r\n　そもそも、原発は安全で重大な事故は起きないという神話を守るためにこの議論を避けてきた国と電力会社の責任は重大です"
+            ]
+        }
+    ]
+}
