@@ -1,0 +1,93 @@
+{
+    "party": "自民",
+    "repr_name": "青木一彦",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117715007X01520110804_042",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2011-08-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715007X01520110804/42",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　例えば、本当、農水産物への影響というものは今回の原子力発電の事故、これ絶大なものがあると思っておりますが、今回またセシウム牛肉の問題なんか出ました"
+            ]
+        },
+        {
+            "speech_id": "117715007X01520110804_054",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2011-08-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715007X01520110804/54",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　この変遷ぶりを見ますと、脱原発に一直線に向かっているとしか私は思えません"
+            ]
+        },
+        {
+            "speech_id": "117715007X01420110726_164",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2011-07-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715007X01420110726/164",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "出荷した県は「宮城県の業者」と明記してあるのと、そのほかは「原発事故後に収穫した稲わら」としか書いておりませんが、はっきりしたこと、これは分かっていないんでしょうか"
+            ]
+        },
+        {
+            "speech_id": "117714103X00920110530_079",
+            "house_name": "参議院",
+            "meeting_name": "決算委員会",
+            "date": "2011-05-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117714103X00920110530/79",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "これは、日本のエネルギー戦略が原発推進から自然エネルギー重視へ転換するのではないかと間違ったメッセージを国際社会に発信したことにはなりませんか"
+            ]
+        },
+        {
+            "speech_id": "117715007X00920110519_028",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2011-05-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715007X00920110519/28",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "福島は今、原発の事故でまだまだ大変だと思います",
+                "やはり原発の一日も早い、原発が収まること、これがまず第一条件になるのではないかと思っておりますが"
+            ]
+        },
+        {
+            "speech_id": "117714339X00420110413_057",
+            "house_name": "参議院",
+            "meeting_name": "災害対策特別委員会",
+            "date": "2011-04-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117714339X00420110413/57",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　今後、原子力災害、いろんな意味で事態がどのようになるか分かりません",
+                "\r\n　そして、前回の汚染水流出時の対応や国際原子力事象評価尺度の発表の仕方、風評被害に対しての在り方も何も検討されていないのではないかと、そのように言われてもしようがないと思います"
+            ]
+        },
+        {
+            "speech_id": "117714339X00420110413_061",
+            "house_name": "参議院",
+            "meeting_name": "災害対策特別委員会",
+            "date": "2011-04-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117714339X00420110413/61",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "そういう意味では、今回の原子力災害で問われているのは日本の国に対する信頼です"
+            ]
+        }
+    ]
+}

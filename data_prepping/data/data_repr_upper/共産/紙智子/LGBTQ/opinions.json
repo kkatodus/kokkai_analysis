@@ -1,0 +1,25 @@
+{
+    "party": "共産",
+    "repr_name": "紙智子",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115254X03420230621_031",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-06-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115254X03420230621/31",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "外国人難民の人権、ＬＧＢＴ、性的少数者の人権など、当事者が納得していないのに入管法やＬＧＢＴ法が採択されました"
+            ]
+        }
+    ]
+}

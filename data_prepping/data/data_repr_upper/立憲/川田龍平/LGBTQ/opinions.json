@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "川田龍平",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114260X00220230309_051",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-03-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X00220230309/51",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　そして、本当にこの人権の問題、先日も、同性愛の方に対する本当にこの発言によって、政権も揺るがされる大きな事件もありました、発言もありました"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "party": "公明",
+    "repr_name": "里見隆治",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120715261X00220211217_110",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2021-12-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120715261X00220211217/110",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　今回の十万円の、隙間なく支給する制度を構築するとともに、令和四年度以降も恒久的な子育て支援策の充実に向けて御努力いただく必要があると思います"
+            ]
+        },
+        {
+            "speech_id": "119214889X00220161020_089",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2016-10-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119214889X00220161020/89",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　一億総活躍社会の実現のために、現役世代の働き方改革とともに、少子化対策、子ども・子育て支援をより一層推し進めていく必要がございます"
+            ]
+        }
+    ]
+}

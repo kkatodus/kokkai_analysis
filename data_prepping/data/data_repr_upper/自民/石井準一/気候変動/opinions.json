@@ -1,0 +1,37 @@
+{
+    "party": "自民",
+    "repr_name": "石井準一",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120015254X00320191009_016",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2019-10-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120015254X00320191009/16",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "\r\n　そして、気候変動のもたらす脅威は自然災害の頻発だけではありません"
+            ]
+        },
+        {
+            "speech_id": "117715254X01920110601_007",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2011-06-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715254X01920110601/7",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　今回の菅総理のパフォーマンスは、鳩山前総理が国連の会議で温室効果ガスの二五％削減を唐突に打ち出したことをほうふつとさせます"
+            ]
+        }
+    ]
+}

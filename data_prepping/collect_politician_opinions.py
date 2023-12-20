@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
+# %%
 import os
 import re
 import logging
@@ -14,7 +9,7 @@ from api_requests.meeting_convo_collector import MeetingConvoCollector
 
 from file_handling.file_read_writer import read_json, write_json, create_dir, write_file
 
-OUTPUT_DIR = os.path.join(ROOT_DIR, 'data', 'data_repr_new')
+OUTPUT_DIR = os.path.join(ROOT_DIR, 'data', 'data_repr_upper')
 create_dir(OUTPUT_DIR)
 print(os.path.abspath(OUTPUT_DIR))
 LOWER_HOUSE_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'data_shugiin')
@@ -24,16 +19,15 @@ UPPER_HOUSE_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'data_sangiin')
 lower_repr_dir = os.path.join(LOWER_HOUSE_DATA_DIR, 'repr_list')
 lower_repr_file = os.listdir(lower_repr_dir)[0]
 lower_house_meeting_dict = read_json(os.path.join(lower_repr_dir, lower_repr_file))
+lower_repr_dict = lower_house_meeting_dict['reprs']
 
 upper_repr_dir = os.path.join(UPPER_HOUSE_DATA_DIR, 'repr_list')
 upper_repr_file = os.listdir(upper_repr_dir)[0]
 upper_house_meeting_dict = read_json(os.path.join(upper_repr_dir, upper_repr_file))
-repr_dict = lower_house_meeting_dict['reprs']
+upper_repr_dict = upper_house_meeting_dict['reprs']
 
 
-# In[2]:
-
-
+# %%
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
 	return repr_name
@@ -49,9 +43,13 @@ def remove_duplicate_speeches(speeches):
 
 
 class ReprTopicOpinionCollector:
-	def __init__(self):
+	def __init__(self, house='lower'):
 		self.mcc = MeetingConvoCollector("https://kokkai.ndl.go.jp/api/speech?")
-		self.topic_dict = read_json(os.path.join(ROOT_DIR, 'resource','search_words_for_topics.json'))
+		self.topic_dict = read_json(os.path.join(ROOT_DIR, 'resource','experiment_config.json'))
+		if house == 'lower':
+			self.repr_dict = lower_repr_dict
+		elif house == 'upper':
+			self.repr_dict = upper_repr_dict
 
 		self.model_name = "kkatodus/jp-speech-classifier"
 		self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
@@ -76,7 +74,7 @@ class ReprTopicOpinionCollector:
 				return True
 		return False
 	
-	def create_mini_batches_from_sentences(self, sentences, batch_size=200):
+	def create_mini_batches_from_sentences(self, sentences, batch_size=100):
 		mini_batches = []
 		for i in range(0, len(sentences), batch_size):
 			mini_batches.append(sentences[i:i+batch_size])
@@ -142,12 +140,14 @@ class ReprTopicOpinionCollector:
 			self.logger.info(f"Added {len(processed_speeches)} speeches to the list with {len(self.current_speeches_dict_for_repr_for_topic)} speeches in total")
 
 	def collect(self):
-		for party in repr_dict.keys():
+		for party in self.repr_dict.keys():
 			self.current_party = party
-			for repr in repr_dict[party]:
+			for repr in self.repr_dict[party]:
 				self.current_repr = repr
 				self.current_repr_name = clean_repr_name(repr['name'])
-				for topic, search_words in self.topic_dict.items():
+				for topic_config in self.topic_dict:
+					topic = topic_config['topic_name']
+					search_words = topic_config['search_words']
 					self.current_topic = topic
 					self.current_search_words = search_words
 					repr_topic_dir = os.path.join(OUTPUT_DIR, party, self.current_repr_name, topic)
@@ -173,21 +173,17 @@ class ReprTopicOpinionCollector:
 					self.current_speeches_dict_for_repr_for_topic = []
 		
 
-
+# %% [markdown]
 # # Script to collect opinion based sentences for each topic
 
-# In[3]:
-
-
-repr_topic_opinion_collector = ReprTopicOpinionCollector()
+# %%
+repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
 repr_topic_opinion_collector.collect()
 
-
+# %% [markdown]
 # # Creating summary json to record topics for each politicians and how many files
 
-# In[ ]:
-
-
+# %%
 #create a summary json for the repr opinions data
 summary_dict = {'reprs':{}}
 for party in repr_dict.keys():
@@ -198,7 +194,7 @@ for party in repr_dict.keys():
 		repr_dir_path = os.path.join(OUTPUT_DIR,party, repr_name)
 		if not os.path.exists(repr_dir_path):
 			continue
-		tags = [dirname for dirname in os.listdir(repr_dir_path)]
+		tags = [dirname for dirname in os.listdir(repr_dir_path) if read_json(os.path.join(repr_dir_path, dirname, 'opinions.json')) != {}]
 		if len(tags) == 0:
 			continue
 		summary_dict['reprs'][party][repr_name] = {}
@@ -209,10 +205,5 @@ for party in repr_dict.keys():
 			number_of_files = len(os.listdir(topic_dir))
 			summary_dict['reprs'][party][repr_name]['number_of_files'][tag] = number_of_files
 write_json(summary_dict, os.path.join(OUTPUT_DIR, 'summary.json'))
-
-
-# In[ ]:
-
-
 
 

@@ -1,0 +1,58 @@
+{
+    "party": "立憲",
+    "repr_name": "打越さく良",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115254X02120230512_028",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-05-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115254X02120230512/28",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　今国会における原発の運転期間の延長を盛り込んだＧＸ脱炭素電源法案も国民に争点を隠す悪質なものであり、このような政府の姿勢こそがまずただされるべきなのであります"
+            ]
+        },
+        {
+            "speech_id": "121114260X01120230511_090",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-05-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X01120230511/90",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "今国会における原発の運転期間の延長を盛り込んだＧＸ脱炭素電源法案も同様であり、このような政府の姿勢こそがまずただされるべきなのであります"
+            ]
+        },
+        {
+            "speech_id": "121114260X01020230509_012",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-05-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X01020230509/12",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "今国会における原発の運転期間の延長を盛り込んだＧＸ脱炭素電源法案も、争点隠しの束ね法案です"
+            ]
+        },
+        {
+            "speech_id": "120415261X01020210312_173",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2021-03-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120415261X01020210312/173",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "こうした柏崎刈羽原発の再稼働をめぐっては本当に地元は大変困惑していますので、これはもうできないものというふうに政策は進んでいくべきだというふうに考えます"
+            ]
+        }
+    ]
+}
