@@ -1,0 +1,40 @@
+{
+    "party": "維新",
+    "repr_name": "漆間譲司",
+    "topic": "経済対策",
+    "search_words": [
+        "経済対策",
+        "景気",
+        "デフレ",
+        "財政政策",
+        "金融政策",
+        "インフレ",
+        "中小企業",
+        "雇用",
+        "スタートアップ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121205261X00320231030_167",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-10-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121205261X00320231030/167",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　経済対策にスポットが当たる今国会は、憲法国会でもあります"
+            ]
+        },
+        {
+            "speech_id": "121104858X00520230509_137",
+            "house_name": "衆議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2023-05-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104858X00520230509/137",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "どんなに優秀な研究者を呼び込んでも、浜通りの復興のためには、新たな産業を創出し、地元の雇用を創出しなければなりません"
+            ]
+        }
+    ]
+}

@@ -23,6 +23,12 @@ export default function SangiinReprPage() {
       setPeriod(res.data.meeting_period);
       setKaihas(Object.keys(res.data.reprs));
     });
+    return () => {
+      // Cleanup function to clear data
+      setReps([]);
+      setPeriod([]);
+      setKaihas([]);
+    };
   }, []);
   const pageContent = !kaihas
     ? gridLoader

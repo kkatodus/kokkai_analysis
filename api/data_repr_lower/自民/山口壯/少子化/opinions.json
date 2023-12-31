@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "山口壯",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "115605124X01520030530_054",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2003-05-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115605124X01520030530/54",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "だけれども、教育費さえうまくいけば、日本の少子化対策には本当は極めて役に立つんじゃないかなというふうに思うんです"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "party": "公明",
+    "repr_name": "横山信一",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118915261X00320150203_030",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2015-02-03",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118915261X00320150203/30",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "これは、補正予算の中で地域少子化対策強化交付金というふうに示されておりまして、これもまた評価したいというふうに思っております"
+            ]
+        }
+    ]
+}

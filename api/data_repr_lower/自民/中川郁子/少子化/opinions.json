@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "中川郁子",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118305267X00220130415_289",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第五分科会",
+            "date": "2013-04-15",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118305267X00220130415/289",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　少子化問題を考えていくときに、やはり女性の雇用の場がたくさんあるということが大切な問題であるというふうに思います"
+            ]
+        }
+    ]
+}

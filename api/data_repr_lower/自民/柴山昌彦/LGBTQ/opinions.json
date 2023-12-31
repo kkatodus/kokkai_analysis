@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "柴山昌彦",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119705124X00220181114_154",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2018-11-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119705124X00220181114/154",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　今後とも、性的指向、性自認に係る教職員の理解促進を通じて、悩みや不安を抱える児童生徒が相談しやすい環境づくりをしっかりと進めていきたいと考えております"
+            ]
+        }
+    ]
+}

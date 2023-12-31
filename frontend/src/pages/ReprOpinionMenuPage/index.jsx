@@ -1,49 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import BasePageLayout from '../../layouts/BasePageLayout';
-import ReprCard from '../../sharedComponents/ReprCard';
-import { SpeechAbbrev2Kaiha, speechEndpoint } from '../../resource/resources';
-import { gridLoader } from '../../resource/loader';
+import React from 'react';
+import { RiGovernmentFill, RiGovernmentLine } from 'react-icons/ri';
+import BaseMenuLayout from '../../layouts/BaseMenuLayout';
 
-function ReprOpinionMenuPage() {
-  // eslint-disable-next-line no-unused-vars
-  const [summary, setSummary] = useState(null);
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `${speechEndpoint}`,
-    }).then((res) => {
-      setSummary(res.data);
-    });
-  }, []);
-  const parties = summary ? Object.keys(summary.reprs) : [];
+const ReprMenuPageIcons = [
+  {
+    link: '/repr_analysis/speech/upper',
+    icon: <RiGovernmentLine className="menu-icon" />,
+    title: '参議院',
+  },
+  {
+    link: '/repr_analysis/speech/lower',
+    icon: <RiGovernmentFill className="menu-icon" />,
+    title: '衆議院',
+  },
+];
 
-  const pageContent = !summary
-    ? gridLoader
-    : parties.map((party) => {
-        const partyDict = summary.reprs[party];
-        const partyReprs = Object.keys(partyDict);
-        const reprCards = partyReprs.map((repr) => (
-          <ReprCard
-            name={repr}
-            party={SpeechAbbrev2Kaiha[party]}
-            tags={partyDict[repr].tags}
-            link={`${party}/${repr}`}
-          />
-        ));
-        return reprCards;
-      });
-  const extraStyles = !summary
-    ? { content: '' }
-    : { content: 'card-container justify-items-center' };
+export default function ReprOpinionMenuPage() {
   return (
-    <BasePageLayout
-      pageTitle="議員分析"
-      backTo="/"
-      MainContent={pageContent}
-      extraStyles={extraStyles}
+    <BaseMenuLayout
+      backTo="/repr_analysis"
+      MenuTitle="発言閲覧"
+      Links={ReprMenuPageIcons}
     />
   );
 }
-
-export default ReprOpinionMenuPage;

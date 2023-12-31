@@ -49,7 +49,6 @@ function PopulationPage() {
     cityPopulationDataState || [],
     Number(year)
   );
-  console.log('sorted city data', sortedCityData);
 
   const dataGridColumns = [
     {

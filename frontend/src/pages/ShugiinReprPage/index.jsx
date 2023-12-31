@@ -20,6 +20,11 @@ export default function ShugiinReprPage() {
       setReps(res.data.reprs);
       setKaihas(Object.keys(res.data.reprs));
     });
+    return () => {
+      // Cleanup function to clear data
+      setReps([]);
+      setKaihas([]);
+    };
   }, []);
   const pageContent = !kaihas
     ? gridLoader

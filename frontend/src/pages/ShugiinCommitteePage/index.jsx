@@ -23,6 +23,12 @@ export default function ShugiinCommitteePage() {
       setComNames(Object.keys(res.data.meetings));
       setPeriod(res.data.meeting_period);
     });
+    return () => {
+      // Cleanup function to clear data
+      setComs([]);
+      setComNames([]);
+      setPeriod([]);
+    };
   }, []);
   const pageContent = !comNames
     ? gridLoader

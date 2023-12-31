@@ -1,0 +1,36 @@
+{
+    "party": "立憲",
+    "repr_name": "吉田はるみ",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121205254X00320231024_013",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2023-10-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121205254X00320231024/13",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　また、非正規と正規雇用の賃金格差が、結婚することを困難にし、少子化に拍車をかけている実態を政府は直視すべきです"
+            ]
+        },
+        {
+            "speech_id": "121105261X00520230202_145",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X00520230202/145",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　小倉大臣、選択的夫婦別姓、女性の活躍、これにちょっとキャップをかけ、そして少子化対策のネックになっているというような認識はございますか"
+            ]
+        }
+    ]
+}

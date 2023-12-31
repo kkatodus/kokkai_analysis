@@ -1,0 +1,25 @@
+{
+    "party": "維新",
+    "repr_name": "金子道仁",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115104X01520230613_083",
+            "house_name": "参議院",
+            "meeting_name": "文教科学委員会",
+            "date": "2023-06-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115104X01520230613/83",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "つまり、それは子育て支援、少子化対策どころか、少子化を推進するような、そのような規制になっているのではないでしょうか"
+            ]
+        }
+    ]
+}

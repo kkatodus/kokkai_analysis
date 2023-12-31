@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "鈴木淳司",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121204601X00220231107_020",
+            "house_name": "衆議院",
+            "meeting_name": "総務委員会",
+            "date": "2023-11-07",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121204601X00220231107/20",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　少子化は、我が国の社会経済全体に関わる先送りできない重要な課題であると認識をしております"
+            ]
+        }
+    ]
+}

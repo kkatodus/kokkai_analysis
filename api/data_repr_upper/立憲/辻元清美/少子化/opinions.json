@@ -1,0 +1,58 @@
+{
+    "party": "立憲",
+    "repr_name": "辻元清美",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115261X01620230328_085",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X01620230328/85",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "○辻元清美君　私ね、給食無償化ぐらいできなかったら、異次元のしょぼい少子化対策になってしまうというように思います"
+            ]
+        },
+        {
+            "speech_id": "118504080X00520131112_040",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2013-11-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118504080X00520131112/40",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "そして、先ほど私は、ディーセントワークで、やはり人間らしい暮らしができる社会にしないと、内需も拡大しないし少子化も進んでいく"
+            ]
+        },
+        {
+            "speech_id": "118005261X02620120709_018",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2012-07-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118005261X02620120709/18",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "\r\n　私は、今回、子育て支援ということで充実したいというメニューは、この増税分に入っている、これは充実させていただきたいと思いますけれども、同時に、この現役世代をサポートしていくようなさまざまな政策を大動員しなきゃいけないと思うんです"
+            ]
+        },
+        {
+            "speech_id": "116605254X00420070130_013",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2007-01-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116605254X00420070130/13",
+            "speaker_group": "社会民主党・市民連合",
+            "extracted_opinions": [
+                "残念ながら、柳澤大臣は少子化も担当する大臣にはふさわしくなかったようです"
+            ]
+        }
+    ]
+}

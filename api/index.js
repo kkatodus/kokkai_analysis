@@ -19,6 +19,8 @@ var api_guide = {
   "shugiin commitees": "shugiin/commitee",
   "shugiin representatives": "shugiin/repr",
   "speech summary": "speeches",
+  "lower house speech summary": "speeches/lower",
+  "upper house speech summary": "speeches/upper",
   "position stats": "stats/position",
 };
 

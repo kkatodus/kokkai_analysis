@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "山田勝彦",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120805254X02020220414_019",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2022-04-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805254X02020220414/19",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　また、子育て支援の質の向上のためには、同じ職場で働く栄養士や調理師、事務職員などについても処遇改善が必要であると考えます"
+            ]
+        }
+    ]
+}

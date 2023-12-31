@@ -1,0 +1,51 @@
+{
+    "party": "自民",
+    "repr_name": "本田顕子",
+    "topic": "経済対策",
+    "search_words": [
+        "経済対策",
+        "景気",
+        "デフレ",
+        "財政政策",
+        "金融政策",
+        "インフレ",
+        "中小企業",
+        "雇用",
+        "スタートアップ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120414260X00720210408_159",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2021-04-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120414260X00720210408/159",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "\r\n　一方、サラリーマン男性が育児休業を取得しやすくするためには、雇用環境の整備も重要と考えております"
+            ]
+        },
+        {
+            "speech_id": "120114260X01220200519_014",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2020-05-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120114260X01220200519/14",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "この実現には、中小企業・小規模事業者の生産性向上への支援も必要不可欠と存じます"
+            ]
+        },
+        {
+            "speech_id": "120114260X01220200519_012",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2020-05-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120114260X01220200519/12",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "\r\n　安定した運用のためには、私は安定した雇用実現が必要不可欠と思います"
+            ]
+        }
+    ]
+}

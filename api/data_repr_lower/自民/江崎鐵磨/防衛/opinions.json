@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "江崎鐵磨",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119514889X00120171130_022",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2017-11-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119514889X00120171130/22",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　海洋政策については、海洋の安全保障、海洋の積極的な開発や利用と環境保全、人材育成などの取組を強化していくことが重要であり、海洋基本計画に基づき、総合的な海洋政策を推進してまいります"
+            ]
+        },
+        {
+            "speech_id": "114703815X00320000413_093",
+            "house_name": "衆議院",
+            "meeting_name": "安全保障委員会",
+            "date": "2000-04-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/114703815X00320000413/93",
+            "speaker_group": "保守党",
+            "extracted_opinions": [
+                "\r\n　我が国を取り巻く安全保障問題を考えるとき、北朝鮮をめぐる問題は引き続き重要な課題であります"
+            ]
+        }
+    ]
+}

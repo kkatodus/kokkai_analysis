@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "中谷一馬",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121104889X01920230609_147",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2023-06-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104889X01920230609/147",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　我が党が共同提出したＬＧＢＴなど性的少数者への理解を深める法案は、自民党を含む超党派議連で全党が合意した法案です"
+            ]
+        }
+    ]
+}

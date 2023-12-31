@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "鈴木俊一",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121104376X00220230210_083",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2023-02-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104376X00220230210/83",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "性的指向、性自認を理由とするような不当な差別、偏見、そういうものはあってはならないんだ、そういうふうに思います"
+            ]
+        }
+    ]
+}
