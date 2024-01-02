@@ -9,7 +9,7 @@ import disclaimer from './disclaimer';
 import { gridLoader } from '../../resource/loader';
 import DimensionToggle from './components/DimensionToggle';
 
-const possibleTopics = ['防衛', 'LGBTQ', '原発', '少子化'];
+const possibleTopics = ['防衛', 'LGBTQ', '原発', '少子化', '気候変動'];
 function ReprSpeechGraphPage() {
   const [currentTopic, setCurrentTopic] = useState('防衛');
   const [currentRepr, setCurrentRepr] = useState(null);

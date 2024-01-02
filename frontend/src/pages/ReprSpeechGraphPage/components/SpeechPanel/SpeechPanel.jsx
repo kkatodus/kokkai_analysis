@@ -3,7 +3,10 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { AiOutlineLink } from 'react-icons/ai';
 import { squareLoader } from '../../../../resource/loader';
-import { speechEndpoint } from '../../../../resource/resources';
+import {
+  SpeechAbbrev2Kaiha,
+  speechEndpoint,
+} from '../../../../resource/resources';
 import { colors } from '../../../../resource/styling';
 
 function SpeechPanel({
@@ -41,7 +44,7 @@ function SpeechPanel({
     <div className="flex items-center justify-center relative h-full w-full">
       <div className="w-[98%] h-[98%] border-[5px] p-2 rounded-lg flex flex-col items-center justify-start">
         <div className="w-full mb-2 flex justify-between">
-          {currentTopic}-{currentRepr}
+          {SpeechAbbrev2Kaiha[currentParty]}-{currentTopic}-{currentRepr}
         </div>
         <div className="h-full w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
           {speeches
