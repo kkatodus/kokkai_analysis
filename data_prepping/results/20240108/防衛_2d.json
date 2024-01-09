@@ -1,0 +1,3154 @@
+{
+    "data": [
+        {
+            "idx": 0,
+            "x": "6.607244",
+            "y": "14.151733",
+            "repr": "関芳弘",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 1,
+            "x": "7.9738345",
+            "y": "12.1219425",
+            "repr": "新藤義孝",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 2,
+            "x": "9.777347",
+            "y": "13.026266",
+            "repr": "鷲尾英一郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 3,
+            "x": "8.064342",
+            "y": "13.497237",
+            "repr": "江藤拓",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 4,
+            "x": "7.6852713",
+            "y": "12.517707",
+            "repr": "義家弘介",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 5,
+            "x": "5.944062",
+            "y": "13.874682",
+            "repr": "高村正大",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 6,
+            "x": "5.581187",
+            "y": "13.5056095",
+            "repr": "高鳥修一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 7,
+            "x": "8.065156",
+            "y": "12.877451",
+            "repr": "中谷真一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 8,
+            "x": "5.417899",
+            "y": "13.59319",
+            "repr": "藤丸敏",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 9,
+            "x": "9.894744",
+            "y": "12.713663",
+            "repr": "柴山昌彦",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 10,
+            "x": "7.7655983",
+            "y": "16.10863",
+            "repr": "中谷元",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 11,
+            "x": "10.197666",
+            "y": "14.025437",
+            "repr": "下村博文",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 12,
+            "x": "6.366036",
+            "y": "15.156648",
+            "repr": "岸田文雄",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 13,
+            "x": "8.771955",
+            "y": "13.926858",
+            "repr": "小渕優子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 14,
+            "x": "8.768616",
+            "y": "13.83238",
+            "repr": "小泉進次郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 15,
+            "x": "6.068296",
+            "y": "12.9648485",
+            "repr": "吉野正芳",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 16,
+            "x": "6.5873485",
+            "y": "13.532991",
+            "repr": "中曽根康隆",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 17,
+            "x": "7.7871323",
+            "y": "14.083971",
+            "repr": "宮下一郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 18,
+            "x": "9.06913",
+            "y": "13.282272",
+            "repr": "平井卓也",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 19,
+            "x": "7.089049",
+            "y": "15.077777",
+            "repr": "菅義偉",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 20,
+            "x": "6.0560813",
+            "y": "12.095612",
+            "repr": "石井拓",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 21,
+            "x": "7.741459",
+            "y": "15.941593",
+            "repr": "木村次郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 22,
+            "x": "6.2201185",
+            "y": "13.703071",
+            "repr": "八木哲也",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 23,
+            "x": "7.2918253",
+            "y": "15.900729",
+            "repr": "松島みどり",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 24,
+            "x": "9.454887",
+            "y": "13.936368",
+            "repr": "鈴木憲和",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 25,
+            "x": "7.494541",
+            "y": "16.157307",
+            "repr": "渡辺孝一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 26,
+            "x": "5.4599915",
+            "y": "14.552658",
+            "repr": "林幹雄",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 27,
+            "x": "7.184581",
+            "y": "12.568519",
+            "repr": "石破茂",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 28,
+            "x": "5.7278914",
+            "y": "14.904656",
+            "repr": "堀井学",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 29,
+            "x": "6.6212773",
+            "y": "13.514447",
+            "repr": "井上信治",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 30,
+            "x": "6.7970424",
+            "y": "15.312133",
+            "repr": "城内実",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 31,
+            "x": "10.114995",
+            "y": "13.661123",
+            "repr": "東国幹",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 32,
+            "x": "6.3852983",
+            "y": "15.330736",
+            "repr": "林芳正",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 33,
+            "x": "8.82239",
+            "y": "14.76637",
+            "repr": "遠藤利明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 34,
+            "x": "5.412356",
+            "y": "13.877932",
+            "repr": "小森卓郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 35,
+            "x": "5.946788",
+            "y": "13.1641445",
+            "repr": "高見康裕",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 36,
+            "x": "7.747188",
+            "y": "14.402804",
+            "repr": "後藤茂之",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 37,
+            "x": "7.9703655",
+            "y": "14.23193",
+            "repr": "神田潤一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 38,
+            "x": "6.609808",
+            "y": "15.391121",
+            "repr": "茂木敏充",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 39,
+            "x": "6.9416337",
+            "y": "12.994999",
+            "repr": "高木宏壽",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 40,
+            "x": "7.4236455",
+            "y": "14.050713",
+            "repr": "山本左近",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 41,
+            "x": "7.912691",
+            "y": "13.367605",
+            "repr": "泉田裕彦",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 42,
+            "x": "6.55718",
+            "y": "12.790656",
+            "repr": "宮崎政久",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 43,
+            "x": "8.664874",
+            "y": "11.830156",
+            "repr": "山下貴司",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 44,
+            "x": "7.893311",
+            "y": "14.050212",
+            "repr": "野中厚",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 45,
+            "x": "9.684448",
+            "y": "14.741089",
+            "repr": "加藤勝信",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 46,
+            "x": "6.954177",
+            "y": "15.781534",
+            "repr": "稲田朋美",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "for"
+        },
+        {
+            "idx": 47,
+            "x": "5.934198",
+            "y": "14.847815",
+            "repr": "伊藤達也",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 48,
+            "x": "7.8630195",
+            "y": "14.104253",
+            "repr": "齋藤健",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 49,
+            "x": "8.340476",
+            "y": "12.2286215",
+            "repr": "船田元",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 50,
+            "x": "7.474235",
+            "y": "13.706146",
+            "repr": "土屋品子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 51,
+            "x": "7.3646145",
+            "y": "15.6457615",
+            "repr": "上川陽子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 52,
+            "x": "5.5251412",
+            "y": "14.16366",
+            "repr": "和田義明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 53,
+            "x": "8.301955",
+            "y": "13.358212",
+            "repr": "甘利明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 54,
+            "x": "7.019455",
+            "y": "15.874832",
+            "repr": "門山宏哲",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 55,
+            "x": "10.069299",
+            "y": "13.990675",
+            "repr": "大塚拓",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 56,
+            "x": "6.2788916",
+            "y": "14.050761",
+            "repr": "山田賢司",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 57,
+            "x": "9.360133",
+            "y": "14.9985075",
+            "repr": "松本洋平",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 58,
+            "x": "6.089306",
+            "y": "14.984484",
+            "repr": "伊藤信太郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 59,
+            "x": "8.431625",
+            "y": "15.812475",
+            "repr": "石田真敏",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 60,
+            "x": "8.056966",
+            "y": "16.19162",
+            "repr": "福田達夫",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 61,
+            "x": "6.304887",
+            "y": "12.94045",
+            "repr": "務台俊介",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 62,
+            "x": "8.610231",
+            "y": "15.352716",
+            "repr": "斎藤洋明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 63,
+            "x": "7.433096",
+            "y": "15.259997",
+            "repr": "越智隆雄",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 64,
+            "x": "8.084587",
+            "y": "15.456471",
+            "repr": "岩屋毅",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 65,
+            "x": "7.492086",
+            "y": "16.20308",
+            "repr": "山本ともひろ",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 66,
+            "x": "7.765275",
+            "y": "15.334219",
+            "repr": "木原誠二",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 67,
+            "x": "6.1656795",
+            "y": "15.510125",
+            "repr": "鬼木誠",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 68,
+            "x": "7.3548036",
+            "y": "14.356841",
+            "repr": "永岡桂子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 69,
+            "x": "7.5951447",
+            "y": "16.005285",
+            "repr": "江渡聡徳",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 70,
+            "x": "9.516885",
+            "y": "13.432755",
+            "repr": "辻清人",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 71,
+            "x": "7.816577",
+            "y": "13.916044",
+            "repr": "小倉將信",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 72,
+            "x": "7.755561",
+            "y": "16.179497",
+            "repr": "井野俊郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 73,
+            "x": "6.182219",
+            "y": "14.363314",
+            "repr": "黄川田仁志",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 74,
+            "x": "8.572648",
+            "y": "12.099749",
+            "repr": "柿沢未途",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 75,
+            "x": "6.5856194",
+            "y": "14.897252",
+            "repr": "宮澤博行",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 76,
+            "x": "8.418564",
+            "y": "13.263217",
+            "repr": "山際大志郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 77,
+            "x": "5.847284",
+            "y": "13.959624",
+            "repr": "杉田水脈",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 78,
+            "x": "7.2432203",
+            "y": "14.2214",
+            "repr": "梶山弘志",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 79,
+            "x": "6.7849517",
+            "y": "15.754953",
+            "repr": "小野寺五典",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 80,
+            "x": "5.468136",
+            "y": "14.322671",
+            "repr": "鈴木英敬",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 81,
+            "x": "6.8019977",
+            "y": "15.471244",
+            "repr": "松野博一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 82,
+            "x": "7.8710628",
+            "y": "15.812722",
+            "repr": "鈴木俊一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 83,
+            "x": "7.488328",
+            "y": "13.3697815",
+            "repr": "武部新",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 84,
+            "x": "7.751672",
+            "y": "15.547894",
+            "repr": "山口俊一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 85,
+            "x": "5.876237",
+            "y": "13.978364",
+            "repr": "田中良生",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 86,
+            "x": "5.9520583",
+            "y": "15.032936",
+            "repr": "あべ俊子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 87,
+            "x": "6.815391",
+            "y": "12.719513",
+            "repr": "野田聖子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 88,
+            "x": "7.051858",
+            "y": "15.812844",
+            "repr": "熊田裕通",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 89,
+            "x": "8.177379",
+            "y": "14.25987",
+            "repr": "中山展宏",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 90,
+            "x": "6.053822",
+            "y": "13.762611",
+            "repr": "二階俊博",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 91,
+            "x": "7.6760674",
+            "y": "16.106936",
+            "repr": "木原稔",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 92,
+            "x": "7.34015",
+            "y": "14.149",
+            "repr": "平沼正二郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 93,
+            "x": "5.6971483",
+            "y": "13.483746",
+            "repr": "金子恭之",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 94,
+            "x": "5.8363247",
+            "y": "14.550904",
+            "repr": "西銘恒三郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 95,
+            "x": "8.391522",
+            "y": "14.270586",
+            "repr": "細田健一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 96,
+            "x": "7.2955556",
+            "y": "14.183332",
+            "repr": "山口晋",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 97,
+            "x": "5.653684",
+            "y": "14.19287",
+            "repr": "國場幸之助",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 98,
+            "x": "9.186605",
+            "y": "13.868668",
+            "repr": "井原巧",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 99,
+            "x": "9.066658",
+            "y": "12.847187",
+            "repr": "笹川博義",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 100,
+            "x": "6.416292",
+            "y": "13.89309",
+            "repr": "中川郁子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 101,
+            "x": "6.902111",
+            "y": "13.167783",
+            "repr": "若林健太",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 102,
+            "x": "5.8251104",
+            "y": "14.259907",
+            "repr": "武村展英",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 103,
+            "x": "6.13908",
+            "y": "15.267055",
+            "repr": "中根一幸",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 104,
+            "x": "5.6380115",
+            "y": "13.481639",
+            "repr": "田中和徳",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 105,
+            "x": "6.523558",
+            "y": "15.732718",
+            "repr": "櫻田義孝",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 106,
+            "x": "8.527241",
+            "y": "11.90347",
+            "repr": "中西健治",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 107,
+            "x": "7.716949",
+            "y": "15.704924",
+            "repr": "衛藤征士郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 108,
+            "x": "9.114055",
+            "y": "14.740382",
+            "repr": "坂本哲志",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 109,
+            "x": "9.456225",
+            "y": "12.696562",
+            "repr": "細野豪志",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 110,
+            "x": "8.175991",
+            "y": "15.090511",
+            "repr": "武田良太",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 111,
+            "x": "6.0315237",
+            "y": "15.078532",
+            "repr": "河野太郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 112,
+            "x": "6.701827",
+            "y": "14.400146",
+            "repr": "本田太郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 113,
+            "x": "9.643202",
+            "y": "13.622113",
+            "repr": "大野敬太郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 114,
+            "x": "5.9848127",
+            "y": "13.4474125",
+            "repr": "伊東良孝",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 115,
+            "x": "7.066634",
+            "y": "14.269938",
+            "repr": "星野剛士",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 116,
+            "x": "7.9909825",
+            "y": "15.76258",
+            "repr": "井上貴博",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 117,
+            "x": "5.957719",
+            "y": "15.217609",
+            "repr": "武井俊輔",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 118,
+            "x": "9.812756",
+            "y": "13.627556",
+            "repr": "武藤容治",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 119,
+            "x": "10.513513",
+            "y": "13.665885",
+            "repr": "伊藤忠彦",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 120,
+            "x": "7.7842426",
+            "y": "12.591125",
+            "repr": "山本有二",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 121,
+            "x": "9.138901",
+            "y": "12.062055",
+            "repr": "山口壯",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 122,
+            "x": "7.2942576",
+            "y": "13.785614",
+            "repr": "簗和生",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 123,
+            "x": "9.892439",
+            "y": "12.568798",
+            "repr": "長島昭久",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 124,
+            "x": "7.849075",
+            "y": "14.358312",
+            "repr": "中村裕之",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 125,
+            "x": "5.6805596",
+            "y": "13.546244",
+            "repr": "森山裕",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 126,
+            "x": "8.357352",
+            "y": "12.14226",
+            "repr": "葉梨康弘",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 127,
+            "x": "9.739037",
+            "y": "14.704637",
+            "repr": "堀内詔子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 128,
+            "x": "9.940849",
+            "y": "11.967616",
+            "repr": "橋本岳",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 129,
+            "x": "10.639359",
+            "y": "13.300735",
+            "repr": "渡海紀三朗",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 130,
+            "x": "6.834988",
+            "y": "14.61755",
+            "repr": "尾身朝子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 131,
+            "x": "6.8300447",
+            "y": "12.562766",
+            "repr": "高市早苗",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 132,
+            "x": "6.56551",
+            "y": "14.128951",
+            "repr": "加藤竜祥",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 133,
+            "x": "8.339998",
+            "y": "15.475823",
+            "repr": "高木毅",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 134,
+            "x": "9.277385",
+            "y": "14.987528",
+            "repr": "平口洋",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 135,
+            "x": "8.966328",
+            "y": "12.841525",
+            "repr": "三谷英弘",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 136,
+            "x": "7.2456903",
+            "y": "15.247149",
+            "repr": "古川禎久",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 137,
+            "x": "6.482951",
+            "y": "15.386999",
+            "repr": "坂井学",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 138,
+            "x": "9.625152",
+            "y": "12.493937",
+            "repr": "古屋圭司",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 139,
+            "x": "8.4605",
+            "y": "14.077654",
+            "repr": "西村康稔",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 140,
+            "x": "8.847871",
+            "y": "15.10987",
+            "repr": "松本尚",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 141,
+            "x": "7.1580715",
+            "y": "12.284814",
+            "repr": "山田美樹",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 142,
+            "x": "7.781221",
+            "y": "15.045486",
+            "repr": "金田勝年",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 143,
+            "x": "10.257173",
+            "y": "13.407494",
+            "repr": "秋本真利",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 144,
+            "x": "8.920779",
+            "y": "12.74375",
+            "repr": "今村雅弘",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 145,
+            "x": "6.693441",
+            "y": "12.66844",
+            "repr": "島尻安伊子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 146,
+            "x": "9.485849",
+            "y": "14.835364",
+            "repr": "田村憲久",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 147,
+            "x": "8.488648",
+            "y": "13.363712",
+            "repr": "平将明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 148,
+            "x": "10.200686",
+            "y": "14.230692",
+            "repr": "麻生太郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 149,
+            "x": "8.871738",
+            "y": "14.410338",
+            "repr": "津島淳",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 150,
+            "x": "8.175544",
+            "y": "11.699694",
+            "repr": "平沢勝栄",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 151,
+            "x": "7.973725",
+            "y": "15.822853",
+            "repr": "金子俊平",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 152,
+            "x": "6.572646",
+            "y": "12.553841",
+            "repr": "赤澤亮正",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 153,
+            "x": "7.5524087",
+            "y": "14.843555",
+            "repr": "渡辺博道",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 154,
+            "x": "5.7853727",
+            "y": "14.009741",
+            "repr": "小田原潔",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 155,
+            "x": "9.972155",
+            "y": "13.195385",
+            "repr": "塚田一郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 156,
+            "x": "7.976224",
+            "y": "15.657047",
+            "repr": "寺田稔",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 157,
+            "x": "8.160771",
+            "y": "14.674099",
+            "repr": "高木啓",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 158,
+            "x": "5.3838964",
+            "y": "14.369759",
+            "repr": "岩田和親",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 159,
+            "x": "6.7368875",
+            "y": "13.995673",
+            "repr": "萩生田光一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 160,
+            "x": "9.6296835",
+            "y": "12.457431",
+            "repr": "井出庸生",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 161,
+            "x": "6.851851",
+            "y": "15.116385",
+            "repr": "谷公一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 162,
+            "x": "9.946443",
+            "y": "14.265692",
+            "repr": "松本剛明",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 163,
+            "x": "7.3557434",
+            "y": "14.337454",
+            "repr": "小林鷹之",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 164,
+            "x": "9.228919",
+            "y": "13.273449",
+            "repr": "鈴木馨祐",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 165,
+            "x": "9.250121",
+            "y": "13.94359",
+            "repr": "西野太亮",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 166,
+            "x": "10.199246",
+            "y": "13.643",
+            "repr": "大岡敏孝",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 167,
+            "x": "7.4443893",
+            "y": "16.067142",
+            "repr": "浜田靖一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 168,
+            "x": "6.308541",
+            "y": "14.18707",
+            "repr": "小里泰弘",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 169,
+            "x": "8.325778",
+            "y": "13.514826",
+            "repr": "宗清皇一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 170,
+            "x": "9.059355",
+            "y": "13.40428",
+            "repr": "牧原秀樹",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 171,
+            "x": "5.5998306",
+            "y": "14.564259",
+            "repr": "鈴木淳司",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 172,
+            "x": "6.2424273",
+            "y": "15.290177",
+            "repr": "佐々木紀",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 173,
+            "x": "7.059997",
+            "y": "15.967599",
+            "repr": "若宮健嗣",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 174,
+            "x": "6.3578625",
+            "y": "15.532832",
+            "repr": "鈴木貴子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 175,
+            "x": "7.3799906",
+            "y": "13.667602",
+            "repr": "石川昭政",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 176,
+            "x": "6.6914535",
+            "y": "14.407885",
+            "repr": "盛山正仁",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 177,
+            "x": "8.805613",
+            "y": "15.33412",
+            "repr": "額賀福志郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 178,
+            "x": "6.2017956",
+            "y": "15.135362",
+            "repr": "御法川信英",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 179,
+            "x": "7.67191",
+            "y": "15.220676",
+            "repr": "石原宏高",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 180,
+            "x": "9.900567",
+            "y": "14.431279",
+            "repr": "逢沢一郎",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 181,
+            "x": "9.208093",
+            "y": "12.650212",
+            "repr": "秋葉賢也",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 182,
+            "x": "10.226045",
+            "y": "13.51342",
+            "repr": "斎藤アレックス",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 183,
+            "x": "9.6307955",
+            "y": "13.452505",
+            "repr": "古川元久",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 184,
+            "x": "10.082736",
+            "y": "12.6914",
+            "repr": "前原誠司",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 185,
+            "x": "8.426285",
+            "y": "12.730807",
+            "repr": "田中健",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 186,
+            "x": "8.555394",
+            "y": "13.826269",
+            "repr": "浅野哲",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 187,
+            "x": "6.0971055",
+            "y": "14.240159",
+            "repr": "鈴木敦",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 188,
+            "x": "5.444392",
+            "y": "14.043743",
+            "repr": "長友慎治",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 189,
+            "x": "7.169923",
+            "y": "14.103971",
+            "repr": "西岡秀子",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 190,
+            "x": "8.053926",
+            "y": "11.853506",
+            "repr": "玉木雄一郎",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 191,
+            "x": "10.216932",
+            "y": "12.150493",
+            "repr": "鈴木義弘",
+            "party": "国民",
+            "color": "blue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 192,
+            "x": "7.4984164",
+            "y": "15.358229",
+            "repr": "石井啓一",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 193,
+            "x": "6.3162775",
+            "y": "13.438009",
+            "repr": "浜地雅一",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 194,
+            "x": "6.6471233",
+            "y": "14.747581",
+            "repr": "金城泰邦",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 195,
+            "x": "7.457659",
+            "y": "15.249897",
+            "repr": "山崎正恭",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 196,
+            "x": "7.8314786",
+            "y": "12.432241",
+            "repr": "伊佐進一",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 197,
+            "x": "8.645326",
+            "y": "14.592213",
+            "repr": "河西宏一",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 198,
+            "x": "6.8780627",
+            "y": "14.412483",
+            "repr": "佐藤英道",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 199,
+            "x": "5.5737453",
+            "y": "13.568833",
+            "repr": "古屋範子",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 200,
+            "x": "7.546835",
+            "y": "14.526849",
+            "repr": "稲津久",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 201,
+            "x": "8.434271",
+            "y": "14.966164",
+            "repr": "伊藤渉",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 202,
+            "x": "10.413383",
+            "y": "13.565896",
+            "repr": "佐藤茂樹",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 203,
+            "x": "8.079569",
+            "y": "12.083019",
+            "repr": "大口善徳",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 204,
+            "x": "6.658535",
+            "y": "13.325198",
+            "repr": "庄子賢一",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 205,
+            "x": "6.1563625",
+            "y": "13.251544",
+            "repr": "斉藤鉄夫",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 206,
+            "x": "7.5528803",
+            "y": "12.393484",
+            "repr": "國重徹",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 207,
+            "x": "9.310478",
+            "y": "14.370677",
+            "repr": "赤羽一嘉",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 208,
+            "x": "8.486292",
+            "y": "12.347231",
+            "repr": "北側一雄",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 209,
+            "x": "8.132003",
+            "y": "13.830513",
+            "repr": "岡本三成",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 210,
+            "x": "8.112261",
+            "y": "12.565737",
+            "repr": "高木陽介",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 211,
+            "x": "6.438703",
+            "y": "14.679679",
+            "repr": "吉田宣弘",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 212,
+            "x": "5.959634",
+            "y": "14.260144",
+            "repr": "浮島智子",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 213,
+            "x": "7.4264665",
+            "y": "13.852703",
+            "repr": "中野洋昌",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 214,
+            "x": "6.9539375",
+            "y": "14.984525",
+            "repr": "中川宏昌",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 215,
+            "x": "7.3460593",
+            "y": "14.688934",
+            "repr": "竹内譲",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 216,
+            "x": "10.486713",
+            "y": "12.563146",
+            "repr": "笠浩史",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 217,
+            "x": "9.982304",
+            "y": "11.7974",
+            "repr": "後藤祐一",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 218,
+            "x": "8.874567",
+            "y": "11.820781",
+            "repr": "江田憲司",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 219,
+            "x": "7.070933",
+            "y": "11.819586",
+            "repr": "山岸一生",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 220,
+            "x": "6.9198465",
+            "y": "11.5341425",
+            "repr": "泉健太",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 221,
+            "x": "9.177921",
+            "y": "13.76315",
+            "repr": "小山展弘",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 222,
+            "x": "7.0085993",
+            "y": "12.755732",
+            "repr": "岡本あき子",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 223,
+            "x": "7.299359",
+            "y": "13.159934",
+            "repr": "神津たけし",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 224,
+            "x": "7.800645",
+            "y": "13.163277",
+            "repr": "金子恵美",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 225,
+            "x": "6.5019403",
+            "y": "12.597562",
+            "repr": "中島克仁",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 226,
+            "x": "8.344983",
+            "y": "11.111144",
+            "repr": "馬場雄基",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 227,
+            "x": "7.948942",
+            "y": "11.352071",
+            "repr": "枝野幸男",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 228,
+            "x": "10.132971",
+            "y": "12.120769",
+            "repr": "長妻昭",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 229,
+            "x": "8.799928",
+            "y": "12.439376",
+            "repr": "松木けんこう",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 230,
+            "x": "8.657873",
+            "y": "11.018107",
+            "repr": "大西健介",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 231,
+            "x": "7.569804",
+            "y": "11.5313",
+            "repr": "階猛",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 232,
+            "x": "6.841021",
+            "y": "12.184453",
+            "repr": "青柳陽一郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 233,
+            "x": "8.411965",
+            "y": "13.721528",
+            "repr": "山岡達丸",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 234,
+            "x": "10.135883",
+            "y": "12.758102",
+            "repr": "牧義夫",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 235,
+            "x": "9.064914",
+            "y": "11.942585",
+            "repr": "中村喜四郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 236,
+            "x": "6.575032",
+            "y": "12.61884",
+            "repr": "吉田統彦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 237,
+            "x": "10.146972",
+            "y": "12.182645",
+            "repr": "中川正春",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 238,
+            "x": "9.352305",
+            "y": "12.155792",
+            "repr": "近藤昭一",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 239,
+            "x": "8.376087",
+            "y": "11.651145",
+            "repr": "早稲田ゆき",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 240,
+            "x": "8.499388",
+            "y": "11.09923",
+            "repr": "櫻井周",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 241,
+            "x": "10.0796",
+            "y": "13.16212",
+            "repr": "小熊慎司",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 242,
+            "x": "7.1584888",
+            "y": "11.468595",
+            "repr": "原口一博",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 243,
+            "x": "9.435335",
+            "y": "14.091038",
+            "repr": "伊藤俊輔",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 244,
+            "x": "6.0878015",
+            "y": "13.205607",
+            "repr": "小宮山泰子",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 245,
+            "x": "7.6636066",
+            "y": "11.818249",
+            "repr": "佐藤公治",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 246,
+            "x": "6.50172",
+            "y": "12.128826",
+            "repr": "山崎誠",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 247,
+            "x": "6.2876673",
+            "y": "12.256573",
+            "repr": "井坂信彦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 248,
+            "x": "9.439732",
+            "y": "12.767432",
+            "repr": "松原仁",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 249,
+            "x": "8.82205",
+            "y": "11.305477",
+            "repr": "渡辺創",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 250,
+            "x": "6.8029213",
+            "y": "11.81756",
+            "repr": "山田勝彦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 251,
+            "x": "9.325338",
+            "y": "12.944559",
+            "repr": "緑川貴士",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 252,
+            "x": "9.482598",
+            "y": "12.282911",
+            "repr": "篠原豪",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 253,
+            "x": "8.989788",
+            "y": "11.089319",
+            "repr": "柚木道義",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 254,
+            "x": "7.725325",
+            "y": "11.945401",
+            "repr": "本庄知史",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 255,
+            "x": "9.209694",
+            "y": "13.542446",
+            "repr": "太栄志",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 256,
+            "x": "6.3017507",
+            "y": "13.183297",
+            "repr": "城井崇",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 257,
+            "x": "9.23115",
+            "y": "13.80131",
+            "repr": "大河原まさこ",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 258,
+            "x": "7.972597",
+            "y": "12.442522",
+            "repr": "小沢一郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 259,
+            "x": "7.129066",
+            "y": "14.863093",
+            "repr": "野田佳彦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 260,
+            "x": "7.230507",
+            "y": "11.5084",
+            "repr": "山井和則",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 261,
+            "x": "9.24157",
+            "y": "11.219515",
+            "repr": "福田昭夫",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 262,
+            "x": "7.6434836",
+            "y": "11.624954",
+            "repr": "道下大樹",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 263,
+            "x": "7.28745",
+            "y": "13.28403",
+            "repr": "梅谷守",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 264,
+            "x": "9.959583",
+            "y": "13.61021",
+            "repr": "森山浩行",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 265,
+            "x": "8.726919",
+            "y": "12.849787",
+            "repr": "馬淵澄夫",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 266,
+            "x": "6.972654",
+            "y": "13.3295145",
+            "repr": "近藤和也",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 267,
+            "x": "9.781819",
+            "y": "11.988019",
+            "repr": "大串博志",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 268,
+            "x": "8.681418",
+            "y": "13.26536",
+            "repr": "青山大人",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 269,
+            "x": "7.963261",
+            "y": "11.418388",
+            "repr": "新垣邦男",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 270,
+            "x": "8.309348",
+            "y": "11.187904",
+            "repr": "吉田はるみ",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 271,
+            "x": "10.233868",
+            "y": "12.242551",
+            "repr": "末松義規",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 272,
+            "x": "9.64932",
+            "y": "11.85444",
+            "repr": "寺田学",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 273,
+            "x": "10.4054165",
+            "y": "12.567916",
+            "repr": "渡辺周",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 274,
+            "x": "10.635543",
+            "y": "12.71111",
+            "repr": "鎌田さゆり",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 275,
+            "x": "9.648835",
+            "y": "12.719267",
+            "repr": "伴野豊",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 276,
+            "x": "9.100939",
+            "y": "13.236755",
+            "repr": "重徳和彦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 277,
+            "x": "10.2854595",
+            "y": "12.658587",
+            "repr": "安住淳",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 278,
+            "x": "8.886354",
+            "y": "11.769242",
+            "repr": "岡田克也",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 279,
+            "x": "7.0296965",
+            "y": "11.671166",
+            "repr": "石川香織",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 280,
+            "x": "9.287748",
+            "y": "13.152875",
+            "repr": "玄葉光一郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 281,
+            "x": "9.707388",
+            "y": "11.802549",
+            "repr": "奥野総一郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 282,
+            "x": "9.155957",
+            "y": "11.285984",
+            "repr": "米山隆一",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 283,
+            "x": "9.528544",
+            "y": "11.335546",
+            "repr": "源馬謙太郎",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 284,
+            "x": "8.112021",
+            "y": "11.512443",
+            "repr": "中谷一馬",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 285,
+            "x": "9.3790655",
+            "y": "11.638916",
+            "repr": "逢坂誠二",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 286,
+            "x": "7.8514066",
+            "y": "11.769074",
+            "repr": "篠原孝",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 287,
+            "x": "6.7426305",
+            "y": "12.261256",
+            "repr": "西村智奈美",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 288,
+            "x": "9.308431",
+            "y": "12.682016",
+            "repr": "下条みつ",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 289,
+            "x": "6.326453",
+            "y": "12.5575485",
+            "repr": "阿部知子",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 290,
+            "x": "8.050998",
+            "y": "11.637148",
+            "repr": "小川淳也",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 291,
+            "x": "8.451339",
+            "y": "13.030365",
+            "repr": "大島敦",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 292,
+            "x": "8.064768",
+            "y": "14.723213",
+            "repr": "菅直人",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 293,
+            "x": "9.510605",
+            "y": "11.775154",
+            "repr": "吉川元",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 294,
+            "x": "6.0011125",
+            "y": "12.695225",
+            "repr": "菊田真紀子",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 295,
+            "x": "9.269788",
+            "y": "12.034041",
+            "repr": "田嶋要",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 296,
+            "x": "6.5118613",
+            "y": "11.724705",
+            "repr": "落合貴之",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 297,
+            "x": "9.557412",
+            "y": "12.408778",
+            "repr": "徳永久志",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 298,
+            "x": "10.504363",
+            "y": "12.891467",
+            "repr": "荒井優",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 299,
+            "x": "7.095597",
+            "y": "11.484645",
+            "repr": "藤岡隆雄",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 300,
+            "x": "6.8085265",
+            "y": "11.538511",
+            "repr": "櫛渕万里",
+            "party": "れ新",
+            "color": "green",
+            "ref_point": "none"
+        },
+        {
+            "idx": 301,
+            "x": "6.8455167",
+            "y": "11.506252",
+            "repr": "大石あきこ",
+            "party": "れ新",
+            "color": "green",
+            "ref_point": "none"
+        },
+        {
+            "idx": 302,
+            "x": "6.3405623",
+            "y": "11.746606",
+            "repr": "岬麻紀",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 303,
+            "x": "10.062171",
+            "y": "12.980161",
+            "repr": "三木圭恵",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 304,
+            "x": "5.9223185",
+            "y": "13.681384",
+            "repr": "美延映夫",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 305,
+            "x": "7.2774453",
+            "y": "11.771377",
+            "repr": "和田有一朗",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 306,
+            "x": "10.408203",
+            "y": "13.432012",
+            "repr": "杉本和巳",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 307,
+            "x": "10.618054",
+            "y": "12.968464",
+            "repr": "奥下剛光",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 308,
+            "x": "8.736157",
+            "y": "13.985492",
+            "repr": "沢田良",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 309,
+            "x": "6.0877647",
+            "y": "12.203756",
+            "repr": "馬場伸幸",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 310,
+            "x": "6.1971164",
+            "y": "12.256437",
+            "repr": "池畑浩太朗",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 311,
+            "x": "7.408949",
+            "y": "11.860974",
+            "repr": "井上英孝",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 312,
+            "x": "6.6346416",
+            "y": "11.76272",
+            "repr": "藤田文武",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 313,
+            "x": "6.780344",
+            "y": "11.880855",
+            "repr": "一谷勇一郎",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 314,
+            "x": "9.479812",
+            "y": "13.748076",
+            "repr": "藤巻健太",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 315,
+            "x": "8.522604",
+            "y": "11.511072",
+            "repr": "足立康史",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 316,
+            "x": "9.859493",
+            "y": "11.876474",
+            "repr": "阿部弘樹",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 317,
+            "x": "7.175872",
+            "y": "13.136056",
+            "repr": "空本誠喜",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 318,
+            "x": "9.952452",
+            "y": "13.5870285",
+            "repr": "浦野靖人",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 319,
+            "x": "10.50744",
+            "y": "12.5997505",
+            "repr": "市村浩一郎",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 320,
+            "x": "10.523576",
+            "y": "12.681895",
+            "repr": "浅川義治",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 321,
+            "x": "8.420207",
+            "y": "13.929914",
+            "repr": "阿部司",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 322,
+            "x": "5.5442495",
+            "y": "13.964718",
+            "repr": "掘井健智",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 323,
+            "x": "10.340729",
+            "y": "13.031833",
+            "repr": "伊東信久",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 324,
+            "x": "6.288807",
+            "y": "11.709713",
+            "repr": "早坂敦",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 325,
+            "x": "8.273493",
+            "y": "12.416425",
+            "repr": "小野泰輔",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 326,
+            "x": "7.5453176",
+            "y": "11.234092",
+            "repr": "前川清成",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 327,
+            "x": "8.863973",
+            "y": "13.387548",
+            "repr": "青柳仁士",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 328,
+            "x": "6.4162073",
+            "y": "13.047045",
+            "repr": "山本剛正",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 329,
+            "x": "10.108331",
+            "y": "13.11722",
+            "repr": "岩谷良平",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 330,
+            "x": "8.37866",
+            "y": "13.23389",
+            "repr": "堀場幸子",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 331,
+            "x": "6.267608",
+            "y": "11.69479",
+            "repr": "住吉寛紀",
+            "party": "維新",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 332,
+            "x": "9.717429",
+            "y": "12.961727",
+            "repr": "吉田豊史",
+            "party": "無",
+            "color": "purple",
+            "ref_point": "none"
+        },
+        {
+            "idx": 333,
+            "x": "8.68846",
+            "y": "11.546856",
+            "repr": "海江田万里",
+            "party": "無",
+            "color": "purple",
+            "ref_point": "none"
+        },
+        {
+            "idx": 334,
+            "x": "10.031141",
+            "y": "14.486766",
+            "repr": "細田博之",
+            "party": "無",
+            "color": "purple",
+            "ref_point": "none"
+        },
+        {
+            "idx": 335,
+            "x": "7.0271583",
+            "y": "11.239731",
+            "repr": "田村貴昭",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 336,
+            "x": "9.323514",
+            "y": "11.454696",
+            "repr": "高橋千鶴子",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 337,
+            "x": "6.869092",
+            "y": "11.144949",
+            "repr": "志位和夫",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 338,
+            "x": "7.6867957",
+            "y": "11.140155",
+            "repr": "宮本岳志",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 339,
+            "x": "7.0645714",
+            "y": "11.136239",
+            "repr": "赤嶺政賢",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 340,
+            "x": "9.385549",
+            "y": "11.577633",
+            "repr": "笠井亮",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 341,
+            "x": "7.593317",
+            "y": "11.031979",
+            "repr": "宮本徹",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 342,
+            "x": "7.584488",
+            "y": "10.961272",
+            "repr": "穀田恵二",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 343,
+            "x": "7.895062",
+            "y": "11.005784",
+            "repr": "塩川鉄也",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "against"
+        },
+        {
+            "idx": 344,
+            "x": "6.603205",
+            "y": "11.311392",
+            "repr": "本村伸子",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "none"
+        },
+        {
+            "idx": 345,
+            "x": "9.4487505",
+            "y": "13.643691",
+            "repr": "仁木博文",
+            "party": "有志",
+            "color": "grey",
+            "ref_point": "none"
+        },
+        {
+            "idx": 346,
+            "x": "9.156306",
+            "y": "11.188735",
+            "repr": "福島伸享",
+            "party": "有志",
+            "color": "grey",
+            "ref_point": "none"
+        },
+        {
+            "idx": 347,
+            "x": "9.395721",
+            "y": "13.360288",
+            "repr": "吉良州司",
+            "party": "有志",
+            "color": "grey",
+            "ref_point": "none"
+        },
+        {
+            "idx": 348,
+            "x": "10.232418",
+            "y": "12.261397",
+            "repr": "緒方林太郎",
+            "party": "有志",
+            "color": "grey",
+            "ref_point": "none"
+        },
+        {
+            "idx": 349,
+            "x": "9.052508",
+            "y": "12.22152",
+            "repr": "北神圭朗",
+            "party": "有志",
+            "color": "grey",
+            "ref_point": "none"
+        }
+    ]
+}
