@@ -32,3 +32,7 @@ def read_hdf5_file(path):
             value = f[key][:]
             out_dict[key] = value
         return out_dict
+    
+def read_txt_file(path):
+    with open(path, "r", encoding="utf-8") as f:
+         return f.read().splitlines()

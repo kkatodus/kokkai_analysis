@@ -1,3 +1,4 @@
 secrets.sh
 secret_keys/
 *.hdf5
+mecab-ipadic-neologd/
