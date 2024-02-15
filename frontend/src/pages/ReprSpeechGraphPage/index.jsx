@@ -8,8 +8,9 @@ import { visualEndpoint } from '../../resource/resources';
 import disclaimer from './disclaimer';
 import { gridLoader } from '../../resource/loader';
 import DimensionToggle from './components/DimensionToggle';
+import LeftRightSpectrum from './components/LeftRightSpectrum';
 
-const possibleTopics = ['防衛', 'LGBTQ', '原発', '少子化', '気候変動'];
+const possibleTopics = ['防衛', '原発', '少子化', '気候変動'];
 function ReprSpeechGraphPage() {
   const [currentTopic, setCurrentTopic] = useState('防衛');
   const [currentRepr, setCurrentRepr] = useState(null);
@@ -18,6 +19,8 @@ function ReprSpeechGraphPage() {
   const [Scatter1dData, setScatter1dData] = useState(null);
   const [lineData, setLineData] = useState(null);
   const [dimension, setDimension] = useState('2D');
+  const [leftLabel, setLeftLabel] = useState(null);
+  const [rightLabel, setRightLabel] = useState(null);
   const displayScatterData = dimension === '1D' ? Scatter1dData : Scatter2dData;
   useEffect(() => {
     setCurrentRepr(null);
@@ -27,6 +30,8 @@ function ReprSpeechGraphPage() {
       url: requestUrl,
     })
       .then((res) => {
+        setLeftLabel(res.data['1d'].descriptions?.left);
+        setRightLabel(res.data['1d'].descriptions?.right);
         setScatter2dData(res.data['2d'].data);
         setScatter1dData(res.data['1d'].data);
         setLineData(
@@ -45,16 +50,27 @@ function ReprSpeechGraphPage() {
     gridLoader
   ) : (
     <div className="w-full h-full">
-      <div className="flex h-[90%]">
-        <div className="w-[70%] h-full">
-          <ScatterWithLineGraph
-            displayLine={dimension === '2D'}
-            scatterData={displayScatterData}
-            lineData={lineData}
-            setCurrentParty={setCurrentParty}
-            setCurrentRepr={setCurrentRepr}
-          />
+      <div className="flex h-[90%] relative">
+        <div className="w-[70%] relative">
+          {dimension === '1D' && leftLabel && rightLabel && (
+            <div className="h-[5%]">
+              <LeftRightSpectrum
+                leftLabel={leftLabel}
+                rightLabel={rightLabel}
+              />
+            </div>
+          )}
+          <div className="h-[95%]">
+            <ScatterWithLineGraph
+              displayLine={dimension === '2D'}
+              scatterData={displayScatterData}
+              lineData={lineData}
+              setCurrentParty={setCurrentParty}
+              setCurrentRepr={setCurrentRepr}
+            />
+          </div>
         </div>
+
         <div className="w-[30%]">
           <SpeechPanel
             currentHouse="lower"
@@ -64,8 +80,8 @@ function ReprSpeechGraphPage() {
           />
         </div>
       </div>
-      <div className="h-[10%] overflow-y-scroll">
-        <div className="w-full h-full">{disclaimer}</div>
+      <div className="h-[10%] w-full p-2 overflow-y-scroll text-sm">
+        {disclaimer}
       </div>
     </div>
   );
