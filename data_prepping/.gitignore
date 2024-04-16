@@ -1,2 +1,4 @@
 secrets.sh
 secret_keys/
+*.exe
+*.log
