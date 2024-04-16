@@ -1,0 +1,103 @@
+{
+    "party": "共産",
+    "repr_name": "志位和夫",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105254X00320230126_013",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2023-01-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105254X00320230126/13",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "原発頼みを続けてきたことが、再生可能エネルギー、省エネルギー普及の障害になっています"
+            ]
+        },
+        {
+            "speech_id": "120805254X02920220525_035",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2022-05-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805254X02920220525/35",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "一〇〇％国産の再生可能エネルギーの大規模な普及を図るべきではありませんか"
+            ]
+        },
+        {
+            "speech_id": "120305261X00320201104_427",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2020-11-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120305261X00320201104/427",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　つまり、今回の任命拒否を、多くの方々が、学問の自由の侵害のみならず、表現の自由、言論の自由の侵害につながり、信教の自由の侵害にもつながり、環境保護の運動にとっても重大問題だと声を上げている"
+            ]
+        },
+        {
+            "speech_id": "119605254X00320180125_010",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2018-01-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119605254X00320180125/10",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　原発ゼロの決断と一体に再生可能エネルギーの飛躍的普及を図ることこそ、現実的で、真に未来ある道ではありませんか"
+            ]
+        },
+        {
+            "speech_id": "118605254X00320140129_021",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2014-01-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118605254X00320140129/21",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　即時原発ゼロを政治決断し、再生可能エネルギーの思い切った普及と低エネルギー社会への転換に力を注ぐことこそ、国民の命と安全に責任を負うべき政府が選択すべき道であります"
+            ]
+        },
+        {
+            "speech_id": "118305254X00320130131_011",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2013-01-31",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118305254X00320130131/11",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　日本共産党は、即時原発ゼロと再生可能エネルギーへの抜本的転換の政治的決断を強く求めるものであります"
+            ]
+        },
+        {
+            "speech_id": "118105254X00320121101_006",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2012-11-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118105254X00320121101/6",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　再生可能エネルギーの導入可能量は、全原発の発電能力の約四十倍であり、この大きな可能性を現実にする本格的取り組みを開始すべきです"
+            ]
+        },
+        {
+            "speech_id": "117305254X00320091029_003",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2009-10-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117305254X00320091029/3",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "温暖化対策とのかかわりでも、慎重な検討が求められるのではないでしょうか"
+            ]
+        }
+    ]
+}

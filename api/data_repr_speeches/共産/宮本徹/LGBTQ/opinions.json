@@ -1,0 +1,25 @@
+{
+    "party": "共産",
+    "repr_name": "宮本徹",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105261X01520230228_159",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X01520230228/159",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　総理、同性カップルに法的な結婚を認めないというのは、国が同性愛者を差別している、こういう認識はございますか"
+            ]
+        }
+    ]
+}

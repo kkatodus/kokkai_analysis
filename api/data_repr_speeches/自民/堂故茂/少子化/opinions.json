@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "堂故茂",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119315261X01120170313_021",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2017-03-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119315261X01120170313/21",
+            "speaker_group": "自由民主党・こころ",
+            "extracted_opinions": [
+                "出生率を上げ、少子化に歯止めを掛け、地方創生にも資すると考えられます"
+            ]
+        },
+        {
+            "speech_id": "118714773X00120141110_016",
+            "house_name": "参議院",
+            "meeting_name": "地方創生に関する特別委員会",
+            "date": "2014-11-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118714773X00120141110/16",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　出生率を一・八まで上げ、五十年後に一億の人口を維持することなど、並大抵の覚悟ではできないことだと思います"
+            ]
+        }
+    ]
+}

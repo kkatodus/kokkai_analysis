@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "星北斗",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114260X01720230601_113",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-06-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X01720230601/113",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　この少子化対策に必要な財源の確保について、今はなかなか話しにくいと思いますが、現時点で話せる範囲で政府としての見解をお願いいたします"
+            ]
+        },
+        {
+            "speech_id": "121114260X00220230309_036",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-03-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X00220230309/36",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　これ、この少子化問題、子ども・子育ての支援、これ本当に待ったなしであります"
+            ]
+        }
+    ]
+}

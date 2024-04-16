@@ -1,0 +1,36 @@
+{
+    "party": "維新",
+    "repr_name": "漆間譲司",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105206X01320230425_196",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2023-04-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105206X01320230425/196",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "これがひいては、私は、少子化の原因にもつながっているのではないのかと思います"
+            ]
+        },
+        {
+            "speech_id": "121105267X00220230221_036",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第五分科会",
+            "date": "2023-02-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105267X00220230221/36",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "また、地域子育て支援拠点に係る事業の民間活力の活用に向けた財源確保も今後の課題であります"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "新谷正義",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119804889X00920190327_249",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2019-03-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119804889X00920190327/249",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　また、子育て支援に当たりましては、保護者同士の信頼性、関係性を高めることも、保護者の子育てや子供の成長を支える大きな力となると考えてございます"
+            ]
+        },
+        {
+            "speech_id": "118305267X00220130415_338",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第五分科会",
+            "date": "2013-04-15",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118305267X00220130415/338",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "医療保険制度の持続可能性を高めていく観点からも、少子化対策は待ったなしの問題と考えております"
+            ]
+        }
+    ]
+}

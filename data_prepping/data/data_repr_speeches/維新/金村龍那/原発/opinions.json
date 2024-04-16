@@ -1,0 +1,25 @@
+{
+    "party": "維新",
+    "repr_name": "金村龍那",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120805254X02920220525_024",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2022-05-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805254X02920220525/24",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "原発の安全性確保は欠かせませんが、規制委が独善に陥ってはなりません"
+            ]
+        }
+    ]
+}

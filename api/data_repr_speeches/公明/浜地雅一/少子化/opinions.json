@@ -1,0 +1,25 @@
+{
+    "party": "公明",
+    "repr_name": "浜地雅一",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120405254X01520210325_014",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2021-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120405254X01520210325/14",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "早急に政府を挙げて体制強化を図るべきと思いますが、坂本少子化担当大臣の答弁を求めます"
+            ]
+        }
+    ]
+}

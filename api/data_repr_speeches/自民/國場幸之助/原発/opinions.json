@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "國場幸之助",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121104080X01120230414_011",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2023-04-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104080X01120230414/11",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "この視点からも、何よりも安全性に最大限配慮した原子力をいかに活用するのかは、国家的な課題でもあります"
+            ]
+        }
+    ]
+}

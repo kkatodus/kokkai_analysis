@@ -1,0 +1,25 @@
+{
+    "party": "沖縄",
+    "repr_name": "高良鉄美",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120415206X01120210506_077",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2021-05-06",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120415206X01120210506/77",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "それだけじゃなくて、大学の学費ですね、養育費としての大学の学費に分担が行かないんじゃないかというような懸念も払拭されていません"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "松木けんこう",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118005007X00520120418_034",
+            "house_name": "衆議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2012-04-18",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118005007X00520120418/34",
+            "speaker_group": "新党大地・真民主",
+            "extracted_opinions": [
+                "だから、減らないように子育て支援とかも頑張ろうと言っていたんですけれども、これも何かおかしくなりました"
+            ]
+        }
+    ]
+}

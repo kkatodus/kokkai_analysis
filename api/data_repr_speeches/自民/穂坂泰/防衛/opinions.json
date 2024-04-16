@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "穂坂泰",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121203815X00120231102_022",
+            "house_name": "衆議院",
+            "meeting_name": "安全保障委員会",
+            "date": "2023-11-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121203815X00120231102/22",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　我が国を取り巻く安全保障環境が一層厳しさと不確実性を増す中、国民の皆様の期待に応える外交を推進する所存でございます"
+            ]
+        }
+    ]
+}

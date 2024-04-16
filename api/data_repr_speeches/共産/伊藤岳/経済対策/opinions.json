@@ -1,0 +1,128 @@
+{
+    "party": "共産",
+    "repr_name": "伊藤岳",
+    "topic": "経済対策",
+    "search_words": [
+        "経済対策",
+        "景気",
+        "デフレ",
+        "財政政策",
+        "金融政策",
+        "インフレ",
+        "中小企業",
+        "雇用",
+        "スタートアップ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114601X00620230323_093",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2023-03-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114601X00620230323/93",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　大臣、専門性を有し行政の重要な分野で役割を担う人材が、会計年度任用職員という不安定な雇用で流出、外に出てしまう、自治体の現場から出ていってしまう、住民のサービスの低下につながる、こういう指摘、声をどう受け止めますか"
+            ]
+        },
+        {
+            "speech_id": "120815254X00920220322_026",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2022-03-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120815254X00920220322/26",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　岸田内閣の賃上げ促進税制は、多くの労働者が働く中小企業や赤字企業は対象になっておらず、賃上げを保障するものにはなりません"
+            ]
+        },
+        {
+            "speech_id": "120814601X00520220322_080",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2022-03-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120814601X00520220322/80",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "賃上げを実現するためには、大企業の内部留保を活用させること、中小企業支援の抜本的拡充と一体に最低賃金を千五百円に引き上げること、正規雇用者を増やす労働法制への転換こそが必要です"
+            ]
+        },
+        {
+            "speech_id": "120714601X00120211220_110",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2021-12-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120714601X00120211220/110",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　政府の経済対策は、コロナで困窮する国民への支援は極めて不十分です"
+            ]
+        },
+        {
+            "speech_id": "120414601X00120210127_066",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2021-01-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120414601X00120210127/66",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "事業規模や雇用者数などに応じた増額を決断しないのですか"
+            ]
+        },
+        {
+            "speech_id": "120414601X00120210127_070",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2021-01-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120414601X00120210127/70",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　雇用調整助成金の特例措置も、四月以降の延長も検討すると言いますが、新型コロナ感染が続く限り継続すべきです"
+            ]
+        },
+        {
+            "speech_id": "120314601X00420201126_228",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2020-11-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120314601X00420201126/228",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "今回の法改正を通じて、人員、特に正規の雇用を増やしていくことにつなげていくことが大変重要だとお話を伺って感じました"
+            ]
+        },
+        {
+            "speech_id": "120114601X01720200604_112",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2020-06-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120114601X01720200604/112",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "聴覚障害者の雇用の促進を強く要望しておきたいと思います"
+            ]
+        },
+        {
+            "speech_id": "120114601X01220200416_125",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2020-04-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120114601X01220200416/125",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　緊急経済対策に盛り込まれた中小・小規模事業者に上限二百万円の現金給付を、幅広く中小業者が受け取れるようにすることはもちろんですが、一回きりの給付では持ちこたえられないという観光業の実態を踏まえるべきだと思います"
+            ]
+        },
+        {
+            "speech_id": "120114601X00620200319_164",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2020-03-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120114601X00620200319/164",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "そして、消費税増税以降の景気の冷え込み、加えて新型コロナの影響が全国に広がる中、リーマン・ショックのときや東日本大震災のときで行った対応を踏まえて、融資の返済猶予、特例的な助成金や補助金、消費税減税など、今まで以上のあらゆる手だてを迅速に講ずるべきではないでしょうか"
+            ]
+        }
+    ]
+}

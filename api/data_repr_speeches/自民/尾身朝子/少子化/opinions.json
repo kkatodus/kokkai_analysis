@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "尾身朝子",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119805270X00120190227_288",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第四分科会",
+            "date": "2019-02-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119805270X00120190227/288",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "少子化を迎える我が国にとって、人的資源の有効活用という観点からも一刻を争う死活的問題です"
+            ]
+        },
+        {
+            "speech_id": "119805261X00420190208_092",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2019-02-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119805261X00420190208/92",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　このように、国を挙げて子育て支援を行っていくという施策は、子育て世代の皆様へ力強いメッセージになると大いに期待しております"
+            ]
+        }
+    ]
+}

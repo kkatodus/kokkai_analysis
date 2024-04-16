@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "谷川弥一",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "116405007X01420060531_010",
+            "house_name": "衆議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2006-05-31",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116405007X01420060531/10",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "要するに、軍事力を持たないとこの国の意見は通らないんですか、今の世の中は"
+            ]
+        }
+    ]
+}

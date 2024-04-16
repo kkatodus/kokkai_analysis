@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "広瀬めぐみ",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114858X00420230419_022",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2023-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114858X00420230419/22",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "しかし、今後、防衛力のみならず、少子化対策などについても財源確保をしなくてはならないという切実な財政状況の中、果たして復興特別所得税がしっかりと確保できるのか、懸念がございます"
+            ]
+        },
+        {
+            "speech_id": "121014889X00820221208_014",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-12-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121014889X00820221208/14",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "地方創生は重要な少子化対策でもあります"
+            ]
+        }
+    ]
+}

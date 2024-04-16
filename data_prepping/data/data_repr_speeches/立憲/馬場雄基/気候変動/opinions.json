@@ -1,0 +1,59 @@
+{
+    "party": "立憲",
+    "repr_name": "馬場雄基",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120804006X00920220513_044",
+            "house_name": "衆議院",
+            "meeting_name": "環境委員会",
+            "date": "2022-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804006X00920220513/44",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　まさに今、待ったなしの状況であるのが気候変動の問題です"
+            ]
+        },
+        {
+            "speech_id": "120804006X00920220513_048",
+            "house_name": "衆議院",
+            "meeting_name": "環境委員会",
+            "date": "2022-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804006X00920220513/48",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　いわゆる気候変動対策、気候危機対策においての柱であるはずの公共交通の部門においてここまで今厳しい状況であるということでございますけれども、公共交通部門はやはり大切であるということを改めて一言いただけないでしょうか"
+            ]
+        },
+        {
+            "speech_id": "120804006X00220220308_105",
+            "house_name": "衆議院",
+            "meeting_name": "環境委員会",
+            "date": "2022-03-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804006X00220220308/105",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "環境問題、そのことについて、温暖化対策の認識そのものは、日本国内中で認識され大きく広がっていたというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "120805274X00220220217_026",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第六分科会",
+            "date": "2022-02-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805274X00220220217/26",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "気候変動が激しい今、環境に豊かな社会を築き上げるという面に立って、環境省の役割は極めて大きいというふうに思っています"
+            ]
+        }
+    ]
+}

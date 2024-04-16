@@ -1,0 +1,84 @@
+{
+    "party": "公明",
+    "repr_name": "平林晃",
+    "topic": "経済対策",
+    "search_words": [
+        "経済対策",
+        "景気",
+        "デフレ",
+        "財政政策",
+        "金融政策",
+        "インフレ",
+        "中小企業",
+        "雇用",
+        "スタートアップ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121204194X00220231114_146",
+            "house_name": "衆議院",
+            "meeting_name": "原子力問題調査特別委員会",
+            "date": "2023-11-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121204194X00220231114/146",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　今回の経済対策は補正予算でもしっかりと御支援をいただいているということでございまして、しっかりと引き続き取組をお願いします"
+            ]
+        },
+        {
+            "speech_id": "121204601X00320231109_027",
+            "house_name": "衆議院",
+            "meeting_name": "総務委員会",
+            "date": "2023-11-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121204601X00320231109/27",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "中小企業においては、是非力をかしてほしいとの声もあろうかと思います"
+            ]
+        },
+        {
+            "speech_id": "121105124X00920230419_018",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2023-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105124X00920230419/18",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　今の御答弁内容以外にも、支援対象者の拡充でありますとか、大学との雇用制度の改善なども進めていただいていると承知をしております"
+            ]
+        },
+        {
+            "speech_id": "121105124X00920230419_020",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2023-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105124X00920230419/20",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "それも本当に大事な問題ですし、研究費、雇用、変化の激しい講義担当などなど、様々な状況によって、研究する時間が取れないという声を本当に切実に伺っております"
+            ]
+        },
+        {
+            "speech_id": "121105271X00120230220_138",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第七分科会",
+            "date": "2023-02-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105271X00120230220/138",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "その流れを大企業から中小企業にまで広げていくことが重要です"
+            ]
+        },
+        {
+            "speech_id": "120804080X00620220330_159",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2022-03-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804080X00620220330/159",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　同事業、文字どおり、中小企業がデジタル化を推進していくためのサポートとして我が党が提言させていただいた事業と認識をさせていただいております"
+            ]
+        }
+    ]
+}

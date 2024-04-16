@@ -1,0 +1,112 @@
+{
+    "data": [
+        {
+            "idx": 0,
+            "x": "15.633171",
+            "y": "5.890659",
+            "repr": "岸田文雄",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "against"
+        },
+        {
+            "idx": 1,
+            "x": "15.1742325",
+            "y": "5.4269514",
+            "repr": "菅義偉",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 2,
+            "x": "14.1781435",
+            "y": "7.2206774",
+            "repr": "加藤勝信",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 3,
+            "x": "15.470614",
+            "y": "6.5977454",
+            "repr": "齋藤健",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 4,
+            "x": "13.690762",
+            "y": "6.123519",
+            "repr": "上川陽子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 5,
+            "x": "14.333172",
+            "y": "5.76736",
+            "repr": "小倉將信",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 6,
+            "x": "14.625787",
+            "y": "6.607632",
+            "repr": "松野博一",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 7,
+            "x": "14.451993",
+            "y": "4.9264507",
+            "repr": "野田聖子",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 8,
+            "x": "15.613246",
+            "y": "4.9059825",
+            "repr": "根本匠",
+            "party": "自民",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 9,
+            "x": "12.873516",
+            "y": "5.9396358",
+            "repr": "國重徹",
+            "party": "公明",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 10,
+            "x": "13.406448",
+            "y": "7.127456",
+            "repr": "西村智奈美",
+            "party": "立憲",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 11,
+            "x": "12.856838",
+            "y": "6.6174817",
+            "repr": "本村伸子",
+            "party": "共産",
+            "color": "red",
+            "ref_point": "for"
+        }
+    ]
+}

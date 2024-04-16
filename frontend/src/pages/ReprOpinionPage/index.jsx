@@ -11,7 +11,7 @@ function ReprOpinionPage() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${speechEndpoint}/${party}/${reprId}`,
+      url: `${speechEndpoint}summary/${party}/${reprId}`,
     })
       .then((res) => {
         setReprSummary(res.data);
@@ -22,19 +22,26 @@ function ReprOpinionPage() {
       });
   }, []);
 
-  const pageContent = reprSummary?.tags.map((tag) => (
-    <ReprTopicOpinionCard
-      party={party}
-      reprName={reprId}
-      idxOptions={reprSummary.number_of_files[tag]}
-      topic={tag}
-    />
-  ));
-
+  const pageContent = reprSummary ? (
+    reprSummary.tags.map((tag) => (
+      <ReprTopicOpinionCard
+        key={tag}
+        party={party}
+        reprName={reprId}
+        topic={tag}
+      />
+    ))
+  ) : (
+    <div className="h-full w-full flex items-center justify-center">
+      <h1 className="text-2xl font-extrabold">
+        この議員の発言データはありません
+      </h1>
+    </div>
+  );
   return (
     <BasePageLayout
       pageTitle={reprId}
-      backTo="/repr_analysis"
+      backTo="/repr_analysis/speech"
       MainContent={pageContent}
       extraStyles={{ content: 'flex flex-wrap' }}
     />

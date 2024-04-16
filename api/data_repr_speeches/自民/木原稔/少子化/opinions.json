@@ -1,0 +1,47 @@
+{
+    "party": "自民",
+    "repr_name": "木原稔",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121213950X00120231107_010",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2023-11-07",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121213950X00120231107/10",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　防衛力の中核は自衛隊員であり、少子化が進む今日、人材の確保は大きな課題です"
+            ]
+        },
+        {
+            "speech_id": "121203815X00120231102_008",
+            "house_name": "衆議院",
+            "meeting_name": "安全保障委員会",
+            "date": "2023-11-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121203815X00120231102/8",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　防衛力の中核は自衛隊員であり、少子化が進む今日、人材の確保は大きな課題です"
+            ]
+        },
+        {
+            "speech_id": "120804889X02520220513_028",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X02520220513/28",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　以上のように、御指摘の三条六号の文言は、子育てに負担を感じる場面が多いとの現実を課題として捉え、子育てをしやすくするための子育て支援策の充実等を通じてこれに向き合う姿勢を示したというものであり、この点も是非御理解をいただきたいと思っております"
+            ]
+        }
+    ]
+}

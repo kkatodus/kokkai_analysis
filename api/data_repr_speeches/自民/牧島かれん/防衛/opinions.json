@@ -1,0 +1,47 @@
+{
+    "party": "自民",
+    "repr_name": "牧島かれん",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119204889X00420161026_014",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2016-10-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119204889X00420161026/14",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "万が一にもテロリストの手に渡るようなことがあったら、安全保障上の大きな問題に結びかねません"
+            ]
+        },
+        {
+            "speech_id": "119204889X00420161026_016",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2016-10-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119204889X00420161026/16",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　また、同時に進めなければならないのは宇宙安全保障の確保だと思います"
+            ]
+        },
+        {
+            "speech_id": "118605268X00120140226_190",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第三分科会",
+            "date": "2014-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118605268X00120140226/190",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　宇宙が重要であるということは間違いのない事実としてここにあって、安全保障上も、そして私たちの豊かな毎日の生活の中にも宇宙空間はかかわりがあるということを多くの国民の皆様にも御理解をいただきたいと思います"
+            ]
+        }
+    ]
+}

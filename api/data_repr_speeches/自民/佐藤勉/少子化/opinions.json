@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "佐藤勉",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "115404260X02120020614_132",
+            "house_name": "衆議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2002-06-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115404260X02120020614/132",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　もちろん、我が国の少子化そして高齢化というのは、もう世界に類を見ないスピードで増大をしているということだと思います"
+            ]
+        }
+    ]
+}

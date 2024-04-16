@@ -1,0 +1,92 @@
+{
+    "party": "沖縄",
+    "repr_name": "伊波洋一",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120113950X01720200612_154",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2020-06-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120113950X01720200612/154",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "\r\n　日本国の主権の行使として在沖米軍基地に属地的に適用されている国内法には沖縄県赤土条例を含みながら、実際に米軍が執行しているＪＥＧＳに反映される国内法には赤土等流出防止条例は含まれないということは、環境保護のための規制権限が後退しているのではありませんか"
+            ]
+        },
+        {
+            "speech_id": "120113950X01520200602_098",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2020-06-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120113950X01520200602/98",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "沖縄県赤土等流出防止条例は環境保護に関する条例だという認識はありますか"
+            ]
+        },
+        {
+            "speech_id": "119613950X02120180628_169",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2018-06-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119613950X02120180628/169",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "\r\n　モントリオール議定書については、地球温暖化対策であり、賛成いたします"
+            ]
+        },
+        {
+            "speech_id": "119613950X01220180419_140",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2018-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119613950X01220180419/140",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "是非、今、先ほどの河野大臣のイニシアチブで、米軍に環境保護と安全確保の取組を遵守させる、日本政府側の体制を確立していただくようお願いいたします"
+            ]
+        },
+        {
+            "speech_id": "119613950X00920180410_250",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2018-04-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119613950X00920180410/250",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "\r\n　この流れを見ても、せっかく自主アセスで環境調査をしたのに、環境保護の要請を無視して米軍の要望が割り込んできたのは明らかではありませんか"
+            ]
+        },
+        {
+            "speech_id": "119313950X02420170606_298",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2017-06-06",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119313950X02420170606/298",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "今、日本が世界に協力すべきなのは、原発輸出ではなく、再生可能エネルギー分野です"
+            ]
+        },
+        {
+            "speech_id": "119213950X00420161027_045",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2016-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119213950X00420161027/45",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "離島を含む島々から成り、気候変動の大きな影響を受ける沖縄県民として、沖縄の風としてもパリ協定の批准に賛成いたします"
+            ]
+        }
+    ]
+}

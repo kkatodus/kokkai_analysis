@@ -1,0 +1,25 @@
+{
+    "party": "民主",
+    "repr_name": "浜野喜史",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118915254X00720150218_023",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2015-02-18",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118915254X00720150218/23",
+            "speaker_group": "民主党・新緑風会",
+            "extracted_opinions": [
+                "常任理事国として賛成した安全保障活動に自国は参加しないということが可能でしょうか"
+            ]
+        }
+    ]
+}

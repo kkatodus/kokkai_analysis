@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "渡辺博道",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "115404191X00120020228_089",
+            "house_name": "衆議院",
+            "meeting_name": "憲法調査会地方自治に関する調査小委員会",
+            "date": "2002-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115404191X00120020228/89",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　そうした中において、私は、高齢化そしてまた少子化というこの現実の社会を直視するならば、当然のことながら、地方分権というのは進めざるを得ない、そういう現実があるというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "114705077X01220000419_054",
+            "house_name": "衆議院",
+            "meeting_name": "文教委員会",
+            "date": "2000-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/114705077X01220000419/54",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "少子化対策に対する一つの対応かもしれません"
+            ]
+        }
+    ]
+}

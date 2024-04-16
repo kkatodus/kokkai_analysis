@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "岸信千世",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121104376X02020230602_009",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2023-06-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104376X02020230602/9",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "その中で、日本の防衛力強化というものは喫緊の課題でして、何としても対処をしなきゃいけない"
+            ]
+        }
+    ]
+}

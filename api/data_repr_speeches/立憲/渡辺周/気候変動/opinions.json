@@ -1,0 +1,26 @@
+{
+    "party": "立憲",
+    "repr_name": "渡辺周",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120405253X00320210611_100",
+            "house_name": "衆議院",
+            "meeting_name": "北朝鮮による拉致問題等に関する特別委員会",
+            "date": "2021-06-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120405253X00320210611/100",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "中国の問題もあれば、気候変動の問題もあるでしょう"
+            ]
+        }
+    ]
+}

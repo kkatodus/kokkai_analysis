@@ -1,0 +1,36 @@
+{
+    "party": "立憲",
+    "repr_name": "福山哲郎",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121113950X00420230317_033",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2023-03-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121113950X00420230317/33",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "それから、同性愛の問題も非常に、世界の流れじゃない、少数派だと言うことも非常に問題があると"
+            ]
+        },
+        {
+            "speech_id": "115415254X02020020424_005",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2002-04-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115415254X02020020424/5",
+            "speaker_group": "民主党・新緑風会",
+            "extracted_opinions": [
+                "\r\n　さらに、人権侵害の定義については、本法案では、差別禁止事由として人種、民族、信条、性別、社会的身分、門地、障害、疾病又は性的指向を挙げておりますが、極めてあいまいであると言わざるを得ません"
+            ]
+        }
+    ]
+}

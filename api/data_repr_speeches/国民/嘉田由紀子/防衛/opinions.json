@@ -1,0 +1,25 @@
+{
+    "party": "民主",
+    "repr_name": "嘉田由紀子",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115254X01120230328_010",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-03-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115254X01120230328/10",
+            "speaker_group": "国民民主党・新緑風会",
+            "extracted_opinions": [
+                "そして、防衛増税は、政府からの説明も、国民の理解得られる内容には全くなっておりません"
+            ]
+        }
+    ]
+}

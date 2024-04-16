@@ -1,0 +1,47 @@
+{
+    "party": "公明",
+    "repr_name": "下野六太",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115007X00920230516_070",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2023-05-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115007X00920230516/70",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "食料安全保障の観点からも、国内資源の活用を強力に進めるべきではないかと考えております"
+            ]
+        },
+        {
+            "speech_id": "121115007X00220230309_065",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2023-03-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115007X00220230309/65",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　まず、私も、食料安全保障の観点から輸出が非常に重要になってくるのではないかというふうに思っております"
+            ]
+        },
+        {
+            "speech_id": "121115254X00220230124_016",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-01-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115254X00220230124/16",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "そのため、政府は年末に食料安全保障強化政策大綱を決定し、今後、予算面においても関連施策を実施していくことになりますが、予算を適切に執行していくことが何より重要です"
+            ]
+        }
+    ]
+}

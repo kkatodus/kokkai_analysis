@@ -1,0 +1,36 @@
+{
+    "party": "れ新",
+    "repr_name": "天畠大輔",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114260X00720230420_248",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-04-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X00720230420/248",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　全世代型社会保障法案、そして少子化対策を議論するに当たり、まず現政権の女性や障害者、同性愛者など社会的マイノリティーへの偏った意識を改める必要があります"
+            ]
+        },
+        {
+            "speech_id": "121015261X00720221202_175",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2022-12-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121015261X00720221202/175",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　生産性のない者は支援に値しない、こうした考え方は、障害者や同性愛者を社会の役に立たない存在として葬り去ろうとしたかつての全体主義と重なります"
+            ]
+        }
+    ]
+}

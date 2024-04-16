@@ -1,0 +1,25 @@
+{
+    "party": "有志",
+    "repr_name": "仁木博文",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118004260X00620120321_134",
+            "house_name": "衆議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2012-03-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118004260X00620120321/134",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "ただ、現地の復興と並んで、福島第一原発、この放射能の問題というのは非常に社会的な大きな問題だと思っております"
+            ]
+        }
+    ]
+}

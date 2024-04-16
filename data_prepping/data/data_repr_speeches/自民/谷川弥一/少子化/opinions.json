@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "谷川弥一",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117405007X00220100311_080",
+            "house_name": "衆議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2010-03-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117405007X00220100311/80",
+            "speaker_group": "自由民主党・改革クラブ",
+            "extracted_opinions": [
+                "少子化対策だから大変立派な政策なんです"
+            ]
+        }
+    ]
+}

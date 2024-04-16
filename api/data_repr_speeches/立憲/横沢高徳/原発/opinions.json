@@ -1,0 +1,80 @@
+{
+    "party": "立憲",
+    "repr_name": "横沢高徳",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114370X01120230530_025",
+            "house_name": "参議院",
+            "meeting_name": "財政金融委員会",
+            "date": "2023-05-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114370X01120230530/25",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "○横沢高徳君　福島は原子力災害がありますので、かなり長期的なスパンで考えていかなければいけない部分も当然出てくると思います"
+            ]
+        },
+        {
+            "speech_id": "120814858X00520220513_032",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2022-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120814858X00520220513/32",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "非常に廃炉に向けた道のりは長期戦だなと思いましたし、乗り越えなければいけない課題もたくさんあると感じてまいりました"
+            ]
+        },
+        {
+            "speech_id": "120814858X00420220325_090",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120814858X00420220325/90",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "福島県の地元の皆様にとって、福島第一原発の廃炉完了は復興の大前提であると考えます"
+            ]
+        },
+        {
+            "speech_id": "120814858X00420220325_096",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120814858X00420220325/96",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "どのような状態になったら廃炉を完了とするのか、非常に重要だと思います"
+            ]
+        },
+        {
+            "speech_id": "120814858X00420220325_098",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120814858X00420220325/98",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "その一方で、やはり地元の皆様にしてみれば、どこまで作業が進めば廃炉完了か分からない状態、国が責任を持ってどこまでやってくれるのかもまだ示されない不安もあるのも現実だと思います"
+            ]
+        },
+        {
+            "speech_id": "120414858X00320210323_032",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2021-03-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120414858X00320210323/32",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "原子炉の冷温停止から三十年から四十年に設定した廃止措置終了期間の見直しも避けられないのではないかと思われますが、廃炉に向けたロードマップにも影響してくると考えます"
+            ]
+        }
+    ]
+}

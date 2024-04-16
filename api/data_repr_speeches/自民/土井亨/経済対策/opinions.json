@@ -1,0 +1,40 @@
+{
+    "party": "自民",
+    "repr_name": "土井亨",
+    "topic": "経済対策",
+    "search_words": [
+        "経済対策",
+        "景気",
+        "デフレ",
+        "財政政策",
+        "金融政策",
+        "インフレ",
+        "中小企業",
+        "雇用",
+        "スタートアップ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "116904889X00620080402_006",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2008-04-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116904889X00620080402/6",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "今、東海はよく、製造業を含めた形の中で景気がいいと"
+            ]
+        },
+        {
+            "speech_id": "116405272X00220060301_012",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第二分科会",
+            "date": "2006-03-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116405272X00220060301/12",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "経済対策に呼応したことが、そのことが地方の自治体の経済、財政を危機におとしめているというのは、まさしく地方の責任逃れだというふうにしかとらえられない"
+            ]
+        }
+    ]
+}

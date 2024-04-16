@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "村井英樹",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119604889X00720180404_090",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2018-04-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119604889X00720180404/90",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "いずれも項目の中で最大の理由となっておりまして、幼児教育の無償化は少子化対策としても極めて重要であると考えております"
+            ]
+        }
+    ]
+}

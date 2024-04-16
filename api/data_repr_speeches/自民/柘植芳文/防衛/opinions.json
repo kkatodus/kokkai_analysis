@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "柘植芳文",
+    "topic": "防衛",
+    "search_words": [
+        "自衛隊",
+        "集団的自衛権",
+        "安全保障",
+        "軍事力",
+        "防衛"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120815254X00720220309_004",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2022-03-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120815254X00720220309/4",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "政府におかれても、国際社会と連携協力し、世界の安全保障への脅威に対処することを強く求めます"
+            ]
+        },
+        {
+            "speech_id": "119014601X00620160323_013",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2016-03-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119014601X00620160323/13",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　近年、こうしたサイバー攻撃は高度化し、サイバーテロはもちろん、国の安全保障そのものにも関わるものと考えます"
+            ]
+        }
+    ]
+}

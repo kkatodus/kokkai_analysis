@@ -1,0 +1,36 @@
+{
+    "party": "立憲",
+    "repr_name": "徳永エリ",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118315261X01120130424_140",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2013-04-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118315261X01120130424/140",
+            "speaker_group": "民主党・新緑風会",
+            "extracted_opinions": [
+                "これは、私はちょっと怖いのは、子育て支援からの意見ではなくて、保育をビジネスにするというその企業側の都合からの意見なんではないかということを懸念いたしております"
+            ]
+        },
+        {
+            "speech_id": "117715261X00520110309_009",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2011-03-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117715261X00520110309/9",
+            "speaker_group": "民主党・新緑風会",
+            "extracted_opinions": [
+                "景気刺激対策でも少子化対策にはつながるかもしれませんが、少子化対策でもないと私は思っています"
+            ]
+        }
+    ]
+}

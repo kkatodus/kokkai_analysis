@@ -28,7 +28,7 @@ class MeetingConvoCollector:
                 request_dicts_list.append(response)
                 
                 starting_point = next_position
-                time.sleep(10)
+                time.sleep(5)
         return request_dicts_list
         
     def make_one_request(self, conditions_list, starting_point=1):

@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "牧島かれん",
+    "topic": "LGBTQ",
+    "search_words": [
+        "性的指向",
+        "性的少数者",
+        "LGBT",
+        "同性愛",
+        "パートナーシップ制度"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121104889X01920230609_044",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2023-06-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121104889X01920230609/44",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "なので、全ての国民が、その性的指向又は性同一性にかかわらず、等しく基本的人権を享有するかけがえのない個人として尊重されるということが重要であります"
+            ]
+        }
+    ]
+}

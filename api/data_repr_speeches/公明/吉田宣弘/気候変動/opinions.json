@@ -1,0 +1,26 @@
+{
+    "party": "公明",
+    "repr_name": "吉田宣弘",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121003968X00620221111_018",
+            "house_name": "衆議院",
+            "meeting_name": "外務委員会",
+            "date": "2022-11-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121003968X00620221111/18",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　最後に、地球温暖化の影響で、世界各国で豪雨災害が生じるのではないのかなと私は感じております"
+            ]
+        }
+    ]
+}

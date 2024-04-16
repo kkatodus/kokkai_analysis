@@ -1,0 +1,47 @@
+{
+    "party": "れ新",
+    "repr_name": "大石あきこ",
+    "topic": "原発",
+    "search_words": [
+        "原子",
+        "原発",
+        "廃炉",
+        "再稼働",
+        "ベースロード"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120804889X01220220325_329",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X01220220325/329",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "一方、日本の経産省は成長戦略として原発輸出を挙げていた、その日米の意向がマッチしたことが大きな理由だったんじゃないでしょうか"
+            ]
+        },
+        {
+            "speech_id": "120804889X01220220325_331",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X01220220325/331",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　実際に、政府にも与党にも、そして維新にも反省がないから、先日と本日の委員会において、経済安全保障の観点から原発の再稼働などといった、勘違いも甚だしい質疑がありましたが、大臣に伺います"
+            ]
+        },
+        {
+            "speech_id": "120804889X01220220325_333",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X01220220325/333",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　でも、危険なもので、原発のリスクがあるんです"
+            ]
+        }
+    ]
+}

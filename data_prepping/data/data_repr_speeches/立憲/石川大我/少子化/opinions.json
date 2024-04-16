@@ -1,0 +1,25 @@
+{
+    "party": "立憲",
+    "repr_name": "石川大我",
+    "topic": "少子化",
+    "search_words": [
+        "出生率",
+        "少子化",
+        "子育て支援",
+        "育児支援",
+        "学費"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120115261X00220200130_496",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2020-01-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120115261X00220200130/496",
+            "speaker_group": "立憲・国民．新緑風会・社民",
+            "extracted_opinions": [
+                "○石川大我君　同性婚を認め少子化が広がっているような、そんな国はありません"
+            ]
+        }
+    ]
+}

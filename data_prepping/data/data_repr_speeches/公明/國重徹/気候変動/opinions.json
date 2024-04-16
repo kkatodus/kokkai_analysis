@@ -1,0 +1,37 @@
+{
+    "party": "公明",
+    "repr_name": "國重徹",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121205261X00220231027_104",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121205261X00220231027/104",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "改めて地球温暖化というのを身近に感じた方も多かったんじゃないかなというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "118604080X01620140514_042",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2014-05-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118604080X01620140514/42",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　続きまして、小売全面自由化が進んだ場合の再生可能エネルギーの固定価格買い取り義務者、これについて、小売事業者なのか、それとも送配電事業者になるのか"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "party": "立憲",
+    "repr_name": "石川香織",
+    "topic": "気候変動",
+    "search_words": [
+        "温室効果ガス",
+        "気候変動",
+        "温暖化",
+        "海面上昇",
+        "再生可能エネルギ",
+        "環境保護"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120705261X00220211213_281",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2021-12-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120705261X00220211213/281",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　この赤潮もそうなんですが、確実に気候変動の波が日本にも押し寄せていると思っています"
+            ]
+        },
+        {
+            "speech_id": "120705261X00220211213_283",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2021-12-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120705261X00220211213/283",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　総理、やはり気候変動というのは命あるものにおいては非常に脅威だと思います"
+            ]
+        }
+    ]
+}

@@ -68,7 +68,6 @@ function getTooltip({ object }) {
   if (!object) {
     return null;
   }
-  console.log('object', object);
   const lat = object.position[1];
   const lng = object.position[0];
   const count = object.points.length;
@@ -92,7 +91,6 @@ export default function DeckPlayground({
     csv(DATA_URL, (error, response) => {
       if (!error) {
         const mapdata = response.map((d) => [Number(d.lng), Number(d.lat)]);
-        console.log('map data', mapdata);
         setData(mapdata);
       }
     });
