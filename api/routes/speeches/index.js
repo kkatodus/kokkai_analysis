@@ -8,15 +8,13 @@ const router = express.Router();
 
 router.get("", getSpeechSummary);
 
-//endpoint for speech reprs summary
-router.get("/:house", getSpeechSummary);
+// //endpoint for one speech repr summary
+router.get("/summary/:party/:reprName", getOneSummary);
 
-//endpoint for one speech repr summary
-router.get("/:house/:party/:reprName", getOneSummary);
+// //endpoint for repr opinion
+router.get("/opinion/:party/:reprName/:topic", getReprOpinions);
 
-//endpoint for repr opinion
-router.get("/opinion/:house/:party/:reprName/:topic", getReprOpinions);
-
+//endpoint for topic scatter visualization
 router.get("/visualization/:topic", getTopicVisualization);
 
 export default router;

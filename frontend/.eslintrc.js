@@ -12,4 +12,11 @@ module.exports = {
     'prettier/prettier': ['warn'],
   },
   plugins: ['prettier'],
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
+  },
 };

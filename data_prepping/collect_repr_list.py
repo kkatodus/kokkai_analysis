@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import datetime
 from selenium.common.exceptions import NoSuchElementException
 from api_requests.meeting_convo_collector import MeetingConvoCollector
 from params.paths import ROOT_DIR
@@ -15,6 +16,7 @@ LOWER_REPR_LIST_URL = "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/st
 
 UPPER_MEETING_INFO_PAGE_URL = "https://www.sangiin.go.jp/japanese/kon_kokkaijyoho/index.html"
 LOWER_MEETING_INFO_PAGE_URL = "https://www.shugiin.go.jp/internet/itdb_iinkai.nsf/html/iinkai/list.htm"
+TODAY_STR = datetime.now().strftime('%Y%m%d')
 
 
 ## PATHS
@@ -91,7 +93,7 @@ def scrape_upper_repr_list():
         out_dict["reprs"][kaiha].append(repr_dict)
     
     #saving json
-    repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, "repr_list",f"{meeting_period_text}_repr_list.json")
+    repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, "repr_list",f"{TODAY_STR}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
 def scrape_lower_repr_list():
@@ -146,7 +148,7 @@ def scrape_lower_repr_list():
                out_dict["reprs"][kaiha].append(repr_dict)
 		
     #saving json
-    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{date_up2date[:-2]}_repr_list.json")
+    repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{TODAY_STR}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
 
 def scrape_upper_meeting_member_list():

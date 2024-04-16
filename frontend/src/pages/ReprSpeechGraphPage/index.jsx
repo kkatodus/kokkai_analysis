@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import useDisplaySize from 'state/useDisplayType';
 import BasePageLayout from '../../layouts/BasePageLayout';
 import ScatterWithLineGraph from './components/ScatterWithLineGraph/ScatterWithLineGraph';
 import SpeechPanel from './components/SpeechPanel/SpeechPanel';
@@ -9,13 +10,13 @@ import disclaimer from './disclaimer';
 import { gridLoader } from '../../resource/loader';
 import DimensionToggle from './components/DimensionToggle';
 import LeftRightSpectrum from './components/LeftRightSpectrum';
-import useDisplaySize from '../../state/useDisplayType';
 
 const possibleTopics = ['防衛', '原発', '少子化', '気候変動'];
 function ReprSpeechGraphPage() {
   const [currentTopic, setCurrentTopic] = useState('防衛');
   const [currentRepr, setCurrentRepr] = useState(null);
   const [currentParty, setCurrentParty] = useState(null);
+  const [currentHouse, setCurrentHouse] = useState(null);
   const [Scatter2dData, setScatter2dData] = useState(null);
   const [Scatter1dData, setScatter1dData] = useState(null);
   const [lineData, setLineData] = useState(null);
@@ -33,8 +34,8 @@ function ReprSpeechGraphPage() {
       url: requestUrl,
     })
       .then((res) => {
-        setLeftLabel(res.data['1d'].descriptions?.left);
-        setRightLabel(res.data['1d'].descriptions?.right);
+        setLeftLabel(res.data['1d']?.descriptions?.left);
+        setRightLabel(res.data['1d']?.descriptions?.right);
         setScatter2dData(res.data['2d'].data);
         setScatter1dData(res.data['1d'].data);
         setLineData(
@@ -65,19 +66,22 @@ function ReprSpeechGraphPage() {
               />
             </div>
           )}
-          <div className={`${isMobile ? 'h-[800px]' : 'h-[95%]'}`}>
+          <div className={`${isMobile ? 'h-[650px]' : 'h-[95%]'}`}>
             <ScatterWithLineGraph
               displayLine={dimension === '2D'}
               scatterData={displayScatterData}
               lineData={lineData}
               setCurrentParty={setCurrentParty}
               setCurrentRepr={setCurrentRepr}
+              setCurrentHouse={setCurrentHouse}
+              showXAxis={false}
+              showYAxis={false}
             />
           </div>
         </div>
         <div className={`${isMobile ? 'w-full h-[500px]' : 'w-[30%]'}`}>
           <SpeechPanel
-            currentHouse="lower"
+            currentHouse={currentHouse}
             currentParty={currentParty}
             currentRepr={currentRepr}
             currentTopic={currentTopic}

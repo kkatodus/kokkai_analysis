@@ -16,11 +16,13 @@ function ReprCard(props) {
     link,
     numberOfTermsLower,
     numberofTermsUpper,
+    house,
     tags,
   } = props;
   const cardContent = (
     <div>
       {yomikata ? <p>{yomikata}</p> : ''}
+      {house ? <p>院：{house}</p> : ''}
       {district ? <p>選挙区：{district}</p> : ''}
       {role ? <p>役職：{role}</p> : ''}
       {party ? <p>所属政党：{party}</p> : ''}
@@ -47,6 +49,7 @@ ReprCard.defaultProps = {
   period: null,
   role: null,
   party: null,
+  house: null,
   link: null,
   numberOfTermsLower: null,
   numberofTermsUpper: null,
@@ -61,6 +64,7 @@ ReprCard.propTypes = {
   role: Proptypes.string,
   party: Proptypes.string,
   link: Proptypes.string,
+  house: Proptypes.string,
   numberOfTermsLower: Proptypes.number,
   numberofTermsUpper: Proptypes.number,
   tags: Proptypes.arrayOf(Proptypes.string),

@@ -4,6 +4,8 @@ export const speechEndpoint = 'https://sangiin-api.herokuapp.com/speeches/';
 export const visualEndpoint =
   'https://sangiin-api.herokuapp.com/speeches/visualization';
 export const statsEndpoint = 'https://sangiin-api.herokuapp.com/stats/';
+export const geoEndpoint = 'https://sangiin-api.herokuapp.com/geo/';
+export const reprsEndpoint = 'https://sangiin-api.herokuapp.com/reprs/';
 
 export const SangiinAbbrev2Kaiha = {
   自民: '自由民主党',
@@ -46,6 +48,21 @@ export const Party2ColorList = [
   { party: '無', color: 'purple' },
   { party: '有志', color: 'grey' },
 ];
+
+export const Party2RGBColor = {
+  自民: [0, 0, 0],
+  公明: [0, 191, 255],
+  立憲: [255, 165, 0],
+  維新: [255, 215, 0],
+  民主: [0, 0, 255],
+  共産: [255, 0, 0],
+  れ新: [0, 128, 0],
+  沖縄: [0, 255, 255],
+  女子: [255, 0, 255],
+  無所属: [128, 128, 128],
+  無: [119, 0, 200],
+  国民: [0, 0, 255],
+};
 
 export const getSangiinHoureiLink = (meetingNum) =>
   `https://www.shugiin.go.jp/internet/itdb_housei.nsf/html/housei/kaiji${meetingNum}_l.htm`;

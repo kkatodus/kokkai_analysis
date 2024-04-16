@@ -19,7 +19,7 @@ function SpeechPanel({
 
   useEffect(() => {
     if (currentHouse && currentParty && currentRepr && currentTopic) {
-      const requestUrl = `${speechEndpoint}opinion/${currentHouse}/${currentParty}/${currentRepr}/${currentTopic}`;
+      const requestUrl = `${speechEndpoint}opinion/${currentParty}/${currentRepr}/${currentTopic}`;
       axios({
         method: 'get',
         url: requestUrl,
@@ -44,7 +44,8 @@ function SpeechPanel({
     <div className="flex items-center justify-center relative h-full w-full">
       <div className="w-[98%] h-[98%] border-[5px] p-2 rounded-lg flex flex-col items-center justify-start">
         <div className="w-full mb-2 flex justify-between">
-          {SpeechAbbrev2Kaiha[currentParty]}-{currentTopic}-{currentRepr}
+          {currentHouse}-{SpeechAbbrev2Kaiha[currentParty]}-{currentTopic}-
+          {currentRepr}
         </div>
         <div className="h-full w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
           {speeches

@@ -7,7 +7,7 @@ function DimensionToggle({ selectedDimension, setSelectedDimension }) {
   const buttonClass =
     'w-100 border-2 m-2 pt-1 pb-1 pr-5 pl-5 text-center font-bold rounded-md';
   return (
-    <div className="h-full w-full flex justify-center items-center flex-wrap">
+    <div className="h-full w-full flex justify-center items-center flex-wrap overflow-y-scroll">
       {buttonTexts.map((text) => (
         <button
           type="button"

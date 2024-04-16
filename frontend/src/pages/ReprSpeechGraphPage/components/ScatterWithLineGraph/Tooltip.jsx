@@ -6,11 +6,13 @@ import { SpeechAbbrev2Kaiha } from '../../../../resource/resources';
 function Tooltip({ active, payload }) {
   if (active && payload.length) {
     const reprPayload = payload[0].payload;
-    const { repr, party } = reprPayload;
+    const { repr, party, house, hiragana } = reprPayload;
     return (
       <div className={`${colors.primary} p-2 rounded-md bg-opacity-25`}>
         <h1>政党:{SpeechAbbrev2Kaiha[party]}</h1>
+        <h1>院：{house}</h1>
         <h1>{repr}</h1>
+        <h1>{hiragana}</h1>
       </div>
     );
   }

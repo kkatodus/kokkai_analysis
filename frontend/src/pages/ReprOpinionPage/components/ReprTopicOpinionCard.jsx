@@ -7,12 +7,12 @@ import { speechEndpoint } from '../../../resource/resources';
 import { squareLoader } from '../../../resource/loader';
 
 function ReprTopicOpinionCard(props) {
-  const { house, topic, reprName, party } = props;
+  const { topic, reprName, party } = props;
 
   const [speeches, setSpeeches] = useState(null);
 
   useEffect(() => {
-    const requestUrl = `${speechEndpoint}opinion/${house}/${party}/${reprName}/${topic}`;
+    const requestUrl = `${speechEndpoint}opinion/${party}/${reprName}/${topic}`;
     // eslint-disable-next-line no-console
     axios({
       method: 'get',
@@ -74,7 +74,6 @@ function ReprTopicOpinionCard(props) {
 
 ReprTopicOpinionCard.defaultProps = {};
 ReprTopicOpinionCard.propTypes = {
-  house: PropTypes.string.isRequired,
   topic: PropTypes.string.isRequired,
   reprName: PropTypes.string.isRequired,
   party: PropTypes.string.isRequired,

@@ -22,6 +22,9 @@ function ScatterWithLineGraph({
   lineData,
   setCurrentRepr,
   setCurrentParty,
+  setCurrentHouse,
+  showXAxis,
+  showYAxis,
 }) {
   const handlePointClick = (e) => {
     if (!e) {
@@ -35,6 +38,7 @@ function ScatterWithLineGraph({
     const { payload } = activePayload[0];
     setCurrentRepr(payload.repr);
     setCurrentParty(payload.party);
+    setCurrentHouse(payload.house);
   };
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -51,8 +55,23 @@ function ScatterWithLineGraph({
         onClick={(e) => handlePointClick(e)}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey={getXAxis} type="number" domain={['auto', 'auto']} />
-        <YAxis dataKey={getYAxis} type="number" domain={['auto', 'auto']} />
+        <XAxis
+          dataKey={getXAxis}
+          type="number"
+          domain={['auto', 'auto']}
+          axisLine={showXAxis}
+          tick={showXAxis}
+          tickLine={showXAxis}
+        />
+        <YAxis
+          dataKey={getYAxis}
+          type="number"
+          domain={['auto', 'auto']}
+          color="white"
+          axisLine={showYAxis}
+          tickLine={showYAxis}
+          tick={showYAxis}
+        />
         <Tooltip
           content={<TooltipContent active={false} payload={[]} label="" />}
         />
@@ -81,6 +100,10 @@ function ScatterWithLineGraph({
   );
 }
 
+ScatterWithLineGraph.defaultProps = {
+  showXAxis: true,
+  showYAxis: true,
+};
 ScatterWithLineGraph.propTypes = {
   scatterData: PropTypes.arrayOf(
     PropTypes.shape({
@@ -104,7 +127,10 @@ ScatterWithLineGraph.propTypes = {
   ).isRequired,
   setCurrentRepr: PropTypes.func.isRequired,
   setCurrentParty: PropTypes.func.isRequired,
+  setCurrentHouse: PropTypes.func.isRequired,
   displayLine: PropTypes.bool.isRequired,
+  showXAxis: PropTypes.bool,
+  showYAxis: PropTypes.bool,
 };
 
 export default ScatterWithLineGraph;

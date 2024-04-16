@@ -1,17 +1,14 @@
-import { SPEECHES_UPPER_DIR, SPEECHES_LOWER_DIR } from "./constants.js";
+import { ALL_SPEECHES } from "./constants.js";
 import { readFileSync } from "fs";
 
-const summary_lower_json_path = SPEECHES_LOWER_DIR + "summary.json";
-const summary_upper_json_path = SPEECHES_UPPER_DIR + "summary.json";
+const summary_json_path = ALL_SPEECHES + "summary.json";
 
 export function getOneSummary(request, response) {
-  const { house, reprName, party } = request.params;
-  if (house === "lower") {
-    var speech_summary_data = readFileSync(summary_lower_json_path);
-  }
-  if (house === "upper") {
-    var speech_summary_data = readFileSync(summary_upper_json_path);
-  }
+  const { reprName, party } = request.params;
+  var speech_summary_data = readFileSync(summary_json_path);
   const speech_summary_file_json = JSON.parse(speech_summary_data);
-  response.json(speech_summary_file_json.reprs[party][reprName]);
+  const one_summary = speech_summary_file_json.reprs.find(
+    (repr) => repr.name === reprName && repr.party === party
+  );
+  response.json(one_summary);
 }

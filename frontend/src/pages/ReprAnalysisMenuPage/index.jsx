@@ -1,6 +1,7 @@
 import React from 'react';
 import { PiGraphFill } from 'react-icons/pi';
 import { SlSpeech } from 'react-icons/sl';
+import { MdPersonSearch } from 'react-icons/md';
 import BaseMenuLayout from '../../layouts/BaseMenuLayout';
 
 const ReprAnalysisMenuIcons = [
@@ -13,6 +14,11 @@ const ReprAnalysisMenuIcons = [
     link: '/repr_analysis/graph',
     icon: <PiGraphFill className="menu-icon" />,
     title: 'スタンスの可視化',
+  },
+  {
+    link: '/repr_analysis/search',
+    icon: <MdPersonSearch className="menu-icon" />,
+    title: '議員検索',
   },
 ];
 

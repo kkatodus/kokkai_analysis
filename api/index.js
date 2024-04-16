@@ -39,3 +39,9 @@ app.use("/speeches", speechRouter);
 
 import statsRouter from "./routes/stats/index.js";
 app.use("/stats", statsRouter);
+
+import geoRouter from "./routes/geo/index.js";
+app.use("/geo", geoRouter);
+
+import reprRouter from "./routes/reprs/index.js";
+app.use("/reprs", reprRouter);
