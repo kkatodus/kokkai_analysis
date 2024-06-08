@@ -20,8 +20,18 @@ TODAY_STR = datetime.now().strftime('%Y%m%d')
 
 
 ## PATHS
-UPPER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_sangiin")
-LOWER_OUTPUT_DIR = os.path.join(ROOT_DIR, "data_prepping","data_shugiin")
+UPPER_OUTPUT_DIR = os.path.join(ROOT_DIR,'data', "data_sangiin")
+LOWER_OUTPUT_DIR = os.path.join(ROOT_DIR,'data', "data_shugiin")
+print(os.listdir(ROOT_DIR))
+if not os.path.exists(UPPER_OUTPUT_DIR):
+    raise Exception("Upper house output directory does not exist")
+if not os.path.exists(LOWER_OUTPUT_DIR):
+    raise Exception("Lower house output directory does not exist")
+if not os.path.exists(os.path.join(UPPER_OUTPUT_DIR, "repr_list")):
+    print(os.listdir(UPPER_OUTPUT_DIR))
+    raise Exception("Upper house repr list directory does not exist")
+if not os.path.exists(os.path.join(LOWER_OUTPUT_DIR, "repr_list")):
+    raise Exception("Lower house repr list directory does not exist")
 
 UPPER_SPEECH_OUTPUT_DIR = os.path.join(UPPER_OUTPUT_DIR, "speeches")
 LOWER_SPEECH_OUTPUT_DIR = os.path.join(LOWER_OUTPUT_DIR, "speeches")
@@ -34,7 +44,7 @@ create_dir(LOWER_SPEECH_OUTPUT_DIR)
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")	
 
 ## PARAMS
-SCRAPE_UPPER_REPR_LIST = False
+SCRAPE_UPPER_REPR_LIST = True
 SCRAPE_LOWER_REPR_LIST = True
 SCRAPE_UPPER_MEETING_MEMBER_LIST = False
 SCRAPE_LOWER_MEETING_MEMBER_LIST = False
