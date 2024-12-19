@@ -1,0 +1,5674 @@
+{
+    "meetings": {
+        "内閣委員会": [
+            {
+                "role": "委員長",
+                "name": "大岡 敏孝君",
+                "yomikata": "おおおか　としたか",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "黄川田 仁志君",
+                "yomikata": "きかわだ　ひとし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "國場 幸之助君",
+                "yomikata": "こくば　こうのすけ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "西銘 恒三郎君",
+                "yomikata": "にしめ　こうさぶろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "今井 雅人君",
+                "yomikata": "いまい　まさと",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "本庄 知史君",
+                "yomikata": "ほんじょう　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "山岸 一生君",
+                "yomikata": "やまぎし　いっせい",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "阿部 司君",
+                "yomikata": "あべ　つかさ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "田中 健君",
+                "yomikata": "たなか　けん",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "石原 宏高君",
+                "yomikata": "いしはら　ひろたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "井野 俊郎君",
+                "yomikata": "いの　としろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "江渡 聡徳君",
+                "yomikata": "えと　あきのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "尾崎 正直君",
+                "yomikata": "おざき　まさなお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "岸 信千世君",
+                "yomikata": "きし　のぶちよ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "栗原 渉君",
+                "yomikata": "くりはら　わたる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田中 良生君",
+                "yomikata": "たなか　りょうせい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西野 太亮君",
+                "yomikata": "にしの　だいすけ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平井 卓也君",
+                "yomikata": "ひらい　たくや",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平沼 正二郎君",
+                "yomikata": "ひらぬま　しょうじろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮下 一郎君",
+                "yomikata": "みやした　いちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山際 大志郎君",
+                "yomikata": "やまぎわ　だいしろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山口 壯君",
+                "yomikata": "やまぐち　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "市來 伴子君",
+                "yomikata": "いちき　ともこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "梅谷 守君",
+                "yomikata": "うめたに　まもる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "おおたけ りえ君",
+                "yomikata": "おおたけ　りえ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "下野 幸助君",
+                "yomikata": "しもの　こうすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "橋本 慧悟君",
+                "yomikata": "はしもと　けいご",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "藤岡 たかお君",
+                "yomikata": "ふじおか　たかお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬淵 澄夫君",
+                "yomikata": "まぶち　すみお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "水沼 秀幸君",
+                "yomikata": "みずぬま　ひでゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山 登志浩君",
+                "yomikata": "やま　としひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "市村 浩一郎君",
+                "yomikata": "いちむら　こういちろう",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "三木 圭恵君",
+                "yomikata": "みき　けえ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "石井 智恵君",
+                "yomikata": "いしい　ともえ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "菊池 大二郎君",
+                "yomikata": "きくち　だいじろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "河西 宏一君",
+                "yomikata": "かさい　こういち",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山崎 正恭君",
+                "yomikata": "やまさき　まさやす",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "上村 英明君",
+                "yomikata": "うえむら　ひであき",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "塩川 鉄也君",
+                "yomikata": "しおかわ　てつや",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "緒方 林太郎君",
+                "yomikata": "おがた　りんたろう",
+                "party": "有志"
+            }
+        ],
+        "総務委員会": [
+            {
+                "role": "委員長",
+                "name": "竹内 譲君",
+                "yomikata": "たけうち　ゆずる",
+                "party": "公明"
+            },
+            {
+                "role": "理事",
+                "name": "あかま 二郎君",
+                "yomikata": "あかま　じろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "塩崎 彰久君",
+                "yomikata": "しおざき　あきひさ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "島尻 安伊子君",
+                "yomikata": "しまじり　あいこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "おおつき 紅葉君",
+                "yomikata": "おおつき　くれは",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "岡島 一正君",
+                "yomikata": "おかじま　かずまさ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "吉川 元君",
+                "yomikata": "よしかわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "守島 正君",
+                "yomikata": "もりしま　ただし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "向山 好一君",
+                "yomikata": "むこやま　こういち",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "石橋 林太郎君",
+                "yomikata": "いしばし　りんたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大西 洋平君",
+                "yomikata": "おおにし　ようへい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "加藤 竜祥君",
+                "yomikata": "かとう　りゅうしょう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "川崎 ひでと君",
+                "yomikata": "かわさき　ひでと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小寺 裕雄君",
+                "yomikata": "こてら　ひろお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小森 卓郎君",
+                "yomikata": "こもり　たくお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "佐藤 勉君",
+                "yomikata": "さとう　つとむ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高市 早苗君",
+                "yomikata": "たかいち　さなえ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田所 嘉徳君",
+                "yomikata": "たどころ　よしのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中野 英幸君",
+                "yomikata": "なかの　ひでゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福原 淳嗣君",
+                "yomikata": "ふくはら　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古川 直季君",
+                "yomikata": "ふるかわ　なおき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山口 俊一君",
+                "yomikata": "やまぐち　しゅんいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "若山 慎司君",
+                "yomikata": "わかやま　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "おおたけ りえ君",
+                "yomikata": "おおたけ　りえ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡本 あき子君",
+                "yomikata": "おかもと　あきこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "奥野 総一郎君",
+                "yomikata": "おくの　そういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "杉村 慎治君",
+                "yomikata": "すぎむら　しんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "高松 智之君",
+                "yomikata": "たかまつ　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "武正 公一君",
+                "yomikata": "たけまさ　こういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "西川 厚志君",
+                "yomikata": "にしかわ　あつし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福田 昭夫君",
+                "yomikata": "ふくだ　あきお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松尾 明弘君",
+                "yomikata": "まつお　あきひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "道下 大樹君",
+                "yomikata": "みちした　だいき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山花 郁夫君",
+                "yomikata": "やまはな　いくお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "黒田 征樹君",
+                "yomikata": "くろだ　まさき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "杉本 和巳君",
+                "yomikata": "すぎもと　かずみ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "福田 玄君",
+                "yomikata": "ふくだ　げん",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "中川 康洋君",
+                "yomikata": "なかがわ　やすひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山川 仁君",
+                "yomikata": "やまかわ　ひとし",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "辰巳 孝太郎君",
+                "yomikata": "たつみ　こうたろう",
+                "party": "共産"
+            }
+        ],
+        "法務委員会": [
+            {
+                "role": "委員長",
+                "name": "西村 智奈美君",
+                "yomikata": "にしむら　ちなみ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "小寺 裕雄君",
+                "yomikata": "こてら　ひろお",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "津島 淳君",
+                "yomikata": "つしま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "松本 剛明君",
+                "yomikata": "まつもと　たけあき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "鎌田 さゆり君",
+                "yomikata": "かまた　さゆり",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "黒岩 宇洋君",
+                "yomikata": "くろいわ　たかひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "米山 隆一君",
+                "yomikata": "よねやま　りゅういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "金村 龍那君",
+                "yomikata": "かねむら　りゅうな",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "円 より子君",
+                "yomikata": "まどか　よりこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "井出 庸生君",
+                "yomikata": "いで　ようせい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "稲田 朋美君",
+                "yomikata": "いなだ　ともみ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上川 陽子君",
+                "yomikata": "かみかわ　ようこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "神田 潤一君",
+                "yomikata": "かんだ　じゅんいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "河野 太郎君",
+                "yomikata": "こうの　たろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "棚橋 泰文君",
+                "yomikata": "たなはし　やすふみ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "寺田 稔君",
+                "yomikata": "てらだ　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平沢 勝栄君",
+                "yomikata": "ひらさわ　かつえい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森 英介君",
+                "yomikata": "もり　えいすけ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "若山 慎司君",
+                "yomikata": "わかやま　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "有田 芳生君",
+                "yomikata": "ありた　よしふ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠田 奈保子君",
+                "yomikata": "しのだ　なおこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柴田 勝之君",
+                "yomikata": "しばた　かつゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "寺田 学君",
+                "yomikata": "てらた　まなぶ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "平岡 秀夫君",
+                "yomikata": "ひらおか　ひでお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "藤原 規眞君",
+                "yomikata": "ふじわら　のりまさ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松下 玲子君",
+                "yomikata": "まつした　れいこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "萩原 佳君",
+                "yomikata": "はぎはら　けい",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "藤田 文武君",
+                "yomikata": "ふじた　ふみたけ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "小竹 凱君",
+                "yomikata": "おだけ　かい",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "大森 江里子君",
+                "yomikata": "おおもり　えりこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "平林 晃君",
+                "yomikata": "ひらばやし　あきら",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "本村 伸子君",
+                "yomikata": "もとむら　のぶこ",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "吉川 里奈君",
+                "yomikata": "よしかわ　りな",
+                "party": "参政"
+            },
+            {
+                "role": "委員",
+                "name": "島田 洋一君",
+                "yomikata": "しまだ　よういち",
+                "party": "保守"
+            }
+        ],
+        "外務委員会": [
+            {
+                "role": "委員長",
+                "name": "堀内 詔子君",
+                "yomikata": "ほりうち　のりこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "中曽根 康隆君",
+                "yomikata": "なかそね　やすたか",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "星野 剛士君",
+                "yomikata": "ほしの　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "山田 賢司君",
+                "yomikata": "やまだ　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "源馬 謙太郎君",
+                "yomikata": "げんま　けんたろう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "鈴木 庸介君",
+                "yomikata": "すずき　ようすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "太 栄志君",
+                "yomikata": "ふとり　ひでし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "青柳 仁士君",
+                "yomikata": "あおやぎ　ひとし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "西岡 秀子君",
+                "yomikata": "にしおか　ひでこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "逢沢 一郎君",
+                "yomikata": "あいさわ　いちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "英利 アルフィヤ君",
+                "yomikata": "えり　あるふぃや",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大空 幸星君",
+                "yomikata": "おおぞら　こうき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "新藤 義孝君",
+                "yomikata": "しんどう　よしたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高木 啓君",
+                "yomikata": "たかぎ　けい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "広瀬 建君",
+                "yomikata": "ひろせ　けん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松島 みどり君",
+                "yomikata": "まつしま　みどり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松本 尚君",
+                "yomikata": "まつもと　ひさし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "茂木 敏充君",
+                "yomikata": "もてぎ　としみつ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小熊 慎司君",
+                "yomikata": "おぐま　しんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "亀井 亜紀子君",
+                "yomikata": "かめい　あきこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠原 豪君",
+                "yomikata": "しのはら　ごう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "竹内 千春君",
+                "yomikata": "たけうち　ちはる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "武正 公一君",
+                "yomikata": "たけまさ　こういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "渡辺 周君",
+                "yomikata": "わたなべ　しゅう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "西田 薫君",
+                "yomikata": "にしだ　かおる",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "和田 有一朗君",
+                "yomikata": "わだ　ゆういちろう",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "深作 ヘスス君",
+                "yomikata": "ふかさく　へすす",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "西園 勝秀君",
+                "yomikata": "にしぞの　かつひで",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山崎 正恭君",
+                "yomikata": "やまさき　まさやす",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "阪口 直人君",
+                "yomikata": "さかぐち　なおと",
+                "party": "れ新"
+            }
+        ],
+        "財務金融委員会": [
+            {
+                "role": "委員長",
+                "name": "井林 辰憲君",
+                "yomikata": "いばやし　たつのり",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "大野 敬太郎君",
+                "yomikata": "おおの　けいたろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "国光 あやの君",
+                "yomikata": "くにみつ　あやの",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "小林 鷹之君",
+                "yomikata": "こばやし　たかゆき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "阿久津 幸彦君",
+                "yomikata": "あくつ　ゆきひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "稲富 修二君",
+                "yomikata": "いなとみ　しゅうじ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "櫻井 周君",
+                "yomikata": "さくらい　しゅう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "斎藤 アレックス君",
+                "yomikata": "さいとう　あれっくす",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "田中 健君",
+                "yomikata": "たなか　けん",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "東 国幹君",
+                "yomikata": "あずま　くによし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "石田 真敏君",
+                "yomikata": "いしだ　まさとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "伊藤 達也君",
+                "yomikata": "いとう　たつや",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小泉 龍司君",
+                "yomikata": "こいずみ　りゅうじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田中 和徳君",
+                "yomikata": "たなか　かずのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田畑 裕明君",
+                "yomikata": "たばた　ひろあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "土田 慎君",
+                "yomikata": "つちだ　しん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "長島 昭久君",
+                "yomikata": "ながしま　あきひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福原 淳嗣君",
+                "yomikata": "ふくはら　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古川 禎久君",
+                "yomikata": "ふるかわ　よしひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "牧島 かれん君",
+                "yomikata": "まきしま　かれん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "江田 憲司君",
+                "yomikata": "えだ　けんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 悟君",
+                "yomikata": "おかだ　さとる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "海江田 万里君",
+                "yomikata": "かいえだ　ばんり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "川内 博史君",
+                "yomikata": "かわうち　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "階 猛君",
+                "yomikata": "しな　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "末松 義規君",
+                "yomikata": "すえまつ　よしのり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "長谷川 嘉一君",
+                "yomikata": "はせがわ　かいち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "原口 一博君",
+                "yomikata": "はらぐち　かずひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "水沼 秀幸君",
+                "yomikata": "みずぬま　ひでゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "三角 創太君",
+                "yomikata": "みすみ　そうた",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "矢崎 堅太郎君",
+                "yomikata": "やざき　けんたろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "萩原 佳君",
+                "yomikata": "はぎはら　けい",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "村上 智信君",
+                "yomikata": "むらかみ　とものぶ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "岸田 光広君",
+                "yomikata": "きしだ　みつひろ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "中川 宏昌君",
+                "yomikata": "なかがわ　ひろまさ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山口 良治君",
+                "yomikata": "やまぐち　りょうじ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "高井 崇志君",
+                "yomikata": "たかい　たかし",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "田村 智子君",
+                "yomikata": "たむら　ともこ",
+                "party": "共産"
+            }
+        ],
+        "文部科学委員会": [
+            {
+                "role": "委員長",
+                "name": "中村 裕之君",
+                "yomikata": "なかむら　ひろゆき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "今枝 宗一郎君",
+                "yomikata": "いまえだ　そういちろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "小林 茂樹君",
+                "yomikata": "こばやし　しげき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "永岡 桂子君",
+                "yomikata": "ながおか　けいこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "青山 大人君",
+                "yomikata": "あおやま　やまと",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "亀井 亜紀子君",
+                "yomikata": "かめい　あきこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "坂本 祐之輔君",
+                "yomikata": "さかもと　ゆうのすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "美延 映夫君",
+                "yomikata": "みのべ　てるお",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "日野 紗里亜君",
+                "yomikata": "ひの　さりあ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "遠藤 利明君",
+                "yomikata": "えんどう　としあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小渕 優子君",
+                "yomikata": "おぶち　ゆうこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "木原 稔君",
+                "yomikata": "きはら　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "柴山 昌彦君",
+                "yomikata": "しばやま　まさひこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 貴子君",
+                "yomikata": "すずき　たかこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "渡海 紀三朗君",
+                "yomikata": "とかい　きさぶろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "萩生田 光一君",
+                "yomikata": "はぎうだ　こういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "船田 元君",
+                "yomikata": "ふなだ　はじめ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古屋 圭司君",
+                "yomikata": "ふるや　けいじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松野 博一君",
+                "yomikata": "まつの　ひろかず",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三谷 英弘君",
+                "yomikata": "みたに　ひでひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "簗 和生君",
+                "yomikata": "やな　かずお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山本 大地君",
+                "yomikata": "やまもと　だいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 祐美子君",
+                "yomikata": "あべ　ゆみこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "安藤 じゅん子君",
+                "yomikata": "あんどう　じゅんこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "五十嵐 えり君",
+                "yomikata": "いがらし　えり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小山 千帆君",
+                "yomikata": "こやま　ちほ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "佐々木 ナオミ君",
+                "yomikata": "ささき　なおみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "高橋 永君",
+                "yomikata": "たかはし　えい",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "辻 英之君",
+                "yomikata": "つじ　ひでゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "中谷 一馬君",
+                "yomikata": "なかたに　かずま",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "波多野 翼君",
+                "yomikata": "はたの　つばさ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "眞野 哲君",
+                "yomikata": "まの　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "吉川 元君",
+                "yomikata": "よしかわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "高橋 英明君",
+                "yomikata": "たかはし　ひであき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "藤巻 健太君",
+                "yomikata": "ふじまき　けんた",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "前原 誠司君",
+                "yomikata": "まえはら　せいじ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "西岡 義高君",
+                "yomikata": "にしおか　よしたか",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "浮島 智子君",
+                "yomikata": "うきしま　ともこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "金城 泰邦君",
+                "yomikata": "きんじょう　やすくに",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "大石 あきこ君",
+                "yomikata": "おおいし　あきこ",
+                "party": "れ新"
+            }
+        ],
+        "厚生労働委員会": [
+            {
+                "role": "委員長",
+                "name": "藤丸 敏君",
+                "yomikata": "ふじまる　さとし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "上野 賢一郎君",
+                "yomikata": "うえの　けんいちろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "古賀 篤君",
+                "yomikata": "こが　あつし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "長坂 康正君",
+                "yomikata": "ながさか　やすまさ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "井坂 信彦君",
+                "yomikata": "いさか　のぶひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "岡本 充功君",
+                "yomikata": "おかもと　みつのり",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "早稲田 ゆき君",
+                "yomikata": "わせだ　ゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "梅村 聡君",
+                "yomikata": "うめむら　さとし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "浅野 哲君",
+                "yomikata": "あさの　さとし",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "安藤 たかお君",
+                "yomikata": "あんどう　たかお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "草間 剛君",
+                "yomikata": "くさま　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "後藤 茂之君",
+                "yomikata": "ごとう　しげゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "佐々木 紀君",
+                "yomikata": "ささき　はじめ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "塩崎 彰久君",
+                "yomikata": "しおざき　あきひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 隼人君",
+                "yomikata": "すずき　はやと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田村 憲久君",
+                "yomikata": "たむら　のりひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 拓君",
+                "yomikata": "ねもと　たく",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 幸典君",
+                "yomikata": "ねもと　ゆきのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "長谷川 淳二君",
+                "yomikata": "はせがわ　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平口 洋君",
+                "yomikata": "ひらぐち　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "深澤 陽一君",
+                "yomikata": "ふかざわ　よういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 かおる君",
+                "yomikata": "ふくだ　かおる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森下 千里君",
+                "yomikata": "もりした　ちさと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 真次君",
+                "yomikata": "よしだ　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "池田 真紀君",
+                "yomikata": "いけだ　まき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大塚 小百合君",
+                "yomikata": "おおつか　さゆり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大西 健介君",
+                "yomikata": "おおにし　けんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "酒井 なつみ君",
+                "yomikata": "さかい　なつみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "宗野 創君",
+                "yomikata": "そうの　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "堤 かなめ君",
+                "yomikata": "つつみ　かなめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "中島 克仁君",
+                "yomikata": "なかじま　かつひと",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "長妻 昭君",
+                "yomikata": "ながつま　あきら",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "長谷川 嘉一君",
+                "yomikata": "はせがわ　かいち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "宮川 伸君",
+                "yomikata": "みやかわ　しん",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山井 和則君",
+                "yomikata": "やまのい　かずのり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柚木 道義君",
+                "yomikata": "ゆのき　みちよし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 圭史君",
+                "yomikata": "あべ　けいし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "池下 卓君",
+                "yomikata": "いけした　たく",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "猪口 幸子君",
+                "yomikata": "いのくち　さちこ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "福田 徹君",
+                "yomikata": "ふくた　とおる",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "森 ようすけ君",
+                "yomikata": "もり　ようすけ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "沼崎 満子君",
+                "yomikata": "ぬまざき　みつこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "浜地 雅一君",
+                "yomikata": "はまち　まさかず",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "八幡 愛君",
+                "yomikata": "やはた　あい",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "田村 貴昭君",
+                "yomikata": "たむら　たかあき",
+                "party": "共産"
+            }
+        ],
+        "農林水産委員会": [
+            {
+                "role": "委員長",
+                "name": "御法川 信英君",
+                "yomikata": "みのりかわ　のぶひで",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "鈴木 貴子君",
+                "yomikata": "すずき　たかこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "西田 昭二君",
+                "yomikata": "にしだ　しょうじ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "葉梨 康弘君",
+                "yomikata": "はなし　やすひろ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "神谷 裕君",
+                "yomikata": "かみや　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "野間 健君",
+                "yomikata": "のま　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "渡辺 創君",
+                "yomikata": "わたなべ　そう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "池畑 浩太朗君",
+                "yomikata": "いけはた　こうたろう",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "長友 慎治君",
+                "yomikata": "ながとも　しんじ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "大空 幸星君",
+                "yomikata": "おおぞら　こうき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "栗原 渉君",
+                "yomikata": "くりはら　わたる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小池 正昭君",
+                "yomikata": "こいけ　まさあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "武村 展英君",
+                "yomikata": "たけむら　のぶひで",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田野瀬 太道君",
+                "yomikata": "たのせ　たいどう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 拓君",
+                "yomikata": "ねもと　たく",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 幸典君",
+                "yomikata": "ねもと　ゆきのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "長谷川 淳二君",
+                "yomikata": "はせがわ　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平沼 正二郎君",
+                "yomikata": "ひらぬま　しょうじろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮下 一郎君",
+                "yomikata": "みやした　いちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森下 千里君",
+                "yomikata": "もりした　ちさと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "簗 和生君",
+                "yomikata": "やな　かずお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山本 大地君",
+                "yomikata": "やまもと　だいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "石川 香織君",
+                "yomikata": "いしかわ　かおり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 華子君",
+                "yomikata": "おかだ　はなこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "金子 恵美君",
+                "yomikata": "かねこ　えみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小山 展弘君",
+                "yomikata": "こやま　のぶひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "近藤 和也君",
+                "yomikata": "こんどう　かずや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "西川 将人君",
+                "yomikata": "にしかわ　まさひと",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福田 淳太君",
+                "yomikata": "ふくだ　じゅんた",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "緑川 貴士君",
+                "yomikata": "みどりかわ　たかし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柳沢 剛君",
+                "yomikata": "やなぎさわ　つよし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山田 勝彦君",
+                "yomikata": "やまだ　かつひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "奥下 剛光君",
+                "yomikata": "おくした　たけみつ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "林 佑美君",
+                "yomikata": "はやし　ゆみ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "許斐 亮太郎君",
+                "yomikata": "このみ　りょうたろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "村岡 敏英君",
+                "yomikata": "むらおか　としひで",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "庄子 賢一君",
+                "yomikata": "しょうじ　けんいち",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "角田 秀穂君",
+                "yomikata": "つのだ　ひでお",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "八幡 愛君",
+                "yomikata": "やはた　あい",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "北神 圭朗君",
+                "yomikata": "きたがみ　けいろう",
+                "party": "有志"
+            }
+        ],
+        "経済産業委員会": [
+            {
+                "role": "委員長",
+                "name": "宮崎 政久君",
+                "yomikata": "みやざき　まさひさ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "小泉 進次郎君",
+                "yomikata": "こいずみ　しんじろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "新谷 正義君",
+                "yomikata": "しんたに　まさよし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "山下 貴司君",
+                "yomikata": "やました　たかし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "荒井 優君",
+                "yomikata": "あらい　ゆたか",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "山岡 達丸君",
+                "yomikata": "やまおか　たつまる",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "山崎 誠君",
+                "yomikata": "やまざき　まこと",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "斉木 武志君",
+                "yomikata": "さいき　たけし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "丹野 みどり君",
+                "yomikata": "たんの　みどり",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "岩田 和親君",
+                "yomikata": "いわた　かずちか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鬼木 誠君",
+                "yomikata": "おにき　まこと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小池 正昭君",
+                "yomikata": "こいけ　まさあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "坂本 竜太郎君",
+                "yomikata": "さかもと　りゅうたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "島田 智明君",
+                "yomikata": "しまだ　ともあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 英敬君",
+                "yomikata": "すずき　えいけい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "関 芳弘君",
+                "yomikata": "せき　よしひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "世耕 弘成君",
+                "yomikata": "せこう　ひろしげ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西村 康稔君",
+                "yomikata": "にしむら　やすとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "細野 豪志君",
+                "yomikata": "ほその　ごうし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松本 洋平君",
+                "yomikata": "まつもと　ようへい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮内 秀樹君",
+                "yomikata": "みやうち　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "向山 淳君",
+                "yomikata": "むこうやま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "東 克哉君",
+                "yomikata": "あずま　かつや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大島 敦君",
+                "yomikata": "おおしま　あつし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 克也君",
+                "yomikata": "おかだ　かつや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "落合 貴之君",
+                "yomikata": "おちあい　たかゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小山 展弘君",
+                "yomikata": "こやま　のぶひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 岳幸君",
+                "yomikata": "すずき　たけゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "田嶋 要君",
+                "yomikata": "たじま　かなめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福森 和歌子君",
+                "yomikata": "ふくもり　わかこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 はるみ君",
+                "yomikata": "よしだ　はるみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "東 徹君",
+                "yomikata": "あずま　とおる",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "黒田 征樹君",
+                "yomikata": "くろだ　まさき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "岡野 純子君",
+                "yomikata": "おかの　じゅんこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "平岩 征樹君",
+                "yomikata": "ひらいわ　まさき",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "福重 隆浩君",
+                "yomikata": "ふくしげ　たかひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山口 良治君",
+                "yomikata": "やまぐち　りょうじ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "佐原 若子君",
+                "yomikata": "さわら　わかこ",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "辰巳 孝太郎君",
+                "yomikata": "たつみ　こうたろう",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "吉良 州司君",
+                "yomikata": "きら　しゅうじ",
+                "party": "有志"
+            }
+        ],
+        "国土交通委員会": [
+            {
+                "role": "委員長",
+                "name": "井上 貴博君",
+                "yomikata": "いのうえ　たかひろ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "勝俣 孝明君",
+                "yomikata": "かつまた　たかあき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "加藤 鮎子君",
+                "yomikata": "かとう　あゆこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "中谷 真一君",
+                "yomikata": "なかたに　しんいち",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "城井 崇君",
+                "yomikata": "きい　たかし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "神津 たけし君",
+                "yomikata": "こうづ　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "森山 浩行君",
+                "yomikata": "もりやま　ひろゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "奥下 剛光君",
+                "yomikata": "おくした　たけみつ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "西岡 秀子君",
+                "yomikata": "にしおか　ひでこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "石橋 林太郎君",
+                "yomikata": "いしばし　りんたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大西 洋平君",
+                "yomikata": "おおにし　ようへい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "梶山 弘志君",
+                "yomikata": "かじやま　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "加藤 竜祥君",
+                "yomikata": "かとう　りゅうしょう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "金子 恭之君",
+                "yomikata": "かねこ　やすし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "工藤 彰三君",
+                "yomikata": "くどう　しょうぞう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "国定 勇人君",
+                "yomikata": "くにさだ　いさと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小森 卓郎君",
+                "yomikata": "こもり　たくお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高見 康裕君",
+                "yomikata": "たかみ　やすひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田所 嘉徳君",
+                "yomikata": "たどころ　よしのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "谷 公一君",
+                "yomikata": "たに　こういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "土屋 品子君",
+                "yomikata": "つちや　しなこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中野 英幸君",
+                "yomikata": "なかの　ひでゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西田 昭二君",
+                "yomikata": "にしだ　しょうじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三反園 訓君",
+                "yomikata": "みたぞの　さとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "阿久津 幸彦君",
+                "yomikata": "あくつ　ゆきひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "尾辻 かな子君",
+                "yomikata": "おつじ　かなこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小宮山 泰子君",
+                "yomikata": "こみやま　やすこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "下条 みつ君",
+                "yomikata": "しもじょう　みつ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "白石 洋一君",
+                "yomikata": "しらいし　よういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "津村 啓介君",
+                "yomikata": "つむら　けいすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "長友 よしひろ君",
+                "yomikata": "ながとも　よしひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "伴野 豊君",
+                "yomikata": "ばんの　ゆたか",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松田 功君",
+                "yomikata": "まつだ　いさお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬淵 澄夫君",
+                "yomikata": "まぶち　すみお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "谷田川 元君",
+                "yomikata": "やたがわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "伊東 信久君",
+                "yomikata": "いとう　のぶひさ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "井上 英孝君",
+                "yomikata": "いのうえ　ひでたか",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "徳安 淳子君",
+                "yomikata": "とくやす　じゅんこ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "鳩山 紀一郎君",
+                "yomikata": "はとやま　きいちろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "古川 元久君",
+                "yomikata": "ふるかわ　もとひさ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "赤羽 一嘉君",
+                "yomikata": "あかば　かずよし",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "中川 康洋君",
+                "yomikata": "なかがわ　やすひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "たがや 亮君",
+                "yomikata": "たがや　りょう",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "堀川 あきこ君",
+                "yomikata": "ほりかわ　あきこ",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "福島 伸享君",
+                "yomikata": "ふくしま　のぶゆき",
+                "party": "有志"
+            }
+        ],
+        "環境委員会": [
+            {
+                "role": "委員長",
+                "name": "近藤 昭一君",
+                "yomikata": "こんどう　しょういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "石原 宏高君",
+                "yomikata": "いしはら　ひろたか",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "武村 展英君",
+                "yomikata": "たけむら　のぶひで",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "平口 洋君",
+                "yomikata": "ひらぐち　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "阿部 知子君",
+                "yomikata": "あべ　ともこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "松木 けんこう君",
+                "yomikata": "まつき　けんこう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "森田 俊和君",
+                "yomikata": "もりた　としかず",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "空本 誠喜君",
+                "yomikata": "そらもと　せいき",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "仙田 晃宏君",
+                "yomikata": "せんだ　あきひろ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "五十嵐 清君",
+                "yomikata": "いがらし　きよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "勝目 康君",
+                "yomikata": "かつめ　やすし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古賀 篤君",
+                "yomikata": "こが　あつし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "坂本 竜太郎君",
+                "yomikata": "さかもと　りゅうたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "佐々木 紀君",
+                "yomikata": "ささき　はじめ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "島田 智明君",
+                "yomikata": "しまだ　ともあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "深澤 陽一君",
+                "yomikata": "ふかざわ　よういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮内 秀樹君",
+                "yomikata": "みやうち　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山際 大志郎君",
+                "yomikata": "やまぎわ　だいしろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大河原 まさこ君",
+                "yomikata": "おおかわら　まさこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "川原田 英世君",
+                "yomikata": "かわはらだ　えいせい",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "齋藤 裕喜君",
+                "yomikata": "さいとう　ゆうき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "佐藤 公治君",
+                "yomikata": "さとう　こうじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠原 孝君",
+                "yomikata": "しのはら　たかし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬場 雄基君",
+                "yomikata": "ばば　ゆうき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "うるま 譲司君",
+                "yomikata": "うるま　じょうじ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "沼崎 満子君",
+                "yomikata": "ぬまざき　みつこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "福重 隆浩君",
+                "yomikata": "ふくしげ　たかひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "北野 裕子君",
+                "yomikata": "きたの　ゆうこ",
+                "party": "参政"
+            },
+            {
+                "role": "委員",
+                "name": "竹上 裕子君",
+                "yomikata": "たけがみ　ゆうこ",
+                "party": "保守"
+            },
+            {
+                "role": "委員",
+                "name": "中村 はやと君",
+                "yomikata": "なかむら　はやと",
+                "party": "無"
+            }
+        ],
+        "安全保障委員会": [
+            {
+                "role": "委員長",
+                "name": "遠藤 敬君",
+                "yomikata": "えんどう　たかし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "岩田 和親君",
+                "yomikata": "いわた　かずちか",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "尾崎 正直君",
+                "yomikata": "おざき　まさなお",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "木原 稔君",
+                "yomikata": "きはら　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "篠原 豪君",
+                "yomikata": "しのはら　ごう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "升田 世喜男君",
+                "yomikata": "ますた　せきお",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "屋良 朝博君",
+                "yomikata": "やら　ともひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "池畑 浩太朗君",
+                "yomikata": "いけはた　こうたろう",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "橋本 幹彦君",
+                "yomikata": "はしもと　みきひこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "江渡 聡徳君",
+                "yomikata": "えと　あきのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "金子 容三君",
+                "yomikata": "かねこ　ようぞう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "黄川田 仁志君",
+                "yomikata": "きかわだ　ひとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "草間 剛君",
+                "yomikata": "くさま　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 英敬君",
+                "yomikata": "すずき　えいけい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 隼人君",
+                "yomikata": "すずき　はやと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "関 芳弘君",
+                "yomikata": "せき　よしひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中曽根 康隆君",
+                "yomikata": "なかそね　やすたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 かおる君",
+                "yomikata": "ふくだ　かおる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "向山 淳君",
+                "yomikata": "むこうやま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "新垣 邦男君",
+                "yomikata": "あらかき　くにお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "五十嵐 えり君",
+                "yomikata": "いがらし　えり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "伊藤 俊輔君",
+                "yomikata": "いとう　しゅんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "重徳 和彦君",
+                "yomikata": "しげとく　かずひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "下野 幸助君",
+                "yomikata": "しもの　こうすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松尾 明弘君",
+                "yomikata": "まつお　あきひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 弘樹君",
+                "yomikata": "あべ　ひろき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "平岩 征樹君",
+                "yomikata": "ひらいわ　まさき",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "西園 勝秀君",
+                "yomikata": "にしぞの　かつひで",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山崎 正恭君",
+                "yomikata": "やまさき　まさやす",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "赤嶺 政賢君",
+                "yomikata": "あかみね　せいけん",
+                "party": "共産"
+            }
+        ],
+        "国家基本政策委員会": [
+            {
+                "role": "委員長",
+                "name": "泉 健太君",
+                "yomikata": "いずみ　けんた",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "小渕 優子君",
+                "yomikata": "おぶち　ゆうこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "平井 卓也君",
+                "yomikata": "ひらい　たくや",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "青柳 陽一郎君",
+                "yomikata": "あおやぎ　よういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "後藤 祐一君",
+                "yomikata": "ごとう　ゆういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "手塚 仁雄君",
+                "yomikata": "てづか　よしお",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "玉木 雄一郎君",
+                "yomikata": "たまき　ゆういちろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "小野寺 五典君",
+                "yomikata": "おのでら　いつのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "木原 誠二君",
+                "yomikata": "きはら　せいじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "坂本 哲志君",
+                "yomikata": "さかもと　てつし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "菅 義偉君",
+                "yomikata": "すが　よしひで",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 俊一君",
+                "yomikata": "すずき　しゅんいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田所 嘉徳君",
+                "yomikata": "たどころ　よしのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "丹羽 秀樹君",
+                "yomikata": "にわ　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 達夫君",
+                "yomikata": "ふくだ　たつお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "村井 英樹君",
+                "yomikata": "むらい　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森山 裕君",
+                "yomikata": "もりやま　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大串 博志君",
+                "yomikata": "おおぐし　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小川 淳也君",
+                "yomikata": "おがわ　じゅんや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小宮山 泰子君",
+                "yomikata": "こみやま　やすこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "野田 佳彦君",
+                "yomikata": "のだ　よしひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "笠 浩史君",
+                "yomikata": "りゅう　ひろふみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岩谷 良平君",
+                "yomikata": "いわたに　りょうへい",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "馬場 伸幸君",
+                "yomikata": "ばば　のぶゆき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "斉藤 鉄夫君",
+                "yomikata": "さいとう　てつお",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "大石 あきこ君",
+                "yomikata": "おおいし　あきこ",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 敦君",
+                "yomikata": "すずき　あつし",
+                "party": "参政"
+            },
+            {
+                "role": "委員",
+                "name": "島田 洋一君",
+                "yomikata": "しまだ　よういち",
+                "party": "保守"
+            }
+        ],
+        "予算委員会": [
+            {
+                "role": "委員長",
+                "name": "安住 淳君",
+                "yomikata": "あずみ　じゅん",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "井上 信治君",
+                "yomikata": "いのうえ　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "高木 啓君",
+                "yomikata": "たかぎ　けい",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "牧島 かれん君",
+                "yomikata": "まきしま　かれん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "山下 貴司君",
+                "yomikata": "やました　たかし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "岡本 あき子君",
+                "yomikata": "おかもと　あきこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "奥野 総一郎君",
+                "yomikata": "おくの　そういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "山井 和則君",
+                "yomikata": "やまのい　かずのり",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "三木 圭恵君",
+                "yomikata": "みき　けえ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "浅野 哲君",
+                "yomikata": "あさの　さとし",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "伊藤 達也君",
+                "yomikata": "いとう　たつや",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "稲田 朋美君",
+                "yomikata": "いなだ　ともみ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鬼木 誠君",
+                "yomikata": "おにき　まこと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "国光 あやの君",
+                "yomikata": "くにみつ　あやの",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "河野 太郎君",
+                "yomikata": "こうの　たろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "後藤 茂之君",
+                "yomikata": "ごとう　しげゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小林 茂樹君",
+                "yomikata": "こばやし　しげき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "齋藤 健君",
+                "yomikata": "さいとう　けん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田中 和徳君",
+                "yomikata": "たなか　かずのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "谷 公一君",
+                "yomikata": "たに　こういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "土屋 品子君",
+                "yomikata": "つちや　しなこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "寺田 稔君",
+                "yomikata": "てらだ　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西銘 恒三郎君",
+                "yomikata": "にしめ　こうさぶろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平沢 勝栄君",
+                "yomikata": "ひらさわ　かつえい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "深澤 陽一君",
+                "yomikata": "ふかざわ　よういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古屋 圭司君",
+                "yomikata": "ふるや　けいじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山田 賢司君",
+                "yomikata": "やまだ　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "今井 雅人君",
+                "yomikata": "いまい　まさと",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大島 敦君",
+                "yomikata": "おおしま　あつし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大西 健介君",
+                "yomikata": "おおにし　けんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "神谷 裕君",
+                "yomikata": "かみや　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "川内 博史君",
+                "yomikata": "かわうち　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "黒岩 宇洋君",
+                "yomikata": "くろいわ　たかひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "近藤 和也君",
+                "yomikata": "こんどう　かずや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "酒井 なつみ君",
+                "yomikata": "さかい　なつみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "階 猛君",
+                "yomikata": "しな　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "本庄 知史君",
+                "yomikata": "ほんじょう　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "米山 隆一君",
+                "yomikata": "よねやま　りゅういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "早稲田 ゆき君",
+                "yomikata": "わせだ　ゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "空本 誠喜君",
+                "yomikata": "そらもと　せいき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "西田 薫君",
+                "yomikata": "にしだ　かおる",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "前原 誠司君",
+                "yomikata": "まえはら　せいじ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "長友 慎治君",
+                "yomikata": "ながとも　しんじ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "橋本 幹彦君",
+                "yomikata": "はしもと　みきひこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "赤羽 一嘉君",
+                "yomikata": "あかば　かずよし",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "大森 江里子君",
+                "yomikata": "おおもり　えりこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "河西 宏一君",
+                "yomikata": "かさい　こういち",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "櫛渕 万里君",
+                "yomikata": "くしぶち　まり",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "田村 貴昭君",
+                "yomikata": "たむら　たかあき",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "緒方 林太郎君",
+                "yomikata": "おがた　りんたろう",
+                "party": "有志"
+            }
+        ],
+        "決算行政監視委員会": [
+            {
+                "role": "委員長",
+                "name": "鈴木 義弘君",
+                "yomikata": "すずき　よしひろ",
+                "party": "国民"
+            },
+            {
+                "role": "理事",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "池田 真紀君",
+                "yomikata": "いけだ　まき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "白石 洋一君",
+                "yomikata": "しらいし　よういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "中谷 一馬君",
+                "yomikata": "なかたに　かずま",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "杉本 和巳君",
+                "yomikata": "すぎもと　かずみ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "臼木 秀剛君",
+                "yomikata": "うすき　ひでたけ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "大野 敬太郎君",
+                "yomikata": "おおの　けいたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "加藤 鮎子君",
+                "yomikata": "かとう　あゆこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "工藤 彰三君",
+                "yomikata": "くどう　しょうぞう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "新谷 正義君",
+                "yomikata": "しんたに　まさよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高市 早苗君",
+                "yomikata": "たかいち　さなえ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田中 良生君",
+                "yomikata": "たなか　りょうせい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "棚橋 泰文君",
+                "yomikata": "たなはし　やすふみ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田畑 裕明君",
+                "yomikata": "たばた　ひろあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "津島 淳君",
+                "yomikata": "つしま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "長坂 康正君",
+                "yomikata": "ながさか　やすまさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中谷 真一君",
+                "yomikata": "なかたに　しんいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "野田 聖子君",
+                "yomikata": "のだ　せいこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 達夫君",
+                "yomikata": "ふくだ　たつお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古川 禎久君",
+                "yomikata": "ふるかわ　よしひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "星野 剛士君",
+                "yomikata": "ほしの　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松野 博一君",
+                "yomikata": "まつの　ひろかず",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "青柳 陽一郎君",
+                "yomikata": "あおやぎ　よういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "井坂 信彦君",
+                "yomikata": "いさか　のぶひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大河原 まさこ君",
+                "yomikata": "おおかわら　まさこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "後藤 祐一君",
+                "yomikata": "ごとう　ゆういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "宗野 創君",
+                "yomikata": "そうの　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "堤 かなめ君",
+                "yomikata": "つつみ　かなめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬淵 澄夫君",
+                "yomikata": "まぶち　すみお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "谷田川 元君",
+                "yomikata": "やたがわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柚木 道義君",
+                "yomikata": "ゆのき　みちよし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "中司 宏君",
+                "yomikata": "なかつか　ひろし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "守島 正君",
+                "yomikata": "もりしま　ただし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "岡本 三成君",
+                "yomikata": "おかもと　みつなり",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "中川 宏昌君",
+                "yomikata": "なかがわ　ひろまさ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "志位 和夫君",
+                "yomikata": "しい　かずお",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 敦君",
+                "yomikata": "すずき　あつし",
+                "party": "参政"
+            },
+            {
+                "role": "委員",
+                "name": "河村 たかし君",
+                "yomikata": "かわむら　たかし",
+                "party": "保守"
+            },
+            {
+                "role": "委員",
+                "name": "松原 仁君",
+                "yomikata": "まつばら　じん",
+                "party": "無"
+            }
+        ],
+        "議院運営委員会": [
+            {
+                "role": "委員長",
+                "name": "浜田 靖一君",
+                "yomikata": "はまだ　やすかず",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "井出 庸生君",
+                "yomikata": "いで　ようせい",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "井野 俊郎君",
+                "yomikata": "いの　としろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "田野瀬 太道君",
+                "yomikata": "たのせ　たいどう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "村井 英樹君",
+                "yomikata": "むらい　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "青柳 陽一郎君",
+                "yomikata": "あおやぎ　よういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "道下 大樹君",
+                "yomikata": "みちした　だいき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "吉田 はるみ君",
+                "yomikata": "よしだ　はるみ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "中司 宏君",
+                "yomikata": "なかつか　ひろし",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "村岡 敏英君",
+                "yomikata": "むらおか　としひで",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 隼人君",
+                "yomikata": "すずき　はやと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高木 啓君",
+                "yomikata": "たかぎ　けい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "深澤 陽一君",
+                "yomikata": "ふかざわ　よういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三谷 英弘君",
+                "yomikata": "みたに　ひでひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森下 千里君",
+                "yomikata": "もりした　ちさと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "五十嵐 えり君",
+                "yomikata": "いがらし　えり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "伊藤 俊輔君",
+                "yomikata": "いとう　しゅんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "高松 智之君",
+                "yomikata": "たかまつ　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "長友 よしひろ君",
+                "yomikata": "ながとも　よしひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "金村 龍那君",
+                "yomikata": "かねむら　りゅうな",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "臼木 秀剛君",
+                "yomikata": "うすき　ひでたけ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 宣弘君",
+                "yomikata": "よしだ　のぶひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山川 仁君",
+                "yomikata": "やまかわ　ひとし",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "塩川 鉄也君",
+                "yomikata": "しおかわ　てつや",
+                "party": "共産"
+            }
+        ],
+        "懲罰委員会": [
+            {
+                "role": "委員長",
+                "name": "菊田 真紀子君",
+                "yomikata": "きくた　まきこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "野田 聖子君",
+                "yomikata": "のだ　せいこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "村井 英樹君",
+                "yomikata": "むらい　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "後藤 祐一君",
+                "yomikata": "ごとう　ゆういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "山井 和則君",
+                "yomikata": "やまのい　かずのり",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "浦野 靖人君",
+                "yomikata": "うらの　やすと",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "麻生 太郎君",
+                "yomikata": "あそう　たろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鬼木 誠君",
+                "yomikata": "おにき　まこと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "岸田 文雄君",
+                "yomikata": "きしだ　ふみお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田所 嘉徳君",
+                "yomikata": "たどころ　よしのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田野瀬 太道君",
+                "yomikata": "たのせ　たいどう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "枝野 幸男君",
+                "yomikata": "えだの　ゆきお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "逢坂 誠二君",
+                "yomikata": "おおさか　せいじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小沢 一郎君",
+                "yomikata": "おざわ　いちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "牧 義夫君",
+                "yomikata": "まき　よしお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬場 伸幸君",
+                "yomikata": "ばば　のぶゆき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "円 より子君",
+                "yomikata": "まどか　よりこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "佐藤 英道君",
+                "yomikata": "さとう　ひでみち",
+                "party": "公明"
+            }
+        ],
+        "東日本大震災復興・防災・災害対策に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "金子 恭之君",
+                "yomikata": "かねこ　やすし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "古賀 篤君",
+                "yomikata": "こが　あつし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "土屋 品子君",
+                "yomikata": "つちや　しなこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "平沼 正二郎君",
+                "yomikata": "ひらぬま　しょうじろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "小熊 慎司君",
+                "yomikata": "おぐま　しんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "近藤 和也君",
+                "yomikata": "こんどう　かずや",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "森山 浩行君",
+                "yomikata": "もりやま　ひろゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "林 佑美君",
+                "yomikata": "はやし　ゆみ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "田中 健君",
+                "yomikata": "たなか　けん",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "尾崎 正直君",
+                "yomikata": "おざき　まさなお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鬼木 誠君",
+                "yomikata": "おにき　まこと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "梶山 弘志君",
+                "yomikata": "かじやま　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "工藤 彰三君",
+                "yomikata": "くどう　しょうぞう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小寺 裕雄君",
+                "yomikata": "こてら　ひろお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "後藤 茂之君",
+                "yomikata": "ごとう　しげゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小森 卓郎君",
+                "yomikata": "こもり　たくお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田畑 裕明君",
+                "yomikata": "たばた　ひろあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西田 昭二君",
+                "yomikata": "にしだ　しょうじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 幸典君",
+                "yomikata": "ねもと　ゆきのり",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松本 洋平君",
+                "yomikata": "まつもと　ようへい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "簗 和生君",
+                "yomikata": "やな　かずお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "阿久津 幸彦君",
+                "yomikata": "あくつ　ゆきひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "梅谷 守君",
+                "yomikata": "うめたに　まもる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡島 一正君",
+                "yomikata": "おかじま　かずまさ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "金子 恵美君",
+                "yomikata": "かねこ　えみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小宮山 泰子君",
+                "yomikata": "こみやま　やすこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "齋藤 裕喜君",
+                "yomikata": "さいとう　ゆうき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "竹内 千春君",
+                "yomikata": "たけうち　ちはる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬場 雄基君",
+                "yomikata": "ばば　ゆうき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福田 昭夫君",
+                "yomikata": "ふくだ　あきお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柳沢 剛君",
+                "yomikata": "やなぎさわ　つよし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "市村 浩一郎君",
+                "yomikata": "いちむら　こういちろう",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "美延 映夫君",
+                "yomikata": "みのべ　てるお",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "菊池 大二郎君",
+                "yomikata": "きくち　だいじろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "鳩山 紀一郎君",
+                "yomikata": "はとやま　きいちろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "中川 宏昌君",
+                "yomikata": "なかがわ　ひろまさ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "西園 勝秀君",
+                "yomikata": "にしぞの　かつひで",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "櫛渕 万里君",
+                "yomikata": "くしぶち　まり",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "堀川 あきこ君",
+                "yomikata": "ほりかわ　あきこ",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "北神 圭朗君",
+                "yomikata": "きたがみ　けいろう",
+                "party": "有志"
+            }
+        ],
+        "政治改革に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "渡辺 周君",
+                "yomikata": "わたなべ　しゅう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "小泉 進次郎君",
+                "yomikata": "こいずみ　しんじろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "齋藤 健君",
+                "yomikata": "さいとう　けん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "長谷川 淳二君",
+                "yomikata": "はせがわ　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "落合 貴之君",
+                "yomikata": "おちあい　たかゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "後藤 祐一君",
+                "yomikata": "ごとう　ゆういち",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "櫻井 周君",
+                "yomikata": "さくらい　しゅう",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "池下 卓君",
+                "yomikata": "いけした　たく",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "長友 慎治君",
+                "yomikata": "ながとも　しんじ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "石田 真敏君",
+                "yomikata": "いしだ　まさとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "井出 庸生君",
+                "yomikata": "いで　ようせい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "国光 あやの君",
+                "yomikata": "くにみつ　あやの",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小林 茂樹君",
+                "yomikata": "こばやし　しげき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "坂本 竜太郎君",
+                "yomikata": "さかもと　りゅうたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "塩崎 彰久君",
+                "yomikata": "しおざき　あきひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "島田 智明君",
+                "yomikata": "しまだ　ともあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中曽根 康隆君",
+                "yomikata": "なかそね　やすたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平口 洋君",
+                "yomikata": "ひらぐち　ひろし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 かおる君",
+                "yomikata": "ふくだ　かおる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松本 剛明君",
+                "yomikata": "まつもと　たけあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "向山 淳君",
+                "yomikata": "むこうやま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山本 大地君",
+                "yomikata": "やまもと　だいち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "今井 雅人君",
+                "yomikata": "いまい　まさと",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "江田 憲司君",
+                "yomikata": "えだ　けんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "鎌田 さゆり君",
+                "yomikata": "かまた　さゆり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "黒岩 宇洋君",
+                "yomikata": "くろいわ　たかひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "源馬 謙太郎君",
+                "yomikata": "げんま　けんたろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠原 孝君",
+                "yomikata": "しのはら　たかし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "手塚 仁雄君",
+                "yomikata": "てづか　よしお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬淵 澄夫君",
+                "yomikata": "まぶち　すみお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "矢崎 堅太郎君",
+                "yomikata": "やざき　けんたろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "青柳 仁士君",
+                "yomikata": "あおやぎ　ひとし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "斎藤 アレックス君",
+                "yomikata": "さいとう　あれっくす",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "福田 玄君",
+                "yomikata": "ふくだ　げん",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "森 ようすけ君",
+                "yomikata": "もり　ようすけ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "中川 康洋君",
+                "yomikata": "なかがわ　やすひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山口 良治君",
+                "yomikata": "やまぐち　りょうじ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "高井 崇志君",
+                "yomikata": "たかい　たかし",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "塩川 鉄也君",
+                "yomikata": "しおかわ　てつや",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "福島 伸享君",
+                "yomikata": "ふくしま　のぶゆき",
+                "party": "有志"
+            }
+        ],
+        "沖縄及び北方問題に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "逢坂 誠二君",
+                "yomikata": "おおさか　せいじ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "國場 幸之助君",
+                "yomikata": "こくば　こうのすけ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "島尻 安伊子君",
+                "yomikata": "しまじり　あいこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "鈴木 貴子君",
+                "yomikata": "すずき　たかこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "新垣 邦男君",
+                "yomikata": "あらかき　くにお",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "川内 博史君",
+                "yomikata": "かわうち　ひろし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "屋良 朝博君",
+                "yomikata": "やら　ともひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "高橋 英明君",
+                "yomikata": "たかはし　ひであき",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "許斐 亮太郎君",
+                "yomikata": "このみ　りょうたろう",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小林 鷹之君",
+                "yomikata": "こばやし　たかゆき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 隼人君",
+                "yomikata": "すずき　はやと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西銘 恒三郎君",
+                "yomikata": "にしめ　こうさぶろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "広瀬 建君",
+                "yomikata": "ひろせ　けん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "向山 淳君",
+                "yomikata": "むこうやま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "若山 慎司君",
+                "yomikata": "わかやま　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "川原田 英世君",
+                "yomikata": "かわはらだ　えいせい",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠田 奈保子君",
+                "yomikata": "しのだ　なおこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "西川 将人君",
+                "yomikata": "にしかわ　まさひと",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松木 けんこう君",
+                "yomikata": "まつき　けんこう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "藤巻 健太君",
+                "yomikata": "ふじまき　けんた",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "深作 ヘスス君",
+                "yomikata": "ふかさく　へすす",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 宣弘君",
+                "yomikata": "よしだ　のぶひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "山川 仁君",
+                "yomikata": "やまかわ　ひとし",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "赤嶺 政賢君",
+                "yomikata": "あかみね　せいけん",
+                "party": "共産"
+            }
+        ],
+        "北朝鮮による拉致問題等に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "牧 義夫君",
+                "yomikata": "まき　よしお",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "石橋 林太郎君",
+                "yomikata": "いしばし　りんたろう",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "黄川田 仁志君",
+                "yomikata": "きかわだ　ひとし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "星野 剛士君",
+                "yomikata": "ほしの　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "有田 芳生君",
+                "yomikata": "ありた　よしふ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "下条 みつ君",
+                "yomikata": "しもじょう　みつ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "藤岡 たかお君",
+                "yomikata": "ふじおか　たかお",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "和田 有一朗君",
+                "yomikata": "わだ　ゆういちろう",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "向山 好一君",
+                "yomikata": "むこやま　こういち",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "大空 幸星君",
+                "yomikata": "おおぞら　こうき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小泉 進次郎君",
+                "yomikata": "こいずみ　しんじろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "寺田 稔君",
+                "yomikata": "てらだ　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "西村 康稔君",
+                "yomikata": "にしむら　やすとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 達夫君",
+                "yomikata": "ふくだ　たつお",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福原 淳嗣君",
+                "yomikata": "ふくはら　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松野 博一君",
+                "yomikata": "まつの　ひろかず",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三谷 英弘君",
+                "yomikata": "みたに　ひでひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小熊 慎司君",
+                "yomikata": "おぐま　しんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "篠原 豪君",
+                "yomikata": "しのはら　ごう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "原口 一博君",
+                "yomikata": "はらぐち　かずひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "太 栄志君",
+                "yomikata": "ふとり　ひでし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "西田 薫君",
+                "yomikata": "にしだ　かおる",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "岸田 光広君",
+                "yomikata": "きしだ　みつひろ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "浜地 雅一君",
+                "yomikata": "はまち　まさかず",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "上村 英明君",
+                "yomikata": "うえむら　ひであき",
+                "party": "れ新"
+            }
+        ],
+        "消費者問題に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "浦野 靖人君",
+                "yomikata": "うらの　やすと",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "勝俣 孝明君",
+                "yomikata": "かつまた　たかあき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "中野 英幸君",
+                "yomikata": "なかの　ひでゆき",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "松島 みどり君",
+                "yomikata": "まつしま　みどり",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "青山 大人君",
+                "yomikata": "あおやま　やまと",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "大西 健介君",
+                "yomikata": "おおにし　けんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "尾辻 かな子君",
+                "yomikata": "おつじ　かなこ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "伊東 信久君",
+                "yomikata": "いとう　のぶひさ",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "丹野 みどり君",
+                "yomikata": "たんの　みどり",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "今枝 宗一郎君",
+                "yomikata": "いまえだ　そういちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上野 賢一郎君",
+                "yomikata": "うえの　けんいちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "加藤 鮎子君",
+                "yomikata": "かとう　あゆこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小池 正昭君",
+                "yomikata": "こいけ　まさあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高木 啓君",
+                "yomikata": "たかぎ　けい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "武村 展英君",
+                "yomikata": "たけむら　のぶひで",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "永岡 桂子君",
+                "yomikata": "ながおか　けいこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "野田 聖子君",
+                "yomikata": "のだ　せいこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "福原 淳嗣君",
+                "yomikata": "ふくはら　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三反園 訓君",
+                "yomikata": "みたぞの　さとし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "若山 慎司君",
+                "yomikata": "わかやま　しんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "井坂 信彦君",
+                "yomikata": "いさか　のぶひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "石川 香織君",
+                "yomikata": "いしかわ　かおり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大河原 まさこ君",
+                "yomikata": "おおかわら　まさこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "大島 敦君",
+                "yomikata": "おおしま　あつし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "おおつき 紅葉君",
+                "yomikata": "おおつき　くれは",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松田 功君",
+                "yomikata": "まつだ　いさお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山田 勝彦君",
+                "yomikata": "やまだ　かつひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山井 和則君",
+                "yomikata": "やまのい　かずのり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "梅村 聡君",
+                "yomikata": "うめむら　さとし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "西岡 義高君",
+                "yomikata": "にしおか　よしたか",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "角田 秀穂君",
+                "yomikata": "つのだ　ひでお",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "沼崎 満子君",
+                "yomikata": "ぬまざき　みつこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "たがや 亮君",
+                "yomikata": "たがや　りょう",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "本村 伸子君",
+                "yomikata": "もとむら　のぶこ",
+                "party": "共産"
+            }
+        ],
+        "原子力問題調査特別委員会": [
+            {
+                "role": "委員長",
+                "name": "江渡 聡徳君",
+                "yomikata": "えと　あきのり",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "岩田 和親君",
+                "yomikata": "いわた　かずちか",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "津島 淳君",
+                "yomikata": "つしま　じゅん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "細野 豪志君",
+                "yomikata": "ほその　ごうし",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "田嶋 要君",
+                "yomikata": "たじま　かなめ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "野間 健君",
+                "yomikata": "のま　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "宮川 伸君",
+                "yomikata": "みやかわ　しん",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "阿部 弘樹君",
+                "yomikata": "あべ　ひろき",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "岡野 純子君",
+                "yomikata": "おかの　じゅんこ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "石原 宏高君",
+                "yomikata": "いしはら　ひろたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "栗原 渉君",
+                "yomikata": "くりはら　わたる",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "坂本 竜太郎君",
+                "yomikata": "さかもと　りゅうたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "佐々木 紀君",
+                "yomikata": "ささき　はじめ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 英敬君",
+                "yomikata": "すずき　えいけい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "関 芳弘君",
+                "yomikata": "せき　よしひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "世耕 弘成君",
+                "yomikata": "せこう　ひろしげ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "根本 拓君",
+                "yomikata": "ねもと　たく",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "長谷川 淳二君",
+                "yomikata": "はせがわ　じゅんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮内 秀樹君",
+                "yomikata": "みやうち　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森下 千里君",
+                "yomikata": "もりした　ちさと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 知子君",
+                "yomikata": "あべ　ともこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 華子君",
+                "yomikata": "おかだ　はなこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "小熊 慎司君",
+                "yomikata": "おぐま　しんじ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "齋藤 裕喜君",
+                "yomikata": "さいとう　ゆうき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "下野 幸助君",
+                "yomikata": "しもの　こうすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "高松 智之君",
+                "yomikata": "たかまつ　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "波多野 翼君",
+                "yomikata": "はたの　つばさ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "伴野 豊君",
+                "yomikata": "ばんの　ゆたか",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "斉木 武志君",
+                "yomikata": "さいき　たけし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "守島 正君",
+                "yomikata": "もりしま　ただし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "小竹 凱君",
+                "yomikata": "おだけ　かい",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "平林 晃君",
+                "yomikata": "ひらばやし　あきら",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "福重 隆浩君",
+                "yomikata": "ふくしげ　たかひろ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "佐原 若子君",
+                "yomikata": "さわら　わかこ",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "辰巳 孝太郎君",
+                "yomikata": "たつみ　こうたろう",
+                "party": "共産"
+            }
+        ],
+        "地域活性化・こども政策・デジタル社会形成に関する特別委員会": [
+            {
+                "role": "委員長",
+                "name": "谷 公一君",
+                "yomikata": "たに　こういち",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "上川 陽子君",
+                "yomikata": "かみかわ　ようこ",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "牧島 かれん君",
+                "yomikata": "まきしま　かれん",
+                "party": "自民"
+            },
+            {
+                "role": "理事",
+                "name": "神津 たけし君",
+                "yomikata": "こうづ　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "坂本 祐之輔君",
+                "yomikata": "さかもと　ゆうのすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "森田 俊和君",
+                "yomikata": "もりた　としかず",
+                "party": "立憲"
+            },
+            {
+                "role": "理事",
+                "name": "東 徹君",
+                "yomikata": "あずま　とおる",
+                "party": "維新"
+            },
+            {
+                "role": "理事",
+                "name": "日野 紗里亜君",
+                "yomikata": "ひの　さりあ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "遠藤 利明君",
+                "yomikata": "えんどう　としあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大西 洋平君",
+                "yomikata": "おおにし　ようへい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "加藤 竜祥君",
+                "yomikata": "かとう　りゅうしょう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "岸 信千世君",
+                "yomikata": "きし　のぶちよ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "草間 剛君",
+                "yomikata": "くさま　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小池 正昭君",
+                "yomikata": "こいけ　まさあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "小泉 龍司君",
+                "yomikata": "こいずみ　りゅうじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田野瀬 太道君",
+                "yomikata": "たのせ　たいどう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "萩生田 光一君",
+                "yomikata": "はぎうだ　こういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "宮下 一郎君",
+                "yomikata": "みやした　いちろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "東 克哉君",
+                "yomikata": "あずま　かつや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "安藤 じゅん子君",
+                "yomikata": "あんどう　じゅんこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "市來 伴子君",
+                "yomikata": "いちき　ともこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "中谷 一馬君",
+                "yomikata": "なかたに　かずま",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "橋本 慧悟君",
+                "yomikata": "はしもと　けいご",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福田 淳太君",
+                "yomikata": "ふくだ　じゅんた",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "福森 和歌子君",
+                "yomikata": "ふくもり　わかこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柚木 道義君",
+                "yomikata": "ゆのき　みちよし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 司君",
+                "yomikata": "あべ　つかさ",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "斎藤 アレックス君",
+                "yomikata": "さいとう　あれっくす",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "仙田 晃宏君",
+                "yomikata": "せんだ　あきひろ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "浮島 智子君",
+                "yomikata": "うきしま　ともこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "大森 江里子君",
+                "yomikata": "おおもり　えりこ",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "阪口 直人君",
+                "yomikata": "さかぐち　なおと",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "本村 伸子君",
+                "yomikata": "もとむら　のぶこ",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "吉良 州司君",
+                "yomikata": "きら　しゅうじ",
+                "party": "有志"
+            }
+        ],
+        "憲法審査会": [
+            {
+                "role": "会長",
+                "name": "枝野 幸男君",
+                "yomikata": "えだの　ゆきお",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "井野 俊郎君",
+                "yomikata": "いの　としろう",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "小林 鷹之君",
+                "yomikata": "こばやし　たかゆき",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "寺田 稔君",
+                "yomikata": "てらだ　みのる",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "船田 元君",
+                "yomikata": "ふなだ　はじめ",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "武正 公一君",
+                "yomikata": "たけまさ　こういち",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "津村 啓介君",
+                "yomikata": "つむら　けいすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "山花 郁夫君",
+                "yomikata": "やまはな　いくお",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "馬場 伸幸君",
+                "yomikata": "ばば　のぶゆき",
+                "party": "維新"
+            },
+            {
+                "role": "幹事",
+                "name": "浅野 哲君",
+                "yomikata": "あさの　さとし",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "井出 庸生君",
+                "yomikata": "いで　ようせい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "稲田 朋美君",
+                "yomikata": "いなだ　ともみ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "大野 敬太郎君",
+                "yomikata": "おおの　けいたろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上川 陽子君",
+                "yomikata": "かみかわ　ようこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "柴山 昌彦君",
+                "yomikata": "しばやま　まさひこ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "新藤 義孝君",
+                "yomikata": "しんどう　よしたか",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高市 早苗君",
+                "yomikata": "たかいち　さなえ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "葉梨 康弘君",
+                "yomikata": "はなし　やすひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "平沢 勝栄君",
+                "yomikata": "ひらさわ　かつえい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古川 禎久君",
+                "yomikata": "ふるかわ　よしひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "古屋 圭司君",
+                "yomikata": "ふるや　けいじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "細野 豪志君",
+                "yomikata": "ほその　ごうし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "松本 剛明君",
+                "yomikata": "まつもと　たけあき",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "森 英介君",
+                "yomikata": "もり　えいすけ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山口 壯君",
+                "yomikata": "やまぐち　つよし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山下 貴司君",
+                "yomikata": "やました　たかし",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "山田 賢司君",
+                "yomikata": "やまだ　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "五十嵐 えり君",
+                "yomikata": "いがらし　えり",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 悟君",
+                "yomikata": "おかだ　さとる",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "奥野 総一郎君",
+                "yomikata": "おくの　そういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "重徳 和彦君",
+                "yomikata": "しげとく　かずひこ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "階 猛君",
+                "yomikata": "しな　たけし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "柴田 勝之君",
+                "yomikata": "しばた　かつゆき",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "平岡 秀夫君",
+                "yomikata": "ひらおか　ひでお",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "藤原 規眞君",
+                "yomikata": "ふじわら　のりまさ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "松尾 明弘君",
+                "yomikata": "まつお　あきひろ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "谷田川 元君",
+                "yomikata": "やたがわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 はるみ君",
+                "yomikata": "よしだ　はるみ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "米山 隆一君",
+                "yomikata": "よねやま　りゅういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "青柳 仁士君",
+                "yomikata": "あおやぎ　ひとし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "阿部 圭史君",
+                "yomikata": "あべ　けいし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "岩谷 良平君",
+                "yomikata": "いわたに　りょうへい",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "平岩 征樹君",
+                "yomikata": "ひらいわ　まさき",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "福田 徹君",
+                "yomikata": "ふくた　とおる",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "河西 宏一君",
+                "yomikata": "かさい　こういち",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "浜地 雅一君",
+                "yomikata": "はまち　まさかず",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "平林 晃君",
+                "yomikata": "ひらばやし　あきら",
+                "party": "公明"
+            },
+            {
+                "role": "委員",
+                "name": "大石 あきこ君",
+                "yomikata": "おおいし　あきこ",
+                "party": "れ新"
+            },
+            {
+                "role": "委員",
+                "name": "赤嶺 政賢君",
+                "yomikata": "あかみね　せいけん",
+                "party": "共産"
+            },
+            {
+                "role": "委員",
+                "name": "北神 圭朗君",
+                "yomikata": "きたがみ　けいろう",
+                "party": "有志"
+            }
+        ],
+        "情報監視審査会": [
+            {
+                "role": "会長",
+                "name": "伊藤 達也君",
+                "yomikata": "いとう　たつや",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "田村 憲久君",
+                "yomikata": "たむら　のりひさ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "中西 健治君",
+                "yomikata": "なかにし　けんじ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "伊藤 俊輔君",
+                "yomikata": "いとう　しゅんすけ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "岡田 克也君",
+                "yomikata": "おかだ　かつや",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "本庄 知史君",
+                "yomikata": "ほんじょう　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "中司 宏君",
+                "yomikata": "なかつか　ひろし",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "田中 健君",
+                "yomikata": "たなか　けん",
+                "party": "国民"
+            }
+        ],
+        "政治倫理審査会": [
+            {
+                "role": "会長",
+                "name": "田中 和徳君",
+                "yomikata": "たなか　かずのり",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "井出 庸生君",
+                "yomikata": "いで　ようせい",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "田野瀬 太道君",
+                "yomikata": "たのせ　たいどう",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "村井 英樹君",
+                "yomikata": "むらい　ひでき",
+                "party": "自民"
+            },
+            {
+                "role": "幹事",
+                "name": "青柳 陽一郎君",
+                "yomikata": "あおやぎ　よういちろう",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "寺田 学君",
+                "yomikata": "てらた　まなぶ",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "中谷 一馬君",
+                "yomikata": "なかたに　かずま",
+                "party": "立憲"
+            },
+            {
+                "role": "幹事",
+                "name": "藤田 文武君",
+                "yomikata": "ふじた　ふみたけ",
+                "party": "維新"
+            },
+            {
+                "role": "幹事",
+                "name": "石井 智恵君",
+                "yomikata": "いしい　ともえ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "井野 俊郎君",
+                "yomikata": "いの　としろう",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "上田 英俊君",
+                "yomikata": "うえだ　えいしゅん",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鬼木 誠君",
+                "yomikata": "おにき　まこと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "鈴木 隼人君",
+                "yomikata": "すずき　はやと",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "高木 啓君",
+                "yomikata": "たかぎ　けい",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "深澤 陽一君",
+                "yomikata": "ふかざわ　よういち",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "三谷 英弘君",
+                "yomikata": "みたに　ひでひろ",
+                "party": "自民"
+            },
+            {
+                "role": "委員",
+                "name": "白石 洋一君",
+                "yomikata": "しらいし　よういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "本庄 知史君",
+                "yomikata": "ほんじょう　さとし",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "三角 創太君",
+                "yomikata": "みすみ　そうた",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "谷田川 元君",
+                "yomikata": "やたがわ　はじめ",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "山岸 一生君",
+                "yomikata": "やまぎし　いっせい",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "米山 隆一君",
+                "yomikata": "よねやま　りゅういち",
+                "party": "立憲"
+            },
+            {
+                "role": "委員",
+                "name": "馬場 伸幸君",
+                "yomikata": "ばば　のぶゆき",
+                "party": "維新"
+            },
+            {
+                "role": "委員",
+                "name": "臼木 秀剛君",
+                "yomikata": "うすき　ひでたけ",
+                "party": "国民"
+            },
+            {
+                "role": "委員",
+                "name": "吉田 宣弘君",
+                "yomikata": "よしだ　のぶひろ",
+                "party": "公明"
+            }
+        ]
+    }
+}
