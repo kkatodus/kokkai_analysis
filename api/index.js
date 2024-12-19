@@ -7,6 +7,7 @@ var listener = app.listen(process.env.PORT || 5000, function () {
 });
 app.use(express.static("public"));
 app.use(cors());
+app.use(express.json());
 
 //endpoint for api guide
 var api_guide = {
@@ -45,3 +46,6 @@ app.use("/geo", geoRouter);
 
 import reprRouter from "./routes/reprs/index.js";
 app.use("/reprs", reprRouter);
+
+import paymentRouter from "./routes/payment/index.js";
+app.use("/payment", paymentRouter);

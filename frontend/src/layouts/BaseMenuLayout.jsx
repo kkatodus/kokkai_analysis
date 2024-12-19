@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Div100vh from 'react-div-100vh';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import Proptypes from 'prop-types';
-import { colors } from '../resource/styling';
+import ModalManager from 'modals';
+import { colors } from 'resource/styling';
 
 export default function BaseMenuLayout(props) {
   const { MenuTitle, Links, backTo } = props;
@@ -20,8 +21,9 @@ export default function BaseMenuLayout(props) {
   return (
     <Div100vh>
       <div
-        className={`h-[99%] w-[100%] relative flex justify-center items-center ${colors.secondary} `}
+        className={`h-[100%] w-[100%] relative flex justify-center items-center ${colors.secondary} `}
       >
+        <ModalManager />
         {backTo && (
           <Link className="back-icon absolute top-0 left-0 p-2" to={backTo}>
             <MdOutlineArrowBack className="menu-icon" />

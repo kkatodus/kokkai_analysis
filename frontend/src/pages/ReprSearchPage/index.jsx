@@ -5,6 +5,7 @@ import Div100vh from 'react-div-100vh';
 import { Link } from 'react-router-dom';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { colors } from 'resource/styling';
+import ModalManager from 'modals';
 
 import VoteDistrictMap from './components/VoteDistrictMap';
 import DistrictRepsPanel from './components/DistrictRepsPanel';
@@ -39,8 +40,9 @@ function ReprSearchPage() {
 
   return (
     <Div100vh>
-      <div className="relative h-[99%] w-screen flex">
-        <div className="absolute h-20 w-[70%] z-40">
+      <div className="relative h-[100%] w-screen flex">
+        <ModalManager />
+        <div className="absolute h-20 w-[70%] z-10">
           <div className="w-full flex h-full">
             <Link
               className={`back-icon z-40 top-0 left-0 p-2 rounded-lg ${colors.primary}`}

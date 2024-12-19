@@ -21,6 +21,8 @@ import ReprSpeechGraphPage from 'pages/ReprSpeechGraphPage';
 import StatsMenuPage from 'pages/StatsMenuPage';
 import PopulationPage from 'pages/StatPages/PopulationPage';
 import ReprSearchPage from 'pages/ReprSearchPage';
+import PaymentSuccessPage from 'pages/PaymentResultPages/PaymentSuccessPage';
+import PaymentFailurePage from 'pages/PaymentResultPages/PaymentFailurePage';
 /**
  *
  * @return {JSX.Element}
@@ -85,6 +87,8 @@ function App() {
       <Route exact path="repr_analysis/search" element={<ReprSearchPage />} />
       <Route exact path="stats" element={<StatsMenuPage />} />
       <Route exact path="stats/population" element={<PopulationPage />} />
+      <Route exact path="payment-success" element={<PaymentSuccessPage />} />
+      <Route exact path="payment-cancel" element={<PaymentFailurePage />} />
     </Routes>
   );
 }

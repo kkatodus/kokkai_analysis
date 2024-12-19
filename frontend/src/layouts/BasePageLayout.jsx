@@ -1,6 +1,7 @@
 import React from 'react';
 import Div100vh from 'react-div-100vh';
 import { Link } from 'react-router-dom';
+import ModalManager from 'modals';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import Proptypes from 'prop-types';
 import { colors } from '../resource/styling';
@@ -20,6 +21,8 @@ export default function BasePageLayout(props) {
   return (
     <Div100vh>
       <div className="flex flex-col h-[99%] relative">
+        <ModalManager />
+
         <div
           className={`${
             isMobile ? 'h-[10%]' : 'h-1/6'

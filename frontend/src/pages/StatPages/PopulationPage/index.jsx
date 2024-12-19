@@ -8,12 +8,13 @@ import { MdOutlineArrowBack } from 'react-icons/md';
 import Slider from '@mui/material/Slider';
 import Div100vh from 'react-div-100vh';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { statsEndpoint } from '../../../resource/resources';
-import DataTable from '../../../sharedComponents/DataTable';
-import useCityPopulationData from '../../../state/useCityPopulationData';
+import ModalManager from 'modals';
+import { statsEndpoint } from 'resource/resources';
+import DataTable from 'sharedComponents/DataTable';
+import { colors } from 'resource/styling';
+import useCityPopulationData from 'state/useCityPopulationData';
 import sortDataByPopulation from './utils/sortDataByPopulation';
 import getPopulationValueFromRow from './utils/getPopulationValueFromData';
-import { colors } from '../../../resource/styling';
 
 const MAP_STYLE = 'mapbox://styles/kkatodus/clnkx6x1z002601p7c4vl398t';
 // eslint-disable-next-line no-unused-vars
@@ -129,6 +130,8 @@ function PopulationPage() {
   return (
     <Div100vh>
       <div className="relative h-[99%] w-screen">
+        <ModalManager />
+
         <Link
           className={`back-icon absolute z-40 top-0 left-0 p-2 rounded-lg ${colors.primary}`}
           to="/stats"
