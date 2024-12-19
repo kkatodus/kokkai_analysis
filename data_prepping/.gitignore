@@ -1,4 +1,9 @@
 secrets.sh
 secret_keys/
+<<<<<<< HEAD
+*.exe
+*.log
+=======
 *.hdf5
 mecab-ipadic-neologd/
+>>>>>>> 5fd100a9bef95a6123b9a3542fb755bcd5ddc55c
