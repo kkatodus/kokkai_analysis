@@ -1854,3 +1854,98 @@ DevTools listening on ws://127.0.0.1:60654/devtools/browser/9a12f6e7-1f75-4ccd-a
 1717854023670	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
 1717854062785	Marionette	INFO	Stopped listening on port 60667
 Dynamically enable window occlusion 1
+1734578408609	geckodriver	INFO	Listening on 127.0.0.1:64554
+1734578411696	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64555" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofileOgFwWg"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1734578412154	Marionette	INFO	Marionette enabled
+1734578412264	Marionette	INFO	Listening on port 64585
+WebDriver BiDi listening on ws://127.0.0.1:64555
+Read port: 64585
+1734578412397	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giin.htm" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho" ({})
+console.warn: WindowsJumpLists: "Failed to fetch favicon for " "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm" ({})
+1734579525913	Marionette	INFO	Stopped listening on port 64585
+Dynamically enable window occlusion 1
+1734579719165	geckodriver	INFO	Listening on 127.0.0.1:54470
+1734579722210	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54471" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofilemekiSS"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1734579722545	Marionette	INFO	Marionette enabled
+1734579722701	Marionette	INFO	Listening on port 54481
+WebDriver BiDi listening on ws://127.0.0.1:54471
+Read port: 54481
+1734579722851	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1734579754153	Marionette	INFO	Stopped listening on port 54481
+Dynamically enable window occlusion 1
+1734579936390	geckodriver	INFO	Listening on 127.0.0.1:55581
+1734579939455	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55582" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofileajW4ZC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1734579939778	Marionette	INFO	Marionette enabled
+1734579939921	Marionette	INFO	Listening on port 55591
+WebDriver BiDi listening on ws://127.0.0.1:55582
+Read port: 55591
+1734579940044	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1734580033010	Marionette	INFO	Stopped listening on port 55591
+Dynamically enable window occlusion 1
+1734580113409	geckodriver	INFO	Listening on 127.0.0.1:55741
+1734580116477	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55742" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofile1oTNVE"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1734580116823	Marionette	INFO	Marionette enabled
+1734580116916	Marionette	INFO	Listening on port 55751
+WebDriver BiDi listening on ws://127.0.0.1:55742
+Read port: 55751
+1734580117054	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1734580207842	Marionette	INFO	Stopped listening on port 55751
+Dynamically enable window occlusion 1
+1734581029456	geckodriver	INFO	Listening on 127.0.0.1:56746
+1734581032510	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56747" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofilekE72rY"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1734581032859	Marionette	INFO	Marionette enabled
+1734581032952	Marionette	INFO	Listening on port 56757
+WebDriver BiDi listening on ws://127.0.0.1:56747
+Read port: 56757
+1734581033146	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1734581136527	Marionette	INFO	Stopped listening on port 56757
+Dynamically enable window occlusion 1

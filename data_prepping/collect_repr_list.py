@@ -11,7 +11,7 @@ from file_handling.file_read_writer import read_json, write_json, create_dir
 ## URLS
 GIJI_URL = "https://kokkai.ndl.go.jp/api/speech?"
 
-UPPER_REPR_LIST_URL = "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/211/giin.htm"
+UPPER_REPR_LIST_URL = "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm"
 LOWER_REPR_LIST_URL = "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/syu/1giin.htm"
 
 UPPER_MEETING_INFO_PAGE_URL = "https://www.sangiin.go.jp/japanese/kon_kokkaijyoho/index.html"
@@ -22,7 +22,6 @@ TODAY_STR = datetime.now().strftime('%Y%m%d')
 ## PATHS
 UPPER_OUTPUT_DIR = os.path.join(ROOT_DIR,'data', "data_sangiin")
 LOWER_OUTPUT_DIR = os.path.join(ROOT_DIR,'data', "data_shugiin")
-print(os.listdir(ROOT_DIR))
 if not os.path.exists(UPPER_OUTPUT_DIR):
     raise Exception("Upper house output directory does not exist")
 if not os.path.exists(LOWER_OUTPUT_DIR):
@@ -46,8 +45,8 @@ CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")
 ## PARAMS
 SCRAPE_UPPER_REPR_LIST = True
 SCRAPE_LOWER_REPR_LIST = True
-SCRAPE_UPPER_MEETING_MEMBER_LIST = False
-SCRAPE_LOWER_MEETING_MEMBER_LIST = False
+SCRAPE_UPPER_MEETING_MEMBER_LIST = True
+SCRAPE_LOWER_MEETING_MEMBER_LIST = True
 
 #LAYOUT
 REPR_LIST_LAYOUT = {
@@ -232,7 +231,7 @@ def scrape_lower_meeting_member_list():
             meeting_member_dict['meetings'][meeting_name].append(member_dict)
     output_dir = os.path.join(LOWER_OUTPUT_DIR, "meeting_member_lists")
     create_dir(output_dir)
-    meeting_member_json_path = os.path.join(output_dir, f"meeting_member_list.json")
+    meeting_member_json_path = os.path.join(output_dir, f"{TODAY_STR}_meeting_member_list.json")
     write_json(meeting_member_dict, meeting_member_json_path)
             
 def scrape_upper_meeting_bills_info():
