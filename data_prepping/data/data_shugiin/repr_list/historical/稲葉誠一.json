@@ -1,0 +1,74 @@
+{
+    "name_kanji": "稲葉誠一",
+    "name_kana": "いなばせいいち",
+    "years": [
+        "1972-12-10",
+        "1976-12-05",
+        "1979-10-07",
+        "1980-06-22",
+        "1983-12-18",
+        "1986-07-06"
+    ],
+    "election_data": [
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第36回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "第37回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "栃木1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        }
+    ]
+}

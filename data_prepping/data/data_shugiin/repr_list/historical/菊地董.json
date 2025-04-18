@@ -1,0 +1,39 @@
+{
+    "name_kanji": "菊地董",
+    "name_kana": "きくちただす、きくちただし",
+    "years": [
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": " ※静岡7区落選"
+        },
+        {
+            "year": "2000年",
+            "month": "2月",
+            "day": "22日",
+            "election_name": "同",
+            "district": "東海ブロック",
+            "party": "社会民主党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": " ※静岡5区落選"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "name_kanji": "坂井隆憲",
+    "name_kana": "さかいたかのり",
+    "years": [
+        "1990-02-18",
+        "1993-07-18",
+        "1996-10-20",
+        "2000-06-25"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目） ※佐賀1区落選"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "佐賀1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name_kanji": "有田八郎",
+    "name_kana": "ありたはちろう",
+    "years": [
+        "1953-04-19"
+    ],
+    "election_data": [
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "新潟1区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "新潟1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -12,7 +12,7 @@ def read_json(path):
         meeting_dict = json.load(j)
     return meeting_dict
 
-def write_json(dict_obj, path):
+def write_json(dict_obj:dict, path:str)->None:
     if not path.endswith(".json"):
         raise Exception("File is not a json file")
     with open(path, "w", encoding="utf-8") as j:
@@ -65,4 +65,14 @@ def get_newest_file(dir):
 				most_recent_file = entry.name
 	return most_recent_file
 
+def get_newest_dir(dir):
+	most_recent_dir = None
+	most_recent_time = 0
+	for entry in os.scandir(dir):
+		if entry.is_dir:
+			mod_time = entry.stat().st_mtime
+			if mod_time > most_recent_time:
+				most_recent_time = mod_time
+				most_recent_dir = entry.name
+	return most_recent_dir
 	

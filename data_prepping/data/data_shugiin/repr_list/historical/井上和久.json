@@ -1,0 +1,29 @@
+{
+    "name_kanji": "井上和久",
+    "name_kana": "いのうえかずひさ",
+    "years": [
+        "1986-07-06"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "愛媛1区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "愛媛1区",
+            "party": "公明党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

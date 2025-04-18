@@ -1,0 +1,60 @@
+{
+    "name_kanji": "山崎摩耶",
+    "name_kana": "やまざきまや",
+    "years": [
+        "2009-08-30",
+        "2017-10-22"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目） ※比例単独"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※北海道12区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        },
+        {
+            "year": "2021年",
+            "month": "8月",
+            "day": "7日",
+            "election_name": "同",
+            "district": "北海道ブロック",
+            "party": "立憲民主党",
+            "result": "繰上",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "国民民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        }
+    ]
+}

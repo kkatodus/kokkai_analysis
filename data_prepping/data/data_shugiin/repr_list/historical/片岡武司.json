@@ -1,0 +1,61 @@
+{
+    "name_kanji": "片岡武司",
+    "name_kana": "かたおかたけし",
+    "years": [
+        "1986-07-06",
+        "1990-02-18",
+        "1993-07-18"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "愛知6区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "愛知6区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "愛知6区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※愛知3区落選"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※愛知3区落選"
+        }
+    ]
+}

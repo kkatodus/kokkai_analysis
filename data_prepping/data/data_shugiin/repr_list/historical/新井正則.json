@@ -1,0 +1,39 @@
+{
+    "name_kanji": "新井正則",
+    "name_kana": "あらいまさのり",
+    "years": [
+        "2003-11-09"
+    ],
+    "election_data": [
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "北関東ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※埼玉8区落選"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "北関東ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※埼玉8区落選"
+        },
+        {
+            "year": "2003年",
+            "month": "11月",
+            "day": "9日",
+            "election_name": "第43回衆議院議員総選挙",
+            "district": "埼玉8区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

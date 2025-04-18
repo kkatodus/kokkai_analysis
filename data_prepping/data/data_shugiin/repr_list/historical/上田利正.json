@@ -1,0 +1,30 @@
+{
+    "name_kanji": "上田利正",
+    "name_kana": "うえだりせい",
+    "years": [
+        "1986-07-06",
+        "1990-02-18"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "山梨全県区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "山梨全県区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

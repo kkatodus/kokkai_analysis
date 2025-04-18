@@ -1,0 +1,40 @@
+{
+    "name_kanji": "細川護熙、細川護煕",
+    "name_kana": "ほそかわもりひろ",
+    "years": [
+        "1993-07-18",
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "日本新党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name_kanji": "鴻池祥肇",
+    "name_kana": "こうのいけよしただ",
+    "years": [
+        "1986-07-06",
+        "1990-02-18"
+    ],
+    "election_data": [
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "第37回衆議院議員総選挙",
+            "district": "兵庫2区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "兵庫2区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "兵庫2区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "兵庫2区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

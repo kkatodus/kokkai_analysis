@@ -1,0 +1,51 @@
+{
+    "name_kanji": "井村重雄",
+    "name_kana": "いむらしげお",
+    "years": [
+        "1960-11-20",
+        "1963-11-21",
+        "1967-01-29"
+    ],
+    "election_data": [
+        {
+            "year": "1958年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "第28回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1960年",
+            "month": "11月",
+            "day": "20日",
+            "election_name": "第29回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1963年",
+            "month": "11月",
+            "day": "21日",
+            "election_name": "第30回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

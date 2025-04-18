@@ -1,0 +1,30 @@
+{
+    "name_kanji": "斎藤隆夫、齋藤隆夫",
+    "name_kana": "さいとうたかお",
+    "years": [
+        "1947-04-25",
+        "1949-01-23"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "兵庫5区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（12回目）"
+        },
+        {
+            "year": "1949年",
+            "month": "1月",
+            "day": "23日",
+            "election_name": "第24回衆議院議員総選挙",
+            "district": "兵庫5区",
+            "party": "民主自由党",
+            "result": "当選",
+            "election_freq": "（13回目）"
+        }
+    ]
+}

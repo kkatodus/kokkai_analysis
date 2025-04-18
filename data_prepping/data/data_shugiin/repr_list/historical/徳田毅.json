@@ -1,0 +1,41 @@
+{
+    "name_kanji": "徳田毅",
+    "name_kana": "とくだたけし",
+    "years": [
+        "2005-09-11",
+        "2009-08-30",
+        "2012-12-16"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "鹿児島2区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "鹿児島2区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "鹿児島2区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

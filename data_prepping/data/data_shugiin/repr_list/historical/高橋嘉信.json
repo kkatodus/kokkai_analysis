@@ -1,0 +1,29 @@
+{
+    "name_kanji": "高橋嘉信",
+    "name_kana": "たかはしよしのぶ",
+    "years": [
+        "2000-06-25"
+    ],
+    "election_data": [
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "自由党",
+            "result": "当選",
+            "election_freq": "（1回目） ※比例単独"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※岩手4区落選"
+        }
+    ]
+}

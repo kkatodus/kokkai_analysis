@@ -1,0 +1,49 @@
+{
+    "name_kanji": "中屋大介",
+    "name_kana": "なかやだいすけ",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※福岡7区落選"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        },
+        {
+            "year": "2010年",
+            "month": "9月",
+            "day": "3日",
+            "election_name": "同",
+            "district": "九州ブロック",
+            "party": "民主党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "中国ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※山口3区落選"
+        }
+    ]
+}

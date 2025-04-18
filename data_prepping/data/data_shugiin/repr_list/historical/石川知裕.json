@@ -1,0 +1,61 @@
+{
+    "name_kanji": "石川知裕",
+    "name_kana": "いしかわともひろ",
+    "years": [
+        "2005-09-11",
+        "2009-08-30",
+        "2012-12-16"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※北海道11区落選"
+        },
+        {
+            "year": "2007年",
+            "month": "3月",
+            "day": "27日",
+            "election_name": "同",
+            "district": "北海道ブロック",
+            "party": "民主党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "北海道11区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "新党大地",
+            "result": "当選",
+            "election_freq": "（3回目） ※北海道11区落選"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "北海道ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        }
+    ]
+}

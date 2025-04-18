@@ -1,0 +1,29 @@
+{
+    "name_kanji": "井上一徳",
+    "name_kana": "いのうえかずのり",
+    "years": [
+        "2017-10-22"
+    ],
+    "election_data": [
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "希望の党",
+            "result": "当選",
+            "election_freq": "（1回目） ※京都5区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "京都5区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

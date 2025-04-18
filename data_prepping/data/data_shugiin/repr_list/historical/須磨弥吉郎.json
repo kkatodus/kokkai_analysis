@@ -1,0 +1,40 @@
+{
+    "name_kanji": "須磨弥吉郎、須磨彌吉郎",
+    "name_kana": "すまやきちろう",
+    "years": [
+        "1953-04-19",
+        "1955-02-27"
+    ],
+    "election_data": [
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "秋田1区",
+            "party": "改進党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "秋田1区",
+            "party": "日本民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1958年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "第28回衆議院議員総選挙",
+            "district": "秋田1区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

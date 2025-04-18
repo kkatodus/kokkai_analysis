@@ -1,0 +1,40 @@
+{
+    "name_kanji": "折小野良一",
+    "name_kana": "おりおのりょういち",
+    "years": [
+        "1967-01-29",
+        "1972-12-10"
+    ],
+    "election_data": [
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "宮崎1区",
+            "party": "民主社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "宮崎1区",
+            "party": "民社党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "宮崎1区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "name_kanji": "山本和嘉子",
+    "name_kana": "やまもとわかこ",
+    "years": [
+        "2017-10-22"
+    ],
+    "election_data": [
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "立憲民主党",
+            "result": "当選",
+            "election_freq": "（1回目） ※比例単独"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※京都5区落選"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※京都5区落選"
+        }
+    ]
+}

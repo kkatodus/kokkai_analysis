@@ -1,0 +1,49 @@
+{
+    "name_kanji": "上杉光弘",
+    "name_kana": "うえすぎみつひろ",
+    "years": [
+        "2012-12-16"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※宮崎2区落選"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "宮崎1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "中国ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目） ※比例単独"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        }
+    ]
+}

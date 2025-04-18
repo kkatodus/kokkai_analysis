@@ -1,0 +1,29 @@
+{
+    "name_kanji": "横山博幸",
+    "name_kana": "よこやまひろゆき",
+    "years": [
+        "2014-12-14"
+    ],
+    "election_data": [
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "四国ブロック",
+            "party": "維新の党",
+            "result": "当選",
+            "election_freq": "（1回目） ※愛媛2区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "四国ブロック",
+            "party": "希望の党",
+            "result": "落選",
+            "election_freq": " ※愛媛2区落選"
+        }
+    ]
+}

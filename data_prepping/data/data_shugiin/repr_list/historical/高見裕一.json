@@ -1,0 +1,29 @@
+{
+    "name_kanji": "高見裕一",
+    "name_kana": "たかみゆういち",
+    "years": [
+        "1993-07-18"
+    ],
+    "election_data": [
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "兵庫1区",
+            "party": "日本新党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "新党さきがけ",
+            "result": "落選",
+            "election_freq": " ※兵庫2区落選"
+        }
+    ]
+}

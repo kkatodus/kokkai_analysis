@@ -1,0 +1,40 @@
+{
+    "name_kanji": "山本孝史",
+    "name_kana": "やまもとたかし",
+    "years": [
+        "1993-07-18",
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "大阪4区",
+            "party": "日本新党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（2回目） ※比例単独"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※大阪14区落選"
+        }
+    ]
+}

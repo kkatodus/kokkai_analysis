@@ -1,0 +1,95 @@
+{
+    "name_kanji": "井上喜一",
+    "name_kana": "いのうえきいち",
+    "years": [
+        "1986-07-06",
+        "1990-02-18",
+        "1993-07-18",
+        "1996-10-20",
+        "2000-06-25",
+        "2003-11-09",
+        "2005-09-11"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "兵庫3区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "兵庫3区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "兵庫3区",
+            "party": "新生党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "兵庫4区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "兵庫4区",
+            "party": "保守党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2003年",
+            "month": "11月",
+            "day": "9日",
+            "election_name": "第43回衆議院議員総選挙",
+            "district": "兵庫4区",
+            "party": "保守新党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "兵庫4区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "兵庫4区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

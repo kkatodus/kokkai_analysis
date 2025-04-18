@@ -1,0 +1,29 @@
+{
+    "name_kanji": "中島正純",
+    "name_kana": "なかじままさずみ",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "大阪3区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "九州ブロック",
+            "party": "国民新党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "name_kanji": "加地和",
+    "name_kana": "かぢやまと",
+    "years": [
+        "1976-12-05"
+    ],
+    "election_data": [
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "京都1区",
+            "party": "新自由クラブ",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "京都1区",
+            "party": "新自由クラブ",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "京都1区",
+            "party": "新自由クラブ",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

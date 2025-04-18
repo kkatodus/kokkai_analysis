@@ -1,0 +1,29 @@
+{
+    "name_kanji": "上田晃弘",
+    "name_kana": "うえだあきひろ",
+    "years": [
+        "1993-07-18"
+    ],
+    "election_data": [
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "神奈川4区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "神奈川2区",
+            "party": "新進党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

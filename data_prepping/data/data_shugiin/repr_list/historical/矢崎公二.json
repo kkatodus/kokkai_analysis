@@ -1,0 +1,39 @@
+{
+    "name_kanji": "矢崎公二",
+    "name_kana": "やざきこうじ",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "長野4区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※長野4区落選"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※長野4区落選"
+        }
+    ]
+}

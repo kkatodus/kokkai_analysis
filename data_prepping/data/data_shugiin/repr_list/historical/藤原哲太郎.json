@@ -1,0 +1,29 @@
+{
+    "name_kanji": "藤原哲太郎",
+    "name_kana": "ふじわらてつたろう",
+    "years": [
+        "1983-12-18"
+    ],
+    "election_data": [
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "第37回衆議院議員総選挙",
+            "district": "東京4区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "東京4区",
+            "party": "民社党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

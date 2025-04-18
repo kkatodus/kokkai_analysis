@@ -1,0 +1,85 @@
+{
+    "name_kanji": "馳浩",
+    "name_kana": "はせひろし",
+    "years": [
+        "2000-06-25",
+        "2003-11-09",
+        "2005-09-11",
+        "2009-08-30",
+        "2012-12-16",
+        "2014-12-14",
+        "2017-10-22"
+    ],
+    "election_data": [
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2003年",
+            "month": "11月",
+            "day": "9日",
+            "election_name": "第43回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目） ※石川1区落選"
+        },
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目） ※石川1区落選"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "石川1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        }
+    ]
+}

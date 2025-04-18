@@ -1,0 +1,30 @@
+{
+    "name_kanji": "四宮久吉",
+    "name_kana": "しのみやひさきち",
+    "years": [
+        "1963-11-21",
+        "1967-01-29"
+    ],
+    "election_data": [
+        {
+            "year": "1963年",
+            "month": "11月",
+            "day": "21日",
+            "election_name": "第30回衆議院議員総選挙",
+            "district": "東京1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "東京8区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}
