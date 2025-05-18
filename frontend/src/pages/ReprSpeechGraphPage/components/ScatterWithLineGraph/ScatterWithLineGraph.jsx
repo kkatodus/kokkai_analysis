@@ -11,7 +11,9 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  ZAxis,
 } from 'recharts';
+import { Party2Party } from 'resource/resources';
 import { getXAxis, getYAxis } from './utils';
 import GraphLegendContent from './Legend';
 import TooltipContent from './Tooltip';
@@ -25,6 +27,7 @@ function ScatterWithLineGraph({
   setCurrentHouse,
   showXAxis,
   showYAxis,
+  currentRepr,
 }) {
   const handlePointClick = (e) => {
     if (!e) {
@@ -37,7 +40,7 @@ function ScatterWithLineGraph({
     }
     const { payload } = activePayload[0];
     setCurrentRepr(payload.repr);
-    setCurrentParty(payload.party);
+    setCurrentParty(Party2Party[payload.party]);
     setCurrentHouse(payload.house);
   };
   return (
@@ -72,20 +75,23 @@ function ScatterWithLineGraph({
           tickLine={showYAxis}
           tick={showYAxis}
         />
+		<ZAxis range={[20,20]} />
         <Tooltip
           content={<TooltipContent active={false} payload={[]} label="" />}
         />
         <Legend content={<GraphLegendContent />} verticalAlign="top" />
         <Scatter data={scatterData} dataKey={getYAxis}>
-          {scatterData.map((entry, index) => (
+          {scatterData.map((entry, index) => 
             <Cell
               // eslint-disable-next-line react/no-array-index-key
               key={`cell-${index}`}
               data={scatterData}
               fill={entry.color}
-              opacity={0.5}
+              opacity={currentRepr === entry.repr ? 1 : 0.5}
+			  strokeWidth={currentRepr === entry.repr ? 20 : 1}
+			  stroke={entry.color}
             />
-          ))}
+          )}
         </Scatter>
         <Line
           stroke="black"
@@ -103,13 +109,14 @@ function ScatterWithLineGraph({
 ScatterWithLineGraph.defaultProps = {
   showXAxis: true,
   showYAxis: true,
+  currentRepr: null,
 };
 ScatterWithLineGraph.propTypes = {
   scatterData: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.number,
-      y: PropTypes.number,
-      z: PropTypes.number,
+      x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      y: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      z: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       color: PropTypes.string,
       party: PropTypes.string,
       name: PropTypes.string,
@@ -117,9 +124,9 @@ ScatterWithLineGraph.propTypes = {
   ).isRequired,
   lineData: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.number,
-      y: PropTypes.number,
-      z: PropTypes.number,
+      x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      y: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      z: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       color: PropTypes.string,
       party: PropTypes.string,
       name: PropTypes.string,
@@ -131,6 +138,7 @@ ScatterWithLineGraph.propTypes = {
   displayLine: PropTypes.bool.isRequired,
   showXAxis: PropTypes.bool,
   showYAxis: PropTypes.bool,
+  currentRepr: PropTypes.string,
 };
 
 export default ScatterWithLineGraph;

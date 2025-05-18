@@ -6,7 +6,7 @@ import DonationPage from './components/DonationPage';
 import PaymentPage from './components/PaymentPage';
 
 export default function PaymentModal() {
-  const [modalsState, , removeModal] = useModalState();
+  const {modalsState, removeModal} = useModalState();
   const [modalPage, setModalPage] = useState('donation');
   const [items, setItems] = useState({
     s: {

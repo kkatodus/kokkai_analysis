@@ -3,7 +3,7 @@ import useModalState from 'modals/useModalState';
 import { RxCross1 } from 'react-icons/rx';
 
 export default function OtherModal() {
-  const [modalsState, , removeModal] = useModalState();
+  const {modalsState, removeModal} = useModalState();
   if (modalsState.indexOf('other') === -1) {
     return null;
   }

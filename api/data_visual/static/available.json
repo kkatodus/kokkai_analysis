@@ -1,0 +1,36 @@
+{
+  "availability": [
+    {
+		"name":"nuclear",
+		"jpn":"原発",
+		"data": [
+			{"name":"export", "jpn":"原発の輸出について"},
+			{"name":"newbuildandextendlifetime", "jpn":"原発の新設及び運転期間の延長について"},
+			{"name":"restart", "jpn":"原発の再稼働について"}
+		]
+	},
+	{
+		"name":"defence",
+		"jpn":"防衛",
+		"data": [
+			{"name":"constitution", "jpn":"自衛隊の憲法明記について"},
+			{"name":"defencebudget", "jpn":"防衛予算の増額について"},
+			{"name":"collectiveselfdefence", "jpn":"集団自衛権の行使について"}
+		]
+	},
+	{
+		"name":"aging",
+		"jpn":"少子高齢化",
+		"data": [
+			{"name":"educationcost", "jpn":"教育費の負担減について"}
+		]
+	},
+	{
+		"name":"economy",
+		"jpn":"経済",
+		"data": [
+			{"name":"foreignworkers", "jpn":"外国人労働者の受け入れについて"}
+		]
+	}
+  ]
+}
