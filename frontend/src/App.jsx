@@ -55,19 +55,6 @@ function App() {
       <Route exact path="shugiin_repr" element={<ShugiinReprPage />} />
       <Route exact path="shugiin_commitee" element={<ShugiinCommitteePage />} />
 
-      {/*
-	  ReprAnalysisMenuPage
-	  => ReprOpinionMenuPage
-	     => ReprOpinionSummaryPage(uppper)
-		   => ReprOpinionPage
-		   => ReprOpinionPage
-		   ....
-		 => ReprOpinionSummaryPage(lower)
-		   => ReprOpinionPage
-		   => ReprOpinionPage
-		   ....
-	  => ReprGraphMenuPage
-	  */}
       <Route exact path="repr_analysis" element={<ReprAnalysisMenuPage />} />
       <Route
         exact

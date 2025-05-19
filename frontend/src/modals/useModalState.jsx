@@ -13,7 +13,7 @@ const useModalState = () => {
     setModalState(modalsState.filter((key) => key !== modalKey));
   };
 
-  return {modalsState, addModal, removeModal};
+  return { modalsState, addModal, removeModal };
 };
 
 export default useModalState;

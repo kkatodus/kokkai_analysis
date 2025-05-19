@@ -75,23 +75,23 @@ function ScatterWithLineGraph({
           tickLine={showYAxis}
           tick={showYAxis}
         />
-		<ZAxis range={[20,20]} />
+        <ZAxis range={[20, 20]} />
         <Tooltip
           content={<TooltipContent active={false} payload={[]} label="" />}
         />
         <Legend content={<GraphLegendContent />} verticalAlign="top" />
         <Scatter data={scatterData} dataKey={getYAxis}>
-          {scatterData.map((entry, index) => 
+          {scatterData.map((entry, index) => (
             <Cell
               // eslint-disable-next-line react/no-array-index-key
               key={`cell-${index}`}
               data={scatterData}
               fill={entry.color}
               opacity={currentRepr === entry.repr ? 1 : 0.5}
-			  strokeWidth={currentRepr === entry.repr ? 20 : 1}
-			  stroke={entry.color}
+              strokeWidth={currentRepr === entry.repr ? 20 : 1}
+              stroke={entry.color}
             />
-          )}
+          ))}
         </Scatter>
         <Line
           stroke="black"

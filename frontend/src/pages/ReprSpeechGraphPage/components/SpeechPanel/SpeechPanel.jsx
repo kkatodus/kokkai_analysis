@@ -18,11 +18,13 @@ function SpeechPanel({
   currentTopic,
 }) {
   const [speeches, setSpeeches] = useState(null);
-  const displayParty = Object.keys(SpeechAbbrev2Kaiha).includes(currentParty) ? SpeechAbbrev2Kaiha[currentParty] : currentParty;
+  const displayParty = Object.keys(SpeechAbbrev2Kaiha).includes(currentParty)
+    ? SpeechAbbrev2Kaiha[currentParty]
+    : currentParty;
 
   useEffect(() => {
-    if (currentHouse && currentParty && currentRepr && currentTopic) {
-	  setSpeeches(null)
+    if (currentParty && currentRepr && currentTopic) {
+      setSpeeches(null);
       const requestUrl = `${speechEndpoint}opinion/${currentParty}/${currentRepr}/${Topic2Topic[currentTopic]}`;
       axios({
         method: 'get',
@@ -36,7 +38,7 @@ function SpeechPanel({
           console.log(err);
         });
     }
-  }, [currentHouse, currentParty, currentRepr, currentTopic]);
+  }, [currentParty, currentRepr, currentTopic]);
   if (!currentRepr) {
     return (
       <div className="w-full h-full flex justify-center items-center border-2">
@@ -48,8 +50,8 @@ function SpeechPanel({
     <div className="flex items-center justify-center relative h-full w-full">
       <div className="w-[98%] h-[98%] border-[5px] p-2 rounded-lg flex flex-col items-center justify-start">
         <div className="w-full mb-2 flex justify-between">
-          {House2House[currentHouse]}-{displayParty}-{Topic2Topic[currentTopic]}-
-          {currentRepr}
+          {House2House[currentHouse]}-{displayParty}-{Topic2Topic[currentTopic]}
+          -{currentRepr}
         </div>
         <div className="h-full w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
           {speeches

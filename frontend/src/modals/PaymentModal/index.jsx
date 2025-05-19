@@ -6,7 +6,7 @@ import DonationPage from './components/DonationPage';
 import PaymentPage from './components/PaymentPage';
 
 export default function PaymentModal() {
-  const {modalsState, removeModal} = useModalState();
+  const { modalsState, removeModal } = useModalState();
   const [modalPage, setModalPage] = useState('donation');
   const [items, setItems] = useState({
     s: {
@@ -25,6 +25,11 @@ export default function PaymentModal() {
       name: 'めっちゃ応援する',
     },
   });
+
+  const totalPrice = Object.values(items).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   if (modalsState.indexOf('payment') === -1) {
     return null;
@@ -57,7 +62,11 @@ export default function PaymentModal() {
       </button>
       {modalPage === 'donation' && <DonationPage setModalPage={setModalPage} />}
       {modalPage === 'payment' && (
-        <PaymentPage setItems={setItems} makePayment={makePayment} />
+        <PaymentPage
+          setItems={setItems}
+          makePayment={makePayment}
+          totalPrice={totalPrice}
+        />
       )}
     </div>
   );

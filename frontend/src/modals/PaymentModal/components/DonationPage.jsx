@@ -9,7 +9,7 @@ export default function DonationPage({ setModalPage }) {
       <div className="m-3">{donationMessage}</div>
       <button
         type="button"
-        className="flex justify-center items-center text-4xl text-bold"
+        className="flex justify-center items-center text-4xl text-bold hover:scale-125 transition-all duration-200 ease-in-out"
         onClick={() => setModalPage('payment')}
       >
         <BiDonateHeart />

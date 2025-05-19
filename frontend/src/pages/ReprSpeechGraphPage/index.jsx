@@ -5,7 +5,7 @@ import useModalState from 'modals/useModalState';
 import BasePageLayout from '../../layouts/BasePageLayout';
 import ScatterWithLineGraph from './components/ScatterWithLineGraph/ScatterWithLineGraph';
 import SpeechPanel from './components/SpeechPanel/SpeechPanel';
-import { staticEndpoint, Topic2Topic} from '../../resource/resources';
+import { staticEndpoint, Topic2Topic, House2House} from '../../resource/resources';
 import disclaimer from './disclaimer';
 import { gridLoader } from '../../resource/loader';
 import DimensionToggle from './components/DimensionToggle';
@@ -42,7 +42,7 @@ function ReprSpeechGraphPage() {
         setRightLabel(res.data['1d']?.descriptions?.right);
         setScatter2dData(res.data['2d'].data);
         setScatter1dData(res.data['1d'].data);
-        setAvailableReprs(res.data['1d'].data.map((d) => `${d.repr}-${d.party}`));
+        setAvailableReprs(res.data['1d'].data.map((d) => `${d.repr}-${d.party}-${House2House[d.house]}`));
         setLineData(
           res.data['2d'].data.filter(
             (d) => d.ref_point === 'for' || d.ref_point === 'against'
@@ -115,7 +115,7 @@ function ReprSpeechGraphPage() {
 			<TopicSelectionModalOpener
               addModal={addModal}
             />
-			<ReprSearchInput availableReprs={availableReprs} setCurrentRepr={setCurrentRepr} setCurrentParty={setCurrentParty} />
+			<ReprSearchInput availableReprs={availableReprs} setCurrentRepr={setCurrentRepr} setCurrentParty={setCurrentParty} setCurrentHouse={setCurrentHouse}/>
 		  </div>
           
           <DimensionToggle

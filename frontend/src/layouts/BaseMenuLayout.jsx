@@ -8,16 +8,30 @@ import { colors } from 'resource/styling';
 
 export default function BaseMenuLayout(props) {
   const { MenuTitle, Links, backTo } = props;
-  const linksComponents = Links.map((icon) => (
-    <Link key={icon.link} to={icon.link}>
-      <div className="flex flex-col items-center justify-center m-6">
-        <div className="text-6xl border-solid border-4 rounded-full p-2 border-black grow-on-hover-medium">
-          {icon.icon}
+  const linksComponents = Links.map((icon) => {
+    if (icon.link === null) {
+      return (
+        <button key={icon.link} onClick={icon.onClick} type="button">
+          <div className="flex flex-col items-center justify-center m-6">
+            <div className="text-6xl border-solid border-4 rounded-full p-2 border-black grow-on-hover-medium">
+              {icon.icon}
+            </div>
+            <h3 className="text-xl mt-3">{icon.title}</h3>
+          </div>
+        </button>
+      );
+    }
+    return (
+      <Link key={icon.link} to={icon.link}>
+        <div className="flex flex-col items-center justify-center m-6">
+          <div className="text-6xl border-solid border-4 rounded-full p-2 border-black grow-on-hover-medium">
+            {icon.icon}
+          </div>
+          <h3 className="text-xl mt-3">{icon.title}</h3>
         </div>
-        <h3 className="text-xl mt-3">{icon.title}</h3>
-      </div>
-    </Link>
-  ));
+      </Link>
+    );
+  });
   return (
     <Div100vh>
       <div
@@ -50,6 +64,7 @@ BaseMenuLayout.propTypes = {
       link: Proptypes.string,
       icon: Proptypes.element,
       title: Proptypes.string,
+      onClick: Proptypes.func,
     })
   ).isRequired,
   backTo: Proptypes.string,

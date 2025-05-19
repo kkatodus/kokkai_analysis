@@ -4,15 +4,17 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { colors } from '../../../../resource/styling';
 
-function ReprSearchInput({ availableReprs, setCurrentRepr, setCurrentParty }) {
+function ReprSearchInput({ availableReprs, setCurrentRepr, setCurrentParty, setCurrentHouse }) {
   const handleChange = (event, newValue) => {
 	if (availableReprs.includes(newValue)) {
 		setCurrentRepr(newValue.split('-')[0]);
 		setCurrentParty(newValue.split('-')[1]);
+		setCurrentHouse(newValue.split('-')[2]);
 	}
 	else{
 		setCurrentRepr(null);
 		setCurrentParty(null);
+		setCurrentHouse(null);
 	}
   }
   return (
@@ -41,6 +43,7 @@ ReprSearchInput.propTypes = {
   availableReprs: PropTypes.arrayOf(PropTypes.string),
   setCurrentRepr: PropTypes.func.isRequired,
   setCurrentParty: PropTypes.func.isRequired,
+  setCurrentHouse: PropTypes.func.isRequired,
 };
 
 ReprSearchInput.defaultProps = {
