@@ -7,7 +7,7 @@ export default function Accordion(props) {
   const { title, content, extraStyles } = props;
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <div className="flex flex-col items-center  w-4/5 bg-slate-200 p-5 m-2 relative rounded-xl">
+    <div className="flex flex-col items-center flex-wrap w-4/5 bg-slate-200 p-5 m-2 relative rounded-xl">
       <div className="flex justify-start w-full">
         <button
           type="button"

@@ -12,7 +12,7 @@ import DimensionToggle from './components/DimensionToggle';
 import LeftRightSpectrum from './components/LeftRightSpectrum';
 import useGraphTopicSelection from './hooks/useGraphTopicSelection';
 import TopicSelectionModalOpener from './components/TopicSelectionModalOpener';
-import ReprSearchInput from './components/ReprSearchInput';
+import ReprSearchInput from '../../sharedComponents/ReprSearchInput';
 
 function ReprSpeechGraphPage() {
   const {currentTopic, currentAxis, currentAxisAvailability} = useGraphTopicSelection();

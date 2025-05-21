@@ -12,7 +12,7 @@ function MeetingCard(props) {
   return (
     <Link
       to={`/sangiin_meetings/${MeetingName}`}
-      className={`transition hover:scale-105 w-11/12 m-5 rounded-lg p-2 ${colors.tertiary}`}
+      className={`transition hover:scale-105 w-[250px] min-h-0 max-h-auto m-5 rounded-lg p-2 ${colors.tertiary}`}
     >
       <h1>{MeetingName}</h1>
       <h2>{Period}</h2>

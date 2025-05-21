@@ -11,7 +11,7 @@ export default function CardItem(props) {
     return (
       <Link
         to={link}
-        className={`w-5/6 h-auto p-2 m-2 flex flex-col items-center rounded-xl ${colors.primary} transition hover:scale-105 cursor-pointer`}
+        className={`w-[250px] min-h-0 max-h-[300px] p-2 m-2 flex flex-col items-center rounded-xl ${colors.primary} transition hover:scale-105 cursor-pointer`}
       >
         <div className="relative ">
           {cardImage ? <img src={cardImage} alt="" /> : cardIcon}
@@ -25,7 +25,7 @@ export default function CardItem(props) {
   }
   return (
     <div
-      className={`w-5/6 h-auto p-2 m-2 flex flex-col items-center rounded-xl ${colors.primary} transition hover:scale-105`}
+      className={`w-[250px] min-h-0 p-2 m-2 flex flex-col items-center rounded-xl ${colors.primary} transition hover:scale-105`}
     >
       <div className="relative ">
         {cardImage ? <img src={cardImage} alt="" /> : cardIcon}

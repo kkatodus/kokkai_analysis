@@ -33,7 +33,7 @@ function SangiinMeetingDetailPage() {
   const content = !meeting ? (
     gridLoader
   ) : (
-    <div className="card-container ">
+    <div className="flex flex-wrap justify-center">
       {meeting.topics.map((topic) => (
         <TopicCard
           key={topic.topic_title + topic.topic_date}
