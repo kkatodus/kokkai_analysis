@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[5]:
+
+
+# !jupyter nbconvert --to script collect_politician_opinions.ipynb
+
+
+# In[2]:
 
 
 import os
@@ -42,12 +48,15 @@ def get_newest_file(dir):
 lower_repr_dir = os.path.join(LOWER_HOUSE_DATA_DIR, 'repr_list')
 lower_repr_file = '20241218_repr_list.json'
 lower_house_meeting_dict = os.path.join(lower_repr_dir, lower_repr_file)
+lower_house_repr_dict = read_json(lower_house_meeting_dict)['reprs']
+
 
 
 
 upper_repr_dir = os.path.join(UPPER_HOUSE_DATA_DIR, 'repr_list')
 upper_repr_file = "20241218_repr_list.json"
 upper_house_meeting_dict_path = os.path.join(upper_repr_dir, upper_repr_file)
+upper_house_repr_dict = read_json(upper_house_meeting_dict_path)['reprs']
 
 # execute if want to collect historical data
 lower_house_historical_data_path = os.path.join(LOWER_HOUSE_DATA_DIR,'repr_list', 'historical.json')
@@ -57,7 +66,7 @@ print("Lower Repr File", lower_repr_file)
 print("Upper Repr File", upper_repr_file)
 
 
-# In[ ]:
+# In[3]:
 
 
 def clean_repr_name(repr_name):
@@ -408,7 +417,7 @@ class ReprTopicOpinionCollector:
 		
 	
 
-	def collect(self):
+	def collect(self, collect_topics=[]):
 		for party in self.repr_dict.keys():
 			self.current_party = select_party_name(party)
 			print(f"Collecting speeches for {party}")
@@ -416,7 +425,11 @@ class ReprTopicOpinionCollector:
 				self.current_repr = repr
 				self.current_repr_name = clean_repr_name(repr['name'])
 				for topic_config in self.topic_dict:
+
 					topic = topic_config['topic_name']
+					if len(collect_topics) > 0 and topic not in collect_topics:
+						continue
+
 					search_words = topic_config['search_words']
 					self.current_topic = topic
 					self.current_search_words = search_words
@@ -463,30 +476,35 @@ class ReprTopicOpinionCollector:
 
 # # Script to collect opinion based sentences for each topic current serving politicians
 
-# In[ ]:
+# In[4]:
 
 
-# repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
-# repr_topic_opinion_collector.collect()
-# print('Done with upper house')
-# repr_topic_opinion_collector = ReprTopicOpinionCollector(house="lower")
-# repr_topic_opinion_collector.collect()
+repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
+collect_topics = [
+	"夫婦別姓",
+	"オンライン投票",
+	"マイナンバー"
+]
+repr_topic_opinion_collector.collect(collect_topics=collect_topics)
+print('Done with upper house')
+repr_topic_opinion_collector = ReprTopicOpinionCollector(house="lower")
+repr_topic_opinion_collector.collect()
 
 
 # In[9]:
 
 
-repr_topic_opinion_collector = ReprTopicOpinionCollector()
-repr_topic_opinion_collector.print_all_historical_parties()
-repr_topic_opinion_collector.collect_historical(house='upper')
-print('Done with upper house')
-repr_topic_opinion_collector.collect_historical(house='lower')
-print('Done with lower house') 
+# repr_topic_opinion_collector = ReprTopicOpinionCollector()
+# repr_topic_opinion_collector.print_all_historical_parties()
+# repr_topic_opinion_collector.collect_historical(house='upper')
+# print('Done with upper house')
+# repr_topic_opinion_collector.collect_historical(house='lower')
+# print('Done with lower house') 
 
 
 # ## Script to produce stats on collected data
 
-# In[26]:
+# In[4]:
 
 
 repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
@@ -498,19 +516,19 @@ repr_topic_opinion_collector.produce_statistics()
 
 # # Creating summary json to record topics for each politicians and how many files
 
-# In[ ]:
+# In[4]:
 
 
 #create a summary json for the repr opinions data
 def clean_repr_name(repr_name):
 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
 	return repr_name
-dicts = [lower_repr_dict, upper_repr_dict]
+dicts = [lower_house_repr_dict, upper_house_repr_dict]
 houses = ['衆議院', '参議院']
 ALL_REPRS = []
-for dict, house in zip(dicts, houses):
-	for party in dict.keys():
-		for repr in dict[party]:
+for house_dict, house in zip(dicts, houses):
+	for party in house_dict.keys():
+		for repr in house_dict[party]:
 			repr['house'] = house
 			ALL_REPRS.append(repr)
 
@@ -518,13 +536,17 @@ def get_hiragana_from_kanji_name(kanji_name):
 	for repr in ALL_REPRS:
 		if kanji_name in clean_repr_name(repr['name']):
 			return repr['yomikata'], repr['house']
-	return None
+	return '', ''
 summary_dict = {'reprs':[]}
 
-for party in [party for party in os.listdir(OUTPUT_DIR) if not party.endswith('.json')]:
+covered_repr_names = set()
+for party in [party for party in os.listdir(OUTPUT_DIR) if os.path.isdir(os.path.join(OUTPUT_DIR, party))]:
 	party_dir = os.path.join(OUTPUT_DIR, party)
 	for repr_name in os.listdir(party_dir):
 		repr_dir_path = os.path.join(party_dir, repr_name)
+		if repr_name in covered_repr_names:
+			continue
+		covered_repr_names.add(repr_name)
 		tags = [dirname for dirname in os.listdir(repr_dir_path) if read_json(os.path.join(repr_dir_path, dirname, 'opinions.json')) != {}]
 		if len(tags) == 0:
 			continue

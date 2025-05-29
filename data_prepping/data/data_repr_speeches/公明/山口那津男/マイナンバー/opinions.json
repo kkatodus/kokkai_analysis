@@ -1,0 +1,32 @@
+{
+    "party": "公明",
+    "repr_name": "山口那津男",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120515254X00420211013_002",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2021-10-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120515254X00420211013/2",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "私たちの暮らしを便利で豊かにするデジタル社会の実現は、その基盤となるマイナンバーカードの普及が不可欠です"
+            ]
+        },
+        {
+            "speech_id": "119815254X00420190201_005",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2019-02-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119815254X00420190201/5",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　カード化することによって、障害者の方の心のバリアが除かれるとともに、さらに、マイナンバーカードとの関連も視野に入れることにより、飛躍的に利便性が高まる社会の形成にも通じるものと確信します"
+            ]
+        }
+    ]
+}

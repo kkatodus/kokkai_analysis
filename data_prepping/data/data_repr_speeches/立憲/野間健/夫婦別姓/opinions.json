@@ -1,0 +1,23 @@
+{
+    "party": "立憲",
+    "repr_name": "野間健",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105254X00720230228_008",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2023-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105254X00720230228/8",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　我が国で、世界標準のごく当たり前の常識であるＬＧＢＴの差別解消法や同性婚、選択的夫婦別姓制度の法制化が進まない大きな理由は、自民党と統一教会との癒着にあります"
+            ]
+        }
+    ]
+}

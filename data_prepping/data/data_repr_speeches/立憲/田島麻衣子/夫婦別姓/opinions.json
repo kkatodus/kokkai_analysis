@@ -1,0 +1,67 @@
+{
+    "party": "立憲",
+    "repr_name": "田島麻衣子",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121715206X00420250408_027",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2025-04-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715206X00420250408/27",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "\r\n　次、きちんとこの選択的夫婦別姓に関する調査を行う上では、きちんとバランスの取れた、何らかの議員の圧力がない形の調査票を私は作らなければならないというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "121615206X00320241219_079",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2024-12-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615206X00320241219/79",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "\r\n　これまで質疑るるありましたとおり、大臣は選択的夫婦別姓について賛成の立場であること、誰もが分かっていることであると思います"
+            ]
+        },
+        {
+            "speech_id": "121615261X00320241213_289",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615261X00320241213/289",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "\r\n　次に、選択的夫婦別姓に移りたいと思います"
+            ]
+        },
+        {
+            "speech_id": "120813950X01020220419_026",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2022-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120813950X01020220419/26",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "我々立憲民主党は、選択的夫婦別姓、これを推し進めていこうという気持ちを新たにしておりますけれども、現在、この旧姓併記のパスポートで、海外用の新型コロナワクチン接種証明書アプリ、これというのは旧姓で証明書を取得することはできるんでしょうか"
+            ]
+        },
+        {
+            "speech_id": "120813950X01020220419_034",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2022-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120813950X01020220419/34",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　我々は、選択的夫婦別姓進めてまいります"
+            ]
+        }
+    ]
+}

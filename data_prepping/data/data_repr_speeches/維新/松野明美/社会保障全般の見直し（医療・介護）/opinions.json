@@ -1,0 +1,36 @@
+{
+    "party": "維新",
+    "repr_name": "松野明美",
+    "topic": "社会保障全般の見直し（医療・介護）",
+    "search_words": [
+        "社会保障",
+        "医療保険",
+        "介護保険",
+        "給付負担",
+        "保険料"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121215261X00620231129_332",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-11-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121215261X00620231129/332",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　我が党は、社会保障制度や医療制度などの改革を政府に提言していく予定であり、政府とは改革の内容を切磋琢磨していく所存です"
+            ]
+        },
+        {
+            "speech_id": "121114260X00820230425_202",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-04-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X00820230425/202",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "そういうときに保険料免除のことを考えるかといったら、恐らくそこまで頭が回らないような状況ではないかなと思っております"
+            ]
+        }
+    ]
+}

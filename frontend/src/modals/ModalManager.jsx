@@ -5,6 +5,7 @@ import useModalState from './useModalState';
 import PaymentModal from './PaymentModal';
 import OtherModal from './OtherModal';
 import TopicSelectionModal from './TopicSelectionModal';
+import GraphInfoModal from './GraphInfoModal';
 
 export default function ModalManager() {
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +16,7 @@ export default function ModalManager() {
     payment: <PaymentModal />,
     other: <OtherModal />,
 	topicSelection: <TopicSelectionModal />,
+	graphInfo: <GraphInfoModal />,
   };
   const { type: displayType } = useDisplaySize();
   const modalWidth = displayType === 'mobile' ? 'w-full' : 'w-1/2';

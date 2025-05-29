@@ -1,0 +1,59 @@
+{
+    "party": "れ新",
+    "repr_name": "天畠大輔",
+    "topic": "物価高対策・減税と賃上げ",
+    "search_words": [
+        "物価",
+        "インフレ",
+        "消費税",
+        "減税",
+        "賃上げ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121114260X00820230425_276",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2023-04-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114260X00820230425/276",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "それなのに、十分な報酬改善や人材確保、物価高対策をせず、都道府県に介護現場での生産性向上を求めることは問題であると考えます"
+            ]
+        },
+        {
+            "speech_id": "121115363X00320230222_067",
+            "house_name": "参議院",
+            "meeting_name": "国民生活・経済及び地方に関する調査会",
+            "date": "2023-02-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115363X00320230222/67",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "物価高対策以前に障害者の所得保障すらされていない現状では、障害者の社会参加は進みません"
+            ]
+        },
+        {
+            "speech_id": "121015261X00220221020_478",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2022-10-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121015261X00220221020/478",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "現金給付は、悪い物価高が収まるまで、季節ごとに一律十万円給付するべきと考えます",
+                "\r\n　日本の経済を再生すると豪語された総理、一人一人の購買力を上げて需要を喚起、景気回復を促す政策として、まずは消費税減税と一律現金給付を併せてやるべきと考えます"
+            ]
+        },
+        {
+            "speech_id": "121015261X00220221020_481",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2022-10-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121015261X00220221020/481",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "消費税減税も一律現金給付もしない"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "party": "維新",
+    "repr_name": "空本誠喜",
+    "topic": "社会保障全般の見直し（医療・介護）",
+    "search_words": [
+        "社会保障",
+        "医療保険",
+        "介護保険",
+        "給付負担",
+        "保険料"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121605254X00620241212_018",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2024-12-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605254X00620241212/18",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "地域医療を守りながら、電子カルテ情報を共有できる地域医療体制を、そして国民の健康維持に資する医療保険制度を総合的に構築することが不可欠です"
+            ]
+        },
+        {
+            "speech_id": "121605261X00420241211_118",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605261X00420241211/118",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "さらに、将来的には社会保障制度を抜本的に変えなきゃいけない"
+            ]
+        },
+        {
+            "speech_id": "121605261X00420241211_122",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605261X00420241211/122",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　そして、私たちは、次の社会保険の壁について、やはり、税制と社会保障制度一体化を考えるならば、給付つき税額控除を考えるべきだろうというふうに考えています"
+            ]
+        },
+        {
+            "speech_id": "121605261X00420241211_124",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605261X00420241211/124",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "そのために、あるべき社会保障の制度とはどうなのか"
+            ]
+        }
+    ]
+}

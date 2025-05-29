@@ -1,0 +1,25 @@
+{
+    "party": "自民",
+    "repr_name": "山崎正昭",
+    "topic": "物価高対策・減税と賃上げ",
+    "search_words": [
+        "物価",
+        "インフレ",
+        "消費税",
+        "減税",
+        "賃上げ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117015254X00320081002_005",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2008-10-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117015254X00320081002/5",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "やることが決まったからには、是非とも減税の景気刺激効果が出るようにしっかりとした対応を望みます"
+            ]
+        }
+    ]
+}

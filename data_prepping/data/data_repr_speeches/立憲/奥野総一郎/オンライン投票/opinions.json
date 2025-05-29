@@ -1,0 +1,23 @@
+{
+    "party": "立憲",
+    "repr_name": "奥野総一郎",
+    "topic": "オンライン投票",
+    "search_words": [
+        "オンライン投票",
+        "電子投票",
+        "ネット投票"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121004183X00320221110_023",
+            "house_name": "衆議院",
+            "meeting_name": "憲法審査会",
+            "date": "2022-11-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121004183X00320221110/23",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "さらに、オンライン投票やオンライン選挙運動を可能とすればベストでありますが、この点もしっかり求めていきたいと思います"
+            ]
+        }
+    ]
+}

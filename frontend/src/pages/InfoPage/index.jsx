@@ -112,6 +112,15 @@ function InfoPage() {
           <p>@kokkaidoc_no_naka</p>
         </a>
       </div>
+	  <div className="w-full flex flex-col items-center justify-center m-2">
+		<h2 className="text-2xl">ご支援者一覧（順不同・敬称略）</h2>
+		<p className="mt-5">
+		当サイトの活動を 4,000 円以上のご寄付でご支援くださった皆さまを、心より感謝を込めて掲載いたします。掲載名の変更・非掲載をご希望の方は kokkai.doc[アット]gmail.com までご連絡ください。
+		</p>
+		<p className="mt-5">
+			Kohei Oshida 
+		</p>
+	  </div>
     </div>
   );
   return (

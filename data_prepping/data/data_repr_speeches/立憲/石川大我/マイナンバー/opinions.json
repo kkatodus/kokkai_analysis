@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "石川大我",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120415104X01220210513_056",
+            "house_name": "参議院",
+            "meeting_name": "文教科学委員会",
+            "date": "2021-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120415104X01220210513/56",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　マイナンバーというものが出てくることによって、この言葉自体が独り歩きをしてしまう心配があるのかなというふうに思います"
+            ]
+        }
+    ]
+}

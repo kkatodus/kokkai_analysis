@@ -1,0 +1,58 @@
+{
+    "party": "立憲",
+    "repr_name": "本庄知史",
+    "topic": "社会保障全般の見直し（医療・介護）",
+    "search_words": [
+        "社会保障",
+        "医療保険",
+        "介護保険",
+        "給付負担",
+        "保険料"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121705261X01620250226_219",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705261X01620250226/219",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　教育や社会保障以外にも、防衛、国土強靱化、あるいは国債の利払い費などなど、歳出増メニューがメジロ押しというのが今の現状だと思うんですね"
+            ]
+        },
+        {
+            "speech_id": "121705261X01620250226_227",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705261X01620250226/227",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "その徹底した行財政改革が、防衛でもなく社会保障でもなく、今回の学校の所得制限撤廃、そこに回る余地というのはあるんですか"
+            ]
+        },
+        {
+            "speech_id": "121705261X01620250226_245",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705261X01620250226/245",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "私は、考え方、やり方を改めていただかないと、この先の社会保障改革はおぼつかないというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "121705261X01620250226_235",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705261X01620250226/235",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "維新の会として、国民医療費の総額を年間で最低四兆円削減することによって、現役世代一人当たりの社会保険料負担を年間六万円引き下げる、これも念頭に置く"
+            ]
+        }
+    ]
+}

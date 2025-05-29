@@ -1,0 +1,48 @@
+{
+    "party": "共産",
+    "repr_name": "志位和夫",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120705254X00320211209_013",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2021-12-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120705254X00320211209/13",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　総選挙での党首討論で選択的夫婦別姓に反対したのは、総理ただ一人でした",
+                "総理は、半年前には自民党の夫婦別姓推進議連の呼びかけ人だったのに、総理になると反対に回る",
+                "自民党内のたった二八％のために、選択的夫婦別姓がいつまでも先送りされていいでしょうか"
+            ]
+        },
+        {
+            "speech_id": "120505254X00420211012_007",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2021-10-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120505254X00420211012/7",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "選択的夫婦別姓は急務です",
+                "選択的夫婦別姓を実現する意思があるのかないのか、はっきり答弁をしていただきたい"
+            ]
+        },
+        {
+            "speech_id": "120105254X00320200123_008",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2020-01-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120105254X00320200123/8",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "民法を改正して、選択的夫婦別姓を実現するべきではありませんか"
+            ]
+        }
+    ]
+}

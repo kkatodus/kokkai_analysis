@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
 import useDisplaySize from 'state/useDisplayType';
 import useModalState from 'modals/useModalState';
-import BasePageLayout from '../../layouts/BasePageLayout';
+import {RiInformationLine} from 'react-icons/ri';
+import { gridLoader } from 'resource/loader';
+import BasePageLayout from 'layouts/BasePageLayout';
+import { staticEndpoint, Topic2Topic, House2House} from 'resource/resources';
+import ReprSearchInput from 'sharedComponents/ReprSearchInput';
 import ScatterWithLineGraph from './components/ScatterWithLineGraph/ScatterWithLineGraph';
 import SpeechPanel from './components/SpeechPanel/SpeechPanel';
-import { staticEndpoint, Topic2Topic, House2House} from '../../resource/resources';
-import disclaimer from './disclaimer';
-import { gridLoader } from '../../resource/loader';
 import DimensionToggle from './components/DimensionToggle';
 import LeftRightSpectrum from './components/LeftRightSpectrum';
 import useGraphTopicSelection from './hooks/useGraphTopicSelection';
 import TopicSelectionModalOpener from './components/TopicSelectionModalOpener';
-import ReprSearchInput from '../../sharedComponents/ReprSearchInput';
 
 function ReprSpeechGraphPage() {
   const {currentTopic, currentAxis, currentAxisAvailability} = useGraphTopicSelection();
@@ -28,6 +28,11 @@ function ReprSpeechGraphPage() {
   const [leftLabel, setLeftLabel] = useState(null);
   const [rightLabel, setRightLabel] = useState(null);
   const displayScatterData = dimension === '1D' ? Scatter1dData : Scatter2dData;
+
+  useLayoutEffect(() => {
+    addModal('graphInfo');
+  }, []);
+  
   const { type } = useDisplaySize();
   const isMobile = type === 'mobile';
   useEffect(() => {
@@ -61,7 +66,7 @@ function ReprSpeechGraphPage() {
     <div
       className={`w-full ${isMobile ? 'overflow-y-scroll h-auto' : 'h-full'}`}
     >
-      <div className={`${isMobile ? 'h-auto' : 'flex'} h-[90%] relative`}>
+      <div className={`${isMobile ? 'h-auto' : 'flex'} h-[100%] relative`}>
         <div className={`${isMobile ? '' : 'w-[70%]'} relative`}>
           {dimension === '1D' && (
             <div className="h-[5%]">
@@ -91,13 +96,6 @@ function ReprSpeechGraphPage() {
           />
         </div>
       </div>
-      <div
-        className={`${
-          isMobile ? 'h-auto' : 'h-[10%] '
-        } w-full p-2 overflow-y-scroll text-sm`}
-      >
-        {disclaimer}
-      </div>
     </div>
   );
   return (
@@ -106,6 +104,13 @@ function ReprSpeechGraphPage() {
       backTo="/repr_analysis"
       headerComponent={
         <div className="flex h-full">
+		  <button
+            className="transition hover:scale-125 hover:text-white"
+            onClick={() => addModal('graphInfo')}
+            type="button"
+          >
+            <RiInformationLine className="h-10 w-10" />
+          </button>
 		  <div className="flex items-center justify-center w-full flex-col">
 			<h1 className="text-sm font-bold whitespace-nowrap">トピック:{Topic2Topic[currentTopic]}</h1>
 			<h1 className="text-sm font-bold whitespace-nowrap">対立軸:{currentAxisAvailability.find((axis) => axis.name === currentAxis)?.jpn}</h1>

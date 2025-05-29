@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "城井崇",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120805261X00320220125_083",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2022-01-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805261X00320220125/83",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　さらに、プロファイリングや信用スコアリングの危険及びマイナンバー法違反のおそれがあるため、デジタル庁など政府では、この計画の中止や再検討を行うべきだというふうに考えます"
+            ]
+        }
+    ]
+}
