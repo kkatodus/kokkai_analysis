@@ -1949,3 +1949,28 @@ Read port: 56757
 1734581033146	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
 1734581136527	Marionette	INFO	Stopped listening on port 56757
 Dynamically enable window occlusion 1
+1757548041828	geckodriver	INFO	Listening on 127.0.0.1:60823
+1757548044892	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60824" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofileRMrRr6"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1757548045183	Marionette	INFO	Marionette enabled
+1757548045259	Marionette	INFO	Listening on port 60838
+WebDriver BiDi listening on ws://127.0.0.1:60824
+Read port: 60838
+1757548045412	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1757548128904	Marionette	INFO	Stopped listening on port 60838
+Dynamically enable window occlusion 1
+console.error: "Failed to fetch https://ads.mozilla.org/v1/delete_user:" "NetworkError when attempting to fetch resource."
+console.warn: TopSitesFeed: Failed to fetch data from MARS server: NetworkError when attempting to fetch resource.
+JavaScript error: resource://services-settings/RemoteSettingsClient.sys.mjs, line 102: Error: Unknown callback
+1757548296487	geckodriver	INFO	Listening on 127.0.0.1:57831
+1757548299566	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "57832" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\katok\\AppData\\Local\\Temp\\rust_mozprofile4nrhzY"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1757548299895	Marionette	INFO	Marionette enabled
+1757548299962	Marionette	INFO	Listening on port 57863
+WebDriver BiDi listening on ws://127.0.0.1:57832
+Read port: 57863
+1757548300093	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
