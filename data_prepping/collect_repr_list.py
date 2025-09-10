@@ -11,7 +11,7 @@ from file_handling.file_read_writer import read_json, write_json, create_dir
 ## URLS
 GIJI_URL = "https://kokkai.ndl.go.jp/api/speech?"
 
-UPPER_REPR_LIST_URL = "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/216/giin.htm"
+UPPER_REPR_LIST_URL = "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/218/giin.htm"
 LOWER_REPR_LIST_URL = "https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/syu/1giin.htm"
 
 UPPER_MEETING_INFO_PAGE_URL = "https://www.sangiin.go.jp/japanese/kon_kokkaijyoho/index.html"
