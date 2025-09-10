@@ -1,0 +1,21 @@
+{
+    "party": "自民",
+    "repr_name": "五十嵐清",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120805266X00120220216_170",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第一分科会",
+            "date": "2022-02-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120805266X00120220216/170",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　デジタル田園都市構想において、もう一つ私が重要だと思うのは、まさに通行手形ともなり得るマイナンバーカードの取得を更に加速をさせるべきだというふうに思っております"
+            ]
+        }
+    ]
+}

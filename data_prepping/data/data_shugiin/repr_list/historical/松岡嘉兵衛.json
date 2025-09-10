@@ -1,0 +1,29 @@
+{
+    "name_kanji": "松岡嘉兵衛",
+    "name_kana": "まつおかかへえ",
+    "years": [
+        "1958-05-22"
+    ],
+    "election_data": [
+        {
+            "year": "1958年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "第28回衆議院議員総選挙",
+            "district": "静岡1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1960年",
+            "month": "11月",
+            "day": "20日",
+            "election_name": "第29回衆議院議員総選挙",
+            "district": "静岡1区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

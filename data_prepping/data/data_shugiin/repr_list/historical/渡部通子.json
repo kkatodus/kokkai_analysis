@@ -1,0 +1,29 @@
+{
+    "name_kanji": "渡部通子",
+    "name_kana": "わたなべみちこ",
+    "years": [
+        "1969-12-27"
+    ],
+    "election_data": [
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "東京1区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "東京1区",
+            "party": "公明党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name_kanji": "長内順一",
+    "name_kana": "おさないじゅんいち",
+    "years": [
+        "1993-07-18",
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "北海道1区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "北海道2区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

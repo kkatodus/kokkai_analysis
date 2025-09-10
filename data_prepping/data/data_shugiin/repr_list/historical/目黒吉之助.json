@@ -1,0 +1,39 @@
+{
+    "name_kanji": "目黒吉之助",
+    "name_kana": "めぐろきちのすけ",
+    "years": [
+        "1990-02-18"
+    ],
+    "election_data": [
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "新潟3区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "新潟3区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "北陸信越ブロック",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": " ※新潟5区落選"
+        }
+    ]
+}

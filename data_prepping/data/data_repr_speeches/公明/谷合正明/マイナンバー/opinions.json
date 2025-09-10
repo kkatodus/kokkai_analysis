@@ -1,0 +1,32 @@
+{
+    "party": "公明",
+    "repr_name": "谷合正明",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118314889X00520130509_181",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2013-05-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118314889X00520130509/181",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　それでは、マイナンバーについてなんですけれども、マイナンバーも番号によって性同一性障害かどうか類推されるようなおそれはないのかどうか"
+            ]
+        },
+        {
+            "speech_id": "118314889X00520130509_183",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2013-05-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118314889X00520130509/183",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　そのマイナンバーですけれども、例えば性別欄というのは、ＩＣチップ上のみの情報として表面的な記載から削除するなんということも可能、検討として可能なんでしょうか"
+            ]
+        }
+    ]
+}

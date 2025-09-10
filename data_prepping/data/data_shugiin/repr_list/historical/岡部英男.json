@@ -1,0 +1,29 @@
+{
+    "name_kanji": "岡部英男",
+    "name_kana": "おかべひでお",
+    "years": [
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1998年",
+            "month": "2月",
+            "day": "1日",
+            "election_name": "補欠選挙",
+            "district": "茨城5区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "北関東ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※茨城5区落選"
+        }
+    ]
+}

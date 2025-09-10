@@ -1,0 +1,40 @@
+{
+    "name_kanji": "上塚司",
+    "name_kana": "うえつかつかさ",
+    "years": [
+        "1952-10-01",
+        "1953-04-19"
+    ],
+    "election_data": [
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "熊本2区",
+            "party": "自由党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "熊本2区",
+            "party": "吉田自由党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "熊本2区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

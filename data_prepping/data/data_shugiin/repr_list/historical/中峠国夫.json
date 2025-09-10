@@ -1,0 +1,79 @@
+{
+    "name_kanji": "中峠国夫、中峠國夫",
+    "name_kana": "なかたおくにお",
+    "years": [
+        "1952-10-01"
+    ],
+    "election_data": [
+        {
+            "year": "1949年",
+            "month": "1月",
+            "day": "23日",
+            "election_name": "第24回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "国民協同党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "吉田自由党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1960年",
+            "month": "11月",
+            "day": "20日",
+            "election_name": "第29回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1963年",
+            "month": "11月",
+            "day": "21日",
+            "election_name": "第30回衆議院議員総選挙",
+            "district": "愛知1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "愛知2区",
+            "party": "公明選挙政治連盟",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name_kanji": "沖田正人",
+    "name_kana": "おきたまさと",
+    "years": [
+        "1990-02-18"
+    ],
+    "election_data": [
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "東京4区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "東京4区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

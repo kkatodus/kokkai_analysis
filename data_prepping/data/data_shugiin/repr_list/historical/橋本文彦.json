@@ -1,0 +1,30 @@
+{
+    "name_kanji": "橋本文彦",
+    "name_kana": "はしもとふみひこ",
+    "years": [
+        "1983-12-18",
+        "1986-07-06"
+    ],
+    "election_data": [
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "第37回衆議院議員総選挙",
+            "district": "神奈川3区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "神奈川3区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

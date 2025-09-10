@@ -1,0 +1,41 @@
+{
+    "party": "自民",
+    "repr_name": "泉原保二",
+    "topic": "防衛",
+    "search_words": [
+        "防衛",
+        "自衛隊",
+        "安全保障",
+        "軍備",
+        "軍事",
+        "集団的自衛権",
+        "専守防衛",
+        "防衛費",
+        "基地",
+        "国防"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118704339X00320141010_012",
+            "house_name": "衆議院",
+            "meeting_name": "災害対策特別委員会",
+            "date": "2014-10-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118704339X00320141010/12",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "これは、本当に国民全体で、この作業において、やはり自衛隊並びに関係者の皆さんに感謝申し上げることを忘れてはいかぬと私は思います"
+            ]
+        },
+        {
+            "speech_id": "118304183X00320130321_068",
+            "house_name": "衆議院",
+            "meeting_name": "憲法審査会",
+            "date": "2013-03-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118304183X00320130321/68",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "私は、これは国防上非常に恐ろしい問題が発生するんじゃないかと"
+            ]
+        }
+    ]
+}

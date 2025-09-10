@@ -1,0 +1,30 @@
+{
+    "name_kanji": "高田富与、高田富與",
+    "name_kana": "たかだとみよ",
+    "years": [
+        "1958-05-22",
+        "1960-11-20"
+    ],
+    "election_data": [
+        {
+            "year": "1959年",
+            "month": "5月",
+            "day": "16日",
+            "election_name": "補欠選挙",
+            "district": "北海道1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1960年",
+            "month": "11月",
+            "day": "20日",
+            "election_name": "第29回衆議院議員総選挙",
+            "district": "北海道1区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

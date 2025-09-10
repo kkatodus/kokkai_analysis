@@ -1,0 +1,40 @@
+{
+    "name_kanji": "柳田稔",
+    "name_kana": "やなぎだみのる",
+    "years": [
+        "1990-02-18",
+        "1993-07-18"
+    ],
+    "election_data": [
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "広島3区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "広島3区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "広島7区",
+            "party": "新進党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

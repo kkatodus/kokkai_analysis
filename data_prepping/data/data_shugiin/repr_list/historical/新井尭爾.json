@@ -1,0 +1,29 @@
+{
+    "name_kanji": "新井尭爾",
+    "name_kana": "あらいぎょうじ",
+    "years": [
+        "1952-10-01"
+    ],
+    "election_data": [
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "埼玉4区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "埼玉4区",
+            "party": "吉田自由党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

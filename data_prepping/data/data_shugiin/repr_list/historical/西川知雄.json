@@ -1,0 +1,29 @@
+{
+    "name_kanji": "西川知雄",
+    "name_kana": "にしかわともお",
+    "years": [
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "神奈川3区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "神奈川3区",
+            "party": "改革クラブ",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "name_kanji": "木村剛司、木村たけつか",
+    "name_kana": "きむらたけつか",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "東京14区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "日本未来の党",
+            "result": "落選",
+            "election_freq": " ※東京14区落選"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※東京14区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "日本維新の会",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※東京14区落選"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※東京29区落選"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name_kanji": "大石秀政",
+    "name_kana": "おおいしひでまさ",
+    "years": [
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目） ※比例単独"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "静岡2区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

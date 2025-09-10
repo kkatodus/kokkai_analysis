@@ -55,7 +55,7 @@ function TopicCard(props) {
   return (
     <a
       href={getSangiinHoureiLink(meetingId.substring(1, 4))}
-      className={`${colors.tertiary} mt-1 mb-1 ms-2 p-1 rounded-lg relative`}
+      className={`${colors.tertiary} mt-1 mb-1 ms-2 p-1 rounded-lg relative w-[300px] min-h-0 max-h-auto`}
     >
       <div
         className={`${colors.primary} rounded-lg p-2 h-20 overflow-y-scroll`}

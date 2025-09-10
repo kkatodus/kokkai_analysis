@@ -1,0 +1,5914 @@
+{
+    "data": [
+        {
+            "idx": 0,
+            "y": "0",
+            "x": "-2.8554318",
+            "repr": "たがや亮",
+            "hiragana": "たがやりょう",
+            "house": "lower",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 1,
+            "y": "1",
+            "x": "-2.3566446",
+            "repr": "大島九州男",
+            "hiragana": "おおしまくすお",
+            "house": "upper",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 2,
+            "y": "2",
+            "x": "-2.5511382",
+            "repr": "大石あきこ",
+            "hiragana": "おおいしあきこ",
+            "house": "lower",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 3,
+            "y": "3",
+            "x": "-2.2647395",
+            "repr": "天畠大輔",
+            "hiragana": "てんばただいすけ",
+            "house": "upper",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 4,
+            "y": "4",
+            "x": "-2.4399188",
+            "repr": "山本太郎",
+            "hiragana": "やまもとたろう",
+            "house": "upper",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 5,
+            "y": "5",
+            "x": "-2.1438015",
+            "repr": "櫛渕万里",
+            "hiragana": "くしぶちまり",
+            "house": "lower",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 6,
+            "y": "6",
+            "x": "-3.3584359",
+            "repr": "舩後靖彦",
+            "hiragana": "ふなごやすひこ",
+            "house": "upper",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 7,
+            "y": "7",
+            "x": "-1.1569982",
+            "repr": "阪口直人",
+            "hiragana": "さかぐちなおと",
+            "house": "lower",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 8,
+            "y": "8",
+            "x": "-2.5712883",
+            "repr": "高井崇志",
+            "hiragana": "たかいたかし",
+            "house": "lower",
+            "party": "れ新",
+            "color": "green"
+        },
+        {
+            "idx": 9,
+            "y": "9",
+            "x": "-1.982239",
+            "repr": "島田洋一",
+            "hiragana": "しまだよういち",
+            "house": "lower",
+            "party": "保守",
+            "color": "brown"
+        },
+        {
+            "idx": 10,
+            "y": "10",
+            "x": "-2.6062973",
+            "repr": "河村たかし",
+            "hiragana": "かわむらたかし",
+            "house": "lower",
+            "party": "保守",
+            "color": "brown"
+        },
+        {
+            "idx": 11,
+            "y": "11",
+            "x": "-1.1536082",
+            "repr": "三浦信祐",
+            "hiragana": "みうらのぶひろ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 12,
+            "y": "12",
+            "x": "-1.888325",
+            "repr": "上田勇",
+            "hiragana": "うえだいさむ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 13,
+            "y": "13",
+            "x": "-2.483318",
+            "repr": "下野六太",
+            "hiragana": "しものろくた",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 14,
+            "y": "14",
+            "x": "-1.5375453",
+            "repr": "中川宏昌",
+            "hiragana": "なかがわひろまさ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 15,
+            "y": "15",
+            "x": "-1.6217694",
+            "repr": "中川康洋",
+            "hiragana": "なかがわやすひろ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 16,
+            "y": "16",
+            "x": "-1.5913984",
+            "repr": "中野洋昌",
+            "hiragana": "なかのひろまさ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 17,
+            "y": "17",
+            "x": "-2.369592",
+            "repr": "伊藤孝江",
+            "hiragana": "いとうたかえ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 18,
+            "y": "18",
+            "x": "-1.8080896",
+            "repr": "佐々木さやか",
+            "hiragana": "ささきさやか",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 19,
+            "y": "19",
+            "x": "-1.6475695",
+            "repr": "佐藤英道",
+            "hiragana": "さとうひでみち",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 20,
+            "y": "20",
+            "x": "-1.8850929",
+            "repr": "吉田宣弘",
+            "hiragana": "よしだのぶひろ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 21,
+            "y": "21",
+            "x": "-1.9149703",
+            "repr": "塩田博昭",
+            "hiragana": "しおたひろあき",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 22,
+            "y": "22",
+            "x": "-2.246683",
+            "repr": "安江伸夫",
+            "hiragana": "やすえのぶお",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 23,
+            "y": "23",
+            "x": "-1.3489234",
+            "repr": "宮崎勝",
+            "hiragana": "みやざきまさる",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 24,
+            "y": "24",
+            "x": "-1.5286527",
+            "repr": "山口那津男",
+            "hiragana": "やまぐちなつお",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 25,
+            "y": "25",
+            "x": "-2.0050635",
+            "repr": "山崎正恭",
+            "hiragana": "やまさきまさやす",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 26,
+            "y": "26",
+            "x": "-1.8982832",
+            "repr": "山本博司",
+            "hiragana": "やまもとひろし",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 27,
+            "y": "27",
+            "x": "-1.6515573",
+            "repr": "岡本三成",
+            "hiragana": "おかもとみつなり",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 28,
+            "y": "28",
+            "x": "-0.5549234",
+            "repr": "平木大作",
+            "hiragana": "ひらきだいさく",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 29,
+            "y": "29",
+            "x": "-1.885165",
+            "repr": "平林晃",
+            "hiragana": "ひらばやしあきら",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 30,
+            "y": "30",
+            "x": "-2.1239238",
+            "repr": "庄子賢一",
+            "hiragana": "しょうじけんいち",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 31,
+            "y": "31",
+            "x": "-1.8237244",
+            "repr": "斉藤鉄夫",
+            "hiragana": "さいとうてつお",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 32,
+            "y": "32",
+            "x": "-2.0233543",
+            "repr": "新妻秀規",
+            "hiragana": "にいづまひでき",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 33,
+            "y": "33",
+            "x": "-0.8723527",
+            "repr": "杉久武",
+            "hiragana": "すぎひさたけ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 34,
+            "y": "34",
+            "x": "-1.460507",
+            "repr": "横山信一",
+            "hiragana": "よこやましんいち",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 35,
+            "y": "35",
+            "x": "-1.6470648",
+            "repr": "河西宏一",
+            "hiragana": "かさいこういち",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 36,
+            "y": "36",
+            "x": "-2.3620267",
+            "repr": "河野義博",
+            "hiragana": "かわのよしひろ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 37,
+            "y": "37",
+            "x": "-1.8161057",
+            "repr": "浜地雅一",
+            "hiragana": "はまちまさかず",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 38,
+            "y": "38",
+            "x": "-1.9804262",
+            "repr": "浮島智子",
+            "hiragana": "うきしまともこ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 39,
+            "y": "39",
+            "x": "-1.5773344",
+            "repr": "矢倉克夫",
+            "hiragana": "やくらかつお",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 40,
+            "y": "40",
+            "x": "-1.2823232",
+            "repr": "石川博崇",
+            "hiragana": "いしかわひろたか",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 41,
+            "y": "41",
+            "x": "-2.9002275",
+            "repr": "福重隆浩",
+            "hiragana": "ふくしげたかひろ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 42,
+            "y": "42",
+            "x": "-1.5755507",
+            "repr": "秋野公造",
+            "hiragana": "あきのこうぞう",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 43,
+            "y": "43",
+            "x": "-1.7970409",
+            "repr": "窪田哲也",
+            "hiragana": "くぼたてつや",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 44,
+            "y": "44",
+            "x": "-1.3846068",
+            "repr": "竹内真二",
+            "hiragana": "たけうちしんじ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 45,
+            "y": "45",
+            "x": "-2.1184573",
+            "repr": "竹内譲",
+            "hiragana": "たけうちゆずる",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 46,
+            "y": "46",
+            "x": "-1.971844",
+            "repr": "竹谷とし子",
+            "hiragana": "たけやとしこ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 47,
+            "y": "47",
+            "x": "-2.1031199",
+            "repr": "若松謙維",
+            "hiragana": "わかまつかねしげ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 48,
+            "y": "48",
+            "x": "-1.9933214",
+            "repr": "西田実仁",
+            "hiragana": "にしだまこと",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 49,
+            "y": "49",
+            "x": "-2.5058389",
+            "repr": "角田秀穂",
+            "hiragana": "つのだひでお",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 50,
+            "y": "50",
+            "x": "-1.6401715",
+            "repr": "谷合正明",
+            "hiragana": "たにあいまさあき",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 51,
+            "y": "51",
+            "x": "-0.69026667",
+            "repr": "赤羽一嘉",
+            "hiragana": "あかばかずよし",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 52,
+            "y": "52",
+            "x": "-2.0315893",
+            "repr": "輿水恵一",
+            "hiragana": "こしみずけいいち",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 53,
+            "y": "53",
+            "x": "-1.696758",
+            "repr": "里見隆治",
+            "hiragana": "さとみりゅうじ",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 54,
+            "y": "54",
+            "x": "-2.2970788",
+            "repr": "金城泰邦",
+            "hiragana": "きんじょうやすくに",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 55,
+            "y": "55",
+            "x": "-0.74892247",
+            "repr": "高橋光男",
+            "hiragana": "たかはしみつお",
+            "house": "upper",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 56,
+            "y": "56",
+            "x": "-2.1309934",
+            "repr": "鰐淵洋子",
+            "hiragana": "わにぶちようこ",
+            "house": "lower",
+            "party": "公明",
+            "color": "lightblue"
+        },
+        {
+            "idx": 57,
+            "y": "57",
+            "x": "-2.462255",
+            "repr": "井上哲士",
+            "hiragana": "いのうえさとし",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 58,
+            "y": "58",
+            "x": "-2.7305863",
+            "repr": "仁比聡平",
+            "hiragana": "にひそうへい",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 59,
+            "y": "59",
+            "x": "-2.6330028",
+            "repr": "伊藤岳",
+            "hiragana": "いとうがく",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 60,
+            "y": "60",
+            "x": "-2.7283783",
+            "repr": "倉林明子",
+            "hiragana": "くらばやしあきこ",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 61,
+            "y": "61",
+            "x": "-2.6176298",
+            "repr": "吉良よし子",
+            "hiragana": "きらよしこ",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 62,
+            "y": "62",
+            "x": "-2.5422015",
+            "repr": "塩川鉄也",
+            "hiragana": "しおかわてつや",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 63,
+            "y": "63",
+            "x": "-2.463971",
+            "repr": "大門実紀史",
+            "hiragana": "だいもんみきし",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 64,
+            "y": "64",
+            "x": "-2.3945572",
+            "repr": "小池晃",
+            "hiragana": "こいけあきら",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 65,
+            "y": "65",
+            "x": "-2.7541852",
+            "repr": "山下芳生",
+            "hiragana": "やましたよしき",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 66,
+            "y": "66",
+            "x": "-2.1036806",
+            "repr": "山添拓",
+            "hiragana": "やまぞえたく",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 67,
+            "y": "67",
+            "x": "-2.4039211",
+            "repr": "岩渕友",
+            "hiragana": "いわぶちとも",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 68,
+            "y": "68",
+            "x": "-2.5633657",
+            "repr": "志位和夫",
+            "hiragana": "しいかずお",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 69,
+            "y": "69",
+            "x": "-2.216176",
+            "repr": "本村伸子",
+            "hiragana": "もとむらのぶこ",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 70,
+            "y": "70",
+            "x": "-2.2433927",
+            "repr": "田村智子",
+            "hiragana": "たむらともこ",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 71,
+            "y": "71",
+            "x": "-2.5803456",
+            "repr": "田村貴昭",
+            "hiragana": "たむらたかあき",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 72,
+            "y": "72",
+            "x": "-2.4474115",
+            "repr": "紙智子",
+            "hiragana": "かみともこ",
+            "house": "upper",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 73,
+            "y": "73",
+            "x": "-2.756508",
+            "repr": "赤嶺政賢",
+            "hiragana": "あかみねせいけん",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 74,
+            "y": "74",
+            "x": "-3.1894062",
+            "repr": "辰巳孝太郎",
+            "hiragana": "たつみこうたろう",
+            "house": "lower",
+            "party": "共産",
+            "color": "red"
+        },
+        {
+            "idx": 75,
+            "y": "75",
+            "x": "-1.5180146",
+            "repr": "鈴木敦",
+            "hiragana": "すずきあつし",
+            "house": "lower",
+            "party": "参政",
+            "color": "cyan"
+        },
+        {
+            "idx": 76,
+            "y": "76",
+            "x": "-2.4165409",
+            "repr": "円より子",
+            "hiragana": "まどかよりこ",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 77,
+            "y": "77",
+            "x": "-1.6528986",
+            "repr": "古川元久",
+            "hiragana": "ふるかわもとひさ",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 78,
+            "y": "78",
+            "x": "-1.5102564",
+            "repr": "向山好一",
+            "hiragana": "むこやまこういち",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 79,
+            "y": "79",
+            "x": "-1.9250563",
+            "repr": "村岡敏英",
+            "hiragana": "むらおかとしひで",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 80,
+            "y": "80",
+            "x": "-1.7159253",
+            "repr": "浅野哲",
+            "hiragana": "あさのさとし",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 81,
+            "y": "81",
+            "x": "-2.1881177",
+            "repr": "玉木雄一郎",
+            "hiragana": "たまきゆういちろう",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 82,
+            "y": "82",
+            "x": "-1.5266292",
+            "repr": "田中健",
+            "hiragana": "たなかけん",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 83,
+            "y": "83",
+            "x": "-2.2279098",
+            "repr": "西岡秀子",
+            "hiragana": "にしおかひでこ",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 84,
+            "y": "84",
+            "x": "-1.8677332",
+            "repr": "鈴木義弘",
+            "hiragana": "すずきよしひろ",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 85,
+            "y": "85",
+            "x": "-2.2415977",
+            "repr": "長友慎治",
+            "hiragana": "ながともしんじ",
+            "house": "lower",
+            "party": "国民",
+            "color": "blue"
+        },
+        {
+            "idx": 86,
+            "y": "86",
+            "x": "-2.056553",
+            "repr": "北神圭朗",
+            "hiragana": "きたがみけいろう",
+            "house": "lower",
+            "party": "有志",
+            "color": "grey"
+        },
+        {
+            "idx": 87,
+            "y": "87",
+            "x": "-1.8953489",
+            "repr": "吉良州司",
+            "hiragana": "きらしゅうじ",
+            "house": "lower",
+            "party": "有志",
+            "color": "grey"
+        },
+        {
+            "idx": 88,
+            "y": "88",
+            "x": "-2.1855001",
+            "repr": "福島伸享",
+            "hiragana": "ふくしまのぶゆき",
+            "house": "lower",
+            "party": "有志",
+            "color": "grey"
+        },
+        {
+            "idx": 89,
+            "y": "89",
+            "x": "-1.6048931",
+            "repr": "緒方林太郎",
+            "hiragana": "おがたりんたろう",
+            "house": "lower",
+            "party": "有志",
+            "color": "grey"
+        },
+        {
+            "idx": 90,
+            "y": "90",
+            "x": "-1.3428265",
+            "repr": "上田清司",
+            "hiragana": "うえだきよし",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 91,
+            "y": "91",
+            "x": "-2.2734592",
+            "repr": "伊藤孝恵",
+            "hiragana": "いとうたかえ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 92,
+            "y": "92",
+            "x": "-2.347087",
+            "repr": "堂込麻紀子",
+            "hiragana": "どうごみまきこ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 93,
+            "y": "93",
+            "x": "-1.8718054",
+            "repr": "川合孝典",
+            "hiragana": "かわいたかのり",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 94,
+            "y": "94",
+            "x": "-0.91975445",
+            "repr": "榛葉賀津也",
+            "hiragana": "しんばかづや",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 95,
+            "y": "95",
+            "x": "-1.6606764",
+            "repr": "浜口誠",
+            "hiragana": "はまぐちまこと",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 96,
+            "y": "96",
+            "x": "-2.5653465",
+            "repr": "浜野喜史",
+            "hiragana": "はまのよしふみ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 97,
+            "y": "97",
+            "x": "-2.2634573",
+            "repr": "田村まみ",
+            "hiragana": "たむらまみ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 98,
+            "y": "98",
+            "x": "-1.3247515",
+            "repr": "礒崎哲史",
+            "hiragana": "いそざきてつじ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 99,
+            "y": "99",
+            "x": "-2.0687604",
+            "repr": "竹詰仁",
+            "hiragana": "たけづめひとし",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 100,
+            "y": "100",
+            "x": "-1.350487",
+            "repr": "舟山康江",
+            "hiragana": "ふなやまやすえ",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 101,
+            "y": "101",
+            "x": "-2.064409",
+            "repr": "芳賀道也",
+            "hiragana": "はがみちや",
+            "house": "upper",
+            "party": "民主",
+            "color": "blue"
+        },
+        {
+            "idx": 102,
+            "y": "102",
+            "x": "-2.4045699",
+            "repr": "伊波洋一",
+            "hiragana": "いはよういち",
+            "house": "upper",
+            "party": "沖縄",
+            "color": "pink"
+        },
+        {
+            "idx": 103,
+            "y": "103",
+            "x": "-2.5071826",
+            "repr": "高良鉄美",
+            "hiragana": "たからてつみ",
+            "house": "upper",
+            "party": "沖縄",
+            "color": "pink"
+        },
+        {
+            "idx": 104,
+            "y": "104",
+            "x": "-1.4590021",
+            "repr": "松原仁",
+            "hiragana": "まつばらじん",
+            "house": "lower",
+            "party": "無",
+            "color": "purple"
+        },
+        {
+            "idx": 105,
+            "y": "105",
+            "x": "-2.1397352",
+            "repr": "玄葉光一郎",
+            "hiragana": "げんばこういちろう",
+            "house": "lower",
+            "party": "無",
+            "color": "purple"
+        },
+        {
+            "idx": 106,
+            "y": "106",
+            "x": "-1.231652",
+            "repr": "額賀福志郎",
+            "hiragana": "ぬかがふくしろう",
+            "house": "lower",
+            "party": "無",
+            "color": "purple"
+        },
+        {
+            "idx": 107,
+            "y": "107",
+            "x": "-1.1784675",
+            "repr": "ながえ孝子",
+            "hiragana": "ながえたかこ",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 108,
+            "y": "108",
+            "x": "-1.121431",
+            "repr": "大野泰正",
+            "hiragana": "おおのやすただ",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 109,
+            "y": "109",
+            "x": "-1.9374391",
+            "repr": "寺田静",
+            "hiragana": "てらたしずか",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 110,
+            "y": "110",
+            "x": "-1.6814017",
+            "repr": "平山佐知子",
+            "hiragana": "ひらやまさちこ",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 111,
+            "y": "111",
+            "x": "-1.5132804",
+            "repr": "神谷宗幣",
+            "hiragana": "かみやそうへい",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 112,
+            "y": "112",
+            "x": "-0.9905526",
+            "repr": "鈴木宗男",
+            "hiragana": "すずきむねお",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 113,
+            "y": "113",
+            "x": "-2.4346676",
+            "repr": "長浜博行",
+            "hiragana": "ながはまひろゆき",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 114,
+            "y": "114",
+            "x": "-2.1148915",
+            "repr": "関口昌一",
+            "hiragana": "せきぐちまさかず",
+            "house": "upper",
+            "party": "無所属",
+            "color": "purple"
+        },
+        {
+            "idx": 115,
+            "y": "115",
+            "x": "-2.577904",
+            "repr": "おおつき紅葉",
+            "hiragana": "おおつきくれは",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 116,
+            "y": "116",
+            "x": "-1.9458529",
+            "repr": "三上えり",
+            "hiragana": "みかみえり",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 117,
+            "y": "117",
+            "x": "-1.1978872",
+            "repr": "下条みつ",
+            "hiragana": "しもじょうみつ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 118,
+            "y": "118",
+            "x": "-1.9827094",
+            "repr": "中島克仁",
+            "hiragana": "なかじまかつひと",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 119,
+            "y": "119",
+            "x": "-2.3968844",
+            "repr": "中谷一馬",
+            "hiragana": "なかたにかずま",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 120,
+            "y": "120",
+            "x": "-1.9468482",
+            "repr": "亀井亜紀子",
+            "hiragana": "かめいあきこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 121,
+            "y": "121",
+            "x": "-2.7121756",
+            "repr": "井坂信彦",
+            "hiragana": "いさかのぶひこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 122,
+            "y": "122",
+            "x": "-2.049981",
+            "repr": "今井雅人",
+            "hiragana": "いまいまさと",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 123,
+            "y": "123",
+            "x": "-1.523128",
+            "repr": "伊藤俊輔",
+            "hiragana": "いとうしゅんすけ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 124,
+            "y": "124",
+            "x": "-1.3550681",
+            "repr": "伴野豊",
+            "hiragana": "ばんのゆたか",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 125,
+            "y": "125",
+            "x": "-2.1768272",
+            "repr": "佐藤公治",
+            "hiragana": "さとうこうじ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 126,
+            "y": "126",
+            "x": "-2.494611",
+            "repr": "勝部賢志",
+            "hiragana": "かつべけんじ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 127,
+            "y": "127",
+            "x": "-1.7352839",
+            "repr": "升田世喜男",
+            "hiragana": "ますたせきお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 128,
+            "y": "128",
+            "x": "-2.4693713",
+            "repr": "原口一博",
+            "hiragana": "はらぐちかずひろ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 129,
+            "y": "129",
+            "x": "-2.068442",
+            "repr": "古賀之士",
+            "hiragana": "こがゆきひと",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 130,
+            "y": "130",
+            "x": "-3.0724757",
+            "repr": "古賀千景",
+            "hiragana": "こがちかげ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 131,
+            "y": "131",
+            "x": "-2.4457467",
+            "repr": "吉川元",
+            "hiragana": "よしかわはじめ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 132,
+            "y": "132",
+            "x": "-2.7668538",
+            "repr": "吉川沙織",
+            "hiragana": "よしかわさおり",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 133,
+            "y": "133",
+            "x": "-2.826281",
+            "repr": "吉田はるみ",
+            "hiragana": "よしだはるみ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 134,
+            "y": "134",
+            "x": "-2.1565275",
+            "repr": "坂本祐之輔",
+            "hiragana": "さかもとゆうのすけ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 135,
+            "y": "135",
+            "x": "-1.6092932",
+            "repr": "城井崇",
+            "hiragana": "きいたかし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 136,
+            "y": "136",
+            "x": "-2.843866",
+            "repr": "堤かなめ",
+            "hiragana": "つつみかなめ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 137,
+            "y": "137",
+            "x": "-1.2786521",
+            "repr": "塩村あやか",
+            "hiragana": "しおむらあやか",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 138,
+            "y": "138",
+            "x": "-2.328799",
+            "repr": "大串博志",
+            "hiragana": "おおぐしひろし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 139,
+            "y": "139",
+            "x": "-1.2051044",
+            "repr": "大島敦",
+            "hiragana": "おおしまあつし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 140,
+            "y": "140",
+            "x": "-2.108733",
+            "repr": "大椿ゆうこ",
+            "hiragana": "おおつばきゆうこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 141,
+            "y": "141",
+            "x": "-1.8752762",
+            "repr": "大河原まさこ",
+            "hiragana": "おおかわらまさこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 142,
+            "y": "142",
+            "x": "-2.1189678",
+            "repr": "大西健介",
+            "hiragana": "おおにしけんすけ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 143,
+            "y": "143",
+            "x": "-1.5592376",
+            "repr": "太栄志",
+            "hiragana": "ふとりひでし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 144,
+            "y": "144",
+            "x": "-2.7059724",
+            "repr": "奥野総一郎",
+            "hiragana": "おくのそういちろう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 145,
+            "y": "145",
+            "x": "-2.076642",
+            "repr": "安住淳",
+            "hiragana": "あずみじゅん",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 146,
+            "y": "146",
+            "x": "-3.3103776",
+            "repr": "宮口治子",
+            "hiragana": "みやぐちはるこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 147,
+            "y": "147",
+            "x": "-1.8710622",
+            "repr": "宮川伸",
+            "hiragana": "みやかわしん",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 148,
+            "y": "148",
+            "x": "-2.011209",
+            "repr": "寺田学",
+            "hiragana": "てらたまなぶ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 149,
+            "y": "149",
+            "x": "-3.2100468",
+            "repr": "小宮山泰子",
+            "hiragana": "こみやまやすこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 150,
+            "y": "150",
+            "x": "-1.4288424",
+            "repr": "小山展弘",
+            "hiragana": "こやまのぶひろ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 151,
+            "y": "151",
+            "x": "-2.4026477",
+            "repr": "小川淳也",
+            "hiragana": "おがわじゅんや",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 152,
+            "y": "152",
+            "x": "-2.4745507",
+            "repr": "小沢一郎",
+            "hiragana": "おざわいちろう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 153,
+            "y": "153",
+            "x": "-3.4072614",
+            "repr": "小沢雅仁",
+            "hiragana": "おざわまさひと",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 154,
+            "y": "154",
+            "x": "-2.1275017",
+            "repr": "小沼巧",
+            "hiragana": "おぬまたくみ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 155,
+            "y": "155",
+            "x": "-1.330084",
+            "repr": "小熊慎司",
+            "hiragana": "おぐましんじ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 156,
+            "y": "156",
+            "x": "-2.3457654",
+            "repr": "小西洋之",
+            "hiragana": "こにしひろゆき",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 157,
+            "y": "157",
+            "x": "-2.0740814",
+            "repr": "尾辻かな子",
+            "hiragana": "おつじかなこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 158,
+            "y": "158",
+            "x": "-1.8320372",
+            "repr": "屋良朝博",
+            "hiragana": "やらともひろ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 159,
+            "y": "159",
+            "x": "-2.4304786",
+            "repr": "山井和則",
+            "hiragana": "やまのいかずのり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 160,
+            "y": "160",
+            "x": "-2.1667397",
+            "repr": "山岡達丸",
+            "hiragana": "やまおかたつまる",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 161,
+            "y": "161",
+            "x": "-1.9012698",
+            "repr": "山岸一生",
+            "hiragana": "やまぎしいっせい",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 162,
+            "y": "162",
+            "x": "-2.0886388",
+            "repr": "山崎誠",
+            "hiragana": "やまざきまこと",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 163,
+            "y": "163",
+            "x": "-2.423464",
+            "repr": "山田勝彦",
+            "hiragana": "やまだかつひこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 164,
+            "y": "164",
+            "x": "-2.2837522",
+            "repr": "山花郁夫",
+            "hiragana": "やまはないくお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 165,
+            "y": "165",
+            "x": "-2.1639664",
+            "repr": "岡島一正",
+            "hiragana": "おかじまかずまさ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 166,
+            "y": "166",
+            "x": "-2.195567",
+            "repr": "岡本あき子",
+            "hiragana": "おかもとあきこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 167,
+            "y": "167",
+            "x": "-1.3498708",
+            "repr": "岡本充功",
+            "hiragana": "おかもとみつのり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 168,
+            "y": "168",
+            "x": "-2.4170296",
+            "repr": "岡田克也",
+            "hiragana": "おかだかつや",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 169,
+            "y": "169",
+            "x": "-2.2246478",
+            "repr": "岸真紀子",
+            "hiragana": "きしまきこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 170,
+            "y": "170",
+            "x": "-2.0450287",
+            "repr": "川内博史",
+            "hiragana": "かわうちひろし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 171,
+            "y": "171",
+            "x": "-2.160894",
+            "repr": "川田龍平",
+            "hiragana": "かわだりゅうへい",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 172,
+            "y": "172",
+            "x": "-2.2876983",
+            "repr": "平岡秀夫",
+            "hiragana": "ひらおかひでお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 173,
+            "y": "173",
+            "x": "-2.473956",
+            "repr": "広田一",
+            "hiragana": "ひろたはじめ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 174,
+            "y": "174",
+            "x": "-2.0489607",
+            "repr": "後藤祐一",
+            "hiragana": "ごとうゆういち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 175,
+            "y": "175",
+            "x": "-1.5243412",
+            "repr": "徳永エリ",
+            "hiragana": "とくながえり",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 176,
+            "y": "176",
+            "x": "-3.4160054",
+            "repr": "手塚仁雄",
+            "hiragana": "てづかよしお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 177,
+            "y": "177",
+            "x": "-3.183515",
+            "repr": "打越さく良",
+            "hiragana": "うちこしさくら",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 178,
+            "y": "178",
+            "x": "-2.9489489",
+            "repr": "斎藤嘉隆",
+            "hiragana": "さいとうよしたか",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 179,
+            "y": "179",
+            "x": "-2.5386403",
+            "repr": "新垣邦男",
+            "hiragana": "あらかきくにお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 180,
+            "y": "180",
+            "x": "-1.9592394",
+            "repr": "早稲田ゆき",
+            "hiragana": "わせだゆき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 181,
+            "y": "181",
+            "x": "-2.4024215",
+            "repr": "有田芳生",
+            "hiragana": "ありたよしふ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 182,
+            "y": "182",
+            "x": "-2.3058927",
+            "repr": "木戸口英司",
+            "hiragana": "きどぐちえいじ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 183,
+            "y": "183",
+            "x": "-2.2644246",
+            "repr": "末松義規",
+            "hiragana": "すえまつよしのり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 184,
+            "y": "184",
+            "x": "-2.5835493",
+            "repr": "本庄知史",
+            "hiragana": "ほんじょうさとし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 185,
+            "y": "185",
+            "x": "-2.2892725",
+            "repr": "杉尾秀哉",
+            "hiragana": "すぎおひでや",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 186,
+            "y": "186",
+            "x": "-3.154753",
+            "repr": "村田享子",
+            "hiragana": "むらたきょうこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 187,
+            "y": "187",
+            "x": "-2.952851",
+            "repr": "松尾明弘",
+            "hiragana": "まつおあきひろ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 188,
+            "y": "188",
+            "x": "-2.0313652",
+            "repr": "松木けんこう",
+            "hiragana": "まつきけんこう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 189,
+            "y": "189",
+            "x": "-2.7635107",
+            "repr": "松田功",
+            "hiragana": "まつだいさお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 190,
+            "y": "190",
+            "x": "-2.4758074",
+            "repr": "枝野幸男",
+            "hiragana": "えだのゆきお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 191,
+            "y": "191",
+            "x": "-2.8957748",
+            "repr": "柚木道義",
+            "hiragana": "ゆのきみちよし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 192,
+            "y": "192",
+            "x": "-2.3566024",
+            "repr": "柴愼一",
+            "hiragana": "しばしんいち",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 193,
+            "y": "193",
+            "x": "-1.6661596",
+            "repr": "梅谷守",
+            "hiragana": "うめたにまもる",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 194,
+            "y": "194",
+            "x": "-1.4656653",
+            "repr": "森屋隆",
+            "hiragana": "もりやたかし",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 195,
+            "y": "195",
+            "x": "-1.6152847",
+            "repr": "森山浩行",
+            "hiragana": "もりやまひろゆき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 196,
+            "y": "196",
+            "x": "-1.7367071",
+            "repr": "森本真治",
+            "hiragana": "もりもとしんじ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 197,
+            "y": "197",
+            "x": "-2.4493396",
+            "repr": "森田俊和",
+            "hiragana": "もりたとしかず",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 198,
+            "y": "198",
+            "x": "-1.7305213",
+            "repr": "横沢高徳",
+            "hiragana": "よこさわたかのり",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 199,
+            "y": "199",
+            "x": "-1.9340907",
+            "repr": "櫻井周",
+            "hiragana": "さくらいしゅう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 200,
+            "y": "200",
+            "x": "-2.62363",
+            "repr": "武正公一",
+            "hiragana": "たけまさこういち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 201,
+            "y": "201",
+            "x": "-2.4507194",
+            "repr": "水岡俊一",
+            "hiragana": "みずおかしゅんいち",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 202,
+            "y": "202",
+            "x": "-1.9516933",
+            "repr": "水野素子",
+            "hiragana": "みずのもとこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 203,
+            "y": "203",
+            "x": "-2.426371",
+            "repr": "江田憲司",
+            "hiragana": "えだけんじ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 204,
+            "y": "204",
+            "x": "-2.369085",
+            "repr": "池田真紀",
+            "hiragana": "いけだまき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 205,
+            "y": "205",
+            "x": "-2.564484",
+            "repr": "泉健太",
+            "hiragana": "いずみけんた",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 206,
+            "y": "206",
+            "x": "-1.1347989",
+            "repr": "津村啓介",
+            "hiragana": "つむらけいすけ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 207,
+            "y": "207",
+            "x": "-2.828479",
+            "repr": "海江田万里",
+            "hiragana": "かいえだばんり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 208,
+            "y": "208",
+            "x": "-2.6955059",
+            "repr": "渡辺創",
+            "hiragana": "わたなべそう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 209,
+            "y": "209",
+            "x": "-1.7473295",
+            "repr": "渡辺周",
+            "hiragana": "わたなべしゅう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 210,
+            "y": "210",
+            "x": "-2.0250475",
+            "repr": "源馬謙太郎",
+            "hiragana": "げんまけんたろう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 211,
+            "y": "211",
+            "x": "-2.3189533",
+            "repr": "熊谷裕人",
+            "hiragana": "くまがいひろと",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 212,
+            "y": "212",
+            "x": "-2.0726993",
+            "repr": "牧山ひろえ",
+            "hiragana": "まきやまひろえ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 213,
+            "y": "213",
+            "x": "-1.80312",
+            "repr": "牧義夫",
+            "hiragana": "まきよしお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 214,
+            "y": "214",
+            "x": "-1.6961368",
+            "repr": "田名部匡代",
+            "hiragana": "たなぶまさよ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 215,
+            "y": "215",
+            "x": "-2.3967152",
+            "repr": "田島麻衣子",
+            "hiragana": "たじままいこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 216,
+            "y": "216",
+            "x": "-1.7925944",
+            "repr": "田嶋要",
+            "hiragana": "たじまかなめ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 217,
+            "y": "217",
+            "x": "-1.6303632",
+            "repr": "白石洋一",
+            "hiragana": "しらいしよういち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 218,
+            "y": "218",
+            "x": "-2.6258452",
+            "repr": "石垣のりこ",
+            "hiragana": "いしがきのりこ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 219,
+            "y": "219",
+            "x": "-2.1046045",
+            "repr": "石川大我",
+            "hiragana": "いしかわたいが",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 220,
+            "y": "220",
+            "x": "-2.6485927",
+            "repr": "石川香織",
+            "hiragana": "いしかわかおり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 221,
+            "y": "221",
+            "x": "-2.1627145",
+            "repr": "石橋通宏",
+            "hiragana": "いしばしみちひろ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 222,
+            "y": "222",
+            "x": "-2.0478957",
+            "repr": "神津たけし",
+            "hiragana": "こうづたけし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 223,
+            "y": "223",
+            "x": "-2.0399017",
+            "repr": "神谷裕",
+            "hiragana": "かみやひろし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 224,
+            "y": "224",
+            "x": "-1.5765179",
+            "repr": "福山哲郎",
+            "hiragana": "ふくやまてつろう",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 225,
+            "y": "225",
+            "x": "-2.5228517",
+            "repr": "福島みずほ",
+            "hiragana": "ふくしまみずほ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 226,
+            "y": "226",
+            "x": "-2.8364322",
+            "repr": "福田昭夫",
+            "hiragana": "ふくだあきお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 227,
+            "y": "227",
+            "x": "-2.7496467",
+            "repr": "稲富修二",
+            "hiragana": "いなとみしゅうじ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 228,
+            "y": "228",
+            "x": "-1.9072502",
+            "repr": "笠浩史",
+            "hiragana": "りゅうひろふみ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 229,
+            "y": "229",
+            "x": "-1.4232163",
+            "repr": "篠原孝",
+            "hiragana": "しのはらたかし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 230,
+            "y": "230",
+            "x": "-1.9995438",
+            "repr": "篠原豪",
+            "hiragana": "しのはらごう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 231,
+            "y": "231",
+            "x": "-3.0839698",
+            "repr": "米山隆一",
+            "hiragana": "よねやまりゅういち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 232,
+            "y": "232",
+            "x": "-1.8396566",
+            "repr": "緑川貴士",
+            "hiragana": "みどりかわたかし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 233,
+            "y": "233",
+            "x": "-1.735628",
+            "repr": "羽田次郎",
+            "hiragana": "はたじろう",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 234,
+            "y": "234",
+            "x": "-1.5628047",
+            "repr": "荒井優",
+            "hiragana": "あらいゆたか",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 235,
+            "y": "235",
+            "x": "-2.0988512",
+            "repr": "菊田真紀子",
+            "hiragana": "きくたまきこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 236,
+            "y": "236",
+            "x": "-1.9253176",
+            "repr": "落合貴之",
+            "hiragana": "おちあいたかゆき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 237,
+            "y": "237",
+            "x": "-2.9867191",
+            "repr": "藤岡たかお",
+            "hiragana": "ふじおかたかお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 238,
+            "y": "238",
+            "x": "-2.6384814",
+            "repr": "西村智奈美",
+            "hiragana": "にしむらちなみ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 239,
+            "y": "239",
+            "x": "-2.2969594",
+            "repr": "谷田川元",
+            "hiragana": "やたがわはじめ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 240,
+            "y": "240",
+            "x": "-2.1427011",
+            "repr": "辻元清美",
+            "hiragana": "つじもときよみ",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 241,
+            "y": "241",
+            "x": "-1.7874714",
+            "repr": "近藤和也",
+            "hiragana": "こんどうかずや",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 242,
+            "y": "242",
+            "x": "-2.3115644",
+            "repr": "近藤昭一",
+            "hiragana": "こんどうしょういち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 243,
+            "y": "243",
+            "x": "-2.4239805",
+            "repr": "逢坂誠二",
+            "hiragana": "おおさかせいじ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 244,
+            "y": "244",
+            "x": "-2.6549752",
+            "repr": "道下大樹",
+            "hiragana": "みちしただいき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 245,
+            "y": "245",
+            "x": "-1.6497804",
+            "repr": "酒井なつみ",
+            "hiragana": "さかいなつみ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 246,
+            "y": "246",
+            "x": "-2.1075494",
+            "repr": "重徳和彦",
+            "hiragana": "しげとくかずひこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 247,
+            "y": "247",
+            "x": "-1.7168143",
+            "repr": "野田佳彦",
+            "hiragana": "のだよしひこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 248,
+            "y": "248",
+            "x": "-3.5094182",
+            "repr": "野田国義",
+            "hiragana": "のだくによし",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 249,
+            "y": "249",
+            "x": "-2.6230838",
+            "repr": "野間健",
+            "hiragana": "のまたけし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 250,
+            "y": "250",
+            "x": "-1.8603604",
+            "repr": "金子恵美",
+            "hiragana": "かねこえみ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 251,
+            "y": "251",
+            "x": "-2.4915054",
+            "repr": "鈴木庸介",
+            "hiragana": "すずきようすけ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 252,
+            "y": "252",
+            "x": "-2.9143093",
+            "repr": "鎌田さゆり",
+            "hiragana": "かまたさゆり",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 253,
+            "y": "253",
+            "x": "-2.3985136",
+            "repr": "長妻昭",
+            "hiragana": "ながつまあきら",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 254,
+            "y": "254",
+            "x": "-1.683798",
+            "repr": "長谷川嘉一",
+            "hiragana": "はせがわかいち",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 255,
+            "y": "255",
+            "x": "-1.7264915",
+            "repr": "阿久津幸彦",
+            "hiragana": "あくつゆきひこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 256,
+            "y": "256",
+            "x": "-1.8394734",
+            "repr": "阿部知子",
+            "hiragana": "あべともこ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 257,
+            "y": "257",
+            "x": "-2.5822716",
+            "repr": "階猛",
+            "hiragana": "しなたけし",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 258,
+            "y": "258",
+            "x": "-1.5975906",
+            "repr": "青山大人",
+            "hiragana": "あおやまやまと",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 259,
+            "y": "259",
+            "x": "-1.9417634",
+            "repr": "青木愛",
+            "hiragana": "あおきあい",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 260,
+            "y": "260",
+            "x": "-2.062038",
+            "repr": "青柳陽一郎",
+            "hiragana": "あおやぎよういちろう",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 261,
+            "y": "261",
+            "x": "-2.4925983",
+            "repr": "馬場雄基",
+            "hiragana": "ばばゆうき",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 262,
+            "y": "262",
+            "x": "-1.8253723",
+            "repr": "馬淵澄夫",
+            "hiragana": "まぶちすみお",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 263,
+            "y": "263",
+            "x": "-2.7716434",
+            "repr": "高木真理",
+            "hiragana": "たかぎまり",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 264,
+            "y": "264",
+            "x": "-0.7434707",
+            "repr": "鬼木誠",
+            "hiragana": "おにきまこと",
+            "house": "upper",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 265,
+            "y": "265",
+            "x": "-2.247415",
+            "repr": "黒岩宇洋",
+            "hiragana": "くろいわたかひろ",
+            "house": "lower",
+            "party": "立憲",
+            "color": "orange"
+        },
+        {
+            "idx": 266,
+            "y": "266",
+            "x": "-2.8204658",
+            "repr": "うるま譲司",
+            "hiragana": "うるまじょうじ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 267,
+            "y": "267",
+            "x": "-2.29433",
+            "repr": "三木圭恵",
+            "hiragana": "みきけえ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 268,
+            "y": "268",
+            "x": "-3.1985867",
+            "repr": "中司宏",
+            "hiragana": "なかつかひろし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 269,
+            "y": "269",
+            "x": "-1.3821775",
+            "repr": "串田誠一",
+            "hiragana": "くしだせいいち",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 270,
+            "y": "270",
+            "x": "-2.5299108",
+            "repr": "井上英孝",
+            "hiragana": "いのうえひでたか",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 271,
+            "y": "271",
+            "x": "-1.6657312",
+            "repr": "伊東信久",
+            "hiragana": "いとうのぶひさ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 272,
+            "y": "272",
+            "x": "-2.1627965",
+            "repr": "前原誠司",
+            "hiragana": "まえはらせいじ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 273,
+            "y": "273",
+            "x": "-1.9859518",
+            "repr": "和田有一朗",
+            "hiragana": "わだゆういちろう",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 274,
+            "y": "274",
+            "x": "-3.0973575",
+            "repr": "嘉田由紀子",
+            "hiragana": "かだゆきこ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 275,
+            "y": "275",
+            "x": "-2.5144572",
+            "repr": "奥下剛光",
+            "hiragana": "おくしたたけみつ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 276,
+            "y": "276",
+            "x": "-2.0470154",
+            "repr": "守島正",
+            "hiragana": "もりしまただし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 277,
+            "y": "277",
+            "x": "-2.038333",
+            "repr": "山口和之",
+            "hiragana": "やまぐちかずゆき",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 278,
+            "y": "278",
+            "x": "-2.3144662",
+            "repr": "岩谷良平",
+            "hiragana": "いわたにりょうへい",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 279,
+            "y": "279",
+            "x": "-1.821959",
+            "repr": "市村浩一郎",
+            "hiragana": "いちむらこういちろう",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 280,
+            "y": "280",
+            "x": "-2.27357",
+            "repr": "斉木武志",
+            "hiragana": "さいきたけし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 281,
+            "y": "281",
+            "x": "-1.2159537",
+            "repr": "斎藤アレックス",
+            "hiragana": "さいとうあれっくす",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 282,
+            "y": "282",
+            "x": "-1.4012469",
+            "repr": "杉本和巳",
+            "hiragana": "すぎもとかずみ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 283,
+            "y": "283",
+            "x": "-2.3483658",
+            "repr": "東徹",
+            "hiragana": "あずまとおる",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 284,
+            "y": "284",
+            "x": "-1.7442262",
+            "repr": "松沢成文",
+            "hiragana": "まつざわしげふみ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 285,
+            "y": "285",
+            "x": "-2.1244369",
+            "repr": "松野明美",
+            "hiragana": "まつのあけみ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 286,
+            "y": "286",
+            "x": "-1.644777",
+            "repr": "柳ヶ瀬裕文",
+            "hiragana": "やながせひろふみ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 287,
+            "y": "287",
+            "x": "-1.59851",
+            "repr": "柴田巧",
+            "hiragana": "しばたたくみ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 288,
+            "y": "288",
+            "x": "-1.6646906",
+            "repr": "梅村みずほ",
+            "hiragana": "うめむらみずほ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 289,
+            "y": "289",
+            "x": "-2.4280944",
+            "repr": "梅村聡",
+            "hiragana": "うめむらさとし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 290,
+            "y": "290",
+            "x": "-1.9095538",
+            "repr": "池畑浩太朗",
+            "hiragana": "いけはたこうたろう",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 291,
+            "y": "291",
+            "x": "-2.056523",
+            "repr": "浅田均",
+            "hiragana": "あさだひとし",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 292,
+            "y": "292",
+            "x": "-0.8301411",
+            "repr": "浦野靖人",
+            "hiragana": "うらのやすと",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 293,
+            "y": "293",
+            "x": "-2.275644",
+            "repr": "片山大介",
+            "hiragana": "かたやまだいすけ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 294,
+            "y": "294",
+            "x": "-1.6752536",
+            "repr": "猪瀬直樹",
+            "hiragana": "いのせなおき",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 295,
+            "y": "295",
+            "x": "-2.378469",
+            "repr": "石井章",
+            "hiragana": "いしいあきら",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 296,
+            "y": "296",
+            "x": "-1.4855255",
+            "repr": "石井苗子",
+            "hiragana": "いしいみつこ",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 297,
+            "y": "297",
+            "x": "-1.4786788",
+            "repr": "空本誠喜",
+            "hiragana": "そらもとせいき",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 298,
+            "y": "298",
+            "x": "-1.4832882",
+            "repr": "美延映夫",
+            "hiragana": "みのべてるお",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 299,
+            "y": "299",
+            "x": "-2.5156982",
+            "repr": "藤巻健史",
+            "hiragana": "ふじまきたけし",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 300,
+            "y": "300",
+            "x": "-2.21888",
+            "repr": "藤巻健太",
+            "hiragana": "ふじまきけんた",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 301,
+            "y": "301",
+            "x": "-2.0421221",
+            "repr": "藤田文武",
+            "hiragana": "ふじたふみたけ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 302,
+            "y": "302",
+            "x": "-2.2121205",
+            "repr": "遠藤敬",
+            "hiragana": "えんどうたかし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 303,
+            "y": "303",
+            "x": "-1.8487461",
+            "repr": "金子道仁",
+            "hiragana": "かねこみちひと",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 304,
+            "y": "304",
+            "x": "-2.0739026",
+            "repr": "金村龍那",
+            "hiragana": "かねむらりゅうな",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 305,
+            "y": "305",
+            "x": "-2.4041033",
+            "repr": "阿部司",
+            "hiragana": "あべつかさ",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 306,
+            "y": "306",
+            "x": "-2.0063465",
+            "repr": "阿部弘樹",
+            "hiragana": "あべひろき",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 307,
+            "y": "307",
+            "x": "-3.1351583",
+            "repr": "青島健太",
+            "hiragana": "あおしまけんた",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 308,
+            "y": "308",
+            "x": "-1.6814206",
+            "repr": "青柳仁士",
+            "hiragana": "あおやぎひとし",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 309,
+            "y": "309",
+            "x": "-1.876005",
+            "repr": "馬場伸幸",
+            "hiragana": "ばばのぶゆき",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 310,
+            "y": "310",
+            "x": "-1.6968547",
+            "repr": "高木かおり",
+            "hiragana": "たかぎかおり",
+            "house": "upper",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 311,
+            "y": "311",
+            "x": "-1.974426",
+            "repr": "高橋英明",
+            "hiragana": "たかはしひであき",
+            "house": "lower",
+            "party": "維新",
+            "color": "gold"
+        },
+        {
+            "idx": 312,
+            "y": "312",
+            "x": "-2.626861",
+            "repr": "あかま二郎",
+            "hiragana": "あかまじろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 313,
+            "y": "313",
+            "x": "-1.2619736",
+            "repr": "あべ俊子",
+            "hiragana": "あべとしこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 314,
+            "y": "314",
+            "x": "-1.5910956",
+            "repr": "こやり隆史",
+            "hiragana": "こやりたかし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 315,
+            "y": "315",
+            "x": "-1.4439907",
+            "repr": "三原じゅん子",
+            "hiragana": "みはらじゅんこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 316,
+            "y": "316",
+            "x": "-2.2341175",
+            "repr": "三反園訓",
+            "hiragana": "みたぞのさとし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 317,
+            "y": "317",
+            "x": "-2.213457",
+            "repr": "三宅伸吾",
+            "hiragana": "みやけしんご",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 318,
+            "y": "318",
+            "x": "-1.4766885",
+            "repr": "三浦靖",
+            "hiragana": "みうらやすし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 319,
+            "y": "319",
+            "x": "-1.0001223",
+            "repr": "三谷英弘",
+            "hiragana": "みたにひでひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 320,
+            "y": "320",
+            "x": "-1.389615",
+            "repr": "上川陽子",
+            "hiragana": "かみかわようこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 321,
+            "y": "321",
+            "x": "-1.4547657",
+            "repr": "上月良祐",
+            "hiragana": "こうづきりょうすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 322,
+            "y": "322",
+            "x": "-1.6620561",
+            "repr": "上田英俊",
+            "hiragana": "うえだえいしゅん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 323,
+            "y": "323",
+            "x": "-2.5831103",
+            "repr": "上野賢一郎",
+            "hiragana": "うえのけんいちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 324,
+            "y": "324",
+            "x": "-1.1128044",
+            "repr": "上野通子",
+            "hiragana": "うえのみちこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 325,
+            "y": "325",
+            "x": "-1.2672563",
+            "repr": "世耕弘成",
+            "hiragana": "せこうひろしげ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 326,
+            "y": "326",
+            "x": "-1.7584106",
+            "repr": "中曽根康隆",
+            "hiragana": "なかそねやすたか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 327,
+            "y": "327",
+            "x": "-1.5661691",
+            "repr": "中曽根弘文",
+            "hiragana": "なかそねひろふみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 328,
+            "y": "328",
+            "x": "-1.8243375",
+            "repr": "中村裕之",
+            "hiragana": "なかむらひろゆき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 329,
+            "y": "329",
+            "x": "-2.3602831",
+            "repr": "中田宏",
+            "hiragana": "なかだひろし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 330,
+            "y": "330",
+            "x": "-2.0762627",
+            "repr": "中西健治",
+            "hiragana": "なかにしけんじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 331,
+            "y": "331",
+            "x": "-1.5804263",
+            "repr": "中西祐介",
+            "hiragana": "なかにしゆうすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 332,
+            "y": "332",
+            "x": "-1.2018882",
+            "repr": "中谷元",
+            "hiragana": "なかたにげん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 333,
+            "y": "333",
+            "x": "-1.0023618",
+            "repr": "中谷真一",
+            "hiragana": "なかたにしんいち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 334,
+            "y": "334",
+            "x": "-2.2513852",
+            "repr": "五十嵐清",
+            "hiragana": "いがらしきよし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 335,
+            "y": "335",
+            "x": "-2.4601188",
+            "repr": "井上信治",
+            "hiragana": "いのうえしんじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 336,
+            "y": "336",
+            "x": "-1.9706889",
+            "repr": "井上義行",
+            "hiragana": "いのうえよしゆき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 337,
+            "y": "337",
+            "x": "-1.6186703",
+            "repr": "井上貴博",
+            "hiragana": "いのうえたかひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 338,
+            "y": "338",
+            "x": "-2.2937486",
+            "repr": "井出庸生",
+            "hiragana": "いでようせい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 339,
+            "y": "339",
+            "x": "-2.5361352",
+            "repr": "井林辰憲",
+            "hiragana": "いばやしたつのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 340,
+            "y": "340",
+            "x": "-1.4175698",
+            "repr": "井野俊郎",
+            "hiragana": "いのとしろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 341,
+            "y": "341",
+            "x": "-1.4529681",
+            "repr": "仁木博文",
+            "hiragana": "にきひろぶみ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 342,
+            "y": "342",
+            "x": "-2.025317",
+            "repr": "今井絵理子",
+            "hiragana": "いまいえりこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 343,
+            "y": "343",
+            "x": "-2.334773",
+            "repr": "今枝宗一郎",
+            "hiragana": "いまえだそういちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 344,
+            "y": "344",
+            "x": "-2.1796124",
+            "repr": "伊東良孝",
+            "hiragana": "いとうよしたか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 345,
+            "y": "345",
+            "x": "-1.6265163",
+            "repr": "伊藤忠彦",
+            "hiragana": "いとうただひこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 346,
+            "y": "346",
+            "x": "-2.4819129",
+            "repr": "伊藤達也",
+            "hiragana": "いとうたつや",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 347,
+            "y": "347",
+            "x": "-1.4161919",
+            "repr": "佐々木紀",
+            "hiragana": "ささきはじめ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 348,
+            "y": "348",
+            "x": "-1.3823287",
+            "repr": "佐藤信秋",
+            "hiragana": "さとうのぶあき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 349,
+            "y": "349",
+            "x": "-2.9305973",
+            "repr": "佐藤勉",
+            "hiragana": "さとうつとむ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 350,
+            "y": "350",
+            "x": "-1.6253724",
+            "repr": "佐藤啓",
+            "hiragana": "さとうけい",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 351,
+            "y": "351",
+            "x": "-1.2797973",
+            "repr": "佐藤正久",
+            "hiragana": "さとうまさひさ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 352,
+            "y": "352",
+            "x": "-2.0880988",
+            "repr": "冨樫博之",
+            "hiragana": "とがしひろゆき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 353,
+            "y": "353",
+            "x": "-2.6366317",
+            "repr": "加田裕之",
+            "hiragana": "かだひろゆき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 354,
+            "y": "354",
+            "x": "-2.188197",
+            "repr": "加藤勝信",
+            "hiragana": "かとうかつのぶ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 355,
+            "y": "355",
+            "x": "-1.9165473",
+            "repr": "加藤明良",
+            "hiragana": "かとうあきよし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 356,
+            "y": "356",
+            "x": "-1.5891823",
+            "repr": "加藤竜祥",
+            "hiragana": "かとうりゅうしょう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 357,
+            "y": "357",
+            "x": "-2.1966927",
+            "repr": "加藤鮎子",
+            "hiragana": "かとうあゆこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 358,
+            "y": "358",
+            "x": "-1.788755",
+            "repr": "勝俣孝明",
+            "hiragana": "かつまたたかあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 359,
+            "y": "359",
+            "x": "-2.378264",
+            "repr": "勝目康",
+            "hiragana": "かつめやすし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 360,
+            "y": "360",
+            "x": "-1.521075",
+            "repr": "北村経夫",
+            "hiragana": "きたむらつねお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 361,
+            "y": "361",
+            "x": "-1.7399482",
+            "repr": "古屋圭司",
+            "hiragana": "ふるやけいじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 362,
+            "y": "362",
+            "x": "-2.0390646",
+            "repr": "古川俊治",
+            "hiragana": "ふるかわとしはる",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 363,
+            "y": "363",
+            "x": "-2.0386233",
+            "repr": "古川康",
+            "hiragana": "ふるかわやすし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 364,
+            "y": "364",
+            "x": "-2.3891351",
+            "repr": "古川直季",
+            "hiragana": "ふるかわなおき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 365,
+            "y": "365",
+            "x": "-1.3854723",
+            "repr": "古川禎久",
+            "hiragana": "ふるかわよしひさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 366,
+            "y": "366",
+            "x": "-2.6590223",
+            "repr": "古庄玄知",
+            "hiragana": "こしょうはるとも",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 367,
+            "y": "367",
+            "x": "-1.3997817",
+            "repr": "古賀友一郎",
+            "hiragana": "こがゆういちろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 368,
+            "y": "368",
+            "x": "-2.4434266",
+            "repr": "吉井章",
+            "hiragana": "よしいあきら",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 369,
+            "y": "369",
+            "x": "-1.8446544",
+            "repr": "吉川ゆうみ",
+            "hiragana": "よしかわゆうみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 370,
+            "y": "370",
+            "x": "-1.8498149",
+            "repr": "吉田真次",
+            "hiragana": "よしだしんじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 371,
+            "y": "371",
+            "x": "-1.2384665",
+            "repr": "和田政宗",
+            "hiragana": "わだまさむね",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 372,
+            "y": "372",
+            "x": "-2.0932312",
+            "repr": "国光あやの",
+            "hiragana": "くにみつあやの",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 373,
+            "y": "373",
+            "x": "-2.176342",
+            "repr": "国定勇人",
+            "hiragana": "くにさだいさと",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 374,
+            "y": "374",
+            "x": "-1.3711416",
+            "repr": "國場幸之助",
+            "hiragana": "こくばこうのすけ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 375,
+            "y": "375",
+            "x": "-1.3957634",
+            "repr": "土屋品子",
+            "hiragana": "つちやしなこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 376,
+            "y": "376",
+            "x": "-1.6720023",
+            "repr": "土田慎",
+            "hiragana": "つちだしん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 377,
+            "y": "377",
+            "x": "-1.8398814",
+            "repr": "坂井学",
+            "hiragana": "さかいまなぶ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 378,
+            "y": "378",
+            "x": "-1.2760595",
+            "repr": "坂本哲志",
+            "hiragana": "さかもとてつし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 379,
+            "y": "379",
+            "x": "-1.7652979",
+            "repr": "城内実",
+            "hiragana": "きうちみのる",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 380,
+            "y": "380",
+            "x": "-1.5208585",
+            "repr": "堀井巌",
+            "hiragana": "ほりいいわお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 381,
+            "y": "381",
+            "x": "-0.65752417",
+            "repr": "堀内詔子",
+            "hiragana": "ほりうちのりこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 382,
+            "y": "382",
+            "x": "-2.6989005",
+            "repr": "堂故茂",
+            "hiragana": "どうこしげる",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 383,
+            "y": "383",
+            "x": "-1.6721587",
+            "repr": "塩崎彰久",
+            "hiragana": "しおざきあきひさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 384,
+            "y": "384",
+            "x": "-1.6416147",
+            "repr": "大串正樹",
+            "hiragana": "おおぐしまさき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 385,
+            "y": "385",
+            "x": "-1.9856738",
+            "repr": "大家敏志",
+            "hiragana": "おおいえさとし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 386,
+            "y": "386",
+            "x": "-1.5600269",
+            "repr": "大岡敏孝",
+            "hiragana": "おおおかとしたか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 387,
+            "y": "387",
+            "x": "-1.5573326",
+            "repr": "大野敬太郎",
+            "hiragana": "おおのけいたろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 388,
+            "y": "388",
+            "x": "-1.3072248",
+            "repr": "太田房江",
+            "hiragana": "おおたふさえ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 389,
+            "y": "389",
+            "x": "-1.4514891",
+            "repr": "宮下一郎",
+            "hiragana": "みやしたいちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 390,
+            "y": "390",
+            "x": "-1.7688159",
+            "repr": "宮内秀樹",
+            "hiragana": "みやうちひでき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 391,
+            "y": "391",
+            "x": "-1.8997166",
+            "repr": "宮崎政久",
+            "hiragana": "みやざきまさひさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 392,
+            "y": "392",
+            "x": "-1.9776318",
+            "repr": "宮崎雅夫",
+            "hiragana": "みやざきまさお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 393,
+            "y": "393",
+            "x": "-2.1365824",
+            "repr": "宮本周司",
+            "hiragana": "みやもとしゅうじ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 394,
+            "y": "394",
+            "x": "-2.6175575",
+            "repr": "宮沢洋一",
+            "hiragana": "みやざわよういち",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 395,
+            "y": "395",
+            "x": "-1.923561",
+            "repr": "宮路拓馬",
+            "hiragana": "みやじたくま",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 396,
+            "y": "396",
+            "x": "-1.58854",
+            "repr": "寺田稔",
+            "hiragana": "てらだみのる",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 397,
+            "y": "397",
+            "x": "-1.7073473",
+            "repr": "小寺裕雄",
+            "hiragana": "こてらひろお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 398,
+            "y": "398",
+            "x": "-1.8898876",
+            "repr": "小林一大",
+            "hiragana": "こばやしかずひろ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 399,
+            "y": "399",
+            "x": "-2.616158",
+            "repr": "小林史明",
+            "hiragana": "こばやしふみあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 400,
+            "y": "400",
+            "x": "-2.4249704",
+            "repr": "小林茂樹",
+            "hiragana": "こばやししげき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 401,
+            "y": "401",
+            "x": "-1.6002482",
+            "repr": "小林鷹之",
+            "hiragana": "こばやしたかゆき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 402,
+            "y": "402",
+            "x": "-1.9018341",
+            "repr": "小森卓郎",
+            "hiragana": "こもりたくお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 403,
+            "y": "403",
+            "x": "-0.9910276",
+            "repr": "小泉進次郎",
+            "hiragana": "こいずみしんじろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 404,
+            "y": "404",
+            "x": "-2.4199164",
+            "repr": "小泉龍司",
+            "hiragana": "こいずみりゅうじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 405,
+            "y": "405",
+            "x": "-1.7500161",
+            "repr": "小渕優子",
+            "hiragana": "おぶちゆうこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 406,
+            "y": "406",
+            "x": "-1.5367826",
+            "repr": "小野寺五典",
+            "hiragana": "おのでらいつのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 407,
+            "y": "407",
+            "x": "-1.036552",
+            "repr": "小野田紀美",
+            "hiragana": "おのだきみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 408,
+            "y": "408",
+            "x": "-1.896908",
+            "repr": "尾崎正直",
+            "hiragana": "おざきまさなお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 409,
+            "y": "409",
+            "x": "-1.3615211",
+            "repr": "尾辻秀久",
+            "hiragana": "おつじひでひさ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 410,
+            "y": "410",
+            "x": "-2.3358436",
+            "repr": "山下貴司",
+            "hiragana": "やましたたかし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 411,
+            "y": "411",
+            "x": "-1.6584657",
+            "repr": "山下雄平",
+            "hiragana": "やましたゆうへい",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 412,
+            "y": "412",
+            "x": "-1.7029661",
+            "repr": "山口俊一",
+            "hiragana": "やまぐちしゅんいち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 413,
+            "y": "413",
+            "x": "-1.7456774",
+            "repr": "山口壯",
+            "hiragana": "やまぐちつよし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 414,
+            "y": "414",
+            "x": "-2.1167603",
+            "repr": "山崎正昭",
+            "hiragana": "やまざきまさあき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 415,
+            "y": "415",
+            "x": "-1.5229734",
+            "repr": "山本啓介",
+            "hiragana": "やまもとけいすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 416,
+            "y": "416",
+            "x": "-1.9309447",
+            "repr": "山本順三",
+            "hiragana": "やまもとじゅんぞう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 417,
+            "y": "417",
+            "x": "-1.7342763",
+            "repr": "山東昭子",
+            "hiragana": "さんとうあきこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 418,
+            "y": "418",
+            "x": "-1.4600135",
+            "repr": "山田俊男",
+            "hiragana": "やまだとしお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 419,
+            "y": "419",
+            "x": "-1.714638",
+            "repr": "山田太郎",
+            "hiragana": "やまだたろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 420,
+            "y": "420",
+            "x": "-1.9677942",
+            "repr": "山田宏",
+            "hiragana": "やまだひろし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 421,
+            "y": "421",
+            "x": "-1.1624125",
+            "repr": "山田賢司",
+            "hiragana": "やまだけんじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 422,
+            "y": "422",
+            "x": "-1.0749888",
+            "repr": "山谷えり子",
+            "hiragana": "やまたにえりこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 423,
+            "y": "423",
+            "x": "-2.122838",
+            "repr": "山際大志郎",
+            "hiragana": "やまぎわだいしろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 424,
+            "y": "424",
+            "x": "-1.9953488",
+            "repr": "岡田直樹",
+            "hiragana": "おかだなおき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 425,
+            "y": "425",
+            "x": "-1.5378995",
+            "repr": "岩屋毅",
+            "hiragana": "いわやたけし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 426,
+            "y": "426",
+            "x": "-1.2986894",
+            "repr": "岩本剛人",
+            "hiragana": "いわもとつよひと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 427,
+            "y": "427",
+            "x": "-1.2945602",
+            "repr": "岩田和親",
+            "hiragana": "いわたかずちか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 428,
+            "y": "428",
+            "x": "-1.8456036",
+            "repr": "岸信千世",
+            "hiragana": "きしのぶちよ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 429,
+            "y": "429",
+            "x": "-1.4293962",
+            "repr": "岸田文雄",
+            "hiragana": "きしだふみお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 430,
+            "y": "430",
+            "x": "-1.4014826",
+            "repr": "島尻安伊子",
+            "hiragana": "しまじりあいこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 431,
+            "y": "431",
+            "x": "-2.11321",
+            "repr": "川崎ひでと",
+            "hiragana": "かわさきひでと",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 432,
+            "y": "432",
+            "x": "-1.3564708",
+            "repr": "平井卓也",
+            "hiragana": "ひらいたくや",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 433,
+            "y": "433",
+            "x": "-1.8945849",
+            "repr": "平口洋",
+            "hiragana": "ひらぐちひろし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 434,
+            "y": "434",
+            "x": "-2.3348944",
+            "repr": "平将明",
+            "hiragana": "たいらまさあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 435,
+            "y": "435",
+            "x": "-1.6675886",
+            "repr": "平沢勝栄",
+            "hiragana": "ひらさわかつえい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 436,
+            "y": "436",
+            "x": "-2.0102777",
+            "repr": "平沼正二郎",
+            "hiragana": "ひらぬましょうじろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 437,
+            "y": "437",
+            "x": "-1.7858733",
+            "repr": "後藤茂之",
+            "hiragana": "ごとうしげゆき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 438,
+            "y": "438",
+            "x": "-2.2726498",
+            "repr": "御法川信英",
+            "hiragana": "みのりかわのぶひで",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 439,
+            "y": "439",
+            "x": "-1.267733",
+            "repr": "斎藤洋明",
+            "hiragana": "さいとうひろあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 440,
+            "y": "440",
+            "x": "-1.7475597",
+            "repr": "新藤義孝",
+            "hiragana": "しんどうよしたか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 441,
+            "y": "441",
+            "x": "-1.7152942",
+            "repr": "星北斗",
+            "hiragana": "ほしほくと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 442,
+            "y": "442",
+            "x": "-2.0432835",
+            "repr": "星野剛士",
+            "hiragana": "ほしのつよし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 443,
+            "y": "443",
+            "x": "-0.95888627",
+            "repr": "有村治子",
+            "hiragana": "ありむらはるこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 444,
+            "y": "444",
+            "x": "-1.363245",
+            "repr": "朝日健太郎",
+            "hiragana": "あさひけんたろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 445,
+            "y": "445",
+            "x": "-0.864965",
+            "repr": "木原稔",
+            "hiragana": "きはらみのる",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 446,
+            "y": "446",
+            "x": "-2.0175061",
+            "repr": "木原誠二",
+            "hiragana": "きはらせいじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 447,
+            "y": "447",
+            "x": "-1.9828112",
+            "repr": "末松信介",
+            "hiragana": "すえまつしんすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 448,
+            "y": "448",
+            "x": "-1.7935473",
+            "repr": "本田太郎",
+            "hiragana": "ほんだたろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 449,
+            "y": "449",
+            "x": "-2.1584127",
+            "repr": "本田顕子",
+            "hiragana": "ほんだあきこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 450,
+            "y": "450",
+            "x": "-2.1026804",
+            "repr": "村上誠一郎",
+            "hiragana": "むらかみせいいちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 451,
+            "y": "451",
+            "x": "-1.8021263",
+            "repr": "村井英樹",
+            "hiragana": "むらいひでき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 452,
+            "y": "452",
+            "x": "-2.0827556",
+            "repr": "東国幹",
+            "hiragana": "あずまくによし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 453,
+            "y": "453",
+            "x": "-2.1634812",
+            "repr": "松下新平",
+            "hiragana": "まつしたしんぺい",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 454,
+            "y": "454",
+            "x": "-1.965655",
+            "repr": "松山政司",
+            "hiragana": "まつやままさじ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 455,
+            "y": "455",
+            "x": "-2.2969327",
+            "repr": "松島みどり",
+            "hiragana": "まつしまみどり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 456,
+            "y": "456",
+            "x": "-1.2167321",
+            "repr": "松川るい",
+            "hiragana": "まつかわるい",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 457,
+            "y": "457",
+            "x": "-2.0591702",
+            "repr": "松本剛明",
+            "hiragana": "まつもとたけあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 458,
+            "y": "458",
+            "x": "-1.7104114",
+            "repr": "松本尚",
+            "hiragana": "まつもとひさし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 459,
+            "y": "459",
+            "x": "-1.8924762",
+            "repr": "松本洋平",
+            "hiragana": "まつもとようへい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 460,
+            "y": "460",
+            "x": "-1.4000396",
+            "repr": "松村祥史",
+            "hiragana": "まつむらよしふみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 461,
+            "y": "461",
+            "x": "-1.350455",
+            "repr": "松野博一",
+            "hiragana": "まつのひろかず",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 462,
+            "y": "462",
+            "x": "-1.3212616",
+            "repr": "林芳正",
+            "hiragana": "はやしよしまさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 463,
+            "y": "463",
+            "x": "-1.9257448",
+            "repr": "柘植芳文",
+            "hiragana": "つげよしふみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 464,
+            "y": "464",
+            "x": "-2.1033344",
+            "repr": "柴山昌彦",
+            "hiragana": "しばやままさひこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 465,
+            "y": "465",
+            "x": "-1.6319108",
+            "repr": "根本幸典",
+            "hiragana": "ねもとゆきのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 466,
+            "y": "466",
+            "x": "-2.1831443",
+            "repr": "梶原大介",
+            "hiragana": "かじはらだいすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 467,
+            "y": "467",
+            "x": "-1.9489049",
+            "repr": "梶山弘志",
+            "hiragana": "かじやまひろし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 468,
+            "y": "468",
+            "x": "-2.6816502",
+            "repr": "棚橋泰文",
+            "hiragana": "たなはしやすふみ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 469,
+            "y": "469",
+            "x": "-1.1915925",
+            "repr": "森まさこ",
+            "hiragana": "もりまさこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 470,
+            "y": "470",
+            "x": "-2.0588121",
+            "repr": "森屋宏",
+            "hiragana": "もりやひろし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 471,
+            "y": "471",
+            "x": "-1.3474011",
+            "repr": "森山裕",
+            "hiragana": "もりやまひろし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 472,
+            "y": "472",
+            "x": "-2.243114",
+            "repr": "森英介",
+            "hiragana": "もりえいすけ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 473,
+            "y": "473",
+            "x": "-1.8509878",
+            "repr": "橋本聖子",
+            "hiragana": "はしもとせいこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 474,
+            "y": "474",
+            "x": "-2.0006275",
+            "repr": "橘慶一郎",
+            "hiragana": "たちばなけいいちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 475,
+            "y": "475",
+            "x": "-1.669782",
+            "repr": "櫻井充",
+            "hiragana": "さくらいみつる",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 476,
+            "y": "476",
+            "x": "-1.3111073",
+            "repr": "武村展英",
+            "hiragana": "たけむらのぶひで",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 477,
+            "y": "477",
+            "x": "-1.9620987",
+            "repr": "武藤容治",
+            "hiragana": "むとうようじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 478,
+            "y": "478",
+            "x": "-1.6575439",
+            "repr": "武見敬三",
+            "hiragana": "たけみけいぞう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 479,
+            "y": "479",
+            "x": "-2.3986475",
+            "repr": "武部新",
+            "hiragana": "たけべあらた",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 480,
+            "y": "480",
+            "x": "-1.4623679",
+            "repr": "比嘉奈津美",
+            "hiragana": "ひがなつみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 481,
+            "y": "481",
+            "x": "-1.4151301",
+            "repr": "永岡桂子",
+            "hiragana": "ながおかけいこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 482,
+            "y": "482",
+            "x": "-2.0946004",
+            "repr": "江島潔",
+            "hiragana": "えじまきよし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 483,
+            "y": "483",
+            "x": "-1.1568152",
+            "repr": "江渡聡徳",
+            "hiragana": "えとあきのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 484,
+            "y": "484",
+            "x": "-1.0354751",
+            "repr": "江藤拓",
+            "hiragana": "えとうたく",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 485,
+            "y": "485",
+            "x": "-1.2029935",
+            "repr": "河野太郎",
+            "hiragana": "こうのたろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 486,
+            "y": "486",
+            "x": "-1.3024956",
+            "repr": "津島淳",
+            "hiragana": "つしまじゅん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 487,
+            "y": "487",
+            "x": "-1.4937695",
+            "repr": "浅尾慶一郎",
+            "hiragana": "あさおけいいちろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 488,
+            "y": "488",
+            "x": "-0.4174326",
+            "repr": "浜田靖一",
+            "hiragana": "はまだやすかず",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 489,
+            "y": "489",
+            "x": "-2.5378213",
+            "repr": "深澤陽一",
+            "hiragana": "ふかざわよういち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 490,
+            "y": "490",
+            "x": "-1.628963",
+            "repr": "清水真人",
+            "hiragana": "しみずまさと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 491,
+            "y": "491",
+            "x": "-2.0856187",
+            "repr": "渡海紀三朗",
+            "hiragana": "とかいきさぶろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 492,
+            "y": "492",
+            "x": "-2.032351",
+            "repr": "滝沢求",
+            "hiragana": "たきさわもとめ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 493,
+            "y": "493",
+            "x": "-1.893073",
+            "repr": "滝波宏文",
+            "hiragana": "たきなみひろふみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 494,
+            "y": "494",
+            "x": "-2.0858536",
+            "repr": "瀬戸隆一",
+            "hiragana": "せとたかかず",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 495,
+            "y": "495",
+            "x": "-1.756956",
+            "repr": "片山さつき",
+            "hiragana": "かたやまさつき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 496,
+            "y": "496",
+            "x": "-2.2262409",
+            "repr": "牧島かれん",
+            "hiragana": "まきしまかれん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 497,
+            "y": "497",
+            "x": "-2.121445",
+            "repr": "牧野たかお",
+            "hiragana": "まきのたかお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 498,
+            "y": "498",
+            "x": "-1.1766447",
+            "repr": "猪口邦子",
+            "hiragana": "いのぐちくにこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 499,
+            "y": "499",
+            "x": "-1.901044",
+            "repr": "生稲晃子",
+            "hiragana": "いくいなあきこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 500,
+            "y": "500",
+            "x": "-1.526261",
+            "repr": "田中和徳",
+            "hiragana": "たなかかずのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 501,
+            "y": "501",
+            "x": "-1.6358064",
+            "repr": "田中良生",
+            "hiragana": "たなかりょうせい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 502,
+            "y": "502",
+            "x": "-1.6129774",
+            "repr": "田所嘉徳",
+            "hiragana": "たどころよしのり",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 503,
+            "y": "503",
+            "x": "-1.4838152",
+            "repr": "田村憲久",
+            "hiragana": "たむらのりひさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 504,
+            "y": "504",
+            "x": "-2.2426453",
+            "repr": "田畑裕明",
+            "hiragana": "たばたひろあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 505,
+            "y": "505",
+            "x": "-2.2363393",
+            "repr": "石井正弘",
+            "hiragana": "いしいまさひろ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 506,
+            "y": "506",
+            "x": "-2.3184054",
+            "repr": "石井浩郎",
+            "hiragana": "いしいひろお",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 507,
+            "y": "507",
+            "x": "-1.6435564",
+            "repr": "石井準一",
+            "hiragana": "いしいじゅんいち",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 508,
+            "y": "508",
+            "x": "-1.1735342",
+            "repr": "石原宏高",
+            "hiragana": "いしはらひろたか",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 509,
+            "y": "509",
+            "x": "-2.0047152",
+            "repr": "石橋林太郎",
+            "hiragana": "いしばしりんたろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 510,
+            "y": "510",
+            "x": "-1.6441532",
+            "repr": "石田昌宏",
+            "hiragana": "いしだまさひろ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 511,
+            "y": "511",
+            "x": "-1.9507817",
+            "repr": "石田真敏",
+            "hiragana": "いしだまさとし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 512,
+            "y": "512",
+            "x": "-1.5672995",
+            "repr": "石破茂",
+            "hiragana": "いしばしげる",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 513,
+            "y": "513",
+            "x": "-1.502557",
+            "repr": "磯崎仁彦",
+            "hiragana": "いそざきよしひこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 514,
+            "y": "514",
+            "x": "-2.0587165",
+            "repr": "神田潤一",
+            "hiragana": "かんだじゅんいち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 515,
+            "y": "515",
+            "x": "-1.692789",
+            "repr": "福岡資麿",
+            "hiragana": "ふくおかたかまろ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 516,
+            "y": "516",
+            "x": "-0.9550132",
+            "repr": "福田達夫",
+            "hiragana": "ふくだたつお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 517,
+            "y": "517",
+            "x": "-1.2957462",
+            "repr": "稲田朋美",
+            "hiragana": "いなだともみ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 518,
+            "y": "518",
+            "x": "-2.4677122",
+            "repr": "穂坂泰",
+            "hiragana": "ほさかやすし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 519,
+            "y": "519",
+            "x": "-0.7422061",
+            "repr": "笹川博義",
+            "hiragana": "ささがわひろよし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 520,
+            "y": "520",
+            "x": "-1.4365872",
+            "repr": "簗和生",
+            "hiragana": "やなかずお",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 521,
+            "y": "521",
+            "x": "-1.6081679",
+            "repr": "細野豪志",
+            "hiragana": "ほそのごうし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 522,
+            "y": "522",
+            "x": "-1.4470108",
+            "repr": "羽生田俊",
+            "hiragana": "はにゅうだたかし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 523,
+            "y": "523",
+            "x": "-1.8749015",
+            "repr": "自見はなこ",
+            "hiragana": "じみはなこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 524,
+            "y": "524",
+            "x": "-1.4377898",
+            "repr": "臼井正一",
+            "hiragana": "うすいしょういち",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 525,
+            "y": "525",
+            "x": "-2.0530324",
+            "repr": "舞立昇治",
+            "hiragana": "まいたちしょうじ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 526,
+            "y": "526",
+            "x": "-2.1076884",
+            "repr": "船橋利実",
+            "hiragana": "ふなはしとしみつ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 527,
+            "y": "527",
+            "x": "-2.0480363",
+            "repr": "船田元",
+            "hiragana": "ふなだはじめ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 528,
+            "y": "528",
+            "x": "-1.5888956",
+            "repr": "若林洋平",
+            "hiragana": "わかばやしようへい",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 529,
+            "y": "529",
+            "x": "-2.6263714",
+            "repr": "英利アルフィヤ",
+            "hiragana": "えりあるふぃや",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 530,
+            "y": "530",
+            "x": "-1.4878783",
+            "repr": "茂木敏充",
+            "hiragana": "もてぎとしみつ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 531,
+            "y": "531",
+            "x": "-1.4133799",
+            "repr": "菅義偉",
+            "hiragana": "すがよしひで",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 532,
+            "y": "532",
+            "x": "-1.1363647",
+            "repr": "萩生田光一",
+            "hiragana": "はぎうだこういち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 533,
+            "y": "533",
+            "x": "-1.2991865",
+            "repr": "葉梨康弘",
+            "hiragana": "はなしやすひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 534,
+            "y": "534",
+            "x": "-2.0356896",
+            "repr": "藤丸敏",
+            "hiragana": "ふじまるさとし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 535,
+            "y": "535",
+            "x": "-2.6133912",
+            "repr": "藤井一博",
+            "hiragana": "ふじいかずひろ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 536,
+            "y": "536",
+            "x": "-2.161729",
+            "repr": "藤井比早之",
+            "hiragana": "ふじいひさゆき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 537,
+            "y": "537",
+            "x": "-2.4961889",
+            "repr": "藤川政人",
+            "hiragana": "ふじかわまさひと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 538,
+            "y": "538",
+            "x": "-1.429732",
+            "repr": "藤木眞也",
+            "hiragana": "ふじきしんや",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 539,
+            "y": "539",
+            "x": "-2.5305734",
+            "repr": "衛藤晟一",
+            "hiragana": "えとうせいいち",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 540,
+            "y": "540",
+            "x": "-1.3371794",
+            "repr": "西村康稔",
+            "hiragana": "にしむらやすとし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 541,
+            "y": "541",
+            "x": "-2.0770683",
+            "repr": "西田昌司",
+            "hiragana": "にしだしょうじ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 542,
+            "y": "542",
+            "x": "-2.3724298",
+            "repr": "西田昭二",
+            "hiragana": "にしだしょうじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 543,
+            "y": "543",
+            "x": "-1.5293999",
+            "repr": "西野太亮",
+            "hiragana": "にしのだいすけ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 544,
+            "y": "544",
+            "x": "-1.4753284",
+            "repr": "西銘恒三郎",
+            "hiragana": "にしめこうさぶろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 545,
+            "y": "545",
+            "x": "-1.465753",
+            "repr": "谷公一",
+            "hiragana": "たにこういち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 546,
+            "y": "546",
+            "x": "-2.408317",
+            "repr": "豊田俊郎",
+            "hiragana": "とよだとしろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 547,
+            "y": "547",
+            "x": "-1.560212",
+            "repr": "赤池誠章",
+            "hiragana": "あかいけまさあき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 548,
+            "y": "548",
+            "x": "-1.0606587",
+            "repr": "赤澤亮正",
+            "hiragana": "あかざわりょうせい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 549,
+            "y": "549",
+            "x": "-1.8237557",
+            "repr": "越智俊之",
+            "hiragana": "おちとしゆき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 550,
+            "y": "550",
+            "x": "-1.0490478",
+            "repr": "足立敏之",
+            "hiragana": "あだちとしゆき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 551,
+            "y": "551",
+            "x": "-1.7464056",
+            "repr": "辻清人",
+            "hiragana": "つじきよと",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 552,
+            "y": "552",
+            "x": "-2.2290895",
+            "repr": "逢沢一郎",
+            "hiragana": "あいさわいちろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 553,
+            "y": "553",
+            "x": "-2.0183334",
+            "repr": "進藤金日子",
+            "hiragana": "しんどうかねひこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 554,
+            "y": "554",
+            "x": "-1.8922559",
+            "repr": "遠藤利明",
+            "hiragana": "えんどうとしあき",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 555,
+            "y": "555",
+            "x": "-2.2141979",
+            "repr": "酒井庸行",
+            "hiragana": "さかいやすゆき",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 556,
+            "y": "556",
+            "x": "-1.7561513",
+            "repr": "野上浩太郎",
+            "hiragana": "のがみこうたろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 557,
+            "y": "557",
+            "x": "-1.4982696",
+            "repr": "野中厚",
+            "hiragana": "のなかあつし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 558,
+            "y": "558",
+            "x": "-1.2104356",
+            "repr": "野村哲郎",
+            "hiragana": "のむらてつろう",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 559,
+            "y": "559",
+            "x": "-1.4127896",
+            "repr": "野田聖子",
+            "hiragana": "のだせいこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 560,
+            "y": "560",
+            "x": "-1.7971687",
+            "repr": "金子恭之",
+            "hiragana": "かねこやすし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 561,
+            "y": "561",
+            "x": "-1.4559504",
+            "repr": "鈴木俊一",
+            "hiragana": "すずきしゅんいち",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 562,
+            "y": "562",
+            "x": "-1.6284444",
+            "repr": "鈴木憲和",
+            "hiragana": "すずきのりかず",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 563,
+            "y": "563",
+            "x": "-1.7459631",
+            "repr": "鈴木英敬",
+            "hiragana": "すずきえいけい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 564,
+            "y": "564",
+            "x": "-0.4312302",
+            "repr": "鈴木貴子",
+            "hiragana": "すずきたかこ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 565,
+            "y": "565",
+            "x": "-1.7513953",
+            "repr": "鈴木隼人",
+            "hiragana": "すずきはやと",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 566,
+            "y": "566",
+            "x": "-1.6007841",
+            "repr": "鈴木馨祐",
+            "hiragana": "すずきけいすけ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 567,
+            "y": "567",
+            "x": "-2.3839538",
+            "repr": "長坂康正",
+            "hiragana": "ながさかやすまさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 568,
+            "y": "568",
+            "x": "-2.092937",
+            "repr": "長峯誠",
+            "hiragana": "ながみねまこと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 569,
+            "y": "569",
+            "x": "-1.6711603",
+            "repr": "長島昭久",
+            "hiragana": "ながしまあきひさ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 570,
+            "y": "570",
+            "x": "-1.9739267",
+            "repr": "長谷川岳",
+            "hiragana": "はせがわがく",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 571,
+            "y": "571",
+            "x": "-1.6504751",
+            "repr": "長谷川淳二",
+            "hiragana": "はせがわじゅんじ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 572,
+            "y": "572",
+            "x": "-1.6527566",
+            "repr": "関芳弘",
+            "hiragana": "せきよしひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 573,
+            "y": "573",
+            "x": "-1.8387935",
+            "repr": "阿達雅志",
+            "hiragana": "あだちまさし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 574,
+            "y": "574",
+            "x": "-1.9962529",
+            "repr": "青山繁晴",
+            "hiragana": "あおやましげはる",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 575,
+            "y": "575",
+            "x": "-1.4904442",
+            "repr": "青木一彦",
+            "hiragana": "あおきかずひこ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 576,
+            "y": "576",
+            "x": "-1.5081022",
+            "repr": "馬場成志",
+            "hiragana": "ばばせいし",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 577,
+            "y": "577",
+            "x": "-1.8425258",
+            "repr": "高市早苗",
+            "hiragana": "たかいちさなえ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 578,
+            "y": "578",
+            "x": "-1.6038742",
+            "repr": "高木啓",
+            "hiragana": "たかぎけい",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 579,
+            "y": "579",
+            "x": "-1.5123986",
+            "repr": "高村正大",
+            "hiragana": "こうむらまさひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 580,
+            "y": "580",
+            "x": "-1.5589871",
+            "repr": "高橋はるみ",
+            "hiragana": "たかはしはるみ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 581,
+            "y": "581",
+            "x": "-2.1610708",
+            "repr": "高橋克法",
+            "hiragana": "たかはしかつのり",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 582,
+            "y": "582",
+            "x": "-2.7057593",
+            "repr": "高見康裕",
+            "hiragana": "たかみやすひろ",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 583,
+            "y": "583",
+            "x": "-1.1458236",
+            "repr": "鬼木誠",
+            "hiragana": "おにきまこと",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 584,
+            "y": "584",
+            "x": "-1.3488849",
+            "repr": "鳩山二郎",
+            "hiragana": "はとやまじろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 585,
+            "y": "585",
+            "x": "-1.440013",
+            "repr": "鶴保庸介",
+            "hiragana": "つるほようすけ",
+            "house": "upper",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 586,
+            "y": "586",
+            "x": "-1.3142383",
+            "repr": "麻生太郎",
+            "hiragana": "あそうたろう",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 587,
+            "y": "587",
+            "x": "-1.7063923",
+            "repr": "黄川田仁志",
+            "hiragana": "きかわだひとし",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 588,
+            "y": "588",
+            "x": "-1.2498182",
+            "repr": "齋藤健",
+            "hiragana": "さいとうけん",
+            "house": "lower",
+            "party": "自民",
+            "color": "black"
+        },
+        {
+            "idx": 589,
+            "y": "589",
+            "x": "-1.6602452",
+            "repr": "浜田聡",
+            "hiragana": "はまださとし",
+            "house": "upper",
+            "party": "Ｎ党",
+            "color": "lightcoral"
+        },
+        {
+            "idx": 590,
+            "y": "590",
+            "x": "-1.9771613",
+            "repr": "齊藤健一郎",
+            "hiragana": "さいとうけんいちろう",
+            "house": "upper",
+            "party": "Ｎ党",
+            "color": "lightcoral"
+        }
+    ]
+}

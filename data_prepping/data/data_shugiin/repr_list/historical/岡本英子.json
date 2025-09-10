@@ -1,0 +1,39 @@
+{
+    "name_kanji": "岡本英子",
+    "name_kana": "おかもとえいこ",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "神奈川3区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "日本未来の党",
+            "result": "落選",
+            "election_freq": " ※神奈川3区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※神奈川2区落選"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name_kanji": "坂口主税",
+    "name_kana": "さかぐちちから",
+    "years": [
+        "1947-04-25",
+        "1949-01-23"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1949年",
+            "month": "1月",
+            "day": "23日",
+            "election_name": "第24回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "熊本1区",
+            "party": "改進党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "name_kanji": "谷口是巨",
+    "name_kana": "たにぐちよしのり",
+    "years": [
+        "1976-12-05",
+        "1979-10-07"
+    ],
+    "election_data": [
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "長崎1区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "長崎1区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第36回衆議院議員総選挙",
+            "district": "長崎1区",
+            "party": "公明党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

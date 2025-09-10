@@ -1,0 +1,41 @@
+{
+    "party": "自民",
+    "repr_name": "徳田毅",
+    "topic": "原発",
+    "search_words": [
+        "原発",
+        "原子力発電",
+        "再稼働",
+        "廃炉",
+        "核燃料",
+        "放射能",
+        "放射性廃棄物",
+        "エネルギー政策",
+        "ベースロード電源",
+        "福島第一原発"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117704376X02920110720_038",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2011-07-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117704376X02920110720/38",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "そしてまた、原発の対応、今回の第二次補正予算、原発関連について、被災者の生活支援について、そうしたところも私は不十分ではないか"
+            ]
+        },
+        {
+            "speech_id": "117704376X01820110511_047",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2011-05-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117704376X01820110511/47",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "原発の問題もあります"
+            ]
+        }
+    ]
+}

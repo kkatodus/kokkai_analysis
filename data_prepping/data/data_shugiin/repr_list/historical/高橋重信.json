@@ -1,0 +1,39 @@
+{
+    "name_kanji": "高橋重信",
+    "name_kana": "たかはししげのぶ、たかはしじゅうしん",
+    "years": [
+        "1963-11-21"
+    ],
+    "election_data": [
+        {
+            "year": "1964年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "補欠選挙",
+            "district": "岐阜1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "岐阜1区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "岐阜1区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

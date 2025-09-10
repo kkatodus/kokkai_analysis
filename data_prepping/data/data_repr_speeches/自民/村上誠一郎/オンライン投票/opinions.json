@@ -1,0 +1,23 @@
+{
+    "party": "自民",
+    "repr_name": "村上誠一郎",
+    "topic": "オンライン投票",
+    "search_words": [
+        "オンライン投票",
+        "電子投票",
+        "ネット投票"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121614601X00320241219_074",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2024-12-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121614601X00320241219/74",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　御指摘のインターネット投票については、有権者の利便性の向上に資するものと認識しております"
+            ]
+        }
+    ]
+}

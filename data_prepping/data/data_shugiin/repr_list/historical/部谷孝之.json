@@ -1,0 +1,50 @@
+{
+    "name_kanji": "部谷孝之",
+    "name_kana": "へやたかゆき",
+    "years": [
+        "1979-10-07",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "山口2区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第36回衆議院議員総選挙",
+            "district": "山口2区",
+            "party": "民社党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "第37回衆議院議員総選挙",
+            "district": "山口2区",
+            "party": "民社党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第38回衆議院議員総選挙",
+            "district": "山口2区",
+            "party": "民社党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

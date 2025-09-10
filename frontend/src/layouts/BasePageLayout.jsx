@@ -33,14 +33,14 @@ export default function BasePageLayout(props) {
           <Link className="back-icon" to={backTo}>
             <MdOutlineArrowBack />
           </Link>
-          <div className={`${headerComponent ? 'w-[30%]' : 'w-full'}`}>
+          <div className={`${headerComponent ? '' : 'w-full'}`}>
             <h1 className={`${isMobile ? 'text-md' : 'text-2xl px-3'}  `}>
               {pageTitle}
             </h1>
             <h3 className="text-lg">{pageSubtitle}</h3>
           </div>
           {headerComponent && (
-            <div className="h-full w-[70%]">{headerComponent}</div>
+            <div className="h-full flex-1">{headerComponent}</div>
           )}
         </div>
         <div

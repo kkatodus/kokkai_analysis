@@ -1,0 +1,60 @@
+{
+    "name_kanji": "椎木保",
+    "name_kana": "しいきたもつ",
+    "years": [
+        "2012-12-16",
+        "2014-12-14"
+    ],
+    "election_data": [
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "日本維新の会",
+            "result": "当選",
+            "election_freq": "（1回目） ※千葉13区落選"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "維新の党",
+            "result": "落選",
+            "election_freq": " ※大阪2区落選"
+        },
+        {
+            "year": "2015年",
+            "month": "10月",
+            "day": "9日",
+            "election_name": "同",
+            "district": "近畿ブロック",
+            "party": "維新の党",
+            "result": "繰上",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "日本維新の会",
+            "result": "落選",
+            "election_freq": " ※大阪2区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "日本維新の会",
+            "result": "落選",
+            "election_freq": " ※千葉5区落選"
+        }
+    ]
+}

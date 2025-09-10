@@ -1,0 +1,21 @@
+{
+    "party": "自民",
+    "repr_name": "松山政司",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120815254X00220220120_006",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2022-01-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120815254X00220220120/6",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "\r\n　我が国の成長を支えるデジタル化を推進するには、デジタル社会の安心、安全のためのパスポートであるマイナンバーカードの活用が不可欠です"
+            ]
+        }
+    ]
+}

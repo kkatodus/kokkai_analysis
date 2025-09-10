@@ -1,0 +1,84 @@
+{
+    "name_kanji": "赤間二郎、あかま二郎",
+    "name_kana": "あかまじろう",
+    "years": [
+        "2005-09-11",
+        "2012-12-16",
+        "2014-12-14",
+        "2017-10-22",
+        "2021-10-31",
+        "2024-10-27"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": " ※神奈川14区落選"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "神奈川14区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        }
+    ]
+}

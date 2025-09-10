@@ -1,0 +1,23 @@
+{
+    "party": "立憲",
+    "repr_name": "原口一博",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120405254X03420210615_010",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2021-06-15",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120405254X03420210615/10",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "なぜ選択的夫婦別姓もＬＧＢＴ差別解消もできないんでしょうか"
+            ]
+        }
+    ]
+}

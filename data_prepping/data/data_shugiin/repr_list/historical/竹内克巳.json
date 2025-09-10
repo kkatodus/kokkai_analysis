@@ -1,0 +1,29 @@
+{
+    "name_kanji": "竹内克巳",
+    "name_kana": "たけうちかつみ",
+    "years": [
+        "1947-04-25"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "京都1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1949年",
+            "month": "1月",
+            "day": "23日",
+            "election_name": "第24回衆議院議員総選挙",
+            "district": "京都1区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name_kanji": "江藤夏雄",
+    "name_kana": "えとうなつお",
+    "years": [
+        "1952-10-01",
+        "1953-04-19"
+    ],
+    "election_data": [
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "1月",
+            "day": "5日",
+            "election_name": "同",
+            "district": "佐賀全県区",
+            "party": "自由党",
+            "result": "繰上",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "吉田自由党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "佐賀全県区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

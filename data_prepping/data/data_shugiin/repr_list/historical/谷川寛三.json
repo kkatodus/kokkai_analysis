@@ -1,0 +1,29 @@
+{
+    "name_kanji": "谷川寛三",
+    "name_kana": "たにがわかんぞう",
+    "years": [
+        "1976-12-05"
+    ],
+    "election_data": [
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "高知全県区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "高知全県区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

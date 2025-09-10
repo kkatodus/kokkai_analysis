@@ -1,0 +1,59 @@
+{
+    "name_kanji": "外崎千代吉",
+    "name_kana": "とのさきちよきち、とのざきちよきち",
+    "years": [
+        "1947-04-25"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "社会革新党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1949年",
+            "month": "1月",
+            "day": "23日",
+            "election_name": "第24回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "社会革新党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "協同党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "右派社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1960年",
+            "month": "11月",
+            "day": "20日",
+            "election_name": "第29回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "民主社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

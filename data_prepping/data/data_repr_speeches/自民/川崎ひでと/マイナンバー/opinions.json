@@ -1,0 +1,43 @@
+{
+    "party": "自民",
+    "repr_name": "川崎ひでと",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121305273X00220240228_189",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第八分科会",
+            "date": "2024-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305273X00220240228/189",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "これはまさに、マイナンバーカードとＳｕｉｃａ、こうしたものをがっちゃんこしてやっているような事業になりますので、大変面白い事業だと思っています"
+            ]
+        },
+        {
+            "speech_id": "121004601X00220221027_009",
+            "house_name": "衆議院",
+            "meeting_name": "総務委員会",
+            "date": "2022-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121004601X00220221027/9",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "片方はマイナンバーカードで電子化を行っていて、片方は紙で発行するというのは、非常に違和感を覚えます"
+            ]
+        },
+        {
+            "speech_id": "121004601X00220221027_013",
+            "house_name": "衆議院",
+            "meeting_name": "総務委員会",
+            "date": "2022-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121004601X00220221027/13",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　また、このマイナンバーカードを普及させるためには、様々なやり方を取り入れることがよいと考えております"
+            ]
+        }
+    ]
+}

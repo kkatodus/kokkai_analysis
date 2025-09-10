@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Proptypes from 'prop-types';
 
 const buttonStyle =
-  'border-2 border-grey-500 w-[20px] h-[20px] flex items-center justify-center rounded-lg';
+  'border-2 border-grey-500 w-[20px] h-[20px] flex items-center justify-center rounded-lg hover:scale-125 transition-all duration-200 ease-in-out';
 
 export default function ItemDisplay({ item, setItems }) {
   const [quantity, setQuantity] = React.useState(0);
@@ -16,7 +16,7 @@ export default function ItemDisplay({ item, setItems }) {
 
   return (
     <div
-      className="m-2 flex flex-col justify-center items-center"
+      className="m-2 flex flex-col justify-center items-center h-[80%]"
       key={item.id}
     >
       <div className="flex justify-center items-center">
@@ -43,11 +43,11 @@ export default function ItemDisplay({ item, setItems }) {
         </button>
       </div>
       <div
-        className={`${item.color} h-[100px] w-[100px] flex justify-center items-center rounded-lg`}
+        className={`${item.color} w-auto flex justify-evenly items-center rounded-lg flex-col px-3 h-[80%]`}
       >
-        <p className="text-center">{item.name}</p>
+        <p className="text-center whitespace-nowrap">{item.name}</p>
+        <p>{item.price}円</p>
       </div>
-      <div>{item.price}円</div>
     </div>
   );
 }

@@ -55,7 +55,7 @@ export default function SangiinCommitteePage() {
             key={comName}
             title={`${comName}（${numReps}）`}
             content={comRepsComponents}
-            extraStyles={{ title: '', content: 'card-container' }}
+            extraStyles={{ title: '', content: 'flex flex-wrap justify-center' }}
           />
         );
       });

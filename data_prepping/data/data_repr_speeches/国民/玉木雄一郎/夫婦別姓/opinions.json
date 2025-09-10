@@ -1,0 +1,34 @@
+{
+    "party": "国民",
+    "repr_name": "玉木雄一郎",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120105254X00220200122_019",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2020-01-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120105254X00220200122/19",
+            "speaker_group": "立憲民主・国民・社保・無所属フォーラム",
+            "extracted_opinions": [
+                "速やかに選択的夫婦別姓を実現すべきと考えますが、総理の見解を伺います"
+            ]
+        },
+        {
+            "speech_id": "119705254X00220181029_011",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2018-10-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119705254X00220181029/11",
+            "speaker_group": "国民民主党・無所属クラブ",
+            "extracted_opinions": [
+                "このほかにも、選択的夫婦別姓、尊厳死、そして、女性宮家、女性天皇の問題など、自民党には主張できない政策や社会像を議論し、示しながら、日本が進むべき新しい道を示してまいります"
+            ]
+        }
+    ]
+}

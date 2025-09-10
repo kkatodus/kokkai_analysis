@@ -1,0 +1,34 @@
+{
+    "party": "共産",
+    "repr_name": "赤嶺政賢",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121604183X00120241219_021",
+            "house_name": "衆議院",
+            "meeting_name": "憲法審査会",
+            "date": "2024-12-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121604183X00120241219/21",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　さらに、同性婚や選択的夫婦別姓、学費や教育費の無償化、貧困と格差、冤罪と再審請求、外国人の人権など、全てが憲法問題です"
+            ]
+        },
+        {
+            "speech_id": "121004183X00220221027_016",
+            "house_name": "衆議院",
+            "meeting_name": "憲法審査会",
+            "date": "2022-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121004183X00220221027/16",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　夫婦別姓や同性婚など、ジェンダー政策は、個人の尊厳と基本的人権に関わる問題です"
+            ]
+        }
+    ]
+}

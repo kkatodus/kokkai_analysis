@@ -1,0 +1,29 @@
+{
+    "name_kanji": "大宮伍三郎",
+    "name_kana": "おおみやごさぶろう",
+    "years": [
+        "1947-04-25"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "広島3区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "広島3区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

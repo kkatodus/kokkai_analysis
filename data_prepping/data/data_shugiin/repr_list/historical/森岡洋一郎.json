@@ -1,0 +1,29 @@
+{
+    "name_kanji": "森岡洋一郎",
+    "name_kana": "もりおかよういちろう",
+    "years": [
+        "2009-08-30"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "埼玉13区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "北関東ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※埼玉13区落選"
+        }
+    ]
+}

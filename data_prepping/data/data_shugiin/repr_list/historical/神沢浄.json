@@ -1,0 +1,29 @@
+{
+    "name_kanji": "神沢浄",
+    "name_kana": "かんざわきよし",
+    "years": [
+        "1979-10-07"
+    ],
+    "election_data": [
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "山梨全県区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第36回衆議院議員総選挙",
+            "district": "山梨全県区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

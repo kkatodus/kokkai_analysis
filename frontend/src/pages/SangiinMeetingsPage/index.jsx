@@ -41,7 +41,7 @@ function SangiinMeetingsPage() {
       backTo="/sangiin_menu"
       pageTitle="投票記録"
       MainContent={PageContent}
-      extraStyles={{ content: 'flex flex-col items-center' }}
+      extraStyles={{ content: 'flex flex-wrap justify-center' }}
     />
   );
 }

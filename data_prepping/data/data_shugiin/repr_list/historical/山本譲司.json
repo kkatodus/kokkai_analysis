@@ -1,0 +1,30 @@
+{
+    "name_kanji": "山本譲司",
+    "name_kana": "やまもとじょうじ",
+    "years": [
+        "1996-10-20",
+        "2000-06-25"
+    ],
+    "election_data": [
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "東京21区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東京21区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

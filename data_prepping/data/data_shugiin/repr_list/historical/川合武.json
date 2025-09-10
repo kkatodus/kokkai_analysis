@@ -1,0 +1,59 @@
+{
+    "name_kanji": "川合武",
+    "name_kana": "かわいたけし",
+    "years": [
+        "1976-12-05"
+    ],
+    "election_data": [
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "神奈川1区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "神奈川1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1958年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "第28回衆議院議員総選挙",
+            "district": "神奈川1区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "神奈川4区",
+            "party": "新自由クラブ",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "神奈川4区",
+            "party": "新自由クラブ",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

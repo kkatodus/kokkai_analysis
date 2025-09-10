@@ -1,0 +1,30 @@
+{
+    "party": "自民",
+    "repr_name": "岩井國臣",
+    "topic": "防衛",
+    "search_words": [
+        "防衛",
+        "自衛隊",
+        "安全保障",
+        "軍備",
+        "軍事",
+        "集団的自衛権",
+        "専守防衛",
+        "防衛費",
+        "基地",
+        "国防"
+    ],
+    "speeches": [
+        {
+            "speech_id": "115914184X00520040407_030",
+            "house_name": "参議院",
+            "meeting_name": "憲法調査会",
+            "date": "2004-04-07",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115914184X00520040407/30",
+            "speaker_group": "自由民主党・保守党",
+            "extracted_opinions": [
+                "日本は、軍事力はありません"
+            ]
+        }
+    ]
+}

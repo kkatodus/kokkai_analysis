@@ -1,1 +1,52 @@
-{}
+{
+    "party": "公明",
+    "repr_name": "福重隆浩",
+    "topic": "少子化",
+    "search_words": [
+        "少子化",
+        "出生率",
+        "子育て支援",
+        "育児休業",
+        "待機児童",
+        "人口減少",
+        "保育所",
+        "子ども手当",
+        "家庭政策",
+        "育児負担"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121304127X00520240617_023",
+            "house_name": "衆議院",
+            "meeting_name": "決算行政監視委員会",
+            "date": "2024-06-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121304127X00520240617/23",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　今、少子高齢化、人口減少が進む中、東京一極集中の是正が喫緊の課題であります"
+            ]
+        },
+        {
+            "speech_id": "121304260X01420240419_112",
+            "house_name": "衆議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2024-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121304260X01420240419/112",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "深刻化する少子化に歯止めをかけることが急務であることは、誰が見ても明らかであります"
+            ]
+        },
+        {
+            "speech_id": "121304260X01420240419_116",
+            "house_name": "衆議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2024-04-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121304260X01420240419/116",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　育児・介護休業法では、育児休業や育児短時間勤務を理由に社員に不利益な取扱いをすることは原則として禁止されていると承知しています"
+            ]
+        }
+    ]
+}

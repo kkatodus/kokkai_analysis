@@ -1,0 +1,21 @@
+{
+    "party": "自民",
+    "repr_name": "宮下一郎",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120104080X00420200403_256",
+            "house_name": "衆議院",
+            "meeting_name": "経済産業委員会",
+            "date": "2020-04-03",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120104080X00420200403/256",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　一方で、マイナンバーを活用した支援策、これは大変重要な論点だと思います"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "田名部匡代",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121215254X00320231025_002",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-10-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121215254X00320231025/2",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "マイナンバーカードは申請主義であるのに、健康保険証は強制的に廃止するのですか"
+            ]
+        }
+    ]
+}

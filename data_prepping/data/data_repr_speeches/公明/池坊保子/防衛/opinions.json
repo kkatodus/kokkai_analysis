@@ -1,0 +1,74 @@
+{
+    "party": "公明",
+    "repr_name": "池坊保子",
+    "topic": "防衛",
+    "search_words": [
+        "防衛",
+        "自衛隊",
+        "安全保障",
+        "軍備",
+        "軍事",
+        "集団的自衛権",
+        "専守防衛",
+        "防衛費",
+        "基地",
+        "国防"
+    ],
+    "speeches": [
+        {
+            "speech_id": "117105272X00120090219_005",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会第二分科会",
+            "date": "2009-02-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/117105272X00120090219/5",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "外交、防衛、福祉、医療、教育などなどだと思います"
+            ]
+        },
+        {
+            "speech_id": "116405124X00620060314_031",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2006-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116405124X00620060314/31",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "防衛、外交、教育、福祉等々だと思っておりますけれども"
+            ]
+        },
+        {
+            "speech_id": "116405254X01020060228_012",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2006-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116405254X01020060228/12",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "なぜなら、地方が責任を持つ時代においても、国は、外交、福祉、教育、防衛に責任を持つべきだと強く思うからです"
+            ]
+        },
+        {
+            "speech_id": "116205253X00220050224_046",
+            "house_name": "衆議院",
+            "meeting_name": "北朝鮮による拉致問題等に関する特別委員会",
+            "date": "2005-02-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116205253X00220050224/46",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "でも、これからはハードルを高くして、自国を守るためにはこの防衛力ということも大切な要素になっていくと思います"
+            ]
+        },
+        {
+            "speech_id": "116105124X00220041027_048",
+            "house_name": "衆議院",
+            "meeting_name": "文部科学委員会",
+            "date": "2004-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/116105124X00220041027/48",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "国がやるべきこと、教育、福祉、防衛、外交等々ございますけれども、教育というのは国が果たすべきものの最大のものではないかと思っております"
+            ]
+        }
+    ]
+}

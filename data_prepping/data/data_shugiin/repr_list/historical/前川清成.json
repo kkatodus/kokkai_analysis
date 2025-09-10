@@ -1,0 +1,29 @@
+{
+    "name_kanji": "前川清成",
+    "name_kana": "まえかわきよしげ",
+    "years": [
+        "2021-10-31"
+    ],
+    "election_data": [
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "希望の党",
+            "result": "落選",
+            "election_freq": " ※奈良3区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "近畿ブロック",
+            "party": "日本維新の会",
+            "result": "当選",
+            "election_freq": "（1回目） ※奈良1区落選"
+        }
+    ]
+}

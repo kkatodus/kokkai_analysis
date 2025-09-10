@@ -13,8 +13,13 @@ function LeftRightSpectrum({ leftLabel, rightLabel }) {
 }
 
 LeftRightSpectrum.propTypes = {
-  leftLabel: PropTypes.string.isRequired,
-  rightLabel: PropTypes.string.isRequired,
+  leftLabel: PropTypes.string,
+  rightLabel: PropTypes.string,
+};
+
+LeftRightSpectrum.defaultProps = {
+  leftLabel: '後ろ向き',
+  rightLabel: '前向き',
 };
 
 export default LeftRightSpectrum;

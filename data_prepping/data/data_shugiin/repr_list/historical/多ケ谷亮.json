@@ -1,0 +1,60 @@
+{
+    "name_kanji": "多ケ谷亮、たがや亮",
+    "name_kana": "たがやりょう",
+    "years": [
+        "2021-10-31",
+        "2024-10-27"
+    ],
+    "election_data": [
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "日本未来の党",
+            "result": "落選",
+            "election_freq": " ※東京10区落選"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "生活の党",
+            "result": "落選",
+            "election_freq": " ※東京10区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "希望の党",
+            "result": "落選",
+            "election_freq": " ※千葉11区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "れいわ新選組",
+            "result": "当選",
+            "election_freq": "（1回目） ※千葉11区落選"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "南関東ブロック",
+            "party": "れいわ新選組",
+            "result": "当選",
+            "election_freq": "（2回目） ※千葉11区落選"
+        }
+    ]
+}

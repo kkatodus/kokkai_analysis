@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "佐藤公治",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118313950X01120130620_091",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2013-06-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118313950X01120130620/91",
+            "speaker_group": "生活の党",
+            "extracted_opinions": [
+                "これに、結局、マイナンバーが、この前も法案が通ったわけですけれども、私たちは反対しました"
+            ]
+        }
+    ]
+}

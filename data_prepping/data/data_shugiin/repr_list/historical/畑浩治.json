@@ -1,0 +1,60 @@
+{
+    "name_kanji": "畑浩治",
+    "name_kana": "はたこうじ",
+    "years": [
+        "2009-08-30",
+        "2012-12-16"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "第44回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※岩手2区落選"
+        },
+        {
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "岩手2区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "16日",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "日本未来の党",
+            "result": "当選",
+            "election_freq": "（2回目） ※岩手2区落選"
+        },
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "生活の党",
+            "result": "落選",
+            "election_freq": " ※岩手2区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "東北ブロック",
+            "party": "希望の党",
+            "result": "落選",
+            "election_freq": " ※岩手2区落選"
+        }
+    ]
+}

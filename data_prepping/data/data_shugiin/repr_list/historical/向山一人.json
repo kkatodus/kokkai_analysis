@@ -1,0 +1,60 @@
+{
+    "name_kanji": "向山一人",
+    "name_kana": "むかいやまかずと",
+    "years": [
+        "1969-12-27",
+        "1976-12-05"
+    ],
+    "election_data": [
+        {
+            "year": "1963年",
+            "month": "11月",
+            "day": "21日",
+            "election_name": "第30回衆議院議員総選挙",
+            "district": "長野3区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "長野3区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "長野3区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "長野3区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1979年",
+            "month": "10月",
+            "day": "7日",
+            "election_name": "第35回衆議院議員総選挙",
+            "district": "長野3区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

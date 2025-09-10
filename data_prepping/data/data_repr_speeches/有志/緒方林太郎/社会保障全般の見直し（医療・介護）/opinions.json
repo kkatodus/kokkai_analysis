@@ -1,0 +1,91 @@
+{
+    "party": "有志",
+    "repr_name": "緒方林太郎",
+    "topic": "社会保障全般の見直し（医療・介護）",
+    "search_words": [
+        "社会保障",
+        "医療保険",
+        "介護保険",
+        "給付負担",
+        "保険料"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121705261X01820250303_374",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-03-03",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705261X01820250303/374",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "\r\n　保険料を支払う人が多くて、給付する方が少ない時代は、世界に冠たる国民皆保険制度だったと思います"
+            ]
+        },
+        {
+            "speech_id": "121305261X01520240301_126",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-03-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305261X01520240301/126",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "○緒方委員　では、旧文通費でマンションの家賃、公租公課、さらには社会保険料を出す行為はよくないというふうに思われませんか、岸田総理大臣"
+            ]
+        },
+        {
+            "speech_id": "121205261X00720231124_196",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-11-24",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121205261X00720231124/196",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "支援金制度を社会保障に上乗せして実施しようとしていることには疑問がありますが、大きな政策の方向性としてはこれ以外に考えられないでしょう"
+            ]
+        },
+        {
+            "speech_id": "121105261X01520230228_207",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X01520230228/207",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "今必要とされる金額を捻出するための行革ならば、社会保障、地方交付税、公共事業といった大玉に着手せざるを得ません"
+            ]
+        },
+        {
+            "speech_id": "121105261X01220230217_209",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X01220230217/209",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "それを超えて深掘りをしようというその行政改革を訴える方は、社会保障か地方交付税か公共事業か、どれかに果敢に切り込んでいく勇敢な人物しかこれを口にすることはできないはずです"
+            ]
+        },
+        {
+            "speech_id": "120804889X02520220513_152",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120804889X02520220513/152",
+            "speaker_group": "有志の会",
+            "extracted_opinions": [
+                "財政、社会保障、ひいては安全保障まで、今のままでは維持不可能です"
+            ]
+        },
+        {
+            "speech_id": "118004376X01720120801_197",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2012-08-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118004376X01720120801/197",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "現在、社会保障と税の一体改革の法案も参議院の方で大詰めだというふうに伺っておりますし、財政再建に向けて一丸となって頑張っていきたいというふうに思います"
+            ]
+        }
+    ]
+}

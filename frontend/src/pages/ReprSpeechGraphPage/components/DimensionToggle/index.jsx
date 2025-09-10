@@ -10,6 +10,7 @@ function DimensionToggle({ selectedDimension, setSelectedDimension }) {
     <div className="h-full w-full flex justify-center items-center flex-wrap overflow-y-scroll">
       {buttonTexts.map((text) => (
         <button
+		  key={text}
           type="button"
           className={`${buttonClass} ${
             text === selectedDimension ? colors.secondary : ''

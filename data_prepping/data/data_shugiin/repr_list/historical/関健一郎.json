@@ -1,0 +1,49 @@
+{
+    "name_kanji": "関健一郎",
+    "name_kana": "せきけんいちろう",
+    "years": [
+        "2017-10-22"
+    ],
+    "election_data": [
+        {
+            "year": "2014年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "第47回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": " ※愛知15区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "希望の党",
+            "result": "当選",
+            "election_freq": "（1回目） ※愛知15区落選"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※愛知15区落選"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "東海ブロック",
+            "party": "日本維新の会",
+            "result": "落選",
+            "election_freq": " ※愛知15区落選"
+        }
+    ]
+}

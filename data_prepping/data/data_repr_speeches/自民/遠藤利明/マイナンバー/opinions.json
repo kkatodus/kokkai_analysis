@@ -1,0 +1,32 @@
+{
+    "party": "自民",
+    "repr_name": "遠藤利明",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "119004889X01020160330_067",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2016-03-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119004889X01020160330/67",
+            "speaker_group": null,
+            "extracted_opinions": [
+                "\r\n　とはいえ、マイナンバー制度の本格稼働を踏まえて、地方自治体のセキュリティー対策の強化は極めて重要であり、関係府省と連携をしつつ、地方自治体に対する支援を含めた対策をなお一層推進してまいりたいと考えております"
+            ]
+        },
+        {
+            "speech_id": "119004889X01020160330_133",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2016-03-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119004889X01020160330/133",
+            "speaker_group": null,
+            "extracted_opinions": [
+                "\r\n　マイナンバー制度の本格稼働を踏まえ、地方自治体のセキュリティー対策の強化は極めて重要であり、関係府省と連携しつつ対策を推進してまいりたいと思います"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "name_kanji": "秋葉忠利",
+    "name_kana": "あきばただとし",
+    "years": [
+        "1990-02-18",
+        "1993-07-18",
+        "1996-10-20"
+    ],
+    "election_data": [
+        {
+            "year": "1990年",
+            "month": "2月",
+            "day": "18日",
+            "election_name": "第39回衆議院議員総選挙",
+            "district": "広島1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "広島1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "中国ブロック",
+            "party": "社会民主党",
+            "result": "当選",
+            "election_freq": "（3回目） ※広島2区落選"
+        },
+        {
+            "year": "2017年",
+            "month": "10月",
+            "day": "22日",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "中国ブロック",
+            "party": "立憲民主党",
+            "result": "落選",
+            "election_freq": " ※比例単独"
+        }
+    ]
+}

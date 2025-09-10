@@ -1,0 +1,49 @@
+{
+    "name_kanji": "清水徳松",
+    "name_kana": "しみずとくまつ",
+    "years": [
+        "1972-12-10"
+    ],
+    "election_data": [
+        {
+            "year": "1967年",
+            "month": "1月",
+            "day": "29日",
+            "election_name": "第31回衆議院議員総選挙",
+            "district": "埼玉2区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1969年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "第32回衆議院議員総選挙",
+            "district": "埼玉2区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "埼玉2区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "5日",
+            "election_name": "第34回衆議院議員総選挙",
+            "district": "埼玉2区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

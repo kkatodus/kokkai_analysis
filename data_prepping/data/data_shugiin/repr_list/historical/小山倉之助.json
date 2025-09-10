@@ -1,0 +1,39 @@
+{
+    "name_kanji": "小山倉之助",
+    "name_kana": "おやまくらのすけ",
+    "years": [
+        "1953-04-19"
+    ],
+    "election_data": [
+        {
+            "year": "1952年",
+            "month": "10月",
+            "day": "1日",
+            "election_name": "第25回衆議院議員総選挙",
+            "district": "宮城2区",
+            "party": "改進党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "19日",
+            "election_name": "第26回衆議院議員総選挙",
+            "district": "宮城2区",
+            "party": "改進党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "1955年",
+            "month": "2月",
+            "day": "27日",
+            "election_name": "第27回衆議院議員総選挙",
+            "district": "宮城2区",
+            "party": "新党同志会",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}
