@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "岡田悟",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121704376X00220250212_052",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2025-02-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121704376X00220250212/52",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "これがマイナンバーといろいろと一緒になって批判をされているという面もあろうかと思います"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "party": "自民",
+    "repr_name": "佐藤正久",
+    "topic": "物価高対策・減税と賃上げ",
+    "search_words": [
+        "物価",
+        "インフレ",
+        "消費税",
+        "減税",
+        "賃上げ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121715261X00220250305_345",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-03-05",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715261X00220250305/345",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "来年以降は棚上げにして検討するが今年はよいというのはよく分からない、今年こそ物価高が厳しいときだから止まるべきだという意見もありました"
+            ]
+        },
+        {
+            "speech_id": "121013950X00320221101_273",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2022-11-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121013950X00320221101/273",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "本当にこの円安、物価高含めてここ考えないといけない"
+            ]
+        },
+        {
+            "speech_id": "118014858X00420120327_052",
+            "house_name": "参議院",
+            "meeting_name": "東日本大震災復興特別委員会",
+            "date": "2012-03-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118014858X00420120327/52",
+            "speaker_group": "自由民主党・たちあがれ日本・無所属の会",
+            "extracted_opinions": [
+                "今回、国家公務員の給与も削減される、消費税の増税の話も議論されている、そういう中で、このようなポイント、非常にみんな楽しみにしている部分も奪うというのはどうかなと思います"
+            ]
+        }
+    ]
+}

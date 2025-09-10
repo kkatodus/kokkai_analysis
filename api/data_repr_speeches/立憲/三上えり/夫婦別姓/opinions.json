@@ -1,0 +1,34 @@
+{
+    "party": "立憲",
+    "repr_name": "三上えり",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121315254X02920240621_011",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2024-06-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121315254X02920240621/11",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　私は、この要因の一つに、選択的夫婦別姓制度が導入されていないことがあると考えています"
+            ]
+        },
+        {
+            "speech_id": "121315261X01420240326_136",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-03-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121315261X01420240326/136",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "こういった方々は少なくないと思いますので、改めて、この選択的夫婦別姓については議論を超党派で深めて実現してもらいたいと思っておりますので、よろしくお願いいたします"
+            ]
+        }
+    ]
+}

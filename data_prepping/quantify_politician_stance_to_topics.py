@@ -184,7 +184,7 @@ print("TODAYS RESULTS", TODAYS_RESULTS)
 print('-----------------------------------')
 
 
-# In[2]:
+# In[3]:
 
 
 # create inverted dict for repr to repr data
@@ -230,7 +230,7 @@ gen_for_embedding = st.encode('これとかあれとか', convert_to_tensor=True
 print('shape', gen_for_embedding.shape)
 
 
-# In[4]:
+# In[21]:
 
 
 from api_requests.prompter import Prompter
@@ -273,7 +273,7 @@ def read_opinion_sentences_and_dates(file_path):
 	
 	return opinion_sentences, dates
 
-def summarize_for_repr(party:str, repr_name:str, topic:str, stale_check_days:int=0)->str:
+def summarize_for_repr(party:str, repr_name:str, topic:str, stale_check_days:int=2, summarize_speech_cutoff_number:int=3)->str:
 	logger.info(f'Working on {topic}-{party}-{repr_name}')
 	party_path = os.path.join(DATA_REPR_SPEECHES_DIR, party)
 	repr_path = os.path.join(party_path, repr_name)
@@ -287,6 +287,9 @@ def summarize_for_repr(party:str, repr_name:str, topic:str, stale_check_days:int
 	
 	if not topic_opinions:
 		logger.info(f'No opinions found for {topic} in {repr_path}')
+		return None
+	if len(topic_opinions) < summarize_speech_cutoff_number:
+		logger.info(f'Not enough opinions found for {topic} in {repr_path}')
 		return None
 	
 	summary_txt_path = os.path.join(topic_path, 'summary.txt')
@@ -323,14 +326,14 @@ class SpeechSummarizer:
 					if summary is None:
 						continue
 	
-	def embed(self, topic, stale_check_days=2):
+	def embed(self, topic, stale_check_dayshdf5=2, summarize_speech_cutoff_number=3):
 		summary_repr_names = []
 		summary_repr_parties = []
 		summary_txts = []
 		embeddings = []
 		topic_hdf5_path = os.path.join(DATA_REPR_SPEECHES_DIR, f'{topic}_summaries.hdf5')
 		if os.path.exists(topic_hdf5_path):
-			if not is_file_stale(topic_hdf5_path, max_day_stale=stale_check_days):
+			if not is_file_stale(topic_hdf5_path, max_day_stale=stale_check_dayshdf5):
 				logger.info(f'{topic_hdf5_path} is not stale.')
 				return
 
@@ -341,7 +344,7 @@ class SpeechSummarizer:
 				# print(f'{party} ----- {repr_name}')
 				# logger.info(f'{party} ----- {repr_name}')
 				for repr_name in repr_names:
-					summary = summarize_for_repr(party, repr_name, topic)
+					summary = summarize_for_repr(party, repr_name, topic, summarize_speech_cutoff_number=summarize_speech_cutoff_number, stale_check_days=300)
 					if summary is None:
 						continue
 					summary_repr_names.append(repr_name)
@@ -360,23 +363,21 @@ class SpeechSummarizer:
 
 
 
-# In[ ]:
+# In[26]:
 
 
 summarizer = SpeechSummarizer()
 # TOPICS_TO_SUMMARIZE = ['防衛', '原発', '経済対策', '気候変動', '少子化', 'LGBTQ']
 # TOPICS_TO_SUMMARIZE = ['防衛']
-TOPICS_TO_SUMMARIZE = [ "物価高対策・減税と賃上げ", "社会保障全般の見直し（医療・介護）", "年金制度改革・基礎年金底上げ", "マイナンバー", "夫婦別姓", "オンライン投票",]
+TOPICS_TO_SUMMARIZE = [ "物価高対策・減税と賃上げ", "社会保障全般の見直し（医療・介護）", "年金制度改革・基礎年金底上げ", "マイナンバー", "夫婦別姓", "オンライン投票", "防衛", "原発","経済対策","少子化"]
 for topic in TOPICS_TO_SUMMARIZE:
-	print(f'Summarizing {topic}')
-	summarizer.summarize(topic, stale_check_days=2)
 	print(f'Embedding {topic}')
-	summarizer.embed(topic, stale_check_days=2)
+	summarizer.embed(topic, stale_check_dayshdf5=0)
 
 
 # ## Part 2: Extract axis of political controversy from the summaries and generate speeches that represent the extremes of the axis using GPT4
 
-# In[ ]:
+# In[8]:
 
 
 from prompts.generate_example import generate_example_prompt
@@ -452,7 +453,7 @@ class ControversyAxis:
 # In[ ]:
 
 
-TOPICS_TO_CREATE_AXIS_FOR = ['原発', '少子化', '気候変動', '経済対策', '防衛']
+TOPICS_TO_CREATE_AXIS_FOR = ["物価高対策・減税と賃上げ", "社会保障全般の見直し（医療・介護）", "年金制度改革・基礎年金底上げ", "マイナンバー", "夫婦別姓", "オンライン投票",]
 
 controversy_axis = ControversyAxis()
 axis_dir = os.path.join(ROOT_DIR, 'axis')
@@ -467,17 +468,23 @@ for topic in TOPICS_TO_CREATE_AXIS_FOR:
 	while not len(axis_reply_json):
 		print('Trying to get axis for ', topic, 'Attempt:', counter)
 		axis_reply_json, prompt, axis_reply = controversy_axis.generate_controversy_axis_for_topic(topic)
-	with open(os.path.join(axis_dir, f'{topic}_axis.txt'), 'w', encoding='utf-8') as f:
+	topic_axis_path = os.path.join(axis_dir, topic)
+	os.makedirs(topic_axis_path, exist_ok=True)
+	text_path = os.path.join(topic_axis_path, f'{topic}_axis.txt')
+	if not is_file_stale(text_path, max_day_stale=1):
+		print(f'{topic} axis already exists')
+		continue
+	with open(text_path, 'w', encoding='utf-8') as f:
 		f.write(axis_reply)
-	with open(os.path.join(axis_dir, f'{topic}_axis_prompt.txt'), 'w', encoding='utf-8') as f:
+	with open(os.path.join(topic_axis_path, f'{topic}_axis_prompt.txt'), 'w', encoding='utf-8') as f:
 		f.write(prompt)
-	write_json(axis_reply_json,os.path.join(axis_dir, f'{topic}_axis.json'))
+	write_json(axis_reply_json,os.path.join(topic_axis_path, f'{topic}_axis.json'))
 
 
 # In[ ]:
 
 
-TOPICS_TO_CREATE_AXIS_FOR = ['原発', '少子化', '気候変動', '経済対策', '防衛']
+TOPICS_TO_CREATE_AXIS_FOR = ["物価高対策・減税と賃上げ", "社会保障全般の見直し（医療・介護）", "年金制度改革・基礎年金底上げ", "マイナンバー", "夫婦別姓", "オンライン投票",]
 controversy_axis = ControversyAxis()
 
 for topic in TOPICS_TO_CREATE_AXIS_FOR:
@@ -510,7 +517,7 @@ for topic in TOPICS_TO_CREATE_AXIS_FOR:
 # 3. Create a scalar measurement for how far each politician is from the two reference points
 # 4. Use UMAP dim reduction to see the positions of the politicians as well as the generated/selected reference points
 
-# In[6]:
+# In[23]:
 
 
 import numpy as np
@@ -807,7 +814,7 @@ class PoliticalStanceVisualizer:
 		
 
 
-# In[ ]:
+# In[24]:
 
 
 vo = VectorOperator()

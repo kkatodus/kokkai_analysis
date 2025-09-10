@@ -1,0 +1,67 @@
+{
+    "party": "公明",
+    "repr_name": "谷合正明",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121215261X00220231101_064",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-11-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121215261X00220231101/64",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　このような理解増進法の基本理念に反するような性的マイノリティーの方に対する人権侵害を社会からなくすべく、政府は全力で取り組むべきと考えますが、理解増進法が成立した意義と加藤担当大臣の意気込みを伺います"
+            ]
+        },
+        {
+            "speech_id": "121115206X00320230317_074",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2023-03-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115206X00320230317/74",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "ですから、この性的指向、性自認という表現は、特定の誰かを指すということではないということもこの理解増進法の一つの包摂的な、何だろうか、理解増進法という意味で、大変重要な考えでその言葉を使っているということも理解していただきたいと思います"
+            ]
+        },
+        {
+            "speech_id": "121115206X00320230317_084",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2023-03-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115206X00320230317/84",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　今、超党派のＬＧＢＴ議連のＳＯＧＩの、性的指向、性自認の多様性に関する理解増進法案、これは政権が掲げる多様性を尊重し包摂的な社会の実現に資するものというふうに私は認識をしております"
+            ]
+        },
+        {
+            "speech_id": "121015261X00220221020_042",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2022-10-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121015261X00220221020/42",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　誤解される方がいますが、これ、同性婚を認めることとこの問題は違うんですね"
+            ]
+        },
+        {
+            "speech_id": "120415206X00320210322_056",
+            "house_name": "参議院",
+            "meeting_name": "法務委員会",
+            "date": "2021-03-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120415206X00320210322/56",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "政府は慎重な検討を要するという立場でありますけれども、こうした同性婚をめぐる訴訟が提起されており、国民的議論を深めていく必要があると考えております"
+            ]
+        }
+    ]
+}

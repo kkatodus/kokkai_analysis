@@ -1,0 +1,45 @@
+{
+    "party": "立憲",
+    "repr_name": "杉尾秀哉",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115261X00220230301_024",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00220230301/24",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　まさに、まさにこの同性婚、ＬＧＢＴというのはこの憲法十三条に関わる問題じゃないですか"
+            ]
+        },
+        {
+            "speech_id": "121115261X00220230301_026",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00220230301/26",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　総理も、ＬＧＢＴ、同性婚をめぐって、拭い難いこうした偏見、差別があるんじゃないですか"
+            ]
+        },
+        {
+            "speech_id": "121115261X00220230301_028",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-01",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00220230301/28",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "\r\n　ＬＧＢＴＱ、同性婚だけではありません"
+            ]
+        }
+    ]
+}

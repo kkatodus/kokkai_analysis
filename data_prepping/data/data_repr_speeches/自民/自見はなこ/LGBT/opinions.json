@@ -1,0 +1,45 @@
+{
+    "party": "自民",
+    "repr_name": "自見はなこ",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115261X00920230314_065",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00920230314/65",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　なお、ＬＧＢＴ理解増進法案につきましては、議員立法の法律、法案として、超党派の議連の議論の結果策定され、現在、自民党においては同法案の提出に向けた準備を進めていると承知をしております"
+            ]
+        },
+        {
+            "speech_id": "121115261X00920230314_079",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00920230314/79",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　ＬＧＢＴ理解増進法案につきましては、議員立法の法案として提出に向けた準備が進められていると承知をしております"
+            ]
+        },
+        {
+            "speech_id": "121115261X00920230314_083",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00920230314/83",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　なお、繰り返しになりますが、ＬＧＢＴ理解増進法案につきましては、議員立法の法案として提出に向けた準備が進められていると承知をしており、政府の立場としては、まずはこうした動きを尊重しつつ見守っていきたいと考えております"
+            ]
+        }
+    ]
+}

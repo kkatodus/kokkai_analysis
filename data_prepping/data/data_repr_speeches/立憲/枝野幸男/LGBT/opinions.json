@@ -1,0 +1,23 @@
+{
+    "party": "立憲",
+    "repr_name": "枝野幸男",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120005254X00220191007_003",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2019-10-07",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120005254X00220191007/3",
+            "speaker_group": "立憲民主・国民・社保・無所属フォーラム",
+            "extracted_opinions": [
+                "\r\n　自由民主党が、同性婚を認めることに賛同いただき、議論を進めていただけるなら、大歓迎であります"
+            ]
+        }
+    ]
+}

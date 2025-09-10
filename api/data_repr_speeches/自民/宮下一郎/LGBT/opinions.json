@@ -1,0 +1,23 @@
+{
+    "party": "自民",
+    "repr_name": "宮下一郎",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121105261X00820230208_006",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-02-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121105261X00820230208/6",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　そうした中で、先週末、総理秘書官の一人が、性的マイノリティーや同性婚カップルの方々を差別していると受け取られても仕方ない発言を行い、その職を追われるという事態が発生したことは、痛恨の極みであります"
+            ]
+        }
+    ]
+}

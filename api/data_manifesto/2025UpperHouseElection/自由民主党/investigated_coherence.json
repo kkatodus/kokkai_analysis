@@ -1,0 +1,676 @@
+[
+    {
+        "policy1": {
+            "topic": "外交・安全保障",
+            "topic_en": "Foreign & Security Policy",
+            "text": "自由で開かれたインド太平洋」を推進し、日米同盟を基軸に豪州・韓国・台湾・ASEAN・インド・欧州との連携を強化します。中国・ロシアの力による現状変更に備え、安保三文書に基づき防衛力を抜本的に強化し、能動的サイバー防御や先端技術の活用を進めます。",
+            "summary": "価値観を共有するパートナーとの協力と防衛力の強化で抑止力を高め、サイバー・宇宙・先端技術分野でも優位性を確保する方針です。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/03/"
+        },
+        "policy2": {
+            "topic": "こども・子育て・教育",
+            "topic_en": "Child-rearing & Education",
+            "text": "児童手当の抜本的拡充や高等教育費負担の軽減、男性育休取得率の大幅引き上げなどを盛り込んだ「加速化プラン」を実施します。高校教育無償化の拡大や大学等の高等教育無償化を大胆に進め、教師の処遇改善や教員による性暴力根絶にも取り組みます。",
+            "summary": "少子化対策として手当・保育・住宅支援を一体強化し、教育費無償化と教員環境改善で子どもの成長と学びを支えるとしています。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/04/"
+        },
+        "reason": "いずれも恒久的に巨額の歳出増を伴う政策であり、同時に実施するには安定した追加財源が不可欠です。しかし提示された政策群の中では、増税や社会保険料引上げなど具体的な新規歳入策が示されておらず、経済成長による税収増だけで二つの大型支出を同時に賄うのは財政的に極めて困難です。",
+        "coherence_flag_p1": "外交・安全保障（安保三文書に基づく防衛力の抜本的強化）",
+        "coherence_flag_p2": "こども・子育て・教育（児童手当の抜本的拡充・高校・大学等の高等教育無償化）",
+        "flagged_by": "o3",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Agree  \nREASON：  \n両政策は安全保障と少子化対策という異なる目的を掲げており、概念上は同時推進も可能です。しかし政府予算には単年度・中期の財政制約が存在するため、恒久的な歳出増を伴う施策を複数同時に実行する場合は、同じく恒久的で確実な歳入源（増税・社会保険料・歳出削減・成長による自然増収のいずれかの組み合わせ）が不可欠です。  \n\n提示されたマニフェストには①防衛費をGDP 比２％程度へ引き上げつつ宇宙・サイバー等の新領域に投資する計画、②児童手当拡充・教育無償化・保育・住宅支援拡充などを恒常的に行う計画が並列して掲げられている一方、これらを賄う財源として具体的に「どの税目を何％引き上げる」「どの歳出をどれだけ削減する」といった恒常財源は明示されていません。過去の日本の税収弾性値（名目 GDP１％増に対し税収はおよそ1.1〜1.3％増）が示す範囲では、想定される数兆〜数十兆円規模の追加歳出を経済成長だけで吸収するのは現実的でなく、国債依存を恒常化すればすでに GDP の２倍程度に達する公的債務残高の持続可能性リスクがさらに高まります。  \n\nしたがって、現段階の政策文書だけを読む限り、財政面の裏付けが不足しており「両政策を同時期に恒久実施する」という観点では整合性に欠けるとの専門家判断は妥当と考えられます。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 3340,
+                    "end_idx": 3502,
+                    "text": "増税や社会保険料負担増に対する国民や企業からの反発は大きく、政治的な実行のハードルは非常に高いのが実情です。",
+                    "grounding_chunk_indices": [
+                        6,
+                        17
+                    ]
+                },
+                {
+                    "start_idx": 3159,
+                    "end_idx": 3339,
+                    "text": "しかし、現状では防衛費増額、少子化対策ともに「規模先にありき」で議論が進み、最も困難な財源の議論は先送りされてきました。",
+                    "grounding_chunk_indices": [
+                        14,
+                        15,
+                        1,
+                        16
+                    ]
+                },
+                {
+                    "start_idx": 2912,
+                    "end_idx": 3158,
+                    "text": "**財源議論の先送りと政治的困難性**\n    本来であれば、これほど大規模な歳出増を伴う政策は、その効果とともに安定財源の裏付けをセットで国民に提示し、理解を求めるべきです。",
+                    "grounding_chunk_indices": [
+                        14,
+                        15,
+                        11
+                    ]
+                },
+                {
+                    "start_idx": 2563,
+                    "end_idx": 2906,
+                    "text": "*   **経済成長への過度な期待**: 両政策の議論の根底には、経済成長による税収増への期待がありますが、経済状況によって変動する不確実なものであり、これを恒久的な大規模支出の主たる当てにすることは財政規律上、極めてリスクが高いと言えます。",
+                    "grounding_chunk_indices": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "start_idx": 2330,
+                    "end_idx": 2558,
+                    "text": "また、安定財源が確保されるまでのつなぎとして「こども特例公債」という事実上の赤字国債を発行する計画もあり、将来世代への負担の先送りという批判があります。",
+                    "grounding_chunk_indices": [
+                        2,
+                        8,
+                        11
+                    ]
+                },
+                {
+                    "start_idx": 2182,
+                    "end_idx": 2329,
+                    "text": "政府は歳出改革と賃上げにより「実質的な負担は生じない」と説明していますが、その実現性は不透明です。",
+                    "grounding_chunk_indices": [
+                        8,
+                        10
+                    ]
+                },
+                {
+                    "start_idx": 1883,
+                    "end_idx": 2181,
+                    "text": "*   **こども・子育て政策の財源**: 主な財源の一つとして、公的医療保険料に上乗せして徴収する「子ども・子育て支援金」制度が創設されますが、これは実質的な社会保険料の引き上げであり国民負担増につながります。",
+                    "grounding_chunk_indices": [
+                        7,
+                        8,
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "start_idx": 1676,
+                    "end_idx": 1878,
+                    "text": "不足する1兆円強については、法人税・所得税・たばこ税による増税が予定されていますが、与党内での反発も強く実施時期は先送りされたままです。",
+                    "grounding_chunk_indices": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 1455,
+                    "end_idx": 1675,
+                    "text": "*   **防衛費の財源**: 歳出改革や決算剰余金、税外収入で大半を賄う計画ですが、これらは単年度の工夫に依存する部分が多く、恒久的な財源としては不安定です。",
+                    "grounding_chunk_indices": [
+                        0
+                    ]
+                },
+                {
+                    "start_idx": 931,
+                    "end_idx": 1144,
+                    "text": "*   **こども・子育て・教育（異次元の少子化対策）**：政府は「こども未来戦略」に基づき、2028年度までに年間で3.6兆円規模の追加予算を確保する方針です。",
+                    "grounding_chunk_indices": [
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 844,
+                    "end_idx": 926,
+                    "text": "これにより、毎年度4兆円程度の追加財源が必要となります。",
+                    "grounding_chunk_indices": [
+                        0
+                    ]
+                },
+                {
+                    "start_idx": 572,
+                    "end_idx": 843,
+                    "text": "**二つの政策が要求する巨額の財源**\n    *   **外交・安全保障（防衛費増額）**：政府は2023年度から2027年度までの5年間で防衛費を総額43兆円規模とし、2027年度にはGDP比2%に達する水準を目指しています。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFp-UEHi5p5p_0lt_ky4VBQbGZb-P6Lahke8D1KuMb23dVD6nsoDrnHliLuRZMidlxawl7TW1NGcvMrxDkH77uFxDWUakUrYb5ePBpewdrZkeIqi94W6T26VGz_jHNeVnkFfOFoMRtVefvewtxNtWHfyOROWBvshsFuEfXHkNPh2tFB",
+                    "title": "ndl.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHMJmlFvANVkzvJwelrt01Wasu721pYgerlw0Ktl2jrRw14PJhpEjOrsXABZlHcbagpNtOfo0FFhJ4zcwMWlk3lUvGAlv1vcTmCs20AG9EMNNHT2CFPEL3JF3Otg-NKw4JF531Fk8o=",
+                    "title": "tokyo-np.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHY3SNIuLXV-6eEZdnjPDlfdrfk_LUH_GtKRQqKAR-U-PWGW1YC0sIDvn89uCFSK5TweAEQQ3CiyNj17-urHHbmo4JVfWCV8bUtVioG2ZvK2MSBwWeNiQcUGraDxOVYbqNkmIM=",
+                    "title": "fukushishimbun.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEXsE0akcmgJwSISeu_8XXbMcUqyc_Y9EXPaZCFAXAfvOEWoNZEs5G4U4Vj_urOBvaWOPS-ypfCJTFBNrvhNqj-__-TjD9NOcMEpL1qbvPaYg_er4DB36OYodWRg8c7-Wui1-PC9Kypyq_gYxCyQk743yVG",
+                    "title": "daika-kenpo.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHqT5PsmDsGEb6_hpq8dh7udNCUYOkQ-hu5mFX8lqCijivi5WEYmkcHStkwbXEMQkbv-ea0SWaWxv3mkUaWS6lOsDdvn9Q3ag_K_IrQd5XhOBwNcwy__qvHZpKdrjL2svC9PjqDj27xhUdDR9Wt0BrfVtpxKgSYlgkRKgXvRxY-FGI9icCNOTBapQfSscyI8r7dN02pvzp6L-Kvzs4jakbnW7t2ry69JEW-WpSOITxgBdPys9oJ9gNFiPr-75Cq75p8fcAmU_jZxs9BYoAJ9MWE-cpg7lk8ZxA0jgoZ",
+                    "title": "cfa.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5B8mJ9pcq_t2yZh0F24PG1AeeKS3IL4-QKKuWw4RRQuLJJ0CEJmwBvX8Ldevtyoo9Pl0h6Mcv_qGkR2VXXXr2tlbdhBvHE8nz93ZEE5jTJTQb4NVaJv49ErcFs7SMxlfWdb6xLSa94-6DuqgRAbVLLAI=",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFkS2NUIWSoZ7aotj6nnO_4fqcO82gK3-Ud49kKkU62CKcWODwpkkbux6qafewfhjAOMOR5eDHIoO17FUa0uiasDaJuFeq3OI0r3YaXd1d39r8Mxo6NGO4297FDTg3ckQXfqlBY6KVrB6C294XJPr4kESkWUQ==",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpoH3mAWAOgDM_8j5JpjSs5NmpuXQ0ZZ0yJrdX-BdPoMPpdqPLgotFxH4n2oSgPssINcHiw8qZXwZnFMCDhgnjeflZBuLCJGbhCzLWnMUzaUp1xpYh1m6x36Q-oBvhJ5yR3hYpWtU=",
+                    "title": "dlri.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHTYT6mhuUKnBVjI7xt1pM03gK8eDWdLgtcvnaxWjLzWRgnOCIo9Xni3LHJAL_Dqs1XMyizhSyOmybdku-yfSiY9xBQWUq9BnfQU6dU4WtvUOC-ZhIHIPFYccoZfkhxklOQiQqyHaR-cG0XTOc=",
+                    "title": "tkfd.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHoKtzpKaAiZiU0ohCvFbJZ4_y5n_M48D7WbJrvHa_6OR36iHR8u8BiN-ltUZcrqw1n1MnqEVlEB_28rTrkD7uFg8XmzL9Zv-jBWRH6ZaQcHuEXxOh8N2o-MfOvWPUnAlJsc1GeT_3YIZo5cGcTZBX8EcNd9nY=",
+                    "title": "aeonbank.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF8_PF43xSkOL9-ou2NK6IpbN7hk6SW7qmf_OXuQt-k15c2Kwcpwvb0dlxZM3ck2Q3KkqunsLK872I89fC113rrfyL5DyHFCDKw8gMlnTxBjhAIsHa5UUPZqqrs3c1RQLbXMJLWg1U=",
+                    "title": "dlri.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPTpQZNf_9cc-Tt-PJU9J7xo_xKbdFSW6xt3-Wc94l2tDo-BcW-fMT6rLI6RhPD5vWe2PoeybKnF8jvXnEgxKXXVAqI0XYtrsfUjjm4UqUvp8yS18mVmIeaAxdeyKLG_yMElc19Hji3dspZEg=",
+                    "title": "tkfd.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFe031dGjSyJtvvz7EMvyHVDG3dklafXSdJA4cMjbOlsSvJfHBzk7h2CgJFFrOg8c5almLzf6seSbN1bT5J7QoUuNnSS14WRD7rLOv3rW9GsAi5p7j6CwdFRFGPpY7kitUWyzQ7F0s4v8fLhDWvPXyvfWnwMg==",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSA7kHu43RCSZgwMBS5B-rmCZPJ6WTDIxEG-ogGiGvN60FU4AgAEZLuL85Vv5kmpF31ahLjJ0LmM6poNetKbpK7NKDqVoqx6Qn5wB5YsHOofXLVYXrVZE1lFolI7qPXSPH6jP3Llfe4BNxiIAoNSX9AWZNr2fFNcx5K3_nYKq-wCkJyUuExFZV22Msqny4OqbbgzpT3p7vYwxo2mbkD7HVgekEROc4Jl97PG1dyennbHnqGNjDiYPX3u4mUaxnr7yKrxY9bnkZhus6kMSmgT_IyaJMdydydOf5p_GFNSRf4gj2pcHo3dwkQHeFQrILghtSoMSMI3hDSEwesdrRYcsTdozdLEKq83_UBCW0-C9ay7sXXGEi2oXII1vsiBjhw7Q9kB_4Q3wrpNGT5chgyZP-Zj9q44RIwzi5J1it-EgE5WncjYGgf60LZsah2kjlQ-QRJIkuGOmO",
+                    "title": "doyukai.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFKXjBW3NTtJ_Tut7kLtOMZx1X0vLBNzzhiGHuip-HHDqoAiiECjYbh-bBfha_61WQOnZV-K0714OooI76ufL_A6c7iQhK2RZx53Nhg-SHIjqKXWh_dxn2xLh_d7fB35aBL1Vq5rIAnCjlPVPwpPNp5SXc=",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGFqttBnq8RLcPcPcbzyzQ_qajCYnia7Ykth1LD2E4cJXpb5zDDlirDdIBpX3j9pg7NdSTKtCi1Urm-PLsw_PDAEv3O-kbFUZslDfvpB8aw_jgM7nk9IB64yMFVHFeLlcMN300AA6FVH8Z-o_CAL_wsj0Y=",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGg0co34klnnl_B1VZvrFNn7UJxAjyrCN2zkmv5Vri8CyDaPgADUz1XevC5LqSQkbNpJ21HpTmCf0Fhzkn_Ctk4BBK4-rXv5QNDnLZ-2I0A0vFKxa785h4_Y6Wo7glr29BoL3ma6a-aJWNk",
+                    "title": "japantax.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGwpS5T7aveyHBjGsMgNLqj9GX5RB3oOtBkPax9_dxT6oczng8Jn2WSkFotXGuyTJUOC4Vcvz6_3V9gQ8r79T2uvXojLdEIR0bsHE0AVj-yE9cp_kW0Wqbuf-qjuj7nVTQ-MizlqrDllvg-oA==",
+                    "title": "jimin.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：提示された二つの政策、「外交・安全保障」と「こども・子育て・教育」は、いずれも国家の根幹に関わる重要な課題であり、同時に巨額の恒久財源を必要とします。専門家が指摘するように、これらの大規模な歳出拡大政策を同時に、かつ安定的に実施するための具体的な財源確保策が十分に示されておらず、財政的な整合性に深刻な疑義があるという判断に同意します。\n\n理由は以下の通りです。\n\n1.  **二つの政策が要求する巨額の財源**\n    *   **外交・安全保障（防衛費増額）**：政府は2023年度から2027年度までの5年間で防衛費を総額43兆円規模とし、2027年度にはGDP比2%に達する水準を目指しています。 これにより、毎年度4兆円程度の追加財源が必要となります。\n    *   **こども・子育て・教育（異次元の少子化対策）**：政府は「こども未来戦略」に基づき、2028年度までに年間で3.6兆円規模の追加予算を確保する方針です。\n\n2.  **不確実で不安定な財源確保策**\n    両政策の財源として、政府・与党は歳出改革、決算剰余金の活用、税外収入、そして増税や新たな支援金制度などを挙げていますが、いずれも安定性や実現可能性に課題を抱えています。\n    *   **防衛費の財源**: 歳出改革や決算剰余金、税外収入で大半を賄う計画ですが、これらは単年度の工夫に依存する部分が多く、恒久的な財源としては不安定です。 不足する1兆円強については、法人税・所得税・たばこ税による増税が予定されていますが、与党内での反発も強く実施時期は先送りされたままです。\n    *   **こども・子育て政策の財源**: 主な財源の一つとして、公的医療保険料に上乗せして徴収する「子ども・子育て支援金」制度が創設されますが、これは実質的な社会保険料の引き上げであり国民負担増につながります。 政府は歳出改革と賃上げにより「実質的な負担は生じない」と説明していますが、その実現性は不透明です。 また、安定財源が確保されるまでのつなぎとして「こども特例公債」という事実上の赤字国債を発行する計画もあり、将来世代への負担の先送りという批判があります。\n    *   **経済成長への過度な期待**: 両政策の議論の根底には、経済成長による税収増への期待がありますが、経済状況によって変動する不確実なものであり、これを恒久的な大規模支出の主たる当てにすることは財政規律上、極めてリスクが高いと言えます。\n\n3.  **財源議論の先送りと政治的困難性**\n    本来であれば、これほど大規模な歳出増を伴う政策は、その効果とともに安定財源の裏付けをセットで国民に提示し、理解を求めるべきです。 しかし、現状では防衛費増額、少子化対策ともに「規模先にありき」で議論が進み、最も困難な財源の議論は先送りされてきました。 増税や社会保険料負担増に対する国民や企業からの反発は大きく、政治的な実行のハードルは非常に高いのが実情です。\n\n以上の点から、外交・安全保障と子育て支援という二つの重要な政策目標を同時に達成しようとしながら、そのための安定的かつ具体的な財源確保の道筋を示せていないため、両政策の整合性はなく、財政的に極めて困難であるという専門家の指摘は妥当であると判断します。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "外交・安全保障",
+            "topic_en": "Foreign & Security Policy",
+            "text": "自由で開かれたインド太平洋」を推進し、日米同盟を基軸に豪州・韓国・台湾・ASEAN・インド・欧州との連携を強化します。中国・ロシアの力による現状変更に備え、安保三文書に基づき防衛力を抜本的に強化し、能動的サイバー防御や先端技術の活用を進めます。",
+            "summary": "価値観を共有するパートナーとの協力と防衛力の強化で抑止力を高め、サイバー・宇宙・先端技術分野でも優位性を確保する方針です。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/03/"
+        },
+        "policy2": {
+            "topic": "地方創生・地域活性化",
+            "topic_en": "Regional Revitalization",
+            "text": "地方創生2.0」を始動し、地方創生交付金の倍増を目指すとともに「新しい地方経済・生活環境創生本部」を政府に創設します。デジタル活用による地域サービス創出、企業版ふるさと納税の活用促進、交通空白解消や観光高付加価値化などを推進します。",
+            "summary": "交付金拡充とデジタル活用で雇用・サービスを地方に呼び込み、交通・観光・関係人口創出を通じて地方を成長の主役にする計画です。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/05/"
+        },
+        "reason": "防衛力強化と交付金倍増はいずれも国家予算を大幅に圧迫する歳出拡大策です。限られた財源の下で同時に実施すれば、いずれかの施策が十分な規模・速度で実現できなくなるか、財政赤字の拡大を招きかねず、両立は難しいと考えられます。",
+        "coherence_flag_p1": "外交・安全保障（安保三文書に基づく防衛力の抜本的強化）",
+        "coherence_flag_p2": "地方創生・地域活性化（地方創生交付金の倍増）",
+        "flagged_by": "o3",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Neutral  \nREASON：  \n・両政策が「防衛力の抜本的強化」と「地方創生交付金の倍増」という大規模歳出拡大を伴う点は指摘のとおりであり、現状でも債務残高が GDP 比約 260％に達する日本の財政に追加の負担をかけるのは事実です。財政再建目標（2025 年度プライマリーバランス黒字化）とも整合しにくく、十分な増収策が示されないまま同時に実行すれば財政赤字がさらに拡大するリスクは高いでしょう。  \n\n・しかし「整合性がない（両立不能）」とまでは必ずしも言えません。①防衛費については歳出の伸びを平準化しつつ防衛装備移転収入や国有財産売却益を充当する案、②地方創生については既存補助金の整理統合や企業版ふるさと納税の上限拡大で民間資金を取り込む案、③歳入面では防衛財源確保税（法人税・所得税の附帯税）や消費課税の見直し等が議論されており、歳入歳出の組み合わせ次第では両政策を並行させる余地が残ります。  \n\n・加えて防衛力強化は安全保障上の外部効果（抑止力向上）、地方創生は人口分散による長期的な社会保障費抑制や地域所得の底上げといった将来の財政負担軽減効果を持つ可能性もあり、マクロ的に見れば「投資的支出」と位置付けて実施する理屈は成り立ちます。  \n\n・したがって「追加の安定財源を示さずに同時実行するなら財政面で両立困難」という専門家の指摘は妥当だが、「必ず両立できない」と断ずるのは早計であり、設計次第では整合性を持たせることも可能と考えられるため Neutral と判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 2500,
+                    "end_idx": 2656,
+                    "text": "政府は防衛力強化を喫緊の課題と位置づけ、具体的な予算計画と財源確保策（増税の議論を含む）を進めています。",
+                    "grounding_chunk_indices": [
+                        1,
+                        13
+                    ]
+                },
+                {
+                    "start_idx": 2246,
+                    "end_idx": 2450,
+                    "text": "このような状況下で、さらなる大規模な歳出拡大を同時に進めることは、財政赤字を一層拡大させ、将来世代への負担を増大させるリスクを伴います。",
+                    "grounding_chunk_indices": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "start_idx": 2088,
+                    "end_idx": 2245,
+                    "text": "*   **累積する政府債務**: 国債残高はGDP比で主要先進国の中で最も高い水準にあり、財政の硬直化が進行しています。",
+                    "grounding_chunk_indices": [
+                        7,
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "start_idx": 1983,
+                    "end_idx": 2087,
+                    "text": "2024年度予算案でも、歳入の約3割を公債金（借金）に依存している状況です。",
+                    "grounding_chunk_indices": [
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 1783,
+                    "end_idx": 1982,
+                    "text": "*   **プライマリーバランスの赤字**: 日本の財政は、国債の発行に頼らないと支出をまかなえないプライマリーバランスの赤字状態が続いています。",
+                    "grounding_chunk_indices": [
+                        6,
+                        7,
+                        8
+                    ]
+                },
+                {
+                    "start_idx": 1281,
+                    "end_idx": 1404,
+                    "text": "関連する交付金として「新しい地方経済・生活環境創生交付金」などが創設されていますが",
+                    "grounding_chunk_indices": [
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 1163,
+                    "end_idx": 1280,
+                    "text": "2025年度予算案では地方創生交付金を倍増し2,000億円を確保する方針が示されています。",
+                    "grounding_chunk_indices": [
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 821,
+                    "end_idx": 992,
+                    "text": "しかし、これらの財源確保策は一時的な収入に頼る部分も多く、安定性や実現可能性には依然として課題が指摘されています。",
+                    "grounding_chunk_indices": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "start_idx": 607,
+                    "end_idx": 820,
+                    "text": "この財源を確保するため、歳出改革、決算剰余金の活用、税外収入に加えて、最終的には増税も視野に入れた「防衛力強化資金」の創設などを進めています。",
+                    "grounding_chunk_indices": [
+                        2,
+                        1
+                    ]
+                },
+                {
+                    "start_idx": 419,
+                    "end_idx": 606,
+                    "text": "*   **防衛費の増額**：政府は2023年度から2027年度までの5年間で、防衛力整備の水準に係る金額を43兆円程度とする方針を明確にしています。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQES9tSgREXligkyT35Tlr9knasuM16ByST_22cVw2SJE73CWtPogCKLunvRhbyJkA8hA6-bYDpzqqyFoJhAzzVRFbD25m7pm-E5P60ACz7dJqWCkq-Sm65Cgy5webEZQDU7rfdDQkG77uF86NXlz6Rx6OmPBcm5fp2FF6UK",
+                    "title": "mod.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDLPWfZL-a7Me7ZX9vojDULm7cRKkp_BcG92wBVA2zmMGtupD-2fy4_RDI4MoKSxNGNpFtH6wYzaO1uDTpZxHnXAINCB68h5jGjL5SjA7uQ0fn2T30EXn_xke1MH6z7DVLYW0nQ4Wnn9WKnBYiJ-TrIl7hR93WA06i0FB-lSivoxAWmXDgpISIk-H2fERzINBmHCNYHslxHsU6ZZN1NwxKUQmfxK9Ors8=",
+                    "title": "shugiin.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuIUFwRacpPzPG-62VSZtbWT831X9hb4WpzcsmkdhneXTlsa4K6yX3qILpg4WlmWvoUqyZ56WdlF9K_JoDFTDPyr6TDmMkVwzeQDUC759rNJugVZ7pzf3_BhtQaDZ0rz2dm0dqOjEgitwbj5ZIl2Pb2a81",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9MJbQMd6agQxN4_HLgFlnWppBbYj8is-_gkgRQ_ctjgSSCVxjIym8F8G2L7bPjhgsbbCBYrs7TkFE8qOmh8uqZtfO575xmNSyS72OA_-PxkwazhVlLNUAb-_jHKJTBS8ME0wGlO5CdzIQdJJ0",
+                    "title": "cdp-japan.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFbr52zW5TEnLUQEnjSCPElNmikkbvkgEF6Jg19057ELjbwu9cyBPnXapqrk0vUksj7npTCPjTZjBHcQQHvb6cE7lQG8b676qmwLIiaKpo2OHgEnNEO2f8FO78wZSLDi1rFrrr2Fg==",
+                    "title": "jichiro.gr.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH44dZORf5LKbqAdmJfqhpSmaZrQzxoDL4OU2RwktgiKXVJpjJI5HESGiK602OAvW3y4v-EqTa-E5QfLNn5UcL-TLg21l9dhSsWJ9FOJxZsz4ORilc9g9i3FGHW5skbTiMkzFVVK0BNM7g73VeIE_uoT3oZR5Fdd5fO8PKeda3GyN7Kknggbe7HuEjmrAl-8ChjT1n4",
+                    "title": "chisou.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpBfVznosmK6B63dWkHTkH2OGg4VkwSKoe1sbvpni2CTmVQxbXuuH7wSdKwwCbcVNadPX_Avy3taUWOpKfcKN_i19S9eJh7pJrxneH5eUvzqmgh_GPSvuJjMu3-fgTnkJPb8TF0ForDZfEm-whod0vNauc",
+                    "title": "mof.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFeEBG3EhGfW-fEtiGLeoxAfsJKy8scK_sQczFsUqaSOkR1Efyq-mQXeKe-OiKvqCH35TDlQLyzt38uByq37GN7g1XSMnebH8sdxhs9cUkKo-XDbk4Mv7rtArEzTeuIYqMuIytfFrFl",
+                    "title": "dlri.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH1XIsYQ1Erlx2NqP-tpgtby8eCWyZnExMDJebEUlddNjrNkad4-uBibi17sl_qeqEnmhcs3xGVRoY19val9-ixGlJp0Qeaoq0SgHb71oTpfO1wphgDGYKOIFl8cTdbw1vi-SOYQjHDFCRyRWTKsMLm",
+                    "title": "smbcnikko.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHg4RFZ5-AJ9YwcdSDn1ZpuY27QV0imrXTw8h0Pi3y85u5SjqGTuUAyEG_eW181TFB8zeQOO782AjG5pkzyhRwPOL-BF9y6tRPAxX_UKEEiAN7ZiqoMnk5Nc6_KLSNOm5kNmHWAsBrNZ5tb1_f-FddnK6YlNylstaYXVw-iooqdkONL6hdvSaxfppWg0I78AKs9EUurOgcTBAXVFM0yENd3_PQiuNW2bIAwtKU=",
+                    "title": "pictet.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFHEa2COD-En4AF_VCH2GBFO-mK6GuDg-hvb7HPsPAnb8mD22MrcA_utqrycb9nyak63XYeQSmFhfDAwBq3qb2nWGIRvcQVFTVQ5blJi5NDKI2UjyOXqYC8mpsXYHYwTrRcLwAf0WxvQrnzUvinxUc-skRisn84_obRGsvuMA==",
+                    "title": "mof.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGG-yeALxzTICahZjpS8Af2mg6_eqw0BuHJNP1bt2WHlwd-iJ3yDz1KFlv-kDUB5JLjELUHZTyfQLP1YnJiaAfmsibMkydmf2FG9qRH-hSa94IkD2bviQV-pbDC1Kw2tflhzCb4el1gvdDITOPvq9TcuKCH",
+                    "title": "cao.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEcibv-RPfbIWww1IJpLIIowjHePzi0YgOTIbYIvhAq1UQrZfFPPGiiMe5WC_H1FtblHeK6VTu12POSALwe-8cOjWTZXCmTFZ9MVPbNFhS4Tun9hyMtdqlqbNxk4Jwbvultfmm75CYua4A7eWYb",
+                    "title": "tkfd.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEtIyCJuPZwpMkkLz61TZ69d-khdRZraEjN6PzXXmi3KWmuFhPXpo7xjKLygyUZ1FG1Pbd6SHQS2jEueNC9u_BEedU0IvitaQI8jaR9n3EfnNKlpfCowtve12VhwGyhcAkFj5ujpvAXys-kJymigZORI7VwVu23Y0FeT2BaC7Dg",
+                    "title": "mod.go.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：専門家が指摘する通り、「防衛力の抜本的強化」と「地方創生交付金の倍増」という二つの大規模な歳出拡大策を、現在の日本の厳しい財政状況下で同時に、かつ公約通りの規模で実現することは極めて困難であり、両政策の整合性はないと考えられます。\n\n**1. 財源の競合と規模の大きさ**\n\n*   **防衛費の増額**：政府は2023年度から2027年度までの5年間で、防衛力整備の水準に係る金額を43兆円程度とする方針を明確にしています。 この財源を確保するため、歳出改革、決算剰余金の活用、税外収入に加えて、最終的には増税も視野に入れた「防衛力強化資金」の創設などを進めています。 しかし、これらの財源確保策は一時的な収入に頼る部分も多く、安定性や実現可能性には依然として課題が指摘されています。\n*   **地方創生交付金の倍増**：一方で、「地方創生2.0」を掲げ、その中核として地方創生交付金の倍増を目指すとしています。2025年度予算案では地方創生交付金を倍増し2,000億円を確保する方針が示されています。 関連する交付金として「新しい地方経済・生活環境創生交付金」などが創設されていますが、「倍増」という目標の達成時期や、防衛費のような具体的な複数年度にわたる財源確保の道筋は明確ではありません。\n\nこれら二つの政策は、いずれも兆円単位の巨額な国家予算を必要とするため、限られた財源をめぐって競合することは避けられません。\n\n**2. 深刻な財政状況**\n\n*   **プライマリーバランスの赤字**: 日本の財政は、国債の発行に頼らないと支出をまかなえないプライマリーバランスの赤字状態が続いています。 2024年度予算案でも、歳入の約3割を公債金（借金）に依存している状況です。\n*   **累積する政府債務**: 国債残高はGDP比で主要先進国の中で最も高い水準にあり、財政の硬直化が進行しています。 このような状況下で、さらなる大規模な歳出拡大を同時に進めることは、財政赤字を一層拡大させ、将来世代への負担を増大させるリスクを伴います。\n\n**3. 政策の優先順位と実現可能性**\n\n政府は防衛力強化を喫緊の課題と位置づけ、具体的な予算計画と財源確保策（増税の議論を含む）を進めています。 これに対し、地方創生交付金の「倍増」は「目指す」という表現に留まり、防衛費ほどの具体性と拘束力を持って語られてはいません。これは、両立の困難さを認識し、実質的に防衛政策を優先していることの表れとも考えられます。\n\n以上の理由から、防衛費の急増と地方創生交付金の倍増を同時に満額で実現することは財政的に極めて困難であり、両政策には整合性がないという専門家の指摘は妥当であると判断します。どちらかの政策が計画通りに進まないか、あるいは他の重要政策の予算を大幅に削減するか、更なる国民負担（増税や社会保障負担増）につながる可能性が高いと言えます。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "外交・安全保障",
+            "topic_en": "Foreign & Security Policy",
+            "text": "自由で開かれたインド太平洋」を推進し、日米同盟を基軸に豪州・韓国・台湾・ASEAN・インド・欧州との連携を強化します。中国・ロシアの力による現状変更に備え、安保三文書に基づき防衛力を抜本的に強化し、能動的サイバー防御や先端技術の活用を進めます。",
+            "summary": "価値観を共有するパートナーとの協力と防衛力の強化で抑止力を高め、サイバー・宇宙・先端技術分野でも優位性を確保する方針です。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/03/"
+        },
+        "policy2": {
+            "topic": "社会保障",
+            "topic_en": "Social Security",
+            "text": "全ての世代が安心でき、能力に応じて支える、持続可能な全世代型社会保障を構築します。予防・健康づくりを強化し、年収の壁を見直して働き方に中立な社会保険制度とし、基礎年金の受給額の底上げを図るなど将来にわたる安心を更に強化します。",
+            "summary": "予防医療強化と社会保険改革で全世代を支える持続可能な仕組みを構築し、年金・医療・介護の安心を底上げする方針です。",
+            "url": "https://storage.jimin.jp/pdf/pamphlet/202410_manifest.pdf"
+        },
+        "reason": "社会保障給付の拡充は長期にわたって歳出を押し上げる一方、財源として重視される消費税率については「引下げ・廃止は適当でない」とするだけで増税には言及していません。歳入拡大策を示さないまま防衛費の大幅増と社会保障給付の恒常的拡大を同時に進めるのは、財政的な実現可能性に大きな疑問が残ります。",
+        "coherence_flag_p1": "外交・安全保障（安保三文書に基づく防衛力の抜本的強化）",
+        "coherence_flag_p2": "社会保障（基礎年金の底上げなど給付拡充と全世代型社会保障の構築）",
+        "flagged_by": "o3",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Agree  \nREASON：  \n・防衛費は現行 GDP 比約１％から２％へ倍増させる方針がすでに政府決定されており、追加歳出は年５兆円規模と見込まれています。しかも装備品は多年度契約で、一度始めると簡単には減額できません。  \n・社会保障については「全世代型」への移行で給付構造を見直すとしつつも、基礎年金の底上げや予防医療の拡充など恒常的な支出増要素が含まれます。高齢化の加速により自然増（医療・介護費）だけでも今後数兆円規模の圧力が続くことが政府試算で示されています。  \n・一方、財源については「消費税率の引下げ・廃止は適当でない」と述べるのみで、逆に引き上げるかどうかを明示していません。2024 年末に閣議決定された防衛財源確保法は法人税・所得税・たばこ税の付加税で年１兆円強を賄うに過ぎず、防衛費増分の大半は赤字国債と特別会計剰余の転用に依存するとされます。社会保障の追加財源については記載がなく、歳入欠陥はさらに拡大します。  \n・日本の国債残高は GDP 比 250％超で、長期金利が上昇局面に入れば利払費の増加も避けられません。財政余力が限られるなかで、防衛と社会保障という二大恒常支出を同時に拡大するには、増税・歳出削減・制度改革など対案を示さない限り、整合的とは言えません。  \n以上より、専門家が指摘する「財政的な実現可能性への疑問」は妥当であり、両政策には整合性欠如のリスクが高いと判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 2129,
+                    "end_idx": 2396,
+                    "text": "とし、財政規律を重視する姿勢を見せる一方で、歳入増の具体策を欠いたまま大規模な歳出増を掲げることは、将来世代へ負担を先送りすることにつながりかねず、政策としての一貫性に欠けます。",
+                    "grounding_chunk_indices": [
+                        7,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 2030,
+                    "end_idx": 2128,
+                    "text": "**財政規律との矛盾**:\n    *   「財源の裏付けのない減税政策はやらない」",
+                    "grounding_chunk_indices": [
+                        8,
+                        9
+                    ]
+                },
+                {
+                    "start_idx": 1711,
+                    "end_idx": 1840,
+                    "text": "消費税率について「引下げ・廃止は適当でない」とするのみで、増税には踏み込んでいません。",
+                    "grounding_chunk_indices": [
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 1377,
+                    "end_idx": 1606,
+                    "text": "しかし、増税の実施時期は「令和6年以降の適切な時期」と先送りされており、国民の負担に対する慎重な姿勢がうかがえる一方で、財源確保の不確実性を高めています。",
+                    "grounding_chunk_indices": [
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 1155,
+                    "end_idx": 1376,
+                    "text": "*   防衛費増額の財源については、歳出改革、決算剰余金の活用、税外収入、そして最終的に1兆円強を法人税、所得税、たばこ税の増税で賄う案が示されています。",
+                    "grounding_chunk_indices": [
+                        1,
+                        2,
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 821,
+                    "end_idx": 959,
+                    "text": "社会保障給付費はすでに日本の国家予算の大きな部分を占めており、今後も増加が見込まれています。",
+                    "grounding_chunk_indices": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 633,
+                    "end_idx": 820,
+                    "text": "*   **社会保障費**: 高齢化の自然増に加え、「基礎年金の受給額の底上げ」のような給付拡充策は、社会保障給付費をさらに押し上げます。",
+                    "grounding_chunk_indices": [
+                        3,
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 519,
+                    "end_idx": 628,
+                    "text": "これは年間で約4兆円の恒久的な財源が追加で必要になることを示唆しています。",
+                    "grounding_chunk_indices": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 276,
+                    "end_idx": 518,
+                    "text": "**巨額かつ恒久的な歳出増**:\n    *   **防衛費**: 「安保三文書」に基づき防衛力を抜本的に強化する方針は、2027年度までに防衛費と関連経費をGDP比2%に倍増させることを意味します。",
+                    "grounding_chunk_indices": [
+                        0
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGG5_rNd1Q-EWpmDG10j9K7L7lYGQxmU-rcK_ZlyFpI-QEXpseqchA5gIJKrQ-nRoTO-zq3gQa2d2mX7Q20HTeFPzpZ4Sm86zhMx_nC4eViKLeQe9Xk4yZ5VHZW_2DMirg90sSQ8b_nqBf08g==",
+                    "title": "all-senmonka.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHBWrI9493U3VhL9dttLhkfrwsP0XWC7S0W9T6WjIsbJsdF8KbitKDuz-GCfkxk-XRm39tbHTyD-GODz7X0NQI4EGn9zjwWvKZcjJNdhnygXqB7N_l-KQstOFhxhd8FbCnLUtYNnlz0UEX1-utUkYUnbIR3IISiarTXcG07qfh0Gi2MMy39lZg=",
+                    "title": "murc.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEdMeQCB3V7fR3zRaNhlZAfi8ToxgXk7oi3LMHQwUs_xdk9HLNtKunXM_y0Zpi_ZDRsSgG0jygmlFotaZHx6qXgtYVTwmS6HTWcOconW3ddY2MVDr0UJbtySkcdSYc1YywddauJEw==",
+                    "title": "komei.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQExk2k9ew10wYi8YecwSIWmEmH5p7EL6cy50fnBrUqJS-bGpgrtMPyJlWGFqlfvMYl23qVh99yxUGM2znXWT2_pJExwJ_eKneHcckI0zZgWHbObBbmla-9igvwY9y15at9F0IM9MzzRcQY-lNF5sz_0M2YcSxXKeAacpw7ffUDYbiprp0oh_kk=",
+                    "title": "murc.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE00lkQYeq4LhJVd0lew4h7JoFbGT2u9oRxWGoOg3mErfBKwMSbFh5xV93LAgbTh0Dpl2dfnys901x_FUKkzWf1-oeryUrEL1uvxjPZhwDeZUV743HQPSY8lEIfIlIx8wC4lFndas2pgg==",
+                    "title": "mhlw.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF78oMuEaj6bRfG6fd6y6phK8n3Yvk7mRv5bMnaE09EkwU-nD5Btf5u8doNV4VAQnnDj48htxrziZsfSkSyslo48zSfCF_q0pdRbzDIspCv9qnySjUmEtcYObYt02A=",
+                    "title": "ippjapan.org"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2AdKZK_NcP_t9ibiOLMvxllTHFQNhL4KAFrRtU5bBFzukAWJdpBYSkblgpLeqLLY9fGjoPEsnjBOb6cdSzAMZ_O6fNIYm63KtcwpWWqHGM2oJJw5PDqJOWpkkOtIsweDBL6xU9hnyjzAmimj2GcG42CHb1YD7Nm-wmuZ7t5qt4Nt7bg==",
+                    "title": "ndl.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG46dYxXkok3NjJBKsCmRbbWUMonyj7SVh20rmniEE0PLeBJpoa2Uf0Th_Ps60HL1OpyPE85SAM7Wn1e50NWABrjzBQYL7Kxnc-_SXOFoQfiwkTU4WNagYc6IXO1_9s12Z7qoLx04Dj7_M5bIQ=",
+                    "title": "jimin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFUuZpbQZHqdx-nHKZRkyUtUqbMwyxqDA9-v246liiACz_pb-vhSO2LqIl3y_lBuBEAkKLN2DnBnWIUH_TtMYSlTo6ni5T2LM0hMo4sJ3nakTzuvx70m44obRPLuJjrQRH3g-iydII=",
+                    "title": "youtube.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGqkUN6O0CMzhX2SHMrmpxWQv3UyqdiGVmAn7K_ZG-RVDF1CSJ5FfCrDkC1xVQtKmPXaC5eMRoHk97D0yVF2ar7VOA239JHKjZpPrGfc2esXy4TzsQWX3QQAPKJmflEcmmQHFF30eIFOK7OkicXyyE3uGDoiR0=",
+                    "title": "nri.com"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：専門家が指摘するように、提示された「外交・安全保障」政策と「社会保障」政策を同時に実現するには、財政的な整合性に大きな疑問符が付きます。その理由は以下の通りです。\n\n1.  **巨額かつ恒久的な歳出増**:\n    *   **防衛費**: 「安保三文書」に基づき防衛力を抜本的に強化する方針は、2027年度までに防衛費と関連経費をGDP比2%に倍増させることを意味します。 これは年間で約4兆円の恒久的な財源が追加で必要になることを示唆しています。\n    *   **社会保障費**: 高齢化の自然増に加え、「基礎年金の受給額の底上げ」のような給付拡充策は、社会保障給付費をさらに押し上げます。 社会保障給付費はすでに日本の国家予算の大きな部分を占めており、今後も増加が見込まれています。\n\n2.  **財源の具体性の欠如**:\n    *   これら二つの大きな歳出拡大を賄うための、安定的かつ具体的な歳入増の道筋が明確に示されていません。\n    *   防衛費増額の財源については、歳出改革、決算剰余金の活用、税外収入、そして最終的に1兆円強を法人税、所得税、たばこ税の増税で賄う案が示されています。 しかし、増税の実施時期は「令和6年以降の適切な時期」と先送りされており、国民の負担に対する慎重な姿勢がうかがえる一方で、財源確保の不確実性を高めています。\n    *   社会保障の拡充についても、財源に関する具体的な言及は乏しいです。消費税率について「引下げ・廃止は適当でない」とするのみで、増税には踏み込んでいません。 これは、有権者に不人気な負担増の議論を避けたいという政治的配慮がうかがえますが、政策の実現可能性という観点からは問題です。\n\n3.  **財政規律との矛盾**:\n    *   「財源の裏付けのない減税政策はやらない」 とし、財政規律を重視する姿勢を見せる一方で、歳入増の具体策を欠いたまま大規模な歳出増を掲げることは、将来世代へ負担を先送りすることにつながりかねず、政策としての一貫性に欠けます。\n\n結論として、外交・安全保障の強化と社会保障の拡充は、それぞれが国民にとって重要な政策課題です。しかし、その両立を目指すのであれば、国民が納得できる形で、痛みを伴う可能性のある財源論（特に増税）について正面から言及し、具体的な計画を示す必要があります。現状の政策提示では、歳出拡大というアクセルを踏みながらも、歳入確保というブレーキ、あるいはガソリン供給について曖昧なままとなっており、専門家が指摘する通り、政策の整合性が取れているとは言えません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "地方創生・地域活性化",
+            "topic_en": "Regional Revitalization",
+            "text": "地方創生2.0」を始動し、地方創生交付金の倍増を目指すとともに「新しい地方経済・生活環境創生本部」を政府に創設します。デジタル活用による地域サービス創出、企業版ふるさと納税の活用促進、交通空白解消や観光高付加価値化などを推進します。",
+            "summary": "交付金拡充とデジタル活用で雇用・サービスを地方に呼び込み、交通・観光・関係人口創出を通じて地方を成長の主役にする計画です。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/05/"
+        },
+        "policy2": {
+            "topic": "こども・子育て・教育",
+            "topic_en": "Child-rearing & Education",
+            "text": "児童手当の抜本的拡充や高等教育費負担の軽減、男性育休取得率の大幅引き上げなどを盛り込んだ「加速化プラン」を実施します。高校教育無償化の拡大や大学等の高等教育無償化を大胆に進め、教師の処遇改善や教員による性暴力根絶にも取り組みます。",
+            "summary": "少子化対策として手当・保育・住宅支援を一体強化し、教育費無償化と教員環境改善で子どもの成長と学びを支えるとしています。",
+            "url": "https://special.jimin.jp/political_promise/manifesto/04/"
+        },
+        "reason": "上記の指摘と同様に、財源の観点からの矛盾です。「地方創生交付金の倍増」もまた、国家財政に大きな負担を強いる歳出拡大政策です。これを、同じく巨額の財源を必要とする「防衛力の抜本的強化」や「高等教育の無償化」といった政策と同時に実現しようとすることは、財源の配分を巡って深刻な競合を招きます。限られた国家予算の中で、これら複数の大規模な歳出拡大策を、具体的な増収策なしに同時に達成することは極めて困難です。政策の優先順位が不明確なまま、全ての拡充策を並列で掲げることは、計画の実現可能性という点で整合性を欠いていると言えます。",
+        "coherence_flag_p1": "地方創生・地域活性化 (「地方創生2.0」を始動し、地方創生交付金の倍増を目指す)",
+        "coherence_flag_p2": "外교・安全保障 (安保三文書に基づき防衛力を抜本的に強化) / こども・子育て・教育 (大学等の高等教育無償化を大胆に進める)",
+        "flagged_by": "gemini-2.5-pro",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Agree  \nREASON：  \n両政策は内容面で相互に矛盾しているわけではなく、むしろ「子育て支援を充実させて若年層を地方に呼び込む」といった補完関係も考えられます。しかし今回の指摘は「財政面で同時実施が困難ではないか」という整合性の問題です。  \n\n1. 地方創生交付金の倍増・交通インフラ整備・観光支援などは、一時的・恒常的いずれにせよ国の歳出を増やします。  \n2. 児童手当拡充や高等教育無償化は年間ベースで巨額の恒久財源を要し、制度上も景気循環によらず支出が自動的に発生します。  \n3. いずれも「成長による税収自然増」「歳出改革努力」など一般的な財源確保方策に言及するのみで、増税や社会保険料の具体的引き上げ、水準・時期を示した支出抑制策が公約内に明示されていません。  \n4. 現状の国・地方を合わせた長期債務残高はGDP比で250％程度と国際的に突出しており、財政健全化目標（2025年度PB黒字化など）との整合も不透明です。恒常的な歳出拡大を複数同時に行う場合、歳入措置が伴わなければ財政悪化か公債依存の拡大を招き、将来世代負担の面で他の政策目的（持続可能性）と衝突します。  \n\n以上より「政策目標そのもの」ではなく「同一財源プールに対し多額の恒久支出を積み上げている点」で優先順位・実現手段が不明確であり、専門家が指摘する“財源を巡る深刻な競合”という評価は妥当と判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 2221,
+                    "end_idx": 2383,
+                    "text": "実際に、防衛費増額の議論が優先され、子ども関連予算の財源に関する議論が後回しにされてきたとの指摘もあります。",
+                    "grounding_chunk_indices": [
+                        0
+                    ]
+                },
+                {
+                    "start_idx": 2010,
+                    "end_idx": 2220,
+                    "text": "限られた国家予算の中で、防衛費の増額、地方創生、子育て支援という複数の大規模な歳出拡大策は、明らかに予算の奪い合いという競合関係にあります。",
+                    "grounding_chunk_indices": [
+                        7,
+                        0
+                    ]
+                },
+                {
+                    "start_idx": 1888,
+                    "end_idx": 1984,
+                    "text": "高等教育の無償化についても、財源確保が持続可能性の鍵となります。",
+                    "grounding_chunk_indices": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 1719,
+                    "end_idx": 1887,
+                    "text": "消費税や社会保険料を財源とすることも選択肢ですが、それぞれに政治的な困難や負担の偏りといった課題を抱えています。",
+                    "grounding_chunk_indices": [
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 1390,
+                    "end_idx": 1718,
+                    "text": "*   **負担を巡る議論**: 子育て支援の財源として、公的医療保険料に上乗せする「子ども・子育て支援金」制度が検討されていますが、与党内からも「目的外使用ではないか」といった異論が出ており、国民的合意の形成は容易ではありません。",
+                    "grounding_chunk_indices": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 1173,
+                    "end_idx": 1389,
+                    "text": "「次元の異なる」少子化対策として約3.5兆円規模の新たな支出が見込まれる一方で、その財源は歳出改革を優先するとしていますが、中身は不透明なままです。",
+                    "grounding_chunk_indices": [
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 943,
+                    "end_idx": 1172,
+                    "text": "*   **財源論の先送り**: 岸田政権は「こども未来戦略」などで子育て予算の倍増を目指す方針を示していますが、その財源の具体的な議論は先送りされる傾向にあります。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "start_idx": 795,
+                    "end_idx": 942,
+                    "text": "したがって、その財源は単年度の補正予算や剰余金に頼るのではなく、恒久的なものである必要があります。",
+                    "grounding_chunk_indices": [
+                        0
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKPyqxeAoq04gJovqEoM0zXSxbDXk3WhqytRLrh2yflcMtI0EwHpr-WWYzv60xm8Sc2e6_wNcX7lr5MyJng5XfMNc3RMFXe0hiptfjrOAvWZ0Av-x9ySdGDWMSRJqsBZLechnBwbY=",
+                    "title": "tokyo-np.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEwjae0FQ_qpuf8znwUuntf0jvpBA6n1aJtPbWVi2m5m04t62Y3nc5PmiyIVI7fb6Y86m7t0zlCHZ9Eos0XtENS-COldwoM0g0XH7dgFNMhxjNt9ucgB-pZmCSS_lNqjqTFQgceglPEUaGKLL1sHiJHRo8As3g=",
+                    "title": "medical-confidential.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEss_9sKNIL4uPSkffUmlIxbrHmS9WW71q8vxhSoM-XEgEbCH9ofFiNK4Ek6x5hUz8v1JOeLBwl8B9BR9EQolUrFaLjjCuLcbtSygeJEtDmORD7qrPP4FuGriU4VTEo14NEBaL0VwE9CvV9nUk=",
+                    "title": "tkfd.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHm3VWPA2kfo24wjFkxJW4bIPLlf4D47GczlfiGAIaFrdKAgoFWJ608eV-AI3kgo3BlxKxJktCyXro5UcZXOwSY7WyC8tUhAqSW4tbzsCAzV92QqrtX7JkQz_A3hcq-Dl8=",
+                    "title": "fukushishimbun.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFJHO3n5MrYcyk7wfQw8Cf93aZzv5kD5qBmF919zPzKms9mukTZYNfKtrnyTgawEaucPQGsIdtAIfTypU5e_7LQQDCAVmApN66KtrjHf9w_wpKeDUll5DA12PUtRLmKRnp2iNAmy9-HMsd6gdsCA_vyHy4zMsNKT1Ai",
+                    "title": "youtube.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH45mhWTDbKUkrBIsfH5p8Mfc2EjhfkcRCY65dpfdWihVZmX1Q90MAwKz1HJ2LOFMGAS8ZglaUKl9S0hjBIlrCL31cNye7o7H6hYubFOPFRwygfDDec8tFM-nT-YEmkgQ==",
+                    "title": "coki.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFzy5tYCXI4pPW970cPyBAiCgx4LQKYEQ8d276iSeY2THWbVORbzKtCdGVp4nVSrRfCzu-a5fyc0n8XNQFwe49z7S_KKSQLIxfRK6txRZkBGdF7-TApUVBjqFoA3wweJhrTqAP5vWbCc4gzznxrLw_BdZFF3To9",
+                    "title": "shidaikyo.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnw3nsAFkE_7D_QpVa87IicCsDyg8eqckwZZfAXkU5U1wBCZen8CSTXrQoRHLsvnh_DiaF-MSwheWbW3OD3QOXzR_7uzXAuBVqz1ofvhMohMFC6nv7qyq66A5sV8YOrlLTF0iMQZoOuw==",
+                    "title": "lite-ra.com"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：提示された専門家の指摘は、財源の観点から見て論理的であり、同意します。「地方創生交付金の倍増」と「こども・子育て・教育」の充実は、いずれも巨額の国家予算を必要とする歳出拡大政策です。これらを、同樣に大規模な財源を必要とする他の政策（例えば防衛費増額など）と同時に、安定的な財源確保の具体的な道筋を示すことなく公約として掲げることは、政策実現の観点から整合性に欠けると言わざるを得ません。\n\n**財源確保の不透明性**\n\n*   **恒久的な施策と財源**: 地方創生も子育て支援も、一過性の給付ではなく継続的な投資が求められる政策です。したがって、その財源は単年度の補正予算や剰余金に頼るのではなく、恒久的なものである必要があります。\n*   **財源論の先送り**: 岸田政権は「こども未来戦略」などで子育て予算の倍増を目指す方針を示していますが、その財源の具体的な議論は先送りされる傾向にあります。 「次元の異なる」少子化対策として約3.5兆円規模の新たな支出が見込まれる一方で、その財源は歳出改革を優先するとしていますが、中身は不透明なままです。\n*   **負担を巡る議論**: 子育て支援の財源として、公的医療保険料に上乗せする「子ども・子育て支援金」制度が検討されていますが、与党内からも「目的外使用ではないか」といった異論が出ており、国民的合意の形成は容易ではありません。 消費税や社会保険料を財源とすることも選択肢ですが、それぞれに政治的な困難や負担の偏りといった課題を抱えています。 高等教育の無償化についても、財源確保が持続可能性の鍵となります。\n\n**政策間の競合**\n\n限られた国家予算の中で、防衛費の増額、地方創生、子育て支援という複数の大規模な歳出拡大策は、明らかに予算の奪い合いという競合関係にあります。 実際に、防衛費増額の議論が優先され、子ども関連予算の財源に関する議論が後回しにされてきたとの指摘もあります。 政策の優先順位が明確に示されないままでは、どの政策も中途半端に終わるリスクがあります。\n\n**長期的視点と政治的意図**\n\n一方で、これらの政策には長期的な相乗効果も期待できます。例えば、地方における子育て支援の充実は、若者世代の地方移住を促し、地域経済の担い手確保、ひいては地方創生に繋がる可能性があります。また、教育への投資は、将来の労働生産性を向上させ、経済成長を通じて長期的な税収増に貢献する可能性も秘めています。\n\nしかし、こうした長期的な効果は短期的な財源問題を直接解決するものではありません。マニフェストが有権者へのアピールとして、財源の具体論よりも魅力的な政策を網羅的に掲げるという政治的な性質を持つことを考慮しても、財源の裏付けが不明確なまま大規模な歳出拡大を複数並立させている現状は、計画の実現可能性という点で専門家の指摘通り整合性を欠いていると評価するのが妥当です。"
+        }
+    }
+]

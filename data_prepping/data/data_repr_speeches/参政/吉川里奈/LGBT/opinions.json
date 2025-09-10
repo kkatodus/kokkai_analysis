@@ -1,0 +1,45 @@
+{
+    "party": "参政",
+    "repr_name": "吉川里奈",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121705206X00220250312_248",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2025-03-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705206X00220250312/248",
+            "speaker_group": "参政党",
+            "extracted_opinions": [
+                "\r\n　一昨年六月、ＬＧＢＴ理解増進法が成立、施行されましたが、私はこの法律の成立過程に強い疑問を抱いております"
+            ]
+        },
+        {
+            "speech_id": "121705206X00220250312_252",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2025-03-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705206X00220250312/252",
+            "speaker_group": "参政党",
+            "extracted_opinions": [
+                "\r\n　ＬＧＢＴや同性婚、そして、今国会で争点とされている選択的夫婦別姓は、急進的なリベラル思想に基づいて推し進められているように感じます"
+            ]
+        },
+        {
+            "speech_id": "121605206X00320241212_156",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2024-12-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605206X00320241212/156",
+            "speaker_group": "参政党",
+            "extracted_opinions": [
+                "\r\n　看護師で三児の母である私は、青天井の保険診療の行き過ぎたビジネス化や、昨年成立しましたＬＧＢＴ理解増進法が、性的指向やジェンダーアイデンティティーを法律で定めることが女性や子供たちの安心、安全に影響を与えることを懸念し、政治の道を志すことにいたしました"
+            ]
+        }
+    ]
+}

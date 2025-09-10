@@ -1,0 +1,21 @@
+{
+    "party": "立憲",
+    "repr_name": "山岸一生",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121004889X00820221116_060",
+            "house_name": "衆議院",
+            "meeting_name": "内閣委員会",
+            "date": "2022-11-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121004889X00820221116/60",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　私は、こういう今の政府の検討状況というものは、国民に対してマイナンバーカードを使ってくれ、使ってくれと言うときに、説得力があるとはなかなか思えないわけなのでございます"
+            ]
+        }
+    ]
+}

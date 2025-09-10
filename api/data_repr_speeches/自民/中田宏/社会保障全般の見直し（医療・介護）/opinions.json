@@ -1,0 +1,36 @@
+{
+    "party": "自民",
+    "repr_name": "中田宏",
+    "topic": "社会保障全般の見直し（医療・介護）",
+    "search_words": [
+        "社会保障",
+        "医療保険",
+        "介護保険",
+        "給付負担",
+        "保険料"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118305261X02320130416_236",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2013-04-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118305261X02320130416/236",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　まず、この予算、先ほど来も議論がありましたけれども、我が国の財政を非常に傷めているのは、社会保障に係る大きな割合だというふうに言えると思います"
+            ]
+        },
+        {
+            "speech_id": "118305261X02320130416_238",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2013-04-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118305261X02320130416/238",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　やはり、健康であれば保険料が安くなる、こういう医療制度をつくらないと日本はだめになると思いますよ"
+            ]
+        }
+    ]
+}

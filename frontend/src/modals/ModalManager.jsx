@@ -20,7 +20,7 @@ export default function ModalManager() {
   };
   const { type: displayType } = useDisplaySize();
   const modalWidth = displayType === 'mobile' ? 'w-full' : 'w-1/2';
-  const modalHeight = displayType === 'mobile' ? 'h-1/2' : 'h-1/2';
+  const modalHeight = displayType === 'mobile' ? 'h-[80%]' : 'h-1/2';
 
   if (modalsState.length === 0) {
     return null;

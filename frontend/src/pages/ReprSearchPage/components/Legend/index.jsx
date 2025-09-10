@@ -10,7 +10,7 @@ function MapLegend() {
   }
   return (
     <div
-      className={`flex flex-wrap justify-center items-center h-full ml-2 w-full z-40 rounded-lg ${colors.primary}`}
+      className={`flex flex-wrap justify-center items-center h-full ml-2 max-w-[400px] z-40 rounded-lg ${colors.primary}`}
     >
       {Party2ColorList.map((d) => (
         <div className="flex px-2" key={d.party}>

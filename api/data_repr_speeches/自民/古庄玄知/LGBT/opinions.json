@@ -1,0 +1,34 @@
+{
+    "party": "自民",
+    "repr_name": "古庄玄知",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115261X00920230314_078",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00920230314/78",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　そういう中で、ＬＧＢＴに関してわざわざ理解増進法という形で法律を作るのはなぜなのか"
+            ]
+        },
+        {
+            "speech_id": "121115261X00920230314_070",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-03-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X00920230314/70",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○古庄玄知君　私自身はまだ同性婚を認めるべき時期には達していないというふうに考えておりますが、この点につきまして政府のお考えはいかがでしょうか"
+            ]
+        }
+    ]
+}

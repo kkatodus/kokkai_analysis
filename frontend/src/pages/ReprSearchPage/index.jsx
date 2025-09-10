@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { colors } from 'resource/styling';
 import ModalManager from 'modals';
+import useDisplaySize from 'state/useDisplayType';
 
 import VoteDistrictMap from './components/VoteDistrictMap';
 import DistrictRepsPanel from './components/DistrictRepsPanel';
@@ -16,6 +17,9 @@ function ReprSearchPage() {
   // eslint-disable-next-line no-unused-vars
   const [searchMode, setSearchMode] = useState('map');
   const [geoJsonData, setGeojsonData] = useState(null);
+  const { type: DisplayType } = useDisplaySize();
+  const isMobile = DisplayType === 'mobile';
+
   const districtOptions = useMemo(
     () =>
       geoJsonData?.features.map((f) => f.properties.kuname.replace('区', '')),
@@ -40,10 +44,10 @@ function ReprSearchPage() {
 
   return (
     <Div100vh>
-      <div className="relative h-[100%] w-screen flex">
+      <div className={`relative h-[100%] w-screen flex ${isMobile ? 'flex-col overflow-clip' : ''}`}>
         <ModalManager />
-        <div className="absolute h-20 w-[70%] z-10">
-          <div className="w-full flex h-full">
+        <div className={`absolute h-20 w-[70%] z-10 flex items-center justify-center ${isMobile ? 'w-full' : ''}`}>
+          <div className={`w-full flex h-full items-center justify-center ${colors.primary}`}>
             <Link
               className={`back-icon z-40 top-0 left-0 p-2 rounded-lg ${colors.primary}`}
               to="/repr_analysis"
@@ -51,23 +55,21 @@ function ReprSearchPage() {
               <MdOutlineArrowBack className="menu-icon h-[50px] w-[50px] " />
             </Link>
             <MapLegend />
-          </div>
-          <div className="w-full h-20 pt-2 pl-2">
-            <AutocompleteInput
+			<AutocompleteInput
               selectedDistrict={selectedDistrict}
               setSelectedDistrict={setSelectedDistrict}
               options={districtOptions}
             />
           </div>
         </div>
-        <div className="w-[70%] h-full">
+        <div className={`w-[70%] h-full ${isMobile ? 'w-full h-[50%]' : ''}`}>
           <VoteDistrictMap
             setCurrentDistrict={setSelectedDistrict}
             selectedDistrict={selectedDistrict}
             geoJsonData={geoJsonData}
           />
         </div>
-        <div className="w-[30%]">
+        <div className={`w-[30%] ${isMobile ? 'w-full h-[50%]' : ''}`}>
           <DistrictRepsPanel districtName={selectedDistrict} />
         </div>
       </div>

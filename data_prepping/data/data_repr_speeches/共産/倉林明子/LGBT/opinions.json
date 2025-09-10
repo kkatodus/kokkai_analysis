@@ -1,0 +1,23 @@
+{
+    "party": "共産",
+    "repr_name": "倉林明子",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120115262X00120200310_217",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会公聴会",
+            "date": "2020-03-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120115262X00120200310/217",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "\r\n　先ほど出た選択的夫婦別姓の問題、同性婚の問題どう考えるのか、あるいは、女性の議員の比率が余りにも低いという問題、賃金格差の問題"
+            ]
+        }
+    ]
+}

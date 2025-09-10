@@ -1,0 +1,58 @@
+{
+    "party": "自民",
+    "repr_name": "牧島かれん",
+    "topic": "物価高対策・減税と賃上げ",
+    "search_words": [
+        "物価",
+        "インフレ",
+        "消費税",
+        "減税",
+        "賃上げ"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121605254X00620241212_014",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2024-12-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121605254X00620241212/14",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "このことによって、賃上げと投資が牽引する成長型経済への移行を確実なものとしなければなりません"
+            ]
+        },
+        {
+            "speech_id": "121305261X01620240302_299",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-03-02",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305261X01620240302/299",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　三十年ぶりの経済の明るい兆しを経済の好循環につなげるため、物価高に負けない賃上げを実現し、企業の稼ぐ力を強化していくことが必要です"
+            ]
+        },
+        {
+            "speech_id": "118604376X00820140416_008",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2014-04-16",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118604376X00820140416/8",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　一方で、物価が上がってきても、賃金が上昇しなければ物価上昇は望ましくないという声が上がるのも自然なことではあります"
+            ]
+        },
+        {
+            "speech_id": "118304376X00220130315_006",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2013-03-15",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118304376X00220130315/6",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "ただ単に物価が上がってデフレを脱却すればいいということではなくて、国民の生活に、もう改善されたんだという実感が伴うこと、雇用や賃金の拡大を伴ったデフレの脱却でなければならないというふうに考えております"
+            ]
+        }
+    ]
+}

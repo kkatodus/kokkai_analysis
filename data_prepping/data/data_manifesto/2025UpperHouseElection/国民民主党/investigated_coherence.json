@@ -1,0 +1,744 @@
+[
+    {
+        "policy1": {
+            "topic": "給料が上がる経済の実現",
+            "topic_en": "Realizing an Economy with Rising Wages",
+            "assigned_tag": "経済",
+            "text": "上げるべきは物価ではなく給料です。1996年をピークに長期的に下がり続けている実質賃金を上昇に転じさせ、「令和の好循環」をつくります。名目賃金上昇率が一定水準（物価上昇率＋2％＝当面の間4％）に達するまで、積極財政等と金融緩和による「高圧経済」によって為替、物価を適切に安定させ、経済低迷の原因である賃金デフレから脱却します。それまでの間、増税や社会保険料アップ、給付削減などによる家計負担増は行いません。「大規模、長期、計画的」な産業政策と、消費力を高める「家計第一の経済政策」により、分厚い中間層を復活させます。",
+            "summary": "国民民主党は、物価上昇を上回る持続的な賃金上昇を実現するため、「令和の好循環」を創出することを経済政策の柱に据えています。実質賃金が物価上昇率を2%上回る水準に達するまで、積極的な財政出動と金融緩和を継続し、増税や社会保険料の負担増は行わない方針です。これによりデフレから完全に脱却し、分厚い中間層を復活させることを目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies/economy"
+            ],
+            "id": "国民民主党_0"
+        },
+        "policy1_id": "国民民主党_0",
+        "policy2": {
+            "topic": "社会保障",
+            "topic_en": "Social Security",
+            "assigned_tag": "社会保障",
+            "text": "世代間公平に配慮しつつ、重点化と効率化によって、子どもから高齢者にわたる、持続可能な社会保障制度を構築します。医療制度は全ての人が享受するものであるからこそ、年齢ではなく負担能力に応じた制度にしていかないといけない。後期高齢者医療について原則2割負担とし、金融資産も考慮して現役並みの所得があると判断できる高齢者については3割負担とするなど、年齢ではなく負担能力に応じた窓口負担に見直します。",
+            "summary": "国民民主党は、持続可能な社会保障制度の構築を目指し、世代間の公平性に配慮した制度改革を掲げています。具体的には、医療費の窓口負担について、年齢ではなく所得や資産に応じた負担（応能負担）を原則とし、後期高齢者は原則2割負担、資力のある高齢者は3割負担とすることを提案しています。 これにより、現役世代の負担を軽減し、全世代対応型の社会保障への転換を目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies-index-2019/mhlw_reforms"
+            ],
+            "id": "国民民主党_7"
+        },
+        "policy2_id": "国民民主党_7",
+        "reason": "政策0では「名目賃金上昇率が物価＋2％に達するまで、増税・社会保険料アップ・給付削減など家計負担増は行わない」と明言しているのに対し、政策7では後期高齢者の医療窓口負担を原則2割（一定所得層は3割）へ引き上げるとし、家計負担を先行的に増やす内容となっている。賃金目標達成前に負担増を実施することになり、同時期に両方を実現するのは困難である。",
+        "coherence_flag_p1": "国民民主党_0",
+        "coherence_flag_p2": "国民民主党_7",
+        "flagged_by": "o3",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Disagree  \nREASON：  \n1. 「給料が上がる経済の実現」で掲げる “それまでの間（名目賃金上昇率が物価＋２％に達するまで）家計負担増は行わない” という記述は、主に①増税、②社会保険料アップ、③給付削減を念頭に置いた文脈です。医療の窓口負担（自己負担割合）は保険料や税ではなく利用時点でのコストシェアであり、条文上ここに直接含まれるとは限りません。  \n\n2. 社会保障改革案は「持続可能な制度」を中期的に再設計する政策パッケージであり、実施時期を「賃金目標達成前」とは特定していません。賃金目標を達成した後、もしくは段階的に導入する形であれば、政策１の条件と両立し得ます。  \n\n3. 医療窓口負担の見直しは、高所得の後期高齢者に追加負担を求める一方で保険料（現役世代負担）抑制や財政投入の節減につなげる意図があります。つまり「ある世代・所得層の負担増」で得た財源を別の世代の負担減に回す設計であれば、家計全体としてのネット負担を増やさないことも可能で、政策１の趣旨（可処分所得の押し下げ回避）と必ずしも衝突しません。  \n\n4. 両政策とも「分厚い中間層を再生」「世代間公平」を共通目標に掲げており、実施時期と設計を調整すれば整合的に運用できる余地が大きいと考えられます。したがって、「同時期に必ず矛盾し両立不可能」と断定するのは妥当とは言えません。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 3196,
+                    "end_idx": 3368,
+                    "text": "政策2は、社会保障の将来に不安を抱く現役世代に対し、負担の公平化と制度の持続可能性を示すことでアピールするものです。",
+                    "grounding_chunk_indices": [
+                        8,
+                        10
+                    ]
+                },
+                {
+                    "start_idx": 2718,
+                    "end_idx": 2886,
+                    "text": "、高齢者への負担増とセットで現役世代の負担を軽減し、全体として「家計第一」を目指すという論理構成が成り立ちます。",
+                    "grounding_chunk_indices": [
+                        9
+                    ]
+                },
+                {
+                    "start_idx": 2634,
+                    "end_idx": 2718,
+                    "text": "党の政策では「現役世代の社会保険料軽減」が明記されており",
+                    "grounding_chunk_indices": [
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 1880,
+                    "end_idx": 2091,
+                    "text": "これは、現役世代の社会保険料負担の増大を抑制することで、結果的に現役世代の手取りを増やすという狙いがあり、政策1の目標に貢献するとも言えます。",
+                    "grounding_chunk_indices": [
+                        7,
+                        8
+                    ]
+                },
+                {
+                    "start_idx": 1648,
+                    "end_idx": 1879,
+                    "text": "ここでの負担増の対象は「後期高齢者」、特に「資力のある高齢者」に限定されており、「年齢ではなく負担能力に応じた負担（応能負担）」という原則を掲げています。",
+                    "grounding_chunk_indices": [
+                        3,
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 1427,
+                    "end_idx": 1647,
+                    "text": "一方で政策2の社会保障改革は、増大する医療費と少子高齢化を背景に、「世代間の公平性」を確保し、制度の持続可能性を高めることを目的とした構造改革です。",
+                    "grounding_chunk_indices": [
+                        6,
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 987,
+                    "end_idx": 1198,
+                    "text": "**政策の対象と目的の違い**\n    政策1の「給料が上がる経済の実現」は、主にデフレ経済下で所得が伸び悩む「現役世代」を対象としたマクロ経済政策です。",
+                    "grounding_chunk_indices": [
+                        0,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 406,
+                    "end_idx": 664,
+                    "text": "一方で政策2では、後期高齢者の医療費窓口負担を原則2割（資力のある高齢者は3割）に引き上げるとしており、これは対象となる高齢者世帯にとって明確な「家計負担増」にあたるからです。",
+                    "grounding_chunk_indices": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 217,
+                    "end_idx": 405,
+                    "text": "政策1では「名目賃金上昇率が物価＋2％に達するまで、増税・社会保険料アップ・給付削減など家計負担増は行わない」と明言しています。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1,
+                        2
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGLbYcTmsh1Lgzg8RdTyaaxfyYI2OJOWY5SsU5xP5f8krTpBri2vH2ScGySUs3mAlrx9JLqYtC6e0uAQ-zL4102A3m6c1Tz7aW2in102VJ1j-dWTi6nXFvDJ7mIoro900wHSI8Us8YEQReJPF4RDjs=",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG0aFTMqC-i4V_ROA91WCP9NvN40NLcIBSd2fnJiai1QDD2ygaziLwm3TByQLZyPI4VM-o1h3qWrSm_DrFMlZeIuw28v2AtW1ti_NZDxTHGDe5djXiPNI-S9SMIpgt3AxzMXQhllw==",
+                    "title": "kagawa-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGmHUNnbrqrY4tKuPKg_zuMuk83KmAyjUxaaIcvrvCu7uNdIjPnVG_oxvkMtKEUZQxhrURw2a-6CJjxA0EkFG03Oe3em-27VDUfTkdzgeF0bOH7ZUXNE-aLgBEcu6Z2SVsx9M_dGQ==",
+                    "title": "kagawa-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFUytQl-LTKqC_PN49Ei9BNqd5plfuu62qOkpXiPEAWjzUj_erywQdskypp2U0B4i0n9rS3MT4DZpwWuoh_TAM_ab3WhdLv4-7wUjcrohwzvMyRo_JNGzB_9VZ9hUIAGG-oS36r5cI=",
+                    "title": "youtube.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEyj-FRDzZ7xK-kP4RZKnBS_-iYNYODorVgN3bxQNpfFEF1mcZL-n2UAHRhB_TT_NpRLkr2Xqs7BFqA7c3kwkfdZV2MbCAG9V8dRQbysOzJah8t7uXQjUr1j9_k7-GjyvLqqOQqQFZZ3Q==",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG2La51b7D2F9AhaKij2CL7kbRhHMFBnLZz3QSIoaAybGtwLz_aj1z5KN6blmUpj1-EFU5UdoWjcKURam6cJDVLla7sMfAeAdPpgCoust2ahY9OtKnFNZM3h6d7y0WC7akGmGPtAN2dkhn3sRwnmLdj8-wwqEG9co4bTapDIkkZBb46UGnI-Gba-0233zufhdZpxVo=",
+                    "title": "the-issues.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWEAXIotEaLKk0Xyn_AyY5wtBVw_ovp20ZlM1nSeKZ4Z2QacMMBQ2FgLJM5BAj2T6nqeseV_F8ZGesvLUTnmKBuu1mQIOYoPiSEBBuwKkalaBTIKPkHTS6xiIhWxrr68m5xJxfu8lk14LSK0jaBg==",
+                    "title": "dpfp.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHgTz1UGoSlfCjLaH06AsbETdvwnKsjrCwA8EXPYvgMh48es2IbIEwCfVAOjteXVleQ79bhCJesRvZyaEB1Idnv4qcKtTd0tgLUO9dYJyNh2MsHFRDtGtssqSc=",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEbpemdSmMa4XAYRuIODTO-0qp55HIRAMM15Lk9OM6Ty1Esid8jybgfKO0HbtV5COKlDWJkVyCk7OOZoo9Sd2r9yIudZetrF8RdJRthu_zKFpopQUUwwJWx6QWjXwAC0OwiYYBE",
+                    "title": "m3.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHsQJHJAtI0bJvvpTXQBJF7OlWzF8IgSUN-kMmCxZs6ce0b_-go23fLD21z9Gxcw0J1sY6lXx1nDIdmCEXf1fbg9exI93Q9GjitPs_Z1IErns3bKKHTBgMtKVwAQ5537qK5og==",
+                    "title": "dpfp.or.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFE7muqPkoA9-U69KNWH8ufiTqQVHiYeeKaeSmcAW0LCif0zIuewBU8ixEPONuxsamPGBJXdYoQYdi3CM1AfZGg2eEKJxzBhMYV__rJYH8MY6Pb0Jq1bv3uHrtccZyiNNdW6cz6avMhgcwmAio=",
+                    "title": "all-senmonka.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Disagree\nREASON：\n提示された二つの政策について、専門家が指摘するように、文言を字義通りに解釈した場合、たしかに整合性が取れないように見えます。政策1では「名目賃金上昇率が物価＋2％に達するまで、増税・社会保険料アップ・給付削減など家計負担増は行わない」と明言しています。 一方で政策2では、後期高齢者の医療費窓口負担を原則2割（資力のある高齢者は3割）に引き上げるとしており、これは対象となる高齢者世帯にとって明確な「家計負担増」にあたるからです。\n\nしかし、政治学および経済学の観点から両政策の目的と対象を深く分析すると、国民民主党の立場からは両立可能であると主張する余地があり、単純に「整合性がない」と断じることには同意できません。その理由は以下の通りです。\n\n1.  **政策の対象と目的の違い**\n    政策1の「給料が上がる経済の実現」は、主にデフレ経済下で所得が伸び悩む「現役世代」を対象としたマクロ経済政策です。 「家計負担増は行わない」というメッセージは、経済が好循環に入るまで、消費の足かせとなる現役世代への追加負担はしないという強い意志表示と解釈できます。\n\n    一方で政策2の社会保障改革は、増大する医療費と少子高齢化を背景に、「世代間の公平性」を確保し、制度の持続可能性を高めることを目的とした構造改革です。 ここでの負担増の対象は「後期高齢者」、特に「資力のある高齢者」に限定されており、「年齢ではなく負担能力に応じた負担（応能負担）」という原則を掲げています。 これは、現役世代の社会保険料負担の増大を抑制することで、結果的に現役世代の手取りを増やすという狙いがあり、政策1の目標に貢献するとも言えます。\n\n2.  **「家計負担増」の解釈**\n    国民民主党は、「家計負担増は行わない」という言葉の定義を、消費税増税や社会保険料の一律引き上げのような、広範な世帯に影響する負担増を念頭に置いている可能性があります。これに対し、特定の層（資力のある高齢者）に対する応能負担の強化は、制度の歪みを是正する「改革」であり、一律の「負担増」とは性質が異なると位置づけていると考えられます。党の政策では「現役世代の社会保険料軽減」が明記されており、高齢者への負担増とセットで現役世代の負担を軽減し、全体として「家計第一」を目指すという論理構成が成り立ちます。\n\n3.  **政治的メッセージの戦略**\n    政党の政策は、異なる有権者層へのアピールを意図して策定されます。政策1は、経済全体のパイを大きくし、働く世代に直接的な恩恵をもたらすという、幅広い支持を得やすいメッセージです。政策2は、社会保障の将来に不安を抱く現役世代に対し、負担の公平化と制度の持続可能性を示すことでアピールするものです。 このようにターゲットを分けてメッセージを発信することで、一見矛盾するように見える政策を両立させようとするのは、政治戦略上、珍しいことではありません。\n\n以上のことから、表面的な文言の矛盾は認められるものの、政策の目的、対象、そして党が持つであろう「負担増」の定義を考慮すれば、国民民主党の内部では二つの政策は整合的であると整理されている可能性が高いです。したがって、両立は困難であるという指摘には、より多角的な分析が必要であり、全面的には同意しません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "原子力・エネルギー政策",
+            "topic_en": "Nuclear and Energy Policy",
+            "assigned_tag": "エネルギー",
+            "text": "安全基準を満たした原子力発電所の早期再稼働を進めるとともに、次世代軽水炉や小型モジュール炉（SMR）など次世代革新炉の開発・建設（リプレース・新増設を含む）を推進します。 運転期間は原則40年としつつ、科学的・技術的根拠に基づき厳格に適用します。 原子力施設への武力攻撃を想定し、自衛隊による迅速な保護を可能とする法整備も行います。 再生可能エネルギーの導入も進めますが、カーボン・ニュートラル実現に向けた過度な負担による産業競争力の低下を回避することも重視しています。",
+            "summary": "国民民主党は、エネルギーの安定供給と脱炭素化の両立を目指し、安全性が確認された原発の再稼働と次世代革新炉の開発・導入を推進します。 40年の運転制限を基本としつつも、科学的根拠に基づく厳格な運用を求めます。 また、再生可能エネルギーの導入と産業競争力維持のバランスを考慮し、現実的なエネルギー政策を重視しています。 安全保障の観点から、原発への武力攻撃に備えた法的措置も講じる方針です。",
+            "urls": [
+                "https://new-kokumin.jp/policies/own-country"
+            ],
+            "id": "国民民主党_4"
+        },
+        "policy1_id": "国民民主党_4",
+        "policy2": {
+            "topic": "消費税・物価高対策",
+            "topic_en": "Consumption Tax and Inflation Countermeasures",
+            "assigned_tag": "税金",
+            "text": "物価が上がり景気が低迷するスタグフレーションに陥らないため、賃金上昇率が物価＋2％に達するまでの間、消費税率を10％から5％へ引き下げます。中小事業者の負担などを踏まえ、インボイス制度は廃止します。また、ガソリン代値下げのため、トリガー条項の凍結解除により暫定税率を廃止（25.1円/L）し、二重課税も解消します。電気代については、再生可能エネルギー賦課金の徴収を停止します。",
+            "summary": "国民民主党は、物価高騰対策として、実質賃金が持続的にプラスに転じるまで消費税率を5%に引き下げることを提案しています。 加えて、ガソリン価格を引き下げるためにトリガー条項凍結解除や二重課税の解消、電気代負担を軽減するために再エネ賦課金の徴収停止を目指します。 また、中小事業者の負担を考慮し、インボイス制度の廃止も掲げています。",
+            "urls": [
+                "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELf-1-5sjzfXGSc572hQnSmdaBqo8uDIACgmU76juJWgTr6kNpfSC7mZpNDBNQbZmFoMV3mhpnWz5GaH0ucLjFQCRLZfMEVl7xr7AMLFOkiEdqqw4WCc3LhuY="
+            ],
+            "id": "国民民主党_1"
+        },
+        "policy2_id": "国民民主党_1",
+        "reason": "政策4は「再生可能エネルギーの導入も進める」と掲げる一方、政策1では電気料金抑制のため再エネ賦課金の徴収停止を打ち出している。賦課金は再エネ拡大の主要財源であり、停止すれば投資インセンティブと導入ペースが低下する。代替財源を示さずに賦課金停止と再エネ導入促進を同時に進めるのは整合しない。",
+        "coherence_flag_p1": "国民民主党_4",
+        "coherence_flag_p2": "国民民主党_1",
+        "flagged_by": "o3",
+        "o3_investigation": {
+            "annotations": [
+                {
+                    "citation_idx": 1,
+                    "title": "",
+                    "url": "https://new-kokumin.jp/wp-content/uploads/2024/03/5efd4e80fe54f9126315491ffbacdad0.pdf",
+                    "start_idx": 221,
+                    "end_idx": 327
+                },
+                {
+                    "citation_idx": 2,
+                    "title": "政策各論2. 自分の国は自分で守る | 新・国民民主党 - つくろう、新しい答え。",
+                    "url": "https://new-kokumin.jp/policies/specifics/specifics2?utm_source=chatgpt.com",
+                    "start_idx": 476,
+                    "end_idx": 571
+                },
+                {
+                    "citation_idx": 3,
+                    "title": "制度の概要｜FIT・FIP制度｜なっとく！再生可能エネルギー",
+                    "url": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/surcharge.html?utm_source=chatgpt.com",
+                    "start_idx": 697,
+                    "end_idx": 826
+                }
+            ],
+            "reply": "AGREEMENT：Disagree  \nREASON：  \n専門家が指摘する「整合性欠如」は必ずしも成立しないと考えます。  \n\n1. 再エネ賦課金停止は“当分の間”の家計支援策であり、法案条文には「再エネ電気の供給促進に悪影響を及ぼさないようにする」「電気使用者が負担しない形で必要費用の在り方を検討する」と明記されています。つまり、停止と同時に国費・別財源などで再エネ導入を維持することを義務づけており、再エネ促進を放棄してはいません。([new-kokumin.jp](https://new-kokumin.jp/wp-content/uploads/2024/03/5efd4e80fe54f9126315491ffbacdad0.pdf))  \n\n2. 国民民主党のエネルギー政策は、原子力の再稼働・次世代炉推進で安価かつ安定した電源を確保しつつ、2030年代に再エネ比率40％超を目標としています。併せて「再エネ賦課金が増大しているため制度を見直す」と党自体が明言しており、賦課金制度改革と再エネ拡大を同時に掲げる姿勢は一貫しています。([new-kokumin.jp](https://new-kokumin.jp/policies/specifics/specifics2?utm_source=chatgpt.com))  \n\n3. 日本の再エネ促進スキームはFITからFIP・入札へと移行中で、将来は市場取引や税財源による補完が前提です。したがって「賦課金＝主要財源」という図式はすでに変容しており、賦課金を一時停止しても別の政策手段で導入を進めることは制度上可能です。([enecho.meti.go.jp](https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/surcharge.html?utm_source=chatgpt.com))  \n\n以上より、「再エネの導入を進める」と「再エネ賦課金の徴収を一時停止する」は、代替財源や制度改革を前提にすれば両立可能であり、必ずしも矛盾とは言えません。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 1660,
+                    "end_idx": 1885,
+                    "text": "**代替財源の欠如**: 国民民主党の政策では、この賦課金停止によって失われる年間数兆円規模の財源を、どのように補うかという代替案が具体的に示されていません。",
+                    "grounding_chunk_indices": [
+                        8,
+                        9
+                    ]
+                },
+                {
+                    "start_idx": 1032,
+                    "end_idx": 1239,
+                    "text": "**賦課金停止の矛盾**: 再エネ賦課金の徴収を停止するということは、再生可能エネルギー発電事業者の収益を保証する原資がなくなることを意味します。",
+                    "grounding_chunk_indices": [
+                        7,
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 906,
+                    "end_idx": 1026,
+                    "text": "つまり、再エネ賦課金は、再生可能エネルギーを普及させるための根幹となる財源です。",
+                    "grounding_chunk_indices": [
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 683,
+                    "end_idx": 905,
+                    "text": "そして、その買取費用は「再生可能エネルギー発電促進賦課金（再エネ賦課金）」として、電気を利用する国民や企業が電気料金の一部として広く負担しています。",
+                    "grounding_chunk_indices": [
+                        4,
+                        3,
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 505,
+                    "end_idx": 682,
+                    "text": "この制度は、電力会社が再生可能エネルギーで発電された電気を、国が定めた価格で一定期間買い取ることを義務付けるものです。",
+                    "grounding_chunk_indices": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "start_idx": 320,
+                    "end_idx": 504,
+                    "text": "**再エネ賦課金の役割**: 日本の再生可能エネルギー導入は、2012年に始まった固定価格買取制度（FIT制度）によって大きく進展しました。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFAbj6VUhwD6EazBle8Nd6LuveBn5R14_2V2lKA8frHAEimmOAe_F9Ud0ifw50UPhUqGmvgK-jXuIqIJKwIgqKKqKKy5cCfeAfvX-G8N658D5T6gl9xT02sMKN4b84k7Cx6kMhIoAHJe4j0rAtAKGihl3MYQzcSHdJJ5Ls-8FB_aZ2QAtoz",
+                    "title": "meti.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXNsDSSNyDCIRuQjNAsGa9ydjmiJTYLZ94yGi97cmzkRpXyKubBosf8UPJKvowFsZ0b3XkaJkxL0OO0h_yIpOzTU3vk0Z0A7Qplz1dpgA5B0aGqg1JaipfNFqv2C0g-kx4iInExQNgdst3UiqGggzONLVoRNCmToYB1ghXNmfrzQoMWUvHNj9P",
+                    "title": "meti.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFW0Yt6w3-SoW3gIj-gGWnKUuG_1TEM7ry2nEq1G5axHu8sbWpEHpUL-QjIQWBUJ3xbLqAjfEuV1H09l4mWQIosGCH3SLCMWtgo9xlt-jQWg673HXCv0qolhxvzaUXzAgt4uRemf9VzYSg=",
+                    "title": "tanso-man.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEM8EDZNfuZuzsQE5zXPM883IFPUUUHaP7saV27NBai4pf_CUT-picPfATYMjfp-bbkcgrVgBffmWw_I8wDaHF6HVE8bVEAVnhHhQ_043c0YPar9LewOE-olMzdNgueqG_OjfSQLuJ5zTnI45LC8EU1l0AfYW0k20o=",
+                    "title": "marubeni.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEN9WZvuZh1lBkSFsGD16UmVvvBWRh_cmvFe46aDRC_qJ8CcwEBGmnCJssxkym9adESYYniEWiWYmw8Q-zBIxki-8P8qu-9QxHDWySUWvIR0wqGxTrWqGRX0WEZ1odSn2y8Ey7NfD1s0g==",
+                    "title": "cigs.canon"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHRcW98QgdygL9Yo5BPeK2WhFkAjMmhqgjTfY47Ze3MjDNzJtgePagxDIXmRdb82TwOhxwYx3Ige-I-tGDwBVyD8KOCAUObbvbP_hXMe6RShvY18rOV9LDIzzhJ0In8OVqpE_ptq-dCgYyUqmo0szyPkIuDp86Mn6875NU=",
+                    "title": "solar-frontier.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHU4vcUlJhlLBFPsopBKu0sQIo5C7Ak-8l3rQ-buiB7STa12Wj2xAT4OzfF4D6NHdTztKkDX9pot30rKxFjRx3asn9ceNAzDaTMd5rQHoWSuMsn-kF0d7liXqYWHNcCID4bbeex-Zd3B6V8uvJfHC0oSNF64cr3yjEO5TayP5nqURr6",
+                    "title": "docomo.ne.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHeaQXiYoPU0UBLGBK1FJkqhLKd6e4FdfaeBjw3jqCHwEEPrthovUIJ2EW6C7ZgrLMB2tKZDxrS3PTUhOCtQyaJHFEJ6oCTbQmnrgBMbaBz_S55UyxTzi-hDeSt6zfQ--b4Xj0=",
+                    "title": "hybridcompany.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH2yu8oqHFjmoLYYrlEF21UOyQrWjXjZ41VMxiEwd7HYJ5zPh1WM30Qp0Nyknp3Y-5kS6uvsaN_MjmC6Biz7VtTWUc94Osd79PHOz6AmID-KGePQcrsXgKMDZWXxEoBPK8UFR2tRH9sPF0vyQVYj2W2g2buN_8=",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6Y1enVz8eI6NCnejA_vZhu_x87JJ6UOLzCUQTS59vmRd1lImc2oIyK3ldGg82q2kMgHdzHaEWkcQ7aWd--0od3tpkHQ4aqT1dqZzfjCHk3gr3nlUga7tVSUPxgCyRh1K18Gx0mf1w6BN4xOtY",
+                    "title": "tkfd.or.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：専門家の指摘は妥当であり、同意します。国民民主党が掲げる「再生可能エネルギーの導入推進」と「再エネ賦課金の徴収停止」は、現状の制度において著しい矛盾を抱えています。\n\nその理由は以下の通りです。\n\n1.  **再エネ賦課金の役割**: 日本の再生可能エネルギー導入は、2012年に始まった固定価格買取制度（FIT制度）によって大きく進展しました。 この制度は、電力会社が再生可能エネルギーで発電された電気を、国が定めた価格で一定期間買い取ることを義務付けるものです。 そして、その買取費用は「再生可能エネルギー発電促進賦課金（再エネ賦課金）」として、電気を利用する国民や企業が電気料金の一部として広く負担しています。 つまり、再エネ賦課金は、再生可能エネルギーを普及させるための根幹となる財源です。\n\n2.  **賦課金停止の矛盾**: 再エネ賦課金の徴収を停止するということは、再生可能エネルギー発電事業者の収益を保証する原資がなくなることを意味します。 これにより、事業者は投資の回収が困難になり、新規の再生可能エネルギー事業への投資意欲は著しく減退するでしょう。結果として、再生可能エネルギーの導入ペースは大幅に鈍化、あるいは停滞する可能性が極めて高く、「再生可能エネルギーの導入を進める」という政策目標と真っ向から矛盾します。\n\n3.  **代替財源の欠如**: 国民民主党の政策では、この賦課金停止によって失われる年間数兆円規模の財源を、どのように補うかという代替案が具体的に示されていません。 代替財源を確保することなく賦課金の停止と再エネ導入の推進を同時に掲げることは、政策としての実現性に大きな疑問符が付きます。\n\n以上の点から、「再生可能エネルギーの導入推進」と、そのための主要な財源である「再エネ賦課金の徴収停止」を同時に掲げる国民民主党の政策は、二つの目標が互いに打ち消しあってしまう関係にあり、論理的な整合性を欠いていると判断せざるを得ません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "消費税・物価高対策",
+            "topic_en": "Consumption Tax and Inflation Countermeasures",
+            "assigned_tag": "税金",
+            "text": "物価が上がり景気が低迷するスタグフレーションに陥らないため、賃金上昇率が物価＋2％に達するまでの間、消費税率を10％から5％へ引き下げます。中小事業者の負担などを踏まえ、インボイス制度は廃止します。また、ガソリン代値下げのため、トリガー条項の凍結解除により暫定税率を廃止（25.1円/L）し、二重課税も解消します。電気代については、再生可能エネルギー賦課金の徴収を停止します。",
+            "summary": "国民民主党は、物価高騰対策として、実質賃金が持続的にプラスに転じるまで消費税率を5%に引き下げることを提案しています。 加えて、ガソリン価格を引き下げるためにトリガー条項凍結解除や二重課税の解消、電気代負担を軽減するために再エネ賦課金の徴収停止を目指します。 また、中小事業者の負担を考慮し、インボイス制度の廃止も掲げています。",
+            "urls": [
+                "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELf-1-5sjzfXGSc572hQnSmdaBqo8uDIACgmU76juJWgTr6kNpfSC7mZpNDBNQbZmFoMV3mhpnWz5GaH0ucLjFQCRLZfMEVl7xr7AMLFOkiEdqqw4WCc3LhuY="
+            ],
+            "id": "国民民主党_1"
+        },
+        "policy1_id": "国民民主党_1",
+        "policy2": {
+            "topic": "原子力・エネルギー政策",
+            "topic_en": "Nuclear and Energy Policy",
+            "assigned_tag": "エネルギー",
+            "text": "安全基準を満たした原子力発電所の早期再稼働を進めるとともに、次世代軽水炉や小型モジュール炉（SMR）など次世代革新炉の開発・建設（リプレース・新増設を含む）を推進します。 運転期間は原則40年としつつ、科学的・技術的根拠に基づき厳格に適用します。 原子力施設への武力攻撃を想定し、自衛隊による迅速な保護を可能とする法整備も行います。 再生可能エネルギーの導入も進めますが、カーボン・ニュートラル実現に向けた過度な負担による産業競争力の低下を回避することも重視しています。",
+            "summary": "国民民主党は、エネルギーの安定供給と脱炭素化の両立を目指し、安全性が確認された原発の再稼働と次世代革新炉の開発・導入を推進します。 40年の運転制限を基本としつつも、科学的根拠に基づく厳格な運用を求めます。 また、再生可能エネルギーの導入と産業競争力維持のバランスを考慮し、現実的なエネルギー政策を重視しています。 安全保障の観点から、原発への武力攻撃に備えた法的措置も講じる方針です。",
+            "urls": [
+                "https://new-kokumin.jp/policies/own-country"
+            ],
+            "id": "国民民主党_4"
+        },
+        "policy2_id": "国民民主党_4",
+        "reason": "政策「消費税・物価高対策」において、電気代の負担軽減策として「再生可能エネルギー賦課金の徴収を停止します」と明記されています。しかし、政策「原子力・エネルギー政策」では、「再生可能エネルギーの導入も進めます」と述べられています。再生可能エネルギー固定価格買取制度（FIT）を支える財源である賦課金を停止した場合、新たな再生可能エネルギーの導入が著しく困難になるだけでなく、既存の事業者の経営にも影響を与えかねません。再生可能エネルギーを推進するという目標と、そのための主要な財源を停止するという手段は、互いに矛盾しており、同時に実現することは極めて困難です。",
+        "coherence_flag_p1": "国民民主党_1",
+        "coherence_flag_p2": "国民民主党_4",
+        "flagged_by": "gemini-2.5-pro",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Disagree  \nREASON：  \n・再エネ賦課金の「徴収停止」は、電気料金の急激な上昇を抑えるための家計支援・物価高対策として一時的に措置すると読めます。国民民主党自身も FIT 制度の見直しや FIP 制度への移行を以前から主張しており、「賦課金＝唯一の財源」とは位置づけていません。一般会計（例：化石燃料への補助の転換）、カーボンプライシング収入、競争入札によるプレミアムの逓減など、別の財源や支援スキームを用いれば再エネ導入を継続することは制度設計上十分に可能です。  \n・政策２が掲げる「再エネ導入を進めるが、過度な負担で産業競争力を損ねない」という方針と、「家計・企業負担となっている賦課金を一旦停止する」はむしろ整合的とも解釈できます。再エネコストが下がってきている現状では、FIT 型の高額固定買取より入札競争や FIP 型支援に切り替えた方が導入量を確保しつつ国民負担を抑えられるという議論が国際的にも一般的です。  \n・もちろん、「停止」の期間や代替財源を明示しなければ既存の FIT 契約費用をどこが負担するのか、再エネ投資家の予見可能性をどう担保するのかという課題は残ります。しかし、政策文は再エネ導入そのものを否定しているわけではなく、「コスト負担の在り方を見直す」方向性を示しているにすぎません。したがって「再エネ推進」と「賦課金停止」が必然的に両立不可能だとまでは言えず、整合性欠如との断定には根拠が不十分と判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 1939,
+                    "end_idx": 2068,
+                    "text": "国民民主党は、再エネ賦課金の停止を求める法案を国会に提出するなど、その意思は明確です。",
+                    "grounding_chunk_indices": [
+                        6,
+                        0
+                    ]
+                },
+                {
+                    "start_idx": 1467,
+                    "end_idx": 1714,
+                    "text": "一方で、政策2では「再生可能エネルギーの導入も進めます」と明記されており、原子力を中心としつつも再エネを含めたエネルギーのベストミックスを目指す姿勢が示されています。",
+                    "grounding_chunk_indices": [
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 1125,
+                    "end_idx": 1254,
+                    "text": "電力会社は再エネを買い取る原資を失い、新たな再エネ事業への投資は著しく困難になります。",
+                    "grounding_chunk_indices": [
+                        3
+                    ]
+                },
+                {
+                    "start_idx": 913,
+                    "end_idx": 1021,
+                    "text": "この制度は、日本の再エネ導入を促進する上で中心的な役割を担ってきました。",
+                    "grounding_chunk_indices": [
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 660,
+                    "end_idx": 912,
+                    "text": "再エネ賦課金は、再生可能エネルギー固定価格買取制度（FIT制度）などに基づき、電力会社が再エネ電力を買い取る費用を、すべての電力利用者が電気使用量に応じて負担するものです。",
+                    "grounding_chunk_indices": [
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "start_idx": 472,
+                    "end_idx": 659,
+                    "text": "政策1で掲げられている「再エネ賦課金の徴収停止」は、国民の電気料金負担を直接的に軽減する物価高対策として位置づけられています。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGV2RGkZDDIX1RQBc2VK2F6HXXDHDUg3lgYsB0fWeaznWcch-49PlY_sWj1yHayYBr_5veWfX5f_3iZrVc7c30OgWKxUUR6V2waJUVwdPzlsVLJrva3xcLaoljtkFrK66XhfP3mIrQw",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFAgJUTdajIf9vKiBQ9byRFoWxbpAjZ70XLxnyg_VX6ncc1uWNXSczIEn_QSZkCR0Y85ofyH0-WZOllMAGrvS_iUbIpJxdLQKNWRDhVkfEBnTlqfVq5uL9KKVdF6RBmfAFe7ZHiF8_c8iYnS3Urbji57VYZDw==",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEcHVD_p0KIt2-kbnQ5QOau0ucuYE6pOoKqEJ6Xd5p7oN1swxLGXZD8vAwEiounoCkRSwtVgBI99M9gvuerRM9Wt4vV1lqLjpz0LYh6aNk-Q8GvVn670OOmrj7dtKWJMyqa90a8UA==",
+                    "title": "u-power.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEDr-8fP7OruiWOcjt3BP2UFMf1hVt_hhdsejRMOS1Kxpx7qKNuWVIhMSoGoR8QaTQ95N7swLdZ7YQFPhMn4FUWIdKFOWiLV35UgcruRTjcH8-iFwhB_hf8MiZ3-wVq6wIc8ELlLFgoDEkNEPMual15Jtz3J-KZQAw=",
+                    "title": "marubeni.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE4b_YCTCmt0rk9_PWEif4MsEQiOeInGDdb7EIEi4n9LzFjSEeeXztWHKOG6Yr8Gn0j2qWyHWDWLnE5cYWVjiU1qoR32ikx-tSs_jFaKsS2WUf4aUiIQ4uXuoCGRNx5cIyYkBeUfX5W6NaKeNcEsjiRtiVBgjfvbuGESg0=",
+                    "title": "solar-frontier.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKN9To6UikOWBTEMr2z0IPX-0RU_1lfqENcHGocX0JyBp2pRqCS7dmKD-Ww0AvouyY8jie8CioIyLXsDhm0_TCivCr8kSpVqLIIgEACFSczaUBXkx_bI5ptW8f-1BL3uzf",
+                    "title": "note.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCrlvTFxDtxRFnkxOXE452w234gePzzJoSuVOWoeft44NKa07n-w69nzoyIV5yYgrEpkli95kUFW_xIn5aUTQb44TD5UrfH8rIO7OCbuWV3AXpF7808FndJMCBSu0jSmeUwinNdD_36ZqH",
+                    "title": "new-kokumin.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：\n国民民主党が掲げる「消費税・物価高対策」と「原子力・エネルギー政策」の2つの政策は、専門家が指摘するように整合性が取れていないと判断します。その理由は、再生可能エネルギー（以下、再エネ）導入の主要な財源と、その推進目標との間に明確な矛盾が存在するためです。\n\n**1. 再エネ賦課金の役割と徴収停止の影響**\n\n政策1で掲げられている「再エネ賦課金の徴収停止」は、国民の電気料金負担を直接的に軽減する物価高対策として位置づけられています。 再エネ賦課金は、再生可能エネルギー固定価格買取制度（FIT制度）などに基づき、電力会社が再エネ電力を買い取る費用を、すべての電力利用者が電気使用量に応じて負担するものです。 この制度は、日本の再エネ導入を促進する上で中心的な役割を担ってきました。\n\nしたがって、この賦課金の徴収を停止すれば、FIT制度の根幹が揺らぎます。電力会社は再エネを買い取る原資を失い、新たな再エネ事業への投資は著しく困難になります。 さらに、すでに発電を開始している事業者の収益も不安定になり、再エネ市場全体が停滞する深刻な影響が懸念されます。\n\n**2. 推進目標と財源確保の矛盾**\n\n一方で、政策2では「再生可能エネルギーの導入も進めます」と明記されており、原子力を中心としつつも再エネを含めたエネルギーのベストミックスを目指す姿勢が示されています。 しかし、その導入を支える最も重要な財源である賦課金を停止するとした上で、どのようにして「導入も進め」るのか、具体的な代替案や財源が示されていません。\n\n国民民主党は、再エネ賦課金の停止を求める法案を国会に提出するなど、その意思は明確です。 しかし、公開されている政策資料や代表者の発言を見ても、賦課金停止後の再エネ導入をどのように財政的に支えるのか（例えば、一般会計からの大規模な支出、新たな目的税の創設など）という点についての具体的な計画は見当たりません。\n\n**3. 結論**\n\n結論として、「再エネ賦課金の徴収停止」という国民負担の軽減を意図した短期的な政策と、「再エネの導入推進」という脱炭素化に向けた長期的な政策目標が、財源の観点から完全に撞着しています。物価高対策という喫緊の課題への対応を掲げる一方で、エネルギーの安定供給と脱炭素化という国家の長期的な課題解決のための具体的な道筋が示されていないため、これら2つの政策は両立不可能であり、整合性を欠いていると言わざるを得ません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "給料が上がる経済の実現",
+            "topic_en": "Realizing an Economy with Rising Wages",
+            "assigned_tag": "経済",
+            "text": "上げるべきは物価ではなく給料です。1996年をピークに長期的に下がり続けている実質賃金を上昇に転じさせ、「令和の好循環」をつくります。名目賃金上昇率が一定水準（物価上昇率＋2％＝当面の間4％）に達するまで、積極財政等と金融緩和による「高圧経済」によって為替、物価を適切に安定させ、経済低迷の原因である賃金デフレから脱却します。それまでの間、増税や社会保険料アップ、給付削減などによる家計負担増は行いません。「大規模、長期、計画的」な産業政策と、消費力を高める「家計第一の経済政策」により、分厚い中間層を復活させます。",
+            "summary": "国民民主党は、物価上昇を上回る持続的な賃金上昇を実現するため、「令和の好循環」を創出することを経済政策の柱に据えています。実質賃金が物価上昇率を2%上回る水準に達するまで、積極的な財政出動と金融緩和を継続し、増税や社会保険料の負担増は行わない方針です。これによりデフレから完全に脱却し、分厚い中間層を復活させることを目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies/economy"
+            ],
+            "id": "国民民主党_0"
+        },
+        "policy1_id": "国民民主党_0",
+        "policy2": {
+            "topic": "社会保障",
+            "topic_en": "Social Security",
+            "assigned_tag": "社会保障",
+            "text": "世代間公平に配慮しつつ、重点化と効率化によって、子どもから高齢者にわたる、持続可能な社会保障制度を構築します。医療制度は全ての人が享受するものであるからこそ、年齢ではなく負担能力に応じた制度にしていかないといけない。後期高齢者医療について原則2割負担とし、金融資産も考慮して現役並みの所得があると判断できる高齢者については3割負担とするなど、年齢ではなく負担能力に応じた窓口負担に見直します。",
+            "summary": "国民民主党は、持続可能な社会保障制度の構築を目指し、世代間の公平性に配慮した制度改革を掲げています。具体的には、医療費の窓口負担について、年齢ではなく所得や資産に応じた負担（応能負担）を原則とし、後期高齢者は原則2割負担、資力のある高齢者は3割負担とすることを提案しています。 これにより、現役世代の負担を軽減し、全世代対応型の社会保障への転換を目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies-index-2019/mhlw_reforms"
+            ],
+            "id": "国民民主党_7"
+        },
+        "policy2_id": "国民民主党_7",
+        "reason": "政策「給料が上がる経済の実現」では、実質賃金が十分に上昇するまでの間、「増税や社会保険料アップ、給付削減などによる家計負担増は行いません」と約束しています。一方で、政策「社会保障」では、後期高齢者医療制度について、現在は1割負担である一定所得以下の高齢者も含め「原則2割負担」に引き上げることを提案しています。これは対象となる高齢者にとって明確な「家計負担増」にあたります。「家計負担増は行わない」という包括的な公約と、特定の世代の負担を増加させる具体的な政策案との間には、明確な不整合が存在します。",
+        "coherence_flag_p1": "国民民主党_0",
+        "coherence_flag_p2": "国民民主党_7",
+        "flagged_by": "gemini-2.5-pro",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Agree  \nREASON：  \n政策１は「実質賃金が物価上昇率＋２％に達するまでの間、増税・社会保険料アップ・給付削減などによる家計負担増は行わない」と明言しています。ここで「給付削減」には医療保険の自己負担割合引き上げ（＝実質的な給付カット）が含まれると解釈するのが一般的です。  \n\n一方、政策２は後期高齢者の窓口負担を現在の１割から原則２割（一定所得層は３割）へ引き上げる案であり、対象高齢者にとっては医療費の自己負担増＝家計負担増・給付削減そのものです。  \n\n両政策文書には「賃金が目標水準に達した後に実施する」といった時間的調整や猶予措置の記載はなく、政策２は早期実施を前提に掲げられています。したがって、賃金目標がまだ達成されていない局面で高齢者（特に年金生活者）に負担増を強いることになり、政策１の「当面は家計負担増を行わない」との宣言と矛盾します。  \n\n高齢者医療費負担の見直しが「応能負担」である点や、現役世代の負担軽減という整合的な政策目的がある点は理解できるものの、「賃金上昇まで家計負担増を凍結する」というマクロ経済方針と、特定集団に対する負担増を同時期に進めることは論理的に両立しません。従って、専門家が指摘した不整合は妥当と判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 1589,
+                    "end_idx": 1751,
+                    "text": "それに対し、政策２は「世代間の公平性」を名目に、特定の世代（後期高齢者）に負担増を求めるミクロ的な政策です。",
+                    "grounding_chunk_indices": [
+                        6
+                    ]
+                },
+                {
+                    "start_idx": 1414,
+                    "end_idx": 1588,
+                    "text": "このメッセージは、有権者全体、特に賃金の伸び悩みに苦しむ現役世代に対して、手取りを増やすという強い期待を抱かせます。",
+                    "grounding_chunk_indices": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 1158,
+                    "end_idx": 1413,
+                    "text": "**政策メッセージの一貫性の欠如**\n    政策１は、減税や負担増の凍結によって「家計第一の経済政策」を掲げ、消費を喚起し経済の好循環を目指すという、マクロ経済的なアプローチです。",
+                    "grounding_chunk_indices": [
+                        0,
+                        3
+                    ]
+                },
+                {
+                    "start_idx": 813,
+                    "end_idx": 998,
+                    "text": "一方で政策２は、後期高齢者の医療費窓口負担を現行の1割（一定所得以下）から「原則2割負担」へと引き上げることを提案しています。",
+                    "grounding_chunk_indices": [
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 343,
+                    "end_idx": 650,
+                    "text": "**「家計負担増は行わない」公約との直接的な矛盾**\n    政策１では、「名目賃金上昇率が一定水準（物価上昇率＋2％）に達するまで、増税や社会保険料アップ、給付削減などによる家計負担増は行いません」と明記しています。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbYShTYEa8LH4zmHgo2hTs0XGv0pfGiapBqcHNAJCzn2mOlyeVA3lRItQ78-8mT6TJzIgePq9lyvSeLW2XJeZP0hqdUWoOo35Vqpptx5LuoYOXsqK2ZD0e9mjfSOIJAXrLd9EbKihL_GQBHc9EKqM=",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFkqR8ePRbqgdx2ynH37X3NDLZtHymn_zEvWb1Df2JZLF8N9U-Msk3x9lPvbWW8Z3lFbLd3bM3YPCHDA43h4kXt2TL7xWVq05kADws-T661qysSfwUxSAzD9jb4aQkDMVgvpTkTq-WFbf0VPXwqDviSNQmkNxTIXw==",
+                    "title": "nikkei.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGCkuHPxb9kZdHnsdD5WSoMJktD8YepKmPcjbzTsbkfWKN0i36XYifRmAqfW1pUFk_YeGKaiVBnrlO99xjFHpfBy9i4cdKINkMM_Ocv1FAK7PJRvboVNrVJ0wk=",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFDVuSse7k3lBZRgoHVehO65ZCKKnz5WTIXvF-wUgg-kL5dMGzct2atsIAZssVATSTVarZqNe0kEnrJTYFpW3_-V_8OCy99BvzLBMmWG9y93uTLk25JTxRrh2Q=",
+                    "title": "k-shimba.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFB9aCqXG86QeYvq2b1FZNSZK3AbSgrB5UPMP6DxEodiy87hIoY7ZFk_5Qk371iUf7SNXAUXQCuDbUljGO6DjE_-UoVZwPT-2DVOYgW1ZoNapgCP2nDla10cM74V7JHD5AeAzQn5I5wJddOCj3EN9dj97PSPHt2c4yrsVCELfZAHnKxakDSCYOnYOh55YlOoLzS",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHfWh4X9_DEKqVTTpVxqmKOJC8FpCaYAm5twvBs1DX1bTx3yVYi1T6UcqUW5KiUfh_CmpnNfkHkSoHx3G4-lZ8tS2y9RmbLjNQ2wctsgk0nVAiteeD7kyIe_1HwwgQn0AQwCgIFMZ9zAU4BuC89rn-FmZshue5SQjcZDOk99w==",
+                    "title": "new-kokumin.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFanVpsqoS9MCTXdHX-na5JOTOQ_SZwWx0B6rA_pNjFVjk7oVtLf0xgi1_aloqWYQN1XlvyNQMDFMvg_WRAbZ_-m5GhqEuE4d7_dlOESfAt1xMPfJGrAhhLjdY2HYjEvEBVflOYNsCSzA_PQvSF6A==",
+                    "title": "dpfp.or.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：\n経済学および政治学の観点から、ご提示いただいた国民民主党の「給料が上がる経済の実現」と「社会保障」に関する2つの政策には、専門家が指摘する通り、明確な不整合が存在すると判断します。\n\n主な理由は以下の通りです。\n\n1.  **「家計負担増は行わない」公約との直接的な矛盾**\n    政策１では、「名目賃金上昇率が一定水準（物価上昇率＋2％）に達するまで、増税や社会保険料アップ、給付削減などによる家計負担増は行いません」と明記しています。 これは、特定の経済状況が達成されるまでの間、国民の可処分所得を減らす政策は実施しないという包括的な約束です。一方で政策２は、後期高齢者の医療費窓口負担を現行の1割（一定所得以下）から「原則2割負担」へと引き上げることを提案しています。 これは、対象となる高齢者世帯にとって紛れもない「家計負担増」であり、政策１の公約と直接的に矛盾します。\n\n2.  **政策メッセージの一貫性の欠如**\n    政策１は、減税や負担増の凍結によって「家計第一の経済政策」を掲げ、消費を喚起し経済の好循環を目指すという、マクロ経済的なアプローチです。 このメッセージは、有権者全体、特に賃金の伸び悩みに苦しむ現役世代に対して、手取りを増やすという強い期待を抱かせます。 それに対し、政策２は「世代間の公平性」を名目に、特定の世代（後期高齢者）に負担増を求めるミクロ的な政策です。 「負担は増やさない」という普遍的な呼びかけと、「特定の層の負担は増やす」という個別の政策が同時に存在することは、政策全体の一貫性を損ない、有権者に混乱を与える可能性があります。\n\n3.  **矛盾を解消するための条件の不明確さ**\n    この矛盾を解消する論理として、「賃金が十分に上昇した後に、社会保障の負担増を行う」という時間軸を設定している可能性は考えられます。しかし、現状の政策発表では、その移行の具体的な時期や条件、両政策の優先順位が明確に示されていません。例えば、「給料が上がる経済」が実現したと、どの時点で、誰が判断するのかという基準が曖昧です。明確なロードマップがなければ、有権者はこれらの政策がどのように実行されるのかを判断することができません。\n\n結論として、「家計の負担を増やさない」という約束と、後期高齢者の医療費自己負担を引き上げるという具体的な政策案は、両立しません。国民民主党がこの2つの政策の整合性を確保するためには、「家計負担増」の定義、適用範囲、そして実施のタイミングについて、より詳細で明確な説明を行うことが不可欠です。現状では、専門家の指摘通り、整合性がないと判断せざるを得ません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "給料が上がる経済の実現",
+            "topic_en": "Realizing an Economy with Rising Wages",
+            "assigned_tag": "経済",
+            "text": "上げるべきは物価ではなく給料です。1996年をピークに長期的に下がり続けている実質賃金を上昇に転じさせ、「令和の好循環」をつくります。名目賃金上昇率が一定水準（物価上昇率＋2％＝当面の間4％）に達するまで、積極財政等と金融緩和による「高圧経済」によって為替、物価を適切に安定させ、経済低迷の原因である賃金デフレから脱却します。それまでの間、増税や社会保険料アップ、給付削減などによる家計負担増は行いません。「大規模、長期、計画的」な産業政策と、消費力を高める「家計第一の経済政策」により、分厚い中間層を復活させます。",
+            "summary": "国民民主党は、物価上昇を上回る持続的な賃金上昇を実現するため、「令和の好循環」を創出することを経済政策の柱に据えています。実質賃金が物価上昇率を2%上回る水準に達するまで、積極的な財政出動と金融緩和を継続し、増税や社会保険料の負担増は行わない方針です。これによりデフレから完全に脱却し、分厚い中間層を復活させることを目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies/economy"
+            ],
+            "id": "国民民主党_0"
+        },
+        "policy1_id": "国民民主党_0",
+        "policy2": {
+            "topic": "財政政策",
+            "topic_en": "Fiscal Policy",
+            "assigned_tag": "財政",
+            "text": "名目賃金上昇率が物価上昇率＋2％に達するまで、プライマリーバランス黒字化目標を一時凍結し、「未来志向の積極財政」に転換します。 2035年にGDP1000兆円を目指し、それによって税収を増加させ、財政健全化を進める考えです。 また、新たな規制や制度を一つ導入する際には、古いものを二つ廃止する「One in, Two out」ルールを導入し、行政の効率化と歳出改革を進めます。",
+            "summary": "国民民主党は、賃金が十分に上昇するまではプライマリーバランス黒字化目標を一時凍結し、積極財政に転換すべきとの立場です。 GDP1000兆円という高い経済成長目標を掲げ、税収増による財政再建を目指します。 同時に、行財政改革を進める「One in, Two out」ルールを導入し、歳出の効率化も図るとしています。",
+            "urls": [
+                "https://new-kokumin.jp/policies/economy",
+                "https://www.nri.com/jp/knowledge/blog/lst/2024/fis/kiuchi/1029"
+            ],
+            "id": "国民民主党_15"
+        },
+        "policy2_id": "国民民主党_15",
+        "reason": "政策「給料が上がる経済の実現」や関連政策（消費税減税、教育国債発行、児童手当拡充など）では、大規模な財政出動や恒久的な減税を掲げています。これに対し、政策「財政政策」では、歳出改革として「One in, Two out」ルールを導入するものの、財政健全化の主な方策を将来の経済成長による税収増に依存しています。プライマリーバランス黒字化目標を「一時凍結」するとしても、掲げられている歳出増・減税の規模は極めて大きく、歳出改革の効果を大幅に上回る可能性が高いです。具体的な財源の裏付けが不確実な経済成長に大きく依存しているため、計画通りに成長が実現しなかった場合、財政規律が著しく悪化するリスクを抱えており、「未来志向の積極財政」と財政の持続可能性との間で整合性に疑義があります。",
+        "coherence_flag_p1": "国民民主党_0",
+        "coherence_flag_p2": "国民民主党_15",
+        "flagged_by": "gemini-2.5-pro",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Neutral  \nREASON：  \n両政策はともに「実質賃金が物価上昇率＋２％に達するまで積極財政を続ける」という点で整合的であり、政策運営のタイミング（当面は財政拡大→賃金上昇後に財政健全化）も共通しています。したがって「論理的に両立できない」とまでは言えません。  \n\nただし、①児童手当拡充や減税など恒久的な歳出・歳入措置が大きくなると、②賃金上昇と名目 GDP 成長による税収増だけで債務残高対 GDP 比を安定化できるかは不確実です。経済成長が想定を下回った場合の代替財源や支出抑制策が十分に示されていないため、実務面では財政リスクが高いという指摘（専門家の懸念）には合理性があります。  \n\n要するに、モデルとしては両政策は矛盾しないものの、「成長依存度が大きいわりにバックアッププランが弱い」という意味で持続可能性に疑義が残る――というのが中立的な評価です。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [
+                {
+                    "start_idx": 2099,
+                    "end_idx": 2327,
+                    "text": "特に、供給側の生産性向上が伴わないまま需要刺激策を続けた場合、経済が過熱し、かえって国民生活を圧迫するスタグフレーションに陥る危険性も指摘されています。",
+                    "grounding_chunk_indices": [
+                        10
+                    ]
+                },
+                {
+                    "start_idx": 1930,
+                    "end_idx": 2098,
+                    "text": "この政策は、格差是正や雇用の改善に繋がる可能性がある一方で、制御不能な悪性インフレを引き起こすリスクも伴います。",
+                    "grounding_chunk_indices": [
+                        8,
+                        9
+                    ]
+                },
+                {
+                    "start_idx": 1710,
+                    "end_idx": 1929,
+                    "text": "**高圧経済のリスク:** 賃金上昇を促すために掲げられている「高圧経済」政策は、財政・金融政策によって意図的に需要を供給が上回る状態を作り出すものです。",
+                    "grounding_chunk_indices": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "start_idx": 1316,
+                    "end_idx": 1511,
+                    "text": "このルールは行政の効率化には寄与するかもしれませんが、高齢化に伴う社会保障費の自然増など、構造的な歳出圧力を抑制する力は弱いです。",
+                    "grounding_chunk_indices": [
+                        2
+                    ]
+                },
+                {
+                    "start_idx": 1147,
+                    "end_idx": 1315,
+                    "text": "これは新しい規制や制度を一つ導入する際に古いものを二つ廃止するというものですが、その効果は限定的と考えられます。",
+                    "grounding_chunk_indices": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "start_idx": 696,
+                    "end_idx": 855,
+                    "text": "過去の経済成長の実績から見て、この目標達成は非常に困難であり、財政計画の基盤としてはあまりにも不確実です。",
+                    "grounding_chunk_indices": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "start_idx": 387,
+                    "end_idx": 540,
+                    "text": "国民民主党は所得税減税や消費税減税、ガソリン減税なども掲げており、これらは大規模な財源を必要とします。",
+                    "grounding_chunk_indices": [
+                        0,
+                        1
+                    ]
+                }
+            ],
+            "chunks": [
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG0fzGLS_pmVyJlVjkFUZyJMGmgn2TMWuwaeBT1pH5Lugb_lwnUImOcBGYpA0qmDbWEAIeJOPxjEOJpnL8mQecjdLqaKvqOUQcPmdL5jg1n6IdOwYx2zVzc0GL5jL1PakHbuFR0YRsFu0OxlAg9uvH7nLBbJw==",
+                    "title": "nri.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHh666fzWKdt94_nUrjcUP6cNvV78lbddN224CcPv7o-y5DGleA9ObT8Towt2RF8-oONQ2jiSLwxad2PGdmdJcooEanQ2HeOmrQSDEeDsFO0p3XYVQGtWPm0UbLSolRPVj5iA4-OFittx27ikiAkVGj",
+                    "title": "sompo-ri.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFCSquXRJbHqOu6GNaXiieAgHw1DUqhgzQmiP5RWli9KKhpSItfCuCY6bSLORF0OezkfGYQD56PVUWxjj0zDIb5kHlexgAb9bjcYHg4JCYMVplc7mmyY9KFiLOz3v7pDTzqGhZiUNXu2sGEpo4lVY2uLzg485IB5p6QTQMVcW9_BMWJotcNylKqzENoQa4LvNX__rx964FPYRAl",
+                    "title": "sangiin.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEX_FQPGWYgt9PaFsjg1RPHAHSyUi_o-Aw6CON3dxhv9NW-tANwAnufy73w284JESpcpvIArk5rmD6yQCAGxW1HonTMkCK-qNP4rOgYxja6g8b5GEpoUz6IE1etR1kOWiRVgWMByM35lCiguQ==",
+                    "title": "cao.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE6x4yV84Pz8aXOOMp4xjTDVUDCI-5E_xPyiSoGOZuV7RdvwrBJxtkHuRgH34VO_tj5sWU97SrH4eI9B_8vzVbhPW-_A6UT0EY8pJ-JVtvGOjVkBUAk7uPx2_6z1Et8gD_nTVqgzyEBZkNuSN5ppm7BmFJaCrxxEIA_yj8OioqaUVEYdZUNAEiNDeqFgKeVPg==",
+                    "title": "cao.go.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGJjxugON5fOBSVmNWUeFnqDCWBo5zZkkPH8exBq3eue03srxE-N2xzSO32qnspMyBS4njZK7jNOJN8gP6YWPVgtf1biPS43w6dNnzjZra4ny5CgxceCf9b86tuo1qPv32xRWE=",
+                    "title": "note.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHkuoC8i3HvnLgqwHZTWcscdDzt-jhMxYW5LpYVZBRJglUft6Q64jLH-WTsucbk5C5TJdLSAt2YaIuYzFqFyOyaQPxbop0JfKwg_iKWHsJ6gSJvKhJsImKFdB5Q8kCgd7suKg==",
+                    "title": "risk-megane.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFe1qgSuHumitAU48nIuNbHcRrfGIwrjoVx47JrZ5kReWwK6pS1EksqlIQd1QVCXPjlVE7Ng4Tbx7s1NLRB-Lj5OUAEOxerrgRgY_-0AgpRn2zoZTr0M-8rgsI3QlzKXwXTrbTDAOjq5HY=",
+                    "title": "dlri.co.jp"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHtaK_qcP1WBZVOz5NhXtyc_93jTO9dwq1aXqxYiB9si7v6InE_nyWo-BJtvh7pFxUh0_atn_8tEN5-wHr7SsGDPsOiPZZNlB2ZEJ9cmOJbD_8hWJBHJeoEkJQ7UFoF1-d9fyuOJA==",
+                    "title": "sogotcha.com"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE3UT7EjEWgaMeIycWg-XOsthIZRxdL0Aun3GHzWO9innDtTVYuD4gcVj8VLSif2vG0DwKFO-pqI3jBXOBCMK6ISNi0lhbo4Cued2PkNAAq5-gcTrWOGP4TAOCBf7pQuWqZKg==",
+                    "title": "toyokeizai.net"
+                },
+                {
+                    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEIHvTzKHo0Ms8-FvZUn8dA1DtMtxDR8XpvAJeNaUT5IFRWbt6IUCKbVou1IC3pKmJartxMvc71BUyJruhmJd_xbeimYHKH9AoMNZjfkonb60g6jeVJyqpGRr-fKc5mCexWHOK_mDVgiCNKzvYil4iHKNNTW4tBuSi0UrpC0dFeMIsDvLzenRkDYTK4fs76pGU=",
+                    "title": "new-kokumin.jp"
+                }
+            ],
+            "reply": "AGREEMENT：Agree\nREASON：専門家の指摘に同意します。政策１「給料が上がる経済の実現」と政策２「財政政策」には、整合性に関する重大な懸念があります。\n\n主な理由は以下の3点です。\n\n1.  **財源の不確実性:** 政策１で掲げる持続的な賃金上昇の実現には、積極的な財政出動が不可欠です。国民民主党は所得税減税や消費税減税、ガソリン減税なども掲げており、これらは大規模な財源を必要とします。 しかし、その財源の主な柱を「2035年にGDP1000兆円」という極めて野心的な経済成長による税収増に依存しています。過去の経済成長の実績から見て、この目標達成は非常に困難であり、財政計画の基盤としてはあまりにも不確実です。 計画通りの成長が実現しなかった場合、財政が著しく悪化するリスクは避けられません。\n\n2.  **歳出改革の効果の限界:** 歳出改革の具体策として「One in, Two out（ワンイン・ツーアウト）」ルールが挙げられています。これは新しい規制や制度を一つ導入する際に古いものを二つ廃止するというものですが、その効果は限定的と考えられます。 このルールは行政の効率化には寄与するかもしれませんが、高齢化に伴う社会保障費の自然増など、構造的な歳出圧力を抑制する力は弱いです。 また、掲げられている減税や給付拡充の規模に比べ、このルールによる歳出削減効果が財政規律を維持するのに十分とは到底考えられません。\n\n3.  **高圧経済のリスク:** 賃金上昇を促すために掲げられている「高圧経済」政策は、財政・金融政策によって意図的に需要を供給が上回る状態を作り出すものです。 この政策は、格差是正や雇用の改善に繋がる可能性がある一方で、制御不能な悪性インフレを引き起こすリスクも伴います。 特に、供給側の生産性向上が伴わないまま需要刺激策を続けた場合、経済が過熱し、かえって国民生活を圧迫するスタグフレーションに陥る危険性も指摘されています。\n\n以上のように、国民民主党の政策は、賃金上昇という魅力的な目標を掲げる一方で、その実現手段である大規模な財政出動と、将来的な財政健全化目標との間に明確で信頼性の高い道筋が示されていません。財政規律を「一時凍結」し、将来の不確実な経済成長に依存する構造は、持続可能な財政運営という観点から大きな疑問符が付きます。したがって、これら2つの政策の整合性は低いと判断せざるを得ません。"
+        }
+    },
+    {
+        "policy1": {
+            "topic": "給料が上がる経済の実現",
+            "topic_en": "Realizing an Economy with Rising Wages",
+            "assigned_tag": "経済",
+            "text": "上げるべきは物価ではなく給料です。1996年をピークに長期的に下がり続けている実質賃金を上昇に転じさせ、「令和の好循環」をつくります。名目賃金上昇率が一定水準（物価上昇率＋2％＝当面の間4％）に達するまで、積極財政等と金融緩和による「高圧経済」によって為替、物価を適切に安定させ、経済低迷の原因である賃金デフレから脱却します。それまでの間、増税や社会保険料アップ、給付削減などによる家計負担増は行いません。「大規模、長期、計画的」な産業政策と、消費力を高める「家計第一の経済政策」により、分厚い中間層を復活させます。",
+            "summary": "国民民主党は、物価上昇を上回る持続的な賃金上昇を実現するため、「令和の好循環」を創出することを経済政策の柱に据えています。実質賃金が物価上昇率を2%上回る水準に達するまで、積極的な財政出動と金融緩和を継続し、増税や社会保険料の負担増は行わない方針です。これによりデフレから完全に脱却し、分厚い中間層を復活させることを目指します。",
+            "urls": [
+                "https://new-kokumin.jp/policies/economy"
+            ],
+            "id": "国民民主党_0"
+        },
+        "policy1_id": "国民民主党_0",
+        "policy2": {
+            "topic": "労働政策",
+            "topic_en": "Labor Policy",
+            "assigned_tag": "労働",
+            "text": "雇用については「無期、直接、フルタイム」という三要素を基本原則に位置付けます。性別や正規・非正規の違いを問わず、同じ価値の仕事をすれば同じ賃金が支払われる「同一価値労働同一賃金」を法定化し、合理的理由のない賃金・待遇の差別を禁止します。中小企業に適切な支援をしつつ、最低賃金は、『全国どこでも時給1150円以上』を早期に実現します。「年収の壁」の解消にも取り組みます。また、家庭と仕事の両立や学習時間を確保するための「可処分時間確保法」の制定を目指します。",
+            "summary": "国民民主党は、「無期・直接・フルタイム」雇用を原則とし、「同一価値労働同一賃金」の法制化により雇用形態による不合理な待遇差をなくすことを目指します。 中小企業を支援しながら全国一律で最低賃金を早期に1150円以上に引き上げ、「年収の壁」問題の解消にも取り組みます。 さらに、ワークライフバランスを向上させるため「可処分時間確保法」の制定を掲げています。",
+            "urls": [
+                "https://new-kokumin.jp/policies/person-build"
+            ],
+            "id": "国民民主党_8"
+        },
+        "policy2_id": "国民民主党_8",
+        "reason": "政策「給料が上がる経済の実現」では、経済全体の好循環を通じて持続的な賃金上昇を目指すとしています。一方で、政策「労働政策」では「最低賃金は、『全国どこでも時給1150円以上』を早期に実現します」と、全国一律での急激な最低賃金引き上げを掲げています。地域によって経済状況や企業の支払い能力が大きく異なる中で、全国一律の高い最低賃金を課すことは、特に体力の乏しい地方や中小企業の経営を圧迫し、かえって雇用の減少や倒産を招きかねません。結果として、経済の好循環を阻害し、持続的な賃金上昇というマクロ経済目標の達成を困難にする可能性があるため、両政策の目指す方向性に齟齬が生じる可能性があります。",
+        "coherence_flag_p1": "国民民主党_0",
+        "coherence_flag_p2": "国民民主党_8",
+        "flagged_by": "gemini-2.5-pro",
+        "o3_investigation": {
+            "annotations": [],
+            "reply": "AGREEMENT：Neutral  \nREASON：  \n両政策のあいだには確かに「全国一律で早期に最低賃金を1,150円以上」とすることで中小企業や地方企業にコスト負担が集中し、景気循環の腰折れを招くリスクがある――という指摘は一定の合理性があります。しかし、①政策１は財政出動・金融緩和による“高圧経済”で企業収益と需要を底上げし、②政策２自身も「中小企業への適切な支援」を組み合わせることを明示しているため、「必ずしも整合性が取れない」と断定するには材料が不足しています。  \n\n1. マクロ‐ミクロ補完の設計  \n　高圧経済は労働需給をタイト化させ、企業に賃上げ余力を生むことが理論的帰結（フィリップス曲線の高圧経済版）です。最低賃金の底上げと組み合わせれば、賃金上昇を下支えする“フロア”として機能しうるため、両者は補完的とも考えられます。  \n\n2. 地域間・規模間の負担差  \n　一方で地域ごとの労働生産性格差を無視した一律引き上げは、雇用調整圧力や倒産リスクを高める可能性があります。このリスクが顕在化すれば政策１の「好循環」を阻害しかねません。したがって両政策を両立させる鍵は、(a)段階的な最低賃金引き上げスケジュール、(b)賃上げ原資を確保する補助・減税・規制緩和などの中小企業支援策、(c)生産性向上投資の促進、といったセーフガードの運用設計にあります。  \n\n3. 実証知見  \n　国際的なメタ分析では、最低賃金引き上げが中小企業や地方で雇用を大幅に毀損した事例は限定的との報告もある一方、急激・大幅な引き上げや地域格差を考慮しない一律設定は負の影響が出やすいとの結果も示されています。つまり「規模」と「速度」の設計次第で結果は大きく変わるため、整合性は“政策パッケージ次第”と言える状況です。  \n\n総合すると、専門家の指摘どおり潜在的な齟齬は存在するものの、政策文書内に「中小企業支援」「家計第一の積極財政」といった緩和策が組み込まれているため直ちに両立不能とまでは言えず、「整合性がない」と断定するよりは“設計・実行次第で両立しうるが注意が必要”という中立的評価が妥当だと判断します。"
+        },
+        "gemini-2.5-pro_investigation": {
+            "sorted_supports": [],
+            "chunks": [],
+            "reply": null
+        }
+    }
+]

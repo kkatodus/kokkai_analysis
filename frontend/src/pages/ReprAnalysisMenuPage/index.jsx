@@ -18,7 +18,7 @@ const ReprAnalysisMenuIcons = [
   {
     link: '/repr_analysis/search',
     icon: <MdPersonSearch className="menu-icon" />,
-    title: '議員検索',
+    title: '選挙区の可視化',
   },
 ];
 

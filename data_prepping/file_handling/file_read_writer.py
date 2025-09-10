@@ -54,11 +54,11 @@ def is_file_stale(path, max_day_stale=1):
 	return int(delta.days) >= max_day_stale
 
 
-def get_newest_file(dir):
+def get_newest_file(dir, extensions=[]):
 	most_recent_file = None
 	most_recent_time = 0
 	for entry in os.scandir(dir):
-		if entry.is_file:
+		if entry.is_file and any(entry.name.endswith(ext) for ext in extensions):
 			mod_time = entry.stat().st_mtime
 			if mod_time > most_recent_time:
 				most_recent_time = mod_time

@@ -45,6 +45,7 @@
     "redux-thunk": "^2.4.2",
     "web-vitals": "^3.3.2"
   },
+  "proxy": "http://localhost:5000",
   "scripts": {
     "start": "react-scripts --max_old_space_size=6096 start",
     "build": "react-scripts --max_old_space_size=6096 build",

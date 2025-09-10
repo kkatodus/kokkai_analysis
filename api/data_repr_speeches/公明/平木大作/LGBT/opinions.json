@@ -1,0 +1,34 @@
+{
+    "party": "公明",
+    "repr_name": "平木大作",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115261X01720230526_105",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2023-05-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115261X01720230526/105",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "今、野党の皆さんからも二つぐらいのグループでこの理解増進法案というのが出てきているわけでありますが、しっかりとこういう様々な声を踏まえて国会で議論を尽くして、これ合意形成をこの国会で目指すべきだというふうに思っております"
+            ]
+        },
+        {
+            "speech_id": "120414183X00220210519_025",
+            "house_name": "参議院",
+            "meeting_name": "憲法審査会",
+            "date": "2021-05-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120414183X00220210519/25",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "とりわけ、本年三月、同性婚を認めていない民法などの規定は違憲で差別に当たるとした札幌地裁の判決を我々は重く受け止める必要があります"
+            ]
+        }
+    ]
+}

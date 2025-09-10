@@ -1,16 +1,18 @@
-export const sangiinEndpoint = 'https://sangiin-api.herokuapp.com/sangiin/';
-export const shugiinEndpoint = 'https://sangiin-api.herokuapp.com/shugiin/';
-export const speechEndpoint = 'https://sangiin-api.herokuapp.com/speeches/';
-export const visualEndpoint =
-  'https://sangiin-api.herokuapp.com/speeches/visualization';
-export const staticEndpoint =
-  'https://sangiin-api.herokuapp.com/speeches/static';
-export const diachronicEndpoint =
-  'https://sangiin-api.herokuapp.com/speeches/diachronic';
-export const statsEndpoint = 'https://sangiin-api.herokuapp.com/stats/';
-export const geoEndpoint = 'https://sangiin-api.herokuapp.com/geo/';
-export const reprsEndpoint = 'https://sangiin-api.herokuapp.com/reprs/';
-export const paymentEndpoint = 'https://sangiin-api.herokuapp.com/payment/';
+const BASE_URL =
+  process.env.REACT_APP_API_URL || 'https://sangiin-api.herokuapp.com';
+export const sangiinEndpoint = `${BASE_URL}/sangiin/`;
+export const shugiinEndpoint = `${BASE_URL}/shugiin/`;
+export const speechEndpoint = `${BASE_URL}/speeches/`;
+export const visualEndpoint = `${BASE_URL}/speeches/visualization`;
+export const staticEndpoint = `${BASE_URL}/speeches/static`;
+export const diachronicEndpoint = `${BASE_URL}/speeches/diachronic`;
+export const statsEndpoint = `${BASE_URL}/stats/`;
+export const geoEndpoint = `${BASE_URL}/geo/`;
+export const reprsEndpoint = `${BASE_URL}/reprs/`;
+export const paymentEndpoint = `${BASE_URL}/payment/`;
+export const donorEndpoint = `${BASE_URL}/donors/`;
+export const policyEndpoint = `${BASE_URL}/policy/`;
+export const manifestoEndpoint = `${BASE_URL}/manifesto/`;
 
 export const Party2Party = {
   自民: '自民',
@@ -66,11 +68,27 @@ export const Topic2Topic = {
   defence: '防衛',
   economy: '経済対策',
   aging: '少子化',
+  familyseparate: '夫婦別姓',
+  mynumber: 'マイナンバー',
+  onlinevoting: 'オンライン投票',
+  livingcostandtax: '物価高対策・減税と賃上げ',
+  pension: '年金制度改革・基礎年金底上げ',
+  socialsecurity: '社会保障全般の見直し（医療・介護）',
+  climatechange: '気候変動',
+  lgbtq: 'LGBT',
   少子化: '少子化',
   原発: '原発',
   防衛: '防衛',
   経済対策: '経済対策',
   経済: '経済',
+  夫婦別姓: '夫婦別姓',
+  マイナンバー: 'マイナンバー',
+  オンライン投票: 'オンライン投票',
+  気候変動: '気候変動',
+  '物価高対策・減税と賃上げ': '物価高対策・減税と賃上げ',
+  '年金制度改革・基礎年金底上げ': '年金制度改革・基礎年金底上げ',
+  '社会保障全般の見直し（医療・介護）': '社会保障全般の見直し（医療・介護）',
+  LGBTQ: 'LGBT',
 };
 export const House2House = {
   lower: '衆院',
@@ -112,7 +130,7 @@ export const Party2ColorList = [
   { party: '自民', color: 'black' },
   { party: '国民', color: 'blue' },
   { party: '立憲', color: 'orange' },
-  { party: '公明', color: 'lightblue' },
+  { party: '公明', color: 'aqua' },
   { party: '共産', color: 'red' },
   { party: '維新', color: 'gold' },
   { party: 'れ新', color: 'green' },
@@ -120,7 +138,14 @@ export const Party2ColorList = [
   { party: '有志', color: 'grey' },
   //   { party: '維教', color: 'gold' },
   { party: 'Ｎ党', color: 'pink' },
+  { party: '参政', color: 'brown' },
+  { party: '沖縄', color: 'teal' },
 ];
+
+export const Party2Color = Party2ColorList.reduce((acc, curr) => {
+  acc[curr.party] = curr.color;
+  return acc;
+}, {});	
 
 export const Party2RGBColor = {
   自民: [0, 0, 0],

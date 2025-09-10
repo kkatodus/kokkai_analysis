@@ -1,15 +1,22 @@
-from openai import OpenAI
+from openai import OpenAI,AsyncOpenAI
 import tiktoken
 from dotenv import load_dotenv
 import os
 import time
+import os
+from agents import Agent, Runner, WebSearchTool, RunConfig, set_default_openai_client, HostedMCPTool
+from typing import List, Dict, Optional
+from pydantic import BaseModel
+from google import genai
+from google.genai import types
+import anthropic
 
 OPENAI_TOKEN_LIMIT = 128000
 load_dotenv()
 
-class Prompter:
+class GPTPrompter:
 
-	def __init__(self, gpt_model='gpt-4o-mini'):
+	def __init__(self, gpt_model='gpt-o3-mini'):
 		"""
 		Initializes a Prompter object.
 
@@ -17,7 +24,11 @@ class Prompter:
 			gpt_model (str, optional): The name of the GPT model to use. Defaults to 'gpt-4o'.
 		"""
 		self.openai_client = OpenAI()
-		self.enc = tiktoken.encoding_for_model(gpt_model)
+		try:
+			self.enc = tiktoken.encoding_for_model(gpt_model)
+		except Exception as e:
+			print(e)
+			self.enc = tiktoken.encoding_for_model('gpt-4o-mini')
 		self.model = gpt_model
 
 	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
@@ -57,6 +68,7 @@ class Prompter:
 					messages=messages+[{"role": "user", "content": prompt}])
 
 				reply = completion.choices[0].message.content
+				print("reply", reply)
 				time.sleep(2)
 				break
 			except Exception as e:
@@ -67,4 +79,173 @@ class Prompter:
 			raise Exception('Failed to get reply for prompt of length', len(prompt), 'after', count, 'retries')	
 	
 		return reply
+	
+class DeepResearchGPT:
+	def __init__(self, gpt_model="o3-deep-research"):
+		self.gpt_model = gpt_model
+		self.openai_client = OpenAI()
+		try:
+			self.enc = tiktoken.encoding_for_model(gpt_model)
+		except Exception as e:
+			print(e)
+			self.enc = tiktoken.encoding_for_model('gpt-4o-mini')
+	
+	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+		"""
+		Sends a prompt to the OpenAI API and returns the generated reply.
+		"""
+		print("PROMPTING {}".format(self.gpt_model))
+		print(system_prompt+"\n\n\n"+prompt)
+		response = self.openai_client.responses.create(
+			model=self.gpt_model,
+			input=[
+				{
+					"role":"developer",
+					"content": [
+						{
+							"type": "input_text",
+							"text": system_prompt
+						}
+					]
+				},
+				{
+					"role": "user",
+					"content": [
+						{
+							"type": "input_text",
+							"text": prompt
+						}
+					]
+				}
+			],
+			# reasoning={
+			# 	"summary":"auto"
+			# },	
+			tools=[
+				{
+					"type": "web_search_preview"
+				}
+			]
+		)
+		citations = []
+		for i, citation in enumerate(response.output[-1].content[0].annotations):
+			citation_idx = i+1
+			title = citation.title
+			url = citation.url
+			start_idx = citation.start_index
+			end_idx = citation.end_index
+			citation_dict = {
+				"citation_idx": citation_idx,
+				"title": title,
+				"url": url,
+				"start_idx": start_idx,
+				"end_idx": end_idx
+			}
+			citations.append(citation_dict)
+		return response.output[-1].content[0].text, citations
+	
+	async def async_prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+		research_agent = Agent(
+			name="Research Agent",
+			model="o4-mini-deep-research-2025-06-26",
+			tools=[WebSearchTool()],
+			instructions=system_prompt
+		)
+		result_stream = Runner.run_streamed(
+			research_agent,
+			prompt
+		)
+
+		async for ev in result_stream.stream_events():
+			if ev.type == "agent_updated_stream_event":
+				print(f"\n--- switched to agent: {ev.new_agent.name} ---")
+				print(f"\n--- RESEARCHING ---")
+			elif ev.type == "raw_response_event" and hasattr(ev.data, "item") and hasattr(ev.data.item, "action"):
+				action = ev.data.item.action or {}
+				if action.get("type") == "search":
+					print(f"[Web search] query={action.get('query')!r}")
+
+		return result_stream.final_output
+	
+class DeepResearchGemini:
+	def __init__(self, model_name="gemini-2.5-pro"):
+		client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+		self.client = client
+		self.model_name = model_name
+
+		# Define the grounding tool
+		grounding_tool = types.Tool(
+			google_search=types.GoogleSearch()
+		)
+		# Configure generation settings
+		config = types.GenerateContentConfig(
+			tools=[grounding_tool]
+		)
+		self.config = config
+		self.grounding_tool = grounding_tool
+
+	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+
+		# Make the request
+		print("PROMPTING GEMINI")
+
+		print(system_prompt+"\n\n\n"+prompt)
+		response = self.client.models.generate_content(
+			model=self.model_name,
+			contents=system_prompt+"\n\n\n"+prompt,
+			config=self.config,
+		)
+		response_text = response.text
+		supports = response.candidates[0].grounding_metadata.grounding_supports
+		chunks = response.candidates[0].grounding_metadata.grounding_chunks
+
+		# Sort supports by end_index in descending order to avoid shifting issues when inserting.
+		if supports is not None:
+			sorted_supports = sorted(supports, key=lambda s: s.segment.end_index, reverse=True)
+		else:
+			sorted_supports = []
+		cleaned_chunks = []
+		if chunks is not None:
+			for c in chunks:
+				uri = c.web.uri
+				title = c.web.title
+				cleaned_chunk = {
+					"uri": uri,
+					"title": title
+				}
+				cleaned_chunks.append(cleaned_chunk)
+		cleaned_supports = []
+		if sorted_supports is not None:
+			for s in sorted_supports:
+				start_idx = s.segment.start_index
+				end_idx = s.segment.end_index
+				segment_text = s.segment.text
+				grounding_chunk_indices = s.grounding_chunk_indices
+				cleaned_support = {
+					"start_idx": start_idx,
+					"end_idx": end_idx,
+					"text": segment_text,
+					"grounding_chunk_indices": grounding_chunk_indices
+				}
+				cleaned_supports.append(cleaned_support)
+		return response_text, cleaned_supports, cleaned_chunks
+
+
+class DeepResearchClaude:
+	def __init__(self, model_name="claude-opus-4-20250514"):
+		self.model_name = model_name
+		
+		client = anthropic.Anthropic(
+			api_key=os.getenv("ANTHROPIC_API_KEY")
+		)
+		self.client = client
+	
+	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+		response = self.client.chat.completions.create(
+			model=self.model_name,
+			messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}]
+		)
+		return response.choices[0].message.content, response.choices[0].message.annotations
+
+
 		

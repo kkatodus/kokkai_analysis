@@ -1,0 +1,46 @@
+{
+    "party": "立憲",
+    "repr_name": "山田勝彦",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121305206X02120240529_078",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2024-05-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305206X02120240529/78",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "\r\n　そもそも、世界の多くの国々同様に日本でも同性婚を認めていれば必要のない制度であります"
+            ]
+        },
+        {
+            "speech_id": "121305206X02120240529_086",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2024-05-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305206X02120240529/86",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "そして、そもそも、なぜ自公政権は同性婚をいまだに認めようとしていないのか"
+            ]
+        },
+        {
+            "speech_id": "121305206X02120240529_088",
+            "house_name": "衆議院",
+            "meeting_name": "法務委員会",
+            "date": "2024-05-29",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121305206X02120240529/88",
+            "speaker_group": "立憲民主党・無所属",
+            "extracted_opinions": [
+                "多様性を認めることが、この同性婚であり、夫婦別姓を認めることだと強くお訴えさせていただきます",
+                "私たち立憲民主党なら、すぐに同性婚も夫婦別姓も実現いたします"
+            ]
+        }
+    ]
+}

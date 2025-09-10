@@ -1,0 +1,32 @@
+{
+    "party": "立憲",
+    "repr_name": "野田国義",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121314601X00320240312_036",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2024-03-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121314601X00320240312/36",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "私はそのように思いますので、しっかりこのマイナンバーカードが活用できるように総務省としても努力をしていただきたいと思います"
+            ]
+        },
+        {
+            "speech_id": "121114601X01120230523_021",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2023-05-23",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121114601X01120230523/21",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "○野田国義君　本当に、このマイナンバーカードを強制、そして健康保険廃止は本当に無理があると私は思います"
+            ]
+        }
+    ]
+}

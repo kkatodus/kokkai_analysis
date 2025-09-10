@@ -1,0 +1,34 @@
+{
+    "party": "沖縄",
+    "repr_name": "高良鉄美",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121213950X00220231109_234",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2023-11-09",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121213950X00220231109/234",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "この点でも、別姓、これは姓の方ですね、別姓も同性婚も認めていないのは日本だけですけれども、共通の価値を持っているとは言えません"
+            ]
+        },
+        {
+            "speech_id": "121113950X01920230606_136",
+            "house_name": "参議院",
+            "meeting_name": "外交防衛委員会",
+            "date": "2023-06-06",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121113950X01920230606/136",
+            "speaker_group": "沖縄の風",
+            "extracted_opinions": [
+                "死刑制度を存置していること、同性婚や別姓婚を認めないこと、難民認定率の低さと申請者の処遇など、人権に関わる我が国の制度は普遍的価値を共有するＧ７諸国と乖離していると言わざるを得ません"
+            ]
+        }
+    ]
+}

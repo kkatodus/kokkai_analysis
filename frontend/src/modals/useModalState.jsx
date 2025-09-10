@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai';
 
-const modalsAtom = atom(['payment']);
+const modalsAtom = atom([]);
 
 const useModalState = () => {
   const [modalsState, setModalState] = useAtom(modalsAtom);

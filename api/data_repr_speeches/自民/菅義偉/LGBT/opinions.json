@@ -1,0 +1,45 @@
+{
+    "party": "自民",
+    "repr_name": "菅義偉",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120405261X01220210217_249",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2021-02-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120405261X01220210217/249",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　そういう中で、同性婚を認めるか否かについては、我が国の家族の在り方の根幹に関わることでありますので、極めて慎重な検討をする必要があるだろうというふうに思います"
+            ]
+        },
+        {
+            "speech_id": "120315254X00320201030_022",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2020-10-30",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120315254X00320201030/22",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　同性婚制度の導入の是非は、我が国の家族の在り方の根幹に関わる問題であり、極めて慎重な検討を要するものと考えております"
+            ]
+        },
+        {
+            "speech_id": "119805261X00720190214_270",
+            "house_name": "衆議院",
+            "meeting_name": "予算委員会",
+            "date": "2019-02-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/119805261X00720190214/270",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○菅国務大臣　いずれにしても、同性婚を認めるか否かは我が国の家族のあり方の根幹にかかわります問題でありますので、極めて慎重に検討を要するものだろうというふうに思います"
+            ]
+        }
+    ]
+}

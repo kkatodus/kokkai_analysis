@@ -6,6 +6,7 @@ import { MdOutlineArrowBack } from 'react-icons/md';
 import Proptypes from 'prop-types';
 import { colors } from '../resource/styling';
 import useDisplaySize from '../state/useDisplayType';
+import { useWebView } from '../contexts/WebViewContext';
 
 export default function BasePageLayout(props) {
   const {
@@ -15,8 +16,10 @@ export default function BasePageLayout(props) {
     pageSubtitle,
     extraStyles,
     headerComponent,
+	showPageTitle,
   } = props;
   const { type: DisplayType } = useDisplaySize();
+  const { isWebView } = useWebView();
   const isMobile = DisplayType === 'mobile';
   return (
     <Div100vh>
@@ -30,14 +33,16 @@ export default function BasePageLayout(props) {
             colors.primary
           }`}
         >
-          <Link className="back-icon" to={backTo}>
-            <MdOutlineArrowBack />
-          </Link>
+          {!isWebView && (
+            <Link className="back-icon" to={backTo}>
+              <MdOutlineArrowBack />
+            </Link>
+          )}
           <div className={`${headerComponent ? '' : 'w-full'}`}>
-            <h1 className={`${isMobile ? 'text-md' : 'text-2xl px-3'}  `}>
+            <h1 className={`${isMobile ? 'text-sm' : 'text-2xl px-3'}  ${showPageTitle ? '' : 'hidden'}`}>
               {pageTitle}
             </h1>
-            <h3 className="text-lg">{pageSubtitle}</h3>
+            <h3 className={`${showPageTitle ? '' : 'hidden'} text-lg`}>{pageSubtitle}</h3>
           </div>
           {headerComponent && (
             <div className="h-full flex-1">{headerComponent}</div>
@@ -65,6 +70,7 @@ BasePageLayout.defaultProps = {
     content: '',
   },
   headerComponent: null,
+  showPageTitle: true,
 };
 
 BasePageLayout.propTypes = {
@@ -74,4 +80,5 @@ BasePageLayout.propTypes = {
   headerComponent: Proptypes.element,
   pageSubtitle: Proptypes.string,
   extraStyles: Proptypes.shape({ content: Proptypes.string }),
+  showPageTitle: Proptypes.bool,
 };

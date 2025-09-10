@@ -23,6 +23,8 @@ var api_guide = {
   "lower house speech summary": "speeches/lower",
   "upper house speech summary": "speeches/upper",
   "position stats": "stats/position",
+  "available parties": "manifesto/parties",
+  "party manifesto data": "manifesto/party/:partyName",
 };
 
 app.get("", (request, response) => {
@@ -49,3 +51,12 @@ app.use("/reprs", reprRouter);
 
 import paymentRouter from "./routes/payment/index.js";
 app.use("/payment", paymentRouter);
+
+import donorsRouter from "./routes/donors/index.js";
+app.use("/donors", donorsRouter);
+
+import policyRouter from "./routes/policy/index.js";
+app.use("/policy", policyRouter);
+
+import manifestoRouter from "./routes/manifesto/index.js";
+app.use("/manifesto", manifestoRouter);

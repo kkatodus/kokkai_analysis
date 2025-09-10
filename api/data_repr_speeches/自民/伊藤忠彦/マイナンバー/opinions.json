@@ -1,0 +1,21 @@
+{
+    "party": "自民",
+    "repr_name": "伊藤忠彦",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "118604601X00420140225_014",
+            "house_name": "衆議院",
+            "meeting_name": "総務委員会",
+            "date": "2014-02-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118604601X00420140225/14",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　マイナンバーの導入につきましては、円滑な運用に当たって、地方公共団体に御協力をいただくことが必要不可欠であるものと考えております"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "party": "立憲",
+    "repr_name": "水岡俊一",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121115254X00320230126_002",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2023-01-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121115254X00320230126/2",
+            "speaker_group": "立憲民主・社民",
+            "extracted_opinions": [
+                "少子化対策の一環として、多様な家族の在り方を認めない婚姻制度を改革し、選択的夫婦別姓制度や同性婚を導入する考えはありますか"
+            ]
+        }
+    ]
+}

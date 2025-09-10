@@ -1,0 +1,301 @@
+{
+    "data": [
+        {
+            "idx": 0,
+            "x": "3.0702038",
+            "y": "16.364298",
+            "repr": "反対",
+            "hiragana": "反対",
+            "house": "",
+            "party": "",
+            "color": "red",
+            "ref_point": "against"
+        },
+        {
+            "idx": 1,
+            "x": "1.6613002",
+            "y": "15.440601",
+            "repr": "賛成",
+            "hiragana": "賛成",
+            "house": "",
+            "party": "",
+            "color": "blue",
+            "ref_point": "for"
+        },
+        {
+            "idx": 2,
+            "x": "2.356185",
+            "y": "15.294798",
+            "repr": "中谷一馬",
+            "hiragana": "なかたにかずま",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 3,
+            "x": "1.8545192",
+            "y": "14.686851",
+            "repr": "後藤祐一",
+            "hiragana": "ごとうゆういち",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 4,
+            "x": "2.8420079",
+            "y": "16.835842",
+            "repr": "枝野幸男",
+            "hiragana": "えだのゆきお",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 5,
+            "x": "1.5123357",
+            "y": "16.089918",
+            "repr": "牧山ひろえ",
+            "hiragana": "まきやまひろえ",
+            "house": "upper",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 6,
+            "x": "2.0205445",
+            "y": "15.902608",
+            "repr": "田嶋要",
+            "hiragana": "たじまかなめ",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 7,
+            "x": "4.570812",
+            "y": "15.221051",
+            "repr": "篠原孝",
+            "hiragana": "しのはらたかし",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 8,
+            "x": "3.958775",
+            "y": "17.320627",
+            "repr": "逢坂誠二",
+            "hiragana": "おおさかせいじ",
+            "house": "lower",
+            "party": "CDP",
+            "color": "orange",
+            "ref_point": "none"
+        },
+        {
+            "idx": 9,
+            "x": "3.5474274",
+            "y": "13.902288",
+            "repr": "中司宏",
+            "hiragana": "なかつかひろし",
+            "house": "lower",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 10,
+            "x": "3.0534873",
+            "y": "13.987671",
+            "repr": "守島正",
+            "hiragana": "もりしまただし",
+            "house": "lower",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 11,
+            "x": "4.013078",
+            "y": "14.6981325",
+            "repr": "岩谷良平",
+            "hiragana": "いわたにりょうへい",
+            "house": "lower",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 12,
+            "x": "3.60081",
+            "y": "15.159944",
+            "repr": "斎藤アレックス",
+            "hiragana": "さいとうあれっくす",
+            "house": "lower",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 13,
+            "x": "4.891181",
+            "y": "16.030401",
+            "repr": "柳ヶ瀬裕文",
+            "hiragana": "やながせひろふみ",
+            "house": "upper",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 14,
+            "x": "3.1574924",
+            "y": "14.861262",
+            "repr": "浦野靖人",
+            "hiragana": "うらのやすと",
+            "house": "lower",
+            "party": "JRP",
+            "color": "gold",
+            "ref_point": "none"
+        },
+        {
+            "idx": 15,
+            "x": "4.504561",
+            "y": "16.318954",
+            "repr": "若松謙維",
+            "hiragana": "わかまつかねしげ",
+            "house": "upper",
+            "party": "Komeito",
+            "color": "lightblue",
+            "ref_point": "none"
+        },
+        {
+            "idx": 16,
+            "x": "3.6621203",
+            "y": "16.685696",
+            "repr": "古屋圭司",
+            "hiragana": "ふるやけいじ",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 17,
+            "x": "2.7803624",
+            "y": "14.561504",
+            "repr": "寺田稔",
+            "hiragana": "てらだみのる",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 18,
+            "x": "2.5465195",
+            "y": "16.20526",
+            "repr": "松本剛明",
+            "hiragana": "まつもとたけあき",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 19,
+            "x": "3.4140403",
+            "y": "14.387965",
+            "repr": "河野太郎",
+            "hiragana": "こうのたろう",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 20,
+            "x": "4.1665344",
+            "y": "15.5826435",
+            "repr": "田中和徳",
+            "hiragana": "たなかかずのり",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 21,
+            "x": "2.1231034",
+            "y": "16.906757",
+            "repr": "船田元",
+            "hiragana": "ふなだはじめ",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 22,
+            "x": "1.586874",
+            "y": "16.676153",
+            "repr": "野田聖子",
+            "hiragana": "のだせいこ",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 23,
+            "x": "2.8802006",
+            "y": "15.580234",
+            "repr": "金子恭之",
+            "hiragana": "かねこやすし",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 24,
+            "x": "2.421668",
+            "y": "14.131756",
+            "repr": "高市早苗",
+            "hiragana": "たかいちさなえ",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 25,
+            "x": "3.794558",
+            "y": "16.009613",
+            "repr": "麻生太郎",
+            "hiragana": "あそうたろう",
+            "house": "lower",
+            "party": "LDP",
+            "color": "black",
+            "ref_point": "none"
+        },
+        {
+            "idx": 26,
+            "x": "3.1678321",
+            "y": "17.40832",
+            "repr": "舟山康江",
+            "hiragana": "ふなやまやすえ",
+            "house": "upper",
+            "party": "NDP",
+            "color": "blue",
+            "ref_point": "none"
+        }
+    ]
+}

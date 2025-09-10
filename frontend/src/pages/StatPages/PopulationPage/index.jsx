@@ -11,6 +11,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import ModalManager from 'modals';
 import { statsEndpoint } from 'resource/resources';
 import DataTable from 'sharedComponents/DataTable';
+import useDisplaySize from 'state/useDisplayType';
 import { colors } from 'resource/styling';
 import useCityPopulationData from 'state/useCityPopulationData';
 import sortDataByPopulation from './utils/sortDataByPopulation';
@@ -43,7 +44,11 @@ const marks = [
 ];
 
 function PopulationPage() {
-  const [year, setYear] = useState(1980);
+  const [year, setYear] = useState(2020);
+
+  const { type: DisplayType } = useDisplaySize();
+  const isMobile = DisplayType === 'mobile';
+
   const { cityPopulationDataState, updateCityPopulationDataState } =
     useCityPopulationData();
   const sortedCityData = sortDataByPopulation(
@@ -138,12 +143,12 @@ function PopulationPage() {
         >
           <MdOutlineArrowBack className="menu-icon h-[50px] w-[50px] " />
         </Link>
-        <div className="flex h-[90%] relative">
+        <div className={`flex h-[90%] relative ${isMobile ? 'flex-col' : ''}`}>
           <DeckGL
             initialViewState={INITIAL_VIEW_STATE}
             controller
             layers={layers}
-            style={{ position: 'relative', height: '100%', width: '70%' }}
+            style={{ position: 'relative', height: '100%', width: isMobile ? '100%' : '70%' }}
             getTooltip={getTooltip}
           >
             <Map
@@ -154,7 +159,7 @@ function PopulationPage() {
               projection="mercator"
             />
           </DeckGL>
-          <div className="h-[100%] w-[30%]">
+          <div className={`h-[100%] w-[30%] ${isMobile ? 'w-full h-[40%]' : ''}`}>
             <DataTable
               data={sortedCityData}
               columns={dataGridColumns}

@@ -1,0 +1,23 @@
+{
+    "party": "共産",
+    "repr_name": "吉良よし子",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121015104X00220221027_212",
+            "house_name": "参議院",
+            "meeting_name": "文教科学委員会",
+            "date": "2022-10-27",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121015104X00220221027/212",
+            "speaker_group": "日本共産党",
+            "extracted_opinions": [
+                "この推薦確認書の中身というのは、憲法改正や同性婚への慎重な扱い、日韓トンネル実現など具体的な政策が並べられているわけで、まさに事実上の政策協定としか言いようがないと思うわけです"
+            ]
+        }
+    ]
+}

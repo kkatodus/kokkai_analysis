@@ -1,0 +1,16 @@
+1757546831107	geckodriver	INFO	Listening on 127.0.0.1:51737
+1757547288899	geckodriver	INFO	Listening on 127.0.0.1:51299
+1757547289436	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/mnt/c/Program Files/M ... te" "--remote-debugging-port" "60635" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileaUUI0Z"
+Error: argument --profile requires a path
+[[ERROR webrender_bindings::program_cache] shader-cache: Shader disk cache is not supported
+GFX1-]: shader-cache: Shader disk cache is not supported
+1757547631302	geckodriver	INFO	Listening on 127.0.0.1:38639
+1757547631816	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/mnt/c/Program Files/M ... te" "--remote-debugging-port" "35089" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile17z1S0"
+Error: argument --profile requires a path
+[GFX1-]: shader-cache: Shader disk cache is not supported
+[ERROR webrender_bindings::program_cache] shader-cache: Shader disk cache is not supported
+1757547821948	geckodriver	INFO	Listening on 127.0.0.1:55985
+1757547822473	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/mnt/c/Program Files/M ... te" "--remote-debugging-port" "41511" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilePKRqlX"
+Error: argument --profile requires a path
+[[ERROR webrender_bindings::program_cache] shader-cache: Shader disk cache is not supported
+GFX1-]: shader-cache: Shader disk cache is not supported

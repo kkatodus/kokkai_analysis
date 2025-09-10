@@ -45,7 +45,7 @@ export default function ItemDisplay({ item, setItems }) {
       <div
         className={`${item.color} w-auto flex justify-evenly items-center rounded-lg flex-col px-3 h-[80%]`}
       >
-        <p className="text-center whitespace-nowrap">{item.name}</p>
+        <p className="text-center">{item.name}</p>
         <p>{item.price}円</p>
       </div>
     </div>

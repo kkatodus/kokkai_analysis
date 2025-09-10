@@ -50,7 +50,7 @@ function ReprOpinionMenuPage() {
       pageTitle="議員分析"
       backTo="/repr_analysis"
 	  headerComponent={
-	  <div className='flex flex-col h-full items-start justify-center'>
+	  <div className='flex flex-col h-full items-start justify-center ml-2'>
 		<ReprSearchInput availableReprs={availableReprs} setCurrentRepr={setCurrentRepr} setCurrentParty={()=>{}} setCurrentHouse={()=>{}} /></div>}
       MainContent={<div className='w-full h-full flex flex-wrap justify-center'>
 		{pageContent}

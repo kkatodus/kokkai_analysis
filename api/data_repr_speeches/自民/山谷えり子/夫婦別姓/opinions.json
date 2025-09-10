@@ -1,0 +1,56 @@
+{
+    "party": "自民",
+    "repr_name": "山谷えり子",
+    "topic": "夫婦別姓",
+    "search_words": [
+        "夫婦別姓",
+        "戸籍法",
+        "旧姓"
+    ],
+    "speeches": [
+        {
+            "speech_id": "120314889X00220201117_058",
+            "house_name": "参議院",
+            "meeting_name": "内閣委員会",
+            "date": "2020-11-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/120314889X00220201117/58",
+            "speaker_group": "自由民主党・国民の声",
+            "extracted_opinions": [
+                "\r\n　しかし、夫婦別姓については、家族の在り方に深く関わり、国民の間に様々な意見がある、慎重な対応が必要というのが前政権までの姿勢でありました"
+            ]
+        },
+        {
+            "speech_id": "118715261X00220141008_411",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2014-10-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118715261X00220141008/411",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○国務大臣（山谷えり子君）　夫婦別姓選択制については国民的議論が様々あると存じております"
+            ]
+        },
+        {
+            "speech_id": "118715261X00220141008_421",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2014-10-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/118715261X00220141008/421",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○国務大臣（山谷えり子君）　民主党は夫婦別姓賛成の党だったと思います"
+            ]
+        },
+        {
+            "speech_id": "115404129X00320020722_057",
+            "house_name": "衆議院",
+            "meeting_name": "決算行政監視委員会第一分科会",
+            "date": "2002-07-22",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/115404129X00320020722/57",
+            "speaker_group": "民主党・無所属クラブ",
+            "extracted_opinions": [
+                "ですから、旧姓を通称使用として使いたいという女性の気持ちも大変わかるのでございますけれども、夫婦別姓というのはまた別の議論があっていいのではないかというふうに考えているわけでございます"
+            ]
+        }
+    ]
+}

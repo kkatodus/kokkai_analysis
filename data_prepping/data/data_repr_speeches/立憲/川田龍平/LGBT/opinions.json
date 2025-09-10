@@ -1,0 +1,34 @@
+{
+    "party": "立憲",
+    "repr_name": "川田龍平",
+    "topic": "LGBT",
+    "search_words": [
+        "LGBT",
+        "同性婚",
+        "理解増進法"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121615261X00520241217_034",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615261X00520241217/34",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "この同性婚を認めることで、小泉元法務大臣は、幸福になる方が増えるという方向性は正しいと答弁しています"
+            ]
+        },
+        {
+            "speech_id": "121615261X00520241217_036",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2024-12-17",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615261X00520241217/36",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "\r\n　立憲民主党は、これ婚姻の平等のために、同性婚制度、しっかりこれ法制化するべく引き続き頑張りますので、是非、総理、与党、よろしくお願いいたします"
+            ]
+        }
+    ]
+}

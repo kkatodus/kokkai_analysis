@@ -66,7 +66,52 @@ print("Lower Repr File", lower_repr_file)
 print("Upper Repr File", upper_repr_file)
 
 
-# In[3]:
+# ## This will nuke the repr speech directory and deletes all representative speeches that are not currently serving
+
+# In[ ]:
+
+
+# import shutil
+# def clean_repr_name(repr_name):
+# 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
+# 	return repr_name
+# all_current_parties = set()
+# all_current_parties.update(lower_house_repr_dict.keys())
+# all_current_parties.update(upper_house_repr_dict.keys())
+# print(all_current_parties)
+
+# party2names = {party:[] for party in all_current_parties}
+
+
+# for party, reprs in lower_house_repr_dict.items():
+# 	for repr in reprs:
+# 		party2names[party].append(clean_repr_name(repr['name']))
+
+# for party, reprs in upper_house_repr_dict.items():
+# 	for repr in reprs:
+# 		party2names[party].append(clean_repr_name(repr['name']))
+
+
+# print(party2names)
+
+# print(all_current_parties)
+
+# for party in os.listdir(OUTPUT_DIR):
+# 	if not os.path.isdir(os.path.join(OUTPUT_DIR, party)):
+# 		continue
+# 	if party not in all_current_parties:
+# 		# delete the party directory
+# 		print(f"Removing {party}")
+# 		shutil.rmtree(os.path.join(OUTPUT_DIR, party))
+# 		continue
+# 	for repr in os.listdir(os.path.join(OUTPUT_DIR, party)):
+# 		print(repr)
+# 		if repr not in party2names[party]:
+# 			print(f"Removing {repr} from {party}")
+# 			shutil.rmtree(os.path.join(OUTPUT_DIR, party, repr))
+
+
+# In[7]:
 
 
 def clean_repr_name(repr_name):
@@ -476,14 +521,12 @@ class ReprTopicOpinionCollector:
 
 # # Script to collect opinion based sentences for each topic current serving politicians
 
-# In[4]:
+# In[ ]:
 
 
 repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
 collect_topics = [
-	"夫婦別姓",
-	"オンライン投票",
-	"マイナンバー"
+	"LGBT"
 ]
 repr_topic_opinion_collector.collect(collect_topics=collect_topics)
 print('Done with upper house')
@@ -516,7 +559,7 @@ repr_topic_opinion_collector.produce_statistics()
 
 # # Creating summary json to record topics for each politicians and how many files
 
-# In[4]:
+# In[15]:
 
 
 #create a summary json for the repr opinions data
