@@ -1,23 +1,17 @@
 {
-    "meeting_period": "第216回国会（臨時会）（令和6年11月28日～令和6年12月21日）",
+    "meeting_period": "第218回国会（臨時会）（令和7年8月1日～令和7年8月5日）",
     "meetings": {
         "参議院内閣委員会": [
             {
                 "role": "委員長",
-                "name": "和田　　政宗",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm",
+                "name": "小野田　紀美",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016013.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "磯崎　　仁彦",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "上月　　良祐",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm",
                 "party": "（自民）"
             },
             {
@@ -34,20 +28,14 @@
             },
             {
                 "role": "理事",
-                "name": "竹谷　とし子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm",
-                "party": "（公明）"
+                "name": "竹詰　　　仁",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
                 "name": "青木　　一彦",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "石井　　浩郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm",
                 "party": "（自民）"
             },
             {
@@ -58,8 +46,8 @@
             },
             {
                 "role": " ",
-                "name": "太田　　房江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm",
+                "name": "いんどう　周作",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025010.htm",
                 "party": "（自民）"
             },
             {
@@ -76,20 +64,20 @@
             },
             {
                 "role": " ",
+                "name": "山本　　啓介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "石垣　のりこ",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019003.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "石川　　大我",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019004.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "奥村　　政佳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024002.htm",
+                "name": "泉　　　房穂",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025007.htm",
                 "party": "（立憲）"
             },
             {
@@ -100,8 +88,20 @@
             },
             {
                 "role": " ",
-                "name": "河野　　義博",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm",
+                "name": "足立　　康史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025002.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "竹谷　とし子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "原田　大二郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025047.htm",
                 "party": "（公明）"
             },
             {
@@ -118,40 +118,34 @@
             },
             {
                 "role": " ",
-                "name": "竹詰　　　仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm",
-                "party": "（民主）"
+                "name": "大津　　　力",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025013.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "井上　　哲士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm",
+                "name": "大門　実紀史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001001.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "大島　九州男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
+                "name": "伊勢崎　賢治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025008.htm",
                 "party": "（れ新）"
             }
         ],
         "参議院総務委員会": [
             {
                 "role": "委員長",
-                "name": "宮崎　　　勝",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm",
-                "party": "（公明）"
+                "name": "小沢　　雅仁",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm",
+                "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "井上　　義行",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "柘植　　芳文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013034.htm",
+                "name": "岩本　　剛人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
                 "party": "（自民）"
             },
             {
@@ -162,15 +156,21 @@
             },
             {
                 "role": "理事",
-                "name": "野田　　国義",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013042.htm",
+                "name": "吉川　　沙織",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "山本　　博司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm",
-                "party": "（公明）"
+                "name": "石井　　苗子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": "理事",
+                "name": "初鹿野　裕樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025046.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
@@ -222,12 +222,6 @@
             },
             {
                 "role": " ",
-                "name": "小沢　　雅仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
                 "name": "岸　　真紀子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019016.htm",
                 "party": "（立憲）"
@@ -240,27 +234,9 @@
             },
             {
                 "role": " ",
-                "name": "吉川　　沙織",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "西田　　実仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004043.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "石井　　　章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016008.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "高木　かおり",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm",
-                "party": "（維新）"
+                "name": "伊藤　　辰夫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025009.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -270,28 +246,52 @@
             },
             {
                 "role": " ",
-                "name": "伊藤　　　岳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019002.htm",
-                "party": "（共産）"
+                "name": "上田　　　勇",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "齊藤　健一郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm",
-                "party": "（Ｎ党）"
+                "name": "西田　　実仁",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004043.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "浜田　　　聡",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019041.htm",
-                "party": "（Ｎ党）"
+                "name": "高木　かおり",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "神谷　　宗幣",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "奥田　ふみよ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025012.htm",
+                "party": "（れ新）"
+            },
+            {
+                "role": " ",
+                "name": "伊波　　洋一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm",
+                "party": "（沖縄）"
+            },
+            {
+                "role": " ",
+                "name": "安野　　貴博",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025005.htm",
+                "party": "（無所属）"
             }
         ],
         "参議院法務委員会": [
             {
                 "role": "委員長",
-                "name": "若松　　謙維",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013065.htm",
+                "name": "谷合　　正明",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm",
                 "party": "（公明）"
             },
             {
@@ -302,8 +302,8 @@
             },
             {
                 "role": "理事",
-                "name": "宮崎　　雅夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm",
+                "name": "渡辺　　猛之",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010055.htm",
                 "party": "（自民）"
             },
             {
@@ -314,15 +314,15 @@
             },
             {
                 "role": "理事",
-                "name": "矢倉　　克夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013056.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": "理事",
                 "name": "川合　　孝典",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
                 "party": "（民主）"
+            },
+            {
+                "role": "理事",
+                "name": "三浦　　信祐",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
@@ -332,20 +332,14 @@
             },
             {
                 "role": " ",
-                "name": "北村　　経夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm",
+                "name": "小川　　克巳",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016012.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "山東　　昭子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5974040.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "田中　　昌史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm",
+                "name": "片山　さつき",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
                 "party": "（自民）"
             },
             {
@@ -380,9 +374,9 @@
             },
             {
                 "role": " ",
-                "name": "谷合　　正明",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm",
-                "party": "（公明）"
+                "name": "牛田　　茉友",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025035.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -392,15 +386,21 @@
             },
             {
                 "role": " ",
+                "name": "安達　　悠司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025003.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
                 "name": "仁比　　聡平",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004045.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "鈴木　　宗男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019023.htm",
-                "party": "（無所属）"
+                "name": "北村　　晴男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025020.htm",
+                "party": "（保守）"
             },
             {
                 "role": " ",
@@ -410,23 +410,17 @@
             },
             {
                 "role": " ",
-                "name": "長浜　　博行",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007041.htm",
+                "name": "福山　　哲郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm",
                 "party": "（無所属）"
             }
         ],
         "参議院外交防衛委員会": [
             {
                 "role": "委員長",
-                "name": "小野田　紀美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016013.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "佐藤　　正久",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm",
-                "party": "（自民）"
+                "name": "宮崎　　　勝",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm",
+                "party": "（公明）"
             },
             {
                 "role": "理事",
@@ -442,14 +436,14 @@
             },
             {
                 "role": "理事",
-                "name": "三浦　　信祐",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm",
+                "name": "高橋　　光男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm",
                 "party": "（公明）"
             },
             {
                 "role": "理事",
-                "name": "柳ヶ瀬　裕文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm",
+                "name": "松沢　　成文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm",
                 "party": "（維新）"
             },
             {
@@ -468,6 +462,12 @@
                 "role": " ",
                 "name": "猪口　　邦子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010009.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "かまやち　敏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025017.htm",
                 "party": "（自民）"
             },
             {
@@ -496,27 +496,27 @@
             },
             {
                 "role": " ",
+                "name": "長浜　　博行",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007041.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
                 "name": "広田　　　一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004050.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "福山　　哲郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm",
+                "name": "ラサール石井",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025006.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "山口　那津男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001049.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "松沢　　成文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm",
-                "party": "（維新）"
+                "name": "江原　くみ子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025011.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -526,34 +526,28 @@
             },
             {
                 "role": " ",
+                "name": "石　　　　平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025019.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "山中　　　泉",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025061.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
                 "name": "山添　　　拓",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
                 "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "伊波　　洋一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm",
-                "party": "（沖縄）"
-            },
-            {
-                "role": " ",
-                "name": "高良　　鉄美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019028.htm",
-                "party": "（沖縄）"
             }
         ],
         "参議院財政金融委員会": [
             {
                 "role": "委員長",
-                "name": "三宅　　伸吾",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013052.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
+                "name": "宮沢　　洋一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm",
                 "party": "（自民）"
             },
             {
@@ -573,6 +567,12 @@
                 "name": "柴　　　愼一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022021.htm",
                 "party": "（立憲）"
+            },
+            {
+                "role": "理事",
+                "name": "上田　　清司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
@@ -624,27 +624,33 @@
             },
             {
                 "role": " ",
-                "name": "宮沢　　洋一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "勝部　　賢志",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019013.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
                 "name": "熊谷　　裕人",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019017.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "上田　　　勇",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm",
-                "party": "（公明）"
+                "name": "小島　とも子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025023.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "福士　　珠美",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025052.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "奥村　　祥大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025015.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "平戸　　航太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025051.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -660,21 +666,21 @@
             },
             {
                 "role": " ",
-                "name": "藤巻　　健史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013047.htm",
+                "name": "岡崎　　　太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025014.htm",
                 "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "上田　　清司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
-                "party": "（民主）"
+                "name": "塩入　　清香",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025030.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "堂込　麻紀子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022027.htm",
-                "party": "（民主）"
+                "name": "松田　　　学",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025054.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
@@ -684,59 +690,47 @@
             },
             {
                 "role": " ",
-                "name": "大野　　泰正",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013013.htm",
-                "party": "（無所属）"
-            },
-            {
-                "role": " ",
-                "name": "神谷　　宗幣",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm",
-                "party": "（無所属）"
+                "name": "大島　九州男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
+                "party": "（れ新）"
             }
         ],
         "参議院文教科学委員会": [
             {
                 "role": "委員長",
-                "name": "堂故　　　茂",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "石井　　正弘",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "進藤　金日子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "本田　　顕子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "宮口　　治子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021001.htm",
+                "name": "勝部　　賢志",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019013.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "伊藤　　孝恵",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm",
+                "name": "石井　　浩郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "臼井　　正一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "森　　ゆうこ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001047.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": "理事",
+                "name": "堂込　麻紀子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022027.htm",
                 "party": "（民主）"
             },
             {
-                "role": " ",
-                "name": "赤池　　誠章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm",
-                "party": "（自民）"
+                "role": "理事",
+                "name": "中条　きよし",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022029.htm",
+                "party": "（維新）"
             },
             {
                 "role": " ",
@@ -752,14 +746,26 @@
             },
             {
                 "role": " ",
-                "name": "臼井　　正一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm",
+                "name": "見坂　　茂範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025021.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "小林　孝一郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025026.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
                 "name": "末松　　信介",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004033.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "鈴木　　大地",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025034.htm",
                 "party": "（自民）"
             },
             {
@@ -782,9 +788,9 @@
             },
             {
                 "role": " ",
-                "name": "水野　　素子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022038.htm",
-                "party": "（立憲）"
+                "name": "伊藤　　孝恵",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -806,28 +812,28 @@
             },
             {
                 "role": " ",
-                "name": "中条　きよし",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022029.htm",
-                "party": "（維新）"
+                "name": "後藤　　翔太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025024.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "吉良　よし子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm",
                 "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "舩後　　靖彦",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019033.htm",
-                "party": "（れ新）"
             }
         ],
         "参議院厚生労働委員会": [
             {
                 "role": "委員長",
-                "name": "比嘉　奈津美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021003.htm",
+                "name": "本田　　顕子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "石田　　昌宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013010.htm",
                 "party": "（自民）"
             },
             {
@@ -838,45 +844,21 @@
             },
             {
                 "role": "理事",
-                "name": "羽生田　　俊",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "三浦　　　靖",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
                 "name": "森本　　真治",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013054.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
+                "name": "田村　　まみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
                 "name": "秋野　　公造",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010003.htm",
                 "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "石田　　昌宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013010.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "衛藤　　晟一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007014.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "片山　さつき",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
-                "party": "（自民）"
             },
             {
                 "role": " ",
@@ -888,6 +870,24 @@
                 "role": " ",
                 "name": "自見　はなこ",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "出川　　桃子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025037.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "西田　　英範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025043.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "東野　　秀樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025049.htm",
                 "party": "（自民）"
             },
             {
@@ -910,8 +910,8 @@
             },
             {
                 "role": " ",
-                "name": "大椿　ゆうこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023003.htm",
+                "name": "郡山　りょう",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025022.htm",
                 "party": "（立憲）"
             },
             {
@@ -922,14 +922,20 @@
             },
             {
                 "role": " ",
-                "name": "塩田　　博昭",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm",
-                "party": "（公明）"
+                "name": "かごしま　彰宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025016.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "新妻　　秀規",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm",
+                "name": "水野　　孝一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025055.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "川村　　雄大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025018.htm",
                 "party": "（公明）"
             },
             {
@@ -940,20 +946,26 @@
             },
             {
                 "role": " ",
-                "name": "山口　　和之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013059.htm",
+                "name": "新実　　彰平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025042.htm",
                 "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "田村　　まみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
-                "party": "（民主）"
+                "name": "岩本　　麻奈",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025038.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "倉林　　明子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013020.htm",
+                "name": "梅村　みずほ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "白川　　容子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025031.htm",
                 "party": "（共産）"
             },
             {
@@ -972,20 +984,14 @@
             },
             {
                 "role": "理事",
-                "name": "佐藤　　　啓",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm",
+                "name": "上月　　良祐",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "山下　　雄平",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "山本　　啓介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
                 "party": "（自民）"
             },
             {
@@ -1002,8 +1008,14 @@
             },
             {
                 "role": " ",
-                "name": "清水　　真人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
+                "name": "佐藤　　　啓",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "進藤　金日子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm",
                 "party": "（自民）"
             },
             {
@@ -1022,12 +1034,6 @@
                 "role": " ",
                 "name": "藤木　　眞也",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "山田　　俊男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007067.htm",
                 "party": "（自民）"
             },
             {
@@ -1056,14 +1062,20 @@
             },
             {
                 "role": " ",
+                "name": "小林　さやか",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025041.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
                 "name": "窪田　　哲也",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022017.htm",
                 "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "高橋　　光男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm",
+                "name": "司　　　隆史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025036.htm",
                 "party": "（公明）"
             },
             {
@@ -1074,40 +1086,40 @@
             },
             {
                 "role": " ",
-                "name": "紙　　　智子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001010.htm",
+                "name": "杉本　　純子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025033.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "岩渕　　　友",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "寺田　　　静",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019030.htm",
+                "name": "齊藤　健一郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm",
                 "party": "（無所属）"
             }
         ],
         "参議院経済産業委員会": [
             {
                 "role": "委員長",
-                "name": "牧山　ひろえ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm",
-                "party": "（立憲）"
+                "name": "礒崎　　哲史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
-                "name": "岩本　　剛人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
+                "name": "清水　　真人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
-                "name": "長峯　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013039.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "松村　　祥史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004057.htm",
+                "name": "宮本　　周司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013053.htm",
                 "party": "（自民）"
             },
             {
@@ -1118,8 +1130,14 @@
             },
             {
                 "role": "理事",
-                "name": "梅村　みずほ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm",
+                "name": "後藤　　　斎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025025.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
+                "name": "石井　めぐみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025045.htm",
                 "party": "（維新）"
             },
             {
@@ -1142,32 +1160,38 @@
             },
             {
                 "role": " ",
+                "name": "北村　　経夫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "古賀　友一郎",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013021.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "高橋　はるみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019026.htm",
+                "name": "松村　　祥史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004057.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "宮本　　周司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013053.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "吉川　ゆうみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013063.htm",
+                "name": "若井　　敦子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025062.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
                 "name": "辻元　　清美",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022025.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "牧山　ひろえ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm",
                 "party": "（立憲）"
             },
             {
@@ -1190,21 +1214,15 @@
             },
             {
                 "role": " ",
-                "name": "礒崎　　哲史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm",
-                "party": "（民主）"
+                "name": "櫻井　　祥子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025028.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "岩渕　　　友",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "平山　佐知子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016033.htm",
-                "party": "（無所属）"
+                "name": "百田　　尚樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025050.htm",
+                "party": "（保守）"
             }
         ],
         "参議院国土交通委員会": [
@@ -1222,32 +1240,26 @@
             },
             {
                 "role": "理事",
-                "name": "渡辺　　猛之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010055.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "森屋　　　隆",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019037.htm",
+                "name": "蓮舫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004060.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "安江　　伸夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019038.htm",
-                "party": "（公明）"
+                "name": "浜口　　　誠",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
-                "name": "青島　　健太",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm",
-                "party": "（維新）"
+                "name": "里見　　隆治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "足立　　敏之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016001.htm",
+                "name": "井上　　義行",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm",
                 "party": "（自民）"
             },
             {
@@ -1264,14 +1276,8 @@
             },
             {
                 "role": " ",
-                "name": "鶴保　　庸介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "豊田　　俊郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013036.htm",
+                "name": "高橋　はるみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019026.htm",
                 "party": "（自民）"
             },
             {
@@ -1288,21 +1294,15 @@
             },
             {
                 "role": " ",
-                "name": "森屋　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "吉井　　　章",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022042.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "小沼　　　巧",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019009.htm",
-                "party": "（立憲）"
+                "name": "脇　　　雅昭",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025063.htm",
+                "party": "（自民）"
             },
             {
                 "role": " ",
@@ -1312,39 +1312,69 @@
             },
             {
                 "role": " ",
-                "name": "佐々木　さやか",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013023.htm",
-                "party": "（公明）"
+                "name": "山内　佳菜子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025059.htm",
+                "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "里見　　隆治",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "石井　　苗子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "浜口　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm",
+                "name": "庭田　　幸恵",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025044.htm",
                 "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "大門　実紀史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001001.htm",
-                "party": "（共産）"
+                "name": "山田　　吉彦",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025060.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "佐々木　雅文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025029.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "青島　　健太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "佐々木　りえ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025040.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "安藤　　　裕",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025004.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "宮出　　千慧",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025056.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "木村　　英子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm",
                 "party": "（れ新）"
+            },
+            {
+                "role": " ",
+                "name": "ながえ　孝子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019031.htm",
+                "party": "（無所属）"
+            },
+            {
+                "role": " ",
+                "name": "平山　佐知子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016033.htm",
+                "party": "（無所属）"
             }
         ],
         "参議院環境委員会": [
@@ -1362,14 +1392,8 @@
             },
             {
                 "role": "理事",
-                "name": "滝沢　　　求",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013031.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "川田　　龍平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007025.htm",
+                "name": "吉田　　忠智",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010053.htm",
                 "party": "（立憲）"
             },
             {
@@ -1380,20 +1404,14 @@
             },
             {
                 "role": "理事",
-                "name": "山下　　芳生",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995071.htm",
-                "party": "（共産）"
+                "name": "中田　　優子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025039.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "石井　　準一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007007.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "尾辻　　秀久",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5989018.htm",
                 "party": "（自民）"
             },
             {
@@ -1404,20 +1422,26 @@
             },
             {
                 "role": " ",
-                "name": "佐藤　　信秋",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007028.htm",
+                "name": "鈴木　　宗男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019023.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "武見　　敬三",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995043.htm",
+                "name": "鶴保　　庸介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "中田　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022001.htm",
+                "name": "福山　　　守",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025053.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "宮本　　和宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025057.htm",
                 "party": "（自民）"
             },
             {
@@ -1434,21 +1458,21 @@
             },
             {
                 "role": " ",
-                "name": "伊藤　　孝江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "高橋　　次郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024003.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
                 "name": "浜野　　喜史",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm",
                 "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "原田　　秀一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025048.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　孝江",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
@@ -1458,8 +1482,26 @@
             },
             {
                 "role": " ",
-                "name": "ながえ　孝子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019031.htm",
+                "name": "高良　　沙哉",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025027.htm",
+                "party": "（沖縄）"
+            },
+            {
+                "role": " ",
+                "name": "尾辻　　朋実",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025032.htm",
+                "party": "（無所属）"
+            },
+            {
+                "role": " ",
+                "name": "寺田　　　静",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019030.htm",
+                "party": "（無所属）"
+            },
+            {
+                "role": " ",
+                "name": "望月　　良男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025058.htm",
                 "party": "（無所属）"
             }
         ],
@@ -1469,24 +1511,6 @@
                 "name": "浅田　　　均",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016003.htm",
                 "party": "（維新）"
-            },
-            {
-                "role": "理事",
-                "name": "松山　　政司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001046.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "榛葉　賀津也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm",
-                "party": "（民主）"
-            },
-            {
-                "role": "理事",
-                "name": "小池　　　晃",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998022.htm",
-                "party": "（共産）"
             },
             {
                 "role": " ",
@@ -1520,14 +1544,14 @@
             },
             {
                 "role": " ",
-                "name": "中田　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022001.htm",
+                "name": "古川　　俊治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007053.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "森屋　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm",
+                "name": "松山　　政司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001046.htm",
                 "party": "（自民）"
             },
             {
@@ -1556,6 +1580,24 @@
             },
             {
                 "role": " ",
+                "name": "蓮舫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004060.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "足立　　康史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025002.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "榛葉　賀津也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
                 "name": "谷合　　正明",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm",
                 "party": "（公明）"
@@ -1574,34 +1616,22 @@
             },
             {
                 "role": " ",
-                "name": "吉良　よし子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm",
-                "party": "（共産）"
+                "name": "後藤　　翔太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025024.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "木村　　英子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm",
-                "party": "（れ新）"
+                "name": "小池　　　晃",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998022.htm",
+                "party": "（共産）"
             }
         ],
         "参議院予算委員会": [
             {
                 "role": "委員長",
-                "name": "櫻井　　　充",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998030.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "足立　　敏之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "臼井　　正一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm",
+                "name": "中西　　祐介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010038.htm",
                 "party": "（自民）"
             },
             {
@@ -1612,14 +1642,20 @@
             },
             {
                 "role": "理事",
-                "name": "中西　　祐介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010038.htm",
+                "name": "進藤　金日子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "永井　　　学",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022030.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "長谷川　　岳",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010043.htm",
                 "party": "（自民）"
             },
             {
@@ -1636,6 +1672,12 @@
             },
             {
                 "role": "理事",
+                "name": "伊藤　　孝恵",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
                 "name": "上田　　　勇",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm",
                 "party": "（公明）"
@@ -1645,6 +1687,12 @@
                 "name": "金子　　道仁",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022013.htm",
                 "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "朝日　健太郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016004.htm",
+                "party": "（自民）"
             },
             {
                 "role": " ",
@@ -1660,14 +1708,14 @@
             },
             {
                 "role": " ",
-                "name": "江島　　　潔",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013001.htm",
+                "name": "臼井　　正一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "北村　　経夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm",
+                "name": "江島　　　潔",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013001.htm",
                 "party": "（自民）"
             },
             {
@@ -1678,20 +1726,8 @@
             },
             {
                 "role": " ",
-                "name": "上月　　良祐",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "佐藤　　　啓",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "進藤　金日子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016022.htm",
                 "party": "（自民）"
             },
             {
@@ -1708,20 +1744,8 @@
             },
             {
                 "role": " ",
-                "name": "本田　　顕子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "松川　　るい",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "三浦　　　靖",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019035.htm",
                 "party": "（自民）"
             },
             {
@@ -1732,8 +1756,8 @@
             },
             {
                 "role": " ",
-                "name": "山田　　俊男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007067.htm",
+                "name": "山下　　雄平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm",
                 "party": "（自民）"
             },
             {
@@ -1744,32 +1768,20 @@
             },
             {
                 "role": " ",
-                "name": "吉川　ゆうみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013063.htm",
+                "name": "脇　　　雅昭",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025063.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "石川　　大我",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019004.htm",
+                "name": "郡山　りょう",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025022.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "小沼　　　巧",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019009.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "奥村　　政佳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024002.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "川田　　龍平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007025.htm",
+                "name": "小島　とも子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025023.htm",
                 "party": "（立憲）"
             },
             {
@@ -1786,9 +1798,39 @@
             },
             {
                 "role": " ",
-                "name": "塩田　　博昭",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm",
-                "party": "（公明）"
+                "name": "福士　　珠美",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025052.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "山内　佳菜子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025059.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　辰夫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025009.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "牛田　　茉友",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025035.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "江原　くみ子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025011.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "田村　　まみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -1828,26 +1870,26 @@
             },
             {
                 "role": " ",
-                "name": "伊藤　　孝恵",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm",
-                "party": "（民主）"
+                "name": "安達　　悠司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025003.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "田村　　まみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
-                "party": "（民主）"
+                "name": "安藤　　　裕",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025004.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "中田　　優子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025039.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "大門　実紀史",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001001.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "山添　　　拓",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
                 "party": "（共産）"
             },
             {
@@ -1860,14 +1902,26 @@
         "参議院決算委員会": [
             {
                 "role": "委員長",
-                "name": "佐藤　　信秋",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007028.htm",
+                "name": "片山　さつき",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "越智　　俊之",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022008.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "藤川　　政人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010046.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "藤木　　眞也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm",
                 "party": "（自民）"
             },
             {
@@ -1884,26 +1938,32 @@
             },
             {
                 "role": "理事",
-                "name": "山口　　和之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013059.htm",
+                "name": "佐々木　りえ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025040.htm",
                 "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "赤池　　誠章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm",
+                "name": "いんどう　周作",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025010.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "岩本　　剛人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
+                "name": "かまやち　敏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025017.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "太田　　房江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm",
+                "name": "見坂　　茂範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025021.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "小林　孝一郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025026.htm",
                 "party": "（自民）"
             },
             {
@@ -1926,32 +1986,8 @@
             },
             {
                 "role": " ",
-                "name": "柘植　　芳文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "豊田　　俊郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013036.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "西田　　昌司",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007044.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "藤川　　政人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010046.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "藤木　　眞也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm",
                 "party": "（自民）"
             },
             {
@@ -1962,14 +1998,8 @@
             },
             {
                 "role": " ",
-                "name": "和田　　政宗",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "大椿　ゆうこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023003.htm",
+                "name": "古賀　　千景",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm",
                 "party": "（立憲）"
             },
             {
@@ -1992,33 +2022,9 @@
             },
             {
                 "role": " ",
-                "name": "杉　　　久武",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013028.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "竹谷　とし子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "新妻　　秀規",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "石井　　　章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016008.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "柳ヶ瀬　裕文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm",
-                "party": "（維新）"
+                "name": "奥村　　祥大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025015.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -2034,59 +2040,77 @@
             },
             {
                 "role": " ",
-                "name": "仁比　　聡平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004045.htm",
+                "name": "杉　　　久武",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013028.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "竹谷　とし子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "猪瀬　　直樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022005.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "櫻井　　祥子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025028.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "山中　　　泉",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025061.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "吉良　よし子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm",
                 "party": "（共産）"
+            },
+            {
+                "role": " ",
+                "name": "伊勢崎　賢治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025008.htm",
+                "party": "（れ新）"
             }
         ],
         "参議院行政監視委員会": [
             {
                 "role": "委員長",
-                "name": "福島　みずほ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998049.htm",
-                "party": "（立憲）"
+                "name": "芳賀　　道也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
-                "name": "片山　さつき",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
+                "name": "小川　　克巳",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016012.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
-                "name": "鶴保　　庸介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm",
+                "name": "山本　　啓介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
-                "name": "鬼木　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022009.htm",
+                "name": "石垣　のりこ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019003.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "里見　　隆治",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm",
+                "name": "石川　　博崇",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010006.htm",
                 "party": "（公明）"
-            },
-            {
-                "role": "理事",
-                "name": "石井　　苗子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "朝日　健太郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "井上　　義行",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm",
-                "party": "（自民）"
             },
             {
                 "role": " ",
@@ -2096,14 +2120,8 @@
             },
             {
                 "role": " ",
-                "name": "石井　　正弘",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "磯崎　　仁彦",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm",
+                "name": "井上　　義行",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm",
                 "party": "（自民）"
             },
             {
@@ -2120,14 +2138,32 @@
             },
             {
                 "role": " ",
-                "name": "滝沢　　　求",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013031.htm",
+                "name": "北村　　経夫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "長峯　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013039.htm",
+                "name": "上月　　良祐",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "鈴木　　大地",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025034.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "出川　　桃子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025037.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "西田　　英範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025043.htm",
                 "party": "（自民）"
             },
             {
@@ -2138,20 +2174,14 @@
             },
             {
                 "role": " ",
-                "name": "羽生田　　俊",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "長谷川　　岳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010043.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "橋本　　聖子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995054.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "本田　　顕子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm",
                 "party": "（自民）"
             },
             {
@@ -2162,8 +2192,8 @@
             },
             {
                 "role": " ",
-                "name": "石垣　のりこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019003.htm",
+                "name": "鬼木　　　誠",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022009.htm",
                 "party": "（立憲）"
             },
             {
@@ -2174,8 +2204,8 @@
             },
             {
                 "role": " ",
-                "name": "古賀　　千景",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm",
+                "name": "木戸口　英司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016015.htm",
                 "party": "（立憲）"
             },
             {
@@ -2186,69 +2216,81 @@
             },
             {
                 "role": " ",
-                "name": "野田　　国義",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013042.htm",
+                "name": "福島　みずほ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998049.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "宮口　　治子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021001.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "森屋　　　隆",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019037.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "石川　　博崇",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010006.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "河野　　義博",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "山本　　博司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "芳賀　　道也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm",
+                "name": "かごしま　彰宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025016.htm",
                 "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "倉林　　明子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013020.htm",
+                "name": "後藤　　　斎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025025.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "小林　さやか",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025041.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "里見　　隆治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016020.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "石井　　苗子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016009.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "新実　　彰平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025042.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "神谷　　宗幣",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "初鹿野　裕樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025046.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "岩渕　　　友",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "大島　九州男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
+                "name": "奥田　ふみよ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025012.htm",
                 "party": "（れ新）"
+            },
+            {
+                "role": " ",
+                "name": "北村　　晴男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025020.htm",
+                "party": "（保守）"
             },
             {
                 "role": " ",
                 "name": "伊波　　洋一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm",
                 "party": "（沖縄）"
-            },
-            {
-                "role": " ",
-                "name": "浜田　　　聡",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019041.htm",
-                "party": "（Ｎ党）"
             }
         ],
         "参議院議院運営委員会": [
@@ -2290,6 +2332,12 @@
             },
             {
                 "role": "理事",
+                "name": "浜野　　喜史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
                 "name": "伊藤　　孝江",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
                 "party": "（公明）"
@@ -2302,15 +2350,15 @@
             },
             {
                 "role": "理事",
-                "name": "浜野　　喜史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm",
-                "party": "（民主）"
+                "name": "梅村　みずほ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm",
+                "party": "（参政）"
             },
             {
-                "role": "理事",
-                "name": "岩渕　　　友",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
-                "party": "（共産）"
+                "role": " ",
+                "name": "岩本　　剛人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
+                "party": "（自民）"
             },
             {
                 "role": " ",
@@ -2332,26 +2380,8 @@
             },
             {
                 "role": " ",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "田中　　昌史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "藤井　　一博",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022033.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "山本　　啓介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
                 "party": "（自民）"
             },
             {
@@ -2386,14 +2416,20 @@
             },
             {
                 "role": " ",
-                "name": "高橋　　次郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024003.htm",
-                "party": "（公明）"
+                "name": "庭田　　幸恵",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025044.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "安江　　伸夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019038.htm",
+                "name": "原田　　秀一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025048.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "下野　　六太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019021.htm",
                 "party": "（公明）"
             },
             {
@@ -2401,6 +2437,12 @@
                 "name": "青島　　健太",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm",
                 "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "大津　　　力",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025013.htm",
+                "party": "（参政）"
             }
         ],
         "議院運営委員会　庶務関係小委員会": [
@@ -2412,7 +2454,19 @@
             },
             {
                 "role": " ",
+                "name": "岩本　　剛人",
+                "link": null,
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "梶原　　大介",
+                "link": null,
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "神谷　　政幸",
                 "link": null,
                 "party": "（自民）"
             },
@@ -2424,19 +2478,7 @@
             },
             {
                 "role": " ",
-                "name": "白坂　　亜紀",
-                "link": null,
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "馬場　　成志",
-                "link": null,
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "藤井　　一博",
                 "link": null,
                 "party": "（自民）"
             },
@@ -2466,13 +2508,19 @@
             },
             {
                 "role": " ",
-                "name": "伊藤　　孝江",
+                "name": "庭田　　幸恵",
                 "link": null,
-                "party": "（公明）"
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "安江　　伸夫",
+                "name": "浜野　　喜史",
+                "link": null,
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　孝江",
                 "link": null,
                 "party": "（公明）"
             },
@@ -2484,15 +2532,9 @@
             },
             {
                 "role": " ",
-                "name": "浜野　　喜史",
+                "name": "梅村　みずほ",
                 "link": null,
-                "party": "（民主）"
-            },
-            {
-                "role": " ",
-                "name": "岩渕　　　友",
-                "link": null,
-                "party": "（共産）"
+                "party": "（参政）"
             }
         ],
         "議院運営委員会　図書館運営小委員会": [
@@ -2516,7 +2558,7 @@
             },
             {
                 "role": " ",
-                "name": "田中　　昌史",
+                "name": "清水　　真人",
                 "link": null,
                 "party": "（自民）"
             },
@@ -2528,13 +2570,13 @@
             },
             {
                 "role": " ",
-                "name": "星　　　北斗",
+                "name": "藤井　　一博",
                 "link": null,
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "山本　　啓介",
+                "name": "星　　　北斗",
                 "link": null,
                 "party": "（自民）"
             },
@@ -2558,13 +2600,19 @@
             },
             {
                 "role": " ",
-                "name": "伊藤　　孝江",
+                "name": "庭田　　幸恵",
                 "link": null,
-                "party": "（公明）"
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "高橋　　次郎",
+                "name": "浜野　　喜史",
+                "link": null,
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　孝江",
                 "link": null,
                 "party": "（公明）"
             },
@@ -2576,28 +2624,28 @@
             },
             {
                 "role": " ",
-                "name": "浜野　　喜史",
+                "name": "梅村　みずほ",
                 "link": null,
-                "party": "（民主）"
-            },
-            {
-                "role": " ",
-                "name": "岩渕　　　友",
-                "link": null,
-                "party": "（共産）"
+                "party": "（参政）"
             }
         ],
         "参議院懲罰委員会": [
             {
                 "role": "委員長",
-                "name": "勝部　　賢志",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019013.htm",
-                "party": "（立憲）"
+                "name": "松田　　　学",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025054.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "石井　　準一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007007.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "大家　　敏志",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010018.htm",
                 "party": "（自民）"
             },
             {
@@ -2608,33 +2656,21 @@
             },
             {
                 "role": " ",
-                "name": "山東　　昭子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5974040.htm",
+                "name": "東野　　秀樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025049.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "武見　　敬三",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995043.htm",
-                "party": "（自民）"
+                "name": "森　　ゆうこ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001047.htm",
+                "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "古川　　俊治",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007053.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "山口　那津男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001049.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "松沢　　成文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm",
-                "party": "（維新）"
+                "name": "吉田　　忠智",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010053.htm",
+                "party": "（立憲）"
             },
             {
                 "role": " ",
@@ -2644,28 +2680,34 @@
             },
             {
                 "role": " ",
-                "name": "井上　　哲士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm",
-                "party": "（共産）"
+                "name": "秋野　　公造",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010003.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "松沢　　成文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm",
+                "party": "（維新）"
             }
         ],
         "参議院災害対策特別委員会": [
             {
                 "role": "委員長",
-                "name": "塩田　　博昭",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm",
+                "name": "平木　　大作",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013046.htm",
                 "party": "（公明）"
-            },
-            {
-                "role": "理事",
-                "name": "足立　　敏之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016001.htm",
-                "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "梶原　　大介",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022012.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "理事",
+                "name": "藤木　　眞也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm",
                 "party": "（自民）"
             },
             {
@@ -2676,9 +2718,9 @@
             },
             {
                 "role": "理事",
-                "name": "平木　　大作",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013046.htm",
-                "party": "（公明）"
+                "name": "舟山　　康江",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007052.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -2688,14 +2730,8 @@
             },
             {
                 "role": " ",
-                "name": "岩本　　剛人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "加田　　裕之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019011.htm",
+                "name": "小川　　克巳",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016012.htm",
                 "party": "（自民）"
             },
             {
@@ -2712,14 +2748,8 @@
             },
             {
                 "role": " ",
-                "name": "藤木　　眞也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "堀井　　　巌",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013048.htm",
+                "name": "佐藤　　　啓",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016019.htm",
                 "party": "（自民）"
             },
             {
@@ -2730,14 +2760,14 @@
             },
             {
                 "role": " ",
-                "name": "木戸口　英司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016015.htm",
+                "name": "泉　　　房穂",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025007.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "野田　　国義",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013042.htm",
+                "name": "木戸口　英司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016015.htm",
                 "party": "（立憲）"
             },
             {
@@ -2745,6 +2775,18 @@
                 "name": "広田　　　一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004050.htm",
                 "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "平戸　　航太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025051.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "宮崎　　　勝",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm",
+                "party": "（公明）"
             },
             {
                 "role": " ",
@@ -2760,9 +2802,9 @@
             },
             {
                 "role": " ",
-                "name": "舟山　　康江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007052.htm",
-                "party": "（民主）"
+                "name": "塩入　　清香",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025030.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
@@ -2774,9 +2816,9 @@
         "参議院政府開発援助等及び沖縄・北方問題に関する特別委員会": [
             {
                 "role": "委員長",
-                "name": "石井　　浩郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm",
-                "party": "（自民）"
+                "name": "牧山　ひろえ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm",
+                "party": "（立憲）"
             },
             {
                 "role": "理事",
@@ -2792,12 +2834,6 @@
             },
             {
                 "role": "理事",
-                "name": "宮崎　　雅夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
                 "name": "若林　　洋平",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm",
                 "party": "（自民）"
@@ -2807,6 +2843,12 @@
                 "name": "羽田　　次郎",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021002.htm",
                 "party": "（立憲）"
+            },
+            {
+                "role": "理事",
+                "name": "浜口　　　誠",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
@@ -2824,6 +2866,12 @@
                 "role": " ",
                 "name": "青山　　繁晴",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016002.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "石井　　浩郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010005.htm",
                 "party": "（自民）"
             },
             {
@@ -2882,14 +2930,8 @@
             },
             {
                 "role": " ",
-                "name": "三宅　　伸吾",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013052.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "森屋　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm",
+                "name": "宮本　　和宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025057.htm",
                 "party": "（自民）"
             },
             {
@@ -2900,44 +2942,44 @@
             },
             {
                 "role": " ",
+                "name": "小島　とも子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025023.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
                 "name": "徳永　　エリ",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010036.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "福山　　哲郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm",
+                "name": "ラサール石井",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025006.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "牧山　ひろえ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007055.htm",
-                "party": "（立憲）"
+                "name": "芳賀　　道也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "水野　　素子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022038.htm",
-                "party": "（立憲）"
+                "name": "水野　　孝一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025055.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "河野　　義博",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm",
-                "party": "（公明）"
+                "name": "山田　　吉彦",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025060.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
                 "name": "三浦　　信祐",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "山本　　博司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm",
                 "party": "（公明）"
             },
             {
@@ -2948,58 +2990,52 @@
             },
             {
                 "role": " ",
-                "name": "榛葉　賀津也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm",
-                "party": "（民主）"
+                "name": "安達　　悠司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025003.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "浜口　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm",
-                "party": "（民主）"
+                "name": "大津　　　力",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025013.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "紙　　　智子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001010.htm",
+                "name": "中田　　優子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025039.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "白川　　容子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025031.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "天畠　　大輔",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022026.htm",
+                "name": "伊勢崎　賢治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025008.htm",
                 "party": "（れ新）"
             },
             {
                 "role": " ",
-                "name": "伊波　　洋一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm",
-                "party": "（沖縄）"
-            },
-            {
-                "role": " ",
-                "name": "高良　　鉄美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019028.htm",
+                "name": "高良　　沙哉",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025027.htm",
                 "party": "（沖縄）"
             }
         ],
         "参議院政治改革に関する特別委員会": [
             {
                 "role": "委員長",
-                "name": "豊田　　俊郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013036.htm",
+                "name": "古川　　俊治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007053.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "磯崎　　仁彦",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "佐藤　　正久",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm",
                 "party": "（自民）"
             },
             {
@@ -3016,9 +3052,15 @@
             },
             {
                 "role": "理事",
-                "name": "小沼　　　巧",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019009.htm",
+                "name": "吉川　　沙織",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm",
                 "party": "（立憲）"
+            },
+            {
+                "role": "理事",
+                "name": "浜野　　喜史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm",
+                "party": "（民主）"
             },
             {
                 "role": "理事",
@@ -3040,6 +3082,12 @@
             },
             {
                 "role": " ",
+                "name": "いんどう　周作",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025010.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "臼井　　正一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022007.htm",
                 "party": "（自民）"
@@ -3052,26 +3100,14 @@
             },
             {
                 "role": " ",
+                "name": "上月　　良祐",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013022.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "古庄　　玄知",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022020.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "清水　　真人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "鶴保　　庸介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm",
                 "party": "（自民）"
             },
             {
@@ -3088,26 +3124,32 @@
             },
             {
                 "role": " ",
-                "name": "宮崎　　雅夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "森屋　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013055.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "山下　　雄平",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
+                "name": "若井　　敦子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025062.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "脇　　　雅昭",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025063.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
                 "name": "石橋　　通宏",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010007.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "熊谷　　裕人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019017.htm",
                 "party": "（立憲）"
             },
             {
@@ -3124,15 +3166,27 @@
             },
             {
                 "role": " ",
-                "name": "宮口　　治子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021001.htm",
+                "name": "福士　　珠美",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025052.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "吉川　　沙織",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007071.htm",
-                "party": "（立憲）"
+                "name": "足立　　康史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025002.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "礒崎　　哲史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　辰夫",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025009.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -3148,50 +3202,38 @@
             },
             {
                 "role": " ",
-                "name": "高橋　　光男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "矢倉　　克夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013056.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
                 "name": "青島　　健太",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm",
                 "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "上田　　清司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
-                "party": "（民主）"
+                "name": "石井　めぐみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025045.htm",
+                "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "浜野　　喜史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013045.htm",
-                "party": "（民主）"
+                "name": "宮出　　千慧",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025056.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "井上　　哲士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm",
+                "name": "山中　　　泉",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025061.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "山添　　　拓",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
                 "party": "（共産）"
             },
             {
                 "role": " ",
-                "name": "岩渕　　　友",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "舩後　　靖彦",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019033.htm",
+                "name": "木村　　英子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm",
                 "party": "（れ新）"
             }
         ],
@@ -3204,14 +3246,14 @@
             },
             {
                 "role": "理事",
-                "name": "清水　　真人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
+                "name": "自見　はなこ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm",
                 "party": "（自民）"
             },
             {
                 "role": "理事",
-                "name": "自見　はなこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm",
+                "name": "清水　　真人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
                 "party": "（自民）"
             },
             {
@@ -3222,21 +3264,9 @@
             },
             {
                 "role": "理事",
-                "name": "安江　　伸夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019038.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "赤池　　誠章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "衛藤　　晟一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007014.htm",
-                "party": "（自民）"
+                "name": "川合　　孝典",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -3270,8 +3300,8 @@
             },
             {
                 "role": " ",
-                "name": "川田　　龍平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007025.htm",
+                "name": "郡山　りょう",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025022.htm",
                 "party": "（立憲）"
             },
             {
@@ -3282,9 +3312,27 @@
             },
             {
                 "role": " ",
+                "name": "牛田　　茉友",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025035.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
                 "name": "窪田　　哲也",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022017.htm",
                 "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "原田　大二郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025047.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "石　　　　平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025019.htm",
+                "party": "（維新）"
             },
             {
                 "role": " ",
@@ -3294,27 +3342,21 @@
             },
             {
                 "role": " ",
-                "name": "柳ヶ瀬　裕文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm",
-                "party": "（維新）"
+                "name": "櫻井　　祥子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025028.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "川合　　孝典",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
-                "party": "（民主）"
+                "name": "大島　九州男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
+                "party": "（れ新）"
             },
             {
                 "role": " ",
-                "name": "井上　　哲士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001007.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "浜田　　　聡",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019041.htm",
-                "party": "（Ｎ党）"
+                "name": "百田　　尚樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025050.htm",
+                "party": "（保守）"
             }
         ],
         "参議院地方創生及びデジタル社会の形成等に関する特別委員会": [
@@ -3344,32 +3386,14 @@
             },
             {
                 "role": "理事",
-                "name": "伊藤　　孝江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
-                "party": "（公明）"
+                "name": "上田　　清司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
                 "name": "越智　　俊之",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "太田　　房江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "鶴保　　庸介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998036.htm",
                 "party": "（自民）"
             },
             {
@@ -3380,20 +3404,26 @@
             },
             {
                 "role": " ",
-                "name": "永井　　　学",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022030.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "長谷川　英晴",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022031.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "古賀　　之士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm",
+                "name": "山本　　啓介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "山本　佐知子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022041.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "柴　　　愼一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022021.htm",
                 "party": "（立憲）"
             },
             {
@@ -3410,14 +3440,26 @@
             },
             {
                 "role": " ",
-                "name": "宮崎　　　勝",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016037.htm",
+                "name": "江原　くみ子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025011.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "伊藤　　孝江",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
                 "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "片山　　大介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016014.htm",
+                "name": "司　　　隆史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025036.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "岡崎　　　太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025014.htm",
                 "party": "（維新）"
             },
             {
@@ -3428,24 +3470,18 @@
             },
             {
                 "role": " ",
-                "name": "礒崎　　哲史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013011.htm",
-                "party": "（民主）"
+                "name": "岩本　　麻奈",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025038.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "伊藤　　　岳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019002.htm",
-                "party": "（共産）"
+                "name": "奥田　ふみよ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025012.htm",
+                "party": "（れ新）"
             }
         ],
         "参議院消費者問題に関する特別委員会": [
-            {
-                "role": "委員長",
-                "name": "石井　　　章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016008.htm",
-                "party": "（維新）"
-            },
             {
                 "role": "理事",
                 "name": "神谷　　政幸",
@@ -3460,15 +3496,15 @@
             },
             {
                 "role": "理事",
-                "name": "石川　　大我",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019004.htm",
+                "name": "村田　　享子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022039.htm",
                 "party": "（立憲）"
             },
             {
                 "role": "理事",
-                "name": "佐々木　さやか",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013023.htm",
-                "party": "（公明）"
+                "name": "田村　　まみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -3496,18 +3532,6 @@
             },
             {
                 "role": " ",
-                "name": "田中　　昌史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "比嘉　奈津美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7021003.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "宮本　　周司",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013053.htm",
                 "party": "（自民）"
@@ -3520,8 +3544,8 @@
             },
             {
                 "role": " ",
-                "name": "大椿　ゆうこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023003.htm",
+                "name": "塩村　あやか",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019020.htm",
                 "party": "（立憲）"
             },
             {
@@ -3532,15 +3556,33 @@
             },
             {
                 "role": " ",
-                "name": "村田　　享子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022039.htm",
+                "name": "山内　佳菜子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025059.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "高橋　　次郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024003.htm",
+                "name": "奥村　　祥大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025015.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "川村　　雄大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025018.htm",
                 "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "高橋　　光男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "串田　　誠一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022016.htm",
+                "party": "（維新）"
             },
             {
                 "role": " ",
@@ -3550,9 +3592,9 @@
             },
             {
                 "role": " ",
-                "name": "田村　　まみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019025.htm",
-                "party": "（民主）"
+                "name": "後藤　　翔太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025024.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
@@ -3564,26 +3606,20 @@
         "参議院東日本大震災復興特別委員会": [
             {
                 "role": "委員長",
-                "name": "小沢　　雅仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm",
-                "party": "（立憲）"
+                "name": "榛葉　賀津也",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001027.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
+                "name": "小川　　克巳",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016012.htm",
+                "party": "（自民）"
             },
             {
                 "role": "理事",
                 "name": "梶原　　大介",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022012.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "柘植　　芳文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013034.htm",
                 "party": "（自民）"
             },
             {
@@ -3600,14 +3636,20 @@
             },
             {
                 "role": "理事",
+                "name": "竹詰　　　仁",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "理事",
                 "name": "竹谷　とし子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010033.htm",
                 "party": "（公明）"
             },
             {
                 "role": "理事",
-                "name": "梅村　みずほ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm",
+                "name": "高木　かおり",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm",
                 "party": "（維新）"
             },
             {
@@ -3624,8 +3666,20 @@
             },
             {
                 "role": " ",
-                "name": "太田　　房江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013014.htm",
+                "name": "かまやち　敏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025017.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "見坂　　茂範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025021.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "小林　孝一郎",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025026.htm",
                 "party": "（自民）"
             },
             {
@@ -3636,14 +3690,14 @@
             },
             {
                 "role": " ",
-                "name": "滝沢　　　求",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013031.htm",
+                "name": "鈴木　　大地",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025034.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
-                "name": "羽生田　　俊",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm",
+                "name": "出川　　桃子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025037.htm",
                 "party": "（自民）"
             },
             {
@@ -3660,12 +3714,6 @@
             },
             {
                 "role": " ",
-                "name": "三浦　　　靖",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "宮沢　　洋一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm",
                 "party": "（自民）"
@@ -3674,12 +3722,6 @@
                 "role": " ",
                 "name": "森　　まさこ",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007061.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "和田　　政宗",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm",
                 "party": "（自民）"
             },
             {
@@ -3690,14 +3732,20 @@
             },
             {
                 "role": " ",
-                "name": "奥村　　政佳",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024002.htm",
+                "name": "小沢　　雅仁",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019008.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
                 "name": "古賀　　千景",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm",
+                "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "古賀　　之士",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm",
                 "party": "（立憲）"
             },
             {
@@ -3708,57 +3756,45 @@
             },
             {
                 "role": " ",
+                "name": "かごしま　彰宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025016.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "佐々木　雅文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025029.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
                 "name": "杉　　　久武",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013028.htm",
                 "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "新妻　　秀規",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "若松　　謙維",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013065.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "藤巻　　健史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013047.htm",
+                "name": "新実　　彰平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025042.htm",
                 "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "竹詰　　　仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm",
-                "party": "（民主）"
+                "name": "杉本　　純子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025033.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
-                "name": "芳賀　　道也",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019032.htm",
-                "party": "（民主）"
+                "name": "初鹿野　裕樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025046.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "岩渕　　　友",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
                 "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "紙　　　智子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001010.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "大島　九州男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
-                "party": "（れ新）"
             },
             {
                 "role": " ",
@@ -3768,473 +3804,23 @@
             },
             {
                 "role": " ",
-                "name": "齊藤　健一郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm",
-                "party": "（Ｎ党）"
-            }
-        ],
-        "参議院外交・安全保障に関する調査会": [
-            {
-                "role": "会長",
-                "name": "猪口　　邦子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010009.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "越智　　俊之",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022008.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "吉川　ゆうみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013063.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "高木　　真理",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022023.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": "理事",
-                "name": "高橋　　光男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019027.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": "理事",
-                "name": "串田　　誠一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022016.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": "理事",
-                "name": "浜口　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016032.htm",
-                "party": "（民主）"
-            },
-            {
-                "role": "理事",
-                "name": "岩渕　　　友",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016011.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "赤松　　　健",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022003.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "朝日　健太郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "生稲　　晃子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "岩本　　剛人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "上野　　通子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010013.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "こやり　隆史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016017.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "永井　　　学",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022030.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "松川　　るい",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "森　　まさこ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007061.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "古賀　　之士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "塩村　あやか",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019020.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "杉尾　　秀哉",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016023.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "広田　　　一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004050.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "塩田　　博昭",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019019.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "梅村　みずほ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019007.htm",
-                "party": "（維新）"
+                "name": "北村　　晴男",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025020.htm",
+                "party": "（保守）"
             },
             {
                 "role": " ",
                 "name": "伊波　　洋一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016007.htm",
                 "party": "（沖縄）"
-            },
-            {
-                "role": " ",
-                "name": "齊藤　健一郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023002.htm",
-                "party": "（Ｎ党）"
-            }
-        ],
-        "参議院国民生活・経済及び地方に関する調査会": [
-            {
-                "role": "会長",
-                "name": "福山　　哲郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5998050.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": "理事",
-                "name": "清水　　真人",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019018.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "長峯　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013039.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "古賀　　千景",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022019.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": "理事",
-                "name": "河野　　義博",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013015.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": "理事",
-                "name": "中条　きよし",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022029.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": "理事",
-                "name": "伊藤　　孝恵",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016006.htm",
-                "party": "（民主）"
-            },
-            {
-                "role": "理事",
-                "name": "山添　　　拓",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "今井　絵理子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016010.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "白坂　　亜紀",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "田中　　昌史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "堂故　　　茂",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "友納　　理緒",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022028.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "長谷川　英晴",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022031.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "星　　　北斗",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022035.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "山本　　啓介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "山本　佐知子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022041.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "若林　　洋平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "三上　　えり",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022037.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "森屋　　　隆",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019037.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "竹内　　真二",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7017001.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "三浦　　信祐",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016036.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "高木　かおり",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016026.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "大島　九州男",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007017.htm",
-                "party": "（れ新）"
-            },
-            {
-                "role": " ",
-                "name": "木村　　英子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019015.htm",
-                "party": "（れ新）"
-            }
-        ],
-        "参議院資源エネルギー・持続可能社会に関する調査会": [
-            {
-                "role": "会長",
-                "name": "宮沢　　洋一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010050.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "神谷　　政幸",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022015.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "北村　　経夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013019.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "藤井　　一博",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022033.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": "理事",
-                "name": "村田　　享子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022039.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": "理事",
-                "name": "新妻　　秀規",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013041.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": "理事",
-                "name": "青島　　健太",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022002.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": "理事",
-                "name": "竹詰　　　仁",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022024.htm",
-                "party": "（民主）"
-            },
-            {
-                "role": "理事",
-                "name": "吉良　よし子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013017.htm",
-                "party": "（共産）"
-            },
-            {
-                "role": " ",
-                "name": "有村　　治子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7001006.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "井上　　義行",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013006.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "石田　　昌宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013010.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "高橋　はるみ",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019026.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "滝波　　宏文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013032.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "船橋　　利実",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "本田　　顕子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019034.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "舞立　　昇治",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013049.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "青木　　　愛",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007006.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "鬼木　　　誠",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022009.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "柴　　　愼一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022021.htm",
-                "party": "（立憲）"
-            },
-            {
-                "role": " ",
-                "name": "上田　　　勇",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022006.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "下野　　六太",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019021.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "高橋　　次郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7024003.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "藤巻　　健史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013047.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "堂込　麻紀子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022027.htm",
-                "party": "（民主）"
             }
         ],
         "参議院憲法審査会": [
             {
                 "role": "会長",
-                "name": "中曽根　弘文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5986024.htm",
-                "party": "（自民）"
+                "name": "長浜　　博行",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007041.htm",
+                "party": "（立憲）"
             },
             {
                 "role": "幹事",
@@ -4244,14 +3830,20 @@
             },
             {
                 "role": "幹事",
-                "name": "片山　さつき",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
+                "name": "藤川　　政人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010046.htm",
                 "party": "（自民）"
             },
             {
                 "role": "幹事",
-                "name": "佐藤　　正久",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm",
+                "name": "山本　　啓介",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": "幹事",
+                "name": "若林　　洋平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm",
                 "party": "（自民）"
             },
             {
@@ -4268,8 +3860,14 @@
             },
             {
                 "role": "幹事",
-                "name": "谷合　　正明",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm",
+                "name": "川合　　孝典",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": "幹事",
+                "name": "伊藤　　孝江",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
                 "party": "（公明）"
             },
             {
@@ -4280,38 +3878,14 @@
             },
             {
                 "role": "幹事",
-                "name": "川合　　孝典",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
-                "party": "（民主）"
-            },
-            {
-                "role": "幹事",
-                "name": "山添　　　拓",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
-                "party": "（共産）"
+                "name": "安達　　悠司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025003.htm",
+                "party": "（参政）"
             },
             {
                 "role": " ",
                 "name": "青山　　繁晴",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016002.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "赤池　　誠章",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013004.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "衛藤　　晟一",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007014.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "加藤　　明良",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022010.htm",
                 "party": "（自民）"
             },
             {
@@ -4322,8 +3896,14 @@
             },
             {
                 "role": " ",
-                "name": "小林　　一大",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022018.htm",
+                "name": "片山　さつき",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "加藤　　明良",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022010.htm",
                 "party": "（自民）"
             },
             {
@@ -4334,20 +3914,26 @@
             },
             {
                 "role": " ",
-                "name": "田中　　昌史",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7023001.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "中田　　　宏",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022001.htm",
+                "name": "小林　　一大",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022018.htm",
                 "party": "（自民）"
             },
             {
                 "role": " ",
                 "name": "中西　　祐介",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010038.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "西田　　英範",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025043.htm",
+                "party": "（自民）"
+            },
+            {
+                "role": " ",
+                "name": "東野　　秀樹",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025049.htm",
                 "party": "（自民）"
             },
             {
@@ -4370,12 +3956,6 @@
             },
             {
                 "role": " ",
-                "name": "山本　　啓介",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022040.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
                 "name": "山本　佐知子",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022041.htm",
                 "party": "（自民）"
@@ -4388,14 +3968,8 @@
             },
             {
                 "role": " ",
-                "name": "和田　　政宗",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013064.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "若林　　洋平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022043.htm",
+                "name": "若井　　敦子",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025062.htm",
                 "party": "（自民）"
             },
             {
@@ -4430,20 +4004,38 @@
             },
             {
                 "role": " ",
-                "name": "水野　　素子",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022038.htm",
-                "party": "（立憲）"
+                "name": "足立　　康史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025002.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
-                "name": "伊藤　　孝江",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016005.htm",
+                "name": "上田　　清司",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "水野　　孝一",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025055.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "山田　　吉彦",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025060.htm",
+                "party": "（民主）"
+            },
+            {
+                "role": " ",
+                "name": "佐々木　雅文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025029.htm",
                 "party": "（公明）"
             },
             {
                 "role": " ",
-                "name": "佐々木　さやか",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013023.htm",
+                "name": "谷合　　正明",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004036.htm",
                 "party": "（公明）"
             },
             {
@@ -4454,20 +4046,8 @@
             },
             {
                 "role": " ",
-                "name": "矢倉　　克夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013056.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
                 "name": "浅田　　　均",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016003.htm",
-                "party": "（維新）"
-            },
-            {
-                "role": " ",
-                "name": "猪瀬　　直樹",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022005.htm",
                 "party": "（維新）"
             },
             {
@@ -4478,14 +4058,26 @@
             },
             {
                 "role": " ",
-                "name": "上田　　清司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019042.htm",
-                "party": "（民主）"
+                "name": "松沢　　成文",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013050.htm",
+                "party": "（維新）"
             },
             {
                 "role": " ",
-                "name": "仁比　　聡平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004045.htm",
+                "name": "塩入　　清香",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025030.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "宮出　　千慧",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025056.htm",
+                "party": "（参政）"
+            },
+            {
+                "role": " ",
+                "name": "山添　　　拓",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016042.htm",
                 "party": "（共産）"
             },
             {
@@ -4493,12 +4085,6 @@
                 "name": "山本　　太郎",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013062.htm",
                 "party": "（れ新）"
-            },
-            {
-                "role": " ",
-                "name": "高良　　鉄美",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019028.htm",
-                "party": "（沖縄）"
             }
         ],
         "参議院情報監視審査会": [
@@ -4516,27 +4102,21 @@
             },
             {
                 "role": " ",
-                "name": "羽生田　　俊",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013043.htm",
+                "name": "岩本　　剛人",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019005.htm",
                 "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "宮崎　　雅夫",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019036.htm",
-                "party": "（自民）"
-            },
-            {
-                "role": " ",
-                "name": "斎藤　　嘉隆",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010027.htm",
-                "party": "（立憲）"
             },
             {
                 "role": " ",
                 "name": "田名部　匡代",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016025.htm",
                 "party": "（立憲）"
+            },
+            {
+                "role": " ",
+                "name": "川合　　孝典",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007022.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -4549,25 +4129,31 @@
                 "name": "串田　　誠一",
                 "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022016.htm",
                 "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "岩本　　麻奈",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025038.htm",
+                "party": "（参政）"
             }
         ],
         "参議院政治倫理審査会": [
             {
                 "role": "会長",
-                "name": "野村　　哲郎",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004046.htm",
+                "name": "松村　　祥史",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7004057.htm",
                 "party": "（自民）"
             },
             {
                 "role": "幹事",
-                "name": "磯崎　　仁彦",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010008.htm",
+                "name": "山下　　雄平",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm",
                 "party": "（自民）"
             },
             {
                 "role": "幹事",
-                "name": "佐藤　　正久",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007029.htm",
+                "name": "渡辺　　猛之",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010055.htm",
                 "party": "（自民）"
             },
             {
@@ -4584,8 +4170,8 @@
             },
             {
                 "role": " ",
-                "name": "片山　さつき",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010020.htm",
+                "name": "自見　はなこ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016021.htm",
                 "party": "（自民）"
             },
             {
@@ -4596,8 +4182,8 @@
             },
             {
                 "role": " ",
-                "name": "山下　　雄平",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013060.htm",
+                "name": "宮本　　和宏",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025057.htm",
                 "party": "（自民）"
             },
             {
@@ -4608,27 +4194,15 @@
             },
             {
                 "role": " ",
-                "name": "古賀　　之士",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7016018.htm",
+                "name": "森本　　真治",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013054.htm",
                 "party": "（立憲）"
             },
             {
                 "role": " ",
-                "name": "山本　　博司",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7007068.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "若松　　謙維",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7013065.htm",
-                "party": "（公明）"
-            },
-            {
-                "role": " ",
-                "name": "柳ヶ瀬　裕文",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7019039.htm",
-                "party": "（維新）"
+                "name": "平戸　　航太",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025051.htm",
+                "party": "（民主）"
             },
             {
                 "role": " ",
@@ -4638,9 +4212,21 @@
             },
             {
                 "role": " ",
-                "name": "山下　　芳生",
-                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/5995071.htm",
-                "party": "（共産）"
+                "name": "石川　　博崇",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7010006.htm",
+                "party": "（公明）"
+            },
+            {
+                "role": " ",
+                "name": "石井　めぐみ",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025045.htm",
+                "party": "（維新）"
+            },
+            {
+                "role": " ",
+                "name": "松田　　　学",
+                "link": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7025054.htm",
+                "party": "（参政）"
             }
         ]
     }
