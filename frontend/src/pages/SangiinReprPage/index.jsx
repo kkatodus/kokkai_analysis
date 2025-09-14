@@ -54,7 +54,10 @@ export default function SangiinReprPage() {
             key={oneKaiha}
             title={`${SangiinAbbrev2Kaiha[oneKaiha]}（${numReps}）`}
             content={kaihaRepsComponents}
-            extraStyles={{ title: '', content: 'flex flex-wrap justify-center' }}
+            extraStyles={{
+              title: '',
+              content: 'flex flex-wrap justify-center',
+            }}
           />
         );
       });

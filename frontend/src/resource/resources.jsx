@@ -62,6 +62,8 @@ export const SangiinAbbrev2Kaiha = {
   国民: '国民民主党',
   維教: '日本維新の会・教育無償化を実現する会',
   Ｎ党: 'ＮＨＫから国民を守る党',
+  参政: '参政党',
+  保守: '日本保守党',
 };
 export const Topic2Topic = {
   nuclear: '原発',
@@ -145,7 +147,7 @@ export const Party2ColorList = [
 export const Party2Color = Party2ColorList.reduce((acc, curr) => {
   acc[curr.party] = curr.color;
   return acc;
-}, {});	
+}, {});
 
 export const Party2RGBColor = {
   自民: [0, 0, 0],

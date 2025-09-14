@@ -29,7 +29,7 @@ function PartySelector({ availableParties, partyColors, selectedParty, setSelect
 		return TAILWIND_COLORS[colorClass] || '#6b7280'; // Default to gray if not found
 	};
 	
-	return <div className="h-[50px] w-[100%] flex flex-row overflow-x-scroll overflow-y-clip no-scrollbar">
+	return <div className="h-[50px] w-[100%] flex flex-row overflow-x-scroll">
 		{availableParties.map((party) => (
 			<button 
 				type="button" 
