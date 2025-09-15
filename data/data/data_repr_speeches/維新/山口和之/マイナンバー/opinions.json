@@ -7,6 +7,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714260X00520250331_073",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2025-03-31",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714260X00520250331/73",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　日本維新の会は、従前より様々な分野において、マイナンバー制度とマイナカードの普及を促進し、行政を効率化し、デジタル政府を実現するという政府の基本方針に強く賛同しています"
+            ]
+        },
+        {
             "speech_id": "119615206X01620180612_156",
             "house_name": "参議院",
             "meeting_name": "法務委員会",

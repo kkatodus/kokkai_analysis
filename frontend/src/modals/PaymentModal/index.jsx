@@ -8,21 +8,28 @@ import PaymentPage from './components/PaymentPage';
 export default function PaymentModal() {
   const { modalsState, removeModal } = useModalState();
   const [modalPage, setModalPage] = useState('donation');
+  const [subscription, setSubscription] = useState(false);
   const [items, setItems] = useState({
     s: {
       price: 100,
       quantity: 0,
       name: 'ちょっと応援する',
+	  color: 'bg-blue-200',
+	  id: 's',
     },
     m: {
       price: 1000,
       quantity: 0,
       name: 'もっと応援する',
+	  color: 'bg-blue-300',
+	  id: 'm',
     },
     l: {
       price: 10000,
       quantity: 0,
       name: 'めっちゃ応援する',
+	  color: 'bg-blue-400',
+	  id: 'l',
     },
   });
 
@@ -35,13 +42,13 @@ export default function PaymentModal() {
     return null;
   }
   const makePayment = async () => {
-    fetch(`${paymentEndpoint}/create-payment-session`, {
+    fetch(`${paymentEndpoint}${subscription ? 'create-subscription-session' : 'create-payment-session'}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        items,
+        items
       }),
     })
       .then((res) => res.json())
@@ -63,9 +70,12 @@ export default function PaymentModal() {
       {modalPage === 'donation' && <DonationPage setModalPage={setModalPage} />}
       {modalPage === 'payment' && (
         <PaymentPage
-          setItems={setItems}
+		  items={items}
+          setItems={setItems}	
           makePayment={makePayment}
           totalPrice={totalPrice}
+		  subscription={subscription}
+		  setSubscription={setSubscription}
         />
       )}
     </div>

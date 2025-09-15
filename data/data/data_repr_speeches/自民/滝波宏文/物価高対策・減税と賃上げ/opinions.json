@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715007X01420250610_010",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2025-06-10",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715007X01420250610/10",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "これは、望むべきマイルドな穏やかな価格上昇ではなくて、ハイパーインフレーションと言われる急激な価格高騰にまで行ってしまったと"
+            ]
+        },
+        {
             "speech_id": "121115261X00520230306_047",
             "house_name": "参議院",
             "meeting_name": "予算委員会",

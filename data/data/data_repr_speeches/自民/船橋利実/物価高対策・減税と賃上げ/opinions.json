@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714370X02020250621_045",
+            "house_name": "参議院",
+            "meeting_name": "財政金融委員会",
+            "date": "2025-06-21",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714370X02020250621/45",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "税収を一兆円恒久的に減税するということであれば、代替の財源を確保することが責任ある政治の在り方と考えます"
+            ]
+        },
+        {
             "speech_id": "121204601X00420231124_056",
             "house_name": "衆議院",
             "meeting_name": "総務委員会",

@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714260X02120250612_200",
+            "house_name": "参議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2025-06-12",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714260X02120250612/200",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "したがって、物価など全体的な経済指標に併せて、こうした世代の実質賃金の動向なども勘案すべきではないかと考えます"
+            ]
+        },
+        {
             "speech_id": "119815261X01120190318_056",
             "house_name": "参議院",
             "meeting_name": "予算委員会",

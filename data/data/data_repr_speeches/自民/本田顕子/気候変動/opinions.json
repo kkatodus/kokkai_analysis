@@ -16,6 +16,28 @@
     ],
     "speeches": [
         {
+            "speech_id": "121615104X00220241219_016",
+            "house_name": "参議院",
+            "meeting_name": "文教科学委員会",
+            "date": "2024-12-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615104X00220241219/16",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　世界のエネルギー情勢が不安定な状況におって、気候変動や環境影響なども踏まえながら、現代の国民生活や経済活動になくてはならないエネルギーを安定的に確保していくことは、経済安全保障の面においても大変重要です"
+            ]
+        },
+        {
+            "speech_id": "121615254X00420241204_020",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2024-12-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121615254X00420241204/20",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　地球温暖化がもたらす災いは、自然災害の激甚化、頻発化だけではありません"
+            ]
+        },
+        {
             "speech_id": "120314260X00720201203_070",
             "house_name": "参議院",
             "meeting_name": "厚生労働委員会",

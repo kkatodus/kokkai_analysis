@@ -2,11 +2,39 @@ import express from "express";
 import cors from "cors";
 const app = express();
 
-var listener = app.listen(process.env.PORT || 5000, function () {
+var listener = app.listen(process.env.PORT || 5000, "0.0.0.0", function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://www.kokkaidoc.com",
+  "https://kokkaidoc.com",
+  "https://deploy-preview"
+];
 app.use(express.static("public"));
-app.use(cors());
+app.use(
+  cors({
+    origin(origin, cb) {
+      // allow non-browser tools with no Origin for GETs if you want; here we're strict:
+      if (!origin) return cb(new Error("CORS blocked"));
+
+      // Check if origin is in allowed list
+      if (allowedOrigins.includes(origin)) {
+        return cb(null, true);
+      }
+
+      // Check for deploy preview patterns (Netlify/Vercel)
+      if (origin.includes('deploy-preview') ||
+          origin.includes('vercel.app') ||
+          origin.match(/https:\/\/.*\.netlify\.app$/)) {
+        return cb(null, true);
+      }
+
+      return cb(new Error("CORS blocked"));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 //endpoint for api guide

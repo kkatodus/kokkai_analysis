@@ -6,11 +6,18 @@ dotenv.config();
 const router = express.Router();
 router.use(express.static("public"));
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://kokkaidoc.com';
 
 const storeItems = new Map([
   ["s", { price: 100, name: "ちょっと応援する" }],
   ["m", { price: 1000, name: "まあまあ応援する" }],
   ["l", { price: 10000, name: "めっちゃ応援する" }],
+]);
+
+const subStoreItems = new Map([
+  ["s", { price: 100, name: "ちょっと応援する", id: "prod_SLGqXcNZN4X4ic", price_id:"price_1RQaIuHdbYFF47cBvjqqKLCh"}],
+  ["m", { price: 1000, name: "まあまあ応援する", id: "prod_SLGre4siQXau8D", price_id:"price_1RQaJJHdbYFF47cBwUK3kxzQ"}],
+  ["l", { price: 10000, name: "めっちゃ応援する", id: "prod_SLGraGqjJVY4Fo", price_id:"price_1RQaJgHdbYFF47cBEYKqNSke"}],
 ]);
 
 router.get("/config", async (req, res) => {
@@ -22,7 +29,6 @@ router.get("/config", async (req, res) => {
 router.post("/create-payment-session", async (req, res) => {
   try {
     const checkoutData = req.body.items;
-
     const line_items = Object.keys(checkoutData).map((key) => {
       if (checkoutData[key].quantity !== 0) {
         return {
@@ -44,12 +50,45 @@ router.post("/create-payment-session", async (req, res) => {
       line_items: line_items.filter((item) => item !== undefined),
       success_url: `https://kokkaidoc.com/payment-success`,
       cancel_url: `https://kokkaidoc.com/payment-cancel`,
+      locale: "ja",
+    }).catch((error) => {
+      console.log('error', error);
     });
+
     res.json({ url: session.url });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
+
+router.post("/create-subscription-session", async (req, res) => {
+    try {
+      const checkoutData = req.body.items;
+      let line_items = Object.keys(checkoutData).map((key) => {
+        if (checkoutData[key].quantity !== 0) {
+          return {
+            quantity: checkoutData[key].quantity,
+            price: subStoreItems.get(key).price_id,
+          };
+        }
+      });
+      line_items = line_items.filter((item) => item !== undefined);
+  
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        mode: "subscription",
+        line_items: line_items,
+        success_url: `https://kokkaidoc.com/payment-success`,
+        cancel_url: `https://kokkaidoc.com/payment-cancel`,
+        locale: "ja",
+      }).catch((error) => {
+        console.log('error', error);
+      });
+      res.json({ url: session.url });
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  });
 
 // New endpoint for mobile payment intents (Apple Pay, Google Pay)
 router.post("/create-payment-intent", async (req, res) => {
@@ -137,6 +176,39 @@ router.post("/create-payment-intent", async (req, res) => {
       items: items,
       customer: customerData || null
     });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Customer portal for subscription management
+router.post("/create-customer-portal", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    // Find customer by email
+    const customers = await stripe.customers.list({
+      email: email,
+      limit: 1
+    });
+
+    if (customers.data.length === 0) {
+      return res.status(404).json({ error: "Customer not found" });
+    }
+
+    const customer = customers.data[0];
+
+    // Create customer portal session
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: customer.id,
+      return_url: `${FRONTEND_URL}`,
+    });
+
+    res.json({ url: portalSession.url });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

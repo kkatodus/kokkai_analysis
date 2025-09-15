@@ -2,22 +2,25 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import ItemDisplay from './components/ItemDisplay';
 
-const items = [
-  { id: 's', price: 100, name: 'ちょっと応援する', color: 'bg-blue-200' },
-  { id: 'm', price: 1000, name: 'もっと応援する', color: 'bg-blue-300' },
-  { id: 'l', price: 10000, name: 'めっちゃ応援する', color: 'bg-blue-400' },
-];
+const displayOrder = ['s', 'm', 'l'];
 
-export default function PaymentPage({ setItems, makePayment, totalPrice }) {
-  const totalPriceText = `合計金額: ${totalPrice}円`;
+export default function PaymentPage({ items, setItems, makePayment, totalPrice, subscription, setSubscription }) {
+  const totalPriceText = `${totalPrice}円`;
   return (
     <div className="w-full h-full flex flex-col justify-center items-center p-2">
+		<button
+			onClick={() => {setSubscription(!subscription)}}
+			className={`text-blue-500 bg-blue-200 p-2 rounded-lg hover:scale-110 transition-all duration-200 ease-in-out ${subscription ? 'bg-blue-400' : 'bg-blue-200'}`} 
+			type="button"
+		>
+			{subscription ? '一度応援する' : '長期的に応援する'}
+		</button>
       <div className="flex justify-center items-center flex-1">
-        {items.map((item) => (
-          <ItemDisplay key={item.id} setItems={setItems} item={item} />
+		{displayOrder.map((key) => (
+        	<ItemDisplay key={key} setItems={setItems} item={items[key]} />
         ))}
       </div>
-      <div className="text-2xl text-bold p-2">{totalPriceText}</div>
+      <div className="text-2xl text-bold p-2">{subscription ? '月額：' : '合計金額：'} {totalPriceText}</div>
 
       <button
         onClick={() => makePayment()}
@@ -36,7 +39,16 @@ export default function PaymentPage({ setItems, makePayment, totalPrice }) {
 }
 
 PaymentPage.propTypes = {
+  items: Proptypes.objectOf(Proptypes.shape({
+    id: Proptypes.string.isRequired,
+    price: Proptypes.number.isRequired,
+    name: Proptypes.string.isRequired,
+    color: Proptypes.string.isRequired,
+	quantity: Proptypes.number.isRequired,
+  })).isRequired,
   setItems: Proptypes.func.isRequired,
   makePayment: Proptypes.func.isRequired,
   totalPrice: Proptypes.number.isRequired,
+  subscription: Proptypes.bool.isRequired,
+  setSubscription: Proptypes.func.isRequired,
 };

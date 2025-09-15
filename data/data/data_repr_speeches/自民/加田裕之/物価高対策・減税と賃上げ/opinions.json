@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714103X00320250414_023",
+            "house_name": "参議院",
+            "meeting_name": "決算委員会",
+            "date": "2025-04-14",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714103X00320250414/23",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "○加田裕之君　先ほど申し上げました、公約的とか政策的なレガシーとして私はそういう減税施策とかやるべきではないと思います"
+            ]
+        },
+        {
             "speech_id": "121115261X00620230307_050",
             "house_name": "参議院",
             "meeting_name": "予算委員会",

@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121614319X00220241219_073",
+            "house_name": "参議院",
+            "meeting_name": "国土交通委員会",
+            "date": "2024-12-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121614319X00220241219/73",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "\r\n　その上で、老朽化対策、今後更に重要となってまいりますが、人口減少、財政面のこと等も考えますと、広域連携、効率的、効果的なマネジメントの充実等の各種取組が不可欠であると存じます"
+            ]
+        },
+        {
             "speech_id": "121314889X01620240523_144",
             "house_name": "参議院",
             "meeting_name": "内閣委員会",

@@ -16,6 +16,28 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714319X01320250513_045",
+            "house_name": "参議院",
+            "meeting_name": "国土交通委員会",
+            "date": "2025-05-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714319X01320250513/45",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "また、カーボンニュートラルを実現していく上でも、既存のストックも含めて、エネルギー効率の良い住宅を普及させていかなければなりません"
+            ]
+        },
+        {
+            "speech_id": "121714319X00720250408_072",
+            "house_name": "参議院",
+            "meeting_name": "国土交通委員会",
+            "date": "2025-04-08",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714319X00720250408/72",
+            "speaker_group": "公明党",
+            "extracted_opinions": [
+                "改正を契機として、脱炭素に資する施設の設置等の各種脱炭素化施策に対して、既存の支援制度の拡充、また新たな支援施策の実施等が必要と考えております"
+            ]
+        },
+        {
             "speech_id": "121115007X00620230413_069",
             "house_name": "参議院",
             "meeting_name": "農林水産委員会",

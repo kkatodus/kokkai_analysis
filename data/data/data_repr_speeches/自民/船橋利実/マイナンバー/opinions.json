@@ -7,6 +7,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714370X00420250325_134",
+            "house_name": "参議院",
+            "meeting_name": "財政金融委員会",
+            "date": "2025-03-25",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714370X00420250325/134",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "また、マイナンバーカードの普及も徐々に進んでおりまして、こうしたインフラも活用しつつ、納税者が簡便に申告納税の手続を行うことができるよう取り組んでいくべきと考えます"
+            ]
+        },
+        {
             "speech_id": "119804260X00520190327_050",
             "house_name": "衆議院",
             "meeting_name": "厚生労働委員会",

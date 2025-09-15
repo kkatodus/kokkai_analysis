@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715262X00120250313_086",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会公聴会",
+            "date": "2025-03-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715262X00120250313/86",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "\r\n　人口減少において、お話があったとおり、女性が本当に、お子さんを産んでくださる女性の転出、また、戻ってこないというものは本当に切実な問題であるというふうに私も思っています"
+            ]
+        },
+        {
             "speech_id": "121314103X00120240401_099",
             "house_name": "参議院",
             "meeting_name": "決算委員会",

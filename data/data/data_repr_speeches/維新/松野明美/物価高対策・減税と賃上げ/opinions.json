@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715007X01220250603_084",
+            "house_name": "参議院",
+            "meeting_name": "農林水産委員会",
+            "date": "2025-06-03",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715007X01220250603/84",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　このシステム法案なんですけど、やっぱり物価が高い、収入が上がらないという中で、この法案が生きるのかどうかと私自身は思うんですね"
+            ]
+        },
+        {
             "speech_id": "121215261X00620231129_332",
             "house_name": "参議院",
             "meeting_name": "予算委員会",

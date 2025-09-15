@@ -7,7 +7,7 @@
 # !jupyter nbconvert --to script collect_politician_opinions.ipynb
 
 
-# In[2]:
+# In[ ]:
 
 
 import os
@@ -30,8 +30,10 @@ print(os.path.abspath(OUTPUT_DIR))
 LOWER_HOUSE_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'data_shugiin')
 UPPER_HOUSE_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'data_sangiin')
 TODAY_STR = datetime.today().strftime('%Y-%m-%d')
-MAX_MONTH_OLD = 6
+MAX_MONTH_OLD = 2
+print("MAX MONTH OLD:", MAX_MONTH_OLD)
 MONTH_AGO_STR = (datetime.today() - timedelta(days=30*MAX_MONTH_OLD)).strftime('%Y-%m-%d')
+print("Earliest date considered:", MONTH_AGO_STR)
 
 def get_newest_file(dir):
 	most_recent_file = None
@@ -68,10 +70,10 @@ print("Upper Repr File", upper_repr_file)
 
 # ## This will nuke the repr speech directory and deletes all representative speeches that are not currently serving
 
-# In[ ]:
+# In[4]:
 
 
-# import shutil
+import shutil
 # def clean_repr_name(repr_name):
 # 	repr_name = re.sub('\s|君|\[(.*?)\]', '', repr_name)
 # 	return repr_name
@@ -109,6 +111,19 @@ print("Upper Repr File", upper_repr_file)
 # 		if repr not in party2names[party]:
 # 			print(f"Removing {repr} from {party}")
 # 			shutil.rmtree(os.path.join(OUTPUT_DIR, party, repr))
+
+NUKE_TOPICS = ["LGBTQ"]
+
+for party in os.listdir(OUTPUT_DIR):
+	if not os.path.isdir(os.path.join(OUTPUT_DIR, party)):
+		continue
+	for repr in os.listdir(os.path.join(OUTPUT_DIR, party)):
+		if not os.path.isdir(os.path.join(OUTPUT_DIR, party, repr)):
+			continue
+		for topic in os.listdir(os.path.join(OUTPUT_DIR, party, repr)):
+			if topic in NUKE_TOPICS:
+				print(f"Removing {topic} from {repr} in {party}")
+				shutil.rmtree(os.path.join(OUTPUT_DIR, party, repr, topic))
 
 
 # In[7]:
@@ -526,7 +541,16 @@ class ReprTopicOpinionCollector:
 
 repr_topic_opinion_collector = ReprTopicOpinionCollector(house="upper")
 collect_topics = [
-	"LGBT"
+	"防衛",
+	"少子化",
+	"原発",
+	"物価高対策・減税と賃上げ",
+	"社会保障全般の見直し（医療・介護）",
+	"気候変動",
+	"マイナンバー",
+	"LGBTQ",
+	"オンライン投票"
+
 ]
 repr_topic_opinion_collector.collect(collect_topics=collect_topics)
 print('Done with upper house')
@@ -559,7 +583,7 @@ repr_topic_opinion_collector.produce_statistics()
 
 # # Creating summary json to record topics for each politicians and how many files
 
-# In[15]:
+# In[5]:
 
 
 #create a summary json for the repr opinions data

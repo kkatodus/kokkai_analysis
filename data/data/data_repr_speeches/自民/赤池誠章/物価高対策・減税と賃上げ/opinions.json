@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714103X00120250407_019",
+            "house_name": "参議院",
+            "meeting_name": "決算委員会",
+            "date": "2025-04-07",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714103X00120250407/19",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "その際、いろいろ御議論はあるんですが、あらゆる政策として減税策も是非御検討いただきたいというふうに思っています"
+            ]
+        },
+        {
             "speech_id": "121314103X00820240527_055",
             "house_name": "参議院",
             "meeting_name": "決算委員会",

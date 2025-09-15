@@ -58,7 +58,13 @@ function LandingPage() {
 		icon: <RiGovernmentFill className="menu-icon" />,
 		title: '衆議院',
 	},
+	{
+		link: 'https://billing.stripe.com/p/login/8x26oHdBm3SF0sJaCpgA800',
+		icon: <RiUserSearchFill className="menu-icon" />,
+		title: 'アカウント',
+	}
   ];
+
   
   // Only add donation button if not in webview
   if (!isWebView) {

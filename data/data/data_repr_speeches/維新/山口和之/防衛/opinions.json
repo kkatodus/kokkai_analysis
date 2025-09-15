@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715254X02620250611_006",
+            "house_name": "参議院",
+            "meeting_name": "本会議",
+            "date": "2025-06-11",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715254X02620250611/6",
+            "speaker_group": "日本維新の会",
+            "extracted_opinions": [
+                "\r\n　少子高齢化が進展しつつ、戦後最も厳しい安全保障環境にある我が国において、未来にわたって財政を守り続けるためには、無駄遣いを徹底的に排除しなければなりません"
+            ]
+        },
+        {
             "speech_id": "119315206X01520170530_072",
             "house_name": "参議院",
             "meeting_name": "法務委員会",

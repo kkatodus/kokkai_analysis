@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121714006X00320250313_037",
+            "house_name": "参議院",
+            "meeting_name": "環境委員会",
+            "date": "2025-03-13",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121714006X00320250313/37",
+            "speaker_group": "立憲民主・社民・無所属",
+            "extracted_opinions": [
+                "大量の二酸化炭素、そしてエアロゾルを排出することから、気候への影響を考える上でも無視できません"
+            ]
+        },
+        {
             "speech_id": "121314319X01420240521_044",
             "house_name": "参議院",
             "meeting_name": "国土交通委員会",

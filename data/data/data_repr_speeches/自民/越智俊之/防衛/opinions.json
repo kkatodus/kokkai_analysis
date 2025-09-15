@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715362X00320250226_009",
+            "house_name": "参議院",
+            "meeting_name": "外交・安全保障に関する調査会",
+            "date": "2025-02-26",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715362X00320250226/9",
+            "speaker_group": "自由民主党",
+            "extracted_opinions": [
+                "しかし、近年、軍事や経済といった力を用いた国益の実現を重視する方向へ流れていっているのではないかと思っております"
+            ]
+        },
+        {
             "speech_id": "121315362X00420240417_009",
             "house_name": "参議院",
             "meeting_name": "外交・安全保障に関する調査会",
