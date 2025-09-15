@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import './styles/animations.css';
@@ -14,18 +14,23 @@ import SangiinCommitteePage from 'pages/SangiinCommitteePage';
 import ShugiinMenuPage from 'pages/ShugiinMenuPage';
 import ShugiinCommitteePage from 'pages/ShugiinCommitteePage';
 import ShugiinReprPage from 'pages/ShugiinReprPage';
-import ReprOpinionSummaryPage from 'pages/ReprOpinionSummaryPage';
 import ReprOpinionPage from 'pages/ReprOpinionPage';
-import ReprAnalysisMenuPage from 'pages/ReprAnalysisMenuPage';
-import ReprSpeechGraphPage from 'pages/ReprSpeechGraphPage';
-import StatsMenuPage from 'pages/StatsMenuPage';
-import PopulationPage from 'pages/StatPages/PopulationPage';
-import ReprSearchPage from 'pages/ReprSearchPage';
-import PartyManifestoPage from 'pages/PartyManifestoPage';
+
 import PaymentSuccessPage from 'pages/PaymentResultPages/PaymentSuccessPage';
 import PaymentFailurePage from 'pages/PaymentResultPages/PaymentFailurePage';
 import PrivacyPolicyPage from 'pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from 'pages/TermsAndConditionsPage';
+import { squareLoader } from 'resource/loader';
+
+const ReprOpinionSummaryPage = lazy(() => import('pages/ReprOpinionSummaryPage'));
+const ReprAnalysisMenuPage = lazy(() => import('pages/ReprAnalysisMenuPage'));
+const ReprSpeechGraphPage = lazy(() => import('pages/ReprSpeechGraphPage'));
+const StatsMenuPage = lazy(() => import('pages/StatsMenuPage'));
+const PopulationPage = lazy(() => import('pages/StatPages/PopulationPage'));
+const ReprSearchPage = lazy(() => import('pages/ReprSearchPage'));
+const PartyManifestoPage = lazy(() => import('pages/PartyManifestoPage'));
+
+
 /**
  *
  * @return {JSX.Element}
@@ -38,6 +43,7 @@ function App() {
   window.addEventListener('resize', appHeight);
   appHeight();
   return (
+    <Suspense fallback={squareLoader}>
     <Routes>
       <Route exact path="/" element={<LandingPage />} />
       <Route exact path="/page_info" element={<InfoPage />} />
@@ -59,11 +65,8 @@ function App() {
       <Route exact path="shugiin_commitee" element={<ShugiinCommitteePage />} />
 
       <Route exact path="repr_analysis" element={<ReprAnalysisMenuPage />} />
-      <Route
-        exact
-        path="repr_analysis/speech"
-        element={<ReprOpinionSummaryPage />}
-      />
+      <Route exact path="repr_analysis/speech" element={<ReprOpinionSummaryPage />}/>
+
       <Route
         exact
         path="repr_analysis/speech/:party/:reprId"
@@ -74,7 +77,7 @@ function App() {
         path="repr_analysis/graph"
         element={<ReprSpeechGraphPage />}
       />
-	  <Route exact path="party_manifesto" element={<PartyManifestoPage />} />
+      <Route exact path="party_manifesto" element={<PartyManifestoPage />} />
       <Route exact path="repr_analysis/search" element={<ReprSearchPage />} />
       <Route exact path="stats" element={<StatsMenuPage />} />
       <Route exact path="stats/population" element={<PopulationPage />} />
@@ -83,6 +86,8 @@ function App() {
       <Route exact path="privacy-policy" element={<PrivacyPolicyPage />} />
       <Route exact path="terms-and-conditions" element={<TermsAndConditionsPage />} />
     </Routes>
+        </Suspense>
+
   );
 }
 

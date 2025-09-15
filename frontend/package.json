@@ -43,6 +43,7 @@
     "recharts": "^2.6.2",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "source-map-explorer": "^2.5.3",
     "web-vitals": "^3.3.2"
   },
   "proxy": "http://localhost:5000",
@@ -50,7 +51,8 @@
     "start": "react-scripts --max_old_space_size=6096 start",
     "build": "react-scripts --max_old_space_size=6096 build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+	"analyze": "source-map-explorer build/static/js/main.*js"
   },
   "eslintConfig": {
     "extends": [
