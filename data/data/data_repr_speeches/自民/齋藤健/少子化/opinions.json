@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121705254X00720250304_010",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2025-03-04",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705254X00720250304/10",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　加えて、急速に進む人口減少や激甚化する自然災害、厳しさを増す安全保障環境など、国内外の様々な変化にしっかりと対応していかなくてはなりません"
+            ]
+        },
+        {
             "speech_id": "121105206X00220230308_035",
             "house_name": "衆議院",
             "meeting_name": "法務委員会",

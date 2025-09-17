@@ -16,6 +16,28 @@
     ],
     "speeches": [
         {
+            "speech_id": "121715261X01020250319_378",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-03-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715261X01020250319/378",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　子育て支援策を拡充することには大いに賛成です"
+            ]
+        },
+        {
+            "speech_id": "121715261X01020250319_381",
+            "house_name": "参議院",
+            "meeting_name": "予算委員会",
+            "date": "2025-03-19",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121715261X01020250319/381",
+            "speaker_group": "れいわ新選組",
+            "extracted_opinions": [
+                "\r\n　総理、子育て支援の財源を同じ社会保障の枠内から捻出するという財務省の論理ではなく、国民の健康と暮らしを守るため、まずは国債発行で社会保障を支えることを御決断ください"
+            ]
+        },
+        {
             "speech_id": "121314894X00120240528_124",
             "house_name": "参議院",
             "meeting_name": "内閣委員会、厚生労働委員会連合審査会",

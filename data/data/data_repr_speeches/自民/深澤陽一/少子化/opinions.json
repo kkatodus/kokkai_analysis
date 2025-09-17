@@ -16,6 +16,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121704260X02220250528_045",
+            "house_name": "衆議院",
+            "meeting_name": "厚生労働委員会",
+            "date": "2025-05-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121704260X02220250528/45",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "特に、実質経済成長率や賃金上昇率、出生率の数字は適切なのか、また、過剰ではないのかという意見が多かったように感じます"
+            ]
+        },
+        {
             "speech_id": "120814889X01820220524_276",
             "house_name": "参議院",
             "meeting_name": "内閣委員会",

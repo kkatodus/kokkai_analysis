@@ -1,0 +1,21 @@
+{
+    "party": "民主",
+    "repr_name": "浜口誠",
+    "topic": "マイナンバー",
+    "search_words": [
+        "マイナンバー"
+    ],
+    "speeches": [
+        {
+            "speech_id": "121314601X01620240528_081",
+            "house_name": "参議院",
+            "meeting_name": "総務委員会",
+            "date": "2024-05-28",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121314601X01620240528/81",
+            "speaker_group": "国民民主党・新緑風会",
+            "extracted_opinions": [
+                "\r\n　こうした多額の予算を使いながらマイナンバーカード普及させてきましたが、一方で効果もあったというふうに思っています"
+            ]
+        }
+    ]
+}

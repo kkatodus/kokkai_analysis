@@ -21,6 +21,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121704376X02720250620_233",
+            "house_name": "衆議院",
+            "meeting_name": "財務金融委員会",
+            "date": "2025-06-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121704376X02720250620/233",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "全国二万七千のガソリンスタンド、消費者、自動車ユーザーへの影響を真剣に検討されたのか、疑問であります"
+            ]
+        },
+        {
             "speech_id": "121304889X00420240322_034",
             "house_name": "衆議院",
             "meeting_name": "内閣委員会",

@@ -11,6 +11,17 @@
     ],
     "speeches": [
         {
+            "speech_id": "121705254X02720250520_025",
+            "house_name": "衆議院",
+            "meeting_name": "本会議",
+            "date": "2025-05-20",
+            "speech_url": "https://kokkai.ndl.go.jp/txt/121705254X02720250520/25",
+            "speaker_group": "自由民主党・無所属の会",
+            "extracted_opinions": [
+                "\r\n　一方、事業主の側から見れば、この改正は、人材確保に資する側面もありますが、事業者のいわゆる裏負担が大きくなり、今後の賃上げ余力すらなくしかねません"
+            ]
+        },
+        {
             "speech_id": "118704889X00720141031_152",
             "house_name": "衆議院",
             "meeting_name": "内閣委員会",
