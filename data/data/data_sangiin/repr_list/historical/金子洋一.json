@@ -1,0 +1,41 @@
+{
+    "name_kanji": "金子洋一",
+    "name_kana": "かねこよういち",
+    "years": [
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2009年",
+            "month": "10月",
+            "day": "25日",
+            "election_name": "補欠選挙",
+            "district": "神奈川県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "民進党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

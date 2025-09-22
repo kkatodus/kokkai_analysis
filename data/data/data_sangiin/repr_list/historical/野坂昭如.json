@@ -1,0 +1,39 @@
+{
+    "name_kanji": "野坂昭如",
+    "name_kana": "のさかあきゆき",
+    "years": [
+        "1983-06-26"
+    ],
+    "election_data": [
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由連合",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

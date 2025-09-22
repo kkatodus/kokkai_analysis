@@ -1,0 +1,53 @@
+{
+    "name_kanji": "森下泰",
+    "name_kana": "もりしたたい",
+    "years": [
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06"
+    ],
+    "election_data": [
+        {
+            "year": "1973年",
+            "month": "6月",
+            "day": "17日",
+            "election_name": "補欠選挙",
+            "district": "大阪府選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

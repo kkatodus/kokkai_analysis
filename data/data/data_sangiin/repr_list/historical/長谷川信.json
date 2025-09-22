@@ -1,0 +1,44 @@
+{
+    "name_kanji": "長谷川信",
+    "name_kana": "はせがわしん",
+    "years": [
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1977年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "補欠選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

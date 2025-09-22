@@ -1,0 +1,30 @@
+{
+    "name_kanji": "中村哲治",
+    "name_kana": "なかむらてつじ",
+    "years": [
+        "2007-07-29",
+        "2010-07-11"
+    ],
+    "election_data": [
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "奈良県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "佐賀県選挙区",
+            "party": "民進党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

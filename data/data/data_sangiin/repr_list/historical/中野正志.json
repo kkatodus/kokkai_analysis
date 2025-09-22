@@ -1,0 +1,40 @@
+{
+    "name_kanji": "中野正志",
+    "name_kana": "なかのまさし",
+    "years": [
+        "2013-07-21",
+        "2016-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "宮城県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "日本維新の会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

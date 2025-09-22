@@ -22,14 +22,15 @@ import PrivacyPolicyPage from 'pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from 'pages/TermsAndConditionsPage';
 import { squareLoader } from 'resource/loader';
 
-const ReprOpinionSummaryPage = lazy(() => import('pages/ReprOpinionSummaryPage'));
+const ReprOpinionSummaryPage = lazy(() =>
+  import('pages/ReprOpinionSummaryPage')
+);
 const ReprAnalysisMenuPage = lazy(() => import('pages/ReprAnalysisMenuPage'));
 const ReprSpeechGraphPage = lazy(() => import('pages/ReprSpeechGraphPage'));
 const StatsMenuPage = lazy(() => import('pages/StatsMenuPage'));
 const PopulationPage = lazy(() => import('pages/StatPages/PopulationPage'));
 const ReprSearchPage = lazy(() => import('pages/ReprSearchPage'));
 const PartyManifestoPage = lazy(() => import('pages/PartyManifestoPage'));
-
 
 /**
  *
@@ -44,50 +45,65 @@ function App() {
   appHeight();
   return (
     <Suspense fallback={squareLoader}>
-    <Routes>
-      <Route exact path="/" element={<LandingPage />} />
-      <Route exact path="/page_info" element={<InfoPage />} />
-      <Route exact path="sangiin_menu" element={<SangiinMenuPage />} />
-      <Route exact path="sangiin_meetings" element={<SangiinMeetingsPage />} />
-      <Route exact path="sangiin_repr" element={<SangiinReprPage />} />
-      <Route
-        exact
-        path="sangiin_committee"
-        element={<SangiinCommitteePage />}
-      />
-      <Route
-        exact
-        path="sangiin_meetings/:meetingId"
-        element={<SangiinMeetingDetailPage />}
-      />
-      <Route exact path="shugiin_menu" element={<ShugiinMenuPage />} />
-      <Route exact path="shugiin_repr" element={<ShugiinReprPage />} />
-      <Route exact path="shugiin_commitee" element={<ShugiinCommitteePage />} />
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/page_info" element={<InfoPage />} />
+        <Route exact path="sangiin_menu" element={<SangiinMenuPage />} />
+        <Route
+          exact
+          path="sangiin_meetings"
+          element={<SangiinMeetingsPage />}
+        />
+        <Route exact path="sangiin_repr" element={<SangiinReprPage />} />
+        <Route
+          exact
+          path="sangiin_committee"
+          element={<SangiinCommitteePage />}
+        />
+        <Route
+          exact
+          path="sangiin_meetings/:meetingId"
+          element={<SangiinMeetingDetailPage />}
+        />
+        <Route exact path="shugiin_menu" element={<ShugiinMenuPage />} />
+        <Route exact path="shugiin_repr" element={<ShugiinReprPage />} />
+        <Route
+          exact
+          path="shugiin_commitee"
+          element={<ShugiinCommitteePage />}
+        />
 
-      <Route exact path="repr_analysis" element={<ReprAnalysisMenuPage />} />
-      <Route exact path="repr_analysis/speech" element={<ReprOpinionSummaryPage />}/>
+        <Route exact path="repr_analysis" element={<ReprAnalysisMenuPage />} />
+        <Route
+          exact
+          path="repr_analysis/speech"
+          element={<ReprOpinionSummaryPage />}
+        />
 
-      <Route
-        exact
-        path="repr_analysis/speech/:party/:reprId"
-        element={<ReprOpinionPage />}
-      />
-      <Route
-        exact
-        path="repr_analysis/graph"
-        element={<ReprSpeechGraphPage />}
-      />
-      <Route exact path="party_manifesto" element={<PartyManifestoPage />} />
-      <Route exact path="repr_analysis/search" element={<ReprSearchPage />} />
-      <Route exact path="stats" element={<StatsMenuPage />} />
-      <Route exact path="stats/population" element={<PopulationPage />} />
-      <Route exact path="payment-success" element={<PaymentSuccessPage />} />
-      <Route exact path="payment-cancel" element={<PaymentFailurePage />} />
-      <Route exact path="privacy-policy" element={<PrivacyPolicyPage />} />
-      <Route exact path="terms-and-conditions" element={<TermsAndConditionsPage />} />
-    </Routes>
-        </Suspense>
-
+        <Route
+          exact
+          path="repr_analysis/speech/:party/:reprId"
+          element={<ReprOpinionPage />}
+        />
+        <Route
+          exact
+          path="repr_analysis/graph"
+          element={<ReprSpeechGraphPage />}
+        />
+        <Route exact path="party_manifesto" element={<PartyManifestoPage />} />
+        <Route exact path="repr_analysis/search" element={<ReprSearchPage />} />
+        <Route exact path="stats" element={<StatsMenuPage />} />
+        <Route exact path="stats/population" element={<PopulationPage />} />
+        <Route exact path="payment-success" element={<PaymentSuccessPage />} />
+        <Route exact path="payment-cancel" element={<PaymentFailurePage />} />
+        <Route exact path="privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route
+          exact
+          path="terms-and-conditions"
+          element={<TermsAndConditionsPage />}
+        />
+      </Routes>
+    </Suspense>
   );
 }
 

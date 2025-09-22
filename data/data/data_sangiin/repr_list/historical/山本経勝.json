@@ -1,0 +1,30 @@
+{
+    "name_kanji": "山本経勝、山本經勝",
+    "name_kana": "やまもとつねかつ",
+    "years": [
+        "1953-04-24",
+        "1956-07-08"
+    ],
+    "election_data": [
+        {
+            "year": "1955年",
+            "month": "3月",
+            "day": "17日",
+            "election_name": "補欠選挙",
+            "district": "福岡県選挙区",
+            "party": "日本社会党（左派）",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "福岡県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

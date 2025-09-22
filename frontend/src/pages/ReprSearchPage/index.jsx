@@ -44,10 +44,20 @@ function ReprSearchPage() {
 
   return (
     <Div100vh>
-      <div className={`relative h-[100%] w-screen flex ${isMobile ? 'flex-col overflow-clip' : ''}`}>
+      <div
+        className={`relative h-[100%] w-screen flex ${
+          isMobile ? 'flex-col overflow-clip' : ''
+        }`}
+      >
         <ModalManager />
-        <div className={`absolute h-20 w-[70%] z-10 flex items-center justify-center ${isMobile ? 'w-full' : ''}`}>
-          <div className={`w-full flex h-full items-center justify-center ${colors.primary}`}>
+        <div
+          className={`absolute h-20 w-[70%] z-10 flex items-center justify-center ${
+            isMobile ? 'w-full' : ''
+          }`}
+        >
+          <div
+            className={`w-full flex h-full items-center justify-center ${colors.primary}`}
+          >
             <Link
               className={`back-icon z-40 top-0 left-0 p-2 rounded-lg ${colors.primary}`}
               to="/repr_analysis"
@@ -55,7 +65,7 @@ function ReprSearchPage() {
               <MdOutlineArrowBack className="menu-icon h-[50px] w-[50px] " />
             </Link>
             <MapLegend />
-			<AutocompleteInput
+            <AutocompleteInput
               selectedDistrict={selectedDistrict}
               setSelectedDistrict={setSelectedDistrict}
               options={districtOptions}

@@ -1,0 +1,39 @@
+{
+    "name_kanji": "信田邦雄",
+    "name_kana": "のぶたくにお",
+    "years": [
+        "2001-07-29"
+    ],
+    "election_data": [
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2002年",
+            "month": "9月",
+            "day": "2日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "繰上",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

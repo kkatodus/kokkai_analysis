@@ -1,0 +1,69 @@
+{
+    "name_kanji": "板野勝次",
+    "name_kana": "いたのかつじ",
+    "years": [
+        "1947-04-20"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第1回参議院議員通常選挙",
+            "district": "岡山県選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "岡山県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "岡山県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "岡山県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

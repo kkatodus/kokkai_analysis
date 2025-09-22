@@ -1,0 +1,29 @@
+{
+    "name_kanji": "立花孝志",
+    "name_kana": "たちばなたかし",
+    "years": [
+        "2019-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2019年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第25回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "NHKから国民を守る党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2019年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "補欠選挙",
+            "district": "埼玉県選挙区",
+            "party": "NHKから国民を守る党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

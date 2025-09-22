@@ -1,0 +1,30 @@
+{
+    "name_kanji": "松崎俊久",
+    "name_kana": "まつざきとしひさ",
+    "years": [
+        "1995-07-23",
+        "1998-07-12"
+    ],
+    "election_data": [
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "新進党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1998年",
+            "month": "6月",
+            "day": "3日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "新進党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

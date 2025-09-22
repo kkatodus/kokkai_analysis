@@ -1,0 +1,30 @@
+{
+    "name_kanji": "藤巻幸夫",
+    "name_kana": "ふじまきゆきお",
+    "years": [
+        "2010-07-11",
+        "2013-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "みんなの党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2012年",
+            "month": "12月",
+            "day": "14日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "みんなの党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

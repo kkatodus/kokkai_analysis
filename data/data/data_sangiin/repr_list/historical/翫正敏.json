@@ -1,0 +1,30 @@
+{
+    "name_kanji": "翫正敏",
+    "name_kana": "いとうまさとし",
+    "years": [
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "憲法みどり農の連帯",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

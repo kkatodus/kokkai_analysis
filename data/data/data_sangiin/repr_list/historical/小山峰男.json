@@ -1,0 +1,30 @@
+{
+    "name_kanji": "小山峰男",
+    "name_kana": "こやまみねお",
+    "years": [
+        "1995-07-23",
+        "1998-07-12"
+    ],
+    "election_data": [
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "長野県選挙区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "長野県選挙区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

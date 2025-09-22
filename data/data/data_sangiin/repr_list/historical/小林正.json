@@ -1,0 +1,40 @@
+{
+    "name_kanji": "小林正",
+    "name_kana": "こばやしただし",
+    "years": [
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

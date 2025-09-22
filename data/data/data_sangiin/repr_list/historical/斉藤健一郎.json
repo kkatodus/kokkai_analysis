@@ -1,0 +1,39 @@
+{
+    "name_kanji": "斉藤健一郎、齊藤健一郎",
+    "name_kana": "さいとうけんいちろう",
+    "years": [
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2022年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "補欠選挙",
+            "district": "石川県選挙区",
+            "party": "ＮＨＫ受信料を支払わない国民を守る党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "NHK党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2023年",
+            "month": "3月",
+            "day": "24日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "NHK党",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

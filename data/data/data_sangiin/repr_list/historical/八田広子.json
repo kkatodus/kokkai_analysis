@@ -1,0 +1,40 @@
+{
+    "name_kanji": "八田広子、八田ひろ子",
+    "name_kana": "はったひろこ",
+    "years": [
+        "1998-07-12",
+        "2001-07-29"
+    ],
+    "election_data": [
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

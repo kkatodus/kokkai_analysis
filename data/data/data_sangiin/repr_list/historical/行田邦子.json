@@ -1,0 +1,32 @@
+{
+    "name_kanji": "行田邦子",
+    "name_kana": "こうだくにこ",
+    "years": [
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "埼玉県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "埼玉県選挙区",
+            "party": "みんなの党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name_kanji": "徳永久志",
+    "name_kana": "とくながひさし",
+    "years": [
+        "2007-07-29",
+        "2010-07-11"
+    ],
+    "election_data": [
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "滋賀県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "滋賀県選挙区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "name_kanji": "斎藤寿夫",
+    "name_kana": "さいとうとしお",
+    "years": [
+        "1971-06-27"
+    ],
+    "election_data": [
+        {
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "補欠選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

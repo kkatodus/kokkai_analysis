@@ -1,0 +1,42 @@
+{
+    "name_kanji": "藤井丙午",
+    "name_kana": "ふじいへいご",
+    "years": [
+        "1947-04-20",
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第1回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "岐阜県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "岐阜県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

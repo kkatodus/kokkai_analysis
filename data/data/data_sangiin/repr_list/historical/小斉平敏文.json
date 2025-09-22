@@ -1,0 +1,30 @@
+{
+    "name_kanji": "小斉平敏文",
+    "name_kana": "こせひらとしふみ",
+    "years": [
+        "2001-07-29",
+        "2004-07-11"
+    ],
+    "election_data": [
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "宮崎県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "宮崎県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

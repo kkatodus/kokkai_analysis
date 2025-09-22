@@ -1,0 +1,30 @@
+{
+    "name_kanji": "宮本邦彦",
+    "name_kana": "みやもとくにひこ",
+    "years": [
+        "1950-06-04",
+        "1953-04-24"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

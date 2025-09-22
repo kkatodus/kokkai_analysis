@@ -1,0 +1,42 @@
+{
+    "name_kanji": "アントニオ猪木、猪木寛至",
+    "name_kana": "あんとにおいのき、いのきかんじ",
+    "years": [
+        "1989-07-23",
+        "1992-07-26",
+        "2013-07-21",
+        "2016-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "スポーツ平和党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "スポーツ平和党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "日本維新の会",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

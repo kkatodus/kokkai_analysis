@@ -1,0 +1,40 @@
+{
+    "name_kanji": "粟森喬",
+    "name_kana": "あわもりたかし",
+    "years": [
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "石川県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "石川県選挙区",
+            "party": "連合の会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "石川県選挙区",
+            "party": "民主改革連合",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

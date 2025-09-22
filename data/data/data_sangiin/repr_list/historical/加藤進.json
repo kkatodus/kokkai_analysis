@@ -1,0 +1,40 @@
+{
+    "name_kanji": "加藤進",
+    "name_kana": "かとうすすむ",
+    "years": [
+        "1971-06-27",
+        "1974-07-07"
+    ],
+    "election_data": [
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

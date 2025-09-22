@@ -1,0 +1,29 @@
+{
+    "name_kanji": "山崎真之輔",
+    "name_kana": "やまざきしんのすけ",
+    "years": [
+        "2019-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "24日",
+            "election_name": "補欠選挙",
+            "district": "静岡県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -9,7 +9,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://www.kokkaidoc.com",
   "https://kokkaidoc.com",
-  "https://deploy-preview"
+  "https://deploy-preview",
 ];
 app.use(express.static("public"));
 app.use(
@@ -24,13 +24,15 @@ app.use(
       }
 
       // Check for deploy preview patterns (Netlify/Vercel)
-      if (origin.includes('deploy-preview') ||
-          origin.includes('vercel.app') ||
-          origin.match(/https:\/\/.*\.netlify\.app$/)) {
+      if (
+        origin.includes("deploy-preview") ||
+        origin.includes("vercel.app") ||
+        origin.match(/https:\/\/.*\.netlify\.app$/)
+      ) {
         return cb(null, true);
       }
 
-      return cb(new Error("CORS blocked"));
+      return cb(new Error("CORS blocked for origin " + origin));
     },
     credentials: true,
   })

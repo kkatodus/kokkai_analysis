@@ -1,0 +1,52 @@
+{
+    "name_kanji": "大城真順、大城眞順",
+    "name_kana": "おおしろしんじゅん",
+    "years": [
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1982年",
+            "month": "11月",
+            "day": "14日",
+            "election_name": "補欠選挙",
+            "district": "沖縄県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "21世紀の沖縄を創る会",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

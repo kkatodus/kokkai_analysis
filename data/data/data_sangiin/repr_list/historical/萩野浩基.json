@@ -1,0 +1,30 @@
+{
+    "name_kanji": "萩野浩基",
+    "name_kana": "はぎのこうき",
+    "years": [
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1992年",
+            "month": "3月",
+            "day": "8日",
+            "election_name": "補欠選挙",
+            "district": "宮城県選挙区",
+            "party": "連合の会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "宮城県選挙区",
+            "party": "民主改革連合",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

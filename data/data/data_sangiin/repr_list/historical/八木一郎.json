@@ -1,0 +1,55 @@
+{
+    "name_kanji": "八木一郎",
+    "name_kana": "やぎいちろう",
+    "years": [
+        "1962-07-01",
+        "1965-07-04",
+        "1968-07-07",
+        "1971-06-27",
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1963年",
+            "month": "10月",
+            "day": "28日",
+            "election_name": "補欠選挙",
+            "district": "愛知県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        }
+    ]
+}

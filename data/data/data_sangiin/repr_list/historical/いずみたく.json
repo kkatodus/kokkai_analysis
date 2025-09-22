@@ -1,0 +1,40 @@
+{
+    "name_kanji": "いずみたく、今泉隆雄",
+    "name_kana": "いずみたく、いまいずみたかお",
+    "years": [
+        "1986-07-06",
+        "1989-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1989年",
+            "month": "6月",
+            "day": "16日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "繰上",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

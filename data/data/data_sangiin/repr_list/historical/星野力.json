@@ -1,0 +1,40 @@
+{
+    "name_kanji": "星野力",
+    "name_kana": "ほしのつとむ",
+    "years": [
+        "1971-06-27",
+        "1974-07-07"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第1回参議院議員通常選挙",
+            "district": "福岡県選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

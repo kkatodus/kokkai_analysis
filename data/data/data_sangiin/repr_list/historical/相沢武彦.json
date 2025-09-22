@@ -1,0 +1,30 @@
+{
+    "name_kanji": "相沢武彦",
+    "name_kana": "あいざわたけひこ",
+    "years": [
+        "1974-07-07",
+        "1977-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "北海道選挙区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "北海道選挙区",
+            "party": "公明党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

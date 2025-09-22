@@ -7,7 +7,13 @@ function Tag(props) {
   const { type: DisplayType } = useDisplaySize();
   const isMobile = DisplayType === 'mobile';
 
-  return <span className={`m-1 rounded-lg p-1 border-2 ${isMobile ? 'text-xs' : ''}`}>{text}</span>;
+  return (
+    <span
+      className={`m-1 rounded-lg p-1 border-2 ${isMobile ? 'text-xs' : ''}`}
+    >
+      {text}
+    </span>
+  );
 }
 
 Tag.defaultProps = {};

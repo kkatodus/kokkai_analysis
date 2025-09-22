@@ -1,0 +1,29 @@
+{
+    "name_kanji": "林了",
+    "name_kana": "はやしりょう",
+    "years": [
+        "1953-04-24"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "緑風会",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "緑風会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

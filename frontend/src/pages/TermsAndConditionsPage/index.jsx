@@ -5,7 +5,6 @@ function TermsAndConditionsPage() {
   const [termsContent, setTermsContent] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log('TermsAndConditionsPage', termsContent);
 
   useEffect(() => {
     const fetchTerms = async () => {
@@ -45,9 +44,9 @@ function TermsAndConditionsPage() {
   return (
     <div className="w-full h-screen overflow-auto p-8 bg-white">
       <div className="max-w-4xl mx-auto">
-        <div 
+        <div
           className="prose prose-gray max-w-none"
-          dangerouslySetInnerHTML={{ __html: termsContent }} 
+          dangerouslySetInnerHTML={{ __html: termsContent }}
         />
       </div>
     </div>

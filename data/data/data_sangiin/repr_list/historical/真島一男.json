@@ -1,0 +1,52 @@
+{
+    "name_kanji": "真島一男",
+    "name_kana": "まじまかずお",
+    "years": [
+        "1989-07-23",
+        "1992-07-26",
+        "1995-07-23",
+        "2001-07-29"
+    ],
+    "election_data": [
+        {
+            "year": "1990年",
+            "month": "12月",
+            "day": "9日",
+            "election_name": "補欠選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

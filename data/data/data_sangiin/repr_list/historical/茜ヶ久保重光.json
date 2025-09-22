@@ -1,0 +1,62 @@
+{
+    "name_kanji": "茜ヶ久保重光、茜ケ久保重光",
+    "name_kana": "あかねがくぼしげみつ",
+    "years": [
+        "1971-06-27",
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1967年",
+            "month": "8月",
+            "day": "20日",
+            "election_name": "補欠選挙",
+            "district": "群馬県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

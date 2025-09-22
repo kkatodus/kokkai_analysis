@@ -1,0 +1,30 @@
+{
+    "name_kanji": "柳岡秋夫",
+    "name_kana": "やなおかあきお",
+    "years": [
+        "1962-07-01",
+        "1965-07-04"
+    ],
+    "election_data": [
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "千葉県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "千葉県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

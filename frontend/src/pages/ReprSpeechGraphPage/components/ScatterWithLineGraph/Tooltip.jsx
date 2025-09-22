@@ -7,15 +7,15 @@ function Tooltip({ active, payload }) {
   if (active && payload.length) {
     const reprPayload = payload[0].payload;
     const { repr, party, house, hiragana } = reprPayload;
-	
-	const houseJPN = house === 'lower' ? '衆院' : '参院';
-	if (repr==="反対"||repr==="賛成"){
-		return (
-			<div className={`${colors.primary} p-2 rounded-md bg-opacity-25`}>
-				<h1>{repr}基準</h1>
-			</div>
-		)
-	}
+
+    const houseJPN = house === 'lower' ? '衆院' : '参院';
+    if (repr === '反対' || repr === '賛成') {
+      return (
+        <div className={`${colors.primary} p-2 rounded-md bg-opacity-25`}>
+          <h1>{repr}基準</h1>
+        </div>
+      );
+    }
     return (
       <div className={`${colors.primary} p-2 rounded-md bg-opacity-25`}>
         <h1>政党:{SpeechAbbrev2Kaiha[party]}</h1>

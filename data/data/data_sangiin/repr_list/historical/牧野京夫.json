@@ -1,0 +1,44 @@
+{
+    "name_kanji": "牧野京夫、牧野たかお",
+    "name_kana": "まきのたかお",
+    "years": [
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10",
+        "2019-07-21",
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2019年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第25回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

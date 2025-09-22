@@ -1,0 +1,40 @@
+{
+    "name_kanji": "吉田正雄",
+    "name_kana": "よしだまさお",
+    "years": [
+        "1977-07-10",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1976年",
+            "month": "12月",
+            "day": "12日",
+            "election_name": "補欠選挙",
+            "district": "新潟県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1977年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "補欠選挙",
+            "district": "新潟県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

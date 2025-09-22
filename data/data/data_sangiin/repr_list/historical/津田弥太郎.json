@@ -1,0 +1,32 @@
+{
+    "name_kanji": "津田弥太郎",
+    "name_kana": "つだやたろう",
+    "years": [
+        "2004-07-11",
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

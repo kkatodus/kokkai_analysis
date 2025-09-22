@@ -1,0 +1,54 @@
+{
+    "name_kanji": "藤井基之",
+    "name_kana": "ふじいもとゆき",
+    "years": [
+        "2001-07-29",
+        "2004-07-11",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10",
+        "2019-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

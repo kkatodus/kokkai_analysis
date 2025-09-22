@@ -1,0 +1,44 @@
+{
+    "name_kanji": "梶原茂嘉",
+    "name_kana": "かじわらしげよし",
+    "years": [
+        "1953-04-24",
+        "1956-07-08",
+        "1959-06-02",
+        "1962-07-01",
+        "1965-07-04",
+        "1968-07-07"
+    ],
+    "election_data": [
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1959年",
+            "month": "6月",
+            "day": "2日",
+            "election_name": "第5回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

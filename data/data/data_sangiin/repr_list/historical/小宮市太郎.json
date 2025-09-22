@@ -1,0 +1,29 @@
+{
+    "name_kanji": "小宮市太郎",
+    "name_kana": "こみやいちたろう",
+    "years": [
+        "1962-07-01"
+    ],
+    "election_data": [
+        {
+            "year": "1963年",
+            "month": "4月",
+            "day": "9日",
+            "election_name": "補欠選挙",
+            "district": "福岡県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "福岡県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

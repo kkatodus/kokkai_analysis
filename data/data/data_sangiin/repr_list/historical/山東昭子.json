@@ -1,0 +1,113 @@
+{
+    "name_kanji": "山東昭子",
+    "name_kana": "さんとうあきこ",
+    "years": [
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23",
+        "1995-07-23",
+        "2001-07-29",
+        "2004-07-11",
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10",
+        "2019-07-21",
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1995年",
+            "month": "8月",
+            "day": "25日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "繰上",
+            "election_freq": "（4回目）[半期]"
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        },
+        {
+            "year": "2019年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第25回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（8回目）"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "name_kanji": "斎藤昇",
+    "name_kana": "さいとうのぼる",
+    "years": [
+        "1953-04-24",
+        "1956-07-08",
+        "1959-06-02",
+        "1962-07-01",
+        "1965-07-04",
+        "1968-07-07",
+        "1971-06-27"
+    ],
+    "election_data": [
+        {
+            "year": "1955年",
+            "month": "8月",
+            "day": "7日",
+            "election_name": "補欠選挙",
+            "district": "三重県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "三重県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "三重県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "三重県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "name_kanji": "西村関一",
+    "name_kana": "にしむらかんいち",
+    "years": [
+        "1965-07-04",
+        "1968-07-07",
+        "1971-06-27"
+    ],
+    "election_data": [
+        {
+            "year": "1967年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "補欠選挙",
+            "district": "滋賀県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "滋賀県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

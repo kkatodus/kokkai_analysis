@@ -1,0 +1,42 @@
+{
+    "name_kanji": "山口重彦",
+    "name_kana": "やまぐちしげひこ",
+    "years": [
+        "1953-04-24",
+        "1956-07-08",
+        "1959-06-02",
+        "1962-07-01"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本社会党（右派）",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1959年",
+            "month": "6月",
+            "day": "2日",
+            "election_name": "第5回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

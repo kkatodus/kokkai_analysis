@@ -1,0 +1,29 @@
+{
+    "name_kanji": "田中茂",
+    "name_kana": "たなかしげる",
+    "years": [
+        "2013-07-21"
+    ],
+    "election_data": [
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "みんなの党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2014年",
+            "month": "3月",
+            "day": "31日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "みんなの党",
+            "result": "繰上",
+            "election_freq": "（1回目）[半期]"
+        }
+    ]
+}

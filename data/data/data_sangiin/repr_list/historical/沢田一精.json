@@ -1,0 +1,55 @@
+{
+    "name_kanji": "沢田一精、澤田一精",
+    "name_kana": "さわだいっせい",
+    "years": [
+        "1962-07-01",
+        "1965-07-04",
+        "1968-07-07",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1962年",
+            "month": "11月",
+            "day": "30日",
+            "election_name": "補欠選挙",
+            "district": "熊本県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "熊本県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "熊本県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "熊本県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        }
+    ]
+}

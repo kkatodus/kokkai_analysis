@@ -1,0 +1,44 @@
+{
+    "name_kanji": "山中郁子",
+    "name_kana": "やまなかいくこ",
+    "years": [
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

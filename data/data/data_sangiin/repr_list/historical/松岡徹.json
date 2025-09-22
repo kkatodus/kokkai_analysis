@@ -1,0 +1,30 @@
+{
+    "name_kanji": "松岡徹",
+    "name_kana": "まつおかとおる",
+    "years": [
+        "2004-07-11",
+        "2007-07-29"
+    ],
+    "election_data": [
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

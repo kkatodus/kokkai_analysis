@@ -1,0 +1,84 @@
+{
+    "name_kanji": "コロムビア・トップ、下村泰",
+    "name_kana": "ころんびあとっぷ、しもむらゆたか",
+    "years": [
+        "1974-07-07",
+        "1977-07-10",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23",
+        "1992-07-26"
+    ],
+    "election_data": [
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "24日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "繰上",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "第二院クラブ",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

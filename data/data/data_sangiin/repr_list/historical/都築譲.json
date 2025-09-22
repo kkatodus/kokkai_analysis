@@ -1,0 +1,30 @@
+{
+    "name_kanji": "都築譲",
+    "name_kana": "つづきゆずる",
+    "years": [
+        "1992-07-26",
+        "1995-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1994年",
+            "month": "9月",
+            "day": "11日",
+            "election_name": "再選挙",
+            "district": "愛知県選挙区",
+            "party": "あいち改革推進協議会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "愛知県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

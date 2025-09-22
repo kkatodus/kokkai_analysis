@@ -1,0 +1,32 @@
+{
+    "name_kanji": "田中正巳",
+    "name_kana": "たなかまさみ",
+    "years": [
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23"
+    ],
+    "election_data": [
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "name_kanji": "小幡治和",
+    "name_kana": "おばたはるかず",
+    "years": [
+        "1953-04-24",
+        "1956-07-08",
+        "1959-06-02"
+    ],
+    "election_data": [
+        {
+            "year": "1955年",
+            "month": "3月",
+            "day": "10日",
+            "election_name": "補欠選挙",
+            "district": "福井県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "福井県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "福井県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1965年",
+            "month": "7月",
+            "day": "4日",
+            "election_name": "第7回参議院議員通常選挙",
+            "district": "福井県選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

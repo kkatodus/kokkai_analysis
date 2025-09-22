@@ -1,0 +1,62 @@
+{
+    "name_kanji": "塚田一郎",
+    "name_kana": "つかだいちろう",
+    "years": [
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2002年",
+            "month": "4月",
+            "day": "28日",
+            "election_name": "補欠選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2019年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第25回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -148,7 +148,11 @@ function PopulationPage() {
             initialViewState={INITIAL_VIEW_STATE}
             controller
             layers={layers}
-            style={{ position: 'relative', height: '100%', width: isMobile ? '100%' : '70%' }}
+            style={{
+              position: 'relative',
+              height: '100%',
+              width: isMobile ? '100%' : '70%',
+            }}
             getTooltip={getTooltip}
           >
             <Map
@@ -159,7 +163,9 @@ function PopulationPage() {
               projection="mercator"
             />
           </DeckGL>
-          <div className={`h-[100%] w-[30%] ${isMobile ? 'w-full h-[40%]' : ''}`}>
+          <div
+            className={`h-[100%] w-[30%] ${isMobile ? 'w-full h-[40%]' : ''}`}
+          >
             <DataTable
               data={sortedCityData}
               columns={dataGridColumns}

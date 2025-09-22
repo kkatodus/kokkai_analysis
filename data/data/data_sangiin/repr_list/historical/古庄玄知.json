@@ -1,0 +1,29 @@
+{
+    "name_kanji": "古庄玄知",
+    "name_kana": "こしょうはるとも",
+    "years": [
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "大分県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "大分県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

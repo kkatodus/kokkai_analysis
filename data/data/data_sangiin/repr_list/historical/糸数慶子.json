@@ -1,0 +1,43 @@
+{
+    "name_kanji": "糸数慶子",
+    "name_kana": "いとかずけいこ",
+    "years": [
+        "2004-07-11",
+        "2007-07-29",
+        "2010-07-11",
+        "2013-07-21",
+        "2016-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2013年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第23回参議院議員通常選挙",
+            "district": "沖縄県選挙区",
+            "party": "沖縄社会大衆党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

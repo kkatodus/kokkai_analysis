@@ -1,0 +1,29 @@
+{
+    "name_kanji": "玉柳実、玉柳實",
+    "name_kana": "たまやなぎみのる",
+    "years": [
+        "1950-06-04"
+    ],
+    "election_data": [
+        {
+            "year": "1951年",
+            "month": "5月",
+            "day": "21日",
+            "election_name": "補欠選挙",
+            "district": "愛媛県選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name_kanji": "金井元彦",
+    "name_kana": "かないもとひこ",
+    "years": [
+        "1971-06-27",
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22"
+    ],
+    "election_data": [
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "兵庫県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "兵庫県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

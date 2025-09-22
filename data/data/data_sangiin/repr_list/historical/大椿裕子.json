@@ -1,0 +1,39 @@
+{
+    "name_kanji": "大椿裕子、大椿ゆうこ",
+    "name_kana": "おおつばきゆうこ",
+    "years": [
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2019年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第25回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2023年",
+            "month": "4月",
+            "day": "7日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "社会民主党",
+            "result": "繰上",
+            "election_freq": "（0回目）[半期]"
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

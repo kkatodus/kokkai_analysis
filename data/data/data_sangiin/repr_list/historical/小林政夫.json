@@ -1,0 +1,30 @@
+{
+    "name_kanji": "小林政夫",
+    "name_kana": "こばやしまさお",
+    "years": [
+        "1950-06-04",
+        "1953-04-24"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "緑風会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "緑風会",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

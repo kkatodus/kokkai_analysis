@@ -1,0 +1,90 @@
+{
+    "name_kanji": "田英夫",
+    "name_kana": "でんひでお",
+    "years": [
+        "1971-06-27",
+        "1974-07-07",
+        "1977-07-10",
+        "1980-06-22",
+        "1983-06-26",
+        "1986-07-06",
+        "1989-07-23",
+        "1992-07-26",
+        "1995-07-23",
+        "1998-07-12",
+        "2001-07-29",
+        "2004-07-11"
+    ],
+    "election_data": [
+        {
+            "year": "1971年",
+            "month": "6月",
+            "day": "27日",
+            "election_name": "第9回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1983年",
+            "month": "6月",
+            "day": "26日",
+            "election_name": "第13回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "新自由クラブ民主連合",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "平和・市民",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "社会民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2003年",
+            "month": "4月",
+            "day": "8日",
+            "election_name": "同",
+            "district": "比例区",
+            "party": "社会民主党",
+            "result": "繰上",
+            "election_freq": "（6回目）"
+        }
+    ]
+}

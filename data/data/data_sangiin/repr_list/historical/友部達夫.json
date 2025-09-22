@@ -1,0 +1,50 @@
+{
+    "name_kanji": "友部達夫",
+    "name_kana": "ともべたつお",
+    "years": [
+        "1995-07-23",
+        "1998-07-12"
+    ],
+    "election_data": [
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "年金党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "年金党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "年金党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "新進党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "name_kanji": "藤田栄",
+    "name_kana": "ふじたさかえ",
+    "years": [
+        "1983-06-26"
+    ],
+    "election_data": [
+        {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1983年",
+            "month": "12月",
+            "day": "18日",
+            "election_name": "補欠選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "静岡県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

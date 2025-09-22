@@ -1,0 +1,30 @@
+{
+    "name_kanji": "鈴木強平",
+    "name_kana": "すずききょうへい",
+    "years": [
+        "1950-06-04",
+        "1953-04-24"
+    ],
+    "election_data": [
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "国民民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "群馬県選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

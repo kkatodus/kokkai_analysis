@@ -1,0 +1,31 @@
+{
+    "name_kanji": "川口順子",
+    "name_kana": "かわぐちよりこ",
+    "years": [
+        "2004-07-11",
+        "2007-07-29",
+        "2010-07-11"
+    ],
+    "election_data": [
+        {
+            "year": "2005年",
+            "month": "10月",
+            "day": "23日",
+            "election_name": "補欠選挙",
+            "district": "神奈川県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "2007年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

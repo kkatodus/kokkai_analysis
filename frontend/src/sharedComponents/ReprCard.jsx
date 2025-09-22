@@ -25,14 +25,50 @@ function ReprCard(props) {
   const cardContent = (
     <div className="h-full flex flex-col">
       <div className="flex-shrink-0">
-        {yomikata ? <p className={`${isMobile ? 'text-xs' : ''}`}>{yomikata}</p> : ''}
-        {house ? <p className={`${isMobile ? 'text-xs' : ''}`}>院：{house}</p> : ''}
-        {district ? <p className={`${isMobile ? 'text-xs' : ''}`}>選挙区：{district}</p> : ''}
-        {role ? <p className={`${isMobile ? 'text-xs' : ''}`}>役職：{role}</p> : ''}
-        {party ? <p className={`${isMobile ? 'text-xs' : ''}`}>所属政党：{party}</p> : ''}
-        {period ? <p className={`${isMobile ? 'text-xs' : ''}`}>任期満了：{period}</p> : ''}
-        {numberOfTermsLower ? <p className={`${isMobile ? 'text-xs' : ''}`}>衆議院当選回数：{numberOfTermsLower}</p> : ''}
-        {numberofTermsUpper ? <p className={`${isMobile ? 'text-xs' : ''}`}>参議院当選回数：{numberofTermsUpper}</p> : ''}
+        {yomikata ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>{yomikata}</p>
+        ) : (
+          ''
+        )}
+        {house ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>院：{house}</p>
+        ) : (
+          ''
+        )}
+        {district ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>選挙区：{district}</p>
+        ) : (
+          ''
+        )}
+        {role ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>役職：{role}</p>
+        ) : (
+          ''
+        )}
+        {party ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>所属政党：{party}</p>
+        ) : (
+          ''
+        )}
+        {period ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>任期満了：{period}</p>
+        ) : (
+          ''
+        )}
+        {numberOfTermsLower ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>
+            衆議院当選回数：{numberOfTermsLower}
+          </p>
+        ) : (
+          ''
+        )}
+        {numberofTermsUpper ? (
+          <p className={`${isMobile ? 'text-xs' : ''}`}>
+            参議院当選回数：{numberofTermsUpper}
+          </p>
+        ) : (
+          ''
+        )}
       </div>
       {tags ? <TagsContainer tags={tags} /> : ''}
     </div>

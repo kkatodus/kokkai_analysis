@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function PaymentFailurePage() {
   return (
     <Div100vh>
-      <div className="flex flex-col h-[99%] relative justify-center items-center">
+      <div className="flex flex-col h-[99%] relative justify-center items-center mx-2">
         <h1 className="text-4xl font-bold mb-10">お支払いが失敗しました。</h1>
         <h2>KOKKAIDOCの活動をご支援いただきありがとうございます。</h2>
         <h2>

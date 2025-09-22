@@ -1,0 +1,42 @@
+{
+    "name_kanji": "長谷川仁",
+    "name_kana": "はせがわじん",
+    "years": [
+        "1962-07-01",
+        "1965-07-04",
+        "1968-07-07",
+        "1971-06-27"
+    ],
+    "election_data": [
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "全国区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

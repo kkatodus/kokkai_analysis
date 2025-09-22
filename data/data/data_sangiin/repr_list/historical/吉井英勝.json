@@ -1,0 +1,39 @@
+{
+    "name_kanji": "吉井英勝",
+    "name_kana": "よしいひでかつ",
+    "years": [
+        "1986-07-06"
+    ],
+    "election_data": [
+        {
+            "year": "1987年",
+            "month": "12月",
+            "day": "27日",
+            "election_name": "補欠選挙",
+            "district": "大阪府選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1988年",
+            "month": "2月",
+            "day": "28日",
+            "election_name": "補欠選挙",
+            "district": "大阪府選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1989年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第15回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}

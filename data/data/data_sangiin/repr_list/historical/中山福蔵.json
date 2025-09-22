@@ -1,0 +1,53 @@
+{
+    "name_kanji": "中山福蔵、中山福藏",
+    "name_kana": "なかやまふくぞう",
+    "years": [
+        "1950-06-04",
+        "1953-04-24",
+        "1956-07-08",
+        "1962-07-01",
+        "1965-07-04"
+    ],
+    "election_data": [
+        {
+            "year": "1951年",
+            "month": "5月",
+            "day": "16日",
+            "election_name": "補欠選挙",
+            "district": "大阪府選挙区",
+            "party": "緑風会",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "緑風会",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1959年",
+            "month": "6月",
+            "day": "2日",
+            "election_name": "第5回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "大阪府選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

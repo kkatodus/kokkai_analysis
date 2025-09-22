@@ -65,7 +65,10 @@ export default function ShugiinReprPage() {
                 : oneKaiha
             }（${numReps}）`}
             content={kaihaRepsComponents}
-            extraStyles={{ title: '', content: 'flex flex-wrap justify-center' }}
+            extraStyles={{
+              title: '',
+              content: 'flex flex-wrap justify-center',
+            }}
           />
         );
       });

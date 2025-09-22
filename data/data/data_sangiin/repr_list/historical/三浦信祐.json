@@ -1,0 +1,31 @@
+{
+    "name_kanji": "三浦信祐",
+    "name_kana": "みうらのぶひろ",
+    "years": [
+        "2016-07-10",
+        "2019-07-21",
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

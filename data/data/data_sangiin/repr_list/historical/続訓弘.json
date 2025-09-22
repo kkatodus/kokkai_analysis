@@ -1,0 +1,32 @@
+{
+    "name_kanji": "続訓弘",
+    "name_kana": "つづきくにひろ",
+    "years": [
+        "1992-07-26",
+        "1995-07-23",
+        "1998-07-12",
+        "2001-07-29"
+    ],
+    "election_data": [
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "公明党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "比例区",
+            "party": "公明",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

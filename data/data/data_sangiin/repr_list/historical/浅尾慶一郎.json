@@ -1,0 +1,43 @@
+{
+    "name_kanji": "浅尾慶一郎",
+    "name_kana": "あさおけいいちろう",
+    "years": [
+        "1998-07-12",
+        "2001-07-29",
+        "2004-07-11",
+        "2007-07-29",
+        "2022-07-10"
+    ],
+    "election_data": [
+        {
+            "year": "1998年",
+            "month": "7月",
+            "day": "12日",
+            "election_name": "第18回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2004年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第20回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        }
+    ]
+}

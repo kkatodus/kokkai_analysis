@@ -1,0 +1,39 @@
+{
+    "name_kanji": "大畠農夫雄",
+    "name_kana": "おおはたのぶお",
+    "years": [
+        "1947-04-20"
+    ],
+    "election_data": [
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第1回参議院議員通常選挙",
+            "district": "茨城県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）[半期]"
+        },
+        {
+            "year": "1950年",
+            "month": "6月",
+            "day": "4日",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "茨城県選挙区",
+            "party": "日本社会党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "茨城県選挙区",
+            "party": "日本社会党（右派）",
+            "result": "落選",
+            "election_freq": ""
+        }
+    ]
+}
