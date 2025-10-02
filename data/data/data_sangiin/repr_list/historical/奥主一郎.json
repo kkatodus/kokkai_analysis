@@ -1,29 +1,30 @@
 {
-    "name_kanji": "奥主一郎、奧主一郎",
+    "name_kanji": "奥主一郎",
     "name_kana": "おくしゅいちろう",
     "years": [
+        "1942-05-19",
         "1947-04-20"
     ],
     "election_data": [
+        {
+            "year": "1942年",
+            "month": "5月",
+            "day": "19日",
+            "election_name": "貴族院多額納税者議員補欠選挙",
+            "district": "京都府",
+            "party": "交友倶楽部",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
             "day": "20日",
             "election_name": "第1回参議院議員通常選挙",
-            "district": "京都府選挙区",
+            "district": "京都地方区",
             "party": "日本自由党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "24日",
-            "election_name": "第3回参議院議員通常選挙",
-            "district": "京都府選挙区",
-            "party": "改進党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（2回目）"
         }
     ]
 }

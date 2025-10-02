@@ -1,5 +1,5 @@
 {
-    "name_kanji": "田辺国男、田邉國男",
+    "name_kanji": "田辺国男",
     "name_kana": "たなべくにお",
     "years": [
         "1958-05-22",
@@ -18,7 +18,7 @@
             "month": "5月",
             "day": "22日",
             "election_name": "第28回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -28,7 +28,7 @@
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -38,7 +38,7 @@
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -48,7 +48,7 @@
             "month": "10月",
             "day": "7日",
             "election_name": "第35回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -58,7 +58,7 @@
             "month": "6月",
             "day": "22日",
             "election_name": "第36回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（5回目）"
@@ -68,7 +68,7 @@
             "month": "12月",
             "day": "18日",
             "election_name": "第37回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -78,7 +78,7 @@
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（7回目）"
@@ -88,30 +88,20 @@
             "month": "2月",
             "day": "18日",
             "election_name": "第39回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（8回目）"
-        },
-        {
-            "year": "1993年",
-            "month": "7月",
-            "day": "18日",
-            "election_name": "第40回衆議院議員総選挙",
-            "district": "山梨全県区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1996年",
             "month": "10月",
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
-            "district": "南関東ブロック",
+            "district": "比例南関東ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（9回目） ※比例単独"
+            "election_freq": "（9回目）"
         }
     ]
 }

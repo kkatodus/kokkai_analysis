@@ -1,9 +1,8 @@
 {
-    "name_kanji": "西川弥平治、西川彌平治",
+    "name_kanji": "西川弥平治",
     "name_kana": "さいかわやへいじ",
     "years": [
-        "1953-04-24",
-        "1956-07-08"
+        "1953-04-24"
     ],
     "election_data": [
         {
@@ -11,7 +10,7 @@
             "month": "4月",
             "day": "24日",
             "election_name": "第3回参議院議員通常選挙",
-            "district": "新潟県選挙区",
+            "district": "新潟県地方区",
             "party": "自由党",
             "result": "当選",
             "election_freq": "（1回目）"

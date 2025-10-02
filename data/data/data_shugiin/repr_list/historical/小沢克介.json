@@ -1,5 +1,5 @@
 {
-    "name_kanji": "小沢克介、小澤克介",
+    "name_kanji": "小沢克介",
     "name_kana": "おざわかつすけ",
     "years": [
         "1983-12-18",
@@ -12,7 +12,7 @@
             "month": "12月",
             "day": "18日",
             "election_name": "第37回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口県第2区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -22,7 +22,7 @@
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口県第2区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -32,20 +32,10 @@
             "month": "2月",
             "day": "18日",
             "election_name": "第39回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口県第2区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（3回目）"
-        },
-        {
-            "year": "1993年",
-            "month": "7月",
-            "day": "18日",
-            "election_name": "第40回衆議院議員総選挙",
-            "district": "山口2区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

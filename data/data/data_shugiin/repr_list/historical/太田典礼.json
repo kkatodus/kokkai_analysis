@@ -1,29 +1,49 @@
 {
-    "name_kanji": "太田典礼、太田典禮",
+    "name_kanji": "太田典礼",
     "name_kana": "おおたてんれい",
     "years": [
         "1947-04-25"
     ],
     "election_data": [
         {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "京都全府区",
+            "party": "日本共産党",
+            "result": "落選",
+            "election_freq": "（1回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "旧京都2区",
             "party": "日本社会党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         },
         {
             "year": "1949年",
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "旧京都2区",
             "party": "労働者農民党",
             "result": "落選",
-            "election_freq": ""
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "京都府選挙区",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": "（4回目）"
         }
     ]
 }

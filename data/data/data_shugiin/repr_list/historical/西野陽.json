@@ -1,5 +1,5 @@
 {
-    "name_kanji": "西野陽、西野あきら",
+    "name_kanji": "西野陽",
     "name_kana": "にしのあきら",
     "years": [
         "1996-10-20",
@@ -9,16 +9,6 @@
         "2009-08-30"
     ],
     "election_data": [
-        {
-            "year": "1993年",
-            "month": "7月",
-            "day": "18日",
-            "election_name": "第40回衆議院議員総選挙",
-            "district": "大阪4区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
         {
             "year": "1996年",
             "month": "10月",
@@ -34,10 +24,10 @@
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目） ※比例単独"
+            "election_freq": "（2回目）"
         },
         {
             "year": "2003年",

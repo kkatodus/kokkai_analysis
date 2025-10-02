@@ -1,11 +1,87 @@
 {
-    "name_kanji": "工藤鉄男、工藤鐵男",
+    "name_kanji": "工藤鉄男",
     "name_kana": "くどうてつお",
     "years": [
-        "1950-06-04",
-        "1953-04-24"
+        "1924-05-10",
+        "1928-02-20",
+        "1930-02-20",
+        "1932-02-20",
+        "1936-02-20",
+        "1937-04-30",
+        "1947-04-25",
+        "1950-06-04"
     ],
     "election_data": [
+        {
+            "year": "1924年",
+            "month": "5月",
+            "day": "10日",
+            "election_name": "第15回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "憲政会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1928年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第16回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1930年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第17回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1932年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第18回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "青森1区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "青森2区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        },
         {
             "year": "1950年",
             "month": "6月",
@@ -14,7 +90,7 @@
             "district": "青森県選挙区",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（8回目）"
         }
     ]
 }

@@ -1,6 +1,6 @@
 {
-    "name_kanji": "西根由佳、林原由佳",
-    "name_kana": "にしねゆか、はやしばらゆか",
+    "name_kanji": "西根由佳",
+    "name_kana": "にしねゆか",
     "years": [
         "2012-12-16"
     ],
@@ -10,10 +10,10 @@
             "month": "12月",
             "day": "16日",
             "election_name": "第46回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿",
             "party": "日本維新の会",
             "result": "当選",
-            "election_freq": "（1回目） ※大阪2区落選"
+            "election_freq": "（1回目）"
         }
     ]
 }

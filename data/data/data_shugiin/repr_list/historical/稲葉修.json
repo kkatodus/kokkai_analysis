@@ -1,5 +1,5 @@
 {
-    "name_kanji": "稲葉修、稻葉修",
+    "name_kanji": "稲葉修",
     "name_kana": "いなばおさむ",
     "years": [
         "1949-01-23",
@@ -18,16 +18,6 @@
     ],
     "election_data": [
         {
-            "year": "1947年",
-            "month": "4月",
-            "day": "25日",
-            "election_name": "第23回衆議院議員総選挙",
-            "district": "新潟2区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "1949年",
             "month": "1月",
             "day": "23日",
@@ -36,16 +26,6 @@
             "party": "民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "新潟2区",
-            "party": "改進党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1953年",
@@ -146,16 +126,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（11回目）"
-        },
-        {
-            "year": "1980年",
-            "month": "6月",
-            "day": "22日",
-            "election_name": "第36回衆議院議員総選挙",
-            "district": "新潟2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1983年",

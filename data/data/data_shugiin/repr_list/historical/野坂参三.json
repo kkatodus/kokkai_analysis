@@ -1,17 +1,32 @@
 {
-    "name_kanji": "野坂参三、野坂參三",
+    "name_kanji": "野坂参三",
     "name_kana": "のさかさんぞう",
     "years": [
+        "1946-04-10",
         "1947-04-25",
-        "1949-01-23"
+        "1949-01-23",
+        "1956-07-08",
+        "1962-07-01",
+        "1968-07-07",
+        "1974-07-07"
     ],
     "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "東京都第1区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "東京1区",
+            "district": "東京都第1区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -21,10 +36,50 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "東京1区",
+            "district": "東京都第1区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（3回目）"
+        },
+        {
+            "year": "1956年",
+            "month": "7月",
+            "day": "8日",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1962年",
+            "month": "7月",
+            "day": "1日",
+            "election_name": "第6回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1968年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第8回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1974年",
+            "month": "7月",
+            "day": "7日",
+            "election_name": "第10回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "日本共産党",
+            "result": "当選",
+            "election_freq": "（4回目）"
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "name_kanji": "徳田与吉郎、徳田與吉郎",
+    "name_kanji": "徳田与吉郎",
     "name_kana": "とくだよきちろう",
     "years": [
         "1955-02-27"
@@ -10,20 +10,10 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "石川1区",
+            "district": "石川県第1区",
             "party": "日本民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "石川1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

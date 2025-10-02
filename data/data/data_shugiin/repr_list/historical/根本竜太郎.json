@@ -1,5 +1,5 @@
 {
-    "name_kanji": "根本竜太郎、根本龍太郎",
+    "name_kanji": "根本龍太郎",
     "name_kana": "ねもとりゅうたろう",
     "years": [
         "1947-04-25",
@@ -53,7 +53,7 @@
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
             "district": "秋田2区",
-            "party": "鳩山自由党",
+            "party": "分党派自由党",
             "result": "当選",
             "election_freq": "（4回目）"
         },
@@ -76,16 +76,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（6回目）"
-        },
-        {
-            "year": "1960年",
-            "month": "11月",
-            "day": "20日",
-            "election_name": "第29回衆議院議員総選挙",
-            "district": "秋田2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1963年",
@@ -156,16 +146,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（13回目）"
-        },
-        {
-            "year": "1983年",
-            "month": "12月",
-            "day": "18日",
-            "election_name": "第37回衆議院議員総選挙",
-            "district": "秋田2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

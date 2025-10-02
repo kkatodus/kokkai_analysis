@@ -1,19 +1,20 @@
 {
-    "name_kanji": "田中重弥、田中重彌",
+    "name_kanji": "田中重弥",
     "name_kana": "たなかしげや",
     "years": [
+        "1946-04-10",
         "1949-01-23"
     ],
     "election_data": [
         {
-            "year": "1947年",
+            "year": "1946年",
             "month": "4月",
-            "day": "25日",
-            "election_name": "第23回衆議院議員総選挙",
-            "district": "長野1区",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "長野全県区",
             "party": "日本自由党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1949年",

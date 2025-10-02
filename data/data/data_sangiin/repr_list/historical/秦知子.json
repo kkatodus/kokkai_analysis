@@ -1,49 +1,19 @@
 {
-    "name_kanji": "秦知子、はたともこ",
+    "name_kanji": "秦知子",
     "name_kana": "はたともこ",
     "years": [
-        "2010-07-11"
+        "2011-11-10"
     ],
     "election_data": [
-        {
-            "year": "2007年",
-            "month": "7月",
-            "day": "29日",
-            "election_name": "第21回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
         {
             "year": "2011年",
             "month": "11月",
             "day": "10日",
-            "election_name": "同",
+            "election_name": "第21回参議院議員通常選挙",
             "district": "比例区",
             "party": "民主党",
-            "result": "繰上",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "2013年",
-            "month": "7月",
-            "day": "21日",
-            "election_name": "第23回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "生活の党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2022年",
-            "month": "7月",
-            "day": "10日",
-            "election_name": "第26回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "立憲民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "繰り上げ当選",
+            "election_freq": "（1回目）"
         }
     ]
 }

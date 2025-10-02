@@ -1,11 +1,9 @@
 {
-    "name_kanji": "鈴木寿、鈴木瀞、鈴木壽",
-    "name_kana": "すずきひとし",
+    "name_kanji": "鈴木寿",
+    "name_kana": "すずき ひとし",
     "years": [
         "1956-07-08",
-        "1959-06-02",
-        "1962-07-01",
-        "1965-07-04"
+        "1962-07-01"
     ],
     "election_data": [
         {
@@ -13,7 +11,7 @@
             "month": "7月",
             "day": "8日",
             "election_name": "第4回参議院議員通常選挙",
-            "district": "秋田県選挙区",
+            "district": "秋田県地方区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -23,7 +21,7 @@
             "month": "7月",
             "day": "1日",
             "election_name": "第6回参議院議員通常選挙",
-            "district": "秋田県選挙区",
+            "district": "秋田県地方区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（2回目）"

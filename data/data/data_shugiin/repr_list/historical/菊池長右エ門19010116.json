@@ -1,0 +1,30 @@
+{
+    "name_kanji": "菊池長右エ門",
+    "name_kana": "きくち ちょううえもん",
+    "years": [
+        "1936-02-20",
+        "1946-04-10"
+    ],
+    "election_data": [
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "岩手1区",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "岩手全県区",
+            "party": "日本自由党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

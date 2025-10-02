@@ -1,6 +1,6 @@
 {
-    "name_kanji": "木桧三四郎、木檜三四郎",
-    "name_kana": "こぐれさんしろう、こぐれさんしらう",
+    "name_kanji": "木桧三四郎",
+    "name_kana": "こぐれさんしろう",
     "years": [
         "1947-04-20"
     ],
@@ -13,17 +13,7 @@
             "district": "群馬県選挙区",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "群馬県選挙区",
-            "party": "国民民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（1回目）"
         }
     ]
 }

@@ -1,6 +1,6 @@
 {
-    "name_kanji": "萩原寿雄、萩原壽雄",
-    "name_kana": "はぎわらとしお",
+    "name_kanji": "萩原寿雄",
+    "name_kana": "はぎわら としお",
     "years": [
         "1947-04-25"
     ],
@@ -10,20 +10,10 @@
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "神奈川3区",
+            "district": "神奈川県第3区",
             "party": "国民協同党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "神奈川3区",
-            "party": "国民協同党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

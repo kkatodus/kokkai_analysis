@@ -1,9 +1,8 @@
 {
-    "name_kanji": "薬師寺道代、薬師寺みちよ",
+    "name_kanji": "薬師寺道代",
     "name_kana": "やくしじみちよ",
     "years": [
-        "2013-07-21",
-        "2016-07-10"
+        "2013-07-21"
     ],
     "election_data": [
         {
@@ -25,6 +24,26 @@
             "party": "みんなの党",
             "result": "当選",
             "election_freq": "（1回目）"
+        },
+        {
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "比例九州ブロック",
+            "party": "自由民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2025年",
+            "month": "7月",
+            "day": "21日",
+            "election_name": "第27回参議院議員通常選挙",
+            "district": "比例代表",
+            "party": "国民民主党",
+            "result": "落選",
+            "election_freq": ""
         }
     ]
 }

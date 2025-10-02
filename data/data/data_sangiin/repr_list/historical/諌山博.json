@@ -1,40 +1,20 @@
 {
-    "name_kanji": "諌山博、諫山博",
+    "name_kanji": "諌山博",
     "name_kana": "いさやまひろし",
     "years": [
-        "1986-07-06",
-        "1989-07-23"
+        "1972-12-10",
+        "1986-07-06"
     ],
     "election_data": [
         {
-            "year": "1967年",
-            "month": "4月",
-            "day": "30日",
-            "election_name": "補欠選挙",
-            "district": "福岡県選挙区",
+            "year": "1972年",
+            "month": "12月",
+            "day": "10日",
+            "election_name": "第33回衆議院議員総選挙",
+            "district": "福岡1区",
             "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1968年",
-            "month": "7月",
-            "day": "7日",
-            "election_name": "第8回参議院議員通常選挙",
-            "district": "福岡県選挙区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1971年",
-            "month": "6月",
-            "day": "27日",
-            "election_name": "第9回参議院議員通常選挙",
-            "district": "福岡県選挙区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1986年",
@@ -44,7 +24,7 @@
             "district": "比例区",
             "party": "日本共産党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         }
     ]
 }

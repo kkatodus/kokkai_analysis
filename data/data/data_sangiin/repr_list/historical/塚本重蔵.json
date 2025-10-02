@@ -1,10 +1,32 @@
 {
-    "name_kanji": "塚本重蔵、塚本重藏",
+    "name_kanji": "塚本重蔵",
     "name_kana": "つかもとじゅうぞう",
     "years": [
+        "1936-02-20",
+        "1937-04-30",
         "1947-04-20"
     ],
     "election_data": [
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "大阪府第三区",
+            "party": "社会大衆党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "大阪府第三区",
+            "party": "社会大衆党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
@@ -13,17 +35,7 @@
             "district": "全国区",
             "party": "日本社会党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（3回目）"
         }
     ]
 }

@@ -1,6 +1,6 @@
 {
-    "name_kanji": "深沢義守、深澤義守",
-    "name_kana": "ふかさわよしもり",
+    "name_kanji": "深沢義守",
+    "name_kana": "ふかざわよしもり",
     "years": [
         "1949-01-23"
     ],
@@ -10,20 +10,10 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "山梨全県区",
+            "district": "山梨県全県区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "山梨全県区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

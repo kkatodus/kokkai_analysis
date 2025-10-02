@@ -1,7 +1,9 @@
 {
-    "name_kanji": "井上良二、井上良次",
+    "name_kanji": "井上良二",
     "name_kana": "いのうえりょうじ",
     "years": [
+        "1937-04-30",
+        "1946-04-10",
         "1947-04-25",
         "1949-01-23",
         "1952-10-01",
@@ -10,11 +12,31 @@
     ],
     "election_data": [
         {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "大阪府第2区",
+            "party": "社会大衆党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "大阪府第2区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "大阪3区",
+            "district": "大阪府第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -24,7 +46,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "大阪3区",
+            "district": "大阪府第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -34,7 +56,7 @@
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "大阪3区",
+            "district": "大阪府第3区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（5回目）"
@@ -44,7 +66,7 @@
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "大阪3区",
+            "district": "大阪府第3区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -54,30 +76,10 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "大阪3区",
+            "district": "大阪府第3区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（7回目）"
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "大阪3区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1960年",
-            "month": "11月",
-            "day": "20日",
-            "election_name": "第29回衆議院議員総選挙",
-            "district": "大阪3区",
-            "party": "民主社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

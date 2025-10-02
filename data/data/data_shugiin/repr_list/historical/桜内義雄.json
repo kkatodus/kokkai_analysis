@@ -1,5 +1,5 @@
 {
-    "name_kanji": "桜内義雄、櫻内義雄",
+    "name_kanji": "桜内義雄",
     "name_kana": "さくらうちよしお",
     "years": [
         "1947-04-25",
@@ -31,16 +31,6 @@
             "party": "民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "東京1区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1952年",
@@ -207,10 +197,10 @@
             "month": "10月",
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
-            "district": "中国ブロック",
+            "district": "比例中国ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（18回目） ※比例単独"
+            "election_freq": "（18回目）"
         }
     ]
 }

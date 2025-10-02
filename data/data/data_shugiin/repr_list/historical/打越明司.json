@@ -1,49 +1,74 @@
 {
-    "name_kanji": "打越明司、打越あかし",
+    "name_kanji": "打越明司",
     "name_kana": "うちこしあかし",
     "years": [
-        "2009-08-30"
+        "1991-04-07",
+        "1995-04-09",
+        "1999-04-11",
+        "2003-04-13",
+        "2009-08-30",
+        "2022-02-06"
     ],
     "election_data": [
         {
-            "year": "2005年",
-            "month": "9月",
+            "year": "1991年",
+            "month": "4月",
+            "day": "7日",
+            "election_name": "鹿児島県議会議員選挙",
+            "district": "指宿市・揖宿郡",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1995年",
+            "month": "4月",
+            "day": "9日",
+            "election_name": "鹿児島県議会議員選挙",
+            "district": "指宿市・揖宿郡",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1999年",
+            "month": "4月",
             "day": "11日",
-            "election_name": "第44回衆議院議員総選挙",
-            "district": "鹿児島2区",
-            "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
+            "election_name": "鹿児島県議会議員選挙",
+            "district": "指宿市・揖宿郡",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "2003年",
+            "month": "4月",
+            "day": "13日",
+            "election_name": "鹿児島県議会議員選挙",
+            "district": "指宿市区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
         },
         {
             "year": "2009年",
             "month": "8月",
             "day": "30日",
             "election_name": "第45回衆議院議員総選挙",
-            "district": "九州ブロック",
+            "district": "比例九州ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※鹿児島2区落選"
+            "election_freq": "（1回目）"
         },
         {
-            "year": "2012年",
-            "month": "12月",
-            "day": "16日",
-            "election_name": "第46回衆議院議員総選挙",
-            "district": "九州ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※鹿児島2区落選"
-        },
-        {
-            "year": "2014年",
-            "month": "4月",
-            "day": "27日",
-            "election_name": "補欠選挙",
-            "district": "鹿児島2区",
+            "year": "2022年",
+            "month": "2月",
+            "day": "6日",
+            "election_name": "指宿市長選挙",
+            "district": "指宿市",
             "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         }
     ]
 }

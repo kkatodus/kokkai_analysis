@@ -1,9 +1,8 @@
 {
-    "name_kanji": "藤森真治、藤森眞治",
+    "name_kanji": "藤森真治",
     "name_kana": "ふじもりしんじ",
     "years": [
-        "1947-04-20",
-        "1950-06-04"
+        "1947-04-20"
     ],
     "election_data": [
         {
@@ -11,8 +10,8 @@
             "month": "4月",
             "day": "20日",
             "election_name": "第1回参議院議員通常選挙",
-            "district": "兵庫県選挙区",
-            "party": "民主政治会",
+            "district": "兵庫県地方区",
+            "party": "緑風会",
             "result": "当選",
             "election_freq": "（1回目）"
         }

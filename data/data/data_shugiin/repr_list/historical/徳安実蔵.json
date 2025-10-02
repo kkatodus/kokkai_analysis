@@ -1,5 +1,5 @@
 {
-    "name_kanji": "徳安実蔵、徳安實藏",
+    "name_kanji": "徳安実蔵",
     "name_kana": "とくやすじつぞう",
     "years": [
         "1952-10-01",
@@ -102,26 +102,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（9回目）"
-        },
-        {
-            "year": "1976年",
-            "month": "12月",
-            "day": "5日",
-            "election_name": "第34回衆議院議員総選挙",
-            "district": "鳥取全県区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1979年",
-            "month": "10月",
-            "day": "7日",
-            "election_name": "第35回衆議院議員総選挙",
-            "district": "鳥取全県区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

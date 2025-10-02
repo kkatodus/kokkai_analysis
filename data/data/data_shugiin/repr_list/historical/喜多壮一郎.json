@@ -1,49 +1,52 @@
 {
-    "name_kanji": "喜多壮一郎、喜多壯一郎",
+    "name_kanji": "喜多壮一郎",
     "name_kana": "きたそういちろう",
     "years": [
+        "1936-02-20",
+        "1937-04-30",
+        "1942-04-30",
         "1953-04-19"
     ],
     "election_data": [
         {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "石川2区",
-            "party": "改進党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "石川県第2区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "石川県第2区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1942年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第21回衆議院議員総選挙",
+            "district": "石川県第2区",
+            "party": "翼賛政治体制協議会",
+            "result": "当選",
+            "election_freq": "（3回目）"
         },
         {
             "year": "1953年",
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "石川2区",
+            "district": "石川県第2区",
             "party": "改進党",
             "result": "当選",
             "election_freq": "（4回目）"
-        },
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "石川2区",
-            "party": "日本民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "石川1区",
-            "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

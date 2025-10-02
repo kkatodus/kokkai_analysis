@@ -1,29 +1,41 @@
 {
-    "name_kanji": "重盛寿治、重盛壽治",
+    "name_kanji": "重盛寿治",
     "name_kana": "しげもりとしはる",
     "years": [
+        "1950-06-04",
+        "1956-07-08",
         "1963-11-21"
     ],
     "election_data": [
         {
-            "year": "1963年",
-            "month": "11月",
-            "day": "21日",
-            "election_name": "第30回衆議院議員総選挙",
-            "district": "東京4区",
+            "year": "1950",
+            "month": "6",
+            "day": "4",
+            "election_name": "第2回参議院議員通常選挙",
+            "district": "東京都選挙区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
         },
         {
-            "year": "1967年",
-            "month": "1月",
-            "day": "29日",
-            "election_name": "第31回衆議院議員総選挙",
+            "year": "1956",
+            "month": "7",
+            "day": "8",
+            "election_name": "第4回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1963",
+            "month": "11",
+            "day": "21",
+            "election_name": "第30回衆議院議員総選挙",
             "district": "東京4区",
             "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（3回目）"
         }
     ]
 }

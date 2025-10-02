@@ -1,5 +1,5 @@
 {
-    "name_kanji": "岡沢完治、岡澤完治",
+    "name_kanji": "岡沢完治",
     "name_kana": "おかざわかんじ",
     "years": [
         "1967-01-29",
@@ -12,9 +12,9 @@
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
             "district": "大阪3区",
-            "party": "民主社会党",
+            "party": "民社党",
             "result": "落選",
-            "election_freq": ""
+            "election_freq": "（1回目）"
         },
         {
             "year": "1967年",
@@ -22,9 +22,9 @@
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
             "district": "大阪3区",
-            "party": "民主社会党",
+            "party": "民社党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         },
         {
             "year": "1969年",
@@ -34,7 +34,7 @@
             "district": "大阪3区",
             "party": "民社党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（3回目）"
         }
     ]
 }

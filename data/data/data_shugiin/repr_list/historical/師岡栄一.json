@@ -1,5 +1,5 @@
 {
-    "name_kanji": "師岡栄一、師岡榮一",
+    "name_kanji": "師岡栄一",
     "name_kana": "もろおかえいいち",
     "years": [
         "1947-04-25"
@@ -14,26 +14,6 @@
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "埼玉2区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "埼玉2区",
-            "party": "左派社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

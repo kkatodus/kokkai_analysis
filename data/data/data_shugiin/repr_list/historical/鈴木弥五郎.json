@@ -1,16 +1,27 @@
 {
-    "name_kanji": "鈴木弥五郎、鈴木彌五郎",
+    "name_kanji": "鈴木弥五郎",
     "name_kana": "すずきやごろう",
     "years": [
+        "1946-04-10",
         "1947-04-25"
     ],
     "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "秋田県全県区",
+            "party": "東北日本国民党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "秋田2区",
+            "district": "秋田県第2区",
             "party": "民主党",
             "result": "当選",
             "election_freq": "（2回目）"

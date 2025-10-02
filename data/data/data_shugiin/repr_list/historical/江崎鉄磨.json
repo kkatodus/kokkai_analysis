@@ -1,5 +1,5 @@
 {
-    "name_kanji": "江崎鉄磨、江崎鐵磨",
+    "name_kanji": "江崎鉄磨",
     "name_kana": "えさきてつま",
     "years": [
         "1993-07-18",
@@ -17,7 +17,7 @@
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "旧愛知3区",
             "party": "新生党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -31,16 +31,6 @@
             "party": "新進党",
             "result": "当選",
             "election_freq": "（2回目）"
-        },
-        {
-            "year": "2000年",
-            "month": "6月",
-            "day": "25日",
-            "election_name": "第42回衆議院議員総選挙",
-            "district": "愛知10区",
-            "party": "保守党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "2003年",
@@ -61,16 +51,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（4回目）"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "東海ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※愛知10区落選"
         },
         {
             "year": "2012年",

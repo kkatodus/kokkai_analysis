@@ -1,27 +1,16 @@
 {
-    "name_kanji": "小滝彬、小瀧彬",
-    "name_kana": "こだきひん、こだきあきら",
+    "name_kanji": "小滝彬",
+    "name_kana": "こだきあきら",
     "years": [
-        "1950-06-04",
-        "1953-04-24",
+        "1952-01-09",
         "1956-07-08"
     ],
     "election_data": [
         {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "島根県選挙区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "1952年",
             "month": "1月",
             "day": "9日",
-            "election_name": "同　（裁判で逆転当選）",
+            "election_name": "第2回参議院議員通常選挙",
             "district": "島根県選挙区",
             "party": "自由党",
             "result": "当選",

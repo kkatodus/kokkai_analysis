@@ -1,25 +1,13 @@
 {
-    "name_kanji": "牧山弘恵、牧山ひろえ",
+    "name_kanji": "牧山弘恵",
     "name_kana": "まきやまひろえ",
     "years": [
         "2007-07-29",
-        "2010-07-11",
         "2013-07-21",
-        "2016-07-10",
         "2019-07-21",
-        "2022-07-10"
+        "2025-07-20"
     ],
     "election_data": [
-        {
-            "year": "2005年",
-            "month": "10月",
-            "day": "23日",
-            "election_name": "補欠選挙",
-            "district": "神奈川県選挙区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
         {
             "year": "2007年",
             "month": "7月",
@@ -49,6 +37,16 @@
             "party": "立憲民主党",
             "result": "当選",
             "election_freq": "（3回目）"
+        },
+        {
+            "year": "2025年",
+            "month": "7月",
+            "day": "20日",
+            "election_name": "第27回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "立憲民主党",
+            "result": "当選",
+            "election_freq": "（4回目）"
         }
     ]
 }

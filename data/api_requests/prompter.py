@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import time
 import os
-from agents import Agent, Runner, WebSearchTool, RunConfig, set_default_openai_client, HostedMCPTool
+# from agents import Agent, Runner, WebSearchTool, RunConfig, set_default_openai_client, HostedMCPTool
 from typing import List, Dict, Optional
 from pydantic import BaseModel
 from google import genai
@@ -80,90 +80,90 @@ class GPTPrompter:
 	
 		return reply
 	
-class DeepResearchGPT:
-	def __init__(self, gpt_model="o3-deep-research"):
-		self.gpt_model = gpt_model
-		self.openai_client = OpenAI()
-		try:
-			self.enc = tiktoken.encoding_for_model(gpt_model)
-		except Exception as e:
-			print(e)
-			self.enc = tiktoken.encoding_for_model('gpt-4o-mini')
+# class DeepResearchGPT:
+# 	def __init__(self, gpt_model="o3-deep-research"):
+# 		self.gpt_model = gpt_model
+# 		self.openai_client = OpenAI()
+# 		try:
+# 			self.enc = tiktoken.encoding_for_model(gpt_model)
+# 		except Exception as e:
+# 			print(e)
+# 			self.enc = tiktoken.encoding_for_model('gpt-4o-mini')
 	
-	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
-		"""
-		Sends a prompt to the OpenAI API and returns the generated reply.
-		"""
-		print("PROMPTING {}".format(self.gpt_model))
-		print(system_prompt+"\n\n\n"+prompt)
-		response = self.openai_client.responses.create(
-			model=self.gpt_model,
-			input=[
-				{
-					"role":"developer",
-					"content": [
-						{
-							"type": "input_text",
-							"text": system_prompt
-						}
-					]
-				},
-				{
-					"role": "user",
-					"content": [
-						{
-							"type": "input_text",
-							"text": prompt
-						}
-					]
-				}
-			],
-			# reasoning={
-			# 	"summary":"auto"
-			# },	
-			tools=[
-				{
-					"type": "web_search_preview"
-				}
-			]
-		)
-		citations = []
-		for i, citation in enumerate(response.output[-1].content[0].annotations):
-			citation_idx = i+1
-			title = citation.title
-			url = citation.url
-			start_idx = citation.start_index
-			end_idx = citation.end_index
-			citation_dict = {
-				"citation_idx": citation_idx,
-				"title": title,
-				"url": url,
-				"start_idx": start_idx,
-				"end_idx": end_idx
-			}
-			citations.append(citation_dict)
-		return response.output[-1].content[0].text, citations
+# 	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+# 		"""
+# 		Sends a prompt to the OpenAI API and returns the generated reply.
+# 		"""
+# 		print("PROMPTING {}".format(self.gpt_model))
+# 		print(system_prompt+"\n\n\n"+prompt)
+# 		response = self.openai_client.responses.create(
+# 			model=self.gpt_model,
+# 			input=[
+# 				{
+# 					"role":"developer",
+# 					"content": [
+# 						{
+# 							"type": "input_text",
+# 							"text": system_prompt
+# 						}
+# 					]
+# 				},
+# 				{
+# 					"role": "user",
+# 					"content": [
+# 						{
+# 							"type": "input_text",
+# 							"text": prompt
+# 						}
+# 					]
+# 				}
+# 			],
+# 			# reasoning={
+# 			# 	"summary":"auto"
+# 			# },	
+# 			tools=[
+# 				{
+# 					"type": "web_search_preview"
+# 				}
+# 			]
+# 		)
+# 		citations = []
+# 		for i, citation in enumerate(response.output[-1].content[0].annotations):
+# 			citation_idx = i+1
+# 			title = citation.title
+# 			url = citation.url
+# 			start_idx = citation.start_index
+# 			end_idx = citation.end_index
+# 			citation_dict = {
+# 				"citation_idx": citation_idx,
+# 				"title": title,
+# 				"url": url,
+# 				"start_idx": start_idx,
+# 				"end_idx": end_idx
+# 			}
+# 			citations.append(citation_dict)
+# 		return response.output[-1].content[0].text, citations
 	
-	async def async_prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
-		research_agent = Agent(
-			name="Research Agent",
-			model="o4-mini-deep-research-2025-06-26",
-			tools=[WebSearchTool()],
-			instructions=system_prompt
-		)
-		result_stream = Runner.run_streamed(
-			research_agent,
-			prompt
-		)
+# 	async def async_prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+# 		research_agent = Agent(
+# 			name="Research Agent",
+# 			model="o4-mini-deep-research-2025-06-26",
+# 			tools=[WebSearchTool()],
+# 			instructions=system_prompt
+# 		)
+# 		result_stream = Runner.run_streamed(
+# 			research_agent,
+# 			prompt
+# 		)
 
-		async for ev in result_stream.stream_events():
-			if ev.type == "agent_updated_stream_event":
-				print(f"\n--- switched to agent: {ev.new_agent.name} ---")
-				print(f"\n--- RESEARCHING ---")
-			elif ev.type == "raw_response_event" and hasattr(ev.data, "item") and hasattr(ev.data.item, "action"):
-				action = ev.data.item.action or {}
-				if action.get("type") == "search":
-					print(f"[Web search] query={action.get('query')!r}")
+# 		async for ev in result_stream.stream_events():
+# 			if ev.type == "agent_updated_stream_event":
+# 				print(f"\n--- switched to agent: {ev.new_agent.name} ---")
+# 				print(f"\n--- RESEARCHING ---")
+# 			elif ev.type == "raw_response_event" and hasattr(ev.data, "item") and hasattr(ev.data.item, "action"):
+# 				action = ev.data.item.action or {}
+# 				if action.get("type") == "search":
+# 					print(f"[Web search] query={action.get('query')!r}")
 
 		return result_stream.final_output
 	
@@ -184,7 +184,7 @@ class DeepResearchGemini:
 		self.config = config
 		self.grounding_tool = grounding_tool
 
-	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
+	def prompt(self, prompt, system_prompt="", shorten_ok=True, retry=2):
 
 		# Make the request
 		print("PROMPTING GEMINI")
@@ -229,23 +229,6 @@ class DeepResearchGemini:
 				}
 				cleaned_supports.append(cleaned_support)
 		return response_text, cleaned_supports, cleaned_chunks
-
-
-class DeepResearchClaude:
-	def __init__(self, model_name="claude-opus-4-20250514"):
-		self.model_name = model_name
-		
-		client = anthropic.Anthropic(
-			api_key=os.getenv("ANTHROPIC_API_KEY")
-		)
-		self.client = client
-	
-	def prompt(self, prompt, system_prompt=None, shorten_ok=True, retry=2):
-		response = self.client.chat.completions.create(
-			model=self.model_name,
-			messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}]
-		)
-		return response.choices[0].message.content, response.choices[0].message.annotations
 
 
 		

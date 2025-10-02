@@ -1,29 +1,6 @@
 {
-    "name_kanji": "西山富佐太、西山冨佐太",
-    "name_kana": "にしやまふさた",
-    "years": [
-        "1947-04-25"
-    ],
-    "election_data": [
-        {
-            "year": "1947年",
-            "month": "4月",
-            "day": "25日",
-            "election_name": "第23回衆議院議員総選挙",
-            "district": "岡山1区",
-            "party": "民主党",
-            "result": "当選",
-            "election_freq": "（2回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "岡山1区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        }
-    ]
+    "name_kanji": "西山富佐太",
+    "name_kana": "",
+    "years": [],
+    "election_data": []
 }

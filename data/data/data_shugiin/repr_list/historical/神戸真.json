@@ -1,39 +1,41 @@
 {
-    "name_kanji": "神戸真、神戸眞",
+    "name_kanji": "神戸眞",
     "name_kana": "かんべしん",
     "years": [
-        "1953-04-19"
+        "1946-04-10",
+        "1953-04-19",
+        "1959-01-18"
     ],
     "election_data": [
         {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "愛知2区",
-            "party": "改進党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "旧愛知1区",
+            "party": "日本進歩党",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1953年",
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "愛知2区",
+            "district": "旧愛知2区",
             "party": "改進党",
             "result": "当選",
             "election_freq": "（2回目）"
         },
         {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "愛知2区",
-            "party": "日本民主党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1959年",
+            "month": "1月",
+            "day": "18日",
+            "election_name": "小牧市長選挙",
+            "district": "小牧市",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
         }
     ]
 }

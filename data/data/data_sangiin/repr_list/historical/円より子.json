@@ -1,33 +1,21 @@
 {
-    "name_kanji": "円より子、山崎順子",
-    "name_kana": "まどかよりこ、やまざきよりこ",
+    "name_kanji": "円より子",
+    "name_kana": "まどかよりこ",
     "years": [
-        "1992-07-26",
-        "1995-07-23",
+        "1993-07-16",
         "1998-07-12",
-        "2001-07-29",
         "2004-07-11",
-        "2007-07-29"
+        "2024-10-27"
     ],
     "election_data": [
-        {
-            "year": "1992年",
-            "month": "7月",
-            "day": "26日",
-            "election_name": "第16回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "日本新党",
-            "result": "落選",
-            "election_freq": ""
-        },
         {
             "year": "1993年",
             "month": "7月",
             "day": "16日",
-            "election_name": "同",
+            "election_name": "第16回参議院議員通常選挙",
             "district": "比例区",
             "party": "日本新党",
-            "result": "繰上",
+            "result": "当選",
             "election_freq": "（1回目）"
         },
         {
@@ -51,44 +39,14 @@
             "election_freq": "（3回目）"
         },
         {
-            "year": "2010年",
-            "month": "7月",
-            "day": "11日",
-            "election_name": "第22回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2013年",
-            "month": "7月",
-            "day": "21日",
-            "election_name": "第23回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2016年",
-            "month": "7月",
-            "day": "10日",
-            "election_name": "第24回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "国民怒りの声",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2019年",
-            "month": "7月",
-            "day": "21日",
-            "election_name": "第25回参議院議員通常選挙",
-            "district": "比例区",
+            "year": "2024年",
+            "month": "10月",
+            "day": "27日",
+            "election_name": "第50回衆議院議員総選挙",
+            "district": "比例東京ブロック",
             "party": "国民民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（4回目）"
         }
     ]
 }

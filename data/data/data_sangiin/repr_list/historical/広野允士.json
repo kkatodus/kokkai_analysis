@@ -1,13 +1,22 @@
 {
-    "name_kanji": "広野允士、広野ただし",
+    "name_kanji": "広野允士",
     "name_kana": "ひろのただし",
     "years": [
+        "1993-07-18",
         "2001-07-29",
-        "2004-07-11",
-        "2007-07-29",
-        "2010-07-11"
+        "2009-08-30"
     ],
     "election_data": [
+        {
+            "year": "1993年",
+            "month": "7月",
+            "day": "18日",
+            "election_name": "第40回衆議院議員総選挙",
+            "district": "旧富山1区",
+            "party": "新生党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "2001年",
             "month": "7月",
@@ -16,37 +25,17 @@
             "district": "比例区",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（1回目）"
-        },
-        {
-            "year": "2007年",
-            "month": "7月",
-            "day": "29日",
-            "election_name": "第21回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（2回目）"
         },
         {
             "year": "2009年",
             "month": "8月",
-            "day": "23日",
-            "election_name": "同",
+            "day": "30日",
+            "election_name": "第21回参議院議員通常選挙",
             "district": "比例区",
             "party": "民主党",
-            "result": "繰上",
-            "election_freq": "（2回目）"
-        },
-        {
-            "year": "2013年",
-            "month": "7月",
-            "day": "21日",
-            "election_name": "第23回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "生活の党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "繰り上げ当選",
+            "election_freq": "（3回目）"
         }
     ]
 }

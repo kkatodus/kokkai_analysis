@@ -1,9 +1,8 @@
 {
-    "name_kanji": "森田義衛、森田義衞",
+    "name_kanji": "森田義衛",
     "name_kana": "もりたよしえ",
     "years": [
-        "1953-04-24",
-        "1956-07-08"
+        "1953-04-24"
     ],
     "election_data": [
         {
@@ -15,16 +14,6 @@
             "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1959年",
-            "month": "6月",
-            "day": "2日",
-            "election_name": "第5回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

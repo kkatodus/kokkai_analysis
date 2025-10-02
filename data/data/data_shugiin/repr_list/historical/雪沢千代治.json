@@ -1,5 +1,5 @@
 {
-    "name_kanji": "雪沢千代治、雪澤千代治",
+    "name_kanji": "雪沢千代治",
     "name_kana": "ゆきざわちよじ",
     "years": [
         "1952-10-01"
@@ -14,26 +14,6 @@
             "party": "自由党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "長崎1区",
-            "party": "吉田自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "長崎1区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

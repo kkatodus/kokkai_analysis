@@ -1,5 +1,5 @@
 {
-    "name_kanji": "斎藤健、齋藤健",
+    "name_kanji": "斎藤健",
     "name_kana": "さいとうけん",
     "years": [
         "2009-08-30",
@@ -11,24 +11,14 @@
     ],
     "election_data": [
         {
-            "year": "2006年",
-            "month": "4月",
-            "day": "23日",
-            "election_name": "補欠選挙",
-            "district": "千葉7区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "2009年",
             "month": "8月",
             "day": "30日",
             "election_name": "第45回衆議院議員総選挙",
-            "district": "南関東ブロック",
+            "district": "比例南関東ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※千葉7区落選"
+            "election_freq": "（1回目）"
         },
         {
             "year": "2012年",

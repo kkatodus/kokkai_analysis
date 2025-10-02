@@ -1,5 +1,5 @@
 {
-    "name_kanji": "冬柴鉄三、冬柴鐵三",
+    "name_kanji": "冬柴鉄三",
     "name_kana": "ふゆしばてつぞう",
     "years": [
         "1986-07-06",
@@ -16,7 +16,7 @@
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "兵庫2区",
+            "district": "旧兵庫2区",
             "party": "公明党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -26,7 +26,7 @@
             "month": "2月",
             "day": "18日",
             "election_name": "第39回衆議院議員総選挙",
-            "district": "兵庫2区",
+            "district": "旧兵庫2区",
             "party": "公明党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -36,7 +36,7 @@
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "兵庫2区",
+            "district": "旧兵庫2区",
             "party": "公明党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -80,16 +80,6 @@
             "party": "公明党",
             "result": "当選",
             "election_freq": "（7回目）"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "兵庫8区",
-            "party": "公明党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

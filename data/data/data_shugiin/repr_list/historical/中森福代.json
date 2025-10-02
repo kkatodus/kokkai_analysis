@@ -1,5 +1,5 @@
 {
-    "name_kanji": "中森福代、中森ふくよ",
+    "name_kanji": "中森福代",
     "name_kana": "なかもりふくよ",
     "years": [
         "2005-09-11"
@@ -10,20 +10,10 @@
             "month": "9月",
             "day": "11日",
             "election_name": "第44回衆議院議員総選挙",
-            "district": "北関東ブロック",
+            "district": "比例北関東ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※比例単独"
-        },
-        {
-            "year": "2014年",
-            "month": "12月",
-            "day": "14日",
-            "election_name": "第47回衆議院議員総選挙",
-            "district": "北陸信越ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※比例単独"
+            "election_freq": "（1回目）"
         }
     ]
 }

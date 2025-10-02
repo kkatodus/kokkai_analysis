@@ -1,6 +1,6 @@
 {
-    "name_kanji": "佐藤観次郎、佐藤觀次郎",
-    "name_kana": "さとうかんじろう",
+    "name_kanji": "佐藤観次郎",
+    "name_kana": "さとう かんじろう",
     "years": [
         "1947-04-25",
         "1952-10-01",
@@ -17,27 +17,17 @@
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "愛知3区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1952年",
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "左派社会党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -47,7 +37,7 @@
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "左派社会党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -57,8 +47,8 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "愛知3区",
-            "party": "左派社会党",
+            "district": "愛知県第3区",
+            "party": "日本社会党",
             "result": "当選",
             "election_freq": "（4回目）"
         },
@@ -67,7 +57,7 @@
             "month": "5月",
             "day": "22日",
             "election_name": "第28回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（5回目）"
@@ -77,7 +67,7 @@
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -87,7 +77,7 @@
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（7回目）"
@@ -97,7 +87,7 @@
             "month": "1月",
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
-            "district": "愛知3区",
+            "district": "愛知県第3区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（8回目）"

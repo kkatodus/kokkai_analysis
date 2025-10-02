@@ -1,8 +1,9 @@
 {
-    "name_kanji": "諌山博、諫山博",
+    "name_kanji": "諫山博",
     "name_kana": "いさやまひろし",
     "years": [
-        "1972-12-10"
+        "1972-12-10",
+        "1986-07-06"
     ],
     "election_data": [
         {
@@ -16,34 +17,14 @@
             "election_freq": "（1回目）"
         },
         {
-            "year": "1976年",
-            "month": "12月",
-            "day": "5日",
-            "election_name": "第34回衆議院議員総選挙",
-            "district": "福岡1区",
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "比例区",
             "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1979年",
-            "month": "10月",
-            "day": "7日",
-            "election_name": "第35回衆議院議員総選挙",
-            "district": "福岡1区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1980年",
-            "month": "6月",
-            "day": "22日",
-            "election_name": "第36回衆議院議員総選挙",
-            "district": "福岡1区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（2回目）"
         }
     ]
 }

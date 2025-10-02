@@ -1,9 +1,8 @@
 {
-    "name_kanji": "寺沢芳男、寺澤芳男",
+    "name_kanji": "寺沢芳男",
     "name_kana": "てらさわよしお",
     "years": [
-        "1992-07-26",
-        "1995-07-23"
+        "1992-07-26"
     ],
     "election_data": [
         {
@@ -15,16 +14,6 @@
             "party": "日本新党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1998年",
-            "month": "7月",
-            "day": "12日",
-            "election_name": "第18回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

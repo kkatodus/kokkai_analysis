@@ -1,12 +1,10 @@
 {
-    "name_kanji": "柳川覚治、柳川覺治",
+    "name_kanji": "柳川覚治",
     "name_kana": "やながわかくじ",
     "years": [
         "1983-06-26",
-        "1986-07-06",
         "1989-07-23",
-        "1992-07-26",
-        "1998-07-12"
+        "2001-02-07"
     ],
     "election_data": [
         {
@@ -30,24 +28,14 @@
             "election_freq": "（2回目）"
         },
         {
-            "year": "1995年",
-            "month": "7月",
-            "day": "23日",
+            "year": "2001年",
+            "month": "2月",
+            "day": "7日",
             "election_name": "第17回参議院議員通常選挙",
             "district": "比例区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2001年",
-            "month": "2月",
-            "day": "6日",
-            "election_name": "同",
-            "district": "比例区",
-            "party": "自由民主党",
-            "result": "繰上",
-            "election_freq": "（3回目）[半期]"
+            "result": "繰り上げ当選",
+            "election_freq": "（3回目）"
         }
     ]
 }

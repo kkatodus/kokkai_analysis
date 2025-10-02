@@ -1,7 +1,8 @@
 {
-    "name_kanji": "山口シヅエ、山口靜江、山口静江",
+    "name_kanji": "山口シヅエ",
     "name_kana": "やまぐちしづえ",
     "years": [
+        "1946-04-10",
         "1947-04-25",
         "1949-01-23",
         "1952-10-01",
@@ -17,11 +18,21 @@
     ],
     "election_data": [
         {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "東京都第1区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -31,7 +42,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -41,7 +52,7 @@
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -51,7 +62,7 @@
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（5回目）"
@@ -61,7 +72,7 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "右派社会党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -71,7 +82,7 @@
             "month": "5月",
             "day": "22日",
             "election_name": "第28回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（7回目）"
@@ -81,7 +92,7 @@
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（8回目）"
@@ -91,7 +102,7 @@
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（9回目）"
@@ -101,7 +112,7 @@
             "month": "1月",
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（10回目）"
@@ -111,27 +122,17 @@
             "month": "12月",
             "day": "27日",
             "election_name": "第32回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（11回目）"
-        },
-        {
-            "year": "1972年",
-            "month": "12月",
-            "day": "10日",
-            "election_name": "第33回衆議院議員総選挙",
-            "district": "東京6区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1976年",
             "month": "12月",
             "day": "5日",
             "election_name": "第34回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（12回目）"
@@ -141,30 +142,10 @@
             "month": "10月",
             "day": "7日",
             "election_name": "第35回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "東京都第6区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（13回目）"
-        },
-        {
-            "year": "1980年",
-            "month": "6月",
-            "day": "22日",
-            "election_name": "第36回衆議院議員総選挙",
-            "district": "東京6区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1983年",
-            "month": "12月",
-            "day": "18日",
-            "election_name": "第37回衆議院議員総選挙",
-            "district": "東京6区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

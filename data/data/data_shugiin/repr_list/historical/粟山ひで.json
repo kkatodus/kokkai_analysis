@@ -1,5 +1,5 @@
 {
-    "name_kanji": "粟山ひで、粟山秀",
+    "name_kanji": "粟山ひで",
     "name_kana": "もみやまひで",
     "years": [
         "1963-11-21",
@@ -9,21 +9,11 @@
     ],
     "election_data": [
         {
-            "year": "1960年",
-            "month": "11月",
-            "day": "20日",
-            "election_name": "第29回衆議院議員総選挙",
-            "district": "福島1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "1963年",
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "福島1区",
+            "district": "旧福島1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -33,7 +23,7 @@
             "month": "1月",
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
-            "district": "福島1区",
+            "district": "旧福島1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -43,7 +33,7 @@
             "month": "12月",
             "day": "27日",
             "election_name": "第32回衆議院議員総選挙",
-            "district": "福島1区",
+            "district": "旧福島1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -53,7 +43,7 @@
             "month": "12月",
             "day": "10日",
             "election_name": "第33回衆議院議員総選挙",
-            "district": "福島1区",
+            "district": "旧福島1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（4回目）"

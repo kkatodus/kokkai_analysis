@@ -1,5 +1,5 @@
 {
-    "name_kanji": "来馬琢道、來馬琢道",
+    "name_kanji": "来馬琢道",
     "name_kana": "くるまたくどう",
     "years": [
         "1947-04-20"
@@ -13,17 +13,7 @@
             "district": "全国区",
             "party": "無所属",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "緑風会",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（1回目）"
         }
     ]
 }

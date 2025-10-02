@@ -1,18 +1,18 @@
 {
-    "name_kanji": "金子容三",
-    "name_kana": "かねこようぞう",
+    "name_kanji": "酒井菜摘",
+    "name_kana": "さかいなつみ",
     "years": [
-        "2021-10-31",
+        "2024-04-28",
         "2024-10-27"
     ],
     "election_data": [
         {
-            "year": "2023年",
-            "month": "10月",
-            "day": "22日",
-            "election_name": "補欠選挙",
-            "district": "長崎4区",
-            "party": "自由民主党",
+            "year": "2024年",
+            "month": "4月",
+            "day": "28日",
+            "election_name": "第49回衆議院議員補欠選挙",
+            "district": "東京15区",
+            "party": "立憲民主党",
             "result": "当選",
             "election_freq": "（1回目）"
         },
@@ -21,8 +21,8 @@
             "month": "10月",
             "day": "27日",
             "election_name": "第50回衆議院議員総選挙",
-            "district": "長崎3区",
-            "party": "自由民主党",
+            "district": "東京15区",
+            "party": "立憲民主党",
             "result": "当選",
             "election_freq": "（2回目）"
         }

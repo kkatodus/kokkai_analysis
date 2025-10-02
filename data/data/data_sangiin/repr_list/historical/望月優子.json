@@ -1,9 +1,8 @@
 {
-    "name_kanji": "望月優子、鈴木美枝子",
-    "name_kana": "もちづきゆうこ、すずきみえこ",
+    "name_kanji": "望月優子",
+    "name_kana": "もちづきゆうこ",
     "years": [
-        "1971-06-27",
-        "1974-07-07"
+        "1971-06-27"
     ],
     "election_data": [
         {
@@ -15,16 +14,6 @@
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1977年",
-            "month": "7月",
-            "day": "10日",
-            "election_name": "第11回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

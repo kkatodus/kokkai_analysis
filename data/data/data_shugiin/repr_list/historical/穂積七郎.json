@@ -1,7 +1,8 @@
 {
-    "name_kanji": "穂積七郎、穗積七郎",
+    "name_kanji": "穂積七郎",
     "name_kana": "ほづみしちろう",
     "years": [
+        "1946-04-10",
         "1953-04-19",
         "1955-02-27",
         "1958-05-22",
@@ -11,14 +12,14 @@
     ],
     "election_data": [
         {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "愛知5区",
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "愛知2区",
             "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1953年",
@@ -79,16 +80,6 @@
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（7回目）"
-        },
-        {
-            "year": "1969年",
-            "month": "12月",
-            "day": "27日",
-            "election_name": "第32回衆議院議員総選挙",
-            "district": "愛知5区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

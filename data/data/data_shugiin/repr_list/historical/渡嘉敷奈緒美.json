@@ -1,5 +1,5 @@
 {
-    "name_kanji": "渡嘉敷奈緒美、とかしきなおみ",
+    "name_kanji": "渡嘉敷奈緒美",
     "name_kana": "とかしきなおみ",
     "years": [
         "2005-09-11",
@@ -17,16 +17,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※大阪7区落選"
         },
         {
             "year": "2012年",
@@ -57,26 +47,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（4回目）"
-        },
-        {
-            "year": "2021年",
-            "month": "10月",
-            "day": "31日",
-            "election_name": "第49回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※大阪7区落選"
-        },
-        {
-            "year": "2024年",
-            "month": "10月",
-            "day": "27日",
-            "election_name": "第50回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※大阪7区落選"
         }
     ]
 }

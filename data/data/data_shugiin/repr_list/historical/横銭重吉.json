@@ -1,5 +1,5 @@
 {
-    "name_kanji": "横銭重吉、横錢重吉",
+    "name_kanji": "横銭重吉",
     "name_kana": "よこぜにじゅうきち",
     "years": [
         "1955-02-27"
@@ -11,19 +11,9 @@
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
             "district": "千葉1区",
-            "party": "左派社会党",
+            "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "千葉1区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

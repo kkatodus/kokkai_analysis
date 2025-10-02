@@ -1,7 +1,8 @@
 {
-    "name_kanji": "加藤高蔵、加藤高藏",
+    "name_kanji": "加藤高蔵",
     "name_kana": "かとうたかぞう",
     "years": [
+        "1946-04-10",
         "1952-10-01",
         "1953-04-19",
         "1955-02-27",
@@ -11,11 +12,21 @@
     ],
     "election_data": [
         {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "茨城県選挙区",
+            "party": "日本進歩党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
             "year": "1952年",
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "改進党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -25,7 +36,7 @@
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "改進党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -35,7 +46,7 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "日本民主党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -45,7 +56,7 @@
             "month": "5月",
             "day": "22日",
             "election_name": "第28回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（5回目）"
@@ -55,7 +66,7 @@
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -65,20 +76,10 @@
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "茨城1区",
+            "district": "茨城県第1区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（7回目）"
-        },
-        {
-            "year": "1967年",
-            "month": "1月",
-            "day": "29日",
-            "election_name": "第31回衆議院議員総選挙",
-            "district": "茨城1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

@@ -1,13 +1,13 @@
 {
-    "name_kanji": "八代英太、前島英三郎",
-    "name_kana": "やしろえいた、まえじまえいざぶろう",
+    "name_kanji": "八代英太",
+    "name_kana": "やしろえいた",
     "years": [
         "1977-07-10",
-        "1980-06-22",
         "1983-06-26",
-        "1986-07-06",
         "1989-07-23",
-        "1992-07-26"
+        "1996-10-20",
+        "2000-06-25",
+        "2003-11-09"
     ],
     "election_data": [
         {
@@ -41,24 +41,34 @@
             "election_freq": "（3回目）"
         },
         {
-            "year": "1995年",
-            "month": "7月",
-            "day": "23日",
-            "election_name": "第17回参議院議員通常選挙",
-            "district": "比例区",
+            "year": "1996年",
+            "month": "10月",
+            "day": "20日",
+            "election_name": "第41回衆議院議員総選挙",
+            "district": "東京都第12区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（4回目）"
         },
         {
-            "year": "2010年",
-            "month": "7月",
-            "day": "11日",
-            "election_name": "第22回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東京都第12区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2003年",
+            "month": "11月",
+            "day": "9日",
+            "election_name": "第43回衆議院議員総選挙",
+            "district": "比例東京ブロック",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（6回目）"
         }
     ]
 }

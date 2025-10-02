@@ -1,5 +1,5 @@
 {
-    "name_kanji": "山内恵子、山内惠子",
+    "name_kanji": "山内恵子",
     "name_kana": "やまうちけいこ",
     "years": [
         "2000-06-25"
@@ -10,30 +10,10 @@
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "北海道ブロック",
+            "district": "比例北海道ブロック",
             "party": "社会民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※比例単独"
-        },
-        {
-            "year": "2003年",
-            "month": "11月",
-            "day": "9日",
-            "election_name": "第43回衆議院議員総選挙",
-            "district": "北海道ブロック",
-            "party": "社会民主党",
-            "result": "落選",
-            "election_freq": " ※北海道11区落選"
-        },
-        {
-            "year": "2005年",
-            "month": "9月",
-            "day": "11日",
-            "election_name": "第44回衆議院議員総選挙",
-            "district": "北海道ブロック",
-            "party": "社会民主党",
-            "result": "落選",
-            "election_freq": " ※比例単独"
+            "election_freq": "（1回目）"
         }
     ]
 }

@@ -1,20 +1,20 @@
 {
-    "name_kanji": "湯沢三千男、湯澤三千男",
+    "name_kanji": "湯沢三千男",
     "name_kana": "ゆざわみちお",
     "years": [
-        "1959-06-02",
-        "1962-07-01"
+        "1943-04-30",
+        "1959-06-02"
     ],
     "election_data": [
         {
-            "year": "1956年",
-            "month": "7月",
-            "day": "8日",
-            "election_name": "第4回参議院議員通常選挙",
-            "district": "栃木県選挙区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1943年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "貴族院勅選議員",
+            "district": "",
+            "party": "",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1959年",
@@ -24,7 +24,7 @@
             "district": "栃木県選挙区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         }
     ]
 }

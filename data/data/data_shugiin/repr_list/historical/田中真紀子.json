@@ -1,5 +1,5 @@
 {
-    "name_kanji": "田中真紀子、田中眞紀子",
+    "name_kanji": "田中真紀子",
     "name_kana": "たなかまきこ",
     "years": [
         "1993-07-18",
@@ -15,7 +15,7 @@
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "新潟3区",
+            "district": "旧新潟3区",
             "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -69,16 +69,6 @@
             "party": "民主党",
             "result": "当選",
             "election_freq": "（6回目）"
-        },
-        {
-            "year": "2012年",
-            "month": "12月",
-            "day": "16日",
-            "election_name": "第46回衆議院議員総選挙",
-            "district": "北陸信越ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※新潟5区落選"
         }
     ]
 }

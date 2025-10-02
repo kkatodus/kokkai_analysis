@@ -1,6 +1,6 @@
 {
-    "name_kanji": "山口壮、山口壯",
-    "name_kana": "やまぐちつよし",
+    "name_kanji": "山口壮",
+    "name_kana": "やまぐち つよし",
     "years": [
         "2000-06-25",
         "2005-09-11",
@@ -13,16 +13,6 @@
     ],
     "election_data": [
         {
-            "year": "1996年",
-            "month": "10月",
-            "day": "20日",
-            "election_name": "第41回衆議院議員総選挙",
-            "district": "兵庫12区",
-            "party": "新進党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "2000年",
             "month": "6月",
             "day": "25日",
@@ -33,24 +23,14 @@
             "election_freq": "（1回目）"
         },
         {
-            "year": "2003年",
-            "month": "11月",
-            "day": "9日",
-            "election_name": "第43回衆議院議員総選挙",
-            "district": "兵庫12区",
-            "party": "無所属の会",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "2005年",
             "month": "9月",
             "day": "11日",
             "election_name": "第44回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（2回目） ※兵庫12区落選"
+            "election_freq": "（2回目）"
         },
         {
             "year": "2009年",

@@ -1,8 +1,9 @@
 {
-    "name_kanji": "北条秀一、北條秀一",
+    "name_kanji": "北条秀一",
     "name_kana": "ほうじょうしゅういち",
     "years": [
-        "1947-04-20"
+        "1947-04-20",
+        "1958-05-22"
     ],
     "election_data": [
         {
@@ -13,27 +14,17 @@
             "district": "全国区",
             "party": "無所属",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
+            "election_freq": "（1回目）"
         },
         {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "緑風会",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "24日",
-            "election_name": "第3回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "日本社会党（右派）",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1958年",
+            "month": "5月",
+            "day": "22日",
+            "election_name": "第28回衆議院議員総選挙",
+            "district": "東京7区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（2回目）"
         }
     ]
 }

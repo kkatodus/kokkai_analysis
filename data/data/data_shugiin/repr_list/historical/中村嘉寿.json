@@ -1,10 +1,54 @@
 {
-    "name_kanji": "中村嘉寿、中村嘉壽",
+    "name_kanji": "中村嘉寿",
     "name_kana": "なかむらかじゅ",
     "years": [
+        "1924-05-10",
+        "1930-02-20",
+        "1936-02-20",
+        "1947-03-01",
         "1947-04-25"
     ],
     "election_data": [
+        {
+            "year": "1924年",
+            "month": "5月",
+            "day": "10日",
+            "election_name": "第15回衆議院議員総選挙",
+            "district": "鹿児島県",
+            "party": "政友本党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1930年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第17回衆議院議員総選挙",
+            "district": "鹿児島県",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "鹿児島県",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1947年",
+            "month": "3月",
+            "day": "1日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "鹿児島全県区",
+            "party": "民主党",
+            "result": "繰り上げ当選",
+            "election_freq": "（4回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
@@ -13,17 +57,7 @@
             "district": "鹿児島1区",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（6回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "鹿児島1区",
-            "party": "民主自由党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（5回目）"
         }
     ]
 }

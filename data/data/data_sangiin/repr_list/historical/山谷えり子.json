@@ -1,25 +1,23 @@
 {
-    "name_kanji": "山谷えり子、小川惠里子",
+    "name_kanji": "山谷えり子",
     "name_kana": "やまたにえりこ",
     "years": [
+        "2000-06-25",
         "2004-07-11",
-        "2007-07-29",
         "2010-07-11",
-        "2013-07-21",
         "2016-07-10",
-        "2019-07-21",
         "2022-07-10"
     ],
     "election_data": [
         {
-            "year": "1989年",
-            "month": "7月",
-            "day": "23日",
-            "election_name": "第15回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民社党",
-            "result": "落選",
-            "election_freq": ""
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "比例東京ブロック",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "2004年",
@@ -29,7 +27,7 @@
             "district": "比例区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         },
         {
             "year": "2010年",
@@ -39,7 +37,7 @@
             "district": "比例区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（3回目）"
         },
         {
             "year": "2016年",
@@ -49,7 +47,7 @@
             "district": "比例区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（4回目）"
         },
         {
             "year": "2022年",
@@ -59,7 +57,7 @@
             "district": "比例区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（5回目）"
         }
     ]
 }

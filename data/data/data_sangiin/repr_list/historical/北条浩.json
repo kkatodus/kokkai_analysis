@@ -1,9 +1,8 @@
 {
-    "name_kanji": "北条浩、北條浩",
+    "name_kanji": "北条浩",
     "name_kana": "ほうじょうひろし",
     "years": [
-        "1965-07-04",
-        "1968-07-07"
+        "1965-07-04"
     ],
     "election_data": [
         {
@@ -11,7 +10,7 @@
             "month": "7月",
             "day": "4日",
             "election_name": "第7回参議院議員通常選挙",
-            "district": "東京都選挙区",
+            "district": "東京選挙区",
             "party": "公明党",
             "result": "当選",
             "election_freq": "（1回目）"

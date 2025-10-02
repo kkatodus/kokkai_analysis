@@ -1,5 +1,5 @@
 {
-    "name_kanji": "米沢隆、米澤隆",
+    "name_kanji": "米沢隆",
     "name_kana": "よねざわたかし",
     "years": [
         "1976-12-05",
@@ -9,7 +9,7 @@
         "1986-07-06",
         "1990-02-18",
         "1993-07-18",
-        "2000-06-25",
+        "2002-11-05",
         "2003-11-09"
     ],
     "election_data": [
@@ -84,33 +84,13 @@
             "election_freq": "（7回目）"
         },
         {
-            "year": "1996年",
-            "month": "10月",
-            "day": "20日",
-            "election_name": "第41回衆議院議員総選挙",
-            "district": "宮崎1区",
-            "party": "新進党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2000年",
-            "month": "6月",
-            "day": "25日",
-            "election_name": "第42回衆議院議員総選挙",
-            "district": "九州ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※宮崎1区落選"
-        },
-        {
             "year": "2002年",
-            "month": "10月",
-            "day": "27日",
-            "election_name": "同",
-            "district": "九州ブロック",
+            "month": "11月",
+            "day": "5日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "比例九州ブロック",
             "party": "民主党",
-            "result": "繰上",
+            "result": "繰り上げ当選",
             "election_freq": "（8回目）"
         },
         {
@@ -118,20 +98,10 @@
             "month": "11月",
             "day": "9日",
             "election_name": "第43回衆議院議員総選挙",
-            "district": "九州ブロック",
+            "district": "比例九州ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（9回目） ※宮崎1区落選"
-        },
-        {
-            "year": "2005年",
-            "month": "9月",
-            "day": "11日",
-            "election_name": "第44回衆議院議員総選挙",
-            "district": "九州ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※宮崎1区落選"
+            "election_freq": "（9回目）"
         }
     ]
 }

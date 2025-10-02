@@ -1,5 +1,5 @@
 {
-    "name_kanji": "寺前巌、寺前巖",
+    "name_kanji": "寺前巌",
     "name_kana": "てらまえいわお",
     "years": [
         "1969-12-27",
@@ -18,7 +18,7 @@
             "month": "12月",
             "day": "27日",
             "election_name": "第32回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -28,7 +28,7 @@
             "month": "12月",
             "day": "10日",
             "election_name": "第33回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -38,7 +38,7 @@
             "month": "12月",
             "day": "5日",
             "election_name": "第34回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -48,7 +48,7 @@
             "month": "10月",
             "day": "7日",
             "election_name": "第35回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -58,27 +58,17 @@
             "month": "6月",
             "day": "22日",
             "election_name": "第36回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（5回目）"
-        },
-        {
-            "year": "1983年",
-            "month": "12月",
-            "day": "18日",
-            "election_name": "第37回衆議院議員総選挙",
-            "district": "京都2区",
-            "party": "日本共産党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1986年",
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（6回目）"
@@ -88,7 +78,7 @@
             "month": "2月",
             "day": "18日",
             "election_name": "第39回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（7回目）"
@@ -98,7 +88,7 @@
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "京都2区",
+            "district": "京都府第2区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（8回目）"
@@ -108,7 +98,7 @@
             "month": "10月",
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
-            "district": "京都3区",
+            "district": "京都府第3区",
             "party": "日本共産党",
             "result": "当選",
             "election_freq": "（9回目）"

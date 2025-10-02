@@ -1,5 +1,5 @@
 {
-    "name_kanji": "田沢吉郎、田澤吉郎",
+    "name_kanji": "田沢吉郎",
     "name_kana": "たざわきちろう",
     "years": [
         "1960-11-20",
@@ -135,16 +135,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（12回目）"
-        },
-        {
-            "year": "1996年",
-            "month": "10月",
-            "day": "20日",
-            "election_name": "第41回衆議院議員総選挙",
-            "district": "東北ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※比例単独"
         }
     ]
 }

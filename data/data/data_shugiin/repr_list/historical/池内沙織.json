@@ -1,59 +1,59 @@
 {
-    "name_kanji": "池内沙織、池内さおり",
+    "name_kanji": "池内沙織",
     "name_kana": "いけうちさおり",
     "years": [
         "2014-12-14"
     ],
     "election_data": [
         {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
+            "year": "2021",
+            "month": "10",
+            "day": "31",
+            "election_name": "第49回衆議院議員総選挙",
             "district": "東京12区",
             "party": "日本共産党",
             "result": "落選",
             "election_freq": ""
         },
         {
-            "year": "2012年",
-            "month": "12月",
-            "day": "16日",
-            "election_name": "第46回衆議院議員総選挙",
-            "district": "東京ブロック",
+            "year": "2017",
+            "month": "10",
+            "day": "22",
+            "election_name": "第48回衆議院議員総選挙",
+            "district": "東京12区",
             "party": "日本共産党",
             "result": "落選",
-            "election_freq": " ※東京12区落選"
+            "election_freq": ""
         },
         {
-            "year": "2014年",
-            "month": "12月",
-            "day": "14日",
+            "year": "2014",
+            "month": "12",
+            "day": "14",
             "election_name": "第47回衆議院議員総選挙",
-            "district": "東京ブロック",
+            "district": "比例東京ブロック",
             "party": "日本共産党",
             "result": "当選",
-            "election_freq": "（1回目） ※東京12区落選"
+            "election_freq": "（1回目）"
         },
         {
-            "year": "2017年",
-            "month": "10月",
-            "day": "22日",
-            "election_name": "第48回衆議院議員総選挙",
-            "district": "東京ブロック",
+            "year": "2012",
+            "month": "12",
+            "day": "16",
+            "election_name": "第46回衆議院議員総選挙",
+            "district": "東京12区",
             "party": "日本共産党",
             "result": "落選",
-            "election_freq": " ※東京12区落選"
+            "election_freq": ""
         },
         {
-            "year": "2021年",
-            "month": "10月",
-            "day": "31日",
-            "election_name": "第49回衆議院議員総選挙",
-            "district": "東京ブロック",
+            "year": "2009",
+            "month": "8",
+            "day": "30",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "東京12区",
             "party": "日本共産党",
             "result": "落選",
-            "election_freq": " ※東京12区落選"
+            "election_freq": ""
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "name_kanji": "井沢京子、井澤京子",
+    "name_kanji": "井沢京子",
     "name_kana": "いざわきょうこ",
     "years": [
         "2005-09-11"
@@ -10,30 +10,10 @@
             "month": "9月",
             "day": "11日",
             "election_name": "第44回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※京都6区落選"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※京都6区落選"
-        },
-        {
-            "year": "2024年",
-            "month": "10月",
-            "day": "27日",
-            "election_name": "第50回衆議院議員総選挙",
-            "district": "東海ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※比例単独"
+            "election_freq": "（1回目）"
         }
     ]
 }

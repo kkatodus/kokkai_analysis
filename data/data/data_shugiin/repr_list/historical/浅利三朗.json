@@ -1,5 +1,5 @@
 {
-    "name_kanji": "浅利三朗、淺利三朗",
+    "name_kanji": "浅利三朗",
     "name_kana": "あさりさぶろう",
     "years": [
         "1947-04-25",
@@ -12,7 +12,7 @@
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "日本自由党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -22,7 +22,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "民主自由党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -36,16 +36,6 @@
             "party": "自由党",
             "result": "当選",
             "election_freq": "（3回目）"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "岩手2区",
-            "party": "吉田自由党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

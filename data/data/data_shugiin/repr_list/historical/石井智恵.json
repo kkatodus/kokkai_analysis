@@ -1,30 +1,60 @@
 {
-    "name_kanji": "金子容三",
-    "name_kana": "かねこようぞう",
+    "name_kanji": "石井智恵",
+    "name_kana": "いしいともえ",
     "years": [
-        "2021-10-31",
+        "2019-04-07",
         "2024-10-27"
     ],
     "election_data": [
         {
-            "year": "2023年",
+            "year": "2014年",
+            "month": "4月",
+            "day": "27日",
+            "election_name": "松山市議会議員選挙",
+            "district": "松山市",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2017年",
             "month": "10月",
             "day": "22日",
-            "election_name": "補欠選挙",
-            "district": "長崎4区",
-            "party": "自由民主党",
+            "election_name": "愛媛県議会議員補欠選挙",
+            "district": "松山市・上浮穴郡",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2019年",
+            "month": "4月",
+            "day": "7日",
+            "election_name": "愛媛県議会議員選挙",
+            "district": "松山市・上浮穴郡",
+            "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"
+        },
+        {
+            "year": "2021年",
+            "month": "10月",
+            "day": "31日",
+            "election_name": "第49回衆議院議員総選挙",
+            "district": "愛媛県第2区",
+            "party": "国民民主党",
+            "result": "落選",
+            "election_freq": ""
         },
         {
             "year": "2024年",
             "month": "10月",
             "day": "27日",
             "election_name": "第50回衆議院議員総選挙",
-            "district": "長崎3区",
-            "party": "自由民主党",
+            "district": "比例四国ブロック",
+            "party": "国民民主党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（1回目）"
         }
     ]
 }

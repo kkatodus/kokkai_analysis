@@ -1,11 +1,32 @@
 {
-    "name_kanji": "関根久蔵、関根久藏",
+    "name_kanji": "関根久蔵",
     "name_kana": "せきねきゅうぞう",
     "years": [
-        "1953-04-24",
-        "1956-07-08"
+        "1946-04-10",
+        "1947-04-25",
+        "1953-04-24"
     ],
     "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "埼玉県選挙区",
+            "party": "日本進歩党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "埼玉県第三区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
         {
             "year": "1953年",
             "month": "4月",
@@ -14,7 +35,7 @@
             "district": "全国区",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（3回目）"
         }
     ]
 }

@@ -1,53 +1,74 @@
 {
-    "name_kanji": "小柳牧衛、小柳牧衞",
+    "name_kanji": "小柳牧衛",
     "name_kana": "こやなぎまきえ",
     "years": [
-        "1953-04-24",
+        "1936-02-20",
+        "1937-04-30",
+        "1942-04-30",
+        "1955-05-15",
         "1956-07-08",
-        "1959-06-02",
-        "1962-07-01",
-        "1965-07-04"
+        "1962-07-01"
     ],
     "election_data": [
         {
-            "year": "1953年",
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "新潟県第二区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1937年",
             "month": "4月",
-            "day": "24日",
-            "election_name": "第3回参議院議員通常選挙",
-            "district": "新潟県選挙区",
-            "party": "改進党",
-            "result": "落選",
-            "election_freq": ""
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "新潟県第二区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1942年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第21回衆議院議員総選挙",
+            "district": "新潟県第二区",
+            "party": "翼賛政治体制協議会推薦",
+            "result": "当選",
+            "election_freq": "（3回目）"
         },
         {
             "year": "1955年",
             "month": "5月",
             "day": "15日",
-            "election_name": "補欠選挙",
-            "district": "新潟県選挙区",
-            "party": "日本民主党",
+            "election_name": "第2回参議院議員通常選挙 補欠選挙",
+            "district": "新潟地方区",
+            "party": "無所属",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1956年",
             "month": "7月",
             "day": "8日",
             "election_name": "第4回参議院議員通常選挙",
-            "district": "新潟県選挙区",
+            "district": "新潟地方区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（5回目）"
         },
         {
             "year": "1962年",
             "month": "7月",
             "day": "1日",
             "election_name": "第6回参議院議員通常選挙",
-            "district": "新潟県選挙区",
+            "district": "新潟地方区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（6回目）"
         }
     ]
 }

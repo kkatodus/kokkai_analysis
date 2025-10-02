@@ -1,9 +1,8 @@
 {
-    "name_kanji": "松沢靖介、松澤靖介",
+    "name_kanji": "松沢靖介",
     "name_kana": "まつざわやすすけ",
     "years": [
-        "1956-07-08",
-        "1959-06-02"
+        "1956-07-08"
     ],
     "election_data": [
         {
@@ -11,7 +10,7 @@
             "month": "7月",
             "day": "8日",
             "election_name": "第4回参議院議員通常選挙",
-            "district": "山形県選挙区",
+            "district": "山形地方区",
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（1回目）"

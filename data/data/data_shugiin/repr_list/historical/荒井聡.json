@@ -1,5 +1,5 @@
 {
-    "name_kanji": "荒井聡、荒井聰",
+    "name_kanji": "荒井聡",
     "name_kana": "あらいさとし",
     "years": [
         "1993-07-18",
@@ -17,20 +17,10 @@
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "北海道1区",
+            "district": "旧北海道1区",
             "party": "日本新党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1996年",
-            "month": "10月",
-            "day": "20日",
-            "election_name": "第41回衆議院議員総選挙",
-            "district": "北海道ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※北海道3区落選"
         },
         {
             "year": "2000年",
@@ -57,10 +47,10 @@
             "month": "9月",
             "day": "11日",
             "election_name": "第44回衆議院議員総選挙",
-            "district": "北海道ブロック",
+            "district": "比例北海道ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（4回目） ※北海道3区落選"
+            "election_freq": "（4回目）"
         },
         {
             "year": "2009年",
@@ -77,20 +67,20 @@
             "month": "12月",
             "day": "16日",
             "election_name": "第46回衆議院議員総選挙",
-            "district": "北海道ブロック",
+            "district": "比例北海道ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（6回目） ※北海道3区落選"
+            "election_freq": "（6回目）"
         },
         {
             "year": "2014年",
             "month": "12月",
             "day": "14日",
             "election_name": "第47回衆議院議員総選挙",
-            "district": "北海道ブロック",
+            "district": "比例北海道ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（7回目） ※北海道3区落選"
+            "election_freq": "（7回目）"
         },
         {
             "year": "2017年",

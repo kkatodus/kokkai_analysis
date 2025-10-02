@@ -1,23 +1,54 @@
 {
-    "name_kanji": "中山福蔵、中山福藏",
+    "name_kanji": "中山福蔵",
     "name_kana": "なかやまふくぞう",
     "years": [
-        "1950-06-04",
+        "1932-02-20",
+        "1936-02-20",
+        "1937-04-30",
+        "1951-05-16",
         "1953-04-24",
-        "1956-07-08",
-        "1962-07-01",
-        "1965-07-04"
+        "1962-07-01"
     ],
     "election_data": [
+        {
+            "year": "1932年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第18回衆議院議員総選挙",
+            "district": "大阪府第4区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "大阪府第4区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "大阪府第4区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
         {
             "year": "1951年",
             "month": "5月",
             "day": "16日",
-            "election_name": "補欠選挙",
+            "election_name": "第1回参議院議員補欠選挙",
             "district": "大阪府選挙区",
             "party": "緑風会",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1953年",
@@ -27,27 +58,17 @@
             "district": "大阪府選挙区",
             "party": "緑風会",
             "result": "当選",
-            "election_freq": "（2回目）"
-        },
-        {
-            "year": "1959年",
-            "month": "6月",
-            "day": "2日",
-            "election_name": "第5回参議院議員通常選挙",
-            "district": "大阪府選挙区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（5回目）"
         },
         {
             "year": "1962年",
             "month": "7月",
             "day": "1日",
             "election_name": "第6回参議院議員通常選挙",
-            "district": "大阪府選挙区",
+            "district": "大阪府地方区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（6回目）"
         }
     ]
 }

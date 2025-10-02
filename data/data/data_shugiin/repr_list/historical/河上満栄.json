@@ -1,39 +1,39 @@
 {
-    "name_kanji": "河上満栄、河上みつえ",
+    "name_kanji": "河上満栄",
     "name_kana": "かわかみみつえ",
     "years": [
         "2009-08-30"
     ],
     "election_data": [
         {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
+            "year": "2009",
+            "month": "8",
+            "day": "30",
             "election_name": "第45回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※比例単独"
+            "election_freq": "（1回目）"
         },
         {
-            "year": "2012年",
-            "month": "12月",
-            "day": "16日",
+            "year": "2010",
+            "month": "7",
+            "day": "11",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "京都府選挙区",
+            "party": "民主党",
+            "result": "落選",
+            "election_freq": ""
+        },
+        {
+            "year": "2012",
+            "month": "12",
+            "day": "16",
             "election_name": "第46回衆議院議員総選挙",
-            "district": "南関東ブロック",
+            "district": "千葉9区",
             "party": "日本未来の党",
             "result": "落選",
-            "election_freq": " ※千葉9区落選"
-        },
-        {
-            "year": "2014年",
-            "month": "12月",
-            "day": "14日",
-            "election_name": "第47回衆議院議員総選挙",
-            "district": "北陸信越ブロック",
-            "party": "生活の党",
-            "result": "落選",
-            "election_freq": " ※比例単独"
+            "election_freq": ""
         }
     ]
 }

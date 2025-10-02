@@ -1,17 +1,138 @@
 {
-    "name_kanji": "斎藤隆夫、齋藤隆夫",
+    "name_kanji": "斎藤隆夫",
     "name_kana": "さいとうたかお",
     "years": [
+        "1912-05-15",
+        "1915-03-25",
+        "1917-04-20",
+        "1924-05-10",
+        "1928-02-20",
+        "1930-02-20",
+        "1932-02-20",
+        "1936-02-20",
+        "1937-04-30",
+        "1942-04-30",
+        "1946-04-10",
         "1947-04-25",
         "1949-01-23"
     ],
     "election_data": [
         {
+            "year": "1912年",
+            "month": "5月",
+            "day": "15日",
+            "election_name": "第11回衆議院議員総選挙",
+            "district": "兵庫県郡部",
+            "party": "立憲国民党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1915年",
+            "month": "3月",
+            "day": "25日",
+            "election_name": "第12回衆議院議員総選挙",
+            "district": "兵庫県郡部",
+            "party": "立憲同志会",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1917年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第13回衆議院議員総選挙",
+            "district": "兵庫県郡部",
+            "party": "憲政会",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
+            "year": "1924年",
+            "month": "5月",
+            "day": "10日",
+            "election_name": "第15回衆議院議員総選挙",
+            "district": "兵庫県第11区",
+            "party": "憲政会",
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "1928年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第16回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "1930年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第17回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（6回目）"
+        },
+        {
+            "year": "1932年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第18回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（7回目）"
+        },
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（8回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "立憲民政党",
+            "result": "当選",
+            "election_freq": "（9回目）"
+        },
+        {
+            "year": "1942年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第21回衆議院議員総選挙",
+            "district": "兵庫県第5区",
+            "party": "非推薦",
+            "result": "当選",
+            "election_freq": "（10回目）"
+        },
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "兵庫県第2区",
+            "party": "日本進歩党",
+            "result": "当選",
+            "election_freq": "（11回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "兵庫5区",
+            "district": "兵庫県第5区",
             "party": "民主党",
             "result": "当選",
             "election_freq": "（12回目）"
@@ -21,7 +142,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "兵庫5区",
+            "district": "兵庫県第5区",
             "party": "民主自由党",
             "result": "当選",
             "election_freq": "（13回目）"

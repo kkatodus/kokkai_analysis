@@ -1,5 +1,5 @@
 {
-    "name_kanji": "富永格五郎、冨永格五郎",
+    "name_kanji": "冨永格五郎",
     "name_kana": "とみながかくごろう",
     "years": [
         "1947-04-25",
@@ -25,16 +25,6 @@
             "party": "民主自由党",
             "result": "当選",
             "election_freq": "（2回目）"
-        },
-        {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "北海道3区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

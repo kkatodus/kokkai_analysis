@@ -1,7 +1,10 @@
 {
-    "name_kanji": "森山真弓、森山眞弓",
+    "name_kanji": "森山真弓",
     "name_kana": "もりやままゆみ",
     "years": [
+        "1980-06-22",
+        "1986-07-06",
+        "1992-07-26",
         "1996-10-20",
         "2000-06-25",
         "2003-11-09",
@@ -9,24 +12,54 @@
     ],
     "election_data": [
         {
+            "year": "1980年",
+            "month": "6月",
+            "day": "22日",
+            "election_name": "第12回参議院議員通常選挙",
+            "district": "栃木県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1986年",
+            "month": "7月",
+            "day": "6日",
+            "election_name": "第14回参議院議員通常選挙",
+            "district": "栃木県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1992年",
+            "month": "7月",
+            "day": "26日",
+            "election_name": "第16回参議院議員通常選挙",
+            "district": "栃木県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
             "year": "1996年",
             "month": "10月",
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
-            "district": "北関東ブロック",
+            "district": "比例北関東ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※比例単独"
+            "election_freq": "（4回目）"
         },
         {
             "year": "2000年",
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "北関東ブロック",
+            "district": "比例北関東ブロック",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目） ※比例単独"
+            "election_freq": "（5回目）"
         },
         {
             "year": "2003年",
@@ -36,7 +69,7 @@
             "district": "栃木2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（6回目）"
         },
         {
             "year": "2005年",
@@ -46,7 +79,7 @@
             "district": "栃木2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（7回目）"
         }
     ]
 }

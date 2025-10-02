@@ -1,6 +1,6 @@
 {
-    "name_kanji": "三ツ林隆志、三ッ林隆志",
-    "name_kana": "みつばやしたかし",
+    "name_kanji": "三ツ林隆志",
+    "name_kana": "みつばやし たかし",
     "years": [
         "2000-06-25",
         "2003-11-09",
@@ -36,16 +36,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（3回目）"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "北関東ブロック",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※埼玉14区落選"
         }
     ]
 }

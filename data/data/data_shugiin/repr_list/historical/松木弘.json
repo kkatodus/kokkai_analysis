@@ -1,20 +1,53 @@
 {
-    "name_kanji": "松木弘、松木宏",
+    "name_kanji": "松木弘",
     "name_kana": "まつきひろむ",
     "years": [
-        "1947-04-25",
+        "1932-02-20",
+        "1936-02-20",
+        "1937-04-30",
+        "1947-12-19",
         "1949-01-23"
     ],
     "election_data": [
         {
+            "year": "1932年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第18回衆議院議員総選挙",
+            "district": "新潟2区",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1936年",
+            "month": "2月",
+            "day": "20日",
+            "election_name": "第19回衆議院議員総選挙",
+            "district": "新潟2区",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "1937年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第20回衆議院議員総選挙",
+            "district": "新潟2区",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（3回目）"
+        },
+        {
             "year": "1947年",
             "month": "12月",
             "day": "19日",
-            "election_name": "補欠選挙",
+            "election_name": "第23回衆議院議員補欠選挙",
             "district": "新潟1区",
             "party": "日本自由党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1949年",
@@ -24,7 +57,7 @@
             "district": "新潟1区",
             "party": "民主自由党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（5回目）"
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "name_kanji": "臼井荘一、臼井莊一",
+    "name_kanji": "臼井荘一",
     "name_kana": "うすいそういち",
     "years": [
         "1952-10-01",
@@ -9,7 +9,8 @@
         "1960-11-20",
         "1963-11-21",
         "1967-01-29",
-        "1972-12-10"
+        "1972-12-10",
+        "1981-03-08"
     ],
     "election_data": [
         {
@@ -83,16 +84,6 @@
             "election_freq": "（7回目）"
         },
         {
-            "year": "1969年",
-            "month": "12月",
-            "day": "27日",
-            "election_name": "第32回衆議院議員総選挙",
-            "district": "千葉1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "1972年",
             "month": "12月",
             "day": "10日",
@@ -103,14 +94,14 @@
             "election_freq": "（8回目）"
         },
         {
-            "year": "1976年",
-            "month": "12月",
-            "day": "5日",
-            "election_name": "第34回衆議院議員総選挙",
-            "district": "千葉1区",
+            "year": "1981年",
+            "month": "3月",
+            "day": "8日",
+            "election_name": "補欠選挙",
+            "district": "千葉県選挙区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         }
     ]
 }

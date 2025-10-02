@@ -1,5 +1,5 @@
 {
-    "name_kanji": "神山栄一、神山榮一",
+    "name_kanji": "神山栄一",
     "name_kana": "かみやまえいいち",
     "years": [
         "1947-04-25"
@@ -14,16 +14,6 @@
             "party": "民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "新潟3区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

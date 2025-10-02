@@ -1,8 +1,10 @@
 {
-    "name_kanji": "斎木重一、齋木重一",
+    "name_kanji": "斎木重一",
     "name_kana": "さいきしげいち",
     "years": [
-        "1953-04-19"
+        "1947-04-25",
+        "1949-01-23",
+        "1952-10-01"
     ],
     "election_data": [
         {
@@ -10,50 +12,30 @@
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "福井全県区",
+            "district": "福井県全県区",
             "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1949年",
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "福井全県区",
+            "district": "福井県全県区",
             "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（2回目）"
         },
         {
             "year": "1952年",
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "福井全県区",
-            "party": "左派社会党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "福井全県区",
+            "district": "福井県全県区",
             "party": "左派社会党",
             "result": "当選",
-            "election_freq": "（1回目）"
-        },
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "福井全県区",
-            "party": "左派社会党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（3回目）"
         }
     ]
 }

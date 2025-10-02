@@ -1,6 +1,6 @@
 {
-    "name_kanji": "西村真悟、西村眞悟",
-    "name_kana": "にしむらしんご",
+    "name_kanji": "西村真悟",
+    "name_kana": "にしむら しんご",
     "years": [
         "1993-07-18",
         "1996-10-20",
@@ -35,10 +35,10 @@
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（3回目） ※大阪17区落選"
+            "election_freq": "（3回目）"
         },
         {
             "year": "2003年",
@@ -55,40 +55,20 @@
             "month": "9月",
             "day": "11日",
             "election_name": "第44回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（5回目） ※大阪17区落選"
-        },
-        {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "改革クラブ",
-            "result": "落選",
-            "election_freq": " ※大阪17区落選"
+            "election_freq": "（5回目）"
         },
         {
             "year": "2012年",
             "month": "12月",
             "day": "16日",
             "election_name": "第46回衆議院議員総選挙",
-            "district": "近畿ブロック",
+            "district": "比例近畿ブロック",
             "party": "日本維新の会",
             "result": "当選",
-            "election_freq": "（6回目） ※比例単独"
-        },
-        {
-            "year": "2014年",
-            "month": "12月",
-            "day": "14日",
-            "election_name": "第47回衆議院議員総選挙",
-            "district": "近畿ブロック",
-            "party": "次世代の党",
-            "result": "落選",
-            "election_freq": " ※大阪16区落選"
+            "election_freq": "（6回目）"
         }
     ]
 }

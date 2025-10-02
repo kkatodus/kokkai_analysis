@@ -1,29 +1,30 @@
 {
-    "name_kanji": "坪井亀蔵、坪井亀藏",
+    "name_kanji": "坪井亀蔵",
     "name_kana": "つぼいかめぞう",
     "years": [
+        "1946-04-10",
         "1947-04-25"
     ],
     "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "静岡県全県区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "静岡3区",
+            "district": "静岡県第3区",
             "party": "国民協同党",
             "result": "当選",
             "election_freq": "（2回目）"
-        },
-        {
-            "year": "1949年",
-            "month": "1月",
-            "day": "23日",
-            "election_name": "第24回衆議院議員総選挙",
-            "district": "静岡3区",
-            "party": "国民協同党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

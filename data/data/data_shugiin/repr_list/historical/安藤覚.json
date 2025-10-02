@@ -1,7 +1,8 @@
 {
-    "name_kanji": "安藤覚、安藤覺",
+    "name_kanji": "安藤覚",
     "name_kana": "あんどうかく",
     "years": [
+        "1942-04-30",
         "1953-04-19",
         "1955-02-27",
         "1960-11-20",
@@ -9,14 +10,14 @@
     ],
     "election_data": [
         {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "神奈川3区",
-            "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
+            "year": "1942年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "第21回衆議院議員総選挙",
+            "district": "神奈川県3区",
+            "party": "翼賛政治体制協議会推薦",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1953年",
@@ -24,7 +25,7 @@
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
             "district": "神奈川3区",
-            "party": "鳩山自由党",
+            "party": "自由党",
             "result": "当選",
             "election_freq": "（2回目）"
         },
@@ -37,16 +38,6 @@
             "party": "日本民主党",
             "result": "当選",
             "election_freq": "（3回目）"
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "神奈川3区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1960年",
@@ -67,16 +58,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（5回目）"
-        },
-        {
-            "year": "1967年",
-            "month": "1月",
-            "day": "29日",
-            "election_name": "第31回衆議院議員総選挙",
-            "district": "神奈川3区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

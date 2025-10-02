@@ -1,10 +1,13 @@
 {
-    "name_kanji": "宮沢洋一、宮澤洋一",
+    "name_kanji": "宮沢洋一",
     "name_kana": "みやざわよういち",
     "years": [
         "2000-06-25",
         "2003-11-09",
-        "2005-09-11"
+        "2005-09-11",
+        "2010-07-11",
+        "2016-07-10",
+        "2022-07-10"
     ],
     "election_data": [
         {
@@ -38,14 +41,34 @@
             "election_freq": "（3回目）"
         },
         {
-            "year": "2009年",
-            "month": "8月",
-            "day": "30日",
-            "election_name": "第45回衆議院議員総選挙",
-            "district": "中国ブロック",
+            "year": "2010年",
+            "month": "7月",
+            "day": "11日",
+            "election_name": "第22回参議院議員通常選挙",
+            "district": "広島県選挙区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": " ※広島7区落選"
+            "result": "当選",
+            "election_freq": "（4回目）"
+        },
+        {
+            "year": "2016年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第24回参議院議員通常選挙",
+            "district": "広島県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（5回目）"
+        },
+        {
+            "year": "2022年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第26回参議院議員通常選挙",
+            "district": "広島県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（6回目）"
         }
     ]
 }

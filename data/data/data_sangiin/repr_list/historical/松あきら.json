@@ -1,13 +1,10 @@
 {
-    "name_kanji": "松あきら、西川玲子",
-    "name_kana": "まつあきら、にしかわれいこ",
+    "name_kanji": "松あきら",
+    "name_kana": "まつあきら",
     "years": [
         "1995-07-23",
-        "1998-07-12",
         "2001-07-29",
-        "2004-07-11",
-        "2007-07-29",
-        "2010-07-11"
+        "2007-09-07"
     ],
     "election_data": [
         {
@@ -32,22 +29,12 @@
         },
         {
             "year": "2007年",
-            "month": "7月",
-            "day": "29日",
-            "election_name": "第21回参議院議員通常選挙",
-            "district": "神奈川県選挙区",
-            "party": "公明党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "2007年",
             "month": "9月",
             "day": "7日",
-            "election_name": "同",
-            "district": "神奈川県選挙区",
+            "election_name": "第21回参議院議員通常選挙",
+            "district": "比例区",
             "party": "公明党",
-            "result": "繰上",
+            "result": "当選",
             "election_freq": "（3回目）"
         }
     ]

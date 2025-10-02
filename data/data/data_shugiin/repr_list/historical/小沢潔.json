@@ -1,5 +1,5 @@
 {
-    "name_kanji": "小沢潔、小澤潔",
+    "name_kanji": "小沢潔",
     "name_kana": "おざわきよし",
     "years": [
         "1979-10-07",
@@ -67,7 +67,7 @@
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
             "district": "東京7区",
-            "party": "自由民主党",
+            "party": "新生党",
             "result": "当選",
             "election_freq": "（6回目）"
         },
@@ -77,9 +77,19 @@
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
             "district": "東京ブロック",
-            "party": "自由民主党",
+            "party": "新進党",
             "result": "当選",
-            "election_freq": "（7回目） ※東京21区落選"
+            "election_freq": "（7回目）"
+        },
+        {
+            "year": "2000年",
+            "month": "6月",
+            "day": "25日",
+            "election_name": "第42回衆議院議員総選挙",
+            "district": "東京ブロック",
+            "party": "保守党",
+            "result": "落選",
+            "election_freq": ""
         }
     ]
 }

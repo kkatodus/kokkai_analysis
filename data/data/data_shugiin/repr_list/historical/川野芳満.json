@@ -1,7 +1,8 @@
 {
-    "name_kanji": "川野芳満、川野芳滿",
-    "name_kana": "かわのよしみつ、かわのほうまん",
+    "name_kanji": "川野芳満",
+    "name_kana": "かわのよしみつ",
     "years": [
+        "1946-04-10",
         "1947-04-25",
         "1949-01-23",
         "1952-10-01",
@@ -12,6 +13,16 @@
         "1967-01-29"
     ],
     "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "宮崎県全県区",
+            "party": "日向民主党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
         {
             "year": "1947年",
             "month": "4月",
@@ -41,16 +52,6 @@
             "party": "自由党",
             "result": "当選",
             "election_freq": "（4回目）"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "宮崎1区",
-            "party": "吉田自由党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1955年",
@@ -101,16 +102,6 @@
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（9回目）"
-        },
-        {
-            "year": "1969年",
-            "month": "12月",
-            "day": "27日",
-            "election_name": "第32回衆議院議員総選挙",
-            "district": "宮崎1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

@@ -1,39 +1,41 @@
 {
-    "name_kanji": "斎藤勁、齋藤勁",
+    "name_kanji": "斎藤勁",
     "name_kana": "さいとうつよし",
     "years": [
+        "1995-07-23",
+        "2001-07-29",
         "2009-08-30"
     ],
     "election_data": [
         {
-            "year": "2005年",
-            "month": "9月",
-            "day": "11日",
-            "election_name": "第44回衆議院議員総選挙",
-            "district": "南関東ブロック",
+            "year": "1995年",
+            "month": "7月",
+            "day": "23日",
+            "election_name": "第17回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
+            "party": "日本社会党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "2001年",
+            "month": "7月",
+            "day": "29日",
+            "election_name": "第19回参議院議員通常選挙",
+            "district": "神奈川県選挙区",
             "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※神奈川11区落選"
+            "result": "当選",
+            "election_freq": "（2回目）"
         },
         {
             "year": "2009年",
             "month": "8月",
             "day": "30日",
             "election_name": "第45回衆議院議員総選挙",
-            "district": "南関東ブロック",
+            "district": "比例南関東ブロック",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（1回目） ※比例単独"
-        },
-        {
-            "year": "2012年",
-            "month": "12月",
-            "day": "16日",
-            "election_name": "第46回衆議院議員総選挙",
-            "district": "南関東ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※山梨1区落選"
+            "election_freq": "（3回目）"
         }
     ]
 }

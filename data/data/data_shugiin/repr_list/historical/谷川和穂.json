@@ -1,5 +1,5 @@
 {
-    "name_kanji": "谷川和穂、谷川和穗",
+    "name_kanji": "谷川和穂",
     "name_kana": "たにかわかずお",
     "years": [
         "1958-05-22",
@@ -7,10 +7,10 @@
         "1967-01-29",
         "1969-12-27",
         "1972-12-10",
+        "1976-12-05",
         "1979-10-07",
         "1980-06-22",
         "1986-07-06",
-        "1990-02-18",
         "1993-07-18",
         "1996-10-20",
         "2000-06-25"
@@ -25,16 +25,6 @@
             "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "1960年",
-            "month": "11月",
-            "day": "20日",
-            "election_name": "第29回衆議院議員総選挙",
-            "district": "広島2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1963年",
@@ -83,8 +73,8 @@
             "election_name": "第34回衆議院議員総選挙",
             "district": "広島2区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（6回目）"
         },
         {
             "year": "1979年",
@@ -94,7 +84,7 @@
             "district": "広島2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（6回目）"
+            "election_freq": "（7回目）"
         },
         {
             "year": "1980年",
@@ -104,33 +94,13 @@
             "district": "広島2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（7回目）"
-        },
-        {
-            "year": "1983年",
-            "month": "12月",
-            "day": "18日",
-            "election_name": "第37回衆議院議員総選挙",
-            "district": "広島2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（8回目）"
         },
         {
             "year": "1986年",
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "広島2区",
-            "party": "自由民主党",
-            "result": "当選",
-            "election_freq": "（8回目）"
-        },
-        {
-            "year": "1990年",
-            "month": "2月",
-            "day": "18日",
-            "election_name": "第39回衆議院議員総選挙",
             "district": "広島2区",
             "party": "自由民主党",
             "result": "当選",
@@ -151,20 +121,20 @@
             "month": "10月",
             "day": "20日",
             "election_name": "第41回衆議院議員総選挙",
-            "district": "中国ブロック",
+            "district": "比例中国",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（11回目） ※比例単独"
+            "election_freq": "（11回目）"
         },
         {
             "year": "2000年",
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "中国ブロック",
+            "district": "比例中国",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（12回目） ※比例単独"
+            "election_freq": "（12回目）"
         }
     ]
 }

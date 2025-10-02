@@ -1,5 +1,5 @@
 {
-    "name_kanji": "吉田知代、吉田とも代",
+    "name_kanji": "吉田知代",
     "name_kana": "よしだともよ",
     "years": [
         "2021-10-31"
@@ -10,20 +10,10 @@
             "month": "10月",
             "day": "31日",
             "election_name": "第49回衆議院議員総選挙",
-            "district": "四国ブロック",
+            "district": "比例四国ブロック",
             "party": "日本維新の会",
             "result": "当選",
-            "election_freq": "（1回目） ※徳島1区落選"
-        },
-        {
-            "year": "2024年",
-            "month": "10月",
-            "day": "27日",
-            "election_name": "第50回衆議院議員総選挙",
-            "district": "四国ブロック",
-            "party": "日本維新の会",
-            "result": "落選",
-            "election_freq": " ※徳島1区落選"
+            "election_freq": "（1回目）"
         }
     ]
 }

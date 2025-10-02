@@ -1,10 +1,9 @@
 {
-    "name_kanji": "深川タマエ、深川タマヱ",
-    "name_kana": "ふかがわたまえ",
+    "name_kanji": "深川タマヱ",
+    "name_kana": "ふかがわ たまえ",
     "years": [
         "1947-04-20",
-        "1950-06-04",
-        "1953-04-24"
+        "1950-06-04"
     ],
     "election_data": [
         {
@@ -12,10 +11,10 @@
             "month": "4月",
             "day": "20日",
             "election_name": "第1回参議院議員通常選挙",
-            "district": "東京都選挙区",
+            "district": "東京地方区",
             "party": "無所属",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
+            "election_freq": "（1回目）"
         },
         {
             "year": "1950年",
@@ -26,16 +25,6 @@
             "party": "国民民主党",
             "result": "当選",
             "election_freq": "（2回目）"
-        },
-        {
-            "year": "1956年",
-            "month": "7月",
-            "day": "8日",
-            "election_name": "第4回参議院議員通常選挙",
-            "district": "東京都選挙区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

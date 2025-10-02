@@ -1,72 +1,85 @@
 {
-    "name_kanji": "小沢太郎、小澤太郎",
-    "name_kana": "おざわたろう",
+    "name_kanji": "小沢太郎",
+    "name_kana": "おざわ たろう",
     "years": [
+        "1953-04-30",
+        "1957-04-21",
         "1960-11-20",
         "1967-01-29",
         "1969-12-27",
-        "1972-12-10"
+        "1972-12-10",
+        "1977-07-10"
     ],
     "election_data": [
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "30日",
+            "election_name": "山口県知事選挙",
+            "district": "山口県",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1957年",
+            "month": "4月",
+            "day": "21日",
+            "election_name": "山口県知事選挙",
+            "district": "山口県",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
         {
             "year": "1960年",
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（1回目）"
-        },
-        {
-            "year": "1963年",
-            "month": "11月",
-            "day": "21日",
-            "election_name": "第30回衆議院議員総選挙",
-            "district": "山口2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（3回目）"
         },
         {
             "year": "1967年",
             "month": "1月",
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1969年",
             "month": "12月",
             "day": "27日",
             "election_name": "第32回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（5回目）"
         },
         {
             "year": "1972年",
             "month": "12月",
             "day": "10日",
             "election_name": "第33回衆議院議員総選挙",
-            "district": "山口2区",
+            "district": "旧山口2区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（6回目）"
         },
         {
-            "year": "1976年",
-            "month": "12月",
-            "day": "5日",
-            "election_name": "第34回衆議院議員総選挙",
-            "district": "山口2区",
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "山口地方区",
             "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（7回目）"
         }
     ]
 }

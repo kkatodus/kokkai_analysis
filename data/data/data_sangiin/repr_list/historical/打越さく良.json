@@ -1,9 +1,9 @@
 {
-    "name_kanji": "打越さく良、村木さく良",
+    "name_kanji": "打越さく良",
     "name_kana": "うちこしさくら",
     "years": [
         "2019-07-21",
-        "2022-07-10"
+        "2025-07-20"
     ],
     "election_data": [
         {
@@ -15,6 +15,16 @@
             "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"
+        },
+        {
+            "year": "2025年",
+            "month": "7月",
+            "day": "20日",
+            "election_name": "第27回参議院議員通常選挙",
+            "district": "新潟県選挙区",
+            "party": "立憲民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
         }
     ]
 }

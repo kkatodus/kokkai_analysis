@@ -1,7 +1,9 @@
 {
-    "name_kanji": "宮沢喜一、宮澤喜一",
+    "name_kanji": "宮沢喜一",
     "name_kana": "みやざわきいち",
     "years": [
+        "1953-04-24",
+        "1959-06-02",
         "1967-01-29",
         "1969-12-27",
         "1972-12-10",
@@ -16,6 +18,26 @@
         "2000-06-25"
     ],
     "election_data": [
+        {
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "広島県選挙区",
+            "party": "自由党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1959年",
+            "month": "6月",
+            "day": "2日",
+            "election_name": "第5回参議院議員通常選挙",
+            "district": "広島県選挙区",
+            "party": "自由民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
         {
             "year": "1967年",
             "month": "1月",
@@ -131,10 +153,10 @@
             "month": "6月",
             "day": "25日",
             "election_name": "第42回衆議院議員総選挙",
-            "district": "中国ブロック",
+            "district": "広島7区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（12回目） ※比例単独"
+            "election_freq": "（12回目）"
         }
     ]
 }

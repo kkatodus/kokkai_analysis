@@ -1,5 +1,5 @@
 {
-    "name_kanji": "寺本斉、寺本齋",
+    "name_kanji": "寺本斉",
     "name_kana": "てらもといつき",
     "years": [
         "1947-04-25",
@@ -25,46 +25,6 @@
             "party": "新自由党",
             "result": "当選",
             "election_freq": "（2回目）"
-        },
-        {
-            "year": "1952年",
-            "month": "10月",
-            "day": "1日",
-            "election_name": "第25回衆議院議員総選挙",
-            "district": "熊本1区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "熊本1区",
-            "party": "吉田自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "熊本1区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "熊本1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

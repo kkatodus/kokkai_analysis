@@ -1,7 +1,9 @@
 {
-    "name_kanji": "広川弘禅、廣川弘禪",
+    "name_kanji": "広川弘禅",
     "name_kana": "ひろかわこうぜん",
     "years": [
+        "1940-10-09",
+        "1946-05-31",
         "1947-04-25",
         "1949-01-23",
         "1952-10-01",
@@ -9,11 +11,31 @@
     ],
     "election_data": [
         {
+            "year": "1940年",
+            "month": "10月",
+            "day": "9日",
+            "election_name": "第20回衆議院議員総選挙 補欠選挙",
+            "district": "東京府第5区",
+            "party": "立憲政友会",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1946年",
+            "month": "5月",
+            "day": "31日",
+            "election_name": "第22回衆議院議員総選挙 再選挙",
+            "district": "東京都第2区",
+            "party": "日本自由党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "東京3区",
+            "district": "東京都第3区",
             "party": "日本自由党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -23,7 +45,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "東京3区",
+            "district": "東京都第3区",
             "party": "民主自由党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -33,60 +55,20 @@
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "東京3区",
+            "district": "東京都第3区",
             "party": "自由党",
             "result": "当選",
             "election_freq": "（5回目）"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "19日",
-            "election_name": "第26回衆議院議員総選挙",
-            "district": "東京3区",
-            "party": "鳩山自由党",
-            "result": "落選",
-            "election_freq": ""
         },
         {
             "year": "1955年",
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "東京3区",
+            "district": "東京都第3区",
             "party": "日本民主党",
             "result": "当選",
             "election_freq": "（6回目）"
-        },
-        {
-            "year": "1958年",
-            "month": "5月",
-            "day": "22日",
-            "election_name": "第28回衆議院議員総選挙",
-            "district": "福島2区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1960年",
-            "month": "11月",
-            "day": "20日",
-            "election_name": "第29回衆議院議員総選挙",
-            "district": "東京3区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1963年",
-            "month": "11月",
-            "day": "21日",
-            "election_name": "第30回衆議院議員総選挙",
-            "district": "東京3区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

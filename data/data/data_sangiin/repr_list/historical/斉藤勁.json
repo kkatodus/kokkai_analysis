@@ -1,11 +1,10 @@
 {
-    "name_kanji": "斉藤勁、齋藤勁",
+    "name_kanji": "斉藤勁",
     "name_kana": "さいとうつよし",
     "years": [
         "1995-07-23",
-        "1998-07-12",
         "2001-07-29",
-        "2004-07-11"
+        "2009-08-30"
     ],
     "election_data": [
         {
@@ -29,14 +28,14 @@
             "election_freq": "（2回目）"
         },
         {
-            "year": "2007年",
-            "month": "7月",
-            "day": "29日",
-            "election_name": "第21回参議院議員通常選挙",
-            "district": "比例区",
+            "year": "2009年",
+            "month": "8月",
+            "day": "30日",
+            "election_name": "第45回衆議院議員総選挙",
+            "district": "比例南関東ブロック",
             "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
+            "result": "当選",
+            "election_freq": "（3回目）"
         }
     ]
 }

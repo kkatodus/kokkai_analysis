@@ -1,9 +1,8 @@
 {
-    "name_kanji": "西村正美、西村まさみ",
+    "name_kanji": "西村正美",
     "name_kana": "にしむらまさみ",
     "years": [
-        "2010-07-11",
-        "2013-07-21"
+        "2010-07-11"
     ],
     "election_data": [
         {
@@ -15,16 +14,6 @@
             "party": "民主党",
             "result": "当選",
             "election_freq": "（1回目）"
-        },
-        {
-            "year": "2016年",
-            "month": "7月",
-            "day": "10日",
-            "election_name": "第24回参議院議員通常選挙",
-            "district": "比例区",
-            "party": "民進党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

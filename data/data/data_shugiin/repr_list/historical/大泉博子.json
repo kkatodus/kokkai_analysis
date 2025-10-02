@@ -1,26 +1,16 @@
 {
-    "name_kanji": "大泉博子、大泉ひろこ",
+    "name_kanji": "大泉博子",
     "name_kana": "おおいずみひろこ",
     "years": [
         "2009-08-30"
     ],
     "election_data": [
         {
-            "year": "2003年",
-            "month": "11月",
-            "day": "9日",
-            "election_name": "第43回衆議院議員総選挙",
-            "district": "中国ブロック",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": " ※山口1区落選"
-        },
-        {
             "year": "2009年",
             "month": "8月",
             "day": "30日",
             "election_name": "第45回衆議院議員総選挙",
-            "district": "茨城6区",
+            "district": "茨城県第6区",
             "party": "民主党",
             "result": "当選",
             "election_freq": "（1回目）"
@@ -30,10 +20,20 @@
             "month": "12月",
             "day": "16日",
             "election_name": "第46回衆議院議員総選挙",
-            "district": "北関東ブロック",
-            "party": "民主党",
+            "district": "茨城県第6区",
+            "party": "無所属",
             "result": "落選",
-            "election_freq": " ※茨城6区落選"
+            "election_freq": "（2回目）"
+        },
+        {
+            "year": "2016年",
+            "month": "11月",
+            "day": "13日",
+            "election_name": "つくば市長選挙",
+            "district": "つくば市",
+            "party": "無所属",
+            "result": "落選",
+            "election_freq": "（3回目）"
         }
     ]
 }

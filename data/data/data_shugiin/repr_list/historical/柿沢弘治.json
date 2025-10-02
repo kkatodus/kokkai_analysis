@@ -1,7 +1,8 @@
 {
-    "name_kanji": "柿沢弘治、柿澤弘治",
+    "name_kanji": "柿沢弘治",
     "name_kana": "かきざわこうじ",
     "years": [
+        "1977-07-10",
         "1980-06-22",
         "1983-12-18",
         "1986-07-06",
@@ -12,54 +13,64 @@
     ],
     "election_data": [
         {
+            "year": "1977年",
+            "month": "7月",
+            "day": "10日",
+            "election_name": "第11回参議院議員通常選挙",
+            "district": "東京都選挙区",
+            "party": "新自由クラブ",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
             "year": "1980年",
             "month": "6月",
             "day": "22日",
             "election_name": "第36回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "旧東京6区",
             "party": "新自由クラブ",
             "result": "当選",
-            "election_freq": "（1回目）"
+            "election_freq": "（2回目）"
         },
         {
             "year": "1983年",
             "month": "12月",
             "day": "18日",
             "election_name": "第37回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "旧東京6区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（2回目）"
+            "election_freq": "（3回目）"
         },
         {
             "year": "1986年",
             "month": "7月",
             "day": "6日",
             "election_name": "第38回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "旧東京6区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1990年",
             "month": "2月",
             "day": "18日",
             "election_name": "第39回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "旧東京6区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（5回目）"
         },
         {
             "year": "1993年",
             "month": "7月",
             "day": "18日",
             "election_name": "第40回衆議院議員総選挙",
-            "district": "東京6区",
+            "district": "旧東京6区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（5回目）"
+            "election_freq": "（6回目）"
         },
         {
             "year": "1996年",
@@ -69,7 +80,7 @@
             "district": "東京15区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（6回目）"
+            "election_freq": "（7回目）"
         },
         {
             "year": "2000年",
@@ -79,17 +90,7 @@
             "district": "東京15区",
             "party": "無所属",
             "result": "当選",
-            "election_freq": "（7回目）"
-        },
-        {
-            "year": "2003年",
-            "month": "11月",
-            "day": "9日",
-            "election_name": "第43回衆議院議員総選挙",
-            "district": "東京15区",
-            "party": "無所属の会",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（8回目）"
         }
     ]
 }

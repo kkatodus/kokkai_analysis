@@ -1,5 +1,5 @@
 {
-    "name_kanji": "実川清之、實川清之",
+    "name_kanji": "実川清之",
     "name_kana": "じつかわきよし",
     "years": [
         "1958-05-22",
@@ -8,16 +8,6 @@
         "1967-01-29"
     ],
     "election_data": [
-        {
-            "year": "1955年",
-            "month": "2月",
-            "day": "27日",
-            "election_name": "第27回衆議院議員総選挙",
-            "district": "千葉3区",
-            "party": "左派社会党",
-            "result": "落選",
-            "election_freq": ""
-        },
         {
             "year": "1958年",
             "month": "5月",
@@ -57,16 +47,6 @@
             "party": "日本社会党",
             "result": "当選",
             "election_freq": "（4回目）"
-        },
-        {
-            "year": "1969年",
-            "month": "12月",
-            "day": "27日",
-            "election_name": "第32回衆議院議員総選挙",
-            "district": "千葉3区",
-            "party": "日本社会党",
-            "result": "落選",
-            "election_freq": ""
         }
     ]
 }

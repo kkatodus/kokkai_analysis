@@ -1,5 +1,5 @@
 {
-    "name_kanji": "古井喜実、古井喜實",
+    "name_kanji": "古井喜実",
     "name_kana": "ふるいよしみ",
     "years": [
         "1952-10-01",
@@ -96,21 +96,11 @@
             "election_freq": "（8回目）"
         },
         {
-            "year": "1972年",
-            "month": "12月",
-            "day": "10日",
-            "election_name": "第33回衆議院議員総選挙",
-            "district": "鳥取全県区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
             "year": "1976年",
             "month": "12月",
             "day": "5日",
             "election_name": "第34回衆議院議員総選挙",
-            "district": "鳥取全県区",
+            "district": "鳥取県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（9回目）"
@@ -120,7 +110,7 @@
             "month": "10月",
             "day": "7日",
             "election_name": "第35回衆議院議員総選挙",
-            "district": "鳥取全県区",
+            "district": "鳥取県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（10回目）"
@@ -130,7 +120,7 @@
             "month": "6月",
             "day": "22日",
             "election_name": "第36回衆議院議員総選挙",
-            "district": "鳥取全県区",
+            "district": "鳥取県全県区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（11回目）"

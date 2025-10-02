@@ -1,49 +1,19 @@
 {
-    "name_kanji": "溝渕春次、溝淵春次",
-    "name_kana": "みぞぶちはるじ",
+    "name_kanji": "溝渕春次",
+    "name_kana": "みぞぶち はるじ",
     "years": [
-        "1950-06-04"
+        "1951-05-16"
     ],
     "election_data": [
         {
             "year": "1951年",
             "month": "5月",
             "day": "16日",
-            "election_name": "補欠選挙",
-            "district": "大阪府選挙区",
-            "party": "自由党",
+            "election_name": "第2回参議院議員補欠選挙",
+            "district": "大阪選挙区",
+            "party": "日本自由党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "24日",
-            "election_name": "第3回参議院議員通常選挙",
-            "district": "大阪府選挙区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1956年",
-            "month": "7月",
-            "day": "8日",
-            "election_name": "第4回参議院議員通常選挙",
-            "district": "大阪府選挙区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1959年",
-            "month": "6月",
-            "day": "2日",
-            "election_name": "第5回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "無所属",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（1回目）"
         }
     ]
 }

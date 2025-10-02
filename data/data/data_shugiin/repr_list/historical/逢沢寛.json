@@ -1,7 +1,8 @@
 {
-    "name_kanji": "逢沢寛、逢澤寛",
+    "name_kanji": "逢沢寛",
     "name_kana": "あいざわかん",
     "years": [
+        "1942-04-30",
         "1949-01-23",
         "1952-10-01",
         "1953-04-19",
@@ -12,14 +13,14 @@
     ],
     "election_data": [
         {
-            "year": "1947年",
+            "year": "1942年",
             "month": "4月",
-            "day": "25日",
-            "election_name": "第23回衆議院議員総選挙",
-            "district": "岡山1区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
+            "day": "30日",
+            "election_name": "第21回衆議院議員総選挙 (翼賛選挙)",
+            "district": "旧岡山1区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1949年",
@@ -29,7 +30,7 @@
             "district": "岡山1区",
             "party": "民主党",
             "result": "当選",
-            "election_freq": "（3回目）"
+            "election_freq": "（2回目）"
         },
         {
             "year": "1952年",
@@ -39,7 +40,7 @@
             "district": "岡山1区",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（4回目）"
+            "election_freq": "（3回目）"
         },
         {
             "year": "1953年",
@@ -49,7 +50,7 @@
             "district": "岡山1区",
             "party": "吉田自由党",
             "result": "当選",
-            "election_freq": "（5回目）"
+            "election_freq": "（4回目）"
         },
         {
             "year": "1955年",
@@ -59,7 +60,7 @@
             "district": "岡山1区",
             "party": "自由党",
             "result": "当選",
-            "election_freq": "（6回目）"
+            "election_freq": "（5回目）"
         },
         {
             "year": "1958年",
@@ -69,7 +70,7 @@
             "district": "岡山1区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（7回目）"
+            "election_freq": "（6回目）"
         },
         {
             "year": "1960年",
@@ -79,7 +80,7 @@
             "district": "岡山1区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（8回目）"
+            "election_freq": "（7回目）"
         },
         {
             "year": "1963年",
@@ -89,17 +90,7 @@
             "district": "岡山1区",
             "party": "自由民主党",
             "result": "当選",
-            "election_freq": "（9回目）"
-        },
-        {
-            "year": "1967年",
-            "month": "1月",
-            "day": "29日",
-            "election_name": "第31回衆議院議員総選挙",
-            "district": "岡山1区",
-            "party": "自由民主党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（8回目）"
         }
     ]
 }

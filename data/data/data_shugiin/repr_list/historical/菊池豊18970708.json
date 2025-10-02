@@ -1,0 +1,30 @@
+{
+    "name_kanji": "菊池豊",
+    "name_kana": "きくちゆたか",
+    "years": [
+        "1946-04-10",
+        "1947-04-25"
+    ],
+    "election_data": [
+        {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "茨城全県区",
+            "party": "無所属",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
+            "year": "1947年",
+            "month": "4月",
+            "day": "25日",
+            "election_name": "第23回衆議院議員総選挙",
+            "district": "茨城全県区",
+            "party": "民主党",
+            "result": "当選",
+            "election_freq": "（2回目）"
+        }
+    ]
+}

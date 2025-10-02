@@ -1,5 +1,5 @@
 {
-    "name_kanji": "浅岡信夫、淺岡信夫",
+    "name_kanji": "浅岡信夫",
     "name_kana": "あさおかのぶお",
     "years": [
         "1947-04-20"
@@ -13,27 +13,7 @@
             "district": "全国区",
             "party": "日本自由党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
-        },
-        {
-            "year": "1950年",
-            "month": "6月",
-            "day": "4日",
-            "election_name": "第2回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
-        },
-        {
-            "year": "1953年",
-            "month": "4月",
-            "day": "24日",
-            "election_name": "第3回参議院議員通常選挙",
-            "district": "全国区",
-            "party": "自由党",
-            "result": "落選",
-            "election_freq": ""
+            "election_freq": "（1回目）"
         }
     ]
 }

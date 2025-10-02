@@ -1,7 +1,8 @@
 {
-    "name_kanji": "関谷勝利、關谷勝利",
+    "name_kanji": "関谷勝利",
     "name_kana": "せきやかつとし",
     "years": [
+        "1946-04-10",
         "1949-01-23",
         "1952-10-01",
         "1953-04-19",
@@ -15,14 +16,14 @@
     ],
     "election_data": [
         {
-            "year": "1947年",
+            "year": "1946年",
             "month": "4月",
-            "day": "25日",
-            "election_name": "第23回衆議院議員総選挙",
-            "district": "愛媛1区",
-            "party": "民主党",
-            "result": "落選",
-            "election_freq": ""
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "愛媛県全県区",
+            "party": "日本進歩党",
+            "result": "当選",
+            "election_freq": "（1回目）"
         },
         {
             "year": "1949年",
@@ -50,7 +51,7 @@
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
             "district": "愛媛1区",
-            "party": "吉田自由党",
+            "party": "自由党",
             "result": "当選",
             "election_freq": "（4回目）"
         },

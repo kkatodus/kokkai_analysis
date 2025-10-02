@@ -1,28 +1,28 @@
 {
-    "name_kanji": "山本経勝、山本經勝",
+    "name_kanji": "山本経勝",
     "name_kana": "やまもとつねかつ",
     "years": [
-        "1953-04-24",
-        "1956-07-08"
+        "1947-04-20",
+        "1953-04-24"
     ],
     "election_data": [
         {
-            "year": "1955年",
-            "month": "3月",
-            "day": "17日",
-            "election_name": "補欠選挙",
-            "district": "福岡県選挙区",
-            "party": "日本社会党（左派）",
+            "year": "1947年",
+            "month": "4月",
+            "day": "20日",
+            "election_name": "第1回参議院議員通常選挙",
+            "district": "鳥取県選挙区",
+            "party": "日本社会党",
             "result": "当選",
-            "election_freq": "（1回目）[半期]"
+            "election_freq": "（1回目）"
         },
         {
-            "year": "1956年",
-            "month": "7月",
-            "day": "8日",
-            "election_name": "第4回参議院議員通常選挙",
-            "district": "福岡県選挙区",
-            "party": "日本社会党",
+            "year": "1953年",
+            "month": "4月",
+            "day": "24日",
+            "election_name": "第3回参議院議員通常選挙",
+            "district": "鳥取県選挙区",
+            "party": "左派社会党",
             "result": "当選",
             "election_freq": "（2回目）"
         }

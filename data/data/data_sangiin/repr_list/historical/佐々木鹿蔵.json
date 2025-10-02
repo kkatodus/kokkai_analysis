@@ -1,9 +1,8 @@
 {
-    "name_kanji": "佐々木鹿蔵、佐々木鹿藏",
+    "name_kanji": "佐々木鹿蔵",
     "name_kana": "ささきしかぞう",
     "years": [
-        "1947-04-20",
-        "1950-06-04"
+        "1947-04-20"
     ],
     "election_data": [
         {
@@ -11,7 +10,7 @@
             "month": "4月",
             "day": "20日",
             "election_name": "第1回参議院議員通常選挙",
-            "district": "広島県選挙区",
+            "district": "広島県地方区",
             "party": "無所属",
             "result": "当選",
             "election_freq": "（1回目）"

@@ -1,7 +1,8 @@
 {
-    "name_kanji": "小沢佐重喜、小澤佐重喜",
-    "name_kana": "おざわさえき",
+    "name_kanji": "小沢佐重喜",
+    "name_kana": "おざわ さえき",
     "years": [
+        "1946-04-10",
         "1947-04-25",
         "1949-01-23",
         "1952-10-01",
@@ -14,11 +15,21 @@
     ],
     "election_data": [
         {
+            "year": "1946年",
+            "month": "4月",
+            "day": "10日",
+            "election_name": "第22回衆議院議員総選挙",
+            "district": "岩手県全県区",
+            "party": "日本自由党",
+            "result": "当選",
+            "election_freq": "（1回目）"
+        },
+        {
             "year": "1947年",
             "month": "4月",
             "day": "25日",
             "election_name": "第23回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "日本自由党",
             "result": "当選",
             "election_freq": "（2回目）"
@@ -28,7 +39,7 @@
             "month": "1月",
             "day": "23日",
             "election_name": "第24回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "民主自由党",
             "result": "当選",
             "election_freq": "（3回目）"
@@ -38,7 +49,7 @@
             "month": "10月",
             "day": "1日",
             "election_name": "第25回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "自由党",
             "result": "当選",
             "election_freq": "（4回目）"
@@ -48,8 +59,8 @@
             "month": "4月",
             "day": "19日",
             "election_name": "第26回衆議院議員総選挙",
-            "district": "岩手2区",
-            "party": "吉田自由党",
+            "district": "岩手県第2区",
+            "party": "自由党",
             "result": "当選",
             "election_freq": "（5回目）"
         },
@@ -58,8 +69,8 @@
             "month": "2月",
             "day": "27日",
             "election_name": "第27回衆議院議員総選挙",
-            "district": "岩手2区",
-            "party": "自由党",
+            "district": "岩手県第2区",
+            "party": "日本民主党",
             "result": "当選",
             "election_freq": "（6回目）"
         },
@@ -68,7 +79,7 @@
             "month": "5月",
             "day": "22日",
             "election_name": "第28回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（7回目）"
@@ -78,7 +89,7 @@
             "month": "11月",
             "day": "20日",
             "election_name": "第29回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（8回目）"
@@ -88,7 +99,7 @@
             "month": "11月",
             "day": "21日",
             "election_name": "第30回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（9回目）"
@@ -98,7 +109,7 @@
             "month": "1月",
             "day": "29日",
             "election_name": "第31回衆議院議員総選挙",
-            "district": "岩手2区",
+            "district": "岩手県第2区",
             "party": "自由民主党",
             "result": "当選",
             "election_freq": "（10回目）"
