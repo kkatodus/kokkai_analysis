@@ -25,6 +25,7 @@ router.get("/", (req, res) => {
       "匠P",
       "末広直也",
       "桜井美空",
+	  "Sumitarou(SumiYama)"
     ],
   });
 });
