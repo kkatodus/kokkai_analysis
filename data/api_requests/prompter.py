@@ -185,6 +185,7 @@ class DeepResearchGemini:
 		self.grounding_tool = grounding_tool
 
 	def prompt(self, prompt, system_prompt="", shorten_ok=True, retry=2):
+		print("---------------------------------------------------------------")
 
 		# Make the request
 		print("PROMPTING GEMINI")
@@ -228,6 +229,10 @@ class DeepResearchGemini:
 					"grounding_chunk_indices": grounding_chunk_indices
 				}
 				cleaned_supports.append(cleaned_support)
+		print("RESPONSE TEXT", response_text)
+		print("CLEANED SUPPORTS", cleaned_supports)
+		print("CLEANED CHUNKS", cleaned_chunks)
+		print("---------------------------------------------------------------")
 		return response_text, cleaned_supports, cleaned_chunks
 
 
