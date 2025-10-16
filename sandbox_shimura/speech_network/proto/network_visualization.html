@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>発言応答ネットワーク可視化</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cytoscape.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    <!-- Day.js for date handling -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <!-- noUiSlider for range slider -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+
+    <style>
+        body { font-family: 'Hiragino Sans', 'Meiryo', sans-serif; }
+        #cy { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 10; }
+        .panel { z-index: 20; background-color: rgba(255, 255, 255, 0.9); }
+        .noUi-connect { background: #3B82F6; }
+        .noUi-handle { border: 1px solid #D1D5DB; border-radius: 9999px; background: #FFF; box-shadow: none; }
+        .loader { border-top-color: #3498db; -webkit-animation: spin 1s linear infinite; animation: spin 1s linear infinite; }
+        @-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="cy"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loader" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+        <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+        <p class="ml-4 text-xl font-semibold">データを読み込み中...</p>
+    </div>
+
+    <!-- Left Control Panel -->
+    <div class="panel fixed top-4 left-4 w-80 max-h-[95vh] p-4 rounded-lg shadow-lg overflow-y-auto">
+        <h1 class="text-xl font-bold mb-4">表示設定</h1>
+
+        <!-- Date Range Filter -->
+        <div>
+            <h2 class="font-semibold mb-2">期間フィルター</h2>
+            <div class="text-sm text-gray-600 mb-2">
+                <span id="date-range-display"></span>
+            </div>
+            <div id="date-slider" class="mx-2"></div>
+        </div>
+
+        <!-- Tag Filter -->
+        <div class="mt-6">
+            <h2 class="font-semibold mb-2">トピックタグ・フィルター</h2>
+            <div id="tag-filter-container" class="space-y-1 text-sm max-h-80 overflow-y-auto pr-2">
+                <!-- Tag checkboxes will be inserted here -->
+            </div>
+        </div>
+
+        <button id="reset-button" class="mt-6 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
+            リセット
+        </button>
+    </div>
+
+    <!-- Right Detail Panel -->
+    <div id="info-panel" class="panel fixed top-4 right-4 w-96 max-h-[95vh] p-4 rounded-lg shadow-lg overflow-y-auto hidden">
+        <h2 id="info-title" class="text-lg font-bold mb-2 border-b pb-2">詳細情報</h2>
+        <div id="info-content" class="text-sm space-y-3"></div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loader = document.getElementById('loader');
+    const infoPanel = document.getElementById('info-panel');
+    const infoTitle = document.getElementById('info-title');
+    const infoContent = document.getElementById('info-content');
+
+    // --- Cytoscape Style Definition ---
+    const cyStyle = [
+        {
+            selector: 'node',
+            style: {
+                'background-color': '#60A5FA', 'label': 'data(id)', 'width': 20, 'height': 20,
+                'font-size': '10px', 'color': '#334155', 'text-valign': 'bottom', 'text-halign': 'center',
+                'text-margin-y': 5
+            }
+        },
+        {
+            selector: 'edge',
+            style: {
+                'width': 1.5, 'line-color': '#94A3B8', 'target-arrow-color': '#94A3B8',
+                'target-arrow-shape': 'triangle', 'curve-style': 'bezier'
+            }
+        },
+        { selector: '.highlighted', style: { 'background-color': '#F43F5E', 'line-color': '#F43F5E', 'width': 3 } },
+        { selector: '.faded', style: { 'opacity': 0.15 } }
+    ];
+
+    // --- Main Application Logic ---
+    // (修正点) JSONファイルのパスを 'web' フォルダを指すように修正
+    fetch('./web/graph_data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            loader.style.display = 'none';
+            if (!data || !data.nodes || !data.edges) {
+                alert("データの読み込みに失敗しました。JSONの形式が正しくない可能性があります。");
+                return;
+            }
+            runVisualization(data);
+        })
+        .catch(error => {
+            loader.style.display = 'none';
+            alert("graph_data.json の読み込み中にエラーが発生しました。\n" + error);
+        });
+
+    function runVisualization(data) {
+        const minDate = dayjs(data.min_date);
+        const maxDate = dayjs(data.max_date);
+
+        // --- Initialize UI Elements ---
+        // Date Slider
+        const dateSlider = document.getElementById('date-slider');
+        noUiSlider.create(dateSlider, {
+            range: { 'min': minDate.unix(), 'max': maxDate.unix() },
+            start: [minDate.unix(), maxDate.unix()],
+            connect: true,
+            step: 24 * 60 * 60, // 1 day step
+            format: {
+                to: value => dayjs.unix(value).format('YYYY-MM-DD'),
+                from: value => dayjs(value).unix()
+            }
+        });
+        const dateRangeDisplay = document.getElementById('date-range-display');
+        dateSlider.noUiSlider.on('update', (values) => {
+            dateRangeDisplay.textContent = `${values[0]} から ${values[1]}`;
+        });
+        dateSlider.noUiSlider.on('set', applyFilters); // 'set' event triggers only when user finishes sliding
+
+        // Tag Filters
+        const tagContainer = document.getElementById('tag-filter-container');
+        data.all_tags.forEach(tag => {
+            const label = document.createElement('label');
+            label.className = 'flex items-center space-x-2 cursor-pointer';
+            label.innerHTML = `
+                <input type="checkbox" value="${tag}" class="tag-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span>${tag}</span>
+            `;
+            tagContainer.appendChild(label);
+        });
+        document.querySelectorAll('.tag-checkbox').forEach(cb => cb.addEventListener('change', applyFilters));
+
+        // --- Initialize Cytoscape ---
+        const cy = cytoscape({
+            container: document.getElementById('cy'),
+            elements: [...data.nodes, ...data.edges],
+            style: cyStyle,
+            layout: { name: 'cose', animate: false, padding: 80, nodeRepulsion: 10000 }
+        });
+
+        // --- Filter Logic ---
+        function applyFilters() {
+            const [startDate, endDate] = dateSlider.noUiSlider.get();
+            const selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked')).map(cb => cb.value);
+
+            cy.batch(() => {
+                cy.elements().style('display', 'element'); // Show all elements first
+
+                const edgesToHide = cy.edges().filter(edge => {
+                    const edgeDate = dayjs(edge.data('date'));
+                    const isDateInRange = edgeDate.isAfter(startDate) && edgeDate.isBefore(endDate);
+
+                    const hasSelectedTag = selectedTags.length === 0 || selectedTags.some(tag => edge.data('tags').includes(tag));
+
+                    return !isDateInRange || !hasSelectedTag;
+                });
+
+                edgesToHide.style('display', 'none');
+
+                // Hide nodes that have no visible edges
+                const nodesToHide = cy.nodes().filter(node => node.connectedEdges(':visible').length === 0);
+                nodesToHide.style('display', 'none');
+            });
+        }
+
+        // --- Event Handlers ---
+        cy.on('tap', 'node, edge', (event) => {
+            const ele = event.target;
+            displayInfo(ele);
+        });
+
+        cy.on('tap', (event) => {
+            if (event.target === cy) { // Click on background
+                infoPanel.classList.add('hidden');
+                cy.elements().removeClass('faded highlighted');
+            }
+        });
+
+        function displayInfo(ele) {
+            cy.elements().removeClass('highlighted').addClass('faded');
+            ele.removeClass('faded').addClass('highlighted');
+            if (ele.isNode()) {
+                ele.connectedEdges().union(ele.neighborhood()).removeClass('faded');
+            }
+
+            let content = '';
+            if (ele.isNode()) {
+                const data = ele.data();
+                infoTitle.textContent = `発言者: ${data.id}`;
+                content = `
+                    <p><strong>所属:</strong> ${data.group}</p>
+                    <p><strong>役職:</strong> ${data.position || 'N/A'}</p>
+                `;
+            } else { // It's an edge
+                const data = ele.data();
+                infoTitle.textContent = `発言の繋がり`;
+                content = `
+                    <p><strong>日付:</strong> ${data.date}</p>
+                    <p><strong>トピック要約:</strong> ${data.summary || 'N/A'}</p>
+                    <p><strong>タグ:</strong> ${data.tags.join(', ') || 'なし'}</p>
+                    <hr class="my-2">
+                    <p class="font-semibold text-blue-700">元の発言 (${data.source})</p>
+                    <p class="bg-gray-100 p-2 rounded">${data.previous_speech}</p>
+                    <p class="font-semibold text-green-700 mt-2">応答発言 (${data.target})</p>
+                    <p class="bg-gray-100 p-2 rounded">${data.subsequent_speech}</p>
+                `;
+            }
+            infoContent.innerHTML = content;
+            infoPanel.classList.remove('hidden');
+        }
+
+        // --- Reset Button ---
+        document.getElementById('reset-button').addEventListener('click', () => {
+            dateSlider.noUiSlider.set([minDate.unix(), maxDate.unix()]);
+            document.querySelectorAll('.tag-checkbox').forEach(cb => cb.checked = false);
+            applyFilters();
+            cy.animate({ fit: { padding: 50 }, duration: 500 });
+        });
+
+        // Initial filter application
+        applyFilters();
+    }
+});
+</script>
+
+</body>
+</html>
+
