@@ -25,7 +25,8 @@ router.get("/", (req, res) => {
       "匠P",
       "末広直也",
       "桜井美空",
-	  "Sumitarou(SumiYama)"
+	  "Sumitarou(SumiYama)",
+	  "日本人である事の幸せ、KAZUTO"
     ],
   });
 });

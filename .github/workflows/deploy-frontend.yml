@@ -1,0 +1,107 @@
+# Human-friendly workflow name shown in the GitHub UI.
+name: Deploy Frontend
+
+on:
+  # Run automatically when commits land on the main branch…
+  push:
+    branches:
+      - main
+  # …and allow manual invocation from the Actions tab.
+  workflow_dispatch:
+
+permissions:
+  # Allow the workflow to request an OIDC token for AWS role assumption.
+  id-token: write
+  # Read access to the repository so checkout can fetch code.
+  contents: read
+
+env:
+  # Where the React app lives relative to the repo root.
+  FRONTEND_DIR: frontend
+  # CloudFormation stack name to look up outputs from.
+  INFRA_STACK_NAME: FrontendStack
+
+jobs:
+  deploy:
+    # Use GitHub’s Ubuntu runner for the build and deploy steps.
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pull the repository contents onto the runner.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install Node.js 18 and enable npm caching for faster builds.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            infra/package-lock.json
+
+      # Install frontend dependencies using a clean lockfile install.
+      - name: Install frontend dependencies
+        working-directory: ${{ env.FRONTEND_DIR }}
+        run: npm ci
+
+      # Produce the production build artifacts for the React app.
+      - name: Build frontend
+        working-directory: ${{ env.FRONTEND_DIR }}
+        run: npm run build
+
+      # Install the CDK app dependencies to access aws CLI from node_modules if needed.
+      - name: Install infra dependencies
+        working-directory: infra
+        run: npm ci
+
+      # Configure AWS credentials via OIDC into the target account.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Fetch the S3 bucket and CloudFront details from the deployed stack.
+      - name: Collect CloudFormation outputs
+        id: stack
+        run: |
+          BUCKET_NAME=$(aws cloudformation describe-stacks \
+            --stack-name "$INFRA_STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
+            --output text)
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks \
+            --stack-name "$INFRA_STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendDistributionId'].OutputValue" \
+            --output text)
+          DISTRIBUTION_DOMAIN=$(aws cloudformation describe-stacks \
+            --stack-name "$INFRA_STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendDistributionDomainName'].OutputValue" \
+            --output text)
+
+          if [ -z "$BUCKET_NAME" ] || [ "$BUCKET_NAME" = "None" ]; then
+            echo "Bucket output FrontendBucketName not found on stack $INFRA_STACK_NAME" >&2
+            exit 1
+          fi
+
+          echo "bucket=$BUCKET_NAME" >> "$GITHUB_OUTPUT"
+          echo "distribution=$DISTRIBUTION_ID" >> "$GITHUB_OUTPUT"
+          echo "domain=$DISTRIBUTION_DOMAIN" >> "$GITHUB_OUTPUT"
+
+      # Upload the newly built static files to the site bucket, pruning stale files.
+      - name: Sync build artifacts to S3
+        run: aws s3 sync "$FRONTEND_DIR/build/" "s3://${{ steps.stack.outputs.bucket }}/" --delete
+
+      # Trigger a cache invalidation so users see the update quickly.
+      - name: Invalidate CloudFront cache
+        if: ${{ steps.stack.outputs.distribution != '' && steps.stack.outputs.distribution != 'None' }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ steps.stack.outputs.distribution }}" \
+            --paths "/*"
+
+      # Echo the distribution domain for quick visibility in the GitHub logs.
+      - name: Share distribution domain
+        if: ${{ steps.stack.outputs.domain != '' && steps.stack.outputs.domain != 'None' }}
+        run: echo "Frontend available at https://${{ steps.stack.outputs.domain }}"

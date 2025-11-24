@@ -34,6 +34,7 @@ class MeetingConvoCollector:
     def make_one_request(self, conditions_list, starting_point=1):
         conditions_link = "&".join(conditions_list)
         request_url = self.base_url+f"startRecord={starting_point}&"+conditions_link
+        print("FETCHING")
         print(request_url)
         response = requests.get(request_url)
         response = response.json()
@@ -42,4 +43,4 @@ class MeetingConvoCollector:
           return response, None
         next_position = response["nextRecordPosition"]
         return response, next_position
-		
+        

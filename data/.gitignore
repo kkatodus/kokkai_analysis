@@ -6,3 +6,4 @@ secret_keys/
 mecab-ipadic-neologd/
 .env
 geckodriver
+data/*
