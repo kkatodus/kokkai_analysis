@@ -199,20 +199,61 @@ flowchart TD
 
 ```mermaid
 flowchart TD
+    subgraph Local["Local Processing"]
+        LocalWorker["Local Machine<br/>Scraping & LLM Processing"]
+    end
+
     subgraph AWS["AWS Target Architecture"]
         S3Site["Amazon S3<br/>Static Website Bucket"]
         CloudFront["Amazon CloudFront<br/>Global CDN"]
-        LambdaApi["AWS Lambda<br/>Serverless API"]
+        ApiGateway["Amazon API Gateway<br/>Frontend Entry"]
+        Cognito["Amazon Cognito<br/>User Pool / OIDC"]
         DataLake["Amazon S3<br/>Data Lake"]
         EventBridge["Amazon EventBridge<br/>Scheduled Jobs"]
+        Bedrock["Amazon Bedrock<br/>RAG Inference"]
         VectorDB["OpenSearch Serverless<br/>Vector Store"]
+        subgraph VPC["VPC (Private Subnets)"]
+            LambdaApi["AWS Lambda<br/>Serverless API Functions"]
+            BatchJobs["AWS Batch<br/>Heavy Scheduled Jobs"]
+            RelationalDB["Amazon Aurora/PostgreSQL<br/>Primary DB"]
+            VpcEndpoints["VPC Endpoints<br/>S3 / Bedrock / OpenSearch"]
+        end
     end
 
     S3Site --> CloudFront --> EndUsers["Users"]
+    EndUsers --> ApiGateway
+    EndUsers --> Cognito
+    Cognito -- "JWT/OIDC tokens" --> EndUsers
+    Cognito -- "JWT authorizer" --> ApiGateway
+    ApiGateway --> LambdaApi
     EventBridge --> LambdaApi
-    LambdaApi --> DataLake
-    LambdaApi --> VectorDB
+    EventBridge --> BatchJobs
+    BatchJobs --> VpcEndpoints
+    LambdaApi --> VpcEndpoints
+    VpcEndpoints --> DataLake
+    VpcEndpoints --> Bedrock
+    VpcEndpoints --> VectorDB
+    LambdaApi --> RelationalDB
+    Bedrock --> DataLake
+    Bedrock --> VectorDB
+    LocalWorker -- "s3 sync (JSON, artifacts)" --> DataLake
+    LocalWorker -- "DB sync" --> RelationalDB
+    LocalWorker -- "Vector sync" --> VectorDB
 ```
+
+- Local machine runs scraping/LLM processing, then `s3 sync` pushes raw JSON and derived artifacts to the S3 data lake.
+- EventBridge can trigger AWS Batch for heavyweight scheduled jobs; outputs land in the S3 data lake for downstream APIs.
+- Lambda can call Amazon Bedrock for RAG-style responses, retrieving context from the S3 data lake and OpenSearch vector store.
+- Frontend requests hit API Gateway, which invokes Lambda functions to serve data from S3, Aurora/PostgreSQL, and OpenSearch.
+- The same job syncs processed tables into Aurora/PostgreSQL and embeddings into OpenSearch so the serverless API and site stay current.
+- Network boundaries: Lambda and Batch run in private subnets inside a VPC with endpoints to S3/Bedrock/OpenSearch; only CloudFront and API Gateway are public.
+
+### Identity & Auth (recommended)
+
+- Amazon Cognito User Pools (or an external OIDC provider) issues JWTs for signed-in users.
+- CloudFront forwards authenticated requests to API Gateway, which uses a JWT authorizer to validate tokens before invoking Lambda.
+- Lambda enforces fine-grained access (e.g., per-tenant or per-feature) and reads secrets from Secrets Manager/SSM instead of env vars.
+- Public assets stay cacheable on CloudFront/S3; API paths remain protected via Gateway authorizers.
 
 ---
 
