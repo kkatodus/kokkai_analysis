@@ -1,19 +1,12 @@
-// Import the core CDK library for base constructs, durations, removal policies, etc.
 import * as cdk from "aws-cdk-lib";
-// Bring in the specific service namespaces we need for CloudFront, its origins helper, and S3.
 import {
   aws_cloudfront as cloudfront,
   aws_cloudfront_origins as origins,
   aws_s3 as s3,
 } from "aws-cdk-lib";
-// Import the Construct base class to define our stack.
 import { Construct } from "constructs";
 
-// Define the configuration interface consumers can pass to tweak the stack behaviour.
 export interface FrontendStackProps extends cdk.StackProps {
-  /**
-   * Optional explicit bucket name. Leave undefined to let CloudFormation assign one.
-   */
   readonly siteBucketName?: string;
   /**
    * File to serve when the user hits the root path.
