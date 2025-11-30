@@ -22,7 +22,7 @@ on:
 
 env:
   AWS_REGION: ap-northeast-1
-  NODE_VERSION: "18"
+  NODE_VERSION: "22"
 
 jobs:
   build:
