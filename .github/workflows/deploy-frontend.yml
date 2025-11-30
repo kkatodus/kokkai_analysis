@@ -1,107 +1,222 @@
-# Human-friendly workflow name shown in the GitHub UI.
 name: Deploy Frontend
 
 on:
-  # Run automatically when commits land on the main branch…
   push:
     branches:
       - dev
-  # …and allow manual invocation from the Actions tab.
+      - stg
+      - prd
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
   workflow_dispatch:
-
-permissions:
-  # Allow the workflow to request an OIDC token for AWS role assumption.
-  id-token: write
-  # Read access to the repository so checkout can fetch code.
-  contents: read
+    inputs:
+      environment:
+        description: "Environment to deploy (dev, staging, prod)"
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
 
 env:
-  # Where the React app lives relative to the repo root.
-  FRONTEND_DIR: frontend
-  # CloudFormation stack name to look up outputs from.
-  INFRA_STACK_NAME: FrontendStack
+  AWS_REGION: ap-northeast-1
+  NODE_VERSION: "18"
 
 jobs:
-  deploy:
-    # Use GitHub’s Ubuntu runner for the build and deploy steps.
+  build:
+    name: Build Frontend
     runs-on: ubuntu-latest
-
     steps:
-      # Pull the repository contents onto the runner.
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # Install Node.js 18 and enable npm caching for faster builds.
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: npm
-          cache-dependency-path: |
-            frontend/package-lock.json
-            infra/package-lock.json
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
 
-      # Install frontend dependencies using a clean lockfile install.
       - name: Install frontend dependencies
-        working-directory: ${{ env.FRONTEND_DIR }}
+        working-directory: frontend
         run: npm ci
 
-      # Produce the production build artifacts for the React app.
       - name: Build frontend
-        working-directory: ${{ env.FRONTEND_DIR }}
+        working-directory: frontend
         run: npm run build
 
-      # Install the CDK app dependencies to access aws CLI from node_modules if needed.
-      - name: Install infra dependencies
-        working-directory: infra
-        run: npm ci
-
-      # Configure AWS credentials via OIDC into the target account.
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      # Fetch the S3 bucket and CloudFront details from the deployed stack.
-      - name: Collect CloudFormation outputs
-        id: stack
+      - name: Determine build output directory
+        id: build-output
+        working-directory: frontend
         run: |
-          BUCKET_NAME=$(aws cloudformation describe-stacks \
-            --stack-name "$INFRA_STACK_NAME" \
-            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
-            --output text)
-          DISTRIBUTION_ID=$(aws cloudformation describe-stacks \
-            --stack-name "$INFRA_STACK_NAME" \
-            --query "Stacks[0].Outputs[?OutputKey=='FrontendDistributionId'].OutputValue" \
-            --output text)
-          DISTRIBUTION_DOMAIN=$(aws cloudformation describe-stacks \
-            --stack-name "$INFRA_STACK_NAME" \
-            --query "Stacks[0].Outputs[?OutputKey=='FrontendDistributionDomainName'].OutputValue" \
-            --output text)
-
-          if [ -z "$BUCKET_NAME" ] || [ "$BUCKET_NAME" = "None" ]; then
-            echo "Bucket output FrontendBucketName not found on stack $INFRA_STACK_NAME" >&2
+          if [ -d "out" ]; then
+            echo "directory=out" >> $GITHUB_OUTPUT
+            echo "Found static export in 'out' directory"
+          elif [ -d ".next" ]; then
+            echo "directory=.next" >> $GITHUB_OUTPUT
+            echo "Found Next.js build in '.next' directory"
+          else
+            echo "Error: No build output found. Expected 'out' (static export) or '.next' (default build)"
             exit 1
           fi
 
-          echo "bucket=$BUCKET_NAME" >> "$GITHUB_OUTPUT"
-          echo "distribution=$DISTRIBUTION_ID" >> "$GITHUB_OUTPUT"
-          echo "domain=$DISTRIBUTION_DOMAIN" >> "$GITHUB_OUTPUT"
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend/${{ steps.build-output.outputs.directory }}
+          retention-days: 1
 
-      # Upload the newly built static files to the site bucket, pruning stale files.
-      - name: Sync build artifacts to S3
-        run: aws s3 sync "$FRONTEND_DIR/build/" "s3://${{ steps.stack.outputs.bucket }}/" --delete
+  deploy:
+    name: Deploy to S3 and CloudFront
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Trigger a cache invalidation so users see the update quickly.
-      - name: Invalidate CloudFront cache
-        if: ${{ steps.stack.outputs.distribution != '' && steps.stack.outputs.distribution != 'None' }}
+      - name: Determine environment from branch
+        id: env
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id "${{ steps.stack.outputs.distribution }}" \
-            --paths "/*"
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Manual trigger: use input
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          else
+            # Automatic trigger: determine from branch name
+            BRANCH_NAME="${{ github.ref_name }}"
+            case $BRANCH_NAME in
+              dev)
+                echo "environment=dev" >> $GITHUB_OUTPUT
+                ;;
+              stg)
+                echo "environment=staging" >> $GITHUB_OUTPUT
+                ;;
+              prd)
+                echo "environment=prod" >> $GITHUB_OUTPUT
+                ;;
+              *)
+                echo "Error: Unknown branch '$BRANCH_NAME'. Expected: dev, stg, or prd"
+                echo "Note: main and master branches do not trigger deployments."
+                exit 1
+                ;;
+            esac
+          fi
+          echo "Deploying to environment: ${{ steps.env.outputs.environment }}"
+          echo "Branch: ${{ github.ref_name }}"
 
-      # Echo the distribution domain for quick visibility in the GitHub logs.
-      - name: Share distribution domain
-        if: ${{ steps.stack.outputs.domain != '' && steps.stack.outputs.domain != 'None' }}
-        run: echo "Frontend available at https://${{ steps.stack.outputs.domain }}"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend-build
+
+      - name: Get stack outputs
+        id: stack-outputs
+        run: |
+          ENV="${{ steps.env.outputs.environment }}"
+          STACK_NAME="FrontendStack-${ENV}"
+          
+          echo "Fetching outputs from stack: $STACK_NAME"
+          
+          # Get bucket name
+          BUCKET_NAME=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
+            --output text \
+            --region ${{ env.AWS_REGION }} 2>/dev/null || echo "")
+          
+          if [ -z "$BUCKET_NAME" ]; then
+            echo "Error: Could not find bucket name from stack outputs."
+            echo "Make sure the infrastructure stack '$STACK_NAME' is deployed first."
+            exit 1
+          fi
+          
+          # Get distribution ID
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendDistributionId'].OutputValue" \
+            --output text \
+            --region ${{ env.AWS_REGION }} 2>/dev/null || echo "")
+          
+          if [ -z "$DISTRIBUTION_ID" ]; then
+            echo "Error: Could not find CloudFront distribution ID from stack outputs."
+            exit 1
+          fi
+          
+          echo "bucket_name=$BUCKET_NAME" >> $GITHUB_OUTPUT
+          echo "distribution_id=$DISTRIBUTION_ID" >> $GITHUB_OUTPUT
+          echo "Found bucket: $BUCKET_NAME"
+          echo "Found distribution: $DISTRIBUTION_ID"
+
+      - name: Determine build output directory
+        id: build-output
+        run: |
+          if [ -d "frontend-build/out" ]; then
+            echo "directory=frontend-build/out" >> $GITHUB_OUTPUT
+            echo "Using static export from 'out' directory"
+          elif [ -d "frontend-build/.next" ]; then
+            echo "directory=frontend-build/.next" >> $GITHUB_OUTPUT
+            echo "Using Next.js build from '.next' directory"
+          else
+            echo "Error: No build output found in artifacts"
+            exit 1
+          fi
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync ${{ steps.build-output.outputs.directory }} \
+            s3://${{ steps.stack-outputs.outputs.bucket_name }} \
+            --delete \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*.html" \
+            --exclude "*.json"
+          
+          # Upload HTML and JSON files with shorter cache
+          aws s3 sync ${{ steps.build-output.outputs.directory }} \
+            s3://${{ steps.stack-outputs.outputs.bucket_name }} \
+            --delete \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --include "*.html" \
+            --include "*.json"
+          
+          echo "Successfully synced files to S3 bucket: ${{ steps.stack-outputs.outputs.bucket_name }}"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          DISTRIBUTION_ID="${{ steps.stack-outputs.outputs.distribution_id }}"
+          
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*" \
+            --query "Invalidation.Id" \
+            --output text \
+            --region ${{ env.AWS_REGION }})
+          
+          echo "Created CloudFront invalidation: $INVALIDATION_ID"
+          echo "Waiting for invalidation to complete..."
+          
+          aws cloudfront wait invalidation-completed \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --id "$INVALIDATION_ID" \
+            --region ${{ env.AWS_REGION }} || echo "Note: Invalidation may still be in progress"
+          
+          echo "Cache invalidation completed"
+
+      - name: Deployment summary
+        run: |
+          echo "## Frontend Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ steps.env.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **S3 Bucket**: ${{ steps.stack-outputs.outputs.bucket_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **CloudFront Distribution**: ${{ steps.stack-outputs.outputs.distribution_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Output**: ${{ steps.build-output.outputs.directory }}" >> $GITHUB_STEP_SUMMARY

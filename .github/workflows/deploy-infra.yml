@@ -1,0 +1,225 @@
+name: Deploy Infrastructure
+
+on:
+  push:
+    branches:
+      - dev
+      - stg
+      - prd
+    paths:
+      - "infra/**"
+      - ".github/workflows/deploy-infra.yml"
+  pull_request:
+    branches:
+      - dev
+      - stg
+      - prd
+      - main
+      - master
+    paths:
+      - "infra/**"
+      - ".github/workflows/deploy-infra.yml"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy (dev, staging, prod)"
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+env:
+  AWS_REGION: ap-northeast-1
+  NODE_VERSION: "18"
+
+jobs:
+  diff:
+    name: CDK Diff (PR)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: infra/package-lock.json
+
+      - name: Determine environment from base branch
+        id: env
+        run: |
+          BASE_BRANCH="${{ github.base_ref }}"
+          case $BASE_BRANCH in
+            dev)
+              echo "environment=dev" >> $GITHUB_OUTPUT
+              ;;
+            stg)
+              echo "environment=staging" >> $GITHUB_OUTPUT
+              ;;
+            prd)
+              echo "environment=prod" >> $GITHUB_OUTPUT
+              ;;
+            main|master)
+              # PRs to main/master: default to dev for diff (no deployment)
+              echo "environment=dev" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "environment=dev" >> $GITHUB_OUTPUT
+              ;;
+          esac
+          echo "Running diff for environment: ${{ steps.env.outputs.environment }}"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install CDK dependencies
+        working-directory: infra
+        run: npm ci
+
+      - name: Build TypeScript
+        working-directory: infra
+        run: npm run build
+
+      - name: CDK Diff
+        working-directory: infra
+        run: |
+          npx cdk diff --context environment=${{ steps.env.outputs.environment }} || true
+          echo "CDK diff completed. Review the changes above."
+
+  deploy:
+    name: Deploy CDK Stacks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: infra/package-lock.json
+
+      - name: Determine environment from branch
+        id: env
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Manual trigger: use input
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          else
+            # Automatic trigger: determine from branch name
+            BRANCH_NAME="${{ github.ref_name }}"
+            case $BRANCH_NAME in
+              dev)
+                echo "environment=dev" >> $GITHUB_OUTPUT
+                ;;
+              stg)
+                echo "environment=staging" >> $GITHUB_OUTPUT
+                ;;
+              prd)
+                echo "environment=prod" >> $GITHUB_OUTPUT
+                ;;
+              *)
+                echo "Error: Unknown branch '$BRANCH_NAME'. Expected: dev, stg, or prd"
+                echo "Note: main and master branches do not trigger deployments."
+                exit 1
+                ;;
+            esac
+          fi
+          echo "Deploying to environment: ${{ steps.env.outputs.environment }}"
+          echo "Branch: ${{ github.ref_name }}"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set environment variables
+        run: |
+          ENV="${{ steps.env.outputs.environment }}"
+          echo "CDK_ENVIRONMENT=$ENV" >> $GITHUB_ENV
+          echo "Deploying to environment: $ENV"
+          
+          # Set account ID based on environment
+          case $ENV in
+            dev)
+              if [ -n "${{ secrets.AWS_ACCOUNT_ID_DEV }}" ]; then
+                echo "AWS_ACCOUNT_ID_DEV=${{ secrets.AWS_ACCOUNT_ID_DEV }}" >> $GITHUB_ENV
+              fi
+              ;;
+            staging)
+              if [ -n "${{ secrets.AWS_ACCOUNT_ID_STAGING }}" ]; then
+                echo "AWS_ACCOUNT_ID_STAGING=${{ secrets.AWS_ACCOUNT_ID_STAGING }}" >> $GITHUB_ENV
+              fi
+              ;;
+            prod)
+              if [ -n "${{ secrets.AWS_ACCOUNT_ID_PROD }}" ]; then
+                echo "AWS_ACCOUNT_ID_PROD=${{ secrets.AWS_ACCOUNT_ID_PROD }}" >> $GITHUB_ENV
+              fi
+              ;;
+          esac
+
+      - name: Install CDK dependencies
+        working-directory: infra
+        run: npm ci
+
+      - name: Build TypeScript
+        working-directory: infra
+        run: npm run build
+
+      - name: Check CDK bootstrap
+        id: bootstrap
+        working-directory: infra
+        run: |
+          ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+          REGION=${{ env.AWS_REGION }}
+          BOOTSTRAP_STACK="CDKToolkit"
+          
+          if aws cloudformation describe-stacks --stack-name $BOOTSTRAP_STACK --region $REGION >/dev/null 2>&1; then
+            echo "bootstrap_status=exists" >> $GITHUB_OUTPUT
+            echo "CDK bootstrap already exists"
+          else
+            echo "bootstrap_status=missing" >> $GITHUB_OUTPUT
+            echo "CDK bootstrap not found"
+          fi
+
+      - name: Bootstrap CDK (if needed)
+        if: steps.bootstrap.outputs.bootstrap_status == 'missing'
+        working-directory: infra
+        run: |
+          ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+          REGION=${{ env.AWS_REGION }}
+          echo "Bootstrapping CDK for account $ACCOUNT in region $REGION"
+          npx cdk bootstrap aws://$ACCOUNT/$REGION
+
+      - name: CDK Synth
+        working-directory: infra
+        run: npx cdk synth --context environment=${{ steps.env.outputs.environment }}
+
+      - name: CDK Deploy
+        working-directory: infra
+        run: |
+          npx cdk deploy --all \
+            --context environment=${{ steps.env.outputs.environment }} \
+            --require-approval never
+
+      - name: Output stack information
+        working-directory: infra
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ steps.env.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Stack**: FrontendStack-${{ steps.env.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: ${{ env.AWS_REGION }}" >> $GITHUB_STEP_SUMMARY

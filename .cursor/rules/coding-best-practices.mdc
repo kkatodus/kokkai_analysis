@@ -1,0 +1,176 @@
+---
+alwaysApply: true
+description: Coding best practices and conventions for the KOKKAI DOC project
+---
+
+# Coding Best Practices
+
+## General Principles
+
+1. **Explicit over Implicit**: Make code intentions clear through naming and structure
+2. **Fail Fast**: Validate inputs and fail early with clear error messages
+3. **Single Responsibility**: Each function, class, or module should have one clear purpose
+4. **DRY (Don't Repeat Yourself)**: Extract common patterns into reusable utilities
+5. **Documentation**: Document "why" not "what" - code should be self-explanatory
+
+## TypeScript/JavaScript Best Practices
+
+### Type Safety
+- Always use explicit types for function parameters and return values
+- Avoid `any` - use `unknown` and type guards when necessary
+- Leverage TypeScript's strict mode features
+- Use interfaces for object shapes, types for unions/intersections
+
+### Code Organization
+- Keep functions small and focused (ideally < 50 lines)
+- Use meaningful variable and function names
+- Prefer `const` over `let`, avoid `var`
+- Use arrow functions for callbacks, regular functions for methods
+- Group related functionality into modules
+
+### Error Handling
+- Always handle errors explicitly - don't silently swallow exceptions
+- Use try-catch for async operations
+- Provide meaningful error messages with context
+- Log errors appropriately (console.error for debugging, structured logging for production)
+
+### Async/Await
+- Prefer async/await over Promise chains
+- Always await promises or handle errors
+- Use Promise.all() for parallel operations when appropriate
+- Don't forget to handle rejections
+
+## CDK Best Practices
+
+### Stack Design
+- Keep stacks focused on a single concern (e.g., FrontendStack, ApiStack)
+- Use environment-specific configurations from [lib/config/environments.ts](mdc:infra/lib/config/environments.ts)
+- Always extend `BaseStackProps` for consistent environment handling
+- Tag all resources with environment and project tags
+
+### Resource Naming
+- Use descriptive resource IDs that indicate purpose
+- Follow AWS naming conventions
+- Include environment in resource names when appropriate
+- Use CDK's automatic naming when possible (more maintainable)
+
+### Security
+- Never hardcode credentials or secrets
+- Use AWS Secrets Manager or Parameter Store for sensitive data
+- Apply least-privilege IAM policies
+- Enable encryption at rest and in transit
+- Block public access by default
+
+### Outputs and Exports
+- Export stack outputs for cross-stack references
+- Use environment-specific export names (e.g., `FrontendBucketName-prod`)
+- Document what each output is used for
+
+### Code Structure
+- Keep stack constructors focused on resource creation
+- Extract complex logic into helper methods
+- Use CDK patterns and constructs when available
+- Comment complex CloudFormation configurations
+
+## GitHub Actions Best Practices
+
+### Workflow Design
+- Keep workflows focused and single-purpose
+- Use reusable workflows for common patterns
+- Fail fast - validate inputs early
+- Provide clear error messages in workflow steps
+
+### Security
+- Never commit secrets or credentials
+- Use GitHub Secrets for sensitive data
+- Use least-privilege IAM roles for AWS credentials
+- Validate inputs in workflow_dispatch triggers
+
+### Performance
+- Cache dependencies (npm, pip, etc.) when possible
+- Use matrix strategies for parallel jobs when appropriate
+- Clean up artifacts after use
+- Set appropriate retention periods for artifacts
+
+### Error Handling
+- Use `set -e` in bash scripts to fail on errors
+- Check for required tools/environment before use
+- Provide meaningful error messages
+- Use conditional steps (`if:`) to handle optional operations
+
+### Documentation
+- Add comments for complex workflow logic
+- Document required secrets and variables
+- Explain environment detection logic
+- Note any manual steps required
+
+## Code Review Guidelines
+
+### Before Submitting
+- Run linters and fix all warnings
+- Ensure tests pass (if applicable)
+- Update documentation if behavior changes
+- Check that workflows will trigger correctly
+
+### Review Checklist
+- [ ] Code follows project structure conventions
+- [ ] Environment configuration is correct
+- [ ] No hardcoded values (use config/env vars)
+- [ ] Error handling is appropriate
+- [ ] Documentation is updated
+- [ ] Security best practices followed
+- [ ] No unnecessary dependencies added
+
+## File Organization
+
+### Naming Conventions
+- Use kebab-case for file names: `frontend-stack.ts`
+- Use PascalCase for classes: `FrontendStack`
+- Use camelCase for functions and variables: `getEnvironmentConfig`
+- Use UPPER_SNAKE_CASE for constants: `AWS_REGION`
+
+### Directory Structure
+- Group related files in directories
+- Keep directory depth reasonable (max 3-4 levels)
+- Use index files for clean imports when appropriate
+- Separate configuration from implementation
+
+## Documentation Standards
+
+### Code Comments
+- Write self-documenting code - comments should explain "why" not "what"
+- Document complex algorithms or business logic
+- Add JSDoc comments for public APIs
+- Keep comments up-to-date with code changes
+
+### README Files
+- Keep README files in relevant directories
+- Document setup, usage, and deployment
+- Include examples for common tasks
+- Link to related documentation
+
+## Testing Considerations
+
+- Write tests for critical business logic
+- Test error cases, not just happy paths
+- Use descriptive test names that explain what is being tested
+- Keep tests independent and isolated
+- Mock external dependencies (AWS services, APIs)
+
+## Performance
+
+- Avoid premature optimization
+- Profile before optimizing
+- Use appropriate data structures
+- Consider caching for expensive operations
+- Monitor resource usage in production
+
+## Security Checklist
+
+- [ ] No secrets in code or config files
+- [ ] Input validation on all user-facing endpoints
+- [ ] Proper authentication and authorization
+- [ ] HTTPS/TLS for all external communications
+- [ ] Regular dependency updates for security patches
+- [ ] Least-privilege IAM policies
+- [ ] Encrypted data at rest and in transit

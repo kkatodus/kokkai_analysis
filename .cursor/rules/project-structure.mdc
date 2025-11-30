@@ -1,0 +1,59 @@
+---
+alwaysApply: true
+description: High-level project structure and organization
+---
+
+# KOKKAI DOC Project Structure
+
+## Overview
+
+KOKKAI DOC is a civic-tech project that analyzes Japanese parliamentary speeches using LLMs. The project has three main pillars:
+
+1. **`api/`** - Express.js backend serving processed data
+2. **`frontend/`** - Next.js React application (previously CRA)
+3. **`data/`** - Python pipelines for scraping, processing, and LLM analysis
+4. **`infra/`** - AWS CDK infrastructure code
+
+## Key Directories
+
+### Infrastructure (`infra/`)
+- CDK TypeScript code for AWS infrastructure
+- Environment-based deployment configuration
+- See [infra/README.md](mdc:infra/README.md) and [infra/DEPLOYMENT.md](mdc:infra/DEPLOYMENT.md)
+
+### Frontend (`frontend/`)
+- Next.js application
+- Builds to `out/` (static export) or `.next/` (default)
+- Deployed to S3 + CloudFront via GitHub Actions
+
+### Backend (`api/`)
+- Express.js server
+- Currently deployed on Heroku (legacy)
+- Serves data from `api/data_*` directories
+
+### Data Pipeline (`data/`)
+- Python scripts for scraping and LLM processing
+- Large data directories (`data/data_*`) are part of the repo
+- See [AGENTS.md](mdc:AGENTS.md) for detailed documentation
+
+## Deployment Strategy
+
+- **Branch-based**: `dev`, `stg`, `prd` branches map to environments
+- **GitHub Actions**: Automated deployments on push
+- **Infrastructure**: Deployed via CDK from `infra/` directory
+- **Frontend**: Built and deployed to S3/CloudFront from `frontend/` directory
+
+## Important Notes
+
+- Large data directories are committed to the repo - don't delete unless regenerating
+- Environment configuration is in `infra/lib/config/environments.ts`
+- GitHub Actions workflows are in `.github/workflows/`
+- See [README.md](mdc:README.md) for project overview and [AGENTS.md](mdc:AGENTS.md) for detailed codebase guide
+
+## Code Organization Best Practices
+
+- **Follow existing patterns**: Match the structure and style of existing code
+- **Consistent naming**: Use project naming conventions (kebab-case for files, PascalCase for classes)
+- **Modular design**: Keep components, functions, and modules focused and reusable
+- **Environment awareness**: Always consider multi-environment deployment when writing code
+- **Documentation**: Update relevant README files when adding features or changing behavior

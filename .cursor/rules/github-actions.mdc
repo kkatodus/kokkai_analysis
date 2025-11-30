@@ -1,0 +1,71 @@
+---
+globs: .github/workflows/*.yml
+description: GitHub Actions workflow patterns and conventions
+---
+
+# GitHub Actions Workflow Guidelines
+
+## Workflow Files
+
+- [.github/workflows/deploy-infra.yml](mdc:.github/workflows/deploy-infra.yml): Infrastructure (CDK) deployment
+- [.github/workflows/deploy-frontend.yml](mdc:.github/workflows/deploy-frontend.yml): Frontend build and deployment
+
+## Common Patterns
+
+### Environment Detection
+
+All workflows use this pattern to determine environment from branch:
+
+```yaml
+- name: Determine environment from branch
+  id: env
+  run: |
+    BRANCH_NAME="${{ github.ref_name }}"
+    case $BRANCH_NAME in
+      dev)
+        echo "environment=dev" >> $GITHUB_OUTPUT
+        ;;
+      stg)
+        echo "environment=staging" >> $GITHUB_OUTPUT
+        ;;
+      prd|main|master)
+        echo "environment=prod" >> $GITHUB_OUTPUT
+        ;;
+    esac
+```
+
+### Required Secrets
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_ACCOUNT_ID_DEV`, `AWS_ACCOUNT_ID_STAGING`, `AWS_ACCOUNT_ID_PROD` (optional)
+
+### Required Variables
+
+- `AWS_REGION` (defaults to `us-east-1`)
+
+### Workflow Triggers
+
+- **Push**: Triggers on `dev`, `stg`, `prd`, `main`, `master` branches
+- **PR**: Runs diff/validation only (no deployment)
+- **Manual**: Workflow dispatch with environment selection
+
+## When Modifying Workflows
+
+1. Maintain branch-to-environment mapping consistency
+2. Ensure PR workflows don't deploy (only validate/diff)
+3. Keep environment variable setting logic consistent
+4. Update documentation if workflow behavior changes
+
+## Best Practices for Workflows
+
+- Always validate inputs before using them (especially in workflow_dispatch)
+- Use `set -e` in bash scripts to fail fast on errors
+- Cache dependencies (npm, pip) to speed up workflows
+- Provide clear error messages when steps fail
+- Use conditional steps (`if:`) for optional operations
+- Never commit secrets - always use GitHub Secrets
+- Add step summaries for deployment information
+- Check for required tools/environment before use
+- Use appropriate artifact retention periods
+- Document required secrets and variables in workflow comments

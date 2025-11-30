@@ -1,0 +1,63 @@
+---
+globs: infra/**/*.ts
+description: CDK infrastructure structure and environment configuration
+---
+
+# CDK Infrastructure Structure
+
+## Directory Structure
+
+```
+infra/
+├── bin/infra.ts              # CDK app entry point - determines environment from context/env
+├── lib/
+│   ├── stacks/
+│   │   └── frontend-stack.ts # Frontend infrastructure (S3 + CloudFront)
+│   └── config/
+│       ├── environments.ts   # Environment configurations (dev/staging/prod)
+│       └── stack-props.ts   # Shared stack props interfaces
+```
+
+## Environment Configuration
+
+Environment configs are defined in [lib/config/environments.ts](mdc:infra/lib/config/environments.ts):
+- Each environment specifies: account, region, bucket name, logging settings, tags
+- Environment is determined by:
+  1. CDK context: `--context environment=ENV`
+  2. Environment variable: `CDK_ENVIRONMENT=ENV`
+  3. Defaults to `dev` if not specified
+
+## Stack Naming Convention
+
+Stacks are named with environment suffix: `FrontendStack-{environment}`
+- Example: `FrontendStack-dev`, `FrontendStack-staging`, `FrontendStack-prod`
+
+## Stack Props
+
+All stacks extend `BaseStackProps` from [lib/config/stack-props.ts](mdc:infra/lib/config/stack-props.ts), which includes:
+- `environmentConfig`: Full environment configuration
+- `environmentName`: Environment name string
+
+## Key Files
+
+- [bin/infra.ts](mdc:infra/bin/infra.ts): Main entry point - loads environment config and instantiates stacks
+- [lib/stacks/frontend-stack.ts](mdc:infra/lib/stacks/frontend-stack.ts): Frontend infrastructure stack
+- [lib/config/environments.ts](mdc:infra/lib/config/environments.ts): Environment definitions
+
+## When Adding New Stacks
+
+1. Create stack file in `lib/stacks/`
+2. Extend `BaseStackProps` for props
+3. Import and instantiate in `bin/infra.ts` with environment-specific naming
+4. Stack will automatically get environment tags and configuration
+
+## Best Practices for CDK Code
+
+- Always use `BaseStackProps` to ensure environment configuration is passed correctly
+- Tag all resources with environment tags from `environmentConfig.tags`
+- Use descriptive resource IDs that indicate purpose and environment
+- Export stack outputs with environment-specific names for cross-stack references
+- Never hardcode AWS account IDs or regions - use `environmentConfig`
+- Enable encryption and security features by default
+- Add CloudFormation outputs for resources that other stacks or workflows need
+- Keep stack constructors focused - extract complex logic into helper methods

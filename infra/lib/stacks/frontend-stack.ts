@@ -5,8 +5,9 @@ import {
   aws_s3 as s3,
 } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import { BaseStackProps } from "../config/stack-props";
 
-export interface FrontendStackProps extends cdk.StackProps {
+export interface FrontendStackProps extends BaseStackProps {
   readonly siteBucketName?: string;
   /**
    * File to serve when the user hits the root path.
@@ -15,7 +16,7 @@ export interface FrontendStackProps extends cdk.StackProps {
   readonly defaultRootObject?: string;
   /**
    * Whether to enable CloudFront access logging to a dedicated bucket.
-   * @default false
+   * If not specified, uses the value from environmentConfig.enableLogging
    */
   readonly enableLogging?: boolean;
   /**
@@ -33,23 +34,49 @@ export class FrontendStack extends cdk.Stack {
   public readonly distribution: cloudfront.Distribution;
 
   // The constructor wires everything together based on incoming props.
-  constructor(scope: Construct, id: string, props?: FrontendStackProps) {
+  constructor(scope: Construct, id: string, props: FrontendStackProps) {
     // Merge incoming props with defaults so we have concrete values to use below.
     const {
       siteBucketName,
       defaultRootObject = "index.html",
-      enableLogging = false,
+      enableLogging,
       spaRewrite = true,
+      environmentConfig,
+      environmentName,
       ...stackProps
-    } = props ?? {};
+    } = props;
 
-    // Initialise the base Stack with whatever remains in stackProps.
-    super(scope, id, stackProps);
+    // Use environment-specific account and region
+    const env = {
+      account: environmentConfig.account,
+      region: environmentConfig.region,
+    };
+
+    // Initialise the base Stack with environment config and remaining props.
+    super(scope, id, {
+      ...stackProps,
+      env,
+      tags: {
+        ...environmentConfig.tags,
+        Stack: "FrontendStack",
+        ...stackProps.tags,
+      },
+    });
+
+    // Determine bucket name: use prop, then environment config, then undefined (CDK generates)
+    const bucketName =
+      siteBucketName || environmentConfig.frontendBucketName;
+
+    // Determine logging: use prop, then environment config, then false
+    const shouldEnableLogging =
+      enableLogging !== undefined
+        ? enableLogging
+        : environmentConfig.enableLogging;
 
     // Create the S3 bucket that stores the static assets for the frontend.
     this.siteBucket = new s3.Bucket(this, "FrontendBucket", {
       // Optionally apply a fixed bucket name if one was provided.
-      ...(!siteBucketName ? {} : { bucketName: siteBucketName }),
+      ...(!bucketName ? {} : { bucketName }),
       // Ensure no direct public access; only CloudFront can read the bucket.
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       // Encrypt objects at rest with the default AWS-managed key.
@@ -70,7 +97,7 @@ export class FrontendStack extends cdk.Stack {
       "FrontendOAI",
       {
         // Add a helpful comment in the AWS console.
-        comment: "CloudFront access identity for the frontend bucket",
+        comment: `CloudFront access identity for ${environmentName} frontend bucket`,
       }
     );
 
@@ -78,7 +105,7 @@ export class FrontendStack extends cdk.Stack {
     this.siteBucket.grantRead(originAccessIdentity);
 
     // Optionally create a separate bucket to store CloudFront access logs.
-    const accessLogsBucket = enableLogging
+    const accessLogsBucket = shouldEnableLogging
       ? new s3.Bucket(this, "FrontendLogsBucket", {
           // Encrypt log files at rest.
           encryption: s3.BucketEncryption.S3_MANAGED,
@@ -156,16 +183,20 @@ export class FrontendStack extends cdk.Stack {
     // Output the bucket name for easy reference after deployment.
     new cdk.CfnOutput(this, "FrontendBucketName", {
       value: this.siteBucket.bucketName,
+      exportName: `FrontendBucketName-${environmentName}`,
     });
 
     // Output the distribution domain so you can wire DNS or test quickly.
     new cdk.CfnOutput(this, "FrontendDistributionDomainName", {
       value: this.distribution.distributionDomainName,
+      exportName: `FrontendDistributionDomainName-${environmentName}`,
     });
 
     // Output the distribution ID for invalidations or automation hooks.
     new cdk.CfnOutput(this, "FrontendDistributionId", {
       value: this.distribution.distributionId,
+      exportName: `FrontendDistributionId-${environmentName}`,
     });
   }
 }
+

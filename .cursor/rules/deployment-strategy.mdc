@@ -1,0 +1,54 @@
+---
+alwaysApply: true
+description: Branch-based deployment strategy and GitHub Actions workflows
+---
+
+# Branch-Based Deployment Strategy
+
+This project uses a **branch-per-environment** deployment strategy where each branch automatically deploys to its corresponding AWS environment.
+
+## Branch to Environment Mapping
+
+- `dev` branch → `dev` environment (Development)
+- `stg` branch → `staging` environment (Staging)
+- `prd` branch → `prod` environment (Production)
+- `main` or `master` branch → **No deployment** (source of truth only)
+
+## GitHub Actions Workflows
+
+### Infrastructure Deployment
+- **File**: [.github/workflows/deploy-infra.yml](mdc:.github/workflows/deploy-infra.yml)
+- **Triggers**: Push to `dev`, `stg`, or `prd` when `infra/**` changes
+- **Behavior**: Automatically determines environment from branch name and deploys CDK stacks
+- **PR Behavior**: Runs `cdk diff` only (no deployment). PRs to `main`/`master` default to `dev` for diff
+- **Note**: Pushes to `main`/`master` do **NOT** trigger deployments
+
+### Frontend Deployment
+- **File**: [.github/workflows/deploy-frontend.yml](mdc:.github/workflows/deploy-frontend.yml)
+- **Triggers**: Push to `dev`, `stg`, or `prd` when `frontend/**` changes
+- **Behavior**: Builds frontend, syncs to S3, and invalidates CloudFront cache
+- **Requires**: Infrastructure stack must be deployed first for the target environment
+- **Note**: Pushes to `main`/`master` do **NOT** trigger deployments
+
+## Key Principles
+
+1. **Automatic Environment Detection**: Environment is determined from branch name - no manual selection needed for normal deployments
+2. **Separate Workflows**: Infrastructure and frontend have independent deployment workflows
+3. **Environment Isolation**: Each environment has its own AWS resources and stack names (e.g., `FrontendStack-dev`, `FrontendStack-staging`, `FrontendStack-prod`)
+4. **Manual Override**: Workflows support manual dispatch with environment selection for emergency deployments
+
+## When Making Changes
+
+- **Infrastructure changes**: Modify files in `infra/` directory and push to `dev`, `stg`, or `prd` branch
+- **Frontend changes**: Modify files in `frontend/` directory and push to `dev`, `stg`, or `prd` branch
+- **Both changes**: Push to the deployment branch - both workflows will trigger independently
+- **Main branch**: Used as source of truth - merge from `prd` after production deployment (no deployment triggered)
+
+## Deployment Best Practices
+
+- **Test in dev first**: Always test changes in `dev` environment before promoting to `stg` or `prd`
+- **Review diffs**: Check `cdk diff` output in PRs before merging
+- **Verify deployments**: Confirm deployments succeeded by checking workflow logs and AWS console
+- **Rollback plan**: Know how to rollback if deployment fails (revert commit or manual stack update)
+- **Environment parity**: Keep environment configurations similar to avoid surprises
+- **Documentation**: Update [infra/README.md](mdc:infra/README.md) or [infra/DEPLOYMENT.md](mdc:infra/DEPLOYMENT.md) if deployment process changes
