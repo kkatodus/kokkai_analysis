@@ -8,10 +8,6 @@ export interface EnvironmentConfig {
   account: string;
   /** AWS Region */
   region: string;
-  /** Optional S3 bucket name for frontend (if not provided, CDK will generate one) */
-  frontendBucketName?: string;
-  /** Enable CloudFront access logging */
-  enableLogging: boolean;
   /** Stack tags to apply to all resources */
   tags?: Record<string, string>;
 }
@@ -24,8 +20,6 @@ export const environments: Record<string, EnvironmentConfig> = {
   dev: {
     account: process.env.AWS_ACCOUNT_ID_DEV || process.env.CDK_DEFAULT_ACCOUNT || "",
     region: process.env.AWS_REGION || "ap-northeast-1",
-    frontendBucketName: process.env.FRONTEND_BUCKET_NAME_DEV,
-    enableLogging: false,
     tags: {
       Environment: "dev",
       Project: "kokkai-doc",
@@ -34,8 +28,6 @@ export const environments: Record<string, EnvironmentConfig> = {
   staging: {
     account: process.env.AWS_ACCOUNT_ID_STAGING || process.env.CDK_DEFAULT_ACCOUNT || "",
     region: process.env.AWS_REGION || "ap-northeast-1",
-    frontendBucketName: process.env.FRONTEND_BUCKET_NAME_STAGING,
-    enableLogging: true,
     tags: {
       Environment: "staging",
       Project: "kokkai-doc",
@@ -44,8 +36,6 @@ export const environments: Record<string, EnvironmentConfig> = {
   prod: {
     account: process.env.AWS_ACCOUNT_ID_PROD || process.env.CDK_DEFAULT_ACCOUNT || "",
     region: process.env.AWS_REGION || "ap-northeast-1",
-    frontendBucketName: process.env.FRONTEND_BUCKET_NAME_PROD,
-    enableLogging: true,
     tags: {
       Environment: "prod",
       Project: "kokkai-doc",

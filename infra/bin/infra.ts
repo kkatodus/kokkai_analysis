@@ -14,15 +14,6 @@ const environmentName =
 // Load environment-specific configuration
 const environmentConfig = getEnvironmentConfig(environmentName);
 
-// Create stack with environment-specific naming
-const stackName = `FrontendStack-${environmentName}`;
-
-new FrontendStack(app, stackName, {
-  environmentConfig,
-  environmentName,
-  // Stack description for AWS Console
-  description: `Frontend infrastructure stack for ${environmentName} environment`,
-});
 
 // Add app-level tags
 cdk.Tags.of(app).add("Project", "kokkai-doc");
