@@ -1,4 +1,7 @@
+"use client";
+
 import { Badge } from "@/app/components/shared/Badge";
+import { AuthButton } from "@/app/components/auth/AuthButton";
 
 export function Header() {
   return (
@@ -14,9 +17,12 @@ export function Header() {
           citizen commentary.
         </div>
       </div>
-      <Badge variant="default" className="text-[11px] uppercase tracking-wider">
-        Ideology • Trust • Facts • Map
-      </Badge>
+      <div className="flex items-center gap-3">
+        <Badge variant="default" className="text-[11px] uppercase tracking-wider">
+          Ideology • Trust • Facts • Map
+        </Badge>
+        <AuthButton />
+      </div>
     </header>
   );
 }
