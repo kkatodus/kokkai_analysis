@@ -5,6 +5,7 @@
 
 /**
  * Get the API base URL based on environment
+ * Works both server-side and client-side
  */
 export function getApiBaseUrl(): string {
   // Check if we're in local development mode
@@ -12,8 +13,8 @@ export function getApiBaseUrl(): string {
     return "http://localhost:5000";
   }
 
-  // Use environment variable if set
-  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_API_URL) {
+  // Use environment variable if set (works on both server and client)
+  if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 

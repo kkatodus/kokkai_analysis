@@ -2,13 +2,22 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /**
-   * Enable static export for S3/CloudFront deployment.
-   * This generates static HTML files in the 'out' directory.
+   * Server-Side Rendering (SSR) enabled
+   * This allows Server Components, server-side data fetching, and dynamic rendering.
+   * 
+   * NOTE: This requires deploying Next.js as a server (not static export).
+   * Options:
+   * - Vercel (recommended for Next.js)
+   * - AWS with containerized deployment (ECS/Fargate)
+   * - AWS Lambda with @vercel/next
+   * - Other Node.js hosting platforms
+   * 
+   * To revert to static export, set `output: "export"` and convert page.tsx
+   * back to a Client Component.
    */
-  output: "export",
   
   /**
-   * Disable image optimization for static export.
+   * Disable image optimization for simpler deployment.
    * Images will be served as-is from the public directory.
    * For production, consider using a CDN or external image service.
    */
@@ -17,8 +26,7 @@ const nextConfig: NextConfig = {
   },
   
   /**
-   * Disable trailing slash to match S3/CloudFront behavior.
-   * This ensures URLs work correctly with the static export.
+   * Disable trailing slash for cleaner URLs.
    */
   trailingSlash: false,
 };
