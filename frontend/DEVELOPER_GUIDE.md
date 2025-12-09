@@ -7,10 +7,11 @@
 3. [Adding New Pages](#adding-new-pages)
 4. [Component Library](#component-library)
 5. [Data Fetching](#data-fetching)
-6. [Authentication](#authentication)
-7. [Styling & Design System](#styling--design-system)
-8. [Best Practices](#best-practices)
-9. [Common Patterns](#common-patterns)
+6. [Route Revalidation](#route-revalidation)
+7. [Authentication](#authentication)
+8. [Styling & Design System](#styling--design-system)
+9. [Best Practices](#best-practices)
+10. [Common Patterns](#common-patterns)
 
 ---
 
@@ -626,6 +627,432 @@ Located in `app/lib/hooks/useParliamentData.ts`:
 
 ---
 
+## Route Revalidation
+
+The application uses **Incremental Static Regeneration (ISR)** with a 1-week revalidation period. However, when new data becomes available, you can manually invalidate cached routes to force immediate regeneration.
+
+### Overview
+
+- **Automatic Revalidation**: Routes are cached and automatically revalidated after 1 week (`export const revalidate = 604800`)
+- **Manual Revalidation**: Use `revalidatePath()` to invalidate specific routes on demand
+- **Use Cases**: New data updates, content changes, bug fixes that need immediate deployment
+
+### How It Works
+
+When you call `revalidatePath()`:
+1. Next.js/Vercel drops the cached entry for that route
+2. The next request to that route triggers a fresh render
+3. New data is fetched and a new cache entry is created
+4. Subsequent requests use the new cached version
+
+**Important**: This works even if `export const revalidate = 604800` is set on the page.
+
+### Server Actions for Revalidation
+
+Server actions provide a type-safe way to trigger revalidation from Server or Client Components.
+
+**Location**: `app/actions/revalidate.ts`
+
+#### Available Actions
+
+```typescript
+// Revalidate home page
+import { revalidateHomePage } from "@/app/actions/revalidate";
+await revalidateHomePage();
+
+// Revalidate specific path
+import { revalidatePathAction } from "@/app/actions/revalidate";
+await revalidatePathAction("/dashboard");
+
+// Revalidate multiple paths
+import { revalidatePaths } from "@/app/actions/revalidate";
+await revalidatePaths(["/", "/dashboard", "/about"]);
+
+// Revalidate all parliament routes
+import { revalidateParliamentRoutes } from "@/app/actions/revalidate";
+await revalidateParliamentRoutes();
+
+// Revalidate specific politician page
+import { revalidatePolitician } from "@/app/actions/revalidate";
+await revalidatePolitician("politician_123");
+```
+
+### Using Server Actions
+
+#### From Server Components
+
+```typescript
+// app/admin/page.tsx
+import { revalidateHomePage } from "@/app/actions/revalidate";
+
+export default async function AdminPage() {
+  async function handleRevalidate() {
+    "use server";
+    await revalidateHomePage();
+  }
+
+  return (
+    <form action={handleRevalidate}>
+      <button type="submit">Refresh Home Page</button>
+    </form>
+  );
+}
+```
+
+#### From Client Components
+
+```typescript
+"use client";
+
+import { revalidateHomePage } from "@/app/actions/revalidate";
+
+export function RefreshButton() {
+  const handleClick = async () => {
+    await revalidateHomePage();
+    alert("Home page cache invalidated!");
+  };
+
+  return (
+    <button onClick={handleClick}>
+      Refresh Cache
+    </button>
+  );
+}
+```
+
+### API Route for External Triggers
+
+For external services (webhooks, backend scripts, CI/CD), use the API route:
+
+**Endpoint**: `POST /api/revalidate?path=/dashboard&secret=YOUR_SECRET`
+
+**Location**: `app/api/revalidate/route.ts`
+
+#### Usage Examples
+
+**cURL**:
+```bash
+curl -X POST "https://your-domain.com/api/revalidate?path=/&secret=your-secret-token"
+```
+
+**JavaScript/Node.js**:
+```javascript
+const response = await fetch(
+  "https://your-domain.com/api/revalidate?path=/&secret=your-secret-token",
+  { method: "POST" }
+);
+const data = await response.json();
+```
+
+**Python**:
+```python
+import requests
+
+response = requests.post(
+    "https://your-domain.com/api/revalidate",
+    params={"path": "/", "secret": "your-secret-token"}
+)
+```
+
+**From Backend Script**:
+```typescript
+// After updating data in your backend
+async function notifyFrontendUpdate() {
+  await fetch(
+    `${process.env.FRONTEND_URL}/api/revalidate?path=/&secret=${process.env.REVALIDATE_SECRET}`,
+    { method: "POST" }
+  );
+}
+```
+
+#### Security
+
+The API route requires a secret token to prevent unauthorized revalidation:
+
+1. **Set Environment Variable**:
+   ```bash
+   # .env.local or Vercel environment variables
+   REVALIDATE_SECRET=your-random-secret-token-here
+   ```
+
+2. **Pass Secret**:
+   - As query parameter: `?secret=your-secret-token`
+   - Or as header: `x-revalidate-secret: your-secret-token`
+
+3. **Response**:
+   ```json
+   {
+     "revalidated": true,
+     "path": "/",
+     "now": 1234567890
+   }
+   ```
+
+### Admin Component
+
+A pre-built component for manual cache invalidation:
+
+**Location**: `app/components/admin/RevalidateButton.tsx`
+
+```typescript
+import { RevalidateButton } from "@/app/components/admin/RevalidateButton";
+
+// In your admin page
+<RevalidateButton />
+```
+
+**Features**:
+- Revalidate home page button
+- Revalidate all routes button
+- Loading states
+- Success/error messages
+
+**Usage Example**:
+```typescript
+// app/admin/page.tsx
+"use client";
+
+import { AuthGuard } from "@/app/components/auth/AuthGuard";
+import { RevalidateButton } from "@/app/components/admin/RevalidateButton";
+
+export default function AdminPage() {
+  return (
+    <AuthGuard>
+      <div className="p-4">
+        <h1>Admin Panel</h1>
+        <RevalidateButton />
+      </div>
+    </AuthGuard>
+  );
+}
+```
+
+### Common Patterns
+
+#### Pattern 1: Revalidate After Data Update
+
+```typescript
+// app/actions/updateData.ts
+"use server";
+
+import { revalidatePath } from "next/cache";
+
+export async function updatePoliticianData(id: string, data: any) {
+  // Update data in your database/API
+  await updateDataInBackend(id, data);
+  
+  // Revalidate affected routes
+  revalidatePath(`/politician/${id}`);
+  revalidatePath("/"); // Also revalidate home if it lists this politician
+}
+```
+
+#### Pattern 2: Webhook Handler
+
+```typescript
+// app/api/webhooks/data-updated/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+
+export async function POST(request: NextRequest) {
+  // Verify webhook signature (important for security)
+  const body = await request.json();
+  
+  // Process the webhook
+  if (body.event === "politician_updated") {
+    revalidatePath(`/politician/${body.politicianId}`);
+    revalidatePath("/");
+  }
+  
+  return NextResponse.json({ received: true });
+}
+```
+
+#### Pattern 3: Scheduled Revalidation
+
+```typescript
+// app/api/cron/revalidate/route.ts
+import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+
+// Called by Vercel Cron Jobs or external scheduler
+export async function GET(request: Request) {
+  const authHeader = request.headers.get("authorization");
+  
+  // Verify cron secret
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  
+  // Revalidate all routes
+  revalidatePath("/");
+  // Add other routes as needed
+  
+  return NextResponse.json({ revalidated: true });
+}
+```
+
+#### Pattern 4: Revalidate on User Action
+
+```typescript
+"use client";
+
+import { revalidatePathAction } from "@/app/actions/revalidate";
+
+export function RefreshDataButton() {
+  const handleRefresh = async () => {
+    await revalidatePathAction("/");
+    // Optionally refresh the page
+    window.location.reload();
+  };
+
+  return (
+    <button onClick={handleRefresh}>
+      Refresh Data
+    </button>
+  );
+}
+```
+
+### Adding New Revalidation Actions
+
+To add custom revalidation actions:
+
+```typescript
+// app/actions/revalidate.ts
+
+/**
+ * Revalidate your custom route
+ */
+export async function revalidateYourRoute() {
+  revalidatePath("/your-route");
+  return { revalidated: true, path: "/your-route" };
+}
+
+/**
+ * Revalidate based on dynamic parameter
+ */
+export async function revalidateByCategory(category: string) {
+  revalidatePath(`/category/${category}`);
+  revalidatePath("/"); // If home page lists categories
+  return { revalidated: true, paths: [`/category/${category}`, "/"] };
+}
+```
+
+### Environment Variables
+
+```bash
+# .env.local or Vercel environment variables
+REVALIDATE_SECRET=your-random-secret-token-here
+```
+
+**Security Notes**:
+- Use a strong, random secret token
+- Never commit secrets to version control
+- Use different secrets for different environments
+- Rotate secrets periodically
+
+### Best Practices
+
+1. **Revalidate Specific Routes**: Only revalidate routes that actually changed
+   ```typescript
+   // ✅ Good - specific
+   revalidatePath(`/politician/${id}`);
+   
+   // ❌ Avoid - too broad (unless necessary)
+   revalidatePath("/", "layout");
+   ```
+
+2. **Batch Revalidations**: Revalidate multiple related routes together
+   ```typescript
+   revalidatePath("/");
+   revalidatePath(`/politician/${id}`);
+   revalidatePath("/dashboard");
+   ```
+
+3. **Protect API Endpoint**: Always use secret token for `/api/revalidate`
+   ```typescript
+   // ✅ Good
+   const secret = request.headers.get("x-revalidate-secret");
+   if (secret !== process.env.REVALIDATE_SECRET) {
+     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+   }
+   ```
+
+4. **Handle Errors**: Always handle revalidation errors gracefully
+   ```typescript
+   try {
+     await revalidatePathAction("/");
+   } catch (error) {
+     console.error("Failed to revalidate:", error);
+     // Show user-friendly error message
+   }
+   ```
+
+5. **Log Revalidations**: Log revalidation events for debugging
+   ```typescript
+   export async function revalidateHomePage() {
+     revalidatePath("/");
+     console.log(`[Revalidation] Home page invalidated at ${new Date().toISOString()}`);
+     return { revalidated: true, path: "/" };
+   }
+   ```
+
+### Troubleshooting
+
+#### "revalidatePath is not a function"
+
+**Solution**: Ensure you're importing from `next/cache`, not `next/navigation`:
+```typescript
+import { revalidatePath } from "next/cache"; // ✅ Correct
+```
+
+#### Revalidation not working
+
+**Solution**: 
+1. Check that you're calling `revalidatePath` in a Server Action or API Route
+2. Verify the path matches exactly (case-sensitive)
+3. Check Vercel logs for errors
+4. Ensure the route has ISR enabled (`export const revalidate`)
+
+#### API route returns 401
+
+**Solution**:
+1. Verify `REVALIDATE_SECRET` environment variable is set
+2. Check that the secret in the request matches the environment variable
+3. Ensure the secret is passed correctly (query param or header)
+
+#### Revalidation works but page doesn't update
+
+**Solution**:
+1. Clear browser cache
+2. Check that the route is actually cached (has `revalidate` export)
+3. Verify the revalidation happened (check Vercel logs)
+4. Wait a few seconds - revalidation is asynchronous
+
+### When to Use Revalidation
+
+✅ **Use revalidation when**:
+- New data is available from your backend
+- Content needs immediate update (not waiting for 1-week cache)
+- Bug fixes need to be deployed immediately
+- User-generated content is added
+- Scheduled data updates occur
+
+❌ **Don't use revalidation for**:
+- Every page load (defeats the purpose of caching)
+- Real-time data (use client-side fetching instead)
+- Frequently changing data (consider shorter `revalidate` period)
+- User-specific content (use client-side state)
+
+### Additional Resources
+
+- [Next.js revalidatePath Documentation](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
+- [Next.js Data Fetching and Caching](https://nextjs.org/docs/app/building-your-application/data-fetching)
+- [Vercel ISR Documentation](https://vercel.com/docs/concepts/incremental-static-regeneration)
+
+---
+
 ## Authentication
 
 The application uses **AWS Cognito** for authentication via `react-oidc-context`. Authentication is integrated at the root layout level, making it available throughout the application.
@@ -639,20 +1066,24 @@ The application uses **AWS Cognito** for authentication via `react-oidc-context`
 
 ### Configuration
 
-Authentication configuration is managed via environment variables:
+Authentication configuration is managed via environment variables. **All values are required** and must be set:
 
 ```bash
 # .env.local or .env.production
-NEXT_PUBLIC_COGNITO_AUTHORITY=https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_WFUAyQtMs
-NEXT_PUBLIC_COGNITO_CLIENT_ID=237qf0kbmlmrugugfsdqfnj02r
-NEXT_PUBLIC_COGNITO_REDIRECT_URI=https://kokkaidoc.vercel.app/
-NEXT_PUBLIC_COGNITO_LOGOUT_URI=https://kokkaidoc.vercel.app/
-NEXT_PUBLIC_COGNITO_DOMAIN=https://your-cognito-domain.auth.ap-northeast-1.amazoncognito.com
+NEXT_PUBLIC_COGNITO_AUTHORITY=https://cognito-idp.REGION.amazonaws.com/USER_POOL_ID
+NEXT_PUBLIC_COGNITO_CLIENT_ID=your-cognito-client-id
+NEXT_PUBLIC_COGNITO_REDIRECT_URI=https://your-domain.com/
+NEXT_PUBLIC_COGNITO_LOGOUT_URI=https://your-domain.com/
+NEXT_PUBLIC_COGNITO_DOMAIN=https://your-cognito-domain.auth.REGION.amazoncognito.com
 ```
 
 **Location**: `app/lib/config/auth.ts`
 
-**Note**: If environment variables are not set, the system falls back to default values (for development).
+**Security Note**: 
+- ❌ **Never hardcode credentials** in source code
+- ✅ **Always use environment variables** for all authentication configuration
+- ✅ The application will throw an error if required environment variables are missing
+- ✅ Use different values for development and production environments
 
 ### Using Authentication
 
@@ -698,9 +1129,11 @@ export function LoginButton() {
 
 #### 3. Sign Out
 
-There are two sign-out methods:
+The `signOut()` function performs a complete logout:
+1. Clears local storage (removes user and all OIDC state)
+2. Redirects to Cognito logout endpoint to clear server-side session
+3. Cognito redirects back to your app
 
-**Local Sign Out** (removes user from local storage):
 ```typescript
 const { signOut } = useAuth();
 
@@ -709,7 +1142,13 @@ const { signOut } = useAuth();
 </button>
 ```
 
-**Sign Out with Redirect** (redirects to Cognito logout):
+**How it works**:
+- First removes user from local storage using `auth.removeUser()`
+- Clears all OIDC-related keys from both `sessionStorage` and `localStorage`
+- Redirects to: `${cognito_domain}/logout?client_id=${client_id}&logout_uri=${encodeURIComponent(logoutUri)}`
+- Cognito clears the server-side session and redirects back
+
+**Alternative: Direct Redirect** (if you only need to redirect without local cleanup):
 ```typescript
 const { signOutRedirect } = useAuth();
 
@@ -717,6 +1156,11 @@ const { signOutRedirect } = useAuth();
   Sign out
 </button>
 ```
+
+**Important**: The logout URI must be whitelisted in Cognito:
+- Go to: AWS Cognito → App integration → App client → Sign-out URLs
+- Add your logout URI (same as `NEXT_PUBLIC_COGNITO_LOGOUT_URI` or `NEXT_PUBLIC_COGNITO_REDIRECT_URI`)
+- Must match exactly (including protocol, domain, and trailing slash)
 
 #### 4. Access User Information
 
@@ -762,7 +1206,19 @@ export function ProtectedPage() {
 
 Wraps the application with OIDC authentication context. Already integrated in `app/layout.tsx`.
 
+**Key Features**:
+- Initializes config immediately on client-side mount (using `useMemo`)
+- Does NOT remount during OAuth flow (no `key` prop) to preserve OAuth state
+- Handles sign-in callback to clean up URL parameters
+- Handles sign-out callback to clean up URL after logout redirect
+- All hooks are called in consistent order (follows Rules of Hooks)
+
 **Location**: `app/components/auth/AuthProvider.tsx`
+
+**Configuration**:
+- Uses `onSigninCallback` to remove OAuth parameters (`code`, `state`, `session_state`) from URL after successful sign-in
+- Uses `onSignoutCallback` to clean up URL after logout redirect
+- Uses `matchSignoutCallback` to detect when logout callback occurs
 
 ---
 
@@ -1001,17 +1457,26 @@ export function UserProfile() {
 
 1. Create `.env.local`:
 ```bash
-NEXT_PUBLIC_COGNITO_AUTHORITY=https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_WFUAyQtMs
-NEXT_PUBLIC_COGNITO_CLIENT_ID=237qf0kbmlmrugugfsdqfnj02r
+# Required: Get these values from your AWS Cognito User Pool settings
+NEXT_PUBLIC_COGNITO_AUTHORITY=https://cognito-idp.REGION.amazonaws.com/USER_POOL_ID
+NEXT_PUBLIC_COGNITO_CLIENT_ID=your-cognito-app-client-id
 NEXT_PUBLIC_COGNITO_REDIRECT_URI=http://localhost:3000/
 NEXT_PUBLIC_COGNITO_LOGOUT_URI=http://localhost:3000/
-NEXT_PUBLIC_COGNITO_DOMAIN=https://your-cognito-domain.auth.ap-northeast-1.amazoncognito.com
+NEXT_PUBLIC_COGNITO_DOMAIN=https://your-cognito-domain.auth.REGION.amazoncognito.com
 ```
 
+**Where to find these values**:
+- `NEXT_PUBLIC_COGNITO_AUTHORITY`: AWS Cognito User Pool → General settings → User pool ID
+- `NEXT_PUBLIC_COGNITO_CLIENT_ID`: AWS Cognito User Pool → App integration → App client ID
+- `NEXT_PUBLIC_COGNITO_DOMAIN`: AWS Cognito User Pool → App integration → Domain name
+
 2. Ensure your Cognito User Pool is configured:
-   - App client must allow the redirect URI
+   - App client must allow the redirect URI in **Callback URLs**
+   - App client must allow the logout URI in **Sign-out URLs** (if different from redirect URI)
    - OAuth 2.0 settings enabled
    - Authorization code grant enabled
+   - Allowed OAuth scopes: `openid`, `email`, and optionally `phone`
+   - Allowed OAuth flows: Authorization code grant
 
 #### Production
 
@@ -1025,6 +1490,17 @@ Set environment variables in Vercel dashboard:
 #### "Redirect URI mismatch"
 
 **Solution**: Ensure the redirect URI in your environment variables matches exactly what's configured in AWS Cognito App Client settings.
+- Go to: Cognito → App integration → App client → Callback URLs
+- The URI must match EXACTLY (including trailing slash)
+- Use `NEXT_PUBLIC_COGNITO_REDIRECT_URI` environment variable for consistency
+
+#### "No matching state found in storage"
+
+**Solution**: This error occurs when the OAuth state parameter doesn't match between redirect and callback.
+1. Ensure `NEXT_PUBLIC_COGNITO_REDIRECT_URI` is set and matches Cognito exactly
+2. The AuthProvider doesn't remount (no `key` prop) to preserve state
+3. Check browser console for the redirect URI being used
+4. Clear sessionStorage and try again if the error persists
 
 #### "User is not authenticated" after login
 
@@ -1032,6 +1508,15 @@ Set environment variables in Vercel dashboard:
 1. Check that `NEXT_PUBLIC_COGNITO_REDIRECT_URI` matches the current domain
 2. Verify Cognito User Pool domain is correct
 3. Check browser console for OIDC errors
+4. Ensure the redirect URI is whitelisted in Cognito Callback URLs
+
+#### "BadRequest" error on sign out
+
+**Solution**: The logout URI must be whitelisted in Cognito:
+1. Go to: AWS Cognito → App integration → App client → Sign-out URLs
+2. Add your logout URI (same as `NEXT_PUBLIC_COGNITO_LOGOUT_URI` or `NEXT_PUBLIC_COGNITO_REDIRECT_URI`)
+3. Must match exactly (including protocol, domain, and trailing slash)
+4. Check console logs for the exact logout URL being generated
 
 #### "Cannot read property 'profile' of null"
 
@@ -1050,13 +1535,22 @@ if (user?.profile?.email) {
 2. Verify refresh token is included in response
 3. Check browser console for refresh errors
 
+#### User automatically logged in after sign out
+
+**Solution**: This happens if only local storage is cleared but Cognito session remains active.
+- The `signOut()` function now properly redirects to Cognito logout to clear server-side session
+- Ensure `NEXT_PUBLIC_COGNITO_DOMAIN` is set in your environment variables
+- The logout URI must be whitelisted in Cognito Sign-out URLs
+
 ### Security Best Practices
 
 1. **Never expose secrets**: Only use `NEXT_PUBLIC_*` for public configuration
 2. **Validate tokens server-side**: Don't trust client-side tokens for sensitive operations
 3. **Use HTTPS in production**: Required for OAuth flows
 4. **Handle token expiration**: Implement proper error handling for expired tokens
-5. **Secure logout**: Use `signOutRedirect()` to fully log out from Cognito
+5. **Secure logout**: Use `signOut()` to fully log out from Cognito (clears both local and server-side session)
+6. **Whitelist URIs**: Always whitelist redirect and logout URIs in Cognito settings
+7. **Consistent redirect URIs**: Use environment variables for redirect URIs to ensure consistency between initial redirect and callback
 
 ### Additional Resources
 
