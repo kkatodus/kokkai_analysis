@@ -1,5 +1,3 @@
-"use client";
-
 import { Badge } from "@/app/components/shared/Badge";
 import { AuthButton } from "@/app/components/auth/AuthButton";
 
