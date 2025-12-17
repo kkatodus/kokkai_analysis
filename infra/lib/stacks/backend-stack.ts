@@ -22,28 +22,23 @@ export class BackendStack extends cdk.Stack {
 		removalPolicy: cdk.RemovalPolicy.DESTROY,
 	})
 
-	const dbsecret = new rds.DatabaseSecret(this, 'DbSecret', {
-		username: 'app_user',
-	})
+	const dbCredentials = rds.Credentials.fromGeneratedSecret('app_user');
 
-	const db = new rds.DatabaseInstance(this, 'Db', {
-		vpc,
-		engine: rds.DatabaseInstanceEngine.postgres({
-			version: rds.PostgresEngineVersion.VER_17_6,
+	const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
+		vpc, 
+		engine: rds.DatabaseClusterEngine.auroraPostgres({
+			version: rds.AuroraPostgresEngineVersion.VER_17_4,
 		}),
-		credentials: rds.Credentials.fromSecret(dbsecret),
-		instanceType: ec2.InstanceType.of(ec2.InstanceClass.T4G, ec2.InstanceSize.MICRO),
-		allocatedStorage: 20,
-		databaseName: 'app_db',
-		multiAz: false,
-		storageEncrypted: true,
-		backupRetention: cdk.Duration.days(7),
-		publiclyAccessible: false,
+		credentials: dbCredentials,
+		defaultDatabaseName: 'app_db',
+		writer: rds.ClusterInstance.serverlessV2('writer'),
+		serverlessV2MinCapacity: 0.5,
+		serverlessV2MaxCapacity: 4,
+		vpcSubnets: {
+			subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+		},
 		deletionProtection: true,
-		maxAllocatedStorage: 100,
-	});
-
-
+	})
 
   }
 }
