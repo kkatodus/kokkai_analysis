@@ -21,5 +21,29 @@ export class BackendStack extends cdk.Stack {
 		bucketName: `data-lake-bucket-${props.environmentName}`,
 		removalPolicy: cdk.RemovalPolicy.DESTROY,
 	})
+
+	const dbsecret = new rds.DatabaseSecret(this, 'DbSecret', {
+		username: 'app_user',
+	})
+
+	const db = new rds.DatabaseInstance(this, 'Db', {
+		vpc,
+		engine: rds.DatabaseInstanceEngine.postgres({
+			version: rds.PostgresEngineVersion.VER_17_6,
+		}),
+		credentials: rds.Credentials.fromSecret(dbsecret),
+		instanceType: ec2.InstanceType.of(ec2.InstanceClass.T4G, ec2.InstanceSize.MICRO),
+		allocatedStorage: 20,
+		databaseName: 'app_db',
+		multiAz: false,
+		storageEncrypted: true,
+		backupRetention: cdk.Duration.days(7),
+		publiclyAccessible: false,
+		deletionProtection: true,
+		maxAllocatedStorage: 100,
+	});
+
+
+
   }
 }
