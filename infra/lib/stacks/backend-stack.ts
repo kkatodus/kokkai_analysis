@@ -18,7 +18,7 @@ export class BackendStack extends cdk.Stack {
 	})
 
 	const bucket = new s3.Bucket(this, "Bucket", {
-		bucketName: `data-lake-bucket-${props.environmentName}`,
+		bucketName: `kokkai-doc-data-lake-bucket-${props.environmentName}`,
 		removalPolicy: cdk.RemovalPolicy.DESTROY,
 	})
 
