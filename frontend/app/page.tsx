@@ -41,6 +41,7 @@ export default async function ParliamentExplorerPage({
 }: {
   searchParams: Promise<{ id?: string }>;
 }) {
+  console.log('server component');
   // Await searchParams (Next.js 15+ requires this)
   const params = await searchParams;
   

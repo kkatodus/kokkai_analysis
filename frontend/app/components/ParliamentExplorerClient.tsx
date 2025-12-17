@@ -40,6 +40,7 @@ export function ParliamentExplorerClient({
 }: ParliamentExplorerClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  console.log('client component');
   
   // Initialize state from server-provided initialSelectedId
   const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId);
@@ -156,28 +157,6 @@ export function ParliamentExplorerClient({
     setTooltipData(null);
   }, []);
 
-  const handleAddComment = useCallback(
-    (politicianId: string, targetType: "speech" | "tweet", targetId: string) => {
-      const text = prompt("Add your comment (mock, stored only in this session):");
-      if (!text || !text.trim()) return;
-
-      const now = new Date();
-      const newComment: Comment = {
-        id: `c${allComments.length + 1}`,
-        politicianId,
-        targetType,
-        targetId,
-        userName: "You",
-        handle: "@anonymous",
-        text: text.trim(),
-        createdAt: now.toISOString().slice(0, 16).replace("T", " "),
-      };
-
-      setLocalComments([...localComments, newComment]);
-    },
-    [allComments.length, localComments]
-  );
-
   return (
     <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
       <div className="mx-auto max-w-7xl">
@@ -214,7 +193,7 @@ export function ParliamentExplorerClient({
                   </div>
                 </Card>
 
-                <Card>
+                {/* <Card>
                   <CardHeader
                     title="Speech interaction network"
                     subtitle="Nodes are politicians, edges summarise interjections / Q&A."
@@ -230,7 +209,7 @@ export function ParliamentExplorerClient({
                       onTooltipHide={handleTooltipHide}
                     />
                   </div>
-                </Card>
+                </Card> */}
 
                 <Card>
                   <CardHeader
@@ -268,14 +247,14 @@ export function ParliamentExplorerClient({
                   onPoliticianSelect={handlePoliticianSelect}
                 />
 
-                <Rankings
+                {/* <Rankings
                   politicians={filteredPoliticians}
                   metric={rankingMetric}
                   topic={rankingTopic}
                   onPoliticianSelect={handlePoliticianSelect}
                   onMetricChange={setRankingMetric}
                   onTopicChange={setRankingTopic}
-                />
+                /> */}
               </>
             }
           />
@@ -291,7 +270,6 @@ export function ParliamentExplorerClient({
         comments={allComments}
         onClose={() => handlePoliticianSelect(null)}
         onMediumChange={setMedium}
-        onAddComment={handleAddComment}
       />
 
       <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />

@@ -2,9 +2,7 @@
 
 import { useMemo } from "react";
 import Image from "next/image";
-import { Card } from "@/app/components/shared/Card";
 import { ScoreBar } from "@/app/components/shared/ScoreBar";
-import { Badge } from "@/app/components/shared/Badge";
 import { EmptyState } from "@/app/components/shared/EmptyState";
 import type { Politician, Medium, FactStatus, Comment } from "@/app/types";
 
@@ -17,7 +15,6 @@ interface DetailPaneProps {
   comments: Comment[];
   onClose: () => void;
   onMediumChange: (medium: Medium) => void;
-  onAddComment: (politicianId: string, targetType: "speech" | "tweet", targetId: string) => void;
 }
 
 function FactPill({ status }: { status: FactStatus }) {
@@ -111,7 +108,6 @@ export function DetailPane({
   comments,
   onClose,
   onMediumChange,
-  onAddComment,
 }: DetailPaneProps) {
   const filteredUtterances = useMemo(() => {
     if (!politician) return [];
@@ -261,16 +257,6 @@ export function DetailPane({
             >
               Parliament speeches
             </button>
-            <button
-              onClick={() => onMediumChange("twitter")}
-              className={`rounded-full px-2 py-0.5 text-[11px] transition-colors ${
-                medium === "twitter"
-                  ? "bg-blue-600/90 text-gray-50"
-                  : "bg-transparent text-gray-400"
-              }`}
-            >
-              Twitter / X posts
-            </button>
           </div>
 
           {/* Utterances list */}
@@ -323,13 +309,7 @@ export function DetailPane({
                         Open on Twitter
                       </a>
                     )}
-                    <CommentsSection
-                      politicianId={politician.id}
-                      targetType={medium === "parliament" ? "speech" : "tweet"}
-                      targetId={u.id}
-                      comments={comments}
-                      onAddComment={onAddComment}
-                    />
+                   
                   </div>
                 );
               })
