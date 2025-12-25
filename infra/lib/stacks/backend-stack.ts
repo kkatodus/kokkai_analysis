@@ -22,6 +22,12 @@ export class BackendStack extends cdk.Stack {
 		removalPolicy: cdk.RemovalPolicy.DESTROY,
 	})
 
+
+	const secret = new secretsmanager.Secret(this, "Secret", {
+		secretName: `kokkai-doc-api-secret-${props.environmentName}`,
+		removalPolicy: cdk.RemovalPolicy.DESTROY,
+	})
+
 	const dbCredentials = rds.Credentials.fromGeneratedSecret('app_user');
 
 	const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
@@ -39,6 +45,47 @@ export class BackendStack extends cdk.Stack {
 		},
 		deletionProtection: true,
 	})
+
+	const proxy = new rds.DatabaseProxy(this, "DbProxy", {
+		proxyTarget: rds.ProxyTarget.fromCluster(db),
+		secrets: [db.secret!],
+		vpc, 
+		requireTLS: true,
+		iamAuth: false
+	})
+
+	const cluster = new ecs.Cluster(this, "Cluster", {
+		vpc,
+	})
+
+	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
+		cluster: cluster,
+		cpu: 512,
+		memoryLimitMiB: 1024,
+		taskImageOptions:{
+			image: ecs.ContainerImage.fromAsset("../backend"),
+			containerPort: 8000,
+			environment: {
+				DB_HOST: proxy.endpoint,
+				DB_PORT: "5432",
+				DB_USER: "app_user",
+				S3_BUCKET_NAME: bucket.bucketName,
+			
+			},
+			secrets: {
+				DB_PASSWORD: ecs.Secret.fromSecretsManager(db.secret!, "password")
+			},
+		},
+		healthCheckGracePeriod: cdk.Duration.seconds(60)
+	})
+
+	proxy.connections.allowDefaultPortFrom(svc.service, "Allow traffic from the service to the proxy");
+
+	bucket.grantReadWrite(svc.taskDefinition.taskRole)
+
+	new cdk.CfnOutput(this, "AlbDns", {value: svc.loadBalancer.loadBalancerDnsName})
+	new cdk.CfnOutput(this, "DbProxyEndpoint", {value: proxy.endpoint})
+
 
   }
 }

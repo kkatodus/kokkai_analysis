@@ -40,6 +40,7 @@ def generate_election_signature(raw: RawPersonFile) -> str:
         first = raw["election_data"][0]
         parts = [f"{k}:{first[k]}" for k in sorted(first.keys())]
         base = f"{raw['name_kanji']}|{raw['name_kana']}|" + "|".join(parts)
+    return hashlib.sha256(base.encode("utf-8")).hexdigest()
 
 DDL: list[str] = [
     """CREATE TABLE IF NOT EXISTS person (
@@ -67,7 +68,22 @@ DDL: list[str] = [
         account_id TEXT NOT NULL,
         CONSTRAINT uq_person_account UNIQUE (account_id, person_id)
     );
-    """
+    """,
+	"""
+	CREATE TABLE IF NOT EXISTS speeches (
+		issue_id TEXT NOT NULL,
+		name_of_house TEXT NOT NULL,
+		name_of_meeting TEXT NOT NULL,
+		date DATE NOT NULL,
+		pdf_url TEXT,
+		speech_id TEXT PRIMARY KEY,
+		speaker TEXT NOT NULL,
+		speech TEXT NOT NULL,
+		speech_url TEXT NOT NULL,
+		person_id BIGINT NOT NULL REFERENCES person(person_id)
+		
+	);
+	"""
 ]
 
 class RawElection(TypedDict):
@@ -115,6 +131,18 @@ class XAccount:
     person_id: PersonId
     account_id: str
 
+@dataclass(frozen=True)
+class Speech:
+	issue_id: str
+	name_of_house:str
+	name_of_meeting:str
+	date: str
+	pdf_url:str
+	speech_id:str
+	speaker: str
+	speech: str
+	speech_url:str
+	person_id: PersonId
 # ---------- DB ops ----------
 def run_ddl(cur: psycopg2.extensions.cursor) -> None:
     for stmt in DDL:
@@ -161,6 +189,35 @@ def insert_elections_bulk(cur: psycopg2.extensions.cursor, rows: list[ElectionRe
             for r in rows
         ],
     )
+
+def insert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech]) -> None:
+	if not rows:
+		return
+	execute_values(
+		cur,
+		"""
+		INSERT INTO speeches
+		(issue_id, name_of_house, name_of_meeting, date, pdf_url, speech_id, speaker, speech, speech_url, person_id)
+		VALUES %s
+		ON CONFLICT DO NOTHING;
+		""",
+		[
+			(
+				s.issue_id,
+				s.name_of_house,
+				s.name_of_meeting,
+				s.date,
+				s.pdf_url,
+				s.speech_id,
+				s.speaker,
+				s.speech,
+				s.speech_url,
+				s.person_id
+			)
+			for s in rows
+		],
+	)
+	print(f"Inserted {len(rows)} speeches")
     
 
 def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonFile) -> None:
@@ -288,11 +345,47 @@ def get_person_by_column(cur: psycopg2.extensions.cursor, column: Literal["perso
         ))
     return return_array
 
+def get_speech_by_column(cur: psycopg2.extensions.cursor, column: Literal["issue_id", "speaker", "speech_id"], value: Any) -> List[Speech]:
+	query = f"""
+		SELECT issue_id, name_of_house, name_of_meeting, date, pdf_url, speech_id, speaker, speech, speech_url, person_id
+		FROM speeches
+		WHERE {column} = %s;
+	"""
+	cur.execute(query, (value,))
+	rows = cur.fetchall()
+	if not rows:
+		return None
+	return_array = []
+	for row in rows:
+		return_array.append(Speech(
+			issue_id=row[0],
+			name_of_house=row[1],
+			name_of_meeting=row[2],
+			date=row[3],
+			pdf_url=row[4],
+			speech_id=row[5],
+			speaker=row[6],
+			speech=row[7],
+			speech_url=row[8],
+			person_id=PersonId(row[9])
+		))
+	return return_array
+
+def get_all_data_for_column_for_table(cur: psycopg2.extensions.cursor, column: Literal["person_id", "name_kana", "name_kanji", "election_signature"], table: Literal["person", "election_result", "x_account", "speeches"]) -> List[Any]:
+	query = f"""
+		SELECT {column}
+		FROM {table};
+	"""
+	cur.execute(query)
+	return_array = []
+	for row in cur.fetchall():
+		return_array.append(row[0])
+	return return_array
 
 def create_tables_if_not_exist(cur: psycopg2.extensions.cursor) -> None:
     run_ddl(cur)
 
-def connect_db(dbname:str="kokkaidoc", 
+def connect_db(dbname:str="kokkaidoc",
                user:str="postgres",
                password:str="password",
                host:str="localhost",
