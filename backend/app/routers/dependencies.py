@@ -2,8 +2,8 @@ from functools import lru_cache
 
 from fastapi import Depends
 
-from ..core.config import Settings, get_settings
-from ..services.data_loader import DataLoader
+from core.config import Settings, get_settings
+from services.data_loader import DataLoader
 
 
 @lru_cache(maxsize=1)

@@ -3,9 +3,9 @@ from typing import Any, Dict, List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from ..core.config import Settings, get_settings
-from ..services.data_loader import DataLoader
-from .dependencies import get_data_loader
+from core.config import Settings, get_settings
+from services.data_loader import DataLoader
+from routers.dependencies import get_data_loader
 
 router = APIRouter(prefix="/manifesto", tags=["manifesto"])
 

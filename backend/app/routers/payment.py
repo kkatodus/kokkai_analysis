@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 import stripe
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from ..core.config import Settings, get_settings
+from core.config import Settings, get_settings
 
 router = APIRouter(prefix="/payment", tags=["payment"])
 

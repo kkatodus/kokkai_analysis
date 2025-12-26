@@ -19,16 +19,13 @@ export class BackendStack extends cdk.Stack {
 
 	const bucket = new s3.Bucket(this, "Bucket", {
 		bucketName: `kokkai-doc-data-lake-bucket-${props.environmentName}`,
-		removalPolicy: cdk.RemovalPolicy.DESTROY,
+		removalPolicy: props.environmentName == "prod" ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
+		blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+		encryption: s3.BucketEncryption.S3_MANAGED,
+		versioned: true,
 	})
 
-
-	const secret = new secretsmanager.Secret(this, "Secret", {
-		secretName: `kokkai-doc-api-secret-${props.environmentName}`,
-		removalPolicy: cdk.RemovalPolicy.DESTROY,
-	})
-
-	const dbCredentials = rds.Credentials.fromGeneratedSecret('app_user');
+	const dbCredentials = rds.Credentials.fromGeneratedSecret(`kokkai_doc_user_${props.environmentName}`);
 
 	const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
 		vpc, 
@@ -36,7 +33,7 @@ export class BackendStack extends cdk.Stack {
 			version: rds.AuroraPostgresEngineVersion.VER_17_4,
 		}),
 		credentials: dbCredentials,
-		defaultDatabaseName: 'app_db',
+		defaultDatabaseName: 'kokkai_doc_db',
 		writer: rds.ClusterInstance.serverlessV2('writer'),
 		serverlessV2MinCapacity: 0.5,
 		serverlessV2MaxCapacity: 4,
@@ -61,6 +58,7 @@ export class BackendStack extends cdk.Stack {
 	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
 		cluster: cluster,
 		cpu: 512,
+		desiredCount:2,
 		memoryLimitMiB: 1024,
 		taskImageOptions:{
 			image: ecs.ContainerImage.fromAsset("../backend"),
@@ -68,8 +66,9 @@ export class BackendStack extends cdk.Stack {
 			environment: {
 				DB_HOST: proxy.endpoint,
 				DB_PORT: "5432",
-				DB_USER: "app_user",
+				DB_USER: "kokkai_doc_user",
 				S3_BUCKET_NAME: bucket.bucketName,
+				DB_NAME: "kokkai_doc_db",
 			
 			},
 			secrets: {
