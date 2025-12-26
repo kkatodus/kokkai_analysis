@@ -6,6 +6,7 @@ import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 import * as rds from 'aws-cdk-lib/aws-rds';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
+import * as path from "path";
 import { BaseStackProps } from "../config/stack-props";
 
 export class BackendStack extends cdk.Stack {
@@ -61,7 +62,8 @@ export class BackendStack extends cdk.Stack {
 		desiredCount:2,
 		memoryLimitMiB: 1024,
 		taskImageOptions:{
-			image: ecs.ContainerImage.fromAsset("../backend"),
+			// Resolve from this file's directory so deploys work regardless of the current working directory.
+			image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, "../../../backend")),
 			containerPort: 8000,
 			environment: {
 				DB_HOST: proxy.endpoint,
@@ -78,7 +80,7 @@ export class BackendStack extends cdk.Stack {
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
 	})
 
-	proxy.connections.allowDefaultPortFrom(svc.service, "Allow traffic from the service to the proxy");
+	proxy.connections.allowFrom(svc.service, ec2.Port.tcp(5432), "Allow traffic from the database to the proxy");
 
 	bucket.grantReadWrite(svc.taskDefinition.taskRole)
 
