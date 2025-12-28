@@ -21,44 +21,43 @@ export class BackendStack extends cdk.Stack {
 
 	const bucket = new s3.Bucket(this, "Bucket", {
 		bucketName: `kokkai-doc-data-lake-bucket-${props.environmentName}`,
-		removalPolicy: props.environmentName == "prod" ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
+		removalPolicy: cdk.RemovalPolicy.RETAIN,
 		blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
 		encryption: s3.BucketEncryption.S3_MANAGED,
 		versioned: true,
 	})
 
-	const dbCredentials = rds.Credentials.fromGeneratedSecret(`kokkai_doc_user_${props.environmentName}`);
+	// const dbCredentials = rds.Credentials.fromGeneratedSecret(`kokkai_doc_user_${props.environmentName}`);
 
-	const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
-		vpc, 
-		engine: rds.DatabaseClusterEngine.auroraPostgres({
-			version: rds.AuroraPostgresEngineVersion.VER_17_4,
-		}),
-		credentials: dbCredentials,
-		defaultDatabaseName: 'kokkai_doc_db',
-		writer: rds.ClusterInstance.serverlessV2('writer'),
-		serverlessV2MinCapacity: 0.5,
-		serverlessV2MaxCapacity: 4,
-		vpcSubnets: {
-			subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-		},
-		deletionProtection: true,
-	})
+	// const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
+	// 	vpc, 
+	// 	engine: rds.DatabaseClusterEngine.auroraPostgres({
+	// 		version: rds.AuroraPostgresEngineVersion.VER_17_4,
+	// 	}),
+	// 	credentials: dbCredentials,
+	// 	defaultDatabaseName: 'kokkai_doc_db',
+	// 	writer: rds.ClusterInstance.serverlessV2('writer'),
+	// 	serverlessV2MinCapacity: 0.5,
+	// 	serverlessV2MaxCapacity: 4,
+	// 	vpcSubnets: {
+	// 		subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+	// 	},
+	// })
 
-	const proxy = new rds.DatabaseProxy(this, "DbProxy", {
-		proxyTarget: rds.ProxyTarget.fromCluster(db),
-		secrets: [db.secret!],
-		vpc, 
-		requireTLS: true,
-		iamAuth: false
-	})
+	// const proxy = new rds.DatabaseProxy(this, "DbProxy", {
+	// 	proxyTarget: rds.ProxyTarget.fromCluster(db),
+	// 	secrets: [db.secret!],
+	// 	vpc, 
+	// 	requireTLS: true,
+	// 	iamAuth: false
+	// })
 
-	const cluster = new ecs.Cluster(this, "Cluster", {
+	const ECSCluster = new ecs.Cluster(this, "Cluster", {
 		vpc,
 	})
 
 	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
-		cluster: cluster,
+		cluster: ECSCluster,
 		cpu: 512,
 		desiredCount:2,
 		memoryLimitMiB: 1024,
@@ -67,15 +66,8 @@ export class BackendStack extends cdk.Stack {
 			image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, "../../../backend")),
 			containerPort: 8000,
 			environment: {
-				DB_HOST: proxy.endpoint,
-				DB_PORT: "5432",
-				DB_USER: "kokkai_doc_user",
 				S3_BUCKET_NAME: bucket.bucketName,
-				DB_NAME: "kokkai_doc_db",
 			
-			},
-			secrets: {
-				DB_PASSWORD: ecs.Secret.fromSecretsManager(db.secret!, "password")
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
@@ -117,12 +109,10 @@ export class BackendStack extends cdk.Stack {
 		viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 	})
 
-	proxy.connections.allowFrom(svc.service, ec2.Port.tcp(5432), "Allow traffic from the database to the proxy");
 
 	bucket.grantReadWrite(svc.taskDefinition.taskRole)
 
 	new cdk.CfnOutput(this, "AlbDns", {value: svc.loadBalancer.loadBalancerDnsName})
-	new cdk.CfnOutput(this, "DbProxyEndpoint", {value: proxy.endpoint})
 	new cdk.CfnOutput(this, "CloudfrontDomain", {value: cloudfrontDistribution.domainName})
 
 
