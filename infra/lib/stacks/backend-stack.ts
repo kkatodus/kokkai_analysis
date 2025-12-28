@@ -4,8 +4,9 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 import * as rds from 'aws-cdk-lib/aws-rds';
+import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
+import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import * as path from "path";
 import { BaseStackProps } from "../config/stack-props";
 
@@ -80,12 +81,49 @@ export class BackendStack extends cdk.Stack {
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
 	})
 
+	const cloudfrontDistribution = new cloudfront.Distribution(this, "ApiDistribution", {
+		defaultBehavior:{
+			origin: new origins.LoadBalancerV2Origin(svc.loadBalancer, {
+				protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+			}),
+			allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+			cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+			originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
+			viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+		}
+	})
+
+	const publicCachePolicy = new cloudfront.CachePolicy(this, "PublicCachePolicy", {
+		defaultTtl: cdk.Duration.minutes(5),
+		minTtl: cdk.Duration.seconds(0),
+		maxTtl: cdk.Duration.hours(1),
+
+		queryStringBehavior: cloudfront.CacheQueryStringBehavior.all(),
+		cookieBehavior: cloudfront.CacheCookieBehavior.none(),
+		headerBehavior: cloudfront.CacheHeaderBehavior.none(),
+
+		enableAcceptEncodingGzip: true,
+		enableAcceptEncodingBrotli: true
+	})
+
+	cloudfrontDistribution.addBehavior("/api/*",  new origins.LoadBalancerV2Origin(svc.loadBalancer, 
+		{
+			protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+		}
+	), {
+		allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+		cachePolicy: publicCachePolicy,
+		originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+		viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+	})
+
 	proxy.connections.allowFrom(svc.service, ec2.Port.tcp(5432), "Allow traffic from the database to the proxy");
 
 	bucket.grantReadWrite(svc.taskDefinition.taskRole)
 
 	new cdk.CfnOutput(this, "AlbDns", {value: svc.loadBalancer.loadBalancerDnsName})
 	new cdk.CfnOutput(this, "DbProxyEndpoint", {value: proxy.endpoint})
+	new cdk.CfnOutput(this, "CloudfrontDomain", {value: cloudfrontDistribution.domainName})
 
 
   }
