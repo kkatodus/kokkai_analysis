@@ -27,7 +27,10 @@ class Settings(BaseSettings):
     storage_backend: StorageBackend = Field(default=StorageBackend.LOCAL, alias="STORAGE_BACKEND")
 
     # local storage root for development
-    local_data_root: Path = Field(default=Path(__file__).resolve().parents[3] / "s3_mirror", alias="LOCAL_DATA_ROOT")
+    if env == Environment.LOCAL:
+        local_data_root: Optional[Path] = Field(default=Path(__file__).resolve().parents[3] / "s3_mirror", alias="LOCAL_DATA_ROOT")
+    else:
+        local_data_root: Optional[Path] = Field(default=None, alias="LOCAL_DATA_ROOT")
 
     # s3 bucket stuff
     data_lake_bucket_name: Optional[str] = Field(default=None, alias="DATA_LAKE_BUCKET_NAME")
