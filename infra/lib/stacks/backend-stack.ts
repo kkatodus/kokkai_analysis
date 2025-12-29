@@ -50,6 +50,13 @@ export class BackendStack extends cdk.Stack {
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
 	})
+
+	// The ALB target group health check defaults to "/" which our FastAPI app doesn't serve.
+	// Use the app's explicit health endpoint instead.
+	svc.targetGroup.configureHealthCheck({
+		path: "/health",
+		healthyHttpCodes: "200",
+	})
 	dataLakeBucket.grantReadWrite(svc.taskDefinition.taskRole)
 
 	const cloudfrontDistribution = new cloudfront.Distribution(this, "ApiDistribution", {
