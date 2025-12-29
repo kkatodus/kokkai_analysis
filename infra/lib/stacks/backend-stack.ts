@@ -37,6 +37,8 @@ export class BackendStack extends cdk.Stack {
 			environment: {
 				DATA_LAKE_BUCKET_NAME_OBJECT_URI: props.environmentConfig.data_lake_bucket_name_object_uri,
 				DATA_LAKE_BUCKET_NAME: dataLakeBucketName,
+				ENVIRONMENT: props.environmentName,
+				STORAGE_BACKEND: "s3",
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)

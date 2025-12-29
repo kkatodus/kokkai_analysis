@@ -8,7 +8,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Environment(str, Enum):
     LOCAL = "local"
+    STAGING = "staging"
     PROD = "prod"
+    DEV = "dev"
 
 class StorageBackend(str, Enum):
     S3 = "s3"
