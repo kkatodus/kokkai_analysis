@@ -7,6 +7,7 @@ import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as path from "path";
 import * as s3 from "aws-cdk-lib/aws-s3";
+import * as secrets from "aws-cdk-lib/aws-secretsmanager";
 import { BaseStackProps } from "../config/stack-props";
 
 export class BackendStack extends cdk.Stack {
@@ -21,6 +22,8 @@ export class BackendStack extends cdk.Stack {
 	const ECSCluster = new ecs.Cluster(this, "Cluster", {
 		vpc,
 	})
+
+	const apiKeySecret = secrets.Secret.fromSecretCompleteArn(this, "ApiKeySecret", props.environmentConfig.api_key_secret_arn);
 
 	const dataLakeBucketName = props.environmentConfig.data_lake_bucket_name_object_uri.split("/")[2];
 	const dataLakeBucket = s3.Bucket.fromBucketName(this, "DataLakeBucket", dataLakeBucketName);
@@ -39,6 +42,7 @@ export class BackendStack extends cdk.Stack {
 				DATA_LAKE_BUCKET_NAME: dataLakeBucketName,
 				ENVIRONMENT: props.environmentName,
 				STORAGE_BACKEND: "s3",
+				API_KEY: apiKeySecret.secretValueFromJson(props.environmentConfig.api_key_secret_key).toString(),
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
