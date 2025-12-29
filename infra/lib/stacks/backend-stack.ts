@@ -42,7 +42,10 @@ export class BackendStack extends cdk.Stack {
 				DATA_LAKE_BUCKET_NAME: dataLakeBucketName,
 				ENVIRONMENT: props.environmentName,
 				STORAGE_BACKEND: "s3",
-				API_KEY: apiKeySecret.secretValueFromJson(props.environmentConfig.api_key_secret_key).toString(),
+			},
+			// Inject secrets at runtime (do NOT synth them into CloudFormation).
+			secrets: {
+				API_KEY: ecs.Secret.fromSecretsManager(apiKeySecret, props.environmentConfig.api_key_secret_key),
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
