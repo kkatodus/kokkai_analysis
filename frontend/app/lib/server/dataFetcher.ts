@@ -25,7 +25,7 @@ import type {
  */
 function isLocalDevelopment(): boolean {
   if (process.env.NODE_ENV === "development") {
-    const env = process.env.NEXT_PUBLIC_ENVIRONMENT;
+    const env = process.env.ENVIRONMENT;
     return env === "local" || env === undefined;
   }
   return false;
@@ -37,7 +37,7 @@ function isLocalDevelopment(): boolean {
 function getServerApiBaseUrl(): string {
   // Check if we're in local development mode
   if (isLocalDevelopment()) {
-    return "http://localhost:5000";
+    return process.env.BACKEND_URL || "http://localhost:5000";
   }
 
   // Use environment variable if set
@@ -123,6 +123,7 @@ function transformApiReprToPolitician(apiRepr: any): Politician {
  */
 export async function getPoliticians(): Promise<Politician[]> {
   if (isLocalDevelopment()) {
+	console.log("backend url:", getServerApiBaseUrl());
     console.log("[Server DataFetcher] Using mock data for politicians");
     return mockPoliticians;
   }

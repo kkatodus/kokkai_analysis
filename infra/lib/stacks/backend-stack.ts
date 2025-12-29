@@ -3,11 +3,10 @@ import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
-import * as rds from 'aws-cdk-lib/aws-rds';
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
-import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as path from "path";
+import * as s3 from "aws-cdk-lib/aws-s3";
 import { BaseStackProps } from "../config/stack-props";
 
 export class BackendStack extends cdk.Stack {
@@ -19,42 +18,12 @@ export class BackendStack extends cdk.Stack {
 		natGateways: 1,
 	})
 
-	const bucket = new s3.Bucket(this, "Bucket", {
-		bucketName: `kokkai-doc-data-lake-bucket-${props.environmentName}`,
-		removalPolicy: cdk.RemovalPolicy.RETAIN,
-		blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-		encryption: s3.BucketEncryption.S3_MANAGED,
-		versioned: true,
-	})
-
-	// const dbCredentials = rds.Credentials.fromGeneratedSecret(`kokkai_doc_user_${props.environmentName}`);
-
-	// const db = new rds.DatabaseCluster(this, 'AuroraCluster', {
-	// 	vpc, 
-	// 	engine: rds.DatabaseClusterEngine.auroraPostgres({
-	// 		version: rds.AuroraPostgresEngineVersion.VER_17_4,
-	// 	}),
-	// 	credentials: dbCredentials,
-	// 	defaultDatabaseName: 'kokkai_doc_db',
-	// 	writer: rds.ClusterInstance.serverlessV2('writer'),
-	// 	serverlessV2MinCapacity: 0.5,
-	// 	serverlessV2MaxCapacity: 4,
-	// 	vpcSubnets: {
-	// 		subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-	// 	},
-	// })
-
-	// const proxy = new rds.DatabaseProxy(this, "DbProxy", {
-	// 	proxyTarget: rds.ProxyTarget.fromCluster(db),
-	// 	secrets: [db.secret!],
-	// 	vpc, 
-	// 	requireTLS: true,
-	// 	iamAuth: false
-	// })
-
 	const ECSCluster = new ecs.Cluster(this, "Cluster", {
 		vpc,
 	})
+
+	const dataLakeBucketName = props.environmentConfig.data_lake_bucket_name_object_uri.split("/")[2];
+	const dataLakeBucket = s3.Bucket.fromBucketName(this, "DataLakeBucket", dataLakeBucketName);
 
 	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
 		cluster: ECSCluster,
@@ -66,12 +35,13 @@ export class BackendStack extends cdk.Stack {
 			image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, "../../../backend")),
 			containerPort: 8000,
 			environment: {
-				S3_BUCKET_NAME: bucket.bucketName,
-			
+				DATA_LAKE_BUCKET_NAME_OBJECT_URI: props.environmentConfig.data_lake_bucket_name_object_uri,
+				DATA_LAKE_BUCKET_NAME: dataLakeBucketName,
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
 	})
+	dataLakeBucket.grantReadWrite(svc.taskDefinition.taskRole)
 
 	const cloudfrontDistribution = new cloudfront.Distribution(this, "ApiDistribution", {
 		defaultBehavior:{
@@ -98,19 +68,16 @@ export class BackendStack extends cdk.Stack {
 		enableAcceptEncodingBrotli: true
 	})
 
-	cloudfrontDistribution.addBehavior("/api/*",  new origins.LoadBalancerV2Origin(svc.loadBalancer, 
-		{
-			protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
-		}
-	), {
-		allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-		cachePolicy: publicCachePolicy,
-		originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
-		viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-	})
-
-
-	bucket.grantReadWrite(svc.taskDefinition.taskRole)
+	// cloudfrontDistribution.addBehavior("/api/*",  new origins.LoadBalancerV2Origin(svc.loadBalancer, 
+	// 	{
+	// 		protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+	// 	}
+	// ), {
+	// 	allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+	// 	cachePolicy: publicCachePolicy,
+	// 	originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+	// 	viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+	// })
 
 	new cdk.CfnOutput(this, "AlbDns", {value: svc.loadBalancer.loadBalancerDnsName})
 	new cdk.CfnOutput(this, "CloudfrontDomain", {value: cloudfrontDistribution.domainName})

@@ -5,6 +5,7 @@ __pycache__
 .env
 .venv
 venv
+backend_venv
 .env.local
 .cache
 pytest_cache

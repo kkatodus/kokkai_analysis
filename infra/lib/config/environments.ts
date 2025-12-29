@@ -10,6 +10,8 @@ export interface EnvironmentConfig {
   region: string;
   /** Stack tags to apply to all resources */
   tags?: Record<string, string>;
+  /** Data lake bucket name and object URI */
+  data_lake_bucket_name_object_uri: string;
 }
 
 /**
@@ -24,6 +26,7 @@ export const environments: Record<string, EnvironmentConfig> = {
       Environment: "dev",
       Project: "kokkai-doc",
     },
+	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-dev/kokkai-doc/"
   },
   staging: {
     account: process.env.AWS_ACCOUNT_ID_STAGING || process.env.CDK_DEFAULT_ACCOUNT || "",
@@ -32,6 +35,7 @@ export const environments: Record<string, EnvironmentConfig> = {
       Environment: "staging",
       Project: "kokkai-doc",
     },
+	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-staging/kokkai-doc/"
   },
   prod: {
     account: process.env.AWS_ACCOUNT_ID_PROD || process.env.CDK_DEFAULT_ACCOUNT || "",
@@ -40,6 +44,7 @@ export const environments: Record<string, EnvironmentConfig> = {
       Environment: "prod",
       Project: "kokkai-doc",
     },
+	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-prod/kokkai-doc/"
   },
 };
 

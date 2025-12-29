@@ -1,17 +1,16 @@
 from typing import Any
 
-from fastapi import APIRouter, Depends
+import os
+from fastapi import APIRouter
+from fastapi.responses import FileResponse
 
-from core.config import Settings, get_settings
-from services.data_loader import DataLoader
-from routers.dependencies import get_data_loader
+from core.paths import STATIC_DIR
 
 router = APIRouter(prefix="/geo", tags=["geo"])
 
 
 @router.get("/senkyokuPolydata", summary="Senkyoku polygon data")
-async def senkyoku_polygon_data(
-    settings: Settings = Depends(get_settings), loader: DataLoader = Depends(get_data_loader)
-) -> Any:
-    files = list(loader.list_json_files(settings.geo_dir))
-    return loader.load_json(files[0])
+async def senkyoku_polygon_data() -> Any:
+	path = os.path.join(STATIC_DIR, "geo/senkyoku_minified.json.gz")
+	print("fetching path", path)
+	return FileResponse(path=path, media_type="application/json", headers={"Content-Encoding": "gzip"})

@@ -1,10 +1,18 @@
 from functools import lru_cache
 from pathlib import Path
-from typing import List
 
+from typing import List, Optional
+from enum import Enum
 from pydantic import Field
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
+class Environment(str, Enum):
+    LOCAL = "local"
+    PROD = "prod"
+
+class StorageBackend(str, Enum):
+    S3 = "s3"
+    LOCAL = "local"
 
 class Settings(BaseSettings):
     """Application configuration loaded from environment variables.
@@ -13,36 +21,38 @@ class Settings(BaseSettings):
     out of the box when running locally alongside the existing Node API
     data directories.
     """
+    env:Environment = Field(default=Environment.LOCAL, alias="ENVIRONMENT")
+    storage_backend: StorageBackend = Field(default=StorageBackend.LOCAL, alias="STORAGE_BACKEND")
 
-    root_dir: Path = Path(__file__).resolve().parents[2]
-    data_root: Path = root_dir / "api"
-    sangiin_dir: Path = data_root / "data_sangiin"
-    shugiin_dir: Path = data_root / "data_shugiin"
-    speeches_dir: Path = data_root / "data_repr_speeches"
-    stats_dir: Path = data_root / "data_stats"
-    geo_dir: Path = data_root / "data_geo"
-    reprs_dir: Path = data_root / "data_repr_speeches"
-    policy_dir: Path = data_root / "data_visual"
-    donors_dir: Path = data_root / "data_visual"
-    visualization_dir: Path = data_root / "data_visual"
+    # local storage root for development
+    local_data_root: Path = Field(default=Path(__file__).resolve().parents[3] / "s3_mirror", alias="LOCAL_DATA_ROOT")
+
+    # s3 bucket stuff
+    data_lake_bucket_name: Optional[str] = Field(default=None, alias="DATA_LAKE_BUCKET_NAME")
+    data_lake_bucket_name_object_uri: Optional[str] = Field(default=None, alias="DATA_LAKE_BUCKET_NAME_OBJECT_URI")
+
+    # CORS
+    cors_allow_origins: List[str] = Field(default_factory=list, alias="CORS_ALLOW_ORIGINS")
+    
+    # api key
+    api_key: str = Field(..., alias="API_KEY")
+    api_key_header_name: str = Field(default="X-API-KEY", alias="API_KEY_HEADER_NAME")
 
     stripe_secret_key: str | None = Field(default=None, alias="STRIPE_SECRET_KEY")
     stripe_publishable_key: str | None = Field(default=None, alias="STRIPE_PUBLISHABLE_KEY")
     frontend_url: str = Field(default="https://kokkaidoc.com", alias="FRONTEND_URL")
-    manifesto_dir: Path = data_root / "data_manifesto" / "2025UpperHouseElection"
 
-    cors_allow_origins: List[str] = [
-        "http://localhost:3000",
-        "https://www.kokkaidoc.com",
-        "https://kokkaidoc.com",
-    ]
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=False)
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
+    def __str__(self) -> str:
+        return f"\nenv={self.env}\nstorage_backend={self.storage_backend}\nlocal_data_root={self.local_data_root}\ndata_lake_bucket_name={self.data_lake_bucket_name}\ndata_lake_bucket_name_object_uri={self.data_lake_bucket_name_object_uri}\ncors_allow_origins={self.cors_allow_origins}\napi_key={self.api_key}\napi_key_header_name={self.api_key_header_name}\nstripe_secret_key={self.stripe_secret_key}\nstripe_publishable_key={self.stripe_publishable_key}\nfrontend_url={self.frontend_url}"
+
 
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
-    return Settings()
+    settings = Settings()
+    if settings.env == Environment.LOCAL:
+        print(f"Loaded settings: {settings}")
+
+    return settings
