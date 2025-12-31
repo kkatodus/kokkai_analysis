@@ -99,6 +99,9 @@ async def require_api_key(
 			status_code=status.HTTP_401_UNAUTHORIZED,
 			detail="Missing API key",
 		)
+	print("comparing provided and settings.api_key")
+	print("provided", provided)
+	print("settings.api_key", settings.api_key)
 	if not secrets.compare_digest(provided, settings.api_key):
 		raise HTTPException(
 			status_code=status.HTTP_401_UNAUTHORIZED,
