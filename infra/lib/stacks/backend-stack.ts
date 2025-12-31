@@ -78,7 +78,10 @@ export class BackendStack extends cdk.Stack {
 
 		queryStringBehavior: cloudfront.CacheQueryStringBehavior.all(),
 		cookieBehavior: cloudfront.CacheCookieBehavior.none(),
-		headerBehavior: cloudfront.CacheHeaderBehavior.none(),
+		// IMPORTANT: This endpoint is protected by an API key header. If the cache key
+		// does not vary by that header, CloudFront can cache an authorized (200) response
+		// and serve it to unauthorized requests without ever hitting the origin.
+		headerBehavior: cloudfront.CacheHeaderBehavior.allowList("X-API-KEY"),
 
 		enableAcceptEncodingGzip: true,
 		enableAcceptEncodingBrotli: true
