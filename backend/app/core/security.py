@@ -89,6 +89,7 @@ async def require_api_key(
 	settings: Settings = Depends(get_settings),
 ) -> None:
 	"""Require a valid API key in the configured header (default: X-API-KEY)."""
+	print('settings.env', settings.env)
 	if settings.env == Environment.LOCAL:
 		return
 	header_name = settings.api_key_header_name
