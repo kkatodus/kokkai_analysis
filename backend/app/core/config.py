@@ -38,6 +38,10 @@ class Settings(BaseSettings):
 
     # CORS
     cors_allow_origins: List[str] = Field(default_factory=list, alias="CORS_ALLOW_ORIGINS")
+
+    # Domain verification
+    # Comma-separated or JSON list is supported by pydantic; prefer JSON in env for lists.
+    allowed_hosts: List[str] = Field(default_factory=list, alias="ALLOWED_HOSTS")
     
     # api key
     api_key: str = Field(..., alias="API_KEY")

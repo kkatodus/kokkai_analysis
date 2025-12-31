@@ -84,16 +84,16 @@ export class BackendStack extends cdk.Stack {
 		enableAcceptEncodingBrotli: true
 	})
 
-	// cloudfrontDistribution.addBehavior("/api/*",  new origins.LoadBalancerV2Origin(svc.loadBalancer, 
-	// 	{
-	// 		protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
-	// 	}
-	// ), {
-	// 	allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-	// 	cachePolicy: publicCachePolicy,
-	// 	originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
-	// 	viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-	// })
+	cloudfrontDistribution.addBehavior("/geo/senkyokuPolydata",  new origins.LoadBalancerV2Origin(svc.loadBalancer, 
+		{
+			protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
+		}
+	), {
+		allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+		cachePolicy: publicCachePolicy,
+		originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+		viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+	})
 
 	new cdk.CfnOutput(this, "AlbDns", {value: svc.loadBalancer.loadBalancerDnsName})
 	new cdk.CfnOutput(this, "CloudfrontDomain", {value: cloudfrontDistribution.domainName})

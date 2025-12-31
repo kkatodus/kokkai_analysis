@@ -5,7 +5,7 @@
 
 import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
-import { getPoliticians, getTopics, getPrefectures, getNetworkEdges } from "@/app/lib/server/dataFetcher";
+import { getPoliticians, getTopics, getVotingDistrictGeoJsonData, getNetworkEdges } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 
 /**
@@ -46,10 +46,10 @@ export default async function ParliamentExplorerPage({
   const params = await searchParams;
   
   // Fetch all initial data in parallel on the server
-  const [politicians, topics, prefectures, edges] = await Promise.all([
+  const [politicians, topics, votingDistrictGeoJsonData, edges] = await Promise.all([
     getPoliticians(),
     getTopics(),
-    getPrefectures(),
+    getVotingDistrictGeoJsonData(),
     getNetworkEdges(),
   ]);
 
@@ -61,7 +61,7 @@ export default async function ParliamentExplorerPage({
       <ParliamentExplorerClient
         initialPoliticians={politicians}
         initialTopics={topics}
-        initialPrefectures={prefectures}
+        votingDistrictGeoJsonData={votingDistrictGeoJsonData}
         initialEdges={edges}
         initialSelectedId={selectedId}
       />

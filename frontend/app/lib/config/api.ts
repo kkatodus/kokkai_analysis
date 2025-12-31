@@ -51,26 +51,12 @@ export const API_ENDPOINTS = {
   // Representatives
   sangiinRepr: "/sangiin/repr",
   shugiinRepr: "/shugiin/repr",
-  sangiinCommittees: "/sangiin/commitee",
-  shugiinCommittees: "/shugiin/commitee",
   
   // Speeches
   speeches: "/speeches",
-  speechesLower: "/speeches/lower",
-  speechesUpper: "/speeches/upper",
-  speechSummary: (party: string, reprName: string) => `/speeches/summary/${party}/${reprName}`,
   
-  // Manifesto
-  manifestoParties: "/manifesto/parties",
-  manifestoParty: (partyName: string) => `/manifesto/party/${encodeURIComponent(partyName)}`,
+  // voting district geo json data
+  votingDistrictGeoJson: "/geo/senkyokuPolydata",
   
-  // Stats
-  positionStats: "/stats/position",
-  
-  // Meetings
-  sangiinMeetingNames: "/sangiin/meeting_names",
-  sangiinMeetingVotes: (meetingName: string) => `/sangiin/sangiin_meeting_votes/${encodeURIComponent(meetingName)}`,
-  sangiinPartyOpinions: (meetingName: string, topicName: string) => 
-    `/sangiin/sangiin_party_opinions/${encodeURIComponent(meetingName)}/${encodeURIComponent(topicName)}`,
 } as const;
 

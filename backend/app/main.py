@@ -1,12 +1,14 @@
 
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import get_settings
+from core.security import DomainVerificationMiddleware, require_api_key
 from routers import (
     geo,
     speeches,
+	parliamentMember,
 )
 
 
@@ -24,6 +26,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.add_api_route("/health", summary="Health check", tags=["health"], endpoint=lambda: {"status": "ok"})
-app.include_router(speeches.router)
-app.include_router(geo.router)
+# Extra verification beyond CORS:
+# - Enforces Origin/Host allow-lists (where present)
+# - Keeps /health public for ALB health checks
+app.add_middleware(DomainVerificationMiddleware, settings=settings)
+
+app.add_api_route("/health", 
+					summary="Health check", 
+					tags=["health"], 
+					endpoint=lambda: {"status": "ok"},
+					methods=["GET"])
+
+# Protect API routes with API key auth (leave /health open).
+app.include_router(speeches.router, dependencies=[Depends(require_api_key)])
+app.include_router(geo.router, dependencies=[Depends(require_api_key)])
+app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key)])

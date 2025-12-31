@@ -26,7 +26,7 @@ import type { Politician, RankingMetric, Medium, Comment, Topic, NetworkEdge, Pr
 interface ParliamentExplorerClientProps {
   initialPoliticians: Politician[];
   initialTopics: Topic[];
-  initialPrefectures: Prefecture[];
+  votingDistrictGeoJsonData: any;
   initialEdges: NetworkEdge[];
   initialSelectedId?: string | null;
 }
@@ -34,13 +34,13 @@ interface ParliamentExplorerClientProps {
 export function ParliamentExplorerClient({
   initialPoliticians,
   initialTopics,
-  initialPrefectures,
+  votingDistrictGeoJsonData,
   initialEdges,
   initialSelectedId = null,
 }: ParliamentExplorerClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  console.log('client component');
+  console.log('Client ParliamentExplorerClient component');
   
   // Initialize state from server-provided initialSelectedId
   const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId);
@@ -50,8 +50,6 @@ export function ParliamentExplorerClient({
 
   const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
   const [selectedSubtopicId, setSelectedSubtopicId] = useState<string | null>(null);
-  const [rankingMetric, setRankingMetric] = useState<RankingMetric>("trust");
-  const [rankingTopic, setRankingTopic] = useState("");
   const [medium, setMedium] = useState<Medium>("parliament");
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
@@ -80,7 +78,6 @@ export function ParliamentExplorerClient({
   // Use initial data (could be enhanced with client-side refetching if needed)
   const politiciansData = initialPoliticians;
   const topicsData = initialTopics;
-  const prefecturesData = initialPrefectures;
   const edgesData = initialEdges;
   const allComments = [...(comments || []), ...localComments];
 
@@ -218,7 +215,7 @@ export function ParliamentExplorerClient({
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     <JapanMap
-                      prefectures={prefecturesData}
+                      votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
                       politicians={politiciansData}
                       selectedId={selectedId}
                       onPoliticianSelect={handlePoliticianSelect}
