@@ -9,6 +9,7 @@ on:
     paths:
       - "infra/**"
       - ".github/workflows/deploy-infra.yml"
+      - "backend/**"
   pull_request:
     branches:
       - dev

@@ -1,7 +1,6 @@
 import React from 'react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
-import Proptypes from 'prop-types';
 import {Map} from 'react-map-gl/maplibre';
 import { PARTY2RGBCOLOR } from '@/app/lib/config/parties';
 // import useLowerKu2Party from 'state/useLowerKu2Party';
@@ -100,17 +99,7 @@ function VoteDistrictMap({
   );
 }
 
-VoteDistrictMap.defaultProps = {
-  setCurrentDistrict: () => {},
-  selectedDistrict: '',
-  geoJsonData: {},
-};
 
-VoteDistrictMap.propTypes = {
-  setCurrentDistrict: Proptypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  geoJsonData: Proptypes.object,
-  selectedDistrict: Proptypes.string,
-};
+
 
 export default VoteDistrictMap;
