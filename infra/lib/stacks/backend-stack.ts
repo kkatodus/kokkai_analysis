@@ -72,7 +72,7 @@ export class BackendStack extends cdk.Stack {
 	})
 
 	const publicCachePolicy = new cloudfront.CachePolicy(this, "PublicCachePolicy", {
-		defaultTtl: cdk.Duration.minutes(5),
+		defaultTtl: cdk.Duration.hours(5),
 		minTtl: cdk.Duration.seconds(0),
 		maxTtl: cdk.Duration.hours(1),
 
