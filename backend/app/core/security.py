@@ -91,6 +91,7 @@ async def require_api_key(
 	"""Require a valid API key in the configured header (default: X-API-KEY)."""
 	print('settings.env', settings.env)
 	if settings.env == Environment.LOCAL:
+		print("local environment, skipping api key check")
 		return
 	header_name = settings.api_key_header_name
 	provided = request.headers.get(header_name)

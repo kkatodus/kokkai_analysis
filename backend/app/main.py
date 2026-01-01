@@ -10,6 +10,7 @@ from routers import (
     geo,
     speeches,
 	parliamentMember,
+	donors,
 )
 
 
@@ -42,3 +43,4 @@ app.add_api_route("/health",
 app.include_router(speeches.router, dependencies=[Depends(require_api_key)])
 app.include_router(geo.router, dependencies=[Depends(require_api_key)])
 app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key), Depends(get_storage)])
+app.include_router(donors.router, dependencies=[Depends(require_api_key)])

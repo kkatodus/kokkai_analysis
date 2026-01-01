@@ -13,37 +13,36 @@ import { Header } from "@/app/components/layout/Header";
 import { ResizableContainer } from "@/app/components/layout/ResizableContainer";
 import { Card, CardHeader } from "@/app/components/shared/Card";
 import { Tooltip } from "@/app/components/shared/Tooltip";
+import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
 import { NetworkGraph } from "@/app/components/visualizations/NetworkGraph";
 import { JapanMap } from "@/app/components/visualizations/JapanMap";
 import { TopicSelector } from "@/app/components/features/TopicSelector";
-import { SearchList } from "@/app/components/features/SearchList";
-import { Rankings } from "@/app/components/features/Rankings";
-import { DetailPane } from "@/app/components/features/DetailPane";
+import { ModalProvider } from "@/app/lib/hooks/useModal";
 import { useComments } from "@/app/lib/hooks/useParliamentData";
-import type { Politician, RankingMetric, Medium, Comment, Topic, NetworkEdge, Prefecture } from "@/app/types";
+import type { Politician, RankingMetric, Medium, Comment, Topic, NetworkEdge, Prefecture, ParliamentMemberData } from "@/app/types";
 
 interface ParliamentExplorerClientProps {
-  initialPoliticians: Politician[];
+  parliamentMemberData: ParliamentMemberData | null;
   initialTopics: Topic[];
   votingDistrictGeoJsonData: any;
   initialEdges: NetworkEdge[];
   initialSelectedId?: string | null;
+  donors: string[];
 }
 
 export function ParliamentExplorerClient({
-  initialPoliticians,
+  parliamentMemberData,
   initialTopics,
   votingDistrictGeoJsonData,
   initialEdges,
-  initialSelectedId = null,
+  initialSelectedId,
 }: ParliamentExplorerClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   console.log('Client ParliamentExplorerClient component');
-  
   // Initialize state from server-provided initialSelectedId
-  const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId);
+  const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId ?? null);
   
   // Fetch comments for selected politician (client-side for dynamic updates)
   const { data: comments } = useComments(selectedIdState);
@@ -76,56 +75,55 @@ export function ParliamentExplorerClient({
   const selectedId = selectedIdState;
 
   // Use initial data (could be enhanced with client-side refetching if needed)
-  const politiciansData = initialPoliticians;
   const topicsData = initialTopics;
   const edgesData = initialEdges;
   const allComments = [...(comments || []), ...localComments];
 
   // Filter politicians based on topic
-  const filteredPoliticians = useMemo(() => {
-    let filtered = politiciansData;
+//   const filteredPoliticians = useMemo(() => {
+//     let filtered = politiciansData;
 
-    // Topic filter
-    if (selectedTopicId || selectedSubtopicId) {
-      filtered = filtered.filter((p) => {
-        const corpus = [
-          ...p.speeches.map((s) => `${s.topic} ${s.excerpt}`),
-          ...p.tweets.map((t) => `${t.topic} ${t.content}`),
-          ...p.keyPositions.map((kp) => `${kp.topic} ${kp.stance}`),
-        ]
-          .join(" ")
-          .toLowerCase();
+//     // Topic filter
+//     if (selectedTopicId || selectedSubtopicId) {
+//       filtered = filtered.filter((p) => {
+//         const corpus = [
+//           ...p.speeches.map((s) => `${s.topic} ${s.excerpt}`),
+//           ...p.tweets.map((t) => `${t.topic} ${t.content}`),
+//           ...p.keyPositions.map((kp) => `${kp.topic} ${kp.stance}`),
+//         ]
+//           .join(" ")
+//           .toLowerCase();
 
-        const topic = topicsData.find((t) => t.id === selectedTopicId);
-        if (topic) {
-          const kw = topic.keyword.toLowerCase();
-          if (!corpus.includes(kw)) return false;
-        }
+//         const topic = topicsData.find((t) => t.id === selectedTopicId);
+//         if (topic) {
+//           const kw = topic.keyword.toLowerCase();
+//           if (!corpus.includes(kw)) return false;
+//         }
 
-        if (selectedSubtopicId) {
-          const subtopic = topic?.subtopics.find((s) => s.id === selectedSubtopicId);
-          if (subtopic) {
-            const kw = subtopic.keyword.toLowerCase();
-            if (!corpus.includes(kw)) return false;
-          }
-        }
+//         if (selectedSubtopicId) {
+//           const subtopic = topic?.subtopics.find((s) => s.id === selectedSubtopicId);
+//           if (subtopic) {
+//             const kw = subtopic.keyword.toLowerCase();
+//             if (!corpus.includes(kw)) return false;
+//           }
+//         }
 
-        return true;
-      });
-    }
+//         return true;
+//       });
+//     }
 
-    return filtered;
-  }, [politiciansData, topicsData, selectedTopicId, selectedSubtopicId]);
+//     return filtered;
+//   }, [politiciansData, topicsData, selectedTopicId, selectedSubtopicId]);
 
-  const filteredIds = useMemo(
-    () => new Set(filteredPoliticians.map((p) => p.id)),
-    [filteredPoliticians]
-  );
+//   const filteredIds = useMemo(
+//     () => new Set(filteredPoliticians.map((p) => p.id)),
+//     [filteredPoliticians]
+//   );
 
-  const selectedPolitician = useMemo(
-    () => politiciansData.find((p) => p.id === selectedId) || null,
-    [selectedId, politiciansData]
-  );
+//   const selectedPolitician = useMemo(
+//     () => politiciansData.find((p) => p.id === selectedId) || null,
+//     [selectedId, politiciansData]
+//   );
 
   const handlePoliticianSelect = useCallback((id: string | null) => {
     // Update local state
@@ -155,10 +153,12 @@ export function ParliamentExplorerClient({
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-4">
-          <Header />
+    <ModalProvider>
+      <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
+        <div className="w-full">
+          <div className="flex flex-col gap-4">
+            <Header />
+            <ModalManager />
 
           <ResizableContainer
             left={
@@ -169,25 +169,16 @@ export function ParliamentExplorerClient({
                     subtitle="Each point is a politician. Click to open the detail pane."
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <IdeologicalScatterPlot
+                    {/* <IdeologicalScatterPlot
                       politicians={politiciansData}
                       selectedId={selectedId}
                       filteredIds={filteredIds}
                       onPoliticianSelect={handlePoliticianSelect}
                       onTooltipShow={handleTooltipShow}
                       onTooltipHide={handleTooltipHide}
-                    />
+                    /> */}
                   </div>
-                  <div className="mt-1.5 flex gap-3 text-[11px] text-gray-400">
-                    <div className="flex items-center gap-1">
-                      <div className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-cyan-400 to-blue-700" />
-                      <span>Main parties</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <div className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-pink-500 to-orange-600" />
-                      <span>Minor / independents</span>
-                    </div>
-                  </div>
+                
                 </Card>
 
                 {/* <Card>
@@ -210,13 +201,13 @@ export function ParliamentExplorerClient({
 
                 <Card>
                   <CardHeader
-                    title="Electoral map (Japan, mock, D3)"
-                    subtitle="Selecting a representative highlights their prefecture."
+                    title="選挙区地図"
+                    subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     <JapanMap
                       votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
-                      politicians={politiciansData}
+                      parliamentMemberData={parliamentMemberData}
                       selectedId={selectedId}
                       onPoliticianSelect={handlePoliticianSelect}
                       onTooltipShow={handleTooltipShow}
@@ -237,12 +228,12 @@ export function ParliamentExplorerClient({
                     setSelectedSubtopicId(subtopicId);
                   }}
                 />
-
+{/* 
                 <SearchList
                   politicians={politiciansData}
                   selectedId={selectedId}
                   onPoliticianSelect={handlePoliticianSelect}
-                />
+                /> */}
 
                 {/* <Rankings
                   politicians={filteredPoliticians}
@@ -255,9 +246,9 @@ export function ParliamentExplorerClient({
               </>
             }
           />
+          </div>
         </div>
-      </div>
-
+{/* 
       <DetailPane
         politician={selectedPolitician}
         isOpen={selectedPolitician !== null}
@@ -267,10 +258,11 @@ export function ParliamentExplorerClient({
         comments={allComments}
         onClose={() => handlePoliticianSelect(null)}
         onMediumChange={setMedium}
-      />
+      /> */}
 
-      <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
-    </div>
+        <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
+      </div>
+    </ModalProvider>
   );
 }
 

@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Condense UI on iPhone/small screens by scaling down the root font size. */
+@media (max-width: 480px) {
+  html {
+    font-size: 10px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 10px;
+  }
+}

@@ -49,8 +49,10 @@ export function isLocalDevelopment(): boolean {
  */
 export const API_ENDPOINTS = {
   // Representatives
-  sangiinRepr: "/sangiin/repr",
-  shugiinRepr: "/shugiin/repr",
+  parliamentMemberData: "/parliamentMember",
+
+  // donors
+  donors: "/donors",
   
   // Speeches
   speeches: "/speeches",

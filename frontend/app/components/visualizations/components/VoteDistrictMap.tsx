@@ -23,6 +23,7 @@ interface VoteDistrictMapProps {
   geoJsonData: any;
   selectedDistrict: string | null;
   setCurrentDistrict: (district: string) => void;
+  ku2Party: {[key:string]:{name:string, yomikata:string, kaiha:string}}
 }
 
 
@@ -30,17 +31,18 @@ function VoteDistrictMap({
   setCurrentDistrict,
   geoJsonData,
   selectedDistrict,
+  ku2Party,
+
 }: VoteDistrictMapProps) {
   // Geojson data for voting districts
 //   const [Ku2Party] = useLowerKu2Party();
 
 
 
-  const getToolTip = (object : PickingInfo) => {
+  const getToolTip = ({object} : PickingInfo) => {
     if (object) {
-      const { kuname } = object.object?.properties;
-
-      return `${kuname}`
+      	const kuname = object.properties?.kuname;
+		return `${kuname}`
     }
     return null;
   };
@@ -50,12 +52,11 @@ function VoteDistrictMap({
     if (kuname === selectedDistrict) {
       return [51, 255, 51];
     }
-    // const party = Ku2Party[kuname]?.kaiha;
-    // const color = PARTY2RGBCOLOR[party];
+    const party = ku2Party[kuname]?.kaiha;
+    const color = PARTY2RGBCOLOR[party];
     // if (color === undefined) {
     //   return [255, 255, 255];
     // }
-	const color = null;
 
     return color || [255, 255, 255];
   };
@@ -70,7 +71,7 @@ function VoteDistrictMap({
     // eslint-disable-next-line no-unused-vars
     getElevation: (f) => 100,
     getFillColor: (f) => getFillColor(f),
-    getLineColor: [0, 0, 0],
+    getLineColor: [255, 255, 255],
     // eslint-disable-next-line no-unused-vars
     onClick: (info, event) => {
       const { kuname } = info.object.properties;
@@ -93,7 +94,7 @@ function VoteDistrictMap({
 		  
         //   mapboxAccessToken={NEXT_PUBLIC_REACT_APP_MAPBOX_ACCESS_TOKEN}
           reuseMaps
-          mapStyle={MAP_STYLE}
+        //   mapStyle={MAP_STYLE}
         //   preventStyleDiffing
           projection="mercator"
         />

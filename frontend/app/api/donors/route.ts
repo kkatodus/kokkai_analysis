@@ -1,0 +1,54 @@
+import { NextResponse } from "next/server";
+
+function normalizeBaseUrl(baseUrl: string): string {
+  // Ensure absolute URL for server-side fetch (Node/undici requires a scheme).
+  const trimmed = baseUrl.trim().replace(/\/+$/, "");
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
+  return `http://${trimmed}`;
+}
+
+function getBackendBaseUrl(): string {
+  // Prefer server-only var; fall back to public API url for convenience.
+  const fromEnv = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_API_URL;
+  if (fromEnv) return normalizeBaseUrl(fromEnv);
+  return "http://localhost:8000";
+}
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  const baseUrl = getBackendBaseUrl();
+  const url = `${baseUrl}/donors/`;
+
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+  };
+
+  // Server-only: never expose this value to the client.
+  const apiKey = process.env.BACKEND_API_KEY || process.env.API_KEY;
+  if (apiKey) headers["X-API-KEY"] = apiKey;
+
+  const res = await fetch(url, { headers, cache: "no-store" });
+  if (!res.ok) {
+    return NextResponse.json(
+      { error: `Backend request failed: ${res.status} ${res.statusText}` },
+      { status: 502, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  const data: unknown = await res.json();
+  const donors = (data as any)?.donors;
+  if (!Array.isArray(donors)) {
+    return NextResponse.json(
+      { error: "Unexpected backend response shape", data },
+      { status: 502, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  return NextResponse.json(
+    { donors },
+    { status: 200, headers: { "Cache-Control": "no-store" } }
+  );
+}
+
+

@@ -53,15 +53,21 @@ export function ResizableContainer({ left, right }: ResizableContainerProps) {
   }, [isDragging]);
 
   return (
-    <div ref={containerRef} className="flex w-full gap-0">
-      <div ref={leftRef} className="flex min-w-[300px] flex-col gap-4" style={{ flexBasis: "60%" }}>
+    <div ref={containerRef} className="flex w-full flex-col gap-4 md:flex-row md:gap-0">
+      <div
+        ref={leftRef}
+        className="flex w-full min-w-0 flex-col gap-4 md:min-w-[300px] md:basis-[60%]"
+      >
         {left}
       </div>
       <div
         className="w-1.5 cursor-col-resize bg-slate-400/20 transition-colors hover:bg-slate-400/40 shrink-0 max-md:hidden"
         onMouseDown={() => setIsDragging(true)}
       />
-      <div ref={rightRef} className="flex min-w-[260px] flex-col gap-4" style={{ flexBasis: "40%" }}>
+      <div
+        ref={rightRef}
+        className="flex w-full min-w-0 flex-col gap-4 md:min-w-[260px] md:basis-[40%]"
+      >
         {right}
       </div>
     </div>

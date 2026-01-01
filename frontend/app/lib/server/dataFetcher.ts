@@ -1,12 +1,13 @@
+"use server";
 /**
  * Server-side data fetching functions
  * These can be used in Server Components and run on the server
  * They use native fetch with proper cache configurations
  */
 
+
 import { API_ENDPOINTS } from "@/app/lib/config/api";
 import {
-  mockPoliticians,
   mockTopics,
   mockPrefectures,
   mockEdges,
@@ -18,6 +19,7 @@ import type {
   NetworkEdge,
   Prefecture,
   Comment,
+  ParliamentMemberData,
 } from "@/app/types";
 
 /**
@@ -121,34 +123,6 @@ function transformApiReprToPolitician(apiRepr: any): Politician {
 }
 
 /**
- * Fetch all politicians (server-side)
- */
-export async function getPoliticians(): Promise<Politician[]> {
-  if (isLocalDevelopment()) {
-	console.log("backend url:", getServerApiBaseUrl());
-	console.log("[Server DataFetcher] Using mock data for politicians");
-	return mockPoliticians;
-  }
-
-  try {
-	const [sangiinData, shugiinData] = await Promise.all([
-	  fetchApi<any[]>(API_ENDPOINTS.sangiinRepr).catch(() => []),
-	  fetchApi<any[]>(API_ENDPOINTS.shugiinRepr).catch(() => []),
-	]);
-
-	const politicians: Politician[] = [
-	  ...(sangiinData || []).map(transformApiReprToPolitician),
-	  ...(shugiinData || []).map(transformApiReprToPolitician),
-	];
-
-	return politicians;
-  } catch (error) {
-	console.error("Failed to fetch politicians from API, falling back to mock data:", error);
-	return mockPoliticians;
-  }
-}
-
-/**
  * Fetch topics (server-side)
  */
 export async function getTopics(): Promise<Topic[]> {
@@ -181,6 +155,27 @@ export async function getVotingDistrictGeoJsonData(): Promise<Prefecture[]> {
 	return mockPrefectures; 
   }
 }
+
+export async function getParliamentMemberData(): Promise<ParliamentMemberData | null> {
+ 
+  try {
+	// If your API has a parliament member data endpoint, use it here
+	return await fetchApi<ParliamentMemberData>(API_ENDPOINTS.parliamentMemberData);
+  } catch (error) {
+	console.error("Failed to fetch parliament member data from API, falling back to mock data:", error);
+	return null;
+  }
+}
+
+export async function getDonors(): Promise<string[]> {
+	try {
+		return await fetchApi<string[]>(API_ENDPOINTS.donors);
+	} catch (error) {
+		console.error("Failed to fetch donors from API, falling back to mock data:", error);
+		return [];
+	}
+}
+
 
 /**
  * Fetch network edges (server-side)

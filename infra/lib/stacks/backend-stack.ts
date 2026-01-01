@@ -8,6 +8,7 @@ import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as path from "path";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as secrets from "aws-cdk-lib/aws-secretsmanager";
+import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
 import { BaseStackProps } from "../config/stack-props";
 
 export class BackendStack extends cdk.Stack {
@@ -31,7 +32,9 @@ export class BackendStack extends cdk.Stack {
 	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
 		cluster: ECSCluster,
 		cpu: 512,
-		desiredCount:2,
+		// ECS Patterns construct requires desiredCount > 0 at synth time.
+		// We still allow scale-to-zero via autoscaling (minCapacity: 0) after deploy.
+		desiredCount: 1,
 		memoryLimitMiB: 1024,
 		taskImageOptions:{
 			// Resolve from this file's directory so deploys work regardless of the current working directory.
@@ -49,6 +52,36 @@ export class BackendStack extends cdk.Stack {
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)
+	})
+
+	// Autoscaling for dev: scale out on traffic, scale in after extended idle.
+	//
+	// NOTE: With an ALB in front, scaling from 0 means the *first* request will likely see a 503
+	// until at least one task is started and passes health checks.
+	const scalableTarget = svc.service.autoScaleTaskCount({
+		minCapacity: 0,
+		maxCapacity: 2,
+	})
+
+	// Scale OUT quickly when requests hit the load balancer (even if there are currently 0 healthy targets).
+	scalableTarget.scaleOnMetric("AlbRequestCountScaling", {
+		metric: svc.loadBalancer.metrics.requestCount({
+			period: cdk.Duration.minutes(1),
+			statistic: cloudwatch.Stats.SUM,
+		}),
+		// Only scale out; scale-in is handled by CPU target tracking with a long cooldown.
+		scalingSteps: [
+			{ lower: 1, change: +1 },
+			{ lower: 50, change: +1 },
+		],
+		cooldown: cdk.Duration.minutes(2),
+	})
+
+	// Scale IN after being idle for a while (keep tasks warm for up to ~1 hour).
+	scalableTarget.scaleOnCpuUtilization("CpuTargetTracking", {
+		targetUtilizationPercent: 20,
+		scaleOutCooldown: cdk.Duration.minutes(2),
+		scaleInCooldown: cdk.Duration.hours(1),
 	})
 
 	// The ALB target group health check defaults to "/" which our FastAPI app doesn't serve.
@@ -72,7 +105,8 @@ export class BackendStack extends cdk.Stack {
 	})
 
 	const publicCachePolicy = new cloudfront.CachePolicy(this, "PublicCachePolicy", {
-		defaultTtl: cdk.Duration.hours(5),
+		// IMPORTANT: defaultTtl must be <= maxTtl.
+		defaultTtl: cdk.Duration.minutes(5),
 		minTtl: cdk.Duration.seconds(0),
 		maxTtl: cdk.Duration.hours(1),
 

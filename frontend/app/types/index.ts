@@ -13,6 +13,35 @@ export interface TopicScores {
   [key: string]: number | undefined;
 }
 
+export interface ParliamentMemberData {
+  shugiin: {
+	meeting_period: string;
+	reprs:{
+		[key: string]: {
+			name: string;
+			yomikata: string;
+			kaiha: string;
+			district: string;
+			number_of_terms_lower: string;
+			number_of_terms_upper: string;
+		}[];
+	}
+  };
+  sangiin: {
+	meeting_period:string,
+	reprs:{
+		[key: string]: {
+			name:string;
+			yomikata:string;
+			kaiha:string;
+			district:string;
+			period:string;
+			link:string;
+		}
+	}
+  };
+}
+
 export interface District {
   prefectureId: string;
   prefectureName: string;
@@ -112,3 +141,4 @@ export interface Prefecture {
 export type RankingMetric = "trust" | "fact" | "econ" | "social" | "topic";
 export type Medium = "parliament" | "twitter";
 
+export type Modal = "donation" | "disclaimer"

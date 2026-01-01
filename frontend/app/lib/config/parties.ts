@@ -173,18 +173,19 @@ export const PARTY2PARTY: { [key: string]: string } = {
   }, {});
   
   export const PARTY2RGBCOLOR: { [key: string]: [number, number, number] } = {
-	自民: [0, 0, 0],
-	公明: [0, 191, 255],
-	立憲: [255, 165, 0],
-	維新: [255, 215, 0],
-	民主: [0, 0, 255],
-	共産: [255, 0, 0],
-	れ新: [0, 128, 0],
-	沖縄: [0, 255, 255],
-	女子: [255, 0, 255],
-	無所属: [128, 128, 128],
-	無: [119, 0, 200],
-	国民: [0, 0, 255],
-	維教: [255, 215, 0],
-	Ｎ党: [199, 21, 133],
+	// Neon palette for the site's dark navy background (#111827 → #020617).
+	自民: [224, 231, 255],   // neon periwinkle (stands out vs dark, still "neutral-ish")
+	公明: [0, 255, 255],     // neon cyan
+	立憲: [255, 140, 0],     // neon orange
+	維新: [255, 230, 0],     // neon yellow
+	民主: [0, 160, 255],     // electric blue
+	共産: [255, 45, 85],     // neon red/pink
+	れ新: [0, 255, 140],     // neon green
+	沖縄: [0, 255, 200],     // aqua-mint
+	女子: [255, 0, 200],     // hot magenta
+	無所属: [180, 190, 210], // bright slate
+	無: [176, 0, 255],       // electric purple
+	国民: [0, 110, 255],     // vivid blue
+	維教: [190, 255, 0],     // lime neon
+	Ｎ党: [255, 0, 140],     // neon fuchsia
   };

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parliament Explorer | KOKKAI DOC",
+  title: "KOKKAI DOC",
   description: "Explore Japanese parliamentary representatives, their ideologies, speeches, trust scores, and factual accuracy.",
 };
 
