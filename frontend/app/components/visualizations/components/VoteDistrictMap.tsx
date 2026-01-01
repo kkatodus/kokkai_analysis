@@ -2,6 +2,7 @@ import React from 'react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import {Map} from 'react-map-gl/maplibre';
+import type { PickingInfo } from 'deck.gl';
 import { PARTY2RGBCOLOR } from '@/app/lib/config/parties';
 // import useLowerKu2Party from 'state/useLowerKu2Party';
 
@@ -24,6 +25,7 @@ interface VoteDistrictMapProps {
   setCurrentDistrict: (district: string) => void;
 }
 
+
 function VoteDistrictMap({
   setCurrentDistrict,
   geoJsonData,
@@ -33,15 +35,16 @@ function VoteDistrictMap({
 //   const [Ku2Party] = useLowerKu2Party();
 
 
-  const getToolTip = ({ object }: { object: any }) => {
-    if (object) {
-      const { kuname } = object.properties;
 
-      return { html: `<h1>${kuname}</h1>` };
+  const getToolTip = (object : PickingInfo) => {
+    if (object) {
+      const { kuname } = object.object?.properties;
+
+      return `${kuname}`
     }
     return null;
   };
-  const getFillColor = (f: any) => {
+  const getFillColor : (f: any) => [number, number, number] = (f: any) => {
     let { kuname } = f.properties;
     kuname = kuname.replace('区', '');
     if (kuname === selectedDistrict) {

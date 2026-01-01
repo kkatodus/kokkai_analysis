@@ -12,7 +12,7 @@ async def parliament_member_data() -> Any:
 	s3 = boto3.resource('s3')
 	bucket = s3.Bucket(os.environ.get("DATA_LAKE_BUCKET_NAME"))
 
-	objects = bucket.objects.filter(Prefix="/kokkai-doc/parliamentMembers/")
+	objects = bucket.objects.filter(Prefix="kokkai-doc/parliamentMembers/")
 	object_keys = [obj.key for obj in objects]
 
 	print("object_keys", object_keys)
