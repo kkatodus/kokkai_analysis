@@ -120,7 +120,17 @@ export class BackendStack extends cdk.Stack {
 		enableAcceptEncodingGzip: true,
 		enableAcceptEncodingBrotli: true
 	})
-
+	const cachedOriginRequestPolicy = new cloudfront.OriginRequestPolicy(
+		this,
+		"CachedApiOriginRequestPolicy",
+		{
+		  queryStringBehavior:cloudfront.OriginRequestQueryStringBehavior.all(),
+		  headerBehavior: cloudfront.OriginRequestHeaderBehavior.allowList(
+			"X-API-KEY"
+		  ),
+		  cookieBehavior: cloudfront.OriginRequestCookieBehavior.none(),
+		}
+	  );
 	const cacheEndpoints = [
 		"/geo/senkyokuPolydata",
 		"/parliamentMember",
@@ -134,7 +144,7 @@ export class BackendStack extends cdk.Stack {
 		), {
 			allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
 			cachePolicy: publicCachePolicy,
-			originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+			originRequestPolicy: cachedOriginRequestPolicy,
 			viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 		})
 	}

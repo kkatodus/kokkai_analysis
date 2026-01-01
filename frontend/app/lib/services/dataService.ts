@@ -5,7 +5,6 @@
 
 import { getApiBaseUrl, isLocalDevelopment, API_ENDPOINTS } from "@/app/lib/config/api";
 import {
-  mockPoliticians,
   mockTopics,
   mockPrefectures,
   mockEdges,
@@ -51,38 +50,6 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
  * These functions return mock data in local development, or fetch from API in production
  */
 
-/**
- * Fetch all politicians/representatives
- * Note: The API returns different structures for Sangiin/Shugiin
- * This function should be adapted based on your actual API response structure
- */
-export async function fetchPoliticians(): Promise<Politician[]> {
-  if (isLocalDevelopment()) {
-    console.log("[DataService] Using mock data for politicians");
-    return Promise.resolve(mockPoliticians);
-  }
-
-  try {
-    // Try fetching from both houses and merge
-    // Adjust based on your actual API structure
-    const [sangiinData, shugiinData] = await Promise.all([
-      fetchApi<any[]>(API_ENDPOINTS.sangiinRepr).catch(() => []),
-      fetchApi<any[]>(API_ENDPOINTS.shugiinRepr).catch(() => []),
-    ]);
-
-    // Transform API data to Politician[] format
-    // This is a placeholder - you'll need to map the actual API response structure
-    const politicians: Politician[] = [
-      ...(sangiinData || []).map(transformApiReprToPolitician),
-      ...(shugiinData || []).map(transformApiReprToPolitician),
-    ];
-
-    return politicians;
-  } catch (error) {
-    console.error("Failed to fetch politicians from API, falling back to mock data:", error);
-    return mockPoliticians;
-  }
-}
 
 /**
  * Fetch topics
@@ -162,13 +129,6 @@ export async function fetchComments(politicianId: string): Promise<Comment[]> {
   }
 }
 
-/**
- * Fetch a single politician by ID
- */
-export async function fetchPoliticianById(id: string): Promise<Politician | null> {
-  const politicians = await fetchPoliticians();
-  return politicians.find((p) => p.id === id) || null;
-}
 
 /**
  * Transform API representative data to Politician format
