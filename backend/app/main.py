@@ -4,6 +4,7 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import get_settings
+from core.storage import get_storage
 from core.security import DomainVerificationMiddleware, require_api_key
 from routers import (
     geo,
@@ -40,4 +41,4 @@ app.add_api_route("/health",
 # Protect API routes with API key auth (leave /health open).
 app.include_router(speeches.router, dependencies=[Depends(require_api_key)])
 app.include_router(geo.router, dependencies=[Depends(require_api_key)])
-app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key)])
+app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key), Depends(get_storage)])

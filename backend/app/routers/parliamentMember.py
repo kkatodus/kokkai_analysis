@@ -1,20 +1,17 @@
 from typing import Any
 
 import os
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from core.storage import get_storage, Storage
+from core.config import get_settings
+from core.config import Settings
 import boto3
 
 router = APIRouter(prefix="/parliamentMember", tags=["parliamentMember"])
 
 
 @router.get("/", summary="Parliament member data")
-async def parliament_member_data() -> Any:
-	s3 = boto3.resource('s3')
-	bucket = s3.Bucket(os.environ.get("DATA_LAKE_BUCKET_NAME"))
-
-	objects = bucket.objects.filter(Prefix="kokkai-doc/parliamentMembers/")
-	object_keys = [obj.key for obj in objects]
-
-	print("object_keys", object_keys)
+async def parliament_member_data(storage: Storage = Depends(get_storage)) -> Any:
+	object_keys = storage.read_directory("kokkai-doc/parliamentMembers/")
 
 	return {"message": "Parliament member data", "object_keys": object_keys}

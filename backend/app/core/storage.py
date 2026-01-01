@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 from pathlib import Path
 from typing import Protocol
 import json
-from core.config import Settings, StorageBackend
+from core.config import Settings, StorageBackend, get_settings
+from fastapi import Depends
 
 class Storage(Protocol):
 	def read_json(self, key:str) -> dict: ...
@@ -25,6 +27,11 @@ class LocalStorage:
 		with open(path, "r", encoding="utf-8") as f:
 			return json.load(f)
 
+	def read_directory(self, prefix:str) -> list[str]:
+		print("reading directory", os.path.join(self.root, prefix))
+		objects = os.listdir(os.path.join(self.root, prefix))
+		return objects
+
 	def read_bytes(self, key:str) -> bytes:
 		path = self._path(key)
 		if not path.exists():
@@ -36,20 +43,22 @@ class LocalStorage:
 @dataclass
 class S3Storage:
 	bucket_name: str
-	prefix: str
 
 	def __post_init__(self):
 		import boto3 # pylint: disable=import-outside-toplevel
-		self._s3 = boto3.client("s3")
+		self._s3 = boto3.resource('s3')
 
 	def _obj_key(self, key:str) -> str:
-		if self.prefix:
-			return f"{self.prefix.rstrip('/')}/{key.lstrip('/')}"
 		return key.lstrip('/')
+
+	def read_directory(self, prefix:str) -> list[str]:
+		bucket = self._s3.Bucket(self.bucket_name)
+		objects = bucket.objects.filter(Prefix=prefix)
+		return [obj.key for obj in objects] if objects else []
 
 
 	def read_bytes(self, key:str) -> bytes:
-		obj = self._s3.get_object(Bucket=self.bucket_name, Key=self._obj_key(key))
+		obj = self._s3.Bucket(self.bucket_name).Object(self._obj_key(key)).get()
 		return obj["Body"].read()
 
 	def read_json(self, key: str) -> dict:
@@ -57,10 +66,11 @@ class S3Storage:
 
 
 
-def get_storage(settings:Settings) -> Storage:
+def get_storage(settings:Settings = Depends(get_settings)) -> Storage:
 	if settings.storage_backend == StorageBackend.S3:
-		return S3Storage(bucket_name=settings.s3_bucket_name, prefix=settings.s3_prefix)
+		return S3Storage(bucket_name=settings.data_lake_bucket_name)
 	elif settings.storage_backend == StorageBackend.LOCAL:
+		print("reading local storage", settings.local_data_root)
 		return LocalStorage(root=settings.local_data_root)
 	else:
 		raise ValueError(f"Invalid storage backend: {settings.storage_backend}")
