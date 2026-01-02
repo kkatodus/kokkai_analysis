@@ -26,8 +26,9 @@ class Settings(BaseSettings):
 	env:Environment = Field(default=Environment.LOCAL, alias="ENVIRONMENT")
 	storage_backend: StorageBackend = Field(default=StorageBackend.LOCAL, alias="STORAGE_BACKEND")
 
-	# local storage root for development		
-	local_data_root: Optional[Path] = Field(default=Path(__file__).resolve().parents[3] / "s3_mirror", alias="LOCAL_DATA_ROOT")
+	# local storage root for development
+	
+	local_data_root: Optional[Path] = Field(default="", alias="LOCAL_DATA_ROOT")
 
 	# s3 bucket stuff
 	data_lake_bucket_name: Optional[str] = Field(default=None, alias="DATA_LAKE_BUCKET_NAME")
@@ -53,6 +54,8 @@ class Settings(BaseSettings):
 	def __str__(self) -> str:
 		return f"\nenv={self.env}\nstorage_backend={self.storage_backend}\nlocal_data_root={self.local_data_root}\ndata_lake_bucket_name={self.data_lake_bucket_name}\ndata_lake_bucket_name_object_uri={self.data_lake_bucket_name_object_uri}\ncors_allow_origins={self.cors_allow_origins}\napi_key={self.api_key}\napi_key_header_name={self.api_key_header_name}\nstripe_secret_key={self.stripe_secret_key}\nstripe_publishable_key={self.stripe_publishable_key}\nfrontend_url={self.frontend_url}"
 
+	def set_local_data_root(self, local_data_root: Path) -> None:
+		self.local_data_root = local_data_root
 
 
 @lru_cache(maxsize=1)
@@ -60,5 +63,7 @@ def get_settings() -> Settings:
 	settings = Settings()
 	if settings.env == Environment.LOCAL:
 		print(f"Loaded settings: {settings}")
+		if settings.local_data_root == "":
+			settings.local_data_root = Path(__file__).resolve().parents[3] / "s3_mirror"
 
 	return settings

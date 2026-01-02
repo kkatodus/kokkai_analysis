@@ -19,8 +19,7 @@ import { NetworkGraph } from "@/app/components/visualizations/NetworkGraph";
 import { JapanMap } from "@/app/components/visualizations/JapanMap";
 import { TopicSelector } from "@/app/components/features/TopicSelector";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import { useComments } from "@/app/lib/hooks/useParliamentData";
-import type { Politician, RankingMetric, Medium, Comment, Topic, NetworkEdge, Prefecture, ParliamentMemberData } from "@/app/types";
+import type { Medium, Comment, Topic, NetworkEdge, ParliamentMemberData } from "@/app/types";
 
 interface ParliamentExplorerClientProps {
   parliamentMemberData: ParliamentMemberData | null;
@@ -44,8 +43,6 @@ export function ParliamentExplorerClient({
   // Initialize state from server-provided initialSelectedId
   const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId ?? null);
   
-  // Fetch comments for selected politician (client-side for dynamic updates)
-  const { data: comments } = useComments(selectedIdState);
 
   const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
   const [selectedSubtopicId, setSelectedSubtopicId] = useState<string | null>(null);
@@ -77,7 +74,6 @@ export function ParliamentExplorerClient({
   // Use initial data (could be enhanced with client-side refetching if needed)
   const topicsData = initialTopics;
   const edgesData = initialEdges;
-  const allComments = [...(comments || []), ...localComments];
 
   // Filter politicians based on topic
 //   const filteredPoliticians = useMemo(() => {
