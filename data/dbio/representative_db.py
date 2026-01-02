@@ -111,7 +111,15 @@ class Person:
 
     def __str__(self) -> str:
         return f"{self.person_id}-{self.name_kanji} ({self.name_kana})"
-    
+
+@dataclass(frozen=True)
+class PersonMatch:
+    person: Person
+    score: float
+
+    def __str__(self) -> str:
+        return f"{self.person.person_id}-{self.person.name_kanji} ({self.person.name_kana}) - {self.score}"
+
 @dataclass(frozen=True)
 class ElectionResult:
     person_id: PersonId
@@ -344,6 +352,40 @@ def get_person_by_column(cur: psycopg2.extensions.cursor, column: Literal["perso
             election_signature=row[3]
         ))
     return return_array
+
+def get_closest_person_by_name(cur: psycopg2.extensions.cursor, name: str, limit: int = 30) -> Optional[Person]:
+	query = """
+		WITH q AS (
+			SELECT regexp_replace(%s, '[[:space:]\u3000]+', '', 'g') AS query_norm
+		)
+		SELECT
+			person_id,
+			name_kanji,
+			name_kana,
+			election_signature,
+			similarity(
+				regexp_replace(coalesce(name_kanji,'') || coalesce(name_kana,''), '[[:space:]\u3000]+', '', 'g'),
+				q.query_norm
+			) AS score
+		FROM person, q
+		ORDER BY score DESC
+		LIMIT %s;
+	"""
+	cur.execute(query, (name, limit))
+	rows = cur.fetchall()
+	return_array = []
+	for row in rows:
+		return_array.append(PersonMatch(
+			person=Person(
+				person_id=PersonId(row[0]),
+				name_kanji=row[1],
+				name_kana=row[2],
+				election_signature=row[3],
+			),
+			score=float(row[4])
+		))
+	return_array.sort(key=lambda x: x.score, reverse=True)
+	return return_array
 
 def get_speech_by_column(cur: psycopg2.extensions.cursor, column: Literal["issue_id", "speaker", "speech_id"], value: Any) -> List[Speech]:
 	query = f"""
