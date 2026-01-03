@@ -3,12 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 import os
 from pathlib import Path
-from typing import Protocol
+from typing import Protocol, Iterator
 import json
+import gzip
 from core.config import Settings, StorageBackend, get_settings
 from fastapi import Depends
 
 class Storage(Protocol):
+	def read_gzipped_json(self, key:str) -> dict: ...
 	def read_json(self, key:str) -> dict: ...
 	def read_bytes(self, key:str) -> bytes: ...
 
@@ -18,29 +20,30 @@ class LocalStorage:
 	root: Path
 
 	def _path(self, key:str) -> Path:
-		return (self.root/key).resolve()
-
-	
+		return os.path.join(self.root, key)
 
 	def read_directory(self, prefix:str) -> list[str]:
 		print("reading directory", os.path.join(self.root, prefix))
 		objects = os.listdir(os.path.join(self.root, prefix))
 		return objects
+	
 
 	def read_bytes(self, key:str) -> bytes:
 		path = self._path(key)
-		if not path.exists():
+		if not os.path.exists(path):
 			raise FileNotFoundError(f"File not found: {path}")
 		with open(path, "rb") as f:
 			return f.read()
 
 	def read_json(self, key:str) -> dict:
 		path = self._path(key)
-		if not path.exists():
+		if not os.path.exists(path):
 			raise FileNotFoundError(f"File not found: {path}")
 		with open(path, "r", encoding="utf-8") as f:
 			return json.load(f)
 
+
+CHUNK_SIZE = 1024 * 1024 # 1MB
 
 @dataclass
 class S3Storage:
@@ -49,6 +52,13 @@ class S3Storage:
 	def __post_init__(self):
 		import boto3 # pylint: disable=import-outside-toplevel
 		self._s3 = boto3.resource('s3')
+	
+	def iter_s3_body(self, body)-> Iterator[bytes]:
+		while True:
+			chuck = body.read(CHUNK_SIZE)
+			if not chuck:
+				break
+			yield chuck
 
 	def _obj_key(self, key:str) -> str:
 		return key.lstrip('/')

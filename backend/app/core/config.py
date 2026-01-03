@@ -1,6 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
-
+import os
 from typing import List, Optional
 from enum import Enum
 from pydantic import Field
@@ -28,7 +28,7 @@ class Settings(BaseSettings):
 
 	# local storage root for development
 	
-	local_data_root: Optional[Path] = Field(default="", alias="LOCAL_DATA_ROOT")
+	local_data_root: Optional[str] = Field(default="", alias="LOCAL_DATA_ROOT")
 
 	# s3 bucket stuff
 	data_lake_bucket_name: Optional[str] = Field(default=None, alias="DATA_LAKE_BUCKET_NAME")
@@ -64,6 +64,8 @@ def get_settings() -> Settings:
 	if settings.env == Environment.LOCAL:
 		print(f"Loaded settings: {settings}")
 		if settings.local_data_root == "":
-			settings.local_data_root = Path(__file__).resolve().parents[3] / "s3_mirror"
+			print("setting local data root to ", Path(os.path.dirname(__file__)).resolve().parents[3] / "s3_mirror")
+			settings.local_data_root = os.path.join(os.path.dirname(__file__), "..", "..", "..", "s3_mirror")
+			print("local data root", settings.local_data_root)
 
 	return settings

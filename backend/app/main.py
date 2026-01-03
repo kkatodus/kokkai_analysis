@@ -10,6 +10,7 @@ from routers import (
     geo,
     speeches,
 	parliamentMember,
+	ideology,
 	donors,
 )
 
@@ -44,3 +45,4 @@ app.include_router(speeches.router, dependencies=[Depends(require_api_key)])
 app.include_router(geo.router, dependencies=[Depends(require_api_key)])
 app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key), Depends(get_storage)])
 app.include_router(donors.router, dependencies=[Depends(require_api_key)])
+app.include_router(ideology.router, dependencies=[Depends(require_api_key)])

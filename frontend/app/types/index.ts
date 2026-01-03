@@ -15,30 +15,25 @@ export interface TopicScores {
 
 export interface ParliamentMemberData {
   shugiin: {
-	meeting_period: string;
-	reprs:{
-		[key: string]: {
+	reprs: {
 			name: string;
 			yomikata: string;
 			kaiha: string;
 			district: string;
 			number_of_terms_lower: string;
 			number_of_terms_upper: string;
-		}[];
-	}
+		}[]
   };
   sangiin: {
-	meeting_period:string,
-	reprs:{
-		[key: string]: {
+	reprs:
+		{
 			name:string;
 			yomikata:string;
 			kaiha:string;
 			district:string;
 			period:string;
 			link:string;
-		}
-	}
+		}[]
   };
 }
 
