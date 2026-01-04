@@ -7,7 +7,7 @@
 
 
 import { API_ENDPOINTS } from "@/app/lib/config/api";
-import Papa, { type ParseResult } from "papaparse";
+import Papa from "papaparse";
 import { gunzipSync } from "node:zlib";
 import type {
   ParliamentMemberData,

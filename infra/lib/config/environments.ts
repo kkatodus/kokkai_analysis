@@ -17,6 +17,8 @@ export interface EnvironmentConfig {
   /** API key secret name */
   api_key_secret_arn: string;
   api_key_secret_key: string;
+  /** CORS allow origins */
+  cors_allow_origins: string[];
 }
 
 /**
@@ -34,7 +36,8 @@ export const environments: Record<string, EnvironmentConfig> = {
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-dev/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-dev",
 	api_key_secret_arn: "arn:aws:secretsmanager:ap-northeast-1:641577182081:secret:dev/kokkaidoc/api-CWi9sp",
-	api_key_secret_key: "kokkai-doc-dev-api-key"
+	api_key_secret_key: "kokkai-doc-dev-api-key",
+	cors_allow_origins: ["*"],
   },
   staging: {
     account: process.env.AWS_ACCOUNT_ID_STAGING || process.env.CDK_DEFAULT_ACCOUNT || "",
@@ -46,19 +49,21 @@ export const environments: Record<string, EnvironmentConfig> = {
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-staging/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-staging",
 	api_key_secret_arn: "notcreated",
-	api_key_secret_key: "kokkai-doc-staging-api-key"
+	api_key_secret_key: "kokkai-doc-staging-api-key",
+	cors_allow_origins: ["https://staging.kokkaidoc.com"],
   },
   prod: {
     account: process.env.AWS_ACCOUNT_ID_PROD || process.env.CDK_DEFAULT_ACCOUNT || "",
     region: process.env.AWS_REGION || "ap-northeast-1",
     tags: {
-      Environment: "prod",
+      Environment: "prod",	
       Project: "kokkai-doc",
     },
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-prod/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-prod",
 	api_key_secret_arn: "notcreated",
-	api_key_secret_key: "kokkai-doc-prod-api-key"
+	api_key_secret_key: "kokkai-doc-prod-api-key",
+	cors_allow_origins: ["https://kokkaidoc.com"],
   },
 };
 
