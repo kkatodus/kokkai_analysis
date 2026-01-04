@@ -156,7 +156,7 @@ export async function getAllParliamentMemberTable(): Promise<AllParliamentMember
 
 		// Papa.parse on ArrayBuffer triggers FileReaderSync in some environments.
 		// Parse from string instead (sync).
-		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data;
+		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data as AllParliamentMemberTableData[];
 	} catch (error) {
 		console.error("Failed to fetch all parliament member table from API, falling back to mock data:", error);
 		return null;
