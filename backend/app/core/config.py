@@ -49,7 +49,14 @@ class Settings(BaseSettings):
 	stripe_publishable_key: str | None = Field(default=None, alias="STRIPE_PUBLISHABLE_KEY")
 	frontend_url: str = Field(default="https://kokkaidoc.com", alias="FRONTEND_URL")
 
-	model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=False)
+	# Allow list fields (e.g. List[str]) to be provided as comma-separated env vars.
+	# This matches how CDK currently injects CORS_ALLOW_ORIGINS into the ECS task definition.
+	model_config = SettingsConfigDict(
+		env_file=".env",
+		env_file_encoding="utf-8",
+		case_sensitive=False,
+		env_parse_delimiter=",",
+	)
 
 	def __str__(self) -> str:
 		return f"\nenv={self.env}\nstorage_backend={self.storage_backend}\nlocal_data_root={self.local_data_root}\ndata_lake_bucket_name={self.data_lake_bucket_name}\ndata_lake_bucket_name_object_uri={self.data_lake_bucket_name_object_uri}\ncors_allow_origins={self.cors_allow_origins}\napi_key={self.api_key}\napi_key_header_name={self.api_key_header_name}\nstripe_secret_key={self.stripe_secret_key}\nstripe_publishable_key={self.stripe_publishable_key}\nfrontend_url={self.frontend_url}"
