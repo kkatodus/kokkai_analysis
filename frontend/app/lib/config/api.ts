@@ -59,6 +59,11 @@ export const API_ENDPOINTS = {
   
   // voting district geo json data
   votingDistrictGeoJson: "/geo/senkyokuPolydata",
-  
+
+  // ideology
+  ideology: "/ideology",
+
+  // all parliament member table
+  allParliamentMemberTable: "/parliamentMember/all",
 } as const;
 

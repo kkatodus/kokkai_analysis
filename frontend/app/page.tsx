@@ -5,7 +5,7 @@
 
 import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
-import { getTopics, getVotingDistrictGeoJsonData, getNetworkEdges, getParliamentMemberData } from "@/app/lib/server/dataFetcher";
+import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 
 /**
@@ -39,31 +39,31 @@ export const revalidate = 604800; // 7 days * 24 hours * 60 minutes * 60 seconds
 export default async function ParliamentExplorerPage({
   searchParams,
 }: {
-  searchParams: Promise<{ id?: string }>;
+  searchParams: Promise<{ person_id?: string }>;
 }) {
-  console.log('server component');
   // Await searchParams (Next.js 15+ requires this)
   const params = await searchParams;
   
   // Fetch all initial data in parallel on the server
-  const [parliamentMemberData, topics, votingDistrictGeoJsonData, edges] = await Promise.all([
+  const [parliamentMemberData, allParliamentMemberTable, votingDistrictGeoJsonData, ideologyData] = await Promise.all([
     getParliamentMemberData(),
-    getTopics(),
+    getAllParliamentMemberTable(),
     getVotingDistrictGeoJsonData(),
-    getNetworkEdges(),
+    getIdeologyData(),
   ]);
 
+
   // Get selectedId from URL search params (for shareable links)
-  const selectedId = params.id || null;
+  const selectedPersonId = params.person_id || null;
 
   return (
     <Suspense fallback={<LoadingState />}>
       <ParliamentExplorerClient
+		allParliamentMemberTable={allParliamentMemberTable}
         parliamentMemberData={parliamentMemberData}
-        initialTopics={topics}
         votingDistrictGeoJsonData={votingDistrictGeoJsonData}
-        initialEdges={edges}
-        initialSelectedId={selectedId}
+        ideologyData={ideologyData}
+        initialSelectedPersonId={selectedPersonId}
       />
     </Suspense>
   );

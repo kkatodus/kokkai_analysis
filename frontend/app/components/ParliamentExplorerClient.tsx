@@ -6,8 +6,7 @@
  * Receives initial data from Server Component
  */
 
-import { useState, useMemo, useCallback, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useCallback, useEffect } from "react";
 
 import { Header } from "@/app/components/layout/Header";
 import { ResizableContainer } from "@/app/components/layout/ResizableContainer";
@@ -15,126 +14,73 @@ import { Card, CardHeader } from "@/app/components/shared/Card";
 import { Tooltip } from "@/app/components/shared/Tooltip";
 import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
-import { NetworkGraph } from "@/app/components/visualizations/NetworkGraph";
 import { JapanMap } from "@/app/components/visualizations/JapanMap";
-import { TopicSelector } from "@/app/components/features/TopicSelector";
+import { DetailPane } from "@/app/components/features/DetailPane";
+import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import type { Medium, Comment, Topic, NetworkEdge, ParliamentMemberData } from "@/app/types";
+import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData } from "@/app/types";
+import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
+import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
 
 interface ParliamentExplorerClientProps {
   parliamentMemberData: ParliamentMemberData | null;
-  initialTopics: Topic[];
   votingDistrictGeoJsonData: any;
-  initialEdges: NetworkEdge[];
-  initialSelectedId?: string | null;
-  donors: string[];
+  initialSelectedPersonId?: string | null;
+  ideologyData: IdeologyData | null;
+  allParliamentMemberTable: AllParliamentMemberTableData[] | null;
 }
 
 export function ParliamentExplorerClient({
   parliamentMemberData,
-  initialTopics,
   votingDistrictGeoJsonData,
-  initialEdges,
-  initialSelectedId,
+  initialSelectedPersonId,
+  ideologyData,	
+  allParliamentMemberTable,
 }: ParliamentExplorerClientProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  console.log('Client ParliamentExplorerClient component');
   // Initialize state from server-provided initialSelectedId
-  const [selectedIdState, setSelectedIdState] = useState<string | null>(initialSelectedId ?? null);
+  const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
   
 
-  const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
-  const [selectedSubtopicId, setSelectedSubtopicId] = useState<string | null>(null);
-  const [medium, setMedium] = useState<Medium>("parliament");
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
-  const [localComments, setLocalComments] = useState<Comment[]>([]);
+  const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
 
-  // Sync selectedId with URL changes (e.g., browser back/forward)
-  // This handles cases where the URL changes externally (browser navigation)
+  // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
   useEffect(() => {
-    const urlId = searchParams.get("id");
-    setSelectedIdState((currentId) => {
-      // Only update if URL differs from current state
-      if (urlId !== currentId) {
-        if (urlId) {
-          setMedium("parliament");
-        }
-        return urlId;
-      }
-      return currentId;
-    });
-  }, [searchParams]);
+    if (typeof window === "undefined") return;
+
+    const readFromUrl = () => new URLSearchParams(window.location.search).get("person_id");
+
+    // On mount, prefer current URL (if present), else fall back to server-provided initial value.
+    const initialFromUrl = readFromUrl();
+    if (initialFromUrl !== null) setSelectedPersonId(initialFromUrl);
+    else setSelectedPersonId(initialSelectedPersonId ?? null);
+
+    const onPopState = () => {
+      setSelectedPersonId(readFromUrl());
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [initialSelectedPersonId]);
 
   // Use selectedId from state (synced with URL)
   // This must be declared before it's used in useMemo hooks
-  const selectedId = selectedIdState;
+  const selectedPersonId = selectedPersonIdState;
 
-  // Use initial data (could be enhanced with client-side refetching if needed)
-  const topicsData = initialTopics;
-  const edgesData = initialEdges;
-
-  // Filter politicians based on topic
-//   const filteredPoliticians = useMemo(() => {
-//     let filtered = politiciansData;
-
-//     // Topic filter
-//     if (selectedTopicId || selectedSubtopicId) {
-//       filtered = filtered.filter((p) => {
-//         const corpus = [
-//           ...p.speeches.map((s) => `${s.topic} ${s.excerpt}`),
-//           ...p.tweets.map((t) => `${t.topic} ${t.content}`),
-//           ...p.keyPositions.map((kp) => `${kp.topic} ${kp.stance}`),
-//         ]
-//           .join(" ")
-//           .toLowerCase();
-
-//         const topic = topicsData.find((t) => t.id === selectedTopicId);
-//         if (topic) {
-//           const kw = topic.keyword.toLowerCase();
-//           if (!corpus.includes(kw)) return false;
-//         }
-
-//         if (selectedSubtopicId) {
-//           const subtopic = topic?.subtopics.find((s) => s.id === selectedSubtopicId);
-//           if (subtopic) {
-//             const kw = subtopic.keyword.toLowerCase();
-//             if (!corpus.includes(kw)) return false;
-//           }
-//         }
-
-//         return true;
-//       });
-//     }
-
-//     return filtered;
-//   }, [politiciansData, topicsData, selectedTopicId, selectedSubtopicId]);
-
-//   const filteredIds = useMemo(
-//     () => new Set(filteredPoliticians.map((p) => p.id)),
-//     [filteredPoliticians]
-//   );
-
-//   const selectedPolitician = useMemo(
-//     () => politiciansData.find((p) => p.id === selectedId) || null,
-//     [selectedId, politiciansData]
-//   );
 
   const handlePoliticianSelect = useCallback((id: string | null) => {
     // Update local state
-    setSelectedIdState(id);
-    setMedium("parliament");
-    
-    // Update URL for shareable links
-    const params = new URLSearchParams(searchParams.toString());
-    if (id) {
-      params.set("id", id);
-    } else {
-      params.delete("id");
+    setSelectedPersonId(id);
+
+    // Update URL for shareable links WITHOUT triggering an App Router navigation (which refetches RSC).
+    // Use replaceState to avoid adding a history entry for every click.
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (id) url.searchParams.set("person_id", id);
+      else url.searchParams.delete("person_id");
+      window.history.replaceState({}, "", url.toString());
     }
-    router.push(`?${params.toString()}`, { scroll: false });
-  }, [router, searchParams]);
+  }, []);
 
   const handleTooltipShow = useCallback(
     (data: { title: string; meta?: string }, x: number, y: number) => {
@@ -161,100 +107,112 @@ export function ParliamentExplorerClient({
               <>
                 <Card>
                   <CardHeader
-                    title="Ideological scatter plot"
-                    subtitle="Each point is a politician. Click to open the detail pane."
+                    title="歴代議員検索"
+                    subtitle="漢字・かな表記で検索できます。クリックで選択します。"
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {/* <IdeologicalScatterPlot
-                      politicians={politiciansData}
-                      selectedId={selectedId}
-                      filteredIds={filteredIds}
-                      onPoliticianSelect={handlePoliticianSelect}
-                      onTooltipShow={handleTooltipShow}
-                      onTooltipHide={handleTooltipHide}
-                    /> */}
+                    <HistoricalReprSearch
+                      allParliamentMemberTable={allParliamentMemberTable}
+                      selectedPersonId={selectedPersonId}
+                      onSelect={(id) => handlePoliticianSelect(id)}
+                    />
                   </div>
-                
                 </Card>
 
-                {/* <Card>
+                <Card>
                   <CardHeader
-                    title="Speech interaction network"
-                    subtitle="Nodes are politicians, edges summarise interjections / Q&A."
+                    title="政治的な立場の推定"
+                    subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <NetworkGraph
-                      politicians={politiciansData}
-                      edges={edgesData}
-                      selectedId={selectedId}
-                      filteredIds={filteredIds}
+                    <IdeologicalScatterPlot
+                      ideologyData={ideologyData}
+                      selectedPersonId={selectedPersonId}
                       onPoliticianSelect={handlePoliticianSelect}
                       onTooltipShow={handleTooltipShow}
                       onTooltipHide={handleTooltipHide}
                     />
                   </div>
-                </Card> */}
-
+                
+                </Card>
                 <Card>
                   <CardHeader
                     title="選挙区地図"
                     subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
+                    action={
+                      <div className="flex items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95">
+                        <button
+                          type="button"
+                          onClick={() => setMapPane("districts")}
+                          className={`px-3 py-1 text-[11px] ${
+                            mapPane === "districts"
+                              ? "bg-blue-600/90 text-white"
+                              : "text-gray-200 hover:bg-white/5"
+                          }`}
+                        >
+                          地図
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setMapPane("proportional")}
+                          className={`px-3 py-1 text-[11px] ${
+                            mapPane === "proportional"
+                              ? "bg-blue-600/90 text-white"
+                              : "text-gray-200 hover:bg-white/5"
+                          }`}
+                        >
+                          比例
+                        </button>
+                      </div>
+                    }
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <JapanMap
-                      votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
-                      parliamentMemberData={parliamentMemberData}
-                      selectedId={selectedId}
-                      onPoliticianSelect={handlePoliticianSelect}
-                      onTooltipShow={handleTooltipShow}
-                      onTooltipHide={handleTooltipHide}
-                    />
+                    {mapPane === "districts" ? (
+                      <JapanMap
+                        votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
+                        parliamentMemberData={parliamentMemberData}
+                        selectedPersonId={selectedPersonId}
+                        onPoliticianSelect={handlePoliticianSelect}
+                        onTooltipShow={handleTooltipShow}
+                        onTooltipHide={handleTooltipHide}
+                      />
+                    ) : (
+                      <ProportionalReprList
+                        parliamentMemberData={parliamentMemberData}
+                        onPoliticianSelect={(id) => handlePoliticianSelect(id)}
+                      />
+                    )}
                   </div>
                 </Card>
               </>
             }
             right={
               <>
-                <TopicSelector
-                  topics={topicsData}
-                  selectedTopicId={selectedTopicId}
-                  selectedSubtopicId={selectedSubtopicId}
-                  onTopicChange={(topicId, subtopicId) => {
-                    setSelectedTopicId(topicId);
-                    setSelectedSubtopicId(subtopicId);
-                  }}
-                />
-{/* 
-                <SearchList
-                  politicians={politiciansData}
-                  selectedId={selectedId}
-                  onPoliticianSelect={handlePoliticianSelect}
-                /> */}
+                <Card>
+                  <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
+                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                    <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
+                  </div>
+                </Card>
 
-                {/* <Rankings
-                  politicians={filteredPoliticians}
-                  metric={rankingMetric}
-                  topic={rankingTopic}
-                  onPoliticianSelect={handlePoliticianSelect}
-                  onMetricChange={setRankingMetric}
-                  onTopicChange={setRankingTopic}
-                /> */}
+                <Card>
+                  <CardHeader title="衆議院 議席配分" subtitle="党派別（現職）" />
+                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                    <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="lower" />
+                  </div>
+                </Card>
               </>
             }
           />
           </div>
         </div>
-{/* 
+
       <DetailPane
-        politician={selectedPolitician}
-        isOpen={selectedPolitician !== null}
-        medium={medium}
-        selectedTopicId={selectedTopicId}
-        selectedSubtopicId={selectedSubtopicId}
-        comments={allComments}
+        personId={selectedPersonId ?? ""}
+        isOpen={selectedPersonId !== null}
         onClose={() => handlePoliticianSelect(null)}
-        onMediumChange={setMedium}
-      /> */}
+        allParliamentMemberTable={allParliamentMemberTable}
+      />
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
       </div>

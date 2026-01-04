@@ -12,6 +12,7 @@ from routers import (
 	parliamentMember,
 	ideology,
 	donors,
+	electionHistory,
 )
 
 
@@ -46,3 +47,4 @@ app.include_router(geo.router, dependencies=[Depends(require_api_key)])
 app.include_router(parliamentMember.router, dependencies=[Depends(require_api_key), Depends(get_storage)])
 app.include_router(donors.router, dependencies=[Depends(require_api_key)])
 app.include_router(ideology.router, dependencies=[Depends(require_api_key)])
+app.include_router(electionHistory.router, dependencies=[Depends(require_api_key)])

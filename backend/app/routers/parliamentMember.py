@@ -2,10 +2,7 @@ from typing import Any
 
 from fastapi import APIRouter, Depends
 from core.storage import get_storage, Storage
-from core.config import get_settings
-from core.config import Settings
-import boto3
-
+from fastapi.responses import Response
 router = APIRouter(prefix="/parliamentMember", tags=["parliamentMember"])
 
 
@@ -25,3 +22,12 @@ async def parliament_member_data(storage: Storage = Depends(get_storage)) -> Any
 		'shugiin': storage.read_json(base_directory + paths['shugiin']),
 		'sangiin': storage.read_json(base_directory + paths['sangiin']),
 	}
+
+
+@router.get("/all", summary="All parliament member data")
+async def all_parliament_member_data(storage: Storage = Depends(get_storage)) -> Any:
+	path = "kokkai-doc/politicians/table.csv.gz"
+	bytes = storage.read_bytes(path)
+	return Response(content=bytes, 
+		media_type="application/octet-stream", 
+		headers={"Content-Encoding": "gzip", "Content-Length": str(len(bytes))})

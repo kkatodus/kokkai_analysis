@@ -12,6 +12,7 @@ import psycopg2
 from psycopg2.extras import execute_values
 from dotenv import load_dotenv
 from collections import Counter
+from utils.string_process import clean_repr_name
 
 PersonId = NewType("PersonId", int)
 
@@ -386,6 +387,40 @@ def get_closest_person_by_name(cur: psycopg2.extensions.cursor, name: str, limit
 		))
 	return_array.sort(key=lambda x: x.score, reverse=True)
 	return return_array
+
+def get_politician_id_by_name(cur: psycopg2.extensions.cursor, name_kanji: str, name_kana: str, party: str, stop_for_input: bool = True) -> Optional[PersonId]:
+	repr_name_clean = clean_repr_name(name_kanji)
+	print("Working on ", name_kanji)
+	person = get_person_by_column(cur, "name_kanji", repr_name_clean)
+	hiragana_person = get_person_by_column(cur, "name_kana", clean_repr_name(name_kana))
+	if len(person) > 1:
+		if not stop_for_input:
+			return None
+		print(f"{name_kanji} ({name_kana}) is found in multiple persons.")
+		print(f"{party}")
+		for idx, p in enumerate(person):
+			print(f"{idx}: {name_kanji} ({name_kana})")
+			election_result = get_election_result_by_person_id(cur, p.person_id)
+			print("\n".join([str(e) for e in election_result]))
+	
+		selected_idx = int(input(f"{name_kanji} ({name_kana}) is found in multiple persons. Please select the correct one: "))
+		return person[selected_idx].person_id
+
+	elif len(person) == 1:
+		return person[0].person_id
+
+	elif len(hiragana_person) == 1:
+		return hiragana_person[0].person_id
+	else:
+		if not stop_for_input:
+			return None
+		candidates = get_closest_person_by_name(cur, clean_repr_name(name_kanji))
+		if len(candidates) == 0:
+			raise ValueError(f"No person found for {name_kanji} ({name_kana})")
+		for idx, candidate in enumerate(candidates):
+			print(idx, candidate)
+		selected_idx = int(input(f"{name_kanji} ({name_kana}) is not found in the database. Please select the correct one: "))
+		return candidates[int(selected_idx)].person.person_id
 
 def get_speech_by_column(cur: psycopg2.extensions.cursor, column: Literal["issue_id", "speaker", "speech_id"], value: Any) -> List[Speech]:
 	query = f"""

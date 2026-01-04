@@ -7,19 +7,12 @@
 
 
 import { API_ENDPOINTS } from "@/app/lib/config/api";
-import {
-  mockTopics,
-  mockPrefectures,
-  mockEdges,
-  mockComments,
-} from "@/app/data/mockData";
+import Papa, { type ParseResult } from "papaparse";
+import { gunzipSync } from "node:zlib";
 import type {
-  Politician,
-  Topic,
-  NetworkEdge,
-  Prefecture,
-  Comment,
   ParliamentMemberData,
+  IdeologyData,
+  AllParliamentMemberTableData,
 } from "@/app/types";
 
 /**
@@ -90,60 +83,30 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
   }
 }
 
-/**
- * Transform API representative data to Politician format
- */
-function transformApiReprToPolitician(apiRepr: any): Politician {
-  return {
-	id: apiRepr.id || apiRepr.name?.replace(/\s+/g, "_").toLowerCase() || `politician_${Date.now()}`,
-	name: apiRepr.name || "Unknown",
-	party: apiRepr.party || apiRepr.affiliation || "Unknown",
-	isMajor: apiRepr.isMajor || false,
-	ideology: {
-	  econ: apiRepr.ideology?.econ || apiRepr.econ_axis || 0,
-	  social: apiRepr.ideology?.social || apiRepr.social_axis || 0,
-	},
-	topicScores: apiRepr.topicScores || {},
-	trustScore: apiRepr.trustScore || apiRepr.trust_score || 50,
-	trustLabel: apiRepr.trustLabel || apiRepr.trust_label || "Unknown",
-	factScore: apiRepr.factScore || apiRepr.fact_score || 50,
-	factLabel: apiRepr.factLabel || apiRepr.fact_label || "Unknown",
-	district: apiRepr.district ? {
-	  prefectureId: apiRepr.district.prefectureId || apiRepr.district.prefecture_id || "",
-	  prefectureName: apiRepr.district.prefectureName || apiRepr.district.prefecture_name || "",
-	  name: apiRepr.district.name || "",
-	} : undefined,
-	photoUrl: apiRepr.photoUrl || apiRepr.photo_url,
-	summary: apiRepr.summary || "",
-	keyPositions: apiRepr.keyPositions || apiRepr.key_positions || [],
-	career: apiRepr.career || [],
-	speeches: apiRepr.speeches || [],
-	tweets: apiRepr.tweets || [],
-  };
-}
-
-/**
- * Fetch topics (server-side)
- */
-export async function getTopics(): Promise<Topic[]> {
-  if (isLocalDevelopment()) {
-	console.log("[Server DataFetcher] Using mock data for topics");
-	return mockTopics;
-  }
+async function fetchApiRaw(endpoint: string): Promise<ArrayBuffer> {
+  const baseUrl = getServerApiBaseUrl();
+  const url = `${baseUrl}${endpoint}`;
+  console.log('[Server DataFetcher] Fetching from server:', url);
 
   try {
-	// If your API has a topics endpoint, use it here
-	return mockTopics;
+	// Important: disable Next.js fetch cache here.
+	// Large payloads (>2MB) cannot be stored in Next's data cache.
+	const response = await fetch(url, { cache: "no-store" });
+	if (!response.ok) {
+	  throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+	}
+	return await response.arrayBuffer();
   } catch (error) {
-	console.error("Failed to fetch topics from API, falling back to mock data:", error);
-	return mockTopics;
+	console.error(`Failed to fetch from ${url}:`, error);
+	throw error;
   }
 }
+
 
 /**
  * Fetch prefectures (server-side)
  */
-export async function getVotingDistrictGeoJsonData(): Promise<Prefecture[]> {
+export async function getVotingDistrictGeoJsonData(): Promise<any> {
 	
 
   try {
@@ -152,7 +115,7 @@ export async function getVotingDistrictGeoJsonData(): Promise<Prefecture[]> {
 	return geoJsonData;
   } catch (error) {
 	console.error("Failed to fetch prefectures from API, falling back to mock data:", error);
-	return mockPrefectures; 
+	return []; 
   }
 }
 
@@ -177,39 +140,32 @@ export async function getDonors(): Promise<string[]> {
 }
 
 
-/**
- * Fetch network edges (server-side)
- */
-export async function getNetworkEdges(): Promise<NetworkEdge[]> {
-  if (isLocalDevelopment()) {
-	console.log("[Server DataFetcher] Using mock data for network edges");
-	return mockEdges;
-  }
-
-  try {
-	// If your API has a network/edges endpoint, use it here
-	return mockEdges;
-  } catch (error) {
-	console.error("Failed to fetch network edges from API, falling back to mock data:", error);
-	return mockEdges;
-  }
+export async function getIdeologyData(): Promise<IdeologyData | null> {
+	try {
+		return await fetchApi<IdeologyData | null>(API_ENDPOINTS.ideology);
+	} catch (error) {
+		console.error("Failed to fetch ideology data from API, falling back to mock data:", error);
+		return null;
+	}
 }
 
-/**
- * Fetch comments for a politician (server-side)
- */
-export async function getComments(politicianId: string): Promise<Comment[]> {
-  if (isLocalDevelopment()) {
-	console.log("[Server DataFetcher] Using mock data for comments");
-	return mockComments.filter((c) => c.politicianId === politicianId);
-  }
+export async function getAllParliamentMemberTable(): Promise<AllParliamentMemberTableData[] | null> {
+	try {
+		const buf = await fetchApiRaw(API_ENDPOINTS.allParliamentMemberTable);
+		let bytes = new Uint8Array(buf);
 
-  try {
-	// If your API has a comments endpoint, use it here
-	return mockComments.filter((c) => c.politicianId === politicianId);
-  } catch (error) {
-	console.error("Failed to fetch comments from API, falling back to mock data:", error);
-	return mockComments.filter((c) => c.politicianId === politicianId);
-  }
+		// In some runtimes the response may still be gzipped; handle both cases.
+		if (bytes.length >= 2 && bytes[0] === 0x1f && bytes[1] === 0x8b) {
+			bytes = gunzipSync(bytes);
+		}
+
+		const csvText = new TextDecoder("utf-8").decode(bytes);
+
+		// Papa.parse on ArrayBuffer triggers FileReaderSync in some environments.
+		// Parse from string instead (sync).
+		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data as AllParliamentMemberTableData[];
+	} catch (error) {
+		console.error("Failed to fetch all parliament member table from API, falling back to mock data:", error);
+		return null;
+	}
 }
-
