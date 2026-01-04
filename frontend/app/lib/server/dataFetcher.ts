@@ -31,17 +31,10 @@ function isLocalDevelopment(): boolean {
  */
 function getServerApiBaseUrl(): string {
   // Check if we're in local development mode
-  if (isLocalDevelopment()) {
-	return process.env.BACKEND_URL || "http://localhost:5000";
+  if (process.env.BACKEND_URL) {
+	return process.env.BACKEND_URL;
   }
-
-  // Use environment variable if set
-  if (process.env.NEXT_PUBLIC_API_URL) {
-	return process.env.NEXT_PUBLIC_API_URL;
-  }
-
-  // Fallback to production API (Heroku legacy)
-  return "https://sangiin-api.herokuapp.com";
+  return "http://localhost:8000";
 }
 
 /**
@@ -163,7 +156,7 @@ export async function getAllParliamentMemberTable(): Promise<AllParliamentMember
 
 		// Papa.parse on ArrayBuffer triggers FileReaderSync in some environments.
 		// Parse from string instead (sync).
-		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data as AllParliamentMemberTableData[];
+		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data;
 	} catch (error) {
 		console.error("Failed to fetch all parliament member table from API, falling back to mock data:", error);
 		return null;
