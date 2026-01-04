@@ -58,6 +58,7 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
 	const response = await fetch(url, {
 	  headers: {
 		"Content-Type": "application/json",
+		"X-API-KEY": process.env.API_KEY || "",
 	  },
 	  // Use Next.js ISR caching - data is cached for 1 week
 	  // After the revalidation period, Next.js will revalidate in the background
@@ -84,7 +85,7 @@ async function fetchApiRaw(endpoint: string): Promise<ArrayBuffer> {
   try {
 	// Important: disable Next.js fetch cache here.
 	// Large payloads (>2MB) cannot be stored in Next's data cache.
-	const response = await fetch(url, { cache: "no-store" });
+	const response = await fetch(url, { cache: "no-store", headers: { "X-API-KEY": process.env.API_KEY || "" } });
 	if (!response.ok) {
 	  throw new Error(`API request failed: ${response.status} ${response.statusText}`);
 	}
