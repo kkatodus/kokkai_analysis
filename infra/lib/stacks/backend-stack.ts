@@ -45,7 +45,9 @@ export class BackendStack extends cdk.Stack {
 				DATA_LAKE_BUCKET_NAME: dataLakeBucketName,
 				ENVIRONMENT: props.environmentName,
 				STORAGE_BACKEND: "s3",
-				CORS_ALLOW_ORIGINS: props.environmentConfig.cors_allow_origins,
+				// pydantic-settings treats List[str] env vars as "complex" and attempts JSON parsing.
+				// Always provide valid JSON here to avoid parsing failures (e.g. "*" would break json.loads).
+				CORS_ALLOW_ORIGINS: JSON.stringify(props.environmentConfig.cors_allow_origins),
 			},
 			// Inject secrets at runtime (do NOT synth them into CloudFormation).
 			secrets: {
