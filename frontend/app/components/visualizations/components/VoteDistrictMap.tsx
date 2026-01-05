@@ -61,6 +61,15 @@ function VoteDistrictMap({
     return color || [255, 255, 255];
   };
 
+  const getElevation : (f: any) => number = (f: any) => {
+    let { kuname } = f.properties;
+    kuname = kuname.replace('区', '');
+    if (kuname === selectedDistrict) {
+      return 10000;
+    }
+    return 0;
+  };
+
   const geojsonLayer = new GeoJsonLayer({
     data: geoJsonData,
     opacity: 0.8,
@@ -69,8 +78,8 @@ function VoteDistrictMap({
     extruded: true,
     wireframe: true,
     // eslint-disable-next-line no-unused-vars
-    getElevation: (f) => 100,
-    getFillColor: (f) => getFillColor(f),
+    getElevation: getElevation,
+    getFillColor: getFillColor,
     getLineColor: [255, 255, 255],
     // eslint-disable-next-line no-unused-vars
     onClick: (info, event) => {
@@ -79,6 +88,7 @@ function VoteDistrictMap({
     },
     updateTriggers: {
       getFillColor: [selectedDistrict],
+      getElevation: [selectedDistrict],
     },
     pickable: true,
   });
