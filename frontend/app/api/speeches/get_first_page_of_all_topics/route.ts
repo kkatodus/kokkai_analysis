@@ -15,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const revalidate = SEVEN_DAYS_SECONDS;
+export const revalidate = 604800;
 
 /**
  * Proxy for backend `/speeches/get_first_page_of_all_topics?person_id=...`

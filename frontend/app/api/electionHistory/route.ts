@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const SEVEN_DAYS_SECONDS = 60 * 60 * 24 * 7;
+const SEVEN_DAYS_SECONDS = 604800;
 const CACHE_CONTROL_7D = `public, s-maxage=${SEVEN_DAYS_SECONDS}, stale-while-revalidate=86400`;
 
 function normalizeBaseUrl(baseUrl: string): string {
@@ -15,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const revalidate = SEVEN_DAYS_SECONDS;
+export const revalidate = 604800;
 
 /**
  * Proxy for backend `/electionHistory/?person_id=...`
