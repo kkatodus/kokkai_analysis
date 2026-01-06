@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BsTwitterX, BsYoutube } from "react-icons/bs";
+import { BsGlobe, BsTwitterX, BsYoutube } from "react-icons/bs";
 
 export const revalidate = 600000;
 
@@ -32,6 +32,7 @@ export default function AboutPage() {
       href: "https://youtu.be/SP_IJ3xxwLg?si=o6TswnPKpWvJ0Hzd",
       embed: "https://www.youtube.com/embed/SP_IJ3xxwLg?si=NbiQ3v1sy3qKd6u3",
       date: "2025-05-21",
+	  logo: "youtube"
     },
     {
       title: "Abema Primeに出演させていただきました！",
@@ -39,6 +40,7 @@ export default function AboutPage() {
       href: "https://www.youtube.com/watch?v=qDOcZasG2To",
       embed: "https://www.youtube.com/embed/qDOcZasG2To?si=MR6z-APy6Qb3FaPQ",
       date: "2025-05-23",
+	  logo: "youtube"
     },
     {
       title: "KOKKAIDOCの論文がarXivに掲載されました！",
@@ -46,6 +48,7 @@ export default function AboutPage() {
       href: "https://arxiv.org/abs/2505.07118",
 	  no_visual: true,
       date: "2025-05-11",
+	  logo: "website"
     },
     {
       title: "KOKKAIDOCに関連する論文を国際学会でポスター発表してきました。",
@@ -53,6 +56,7 @@ export default function AboutPage() {
       href: "https://polmeth.ucr.edu/program-papers-and-panels",
       date: "2024-07-18",
 	  no_visual: true,
+	  logo: "website"
     },
     {
       title: "学部卒業論文の発表をトロント大学の恩師の前でした様子をyoutubeにアップしました！",
@@ -60,18 +64,21 @@ export default function AboutPage() {
       href: "https://www.youtube.com/watch?v=8HOCEHbDsrE&t=181s",
       embed: "https://www.youtube.com/embed/8HOCEHbDsrE?si=B3TYzgpcSKwjGdeu",
       date: "2025-04-30",
+	  logo: "youtube"
     },
 	{
 	  title: "Ledge.aiさんの記事でKOKKAIDOCの紹介をしていただきました！",
 	  description: "KOKKAIDOCの概要について詳しく書いていただいています。",
 	  href: "https://ledge.ai/articles/kokkai_doc_ai_policy_analysis",
-	  date: "2025-05-28"
+	  date: "2025-05-28",
+	  logo: "website"
 	},
 	{
 	  title: "TECHNO EDGEさんの記事でKOKKAIDOCの紹介をしていただきました！",
 	  description: "KOKKAIDOCの概要について詳しく書いていただいています。",
 	  href: "https://www.techno-edge.net/article/2025/05/19/4367.html",
 	  date: "2025-05-19",
+	  logo: "website"
 	}
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -227,7 +234,7 @@ export default function AboutPage() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 shrink-0 rounded-lg border border-red-500/20 bg-red-500/10 p-2 text-red-200">
-                      <BsYoutube className="text-lg" />
+                      {m.logo === "youtube" ? <BsYoutube className="text-lg" /> : <BsGlobe className="text-lg" />}
                     </div>
                     <div className="min-w-0">
                       <a
