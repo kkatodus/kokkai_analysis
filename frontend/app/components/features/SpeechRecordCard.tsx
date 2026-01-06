@@ -1,6 +1,6 @@
 import { EmptyState } from "@/app/components/shared/EmptyState";
 import type { SpeechRecord } from "@/app/types";
-
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
   // From `data/resource/experiment_config.json` (topic_name_en -> topic_name)
   Defence: "防衛",
@@ -139,7 +139,7 @@ export function SpeechRecordCard({
                       void ensureSpeechPage(selectedTopic.topicKey, prev);
                     }}
                   >
-                    Prev
+                    <FaArrowLeft />
                   </button>
                   <button
                     type="button"
@@ -153,7 +153,7 @@ export function SpeechRecordCard({
                       void ensureSpeechPage(selectedTopic.topicKey, next);
                     }}
                   >
-                    Next
+                    <FaArrowRight />
                   </button>
                 </div>
               </div>
