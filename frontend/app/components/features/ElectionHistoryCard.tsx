@@ -1,4 +1,5 @@
 import { EmptyState } from "@/app/components/shared/EmptyState";
+import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 import type { ElectionHistoryData } from "@/app/types";
 
 interface ElectionHistoryCardProps {
@@ -18,7 +19,11 @@ export function ElectionHistoryCard({ history, historyError, sorted }: ElectionH
         {historyError && (
           <div className="text-xs text-red-300">Failed to load election history: {historyError}</div>
         )}
-        {!historyError && history === null && <div className="text-xs text-gray-300">Loading…</div>}
+        {!historyError && history === null && (
+          <div className="py-2">
+            <LoadingIndicator label="読み込み中" size="sm" />
+          </div>
+        )}
         {!historyError && history !== null && history.length === 0 && (
           <EmptyState message="選挙履歴が見つかりません。" className="py-2" />
         )}

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import * as d3 from "d3";
+import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
 export type PieDatum = {
   label: string;
@@ -41,7 +42,7 @@ export function PartyPieChart({ data, size = 220, innerRadius = 64 }: PartyPieCh
         className="flex w-full items-center justify-center rounded-xl border border-slate-400/10 bg-slate-900/20 text-xs text-gray-400"
         style={{ height: size }}
       >
-        Loading…
+        <LoadingIndicator label="読み込み中" size="sm" />
       </div>
     );
   }

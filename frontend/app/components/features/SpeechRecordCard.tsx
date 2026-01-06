@@ -1,4 +1,5 @@
 import { EmptyState } from "@/app/components/shared/EmptyState";
+import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 import type { SpeechRecord } from "@/app/types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
@@ -82,13 +83,15 @@ export function SpeechRecordCard({
     <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40">
       <div className="flex items-center justify-between px-2 pb-1 pt-2">
         <div className="text-[13px] font-semibold text-gray-50">発言（トピック別）</div>
-        {speechLoading && <div className="text-[11px] text-gray-400">Loading…</div>}
+        {speechLoading && <LoadingIndicator variant="dots" size="sm" />}
       </div>
 
-      {speechError && <div className="px-2 pb-2 text-xs text-red-300">Failed to load speeches: {speechError}</div>}
+      {speechError && <div className="px-2 pb-2 text-xs text-red-300">発言データが見つかりませんでした</div>}
 
       {!speechError && speechTopics === null && (
-        <div className="px-2 pb-2 text-xs text-gray-300">Loading…</div>
+        <div className="px-2 pb-2">
+          <LoadingIndicator label="読み込み中" size="sm" />
+        </div>
       )}
 
       {!speechError && speechTopics !== null && speechTopics.length === 0 && (

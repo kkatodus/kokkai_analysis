@@ -356,7 +356,7 @@ export function IdeologicalScatterPlot({
       <div ref={containerRef} className="relative overflow-hidden">
         {(!ideologyData || !filteredTopics.length || !selectedSubTopic) ? (
           <div className="flex h-[280px] items-center justify-center">
-            <EmptyState message="Ideology data is not available yet." />
+            <EmptyState message="政治思想データが見つかりませんでした" />
           </div>
         ) : (
           <>
@@ -365,7 +365,7 @@ export function IdeologicalScatterPlot({
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onReset={handleReset} />
             <div className="absolute bottom-2 left-2 text-[10px] text-gray-400">
               {titleLabel ? `${titleLabel} • ` : ""}
-              {mode === "2d" ? "Scroll to zoom, drag to pan" : "Scroll to zoom, drag to pan"}
+              {mode === "2d" ? "スクロールでズーム、ドラッグでパン" : "スクロールでズーム、ドラッグでパン"}
             </div>
           </>
         )}

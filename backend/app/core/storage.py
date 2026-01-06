@@ -35,7 +35,6 @@ class LocalStorage:
 		return os.path.join(self.root, key)
 
 	def read_directory(self, prefix:str) -> list[str]:
-		print("reading directory", os.path.join(self.root, prefix))
 		objects = os.listdir(os.path.join(self.root, prefix))
 		return objects
 
@@ -85,19 +84,16 @@ class S3Storage:
 		return key.lstrip('/')
 
 	def read_directory(self, prefix:str) -> list[str]:
-		print("reading s3 directory", prefix)
 		bucket = self._s3.Bucket(self.bucket_name)
 		objects = bucket.objects.filter(Prefix=prefix)
 		return [obj.key[len(prefix):].lstrip('/') for obj in objects] if objects else []
 
 
 	def read_bytes(self, key:str) -> bytes:
-		print("reading s3 bytes", key)
 		obj = self._s3.Bucket(self.bucket_name).Object(self._obj_key(key)).get()
 		return obj["Body"].read()
 
 	def read_json(self, key: str) -> dict:
-		print("reading s3 json", key)
 		return json.loads(self.read_bytes(key))
 
 	
@@ -114,7 +110,6 @@ class S3Storage:
 			raise ValueError("page_number must be >= 0")
 
 		obj_key = self._obj_key(key)
-		print("reading s3 jsonl paginated", obj_key, "page", page_number)
 
 		obj = self._s3.Bucket(self.bucket_name).Object(obj_key).get()
 		body = obj["Body"]  # botocore.response.StreamingBody

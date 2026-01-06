@@ -70,11 +70,7 @@ class DomainVerificationMiddleware(BaseHTTPMiddleware):
 			)
 
 		forwarded_host = request.headers.get("x-forwarded-host")
-		print('forwarded_host', forwarded_host)
 		host = forwarded_host or request.headers.get("host")
-		print('host', request.headers.get("host"))
-		print('host', host)
-		print('allowed_hosts', self.settings.allowed_hosts)
 		if host and not _is_allowed_host(host, self.settings.allowed_hosts):
 			return JSONResponse(
 				status_code=status.HTTP_403_FORBIDDEN,
@@ -89,7 +85,6 @@ async def require_api_key(
 	settings: Settings = Depends(get_settings),
 ) -> None:
 	"""Require a valid API key in the configured header (default: X-API-KEY)."""
-	print('settings.env', settings.env)
 	if settings.env == Environment.LOCAL:
 		print("local environment, skipping api key check")
 		return
@@ -100,9 +95,6 @@ async def require_api_key(
 			status_code=status.HTTP_401_UNAUTHORIZED,
 			detail="Missing API key",
 		)
-	print("comparing provided and settings.api_key")
-	print("provided", provided)
-	print("settings.api_key", settings.api_key)
 	if not secrets.compare_digest(provided, settings.api_key):
 		raise HTTPException(
 			status_code=status.HTTP_401_UNAUTHORIZED,

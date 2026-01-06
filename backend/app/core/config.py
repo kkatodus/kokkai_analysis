@@ -89,7 +89,6 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     settings = Settings()
     if settings.env == Environment.LOCAL:
-        print(f"Loaded settings: {settings}")
         if settings.local_data_root == "":
             print(
                 "setting local data root to ",
@@ -98,6 +97,5 @@ def get_settings() -> Settings:
             settings.local_data_root = os.path.join(
                 os.path.dirname(__file__), "..", "..", "..", "s3_mirror"
             )
-            print("local data root", settings.local_data_root)
 
     return settings
