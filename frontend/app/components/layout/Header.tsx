@@ -3,6 +3,7 @@
 import { Badge } from "@/app/components/shared/Badge";
 import { useModal } from "@/app/lib/hooks/useModal";
 import { BiDonateHeart } from "react-icons/bi";
+import Link from "next/link";
 
 export function Header() {
   const { addModal } = useModal();
@@ -18,6 +19,12 @@ export function Header() {
         </div>
       </div>
       <div className="flex items-center gap-3">
+        <Link
+          href="/about"
+          className="rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
+        >
+          このプロジェクトについて
+        </Link>
         <button
           type="button"
           onClick={() => addModal("donation")}
@@ -26,11 +33,6 @@ export function Header() {
           <BiDonateHeart className="h-7 w-7" /><span className="text-sm">KOKKAI DOC に<br/>募金する</span>
         </button>
       </div>
-      {/* <div className="flex items-center gap-3">
-        <Badge variant="default" className="text-[11px] uppercase tracking-wider">
-          Ideology • Trust • Facts • Map
-        </Badge>
-      </div> */}
     </header>
   );
 }
