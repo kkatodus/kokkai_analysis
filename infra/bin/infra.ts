@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
 import { getEnvironmentConfig } from "../lib/config/environments";
+import { BackendStack } from "../lib/stacks/backend-stack";
 
 const app = new cdk.App();
 
-// Get environment from context, environment variable, or default to 'dev'
-const environmentName =
-  app.node.tryGetContext("environment") ||
-  process.env.CDK_ENVIRONMENT ||
-  "dev";
-
-// Load environment-specific configuration
+const environmentName = app.node.tryGetContext("environment") || process.env.CDK_ENVIRONMENT || "dev";
 const environmentConfig = getEnvironmentConfig(environmentName);
 
+new BackendStack(app, `BackendStack-${environmentName}`, {
+	environmentName,
+	environmentConfig,
+});
 
 // Add app-level tags
 cdk.Tags.of(app).add("Project", "kokkai-doc");

@@ -1,150 +1,270 @@
 "use client";
 
-import { useMemo } from "react";
-import Image from "next/image";
-import { Card } from "@/app/components/shared/Card";
-import { ScoreBar } from "@/app/components/shared/ScoreBar";
-import { Badge } from "@/app/components/shared/Badge";
-import { EmptyState } from "@/app/components/shared/EmptyState";
-import type { Politician, Medium, FactStatus, Comment } from "@/app/types";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { AllParliamentMemberTableData, ElectionHistoryData, SpeechRecord } from "@/app/types";
+import { fetchElectionHistory } from "@/app/lib/services/electionHistoryService";
+import { fetchFirstPageOfAllTopics, fetchSpeechPage } from "@/app/lib/services/speechesService";
+import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCard";
+import { SpeechRecordCard, type SpeechTopicState } from "@/app/components/features/SpeechRecordCard";
 
 interface DetailPaneProps {
-  politician: Politician | null;
+  personId: string;
   isOpen: boolean;
-  medium: Medium;
-  selectedTopicId: string | null;
-  selectedSubtopicId: string | null;
-  comments: Comment[];
   onClose: () => void;
-  onMediumChange: (medium: Medium) => void;
-  onAddComment: (politicianId: string, targetType: "speech" | "tweet", targetId: string) => void;
+  allParliamentMemberTable?: AllParliamentMemberTableData[] | null;
 }
 
-function FactPill({ status }: { status: FactStatus }) {
-  const styles = {
-    accurate: "bg-emerald-500/15 border-emerald-500/70 text-emerald-200",
-    misleading: "bg-amber-500/18 border-amber-500/80 text-amber-200",
-    false: "bg-red-500/20 border-red-500/90 text-red-200",
-  };
-
-  const labels = {
-    accurate: "Fact check: accurate",
-    misleading: "Fact check: needs context",
-    false: "Fact check: factually incorrect",
-  };
-
-  return (
-    <div
-      className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-[10px] ${styles[status]}`}
-    >
-      {labels[status]}
-    </div>
-  );
+function normalizeTopicKey(topic: string): string {
+  return topic.endsWith(".jsonl") ? topic.slice(0, -".jsonl".length) : topic;
 }
 
-function CommentsSection({
-  politicianId,
-  targetType,
-  targetId,
-  comments,
-  onAddComment,
-}: {
-  politicianId: string;
-  targetType: "speech" | "tweet";
-  targetId: string;
-  comments: Comment[];
-  onAddComment: (politicianId: string, targetType: "speech" | "tweet", targetId: string) => void;
-}) {
-  const filteredComments = comments.filter(
-    (c) => c.targetType === targetType && c.targetId === targetId
-  );
-
-  return (
-    <div className="mt-1">
-      <div className="mb-0.5 text-[11px] uppercase tracking-wider text-gray-400">
-        Public comments (mock data)
-      </div>
-      <div className="max-h-20 overflow-y-auto pr-0.5 text-[11px]">
-        {filteredComments.length === 0 ? (
-          <div className="py-1 text-[11px] text-gray-400">
-            No comments yet. Be the first to comment (mock).
-          </div>
-        ) : (
-          filteredComments.map((c) => (
-            <div key={c.id} className="flex gap-1.5 border-t border-gray-800/70 pt-0.5 mt-0.5">
-              <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full border border-slate-400/40 bg-slate-900/90 text-[9px] text-gray-400">
-                {c.userName
-                  .split(/\s+/)
-                  .map((p) => p[0])
-                  .join("")
-                  .slice(0, 2)
-                  .toUpperCase()}
-              </div>
-              <div className="flex-1">
-                <div className="text-[11px] text-gray-400">
-                  {c.userName} ({c.handle}) · {c.createdAt}
-                </div>
-                <div>{c.text}</div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-      <div className="mt-0.5 flex justify-end">
-        <button
-          onClick={() => onAddComment(politicianId, targetType, targetId)}
-          className="rounded-full border border-dashed border-slate-400/60 bg-transparent px-1.5 py-0.5 text-[10px] text-gray-400 transition-colors hover:border-solid hover:text-gray-200"
-        >
-          Add comment (mock)
-        </button>
-      </div>
-    </div>
-  );
+function topicDisplayName(topic: string): string {
+  const t = normalizeTopicKey(topic);
+  return t.replace(/_/g, " ");
 }
+
 
 export function DetailPane({
-  politician,
+  personId,
   isOpen,
-  medium,
-  selectedTopicId,
-  selectedSubtopicId,
-  comments,
   onClose,
-  onMediumChange,
-  onAddComment,
+  allParliamentMemberTable,
 }: DetailPaneProps) {
-  const filteredUtterances = useMemo(() => {
-    if (!politician) return [];
+  const [paneWidthPx, setPaneWidthPx] = useState<number>(380);
+  const [isNarrow, setIsNarrow] = useState(false);
+  const resizeStartXRef = useRef<number>(0);
+  const resizeStartWidthRef = useRef<number>(380);
+  const resizingRef = useRef<boolean>(false);
 
-    const utterances = medium === "parliament" ? politician.speeches : politician.tweets;
+  const [activePanel, setActivePanel] = useState<"speeches" | "history">("speeches");
+  const [history, setHistory] = useState<ElectionHistoryData[] | null>(null);
+  const [historyError, setHistoryError] = useState<string | null>(null);
 
-    if (!selectedTopicId && !selectedSubtopicId) return utterances;
+  const [speechTopics, setSpeechTopics] = useState<SpeechTopicState[] | null>(null);
+  const [speechError, setSpeechError] = useState<string | null>(null);
+  const [selectedTopicKey, setSelectedTopicKey] = useState<string | null>(null);
+  const [speechLoading, setSpeechLoading] = useState(false);
 
-    return utterances.filter((u) => {
-      const text = (medium === "parliament" 
-        ? ("excerpt" in u ? u.excerpt : "") 
-        : ("content" in u ? u.content : "")).toLowerCase();
-      const topic = selectedTopicId?.toLowerCase();
-      const subtopic = selectedSubtopicId?.toLowerCase();
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsNarrow(mql.matches);
+    update();
+    // Safari fallback
+    if (typeof mql.addEventListener === "function") {
+      mql.addEventListener("change", update);
+      return () => mql.removeEventListener("change", update);
+    }
+    mql.addListener(update);
+    return () => mql.removeListener(update);
+  }, []);
 
-      if (topic && !text.includes(topic)) return false;
-      if (subtopic && !text.includes(subtopic)) return false;
-      return true;
-    });
-  }, [politician, medium, selectedTopicId, selectedSubtopicId]);
+  useEffect(() => {
+    const clampWidth = (w: number) => {
+      const max = Math.min(980, Math.max(320, window.innerWidth - 32));
+      return Math.max(320, Math.min(w, max));
+    };
+    const onResize = () => setPaneWidthPx((w) => clampWidth(w));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-  if (!isOpen || !politician) {
+  useEffect(() => {
+    const clampWidth = (w: number) => {
+      const max = Math.min(980, Math.max(320, window.innerWidth - 32));
+      return Math.max(320, Math.min(w, max));
+    };
+
+    const onMove = (e: PointerEvent) => {
+      if (!resizingRef.current) return;
+      const dx = e.clientX - resizeStartXRef.current;
+      const next = clampWidth(resizeStartWidthRef.current - dx);
+      setPaneWidthPx(next);
+    };
+
+    const onUp = () => {
+      if (!resizingRef.current) return;
+      resizingRef.current = false;
+      document.body.style.userSelect = "";
+      document.body.style.cursor = "";
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+    };
+  }, []);
+
+  const personIndex = useMemo(() => {
+    const map = new Map<number, AllParliamentMemberTableData>();
+    for (const row of allParliamentMemberTable ?? []) {
+      if (row?.person_id) map.set(Number(row.person_id), row);
+    }
+    return map;
+  }, [allParliamentMemberTable]);
+
+  const personMeta = useMemo(() => {
+    if (!personId) return null;
+    return personIndex.get(Number(personId)) ?? null;
+  }, [personIndex, personId]);
+
+  useEffect(() => {
+    if (!isOpen || !personId) return;
+    let cancelled = false;
+    setHistory(null);
+    setHistoryError(null);
+    (async () => {
+      try {
+        const data = await fetchElectionHistory(personId);
+        if (!cancelled) setHistory(data);
+      } catch (e) {
+        if (!cancelled) setHistoryError(e instanceof Error ? e.message : "Unknown error");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, personId]);
+
+  useEffect(() => {
+    if (!isOpen || !personId) return;
+    let cancelled = false;
+    setSpeechTopics(null);
+    setSpeechError(null);
+    setSelectedTopicKey(null);
+    setActivePanel("speeches");
+    (async () => {
+      try {
+        const data = await fetchFirstPageOfAllTopics(personId);
+        const rawTopics = Array.isArray((data as any)?.first_pages_of_all_topics)
+          ? ((data as any).first_pages_of_all_topics as Array<{
+              topic: string;
+              page: SpeechRecord[];
+              number_of_pages?: number;
+            }>)
+          : [];
+
+        const topics: SpeechTopicState[] = rawTopics.map((t) => {
+          const topicKey = normalizeTopicKey(String(t.topic ?? ""));
+          const totalPages =
+            typeof t.number_of_pages === "number" && Number.isFinite(t.number_of_pages) ? t.number_of_pages : null;
+          return {
+            topic: String(t.topic ?? ""),
+            topicKey,
+            displayName: topicDisplayName(String(t.topic ?? "")),
+            pagesByNumber: { 0: Array.isArray(t.page) ? (t.page as SpeechRecord[]) : [] },
+            currentPage: 0,
+            totalPages,
+          };
+        });
+
+        topics.sort((a, b) => {
+          const aIsAll = a.topicKey === "all_speeches";
+          const bIsAll = b.topicKey === "all_speeches";
+          if (aIsAll && !bIsAll) return -1;
+          if (!aIsAll && bIsAll) return 1;
+          return 0;
+        });
+
+        if (!cancelled) {
+          setSpeechTopics(topics);
+          setSelectedTopicKey(topics[0]?.topicKey ?? null);
+        }
+      } catch (e) {
+        if (!cancelled) setSpeechError(e instanceof Error ? e.message : "Unknown error");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, personId]);
+
+  const selectedTopic = useMemo(() => {
+    if (!speechTopics || !selectedTopicKey) return null;
+    return speechTopics.find((t) => t.topicKey === selectedTopicKey) ?? null;
+  }, [speechTopics, selectedTopicKey]);
+
+  async function ensureSpeechPage(topicKey: string, pageNumber: number) {
+    if (!speechTopics) return;
+    const topic = speechTopics.find((t) => t.topicKey === topicKey);
+    if (!topic) return;
+    if (topic.pagesByNumber[pageNumber]) {
+      setSpeechTopics((prev) =>
+        (prev ?? []).map((t) => (t.topicKey === topicKey ? { ...t, currentPage: pageNumber } : t))
+      );
+      return;
+    }
+
+    setSpeechLoading(true);
+    setSpeechError(null);
+    try {
+      const data = await fetchSpeechPage(personId, topicKey, pageNumber);
+      setSpeechTopics((prev) =>
+        (prev ?? []).map((t) => {
+          if (t.topicKey !== topicKey) return t;
+          return {
+            ...t,
+            currentPage: data.page_number,
+            totalPages: Number.isFinite(data.total_pages) ? data.total_pages : t.totalPages,
+            pagesByNumber: { ...t.pagesByNumber, [data.page_number]: Array.isArray(data.page) ? data.page : [] },
+          };
+        })
+      );
+    } catch (e) {
+      setSpeechError(e instanceof Error ? e.message : "Unknown error");
+    } finally {
+      setSpeechLoading(false);
+    }
+  }
+
+  const sorted = useMemo(() => {
+    if (!history) return null;
+    const num = (s: string) => {
+      const m = String(s ?? "").match(/\d+/);
+      return m ? parseInt(m[0], 10) : 0;
+    };
+    const toKey = (h: ElectionHistoryData) => {
+      const y = num(h.year);
+      const m = num(h.month);
+      const d = num(h.day);
+      return y * 10000 + m * 100 + d;
+    };
+    // Newest first
+    return [...history].sort((a, b) => toKey(b) - toKey(a));
+  }, [history]);
+
+  const setSelectedTopicKeySafe = (topicKey: string) => setSelectedTopicKey(topicKey);
+
+  if (!isOpen || !personId) {
     return null;
   }
 
   return (
-      <div className="fixed inset-y-4 right-4 z-40 w-[380px] max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0">
+      <div
+        className="fixed inset-y-4 right-4 z-40 max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
+        style={{ width: isNarrow ? "100%" : `${paneWidthPx}px` }}
+      >
       <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-linear-to-br from-[#020617] to-[#020617] p-3.5 shadow-2xl">
-        <div className="mb-1 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[13px] font-semibold">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-            Politician profile, trust & facts
-          </div>
+        {/* Left resize handle (desktop only) */}
+        <div
+          className="absolute inset-y-4 left-0 z-50 hidden w-2 cursor-ew-resize rounded-l-[18px] hover:bg-slate-400/10 md:block"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize detail pane"
+          onPointerDown={(e) => {
+            if (e.button !== 0) return;
+            resizingRef.current = true;
+            resizeStartXRef.current = e.clientX;
+            resizeStartWidthRef.current = paneWidthPx;
+            document.body.style.userSelect = "none";
+            document.body.style.cursor = "ew-resize";
+          }}
+        />
+
+        <div className="mb-1 flex items-center justify-end">
           <button
             onClick={onClose}
             className="flex h-5.5 w-5.5 items-center justify-center rounded-full border-0 bg-slate-900/90 text-sm text-gray-400 transition-colors hover:bg-blue-700/90 hover:text-gray-200"
@@ -153,188 +273,66 @@ export function DetailPane({
             ×
           </button>
         </div>
-        <div className="mb-1.5 text-[11px] text-gray-400">
-          Multi-platform utterances, trust and factual accuracy scores, topic-specific views, and
-          public commentary.
+        <div className="mb-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0 text-base font-semibold text-gray-50">
+              {personMeta?.name_kanji ?? "（氏名不明）"}
+            </div>
+
+            <div
+              className="flex shrink-0 items-center rounded-full border border-slate-400/20 bg-slate-950/30 p-0.5"
+              role="tablist"
+              aria-label="Detail pane view"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activePanel === "speeches"}
+                onClick={() => setActivePanel("speeches")}
+                className={
+                  "rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors " +
+                  (activePanel === "speeches"
+                    ? "bg-cyan-500/20 text-cyan-100"
+                    : "text-gray-300 hover:bg-slate-900/50")
+                }
+              >
+                発言
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activePanel === "history"}
+                onClick={() => setActivePanel("history")}
+                className={
+                  "rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors " +
+                  (activePanel === "history"
+                    ? "bg-cyan-500/20 text-cyan-100"
+                    : "text-gray-300 hover:bg-slate-900/50")
+                }
+              >
+                選挙履歴
+              </button>
+            </div>
+          </div>
+          <div className="text-[11px] text-gray-400">
+            {personMeta?.name_kana ?? "（かな不明）"}
+          </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto pr-1">
-          {/* Header with photo and scores */}
-          <div className="mb-2 grid grid-cols-[auto_1fr] gap-2.5">
-            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-slate-400/40">
-              {politician.photoUrl ? (
-                <Image
-                  src={politician.photoUrl}
-                  alt={politician.name}
-                  width={64}
-                  height={64}
-                  className="h-full w-full object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="h-full w-full bg-slate-800" />
-              )}
-            </div>
-
-            <div>
-              <div className="mb-1 flex items-start justify-between gap-1.5">
-                <div>
-                  <div className="text-base font-semibold">{politician.name}</div>
-                  <div className="text-[11px] text-gray-400">
-                    {politician.party}
-                    {politician.district && ` · ${politician.district.name}`}
-                  </div>
-                </div>
-                <div className="flex flex-col items-end">
-                  <ScoreBar
-                    value={politician.trustScore}
-                    label={`${politician.trustLabel} · trust ${politician.trustScore}/100`}
-                    variant="trust"
-                  />
-                  <ScoreBar
-                    value={politician.factScore}
-                    label={`${politician.factLabel} · fact ${politician.factScore}/100`}
-                    variant="fact"
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-1 text-xs leading-relaxed">
-                <div className="mb-0.5 text-[11px] uppercase tracking-wider text-gray-400">
-                  Summary stance (for voters)
-                </div>
-                <div>{politician.summary}</div>
-              </div>
-
-              <div className="mt-1 flex flex-wrap gap-1.5">
-                {politician.keyPositions.map((kp, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-full border border-slate-400/40 px-1.5 py-0.5 text-[11px]"
-                  >
-                    <strong>{kp.topic}:</strong> {kp.stance}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-1.5">
-                <div className="mb-0.5 text-[11px] uppercase tracking-wider text-gray-400">
-                  Career record
-                </div>
-                <div className="text-[11px] text-gray-400">
-                  {politician.career.map((c, idx) => (
-                    <div key={idx} className="mb-0.5">
-                      <span>{c.period}:</span> <span className="font-medium text-gray-50">{c.role}</span> – {c.note}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Ideology badges */}
-          <div className="mb-2 flex flex-wrap gap-1.5">
-            <div className="rounded-full border border-slate-400/40 px-1.5 py-0.5 text-[11px]">
-              Economic axis: <span className="font-medium text-cyan-400">{politician.ideology.econ.toFixed(2)}</span>
-            </div>
-            <div className="rounded-full border border-slate-400/40 px-1.5 py-0.5 text-[11px]">
-              Social axis: <span className="font-medium text-cyan-400">{politician.ideology.social.toFixed(2)}</span>
-            </div>
-            <div className="rounded-full border border-slate-400/40 px-1.5 py-0.5 text-[11px]">
-              Defense stance: <span className="font-medium text-cyan-400">{(politician.topicScores.defense ?? 0).toFixed(2)}</span>
-            </div>
-            <div className="rounded-full border border-slate-400/40 px-1.5 py-0.5 text-[11px]">
-              Welfare stance: <span className="font-medium text-cyan-400">{(politician.topicScores.welfare ?? 0).toFixed(2)}</span>
-            </div>
-          </div>
-
-          {/* Tabs */}
-          <div className="mb-1 inline-flex rounded-full bg-slate-900/90 p-0.5">
-            <button
-              onClick={() => onMediumChange("parliament")}
-              className={`rounded-full px-2 py-0.5 text-[11px] transition-colors ${
-                medium === "parliament"
-                  ? "bg-blue-600/90 text-gray-50"
-                  : "bg-transparent text-gray-400"
-              }`}
-            >
-              Parliament speeches
-            </button>
-            <button
-              onClick={() => onMediumChange("twitter")}
-              className={`rounded-full px-2 py-0.5 text-[11px] transition-colors ${
-                medium === "twitter"
-                  ? "bg-blue-600/90 text-gray-50"
-                  : "bg-transparent text-gray-400"
-              }`}
-            >
-              Twitter / X posts
-            </button>
-          </div>
-
-          {/* Utterances list */}
-          <div className="max-h-[200px] overflow-auto rounded-lg border border-slate-400/20 bg-[#020617] pr-1">
-            {filteredUtterances.length === 0 ? (
-              <EmptyState
-                message={
-                  selectedTopicId || selectedSubtopicId
-                    ? "No items for the current topic filter."
-                    : "No items."
-                }
-                className="p-2"
-              />
-            ) : (
-              filteredUtterances.map((u) => {
-                const isFalse = u.factStatus === "false";
-                const isMisleading = u.factStatus === "misleading";
-
-                return (
-                  <div
-                    key={u.id}
-                    className={`border-b border-gray-800/60 p-2 text-xs last:border-b-0 ${
-                      isFalse || isMisleading
-                        ? "border-l-2 bg-linear-to-r from-slate-50/2 to-transparent"
-                        : ""
-                    } ${isFalse ? "border-l-red-500/90 bg-linear-to-r from-red-500/10 to-transparent" : ""}`}
-                  >
-                    <div className="mb-0.5 flex justify-between gap-2 text-[11px] text-gray-400">
-                      <span>{u.topic}</span>
-                      <span>{u.date}</span>
-                    </div>
-                    <div className="mb-1">
-                      <FactPill status={u.factStatus} />
-                    </div>
-                    {u.factNote && (
-                      <div className="mb-0.5 text-[11px] text-gray-400">{u.factNote}</div>
-                    )}
-                    <div className="mb-1 leading-relaxed">
-                      {medium === "parliament" 
-                        ? ("excerpt" in u ? u.excerpt : "") 
-                        : ("content" in u ? u.content : "")}
-                    </div>
-                    {medium === "twitter" && "url" in u && u.url && (
-                      <a
-                        href={u.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] text-cyan-400 hover:underline"
-                      >
-                        Open on Twitter
-                      </a>
-                    )}
-                    <CommentsSection
-                      politicianId={politician.id}
-                      targetType={medium === "parliament" ? "speech" : "tweet"}
-                      targetId={u.id}
-                      comments={comments}
-                      onAddComment={onAddComment}
-                    />
-                  </div>
-                );
-              })
-            )}
-          </div>
+        <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">
+          {activePanel === "history" ? (
+            <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
+          ) : (
+            <SpeechRecordCard
+              speechTopics={speechTopics}
+              speechError={speechError}
+              speechLoading={speechLoading}
+              selectedTopicKey={selectedTopicKey}
+              setSelectedTopicKey={setSelectedTopicKeySafe}
+              selectedTopic={selectedTopic}
+              ensureSpeechPage={ensureSpeechPage}
+            />
+          )}
         </div>
       </div>
     </div>

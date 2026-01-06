@@ -1,14 +1,22 @@
-import { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
-interface CardProps {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
+  /** Class applied to the inner content wrapper (the element that directly wraps `children`). */
+  contentClassName?: string;
 }
 
-export function Card({ children, className = "" }: CardProps) {
+export function Card({
+  children,
+  className = "",
+  contentClassName = "",
+  ...rest
+}: CardProps) {
   return (
     <div
       className={`relative overflow-hidden rounded-2xl border border-white/5 bg-linear-to-br from-[#020617] to-[#020617] p-3.5 ${className}`}
+      {...rest}
     >
       {/* Gradient overlay */}
       <div
@@ -18,7 +26,7 @@ export function Card({ children, className = "" }: CardProps) {
             "radial-gradient(circle at top left, rgba(79, 70, 229, 0.1), transparent 60%)",
         }}
       />
-      <div className="relative">{children}</div>
+      <div className={`relative ${contentClassName}`}>{children}</div>
     </div>
   );
 }

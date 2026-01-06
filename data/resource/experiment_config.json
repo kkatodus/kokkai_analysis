@@ -2,6 +2,7 @@
   {
     "topic_id": 1,
     "topic_name": "防衛",
+	"topic_name_en": "Defence",
     "search_words": [
       "防衛",
       "自衛隊",
@@ -43,6 +44,7 @@
   {
     "topic_id": 2,
     "topic_name": "少子化",
+	"topic_name_en": "DecliningBirthrate",
     "search_words": [
       "少子化",
       "出生率",
@@ -76,6 +78,7 @@
   {
     "topic_id": 4,
     "topic_name": "原発",
+	"topic_name_en": "NuclearPower",
     "search_words": [
       "原発",
       "原子力発電",
@@ -117,6 +120,7 @@
   {
     "topic_id": 5,
     "topic_name": "気候変動",
+	"topic_name_en": "ClimateChange",
     "search_words": [
       "気候変動",
       "温暖化",
@@ -150,6 +154,7 @@
   {
     "topic_id": 6,
     "topic_name": "経済対策",
+	"topic_name_en": "Economy",
     "search_words": [
       "経済",
       "景気",
@@ -186,6 +191,7 @@
   {
 	"topic_id": 7,
 	"topic_name": "物価高対策・減税と賃上げ",
+	"topic_name_en": "LivingCostandTax",
 	"search_words": [
 		"物価",
 		"インフレ",
@@ -197,6 +203,7 @@
   {
 	"topic_id": 8,
 	"topic_name": "社会保障全般の見直し（医療・介護）",
+	"topic_name_en": "SocialSecurity",
 	"search_words": [
 		"社会保障",
 		"医療保険",
@@ -208,6 +215,7 @@
   {
 	"topic_id": 9,
 	"topic_name": "年金制度改革・基礎年金底上げ",
+	"topic_name_en": "Pension",
 	"search_words": [
 		"年金改革",
 		"基礎年金",
@@ -219,6 +227,7 @@
   {
 	"topic_id": 10,
 	"topic_name": "夫婦別姓",
+	"topic_name_en": "FamilySeparate",
 	"search_words": [
 		"夫婦別姓",
 		"戸籍法",
@@ -228,6 +237,7 @@
   {
 	"topic_id": 11,
 	"topic_name": "オンライン投票",
+	"topic_name_en": "OnlineVoting",
 	"search_words": [
 		"オンライン投票",
 		"電子投票",
@@ -237,6 +247,7 @@
   {
 	"topic_id": 12,
 	"topic_name": "マイナンバー",
+	"topic_name_en": "MyNumber",
 	"search_words": [
 		"マイナンバー"
 	]
@@ -244,6 +255,7 @@
   {
 	"topic_id": 13,
 	"topic_name": "LGBT",
+	"topic_name_en": "LGBT",
 	"search_words": [
 		"LGBT",
 		"同性婚",

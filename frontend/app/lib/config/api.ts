@@ -5,6 +5,7 @@
 
 /**
  * Get the API base URL based on environment
+ * Works both server-side and client-side
  */
 export function getApiBaseUrl(): string {
   // Check if we're in local development mode
@@ -12,8 +13,8 @@ export function getApiBaseUrl(): string {
     return "http://localhost:5000";
   }
 
-  // Use environment variable if set
-  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_API_URL) {
+  // Use environment variable if set (works on both server and client)
+  if (process.env.NEXT_PUBLIC_API_URL) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
@@ -48,28 +49,21 @@ export function isLocalDevelopment(): boolean {
  */
 export const API_ENDPOINTS = {
   // Representatives
-  sangiinRepr: "/sangiin/repr",
-  shugiinRepr: "/shugiin/repr",
-  sangiinCommittees: "/sangiin/commitee",
-  shugiinCommittees: "/shugiin/commitee",
+  parliamentMemberData: "/parliamentMember",
+
+  // donors
+  donors: "/donors",
   
   // Speeches
   speeches: "/speeches",
-  speechesLower: "/speeches/lower",
-  speechesUpper: "/speeches/upper",
-  speechSummary: (party: string, reprName: string) => `/speeches/summary/${party}/${reprName}`,
   
-  // Manifesto
-  manifestoParties: "/manifesto/parties",
-  manifestoParty: (partyName: string) => `/manifesto/party/${encodeURIComponent(partyName)}`,
-  
-  // Stats
-  positionStats: "/stats/position",
-  
-  // Meetings
-  sangiinMeetingNames: "/sangiin/meeting_names",
-  sangiinMeetingVotes: (meetingName: string) => `/sangiin/sangiin_meeting_votes/${encodeURIComponent(meetingName)}`,
-  sangiinPartyOpinions: (meetingName: string, topicName: string) => 
-    `/sangiin/sangiin_party_opinions/${encodeURIComponent(meetingName)}/${encodeURIComponent(topicName)}`,
+  // voting district geo json data
+  votingDistrictGeoJson: "/geo/senkyokuPolydata",
+
+  // ideology
+  ideology: "/ideology",
+
+  // all parliament member table
+  allParliamentMemberTable: "/parliamentMember/all",
 } as const;
 

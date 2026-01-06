@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parliament Explorer | KOKKAI DOC",
+  title: "KOKKAI DOC",
   description: "Explore Japanese parliamentary representatives, their ideologies, speeches, trust scores, and factual accuracy.",
 };
 
@@ -25,9 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+	  	suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+          {children}
       </body>
     </html>
   );
