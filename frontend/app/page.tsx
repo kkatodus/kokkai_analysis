@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
 import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
+import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
 /**
  * Loading component shown while data is being fetched
@@ -15,7 +16,10 @@ function LoadingState() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-[#111827] to-[#020617]">
       <div className="text-center">
-        <div className="mb-4 text-lg text-gray-400">Loading parliament data...</div>
+        <div className="mb-4 flex items-center justify-center">
+          <LoadingIndicator label="読み込み中" />
+        </div>
+        <div className="text-lg text-gray-400">Loading parliament data...</div>
         <div className="text-sm text-gray-500">
           {isUsingMockData() ? "Using mock data" : "Fetching from API"}
         </div>
