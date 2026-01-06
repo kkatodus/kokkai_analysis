@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { BiDonateHeart } from "react-icons/bi";
-import { createCheckoutSession } from "@/app/lib/services/paymentService";
+import { FaUserAlt } from "react-icons/fa";
+import { createCheckoutSession, createCustomerPortal } from "@/app/lib/services/paymentService";
 
 type DonateModalProps = {
   removeModal?: () => void;
@@ -57,6 +58,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <div className="flex h-full w-full flex-col gap-3 overflow-hidden rounded-lg border border-slate-400/20 bg-[#020617] p-4 text-gray-100">
@@ -112,15 +114,28 @@ export function DonateModal({ removeModal }: DonateModalProps) {
             <br />
             皆さまの温かいご協力が、より開かれた民主主義の実現につながります。何卒よろしくお願い申し上げます。
           </p>
-
-          <button
+          <div className="flex items-stretch gap-2">
+            <button
             type="button"
             onClick={() => setPage("payment")}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-blue-500/60 bg-linear-to-r from-blue-600/45 to-cyan-500/35 px-4 py-3.5 text-base font-semibold text-blue-50 shadow-lg shadow-blue-900/25 transition hover:from-blue-600/60 hover:to-cyan-500/45"
+            className="flex flex-2 items-center justify-center gap-2 rounded-2xl border border-blue-500/60 bg-linear-to-r from-blue-600/45 to-cyan-500/35 px-4 py-3.5 text-base font-semibold text-blue-50 shadow-lg shadow-blue-900/25 transition hover:from-blue-600/60 hover:to-cyan-500/45"
           >
             <BiDonateHeart className="h-6 w-6" />
             募金する
           </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                const url = process.env.NEXT_PUBLIC_STRIPE_LOGIN_REDIRECT || "";
+                if (url) window.location.href = url;
+              }}
+              className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-slate-400/40 bg-slate-900/60 px-4 py-3.5 text-base font-semibold text-gray-100 transition hover:bg-slate-800"
+            >
+              <FaUserAlt className="h-5 w-5" />
+              サブスクリプション管理はこちら
+            </button>
+          </div>
         </>
       ) : (
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
@@ -135,6 +150,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
               <span className="font-semibold text-gray-100">また、サブスクリプション形式でもご支援いただけます。長期的にKOKKAIDOCの活動をご支援いただける方は是非ともご検討ください。</span>
             </p>
           </div>
+
 
           <div className="flex items-center justify-between gap-2">
             <div

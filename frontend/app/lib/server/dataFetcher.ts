@@ -19,10 +19,16 @@ import type {
 /**
  * Get the API base URL (server-side version)
  */
+function normalizeBaseUrl(baseUrl: string): string {
+  const trimmed = baseUrl.trim().replace(/\/+$/, "");
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
+  return `http://${trimmed}`;
+}
+
 function getServerApiBaseUrl(): string {
   // Check if we're in local development mode
   if (process.env.BACKEND_URL) {
-	return process.env.BACKEND_URL;
+	return normalizeBaseUrl(process.env.BACKEND_URL);
   }
   return "http://localhost:8000";
 }
@@ -39,22 +45,30 @@ console.log('[Server DataFetcher] Revalidation time:', REVALIDATION_TIME);
  * Uses Next.js caching with ISR (Incremental Static Regeneration)
  * Data is cached and only refetched after the revalidation period
  */
-async function fetchApi<T>(endpoint: string): Promise<T> {
+async function fetchApi<T>(endpoint: string, options: { cache?: boolean } = { cache: true }): Promise<T> {
   const baseUrl = getServerApiBaseUrl();
   const url = `${baseUrl}${endpoint}`;
   console.log('[Server DataFetcher] Fetching from server:', url);
 
   try {
-	const response = await fetch(url, {
+	const fetchOptions: RequestInit & { next?: { revalidate: number } } = {
 	  headers: {
 		"Content-Type": "application/json",
 		"X-API-KEY": process.env.API_KEY || "",
 	  },
-	  // Use Next.js ISR caching - data is cached for 1 week
-	  // After the revalidation period, Next.js will revalidate in the background
-	  // This prevents hammering the backend API
-	  next: { revalidate: REVALIDATION_TIME },
-	});
+	};
+
+	// IMPORTANT:
+	// In Next.js App Router, fetch() defaults to caching ("force-cache") when no cache/next is provided.
+	// That means `options.cache: false` MUST explicitly use `cache: "no-store"`; otherwise large responses
+	// can hit Next's data cache limits (>2MB) and lead to confusing "works once then hangs" behavior.
+	if (options.cache) {
+	  fetchOptions.next = { revalidate: REVALIDATION_TIME };
+	} else {
+	  fetchOptions.cache = "no-store";
+	}
+
+	const response = await fetch(url, fetchOptions);
 
 	if (!response.ok) {
 	  throw new Error(`API request failed: ${response.status} ${response.statusText}`);
@@ -126,7 +140,7 @@ export async function getDonors(): Promise<string[]> {
 
 export async function getIdeologyData(): Promise<IdeologyData | null> {
 	try {
-		return await fetchApi<IdeologyData | null>(API_ENDPOINTS.ideology);
+		return await fetchApi<IdeologyData | null>(API_ENDPOINTS.ideology, { cache: false });
 	} catch (error) {
 		console.error("Failed to fetch ideology data from API, falling back to mock data:", error);
 		return null;
