@@ -25,6 +25,8 @@ export function JapanMap({
 }: JapanMapProps) {
 
 	const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+	const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
+	
 	const [mapResetCounter, setMapResetCounter] = useState(0);
 
 	// If a person is selected elsewhere (e.g. from search / scatter / list),
@@ -33,6 +35,7 @@ export function JapanMap({
 	useEffect(() => {
 		if (!selectedPersonId) {
 			setSelectedDistrict(null);
+			setSelectedPrefecture(null);
 			return;
 		}
 		const repr = parliamentMemberData?.shugiin?.reprs?.find(
@@ -40,12 +43,14 @@ export function JapanMap({
 		);
 		if (!repr?.district) return;
 		const normalized = repr.district.replace("区", "");
+		const prefecture = repr.district.replace(/\d/g, '')
 		setSelectedDistrict(normalized);
+		setSelectedPrefecture(prefecture);
 	}, [selectedPersonId, parliamentMemberData]);
 
 	const currentSangiinPoliticians = useMemo(() => {
-		return parliamentMemberData?.sangiin.reprs.filter((repr) => selectedDistrict?.includes(repr.district));
-	}, [parliamentMemberData, selectedDistrict]);
+		return parliamentMemberData?.sangiin.reprs.filter((repr) => repr.district.includes(selectedPrefecture || ''));
+	}, [parliamentMemberData, selectedPrefecture]);
 	const currentShugiinPoliticians = useMemo(() => {
 		return parliamentMemberData?.shugiin.reprs.filter((repr) => repr.district.includes(selectedDistrict || ''));
 	}, [parliamentMemberData, selectedDistrict]);
