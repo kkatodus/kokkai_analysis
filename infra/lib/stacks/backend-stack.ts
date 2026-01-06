@@ -97,6 +97,37 @@ export class BackendStack extends cdk.Stack {
 	})
 	dataLakeBucket.grantReadWrite(svc.taskDefinition.taskRole)
 
+	// Reject requests missing an API key at the edge so they never hit the ALB/Fargate origin.
+	// Note: this only checks *presence* of X-API-KEY; the origin still validates correctness.
+	const requireApiKeyFunction = new cloudfront.Function(this, "RequireApiKeyFunction", {
+		code: cloudfront.FunctionCode.fromInline(`
+			function handler(event) {
+			var request = event.request;
+			var headers = request.headers || {};
+
+			// Keep /health reachable if you ever hit it through CloudFront (ALB health checks hit ALB directly).
+			if (request.uri && request.uri.indexOf('/health') === 0) {
+				return request;
+			}
+
+			var apiKey = headers['x-api-key'];
+			if (!apiKey || !apiKey.value) {
+				return {
+				statusCode: 401,
+				statusDescription: 'Unauthorized',
+				headers: {
+					'content-type': { value: 'application/json; charset=utf-8' },
+					'cache-control': { value: 'no-store' }
+				},
+				body: JSON.stringify({ detail: 'Missing API key' })
+				};
+			}
+
+			return request;
+			}
+		`),
+	})
+
 	const cloudfrontDistribution = new cloudfront.Distribution(this, "ApiDistribution", {
 		defaultBehavior:{
 			origin: new origins.LoadBalancerV2Origin(svc.loadBalancer, {
@@ -105,6 +136,7 @@ export class BackendStack extends cdk.Stack {
 			allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
 			cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
 			originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER,
+			functionAssociations: [{ eventType: cloudfront.FunctionEventType.VIEWER_REQUEST, function: requireApiKeyFunction }],
 			viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 		}
 	})
@@ -139,6 +171,9 @@ export class BackendStack extends cdk.Stack {
 	const cacheEndpoints = [
 		"/geo/senkyokuPolydata",
 		"/parliamentMember",
+		"/speeches/available",
+		"/speeches/get_first_page_of_all_topics",
+		"/speeches/get",
 	]
 
 	for (const endpoint of cacheEndpoints) {
@@ -150,6 +185,7 @@ export class BackendStack extends cdk.Stack {
 			allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
 			cachePolicy: publicCachePolicy,
 			originRequestPolicy: cachedOriginRequestPolicy,
+			functionAssociations: [{ eventType: cloudfront.FunctionEventType.VIEWER_REQUEST, function: requireApiKeyFunction }],
 			viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 		})
 	}

@@ -5,6 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BiDonateHeart } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { createCheckoutSession, createCustomerPortal } from "@/app/lib/services/paymentService";
+import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
 type DonateModalProps = {
   removeModal?: () => void;
@@ -97,7 +98,11 @@ export function DonateModal({ removeModal }: DonateModalProps) {
           {/* Donor list: shrink-to-fit when short, scroll when long */}
           <div className="max-h-[45vh] overflow-auto rounded-md border border-slate-400/15 bg-slate-900/40 p-2 text-sm">
             {error && <div className="text-red-300">Failed to load donors: {error}</div>}
-            {!error && donors === null && <div className="text-gray-300">Loading…</div>}
+            {!error && donors === null && (
+              <div className="py-2">
+                <LoadingIndicator label="読み込み中" size="sm" />
+              </div>
+            )}
             {!error && donors !== null && (
               <ul className="flex flex-wrap justify-center gap-2">
                 {donors.map((d) => (
