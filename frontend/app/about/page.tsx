@@ -85,7 +85,8 @@ export default function AboutPage() {
       description: "2025年の夏に同志社大学で開かれた学会でKOKKAIDOCの論文の内容をプレゼンテーションしてきました。",
       href: "https://sites.google.com/view/jsqps/2025-summer-meeting",
       date: "2025-07-05",
-      logo: "website"
+      logo: "website",
+      no_visual: true
     }
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
