@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from "react";
 import { GeoJsonLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import {Map} from 'react-map-gl/maplibre';
@@ -24,6 +24,7 @@ interface VoteDistrictMapProps {
   selectedDistrict: string | null;
   setCurrentDistrict: (district: string) => void;
   ku2Party: {[key:string]:{name:string, yomikata:string, kaiha:string}}
+  resetCounter?: number;
 }
 
 
@@ -32,10 +33,17 @@ function VoteDistrictMap({
   geoJsonData,
   selectedDistrict,
   ku2Party,
+  resetCounter,
 
 }: VoteDistrictMapProps) {
   // Geojson data for voting districts
 //   const [Ku2Party] = useLowerKu2Party();
+
+  const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+
+  useEffect(() => {
+    setViewState(INITIAL_VIEW_STATE);
+  }, [resetCounter]);
 
 
 
@@ -95,7 +103,8 @@ function VoteDistrictMap({
   return (
     <div className="relative h-[500px] ">
       <DeckGL
-        initialViewState={INITIAL_VIEW_STATE}
+        viewState={viewState as any}
+        onViewStateChange={({ viewState: next }) => setViewState(next as any)}
         controller
         layers={[geojsonLayer]}
         getTooltip={getToolTip}
@@ -107,6 +116,7 @@ function VoteDistrictMap({
         //   mapStyle={MAP_STYLE}
         //   preventStyleDiffing
           projection="mercator"
+          {...(viewState as any)}
         />
       </DeckGL>
     </div>

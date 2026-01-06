@@ -25,6 +25,7 @@ export function JapanMap({
 }: JapanMapProps) {
 
 	const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+	const [mapResetCounter, setMapResetCounter] = useState(0);
 
 	// If a person is selected elsewhere (e.g. from search / scatter / list),
 	// and that person exists in the map's underlying district data (Shugiin),
@@ -60,6 +61,15 @@ export function JapanMap({
 
   return (
     <div className="relative" id="japan-map">
+		<div className="absolute right-3 top-3 z-30">
+			<button
+				type="button"
+				onClick={() => setMapResetCounter((c) => c + 1)}
+				className="rounded-full border border-white/10 bg-slate-900/80 px-3 py-1 text-[11px] text-slate-100 shadow-sm backdrop-blur hover:bg-slate-900"
+			>
+				地図をリセット
+			</button>
+		</div>
 		<PoliticianPreviewWindow
 			selectedDistrict={selectedDistrict}
 			shugiinPoliticians={currentShugiinPoliticians}
@@ -73,6 +83,7 @@ export function JapanMap({
 			geoJsonData={votingDistrictGeoJsonData}
 			setCurrentDistrict={setSelectedDistrict}
 			ku2Party={ku2Party}
+			resetCounter={mapResetCounter}
 		/>
     </div>
   );

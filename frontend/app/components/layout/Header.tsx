@@ -14,7 +14,7 @@ export function Header() {
           KOKKAI DOC
         </h1>
         <div className="text-[11px] text-gray-400 sm:text-[13px]">
-         日本の政治を見やすく、わかりやすく、調べやすく
+			日本の政治を調べやすく、わかりやすく、身近に。
         </div>
       </div>
       <div className="flex items-center gap-3">
