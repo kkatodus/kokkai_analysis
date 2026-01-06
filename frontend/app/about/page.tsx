@@ -32,7 +32,7 @@ export default function AboutPage() {
       href: "https://youtu.be/SP_IJ3xxwLg?si=o6TswnPKpWvJ0Hzd",
       embed: "https://www.youtube.com/embed/SP_IJ3xxwLg?si=NbiQ3v1sy3qKd6u3",
       date: "2025-05-21",
-	  logo: "youtube"
+      logo: "youtube"
     },
     {
       title: "Abema Primeに出演させていただきました！",
@@ -40,23 +40,23 @@ export default function AboutPage() {
       href: "https://www.youtube.com/watch?v=qDOcZasG2To",
       embed: "https://www.youtube.com/embed/qDOcZasG2To?si=MR6z-APy6Qb3FaPQ",
       date: "2025-05-23",
-	  logo: "youtube"
+      logo: "youtube"
     },
     {
       title: "KOKKAIDOCの論文がarXivに掲載されました！",
       description: "製作者の学部卒業論文がarXivに掲載されました。",
       href: "https://arxiv.org/abs/2505.07118",
-	  no_visual: true,
+      no_visual: true,
       date: "2025-05-11",
-	  logo: "website"
+      logo: "website"
     },
     {
       title: "KOKKAIDOCに関連する論文を国際学会でポスター発表してきました。",
       description: "カリフォルニア大学リバーサイド校で開かれたPolMeth2024学会に参加してきました。",
       href: "https://polmeth.ucr.edu/program-papers-and-panels",
       date: "2024-07-18",
-	  no_visual: true,
-	  logo: "website"
+      no_visual: true,
+      logo: "website"
     },
     {
       title: "学部卒業論文の発表をトロント大学の恩師の前でした様子をyoutubeにアップしました！",
@@ -64,22 +64,29 @@ export default function AboutPage() {
       href: "https://www.youtube.com/watch?v=8HOCEHbDsrE&t=181s",
       embed: "https://www.youtube.com/embed/8HOCEHbDsrE?si=B3TYzgpcSKwjGdeu",
       date: "2025-04-30",
-	  logo: "youtube"
+      logo: "youtube"
     },
-	{
-	  title: "Ledge.aiさんの記事でKOKKAIDOCの紹介をしていただきました！",
-	  description: "KOKKAIDOCの概要について詳しく書いていただいています。",
-	  href: "https://ledge.ai/articles/kokkai_doc_ai_policy_analysis",
-	  date: "2025-05-28",
-	  logo: "website"
-	},
-	{
-	  title: "TECHNO EDGEさんの記事でKOKKAIDOCの紹介をしていただきました！",
-	  description: "KOKKAIDOCの概要について詳しく書いていただいています。",
-	  href: "https://www.techno-edge.net/article/2025/05/19/4367.html",
-	  date: "2025-05-19",
-	  logo: "website"
-	}
+    {
+      title: "Ledge.aiさんの記事でKOKKAIDOCの紹介をしていただきました！",
+      description: "KOKKAIDOCの概要について詳しく書いていただいています。",
+      href: "https://ledge.ai/articles/kokkai_doc_ai_policy_analysis",
+      date: "2025-05-28",
+      logo: "website"
+    },
+    {
+      title: "TECHNO EDGEさんの記事でKOKKAIDOCの紹介をしていただきました！",
+      description: "KOKKAIDOCの概要について詳しく書いていただいています。",
+      href: "https://www.techno-edge.net/article/2025/05/19/4367.html",
+      date: "2025-05-19",
+      logo: "website"
+    },
+    {
+      title: "計量・数理政治研究会の集会でKOKKAIDOCの論文をポスター発表してきました！",
+      description: "2025年の夏に同志社大学で開かれた学会でKOKKAIDOCの論文の内容をプレゼンテーションしてきました。",
+      href: "https://sites.google.com/view/jsqps/2025-summer-meeting",
+      date: "2025-07-05",
+      logo: "website"
+    }
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
@@ -190,14 +197,14 @@ export default function AboutPage() {
               当サイト管理者は利用者が当サイトにて公開されている情報を用いて行う一切の行為について責任を負いません。
               当サイトの利用は各利用者の自己責任にて行っていただけます。
             </p>
-			<span className="text-lg font-bold ">データの正確性、完全性、最新性について最善を尽くしていますが、誤りがある場合もあります。ご了承ください。</span>
+            <span className="text-lg font-bold ">データの正確性、完全性、最新性について最善を尽くしていますが、誤りがある場合もあります。ご了承ください。</span>
 
           </Section>
 
           <Section title="著作権">
             <p>
               当サイトにて公開されている内容に関して、編集著作権を含む権利は当サイト管理者に帰属します。
-              よって、当サイトの内容を管理者の承諾を得ずに使用することは禁止します。<br/>
+              よって、当サイトの内容を管理者の承諾を得ずに使用することは禁止します。<br />
             </p>
           </Section>
 
@@ -250,21 +257,21 @@ export default function AboutPage() {
                       <div className="mt-1 truncate text-xs text-blue-300">{m.href}</div>
                     </div>
                   </div>
-				  {m.href && !m.embed && !m.no_visual && (
-					<div className="mt-3 overflow-hidden rounded-lg border border-slate-400/15 bg-black/20">
-					<div className="relative w-full pt-[56.25%]">
-					  <iframe
-						className="absolute inset-0 h-full w-full"
-						src={m.href}
-						title={m.title}
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-						referrerPolicy="strict-origin-when-cross-origin"
-						allowFullScreen
-					  />
-					</div>
-				  </div>
+                  {m.href && !m.embed && !m.no_visual && (
+                    <div className="mt-3 overflow-hidden rounded-lg border border-slate-400/15 bg-black/20">
+                      <div className="relative w-full pt-[56.25%]">
+                        <iframe
+                          className="absolute inset-0 h-full w-full"
+                          src={m.href}
+                          title={m.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      </div>
+                    </div>
 
-				  )}
+                  )}
 
                   {m.embed && (
                     <div className="mt-3 overflow-hidden rounded-lg border border-slate-400/15 bg-black/20">
