@@ -64,7 +64,7 @@ export class BackendStack extends cdk.Stack {
 	// NOTE: With an ALB in front, scaling from 0 means the *first* request will likely see a 503
 	// until at least one task is started and passes health checks.
 	const scalableTarget = svc.service.autoScaleTaskCount({
-		minCapacity: 0,
+		minCapacity: props.environmentName === "dev" ? 0 : 1,
 		maxCapacity: 2,
 	})
 

@@ -25,6 +25,7 @@ export function JapanMap({
 }: JapanMapProps) {
 
 	const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+	const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
 	const [mapResetCounter, setMapResetCounter] = useState(0);
 
 	// If a person is selected elsewhere (e.g. from search / scatter / list),
@@ -33,6 +34,7 @@ export function JapanMap({
 	useEffect(() => {
 		if (!selectedPersonId) {
 			setSelectedDistrict(null);
+			setSelectedPrefecture(null);
 			return;
 		}
 		const repr = parliamentMemberData?.shugiin?.reprs?.find(
@@ -44,7 +46,7 @@ export function JapanMap({
 	}, [selectedPersonId, parliamentMemberData]);
 
 	const currentSangiinPoliticians = useMemo(() => {
-		return parliamentMemberData?.sangiin.reprs.filter((repr) => selectedDistrict?.includes(repr.district));
+		return parliamentMemberData?.sangiin.reprs.filter((repr) => repr.district.includes(selectedDistrict?.replace(/\d+/g, '') || ''));
 	}, [parliamentMemberData, selectedDistrict]);
 	const currentShugiinPoliticians = useMemo(() => {
 		return parliamentMemberData?.shugiin.reprs.filter((repr) => repr.district.includes(selectedDistrict || ''));
