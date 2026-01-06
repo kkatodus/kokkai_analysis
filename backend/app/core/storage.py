@@ -88,7 +88,7 @@ class S3Storage:
 		print("reading s3 directory", prefix)
 		bucket = self._s3.Bucket(self.bucket_name)
 		objects = bucket.objects.filter(Prefix=prefix)
-		return [obj.key for obj in objects] if objects else []
+		return [obj.key[len(prefix):].lstrip('/') for obj in objects] if objects else []
 
 
 	def read_bytes(self, key:str) -> bytes:

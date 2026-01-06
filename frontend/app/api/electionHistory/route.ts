@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+const SEVEN_DAYS_SECONDS = 60 * 60 * 24 * 7;
+const CACHE_CONTROL_7D = `public, s-maxage=${SEVEN_DAYS_SECONDS}, stale-while-revalidate=86400`;
+
 function normalizeBaseUrl(baseUrl: string): string {
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
@@ -12,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = SEVEN_DAYS_SECONDS;
 
 /**
  * Proxy for backend `/electionHistory/?person_id=...`
@@ -36,7 +39,7 @@ export async function GET(req: Request) {
   const apiKey = process.env.BACKEND_API_KEY || process.env.API_KEY;
   if (apiKey) headers["X-API-KEY"] = apiKey;
 
-  const res = await fetch(url, { headers, cache: "no-store" });
+  const res = await fetch(url, { headers, next: { revalidate: SEVEN_DAYS_SECONDS } });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     return NextResponse.json(
@@ -55,7 +58,7 @@ export async function GET(req: Request) {
     const history = lines.map((l) => JSON.parse(l));
     return NextResponse.json(
       { history },
-      { status: 200, headers: { "Cache-Control": "no-store" } }
+      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } }
     );
   } catch (e) {
     return NextResponse.json(

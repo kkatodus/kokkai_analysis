@@ -15,16 +15,6 @@ import type {
   AllParliamentMemberTableData,
 } from "@/app/types";
 
-/**
- * Check if we're in local development (server-side)
- */
-function isLocalDevelopment(): boolean {
-  if (process.env.NODE_ENV === "development") {
-	const env = process.env.ENVIRONMENT;
-	return env === "local" || env === undefined;
-  }
-  return false;
-}
 
 /**
  * Get the API base URL (server-side version)

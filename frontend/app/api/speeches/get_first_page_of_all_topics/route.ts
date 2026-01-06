@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+const SEVEN_DAYS_SECONDS = 60 * 60 * 24 * 7;
+const CACHE_CONTROL_7D = `public, s-maxage=${SEVEN_DAYS_SECONDS}, stale-while-revalidate=86400`;
+
 function normalizeBaseUrl(baseUrl: string): string {
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
@@ -12,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = SEVEN_DAYS_SECONDS;
 
 /**
  * Proxy for backend `/speeches/get_first_page_of_all_topics?person_id=...`
@@ -35,7 +38,7 @@ export async function GET(req: Request) {
   if (apiKey) headers["X-API-KEY"] = apiKey;
 
   try {
-    const res = await fetch(url, { headers, cache: "no-store" });
+    const res = await fetch(url, { headers, next: { revalidate: SEVEN_DAYS_SECONDS } });
     const text = await res.text().catch(() => "");
 
     if (!res.ok) {
@@ -47,7 +50,7 @@ export async function GET(req: Request) {
 
     try {
       const data = JSON.parse(text) as unknown;
-      return NextResponse.json(data, { status: 200, headers: { "Cache-Control": "no-store" } });
+      return NextResponse.json(data, { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } });
     } catch {
       return NextResponse.json(
         { error: "Backend returned non-JSON response", raw: text },
