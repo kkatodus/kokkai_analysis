@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { BiDonateHeart } from "react-icons/bi";
+import { createCheckoutSession } from "@/app/lib/services/paymentService";
 
 type DonateModalProps = {
   removeModal?: () => void;
@@ -48,20 +49,8 @@ export function DonateModal({ removeModal }: DonateModalProps) {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
-      const res = await fetch("/api/payment/create-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscription, items }),
-      });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Request failed: ${res.status} ${res.statusText}${text ? ` — ${text}` : ""}`);
-      }
-      const data = (await res.json()) as { url?: string; [k: string]: unknown };
-      if (!data.url || typeof data.url !== "string") {
-        throw new Error("Unexpected response: missing checkout URL");
-      }
-      window.location.href = data.url;
+      const { url } = await createCheckoutSession({ subscription, items });
+      window.location.href = url;
     } catch (e) {
       setSubmitError(e instanceof Error ? e.message : "Unknown error");
     } finally {
@@ -142,20 +131,40 @@ export function DonateModal({ removeModal }: DonateModalProps) {
             <p className="mt-2 leading-relaxed text-gray-300">
               <span className="font-semibold text-gray-100">4,000円以上</span>のご支援で、ご希望に応じて支援者一覧にお名前を掲載できます。
             </p>
+			<p className="mt-2 leading-relaxed text-gray-300">
+              <span className="font-semibold text-gray-100">また、サブスクリプション形式でもご支援いただけます。長期的にKOKKAIDOCの活動をご支援いただける方は是非ともご検討ください。</span>
+            </p>
           </div>
 
           <div className="flex items-center justify-between gap-2">
-            <button
-              type="button"
-              onClick={() => setSubscription((v) => !v)}
-              className={`rounded-full border px-3 py-1 text-xs transition-colors ${
-                subscription
-                  ? "border-blue-500/70 bg-blue-600/30 text-blue-50"
-                  : "border-slate-400/40 bg-slate-900/90 text-gray-200 hover:bg-slate-800"
-              }`}
+            <div
+              className="flex items-center overflow-hidden rounded-full border border-slate-400/40 bg-slate-900/90"
+              role="tablist"
+              aria-label="Donation type"
             >
-              {subscription ? "長期的に応援する（月額）" : "一度応援する"}
-            </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={!subscription}
+                onClick={() => setSubscription(false)}
+                className={`px-3 py-1 text-xs transition-colors ${
+                  !subscription ? "bg-blue-600/60 text-blue-50" : "text-gray-200 hover:bg-slate-800"
+                }`}
+              >
+                一度応援する
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={subscription}
+                onClick={() => setSubscription(true)}
+                className={`px-3 py-1 text-xs transition-colors ${
+                  subscription ? "bg-blue-600/60 text-blue-50" : "text-gray-200 hover:bg-slate-800"
+                }`}
+              >
+                長期的に応援する（月額）
+              </button>
+            </div>
             <div className="text-sm text-gray-200">
               {subscription ? "月額：" : "合計："}
               <span className="ml-1 font-semibold text-gray-50">{totalPrice}円</span>

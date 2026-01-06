@@ -13,6 +13,7 @@ from routers import (
 	ideology,
 	donors,
 	electionHistory,
+    payment,
 )
 
 
@@ -48,3 +49,4 @@ app.include_router(parliamentMember.router, dependencies=[Depends(require_api_ke
 app.include_router(donors.router, dependencies=[Depends(require_api_key)])
 app.include_router(ideology.router, dependencies=[Depends(require_api_key)])
 app.include_router(electionHistory.router, dependencies=[Depends(require_api_key)])
+app.include_router(payment.router, dependencies=[Depends(require_api_key)])

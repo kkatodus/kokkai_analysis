@@ -69,6 +69,52 @@ export interface ParliamentMemberData {
   };
 }
 
+export interface speechMetaData{
+	issueID: string;
+	imageKind: string;
+	searchObject: number;
+	session: number;
+	nameOfHouse: string;
+	nameOfMeeting: string;
+	issue: string;
+	date: string;
+	closing: string;
+	pdfURL: string;
+	nextRecordPosition: number | null;
+}
+
+export interface SpeechRecord {
+	speechID: string;
+	speechOrder: number;
+	speaker: string;
+	speakerYomi: string;
+	speakerGroup: string;
+	speakerPosition: string | null;
+	speakerRole: string | null;
+	speech: string;
+	startPage: number;
+	createTime: string;
+	updateTime: string;
+	speechURL: string;
+	issueID: string;
+	meta: speechMetaData;
+}
+
+export interface FirstPageOfAllTopics {
+	first_pages_of_all_topics: Array<{
+		topic: string;
+		page: SpeechRecord[];
+		number_of_pages?: number;
+	}>;
+}
+
+export interface SpeechPageResponse {
+	page_number: number;
+	number_of_lines: number;
+	total_pages: number;
+	total_lines: number;
+	page: SpeechRecord[];
+}
 export interface ElectionHistoryData {
 	day: string;
 	year: string;

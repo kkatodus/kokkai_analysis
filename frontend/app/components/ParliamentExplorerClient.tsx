@@ -21,6 +21,7 @@ import { ModalProvider } from "@/app/lib/hooks/useModal";
 import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
+import { useModal } from "@/app/lib/hooks/useModal";
 
 interface ParliamentExplorerClientProps {
   parliamentMemberData: ParliamentMemberData | null;
@@ -37,6 +38,26 @@ export function ParliamentExplorerClient({
   ideologyData,	
   allParliamentMemberTable,
 }: ParliamentExplorerClientProps) {
+  return (
+    <ModalProvider>
+      <ParliamentExplorerClientInner
+        parliamentMemberData={parliamentMemberData}
+        votingDistrictGeoJsonData={votingDistrictGeoJsonData}
+        initialSelectedPersonId={initialSelectedPersonId}
+        ideologyData={ideologyData}
+        allParliamentMemberTable={allParliamentMemberTable}
+      />
+    </ModalProvider>
+  );
+}
+
+function ParliamentExplorerClientInner({
+  parliamentMemberData,
+  votingDistrictGeoJsonData,
+  initialSelectedPersonId,
+  ideologyData,
+  allParliamentMemberTable,
+}: ParliamentExplorerClientProps) {
   // Initialize state from server-provided initialSelectedId
   const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
   
@@ -44,6 +65,7 @@ export function ParliamentExplorerClient({
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
+  const { currentModals, addModal } = useModal();
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
   useEffect(() => {
@@ -94,8 +116,38 @@ export function ParliamentExplorerClient({
     setTooltipData(null);
   }, []);
 
+  // Auto-open donation modal for first-time visitors or when URL requests it (e.g. from /payment-cancel).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const ensureDonationModalOpen = () => {
+      if (!currentModals.includes("donation")) addModal("donation");
+    };
+
+    const url = new URL(window.location.href);
+    const open = url.searchParams.get("open");
+    if (open === "donate") {
+      ensureDonationModalOpen();
+      // Remove the query param to avoid re-opening on refresh.
+      url.searchParams.delete("open");
+      window.history.replaceState({}, "", url.toString());
+      return;
+    }
+
+    const key = "kokkai_doc_seen_at";
+    const lastSeenRaw = window.localStorage.getItem(key);
+    const lastSeen = lastSeenRaw ? Number(lastSeenRaw) : NaN;
+    const now = Date.now();
+    const oneDayMs = 24 * 60 * 60 * 1000;
+
+    const isFresh = Number.isFinite(lastSeen) && now - lastSeen < oneDayMs;
+    if (!isFresh) {
+      ensureDonationModalOpen();
+      window.localStorage.setItem(key, String(now));
+    }
+  }, [addModal, currentModals]);
+
   return (
-    <ModalProvider>
       <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
         <div className="w-full">
           <div className="flex flex-col gap-4">
@@ -216,7 +268,6 @@ export function ParliamentExplorerClient({
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
       </div>
-    </ModalProvider>
   );
 }
 

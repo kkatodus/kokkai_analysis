@@ -24,7 +24,7 @@ export class BackendStack extends cdk.Stack {
 		vpc,
 	})
 
-	const apiKeySecret = secrets.Secret.fromSecretCompleteArn(this, "ApiKeySecret", props.environmentConfig.api_key_secret_arn);
+	const secretsManager = secrets.Secret.fromSecretCompleteArn(this, "SecretsManager", props.environmentConfig.secret_arn);
 
 	const dataLakeBucketName = props.environmentConfig.data_lake_bucket_name_object_uri.split("/")[2];
 	const dataLakeBucket = s3.Bucket.fromBucketName(this, "DataLakeBucket", dataLakeBucketName);
@@ -51,7 +51,9 @@ export class BackendStack extends cdk.Stack {
 			},
 			// Inject secrets at runtime (do NOT synth them into CloudFormation).
 			secrets: {
-				API_KEY: ecs.Secret.fromSecretsManager(apiKeySecret, props.environmentConfig.api_key_secret_key),
+				API_KEY: ecs.Secret.fromSecretsManager(secretsManager, props.environmentConfig.api_key_secret_key),
+				STRIPE_SECRET_KEY: ecs.Secret.fromSecretsManager(secretsManager, props.environmentConfig.stripe_secret_key_secret_key),
+				STRIPE_PUBLISHABLE_KEY: ecs.Secret.fromSecretsManager(secretsManager, props.environmentConfig.stripe_publishable_key_secret_key),
 			},
 		},
 		healthCheckGracePeriod: cdk.Duration.seconds(60)

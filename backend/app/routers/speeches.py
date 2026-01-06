@@ -16,7 +16,6 @@ async def available_speeches(
 		speech_files = storage.read_directory(f"kokkai-doc/repr_speeches_id_organized/{person_id}")
 	except FileNotFoundError:
 		raise HTTPException(status_code=404, detail="Person not found")
-
 	return {
 		"available_speeches": speech_files,
 	}
@@ -50,6 +49,7 @@ async def get_first_page_of_all_topics(
 		first_pages_of_all_topics.append({
 			"topic": topic,
 			"page": page.lines,
+			"number_of_pages": page.total_pages,
 		})
 	return {
 		"first_pages_of_all_topics": first_pages_of_all_topics,

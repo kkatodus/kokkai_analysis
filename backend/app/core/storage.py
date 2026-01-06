@@ -59,7 +59,7 @@ class LocalStorage:
 			raise FileNotFoundError(f"File not found: {path}")
 		with open(path, "r", encoding="utf-8") as f:
 			lines = f.read().splitlines()
-			total_pages = len(lines) // PAGE_LINE_SIZE
+			total_pages = len(lines) // PAGE_LINE_SIZE + 1
 			total_lines = len(lines)
 			return Page(lines=[json.loads(line) for line in lines[page_number*PAGE_LINE_SIZE:(page_number+1)*PAGE_LINE_SIZE]], page_number=page_number, total_pages=total_pages, total_lines=total_lines)
 
@@ -158,7 +158,7 @@ class S3Storage:
 				except json.JSONDecodeError as e:
 					raise ValueError(f"Invalid JSON on last line {line_idx} in s3://{self.bucket_name}/{obj_key}: {e}") from e
 
-		total_pages = (total_lines + PAGE_LINE_SIZE - 1) // PAGE_LINE_SIZE
+		total_pages = (total_lines + PAGE_LINE_SIZE - 1) // PAGE_LINE_SIZE + 1
 
 		return Page(
 			lines=page_items,          # NOTE: your Page type says list[str], but LocalStorage returns parsed JSON too

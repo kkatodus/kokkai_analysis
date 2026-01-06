@@ -15,10 +15,14 @@ export interface EnvironmentConfig {
   data_lake_bucket_name: string;
 
   /** API key secret name */
-  api_key_secret_arn: string;
+  secret_arn: string;
   api_key_secret_key: string;
   /** CORS allow origins */
   cors_allow_origins: string[];
+  /** Stripe secret key secret ARN */
+  stripe_secret_key_secret_key: string;
+  /** Stripe publishable key secret ARN */
+  stripe_publishable_key_secret_key: string;
 }
 
 /**
@@ -35,9 +39,11 @@ export const environments: Record<string, EnvironmentConfig> = {
     },
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-dev/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-dev",
-	api_key_secret_arn: "arn:aws:secretsmanager:ap-northeast-1:641577182081:secret:dev/kokkaidoc/api-CWi9sp",
+	secret_arn: "arn:aws:secretsmanager:ap-northeast-1:641577182081:secret:dev/kokkaidoc/api-CWi9sp",
 	api_key_secret_key: "kokkai-doc-dev-api-key",
 	cors_allow_origins: ["*"],
+	stripe_secret_key_secret_key: "stripe-secret-key",
+	stripe_publishable_key_secret_key: "stripe-publishable-key"
   },
   staging: {
     account: process.env.AWS_ACCOUNT_ID_STAGING || process.env.CDK_DEFAULT_ACCOUNT || "",
@@ -48,9 +54,11 @@ export const environments: Record<string, EnvironmentConfig> = {
     },
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-staging/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-staging",
-	api_key_secret_arn: "notcreated",
+	secret_arn: "notcreated",
 	api_key_secret_key: "kokkai-doc-staging-api-key",
 	cors_allow_origins: ["https://staging.kokkaidoc.com"],
+	stripe_secret_key_secret_key: "stripe-secret-key",
+	stripe_publishable_key_secret_key: "stripe-publishable-key"
   },
   prod: {
     account: process.env.AWS_ACCOUNT_ID_PROD || process.env.CDK_DEFAULT_ACCOUNT || "",
@@ -61,9 +69,11 @@ export const environments: Record<string, EnvironmentConfig> = {
     },
 	data_lake_bucket_name_object_uri: "s3://kokkai-doc-bucket-prod/kokkai-doc/",
 	data_lake_bucket_name: "kokkai-doc-bucket-prod",
-	api_key_secret_arn: "notcreated",
+	secret_arn: "notcreated",
 	api_key_secret_key: "kokkai-doc-prod-api-key",
 	cors_allow_origins: ["https://kokkaidoc.com"],
+	stripe_secret_key_secret_key: "stripe-secret-key",
+	stripe_publishable_key_secret_key: "stripe-publishable-key"
   },
 };
 

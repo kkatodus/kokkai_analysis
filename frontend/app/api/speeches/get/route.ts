@@ -14,33 +14,41 @@ function getBackendBaseUrl(): string {
 
 export const dynamic = "force-dynamic";
 
-type IncomingBody = {
-  subscription?: boolean;
-  items?: unknown;
-};
+/**
+ * Proxy for backend `/speeches/get?person_id=...&topic=...&page_number=...`
+ */
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const personId = searchParams.get("person_id");
+  const topic = searchParams.get("topic");
+  const pageNumberRaw = searchParams.get("page_number");
 
-export async function POST(req: Request) {
-  let body: IncomingBody;
-  try {
-    body = (await req.json()) as IncomingBody;
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  if (!personId) {
+    return NextResponse.json({ error: "Missing query param: person_id" }, { status: 400 });
+  }
+  if (!topic) {
+    return NextResponse.json({ error: "Missing query param: topic" }, { status: 400 });
+  }
+  if (pageNumberRaw === null) {
+    return NextResponse.json({ error: "Missing query param: page_number" }, { status: 400 });
   }
 
-  const subscription = Boolean(body.subscription);
-  const items = body.items;
-  if (!items || typeof items !== "object") {
-    return NextResponse.json({ error: "Missing `items`" }, { status: 400 });
+  const pageNumber = Number(pageNumberRaw);
+  if (!Number.isInteger(pageNumber) || pageNumber < 0) {
+    return NextResponse.json(
+      { error: "Invalid query param: page_number (expected a non-negative integer)" },
+      { status: 400 }
+    );
   }
 
   const baseUrl = getBackendBaseUrl();
-  const path = subscription
-    ? "/payment/create-subscription-session"
-    : "/payment/create-payment-session";
-  const url = `${baseUrl}${path}`;
+  const url =
+    `${baseUrl}/speeches/get` +
+    `?person_id=${encodeURIComponent(personId)}` +
+    `&topic=${encodeURIComponent(topic)}` +
+    `&page_number=${encodeURIComponent(String(pageNumber))}`;
 
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
     Accept: "application/json",
   };
 
@@ -48,14 +56,9 @@ export async function POST(req: Request) {
   if (apiKey) headers["X-API-KEY"] = apiKey;
 
   try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ items }),
-      cache: "no-store",
-    });
+    const res = await fetch(url, { headers, cache: "no-store" });
+    const text = await res.text().catch(() => "");
 
-    const text = await res.text();
     if (!res.ok) {
       return NextResponse.json(
         { error: `Backend request failed: ${res.status} ${res.statusText}`, details: text },
@@ -63,7 +66,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Try to parse JSON (expected: { url: "..." })
     try {
       const data = JSON.parse(text) as unknown;
       return NextResponse.json(data, { status: 200, headers: { "Cache-Control": "no-store" } });
