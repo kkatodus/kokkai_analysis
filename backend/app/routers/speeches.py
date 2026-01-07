@@ -14,9 +14,10 @@ async def available_speeches(
 ) -> Any:
 	try:
 		speech_files = storage.read_directory(f"kokkai-doc/repr_speeches_id_organized/{person_id}")
-	except FileNotFoundError:
+	except Exception as e:
 		print("[ERROR: available_speeches] Could not find directory: ", f"kokkai-doc/repr_speeches_id_organized/{person_id}")
-		raise HTTPException(status_code=404, detail="Person not found")
+		print(e)
+		raise HTTPException(status_code=404, detail=f"Person {person_id} not found: {e}")
 	return {
 		"available_speeches": speech_files,
 	}
@@ -33,9 +34,10 @@ async def get_speech(
 	
 	try:
 		page = storage.read_jsonl_paginated(jsonl_path, page_number)
-	except FileNotFoundError:
+	except Exception as e:
 		print("[ERROR: get_speech] Could not find file: ", jsonl_path)
-		raise HTTPException(status_code=404, detail=f"Topic {topic} not found")
+		print(e)
+		raise HTTPException(status_code=404, detail=f"Topic {topic} not found: {e}")
 	return {
 		"page_number": page.page_number,
 		"number_of_lines": len(page.lines),
