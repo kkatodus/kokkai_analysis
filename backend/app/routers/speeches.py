@@ -52,15 +52,16 @@ async def get_first_page_of_all_topics(
 	topics_dir = f"kokkai-doc/repr_speeches_id_organized/{person_id}"
 	try:
 		topics = storage.read_directory(topics_dir)
-	except FileNotFoundError:
+	except Exception as e:
 		print("[ERROR: get_first_page_of_all_topics] Could not find directory: ", topics_dir)
-		raise HTTPException(status_code=404, detail=f"Person {person_id} not found")
+		raise HTTPException(status_code=404, detail=f"Person {person_id} not found: {e}")
 	first_pages_of_all_topics = []
 	for topic in topics:
 		try:
 			page = storage.read_jsonl_paginated(f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}", 0)
-		except FileNotFoundError:
+		except Exception as e:
 			print("[ERROR: get_first_page_of_all_topics] Could not find file: ", f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}")
+			print(e)
 			continue
 		first_pages_of_all_topics.append({
 			"topic": topic,
