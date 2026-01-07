@@ -50,6 +50,9 @@ async def get_speech(
 async def get_first_page_of_all_topics(
 	person_id: str,
 	storage: Storage = Depends(get_storage)):
+
+	print(f"[INFO: get_first_page_of_all_topics] Getting first page of all topics for person {person_id}")
+
 	
 	topics_dir = f"kokkai-doc/repr_speeches_id_organized/{person_id}"
 	try:
@@ -59,6 +62,7 @@ async def get_first_page_of_all_topics(
 		raise HTTPException(status_code=404, detail=f"Person {person_id} not found: {e}")
 	first_pages_of_all_topics = []
 	for topic in topics:
+		print(f"[INFO: get_first_page_of_all_topics] Getting first page of topic {topic}")
 		try:
 			page = storage.read_jsonl_paginated(f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}", 0)
 		except Exception as e:
