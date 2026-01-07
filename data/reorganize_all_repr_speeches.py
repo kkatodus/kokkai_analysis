@@ -23,11 +23,12 @@ RESOURCES_JSON_PATH = os.path.join(RESOURCES_DIR, "experiment_config.json")
 RESOURCES_JSON = read_json(RESOURCES_JSON_PATH)
 
 
-# In[20]:
+# In[ ]:
 
 
 def iterate_meeting_files() -> Iterator[Tuple[str, str]]:
-	for meeting_id in os.listdir(ALL_SPEECHES_DIR):
+	for meeting_id in os.listdir(ALL_SPEECHES_DIR)[::-1]:
+		print(meeting_id)
 		meeting_dir = os.path.join(ALL_SPEECHES_DIR, meeting_id)
 		meta_file = os.path.join(meeting_dir, "meta.json")
 		speeches_file = os.path.join(meeting_dir, "speeches.jsonl")
