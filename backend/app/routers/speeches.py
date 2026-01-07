@@ -15,6 +15,7 @@ async def available_speeches(
 	try:
 		speech_files = storage.read_directory(f"kokkai-doc/repr_speeches_id_organized/{person_id}")
 	except FileNotFoundError:
+		print("[ERROR: available_speeches] Could not find directory: ", f"kokkai-doc/repr_speeches_id_organized/{person_id}")
 		raise HTTPException(status_code=404, detail="Person not found")
 	return {
 		"available_speeches": speech_files,
@@ -27,8 +28,14 @@ async def get_speech(
 	topic: str, 
 	page_number: int,
 	storage: Storage = Depends(get_storage)):
+
+	jsonl_path = f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}.jsonl"
 	
-	page = storage.read_jsonl_paginated(f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}.jsonl", page_number)
+	try:
+		page = storage.read_jsonl_paginated(jsonl_path, page_number)
+	except FileNotFoundError:
+		print("[ERROR: get_speech] Could not find file: ", jsonl_path)
+		raise HTTPException(status_code=404, detail=f"Topic {topic} not found")
 	return {
 		"page_number": page.page_number,
 		"number_of_lines": len(page.lines),
@@ -42,15 +49,25 @@ async def get_first_page_of_all_topics(
 	person_id: str,
 	storage: Storage = Depends(get_storage)):
 	
-	topics = storage.read_directory(f"kokkai-doc/repr_speeches_id_organized/{person_id}")
+	topics_dir = f"kokkai-doc/repr_speeches_id_organized/{person_id}"
+	try:
+		topics = storage.read_directory(topics_dir)
+	except FileNotFoundError:
+		print("[ERROR: get_first_page_of_all_topics] Could not find directory: ", topics_dir)
+		raise HTTPException(status_code=404, detail=f"Person {person_id} not found")
 	first_pages_of_all_topics = []
 	for topic in topics:
-		page = storage.read_jsonl_paginated(f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}", 0)
+		try:
+			page = storage.read_jsonl_paginated(f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}", 0)
+		except FileNotFoundError:
+			print("[ERROR: get_first_page_of_all_topics] Could not find file: ", f"kokkai-doc/repr_speeches_id_organized/{person_id}/{topic}")
+			continue
 		first_pages_of_all_topics.append({
 			"topic": topic,
 			"page": page.lines,
-			"number_of_pages": page.total_pages,
-		})
+				"number_of_pages": page.total_pages,
+			})
+	
 	return {
 		"first_pages_of_all_topics": first_pages_of_all_topics,
 	}
