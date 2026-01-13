@@ -7,6 +7,7 @@
  */
 
 import { useState, useCallback, useEffect } from "react";
+import { track } from "@vercel/analytics";
 
 import { Header } from "@/app/components/layout/Header";
 import { ResizableContainer } from "@/app/components/layout/ResizableContainer";
@@ -90,7 +91,23 @@ function ParliamentExplorerClientInner({
   const selectedPersonId = selectedPersonIdState;
 
 
-  const handlePoliticianSelect = useCallback((id: string | null) => {
+  const handlePoliticianSelect = useCallback(
+    (
+      id: string | null,
+      meta?: { source?: string; queryLength?: number | null }
+    ) => {
+      const source = meta?.source ?? "unknown";
+
+      if (id) {
+        track("SelectPolitician", {
+          source,
+          personId: id,
+          queryLength: meta?.queryLength ?? null,
+        });
+      } else {
+        track("ClosePoliticianDetail", { source });
+      }
+
     // Update local state
     setSelectedPersonId(id);
 
@@ -102,7 +119,9 @@ function ParliamentExplorerClientInner({
       else url.searchParams.delete("person_id");
       window.history.replaceState({}, "", url.toString());
     }
-  }, []);
+    },
+    []
+  );
 
   const handleTooltipShow = useCallback(
     (data: { title: string; meta?: string }, x: number, y: number) => {
@@ -127,6 +146,9 @@ function ParliamentExplorerClientInner({
     const url = new URL(window.location.href);
     const open = url.searchParams.get("open");
     if (open === "donate") {
+      if (!currentModals.includes("donation")) {
+        track("OpenDonationModal", { location: "url_param_open=donate" });
+      }
       ensureDonationModalOpen();
       // Remove the query param to avoid re-opening on refresh.
       url.searchParams.delete("open");
@@ -142,6 +164,9 @@ function ParliamentExplorerClientInner({
 
     const isFresh = Number.isFinite(lastSeen) && now - lastSeen < oneDayMs;
     if (!isFresh) {
+      if (!currentModals.includes("donation")) {
+        track("OpenDonationModal", { location: "auto_first_visit_or_return" });
+      }
       ensureDonationModalOpen();
       window.localStorage.setItem(key, String(now));
     }
@@ -166,7 +191,12 @@ function ParliamentExplorerClientInner({
                     <HistoricalReprSearch
                       allParliamentMemberTable={allParliamentMemberTable}
                       selectedPersonId={selectedPersonId}
-                      onSelect={(id) => handlePoliticianSelect(id)}
+                      onSelect={(id, meta) =>
+                        handlePoliticianSelect(id, {
+                          source: "historical_search",
+                          queryLength: meta?.queryLength ?? null,
+                        })
+                      }
                     />
                   </div>
                 </Card>
@@ -180,7 +210,9 @@ function ParliamentExplorerClientInner({
                     <IdeologicalScatterPlot
                       ideologyData={ideologyData}
                       selectedPersonId={selectedPersonId}
-                      onPoliticianSelect={handlePoliticianSelect}
+                      onPoliticianSelect={(id) =>
+                        handlePoliticianSelect(id, { source: "ideology_scatter" })
+                      }
                       onTooltipShow={handleTooltipShow}
                       onTooltipHide={handleTooltipHide}
                     />
@@ -195,7 +227,12 @@ function ParliamentExplorerClientInner({
                       <div className="flex items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95">
                         <button
                           type="button"
-                          onClick={() => setMapPane("districts")}
+                          onClick={() => {
+                            if (mapPane !== "districts") {
+                              track("MapPaneChange", { pane: "districts" });
+                              setMapPane("districts");
+                            }
+                          }}
                           className={`px-3 py-1 text-[11px] ${
                             mapPane === "districts"
                               ? "bg-blue-600/90 text-white"
@@ -206,7 +243,12 @@ function ParliamentExplorerClientInner({
                         </button>
                         <button
                           type="button"
-                          onClick={() => setMapPane("proportional")}
+                          onClick={() => {
+                            if (mapPane !== "proportional") {
+                              track("MapPaneChange", { pane: "proportional" });
+                              setMapPane("proportional");
+                            }
+                          }}
                           className={`px-3 py-1 text-[11px] ${
                             mapPane === "proportional"
                               ? "bg-blue-600/90 text-white"
@@ -224,14 +266,18 @@ function ParliamentExplorerClientInner({
                         votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
                         parliamentMemberData={parliamentMemberData}
                         selectedPersonId={selectedPersonId}
-                        onPoliticianSelect={handlePoliticianSelect}
+                        onPoliticianSelect={(id) =>
+                          handlePoliticianSelect(id, { source: "district_map" })
+                        }
                         onTooltipShow={handleTooltipShow}
                         onTooltipHide={handleTooltipHide}
                       />
                     ) : (
                       <ProportionalReprList
                         parliamentMemberData={parliamentMemberData}
-                        onPoliticianSelect={(id) => handlePoliticianSelect(id)}
+                        onPoliticianSelect={(id) =>
+                          handlePoliticianSelect(id, { source: "proportional_list" })
+                        }
                       />
                     )}
                   </div>
@@ -262,7 +308,7 @@ function ParliamentExplorerClientInner({
       <DetailPane
         personId={selectedPersonId ?? ""}
         isOpen={selectedPersonId !== null}
-        onClose={() => handlePoliticianSelect(null)}
+        onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
       />
 

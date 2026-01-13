@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { TrackOnMount } from "@/app/components/analytics/TrackOnMount";
 
 export const dynamic = "force-dynamic";
 
 export default function PaymentCancelPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-[#111827] to-[#020617] px-4">
+      <TrackOnMount event="PaymentCancel" properties={{ location: "payment-cancel" }} />
       <div className="w-full max-w-lg rounded-2xl border border-slate-400/20 bg-[#020617] p-6 text-gray-100 shadow-2xl">
         <div className="mb-2 text-lg font-semibold text-gray-50">お支払いがキャンセルされました</div>
         <p className="text-sm leading-relaxed text-gray-300">

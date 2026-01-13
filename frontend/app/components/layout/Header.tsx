@@ -4,6 +4,7 @@ import { Badge } from "@/app/components/shared/Badge";
 import { useModal } from "@/app/lib/hooks/useModal";
 import { BiDonateHeart } from "react-icons/bi";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 export function Header() {
   const { addModal } = useModal();
@@ -21,13 +22,17 @@ export function Header() {
       <div className="flex items-center gap-3">
         <Link
           href="/about"
+          onClick={() => track("Navigate", { destination: "/about", location: "header" })}
           className="rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
         >
           このプロジェクトについて
         </Link>
         <button
           type="button"
-          onClick={() => addModal("donation")}
+          onClick={() => {
+            track("OpenDonationModal", { location: "header" });
+            addModal("donation");
+          }}
           className="flex items-center gap-1 rounded-full border border-cyan-400/20 bg-linear-to-br from-cyan-500/20 to-indigo-600/20 px-3 py-1.5 text-xs font-medium text-cyan-100 shadow-lg shadow-cyan-500/10 transition hover:border-cyan-400/40 hover:bg-cyan-500/25 hover:text-cyan-50"
         >
           <BiDonateHeart className="h-7 w-7" /><span className="text-sm">KOKKAI DOC に<br/>募金する</span>
