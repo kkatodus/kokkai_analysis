@@ -11,6 +11,7 @@ import json
 from dbio.representative_db import create_tables_if_not_exist, connect_db, get_person_by_column, insert_speeches_bulk, Speech, get_speech_by_column, get_all_data_for_column_for_table
 from params.paths import ROOT_DIR
 
+
 speeches_dir = os.path.join(ROOT_DIR, "data", "data_all_speeches")
 
 load_dotenv()
