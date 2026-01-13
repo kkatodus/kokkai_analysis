@@ -7,7 +7,7 @@ import { EmptyState } from "@/app/components/shared/EmptyState";
 type Props = {
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
   selectedPersonId?: string | null;
-  onSelect: (personId: string) => void;
+  onSelect: (personId: string, meta?: { queryLength?: number | null }) => void;
 };
 
 export function HistoricalReprSearch({
@@ -84,7 +84,9 @@ export function HistoricalReprSearch({
                 <button
                   key={r.person_id}
                   type="button"
-                  onClick={() => onSelect(r.person_id)}
+                  onClick={() => {
+                    onSelect(r.person_id, { queryLength: normalizedQuery.length });
+                  }}
                   className={`w-full rounded-xl border bg-[#020617] px-2.5 py-2 text-left transition ${
                     isSelected
                       ? "border-cyan-300/40 shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_28px_rgba(34,211,238,0.18)]"

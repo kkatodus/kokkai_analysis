@@ -6,6 +6,7 @@ import { BiDonateHeart } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { createCheckoutSession, createCustomerPortal } from "@/app/lib/services/paymentService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { track } from "@vercel/analytics";
 
 type DonateModalProps = {
   removeModal?: () => void;
@@ -31,6 +32,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
   const totalPrice = Object.values(items).reduce((acc, it) => acc + it.price * it.quantity, 0);
 
   useEffect(() => {
+    track("ViewDonationModal", { page: "donors" });
     let cancelled = false;
     (async () => {
       try {
@@ -51,6 +53,14 @@ export function DonateModal({ removeModal }: DonateModalProps) {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
+      track("StartCheckout", {
+        type: subscription ? "subscription" : "one_time",
+        totalPrice,
+        sQty: items.s.quantity,
+        mQty: items.m.quantity,
+        lQty: items.l.quantity,
+        isDonorListEligible: totalPrice >= 4000,
+      });
       const { url } = await createCheckoutSession({ subscription, items });
       window.location.href = url;
     } catch (e) {
@@ -79,7 +89,10 @@ export function DonateModal({ removeModal }: DonateModalProps) {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={removeModal}
+            onClick={() => {
+              track("CloseDonationModal", { location: "donation_modal" });
+              removeModal?.();
+            }}
             className="flex items-center gap-1 rounded-full border border-slate-400/40 bg-slate-900/90 px-3 py-1 text-xs text-gray-300 hover:bg-slate-800 hover:text-gray-100"
           >
             <RxCross1 className="h-4 w-4" /> 閉じる
@@ -122,7 +135,11 @@ export function DonateModal({ removeModal }: DonateModalProps) {
           <div className="flex items-stretch gap-2">
             <button
             type="button"
-            onClick={() => setPage("payment")}
+            onClick={() => {
+              track("OpenDonationPayment", { location: "donation_modal_donors" });
+              setPage("payment");
+              track("ViewDonationModal", { page: "payment" });
+            }}
             className="flex flex-2 items-center justify-center gap-2 rounded-2xl border border-blue-500/60 bg-linear-to-r from-blue-600/45 to-cyan-500/35 px-4 py-3.5 text-base font-semibold text-blue-50 shadow-lg shadow-blue-900/25 transition hover:from-blue-600/60 hover:to-cyan-500/45"
           >
             <BiDonateHeart className="h-6 w-6" />
@@ -132,6 +149,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
             <button
               type="button"
               onClick={() => {
+                track("ManageSubscriptionClick", { location: "donation_modal_donors" });
                 const url = process.env.NEXT_PUBLIC_STRIPE_LOGIN_REDIRECT || "";
                 if (url) window.location.href = url;
               }}
@@ -167,7 +185,12 @@ export function DonateModal({ removeModal }: DonateModalProps) {
                 type="button"
                 role="tab"
                 aria-selected={!subscription}
-                onClick={() => setSubscription(false)}
+                onClick={() => {
+                  if (subscription) {
+                    track("DonationTypeSelect", { type: "one_time" });
+                    setSubscription(false);
+                  }
+                }}
                 className={`px-3 py-1 text-xs transition-colors ${
                   !subscription ? "bg-blue-600/60 text-blue-50" : "text-gray-200 hover:bg-slate-800"
                 }`}
@@ -178,7 +201,12 @@ export function DonateModal({ removeModal }: DonateModalProps) {
                 type="button"
                 role="tab"
                 aria-selected={subscription}
-                onClick={() => setSubscription(true)}
+                onClick={() => {
+                  if (!subscription) {
+                    track("DonationTypeSelect", { type: "subscription" });
+                    setSubscription(true);
+                  }
+                }}
                 className={`px-3 py-1 text-xs transition-colors ${
                   subscription ? "bg-blue-600/60 text-blue-50" : "text-gray-200 hover:bg-slate-800"
                 }`}
