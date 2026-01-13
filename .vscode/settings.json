@@ -1,0 +1,6 @@
+{
+  "python.languageServer": "None",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.exclude": ["/frontend/*", "/_frontend/*", "/infra/"],
+  "python.analysis.extraPaths": ["/data/data_venv/**"]
+}

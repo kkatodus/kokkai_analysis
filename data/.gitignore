@@ -7,3 +7,4 @@ mecab-ipadic-neologd/
 .env
 geckodriver
 data/*
+data_venv/

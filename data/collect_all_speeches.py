@@ -6,12 +6,7 @@
 
 from __future__ import annotations
 import os
-import re
-import logging
-from datetime import datetime, timedelta
 import time
-from tqdm import tqdm
-import pandas as pd
 from dataclasses import dataclass, fields, is_dataclass
 from typing import Any, Dict, List, Tuple, get_args, get_origin, Union
 import json
@@ -80,7 +75,7 @@ class FetchedResponse(BaseModel):
 	meetingRecord: List[MeetingRecord]
 
 
-# In[4]:
+# In[ ]:
 
 
 from dotenv import load_dotenv
@@ -218,9 +213,9 @@ def get_and_save_issue(issues:List[str]) -> None:
 					f.write("\n")
 
 
-def get_issues_from_speaker_name_and_save(name: str) -> List[str]:
+def get_issues_from_speaker_name_and_save(name: str ) -> List[str]:
 	cons = [
-		f"any=''",
+		f"any='す'",
 		# f"nameOfHouse=衆議院",
 		f"speaker={name}",
 		f"recordPacking=json",
@@ -237,11 +232,45 @@ def get_issues_from_speaker_name_and_save(name: str) -> List[str]:
 		get_and_save_issue(issues)
 		time.sleep(5)
 		
-
-
+def get_issues_from_any_and_save(any_text: str) -> List[str]:
+	cons = [
+		f"any='{any_text}'",
+		f"recordPacking=json",
+		f"maximumRecords=30"
+	]
+	next_position = 1
+	while True:
+		if next_position is None:
+			break
+		response, next_position  = speechcollector.make_one_request(cons, next_position)
+		response = from_dict(SpeechFetchedResponse, response)
+		speech_records = [from_dict(SpeechRecord, sr) for sr in response.speechRecord]
+		issues = set([sr.issueID for sr in speech_records])
+		if (all(iss in os.listdir(OUTPUT_DIR) for iss in issues)):
+			continue
+		get_and_save_issue(issues)
+		time.sleep(5)
 
 GET_ISSUE_ID_FROM_SPEECH_URL_FIRST = True
-CUT_OFF_YEAR = 2000
+CUT_OFF_YEAR = 1945
+
+
+FOCUS_ON_REPRESENTATIVES = []
+
+for name in FOCUS_ON_REPRESENTATIVES:
+	get_issues_from_speaker_name_and_save(name)
+
+if len(FOCUS_ON_REPRESENTATIVES) > 0:
+	raise Exception("FOCUS_ON_REPRESENTATIVES is not empty")
+
+ANY_TEXTS = ["です", "ます"]	
+
+for any_text in ANY_TEXTS:
+	print(f"GETTING ISSUES FROM {any_text}")
+	get_issues_from_any_and_save(any_text)
+
+if len(ANY_TEXTS) > 0:
+	raise Exception("ANY_TEXTS is not empty")
 
 
 if GET_ISSUE_ID_FROM_SPEECH_URL_FIRST:
@@ -261,6 +290,10 @@ if GET_ISSUE_ID_FROM_SPEECH_URL_FIRST:
 		print("LAST NAME:", last_name)
 	with conn.cursor() as cur:
 		catched_up = False
+
+
+
+
 		for person in iterate_all_persons(cur):
 
 			if not catched_up and person.name_kanji != last_name:
@@ -293,6 +326,12 @@ if GET_ISSUE_ID_FROM_SPEECH_URL_FIRST:
 			
 
 
+
+
+
+
+
+# In[ ]:
 
 
 
