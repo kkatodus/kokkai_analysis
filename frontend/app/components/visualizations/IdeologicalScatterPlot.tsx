@@ -41,6 +41,20 @@ export function IdeologicalScatterPlot({
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  // Keep callback refs so D3 handlers don't force a full redraw when parent re-renders.
+  const onPoliticianSelectRef = useRef(onPoliticianSelect);
+  const onTooltipShowRef = useRef(onTooltipShow);
+  const onTooltipHideRef = useRef(onTooltipHide);
+
+  useEffect(() => {
+    onPoliticianSelectRef.current = onPoliticianSelect;
+  }, [onPoliticianSelect]);
+  useEffect(() => {
+    onTooltipShowRef.current = onTooltipShow;
+  }, [onTooltipShow]);
+  useEffect(() => {
+    onTooltipHideRef.current = onTooltipHide;
+  }, [onTooltipHide]);
 
   const availability = (availableConfig as AvailableConfig).availability;
 
@@ -200,6 +214,9 @@ export function IdeologicalScatterPlot({
     }
 
     // Points
+    const baseR = 4;
+    const UNSELECTED_STROKE = "rgba(255,255,255,0.55)";
+    const SELECTED_STROKE = "rgba(255,255,255,0.95)";
     const circles = g
       .selectAll("circle")
       .data(points)
@@ -208,32 +225,24 @@ export function IdeologicalScatterPlot({
       .attr("cx", (d) => xScale(d.x))
       // In 1D mode we still use y for separation (prevents overlap / improves clickability)
       .attr("cy", (d) => yScale(d.y))
-      .attr("r", (d) => {
-        const id = d.person_id != null ? String(d.person_id) : d.repr;
-        return selectedPersonId && selectedPersonId === id ? 6 : 4;
-      })
+      .attr("r", baseR)
       .attr("fill", (d) => d.color || "#38bdf8")
       .attr("opacity", 0.9)
-      .attr("stroke", (d) => {
-        const id = d.person_id != null ? String(d.person_id) : d.repr;
-        return selectedPersonId && selectedPersonId === id ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.15)";
-      })
-      .attr("stroke-width", (d) => {
-        const id = d.person_id != null ? String(d.person_id) : d.repr;
-        return selectedPersonId && selectedPersonId === id ? 2 : 1;
-      })
+      // Slightly brighter outline so dark/black dots remain visible.
+      .attr("stroke", UNSELECTED_STROKE)
+      .attr("stroke-width", 1.25)
       .style("cursor", "pointer")
       .on("mousemove", (event, d) => {
         const meta =
           mode === "2d"
             ? `${d.party} • x:${d.x.toFixed(2)} y:${d.y.toFixed(2)}`
             : `${d.party} • x:${d.x.toFixed(2)}`;
-        onTooltipShow({ title: d.repr, meta }, event.clientX, event.clientY);
+        onTooltipShowRef.current({ title: d.repr, meta }, event.clientX, event.clientY);
       })
-      .on("mouseleave", () => onTooltipHide())
+      .on("mouseleave", () => onTooltipHideRef.current())
       .on("click", (_event, d) => {
         const id = d.person_id != null ? String(d.person_id) : d.repr;
-        onPoliticianSelect(id);
+        onPoliticianSelectRef.current(id);
       });
 
     // Zoom behavior (pan/zoom the points + guides)
@@ -254,10 +263,35 @@ export function IdeologicalScatterPlot({
 
     // Cleanup tooltip on unmount / rerender
     return () => {
-      onTooltipHide();
-      circles.on(".mousemove", null);
+      onTooltipHideRef.current();
+      circles.on("mousemove", null).on("mouseleave", null).on("click", null);
     };
-  }, [points, selectedPersonId, mode, selectedAxis.showSpectrum, onPoliticianSelect, onTooltipShow, onTooltipHide]);
+  }, [points, mode, selectedAxis.showSpectrum]);
+
+  // Important: update selection styling WITHOUT rebuilding the SVG.
+  // Rebuilding the SVG resets the d3-zoom transform, which feels like an "automatic zoom-out"
+  // right after clicking a dot.
+  useEffect(() => {
+    if (!svgRef.current) return;
+    const svg = d3.select(svgRef.current);
+    const circles = svg.selectAll<SVGCircleElement, PersonIdeologyData>(".plot-content circle");
+
+    circles
+      .attr("r", (d) => {
+        const id = d.person_id != null ? String(d.person_id) : d.repr;
+        return selectedPersonId && selectedPersonId === id ? 6 : 4;
+      })
+      .attr("stroke", (d) => {
+        const id = d.person_id != null ? String(d.person_id) : d.repr;
+        return selectedPersonId && selectedPersonId === id
+          ? "rgba(255,255,255,0.95)"
+          : "rgba(255,255,255,0.55)";
+      })
+      .attr("stroke-width", (d) => {
+        const id = d.person_id != null ? String(d.person_id) : d.repr;
+        return selectedPersonId && selectedPersonId === id ? 2.5 : 1.25;
+      });
+  }, [selectedPersonId]);
 
   const handleZoomIn = () => {
     if (!svgRef.current || !zoomRef.current) return;
