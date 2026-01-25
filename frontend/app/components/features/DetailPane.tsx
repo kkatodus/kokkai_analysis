@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { AllParliamentMemberTableData, ElectionHistoryData, SpeechRecord } from "@/app/types";
+import type { AllParliamentMemberTableData, ElectionHistoryData, RelevanceAndProductivityData, SpeechRecord } from "@/app/types";
 import { fetchElectionHistory } from "@/app/lib/services/electionHistoryService";
 import { fetchFirstPageOfAllTopics, fetchSpeechPage } from "@/app/lib/services/speechesService";
 import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCard";
@@ -12,6 +12,27 @@ interface DetailPaneProps {
   isOpen: boolean;
   onClose: () => void;
   allParliamentMemberTable?: AllParliamentMemberTableData[] | null;
+  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
+  setSelectedIssueId: (issueId: string | null) => void;
+  setSelectedIssueSpeechId: (speechId: string | null) => void;
+}
+
+function clamp01(n: number): number {
+  if (!Number.isFinite(n)) return 0;
+  if (n < 0) return 0;
+  if (n > 1) return 1;
+  return n;
+}
+
+function normalizeProp(raw: number): number {
+  // Expected 0..1, but tolerate 0..100.
+  if (!Number.isFinite(raw)) return 0;
+  const n = raw > 1.00001 ? raw / 100 : raw;
+  return clamp01(n);
+}
+
+function percentLabel(n01: number): string {
+  return `${Math.round(clamp01(n01) * 1000) / 10}%`;
 }
 
 function normalizeTopicKey(topic: string): string {
@@ -29,6 +50,9 @@ export function DetailPane({
   isOpen,
   onClose,
   allParliamentMemberTable,
+  relevanceAndProductivityData,
+  setSelectedIssueId,
+  setSelectedIssueSpeechId,
 }: DetailPaneProps) {
   const [paneWidthPx, setPaneWidthPx] = useState<number>(380);
   const [isNarrow, setIsNarrow] = useState(false);
@@ -110,6 +134,11 @@ export function DetailPane({
     if (!personId) return null;
     return personIndex.get(Number(personId)) ?? null;
   }, [personIndex, personId]);
+
+  const relevanceStats = useMemo(() => {
+    const arr = relevanceAndProductivityData ?? [];
+    return arr.find((d) => String(d.person_id) === String(personId)) ?? null;
+  }, [relevanceAndProductivityData, personId]);
 
   useEffect(() => {
     if (!isOpen || !personId) return;
@@ -317,6 +346,63 @@ export function DetailPane({
           <div className="text-[11px] text-gray-400">
             {personMeta?.name_kana ?? "（かな不明）"}
           </div>
+
+          <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
+            <div className="mb-1 flex items-center justify-between gap-2">
+              <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合）</div>
+              <div className="text-[11px] text-gray-400">
+                総発言数:{" "}
+                {relevanceStats && Number.isFinite(relevanceStats.Total_Count) ? relevanceStats.Total_Count : "—"}
+              </div>
+            </div>
+
+            {relevanceStats ? (
+              (() => {
+                const tt = normalizeProp(relevanceStats.prop_R_True_P_True);
+                const tf = normalizeProp(relevanceStats.prop_R_True_P_False);
+                const ff = normalizeProp(relevanceStats.prop_R_False_P_False);
+                return (
+                  <>
+                    <div className="h-3 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+                      <div className="flex h-full w-full">
+                        <div
+                          className="h-full bg-emerald-500/80"
+                          style={{ width: `${Math.round(tt * 10000) / 100}%` }}
+                          title={`関連×生産性あり: ${percentLabel(tt)}`}
+                        />
+                        <div
+                          className="h-full bg-amber-500/80"
+                          style={{ width: `${Math.round(tf * 10000) / 100}%` }}
+                          title={`関連×生産性なし: ${percentLabel(tf)}`}
+                        />
+                        <div
+                          className="h-full bg-rose-500/80"
+                          style={{ width: `${Math.round(ff * 10000) / 100}%` }}
+                          title={`非関連×生産性なし: ${percentLabel(ff)}`}
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+                      <div className="flex items-center gap-1">
+                        <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
+                        関連×生産性あり: {percentLabel(tt)}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
+                        関連×生産性なし: {percentLabel(tf)}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
+                        非関連×生産性なし: {percentLabel(ff)}
+                      </div>
+                    </div>
+                  </>
+                );
+              })()
+            ) : (
+              <div className="text-[11px] text-gray-500">関連度・生産性データがありません。</div>
+            )}
+          </div>
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">
@@ -331,6 +417,10 @@ export function DetailPane({
               setSelectedTopicKey={setSelectedTopicKeySafe}
               selectedTopic={selectedTopic}
               ensureSpeechPage={ensureSpeechPage}
+              onSelectIssueId={(issueId, speechId) => {
+                setSelectedIssueId(issueId);
+                setSelectedIssueSpeechId(speechId ?? null);
+              }}
             />
           )}
         </div>

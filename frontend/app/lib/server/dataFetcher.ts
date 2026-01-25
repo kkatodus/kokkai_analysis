@@ -13,6 +13,7 @@ import type {
   ParliamentMemberData,
   IdeologyData,
   AllParliamentMemberTableData,
+  RelevanceAndProductivityData,
 } from "@/app/types";
 
 
@@ -164,6 +165,16 @@ export async function getAllParliamentMemberTable(): Promise<AllParliamentMember
 		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data as AllParliamentMemberTableData[];
 	} catch (error) {
 		console.error("Failed to fetch all parliament member table from API, falling back to mock data:", error);
+		return null;
+	}
+}
+
+export async function getAllRelevanceAndProductivityData(): Promise<RelevanceAndProductivityData[] | null> {
+	try {
+		const data = await fetchApi<any>(API_ENDPOINTS.allRelevanceAndProductivityData);
+		return data.data as RelevanceAndProductivityData[];
+	} catch (error) {
+		console.error("Failed to fetch all relevance and productivity data from API, falling back to mock data:", error);
 		return null;
 	}
 }

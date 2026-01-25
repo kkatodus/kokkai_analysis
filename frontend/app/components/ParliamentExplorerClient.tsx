@@ -17,11 +17,13 @@ import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
 import { JapanMap } from "@/app/components/visualizations/JapanMap";
 import { DetailPane } from "@/app/components/features/DetailPane";
+import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData } from "@/app/types";
+import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, RelevanceAndProductivityData } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
+import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
 import { useModal } from "@/app/lib/hooks/useModal";
 
 interface ParliamentExplorerClientProps {
@@ -30,6 +32,7 @@ interface ParliamentExplorerClientProps {
   initialSelectedPersonId?: string | null;
   ideologyData: IdeologyData | null;
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
+  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
 }
 
 export function ParliamentExplorerClient({
@@ -38,6 +41,7 @@ export function ParliamentExplorerClient({
   initialSelectedPersonId,
   ideologyData,	
   allParliamentMemberTable,
+  relevanceAndProductivityData,
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
@@ -47,6 +51,7 @@ export function ParliamentExplorerClient({
         initialSelectedPersonId={initialSelectedPersonId}
         ideologyData={ideologyData}
         allParliamentMemberTable={allParliamentMemberTable}
+        relevanceAndProductivityData={relevanceAndProductivityData}
       />
     </ModalProvider>
   );
@@ -58,11 +63,13 @@ function ParliamentExplorerClientInner({
   initialSelectedPersonId,
   ideologyData,
   allParliamentMemberTable,
+  relevanceAndProductivityData,
 }: ParliamentExplorerClientProps) {
   // Initialize state from server-provided initialSelectedId
   const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
   
-
+  const [selectedIssueIdState, setSelectedIssueId] = useState<string | null>(null);
+  const [selectedIssueSpeechIdState, setSelectedIssueSpeechId] = useState<string | null>(null);
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
@@ -287,6 +294,21 @@ function ParliamentExplorerClientInner({
             right={
               <>
                 <Card>
+                  <CardHeader
+                    title="発言の関連度・生産性（議員別）"
+                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。"
+                  />
+                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                    <RelevanceProductivityBarList
+                      relevanceAndProductivityData={relevanceAndProductivityData}
+                      allParliamentMemberTable={allParliamentMemberTable}
+                      selectedPersonId={selectedPersonId}
+                      onSelectPersonId={(id) => handlePoliticianSelect(id, { source: "relevance_productivity_bars" })}
+                    />
+                  </div>
+                </Card>
+
+                <Card>
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
                   <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
@@ -310,6 +332,19 @@ function ParliamentExplorerClientInner({
         isOpen={selectedPersonId !== null}
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
+        relevanceAndProductivityData={relevanceAndProductivityData}
+		setSelectedIssueId={setSelectedIssueId}
+        setSelectedIssueSpeechId={setSelectedIssueSpeechId}
+      />
+
+      <IssuePane
+        issueId={selectedIssueIdState ?? ""}
+        isOpen={selectedIssueIdState !== null}
+        initialSelectedSpeechId={selectedIssueSpeechIdState}
+        onClose={() => {
+          setSelectedIssueId(null);
+          setSelectedIssueSpeechId(null);
+        }}
       />
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
