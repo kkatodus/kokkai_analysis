@@ -15,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const revalidate = 604800;
+export const revalidate = 86400;
 
 /**
  * Proxy for backend `/speeches/available?person_id=...`
