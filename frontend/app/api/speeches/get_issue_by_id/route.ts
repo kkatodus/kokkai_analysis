@@ -18,17 +18,17 @@ function getBackendBaseUrl(): string {
 export const revalidate = 86400;
 
 /**
- * Proxy for backend `/speeches/available?person_id=...`
+ * Proxy for backend `/speeches/get_issue_by_id?issue_id=...`
  */
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const personId = searchParams.get("person_id");
-  if (!personId) {
-    return NextResponse.json({ error: "Missing query param: person_id" }, { status: 400 });
+  const issueId = searchParams.get("issue_id");
+  if (!issueId) {
+    return NextResponse.json({ error: "Missing query param: issue_id" }, { status: 400 });
   }
 
   const baseUrl = getBackendBaseUrl();
-  const url = `${baseUrl}/speeches/available?person_id=${encodeURIComponent(personId)}`;
+  const url = `${baseUrl}/speeches/get_issue_by_id?issue_id=${encodeURIComponent(issueId)}`;
 
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -39,27 +39,24 @@ export async function GET(req: Request) {
 
   try {
     const res = await fetch(url, { headers, next: { revalidate: SEVEN_DAYS_SECONDS } });
+    const text = await res.text().catch(() => "");
+
     if (!res.ok) {
-      const text = await res.text().catch(() => "");
       return NextResponse.json(
         { error: `Backend request failed: ${res.status} ${res.statusText}`, details: text },
         { status: 502, headers: { "Cache-Control": "no-store" } }
       );
     }
 
-    const data: unknown = await res.json();
-    const availableSpeeches = (data as any)?.available_speeches;
-    if (!Array.isArray(availableSpeeches)) {
+    try {
+      const data = JSON.parse(text) as unknown;
+      return NextResponse.json(data, { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } });
+    } catch {
       return NextResponse.json(
-        { error: "Unexpected backend response shape", data },
+        { error: "Backend returned non-JSON response", raw: text },
         { status: 502, headers: { "Cache-Control": "no-store" } }
       );
     }
-
-    return NextResponse.json(
-      { available_speeches: availableSpeeches },
-      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } }
-    );
   } catch (e) {
     return NextResponse.json(
       { error: "Failed to reach backend", message: e instanceof Error ? e.message : String(e) },
@@ -67,5 +64,4 @@ export async function GET(req: Request) {
     );
   }
 }
-
 

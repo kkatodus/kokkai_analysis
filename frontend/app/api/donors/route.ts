@@ -17,7 +17,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const revalidate = 604800;
+export const revalidate = 86400;
 
 export async function GET() {
   const baseUrl = getBackendBaseUrl();

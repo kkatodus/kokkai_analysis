@@ -65,5 +65,8 @@ export const API_ENDPOINTS = {
 
   // all parliament member table
   allParliamentMemberTable: "/parliamentMember/all",
+
+  // all relevance and productivity data
+  allRelevanceAndProductivityData: "/speeches/get_all_relevance_stats"
 } as const;
 

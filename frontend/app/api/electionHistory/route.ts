@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-const SEVEN_DAYS_SECONDS = 604800;
-const CACHE_CONTROL_7D = `public, s-maxage=${SEVEN_DAYS_SECONDS}, stale-while-revalidate=86400`;
+const ONE_DAY_SECONDS = 86400;
+const CACHE_CONTROL_1D = `public, s-maxage=${ONE_DAY_SECONDS}, stale-while-revalidate=86400`;
 
 function normalizeBaseUrl(baseUrl: string): string {
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
@@ -15,7 +15,7 @@ function getBackendBaseUrl(): string {
   return "http://localhost:8000";
 }
 
-export const revalidate = 604800;
+export const revalidate = 86400;
 
 /**
  * Proxy for backend `/electionHistory/?person_id=...`
@@ -39,7 +39,7 @@ export async function GET(req: Request) {
   const apiKey = process.env.BACKEND_API_KEY || process.env.API_KEY;
   if (apiKey) headers["X-API-KEY"] = apiKey;
 
-  const res = await fetch(url, { headers, next: { revalidate: SEVEN_DAYS_SECONDS } });
+  const res = await fetch(url, { headers, next: { revalidate: ONE_DAY_SECONDS } });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     return NextResponse.json(
@@ -58,7 +58,7 @@ export async function GET(req: Request) {
     const history = lines.map((l) => JSON.parse(l));
     return NextResponse.json(
       { history },
-      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } }
+      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_1D } }
     );
   } catch (e) {
     return NextResponse.json(

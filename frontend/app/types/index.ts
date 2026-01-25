@@ -83,6 +83,40 @@ export interface speechMetaData{
 	nextRecordPosition: number | null;
 }
 
+export interface IssueMeta {
+	issueID: string;
+	imageKind: string;
+	searchObject: number;
+	session: number;
+	nameOfHouse: string;
+	nameOfMeeting: string;
+	issue: string;
+	date: string;
+	closing: string | null;
+	pdfURL: string;
+	nextRecordPosition: number | null;
+}
+
+export interface IssueSpeechRecord {
+	speechID: string;
+	speechOrder: number;
+	speaker: string;
+	speakerYomi: string;
+	speakerGroup: string;
+	speakerPosition: string | null;
+	speakerRole: string | null;
+	speech: string;
+	startPage: number;
+	createTime: string;
+	updateTime: string;
+	speechURL: string;
+	// Flags are sparse in the JSONL: usually only present on the first speech of a segment.
+	// Missing (undefined) means "no label here"; null means explicitly unknown.
+	is_productive?: "True" | "False" | null;
+	is_relevant?: "True" | "False" | null;
+	quality_reason?: string | null;
+}
+
 export interface SpeechRecord {
 	speechID: string;
 	speechOrder: number;
@@ -96,8 +130,15 @@ export interface SpeechRecord {
 	createTime: string;
 	updateTime: string;
 	speechURL: string;
-	issueID: string;
+	// NOTE: In our JSONL payloads, issueID is usually under `meta.issueID`.
+	// Keep this optional for compatibility with any future/legacy shapes.
+	issueID?: string;
 	meta: speechMetaData;
+	// null = explicitly "unknown / not labeled yet"
+	// undefined = field not present in the payload (legacy)
+	is_productive?: "True" | "False" | null;
+	is_relevant?: "True" | "False" | null;
+	quality_reason?: string | null;
 }
 
 export interface FirstPageOfAllTopics {
@@ -125,5 +166,20 @@ export interface ElectionHistoryData {
 	election_freq: string;
 	election_name: string;
 
+}
+
+export interface RelevanceAndProductivityData {
+	speakerID: string;
+	speakerGroup: string;
+	R_True_P_True: number;
+	R_True_P_False: number;
+	R_False_P_True: number;
+	R_False_P_False: number;
+	Total_Count: number;
+	person_id: number;
+	prop_R_True_P_True: number;
+	prop_R_True_P_False: number;
+	prop_R_False_P_True: number;
+	prop_R_False_P_False: number;
 }
 export type Modal = "donation" | "disclaimer"

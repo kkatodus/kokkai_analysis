@@ -17,12 +17,20 @@ import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
 import { JapanMap } from "@/app/components/visualizations/JapanMap";
 import { DetailPane } from "@/app/components/features/DetailPane";
+import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData } from "@/app/types";
+import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, RelevanceAndProductivityData } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
+import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
 import { useModal } from "@/app/lib/hooks/useModal";
+import {
+  DisclaimerPanel,
+  DisclaimerToggleButton,
+  IdeologyDisclaimerContent,
+  RelevanceProductivityDisclaimerContent,
+} from "@/app/components/shared/VisualizationDisclaimer";
 
 interface ParliamentExplorerClientProps {
   parliamentMemberData: ParliamentMemberData | null;
@@ -30,6 +38,7 @@ interface ParliamentExplorerClientProps {
   initialSelectedPersonId?: string | null;
   ideologyData: IdeologyData | null;
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
+  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
 }
 
 export function ParliamentExplorerClient({
@@ -38,6 +47,7 @@ export function ParliamentExplorerClient({
   initialSelectedPersonId,
   ideologyData,	
   allParliamentMemberTable,
+  relevanceAndProductivityData,
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
@@ -47,6 +57,7 @@ export function ParliamentExplorerClient({
         initialSelectedPersonId={initialSelectedPersonId}
         ideologyData={ideologyData}
         allParliamentMemberTable={allParliamentMemberTable}
+        relevanceAndProductivityData={relevanceAndProductivityData}
       />
     </ModalProvider>
   );
@@ -58,14 +69,18 @@ function ParliamentExplorerClientInner({
   initialSelectedPersonId,
   ideologyData,
   allParliamentMemberTable,
+  relevanceAndProductivityData,
 }: ParliamentExplorerClientProps) {
   // Initialize state from server-provided initialSelectedId
   const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
   
-
+  const [selectedIssueIdState, setSelectedIssueId] = useState<string | null>(null);
+  const [selectedIssueSpeechIdState, setSelectedIssueSpeechId] = useState<string | null>(null);
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
+  const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
+  const [showRelevanceDisclaimer, setShowRelevanceDisclaimer] = useState(false);
   const { currentModals, addModal } = useModal();
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
@@ -205,17 +220,29 @@ function ParliamentExplorerClientInner({
                   <CardHeader
                     title="政治的な立場の推定"
                     subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
+                    action={
+                      <DisclaimerToggleButton
+                        pressed={showIdeologyDisclaimer}
+                        onClick={() => setShowIdeologyDisclaimer((v) => !v)}
+                      />
+                    }
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <IdeologicalScatterPlot
-                      ideologyData={ideologyData}
-                      selectedPersonId={selectedPersonId}
-                      onPoliticianSelect={(id) =>
-                        handlePoliticianSelect(id, { source: "ideology_scatter" })
-                      }
-                      onTooltipShow={handleTooltipShow}
-                      onTooltipHide={handleTooltipHide}
-                    />
+                    {showIdeologyDisclaimer ? (
+                      <DisclaimerPanel>
+                        <IdeologyDisclaimerContent />
+                      </DisclaimerPanel>
+                    ) : (
+                      <IdeologicalScatterPlot
+                        ideologyData={ideologyData}
+                        selectedPersonId={selectedPersonId}
+                        onPoliticianSelect={(id) =>
+                          handlePoliticianSelect(id, { source: "ideology_scatter" })
+                        }
+                        onTooltipShow={handleTooltipShow}
+                        onTooltipHide={handleTooltipHide}
+                      />
+                    )}
                   </div>
                 
                 </Card>
@@ -287,6 +314,35 @@ function ParliamentExplorerClientInner({
             right={
               <>
                 <Card>
+                  <CardHeader
+                    title="発言の関連度・生産性（議員別）"
+                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。"
+                    action={
+                      <DisclaimerToggleButton
+                        pressed={showRelevanceDisclaimer}
+                        onClick={() => setShowRelevanceDisclaimer((v) => !v)}
+                      />
+                    }
+                  />
+                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                    {showRelevanceDisclaimer ? (
+                      <DisclaimerPanel>
+                        <RelevanceProductivityDisclaimerContent />
+                      </DisclaimerPanel>
+                    ) : (
+                      <RelevanceProductivityBarList
+                        relevanceAndProductivityData={relevanceAndProductivityData}
+                        allParliamentMemberTable={allParliamentMemberTable}
+                        selectedPersonId={selectedPersonId}
+                        onSelectPersonId={(id) =>
+                          handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
+                        }
+                      />
+                    )}
+                  </div>
+                </Card>
+
+                <Card>
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
                   <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
@@ -310,6 +366,19 @@ function ParliamentExplorerClientInner({
         isOpen={selectedPersonId !== null}
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
+        relevanceAndProductivityData={relevanceAndProductivityData}
+		setSelectedIssueId={setSelectedIssueId}
+        setSelectedIssueSpeechId={setSelectedIssueSpeechId}
+      />
+
+      <IssuePane
+        issueId={selectedIssueIdState ?? ""}
+        isOpen={selectedIssueIdState !== null}
+        initialSelectedSpeechId={selectedIssueSpeechIdState}
+        onClose={() => {
+          setSelectedIssueId(null);
+          setSelectedIssueSpeechId(null);
+        }}
       />
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />

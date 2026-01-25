@@ -16,7 +16,7 @@ router = APIRouter(prefix="/payment", tags=["payment"])
 # Match the legacy Node implementation (`api/routes/payment/index.js`)
 STORE_ITEMS: dict[str, dict[str, Any]] = {
 	"s": {"price": 100, "name": "ちょっと応援する"},
-	"m": {"price": 1000, "name": "まあまあ応援する"},
+	"m": {"price": 1000, "name": "もっと応援する"},
 	"l": {"price": 10000, "name": "めっちゃ応援する"},
 }
 
@@ -29,7 +29,7 @@ SUB_STORE_ITEMS: dict[str, dict[str, Any]] = {
 	},
 	"m": {
 		"price": 1000,
-		"name": "まあまあ応援する",
+		"name": "もっと応援する",
 		"id": "prod_SLGre4siQXau8D",
 		"price_id": "price_1RQaJJHdbYFF47cBwUK3kxzQ",
 	},
