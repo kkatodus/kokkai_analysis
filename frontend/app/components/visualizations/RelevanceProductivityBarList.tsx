@@ -304,7 +304,7 @@ export function RelevanceProductivityBarList({
                   </div>
                   <div className="mt-1 flex items-center justify-between text-[10px] text-gray-500">
                     <div className="truncate">
-                      総発言数: {Number.isFinite(d.Total_Count) ? d.Total_Count : "-"}
+                      分類された発言数: {Number.isFinite(d.Total_Count) ? d.Total_Count : "-"}
                     </div>
                   </div>
                 </div>

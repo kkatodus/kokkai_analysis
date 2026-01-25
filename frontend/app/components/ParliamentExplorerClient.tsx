@@ -25,6 +25,12 @@ import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistr
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
 import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
 import { useModal } from "@/app/lib/hooks/useModal";
+import {
+  DisclaimerPanel,
+  DisclaimerToggleButton,
+  IdeologyDisclaimerContent,
+  RelevanceProductivityDisclaimerContent,
+} from "@/app/components/shared/VisualizationDisclaimer";
 
 interface ParliamentExplorerClientProps {
   parliamentMemberData: ParliamentMemberData | null;
@@ -73,6 +79,8 @@ function ParliamentExplorerClientInner({
   const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
+  const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
+  const [showRelevanceDisclaimer, setShowRelevanceDisclaimer] = useState(false);
   const { currentModals, addModal } = useModal();
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
@@ -212,17 +220,29 @@ function ParliamentExplorerClientInner({
                   <CardHeader
                     title="政治的な立場の推定"
                     subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
+                    action={
+                      <DisclaimerToggleButton
+                        pressed={showIdeologyDisclaimer}
+                        onClick={() => setShowIdeologyDisclaimer((v) => !v)}
+                      />
+                    }
                   />
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <IdeologicalScatterPlot
-                      ideologyData={ideologyData}
-                      selectedPersonId={selectedPersonId}
-                      onPoliticianSelect={(id) =>
-                        handlePoliticianSelect(id, { source: "ideology_scatter" })
-                      }
-                      onTooltipShow={handleTooltipShow}
-                      onTooltipHide={handleTooltipHide}
-                    />
+                    {showIdeologyDisclaimer ? (
+                      <DisclaimerPanel>
+                        <IdeologyDisclaimerContent />
+                      </DisclaimerPanel>
+                    ) : (
+                      <IdeologicalScatterPlot
+                        ideologyData={ideologyData}
+                        selectedPersonId={selectedPersonId}
+                        onPoliticianSelect={(id) =>
+                          handlePoliticianSelect(id, { source: "ideology_scatter" })
+                        }
+                        onTooltipShow={handleTooltipShow}
+                        onTooltipHide={handleTooltipHide}
+                      />
+                    )}
                   </div>
                 
                 </Card>
@@ -297,14 +317,28 @@ function ParliamentExplorerClientInner({
                   <CardHeader
                     title="発言の関連度・生産性（議員別）"
                     subtitle="クリックすると議員詳細が開きます。並び替えもできます。"
+                    action={
+                      <DisclaimerToggleButton
+                        pressed={showRelevanceDisclaimer}
+                        onClick={() => setShowRelevanceDisclaimer((v) => !v)}
+                      />
+                    }
                   />
                   <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    <RelevanceProductivityBarList
-                      relevanceAndProductivityData={relevanceAndProductivityData}
-                      allParliamentMemberTable={allParliamentMemberTable}
-                      selectedPersonId={selectedPersonId}
-                      onSelectPersonId={(id) => handlePoliticianSelect(id, { source: "relevance_productivity_bars" })}
-                    />
+                    {showRelevanceDisclaimer ? (
+                      <DisclaimerPanel>
+                        <RelevanceProductivityDisclaimerContent />
+                      </DisclaimerPanel>
+                    ) : (
+                      <RelevanceProductivityBarList
+                        relevanceAndProductivityData={relevanceAndProductivityData}
+                        allParliamentMemberTable={allParliamentMemberTable}
+                        selectedPersonId={selectedPersonId}
+                        onSelectPersonId={(id) =>
+                          handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
+                        }
+                      />
+                    )}
                   </div>
                 </Card>
 
