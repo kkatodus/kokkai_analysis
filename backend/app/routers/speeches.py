@@ -1,11 +1,10 @@
 from typing import Any, Dict
-
+import json
 from fastapi import APIRouter, Depends, HTTPException
 
 from core.storage import get_storage, Storage
 
 router = APIRouter(prefix="/speeches", tags=["speeches"])
-
 
 @router.get("/available", summary="Available speeches")
 async def available_speeches(
@@ -77,4 +76,26 @@ async def get_first_page_of_all_topics(
 	
 	return {
 		"first_pages_of_all_topics": first_pages_of_all_topics,
+	}
+
+@router.get("/get_all_relevance_stats", summary="Getting all stats of all representatives about their speech relevance and productivity")
+async def get_all_relevance_stats(
+	storage: Storage = Depends(get_storage)
+	):
+
+	lines = storage.read_jsonl("kokkai-doc/relevance_and_productivity/aggregate_processed.jsonl")
+	return {
+		"data": lines,
+	}
+
+@router.get("/get_issue_by_id", summary="Get issue by id")
+async def get_issue_by_id(
+	issue_id: str,
+	storage: Storage = Depends(get_storage)
+):
+	speeches = storage.read_jsonl(f"kokkai-doc/issues/{issue_id}/speeches.jsonl")
+	meta = storage.read_json(f"kokkai-doc/issues/{issue_id}/meta.json")
+	return {
+		"speeches": speeches,
+		"meta": meta,
 	}
