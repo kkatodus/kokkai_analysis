@@ -209,7 +209,15 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
         <div className="mb-2">
           <div className="flex flex-col gap-1">
             <div className="text-base font-semibold text-gray-50">会議：{issueData?.meta?.nameOfMeeting}</div>
-            <div className="text-[11px] text-gray-400">会議ID: {issueId}</div>
+			{issueData?.meta?.pdfURL && (
+				<span className="text-[11px] text-gray-400">PDFリンク: <a href={issueData?.meta?.pdfURL} target="_blank" rel="noopener noreferrer">{issueData?.meta?.pdfURL}</a></span>
+			)}
+			{issueData?.meta?.date && (
+				<span className="text-[11px] text-gray-400">会議日: {issueData?.meta?.date}</span>
+			)}
+			{issueId && (
+				<span className="text-[11px] text-gray-400">会議ID: {issueId}</span>
+			)}
             <IssueLegend />
           </div>
         </div>
@@ -226,7 +234,7 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
                   count={orderedSpeeches.length}
                   selectedIndex={selectedSpeechIndex}
                   onChangeIndex={setSelectedSpeechIndex}
-                  label="発言セレクター"
+                  label="発言ダイアル"
                   segments={ringSegments}
                 />
               </div>
