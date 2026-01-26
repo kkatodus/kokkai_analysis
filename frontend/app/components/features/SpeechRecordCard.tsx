@@ -19,6 +19,8 @@ const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
   OnlineVoting: "オンライン投票",
   MyNumber: "マイナンバー",
   LGBT: "LGBT",
+  Unproductive: "生産性の低い発言",
+  Irrelevant: "関連性の低い発言",
 };
 
 function normalizeTopicLabelKey(raw: string): string {
@@ -79,12 +81,46 @@ export function SpeechRecordCard({
   const topicsForTabs = (speechTopics ?? []).slice().sort((a, b) => {
     const aKey = normalizeTopicLabelKey(a.topicKey);
     const bKey = normalizeTopicLabelKey(b.topicKey);
-    const aIsAll = aKey === "all_speeches" || aKey === "allSpeeches";
-    const bIsAll = bKey === "all_speeches" || bKey === "allSpeeches";
-    if (aIsAll && !bIsAll) return -1;
-    if (!aIsAll && bIsAll) return 1;
-    return 0;
+
+    const priority = (k: string) => {
+      // Order: All speeches → Unproductive → Irrelevant → everything else
+      if (k === "all_speeches" || k === "allSpeeches") return 0;
+      if (k === "Unproductive") return 1;
+      if (k === "Irrelevant") return 2;
+      return 3;
+    };
+
+    const ap = priority(aKey);
+    const bp = priority(bKey);
+    if (ap !== bp) return ap - bp;
+
+    // Stable ordering for the rest
+    const al = translateTopicName(a.topicKey || a.displayName);
+    const bl = translateTopicName(b.topicKey || b.displayName);
+    return al.localeCompare(bl, "ja");
   });
+
+  const topicTabClassName = (topicKey: string, active: boolean) => {
+    const key = normalizeTopicLabelKey(topicKey);
+    const isAll = key === "all_speeches" || key === "allSpeeches";
+    const isUnproductive = key === "Unproductive";
+    const isIrrelevant = key === "Irrelevant";
+
+    const base =
+      "rounded-full border px-2 py-0.5 text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/30 ";
+
+    if (active) {
+      if (isUnproductive) return base + "border-amber-400/60 bg-amber-500/20 text-amber-100";
+      if (isIrrelevant) return base + "border-rose-400/60 bg-rose-500/20 text-rose-100";
+      // Default active (incl. all speeches)
+      return base + (isAll ? "border-cyan-400/60 bg-cyan-500/15 text-cyan-100" : "border-cyan-400/60 bg-cyan-500/15 text-cyan-100");
+    }
+
+    if (isUnproductive) return base + "border-amber-400/25 bg-amber-500/10 text-amber-100 hover:border-amber-400/40 hover:bg-amber-500/15";
+    if (isIrrelevant) return base + "border-rose-400/25 bg-rose-500/10 text-rose-100 hover:border-rose-400/40 hover:bg-rose-500/15";
+
+    return base + "border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-slate-400/40 hover:bg-white/5";
+  };
 
   return (
     <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40">
@@ -120,12 +156,7 @@ export function SpeechRecordCard({
                     key={t.topicKey}
                     type="button"
                     onClick={() => setSelectedTopicKey(t.topicKey)}
-                    className={
-                      "rounded-full border px-2 py-0.5 text-[11px] transition-colors " +
-                      (active
-                        ? "border-cyan-400/60 bg-cyan-500/15 text-cyan-100"
-                        : "border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-slate-400/40")
-                    }
+                    className={topicTabClassName(t.topicKey, active)}
                   >
                     {label}
                   </button>
