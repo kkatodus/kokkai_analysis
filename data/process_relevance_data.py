@@ -72,7 +72,7 @@ with open(AGGREGATE_FILE, "r") as f:
 
 # ## lets first process the low hanging fruit of processing the aggregate file into separate files and attaching person ids
 
-# In[8]:
+# In[12]:
 
 
 import json
@@ -93,6 +93,8 @@ speaker_id_conversion = {
 }
 
 cur = conn.cursor()
+processed_datas = {}
+
 with open(AGGREGATE_FILE, "r") as f, open(os.path.join(RELEVANCE_DATA_DIR, "aggregate_processed.jsonl"), "w") as f_out:
 	columns = f.readline().strip().split("\t")
 	for line_number, line in enumerate(f):
@@ -110,6 +112,19 @@ with open(AGGREGATE_FILE, "r") as f, open(os.path.join(RELEVANCE_DATA_DIR, "aggr
 			print(f"Found {len(person_row_from_db)} persons with name {speaker_id}, passing for now")
 			continue
 		person_id = person_row_from_db[0].person_id
+		if person_id in processed_datas:
+			processed_datas[person_id]["Total_Count"] += int(processed_data["Total_Count"])
+			processed_datas[person_id]["R_True_P_True"] += int(processed_data["R_True_P_True"])
+			processed_datas[person_id]["R_True_P_False"] += int(processed_data["R_True_P_False"])
+			processed_datas[person_id]["R_False_P_True"] += int(processed_data["R_False_P_True"])
+			processed_datas[person_id]["R_False_P_False"] += int(processed_data["R_False_P_False"])
+			processed_datas[person_id]["prop_R_True_P_True"] = processed_datas[person_id]["R_True_P_True"] / processed_datas[person_id]["Total_Count"]
+			processed_datas[person_id]["prop_R_True_P_False"] = processed_datas[person_id]["R_True_P_False"] / processed_datas[person_id]["Total_Count"]
+			processed_datas[person_id]["prop_R_False_P_True"] = processed_datas[person_id]["R_False_P_True"] / processed_datas[person_id]["Total_Count"]
+			processed_datas[person_id]["prop_R_False_P_False"] = processed_datas[person_id]["R_False_P_False"] / processed_datas[person_id]["Total_Count"]
+			processed_datas[person_id]["prop_R_True_P_True"] = processed_datas[person_id]["R_True_P_True"] / processed_datas[person_id]["Total_Count"]
+			continue
+
 		processed_data["person_id"] = person_id
 		total_count = int(processed_data["Total_Count"])
 		prop_prd_rel = int(processed_data["R_True_P_True"]) / total_count
@@ -125,11 +140,16 @@ with open(AGGREGATE_FILE, "r") as f, open(os.path.join(RELEVANCE_DATA_DIR, "aggr
 		processed_data["R_True_P_False"] = int(processed_data["R_True_P_False"])
 		processed_data["R_False_P_True"] = int(processed_data["R_False_P_True"])
 		processed_data["R_False_P_False"] = int(processed_data["R_False_P_False"])
+		processed_datas[person_id] = processed_data
 
-		f_out.write(json.dumps(processed_data, ensure_ascii=False) + "\n") 
+		# f_out.write(json.dumps(processed_data, ensure_ascii=False) + "\n") 
+		# with open(os.path.join(output_dir, f"{person_id}.json"), "w") as f:
+		# 	json.dump(processed_data, f, ensure_ascii=False)
+
+	for person_id, data in processed_datas.items():
+		f_out.write(json.dumps(data, ensure_ascii=False) + "\n")
 		with open(os.path.join(output_dir, f"{person_id}.json"), "w") as f:
-			json.dump(processed_data, f, ensure_ascii=False)
-
+			json.dump(data, f, ensure_ascii=False)
 
 cur.close()
 conn.close()
@@ -139,7 +159,7 @@ print(f"Found data for {len(os.listdir(output_dir))} people")
 
 # ## Now lets process the discussion file
 
-# In[ ]:
+# In[9]:
 
 
 from params.paths import DATA_DIR
@@ -266,10 +286,32 @@ cur.close()
 conn.close()
 
 
-# In[ ]:
+# ## Temp script to sort all repr speeches according to date
+
+# In[17]:
 
 
+from params.paths import DATA_DIR
+target_dir = os.path.join(DATA_DIR, "repr_speeches_id_organized")
 
+for person_id in os.listdir(target_dir):
+	print("person id", person_id)
+	person_dir = os.path.join(target_dir, person_id)
+	for file in os.listdir(person_dir):
+		if "tmp_" in file:
+			continue
+		file_path = os.path.join(person_dir, file)
+
+		with open(file_path, "r") as f:
+			lines = f.readlines()
+			lines = [json.loads(line) for line in lines]
+			lines = sorted(lines, key=lambda x: x["meta"]["date"], reverse=True)
+		with open(file_path, "w") as f_out:
+			for line in lines:
+				f_out.write(json.dumps(line, ensure_ascii=False) + "\n")
+		
+		
+		
 
 
 # In[ ]:
