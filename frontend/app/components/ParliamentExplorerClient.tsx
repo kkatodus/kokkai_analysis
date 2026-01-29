@@ -218,7 +218,7 @@ function ParliamentExplorerClientInner({
 
                 <Card>
                   <CardHeader
-                    title="政治的な立場の推定"
+                    title="政治的な立場の推定（AIの埋め込みベクトルによる推定）"
                     subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
                     action={
                       <DisclaimerToggleButton
@@ -315,8 +315,8 @@ function ParliamentExplorerClientInner({
               <>
                 <Card>
                   <CardHeader
-                    title="発言の関連度・生産性（議員別）"
-                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。"
+                    title="発言の関連度・生産性（AI判定）"
+                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。この情報を参考にする前に、かならず注意事項をご確認ください。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showRelevanceDisclaimer}
