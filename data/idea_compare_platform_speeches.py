@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import os
 import json
 from google.cloud import bigquery
 from typing import List, Dict, Tuple, Any, Optional
+from IPython import get_ipython
 from dbio.representative_db import connect_db, get_person_by_column
 from requests import post, get
 from dotenv import load_dotenv
@@ -15,22 +16,38 @@ from params.paths import DATA_DIR
 import argparse
 load_dotenv()
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--politician_name", type=str, default="田村智子")
-parser.add_argument("--youtube_channel_id", type=str, default="UC37tb1mDOEQyWKWkRa-zO8g")
-parser.add_argument("--twitter_user_id", type=str, default="2313532081")
-parser.add_argument("--topic_of_interest", type=str, default="防衛")
-args = parser.parse_args()
+if get_ipython() is None:
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--politician_name", type=str, default="田村智子")
+	parser.add_argument("--youtube_channel_id", type=str, default="UC37tb1mDOEQyWKWkRa-zO8g")
+	parser.add_argument("--twitter_user_id", type=str, default="2313532081")
+	parser.add_argument("--topic_of_interest", type=str, default="防衛")
+	parser.add_argument("--embedding_model", type=str, default="sbintuitions/sarashina-embedding-v2-1b")
+	parser.add_argument("--subtopic_of_interest", type=str, default="防衛予算の増額")
+	parser.add_argument("--local_llm_port", type=str, default="http://192.168.56.1:1234")
+	parser.add_argument("--llm_model", type=str, default="openai/gpt-oss-20b")
+
+	args = parser.parse_args()
+	POLITICIAN_NAME = args.politician_name
+	YOUTUBE_CHANNEL_ID = args.youtube_channel_id
+	TWITTER_USER_ID = args.twitter_user_id
+	TOPIC_OF_INTEREST = args.topic_of_interest
+	EMBEDDING_MODEL = args.embedding_model
+	LOCAL_LLM_PORT = args.local_llm_port
+	SUBTOPIC_OF_INTEREST = args.subtopic_of_interest
+	LLM_MODEL = args.llm_model
+else: 
+	POLITICIAN_NAME = "田村智子"
+	YOUTUBE_CHANNEL_ID = "UC37tb1mDOEQyWKWkRa-zO8g"
+	TWITTER_USER_ID = "2313532081"
+	TOPIC_OF_INTEREST = "防衛"
+	EMBEDDING_MODEL = "sbintuitions/sarashina-embedding-v2-1b"
+	LOCAL_LLM_PORT = "http://10.5.0.2:1234"
+	LLM_MODEL = "abeja-qwq32b-reasoning-japanese-v1.0"
+COMPLETION_ENDPOINT = f"{LOCAL_LLM_PORT}/v1/chat/completions"
 
 
-# POLITICIAN_NAME ="玉木雄一郎"
-# POLITICIAN_NAME ="枝野幸男"
-# POLITICIAN_NAME="田村智子"
-POLITICIAN_NAME = args.politician_name
-YOUTUBE_CHANNEL_ID = args.youtube_channel_id
-TWITTER_USER_ID = args.twitter_user_id
-TOPIC_OF_INTEREST = args.topic_of_interest
-print("Processing", POLITICIAN_NAME, "on youtube", YOUTUBE_CHANNEL_ID, "and twitter", TWITTER_USER_ID)
+print(f"POLITICIAN_NAME: {POLITICIAN_NAME}\nYOUTUBE_CHANNEL_ID: {YOUTUBE_CHANNEL_ID}\nTWITTER_USER_ID: {TWITTER_USER_ID}\nTOPIC_OF_INTEREST: {TOPIC_OF_INTEREST}\nEMBEDDING_MODEL: {EMBEDDING_MODEL}\nLOCAL_LLM_PORT: {LOCAL_LLM_PORT}\nLLM_MODEL: {LLM_MODEL}")
 SKIP_PLATFORMS = []
 if not YOUTUBE_CHANNEL_ID:
 	SKIP_PLATFORMS.append("youtube")
@@ -624,7 +641,7 @@ OUTPUT_PATHS = {
 	"parliament": os.path.join(PARLIAMENT_DATA_OUTPUT_DIR, "parliament_transcripts_filtered_embeddings.jsonl")
 }
 
-embed_model = SentenceTransformer("sbintuitions/sarashina-embedding-v2-1b")
+embed_model = SentenceTransformer(EMBEDDING_MODEL)
 
 
 for platform in EMBED_PLATFORMS:
@@ -774,6 +791,7 @@ from sentence_transformers import SentenceTransformer
 import umap
 import matplotlib.pyplot as plt
 import copy
+from params.paths import ROOT_DIR
 
 AXIS_EXAMPLES_PATH = os.path.join(ROOT_DIR, "axis", "防衛", "examples", "防衛予算の増額_example_speeches.json")
 
@@ -812,7 +830,10 @@ def project_vectors_onto_axis_get_scalar_values(vectors: List[np.ndarray], axis_
 vectors = []
 platform_and_years = []
 c = []
-if not os.path.exists(os.path.join(ROOT_DIR, "tmp", f"{POLITICIAN_NAME}_axis_examples_embeddings.png")):
+if os.path.exists(os.path.join(ROOT_DIR, "tmp", f"{POLITICIAN_NAME}_axis_examples_embeddings.png")):
+	print("Axis examples embeddings already exist, skipping", POLITICIAN_NAME, TOPIC_OF_INTEREST)
+
+else:
 	embed_model = SentenceTransformer("sbintuitions/sarashina-embedding-v2-1b")
 	pro_opinions_embeddings, con_opinions_embeddings = get_axis_examples_embeddings(embed_model)
 
@@ -897,171 +918,508 @@ if not os.path.exists(os.path.join(ROOT_DIR, "tmp", f"{POLITICIAN_NAME}_axis_exa
 # In[ ]:
 
 
-from params.paths import DATA_DIR
+from params.paths import DATA_DIR, ROOT_DIR
 import os
-  
-party2color = {
-    '自民': 'black',
-    '国民': 'blue',
-    '立憲': 'orange',
-    '公明': 'aqua',
-    '共産': 'red',
-    '維新': 'gold',
-	'社民': 'brown',
-	"pro": "red",
-	"con": "blue"
-}
-platform_cmap = {
-	"youtube": "yellow",
-	"twitter": "cyan",
-	"parliament": "green",
-	"pro": "red",
-	"con": "blue"
-}
-name2party = {
-	"枝野幸男": "国民",
-	"石破茂": "自民",
-	"木原稔" : "自民",
-	"吉村洋文": "維新",
-	"木原誠二": "自民",
-	"田村智子": "共産",
-	"斉藤鉄夫": "公明",
-	"河野太郎": "自民",
-	"福島瑞穂": "社民",
-	"米山隆一": "立憲",
-	"岡本三成": "公明",
-	"小林鷹之": "自民",
-	"玉木雄一郎": "国民",
-	"小野田紀美": "自民",
-	"小西洋之": "立憲",
-}
+from sentence_transformers import SentenceTransformer
+import umap
+import matplotlib.pyplot as plt
+import copy
+import numpy as np
+from tqdm import tqdm
+import japanize_matplotlib
+if False:
+	platform_cmap = {
+		"youtube": "darkred",
+		"twitter": "cyan",
+		"parliament": "green",
+		"pro": "red",
+		"con": "blue"
+	}
+	party2color = {
+		'自民': 'black',
+		'国民': 'blue',
+		'立憲': 'orange',
+		'公明': 'aqua',
+		'共産': 'red',
+		'維新': 'gold',
+		'社民': 'brown',
+		"pro": "red",
+		"con": "blue"
+	}
 
-AXIS_EXAMPLES_PATH = os.path.join(ROOT_DIR, "axis", "防衛", "examples", "防衛予算の増額_example_speeches.json")
+	name2party = {
+		"枝野幸男": "国民",
+		"石破茂": "自民",
+		"木原稔" : "自民",
+		"吉村洋文": "維新",
+		"木原誠二": "自民",
+		"田村智子": "共産",
+		"斉藤鉄夫": "公明",
+		"河野太郎": "自民",
+		"福島瑞穂": "社民",
+		"米山隆一": "立憲",
+		"岡本三成": "公明",
+		"小林鷹之": "自民",
+		"玉木雄一郎": "国民",
+		"小野田紀美": "自民",
+		"小西洋之": "立憲",
+	}
 
-def get_axis_examples_embeddings(embed_model: SentenceTransformer, 
-								axis_example_path: str|None = AXIS_EXAMPLES_PATH):
-	# get axis examples
-	with open(axis_example_path, "r", encoding="utf-8") as f:
-		axis_examples = json.load(f)
-		pro_opinions = axis_examples["pro"]["opinions"]
-		con_opinions = axis_examples["con"]["opinions"]
-		pro_opinions_embeddings = embed_model.encode(pro_opinions)
-		con_opinions_embeddings = embed_model.encode(con_opinions)
-	return pro_opinions_embeddings, con_opinions_embeddings
+	AXIS_EXAMPLES_PATH = os.path.join(ROOT_DIR, "axis", TOPIC_OF_INTEREST, "examples", f"{SUBTOPIC_OF_INTEREST}_example_speeches.json")
 
+	def get_axis_examples_embeddings(embed_model: SentenceTransformer, 
+									axis_example_path: str|None = AXIS_EXAMPLES_PATH):
+		# get axis examples
+		with open(axis_example_path, "r", encoding="utf-8") as f:
+			axis_examples = json.load(f)
+			pro_opinions = axis_examples["pro"]["opinions"]
+			con_opinions = axis_examples["con"]["opinions"]
+			pro_opinions_embeddings = embed_model.encode(pro_opinions)
+			con_opinions_embeddings = embed_model.encode(con_opinions)
+		return pro_opinions_embeddings, con_opinions_embeddings
+	def project_vectors_onto_axis_get_scalar_values(vectors: List[np.ndarray], axis_vector: np.ndarray):
+		scalar_values = []
+		for vector in vectors:
+			scalar_values.append(np.dot(vector, axis_vector) / np.dot(axis_vector, axis_vector))
+		return scalar_values
 
-embeddings = []
-platforms = []
-politicians = []
-parties = []
-years = []
-combined_str_identifier = []
+	embeddings = []
+	platforms = []
+	politicians = []
+	parties = []
+	years = []
+	combined_str_identifier = []
 
-for politician_name in os.listdir(os.path.join(DATA_DIR, "tmp_idea_analysis")):
-	politician_dir = os.path.join(DATA_DIR, "tmp_idea_analysis", politician_name)
-	for platform in os.listdir(politician_dir):
-		topic_group_embeddings_path = os.path.join(politician_dir, platform, TOPIC_OF_INTEREST, f"{TOPIC_OF_INTEREST}_year_grouped_embeddings.jsonl")
-		if not os.path.exists(topic_group_embeddings_path):
-			continue
-		with open(topic_group_embeddings_path, "r", encoding="utf-8") as f:
-			for line in f:
-				data = json.loads(line)
-				if data["number_of_embeddings"] < 5 and platform != "parliament":
-					continue
-				embeddings.append(data["embedding"])
-				platforms.append(platform.split("_")[0])
-				politicians.append(politician_name)
-				parties.append(name2party[politician_name])
-				years.append(data["year"])
-				combined_str_identifier.append(f"{politician_name}_{platform}_{data['year']}")
+	print("Organizing data into the arrays")
+	for politician_name in tqdm(os.listdir(os.path.join(DATA_DIR, "tmp_idea_analysis"))):
+		politician_dir = os.path.join(DATA_DIR, "tmp_idea_analysis", politician_name)
+		for platform in os.listdir(politician_dir):
+			platform_letter = platform[0]
+			topic_group_embeddings_path = os.path.join(politician_dir, platform, TOPIC_OF_INTEREST, f"{TOPIC_OF_INTEREST}_year_grouped_embeddings.jsonl")
+			if not os.path.exists(topic_group_embeddings_path):
+				continue
+			with open(topic_group_embeddings_path, "r", encoding="utf-8") as f:
+				for line in f:
+					data = json.loads(line)
+					if data["number_of_embeddings"] < 5 and platform != "parliament":
+						continue
+					embeddings.append(data["embedding"])
+					platforms.append(platform.split("_")[0])
+					politicians.append(politician_name)
+					parties.append(name2party[politician_name])
+					years.append(data["year"])
+					combined_str_identifier.append(f"{politician_name}_{platform_letter}_{data['year']}")
 
-platform_colors = [platform_cmap[p] for p in platforms]
-party_colors = [party2color[p] for p in parties]
-
-
-
-MODEL_NAME = "sbintuitions/sarashina-embedding-v2-1b"
-
-embed_model = SentenceTransformer(MODEL_NAME)
-
-pro_opinions_embeddings, con_opinions_embeddings = get_axis_examples_embeddings(embed_model)
-
-pro_mean = np.mean(pro_opinions_embeddings, axis=0)
-con_mean = np.mean(con_opinions_embeddings, axis=0)
+	platform_colors = [platform_cmap[p] for p in platforms]
+	party_colors = [party2color[p] for p in parties]
 
 
 
-umap_vectors = copy.deepcopy(embeddings)
-umap_vectors.append(pro_mean)
-umap_vectors.append(con_mean)
-umap_labels = copy.deepcopy(combined_str_identifier)
-umap_labels.append(("pro", ""))
-umap_labels.append(("con", ""))
-umap_colors_platform = copy.deepcopy(platform_colors)
-umap_colors_platform.append(platform_cmap["pro"])
-umap_colors_platform.append(platform_cmap["con"])
-umap_colors_party = copy.deepcopy(party_colors)
-umap_colors_party.append(party2color["pro"])
-umap_colors_party.append(party2color["con"])
+	MODEL_NAME = "sbintuitions/sarashina-embedding-v2-1b"
 
+	print("Loading embedding model")
+	embed_model = SentenceTransformer(MODEL_NAME)
+
+	print("Getting axis examples embeddings")
+	pro_opinions_embeddings, con_opinions_embeddings = get_axis_examples_embeddings(embed_model)
+
+	print("Getting mean embeddings")
+	pro_mean = np.mean(pro_opinions_embeddings, axis=0)
+	con_mean = np.mean(con_opinions_embeddings, axis=0)
+
+
+
+
+
+	print("Organizing umap vectors")
+	umap_vectors = copy.deepcopy(embeddings)
+	umap_vectors.append(pro_mean)
+	umap_vectors.append(con_mean)
+	umap_labels = copy.deepcopy(combined_str_identifier)
+	umap_labels.append(("pro", ""))
+	umap_labels.append(("con", ""))
+	umap_colors_platform = copy.deepcopy(platform_colors)
+	umap_colors_platform.append(platform_cmap["pro"])
+	umap_colors_platform.append(platform_cmap["con"])
+	umap_colors_party = copy.deepcopy(party_colors)
+	umap_colors_party.append(party2color["pro"])
+	umap_colors_party.append(party2color["con"])
+
+
+
+# In[ ]:
+
+
+from matplotlib.lines import Line2D
+from datetime import datetime
 print("Fitting umap")
-fit = umap.UMAP(n_components=2, random_state=42).fit(umap_vectors)
-# plots, time series with platform as the colors, time series with party as the colors, umap with platform as the colors, umap with party as the colors
-fig, ax = plt.subplots(2,2)
-print("plotting umap with platform as the colors")
-ax[0,0].scatter(fit.embedding_[:, 0], fit.embedding_[:, 1], c=umap_colors_platform)
-for i, label in enumerate(umap_labels):
-	label_str = f"{label[0]} {label[1] if label[1] is not None else ''}"
-	ax[0].annotate(
-		label_str, 
-		(fit.embedding_[i, 0], fit.embedding_[i, 1]),
-		textcoords="offset points",
-		xytext=(3,3),
-		ha='left',
-		fontsize=8,
-		alpha=0.6
+
+
+if False:
+	ALPHA_LINES = 0.7
+	ALPHA_POINTS = 0.5
+	fit = umap.UMAP(n_components=2, random_state=42).fit(umap_vectors)
+	# plots, time series with platform as the colors, time series with party as the colors, umap with platform as the colors, umap with party as the colors
+	fig, ax = plt.subplots(2,2, figsize=(50,20))
+	print("plotting umap with platform as the colors")
+	ax[0,0].scatter(fit.embedding_[:, 0], fit.embedding_[:, 1], c=umap_colors_platform, alpha=ALPHA_POINTS)
+	pro_after_umap = fit.embedding_[-2]
+	con_after_umap = fit.embedding_[-1]
+
+	con_2_pro = con_after_umap - pro_after_umap
+	pro_further = con_after_umap + con_2_pro
+
+
+	for i, label in enumerate(umap_labels):
+		
+		ax[0,0].annotate(
+			label, 
+			(fit.embedding_[i, 0], fit.embedding_[i, 1]),
+			textcoords="offset points",
+			xytext=(3,3),
+			ha='left',
+			fontsize=6,
+			alpha=0.5
+		)
+
+	print("plotting umap with party as the colors")
+	ax[0,1].scatter(fit.embedding_[:, 0], fit.embedding_[:, 1], c=umap_colors_party, alpha=ALPHA_POINTS)
+
+	axis_vector = (pro_mean - con_mean).astype(np.float32)
+	scalar_values = project_vectors_onto_axis_get_scalar_values(embeddings, axis_vector)
+	last_y_vals = []
+	last_value_identifiers = []
+	print("plotting time series with platform as the colors")
+	for politician_name in os.listdir(os.path.join(DATA_DIR, "tmp_idea_analysis")):
+		for plat in ["youtube", "twitter", "parliament"]:
+			y_vals = []
+			x_vals = []
+			for s, yr, pl, pol in zip(scalar_values, years, platforms, politicians):
+				if pl == plat and pol == politician_name:
+					y_vals.append(s)
+					x_vals.append(yr)
+			if not y_vals:
+				continue
+			# sort x_vals and y_vals by x_vals
+			x_vals, y_vals = zip(*sorted(zip(x_vals, y_vals)))
+			ax[1, 0].plot(x_vals, y_vals, label=plat, c=platform_cmap[plat], alpha=ALPHA_LINES)
+			ax[1, 1].plot(x_vals, y_vals, label=plat, c=party2color[name2party[politician_name]], alpha=ALPHA_LINES)
+
+			# Annotate the last point of each series with an identifier (politician + platform)
+			x_last, y_last = x_vals[-1], y_vals[-1]
+			identifier = f"{politician_name}_{plat[0]}"
+			ax[1, 0].annotate(
+				identifier,
+				(x_last, y_last),
+				textcoords="offset points",
+				xytext=(6, 0),
+				ha="left",
+				va="center",
+				fontsize=15,
+				alpha=0.9,
+				color=platform_cmap[plat],
+			)
+			ax[1, 1].annotate(
+				identifier,
+				(x_last, y_last),
+				textcoords="offset points",
+				xytext=(6, 0),
+				ha="left",
+				va="center",
+				fontsize=15,
+				alpha=0.9,
+				color=party2color[name2party[politician_name]],
+			)
+
+			last_y_vals.append(y_last)
+			last_value_identifiers.append(identifier)
+
+	ax[0,0].plot([pro_after_umap[0], con_after_umap[0]], [pro_after_umap[1], con_after_umap[1]], c="black", alpha=1)
+	ax[0,1].plot([pro_after_umap[0], con_after_umap[0]], [pro_after_umap[1], con_after_umap[1]], c="black", alpha=1)
+
+	ax[0,0].set_title("UMAP with platform as the colors", fontsize=20)
+	ax[0,1].set_title("UMAP with party as the colors", fontsize=20)
+	ax[1, 0].set_title("Time series with platform as the colors", fontsize=20)
+	ax[1, 0].set_xlabel("year", fontsize=20)
+	ax[1, 0].set_ylabel("projection onto axis", fontsize=20)
+	ax[1, 1].set_title("Time series with party as the colors", fontsize=20)
+	ax[1, 1].set_xlabel("year", fontsize=20)
+	ax[1, 1].set_ylabel("projection onto axis", fontsize=20)
+
+
+
+
+	def _color_legend_handles(color_map, keys):
+		return [
+			Line2D(
+				[0],
+				[0],
+				marker="o",
+				linestyle="None",
+				markersize=10,
+				markerfacecolor=color_map[k],
+				markeredgecolor="none",
+				label=str(k),
+			)
+			for k in keys
+			if k in color_map
+		]
+
+	party_keys = [k for k in party2color.keys() if k not in {"pro", "con"}]
+	platform_keys = [k for k in platform_cmap.keys() if k in {"youtube", "twitter", "parliament"}]
+
+	ax[0, 0].legend(
+		handles=_color_legend_handles(platform_cmap, platform_keys),
+		title="Platform",
+		fontsize=12,
+		title_fontsize=14,
+		loc="upper left",
+		bbox_to_anchor=(1, 1),
+	)
+	ax[0, 1].legend(
+		handles=_color_legend_handles(party2color, party_keys),
+		title="Party",
+		fontsize=12,
+		title_fontsize=14,
+		loc="upper left",
+		bbox_to_anchor=(1, 1),
 	)
 
-ax[0,0].set_title("UMAP with platform as the colors")
-print("plotting umap with party as the colors")
-ax[0,1].scatter(fit.embedding_[:, 0], fit.embedding_[:, 1], c=umap_colors_party)
-ax[0,1].set_title("UMAP with party as the colors")
+	ax[1, 0].legend(
+		handles=_color_legend_handles(platform_cmap, platform_keys),
+		title="Platform",
+		fontsize=12,
+		title_fontsize=14,
+		loc="upper left",
+		bbox_to_anchor=(1, 1),
+	)
+	ax[1, 1].legend(
+		handles=_color_legend_handles(party2color, party_keys),
+		title="Party",
+		fontsize=12,
+		title_fontsize=14,
+		loc="upper left",
+		bbox_to_anchor=(1, 1),
+	)
 
-axis_vector = (pro_mean - con_mean).astype(np.float32)
-scalar_values = project_vectors_onto_axis_get_scalar_values(embeddings, axis_vector)
-print("plotting time series with platform as the colors")
-for politician_name in os.listdir(os.path.join(DATA_DIR, "tmp_idea_analysis")):
-	for plat in ["youtube", "twitter", "parliament"]:
-		y_vals = []
-		x_vals = []
-		for s, yr, pl, pol in zip(scalar_values, years, platforms, politicians):
-			if pl == plat and pol == politician_name:
-				y_vals.append(s)
-				x_vals.append(yr)
-		if not y_vals:
+	plt.tight_layout()
+	output_dir = os.path.join(ROOT_DIR, "tmp")
+	os.makedirs(output_dir, exist_ok=True)
+	plt.savefig(os.path.join(output_dir, f"{datetime.now().strftime('%Y%m%d')}_final_visualization.png"))
+
+
+
+
+
+# ## Create a summary of the politician platform for each year, for each platform
+
+# In[ ]:
+
+
+from params.paths import ROOT_DIR, DATA_DIR
+import os
+from requests import get
+import json
+from datetime import datetime
+import shutil
+from api_requests.prompter import DeepResearchGemini
+import time
+RESULTS_DIR = os.path.join(DATA_DIR, "tmp_idea_analysis")
+
+gemini_prompter = DeepResearchGemini(model_name="gemini-3-flash-preview")
+
+
+input_file_names = {
+	"youtube":"youtube_transcripts_filtered_with_date_embeddings.jsonl",
+	"twitter":"twitter_data_filtered_embeddings.jsonl",
+	"parliament":"parliament_transcripts_filtered_embeddings.jsonl"
+}
+
+creation_formats = {
+	"youtube": "%Y-%m-%dT%H:%M:%SZ",
+	"twitter": "%Y-%m-%d %H:%M:%S",
+	"parliament": "%Y-%m-%d"
+}
+
+time_keys = {
+	"youtube": "date",
+	"twitter": "created_at_ts",
+	"parliament": "date"
+}
+
+def prompt_local_llm(prompt:str, system_prompt:str)->str:
+	payload = json.dumps({
+		"model": LLM_MODEL,
+		"messages": [
+			{
+			"role": "system",
+			"content": system_prompt
+			},
+			{
+			"role": "user",
+			"content": prompt
+			}
+		],
+		"temperature": 0,
+		"max_tokens": -1,
+		"stream": False
+	})
+	headers = {
+		'Content-Type': 'application/json'
+		}
+	print(f"PROMPTING LLM WITH \n{system_prompt}\n\n{prompt}")
+	response = post(COMPLETION_ENDPOINT, headers=headers, data=payload)
+	res = json.loads(response.choices[0].message.content)
+	print(f"GOT REPLY FROM LLM: \n {str(res_json)}")
+
+	return res
+
+
+
+RESOURCE_DIR = os.path.join(ROOT_DIR, "resource")
+experiment_config_path = os.path.join(RESOURCE_DIR, "experiment_config.json")
+
+
+with open(experiment_config_path, "r", encoding="utf-8") as f:
+	experiment_config = json.load(f)
+search_words = [d for d in experiment_config if d["topic_name"] == TOPIC_OF_INTEREST][0]["search_words"]
+print("Search words for topic", TOPIC_OF_INTEREST, ":", search_words)
+
+def check_search_words(search_words: List[str], text: str)->bool:
+	for word in search_words:
+		if word in text:
+			return True
+	return False
+
+
+if False:
+	for politician in os.listdir(RESULTS_DIR):
+		print(f"Processing {politician}")
+		politician_dir = os.path.join(RESULTS_DIR, politician)
+		
+		for plat, file_name in input_file_names.items():
+			print(f"Processing {plat} for {politician}")
+			input_file_path = os.path.join(politician_dir, f"{plat}_data", file_name)
+			if not os.path.exists(input_file_path):
+				print(f"File {input_file_path} does not exist for {politician} on {plat}")
+				continue
+			year_seperated_for_topic_dir = os.path.join(politician_dir, f"{plat}_data", TOPIC_OF_INTEREST, "year_seperated")
+			if os.path.exists(year_seperated_for_topic_dir):
+				print(f"Year seperated directory {year_seperated_for_topic_dir} already exists for {politician} on {plat} wiping it")
+				shutil.rmtree(year_seperated_for_topic_dir)
+			os.makedirs(year_seperated_for_topic_dir, exist_ok=True)
+			
+			
+			with open(input_file_path, "r", encoding="utf-8") as f:
+				print(f"reading from {input_file_path}")
+				for line in f:
+					data = json.loads(line)
+					if not check_search_words(search_words, data["text"]):
+						continue
+					creation_time = datetime.strptime(data[time_keys[plat]], creation_formats[plat])
+					year = creation_time.year
+					year_seperated_file_path = os.path.join(year_seperated_for_topic_dir, f"{year}.jsonl")
+
+					with open(year_seperated_file_path, "a", encoding="utf-8") as f_output:
+
+						f_output.write(line)
+
+summary_prompt_generator  = lambda topic, text: f"""
+
+あなたは日本政治の発言分析を行う中立的なアナリストです。
+以下の政治家の発言のみを根拠として、日本の「{topic}」に対するスタンスを要約してください。
+発言に含まれない内容は推測・補完しないでください。
+
+【目的】
+政治に詳しくない一般の読者でも理解できる、簡潔で中立的な要約を作成すること。
+
+【出力ルール】
+- 箇条書き（最大3項目まで）
+- 各項目は以下の形式に厳密に従うこと
+
+1. スタンス（賛成 / 反対 / 条件付き賛成 / 不明）
+   ・理由（発言から読み取れる主な根拠を平易な言葉で説明）
+   ・根拠引用（発言の一部を短く引用。20〜40文字程度）
+
+【制約】
+- 根拠が弱い、または明確でない場合は要約に含めないとする
+- 評価的・感情的な表現は使わない
+- 専門用語はできるだけ一般的な言葉に言い換える
+- 以下のフォーマットに厳密に従い、余計な文書は一切出力しないこと。
+
+【出力例】
+1. 防衛予算の増額に賛成  
+   ・理由：日本が自分の力で国を守る必要があると述べ、装備や隊員の待遇改善の重要性を強調している  
+   ・根拠引用：「自らの力で国を守る責任がある」
+
+2. 憲法への自衛隊明記に賛成  
+   ・理由：自衛隊の立場があいまいで、国内外で活動しにくいと説明している  
+   ・根拠引用：「法的な根拠が不明確なままだ」
+
+【分析対象の発言】
+{text}
+
+"""
+
+def summarize_year_data(year_file_path: str, output_file_path: str, summarize_count=3)->str:
+	
+	for _ in range(summarize_count):
+		texts = []
+		with open(year_file_path, "r", encoding="utf-8") as f:
+			for line in f:
+				data = json.loads(line)
+				texts.append(data["text"])
+		summary = gemini_prompter.prompt(summary_prompt_generator(TOPIC_OF_INTEREST, "\n".join(texts)), system_prompt="あなたは優秀な政治分析家です。")
+		with open(output_file_path, "a", encoding="utf-8") as f:
+			f.write(json.dumps({"summary": summary, "year": year_file_path.split("/")[-1].split(".")[0]}, ensure_ascii=False) + "\n")
+
+
+
+
+# summarization step
+for politician in os.listdir(RESULTS_DIR):
+	print(f"Processing {politician}")
+	politician_dir = os.path.join(RESULTS_DIR, politician)
+
+	for plat in input_file_names.keys():
+		year_seperated_for_topic_dir = os.path.join(politician_dir, f"{plat}_data", TOPIC_OF_INTEREST, "year_seperated")
+		year_summaries_for_topic_dir = os.path.join(politician_dir, f"{plat}_data", TOPIC_OF_INTEREST, "year_summaries")
+		os.makedirs(year_summaries_for_topic_dir, exist_ok=True)
+		if not os.path.exists(year_seperated_for_topic_dir):
+			print(f"Year seperated directory {year_seperated_for_topic_dir} does not exist for {politician} on {plat}")
 			continue
-		ax[1, 0].plot(x_vals, y_vals, label=plat, c=platform_cmap[plat])
-		ax[1, 1].plot(x_vals, y_vals, label=plat, c=party2color[name2party[politician_name]])
-ax[1, 0].set_title("Time series with platform as the colors")
-ax[1, 0].set_xlabel("year")
-ax[1, 0].set_ylabel("projection onto axis")
-ax[1, 0].legend()
-ax[1, 1].set_title("Time series with party as the colors")
-ax[1, 1].set_xlabel("year")
-ax[1, 1].set_ylabel("projection onto axis")
-ax[1, 1].legend()
+		year_files = os.listdir(year_seperated_for_topic_dir)
+		year_files.sort()
+		for year_file in year_files:
+			print(f"Processing {year_file} for {politician} on {plat}")
+			year_file_path = os.path.join(year_seperated_for_topic_dir, year_file)
+			year_summary_file_path = os.path.join(year_summaries_for_topic_dir, year_file)
+			num_lines = sum(1 for line in open(year_file_path))
+			if num_lines < 5:
+				print(f"Skipping {year_file} for {politician} on {plat} because it has less than 5 lines")
+				continue
 
-plt.tight_layout()
-output_dir = os.path.join(ROOT_DIR, "tmp")
-os.makedirs(output_dir, exist_ok=True)
-plt.savefig(os.path.join(output_dir, f"final_visualization.png"))
+			if os.path.exists(year_summary_file_path):
+				lines = open(year_summary_file_path, "r", encoding="utf-8").readlines()
+				num_lines = len(lines)
+				if num_lines >= 3:
+					print(f"Skipping {year_file} for {politician} on {plat} because it has already been summarized {num_lines} times")
+					continue
+			retries = 0
+			while retries < 3:
+				try:
+					# summarize like 5 times
+					summarize_year_data(year_file_path, year_summary_file_path, summarize_count=3)
+					break
+				except Exception as e:
+					print(f"Error summarizing {year_file} for {politician} on {plat}: {e}")
+					print(f"Retrying {year_file} for {politician} on {plat} in 10 seconds")
+					time.sleep(10)
+					retries += 1
 
 
+			
 
-
-	
-	
-	
 
 
 # In[ ]:
