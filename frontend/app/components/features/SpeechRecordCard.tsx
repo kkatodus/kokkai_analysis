@@ -19,8 +19,8 @@ const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
   OnlineVoting: "オンライン投票",
   MyNumber: "マイナンバー",
   LGBT: "LGBT",
-  Unproductive: "議題にとって生産性の低いと判別された発言（AI判定）",
-  Irrelevant: "議題にとって関連性の低いと判別された発言（AI判定）",
+  Unproductive: "議題にとって生産性の低いと判別された発言",
+  Irrelevant: "議題にとって関連性の低いと判別された発言",
 };
 
 function normalizeTopicLabelKey(raw: string): string {
