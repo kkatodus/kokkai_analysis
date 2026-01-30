@@ -62,6 +62,36 @@ export function IdeologyDisclaimerContent() {
 }
 
 export function RelevanceProductivityDisclaimerContent() {
+  // Hard-coded for now (per request). Update these when you change models/prompts.
+  const llmModelName = "gemma3:27b-it-q8_0"; // e.g. "gpt-4.1-mini" or "gemini-2.0-flash"
+  const llmPrompt = `
+  # 指示
+あなたは議会運営と政策論争の専門家です。
+以下の「会議の議題」と、そこでの「実際の議論（会話ログ）」を比較分析し、
+JSON形式で厳密に評価してください。
+
+# 会議情報
+- 会議名: {meeting_name}
+- 案件(議題): {issue_name}
+
+# 評価項目
+1. **is_relevant** (bool): 
+   この議論は、上記の「案件(議題)」に関連していますか？
+   (個人的なスキャンダル追及、野次、手続き論のみで終始している場合は false。)
+
+2. **is_productive** (bool):
+   この議論は生産的（建設的）ですか？
+   (具体的な政策提案、事実確認、論点の明確化があれば true。
+    単なる誹謗中傷、答えようのない質問、遅延行為、堂々巡りは false。)
+
+3. **initiator** (str):
+   この一連の議論（話題）を実質的に開始した、または方向付けた発言者は誰ですか？
+   (リストに含まれる発言者名から選んでください)
+
+4. **reason** (str):
+   上記の判定に至った理由を、具体的かつ客観的に100文字以内の日本語で記述してください。
+`;
+
   return (
     <>
       <div>
@@ -91,6 +121,27 @@ export function RelevanceProductivityDisclaimerContent() {
 			</li>
 		</ul>
 </div>
+
+      <details className="rounded-lg border border-slate-400/15 bg-slate-950/10 px-3 py-2">
+        <summary className="cursor-pointer select-none text-[11px] font-semibold text-gray-100 hover:text-white">
+          使用したLLMモデル名とプロンプト（展開）
+        </summary>
+        <div className="mt-2 space-y-2 text-[12px] leading-relaxed text-gray-300">
+          <div>
+            <span className="font-semibold text-gray-200">モデル名：</span>
+            <span className="font-mono text-[11px] text-gray-200">{llmModelName}</span>
+          </div>
+          <div>
+            <div className="mb-1 font-semibold text-gray-200">プロンプト：</div>
+            <pre className="max-h-72 overflow-auto whitespace-pre-wrap rounded-md border border-slate-400/15 bg-black/20 p-2 text-[11px] text-gray-200">
+              {llmPrompt}
+            </pre>
+            <div className="text-[11px] text-gray-400">
+              注：結果を再現する際には、システムプロンプト・温度などの設定、前処理/後処理、バージョン差分等により結果が変わり得ます。
+            </div>
+          </div>
+        </div>
+      </details>
 
     </>
   );

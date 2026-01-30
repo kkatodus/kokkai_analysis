@@ -349,7 +349,7 @@ export function DetailPane({
 
           <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
             <div className="mb-1 flex items-center justify-between gap-2">
-              <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合・AI判定）</div>
+              <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合）</div>
               <div className="text-[11px] text-gray-400">
                 分類された発言数:{" "}
                 {relevanceStats && Number.isFinite(relevanceStats.Total_Count) ? relevanceStats.Total_Count : "—"}
