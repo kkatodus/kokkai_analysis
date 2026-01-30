@@ -231,7 +231,7 @@ export function SpeechRecordCard({
                               }
                               title={s.quality_reason ? `関連: ${s.quality_reason}` : undefined}
                             >
-                              関連: {s.is_relevant === "True" ? "あり" : "なし"}
+                              関連性: {s.is_relevant === "True" ? "高い" : "低い"}
                             </span>
                           )}
                           {s.is_productive && (
@@ -244,7 +244,7 @@ export function SpeechRecordCard({
                               }
                               title={s.quality_reason ? `生産性: ${s.quality_reason}` : undefined}
                             >
-                              生産性: {s.is_productive === "True" ? "あり" : "なし"}
+                              生産性: {s.is_productive === "True" ? "高い" : "低い"}
                             </span>
                           )}
                         </div>
