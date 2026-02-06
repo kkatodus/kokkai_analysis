@@ -218,6 +218,7 @@ def create_new_file_with_productivity_flag_for_speech_id(
 
 
 cur = conn.cursor()
+person_kanji2id_cache = {}
 
 print("Processing discussion file")
 with open(DISCUSSION_FILE, "r") as f:
@@ -245,36 +246,36 @@ with open(DISCUSSION_FILE, "r") as f:
 		is_productive = processed_data['is_productive']
 		is_relevant = processed_data['is_relevant']
 
-		person_row_from_db = get_person_by_column(cur, "name_kanji", initiator)
-		if len(person_row_from_db) == 1:
-			# print(f"Found person with name {initiator}, writing to the repr speeches files")
-		
-			person_id = person_row_from_db[0].person_id
-			# print("found person id", person_id, "for", initiator, "with speech id", speech_id)
-
-			# writing to the repr speeches files
-			repr_speeches_dir = os.path.join(repr_speeches_organized_dir, str(person_id))
-			output_for_person_dir = os.path.join(repr_speeches_organized_with_prd_and_rl_dir, str(person_id))
-			os.makedirs(output_for_person_dir, exist_ok=True)
-			files_with_speech_id = return_files_with_speech_id(speech_id, repr_speeches_dir)
-			if len(files_with_speech_id) == 0:
+		if initiator not in person_kanji2id_cache:
+			print("Cache miss for", initiator, "getting from db")
+			person_row_from_db = get_person_by_column(cur, "name_kanji", initiator)
+			if len(person_row_from_db) != 1:
 				continue
-			for file in files_with_speech_id:
-				if "tmp_" in file:
-					continue
-				file_path = os.path.join(repr_speeches_dir, file)
-				output_file_path = os.path.join(output_for_person_dir, file)
-				if not os.path.exists(output_file_path):
-					shutil.copy(file_path, output_file_path)
+			person_kanji2id_cache[initiator] = person_row_from_db[0].person_id
+			print("Caching", initiator, "->", person_kanji2id_cache[initiator])
+		person_id = person_kanji2id_cache[initiator]
+		repr_speeches_dir = os.path.join(repr_speeches_organized_dir, str(person_id))
+		output_for_person_dir = os.path.join(repr_speeches_organized_with_prd_and_rl_dir, str(person_id))
+		os.makedirs(output_for_person_dir, exist_ok=True)
+		files_with_speech_id = return_files_with_speech_id(speech_id, repr_speeches_dir)
+		if len(files_with_speech_id) == 0:
+			continue
+		for file in files_with_speech_id:
+			if "tmp_" in file:
+				continue
+			file_path = os.path.join(repr_speeches_dir, file)
+			output_file_path = os.path.join(output_for_person_dir, file)
+			if not os.path.exists(output_file_path):
+				shutil.copy(file_path, output_file_path)
 
-				create_new_file_with_productivity_flag_for_speech_id(
-					speech_id=speech_id,
-					rewrite_file_dir=output_for_person_dir,
-					rewrite_file_name=file,
-					is_productive=is_productive,
-					is_relevant=is_relevant,
-					quality_reason=quality_reason,
-				)
+			create_new_file_with_productivity_flag_for_speech_id(
+				speech_id=speech_id,
+				rewrite_file_dir=output_for_person_dir,
+				rewrite_file_name=file,
+				is_productive=is_productive,
+				is_relevant=is_relevant,
+				quality_reason=quality_reason,
+			)
 		# now lets change the file we have in data_all_speeches_with_prd_and_rl
 		issue_dir = os.path.join(all_speeches_with_relevance_dir, str(issue_id))
 		speeches_file_path = os.path.join(issue_dir, "speeches.jsonl")
