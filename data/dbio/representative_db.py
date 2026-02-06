@@ -390,7 +390,6 @@ def get_closest_person_by_name(cur: psycopg2.extensions.cursor, name: str, limit
 
 def get_politician_id_by_name(cur: psycopg2.extensions.cursor, name_kanji: str, name_kana: str, party: str, stop_for_input: bool = True) -> Optional[PersonId]:
 	repr_name_clean = clean_repr_name(name_kanji)
-	print("Working on ", name_kanji)
 	person = get_person_by_column(cur, "name_kanji", repr_name_clean)
 	hiragana_person = get_person_by_column(cur, "name_kana", clean_repr_name(name_kana))
 	if len(person) > 1:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 
 import os
@@ -72,7 +72,7 @@ with open(AGGREGATE_FILE, "r") as f:
 
 # ## lets first process the low hanging fruit of processing the aggregate file into separate files and attaching person ids
 
-# In[12]:
+# In[2]:
 
 
 import json
@@ -89,7 +89,8 @@ conn = connect_db(
 )
 
 speaker_id_conversion = {
-	"福島みずほ": "福島瑞穂"
+	"福島みずほ": "福島瑞穂",
+	"大石あきこ": "大石晃子"
 }
 
 cur = conn.cursor()
@@ -159,12 +160,14 @@ print(f"Found data for {len(os.listdir(output_dir))} people")
 
 # ## Now lets process the discussion file
 
-# In[9]:
+# In[ ]:
 
 
 from params.paths import DATA_DIR
+import shutil
 
 repr_speeches_organized_dir = os.path.join(DATA_DIR, "repr_speeches_id_organized")
+repr_speeches_organized_with_prd_and_rl_dir = os.path.join(DATA_DIR, "repr_speeches_id_organized_with_prd_and_rl")
 all_speeches_with_relevance_dir = os.path.join(DATA_DIR, "data_all_speeches_with_prd_and_rl")
 os.makedirs(all_speeches_with_relevance_dir, exist_ok=True)
 
@@ -191,16 +194,16 @@ def return_files_with_speech_id(speech_id:str, repr_speeches_dir:str):
 
 def create_new_file_with_productivity_flag_for_speech_id(
 	speech_id: str,
-	input_file_path: str,
-	input_file_name: str,
-	output_dir: str,
+	rewrite_file_dir: str,
+	rewrite_file_name: str, 
 	is_productive: bool,
 	is_relevant: bool,
 	quality_reason: str,
 ):
-	tmp_file_path = os.path.join(output_dir, f"tmp_{input_file_name}")
-	# print("tmp file path", tmp_file_path)
-	with open(input_file_path, "r") as f, open(tmp_file_path, "w") as f_out:
+	tmp_file_path = os.path.join(rewrite_file_dir, f"tmp_{rewrite_file_name}")
+	rewrite_file_path = os.path.join(rewrite_file_dir, rewrite_file_name)
+
+	with open(rewrite_file_path, "r") as f, open(tmp_file_path, "w") as f_out:
 		for line in f:
 			data = json.loads(line)
 			if data['speechID'] == speech_id:
@@ -208,8 +211,8 @@ def create_new_file_with_productivity_flag_for_speech_id(
 				data['is_relevant'] = is_relevant
 				data['quality_reason'] = quality_reason
 			f_out.write(json.dumps(data, ensure_ascii=False) + "\n")
-	os.remove(input_file_path)
-	os.rename(tmp_file_path, os.path.join(output_dir, input_file_name))
+	os.remove(rewrite_file_path)
+	os.rename(tmp_file_path, rewrite_file_path)
 
 
 
@@ -251,6 +254,8 @@ with open(DISCUSSION_FILE, "r") as f:
 
 			# writing to the repr speeches files
 			repr_speeches_dir = os.path.join(repr_speeches_organized_dir, str(person_id))
+			output_for_person_dir = os.path.join(repr_speeches_organized_with_prd_and_rl_dir, str(person_id))
+			os.makedirs(output_for_person_dir, exist_ok=True)
 			files_with_speech_id = return_files_with_speech_id(speech_id, repr_speeches_dir)
 			if len(files_with_speech_id) == 0:
 				continue
@@ -258,11 +263,14 @@ with open(DISCUSSION_FILE, "r") as f:
 				if "tmp_" in file:
 					continue
 				file_path = os.path.join(repr_speeches_dir, file)
+				output_file_path = os.path.join(output_for_person_dir, file)
+				if not os.path.exists(output_file_path):
+					shutil.copy(file_path, output_file_path)
+
 				create_new_file_with_productivity_flag_for_speech_id(
 					speech_id=speech_id,
-					input_file_path=file_path,
-					input_file_name=file,
-					output_dir=repr_speeches_dir,
+					rewrite_file_dir=output_for_person_dir,
+					rewrite_file_name=file,
 					is_productive=is_productive,
 					is_relevant=is_relevant,
 					quality_reason=quality_reason,
@@ -288,11 +296,11 @@ conn.close()
 
 # ## Temp script to sort all repr speeches according to date
 
-# In[17]:
+# In[ ]:
 
 
 from params.paths import DATA_DIR
-target_dir = os.path.join(DATA_DIR, "repr_speeches_id_organized")
+target_dir = os.path.join(DATA_DIR, "repr_speeches_id_organized_with_prd_and_rl")
 
 for person_id in os.listdir(target_dir):
 	print("person id", person_id)
@@ -312,6 +320,41 @@ for person_id in os.listdir(target_dir):
 		
 		
 		
+
+
+# ## Temp Script to extract all the unproductive or irrelevant speeches into a different file
+
+# In[ ]:
+
+
+from params.paths import DATA_DIR
+import os
+import json
+TARGET_DIR = os.path.join(DATA_DIR, "repr_speeches_id_organized_with_prd_and_rl")
+
+for person_id in os.listdir(TARGET_DIR):
+	person_dir = os.path.join(TARGET_DIR, person_id)
+	unproductive_file = os.path.join(person_dir, "Unproductive.jsonl")
+	unrelevant_file = os.path.join(person_dir, "Irrelevant.jsonl")
+	found_unproductive = False
+	found_unrelevant = False
+	with open(unproductive_file, "w") as f_unproductive, open(unrelevant_file, "w") as f_unrelevant:
+		all_speeches_file_path = os.path.join(person_dir, "all_speeches.jsonl")
+		with open(all_speeches_file_path, "r") as f_all:
+			for line in f_all:
+				data = json.loads(line)
+				if not "is_productive" in data:
+					continue
+				if data["is_productive"] == "False":
+					f_unproductive.write(line)
+					found_unproductive = True
+				if data["is_relevant"] == "False":
+					f_unrelevant.write(line)
+					found_unrelevant = True
+	if not found_unproductive and os.path.exists(unproductive_file):
+		os.remove(unproductive_file)
+	if not found_unrelevant and os.path.exists(unrelevant_file):
+		os.remove(unrelevant_file)
 
 
 # In[ ]:
