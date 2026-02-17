@@ -15,7 +15,15 @@ export class BackendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: BaseStackProps) {
     super(scope, id, props);
 
-	const vpc = new ec2.Vpc(this, "Vpc", {
+	// IMPORTANT (prod migration note):
+	// Changing NAT/subnet mode can cause CloudFormation to try to *replace* subnets in-place.
+	// During replacement it may attempt to create new subnets with CIDRs that are already in use,
+	// failing with "CIDR conflicts with another subnet".
+	// To make the update reliable, we intentionally force a NEW VPC in prod by changing the
+	// construct/logical ID. CloudFormation will create the new VPC+subnets, move ECS/ALB, then
+	// delete the old VPC resources.
+	const vpcId = props.environmentName === "prod" ? "VpcV2" : "Vpc";
+	const vpc = new ec2.Vpc(this, vpcId, {
 		maxAzs: 2,
 		// Cost lever: NAT Gateways are a large fixed monthly cost.
 		// For low-traffic APIs, prefer no NAT and let tasks have a public IP for outbound access.
