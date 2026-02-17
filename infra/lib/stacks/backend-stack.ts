@@ -40,7 +40,11 @@ export class BackendStack extends cdk.Stack {
 	const dataLakeBucketName = props.environmentConfig.data_lake_bucket_name_object_uri.split("/")[2];
 	const dataLakeBucket = s3.Bucket.fromBucketName(this, "DataLakeBucket", dataLakeBucketName);
 
-	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
+	// Similar to the VPC migration, force a clean replacement of the ECS+ALB resources in prod.
+	// Otherwise CloudFormation can attempt to reuse/attach security groups from the old VPC to the
+	// replacement load balancer and fail with: "One or more security groups are invalid".
+	const serviceId = props.environmentName === "prod" ? "ServiceV2" : "Service";
+	const svc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, serviceId, {
 		cluster: ECSCluster,
 		cpu: 512,
 		// ECS Patterns construct requires desiredCount > 0 at synth time.
