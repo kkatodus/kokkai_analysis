@@ -16,8 +16,11 @@ export class BackendStack extends cdk.Stack {
     super(scope, id, props);
 
 	const vpc = new ec2.Vpc(this, "Vpc", {
-		maxAzs: 2, 
-		natGateways: 1,
+		maxAzs: 2,
+		// Cost lever: NAT Gateways are a large fixed monthly cost.
+		// For low-traffic APIs, prefer no NAT and let tasks have a public IP for outbound access.
+		// Tradeoff: tasks run in public subnets (still protected by SGs; not directly exposed).
+		natGateways: 0,
 	})
 
 	const ECSCluster = new ecs.Cluster(this, "Cluster", {
@@ -36,6 +39,9 @@ export class BackendStack extends cdk.Stack {
 		// We still allow scale-to-zero via autoscaling (minCapacity: 0) after deploy.
 		desiredCount: 1,
 		memoryLimitMiB: 1024,
+		// Without NAT, tasks need a public IP for outbound access (ECR image pulls, S3, Secrets Manager, etc.).
+		assignPublicIp: true,
+		taskSubnets: { subnetType: ec2.SubnetType.PUBLIC },
 		taskImageOptions:{
 			// Resolve from this file's directory so deploys work regardless of the current working directory.
 			image: ecs.ContainerImage.fromAsset(path.resolve(__dirname, "../../../backend")),
@@ -64,8 +70,10 @@ export class BackendStack extends cdk.Stack {
 	// NOTE: With an ALB in front, scaling from 0 means the *first* request will likely see a 503
 	// until at least one task is started and passes health checks.
 	const scalableTarget = svc.service.autoScaleTaskCount({
-		minCapacity: props.environmentName === "dev" ? 0 : 1,
-		maxCapacity: 2,
+		// Cost lever: allow scale-to-zero in all environments. If you'd rather avoid cold starts in prod,
+		// change this back to `props.environmentName === "prod" ? 1 : 0`.
+		minCapacity: 0,
+		maxCapacity: 1,
 	})
 
 	// Scale OUT quickly when requests hit the load balancer (even if there are currently 0 healthy targets).
@@ -86,7 +94,9 @@ export class BackendStack extends cdk.Stack {
 	scalableTarget.scaleOnCpuUtilization("CpuTargetTracking", {
 		targetUtilizationPercent: 20,
 		scaleOutCooldown: cdk.Duration.minutes(2),
-		scaleInCooldown: cdk.Duration.hours(1),
+		// Cost lever: scale in faster after traffic stops.
+		// Tradeoff: more cold starts if traffic is sporadic.
+		scaleInCooldown: cdk.Duration.minutes(15),
 	})
 
 	// The ALB target group health check defaults to "/" which our FastAPI app doesn't serve.

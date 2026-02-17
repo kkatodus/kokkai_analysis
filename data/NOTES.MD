@@ -4,14 +4,14 @@
 - possible directions of future research
 	- are some platforms becoming more polarized?
 	- are some parties becoming more polarized
-- extract different focus points
+- extract different focus points DONE
 	- extract particular person
-	- extract particular platform
-	    - parliament more likely to cluster compared to youtube and twitter?
-- include prompt in the slides
-- summarize the anchor points with the same prompt as the others
-- make sure that the sldies a non-japanese friendly
-- fix bug
+	- extract particular platform 
+	    - parliament more likely to cluster compared to youtube and twitter? 
+- include prompt in the slides DONE
+- summarize the anchor points with the same prompt as the others DONE
+- make sure that the sldies a non-japanese friendly 
+- fix bug DONE
 
 
 - when talking about consistency, you could think of it two ways
