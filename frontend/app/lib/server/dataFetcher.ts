@@ -7,6 +7,7 @@
 
 
 import { API_ENDPOINTS } from "@/app/lib/config/api";
+import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 import Papa from "papaparse";
 import { gunzipSync } from "node:zlib";
 import type {
@@ -35,10 +36,12 @@ function getServerApiBaseUrl(): string {
 }
 
 /**
- * Revalidation period: 1 day (86400 seconds)
- * Matches the page-level revalidation setting
+ * Matches the page-level revalidation setting (default 10 minutes)
  */
-const REVALIDATION_TIME = parseInt(process.env.REVALIDATION_TIME || "86400"); // 1 day
+const REVALIDATION_TIME = parseInt(
+  process.env.REVALIDATION_TIME || String(REVALIDATE_TEN_MINUTES),
+  10
+);
 console.log('[Server DataFetcher] Revalidation time:', REVALIDATION_TIME);
 
 /**
@@ -88,8 +91,7 @@ async function fetchApiRaw(endpoint: string, options: { cache?: boolean } = { ca
   console.log('[Server DataFetcher] Fetching from server:', url);
 
   try {
-	// Important: disable Next.js fetch cache here.
-	// Large payloads (>2MB) cannot be stored in Next's data cache.
+	// Large payloads (>2MB) may not fit Next's data cache; keep default cache behavior here.
 	const response = await fetch(url, { cache: options.cache ? "default" : "no-store", headers: { "X-API-KEY": process.env.API_KEY || "" } });
 	if (!response.ok) {
 	  throw new Error(`API request failed: ${response.status} ${response.statusText}`);

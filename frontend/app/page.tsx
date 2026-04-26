@@ -8,6 +8,7 @@ import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerCli
 import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getAllRelevanceAndProductivityData } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
 /**
  * Loading component shown while data is being fetched
@@ -29,12 +30,9 @@ function LoadingState() {
 }
 
 /**
- * Revalidation period: 1 week (604800 seconds)
- * This enables ISR (Incremental Static Regeneration) on Vercel
- * The page will be cached and only revalidated once per week
- * This prevents hammering the backend API on every request
+ * ISR: home page revalidates every 10 minutes (server `fetch` in dataFetcher uses the same default).
  */
-export const revalidate = 604800; // 7 days * 24 hours * 60 minutes * 60 seconds
+export const revalidate = REVALIDATE_TEN_MINUTES;
 
 /**
  * Main page component (Server Component)

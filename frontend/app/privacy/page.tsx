@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
-export const revalidate = 600000
+export const revalidate = REVALIDATE_TEN_MINUTES;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
