@@ -7,6 +7,8 @@ from params.paths import ROOT_DIR
 from scrape.general_scraper import GeneralScraper
 from selenium.webdriver.common.by import By
 from file_handling.file_read_writer import read_json, write_json, create_dir
+from dbio.representative_db import connect_db, insert_person, insert_elections_bulk, get_person_by_column
+from utils.string_process import clean_repr_name
 
 ## URLS
 GIJI_URL = "https://kokkai.ndl.go.jp/api/speech?"
@@ -43,9 +45,9 @@ create_dir(LOWER_SPEECH_OUTPUT_DIR)
 CHROME_DRIVER_PATH = os.path.join(ROOT_DIR, "chromedriver")	
 
 ## PARAMS
-SCRAPE_UPPER_REPR_LIST = True
+SCRAPE_UPPER_REPR_LIST = False
 SCRAPE_LOWER_REPR_LIST = True
-SCRAPE_UPPER_MEETING_MEMBER_LIST = True
+SCRAPE_UPPER_MEETING_MEMBER_LIST = False
 SCRAPE_LOWER_MEETING_MEMBER_LIST = True
 
 #LAYOUT
@@ -104,6 +106,7 @@ def scrape_upper_repr_list():
     #saving json
     repr_list_json_path = os.path.join(UPPER_OUTPUT_DIR, "repr_list",f"{TODAY_STR}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
+    return repr_list_json_path
 
 def scrape_lower_repr_list():
     gs.get_url(LOWER_REPR_LIST_URL)
@@ -112,7 +115,7 @@ def scrape_lower_repr_list():
     hiragana_links = [link.get_attribute("href") for link in hiragana_links]
     out_dict = REPR_LIST_LAYOUT.copy()
     out_dict["meeting_period"] = ''
-    out_dict["reprs"] = {}
+    out_dict["reprs"] = []
     for link in hiragana_links:
         gs.get_url(link)
         table_elements = gs.get_site_components_by(By.TAG_NAME, 'td')
@@ -145,21 +148,20 @@ def scrape_lower_repr_list():
                     terms_in_upper = 0
                terms_in_lower = int(split_period[0])
                repr_dict = {
-					"name":name,
-					"yomikata":yomikata,
-					"kaiha":kaiha,
-					"district":district,
-					"number_of_terms_lower":terms_in_lower,
-					"number_of_terms_upper":terms_in_upper,
-				}
-               if not kaiha in out_dict["reprs"].keys():
-                    out_dict["reprs"][kaiha] = []
-               out_dict["reprs"][kaiha].append(repr_dict)
-		
+                    "name":name,
+                    "yomikata":yomikata,
+                    "kaiha":kaiha,
+                    "district":district,
+                    "number_of_terms_lower":terms_in_lower,
+                    "number_of_terms_upper":terms_in_upper,
+                }
+               out_dict["reprs"].append(repr_dict)
+        
     #saving json
     repr_list_json_path = os.path.join(LOWER_OUTPUT_DIR, "repr_list",f"{TODAY_STR}_repr_list.json")
     write_json(out_dict, repr_list_json_path)
-
+    return repr_list_json_path
+    
 def scrape_upper_meeting_member_list():
     gs.get_url(UPPER_MEETING_INFO_PAGE_URL)
     meeting_period = gs.get_site_components_by(By.XPATH, "//p[@class='subtitle']")[0].text
@@ -198,6 +200,7 @@ def scrape_upper_meeting_member_list():
     create_dir(output_dir)
     meeting_member_json_path = os.path.join(output_dir, f"{meeting_period}.json")
     write_json(meeting_member_dict, meeting_member_json_path)
+    return meeting_member_json_path
 
 def scrape_lower_meeting_member_list():
     gs.get_url(LOWER_MEETING_INFO_PAGE_URL)
@@ -221,11 +224,11 @@ def scrape_lower_meeting_member_list():
         for role, name, yomikata, party in zip(role_texts, name_texts, yomikata_texts, party_texts):
             name = name.replace("\u3000", " ")
             member_dict = {
-				"role":role,
-				"name":name,
-				"yomikata":yomikata,
-				"party":party
-			}
+                "role":role,
+                "name":name,
+                "yomikata":yomikata,
+                "party":party
+            }
             if not meeting_name in meeting_member_dict['meetings'].keys():
                 meeting_member_dict['meetings'][meeting_name] = []
             meeting_member_dict['meetings'][meeting_name].append(member_dict)
@@ -233,49 +236,65 @@ def scrape_lower_meeting_member_list():
     create_dir(output_dir)
     meeting_member_json_path = os.path.join(output_dir, f"{TODAY_STR}_meeting_member_list.json")
     write_json(meeting_member_dict, meeting_member_json_path)
-            
-def scrape_upper_meeting_bills_info():
-    pass
+    return meeting_member_json_path
 
+def populate_db_with_upper_repr_list(upper_repr_list_json_path):
+    upper_repr_list = read_json(upper_repr_list_json_path)
+    for kaiha in upper_repr_list['reprs'].keys():
+        for repr in upper_repr_list['reprs'][kaiha]:
+            repr_name = repr['name']
+            repr_yomikata = repr['yomikata']
+            repr_kaiha = repr['kaiha']
+            repr_district = repr['district']
+            repr_period = repr['period']
 
+def populate_db_with_lower_repr_list(lower_repr_list_json_path):
+    lower_repr_list = read_json(lower_repr_list_json_path)
+    conn = connect_db()
+    cur = conn.cursor()
+    for kaiha in lower_repr_list['reprs'].keys():
+        for repr in lower_repr_list['reprs'][kaiha]:
+            repr_name = repr['name']
+            repr_yomikata = repr['yomikata']
+            repr_kaiha = repr['kaiha']
+            repr_district = repr['district']
+            repr_number_of_terms_lower = repr['number_of_terms_lower']
+            repr_number_of_terms_upper = repr['number_of_terms_upper']
+            repr_name_cleaned = clean_repr_name(repr_name)
+            person = get_person_by_column(cur, "name_kanji", repr_name_cleaned)
+                
+        
 
 def main():
     #declaring global variables
     global gs
     gs = GeneralScraper(CHROME_DRIVER_PATH)
 
-    if SCRAPE_UPPER_REPR_LIST:
-        scrape_upper_repr_list()
-    if SCRAPE_LOWER_REPR_LIST:
-        scrape_lower_repr_list()
-    if SCRAPE_UPPER_MEETING_MEMBER_LIST:
-        scrape_upper_meeting_member_list()
-    if SCRAPE_LOWER_MEETING_MEMBER_LIST:
-        scrape_lower_meeting_member_list()
+    upper_repr_list_json_path = None
+    lower_repr_list_json_path = None
+    upper_meeting_member_json_path = None
+    lower_meeting_member_json_path = None
 
-    #choose which repr list to use
-    upper_house_repr_list_dir = os.path.join(UPPER_OUTPUT_DIR, "repr_list")
-    upper_house_repr_list_file = [file for file in os.listdir(upper_house_repr_list_dir) if file.endswith("json")][0]
-    repr_list = read_json(os.path.join(upper_house_repr_list_dir, upper_house_repr_list_file))
+    if SCRAPE_UPPER_REPR_LIST:
+        upper_repr_list_json_path = scrape_upper_repr_list()
+    if SCRAPE_LOWER_REPR_LIST:
+        lower_repr_list_json_path = scrape_lower_repr_list()
+    if SCRAPE_UPPER_MEETING_MEMBER_LIST:
+        upper_meeting_member_json_path = scrape_upper_meeting_member_list()
+    if SCRAPE_LOWER_MEETING_MEMBER_LIST:
+        lower_meeting_member_json_path = scrape_lower_meeting_member_list()
+
     gs.close_driver()
 
-    return
-    #Collecting the meeting speeches
-    mcc = MeetingConvoCollector(base_url = GIJI_URL)
-    # getting rid of the space so that we have a match in all of the name
-    for speaker in repr_list['reprs']:
-        speaker_name = "".join(speaker["name"].split())
-        conditions_list = [
-            f"from={2022}-01-14",
-            # f"until={2021}-06-18",
-            f"speaker={speaker_name}",
-            "nameOfHouse=参議院",
-            "searchRange=本文",
-            "recordPacking=json"
-        ]
-        requests = mcc.make_requests(conditions_list)
-        write_json(requests, os.path.join(UPPER_SPEECH_OUTPUT_DIR, f'{speaker_name}.json'))
-        print("got requests")
+    if upper_repr_list_json_path:
+        populate_db = input("Do you want to populate the db with the upper house repr list? (y/n)")
+        if populate_db == "y":
+            populate_db_with_upper_repr_list(upper_repr_list_json_path)
+
+    if lower_repr_list_json_path:
+        populate_db = input("Do you want to populate the db with the lower house repr list? (y/n)")
+        if populate_db == "y":
+            populate_db_with_lower_repr_list(lower_repr_list_json_path)
 
 
 if __name__ == "__main__":
