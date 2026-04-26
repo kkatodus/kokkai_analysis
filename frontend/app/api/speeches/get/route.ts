@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { CACHE_CONTROL_10M, REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
+export const revalidate = 600;
+
 function normalizeBaseUrl(baseUrl: string): string {
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
@@ -12,8 +14,6 @@ function getBackendBaseUrl(): string {
   if (fromEnv) return normalizeBaseUrl(fromEnv);
   return "http://localhost:8000";
 }
-
-export const revalidate = REVALIDATE_TEN_MINUTES;
 
 /**
  * Proxy for backend `/speeches/get?person_id=...&topic=...&page_number=...`

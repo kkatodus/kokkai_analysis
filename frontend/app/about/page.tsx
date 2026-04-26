@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { BsGlobe, BsTwitterX, BsYoutube } from "react-icons/bs";
-import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
-export const revalidate = REVALIDATE_TEN_MINUTES;
+export const revalidate = 600;
 
 function Section({
   title,

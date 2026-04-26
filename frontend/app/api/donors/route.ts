@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { CACHE_CONTROL_10M, REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
+/** Avoid build-time prerender (backend may be unavailable during `next build`); use fetch `revalidate` + Cache-Control. */
+export const dynamic = "force-dynamic";
+
 function normalizeBaseUrl(baseUrl: string): string {
   // Ensure absolute URL for server-side fetch (Node/undici requires a scheme).
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
@@ -14,8 +17,6 @@ function getBackendBaseUrl(): string {
   if (fromEnv) return normalizeBaseUrl(fromEnv);
   return "http://localhost:8000";
 }
-
-export const revalidate = REVALIDATE_TEN_MINUTES;
 
 export async function GET() {
   const baseUrl = getBackendBaseUrl();
