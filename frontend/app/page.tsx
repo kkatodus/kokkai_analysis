@@ -8,7 +8,6 @@ import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerCli
 import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getAllRelevanceAndProductivityData } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
-import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
 /**
  * Loading component shown while data is being fetched
@@ -31,8 +30,9 @@ function LoadingState() {
 
 /**
  * ISR: home page revalidates every 10 minutes (server `fetch` in dataFetcher uses the same default).
+ * Must be a numeric literal — Next.js does not allow imported constants for segment config.
  */
-export const revalidate = REVALIDATE_TEN_MINUTES;
+export const revalidate = 600;
 
 /**
  * Main page component (Server Component)

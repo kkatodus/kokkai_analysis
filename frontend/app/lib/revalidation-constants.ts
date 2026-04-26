@@ -1,6 +1,7 @@
 /**
  * App-wide default ISR: 10 minutes (seconds).
- * Used by `export const revalidate`, server `fetch` `next.revalidate`, and API Route Cache-Control s-maxage.
+ * Used for server `fetch` `next.revalidate`, API Route handlers, and Cache-Control s-maxage.
+ * Route and page `export const revalidate` must be the literal `600` (Next.js static analysis).
  */
 export const REVALIDATE_TEN_MINUTES = 600;
 
