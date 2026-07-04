@@ -1,0 +1,362 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{url}
+\usepackage{array}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bbm}
+%% === margins ===
+\addtolength{\hoffset}{-0.75in} \addtolength{\voffset}{-0.75in}
+\addtolength{\textwidth}{1.5in} \addtolength{\textheight}{1.5in}
+
+%% JASA format with 12pt, spacingset = 1.83
+%\addtolength{\hoffset}{-0.3in} \addtolength{\voffset}{-1.2in}
+%\addtolength{\textwidth}{.6in} \addtolength{\textheight}{2.1in}
+%\pdfminorversion=4
+
+%% === basic packages ===
+\usepackage{latexsym}
+\usepackage{amssymb,amsmath, bm,pgfplots,tikz,bbm}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{marvosym}
+\usepackage{multirow,float}
+\usepackage{algpseudocode}
+%%\usepackage[large]{subfigure}
+\usepackage{subcaption}
+\captionsetup[sub]{width=0.9\linewidth}
+ % Adjust the width here
+\usepackage{mathtools}
+
+\usepackage{comment}
+\usepackage{enumitem}
+
+%% === bibliography packages ===
+\usepackage{natbib}
+\bibliographystyle{apalike}
+% \bibliographystyle{pa}
+
+%% === hyperref options ===
+\usepackage[bookmarksopen=true, bookmarksnumbered=true,
+pdfstartview=FitH, breaklinks=true, urlbordercolor={0 1 0}, citebordercolor={0 0 1}]{hyperref}
+
+% === dcolumn package ===
+\usepackage{dcolumn}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+% === theorem package ===
+\usepackage{theorem}
+\theoremstyle{plain}
+\theoremheaderfont{\scshape}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newcommand{\qed}{\hfill \ensuremath{\Box}}
+\newenvironment{proof}{\vspace{1ex}\noindent{\bf Proof}\hspace{0.5em}}
+{\hfill\qed\vspace{1ex}}
+\usepackage{kantlipsum}
+\allowdisplaybreaks
+
+% ==== rotating package ===
+\usepackage{rotating}
+\usepackage[table]{xcolor}% 
+% ==== dotted lines in tables ===
+\usepackage{arydshln}
+\usepackage{threeparttable}
+
+% == spacing between sections and subsections
+\usepackage[compact]{titlesec}
+
+% == anonymous submission
+\newcommand{\blind}{1}
+
+% == times new roman
+%\usepackage{times}
+
+\usepackage{xcolor}
+
+% == Algorithm
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
+\usepackage{pifont}
+
+\newtheorem{definition}{Definition}
+\newtheorem{condition}{Condition}
+\newtheorem{note}{Note}
+\setcounter{MaxMatrixCols}{12}
+
+\graphicspath{{figs/}} 
+\begin{document}
+
+\title{\bf Latent Space Ensembles for Dynamic Ideological Scaling: Measuring Rhetorical Consistency in the Japanese Diet}
+\author{
+Ken Kato\thanks{VETA} \qquad
+Yasutomo Kimura\thanks{Otaru University of Commerce} \qquad
+Yuki Mikiya\thanks{Keio University} \\[1.5em]
+Kota Mori\thanks{Japan Data Science Consortium} \qquad
+Mitsuo Yoshida\thanks{Tsukuba University} \qquad
+Yuko Kasuya\thanks{Waseda University}
+}
+\date{
+Last Updated: \today
+}
+\maketitle\thispagestyle{empty}
+\tableofcontents\thispagestyle{empty}
+
+\begin{abstract}
+\noindent 
+In the contemporary digital public sphere, politicians frequently adapt their rhetoric to navigate a tension between institutional party discipline, evolving historical contexts, and platform-specific audience engagement. Traditional ideological scaling methods, which typically rely on static or single-venue data, struggle to capture this strategic variance. To address this, we introduce a robust, multi-model embedding framework to systematically quantify both the cross-venue and temporal consistency of political actors. Building upon generative anchor-based scaling, we summarize domain-specific political texts, generate idealized ideological anchors via Large Language Models (LLMs), and project the text embeddings onto the resulting semantic axes. To mitigate the idiosyncratic pre-training biases of individual models, we employ a Latent Space Ensemble approach, where we either; 1)concatenate embeddings from diverse LLMs and apply Principal Component Analysis (PCA) for dimensionality reduction to create a dense, highly representative ideological vector. 2)Use Procrustes alignment to transform embeddings from multiple models into one uniform vector space and taking the average. 
+
+We validate our spatial estimates against two distinct benchmarks: macro-level electoral baselines established by the longitudinal UTokyo-Asahi Survey (UTAS), and a novel, micro-level validation dataset constructed from human-annotated pairwise comparisons (Elo-ratings) of politician summaries. Applying this verified metric to the Japanese political context, we move beyond aggregate party trends to compute individual-level volatility and directional drift over time. By systematically measuring this spatial and temporal variance, we uncover significant behavioral trends driven by party organization, electoral tier vulnerability (Proportional Representation vs. Single-Member Districts), and legislator seniority. Ultimately, this framework provides a highly validated, scalable pipeline for tracking dynamic political representation and measuring rhetorical accountability in a multi-platform ecosystem.
+\end{abstract}
+
+\noindent {\bf Keywords: } Quantitative Text Analysis, Political Representation, Measurement, Reliability and Validity
+
+\section{Introduction: Polarization and Accountability}
+Contemporary democratic systems face an unprecedented and systemic escalation in political polarization. The widening ideological gulf between partisan factions necessitates rigorous methods for ideological mapping to enhance political transparency \citep{mccarty2016polarized}. Thus, spatial scaling provides a vital mechanism for quantifying the precise distance between representatives, allowing voters to accurately identify political positioning. Building upon this premise, scholars have observed that this conflict has transcended mere policy disagreement, metastasizing into pervasive affective polarization \citep{iyengar2012affect, mason2015disrespectfully}. When fundamental social identities—encompassing religion, race, and class—align seamlessly with partisan affiliation, they forge a rigid social identity. Consequently, political competition is no longer perceived as a deliberative debate over resource allocation, but rather as an existential clash. Within this paradigm, cross-partisan compromise is framed as a betrayal of one's in-group, inexorably driving legislative gridlock and eroding foundational democratic norms.
+
+This phenomenon is compounded by the structural realities of the contemporary digital information environment, which has dramatically elevated the search costs associated with accessing reliable political data. Trapped within algorithmically generated ``filter bubbles" \citep{pariser2011filter} and self-reinforcing ``echo chambers" \citep{levy2019echo}, voters are frequently isolated in personalized feedback loops that erode shared factual foundations. Furthermore, this polluted information ecosystem is heavily influenced by elite-driven strategic misinformation. Empirical evidence establishes that political elites—including elected officials and influential organizations—frequently function as misinformation ``super-spreaders" \citep{mosleh2022measuring}. These actors often share low-quality, partisan-slanted content at rates significantly exceeding those of average users. This represents a calculated strategic choice: by disseminating misinformation, elites intentionally pollute the public sphere, rendering cross-platform verification an essential prerequisite for democratic transparency.
+
+In contrast to conventional wisdom that assumes ideological consistency across venues, political communication in this digitized era is inherently strategic and highly fragmented. Recent scholarship indicates that representatives strategically adapt their rhetorical positioning in response to distinct platform affordances \citep{blum2023conditional, green2024cross}. While traditional venues, such as legislative minutes, typically foster moderate, policy-centric discourse, social media environments like X or YouTube function as ``unleashed" spaces \citep{castanhosilva2022politicians}. In these relatively unconstrained arenas, politicians frequently adopt more radical, polarized stances designed to galvanize their base and maximize algorithmic engagement.
+
+To address the profound challenges posed by this multi-platform reality, this study introduces a novel methodological pipeline designed to measure the rhetorical and ideological consistency of political actors across disparate venues. By quantifying the variance in platform-dependent positioning, this research fills a critical gap in the existing literature regarding political accountability. Ultimately, this framework provides a robust new metric for evaluating representative fidelity, offering a vital tool for understanding how elites navigate the complexities of modern, affectively polarized democracies.
+
+\section{Motivation: Why measure consistency instead of political position?}
+Democratic accountability rests on a fundamental premise: voters must be able to accurately identify the policy stances of their elected representatives to make informed electoral choices. However, in an increasingly fragmented and polarized media environment, voters face significant hurdles in extracting reliable signals regarding politician positioning. While representatives disseminate information across a wider array of platforms than ever before—ranging from formal legislative speeches to highly curated social media feeds—this proliferation of venues has paradoxically obscured, rather than clarified, their true ideological commitments. Consequently, there is an urgent need for both a reliable methodological framework to measure these diverse stances and an accessible mechanism to present this data to the electorate.
+
+Despite the recognized importance of multi-platform political communication, the discipline currently lacks a systematic method for quantifying the consistency of politicians' rhetoric across these disparate arenas. Traditional scaling methods largely rely on unidimensional or single-venue data, such as roll-call votes or floor speeches. These approaches implicitly assume a unitary actor model, presupposing that a representative's expressed ideology remains constant regardless of the medium. Yet, if politicians strategically adapt their messaging to suit the distinct affordances and audience expectations of different platforms, single-venue measurements risk presenting a fundamentally distorted picture of their overall political positioning.
+
+This methodological gap leaves critical empirical questions unanswered: To what extent do politicians maintain ideological consistency across distinct communication platforms? Furthermore, how does this consistency—or lack thereof—evolve over time and in response to shifting electoral incentives? By shifting the analytical focus from static ideological positioning to cross-platform rhetorical consistency, this paper addresses a crucial blind spot in the representation literature, offering a vital new metric for evaluating the health of democratic accountability in a digitized public sphere.
+
+\section{Theory and Hypotheses}
+\label{sec:theory}
+{\color{red}↓~Citation needed}
+
+To understand why politicians exhibit varying degrees of cross-platform consistency, we conceptualize political communication as a strategic signaling game driven by a dual-principal dilemma. Legislators in modern democracies must simultaneously satisfy two distinct principals: the party leadership, which controls crucial resources such as electoral endorsements, funding, and committee assignments; and the electorate, whose votes dictate political survival. We theorize that politicians strategically calibrate the ideological consistency of their statements across different platforms as a mechanism to send tailored signals to these competing audiences. 
+
+The institutional constraints of a given platform dictate the cost of deviation. In formal institutional settings like the Diet, strict party discipline and official parliamentary records bind legislators to the party line. Conversely, digital platforms like X (formerly Twitter) provide a decentralized environment where politicians can cultivate a personal vote and mobilize specific constituencies. Based on this theoretical framework, we derive a series of hypotheses regarding the determinants of rhetorical consistency, categorized by platform affordances, electoral incentives, party characteristics, and individual legislator attributes.
+\subsection{Platform Affordances and Temporal Dynamics}
+Social media platforms afford politicians the opportunity to bypass traditional media gatekeepers and party whips. Because these digital arenas are optimized for affective engagement, we expect legislators to exploit this freedom to differentiate themselves from the sanitized party line. 
+
+\begin{description}
+    \item[\textbf{Hypothesis 1 (Platform Affordances):}] Politicians will exhibit strict adherence to the party line in institutional venues (e.g., the Diet) due to formal party mandates, but will display significantly higher ideological deviation and rhetorical inconsistency on social media platforms (e.g., X, YouTube) where they can cultivate a personal brand.
+\end{description}
+
+Furthermore, the strategic utility of distinct signaling fluctuates with the electoral cycle. As elections approach, the need to mobilize core supporters and capture public attention supersedes the routine maintenance of party harmony.
+
+\begin{description}
+    \item[\textbf{Hypothesis 2 (Electoral Proximity):}] As national elections approach, politicians will increasingly deploy polarized rhetoric on social media to maximize visibility and mobilize their base, resulting in heightened cross-platform inconsistency.
+\end{description}
+
+\subsection{Electoral Incentives and Cross-Pressures}
+Japan's Mixed-Member Majoritarian (MMM) system provides a critical testing ground for how electoral rules shape communication strategies. Legislators face different pressures depending on whether they rely on party reputation or personal appeal.
+
+\begin{description}
+    \item[\textbf{Hypothesis 3 (Electoral Tier):}] Legislators elected strictly through the Proportional Representation (PR) tier, who rely heavily on party branding, will maintain high cross-platform consistency. In contrast, Single-Member District (SMD) representatives will exhibit greater inconsistency as they pander to localized constituency demands.
+\end{description}
+
+A politician's electoral vulnerability further exacerbates this dynamic. In Japan, SMD candidates who narrowly lose can be ``revived'' through the PR block based on their margin of defeat (\textit{sekihairitsu}). These politicians face intense cross-pressure: they must signal loyalty to the party for PR ranking, while simultaneously courting local voters to win the SMD in the next cycle.
+
+\begin{description}
+    \item[\textbf{Hypothesis 4 (Marginality/Cross-Pressure):}] Politicians with a historically high margin of defeat (\textit{sekihairitsu}) will demonstrate higher levels of cross-platform inconsistency as they attempt to balance party-pleasing institutional behavior with aggressive, voter-targeted signaling on digital platforms.
+\end{description}
+
+\subsection{Organizational Constraints}
+The degree of consistency is also bounded by the nature of the legislator's party. Parties vary in their centralization and ability to monitor member behavior.
+
+\begin{description}
+    \item[\textbf{Hypothesis 5 (Party Discipline):}] The effect of platform affordances on inconsistency will be moderated by party structure; members of parties with high organizational centralization and strict top-down discipline (e.g., JCP, Komeito) will exhibit significantly lower cross-platform variance than members of catch-all parties.
+\end{description}
+\section{Research Design}
+{\color{red}↓~Kato-san will revise}
+
+\subsection{Case Selection: The Japanese Context}
+
+The selection of Japan as the primary case for this study is predicated on its utility as a theoretically critical case for examining the intersection of electoral institutions and platform-specific political communication. Institutionally, Japan's parliamentary system imposes exceptionally strong party discipline, establishing a rigid baseline for official partisan rhetoric. However, the Mixed-Member Majoritarian (MMM) electoral system introduces a competing dual incentive structure. Legislators must balance the imperative of party loyalty---necessary for electoral survival in Proportional Representation (PR) tiers---with the strategic need for personalized, highly differentiated appeals to cultivate localized constituencies in Single-Member Districts (SMDs). This structural tension establishes the theoretical conditions for rhetorical divergence across disparate communication channels.
+
+Compounding this institutional tension is Japan's distinct digital communication landscape, which exhibits marked asymmetric polarization. The Japanese digital sphere, particularly on platforms such as X, is characterized by a disproportionate conservative dominance \citep{yoshida2021japanese} and the materialization of xenophobia as an independent, non-traditional ideological axis \citep{takikawa2017moral}. Furthermore, longitudinal cognitive gaps complicate these discursive environments; traditional ideological labels, such as ``Conservative'' and ``Progressive,'' have undergone significant semantic shifts across voting generations \citep{jou2016generational}.
+
+Consequently, these structural and cognitive pressures manifest as pronounced cross-platform rhetorical gaps. Emerging empirical evidence indicates a substantive divergence between the constrained speech politicians employ within the Diet \citep{kaneko2026extracting}and their localized messaging strategies. Driven by the competing incentives of the MMM system and navigating the asymmetrical polarization of the digital sphere, legislators strategically tailor their rhetoric to specific mediums. Therefore, the core objective of this study is to systematically quantify this discrepancy. By comparing the sanitized, disciplined records of official Diet proceedings with the more ``unleashed'' and personalized rhetoric deployed on platforms like X and YouTube, this research elucidates how institutional constraints and digital affordances interact to shape contemporary political discourse.
+\subsection{Data}
+To systematically evaluate cross-platform rhetorical consistency, we constructed a comprehensive, multi-modal corpus of political communication. Our data collection strategy captures the distinct communicative environments politicians navigate, ranging from highly institutionalized settings to unconstrained digital platforms. The original collection yielded over 16.5 million unique text artifacts, including official parliamentary minutes, YouTube video transcripts, and posts on X. To ensure the validity of our textual metrics, we applied a rigorous preprocessing pipeline to filter out administrative announcements, non-political content, and purely procedural remarks, isolating substantive policy discourse for our downstream analysis. Table \ref{tab:data_summary} summarizes the corpus dimensions before and after this filtering process.
+
+\begin{table}[H]
+\centering
+\caption{Summary of the Textual Corpus Construction}
+\label{tab:data_summary}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Source Platform} & \textbf{Total Collected} & \textbf{Used for Analysis} \\ \midrule
+Parliamentary Speech & \begin{tabular}[c]{@{}c@{}}11,164,180 speeches\\ (107,280 diet meetings)\end{tabular} & 368,557 speech segments \\ \addlinespace
+YouTube Transcripts & 58,765 transcripts & 5,399 transcripts \\ \addlinespace
+Posts on X & 5,327,182 tweets & 196,720 tweets \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Parliamentary Speech}
+Formal legislative speech serves as the baseline for institutionalized, disciplined political rhetoric. We collected the official minutes from 107,280 National Diet meetings, amounting to 11,164,180 individual speech acts. Because official records inherently contain a vast amount of procedural formalities, roll-call responses, and administrative dialogue, we filtered the corpus to extract meaningful policy deliberations. Following this preprocessing, our final analytical sample consists of 368,557 substantive speech segments. This dataset provides the canonical representation of a politician's constrained ideological positioning under strict party discipline.
+
+\subsubsection{YouTube Transcripts}
+To capture long-form, direct-to-voter communication in the digital sphere, we scraped the automated and manually uploaded transcripts from the official YouTube channels of Japanese politicians. From an initial collection of 58,765 video transcripts, we retained 5,399 transcripts for our core analysis. This platform represents a unique intermediary space where politicians face fewer institutional constraints than in the Diet but still typically engage in extended, highly curated narrative building. 
+
+\subsubsection{Posts on X}
+Finally, to measure political rhetoric in an ``unleashed,'' rapid-response environment, we collected posts from politicians' official X accounts. X operates as a primary venue for affective signaling, base mobilization, and platform-specific polarization. We harvested a total of 5,327,182 tweets. After removing pure retweets without quote-tweets, non-textual posts, and non-political constituency updates, we isolated a precise analytical sample of 196,720 tweets. Comparing these unmediated, high-frequency signals against the institutionalized Diet speeches forms the empirical core of our cross-platform consistency metric.
+
+\subsubsection{Pair-wise comparison data with Bradley-Terry Model}
+
+relevant literature
+- https://arxiv.org/abs/2303.12057
+- https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5112677
+- https://www.cambridge.org/core/journals/political-science-research-and-methods/article/measuring-legislators-ideological-position-in-large-chambers-using-pairwisecomparisons/56AB0E30143F83830DA1089FE74386CC    
+
+\subsection{Identification Strategy}
+\subsubsection{Identifying Political Texts}
+Political text data derived from raw digital and institutional environments is inherently noisy, saturated with procedural formalities, casual interactions, and non-political discourse. To ensure the validity of our downstream consistency measurements, we must first systematically isolate substantive political statements from this noise. 
+
+While modern Large Language Models (LLMs) possess exceptional zero-shot classification capabilities, deploying a massive generative model across our entire corpus of over 16 million observations is computationally prohibitive. To resolve this bottleneck, we implemented a supervised pseudo-labeling pipeline, leveraging a teacher-student model architecture.  
+
+Specifically, we utilized a large-scale LLM (\path{openai/gpt-oss-20b}, executed locally via LM Studio) as our ``teacher'' model to annotate a representative subset of texts across all three platforms. We then used these high-quality, LLM-generated labels to fine-tune a smaller, highly efficient ``student'' encoder model (\path{ku-nlp/deberta-v3-base-japanese}). This distillation strategy allows us to leverage the sophisticated semantic reasoning of the large-parameter model while achieving the computational efficiency required for inference at scale.
+
+Recognizing the distinct linguistic affordances of each venue, we trained domain-specific DeBERTa models for parliamentary speeches, YouTube transcripts, and X posts. The classification unit and label schemas were strategically tailored to each platform's structural characteristics. For instance, while X posts were evaluated at the macro-level of the entire tweet, longer-form parliamentary and YouTube texts were segmented by punctuation to capture granular rhetorical shifts. 
+
+Table \ref{tab:domain_models} summarizes the training datasets, classification units, and target labels for each domain-specific model. To ensure the transparency and reproducibility of our computational pipeline, all fine-tuned models have been open-sourced and are publicly accessible via the HuggingFace model hub.
+
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{Summary of Domain-Specific Classification Models}
+\label{tab:domain_models}
+\small
+\begin{tabular}{@{}l l c m{5.5cm} l@{}}
+\toprule
+\textbf{Domain} & \textbf{Model Name\tnote{a}} & \textbf{Training Size} & \textbf{Target Labels} & \textbf{Classification Unit} \\ \midrule
+Parliament & \path{parliament} & 2,995 & Question, Follow-up/Confirmation, Response, Counterargument/Rebuttal, Opinion Statement, Request/Proposal, Criticism, Evaluation, Explanation, Statement of Fact, Apology/Clarification, Procedure/Operation, Other & Speech segment\tnote{b} \\ \addlinespace
+YouTube & \path{youtube-full} & 9,469 & Political, Other & Speech segment\tnote{b} \\ \addlinespace
+X & \path{twitter-full} & 8,696 & Political, Other & Whole tweet \\ \bottomrule
+\end{tabular}
+\begin{tablenotes}\footnotesize
+\item[a] Full prefix \path{text\_labeller\_[domain]-deberta-v3-base-japanese} is omitted for brevity.
+\item[b] Segments are delimited by punctuation (``.'').
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsubsection{*Creating political representation: Ensemble embeddings approach}
+- one llm -> a lot of bias
+- multiple llms ensembled -> less bias (yay)
+- why this is legit? ->https://aclanthology.org/D19-1006.pdf, https://onlinelibrary.wiley.com/doi/abs/10.1111/coin.12478, 
+\subsubsection{*Creating political representation: Procrustes alignment approach}
+- same idea as ensemble embedding 
+- we create anchors where we calculate a rotation matrix to rotate multiple embedding spaces into the same embedding space(I think)
+- why this is legit? -> https://arxiv.org/pdf/2405.07987,  https://arxiv.org/pdf/2505.12540, https://arxiv.org/pdf/1805.11222, https://arxiv.org/pdf/2602.06205,
+https://arxiv.org/pdf/2602.09225
+
+
+\subsubsection{Measuring Consistency with LLM}
+To quantify the ideological positioning and cross-platform consistency of politicians, we developed a multi-step computational pipeline leveraging Large Language Models (LLMs), as illustrated in Figure \ref{fig:Pipeline}. This approach translates unstructured, multi-venue text into normalized, scalar ideological coordinates. The pipeline consists of five primary stages:
+
+\begin{enumerate}
+    \item \textbf{Filtration:} Raw political texts derived from digital and institutional environments are inherently noisy. We apply our domain-specific models, fine-tuned on the \path{ku-nlp/deberta-v3-base-japanese} architecture (as detailed in the previous section), to filter out irrelevant noise and extract substantive, policy-relevant statements.
+    
+    \item \textbf{Summarization for Normalization:} To enable valid, ``apples-to-apples'' comparisons across distinct communication venues with varying affordances (e.g., brief X posts versus lengthy parliamentary speeches), we summarize the filtered texts for each platform and year. We utilize \path{gemini-3-flash-preview} to condense these statements, effectively normalizing the rhetorical variance and text length while preserving the core political stance.
+    
+    \item \textbf{Anchor Generation:} To establish a directional semantic axis for a given political topic, we generate synthetic reference points (anchors). By prompting an LLM (\path{gemini-3-flash-preview}), we create idealized statements that articulate opposing, polarized views on the topic of interest (e.g., strongly in favor versus strongly against).
+    
+    \item \textbf{Embedding:} Both the summarized political speeches and the synthetic anchor statements are mapped into a shared, high-dimensional vector space. To ensure the accurate capture of subtle Japanese political nuances, we employ a large-scale embedding model, \path{sbintuitions/sarashina-embedding-v2-1b}.
+    
+    \item \textbf{Projection:} Finally, we calculate the relative ideological position by projecting the embedded speeches onto the axis defined by the two anchor embeddings. Let $E_{A1}$ and $E_{A2}$ represent the embeddings of the opposing anchor statements, and $E_{S}$ represent the embedding of a summarized speech. The semantic axis vector is defined as $\vec{v} = E_{A2} - E_{A1}$. The scalar position $P$ of the speech is obtained via vector projection:
+    
+    $$P = \frac{(E_{S} - E_{A1}) \cdot \vec{v}}{\|\vec{v}\|^2}$$
+    
+    This projection yields a precise scalar value representing the degree to which a politician's rhetoric aligns with or opposes the target issue. By applying this operation across different domains, we isolate the variance in positioning, providing our core metric for cross-platform rhetorical consistency.
+\end{enumerate}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{fig/pipeline.png}
+    \caption{Pipeline}
+    \label{fig:Pipeline}
+\end{figure}
+\section{Result}
+\subsection{Visualization: General Trend}
+text
+\subsection{}
+text
+\subsection{Downstream Analysis: Determinants of Rhetorical Deviation}
+% どのような議員が一貫・非一貫か？
+
+\section{Discussion}
+text
+\section{Conclusion}
+The fragmentation of political communication across institutional and digital venues poses a profound challenge to democratic accountability. In an era characterized by affective polarization and algorithmic media environments, traditional single-venue measures of political ideology are increasingly insufficient. To address this critical gap, this study introduced a novel computational framework leveraging large language models to systematically measure the rhetorical and ideological consistency of politicians across disparate platforms.
+
+Our empirical findings offer three primary contributions to the study of political behavior and representation. First, our methodology successfully captured the inter-party ideological dynamics within the Japanese Diet, relying exclusively on textual data aggregated from various platforms. This demonstrates that multi-modal, text-as-data approaches can yield robust spatial mappings of party positioning, capturing nuanced rhetorical dimensions that traditional roll-call or manifesto analyses may overlook. 
+
+Second, our framework extends beyond static spatial scaling by capturing diachronic changes in political stances. By measuring rhetorical consistency over time, we demonstrated that politicians do not hold rigidly fixed ideological coordinates; rather, they dynamically adjust their positioning in response to exogenous historical events and shifting electoral landscapes. This temporal dimension provides a more empirically grounded understanding of how representatives navigate policy shocks and changing public sentiment.
+
+Finally, our cross-platform measurements provide rigorous empirical support for the extensive literature suggesting that social media environments exacerbate political polarization. By systematically comparing the disciplined, institutionalized discourse of parliamentary speeches with the ``unleashed'' rhetoric found on platforms like X and YouTube, we revealed a clear rhetorical divergence. Politicians strategically exploit the distinct affordances of digital platforms to deploy more polarized messaging to their base, independent of their formal legislative behavior.
+
+Ultimately, these findings challenge the implicit assumption of the unitary actor in the representation literature. As political elites increasingly tailor their rhetoric to fragmented audiences, scholars must account for platform-specific incentives. By providing a scalable, reliable method for measuring these multi-venue dynamics, this research lays the theoretical and methodological groundwork for future investigations into elite behavior, democratic transparency, and the structural drivers of polarization in the digital age.
+\bibliography{references}
+
+\newpage 
+\appendix
+\setcounter{equation}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{section}{0}
+\renewcommand {\theequation} {S\arabic{equation}}
+\renewcommand {\thefigure} {S\arabic{figure}}
+\renewcommand {\thetable} {S\arabic{table}}
+\renewcommand {\thesection} {S\arabic{section}}
+
+
+\begin{center}
+  {\LARGE \bf Appendix} 
+\end{center}
+\section{Summarization Prompt}
+We used the following translated prompt to summarize the politicians' stances.
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=Method: Summarization Prompt (Translated), breakable]
+You are a neutral analyst of Japanese political speech.\\
+Based only on the statements of the politician below, summarize their stance toward Japan's ``\{topic\}''. Do not infer or supplement information that is not explicitly present in the statements.
+
+\textbf{[Purpose]} \\
+Create a concise, neutral summary that can be understood by general readers who are not familiar with politics.
+
+\textbf{[Output Rules]}
+\begin{itemize}
+    \item Use bullet points (maximum of 3 items)
+    \item Each item must strictly follow the format below:
+    \begin{itemize}
+        \item Stance (Support / Oppose / Conditional Support / Unclear)
+        \item Reason (Explain the main rationale that can be read from the statements, using plain language)
+        \item Evidence Quote (Briefly quote part of the statement, about 20--40 characters)
+    \end{itemize}
+\end{itemize}
+
+\textbf{[Constraints]}
+\begin{itemize}
+    \item Do not include points where the evidence is weak or unclear
+    \item Do not use evaluative or emotional language
+    \item Replace technical terms with general, everyday words whenever possible
+    \item Follow the format exactly and output no additional text
+\end{itemize}
+
+\textbf{[Output Example]} \\
+Supports increasing the defense budget
+\begin{itemize}
+    \item Reason: States that Japan needs to be able to protect itself and emphasizes the importance of improving equipment and the treatment of personnel
+    \item Evidence Quote: ``a responsibility to protect the country ourselves''
+\end{itemize}
+Supports explicitly stating the Self-Defense Forces in the Constitution
+\begin{itemize}
+    \item Reason: Explains that their legal status is unclear and that this makes it difficult to operate domestically and internationally
+    \item Evidence Quote: ``the legal basis remains unclear''
+\end{itemize}
+
+\textbf{[Statements to Analyze]} \\
+\{text\}
+\end{tcolorbox}
+\end{document}

@@ -1,0 +1,77 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{POLIS: Parameter Optimization for Low-resource Ideological Simulation}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    The use of Large Language Models (LLMs) to simulate agentic populations is a rapidly expanding frontier in computational social science. However, current methodologies relying on zero-shot prompting or role-playing frequently suffer from in-group bias, generating caricatures based on demographic stereotypes rather than authentic ideological expressions. While Supervised Fine-Tuning (SFT) mitigates this bias, it is structurally limited by data sparsity; in domains such as political science, high-profile figures possess abundant public transcripts, whereas long-tail demographics have severely limited training data. To achieve grounded persona generation in low-resource settings, we introduce POLIS(Parameter Optimization for Low-resource Ideological Simulation). Rather than attempting to fine-tune on insufficient text, we conceptualize ideology as a continuous latent spectrum. We first train domain-specific LoRA adapters on data-rich personas using Direct Preference Optimization (DPO). For data-sparse target personas, we project these capabilities by interpolating the data-rich adapters using DARE-TIES weight-space arithmetic. To discover the optimal ideological blend without catastrophic stylistic overfitting, we employ Bayesian Optimization to tune the layer-wise mixing coefficients against a cross-validated likelihood objective on the limited target data. By treating fine-tuning-induced weight differences as modular, composable units, our framework synthesizes robust, authentic personas that accurately reflect a target's ideological position without requiring extensive domain data. We demonstrate that this optimized merging approach yields significantly more grounded LLM personas compared to standard SFT in sparse data domains.
+\end{abstract}
+
+\section{Introduction}
+% 研究の背景、課題（LLMのペルソナシミュレーションにおけるデータ不足とバイアス）、POLISの提案、主な貢献（Contributions）を記載。
+
+\section{Related Work}
+% 関連研究: LLM-based Agent Simulation, Parameter-Efficient Fine-Tuning (LoRA), Model Merging (DARE, TIES), Bayesian Optimization for Neural Networksなど。
+
+\section{Preliminaries}
+% 提案手法を説明するための前提知識（DPOの定式化、DARE-TIESの基本原理など）を簡潔に定義。
+
+\section{The POLIS Framework}
+% 提案手法のコアセクション。アブストラクトのパイプラインに沿って展開。
+\subsection{Problem Formulation}
+% イデオロギーを連続的な潜在スペクトルとして定義し、低資源ペルソナ生成の目的関数を定式化。
+\subsection{Base Persona Alignment via Direct Preference Optimization}
+% データ豊富なペルソナを用いたドメイン特化型LoRAアダプタのDPOによる学習プロセス。
+- some literatures to support this
+    - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11372692
+    - https://aclanthology.org/2025.coling-main.369/
+    - Original DPO paper : https://arxiv.org/abs/2305.18290
+\subsection{Weight-Space Interpolation via DARE-TIES}
+% データが疎なターゲットペルソナに向けて、学習済みアダプタをDARE-TIESを用いて統合・投影する手法。
+- DARE paper : https://arxiv.org/abs/2311.03099
+- TIES paper : https://arxiv.org/abs/2306.01708
+
+\subsection{Layer-wise Mixing Optimization via Bayesian Optimization}
+% 破滅的なスタイルの過適合を防ぎつつ、ターゲットデータに対する交差検証尤度を最大化するための、ベイズ最適化を用いた層ごとの混合係数のチューニング。
+- https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11048544
+- https://arxiv.org/pdf/2512.09972v5
+
+\section{Experimental Setup}
+\subsection{Datasets}
+% 使用した政治的/イデオロギー的発言のデータセット（データリッチなドメインとロングテールなドメインの詳細）。
+\subsection{Baselines}
+% 比較対象（Zero-shot Prompting, Standard SFT, Uniform Model Mergingなど）。
+\subsection{Evaluation Metrics}
+% ペルソナのグラウンディング、イデオロギーの正確性、ステレオタイプ/バイアスの評価指標（自動評価および人手評価）。
+
+\section{Results and Analysis}
+\subsection{Main Results}
+% 提案手法（POLIS）とベースラインの比較。低資源環境での優位性を示す。
+\subsection{Ablation Studies}
+% 各モジュールの貢献度分析（例：層ごとの最適化 vs 全層一律の混合、DPO vs SFTなど）。
+\subsection{Qualitative Analysis}
+% 実際の生成テキストの事例（Case Studies）。POLISがステレオタイプを回避し、いかに自然なイデオロギー表現を獲得しているかを示す。
+
+\section{Discussion and Limitations}
+% 本手法の限界（計算コスト、対象ドメインの広がりなど）や将来の展望。
+
+\section{Conclusion}
+
+\section*{Ethics Statement}
+% 社会的影響、バイアスの取り扱い、生成されたペルソナの悪用防止に関する倫理的配慮。
+
+\section*{Acknowledgements}
+
+% \bibliography{references}
+% \bibliographystyle{...}
+
+% \appendix
+% \section{Implementation Details} % ハイパーパラメータやプロンプトの詳細など
+
+\end{document}

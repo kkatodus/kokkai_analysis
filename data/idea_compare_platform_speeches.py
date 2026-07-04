@@ -1097,7 +1097,7 @@ from api_requests.prompter import DeepResearchGemini
 import time
 RESULTS_DIR = os.path.join(DATA_DIR, "tmp_idea_analysis")
 
-gemini_prompter = DeepResearchGemini(model_name="gemini-3-flash-preview")
+gemini_prompter = DeepResearchGemini(model_name="gemini-3.5-flash")
 
 
 input_file_names = {
@@ -1303,7 +1303,7 @@ import time
 if False:
 
 	print("Generating summaries of axis examples")
-	gemini_prompter = DeepResearchGemini(model_name="gemini-3-flash-preview")
+	gemini_prompter = DeepResearchGemini(model_name="gemini-3.5-flash")
 
 
 	AXIS_EXAMPLES_PATH = os.path.join(ROOT_DIR, "axis", TOPIC_OF_INTEREST, "examples", f"{SUBTOPIC_OF_INTEREST}_example_speeches.json")

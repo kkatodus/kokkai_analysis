@@ -166,7 +166,7 @@ load_dotenv()
 		# return result_stream.final_output
 	
 class DeepResearchGemini:
-	def __init__(self, model_name="gemini-3-flash-preview"):
+	def __init__(self, model_name="gemini-3.5-flash"):
 		self.client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 		self.model_name = model_name
 	
