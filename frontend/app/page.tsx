@@ -5,7 +5,7 @@
 
 import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
-import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable } from "@/app/lib/server/dataFetcher";
+import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getAllRelevanceAndProductivityData } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
@@ -29,12 +29,10 @@ function LoadingState() {
 }
 
 /**
- * Revalidation period: 1 week (604800 seconds)
- * This enables ISR (Incremental Static Regeneration) on Vercel
- * The page will be cached and only revalidated once per week
- * This prevents hammering the backend API on every request
+ * ISR: home page revalidates every 10 minutes (server `fetch` in dataFetcher uses the same default).
+ * Must be a numeric literal — Next.js does not allow imported constants for segment config.
  */
-export const revalidate = 604800; // 7 days * 24 hours * 60 minutes * 60 seconds
+export const revalidate = 600;
 
 /**
  * Main page component (Server Component)
@@ -49,13 +47,13 @@ export default async function ParliamentExplorerPage({
   const params = await searchParams;
   
   // Fetch all initial data in parallel on the server
-  const [parliamentMemberData, allParliamentMemberTable, votingDistrictGeoJsonData, ideologyData] = await Promise.all([
+  const [parliamentMemberData, allParliamentMemberTable, votingDistrictGeoJsonData, ideologyData, relevanceAndProductivityData] = await Promise.all([
     getParliamentMemberData(),
     getAllParliamentMemberTable(),
     getVotingDistrictGeoJsonData(),
     getIdeologyData(),
+	getAllRelevanceAndProductivityData(),
   ]);
-
 
   // Get selectedId from URL search params (for shareable links)
   const selectedPersonId = params.person_id || null;
@@ -68,6 +66,7 @@ export default async function ParliamentExplorerPage({
         votingDistrictGeoJsonData={votingDistrictGeoJsonData}
         ideologyData={ideologyData}
         initialSelectedPersonId={selectedPersonId}
+		relevanceAndProductivityData={relevanceAndProductivityData}
       />
     </Suspense>
   );

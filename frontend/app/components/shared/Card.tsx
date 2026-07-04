@@ -41,7 +41,7 @@ export function CardHeader({ title, subtitle, action }: CardHeaderProps) {
   return (
     <div className="mb-2 flex items-center justify-between">
       <div>
-        <div className="flex items-center gap-1.5 text-sm font-semibold">
+        <div className="flex items-center gap-1.5 text-sm font-semibold text-gray-200">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
           {title}
         </div>

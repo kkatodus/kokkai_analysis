@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const revalidate = 600000
+export const revalidate = 600;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

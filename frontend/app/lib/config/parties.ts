@@ -14,6 +14,7 @@ export const PARTIES = [
 	"自由民主党",
 	"再生の道",
 	"公明党",
+	"中道改革連合",
 	"NHK党"
 ]
 
@@ -34,6 +35,7 @@ export const PARTY_COLORS: { [key: string]: string } = {
 	"再生の道": "red-500",
 	"公明党": "blue-500",
 	"NHK党": "green-500",
+	"中道改革連合": "purple-500",
 }
 
 
@@ -51,11 +53,13 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	女子: '女子',
 	保守: '保守',
 	参政: '参政',
+	中道: '中道',
 	無所属: '無',
 	無: '無',
 	N党: 'N党',
 	LDP: '自民',
 	NDP: '国民',
+	CRA: '中道',
 	CDP: '立憲',
 	Komeito: '公明',
 	JCP: '共産',
@@ -137,6 +141,7 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	国民: '国民民主党',
 	維教: '日本維新の会・教育無償化を実現する会',
 	Ｎ党: 'ＮＨＫから国民を守る党',
+	中道: '中道改革連合',
 	LDP: '自由民主党',
 	Komeito: '公明党',
 	JCP: '日本共産党',
@@ -149,6 +154,7 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	None: '無所属',
 	'N Party': 'Ｎ党',
 	CDP: '立憲民主党',
+	CRA: '中道改革連合',
   };
   
   export const PARTY2COLORLIST: { party: string; color: string }[] = [
@@ -165,6 +171,7 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	{ party: 'Ｎ党', color: 'pink' },
 	{ party: '参政', color: 'brown' },
 	{ party: '沖縄', color: 'teal' },
+	{ party: '中道', color: 'purple' },
   ];
   
   export const PARTY2COLOR: { [key: string]: string } = PARTY2COLORLIST.reduce((acc: { [key: string]: string }, curr: { party: string; color: string }) => {
@@ -188,4 +195,5 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	国民: [0, 110, 255],     // vivid blue
 	維教: [190, 255, 0],     // lime neon
 	Ｎ党: [255, 0, 140],     // neon fuchsia
+	中道: [128, 0, 128],     // purple
   };

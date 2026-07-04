@@ -28,8 +28,10 @@ def parse_election_date(y: str, m: str, d: str) -> date:
     dd = _parse_int(d) or 1
     return date(yy, mm, dd)
 
-def parse_election_number(freq: str) -> Optional[int]:
+def parse_election_number(freq: Optional[str]) -> Optional[int]:
     # "（1回目）" -> 1
+    if freq is None or freq == "":
+        return None
     return _parse_int(freq)
 
 def generate_election_signature(raw: RawPersonFile) -> str:
@@ -248,7 +250,7 @@ def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonF
                 district=e["district"],
                 party=e["party"],
                 result=e["result"],
-                election_number=parse_election_number(e["election_freq"]),
+                election_number=parse_election_number(e.get("election_freq")),
                 raw_json=e,
             )
         )
@@ -390,7 +392,6 @@ def get_closest_person_by_name(cur: psycopg2.extensions.cursor, name: str, limit
 
 def get_politician_id_by_name(cur: psycopg2.extensions.cursor, name_kanji: str, name_kana: str, party: str, stop_for_input: bool = True) -> Optional[PersonId]:
 	repr_name_clean = clean_repr_name(name_kanji)
-	print("Working on ", name_kanji)
 	person = get_person_by_column(cur, "name_kanji", repr_name_clean)
 	hiragana_person = get_person_by_column(cur, "name_kana", clean_repr_name(name_kana))
 	if len(person) > 1:

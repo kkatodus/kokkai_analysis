@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
+import { CACHE_CONTROL_10M, REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 
-const SEVEN_DAYS_SECONDS = 604800;
-const CACHE_CONTROL_7D = `public, s-maxage=${SEVEN_DAYS_SECONDS}, stale-while-revalidate=86400`;
+export const revalidate = 600;
 
 function normalizeBaseUrl(baseUrl: string): string {
   const trimmed = baseUrl.trim().replace(/\/+$/, "");
@@ -14,8 +14,6 @@ function getBackendBaseUrl(): string {
   if (fromEnv) return normalizeBaseUrl(fromEnv);
   return "http://localhost:8000";
 }
-
-export const revalidate = 604800;
 
 /**
  * Proxy for backend `/electionHistory/?person_id=...`
@@ -39,7 +37,7 @@ export async function GET(req: Request) {
   const apiKey = process.env.BACKEND_API_KEY || process.env.API_KEY;
   if (apiKey) headers["X-API-KEY"] = apiKey;
 
-  const res = await fetch(url, { headers, next: { revalidate: SEVEN_DAYS_SECONDS } });
+  const res = await fetch(url, { headers, next: { revalidate: REVALIDATE_TEN_MINUTES } });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     return NextResponse.json(
@@ -58,7 +56,7 @@ export async function GET(req: Request) {
     const history = lines.map((l) => JSON.parse(l));
     return NextResponse.json(
       { history },
-      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_7D } }
+      { status: 200, headers: { "Cache-Control": CACHE_CONTROL_10M } }
     );
   } catch (e) {
     return NextResponse.json(

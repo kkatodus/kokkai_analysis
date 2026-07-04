@@ -51,6 +51,13 @@ class LocalStorage:
 			raise FileNotFoundError(f"File not found: {path}")
 		with open(path, "r", encoding="utf-8") as f:
 			return json.load(f)
+	
+	def read_jsonl(self, key:str) -> list[dict]:
+		path = self._path(key)
+		if not os.path.exists(path):
+			raise FileNotFoundError(f"File not found: {path}")
+		with open(path, "r", encoding="utf-8") as f:
+			return [json.loads(line) for line in f.read().splitlines()]
 
 	def read_jsonl_paginated(self, key:str, page_number:int) -> Page:
 		path = self._path(key)
@@ -61,6 +68,7 @@ class LocalStorage:
 			total_pages = len(lines) // PAGE_LINE_SIZE + 1
 			total_lines = len(lines)
 			return Page(lines=[json.loads(line) for line in lines[page_number*PAGE_LINE_SIZE:(page_number+1)*PAGE_LINE_SIZE]], page_number=page_number, total_pages=total_pages, total_lines=total_lines)
+
 
 
 CHUNK_SIZE = 1024 * 1024 # 1MB
@@ -95,7 +103,9 @@ class S3Storage:
 
 	def read_json(self, key: str) -> dict:
 		return json.loads(self.read_bytes(key))
-
+	
+	def read_jsonl(self, key:str) -> list[dict]:
+		return [json.loads(line) for line in self.read_bytes(key).splitlines()]
 	
 	def read_jsonl_paginated(self, key: str, page_number: int) -> Page:
 		"""

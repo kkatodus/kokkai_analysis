@@ -23,15 +23,16 @@ RESOURCES_JSON_PATH = os.path.join(RESOURCES_DIR, "experiment_config.json")
 RESOURCES_JSON = read_json(RESOURCES_JSON_PATH)
 
 
-# In[20]:
+# In[ ]:
 
 
 def iterate_meeting_files() -> Iterator[Tuple[str, str]]:
-	for meeting_id in os.listdir(ALL_SPEECHES_DIR):
+	total_count = len(os.listdir(ALL_SPEECHES_DIR))
+	for idx, meeting_id in enumerate(os.listdir(ALL_SPEECHES_DIR)[::-1]):
 		meeting_dir = os.path.join(ALL_SPEECHES_DIR, meeting_id)
 		meta_file = os.path.join(meeting_dir, "meta.json")
 		speeches_file = os.path.join(meeting_dir, "speeches.jsonl")
-		yield meta_file, speeches_file
+		yield meta_file, speeches_file, idx, total_count
 
 def iterate_speeches_in_meeting(speeches_file: str) -> Iterator[dict]:
 	with open(speeches_file, "r") as f:
@@ -50,6 +51,8 @@ def identify_topic_for_speech(speech_text:str) -> str:
 # In[ ]:
 
 
+from collections import defaultdict
+
 try:
 	conn = connect_db(
 		dbname="kokkaidoc",
@@ -60,30 +63,40 @@ try:
 	)
 	cur = conn.cursor()
 
+	speaker2speaker_id_cache = {}
+	speaker2speech_id_cache = defaultdict(set)
 
-
-	for meta_file, speeches_file in iterate_meeting_files():
+	for meta_file, speeches_file, idx, total_count in iterate_meeting_files():
+		progress = f"{idx}/{total_count}"
+		print("Progress: ", progress)
 		meta_json = read_json(meta_file)
 		for speech_dict in iterate_speeches_in_meeting(speeches_file):
 			speaker = speech_dict["speaker"]
 			if not speaker:
 				continue
-			try:
-				speaker_id = get_politician_id_by_name(cur, speaker, speech_dict["speakerYomi"], speech_dict["speakerGroup"], stop_for_input=False)
-			except Exception as e:
-				print(e)
-				continue
-			if speaker_id is None:
-				continue
+			if speaker not in speaker2speaker_id_cache:
+				try:
+					speaker_id = get_politician_id_by_name(cur, speaker, speech_dict["speakerYomi"], speech_dict["speakerGroup"], stop_for_input=False)
+					speaker2speaker_id_cache[speaker] = speaker_id
+				except Exception as e:
+					continue
+				if speaker_id is None:
+					continue
+			elif speaker in speaker2speaker_id_cache:
+				speaker_id = speaker2speaker_id_cache[speaker]
+			
 			os.makedirs(os.path.join(OUTPUT_DIR, str(speaker_id)), exist_ok=True)
 			speaker_all_speeches_file = os.path.join(OUTPUT_DIR, str(speaker_id), "all_speeches.jsonl")
-			covered_speech_ids = []
-			if os.path.exists(speaker_all_speeches_file):
-				with open(speaker_all_speeches_file, "r") as f:
-					for line in f:
-						covered_speech_ids.append(json.loads(line)["speechID"])
 
-			if speech_dict["speechID"] in covered_speech_ids:
+			if speaker_id not in speaker2speech_id_cache:
+				print("Cache miss for", speaker, speaker_id, "caching done speech ids")
+				if os.path.exists(speaker_all_speeches_file):
+					with open(speaker_all_speeches_file, "r") as f:
+						for line in f:
+							speaker2speech_id_cache[speaker_id].add(json.loads(line)["speechID"])
+
+			if speech_dict["speechID"] in speaker2speech_id_cache[speaker_id]:
+				print("Speech already exists", speech_dict["speechID"], "skipping")
 				continue
 
 			topics = identify_topic_for_speech(speech_dict["speech"])
@@ -97,6 +110,8 @@ try:
 				with open(topic_file, "a") as f:
 					output_dict = speech_dict | {"meta":meta_json}
 					f.write(json.dumps(output_dict, ensure_ascii=False) + "\n")
+
+			speaker2speech_id_cache[speaker_id].add(speech_dict["speechID"])
 
 			
 			

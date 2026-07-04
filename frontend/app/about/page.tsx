@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BsGlobe, BsTwitterX, BsYoutube } from "react-icons/bs";
 
-export const revalidate = 600000;
+export const revalidate = 600;
 
 function Section({
   title,

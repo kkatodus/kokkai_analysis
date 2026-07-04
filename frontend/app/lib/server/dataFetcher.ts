@@ -7,12 +7,14 @@
 
 
 import { API_ENDPOINTS } from "@/app/lib/config/api";
+import { REVALIDATE_TEN_MINUTES } from "@/app/lib/revalidation-constants";
 import Papa from "papaparse";
 import { gunzipSync } from "node:zlib";
 import type {
   ParliamentMemberData,
   IdeologyData,
   AllParliamentMemberTableData,
+  RelevanceAndProductivityData,
 } from "@/app/types";
 
 
@@ -34,10 +36,12 @@ function getServerApiBaseUrl(): string {
 }
 
 /**
- * Revalidation period: 1 week (604800 seconds)
- * Matches the page-level revalidation setting
+ * Matches the page-level revalidation setting (default 10 minutes)
  */
-const REVALIDATION_TIME = parseInt(process.env.REVALIDATION_TIME || "604800"); // 7 days
+const REVALIDATION_TIME = parseInt(
+  process.env.REVALIDATION_TIME || String(REVALIDATE_TEN_MINUTES),
+  10
+);
 console.log('[Server DataFetcher] Revalidation time:', REVALIDATION_TIME);
 
 /**
@@ -81,15 +85,14 @@ async function fetchApi<T>(endpoint: string, options: { cache?: boolean } = { ca
   }
 }
 
-async function fetchApiRaw(endpoint: string): Promise<ArrayBuffer> {
+async function fetchApiRaw(endpoint: string, options: { cache?: boolean } = { cache: true }): Promise<ArrayBuffer> {
   const baseUrl = getServerApiBaseUrl();
   const url = `${baseUrl}${endpoint}`;
   console.log('[Server DataFetcher] Fetching from server:', url);
 
   try {
-	// Important: disable Next.js fetch cache here.
-	// Large payloads (>2MB) cannot be stored in Next's data cache.
-	const response = await fetch(url, { cache: "no-store", headers: { "X-API-KEY": process.env.API_KEY || "" } });
+	// Large payloads (>2MB) may not fit Next's data cache; keep default cache behavior here.
+	const response = await fetch(url, { cache: options.cache ? "default" : "no-store", headers: { "X-API-KEY": process.env.API_KEY || "" } });
 	if (!response.ok) {
 	  throw new Error(`API request failed: ${response.status} ${response.statusText}`);
 	}
@@ -109,7 +112,7 @@ export async function getVotingDistrictGeoJsonData(): Promise<any> {
 
   try {
 	// If your API has a geo endpoint, use it here
-	const geoJsonData = await fetchApi<any>(API_ENDPOINTS.votingDistrictGeoJson);
+	const geoJsonData = await fetchApi<any>(API_ENDPOINTS.votingDistrictGeoJson, { cache: true });
 	return geoJsonData;
   } catch (error) {
 	console.error("Failed to fetch prefectures from API, falling back to mock data:", error);
@@ -121,7 +124,7 @@ export async function getParliamentMemberData(): Promise<ParliamentMemberData | 
  
   try {
 	// If your API has a parliament member data endpoint, use it here
-	return await fetchApi<ParliamentMemberData>(API_ENDPOINTS.parliamentMemberData);
+	return await fetchApi<ParliamentMemberData>(API_ENDPOINTS.parliamentMemberData, { cache: true });
   } catch (error) {
 	console.error("Failed to fetch parliament member data from API, falling back to mock data:", error);
 	return null;
@@ -130,7 +133,7 @@ export async function getParliamentMemberData(): Promise<ParliamentMemberData | 
 
 export async function getDonors(): Promise<string[]> {
 	try {
-		return await fetchApi<string[]>(API_ENDPOINTS.donors);
+		return await fetchApi<string[]>(API_ENDPOINTS.donors, { cache: true });
 	} catch (error) {
 		console.error("Failed to fetch donors from API, falling back to mock data:", error);
 		return [];
@@ -140,7 +143,7 @@ export async function getDonors(): Promise<string[]> {
 
 export async function getIdeologyData(): Promise<IdeologyData | null> {
 	try {
-		return await fetchApi<IdeologyData | null>(API_ENDPOINTS.ideology, { cache: false });
+		return await fetchApi<IdeologyData | null>(API_ENDPOINTS.ideology, { cache: true });
 	} catch (error) {
 		console.error("Failed to fetch ideology data from API, falling back to mock data:", error);
 		return null;
@@ -149,7 +152,7 @@ export async function getIdeologyData(): Promise<IdeologyData | null> {
 
 export async function getAllParliamentMemberTable(): Promise<AllParliamentMemberTableData[] | null> {
 	try {
-		const buf = await fetchApiRaw(API_ENDPOINTS.allParliamentMemberTable);
+		const buf = await fetchApiRaw(API_ENDPOINTS.allParliamentMemberTable, { cache: true });
 		let bytes = new Uint8Array(buf);
 
 		// In some runtimes the response may still be gzipped; handle both cases.
@@ -164,6 +167,16 @@ export async function getAllParliamentMemberTable(): Promise<AllParliamentMember
 		return Papa.parse(csvText, { header: true, skipEmptyLines: true }).data as AllParliamentMemberTableData[];
 	} catch (error) {
 		console.error("Failed to fetch all parliament member table from API, falling back to mock data:", error);
+		return null;
+	}
+}
+
+export async function getAllRelevanceAndProductivityData(): Promise<RelevanceAndProductivityData[] | null> {
+	try {
+		const data = await fetchApi<any>(API_ENDPOINTS.allRelevanceAndProductivityData, { cache: true });
+		return data.data as RelevanceAndProductivityData[];
+	} catch (error) {
+		console.error("Failed to fetch all relevance and productivity data from API, falling back to mock data:", error);
 		return null;
 	}
 }
