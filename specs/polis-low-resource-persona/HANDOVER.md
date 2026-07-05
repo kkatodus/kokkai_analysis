@@ -61,8 +61,58 @@ contrast is meaningful (real politician's rhetorical edge vs Gemini's flattened 
 `generate_polis_rejected.py` gained `--workers` (thread pool, default 8) for throughput; the run
 took ~1 hr. Ready to feed `../idea/persona` DPO trainer at 0.5B.
 
+## Phase 0 — laptop toolchain gate (session 2026-07-05b)
+
+**Core loop PROVEN at 0.5B.** Anchor 152 (岸田) DPO-trained to completion (188 steps, ~19 min, final `train_loss` 0.094, `rewards/accuracies` 1.0, `rewards/margins` 8.0 → the adapter reliably prefers the real utterance over the Gemini caricature). Adapter at `../idea/persona/code/output/polis_152_kishida/`. The option-logprob scorer then ran base-vs-adapter on two real UTAS-2024 items — the full **load → forward → option-logprob → argmax/expectation** loop closes.
+
+**Findings (honest, worth keeping):**
+- **0.5B Likert discrimination is weak.** Length-normalised per-option log-probs are near-flat → the answer distribution is close to uniform. This is the spec §6 risk "0.5B may fail at reliable Likert answering" *observed*, and is the empirical case for the 7–8B main run. (Raw *summed*-logprob softmax collapses degenerately to ~1.0 on the shortest option — a length artefact; the scorer therefore builds `probs`/`argmax`/`expectation` from **length-normalised** log-probs. If 7–8B is still weak, switch to numeric-label scoring: enumerate options in the prompt, score the "1".."5" token.)
+- **The metric responds to the adapter, directionally correctly for an LDP anchor:** small-government item expectation 3.08 → 2.82 (toward *agree*); nuclear item argmax shifts toward "…Bに近い" (retain nuclear). Shifts are small — expected, since the DPO adapter learns register/rhetoric at 0.5B, not survey-answering.
+
+**Still open in Phase 0:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP).
+
+## Phase 2a — anchor-delta cosine kill-check: **PASSED** (session 2026-07-05b)
+
+All 4 anchors trained at 0.5B (152 岸田, 3631 福島, 2377 塩川, 5520 上田; adapters in `../idea/persona/code/output/polis_*`). Ran `anchor_delta_cosine.py` (new, in persona repo) over the reconstructed ΔW=(α/r)·B·A vectors:
+
+- **Pairwise cosine max 0.058, mean 0.047** (all pairs ~0.04–0.06 regardless of party). Delta norms 0.76–0.82 (real signal, consistent across anchors).
+- **The spec §6 collinearity risk did NOT materialize** — anchors are near-orthogonal in weight space, so the merge has plenty of per-anchor residual to interpolate. The negative-design worry ("shared real-register direction dominates") is retired for the 0.5B dev scale. (Caveat to re-check at 7–8B: high-dim LoRA deltas are somewhat orthogonal by default; the consistent substantial norms argue it's genuine, but re-run this check on the main model.)
+
+Note: the 3-anchor sequential run was ~1–2 h/anchor (vs 19 min for 152) — thermal throttling / overnight contention on the laptop, not a correctness issue; all adapters saved with margins ~6.8, accuracies 1.0.
+
+## Phase 3 start — DARE-TIES merge smoke test: **PASSED** (session 2026-07-05b)
+
+`merge_anchors_dare_ties.py` (new, persona repo) loads base + all 4 anchors into one PeftModel and builds a uniform `add_weighted_adapter(combination_type="dare_ties", density=0.1)` merge (density 0.1 = spec's ~0.9 drop rate). Merged model answers cleanly through the option-logprob scorer — the **merge → forward → option-logprob** path is proven at 0.5B.
+
+- Uniform-merge sanity: nuclear item E[1..5] 2.97 (base) → 2.50 (merged, toward "abolish"), consistent with 3 of 4 anchors (福島 SDP, 塩川 JCP, 上田) leaning anti-nuclear vs the lone LDP anchor. The metric responds to anchor composition as expected.
+- Uses PEFT's built-in global per-adapter weighting; the **custom layer-group merge** for BO (§2.4) is still to be written.
+
+### What is now DONE at 0.5B dev scale (all green)
+Phase 0 loop · 4 anchor adapters · Phase 2a cosine kill-check · Phase 3 DARE-TIES merge path. New scripts: `data/polis_option_logprob.py` (kokkai), `anchor_delta_cosine.py` + `merge_anchors_dare_ties.py` (persona repo).
+
+### Original session-start state below
+
+State at time of writing:
+
+- **Persona venv confirmed working.** `/root/projects/idea/persona/.venv/bin/python` has torch 2.12.0+cu130 (CUDA available), trl 1.4.0, peft 0.19.1, transformers 5.9.0, bitsandbytes 0.49.2. RTX 3070 8GB, Qwen2.5-0.5B-Instruct already in HF cache. The `../idea/` access-rejection caution from the prior session no longer applies — reads succeeded this session.
+- **Trainer invocation (verified command):**
+  ```
+  /root/projects/idea/persona/.venv/bin/python \
+    /root/projects/idea/persona/code/train_one_politician_persona.py \
+    --data /root/projects/kokkai_analysis/data/data/polis/dpo_pairs_full/152.jsonl \
+    --model Qwen/Qwen2.5-0.5B-Instruct \
+    --output /root/projects/idea/persona/code/output/polis_152_kishida --epochs 1
+  ```
+  188 steps (1500 pairs, batch 1 × grad-accum 8, 1 epoch), ~6 s/it → ~18 min, ~6.8/8 GB VRAM. Anchor 152 (岸田) adapter is the first-trained. **Adapters live in the persona repo's `code/output/`, not this repo** (per the spec's code-home split).
+- **Option-logprob scorer built (this repo):** `data/polis_option_logprob.py` — the spec §4.4 headline-metric primitive. `score_options(model, tokenizer, system, question, options)` → summed/length-normalised log-probs, softmax option distribution, argmax, and 1..N expectation (MAE-ready for Likert). Model-agnostic; run with the persona venv. Ships the standard UTAS scales in Japanese (`LIKERT_AGREE_JA` = Q4 agree/disagree, `AB_SCALE_JA` = Q5 A/B) and a `--demo` mode running two real UTAS-2024 items (small-government Q4_5, nuclear Q5_6) as the base-model UTAS-format reliability check.
+- **UTAS parsing facts (verified):** CSV names/kana are **Shift-JIS** (`＝` between surname/given, `・` in kana), not UTF-8. Policy Likert items are coded `Q4_*` (5-pt agree/disagree) and `Q5_*` (5-pt A/B); English question wording + option labels are in the `.docx` codebook (`word/document.xml` inside the zip). Party is a numeric code.
+
+**Remaining in Phase 0 (not yet done):** run the scorer `--demo` on the 0.5B base + validate the 152 adapter (`validate_persona.py`) once training finishes (blocked on VRAM while training runs); QLoRA smoke test up to ~3B; BO backend choice (Optuna TPE vs BoTorch).
+
 ## Suggested resume order
 
-1. **Train:** hand `dpo_pairs_full/` JSONL to the `../idea/persona` trainer at 0.5B (QLoRA for the ~3B check) — the Phase-0 laptop toolchain gate (spec §5). Data prep is done.
-2. **UTAS name-matching infra** (shared with `ensemble-scaling-reliability`): match speech `speaker`/`speakerYomi` to UTAS `NAME`/`KANA`; reuse `utils/string_process.clean_repr_name`. Then wave selection (§4.4). NOTE: anchors come from the recent-era scaling set, so they should align with the 2021/2024 UTAS waves.
-3. Then phase-2 kill checks (ICL baseline; anchor-delta cosine) once anchors are trained.
+1. **Anchor-delta cosine kill check (Phase 2a)** — once all 4 adapters exist (152 done; 3631/2377/5520 training as of 2026-07-05b, script `scratchpad/train_rest.sh` → `output/polis_{id}_{name}/`). Load the 4 `adapter_model.safetensors`, compute pairwise cosine of the flattened LoRA deltas. Near-collinear anchors invalidate the merge design (spec §6). This is the cheapest next gate and needs no new data.
+2. **DARE-TIES merge smoke test (Phase 3 start)** — PEFT `add_weighted_adapter(combination_type="dare_ties")` over the 4 adapters → confirm the merged model still answers via the option-logprob scorer. Custom layer-group weighting is the later BO surface.
+3. **UTAS name-matching infra** (shared with `ensemble-scaling-reliability`): match speech `speaker`/`speakerYomi` to UTAS `NAME`/`KANA` (**Shift-JIS**, `＝`/`・` separators!); reuse `utils/string_process.clean_repr_name`. Then wave selection (§4.4). Anchors come from the recent-era scaling set → should align with 2021/2024 UTAS waves. Gives the *real* headline metric (0.5B demo above is only a mechanism check).
+4. **Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP).
+5. **ICL baseline kill check (Phase 2b)** once name-matching + a pilot target exist.
