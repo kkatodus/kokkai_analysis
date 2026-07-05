@@ -179,16 +179,114 @@ def _demo(base: str, adapter: str | None) -> None:
         print(f"  expectation (1..{len(opts)} scale) = {res.expectation:.3f}")
 
 
+def _persona_system(name: str | None) -> str:
+    """Persona instruction. Naming the anchor mirrors the DPO training prompt header
+    (「あなたは〇〇議員です…」); pass name=None for the neutral 'a Diet member' framing."""
+    who = f"、{name}" if name else ""
+    return (
+        f"あなたは日本の国会議員{who}です。以下の政策に関する意見について、"
+        "選択肢の中からあなたの立場に最も近いものを一つだけ答えてください。"
+    )
+
+
+def evaluate_anchor(
+    model,
+    tokenizer,
+    ground_truth: dict,
+    person_id: str,
+    name_persona: bool = True,
+) -> dict:
+    """Administer a wave's UTAS items to a persona and score against the real answers.
+
+    `ground_truth` is a wave file from build_utas_ground_truth.py. Only items the
+    anchor actually answered (coded value not null) are scored. Returns per-item rows
+    plus aggregate MAE (argmax and expectation), exact + within-1 accuracy, over the
+    1..5 scale — the spec §4.4 headline metric.
+    """
+    ans = ground_truth["answers"][str(person_id)]
+    name = ans["name"]
+    system = _persona_system(name if name_persona else None)
+    items = {it["code"]: it for it in ground_truth["items"]}
+
+    rows: list[dict] = []
+    for code, truth in ans["coded"].items():
+        if truth is None:
+            continue
+        it = items[code]
+        q = it["question_ja"]
+        if not q:
+            continue  # untranslated wording -> unscorable
+        res = score_options(model, tokenizer, system, q, it["options_ja"])
+        rows.append(
+            {
+                "code": code,
+                "type": it["type"],
+                "truth": truth,
+                "argmax": res.argmax + 1,
+                "expectation": round(res.expectation, 3),
+                "abs_err_argmax": abs((res.argmax + 1) - truth),
+                "abs_err_exp": round(abs(res.expectation - truth), 3),
+            }
+        )
+
+    n = len(rows)
+    agg = {
+        "person_id": person_id,
+        "name": name,
+        "n_scored": n,
+        "mae_argmax": round(sum(r["abs_err_argmax"] for r in rows) / n, 3) if n else None,
+        "mae_expectation": round(sum(r["abs_err_exp"] for r in rows) / n, 3) if n else None,
+        "exact_acc": round(sum(r["argmax"] == r["truth"] for r in rows) / n, 3) if n else None,
+        "within1_acc": round(sum(r["abs_err_argmax"] <= 1 for r in rows) / n, 3) if n else None,
+    }
+    return {"aggregate": agg, "items": rows}
+
+
+def _run_utas_eval(base: str, adapter: str | None, gt_path: str, person_id: str, neutral: bool):
+    """Load a persona (base [+adapter]) and print the UTAS headline metric for one anchor."""
+    with open(gt_path, encoding="utf-8") as f:
+        gt = json.load(f)
+    model, tokenizer = load_persona(base, adapter)
+    result = evaluate_anchor(model, tokenizer, gt, person_id, name_persona=not neutral)
+    agg = result["aggregate"]
+
+    print("=" * 72)
+    tag = f"adapter={adapter}" if adapter else "base model"
+    print(f"UTAS eval — {agg['name']} (person_id {person_id}), {gt['wave']}, {tag}")
+    print(f"persona={'neutral' if neutral else 'named'}  items scored: {agg['n_scored']}")
+    print("-" * 72)
+    print(f"  {'item':7} {'truth':>5} {'argmax':>6} {'E[1..5]':>8}  {'|err|':>5}")
+    for r in result["items"]:
+        print(
+            f"  {r['code']:7} {r['truth']:>5} {r['argmax']:>6} {r['expectation']:>8.2f}"
+            f"  {r['abs_err_argmax']:>5}"
+        )
+    print("-" * 72)
+    print(
+        f"  MAE(argmax)={agg['mae_argmax']}  MAE(E)={agg['mae_expectation']}  "
+        f"exact={agg['exact_acc']}  within1={agg['within1_acc']}"
+    )
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Option-logprob scoring for POLIS personas")
     ap.add_argument("--base", default="Qwen/Qwen2.5-0.5B-Instruct")
     ap.add_argument("--adapter", default=None, help="Optional LoRA adapter directory")
     ap.add_argument("--demo", action="store_true", help="Run the Phase-0 demo items")
+    ap.add_argument("--utas-eval", metavar="GROUND_TRUTH_JSON",
+                    help="Wave file from build_utas_ground_truth.py; run the headline metric")
+    ap.add_argument("--person-id", help="Anchor person_id to evaluate (with --utas-eval)")
+    ap.add_argument("--neutral", action="store_true",
+                    help="Drop the anchor name from the persona prompt (weights-only persona)")
     args = ap.parse_args()
     if args.demo:
         _demo(args.base, args.adapter)
+    elif args.utas_eval:
+        if not args.person_id:
+            ap.error("--utas-eval requires --person-id")
+        _run_utas_eval(args.base, args.adapter, args.utas_eval, args.person_id, args.neutral)
     else:
-        ap.error("nothing to do: pass --demo (or import score_options)")
+        ap.error("nothing to do: pass --demo, --utas-eval, or import score_options")
 
 
 if __name__ == "__main__":

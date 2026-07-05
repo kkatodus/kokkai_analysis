@@ -143,8 +143,48 @@ agree/disagree, `Q5_*` 5-pt A/B; English wording in the `.docx` codebook
 `data/polis_option_logprob.py`. That closes the real headline metric (the 0.5B
 `--demo` was only a mechanism check).
 
+## UTAS ground truth + real headline metric — DONE (session 2026-07-05d)
+
+The real headline metric (spec §4.4) now runs end-to-end on **actual UTAS answers**,
+not the `--demo` mechanism check.
+
+- **`data/build_utas_ground_truth.py`** → `data/data/polis/utas_ground_truth/{wave}.json`.
+  Parses each wave's `.docx` codebook (tables + paragraphs flattened; regex guards the
+  item body from spanning across `(Qn_...` markers — needed because the 2024 codebook has
+  many parenthesised numbers before Q4) into the Q4_* (5-pt agree/disagree) + Q5_* (5-pt
+  A/B) catalog, attaches the anchor's coded answers (`99`/`66`/blank → null), keyed by
+  person_id via `person_map/{wave}.json`. **2022HoC codebook is native Japanese** (used
+  verbatim, `provenance: native`); **2024HoR is English-only** → translated to Japanese
+  once via **Gemini 2.5-flash** (`--translate`, temp 0, `provenance: translated_from_en`;
+  `source_text` keeps the English for review). Built for the two anchor waves:
+  - `2022HoC.json` — 37 items; 福島みずほ 37/37, 上田清司 37/37.
+  - `2024HoR.json` — 33 items; 岸田文雄 33/33, 塩川鉄也 22/33 (塩川 skipped most Q5 with 99).
+- **`data/polis_option_logprob.py` gained `--utas-eval <wave.json> --person-id <id>
+  [--adapter ...] [--neutral]`** (`evaluate_anchor()`): administers every answered item
+  to the persona (named-anchor system prompt by default, mirroring the DPO training
+  header; `--neutral` = weights-only persona), scores via the existing option-logprob
+  primitive, reports per-item truth vs argmax vs E[1..5] and aggregate MAE(argmax),
+  MAE(E), exact, within-1.
+
+**First real numbers — 岸田 (152), 2024HoR, 33 items, named persona:**
+
+| model | MAE(argmax) | MAE(E) | exact | within-1 |
+|---|---|---|---|---|
+| base 0.5B | 1.152 | 0.764 | 0.273 | 0.667 |
+| 岸田 DPO adapter | 1.545 | 0.753 | 0.182 | 0.545 |
+
+**Honest reading (the mechanism is proven; the 0.5B signal is not):** the loop
+real-truth → administer → option-logprob → MAE closes. But at 0.5B **argmax is
+noise** — it collapses degenerately (base → option 1 across Q5, adapter → option 5),
+so the adapter's argmax metrics look *worse* while MAE(E) barely moves (0.764 → 0.753,
+E stays pinned near 3.0). This is exactly the Phase-0 "weak Likert discrimination"
+finding, now quantified against real ground truth, and is the baseline the 7–8B main
+run must beat. **Actionable next:** at 7–8B, if argmax is still degenerate, switch to
+numeric-label scoring (enumerate options, score the "1".."5" token) per the Phase-0 note.
+
 ## Suggested resume order
 
+0. **Real headline metric + UTAS ground truth** ✅ **DONE** (2026-07-05d, section above).
 1. **Anchor-delta cosine kill check (Phase 2a)** — once all 4 adapters exist (152 done; 3631/2377/5520 training as of 2026-07-05b, script `scratchpad/train_rest.sh` → `output/polis_{id}_{name}/`). Load the 4 `adapter_model.safetensors`, compute pairwise cosine of the flattened LoRA deltas. Near-collinear anchors invalidate the merge design (spec §6). This is the cheapest next gate and needs no new data.
 2. **DARE-TIES merge smoke test (Phase 3 start)** — PEFT `add_weighted_adapter(combination_type="dare_ties")` over the 4 adapters → confirm the merged model still answers via the option-logprob scorer. Custom layer-group weighting is the later BO surface.
 3. ~~**UTAS name-matching infra**~~ **DONE** (2026-07-05c, see section above). Next payload = extract UTAS Likert answers for matched anchors → headline-metric ground truth.
