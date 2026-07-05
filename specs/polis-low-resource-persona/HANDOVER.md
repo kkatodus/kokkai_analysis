@@ -182,11 +182,51 @@ finding, now quantified against real ground truth, and is the baseline the 7–8
 run must beat. **Actionable next:** at 7–8B, if argmax is still degenerate, switch to
 numeric-label scoring (enumerate options, score the "1".."5" token) per the Phase-0 note.
 
+## Numeric-label scoring tested at 0.5B — does NOT rescue the metric (session 2026-07-05e)
+
+The Phase-0 note (repeated in two prior sections) said: "if argmax is still degenerate,
+switch to numeric-label scoring (enumerate options, score the '1'..'N' token)." Built it
+(`score_options_numeric` + `evaluate_anchor(numeric=True)` + `--numeric` flag in
+`data/polis_option_logprob.py`) and A/B'd it against verbose-option scoring on 岸田 (152),
+2024HoR, 33 items:
+
+| model | scoring | MAE(argmax) | MAE(E) | exact | within-1 |
+|---|---|---|---|---|---|
+| base 0.5B | verbose-option | 1.152 | **0.764** | 0.273 | 0.667 |
+| 岸田 adapter | verbose-option | 1.545 | 0.753 | 0.182 | 0.545 |
+| base 0.5B | numeric-label | 1.545 | 1.38 | 0.182 | 0.394 |
+| 岸田 adapter | numeric-label | 1.545 | 1.45 | 0.182 | 0.394 |
+
+**Numeric-label is strictly worse at 0.5B.** It swaps one degeneracy for another: verbose
+scoring collapses toward register/length (E pinned ~3.0), numeric scoring collapses to a
+**first-option / "agree" bias** — argmax = "1" on all 33 items, high-confidence (p≈0.94–0.98
+on content items).
+
+Diagnosed the mechanism (throwaway probe: score `score_options_numeric` on a content-free
+"（内容なし）"/empty question vs. real items, normal vs. reversed option order), and it kills the
+obvious fix:
+- **Content-free** prompts ("（内容なし）"/empty) peak at label **"2"** (0.45–0.58), *not* "1".
+- **Content-bearing** prompts collapse to **"1"** — incl. an absurd sanity item ("consumption
+  tax to 100% immediately" → "そう思う"/agree at p=0.98). The 0.5B model genuinely lacks Likert
+  competence; this is spec §6's risk, now nailed for *both* scoring modes.
+- Because the content-free prior (≈"2") ≠ the content collapse ("1"), **contextual calibration**
+  (Zhao et al. — divide by null-prompt prior) will *not* cleanly remove it. Reversing option
+  order *does* move the distribution (some content sensitivity), so **permutation / order-averaging
+  debiasing (PriDe-style)** is the better companion to numeric scoring — but it can't be validated
+  at 0.5B (model is incompetent on the absurd item), so it's left as a **7–8B main-run task**, not
+  built now (per build-then-port discipline).
+
+**Decision:** keep the numeric-scoring code (it's the planned 7–8B path) but **use verbose-option
+E[1..5] as the least-bad 0.5B proxy**. The metric-reliability question defers to the Studio 7–8B
+run exactly as the spec anticipated. At 7–8B: try numeric-label **with order-averaging**; if argmax
+is usable there, it becomes primary.
+
 ## Suggested resume order
 
 0. **Real headline metric + UTAS ground truth** ✅ **DONE** (2026-07-05d, section above).
-1. **Anchor-delta cosine kill check (Phase 2a)** — once all 4 adapters exist (152 done; 3631/2377/5520 training as of 2026-07-05b, script `scratchpad/train_rest.sh` → `output/polis_{id}_{name}/`). Load the 4 `adapter_model.safetensors`, compute pairwise cosine of the flattened LoRA deltas. Near-collinear anchors invalidate the merge design (spec §6). This is the cheapest next gate and needs no new data.
-2. **DARE-TIES merge smoke test (Phase 3 start)** — PEFT `add_weighted_adapter(combination_type="dare_ties")` over the 4 adapters → confirm the merged model still answers via the option-logprob scorer. Custom layer-group weighting is the later BO surface.
-3. ~~**UTAS name-matching infra**~~ **DONE** (2026-07-05c, see section above). Next payload = extract UTAS Likert answers for matched anchors → headline-metric ground truth.
-4. **Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP).
-5. **ICL baseline kill check (Phase 2b)** once name-matching + a pilot target exist.
+1. ~~**Anchor-delta cosine kill check (Phase 2a)**~~ ✅ **DONE** (2026-07-05b, PASSED — near-orthogonal, section above).
+2. ~~**DARE-TIES merge smoke test (Phase 3 start)**~~ ✅ **DONE** (2026-07-05b, PASSED, section above). Custom layer-group weighting is the later BO surface.
+3. ~~**UTAS name-matching infra**~~ **DONE** (2026-07-05c, see section above).
+4. ~~**Numeric-label scoring** to fix degenerate argmax~~ ✅ **DONE** (2026-07-05e, section above) — tested & rejected at 0.5B (worse than verbose); deferred to 7–8B with order-averaging. Verbose E[1..5] is the 0.5B proxy.
+5. **Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP). ← *cheapest laptop-runnable next steps.*
+6. **ICL baseline kill check (Phase 2b)** once a pilot target exists. NB: at 0.5B all methods sit near the same degenerate floor, so this gate is only decisive at 7–8B — run it there, or expect an inconclusive dev-scale result.

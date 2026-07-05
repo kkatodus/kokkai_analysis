@@ -105,6 +105,37 @@ def score_options(
     return OptionScore(logprobs, norm_logprobs, probs, argmax, expectation)
 
 
+def score_options_numeric(
+    model,
+    tokenizer,
+    system: str | None,
+    question: str,
+    options: Sequence[str],
+) -> OptionScore:
+    """Numeric-label variant of :func:`score_options`.
+
+    Instead of scoring each full option string as the assistant continuation, the
+    options are enumerated in the *prompt* as a numbered list and only the single
+    label token ("1".."N") the model would emit is scored. Motivation (Phase-0
+    finding): at small scale, verbose-option scoring collapses degenerately — the
+    summed log-prob is dominated by option *length*/surface form rather than the
+    model's actual preference, and length-normalisation only partly rescues it.
+    Numeric labels make every candidate continuation exactly one token, so the
+    softmax is a clean, length-unbiased answer distribution and the argmax stops
+    tracking string length. The returned `expectation` is still on the 1..N scale.
+    """
+    enumerated = "\n".join(f"{i+1}. {o}" for i, o in enumerate(options))
+    n = len(options)
+    q = (
+        f"{question}\n{enumerated}\n\n"
+        f"上記の選択肢の中から、あなたの立場に最も近いものの番号（1〜{n}）だけを答えてください。"
+    )
+    labels = [str(i + 1) for i in range(n)]
+    # Labels are single tokens, so length-normalisation is a no-op and the softmax
+    # in score_options reduces to a plain softmax over the label log-probs.
+    return score_options(model, tokenizer, system, q, labels)
+
+
 # --- Standard UTAS answer scales (from the English codebook, presented in Japanese) ---
 
 # Q4-style: 5-point agree/disagree (1. agree ... 5. disagree)
@@ -195,6 +226,7 @@ def evaluate_anchor(
     ground_truth: dict,
     person_id: str,
     name_persona: bool = True,
+    numeric: bool = False,
 ) -> dict:
     """Administer a wave's UTAS items to a persona and score against the real answers.
 
@@ -202,7 +234,12 @@ def evaluate_anchor(
     anchor actually answered (coded value not null) are scored. Returns per-item rows
     plus aggregate MAE (argmax and expectation), exact + within-1 accuracy, over the
     1..5 scale — the spec §4.4 headline metric.
+
+    `numeric=True` uses :func:`score_options_numeric` (enumerate-and-score-the-digit)
+    instead of scoring the full option strings — the Phase-0 fix for degenerate argmax
+    at small scale.
     """
+    scorer = score_options_numeric if numeric else score_options
     ans = ground_truth["answers"][str(person_id)]
     name = ans["name"]
     system = _persona_system(name if name_persona else None)
@@ -216,7 +253,7 @@ def evaluate_anchor(
         q = it["question_ja"]
         if not q:
             continue  # untranslated wording -> unscorable
-        res = score_options(model, tokenizer, system, q, it["options_ja"])
+        res = scorer(model, tokenizer, system, q, it["options_ja"])
         rows.append(
             {
                 "code": code,
@@ -242,18 +279,22 @@ def evaluate_anchor(
     return {"aggregate": agg, "items": rows}
 
 
-def _run_utas_eval(base: str, adapter: str | None, gt_path: str, person_id: str, neutral: bool):
+def _run_utas_eval(base: str, adapter: str | None, gt_path: str, person_id: str,
+                   neutral: bool, numeric: bool):
     """Load a persona (base [+adapter]) and print the UTAS headline metric for one anchor."""
     with open(gt_path, encoding="utf-8") as f:
         gt = json.load(f)
     model, tokenizer = load_persona(base, adapter)
-    result = evaluate_anchor(model, tokenizer, gt, person_id, name_persona=not neutral)
+    result = evaluate_anchor(model, tokenizer, gt, person_id,
+                             name_persona=not neutral, numeric=numeric)
     agg = result["aggregate"]
 
     print("=" * 72)
     tag = f"adapter={adapter}" if adapter else "base model"
     print(f"UTAS eval — {agg['name']} (person_id {person_id}), {gt['wave']}, {tag}")
-    print(f"persona={'neutral' if neutral else 'named'}  items scored: {agg['n_scored']}")
+    print(f"persona={'neutral' if neutral else 'named'}  "
+          f"scoring={'numeric-label' if numeric else 'verbose-option'}  "
+          f"items scored: {agg['n_scored']}")
     print("-" * 72)
     print(f"  {'item':7} {'truth':>5} {'argmax':>6} {'E[1..5]':>8}  {'|err|':>5}")
     for r in result["items"]:
@@ -278,13 +319,17 @@ def main() -> None:
     ap.add_argument("--person-id", help="Anchor person_id to evaluate (with --utas-eval)")
     ap.add_argument("--neutral", action="store_true",
                     help="Drop the anchor name from the persona prompt (weights-only persona)")
+    ap.add_argument("--numeric", action="store_true",
+                    help="Numeric-label scoring: enumerate options, score the '1'..'N' token "
+                         "(Phase-0 fix for degenerate argmax at small scale)")
     args = ap.parse_args()
     if args.demo:
         _demo(args.base, args.adapter)
     elif args.utas_eval:
         if not args.person_id:
             ap.error("--utas-eval requires --person-id")
-        _run_utas_eval(args.base, args.adapter, args.utas_eval, args.person_id, args.neutral)
+        _run_utas_eval(args.base, args.adapter, args.utas_eval, args.person_id,
+                       args.neutral, args.numeric)
     else:
         ap.error("nothing to do: pass --demo, --utas-eval, or import score_options")
 
