@@ -221,6 +221,157 @@ E[1..5] as the least-bad 0.5B proxy**. The metric-reliability question defers to
 run exactly as the spec anticipated. At 7–8B: try numeric-label **with order-averaging**; if argmax
 is usable there, it becomes primary.
 
+## Phase 0 CLOSED — QLoRA 3B smoke test + BO backend locked (session 2026-07-05f)
+
+The last two Phase-0 loose ends are done; the spec §5 phase-0 gate ("lock the dev
+toolchain + BO backend; validate the full pipeline at 0.5B before porting") is met.
+
+**QLoRA ~3B smoke test — PASSED.** `train_one_politician_persona.py --quantize`
+(4-bit nf4, bf16 compute, `paged_adamw_8bit`) on **Qwen2.5-3B-Instruct** ran DPO
+end-to-end on the 8GB RTX 3070: model loaded in 4-bit, 3 steps on a 24-pair subset
+of anchor 152 (~24.5 s/it, ~74s), adapter saved. Proves the toolchain runs
+near-main-scale under quantization on the laptop. (Model now in HF cache, 5.8G.
+The trainer's `--quantize` path is the one to reuse for any QLoRA anchor training
+on the laptop; full 7–8B still deferred to the Studio.)
+
+**BO backend — LOCKED: Optuna harness + native `GPSampler` (GP-BO), TPE fallback
+for the high-dim ablation.** Reasoning + empirical grounding:
+- The main search (§2.4) is **continuous, ~24–32 dim (layer-groups × anchors),
+  expensive evals (merge + forward passes), low budget** → classic GP-BO territory;
+  TPE wins only when evals are cheap and dims high/mixed.
+- Validated on a synthetic 24-dim mixing-coefficient bowl (smooth + mild coupling +
+  small noise), 45-eval budget, `../idea/persona/code/bo_backend_validate.py`:
+  **random best 1.18 · TPE 0.64 · GP 0.19** — GP ≈3× better than TPE, ≈6× better than
+  random, the expected ordering. Full 3×45-eval sweep incl. GP refits ran in ~7s, so
+  harness overhead is negligible next to the real objective.
+- **Use optuna's native `optuna.samplers.GPSampler`** (built into optuna 4.9, torch-based)
+  — no `optuna-integration[botorch]` needed. Keep **TPESampler** for the ~192-dim
+  full-layer-wise ablation bookend (GP scales poorly there; TuRBO/SAASBO via botorch is
+  the alternative if that ablation is pursued).
+- **Deps installed into the persona venv** (`../idea/persona/.venv`, where BO code lives
+  per the code-home split): `optuna` 4.9.0 + `botorch` (the latter only for a possible
+  high-dim TuRBO/SAASBO ablation; the locked default `GPSampler` does **not** require it,
+  so botorch can be dropped to slim the port if that ablation is cut). Note: this venv is
+  **Python 3.14** (not 3.10.12 as an earlier section says for the system python).
+
+**Next real work = Phase 3** (spec §5): custom layer-group DARE-TIES merge code (the
+per-layer-group weighting the uniform `add_weighted_adapter` smoke test in Phase 3-start
+did *not* cover) → wrap merge+forward+k-fold-CV-NLL as an Optuna objective with `GPSampler`
+→ pilot on 2–3 targets. The ICL kill check (Phase 2b) rides along but is only decisive at
+7–8B.
+
+## Phase 3 core — custom layer-group DARE-TIES merge + BO loop: **CLOSES at 0.5B** (session 2026-07-05g)
+
+The spec §5 Phase-3 deliverable ("custom layer-group DARE-TIES merge code; BO loop; pilot on
+2–3 targets") now runs end-to-end at 0.5B. Two new scripts in the persona repo (`code/`):
+
+- **`merge_layer_group.py` — `LayerGroupMerger`.** The per-layer-group merge PEFT's
+  `add_weighted_adapter` cannot do (it only supports one global weight per anchor). Reconstructs
+  ΔW=(α/r)·B·A per module, applies **DARE with a fixed seeded drop mask** (density 0.1 → objective
+  is deterministic in the coefficients; drop rate is a fixed hyperparam, not a BO dim, per §2.3),
+  weights each anchor's delta by `coeff[anchor, depth_group]`, does **TIES** sign-election +
+  disjoint-mean, and writes W_base+ΔW into the live model. `apply(coeffs)` restores base then
+  re-merges (no reload/train per BO eval); `restore()` is exact (self-test: base NLL 2.0808 →
+  merge → restore → 2.0808). 24 layers → 3 contiguous depth groups (0–7 / 8–15 / 16–23). Self-test
+  confirms per-group coeffs change behaviour (upper-only ≠ lower-only NLL).
+- **`bo_merge_coeffs.py`.** Wraps the merger as an Optuna objective, searches the [n_anchors×n_groups]
+  coefficient matrix with the Phase-0-locked **`GPSampler`**, objective = mean session-grounded NLL
+  (`prompt`→`chosen` from `dpo_pairs_full/{target}.jsonl`) over a `--budget` train split; reports
+  held-out `--test` NLL of the tuned coeffs vs three spec baselines (base / uniform merge / best
+  single anchor). `--target <id>` picks the objective politician; `--exclude-target` withholds its
+  own adapter (honest leave-one-out = the real sparse-target use case).
+
+**Pilot results (target 152 岸田, 30 train / 30 test, 40 GP trials), held-out test NLL:**
+
+| framing | base | uniform | best-single | **BO layer-group** |
+|---|---|---|---|---|
+| all 4 anchors (self-validating) | 2.730 | 3.974 | 2.718 (152) | **2.659** |
+| leave-one-out (152 adapter withheld) | 2.730 | 3.833 | 2.835 (2377) | **2.698** |
+
+Findings (green, honest):
+- **BO beats every baseline in both framings**, incl. the target's own single adapter (+0.059) —
+  i.e. **layer-group granularity adds value over a global weight**, the §2.4 claim, shown at dev scale.
+- **BO recovers sensible structure unprompted:** with all anchors, it zeroed the 3 ideologically-distant
+  anchors and kept only Kishida (g0 0.96 / g1 0.00 / g2 0.65 — a layer-group pattern a global merge
+  can't express). The **uniform all-ones merge is much *worse* than base** (deltas overshoot) → the
+  spec baseline-5 is beatable exactly as designed, and coefficient tuning is doing real work.
+- **Graceful degradation:** in leave-one-out (LDP target, only left/center anchors) BO still beats base
+  but only slightly (2.730→2.698), using *small* coefficients rather than overshooting. It never does
+  worse than base. The small gain is the honest low-resource-fidelity signal to quantify at 7–8B with
+  proper anchor coverage.
+
+**Not yet done in Phase 3:** (a) nested k-fold CV for unbiased model selection (§2.4 — current code
+uses a single train/test split as the dev-scale proof; wrap folds around the BO for the full matrix);
+(b) the low-dim (global ~8) and high-dim (~192 full-layer-wise, TuRBO/SAASBO) ablation bookends;
+(c) run on real held-out targets outside the anchor set (needs DPO-pair export for target politicians).
+
+## Genuine held-out targets — BO beats every baseline on all 3 (session 2026-07-05h)
+
+Resume item 6a done: `bo_merge_coeffs.py` run on **real held-out politicians outside the anchor
+set** (not anchors self-validating). Picked 3 targets in **2024HoR** (one wave → one ground-truth
+file) spanning the spectrum, each mapping onto an anchor: 高市早苗(1279, 自民-right)→岸田,
+赤嶺政賢(2053, 共産)→塩川, 枝野幸男(2289, 立憲)→福島/上田. All answer 33/33 UTAS items and are
+speech-rich (reliable train/test), while BO still tunes on only a **30-utterance budget** — so it's
+low-resource on the tuning side even for data-rich targets.
+
+New/changed plumbing:
+- **`data/export_polis_dpo_pairs.py … --output-dir data/data/polis/dpo_pairs_targets`** — targets get
+  prompt/chosen only (**no Gemini `rejected`**: a held-out target gets *no adapter of its own*, its
+  persona is reconstructed by merging the 4 anchors, so DPO training / caricature negatives are moot).
+  Exported 300 pairs each for 1279/2053/2289 (`data/data/polis/dpo_pairs_targets/{id}.jsonl`).
+- **`bo_merge_coeffs.py` gained `--dpo-dir`** (default `dpo_pairs_full` for anchors; pass
+  `.../dpo_pairs_targets` for held-out targets). `--exclude-target` is a **no-op** for genuine targets
+  (there is no `polis_{target}_` adapter to withhold) — just run all 4 anchors into the merge.
+- **`data/build_utas_ground_truth.py` gained `--all-matched`** — emits UTAS answers for *every*
+  matched person in the wave (names from person_map `db_name_kanji`), not just the 4 anchors, so any
+  held-out target's ground-truth vector is available for the §4.4 headline metric. Rebuilt both waves:
+  **2024HoR = 676 persons, 2022HoC = 296** (`data/data/polis/utas_ground_truth/{wave}.json`; anchors
+  still included — it's a superset). 2024 re-translated via Gemini 2.5-flash (temp 0), 2022 native JA.
+
+**Held-out test NLL (lower=better), all 4 anchors merged, budget 30 / test 30 / 40 GP trials:**
+
+| target | party | base | uniform | best-single | **BO layer-group** | BO vs base | BO vs best-single |
+|---|---|---|---|---|---|---|---|
+| 高市早苗 1279 | 自民 | 2.870 | 4.010 | 2.914 (岸田) | **2.823** | +0.047 | +0.092 |
+| 赤嶺政賢 2053 | 共産 | 3.256 | 4.224 | 3.269 (岸田) | **3.186** | +0.070 | +0.083 |
+| 枝野幸男 2289 | 立憲 | 3.317 | 4.356 | 3.320 (岸田) | **3.250** | +0.067 | +0.070 |
+
+Findings (green, but honestly caveated):
+- **BO beats every baseline on every genuine target** — base, best-single-anchor, and (by >1.0) the
+  uniform merge. The margin over best-single (+0.07–0.09) is *larger* than the anchor leave-one-out
+  pilot's, i.e. the low-resource-fidelity signal survives on real held-out politicians.
+- **Uniform all-ones merge is much worse than base everywhere** (deltas overshoot) → spec baseline-5 is
+  beatable by design; coefficient tuning does real work.
+- **Coefficient structure is only *cleanly* ideological for the LDP target.** 高市: BO put 岸田 g0=0.855
+  and zeroed the distant anchors — textbook. But for 赤嶺(共産) and 枝野(立憲), **岸田 g0 dominates every
+  merge and is the best *single* anchor for all three targets.** Reason: at 0.5B the DPO adapters encode
+  **register/rhetoric, not ideology** (a standing finding), and 岸田's adapter is the strongest (trained
+  clean in 19 min vs the thermally-throttled 1–2 h others). So 岸田 g0 is a shared "fluent-Diet-register"
+  backbone; BO adds *target-specific residual* in the other groups (e.g. 枝野 gets 上田 g2=0.356). **Clean
+  ideological coefficient recovery is a 7–8B expectation, not a 0.5B result** — flag for mechanism
+  analysis (6c) and the main run.
+- Absolute NLL gains are small (~0.05–0.09), as expected when the adapters learn register not survey
+  answering. The result is the **directional consistency**: BO > all baselines, 3/3 targets, no exceptions.
+
+**§4.4 UTAS headline metric now wired onto the merged model (same session).** `bo_merge_coeffs.py`
+gained **`--utas-eval <wave.json>`**: after the BO, it imports `evaluate_anchor` from the kokkai repo's
+`data/polis_option_logprob.py` (added `sys.path.insert`) and scores **base / uniform / best-single / BO**
+merges against the target's *real* UTAS answers (in-memory, no model save). Proven end-to-end on 1279:
+
+| config | MAE(E) | MAE(argmax) | within1 | exact |
+|---|---|---|---|---|
+| base | 1.115 | 1.424 | 0.576 | 0.273 |
+| uniform | 1.112 | 1.485 | 0.455 | 0.212 |
+| best-single(岸田) | 1.142 | 1.788 | 0.424 | 0.182 |
+| **BO** | **1.110** | 1.455 | 0.515 | **0.303** |
+
+**Mechanism closes; numbers are the expected 0.5B degenerate floor.** MAE(E) is flat (1.11–1.14) across
+*all* configs — E stays pinned ~3.0 (the standing 0.5B weak-Likert finding). BO has the lowest MAE(E) and
+highest exact_acc, but the spread is within noise. So the merge→§4.4-metric path is *proven and ported-
+ready*; a decisive UTAS comparison of the merge methods is a **7–8B main-run task** (per resume item 7).
+The NLL proxy (above) is where BO's advantage is *visible* at 0.5B. Run with:
+`bo_merge_coeffs.py --target <id> --dpo-dir …/dpo_pairs_targets --utas-eval …/utas_ground_truth/2024HoR.json`.
+
 ## Suggested resume order
 
 0. **Real headline metric + UTAS ground truth** ✅ **DONE** (2026-07-05d, section above).
@@ -228,5 +379,10 @@ is usable there, it becomes primary.
 2. ~~**DARE-TIES merge smoke test (Phase 3 start)**~~ ✅ **DONE** (2026-07-05b, PASSED, section above). Custom layer-group weighting is the later BO surface.
 3. ~~**UTAS name-matching infra**~~ **DONE** (2026-07-05c, see section above).
 4. ~~**Numeric-label scoring** to fix degenerate argmax~~ ✅ **DONE** (2026-07-05e, section above) — tested & rejected at 0.5B (worse than verbose); deferred to 7–8B with order-averaging. Verbose E[1..5] is the 0.5B proxy.
-5. **Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP). ← *cheapest laptop-runnable next steps.*
-6. **ICL baseline kill check (Phase 2b)** once a pilot target exists. NB: at 0.5B all methods sit near the same degenerate floor, so this gate is only decisive at 7–8B — run it there, or expect an inconclusive dev-scale result.
+5. ~~**Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice~~ ✅ **DONE** (2026-07-05f). **Phase 0 CLOSED.**
+6. ~~**Phase 3 core:** custom layer-group DARE-TIES merge + Optuna/`GPSampler` BO loop, pilot~~ ✅ **DONE** (2026-07-05g). → sub-tasks:
+   a. ~~**DPO-pair export for real held-out targets** → BO pilots on genuine targets~~ ✅ **DONE** (2026-07-05h — BO beats all baselines on 3/3 genuine held-out targets) ~~+ wire §4.4 UTAS metric onto the merged model~~ ✅ **DONE** (same session, `--utas-eval`; mechanism closes, 0.5B numbers degenerate as expected). → **Next real work is (b)/(c) below and item 7.**
+   b. **Nested k-fold CV** wrapper (§2.4) for unbiased selection on the full matrix; ablation bookends (global ~8-dim; ~192-dim full-layer-wise via TuRBO/SAASBO/botorch).
+   c. **Mechanism analysis (§4.4):** correlate learned coeffs with anchor–target UTAS/scaling distance + topic overlap. NB: at 0.5B coeffs track *register* (岸田 g0 backbone dominates) not ideology — do this on the 7–8B main run.
+7. **ICL baseline kill check (Phase 2b)** now that real pilot targets exist (1279/2053/2289). NB: at 0.5B all methods sit near the same degenerate floor, so this gate is only decisive at 7–8B — run it there, or expect an inconclusive dev-scale result.
+8. **Port to Studio + 7–8B main run** (deferred to Studio arrival): the whole toolchain (train → merge → BO → UTAS metric) is now proven at 0.5B and ready to lift.

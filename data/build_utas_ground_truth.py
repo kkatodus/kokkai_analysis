@@ -232,19 +232,28 @@ def code_to_value(raw: str) -> int | None:
     return v if 1 <= v <= 5 else None
 
 
-def anchor_utas_ids(wave: str) -> dict[int, str]:
-    """person_id -> utas_id for the dev anchors present in this wave's person_map."""
+def persons_to_emit(wave: str, all_matched: bool) -> dict[int, tuple[str, str]]:
+    """person_id -> (utas_id, display_name) for the persons whose answers to emit.
+
+    Default: just the dev anchors present in this wave. With `all_matched=True`,
+    every confidently matched person in the wave's person_map — so any held-out
+    target politician's ground-truth answers are available for the headline metric
+    (spec §4.4), not only the four anchors.
+    """
     pm_path = os.path.join(UTAS_DIR, "person_map", f"{wave}.json")
     with open(pm_path, encoding="utf-8") as f:
         pm = json.load(f)["map"]
     rev = {v["person_id"]: uid for uid, v in pm.items()}
-    return {pid: rev[pid] for pid in DEV_ANCHORS if pid in rev}
+    if all_matched:
+        names = {v["person_id"]: v.get("db_name_kanji", "") for v in pm.values()}
+        return {pid: (uid, names.get(pid, "")) for pid, uid in rev.items()}
+    return {pid: (rev[pid], DEV_ANCHORS[pid]) for pid in DEV_ANCHORS if pid in rev}
 
 
 # --------------------------------------------------------------------------- #
 # Driver
 # --------------------------------------------------------------------------- #
-def build_wave(wave: str, translate: bool, model: str) -> dict:
+def build_wave(wave: str, translate: bool, model: str, all_matched: bool = False) -> dict:
     csv_path, docx_path = _resolve_files(wave)
     if not csv_path or not docx_path:
         raise FileNotFoundError(f"{wave}: csv={csv_path} docx={docx_path}")
@@ -267,14 +276,14 @@ def build_wave(wave: str, translate: bool, model: str) -> dict:
 
     codes = [it["code"] for it in items]
     answers_raw = load_answers(csv_path, codes)
-    anchors = anchor_utas_ids(wave)
+    persons = persons_to_emit(wave, all_matched)
 
     answers: dict[str, dict] = {}
-    for pid, uid in anchors.items():
+    for pid, (uid, name) in persons.items():
         row = answers_raw.get(uid, {})
         coded = {c: code_to_value(row.get(c, "")) for c in codes}
         answers[str(pid)] = {
-            "name": DEV_ANCHORS[pid],
+            "name": name,
             "utas_id": uid,
             "n_answered": sum(v is not None for v in coded.values()),
             "coded": coded,
@@ -296,6 +305,9 @@ def main() -> None:
     ap.add_argument("--all", action="store_true", help="Both anchor waves (2024HoR + 2022HoC)")
     ap.add_argument("--translate", action="store_true", help="Gemini EN->JA for English codebooks")
     ap.add_argument("--model", default="gemini-2.5-flash", help="Gemini model for translation")
+    ap.add_argument("--all-matched", action="store_true",
+                    help="Emit answers for every matched person in the wave, not just the 4 "
+                         "anchors — needed for held-out target politicians (spec §4.4 metric)")
     args = ap.parse_args()
 
     waves = ["2024HoR", "2022HoC"] if args.all else ([args.wave] if args.wave else [])
@@ -304,15 +316,19 @@ def main() -> None:
 
     os.makedirs(OUT_DIR, exist_ok=True)
     for wave in waves:
-        result = build_wave(wave, args.translate, args.model)
+        result = build_wave(wave, args.translate, args.model, args.all_matched)
         out_path = os.path.join(OUT_DIR, f"{wave}.json")
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
         n_items = result["n_items"]
-        anchors = ", ".join(
-            f"{a['name']}({a['n_answered']}/{n_items})" for a in result["answers"].values()
-        )
-        print(f"{wave}: {n_items} items, anchors: {anchors} -> {out_path}")
+        ans = result["answers"]
+        if args.all_matched:
+            print(f"{wave}: {n_items} items, {len(ans)} matched persons -> {out_path}")
+        else:
+            summary = ", ".join(
+                f"{a['name']}({a['n_answered']}/{n_items})" for a in ans.values()
+            )
+            print(f"{wave}: {n_items} items, anchors: {summary} -> {out_path}")
 
 
 if __name__ == "__main__":
