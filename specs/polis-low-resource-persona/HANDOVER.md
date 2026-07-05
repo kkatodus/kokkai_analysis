@@ -109,10 +109,44 @@ State at time of writing:
 
 **Remaining in Phase 0 (not yet done):** run the scorer `--demo` on the 0.5B base + validate the 152 adapter (`validate_persona.py`) once training finishes (blocked on VRAM while training runs); QLoRA smoke test up to ~3B; BO backend choice (Optuna TPE vs BoTorch).
 
+## UTAS name-matching infra — DONE (session 2026-07-05c)
+
+Resume-order item 3 built and verified. `data/match_utas_to_person.py` maps each
+UTAS candidate → kokkaidoc `person.person_id` via the **live local Postgres**
+(`kokkaidoc` DB, peer-auth as `postgres` OS user, or password from
+`data/.env:PSQL_DATABASE_PASSWORD` for a psycopg2 connection — system `python3`
+has psycopg2, the persona venv does **not**). Reuses `dbio.representative_db`
+(`connect_db`, `get_person_by_column`, `get_closest_person_by_name`) + pg_trgm
+`similarity()`.
+
+- **Matcher instead of speech-string matching.** The `person` table (4818 rows:
+  `person_id`, `name_kanji`, `name_kana` hiragana, `election_signature`) *is* the
+  id map — cleaner than the speaker/speakerYomi route the old plan assumed. Strip
+  UTAS `＝`/`・` separators, then tiered match: kanji-exact → kanji+kana
+  disambiguation → kana-exact → pg_trgm fuzzy (review-only, never auto-accepted).
+- **Output:** `data/data/u-tokyo-asahi/person_map/{wave}.json` (confident map
+  `utas_id → {person_id, tier, …}`) + `{wave}.review.json` (ambiguous/fuzzy/none).
+- **Match rates:** 2024HoR 683/1344, 2021HoR 641/1051, 2022HoC 297/668, 2019HoC
+  280/491. The ~50% is a genuine **coverage ceiling**, not a matcher bug: top
+  fuzzy scores are ~0.15 (e.g. 小林悟→小林元), i.e. the unmatched are losing /
+  non-Diet candidates absent from `person` (which is built from Diet members).
+  Confident tiers are all exact — trustworthy. HoC waves lack a KANA column →
+  kanji-only there (handled).
+- **All 4 anchors resolve, in their correct chamber (wave selection §4.4):**
+  岸田(152)→2021HoR/2024HoR · 塩川(2377)→2021HoR/2024HoR · 福島(3631)→2019HoC/2022HoC ·
+  上田(5520)→2022HoC. **2024HoR + 2022HoC together cover all four** → use those two
+  waves for the headline metric. Same person keeps the same person_id across waves.
+
+**Next after this:** extract the actual UTAS Likert answers (`Q4_*` 5-pt
+agree/disagree, `Q5_*` 5-pt A/B; English wording in the `.docx` codebook
+`word/document.xml`) for the matched anchor person_ids → ground-truth vector for
+`data/polis_option_logprob.py`. That closes the real headline metric (the 0.5B
+`--demo` was only a mechanism check).
+
 ## Suggested resume order
 
 1. **Anchor-delta cosine kill check (Phase 2a)** — once all 4 adapters exist (152 done; 3631/2377/5520 training as of 2026-07-05b, script `scratchpad/train_rest.sh` → `output/polis_{id}_{name}/`). Load the 4 `adapter_model.safetensors`, compute pairwise cosine of the flattened LoRA deltas. Near-collinear anchors invalidate the merge design (spec §6). This is the cheapest next gate and needs no new data.
 2. **DARE-TIES merge smoke test (Phase 3 start)** — PEFT `add_weighted_adapter(combination_type="dare_ties")` over the 4 adapters → confirm the merged model still answers via the option-logprob scorer. Custom layer-group weighting is the later BO surface.
-3. **UTAS name-matching infra** (shared with `ensemble-scaling-reliability`): match speech `speaker`/`speakerYomi` to UTAS `NAME`/`KANA` (**Shift-JIS**, `＝`/`・` separators!); reuse `utils/string_process.clean_repr_name`. Then wave selection (§4.4). Anchors come from the recent-era scaling set → should align with 2021/2024 UTAS waves. Gives the *real* headline metric (0.5B demo above is only a mechanism check).
+3. ~~**UTAS name-matching infra**~~ **DONE** (2026-07-05c, see section above). Next payload = extract UTAS Likert answers for matched anchors → headline-metric ground truth.
 4. **Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice (Optuna TPE vs BoTorch GP).
 5. **ICL baseline kill check (Phase 2b)** once name-matching + a pilot target exist.
