@@ -25,6 +25,12 @@ Skills
   list-skills.sh             Available .agents/skills names
   sync-skills.sh             Copy skills to .cursor/skills and .claude/skills
 
+Doc sync & ship
+  update-agent-docs          Skill: sync docs/agents/ with repo (data, code, infra)
+  finalize                   Skill: run update-agent-docs, then commit + PR to main
+  .agents/skills/update-agent-docs/scripts/audit-agent-docs.sh
+                             Drift report before editing guides
+
 Typical flow
   1. ./scripts/route-task.sh "fix speech API pagination"
   2. ./scripts/show-guide.sh backend

@@ -3,5 +3,22 @@ kokkai_venv/
 __pycache__/
 test/
 kokkaivenv/
+s3_mirror
 s3_mirror/
 CLAUDE.local.md
+
+# LaTeX build output (paper/)
+paper/**/*.aux
+paper/**/*.bbl
+paper/**/*.blg
+paper/**/*.fdb_latexmk
+paper/**/*.fls
+paper/**/*.lof
+paper/**/*.log
+paper/**/*.lot
+paper/**/*.out
+paper/**/*.pdf
+paper/**/*.spl
+paper/**/*.synctex.gz
+paper/**/*.toc
+paper/**/*.zip

@@ -3,8 +3,6 @@ name: Deploy Infrastructure
 on:
   push:
     branches:
-      - dev
-      - stg
       - prd
     paths:
       - "infra/**"
@@ -12,8 +10,6 @@ on:
       - "backend/**"
   pull_request:
     branches:
-      - dev
-      - stg
       - prd
     paths:
       - "infra/**"
@@ -21,12 +17,10 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: "Environment to deploy (dev, staging, prod)"
+        description: "Environment to deploy (prod)"
         required: true
         type: choice
         options:
-          - dev
-          - staging
           - prod
 
 env:
@@ -54,21 +48,11 @@ jobs:
         run: |
           BASE_BRANCH="${{ github.base_ref }}"
           case $BASE_BRANCH in
-            dev)
-              echo "environment=dev" >> $GITHUB_OUTPUT
-              ;;
-            stg)
-              echo "environment=staging" >> $GITHUB_OUTPUT
-              ;;
             prd)
               echo "environment=prod" >> $GITHUB_OUTPUT
               ;;
-            main|master)
-              # PRs to main/master: default to dev for diff (no deployment)
-              echo "environment=dev" >> $GITHUB_OUTPUT
-              ;;
             *)
-              echo "environment=dev" >> $GITHUB_OUTPUT
+              echo "environment=prod" >> $GITHUB_OUTPUT
               ;;
           esac
           echo "Running diff for environment: ${{ steps.env.outputs.environment }}"
@@ -119,18 +103,12 @@ jobs:
             # Automatic trigger: determine from branch name
             BRANCH_NAME="${{ github.ref_name }}"
             case $BRANCH_NAME in
-              dev)
-                echo "environment=dev" >> $GITHUB_OUTPUT
-                ;;
-              stg)
-                echo "environment=staging" >> $GITHUB_OUTPUT
-                ;;
               prd)
                 echo "environment=prod" >> $GITHUB_OUTPUT
                 ;;
               *)
-                echo "Error: Unknown branch '$BRANCH_NAME'. Expected: dev, stg, or prd"
-                echo "Note: main and master branches do not trigger deployments."
+                echo "Error: Unknown branch '$BRANCH_NAME'. Expected: prd"
+                echo "Note: only the prd branch triggers deployments."
                 exit 1
                 ;;
             esac
@@ -153,16 +131,6 @@ jobs:
           
           # Set account ID based on environment
           case $ENV in
-            dev)
-              if [ -n "${{ secrets.AWS_ACCOUNT_ID_DEV }}" ]; then
-                echo "AWS_ACCOUNT_ID_DEV=${{ secrets.AWS_ACCOUNT_ID_DEV }}" >> $GITHUB_ENV
-              fi
-              ;;
-            staging)
-              if [ -n "${{ secrets.AWS_ACCOUNT_ID_STAGING }}" ]; then
-                echo "AWS_ACCOUNT_ID_STAGING=${{ secrets.AWS_ACCOUNT_ID_STAGING }}" >> $GITHUB_ENV
-              fi
-              ;;
             prod)
               if [ -n "${{ secrets.AWS_ACCOUNT_ID_PROD }}" ]; then
                 echo "AWS_ACCOUNT_ID_PROD=${{ secrets.AWS_ACCOUNT_ID_PROD }}" >> $GITHUB_ENV

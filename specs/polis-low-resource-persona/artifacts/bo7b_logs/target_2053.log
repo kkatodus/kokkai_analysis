@@ -1,0 +1,4 @@
+=== [2026-07-07 11:12:36] START target 2053 ===
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 142/339 [00:00<00:00, 1418.84it/s]Loading weights:  84%|████████▍ | 284/339 [00:00<00:00, 1360.07it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 1614.75it/s]
+/usr/local/python_3.14.2/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-11699-7vrnllf_'}
+  warnings.warn(
