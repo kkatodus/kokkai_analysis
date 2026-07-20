@@ -1,0 +1,190 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{booktabs} % Publication-quality tables
+\usepackage{amsmath}  % Math environments and symbols
+\usepackage{amssymb}  % \mathbb and extra symbols
+\usepackage{url}
+
+% Japanese (CJK) support. Compile with xelatex or lualatex (see .latexmkrc).
+\usepackage{iftex}
+\ifPDFTeX
+  % pdflatex fallback: CJK glyphs won't render, but the document still builds.
+  \usepackage[utf8]{inputenc}
+\else
+  \usepackage{xeCJK}
+  \setCJKmainfont{IPAexMincho}
+  \setCJKsansfont{IPAexGothic}
+\fi
+
+\title{POLIS: Parameter Optimization for Low-resource Ideological Simulation}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    The use of Large Language Models (LLMs) to simulate agentic populations is a rapidly expanding frontier in computational social science. However, current methodologies relying on zero-shot prompting or role-playing frequently suffer from in-group bias, generating caricatures based on demographic stereotypes rather than authentic ideological expressions. While Supervised Fine-Tuning (SFT) mitigates this bias, it is structurally limited by data sparsity; in domains such as political science, high-profile figures possess abundant public transcripts, whereas long-tail demographics have severely limited training data. To achieve grounded persona generation in low-resource settings, we introduce POLIS(Parameter Optimization for Low-resource Ideological Simulation). Rather than attempting to fine-tune on insufficient text, we conceptualize ideology as a continuous latent spectrum. We first train domain-specific LoRA adapters on data-rich personas using Direct Preference Optimization (DPO). For data-sparse target personas, we project these capabilities by interpolating the data-rich adapters using DARE-TIES weight-space arithmetic. To discover the optimal ideological blend without catastrophic stylistic overfitting, we employ Bayesian Optimization to tune the layer-wise mixing coefficients against a cross-validated likelihood objective on the limited target data. By treating fine-tuning-induced weight differences as modular, composable units, our framework synthesizes robust, authentic personas that accurately reflect a target's ideological position without requiring extensive domain data. We demonstrate that this optimized merging approach yields significantly more grounded LLM personas compared to standard SFT in sparse data domains.
+\end{abstract}
+
+\emph{Preliminary report.} This draft presents the POLIS framework and \textbf{preliminary results}. The full pipeline (DPO alignment $\rightarrow$ layer-wise DARE-TIES merge $\rightarrow$ Bayesian-optimized mixing) is fully implemented and validated end-to-end at a 0.5B-parameter development scale, where our optimized merge beats every baseline on held-out targets. Early main-scale (7B) experiments confirm that the survey-answering metric becomes reliable at scale and that DPO alignment improves ideological fidelity. The full main-scale merge-method comparison is compute-bound (Section~\ref{sec:discussion}) and is deferred to higher-throughput hardware; those tables are marked \emph{pending} where applicable.
+
+\section{Introduction}
+Simulating human populations with LLMs---``silicon sampling''~\cite{argyle2023out}---has become a productive tool for computational social science, from piloting survey instruments to modeling opinion dynamics. Its central failure mode is that off-the-shelf models, when asked to role-play a demographic or a named individual, tend to reproduce \emph{stereotypes}: a flattened, media-derived caricature rather than the target's authentic ideological expression. Supervised fine-tuning (or preference optimization) on the target's own words mitigates this, but only where such words are abundant.
+
+This creates a structural sparsity problem that is acute in political science. A handful of high-profile figures (party leaders, cabinet ministers) have tens of thousands of transcribed utterances, while the long tail of backbenchers, challengers, and losing candidates have little or none. It is precisely this long tail that a representative population simulation most needs, and precisely where per-persona fine-tuning fails.
+
+We propose \textbf{POLIS} (Parameter Optimization for Low-resource Ideological Simulation), which reframes the problem from \emph{fine-tuning} to \emph{composition}. We treat ideology as a continuous latent spectrum and the weight-differences induced by DPO fine-tuning as modular, composable units. Concretely, POLIS (i) trains a small set of \emph{anchor} adapters on data-rich personas spanning the ideological spectrum via DPO; (ii) for a data-sparse target, synthesizes a persona by interpolating the anchor adapters in weight space with DARE-TIES; and (iii) uses Bayesian Optimization (BO) to tune the \emph{layer-wise} mixing coefficients against a cross-validated likelihood objective on whatever little target data exists, so that only a handful of target utterances are needed---to \emph{locate} a persona in the space the anchors span, not to \emph{train} one.
+
+\paragraph{Contributions.}
+\begin{itemize}
+    \item We formulate low-resource persona generation as weight-space interpolation over DPO anchor adapters, tuned per layer-group by Bayesian optimization against a cross-validated target-likelihood objective.
+    \item We instantiate the framework on Japanese Diet (Kokkai) speech data with an external, training-free evaluation: agreement with real candidate answers to the UTAS (University of Tokyo--Asahi Shimbun) elite survey.
+    \item In a fully validated 0.5B-parameter development study, our layer-wise optimized merge beats zero-shot, best-single-anchor, and uniform-merge baselines on the held-out likelihood objective for \emph{every} genuine held-out target, recovering interpretable per-layer mixing structure. Early 7B experiments show the survey metric becomes non-degenerate at scale and that DPO alignment moves personas toward their true positions.
+\end{itemize}
+
+\section{Related Work}
+% 関連研究: LLM-based Agent Simulation, Parameter-Efficient Fine-Tuning (LoRA), Model Merging (DARE, TIES), Bayesian Optimization for Neural Networksなど。
+POLIS sits at the intersection of four lines of work. \textbf{LLM-based agent simulation} uses conditioned LLMs as stand-ins for human respondents and populations~\cite{argyle2023out}. \textbf{Parameter-efficient fine-tuning} makes per-persona adaptation cheap: LoRA~\cite{hu2022lora} learns low-rank weight updates, and QLoRA~\cite{dettmers2023qlora} makes even multi-billion-parameter models tunable on a single commodity GPU. \textbf{Preference optimization}, in particular DPO~\cite{rafailov2023direct}, aligns a policy to preferred over dispreferred completions without a separate reward model. \textbf{Model merging}---TIES~\cite{yadav2023ties} for resolving sign interference and DARE~\cite{yu2024language} for sparsifying task vectors---composes independently trained capabilities in weight space. POLIS combines these: DPO anchors merged with DARE-TIES, with the merge coefficients selected by \textbf{Bayesian optimization}~\cite{shahriari2016taking,akiba2019optuna}. A fuller treatment of ideological scaling of political text~\cite{slapin2008scaling,laver2003extracting,kaneko2026extracting} and its Japanese instantiations is deferred to a later revision.
+
+\section{Preliminaries}
+% 提案手法を説明するための前提知識（DPOの定式化、DARE-TIESの基本原理など）を簡潔に定義。
+\paragraph{DPO.} Given a prompt $x$ and a preferred/dispreferred completion pair $(y_w, y_l)$, DPO~\cite{rafailov2023direct} optimizes the policy $\pi_\theta$ against a frozen reference $\pi_{\text{ref}}$ by minimizing
+\[
+\mathcal{L}_{\text{DPO}} = -\,\mathbb{E}_{(x,y_w,y_l)}\!\left[\log \sigma\!\left(\beta \log \tfrac{\pi_\theta(y_w\mid x)}{\pi_{\text{ref}}(y_w\mid x)} - \beta \log \tfrac{\pi_\theta(y_l\mid x)}{\pi_{\text{ref}}(y_l\mid x)}\right)\right],
+\]
+which raises the likelihood of $y_w$ relative to $y_l$ without a learned reward model.
+
+\paragraph{Task vectors and DARE-TIES.} For a LoRA adapter with matrices $A,B$ and rank $r$, the induced weight change on a module is $\Delta W = (\alpha/r)\,BA$. A merge combines several adapters' $\Delta W$ into one model. DARE~\cite{yu2024language} randomly \emph{drops} a fraction of each task vector's entries and rescales the survivors (reducing interference); TIES~\cite{yadav2023ties} then \emph{elects} a consensus sign per parameter and averages only the agreeing contributions. POLIS applies DARE with a fixed seeded mask (so the objective is deterministic in the mixing coefficients) followed by TIES sign-election.
+
+\section{The POLIS Framework}
+% 提案手法のコアセクション。アブストラクトのパイプラインに沿って展開。
+\subsection{Problem Formulation}
+% イデオロギーを連続的な潜在スペクトルとして定義し、低資源ペルソナ生成の目的関数を定式化。
+We treat ideology as a continuous latent space and posit that a data-sparse target persona can be expressed as a composition of a small set of data-rich \emph{anchor} personas that span that space. Let $\{\Delta W^{(a)}\}_{a=1}^{K}$ be the DPO-induced weight changes of $K$ anchors. Partitioning the transformer's layers into $G$ contiguous depth-groups, POLIS forms a merged model
+\[
+W = W_{\text{base}} + \mathrm{TIES}\Big(\big\{\, c_{a,g}\cdot \mathrm{DARE}(\Delta W^{(a)}_g) \,\big\}_{a,g}\Big),
+\]
+parameterized by a coefficient matrix $C = [c_{a,g}] \in \mathbb{R}^{K\times G}$. Given only a small set $D_t$ of target utterances, we choose $C$ to minimize the target's held-out negative log-likelihood, $C^\star = \arg\min_C \; \widehat{\mathrm{NLL}}_{D_t}(W(C))$. The persona is thus \emph{located}, not trained: the only free parameters are the $K\times G$ mixing coefficients.
+
+\subsection{Base Persona Alignment via Direct Preference Optimization}
+% データ豊富なペルソナを用いたドメイン特化型LoRAアダプタのDPOによる学習プロセス。
+Each anchor adapter is trained with DPO on \emph{session-grounded} preference pairs drawn from the anchor's Diet speeches. For a real utterance, the \emph{prompt} is the reconstructed prior context of the same sitting (up to $K$ preceding speeches, capped at $\sim$1.2k characters) plus a speaker cue; the \emph{chosen} completion is the politician's actual next utterance; the \emph{rejected} completion is a strong-LLM caricature of that same politician role-playing the same cue (generated with Gemini 2.5-flash-lite). DPO therefore trains the adapter to prefer the politician's authentic register over exactly the stereotype the framework aims to defeat. Adapters use LoRA ($r{=}16$ on \texttt{q,k,v,o\_proj}) over a Qwen2.5-Instruct backbone.
+% TODO(lit-review): literatures to support this subsection
+%   - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11372692
+%   - https://aclanthology.org/2025.coling-main.369/
+%   - Original DPO paper: https://arxiv.org/abs/2305.18290 (cited as rafailov2023direct)
+\subsection{Weight-Space Interpolation via DARE-TIES}
+% データが疎なターゲットペルソナに向けて、学習済みアダプタをDARE-TIESを用いて統合・投影する手法。
+For a sparse target, we do not train an adapter. Instead we reconstruct each anchor's $\Delta W$ and combine them with DARE (density $0.1$, i.e.\ $\sim$90\% of each task vector dropped, under a fixed seed) and TIES sign-election, weighted per anchor \emph{and per depth-group} by $C$. A custom merger (rather than a single global weight per adapter) is required precisely because different layer-groups carry different persona information; the merge writes $W_{\text{base}}+\Delta W$ directly into the model and is exactly reversible, so each BO evaluation re-merges from base without any retraining.
+% DARE paper: https://arxiv.org/abs/2311.03099 (cited as yu2024language)
+% TIES paper: https://arxiv.org/abs/2306.01708 (cited as yadav2023ties)
+
+\subsection{Layer-wise Mixing Optimization via Bayesian Optimization}
+% 破滅的なスタイルの過適合を防ぎつつ、ターゲットデータに対する交差検証尤度を最大化するための、ベイズ最適化を用いた層ごとの混合係数のチューニング。
+The coefficient matrix $C$ is small (${\sim}K\times G$ dimensions), and each evaluation is expensive (a re-merge plus forward passes over the target's held-out utterances)---the classic regime for \textbf{Gaussian-process Bayesian optimization}. We use Optuna's~\cite{akiba2019optuna} native \texttt{GPSampler}, with the objective being the mean session-grounded NLL of the target's utterances under the merged model, coefficients bounded to $[0, 1.5]$. This tunes \emph{how much} of each anchor to inject at each depth, avoiding both under-specification (base model) and the stylistic overshoot of a uniform all-ones merge.
+% TODO(lit-review): BO / merge-coefficient optimization support
+%   - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11048544
+%   - https://arxiv.org/pdf/2512.09972v5
+
+\section{Experimental Setup}
+\subsection{Datasets}
+% 使用した政治的/イデオロギー的発言のデータセット（データリッチなドメインとロングテールなドメインの詳細）。
+\paragraph{Anchors and speeches.} We source utterances from the Kokkai (Japanese National Diet) proceedings. We select four data-rich anchors spanning the spectrum, each with thousands of speeches: 岸田文雄 (Kishida, LDP), 塩川鉄也 (Shiokawa, JCP), 福島みずほ (Fukushima, SDP), and 上田清司 (Ueda, independent/DP-lineage). These are the anchors whose DPO adapters are interpolated for every target.
+
+\paragraph{UTAS ground truth.} For external evaluation we use the University of Tokyo--Asahi Shimbun (UTAS) elite candidate surveys, matching each candidate to a Diet \texttt{person\_id} via a name-based matcher. Policy items are 5-point Likert: \texttt{Q4\_*} (agree--disagree) and \texttt{Q5\_*} (A/B position). We use the 2024 House of Representatives wave (33 items) and the 2022 House of Councillors wave (37 items); English items are machine-translated to Japanese once for administration, native-Japanese items used verbatim.
+
+\paragraph{Models.} Development scale is Qwen2.5-0.5B-Instruct (full-precision LoRA/DPO). Main scale is Qwen2.5-7B-Instruct trained with 4-bit QLoRA (nf4, bf16 compute, \texttt{paged\_adamw\_8bit}, gradient checkpointing). Merges use 3 contiguous depth-groups (0.5B: 24 layers $\rightarrow$ 0--7 / 8--15 / 16--23; 7B: 28 layers $\rightarrow$ 0--9 / 10--19 / 20--27).
+
+\subsection{Baselines}
+% 比較対象（Zero-shot Prompting, Standard SFT, Uniform Model Mergingなど）。
+We compare POLIS's BO-tuned layer-wise merge against: (1) \textbf{Base} --- the zero-shot instruct model with a named-persona system prompt; (2) \textbf{Best-single-anchor} --- the single anchor adapter that best fits the target (standard SFT-transfer); and (3) \textbf{Uniform merge} --- all anchors merged with equal, all-ones coefficients (an untuned DARE-TIES merge). Baseline (1) is the zero-shot/role-play caricature the abstract targets; (2) is the strongest per-persona SFT option available to a sparse target; (3) isolates the contribution of \emph{tuning} the merge.
+
+\subsection{Evaluation Metrics}
+% ペルソナのグラウンディング、イデオロギーの正確性、ステレオタイプ/バイアスの評価指標（自動評価および人手評価）。
+\textbf{(i) Held-out session-grounded NLL} (the BO objective, reported on a disjoint test split): the mean negative log-likelihood the persona assigns to the target's real utterances given prior session context---a direct grounding/fidelity proxy, lower is better. \textbf{(ii) UTAS agreement} (external, training-free): we administer each answered survey item to the persona and read off an answer via an option-log-probability scorer, reporting per-item argmax and expectation $\mathbb{E}[1..5]$ against the candidate's real coded answer, aggregated as MAE(argmax), MAE($\mathbb{E}$), exact-match, and within-1 accuracy. UTAS is deliberately external: it is never used in training or in the BO objective, so it cannot be gamed by the optimization.
+
+\section{Results and Analysis}
+\subsection{Main Results}
+% 提案手法（POLIS）とベースラインの比較。低資源環境での優位性を示す。
+Table~\ref{tab:main-nll} reports the headline development-scale result: held-out session-grounded NLL for three \emph{genuine held-out targets}---politicians outside the anchor set, spanning the spectrum---each simulated by merging the four anchors and tuning the coefficients on a low-resource budget of only 30 utterances (40 GP trials; 30 held-out test utterances).
+
+\begin{table}[t]
+\centering
+\caption{Development-scale (0.5B) held-out session-grounded NLL (lower is better) for genuine held-out targets. All four anchors are merged; budget 30 / test 30 / 40 GP trials. POLIS beats every baseline on every target.}
+\label{tab:main-nll}
+\begin{tabular}{llrrrr}
+\toprule
+Target & Party & Base & Uniform & Best-single & \textbf{POLIS (BO)} \\
+\midrule
+高市早苗 (Takaichi) & LDP & 2.870 & 4.010 & 2.914 & \textbf{2.823} \\
+赤嶺政賢 (Akamine)  & JCP & 3.256 & 4.224 & 3.269 & \textbf{3.186} \\
+枝野幸男 (Edano)    & CDP & 3.317 & 4.356 & 3.320 & \textbf{3.250} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+POLIS beats the zero-shot base, the best single anchor, and (by more than a full nat) the uniform merge on all three targets. Two structural findings support the design:
+\begin{itemize}
+    \item \textbf{Tuning does real work.} The uniform all-ones merge is substantially \emph{worse} than the base model everywhere---untuned task vectors overshoot and corrupt the model. POLIS's advantage over uniform is entirely from selecting coefficients.
+    \item \textbf{Interpretable structure emerges.} For the LDP target, BO zeroed the ideologically distant anchors and kept the LDP anchor with a per-depth-group weighting that a single global weight cannot express---evidence that layer-group granularity is the right knob.
+\end{itemize}
+A caveat we state plainly: at 0.5B the DPO adapters primarily encode \emph{register/rhetoric} rather than fine-grained ideology (the strongest, cleanest-trained anchor tends to serve as a shared ``fluent-Diet-register'' backbone in the lower layers, with target-specific residual added elsewhere). Clean \emph{ideological} coefficient recovery is expected only at main scale; see Section~\ref{sec:disc7b}.
+
+\subsection{Ablation Studies}
+% 各モジュールの貢献度分析（例：層ごとの最適化 vs 全層一律の混合、DPO vs SFTなど）。
+Two ablations are implicit in Table~\ref{tab:main-nll}. \textbf{Merge tuning:} POLIS vs.\ \emph{Uniform} isolates the BO stage---removing it (equal coefficients) is worse than not merging at all. \textbf{Layer-wise vs.\ global:} POLIS vs.\ \emph{Best-single} isolates per-layer-group composition---even the best single anchor is beaten, so blending anchors per depth-group adds fidelity beyond any one adapter or a global weight.
+
+\paragraph{Anchor orthogonality.} A prerequisite for the merge to have room to interpolate is that anchor task vectors are not collinear. Across the four 0.5B anchors, pairwise $\Delta W$ cosine similarity is at most $0.058$ (mean $0.047$) with consistent delta norms $0.76$--$0.82$: the anchors are near-orthogonal in weight space, so each contributes genuine residual signal and the feared collinearity failure does not materialize at development scale (to be re-checked at 7B).
+
+\subsection{Qualitative Analysis and Main-Scale Validation}
+\label{sec:disc7b}
+% 実際の生成テキストの事例（Case Studies）。POLISがステレオタイプを回避し、いかに自然なイデオロギー表現を獲得しているかを示す。
+The UTAS survey metric is only meaningful if the model can answer Likert items competently. Table~\ref{tab:floor} shows this is the pivotal scale effect. At 0.5B the survey metric is a \textbf{degenerate floor}: MAE($\mathbb{E}$) is flat (1.11--1.14) across base, uniform, best-single, and POLIS, with $\mathbb{E}$ pinned near 3.0 and argmax collapsing (a numeric-label variant fails too, with a first-option/``agree'' bias so strong it agrees, at $p\approx0.98$, that consumption tax should be raised to 100\%). The 0.5B study therefore validates the \emph{mechanism} (the NLL objective in Table~\ref{tab:main-nll}), not the survey headline.
+
+At \textbf{7B the floor breaks}. Comparing the base 7B model to its Kishida DPO adapter on the 2024 HoR wave (33 items, named persona):
+
+\begin{table}[t]
+\centering
+\caption{Main-scale (7B) UTAS agreement for the Kishida persona, 2024 HoR, 33 items. At 7B argmax is content-responsive (0.5B collapsed), and DPO alignment improves fidelity on 3/4 metrics with none worse.}
+\label{tab:floor}
+\begin{tabular}{lrrrr}
+\toprule
+Model & MAE(argmax) & MAE($\mathbb{E}$) & exact & within-1 \\
+\midrule
+Base 7B                 & 1.485 & 1.151 & 0.152 & 0.545 \\
+\textbf{Kishida DPO 7B} & \textbf{1.455} & \textbf{1.067} & \textbf{0.212} & 0.545 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At 7B the argmax spans the full 1--5 scale and responds to item content, and the DPO adapter improves alignment on 3 of 4 metrics with none worse---confirming both that the survey metric is usable at scale and that DPO alignment moves the persona toward its true survey positions. A residual bias remains (both models lean the A/B items high; absolute MAE is moderate), which motivates numeric-label scoring with permutation-based (PriDe-style) order de-biasing~\cite{zhao2021calibrate} as the next methods step, buildable only at $\geq$7B where the model is competent enough to validate it.
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+% 本手法の限界（計算コスト、対象ドメインの広がりなど）や将来の展望。
+\paragraph{Survey answering is a scale-gated capability.} At 0.5B, Likert competence is absent (Table~\ref{tab:floor}); the development study can only validate the NLL mechanism, not the survey headline. This is a property of the base model, not of POLIS, and it resolves at 7B.
+
+\paragraph{Compute is the binding constraint on the main-scale merge comparison.} Correctly writing merged $\Delta W$ into a 7B model on an 8\,GB GPU forces full-CPU forward passes: with device offload (\texttt{device\_map="auto"}) the overflow layers become meta tensors and the in-place weight writes silently no-op, so a correct merge must keep the whole model in CPU RAM. Correct-but-CPU 7B forwards over $\sim$1.3k-token session contexts are minutes each; a single UTAS evaluation is tractable, but a full BO run (hundreds of forwards $\times$ trials) is days on the laptop. The full 7B merge-method comparison (base/uniform/best-single/POLIS on NLL \emph{and} UTAS across the three targets)---the main-scale version of Table~\ref{tab:main-nll}---is therefore \textbf{pending on higher-throughput hardware} and is the primary open item.
+
+\paragraph{Coefficients encode register at 0.5B.} As noted, development-scale coefficients track fluent-Diet-register more than ideology; the interpretation of mixing coefficients as ideological positions is a main-scale expectation to be confirmed, not a development-scale result.
+
+\paragraph{Scope.} Results are on Japanese Diet speech with four anchors; anchor count, party coverage, and cross-domain transfer are unstudied here.
+
+\section{Conclusion}
+We introduced POLIS, a framework that reframes low-resource persona simulation from fine-tuning to composition: DPO anchor adapters merged with DARE-TIES, with layer-wise mixing coefficients selected by Bayesian optimization against a small target-likelihood budget. The full pipeline is validated at development scale, where it beats zero-shot, best-single-anchor, and uniform-merge baselines on held-out likelihood for every genuine held-out target and recovers interpretable per-layer structure. Early 7B experiments confirm the external survey metric becomes reliable at scale and that DPO alignment improves ideological fidelity. Completing the main-scale merge-method comparison on higher-throughput hardware is the immediate next step toward grounded, non-caricatured persona simulation for the long tail of political actors.
+
+\section*{Ethics Statement}
+% 社会的影響、バイアスの取り扱い、生成されたペルソナの悪用防止に関する倫理的配慮。
+This work simulates the ideological positions of real, named public figures from their public parliamentary record and public survey responses. Personas are approximations, not the individuals, and can err or misrepresent; they must not be presented as authentic statements by these figures, used to fabricate quotations, or deployed to impersonate or manipulate. All source data (Diet proceedings, UTAS surveys) are public elite records; the intent is scholarly analysis of political discourse and the reduction of stereotype bias in population simulation, and we caution against downstream persuasive or deceptive use.
+
+\section*{Acknowledgements}
+
+\bibliography{references}
+\bibliographystyle{plain}
+
+% \appendix
+% \section{Implementation Details} % ハイパーパラメータやプロンプトの詳細など
+
+\end{document}

@@ -1,0 +1,18 @@
+{
+  "scope": "term",
+  "cohort": 469,
+  "topics": {
+    "Defence": {
+      "cleared": 271,
+      "below_gate": 187,
+      "no_dir": 10,
+      "skipped": 1
+    },
+    "NuclearPower": {
+      "cleared": 100,
+      "below_gate": 312,
+      "no_dir": 57,
+      "skipped": 0
+    }
+  }
+}

@@ -13,6 +13,7 @@ KOKKAI DOC is a civic-tech project that analyzes Japanese parliamentary speeches
 2. **`frontend/`** - Next.js React application (previously CRA)
 3. **`data/`** - Python pipelines for scraping, processing, and LLM analysis
 4. **`infra/`** - AWS CDK infrastructure code
+5. **`specs/`** - Future project plans (index: [specs/README.md](mdc:specs/README.md))
 
 ## Key Directories
 
@@ -34,7 +35,7 @@ KOKKAI DOC is a civic-tech project that analyzes Japanese parliamentary speeches
 ### Data Pipeline (`data/`)
 - Python scripts for scraping and LLM processing
 - Large data directories (`data/data_*`) are part of the repo
-- See [AGENTS.md](mdc:AGENTS.md) for detailed documentation
+- See [AGENTS.md](mdc:AGENTS.md) (index) and `docs/agents/*.md` for area-specific guides
 
 ## Deployment Strategy
 
@@ -48,7 +49,8 @@ KOKKAI DOC is a civic-tech project that analyzes Japanese parliamentary speeches
 - Large data directories are committed to the repo - don't delete unless regenerating
 - Environment configuration is in `infra/lib/config/environments.ts`
 - GitHub Actions workflows are in `.github/workflows/`
-- See [README.md](mdc:README.md) for project overview and [AGENTS.md](mdc:AGENTS.md) for detailed codebase guide
+- See [README.md](mdc:README.md) for project overview and [AGENTS.md](mdc:AGENTS.md) for the agent guide index (`docs/agents/`)
+- **Token savers:** run `./scripts/agent-help.sh` for compact discovery (guides, routes, data dirs) instead of exploring the full tree
 
 ## Code Organization Best Practices
 
