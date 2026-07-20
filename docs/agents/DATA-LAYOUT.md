@@ -69,7 +69,12 @@ City population/coordinates, `senkyoku2022/` GeoJSON.
 
 ### Election timelines — `election_history/`
 
-One `{person_id}.jsonl` per politician. Exported from Postgres.
+One `{person_id}.jsonl` per politician. Exported from the Postgres `election_result`
+table — for term/cohort membership queries (e.g. "who was elected in the 49th HoR
+term"), it's usually faster to query Postgres directly than to scan all jsonl files.
+See [ENVIRONMENT.md](./ENVIRONMENT.md#local-postgres-kokkaidoc-db--check-this-before-grepping-flat-files)
+for connection details, schema, and row counts (`person`, `election_result`,
+`speeches`, `x_account`).
 
 ### Relevance source — `relevance_data/`
 
@@ -78,6 +83,25 @@ NDL TSV exports + `aggregate_processed.jsonl`.
 ### ML labelling corpora
 
 `diet_speech_label/`, `youtube_label/`, `tweet_label/` — for `finetune_text_labeller.py`.
+
+### UTAS candidate surveys — `u-tokyo-asahi/`
+
+University of Tokyo–Asahi Shimbun Election Study Project (UTASP / UTAS) candidate-level
+survey responses. One subdirectory per election wave:
+
+| Subdir | Election | Files |
+|---|---|---|
+| `2019HoC/` | 2019 House of Councillors | `2019UTASP20191109.csv`, `2019UTASP_codebook20191109.docx` |
+| `2021HoR/` | 2021 House of Representatives | `2021UTASP20211126_excludedQ11.csv`, `2021UTASP_English_20240502_temporary.docx` |
+| `2022HoC/` | 2022 House of Councillors | `2022UTASP20220720.csv`, `2022UTASP_codebook20231201.docx` |
+| `2024HoR/` | 2024 House of Representatives | `2024UTASP20241125.csv`, `2024UTASP_English_20250820.docx` |
+
+Each CSV row is one candidate (`ID`, `NAME`, `KANA`, `PARTY`, district fields, `Q*_*`
+policy items). Codebooks (`.docx`) define question wording and scales.
+
+Not mirrored to `s3_mirror/` or served by the API — research ground truth for validating
+ideological-scaling outputs (see [RESEARCHER.md](./RESEARCHER.md),
+[`specs/ensemble-scaling-reliability/`](../../specs/ensemble-scaling-reliability/README.md)).
 
 ### Other dirs
 

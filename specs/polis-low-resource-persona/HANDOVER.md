@@ -2,6 +2,47 @@
 
 Context for resuming work after a session clear. Read [README.md](./README.md) (the spec) first; this file covers only what the spec does not: session state, environment facts, and next actions.
 
+---
+> ## 🔴 START HERE (latest, 2026-07-07 — paper draft DONE)
+> **The "populate the paper with preliminary findings" task is COMPLETE** (see "✅ PAPER POPULATED" section just
+> below this banner). `paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex` is now a full
+> preliminary draft: all section bodies written, Results A/C/D in `booktabs` tables, honestly framed as preliminary,
+> abstract kept verbatim, Ken's reference URLs preserved as source `% TODO(lit-review)` comments. Compiles cleanly
+> with **xelatex** (11 pages; `.latexmkrc` sets pdf_mode=5; CJK via xeCJK + IPAexMincho). Methods refs (DPO/DARE/
+> TIES/LoRA/QLoRA/Optuna/etc.) added to `references.bib`. **Nothing committed** (repo has many unrelated changes — ask Ken).
+> **Next agent options:** (a) let Ken review the PDF/draft and revise; (b) flesh out Related Work / Preliminaries
+> (needs real lit review, not our data); (c) when the **Mac Studio** arrives, run the full 7B merge/BO+UTAS
+> comparison (the pending Main-Results-at-scale table). No compute pending on the laptop; laptop 7B BO is a confirmed
+> dead-end (~days on CPU). Everything below is chronological history.
+---
+
+## ✅ PAPER POPULATED with preliminary findings (session 2026-07-07)
+
+Ken's active request is done. `paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex` went
+from skeleton → full preliminary draft. What was written:
+
+- **Kept verbatim:** the abstract. **Preserved:** every reference URL Ken left, moved into source
+  `% TODO(lit-review)` comments (they carried `&`/`_` that break LaTeX in body text) next to the subsection each belongs to.
+- **Filled with real results:** Introduction (+ Contributions), Preliminaries (DPO loss, DARE-TIES), full POLIS
+  Framework (problem formulation with the $W=W_{base}+\mathrm{TIES}(\{c_{a,g}\mathrm{DARE}(\Delta W)\})$ formalism),
+  Experimental Setup (Datasets/Baselines/Metrics), Results (Main = **Result A** 0.5B NLL table; Ablations + **Result D**
+  orthogonality; Qualitative/Main-Scale = **Result C** 7B floor-break table + **Result B** 0.5B degenerate floor prose),
+  Discussion/Limitations (compute wall, register-not-ideology, scale-gated Likert), Conclusion, Ethics Statement.
+- **Kept light** (need lit review, not our data): Related Work, Preliminaries depth.
+- **Honest framing throughout:** a "Preliminary report" note under the abstract states the 0.5B pipeline is fully
+  validated, 7B is early/partial, and the full-scale merge comparison is **pending on higher-throughput hardware**.
+- **`references.bib`:** added methods refs (rafailov2023direct DPO, yu2024language DARE, yadav2023ties TIES, hu2022lora,
+  dettmers2023qlora, qwen2025qwen25, akiba2019optuna, shahriari2016taking, argyle2023out, zhao2021calibrate).
+
+**Build:** compiles clean with **xelatex** → 11-page `main.pdf`, 0 undefined refs/cites, all 7 JA politician names
+render (xeCJK + IPAexMincho/IPAexGothic, guarded by `iftex` so pdflatex still builds without CJK glyphs).
+Added `.latexmkrc` (`$pdf_mode=5`) so bare `latexmk` uses xelatex, and a `.gitignore` for LaTeX artifacts.
+Preamble gained `booktabs, amsmath, amssymb, url, iftex, xeCJK`. **Nothing committed.**
+
+**Pending in the paper (needs Studio):** the main-scale merge-method comparison table (base/uniform/best-single/POLIS
+on NLL + UTAS across the 3 targets) — currently Table 1 is the 0.5B result as the Main Result and Result C is the
+main-scale proof-of-concept; the 7B merge comparison is described in Discussion as the primary open item.
+
 ## Where things stand
 
 1. **Spec is written and agreed.** [README.md](./README.md) in this directory encodes the full design from a grill session with Ken (all major decisions confirmed one-by-one). `specs/README.md` index row added. Neither is committed yet (repo has many unrelated uncommitted changes — ask before committing).
@@ -372,6 +413,28 @@ ready*; a decisive UTAS comparison of the merge methods is a **7–8B main-run t
 The NLL proxy (above) is where BO's advantage is *visible* at 0.5B. Run with:
 `bo_merge_coeffs.py --target <id> --dpo-dir …/dpo_pairs_targets --utas-eval …/utas_ground_truth/2024HoR.json`.
 
+## 7B QLoRA training FITS the 8GB laptop — main-run deferral is broken (session 2026-07-05i)
+
+Ken fixed the hard-drive mount (`D:\` → `/mnt/d`, 774 GB free; root ext4 still has ~90 GB, where the HF cache lives). Storage was never the binding constraint — **VRAM** was, and that's what the whole "defer 7–8B to the Studio" plan rested on. Tested it directly.
+
+**Smoke test PASSED.** `train_one_politician_persona.py --quantize` on **Qwen2.5-7B-Instruct** (4-bit nf4, bf16 compute, `paged_adamw_8bit`, grad-checkpointing, LoRA r=16 q/k/v/o), 24-pair subset of anchor 152, 3 steps, ran clean end-to-end and saved the adapter (`../idea/persona/code/output/polis_152_qwen7b_smoke/`, 20 MB).
+
+| metric | 0.5B | 3B QLoRA | **7B QLoRA** |
+|---|---|---|---|
+| fits 8 GB | yes | yes | **yes — peak 8003/8192 MiB** |
+| s/it | ~6 | ~24.5 | **~54.5** |
+
+**Implication:** the 7–8B main run can happen **on this laptop via QLoRA**, not only on the delayed Studio. Extrapolated real anchor run = 1500 pairs → 188 steps × 54.5 s ≈ **2.85 h/anchor**; 6–10 anchors ≈ 17–28 h → overnight/multi-night viable. The Studio's remaining advantage is **throughput** (and full-precision 7–8B), not feasibility.
+
+**Full-length run CONFIRMED (same session).** Ran anchor 152 to completion at 7B: `dpo_pairs_full/152.jsonl` (1500 pairs → **188/188 steps, 2:52:25, ~55 s/it**), VRAM stable ~7995/8192 throughout, no OOM. **train_loss 0.0545, rewards/accuracies 1.0, rewards/margins 8.79** — cleaner than the 0.5B 152 adapter (loss 0.094, margins ~8.0). Adapter saved: `../idea/persona/code/output/polis_152_qwen7b/` (20 MB). **Both caveats below are now closed** — the ~zero VRAM margin holds over a full run, and 7B DPO converges properly, not just fits. First real 7B anchor adapter exists.
+
+**Caveats (now CLOSED, kept for the record):**
+- ~~VRAM margin ~zero → full run might OOM~~ → held stable across all 188 steps.
+- ~~DPO metrics at 3 steps are noise~~ → full run gives clean loss 0.0545 / margins 8.79.
+- **Untested at 7B:** merge → forward → option-logprob and the BO loop under 4-bit quantization. `LayerGroupMerger` reconstructs full ΔW and writes into weights — needs verifying that path works on a 4-bit base (dequant/requant, or load the merge base in bf16 for inference-only ~15 GB… which does NOT fit 8 GB → likely merge/score in 4-bit or offload). **This is the next real question.**
+
+**NB for a prior-session artifact:** `../idea/persona/code/bo_granularity_ablation.py` already exists and imports `nested_cv` from `bo_merge_coeffs` — so resume item 6b (nested k-fold CV + granularity bookends) looks **already implemented** but is undocumented above. Verify/run it before rebuilding.
+
 ## Suggested resume order
 
 0. **Real headline metric + UTAS ground truth** ✅ **DONE** (2026-07-05d, section above).
@@ -385,4 +448,139 @@ The NLL proxy (above) is where BO's advantage is *visible* at 0.5B. Run with:
    b. **Nested k-fold CV** wrapper (§2.4) for unbiased selection on the full matrix; ablation bookends (global ~8-dim; ~192-dim full-layer-wise via TuRBO/SAASBO/botorch).
    c. **Mechanism analysis (§4.4):** correlate learned coeffs with anchor–target UTAS/scaling distance + topic overlap. NB: at 0.5B coeffs track *register* (岸田 g0 backbone dominates) not ideology — do this on the 7–8B main run.
 7. **ICL baseline kill check (Phase 2b)** now that real pilot targets exist (1279/2053/2289). NB: at 0.5B all methods sit near the same degenerate floor, so this gate is only decisive at 7–8B — run it there, or expect an inconclusive dev-scale result.
-8. **Port to Studio + 7–8B main run** (deferred to Studio arrival): the whole toolchain (train → merge → BO → UTAS metric) is now proven at 0.5B and ready to lift.
+8. **7–8B main run — NO LONGER Studio-blocked** (2026-07-05i): QLoRA 7B DPO fits the 8 GB laptop; ✅ (a) **full-length anchor 152 run DONE** (188 steps, loss 0.0545, margins 8.79, adapter `output/polis_152_qwen7b/`). ✅ **ALL 4 ANCHORS TRAINED AT 7B** (done 2026-07-06 20:38). Adapters in `../idea/persona/code/output/polis_{152,2377,3631,5520}_qwen7b/`, all clean: 152 loss 0.0545/margins 8.79 · 2377 0.0496/7.08 · 3631 0.0497/9.08 · 5520 0.0475/8.31 · all accuracies 1.0. Overnight throttling stretched wall-time to ~21 h (3631 8.2 h, 5520 9.1 h vs 152's 2.9 h) — throughput only, all rc=0. Next →
+
+### ✅ 7B MERGE/BO PATH UNBLOCKED + 7B BREAKS THE DEGENERACY FLOOR (session 2026-07-06b)
+
+Three results, all green:
+
+**1. Root cause of the "silently wrong" merge was NOT the RAM cap — it was meta-tensor offload.**
+Ken raised the `.wslconfig` cap (WSL now reports **47 GB total / 44 GB free**), but re-running
+`merge_layer_group.py --base Qwen/Qwen2.5-7B-Instruct` under `device_map="auto"` was **still broken**
+(upper-group-only NLL == base 1.0830, lower == uniform 1.7008). Reason: an 8 GB GPU **must** split a
+15 GB bf16 model; `device_map="auto"` puts overflow layers on CPU as **meta tensors** with accelerate
+hooks, and the merger's in-place `.data.copy_()` is a **silent no-op on meta modules**. Forward passes
+are *correct* under offload (hooks move weights per-forward); only weight *writes* break. So RAM only
+changed *where* offload lives, not the meta problem.
+
+**Fix (done + verified): `--device cpu`** on both `merge_layer_group.py` and `bo_merge_coeffs.py` →
+loads the whole model in RAM as real tensors (`device_map={"":"cpu"}`), no meta. CPU self-test now shows
+all four NLLs **distinct** (base 1.0888 · uniform 2.6315 · upper-only **1.2255** · lower-only **1.7592**),
+restore exact → **per-group coeffs bite at 7B.** Cost: CPU forwards are slow (~25 min for a 33-item UTAS
+eval) → a handful of UTAS evals are fine, a **full BO (1000+ forwards) is infeasible on the laptop** →
+run BO at **3B-on-GPU** (bf16 ~6 GB fits, needs 3B adapters retrained ~77 min ea) or on the **Studio**.
+
+**2. 7B BREAKS the 0.5B degeneracy floor (the decisive result the 0.5B run could never give).**
+`polis_option_logprob.py --base Qwen/Qwen2.5-7B-Instruct --utas-eval 2024HoR.json --person-id 152`,
+base vs 岸田 7B adapter (33 items, named persona):
+
+| model | MAE(argmax) | MAE(E) | exact | within1 |
+|---|---|---|---|---|
+| base 7B | 1.485 | 1.151 | 0.152 | 0.545 |
+| **岸田 adapter 7B** | **1.455** | **1.067** | **0.212** | 0.545 |
+
+- **argmax is non-degenerate** — spans 1–5, responds to content (Q5_6 truth5→5, Q4_5 truth4→4, Q4_2
+  truth3→3). At 0.5B argmax collapsed (all→1 on Q5 / length-pinned). Qualitative §6 risk **retired at 7B**.
+- **The DPO adapter IMPROVES UTAS alignment on 3/4 metrics, none worse** (MAE(E) 1.151→1.067, exact
+  0.152→0.212). At 0.5B the adapter made argmax *worse* via collapse; at 7B it moves the persona toward
+  the real positions — the directional signal the whole method rests on, now shown against real ground truth.
+- Residual: both still lean the Q5 (A/B) items toward "5", absolute MAE moderate → 7B is **competent but
+  imperfect** at zero-shot Likert. This is now the regime where the deferred **numeric-label + order-averaging
+  (PriDe) debiasing** is worth building (0.5B was too incompetent to validate it; 7B isn't).
+
+**3. New CLI:** both merge scripts gained `--device cpu` (see fix above). Adapters/scorer paths unchanged.
+
+**DECISION (made 2026-07-07): laptop 7B BO is INFEASIBLE → defer full 7B merge/BO+UTAS to the Studio; write up the preliminary findings into the paper now.**
+
+**Why laptop 7B BO is dead:** Ken chose "7B on CPU overnight." I launched the merge-method BO on the 3 genuine
+held-out 2024HoR targets (1279 高市 → 2053 赤嶺 → 2289 枝野) via
+`specs/polis-low-resource-persona/artifacts/run_7b_bo_overnight.sh` (`--device cpu --budget 12 --test 15 --trials 20 --utas-eval`).
+**After ~12 h it was still on target 1279 (of 3)** — healthy (770% CPU, ~32 GB RAM, no errors), just far too slow.
+Root cause: the BO objective scores NLL over **session-grounded DPO contexts that are ~1,336 tokens median (max ~2,071)**,
+and a *pure-CPU* 7B forward over ~1,300 tokens is ~1–3 min. 240 such for the BO + baselines + a 660-forward UTAS eval ⇒
+**~days for 3 targets, not a night.** My original "~2.5 h/target" estimate was extrapolated from short-prompt forwards and was
+~10× optimistic. **This is a genuine compute wall, not a bug** — `--device cpu` is *correct* (self-test verified), just slow.
+The `--device cpu` fully-on-CPU path is the price of correct ΔW writes (GPU-offload path meta-no-ops the writes); so at 7B on the
+8 GB laptop you cannot have both correct merges AND fast forwards. **All BO processes were killed; the driver + partial log are at
+`specs/polis-low-resource-persona/artifacts/bo7b_logs/target_1279.log` (no results — never reached the print).**
+
+**Ken's call:** don't chase laptop 7B BO further (3B-native was declined; it undercuts the 7B story). Instead **write the preliminary
+findings into the paper** so he can review, and **run the full-scale 7B merge/BO+UTAS comparison on the Mac Studio** when it arrives
+(fast full-precision 7B, no offload → BO cheap, UTAS decisive).
+
+### ▶ NEXT AGENT: populate the paper with preliminary findings (Ken's active request, 2026-07-07)
+
+**Paper:** `paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex` — currently a **skeleton**: the
+**abstract is written (keep verbatim)**, every section body is a Japanese-comment placeholder + a few reference URLs Ken left
+(preserve those URLs). Task = fill the sections we have real results for; leave Related Work / Preliminaries light (need lit review,
+not our data). Frame everything **honestly as preliminary**: method fully validated at 0.5B dev scale; 7B results are early/partial;
+the headline full-scale comparison is pending Studio. Preamble only has `graphicx` → add `booktabs`+`amsmath` for tables/math.
+
+**All numbers below are verified this project — put them straight in, do NOT re-run to re-derive:**
+
+- **Anchors (4, trained at BOTH 0.5B and 7B):** 152 岸田文雄 (自民/LDP) · 2377 塩川鉄也 (共産/JCP) · 3631 福島みずほ (社民/SDP) ·
+  5520 上田清司 (民主/independent). 0.5B adapters `../idea/persona/code/output/polis_{152_kishida,2377_shiokawa,3631_fukushima,5520_ueda}`;
+  7B adapters `output/polis_{152,2377,3631,5520}_qwen7b` (all clean: margins 7–9, accuracies 1.0).
+- **Models/hparams:** dev = Qwen2.5-0.5B-Instruct (full LoRA/DPO); main = Qwen2.5-7B-Instruct (4-bit QLoRA, nf4/bf16, paged_adamw_8bit,
+  grad-checkpointing). LoRA r=16 on q/k/v/o_proj. DPO (TRL). Merge = DARE (density 0.1, fixed seeded mask) + TIES sign-election,
+  weighted per **[anchor × depth-group]**; 3 contiguous depth groups (0.5B 24L→0–7/8–15/16–23; 7B 28L→0–9/10–19/20–27). BO = Optuna
+  `GPSampler` (GP-BO), objective = mean session-grounded NLL over a small budget, `--cmax 1.5`.
+- **Data:** kokkaidoc Diet speeches → session-grounded DPO pairs (prompt = up to K preceding same-session speeches ≤1.2k chars;
+  chosen = real next utterance; rejected = **Gemini 2.5-flash-lite** caricature role-play). UTAS (U-Tokyo/Asahi) candidate surveys
+  2024HoR (33 items) + 2022HoC (37 items): Q4_* 5-pt agree/disagree, Q5_* 5-pt A/B; ground truth via name→person_id matcher
+  (`data/data/polis/utas_ground_truth/{wave}.json`, `--all-matched`).
+- **Metrics:** (1) held-out **session-grounded NLL** (likelihood proxy, the objective); (2) **UTAS headline** via option-logprob
+  scorer (`data/polis_option_logprob.py`): per-item argmax + E[1..5] vs real coded answer → MAE(argmax), MAE(E), exact, within-1.
+
+- **RESULT A — 0.5B dev-scale, BO beats every baseline on 3/3 genuine held-out targets** (held-out test NLL, lower=better;
+  budget 30 / test 30 / 40 GP trials; all 4 anchors merged):
+
+  | target | party | base | uniform | best-single | **BO layer-group** |
+  |---|---|---|---|---|---|
+  | 高市早苗 1279 | 自民 | 2.870 | 4.010 | 2.914 (岸田) | **2.823** |
+  | 赤嶺政賢 2053 | 共産 | 3.256 | 4.224 | 3.269 (岸田) | **3.186** |
+  | 枝野幸男 2289 | 立憲 | 3.317 | 4.356 | 3.320 (岸田) | **3.250** |
+
+  BO > base, best-single, and (by >1.0) the uniform merge, every target. **Uniform all-ones merge is much worse than base**
+  (deltas overshoot) — the tuning does real work. BO recovers sensible structure (for the LDP target it zeroed distant anchors,
+  kept 岸田 with a per-group pattern a global weight can't express). Caveat: at 0.5B coeffs track **register**, not ideology
+  (岸田 g0 is a shared fluent-Diet-register backbone) — clean ideological recovery is a 7B expectation.
+
+- **RESULT B — 0.5B UTAS metric is a DEGENERATE FLOOR** (why 7B is needed): on merged 1279, MAE(E) is flat 1.11–1.14 across
+  base/uniform/best-single/BO (E pinned ~3.0); argmax collapses (numeric-label scoring also fails: first-option/"agree" bias,
+  p≈0.98 even on an absurd "consumption tax to 100%" sanity item). So the §4.4 headline is inconclusive at 0.5B by construction.
+
+- **RESULT C — 7B BREAKS the floor (the key preliminary main-scale result).** base vs 岸田 7B DPO adapter, 152, 2024HoR, 33 items,
+  named persona:
+
+  | model | MAE(argmax) | MAE(E) | exact | within-1 |
+  |---|---|---|---|---|
+  | base 7B | 1.485 | 1.151 | 0.152 | 0.545 |
+  | **岸田 adapter 7B** | **1.455** | **1.067** | **0.212** | 0.545 |
+
+  argmax is now content-responsive across the full 1–5 scale (0.5B collapsed); the DPO adapter improves alignment on **3/4 metrics,
+  none worse** — the SFT/DPO-vs-base premise and the metric itself validated at scale. Residual: both lean the Q5 (A/B) items toward
+  "5", moderate absolute MAE → 7B is competent-but-imperfect at zero-shot Likert.
+
+- **RESULT D — supporting: anchors are near-orthogonal in weight space** (Phase 2a cosine kill-check, 0.5B): pairwise ΔW cosine
+  max 0.058 / mean 0.047, delta norms 0.76–0.82 → the merge has ample per-anchor residual to interpolate; the collinearity risk
+  (spec §6) did not materialize. Re-check at 7B on the Studio.
+
+**For Discussion/Limitations:** (i) 0.5B survey-answering is a degenerate floor → dev scale validates the *mechanism*, not the
+headline number; (ii) **compute:** a correct 7B merge on an 8 GB GPU forces full-CPU forwards (device_map=auto meta-no-ops the ΔW
+writes) → laptop 7B BO is infeasible (~days); full 7B merge/BO+UTAS deferred to higher-throughput hardware (Studio); (iii) at 0.5B
+learned coeffs encode register not ideology — clean ideological recovery expected only at 7B; (iv) numeric-label + PriDe
+order-averaging debiasing is the buildable-at-7B next methods step for the Likert metric.
+
+**What is DONE and ready to just report (no compute needed for the paper):** full pipeline at 0.5B (Result A/B/D), 7B floor-break
+(Result C), all 4 anchors trained at 7B, merger correctness at 7B (`--device cpu` verified). **What is PENDING (needs Studio):** the
+full 7B merge-method comparison (base/uniform/best-single/BO on NLL + UTAS across the 3 targets) — the paper's Main Results table at
+main scale. Draft the paper with the 0.5B table as the current Main Result + Result C as the main-scale proof-of-concept, and leave
+the 7B merge-comparison table as a clearly-marked pending/placeholder to fill from the Studio run.
+
+The cheap 7B pieces (single-adapter UTAS evals, merger correctness) are DONE; the throughput wall is why the merge-BO comparison waits for the Studio.
+
+### ⚠️ 7B MERGE/BO PATH BLOCKED by WSL RAM cap (2026-07-06) — SUPERSEDED, see section above
+7B QLoRA **training** works (4-bit model stays resident on the 8 GB GPU). But the **merge → BO → UTAS** path needs the full bf16 model (~15 GB) for the ΔW-baked forward passes, and it does **not** fit: `merge_layer_group.py --base Qwen/Qwen2.5-7B-Instruct --adapters <the 4 7B adapters> --n-groups 3` ran but was **silently wrong** — upper-group-only merge NLL == base NLL (1.0830), lower-group == uniform (1.7008), i.e. per-group coeffs did *not* bite (they DO at 0.5B). Cause: **`.wslconfig` caps WSL2 at `memory=10485760000` (~9.8 GB)** though the Windows host has 64 GB, so accelerate `device_map="auto"` offloaded upper layers to **disk/meta**, and the merger's in-place ΔW writes to meta tensors are **no-ops** → deltas dropped on offloaded modules (reversibility check still "passes" because no-op writes reverse to no-ops). The handover/spec "64 GB RAM" is the *host*, not WSL.
+
+**Fix path:** raise `memory=` in `C:\Users\katok\.wslconfig` (host has 64 GB → e.g. 48 GB), then run `wsl --shutdown` **from Windows PowerShell** (NOT inside WSL — it kills this session) and reopen. Then bf16 7B fits in RAM, `device_map="auto"` offloads to **CPU RAM not disk**, and the merge is correct. **Caveat:** even fixed, CPU-offloaded 7B forwards are slow → a **single UTAS eval (base/uniform/best-single, ~33 items) is tractable (minutes)** and directly tests whether 7B beats the 0.5B degeneracy floor, but a **full BO (budget×trials×folds ≈ 1000+ forwards) is throughput-brutal** on an 8 GB GPU with offload → BO stage really wants the Studio or a bigger GPU. **Alternative fully-laptop-native path: run merge/BO at 3B** (bf16 ~6 GB fits the GPU, no offload, fast BO) — needs 3B anchor adapters retrained (QLoRA 3B ~77 min each). Decision pending with Ken. (b) **verify merge → forward → option-logprob + BO at 7B** (bf16 `device_map="auto"` auto-offloads the ~15 GB model's overflow to the 64 GB RAM; merger's ΔW edits are plain tensor math, no 4-bit weight-baking needed — just pass `--base Qwen/Qwen2.5-7B-Instruct`, expect slower forwards) → (c) the real headline UTAS comparison of merge methods, the decisive result the 0.5B degenerate floor could not give. Studio port stays relevant only for throughput / full-precision.

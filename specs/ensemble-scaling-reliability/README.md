@@ -119,13 +119,26 @@ reproduce the text-based ranking?).**
    negative/diagnosis-only result. Decide with coauthors before proceeding.
 3. **G3 — Topic volume gate:** per-(politician, topic, term) filtered-speech volume check
    for 夫婦別姓 and LGBT; add them only if enough politicians clear a minimum-text
-   threshold in the 2021–2024 term.
+   threshold in the 2021–2024 term. **RESOLVED 2026-07-05 (A1): FAIL.** Only 26 (夫婦別姓)
+   and 39 (LGBT) of 460 cohort members clear the ≥3-opinion-segment bar — far below the
+   ~100/topic the analysis and BT study need. Paper runs on **Defence + NuclearPower**.
 
 ## Work items
 
 ### A. Pipeline (this repo, `data/`)
-- [ ] A1. Volume check per (politician, topic) for the 49th-term corpus; fixes the topic
-      set (G3) and the minimum-text threshold.
+- [x] A1. Volume check per (politician, topic) for the 49th-term corpus; fixes the topic
+      set (G3) and the minimum-text threshold. **Done 2026-07-05.** Script
+      `data/ensemble_scaling/a1_volume_gate.py`; artifacts in `artifacts/`
+      (`a1_cohort_49th_hor.csv`, `a1_volume_by_person_topic.csv`, `a1_volume_summary.md`).
+      Result: cohort = **469 unique winners** (496 election_result rows dedup'd — 27
+      dual-candidacy 重複立候補 members); 460 have speech dirs. Term-scoped
+      (2021-11-10→2024-10-09, 衆議院) coverage clearing the ≥3-opinion-segment upper bound:
+      **Defence 350 (76%)**, **NuclearPower 166 (36%)**, FamilySeparate 26 (5.7%),
+      LGBT 39 (8.5%). Working threshold = MIN_OPINIONS≥3 (mirrors the pipeline gate).
+      **G3 fails for both
+      conditional topics** → run on Defence + NuclearPower only; **A2 not needed**.
+      Open decision surfaced: in-term 参議院 ministerial speeches (~18–22% of volume) are
+      currently excluded (corpus = HoR); confirm before A3.
       Resolve the 49th-term (2021–2024) HoR cohort and per-politician speech volume via
       the local Postgres `kokkaidoc` DB (`sudo -u postgres psql -d kokkaidoc`), not by
       hand-scanning flat files: `election_result` (`election_name = '第49回衆議院議員総選挙'
@@ -135,8 +148,8 @@ reproduce the text-based ranking?).**
       precomputed `repr_speeches_id_organized/{person_id}/{Topic}.jsonl` files. See
       [ENVIRONMENT.md](../../docs/agents/ENVIRONMENT.md#local-postgres-kokkaidoc-db--check-this-before-grepping-flat-files)
       for schema/row counts.
-- [ ] A2. Author anchor questions + prompts for 夫婦別姓 / LGBT in
-      `experiment_config.json` (only if G3 passes).
+- [x] A2. Author anchor questions + prompts for 夫婦別姓 / LGBT in
+      `experiment_config.json` — **not needed: G3 failed (A1), both topics dropped.**
 - [ ] A3. Multi-model embedding runs: extend the current single-embedder pipeline to the
       5-model grid; cache embeddings per model.
 - [ ] A4. Implement ensemble estimators: concat+PCA, Procrustes+average, z-average.
@@ -149,9 +162,19 @@ reproduce the text-based ranking?).**
       Notes: CSVs are Shift-JIS; columns include `NAME`/`KANA`/`PREFEC`/`DISTRICT`/
       `PR`/`PARTY`/`RESULT` — filter `RESULT` to elected to get the term cohort.
       Caveats: 2021 file excludes Q11; 2021 English codebook is marked temporary.
-- [ ] B2. Candidate-name → Diet-roster matching pipeline (kanji/kana variants, districts).
-- [ ] B3. Map UTAS items to topics (Defence: collective self-defense / constitution item;
-      Nuclear: restart item; surnames/LGBT items if G3 passes).
+- [x] B2. Candidate-name → Diet-roster matching pipeline (kanji/kana variants, districts).
+      **Done.** `data/match_utas_to_person.py` → `data/data/u-tokyo-asahi/person_map/{wave}.json`
+      (+ `.review.json` for ambiguous/fuzzy). Tiered exact-kanji → kanji+kana → kana, fuzzy
+      goes to review only. **UTAS 2021 HoR: 641/1051 candidates matched; covers 463/469
+      (98.7%) of the A1 cohort** — the validation backbone is essentially complete.
+- [x] B3. Map UTAS items to topics. **Done 2026-07-05** (Defence + Nuclear only; conditional
+      topics dropped by G3). `data/ensemble_scaling/b3_utas_item_map.py` →
+      `artifacts/b3_utas_item_map.{json,md}`. Defence primary = `Q6_1` (strengthen defense;
+      + `SQ8_1/2` constitution/collective-self-defense exact-anchor secondaries, `Q7_1`,
+      `Q6_2`); Nuclear primary = `Q7_5` (abolish-now / keep). Each item oriented (`pro_sign`)
+      so higher = 'for'; directions validated against party means (LDP/Ishin high → JCP low).
+      `load_topic_scores(wave, topic)` returns the {person_id → oriented answer} series A6
+      consumes. Only 2021HoR mapped; **2024HoR item numbering still TODO** (needs 2024 codebook).
 
 ### C. Bradley-Terry study
 - [ ] C1. Finalize pair-sampling design + attention checks; freeze politician summaries
