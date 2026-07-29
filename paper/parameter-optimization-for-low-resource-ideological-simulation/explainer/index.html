@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POLIS — an interactive walkthrough of the code</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1:#fcfcfb; --plane:#f9f9f7;
+    --text-primary:#0b0b0b; --text-secondary:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+    --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a; --series-4:#eda100;
+    --pos:#2a78d6; --neg:#e34948; --mid:#f0efec;
+    --code-bg:#f4f4f1; --kw:#4a3aa7; --str:#006300; --com:#898781;
+    --seq-100:#cde2fb; --seq-250:#86b6ef; --seq-400:#3987e5; --seq-550:#1c5cab; --seq-700:#0d366b;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1:#1a1a19; --plane:#0d0d0d;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+    --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70; --series-4:#c98500;
+    --pos:#3987e5; --neg:#e66767; --mid:#383835;
+    --code-bg:#141413; --kw:#9085e9; --str:#0ca30c; --com:#898781;
+    --seq-100:#0d366b; --seq-250:#184f95; --seq-400:#2a78d6; --seq-550:#5598e7; --seq-700:#b7d3f6;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--plane); color:var(--text-primary);
+    font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  .layout { display:grid; grid-template-columns:250px minmax(0,1fr); gap:0; }
+  nav {
+    position:sticky; top:0; height:100vh; overflow-y:auto; padding:24px 16px;
+    border-right:1px solid var(--border); background:var(--surface-1);
+  }
+  nav h2 { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:0 0 12px; }
+  nav a {
+    display:block; padding:6px 10px; margin:1px 0; border-radius:6px;
+    color:var(--text-secondary); text-decoration:none; font-size:14px;
+  }
+  nav a:hover { background:var(--code-bg); color:var(--text-primary); }
+  nav a.active { background:var(--code-bg); color:var(--text-primary); font-weight:600; }
+  main { padding:40px 48px 120px; max-width:900px; }
+  section { margin-bottom:64px; scroll-margin-top:24px; }
+  h1 { font-size:34px; line-height:1.2; margin:0 0 8px; letter-spacing:-.02em; }
+  h2 { font-size:24px; margin:0 0 16px; letter-spacing:-.01em; }
+  h3 { font-size:17px; margin:28px 0 10px; }
+  p { margin:0 0 14px; }
+  .lede { font-size:18px; color:var(--text-secondary); margin-bottom:28px; }
+  .eyebrow { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:600; margin-bottom:6px; }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+         background:var(--code-bg); padding:1px 5px; border-radius:4px; }
+  pre { background:var(--code-bg); border:1px solid var(--border); border-radius:8px;
+        padding:14px 16px; overflow-x:auto; margin:0 0 8px; }
+  pre code { background:none; padding:0; font-size:13px; line-height:1.6; }
+  .kw{color:var(--kw)} .str{color:var(--str)} .com{color:var(--com); font-style:italic}
+  .srcref { font-size:12px; color:var(--muted); font-family:ui-monospace,monospace; margin:0 0 18px; }
+  .card { background:var(--surface-1); border:1px solid var(--border); border-radius:12px;
+          padding:20px 22px; margin:18px 0; }
+  .card > h3:first-child { margin-top:0; }
+  .callout { border-left:3px solid var(--series-1); background:var(--surface-1);
+             padding:12px 18px; margin:18px 0; border-radius:0 8px 8px 0; }
+  .callout.warn { border-left-color:var(--series-2); }
+  .callout .lbl { font-size:12px; text-transform:uppercase; letter-spacing:.08em;
+                  color:var(--muted); font-weight:600; display:block; margin-bottom:4px; }
+  .ctrl { display:flex; align-items:center; gap:12px; margin:8px 0; font-size:14px; }
+  .ctrl label { min-width:150px; color:var(--text-secondary); }
+  .ctrl input[type=range] { flex:1; max-width:260px; accent-color:var(--series-1); }
+  .ctrl .val { font-family:ui-monospace,monospace; min-width:52px; text-align:right;
+               font-variant-numeric:tabular-nums; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-start; }
+  button { font:inherit; font-size:14px; padding:7px 14px; border-radius:7px; cursor:pointer;
+           border:1px solid var(--border); background:var(--surface-1); color:var(--text-primary); }
+  button:hover { background:var(--code-bg); }
+  button.primary { background:var(--series-1); color:#fff; border-color:transparent; }
+  table { border-collapse:collapse; width:100%; font-size:14px; margin:10px 0; }
+  th,td { text-align:right; padding:7px 10px; border-bottom:1px solid var(--grid);
+          font-variant-numeric:tabular-nums; }
+  th:first-child, td:first-child { text-align:left; font-variant-numeric:normal; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.05em; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--text-secondary); margin:10px 0; }
+  .legend span { display:flex; align-items:center; gap:6px; }
+  .swatch { width:11px; height:11px; border-radius:3px; display:inline-block; }
+  .grid-lbl { font-size:11px; fill:var(--muted); font-family:ui-monospace,monospace; }
+  .toggle { position:fixed; top:16px; right:20px; z-index:10; }
+  .tip { font-size:13px; color:var(--muted); margin-top:6px; }
+  .kbd { font-family:ui-monospace,monospace; font-size:12px; border:1px solid var(--border);
+         border-radius:4px; padding:1px 5px; background:var(--code-bg); }
+  .mathblock { background:var(--surface-1); border:1px solid var(--border); border-radius:8px;
+               padding:14px 18px; margin:14px 0; text-align:center; font-size:17px;
+               font-family:ui-monospace,monospace; overflow-x:auto; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .layout{grid-template-columns:1fr} nav{display:none} main{padding:24px} .two{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<button class="toggle" id="themeBtn">Dark</button>
+<div class="layout">
+<nav>
+  <h2>Contents</h2>
+  <a href="#intro">1 · The problem</a>
+  <a href="#data">2 · Building the data</a>
+  <a href="#dpo">3 · DPO</a>
+  <a href="#lora">4 · LoRA &amp; task vectors</a>
+  <a href="#dare">5 · DARE <em>(interactive)</em></a>
+  <a href="#ties">6 · TIES <em>(interactive)</em></a>
+  <a href="#groups">7 · Layer groups <em>(interactive)</em></a>
+  <a href="#nll">8 · The objective</a>
+  <a href="#bo">9 · Bayesian opt <em>(interactive)</em></a>
+  <a href="#cv">10 · Nested CV</a>
+  <a href="#utas">11 · Survey scoring <em>(interactive)</em></a>
+  <a href="#results">12 · Results</a>
+  <a href="#pitfalls">13 · Engineering traps</a>
+</nav>
+<main>
+
+<p class="eyebrow">Interactive walkthrough</p>
+<h1>POLIS: composing personas in weight space</h1>
+<p class="lede">
+  How do you simulate a politician who has barely said anything on the record? This is a
+  guided tour of the actual code behind the POLIS paper — every concept paired with the
+  lines that implement it. Assumes you know attention, MLPs, and how a language model is
+  trained; everything past that is explained from scratch.
+</p>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="intro">
+<h2>1 · The problem: you cannot fine-tune on data you don't have</h2>
+
+<p>
+  "Silicon sampling" is the idea of using an LLM to stand in for a human respondent —
+  ask the model to role-play a person and record its answers as if they were survey data.
+  The failure mode is immediate and well-documented: ask a model to be a politician and it
+  produces a <em>caricature</em> assembled from media coverage, not that person's actual
+  positions.
+</p>
+<p>
+  Fine-tuning on the person's own words fixes this — if the words exist. In the Japanese
+  Diet, a handful of party leaders have tens of thousands of transcribed utterances, while
+  most backbenchers have almost none. That long tail is exactly who a representative
+  simulation needs, and exactly where per-person fine-tuning is impossible.
+</p>
+
+<div class="card">
+<h3>The reframe: locate, don't train</h3>
+<p style="margin-bottom:0">
+  POLIS treats ideology as a <strong>continuous space</strong> and the weight-changes from
+  fine-tuning as <strong>composable vectors</strong> in that space. Train adapters only on
+  the few data-rich politicians ("anchors"). For a sparse target, don't train anything —
+  find the <em>blend</em> of anchors that best explains the handful of sentences the target
+  did say. The target's data is used to <em>locate</em> a point, not to fit a model. With
+  4 anchors and 3 depth groups that's 12 numbers to determine, which is a very different
+  statistical problem from fine-tuning billions of parameters on 30 sentences.
+</p>
+</div>
+
+<h3>The pipeline</h3>
+<div id="pipeline"></div>
+<p class="tip">Each stage below has its own section. The three green stages are where the method lives.</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="data">
+<h2>2 · Building the data: session-grounded preference pairs</h2>
+
+<p>
+  Before any modelling, we need training examples that capture how a specific politician
+  actually talks. The trick here is <strong>session grounding</strong>: rather than
+  isolated quotes, each example reconstructs the real conversational context from the Diet
+  transcript.
+</p>
+
+<p>For every real utterance by an anchor, one training instance is emitted:</p>
+
+<table>
+<thead><tr><th>Field</th><th style="text-align:left">Content</th></tr></thead>
+<tbody>
+<tr><td><code>prompt</code></td><td style="text-align:left">The last K speeches before this utterance <em>in the same sitting</em>, plus a cue for the anchor to speak</td></tr>
+<tr><td><code>chosen</code></td><td style="text-align:left">What the politician <em>actually said</em> next</td></tr>
+<tr><td><code>rejected</code></td><td style="text-align:left">A strong LLM (Gemini 2.5-flash-lite) role-playing that same politician on the same context</td></tr>
+</tbody>
+</table>
+
+<div class="callout">
+<span class="lbl">Why this matters</span>
+The <code>rejected</code> side is the paper's argument made literal. The model isn't just
+learning "sound like a politician" — it's learning <strong>"the real person, not the
+LLM's stereotype of them."</strong> The thing the paper criticises is the exact negative
+the training signal pushes away from.
+</div>
+
+<p>
+  The immediately preceding speech is always kept intact even when truncating, because it is
+  usually the <em>question being answered</em> — drop it and the reply becomes incoherent.
+</p>
+<pre><code><span class="com"># prompt = (optional persona instruction) + last K speeches preceding the</span>
+<span class="com">#          utterance in the same sitting + a cue for the anchor to speak,</span>
+<span class="com">#          truncated to a char budget but always keeping the immediately</span>
+<span class="com">#          preceding speech intact.</span></code></pre>
+<p class="srcref">data/export_polis_dpo_pairs.py:8–14</p>
+
+<p>
+  Context is capped at ~1200 characters as a proxy for the trainer's 1024-token limit
+  (Japanese runs roughly one token per character). In practice the resulting prompts are
+  ~1,336 tokens at the median — a number that comes back to haunt the compute budget later.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="dpo">
+<h2>3 · DPO: learning from pairs without a reward model</h2>
+
+<p>
+  <strong>Direct Preference Optimization</strong> is how each anchor adapter is trained.
+  If you know RLHF, DPO is the shortcut that skips it: classic RLHF trains a separate
+  reward model on human preferences, then optimises the policy against it with RL. DPO
+  proves you can collapse those two steps into a single supervised-looking loss.
+</p>
+
+<div class="mathblock">
+  L = − log σ( β · [ log π<sub>θ</sub>(y<sub>w</sub>|x)/π<sub>ref</sub>(y<sub>w</sub>|x)
+  − log π<sub>θ</sub>(y<sub>l</sub>|x)/π<sub>ref</sub>(y<sub>l</sub>|x) ] )
+</div>
+
+<p>Reading it piece by piece:</p>
+<ul>
+  <li><strong>π<sub>θ</sub></strong> is the model being trained; <strong>π<sub>ref</sub></strong>
+      is a frozen copy of where it started.</li>
+  <li><strong>y<sub>w</sub></strong> ("win") is the real utterance; <strong>y<sub>l</sub></strong>
+      ("lose") is the caricature.</li>
+  <li>Each ratio asks: <em>has this response become more likely than it was before training?</em>
+      Dividing by the reference is what keeps the model from wandering off — it can only be
+      rewarded for moving <em>relatively</em>.</li>
+  <li>The difference of the two ratios is a <strong>score</strong>: high when the model has
+      raised the real utterance and lowered the caricature. σ turns it into a probability
+      and the log makes it a loss.</li>
+  <li><strong>β</strong> controls how far the model may drift from the reference.</li>
+</ul>
+
+<p>
+  Two diagnostics get reported during training, and both appear in the project logs:
+  <code>rewards/accuracies</code> (how often the real utterance scores above the caricature —
+  reached 1.0) and <code>rewards/margins</code> (by how much — reached 7–9). The four 7B
+  anchors all trained cleanly to these values.
+</p>
+
+<div class="callout warn">
+<span class="lbl">Careful</span>
+High margins mean the adapter reliably separates real from fake. That is <em>not</em> the
+same as having learned ideology. At 0.5B the adapters largely captured <strong>register</strong>
+— the cadence of Diet speech — which is why the strongest-trained anchor kept winning as a
+generic "fluent-parliamentarian" backbone regardless of the target's party. See §12.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="lora">
+<h2>4 · LoRA and the idea of a "task vector"</h2>
+
+<p>
+  Fine-tuning every weight of a 7B model per politician is unaffordable. <strong>LoRA</strong>
+  freezes the base model and learns a low-rank correction instead. For a weight matrix
+  W ∈ ℝ<sup>out×in</sup>, it learns two thin matrices A ∈ ℝ<sup>r×in</sup> and
+  B ∈ ℝ<sup>out×r</sup> with r = 16, and the effective weight becomes W + ΔW where:
+</p>
+
+<div class="mathblock">ΔW = (α / r) · B · A</div>
+
+<p>
+  B·A is an out×in matrix — the same shape as W — but it is built from only
+  r(out+in) parameters instead of out·in. At 7B this makes each anchor adapter a 20 MB file
+  standing in for a 15 GB model. α/r is a fixed scaling constant from the config
+  (α=32, r=16, so the scale is 2).
+</p>
+
+<p>
+  Here is the conceptual leap the whole paper rests on. Once training is done,
+  <strong>ΔW is just a matrix</strong> — a direction in weight space that means "be more
+  like Kishida." It can be added, scaled, and combined like any vector. This is the
+  <em>task vector</em> view, and it is what makes "average two personas" a meaningful
+  operation rather than a category error.
+</p>
+
+<pre><code><span class="kw">for</span> pfx <span class="kw">in</span> prefixes:
+    a = next(v <span class="kw">for</span> k, v <span class="kw">in</span> weights.items() <span class="kw">if</span> k.startswith(pfx) <span class="kw">and</span> <span class="str">".lora_A"</span> <span class="kw">in</span> k)
+    b = next(v <span class="kw">for</span> k, v <span class="kw">in</span> weights.items() <span class="kw">if</span> k.startswith(pfx) <span class="kw">and</span> <span class="str">".lora_B"</span> <span class="kw">in</span> k)
+    delta = (b.float() @ a.float()) * scaling            <span class="com"># [out, in]</span></code></pre>
+<p class="srcref">merge_layer_group.py:78–82 — reconstructing ΔW from the stored factors</p>
+
+<h3>Does the "space" actually have room?</h3>
+<p>
+  A blend of anchors can only express positions the anchors span. If all four ΔW pointed
+  the same way, there would be nothing to interpolate — one shared direction with slightly
+  different magnitudes. So the first thing the project checked was the pairwise
+  <strong>cosine similarity</strong> between anchor task vectors (1.0 = identical
+  direction, 0 = orthogonal).
+</p>
+<div id="cosineViz"></div>
+<p class="tip">
+  Measured at 7B across 822 million adapted parameters per anchor
+  (<code>anchor_delta_cosine.py</code>). Everything is far below the 0.9 danger line, so the
+  anchors genuinely span a space.
+</p>
+<div class="callout">
+<span class="lbl">The interesting part</span>
+Look at the <em>structure</em>, not just the magnitudes. Every left-party pair (≈0.088) is
+more similar to each other than any of them is to the LDP anchor (≈0.064). At 0.5B these
+numbers were uniform regardless of party. Ideology is showing up as geometry — but note
+this is 3 pairs against 3 pairs, so it is suggestive, not a significance test.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="dare">
+<h2>5 · DARE: drop most of the vector, keep the meaning</h2>
+
+<p>
+  When you add several task vectors together they <em>interfere</em> — unrelated
+  coordinates pile up into noise that degrades the model. DARE
+  (<em>Drop And REscale</em>) is a surprisingly blunt fix: randomly delete ~90% of each
+  task vector's entries, then multiply the survivors by 1/density to compensate.
+</p>
+
+<div class="mathblock">keep with probability <em>d</em> · then multiply by 1/<em>d</em></div>
+
+<p>
+  Why this doesn't destroy the adapter: the rescaling preserves the <strong>expected
+  value</strong> of every entry (drop 90%, multiply the rest by 10, and the average is
+  unchanged). Fine-tuning deltas turn out to be highly redundant, so a random 10% carries
+  nearly the same information — while the <em>collisions</em> between different anchors
+  become far rarer, since two sparse vectors rarely have non-zeros in the same place.
+</p>
+
+<pre><code>mask = (torch.rand(delta.shape, generator=gen) &lt; self.density)
+delta = torch.where(mask, delta / self.density, torch.zeros_like(delta))</code></pre>
+<p class="srcref">merge_layer_group.py:84–85</p>
+
+<div class="callout">
+<span class="lbl">Why <code>generator=gen</code> is load-bearing</span>
+The mask is drawn from a <strong>seeded</strong> generator fixed once at construction. If
+the mask were redrawn on each merge, the same coefficients would give a different result
+every time — the optimiser in §9 would be chasing a moving target it cannot model. Freezing
+the randomness makes the objective a deterministic function of the coefficients. This is a
+general principle worth absorbing: <em>stochastic components must be frozen before you
+optimise through them.</em>
+</div>
+
+<div class="card">
+<h3>Try it</h3>
+<p>Each cell is one weight in a tiny 12×8 ΔW. Blue is positive, red negative, intensity is magnitude.</p>
+<div class="ctrl">
+  <label>Density <em>d</em></label>
+  <input type="range" id="dareD" min="0.02" max="1" step="0.02" value="0.1">
+  <span class="val" id="dareDv">0.10</span>
+</div>
+<div class="row" style="align-items:center; gap:24px">
+  <div><div class="tip" style="margin-bottom:6px">Original ΔW</div><div id="dareA"></div></div>
+  <div style="font-size:26px; color:var(--muted); align-self:center">→</div>
+  <div><div class="tip" style="margin-bottom:6px">After DARE</div><div id="dareB"></div></div>
+</div>
+<p id="dareStat" class="tip"></p>
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="ties">
+<h2>6 · TIES: settle the disagreements by vote</h2>
+
+<p>
+  DARE reduces collisions but doesn't resolve them. When two anchors <em>do</em> both want
+  to change the same weight in opposite directions, naive averaging cancels them into
+  mush — a weight that means something to both anchors ends up meaning nothing.
+</p>
+<p>
+  TIES resolves this per-coordinate with an <strong>election</strong>. For each individual
+  weight: sum the (already coefficient-weighted) contributions to decide a winning
+  <em>sign</em>, discard every anchor that disagrees with that sign, and average only the
+  survivors. A coordinate ends up decisively positive or decisively negative — never
+  averaged into zero.
+</p>
+
+<pre><code><span class="kw">def</span> _ties(deltas):
+    <span class="com">"""TIES disjoint merge over already-weighted deltas [n_anchors, out, in]."""</span>
+    elected = torch.sign(deltas.sum(dim=<span class="str">0</span>))                  <span class="com"># winning sign per weight</span>
+    agree   = (torch.sign(deltas) == elected) &amp; (deltas != <span class="str">0</span>)  <span class="com"># who voted with it</span>
+    kept    = torch.where(agree, deltas, torch.zeros_like(deltas))
+    count   = agree.sum(dim=<span class="str">0</span>).clamp(min=<span class="str">1</span>)
+    <span class="kw">return</span> kept.sum(dim=<span class="str">0</span>) / count                        <span class="com"># mean of the winners only</span></code></pre>
+<p class="srcref">merge_layer_group.py:132–139</p>
+
+<p>
+  Note <code>clamp(min=1)</code> — it guards the divide-by-zero when a coordinate is zero
+  in every anchor (very common after a 90% drop). And the average is over
+  <em>agreeing anchors only</em>, so a coordinate touched by one anchor keeps that anchor's
+  full magnitude rather than being diluted by three zeros.
+</p>
+
+<div class="card">
+<h3>Try it</h3>
+<p>
+  Four anchors each contribute a value to a single weight. Move the sliders to see the
+  election run. Watch what happens when you make the disagreement close.
+</p>
+<div id="tiesCtrl"></div>
+<div id="tiesViz"></div>
+<p id="tiesOut" class="tip"></p>
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="groups">
+<h2>7 · Layer groups: the knob that makes this a search problem</h2>
+
+<p>
+  So far a merge needs one weight per anchor. POLIS's contribution is that
+  <strong>one number per anchor is not enough</strong>. Transformer layers specialise:
+  earlier layers handle more lexical and syntactic structure, later layers more abstract and
+  task-specific content. A persona is not uniformly distributed across depth — so the
+  amount of each anchor you want to inject should vary <em>by depth</em>.
+</p>
+
+<p>
+  Layers are partitioned into G contiguous depth groups, and the coefficient becomes a
+  matrix <strong>C ∈ ℝ<sup>K×G</sup></strong> — one value per (anchor, group) pair.
+  With 4 anchors and 3 groups that is 12 free parameters, the entire "model" being fit
+  to the sparse target.
+</p>
+
+<pre><code><span class="kw">def</span> _group_of(self, mod_path):
+    layer = int(m.group(<span class="str">1</span>)) <span class="kw">if</span> m <span class="kw">else</span> <span class="str">0</span>
+    <span class="com"># contiguous depth partition: floor(layer / ceil(n_layers / n_groups))</span>
+    per = -(-self._n_layers // self.n_groups)  <span class="com"># ceil div</span>
+    <span class="kw">return</span> min(layer // per, self.n_groups - <span class="str">1</span>)</code></pre>
+<p class="srcref">merge_layer_group.py:103–108</p>
+
+<div class="callout">
+<span class="lbl">Why custom code was needed</span>
+The standard library (PEFT) offers <code>add_weighted_adapter(combination_type="dare_ties")</code>,
+but it only supports <strong>one global weight per adapter</strong>. The per-depth
+coefficient matrix is precisely what it cannot express, so the merge is reimplemented as
+direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> exists at all.
+</div>
+
+<h3>The merge, end to end</h3>
+<p>
+  <code>apply(C)</code> is called once per optimiser trial. It restores the base weights,
+  rebuilds the merge under the new coefficients, and writes the result <em>in place</em> —
+  so a single loaded model is reused for hundreds of evaluations with no retraining and no
+  reloading.
+</p>
+<pre><code><span class="kw">for</span> mod_path, slot <span class="kw">in</span> self.modules.items():
+    base = self.base_weights[mod_path]
+    stacked = []
+    <span class="kw">for</span> ai, am <span class="kw">in</span> enumerate(slot):
+        w = float(C[ai, am.group])          <span class="com"># ← coefficient for THIS anchor at THIS depth</span>
+        <span class="kw">if</span> w != <span class="str">0.0</span>:
+            stacked.append(am.delta * w)
+    merged = self._ties(torch.stack(stacked, dim=<span class="str">0</span>))
+    self._params[mod_path + <span class="str">".weight"</span>].data.copy_(
+        (base.float() + merged.to(base.device)).to(base.dtype))</code></pre>
+<p class="srcref">merge_layer_group.py:111–130</p>
+
+<div class="card">
+<h3>Try it — build a coefficient matrix</h3>
+<p>28 layers (the 7B model), 3 depth groups. Set each anchor's contribution per group.</p>
+<div id="coefCtrl"></div>
+<div id="coefViz"></div>
+<p class="tip">
+  The preset is the structure the optimiser actually discovered for the LDP target: keep the
+  ideologically-matched anchor, zero the distant ones, and vary the amount by depth — a
+  pattern a single global weight per anchor literally cannot represent.
+</p>
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="nll">
+<h2>8 · The objective: how well does this persona predict real sentences?</h2>
+
+<p>
+  To search over C we need a number that says how good a merge is. POLIS uses
+  <strong>negative log-likelihood</strong> of the target's real utterances, given their real
+  session context. In plain terms: <em>show the merged model the room, and ask how
+  surprised it is by what this person actually said.</em> Lower is better.
+</p>
+
+<pre><code><span class="kw">def</span> mean_nll(self, instances):
+    <span class="kw">for</span> prompt, cont <span class="kw">in</span> instances:
+        ids_p = self.tok(prompt, ...).input_ids       <span class="com"># session context</span>
+        ids_c = self.tok(cont, ...).input_ids         <span class="com"># what they really said</span>
+        ids = torch.cat([ids_p, ids_c], dim=<span class="str">1</span>)
+        logits = self.model(ids).logits[:, :-<span class="str">1</span>]
+        logp = torch.log_softmax(logits.float(), dim=-<span class="str">1</span>)
+        tok_logp = logp.gather(-<span class="str">1</span>, ids[:, <span class="str">1</span>:].unsqueeze(-<span class="str">1</span>)).squeeze(-<span class="str">1</span>)[<span class="str">0</span>]
+        n_ctx = ids_p.shape[<span class="str">1</span>] - <span class="str">1</span>
+        tot += -tok_logp[n_ctx:].mean().item()        <span class="com"># ← score ONLY the reply</span></code></pre>
+<p class="srcref">bo_merge_coeffs.py:76–89</p>
+
+<p>Three details that are easy to skim past but matter:</p>
+<ul>
+  <li><strong><code>logits[:, :-1]</code> and <code>ids[:, 1:]</code></strong> — the standard
+      off-by-one of causal LMs. Position <em>t</em>'s logits predict token <em>t+1</em>, so
+      predictions and targets must be shifted against each other.</li>
+  <li><strong><code>gather</code></strong> picks out the log-probability the model assigned
+      to the token that actually occurred, from a distribution over the whole vocabulary.</li>
+  <li><strong><code>tok_logp[n_ctx:]</code></strong> — only the reply is scored. Including the
+      context would swamp the signal with how predictable other people's speeches are, which
+      has nothing to do with the target.</li>
+</ul>
+
+<p>
+  NLL is measured in <strong>nats</strong> per token. A drop of 0.07 nats sounds tiny, and
+  in absolute terms it is; §12 explains why the <em>consistency</em> of that gap matters more
+  than its size.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="bo">
+<h2>9 · Bayesian optimization: searching when every guess is expensive</h2>
+
+<p>
+  Now the search. We need the C that minimises held-out NLL, and we face a specific
+  situation: the space is only ~12-dimensional and continuous, but <em>each evaluation is
+  expensive</em> — a full re-merge plus dozens of forward passes through a 7B model. We can
+  afford tens of evaluations, not millions. No gradients are available (the merge involves
+  sign elections and hard masking).
+</p>
+<p>
+  That combination — expensive, low-dimensional, gradient-free — is the textbook case for
+  <strong>Bayesian optimization</strong>.
+</p>
+
+<h3>How it works</h3>
+<p>
+  BO keeps a probabilistic model of the objective, called a <strong>surrogate</strong> —
+  here a <em>Gaussian process</em>. A GP predicts, for every unevaluated point, both a
+  mean guess and an uncertainty, and its uncertainty is exactly zero where you have already
+  measured. Then an <strong>acquisition function</strong> chooses where to look next by
+  balancing:
+</p>
+<ul>
+  <li><strong>Exploitation</strong> — go where the surrogate predicts a good value.</li>
+  <li><strong>Exploration</strong> — go where the surrogate is unsure, since something
+      better might hide there.</li>
+</ul>
+
+<div class="card">
+<h3>Try it</h3>
+<p>
+  A 1-D stand-in for the real objective. The dashed line is the truth (invisible to the
+  optimiser); the band is the GP's uncertainty. Step through trials and watch it decide
+  where to sample.
+</p>
+<div class="row" style="margin-bottom:10px">
+  <button class="primary" id="boStep">Run one trial</button>
+  <button id="boAuto">Run 10</button>
+  <button id="boReset">Reset</button>
+  <span class="tip" id="boInfo" style="align-self:center"></span>
+</div>
+<div id="boViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--series-1)"></span>GP mean</span>
+  <span><span class="swatch" style="background:var(--series-1);opacity:.2"></span>Uncertainty</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Evaluated points</span>
+  <span><span class="swatch" style="background:var(--muted)"></span>True objective (hidden)</span>
+</div>
+</div>
+
+<p>
+  In the real code Optuna supplies the machinery, and the sampler is chosen by
+  dimensionality — GP for the low-dimensional operating point, TPE for the high-dimensional
+  ablation where GPs scale poorly:
+</p>
+<pre><code>use_gp = name == <span class="str">"gp"</span> <span class="kw">or</span> (name == <span class="str">"auto"</span> <span class="kw">and</span> n_dims &lt;= <span class="str">32</span>)
+<span class="kw">if</span> use_gp:
+    <span class="kw">return</span> <span class="str">"gp"</span>, GPSampler(seed=seed, n_startup_trials=n_start)
+<span class="kw">return</span> <span class="str">"tpe"</span>, TPESampler(seed=seed, multivariate=<span class="kw">True</span>, group=<span class="kw">True</span>, ...)</code></pre>
+<p class="srcref">bo_merge_coeffs.py:103–111</p>
+
+<p>And the objective itself is only four lines — merge, score, return:</p>
+<pre><code><span class="kw">def</span> objective(trial):
+    C = np.array([[trial.suggest_float(f<span class="str">"a{ai}_g{gi}"</span>, <span class="str">0.0</span>, cmax)
+                   <span class="kw">for</span> gi <span class="kw">in</span> range(n_g)] <span class="kw">for</span> ai <span class="kw">in</span> range(n_a)])
+    merger.apply(C)
+    <span class="kw">return</span> scorer.mean_nll(dev)</code></pre>
+<p class="srcref">bo_merge_coeffs.py:117–121</p>
+<p>
+  Coefficients are bounded to [0, 1.5]. The upper bound matters: §12 shows that an untuned
+  all-ones merge is <em>worse than not merging at all</em>, so the search has to be able to
+  pull weights down toward zero, and must not be allowed to run away upward.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="cv">
+<h2>10 · Nested cross-validation: not fooling yourself</h2>
+
+<p>
+  Here is a subtle trap. If you tune 12 coefficients to minimise NLL on 30 sentences and
+  then report that NLL, the number is meaningless — you optimised it directly. A held-out
+  split fixes that, but with only 30 sentences the split is small and the estimate is noisy
+  and luck-dependent.
+</p>
+<p>
+  <strong>Nested cross-validation</strong> is the clean answer. Split the budget into k
+  folds. Hold one fold out, run the <em>entire</em> optimisation on the rest, then score on
+  the untouched fold. Rotate through all folds and aggregate. Every fold's score comes from
+  coefficients that never saw it.
+</p>
+
+<pre><code><span class="kw">for</span> f <span class="kw">in</span> range(folds):
+    te  = [allinst[i] <span class="kw">for</span> i <span class="kw">in</span> fold_idx[f]]                              <span class="com"># untouched</span>
+    dev = [allinst[i] <span class="kw">for</span> j <span class="kw">in</span> range(folds) <span class="kw">if</span> j != f <span class="kw">for</span> i <span class="kw">in</span> fold_idx[j]]
+
+    merger.restore();            rows[<span class="str">"base"</span>].append(scorer.mean_nll(te))
+    merger.apply(np.ones(...));  rows[<span class="str">"uniform"</span>].append(scorer.mean_nll(te))
+    bs_name, bs_te = best_single(merger, scorer, names, dev, te, n_g)
+
+    bestC, _, _ = bo_bestC(merger, scorer, dev, ...)   <span class="com"># full BO, inside the fold</span>
+    merger.apply(bestC)
+    rows[<span class="str">"BO"</span>].append(scorer.mean_nll(te))</code></pre>
+<p class="srcref">bo_merge_coeffs.py:147–176</p>
+
+<div class="callout">
+<span class="lbl">The design detail that makes it fair</span>
+Every baseline is rotated through <em>identical</em> folds — including
+<code>best_single</code>, which re-picks its winning anchor using only that fold's dev data.
+A baseline allowed to choose using the test fold would be getting information POLIS never
+had. Because all methods see the same folds, the results are <strong>paired</strong>, and
+per-fold differences can be compared directly, which is far more sensitive than comparing
+two averages.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="utas">
+<h2>11 · Scoring a survey — and a trap worth internalising</h2>
+
+<p>
+  NLL is an internal proxy. The paper's external metric is different and deliberately
+  untouchable: real politicians answered the <strong>UTAS</strong> academic survey (5-point
+  Likert policy items), and those answers are never used in training or in the optimiser.
+  Nothing in the pipeline can game them.
+</p>
+<p>
+  To administer a survey to a model, you don't generate text and parse it — free generation
+  fails in a hundred ways. Instead, score each candidate answer as a forced continuation
+  and compare log-probabilities. No parsing, and you get a full distribution rather than
+  one sample.
+</p>
+
+<h3>The length bug</h3>
+<p>
+  The natural implementation is to sum log P over the answer's tokens and softmax the
+  sums. <strong>This is broken</strong>, and understanding why is worth the detour.
+</p>
+<p>
+  Every token's log-probability is negative. So a longer answer accumulates a
+  <em>more negative</em> total simply for being longer. In this survey the options are
+  「そう思う」 (short) through 「どちらかといえばそう思う」 (much longer) — so a
+  softmax over summed log-probs collapses onto the shortest option almost regardless of
+  content. You measure string length, not belief.
+</p>
+<p>The fix is to divide by token count, giving average per-token log-probability:</p>
+<pre><code>logprobs.append(lp)
+norm_logprobs.append(lp / max(n, <span class="str">1</span>))
+<span class="com"># Softmax over LENGTH-NORMALISED log-probs. Option strings differ in token</span>
+<span class="com"># count, so a softmax over raw summed log-probs is biased toward shorter</span>
+<span class="com"># options and collapses degenerately.</span>
+probs = torch.softmax(norm_t, dim=<span class="str">0</span>).tolist()
+expectation = sum((i + <span class="str">1</span>) * p <span class="kw">for</span> i, p <span class="kw">in</span> enumerate(probs))</code></pre>
+<p class="srcref">data/polis_option_logprob.py:94–104</p>
+
+<div class="card">
+<h3>Try it</h3>
+<p>
+  Five real UTAS options with their true token counts. The model's per-token preference is
+  fixed and mild; only the aggregation differs.
+</p>
+<div class="ctrl">
+  <label>Aggregation</label>
+  <button id="lenToggle" class="primary">Summed (broken)</button>
+</div>
+<div id="lenViz"></div>
+<p id="lenOut" class="tip"></p>
+</div>
+
+<p>
+  The <code>expectation</code> — Σ i·p<sub>i</sub> — is the payoff of scoring this way. It
+  places the persona <em>continuously</em> on the 1–5 scale rather than forcing a discrete
+  pick, so "leans agree" and "strongly agrees" are distinguishable and you can take a mean
+  absolute error against the politician's real coded answer.
+</p>
+
+<div class="callout warn">
+<span class="lbl">Scale-gating: an honest negative result</span>
+At 0.5B this metric is a <strong>degenerate floor</strong>. The expectation sits pinned near
+3.0 no matter what you merge, so every method scores the same. A numeric-label variant
+(score the token "1".."5") failed differently — a first-option bias so severe the model
+agreed at p≈0.98 that consumption tax should be raised to 100%. The capability simply isn't
+there at 0.5B. At 7B it appears: the argmax spans the full scale and responds to content.
+The lesson is that <em>an evaluation metric can require more model capability than the
+thing being evaluated.</em>
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="results">
+<h2>12 · Reading the results honestly</h2>
+
+<p>
+  Held-out NLL for three real politicians outside the anchor set, each simulated by merging
+  the four anchors, with only 30 of their utterances used for tuning. Lower is better.
+</p>
+
+<div id="resultsViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--series-1)"></span>Base (zero-shot)</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Uniform merge</span>
+  <span><span class="swatch" style="background:var(--series-3)"></span>Best single anchor</span>
+  <span><span class="swatch" style="background:var(--series-4)"></span>POLIS</span>
+</div>
+
+<table>
+<thead><tr><th>Target</th><th>Base</th><th>Uniform</th><th>Best-single</th><th>POLIS</th></tr></thead>
+<tbody>
+<tr><td>Takaichi (LDP)</td><td>2.875</td><td>4.046</td><td>2.932</td><td><strong>2.842</strong></td></tr>
+<tr><td>Akamine (JCP)</td><td>2.938</td><td>4.026</td><td>2.986</td><td><strong>2.894</strong></td></tr>
+<tr><td>Edano (CDP)</td><td>3.173</td><td>4.250</td><td>3.179</td><td><strong>3.107</strong></td></tr>
+</tbody>
+</table>
+<p class="srcref">0.5B, nested 5-fold CV, budget 30, 40 GP trials per fold</p>
+
+<h3>Three things this shows</h3>
+<p>
+  <strong>1 · Tuning does the work.</strong> The uniform all-ones merge is dramatically
+  <em>worse</em> than not merging at all — more than a full nat. Untuned task vectors
+  overshoot and corrupt the model. Every bit of POLIS's advantage comes from choosing
+  coefficients, which is the cleanest possible evidence that the optimisation stage is
+  load-bearing rather than decorative.
+</p>
+<p>
+  <strong>2 · The gains are small but relentless.</strong> POLIS beats the best single
+  anchor by only 0.07–0.09 nats — but it does so in <strong>15 out of 15</strong>
+  cross-validation folds, and beats the base model in 14 of 15. With paired folds, that
+  consistency is the real result; the absolute magnitude is limited by what 0.5B adapters
+  can encode.
+</p>
+<p>
+  <strong>3 · And the honest caveat.</strong> At 0.5B the adapters encode
+  <em>register</em> more than ideology. The tell: the Kishida anchor was selected as
+  best-single in all 15 folds — including for the Communist and Constitutional-Democratic
+  targets. It was not acting as an ideology, it was acting as a generic
+  "fluent Diet speech" backbone, because it happened to be the most cleanly trained. The
+  optimiser then added target-specific residual in the other depth groups. Clean
+  ideological recovery is a claim about larger models, and the paper says so rather than
+  overselling the small one.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="pitfalls">
+<h2>13 · Two engineering traps worth more than they look</h2>
+
+<h3>The silent no-op</h3>
+<p>
+  A 7B model in bf16 needs ~15 GB. On an 8 GB GPU, <code>device_map="auto"</code> helpfully
+  splits it, leaving overflow layers as <strong>meta tensors</strong> — placeholders that
+  carry shape but no storage, materialised on demand during a forward pass.
+</p>
+<p>
+  Forward passes work fine. But the merge writes weights <em>in place</em>, and an in-place
+  write to a meta tensor is <strong>silently discarded</strong>. The result: merges that
+  appear to succeed, coefficients for the upper layers that do nothing, and an optimiser
+  cheerfully searching a partly-flat objective for hours. Even the reversibility check
+  passed — a no-op write reverses to a no-op.
+</p>
+<p>The fix is to refuse to run rather than to run wrongly:</p>
+<pre><code>meta = [p <span class="kw">for</span> p <span class="kw">in</span> self.modules
+        <span class="kw">if</span> self._params[p + <span class="str">".weight"</span>].device.type == <span class="str">"meta"</span>]
+<span class="kw">if</span> meta:
+    <span class="kw">raise</span> RuntimeError(
+        f<span class="str">"{len(meta)} of {len(self.modules)} target modules are meta tensors "</span>
+        f<span class="str">"(offloaded) ... In-place merge writes would silently no-op."</span>)</code></pre>
+<p class="srcref">merge_layer_group.py:92–104</p>
+<div class="callout">
+<span class="lbl">Generalisable lesson</span>
+The dangerous bugs in ML systems are rarely crashes — they are the ones that return
+plausible numbers. When an operation can be silently skipped, assert that it happened.
+</div>
+
+<h3>Memory that scales the wrong way</h3>
+<p>
+  The merger keeps every anchor's reconstructed ΔW resident as a dense fp32 tensor. That is
+  cheap at 0.5B and becomes the dominant cost quickly, because ΔW has the shape of the
+  <em>full</em> weight matrix even though it came from a rank-16 factorisation:
+</p>
+<div id="memViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--series-1)"></span>Model weights (bf16)</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Dense fp32 anchor deltas — the part that scales badly</span>
+</div>
+<p class="tip">
+  Dense fp32 deltas for 4 anchors, plus the bf16 model and its snapshots. At 32B the deltas
+  alone exceed the model itself.
+</p>
+<p>
+  The fix follows from a detail of <code>apply()</code>: it already iterates
+  <em>module by module</em>, so all the deltas never need to exist at once. Keep only the
+  small LoRA factors and rebuild each module's ΔW inside the loop — recomputing B·A costs
+  milliseconds on a GPU and drops 32B from ~129 GB to ~69 GB, which is the difference
+  between four cards and one.
+</p>
+</section>
+
+<p style="color:var(--muted); font-size:13px; border-top:1px solid var(--border); padding-top:20px">
+  Code referenced: <code>merge_layer_group.py</code>, <code>bo_merge_coeffs.py</code>,
+  <code>anchor_delta_cosine.py</code> (persona repo) ·
+  <code>data/polis_option_logprob.py</code>, <code>data/export_polis_dpo_pairs.py</code>
+  (kokkai repo). Numbers are from the project's own logs.
+</p>
+
+</main>
+</div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SVGNS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) {
+  const n = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function svg(host, w, h) {
+  host.innerHTML = "";
+  const s = el("svg", {viewBox:`0 0 ${w} ${h}`, width:"100%",
+    style:`max-width:${w}px;display:block;overflow:visible`}, host);
+  return s;
+}
+// diverging blue↔red for signed values, neutral at 0
+function diverge(v, max) {
+  const t = Math.max(-1, Math.min(1, v / (max || 1)));
+  if (Math.abs(t) < 0.02) return css("--mid");
+  return t > 0 ? css("--pos") : css("--neg");
+}
+const alphaFor = (v, max) => 0.12 + 0.88 * Math.min(1, Math.abs(v) / (max || 1));
+
+/* ---------- theme ---------- */
+const themeBtn = $("#themeBtn");
+themeBtn.onclick = () => {
+  const dark = document.documentElement.dataset.theme === "dark";
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  themeBtn.textContent = dark ? "Dark" : "Light";
+  redrawAll();
+};
+
+/* ---------- nav scrollspy ---------- */
+const links = [...document.querySelectorAll("nav a")];
+const secs = links.map(a => document.querySelector(a.getAttribute("href")));
+addEventListener("scroll", () => {
+  let idx = 0;
+  secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 120) idx = i; });
+  links.forEach((a, i) => a.classList.toggle("active", i === idx));
+}, {passive:true});
+
+/* ---------- 1. pipeline ---------- */
+function drawPipeline() {
+  const host = $("#pipeline"); const W = 820, H = 130;
+  const s = svg(host, W, H);
+  const stages = [
+    {t:"Diet transcripts", s:"session-grounded pairs", key:0},
+    {t:"DPO anchors", s:"4 LoRA adapters", key:0},
+    {t:"DARE + TIES", s:"weight-space merge", key:1},
+    {t:"Bayesian opt", s:"tune C (K×G)", key:1},
+    {t:"Persona", s:"evaluated on UTAS", key:1}
+  ];
+  const bw = 138, gap = (W - stages.length*bw) / (stages.length-1);
+  stages.forEach((st, i) => {
+    const x = i*(bw+gap);
+    const accent = st.key ? css("--series-3") : css("--muted");
+    el("rect", {x, y:34, width:bw, height:58, rx:9, fill:css("--surface-1"),
+      stroke:accent, "stroke-width":st.key?2:1}, s);
+    const t1 = el("text", {x:x+bw/2, y:58, "text-anchor":"middle",
+      fill:css("--text-primary"), "font-size":13, "font-weight":600}, s);
+    t1.textContent = st.t;
+    const t2 = el("text", {x:x+bw/2, y:76, "text-anchor":"middle",
+      fill:css("--text-secondary"), "font-size":11}, s);
+    t2.textContent = st.s;
+    if (i < stages.length-1) {
+      const ax = x+bw+4;
+      el("line", {x1:ax, y1:63, x2:ax+gap-8, y2:63, stroke:css("--axis"), "stroke-width":1.5}, s);
+      el("path", {d:`M${ax+gap-8},63 l-6,-4 l0,8 z`, fill:css("--axis")}, s);
+    }
+  });
+  const lab = el("text", {x:W/2, y:118, "text-anchor":"middle", fill:css("--muted"),
+    "font-size":11}, s);
+  lab.textContent = "green = the POLIS method · grey = standard preparation";
+}
+
+/* ---------- 4. cosine matrix ---------- */
+const ANCH = ["Kishida (LDP)", "Shiokawa (JCP)", "Fukushima (SDP)", "Ueda (DP)"];
+const COS = [[1,0.065,0.064,0.063],[0.065,1,0.090,0.086],
+             [0.064,0.090,1,0.089],[0.063,0.086,0.089,1]];
+function drawCosine() {
+  const host = $("#cosineViz"); const cell = 74, left = 132, top = 42;
+  const W = left + cell*4 + 20, H = top + cell*4 + 16;
+  const s = svg(host, W, H);
+  for (let j=0;j<4;j++) {
+    const t = el("text", {x:left+cell*j+cell/2, y:top-12, "text-anchor":"middle",
+      fill:css("--muted"), "font-size":11}, s);
+    t.textContent = ANCH[j].split(" ")[0];
+  }
+  for (let i=0;i<4;i++) {
+    const t = el("text", {x:left-10, y:top+cell*i+cell/2+4, "text-anchor":"end",
+      fill:css("--text-secondary"), "font-size":12}, s);
+    t.textContent = ANCH[i];
+    for (let j=0;j<4;j++) {
+      const v = COS[i][j], diag = i===j;
+      // sequential blue ramp on magnitude, excluding the diagonal
+      const inten = diag ? 0 : Math.min(1, (v-0.055)/0.04);
+      el("rect", {x:left+cell*j+1, y:top+cell*i+1, width:cell-2, height:cell-2, rx:6,
+        fill: diag ? css("--code-bg") : css("--seq-400"),
+        "fill-opacity": diag ? 1 : (0.18+0.72*inten),
+        stroke:css("--border")}, s);
+      const tx = el("text", {x:left+cell*j+cell/2, y:top+cell*i+cell/2+5,
+        "text-anchor":"middle", "font-size":13, "font-weight":600,
+        fill: diag ? css("--muted") : (inten>0.55 ? "#fff" : css("--text-primary"))}, s);
+      tx.textContent = diag ? "—" : v.toFixed(3);
+    }
+  }
+}
+
+/* ---------- 5. DARE ---------- */
+const GW = 12, GH = 8;
+let DELTA = [];
+(function seedDelta(){
+  let s = 7;
+  const rnd = () => { s = (s*1103515245 + 12345) & 0x7fffffff; return s/0x7fffffff; };
+  for (let i=0;i<GH;i++){ const row=[]; for(let j=0;j<GW;j++) row.push((rnd()*2-1)); DELTA.push(row); }
+})();
+let DMASK = [];
+(function seedMask(){
+  let s = 991;
+  const rnd = () => { s = (s*1103515245 + 12345) & 0x7fffffff; return s/0x7fffffff; };
+  for (let i=0;i<GH;i++){ const row=[]; for(let j=0;j<GW;j++) row.push(rnd()); DMASK.push(row); }
+})();
+function drawGrid(host, vals, max) {
+  const c = 22, W = GW*c, H = GH*c;
+  const s = svg(host, W, H);
+  for (let i=0;i<GH;i++) for (let j=0;j<GW;j++) {
+    const v = vals[i][j];
+    el("rect", {x:j*c+1, y:i*c+1, width:c-2, height:c-2, rx:3,
+      fill:diverge(v,max), "fill-opacity":v===0?0.06:alphaFor(v,max),
+      stroke:css("--border"), "stroke-width":0.5}, s);
+  }
+}
+function drawDare() {
+  const d = parseFloat($("#dareD").value);
+  $("#dareDv").textContent = d.toFixed(2);
+  const out = [], keep = [];
+  let kept = 0;
+  for (let i=0;i<GH;i++){ const r=[]; for(let j=0;j<GW;j++){
+    if (DMASK[i][j] < d) { r.push(DELTA[i][j]/d); kept++; } else r.push(0);
+  } out.push(r); }
+  drawGrid($("#dareA"), DELTA, 1);
+  drawGrid($("#dareB"), out, 1/Math.max(d,0.02));
+  const tot = GW*GH;
+  $("#dareStat").textContent =
+    `${kept} of ${tot} weights kept (${(100*kept/tot).toFixed(0)}%), survivors scaled by ${(1/d).toFixed(1)}×. `
+    + `Mean value is preserved; the number of chances to collide with another anchor is not.`;
+}
+
+/* ---------- 6. TIES ---------- */
+let TV = [0.8, -0.5, 0.6, -0.2];
+function drawTies() {
+  const host = $("#tiesViz"); const W = 700, H = 190;
+  const s = svg(host, W, H);
+  const sum = TV.reduce((a,b)=>a+b, 0);
+  const sign = sum > 0 ? 1 : (sum < 0 ? -1 : 0);
+  const agree = TV.map(v => v !== 0 && Math.sign(v) === sign);
+  const nAgree = agree.filter(Boolean).length;
+  const merged = nAgree ? TV.filter((v,i)=>agree[i]).reduce((a,b)=>a+b,0)/nAgree : 0;
+  const midY = 86, bw = 46, x0 = 60, gapx = 108, maxV = 1.2, scale = 58;
+  el("line", {x1:30, y1:midY, x2:W-180, y2:midY, stroke:css("--axis"), "stroke-width":1}, s);
+  TV.forEach((v,i) => {
+    const x = x0 + i*gapx;
+    const h = Math.abs(v)*scale;
+    const y = v>0 ? midY-h : midY;
+    el("rect", {x:x-bw/2, y, width:bw, height:Math.max(h,1), rx:4,
+      fill:diverge(v,maxV), "fill-opacity":agree[i]?0.95:0.22,
+      stroke:agree[i]?"none":css("--axis"), "stroke-dasharray":agree[i]?"":"3 3"}, s);
+    const t = el("text", {x, y:v>0?y-8:y+h+16, "text-anchor":"middle",
+      "font-size":12, "font-weight":600, fill:css("--text-primary")}, s);
+    t.textContent = v.toFixed(2);
+    const lab = el("text", {x, y:H-30, "text-anchor":"middle", "font-size":11,
+      fill: agree[i] ? css("--text-secondary") : css("--muted")}, s);
+    lab.textContent = ANCH[i].split(" ")[0];
+    const st = el("text", {x, y:H-14, "text-anchor":"middle", "font-size":10,
+      fill: agree[i] ? css("--series-3") : css("--muted")}, s);
+    st.textContent = agree[i] ? "counted" : "discarded";
+  });
+  // result
+  const rx = W-110;
+  el("line", {x1:rx-56, y1:24, x2:rx-56, y2:H-40, stroke:css("--grid"), "stroke-width":1}, s);
+  const h = Math.abs(merged)*scale;
+  el("rect", {x:rx-bw/2, y: merged>0?midY-h:midY, width:bw, height:Math.max(h,1), rx:4,
+    fill:diverge(merged,maxV), "fill-opacity":0.95}, s);
+  const rt = el("text", {x:rx, y:merged>0?midY-h-8:midY+h+16, "text-anchor":"middle",
+    "font-size":13, "font-weight":700, fill:css("--text-primary")}, s);
+  rt.textContent = merged.toFixed(3);
+  const rl = el("text", {x:rx, y:H-30, "text-anchor":"middle", "font-size":11,
+    fill:css("--text-primary"), "font-weight":600}, s);
+  rl.textContent = "merged";
+  $("#tiesOut").textContent =
+    `Sum = ${sum.toFixed(2)} → elected sign ${sign>0?"positive":"negative"}. `
+    + `${nAgree} of 4 anchors agree and are averaged; the rest are dropped entirely. `
+    + `A plain mean would have given ${(TV.reduce((a,b)=>a+b,0)/4).toFixed(3)} — `
+    + `pulled toward zero by the dissenters.`;
+}
+function buildTiesCtrl() {
+  const host = $("#tiesCtrl");
+  host.innerHTML = "";
+  TV.forEach((v,i) => {
+    const d = document.createElement("div"); d.className = "ctrl";
+    d.innerHTML = `<label>${ANCH[i]}</label>
+      <input type="range" min="-1" max="1" step="0.05" value="${v}">
+      <span class="val">${v.toFixed(2)}</span>`;
+    const inp = d.querySelector("input"), val = d.querySelector(".val");
+    inp.oninput = () => { TV[i] = parseFloat(inp.value); val.textContent = TV[i].toFixed(2); drawTies(); };
+    host.appendChild(d);
+  });
+}
+
+/* ---------- 7. layer-group coefficients ---------- */
+const NLAYER = 28, NGROUP = 3;
+let COEF = [[0.86,0.00,0.55],[0.00,0.12,0.00],[0.00,0.00,0.31],[0.00,0.22,0.00]];
+function groupOf(l) { const per = Math.ceil(NLAYER/NGROUP); return Math.min(Math.floor(l/per), NGROUP-1); }
+function buildCoefCtrl() {
+  const host = $("#coefCtrl"); host.innerHTML = "";
+  const tbl = document.createElement("table");
+  tbl.innerHTML = "<thead><tr><th>Anchor</th><th>g0 · layers 0–9</th><th>g1 · 10–19</th><th>g2 · 20–27</th></tr></thead>";
+  const tb = document.createElement("tbody");
+  ANCH.forEach((a,i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${a}</td>` + [0,1,2].map(g =>
+      `<td><input type="range" min="0" max="1.5" step="0.01" value="${COEF[i][g]}" data-a="${i}" data-g="${g}" style="width:96px;accent-color:var(--series-1)">
+       <div style="font-size:11px;font-family:ui-monospace,monospace;color:var(--muted)">${COEF[i][g].toFixed(2)}</div></td>`).join("");
+    tb.appendChild(tr);
+  });
+  tbl.appendChild(tb); host.appendChild(tbl);
+  host.querySelectorAll("input").forEach(inp => {
+    inp.oninput = () => {
+      COEF[+inp.dataset.a][+inp.dataset.g] = parseFloat(inp.value);
+      inp.nextElementSibling.textContent = parseFloat(inp.value).toFixed(2);
+      drawCoef();
+    };
+  });
+}
+function drawCoef() {
+  const host = $("#coefViz"); const W = 800, H = 178;
+  const s = svg(host, W, H);
+  const left = 132, cw = (W-left-16)/NLAYER, rh = 30;
+  for (let g=0; g<NGROUP; g++) {
+    const per = Math.ceil(NLAYER/NGROUP);
+    const x0 = left + g*per*cw, wd = Math.min(per, NLAYER-g*per)*cw;
+    el("rect", {x:x0, y:14, width:wd-2, height:12, rx:3, fill:css("--seq-250"), "fill-opacity":0.5}, s);
+    const t = el("text", {x:x0+wd/2, y:10, "text-anchor":"middle", "font-size":10,
+      fill:css("--muted")}, s);
+    t.textContent = "group "+g;
+  }
+  ANCH.forEach((a,i) => {
+    const y = 36 + i*rh;
+    const lt = el("text", {x:left-10, y:y+rh/2+3, "text-anchor":"end", "font-size":11,
+      fill:css("--text-secondary")}, s);
+    lt.textContent = a.split(" ")[0];
+    for (let l=0;l<NLAYER;l++) {
+      const v = COEF[i][groupOf(l)];
+      el("rect", {x:left+l*cw+0.5, y:y+2, width:cw-1, height:rh-8, rx:2,
+        fill:css("--seq-400"), "fill-opacity":0.06+0.94*Math.min(1,v/1.5),
+        stroke:css("--border"), "stroke-width":0.4}, s);
+    }
+  });
+  for (let l=0;l<NLAYER;l+=4) {
+    const t = el("text", {x:left+l*cw+cw/2, y:H-8, "text-anchor":"middle", "font-size":10,
+      fill:css("--muted")}, s);
+    t.textContent = l;
+  }
+  const xl = el("text", {x:left+(W-left)/2, y:H-24, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  xl.textContent = "transformer layer  →  deeper";
+}
+
+/* ---------- 9. Bayesian optimization ---------- */
+const BO = {pts:[], grid:[]};
+// Multimodal with an interior optimum (min 0.383 at x=0.667) and two decoy basins,
+// so exploration vs exploitation actually matters in the demo.
+const boF = x => 1.30 + 0.38*Math.sin(5.4*x+0.4) + 0.22*Math.sin(12.1*x)
+                 - 0.85*Math.exp(-Math.pow((x-0.66)/0.08, 2));
+const BO_TRUE_MIN = 0.383;
+function rbf(a,b,l=0.11) { const d=a-b; return Math.exp(-(d*d)/(2*l*l)); }
+function solve(A, b) {              // Gaussian elimination, small n
+  const n = b.length, M = A.map((r,i)=>[...r, b[i]]);
+  for (let c=0;c<n;c++) {
+    let p = c;
+    for (let r=c+1;r<n;r++) if (Math.abs(M[r][c])>Math.abs(M[p][c])) p=r;
+    [M[c],M[p]]=[M[p],M[c]];
+    if (Math.abs(M[c][c])<1e-12) continue;
+    for (let r=0;r<n;r++) { if(r===c) continue;
+      const f=M[r][c]/M[c][c];
+      for (let k=c;k<=n;k++) M[r][k]-=f*M[c][k];
+    }
+  }
+  return M.map((r,i)=> Math.abs(M[i][i])<1e-12 ? 0 : r[n]/M[i][i]);
+}
+function gpPost(xs) {
+  const n = BO.pts.length;
+  if (!n) return xs.map(()=>({m:1.0, s:0.55}));
+  const K = BO.pts.map(p => BO.pts.map(q => rbf(p.x,q.x) + (p.x===q.x?1e-4:0)));
+  const y = BO.pts.map(p => p.y);
+  const mean = y.reduce((a,b)=>a+b,0)/n;
+  const alpha = solve(K, y.map(v=>v-mean));
+  return xs.map(x => {
+    const k = BO.pts.map(p => rbf(x,p.x));
+    const m = mean + k.reduce((a,v,i)=>a+v*alpha[i],0);
+    const w = solve(K, k);
+    let v = 1 - k.reduce((a,kv,i)=>a+kv*w[i],0);
+    return {m, s: Math.sqrt(Math.max(v,0))*0.55};
+  });
+}
+function boNext() {
+  const xs = []; for (let i=0;i<=160;i++) xs.push(i/160);
+  if (BO.pts.length < 3) return (BO.pts.length===0)?0.12:(BO.pts.length===1?0.88:0.5);
+  const post = gpPost(xs);
+  const best = Math.min(...BO.pts.map(p=>p.y));
+  let bx = 0, bv = -Infinity;
+  xs.forEach((x,i) => {                       // lower confidence bound (minimising)
+    const u = best - (post[i].m - 1.6*post[i].s);
+    if (u > bv) { bv = u; bx = x; }
+  });
+  return bx;
+}
+function drawBO() {
+  const host = $("#boViz"); const W = 800, H = 300;
+  const s = svg(host, W, H);
+  const L=52, R=16, T=16, B=42, pw=W-L-R, ph=H-T-B;
+  const ymin=0.2, ymax=2.0;
+  const X = x => L + x*pw, Y = y => T + (1-(y-ymin)/(ymax-ymin))*ph;
+  [0.5,1.0,1.5,2.0].forEach(g => {
+    el("line", {x1:L, y1:Y(g), x2:L+pw, y2:Y(g), stroke:css("--grid"), "stroke-width":1}, s);
+    const t = el("text", {x:L-8, y:Y(g)+4, "text-anchor":"end", "font-size":11, fill:css("--muted")}, s);
+    t.textContent = g.toFixed(1);
+  });
+  el("line", {x1:L, y1:T, x2:L, y2:T+ph, stroke:css("--axis")}, s);
+  el("line", {x1:L, y1:T+ph, x2:L+pw, y2:T+ph, stroke:css("--axis")}, s);
+  const xs = []; for (let i=0;i<=160;i++) xs.push(i/160);
+  // truth
+  el("path", {d:"M"+xs.map(x=>`${X(x)},${Y(boF(x))}`).join("L"), fill:"none",
+    stroke:css("--muted"), "stroke-width":1.5, "stroke-dasharray":"5 4", opacity:0.75}, s);
+  if (BO.pts.length) {
+    const post = gpPost(xs);
+    const up = xs.map((x,i)=>`${X(x)},${Y(post[i].m+post[i].s)}`);
+    const dn = xs.map((x,i)=>`${X(x)},${Y(post[i].m-post[i].s)}`).reverse();
+    el("path", {d:"M"+up.join("L")+"L"+dn.join("L")+"Z", fill:css("--series-1"),
+      "fill-opacity":0.18, stroke:"none"}, s);
+    el("path", {d:"M"+xs.map((x,i)=>`${X(x)},${Y(post[i].m)}`).join("L"), fill:"none",
+      stroke:css("--series-1"), "stroke-width":2}, s);
+  }
+  BO.pts.forEach(p => {
+    el("circle", {cx:X(p.x), cy:Y(p.y), r:5, fill:css("--series-2"),
+      stroke:css("--surface-1"), "stroke-width":2}, s);
+  });
+  if (BO.pts.length) {
+    const b = BO.pts.reduce((a,p)=>p.y<a.y?p:a);
+    el("circle", {cx:X(b.x), cy:Y(b.y), r:8, fill:"none", stroke:css("--series-2"), "stroke-width":2}, s);
+  }
+  const xl = el("text", {x:L+pw/2, y:H-8, "text-anchor":"middle", "font-size":11, fill:css("--muted")}, s);
+  xl.textContent = "one coefficient (the real search is 12-dimensional)";
+  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
+  yl.textContent = "held-out NLL";
+  const best = BO.pts.length ? Math.min(...BO.pts.map(p=>p.y)) : null;
+  $("#boInfo").textContent = BO.pts.length
+    ? `${BO.pts.length} trial${BO.pts.length>1?"s":""} · best NLL ${best.toFixed(3)} · true optimum ${BO_TRUE_MIN}`
+    : "No trials yet — the GP has no information and its uncertainty is flat.";
+}
+$("#boStep").onclick = () => { const x = boNext(); BO.pts.push({x, y:boF(x)}); drawBO(); };
+$("#boAuto").onclick = () => { for(let i=0;i<10;i++){ const x=boNext(); BO.pts.push({x,y:boF(x)}); } drawBO(); };
+$("#boReset").onclick = () => { BO.pts = []; drawBO(); };
+
+/* ---------- 11. length normalisation ---------- */
+const OPTS = [
+  {ja:"そう思う", en:"agree", tok:4, pref:-1.05},
+  {ja:"どちらかといえばそう思う", en:"somewhat agree", tok:11, pref:-0.92},
+  {ja:"どちらともいえない", en:"neither", tok:9, pref:-1.02},
+  {ja:"どちらかといえばそう思わない", en:"somewhat disagree", tok:13, pref:-1.10},
+  {ja:"そう思わない", en:"disagree", tok:6, pref:-1.18}
+];
+let lenSummed = true;
+function softmax(v){ const m=Math.max(...v), e=v.map(x=>Math.exp(x-m)), s=e.reduce((a,b)=>a+b,0); return e.map(x=>x/s); }
+function drawLen() {
+  const host = $("#lenViz"); const W = 800, H = 236;
+  const s = svg(host, W, H);
+  const scores = OPTS.map(o => lenSummed ? o.pref*o.tok : o.pref);
+  const p = softmax(scores);
+  const L = 210, R = 60, T = 14, pw = W-L-R, rh = 40;
+  OPTS.forEach((o,i) => {
+    const y = T + i*rh;
+    const t = el("text", {x:L-12, y:y+22, "text-anchor":"end", "font-size":12,
+      fill:css("--text-secondary")}, s);
+    t.textContent = `${o.en} (${o.tok} tok)`;
+    el("rect", {x:L, y:y+6, width:pw, height:24, rx:4, fill:css("--code-bg")}, s);
+    el("rect", {x:L, y:y+6, width:Math.max(pw*p[i],2), height:24, rx:4,
+      fill:css("--series-1"), "fill-opacity":0.9}, s);
+    const v = el("text", {x:L+Math.max(pw*p[i],2)+8, y:y+23, "font-size":12,
+      "font-weight":600, fill:css("--text-primary")}, s);
+    v.textContent = (100*p[i]).toFixed(1)+"%";
+  });
+  const exp = p.reduce((a,v,i)=>a+(i+1)*v, 0);
+  const e = el("text", {x:L, y:H-12, "font-size":12, fill:css("--text-primary")}, s);
+  e.textContent = `E[1..5] = ${exp.toFixed(2)}`;
+  $("#lenOut").textContent = lenSummed
+    ? "Summed: probability tracks token count almost perfectly — the shortest option wins even though the model's per-token preference actually favours 'somewhat agree'. The answer is an artefact of string length."
+    : "Length-normalised: the ranking now follows the model's real per-token preference, and the expectation lands where the belief is rather than where the short strings are.";
+}
+$("#lenToggle").onclick = () => {
+  lenSummed = !lenSummed;
+  $("#lenToggle").textContent = lenSummed ? "Summed (broken)" : "Length-normalised (correct)";
+  $("#lenToggle").className = lenSummed ? "primary" : "";
+  drawLen();
+};
+
+/* ---------- 12. results ---------- */
+const RES = {
+  targets:["Takaichi (LDP)","Akamine (JCP)","Edano (CDP)"],
+  series:["Base","Uniform","Best-single","POLIS"],
+  vals:[[2.875,4.046,2.932,2.842],[2.938,4.026,2.986,2.894],[3.173,4.250,3.179,3.107]]
+};
+function drawResults() {
+  const host = $("#resultsViz"); const W = 800, H = 300;
+  const s = svg(host, W, H);
+  const L=52,R=16,T=18,B=54, pw=W-L-R, ph=H-T-B, ymax=4.6;
+  const Y = v => T + (1-v/ymax)*ph;
+  const cols = ["--series-1","--series-2","--series-3","--series-4"].map(css);
+  [1,2,3,4].forEach(g => {
+    el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
+    const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g;
+  });
+  el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
+  const gw = pw/3;
+  RES.vals.forEach((row,gi) => {
+    const bw = (gw-40)/4;
+    row.forEach((v,si) => {
+      const x = L + gi*gw + 20 + si*bw;
+      el("rect", {x:x+1, y:Y(v), width:bw-3, height:T+ph-Y(v), rx:4,
+        fill:cols[si], "fill-opacity":0.92}, s);
+      const t = el("text", {x:x+bw/2, y:Y(v)-6, "text-anchor":"middle", "font-size":10,
+        "font-weight":600, fill:css("--text-primary")}, s);
+      t.textContent = v.toFixed(2);      // direct labels = the contrast relief rule
+    });
+    const gl = el("text", {x:L+gi*gw+gw/2, y:T+ph+20, "text-anchor":"middle",
+      "font-size":12, fill:css("--text-secondary")}, s);
+    gl.textContent = RES.targets[gi];
+  });
+  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
+  yl.textContent = "held-out NLL (lower better)";
+  const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "The uniform merge is worse than doing nothing — untuned task vectors overshoot.";
+}
+
+/* ---------- 13. memory ---------- */
+const MEM = [
+  {n:"7B", model:14.2, delta:12.2, lazy:16.7},
+  {n:"14B", model:27.4, delta:45.0, lazy:34.0},
+  {n:"32B", model:60.5, delta:60.0, lazy:69.0},
+  {n:"72B", model:135.4, delta:180.0, lazy:158.9}
+];
+function drawMem() {
+  const host = $("#memViz"); const W = 800, H = 250;
+  const s = svg(host, W, H);
+  const L=52,R=120,T=16,B=48, pw=W-L-R, ph=H-T-B, xmax=360;
+  const X = v => L + (v/xmax)*pw;
+  const rh = ph/MEM.length;
+  [0,80,160,240,320].forEach(g => {
+    el("line", {x1:X(g),y1:T,x2:X(g),y2:T+ph,stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g),y:T+ph+18,"text-anchor":"middle","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g+" GB";
+  });
+  MEM.forEach((m,i) => {
+    const y = T + i*rh + 8, bh = rh-26;
+    const lt = el("text", {x:L-10, y:y+bh/2+4, "text-anchor":"end", "font-size":12,
+      "font-weight":600, fill:css("--text-primary")}, s);
+    lt.textContent = m.n;
+    el("rect", {x:L, y, width:Math.max(X(m.model)-L,1), height:bh, rx:3,
+      fill:css("--series-1"), "fill-opacity":0.9}, s);
+    // 2px surface gap between adjacent fills
+    el("rect", {x:X(m.model)+2, y, width:Math.max(X(m.delta)-L-2,1), height:bh, rx:3,
+      fill:css("--series-2"), "fill-opacity":0.9}, s);
+    const tot = m.model+m.delta;
+    const t = el("text", {x:X(tot)+10, y:y+bh/2+4, "font-size":12, "font-weight":600,
+      fill:css("--text-primary")}, s);
+    t.textContent = tot.toFixed(0)+" GB";
+  });
+  const g80 = X(80);
+  el("line", {x1:g80,y1:T-2,x2:g80,y2:T+ph+2, stroke:css("--text-primary"),
+    "stroke-width":1.5, "stroke-dasharray":"4 3", opacity:0.55}, s);
+  const gt = el("text", {x:g80+6, y:T+10, "font-size":11, fill:css("--text-secondary")}, s);
+  gt.textContent = "one 80 GB GPU";
+}
+
+/* ---------- boot ---------- */
+function redrawAll() {
+  drawPipeline(); drawCosine(); drawDare(); drawTies(); drawCoef();
+  drawBO(); drawLen(); drawResults(); drawMem();
+}
+$("#dareD").oninput = drawDare;
+buildTiesCtrl(); buildCoefCtrl();
+redrawAll();
+</script>
+</body>
+</html>

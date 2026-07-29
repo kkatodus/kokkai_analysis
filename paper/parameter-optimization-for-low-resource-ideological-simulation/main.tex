@@ -128,15 +128,44 @@ Target & Party & Base & Uniform & Best-single & \textbf{POLIS (BO)} \\
 POLIS beats the zero-shot base, the best single anchor, and (by more than a full nat) the uniform merge on all three targets. Two structural findings support the design:
 \begin{itemize}
     \item \textbf{Tuning does real work.} The uniform all-ones merge is substantially \emph{worse} than the base model everywhere---untuned task vectors overshoot and corrupt the model. POLIS's advantage over uniform is entirely from selecting coefficients.
-    \item \textbf{Interpretable structure emerges.} For the LDP target, BO zeroed the ideologically distant anchors and kept the LDP anchor with a per-depth-group weighting that a single global weight cannot express---evidence that layer-group granularity is the right knob.
+    \item \textbf{Interpretable structure emerges.} For the LDP target, BO zeroed the ideologically distant anchors and kept the LDP anchor with a per-depth-group weighting that a single global weight cannot express. Whether that added expressiveness actually buys fidelity is a separate question, which we test directly in Section~\ref{sec:granularity}.
 \end{itemize}
+\paragraph{Unbiased estimate via nested cross-validation.} Table~\ref{tab:main-nll} rests on a single train/test split, which yields an optimistic point estimate and no error bar. Table~\ref{tab:nested-nll} repeats the comparison under \emph{nested 5-fold cross-validation}: each outer fold is held out while the BO tunes coefficients on the remaining folds and is then scored on the untouched fold, with every baseline rotated over identical folds. The ranking is unchanged and the margins hold.
+
+\begin{table}[t]
+\centering
+\caption{Development-scale (0.5B) nested 5-fold cross-validated held-out NLL (mean $\pm$ s.d.\ across folds; lower is better), for the same three held-out targets as Table~\ref{tab:main-nll}. Budget 30 utterances, 40 GP trials per fold, all methods rotated over identical folds.}
+\label{tab:nested-nll}
+\begin{tabular}{llrrrr}
+\toprule
+Target & Party & Base & Uniform & Best-single & \textbf{POLIS (BO)} \\
+\midrule
+高市早苗 (Takaichi) & LDP & $2.875_{\pm.14}$ & $4.046_{\pm.12}$ & $2.932_{\pm.14}$ & \textbf{2.842}$_{\pm.14}$ \\
+赤嶺政賢 (Akamine)  & JCP & $2.938_{\pm.17}$ & $4.026_{\pm.19}$ & $2.986_{\pm.16}$ & \textbf{2.894}$_{\pm.15}$ \\
+枝野幸男 (Edano)    & CDP & $3.173_{\pm.20}$ & $4.250_{\pm.22}$ & $3.179_{\pm.19}$ & \textbf{3.107}$_{\pm.18}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Because folds are paired across methods, the per-fold \emph{differences} are the honest signal at this scale, and they are far tighter than the fold-to-fold spread of the absolute values. POLIS improves on the best single anchor by $+0.072$ to $+0.092$ nats, winning \textbf{15 of 15 folds}, and on the base model by $+0.033$ to $+0.066$ nats, winning \textbf{14 of 15}; the sole exception is one Akamine fold where the two sit within $0.003$ nats. It is this consistency, not the absolute magnitude, that the development scale establishes. (Absolute values differ slightly from Table~\ref{tab:main-nll} because cross-validation scores the 30-utterance budget itself, whereas the single split scores a disjoint later block of the target's speeches.)
+
 A caveat we state plainly: at 0.5B the DPO adapters primarily encode \emph{register/rhetoric} rather than fine-grained ideology (the strongest, cleanest-trained anchor tends to serve as a shared ``fluent-Diet-register'' backbone in the lower layers, with target-specific residual added elsewhere). Clean \emph{ideological} coefficient recovery is expected only at main scale; see Section~\ref{sec:disc7b}.
 
 \subsection{Ablation Studies}
 % 各モジュールの貢献度分析（例：層ごとの最適化 vs 全層一律の混合、DPO vs SFTなど）。
-Two ablations are implicit in Table~\ref{tab:main-nll}. \textbf{Merge tuning:} POLIS vs.\ \emph{Uniform} isolates the BO stage---removing it (equal coefficients) is worse than not merging at all. \textbf{Layer-wise vs.\ global:} POLIS vs.\ \emph{Best-single} isolates per-layer-group composition---even the best single anchor is beaten, so blending anchors per depth-group adds fidelity beyond any one adapter or a global weight.
+Two ablations are implicit in Table~\ref{tab:main-nll}. \textbf{Merge tuning:} POLIS vs.\ \emph{Uniform} isolates the BO stage---removing it (equal coefficients) is worse than not merging at all. \textbf{Composition vs.\ selection:} POLIS vs.\ \emph{Best-single} isolates blending---even the best single anchor is beaten, so combining anchors adds fidelity beyond selecting any one of them.
 
-\paragraph{Anchor orthogonality.} A prerequisite for the merge to have room to interpolate is that anchor task vectors are not collinear. Across the four 0.5B anchors, pairwise $\Delta W$ cosine similarity is at most $0.058$ (mean $0.047$) with consistent delta norms $0.76$--$0.82$: the anchors are near-orthogonal in weight space, so each contributes genuine residual signal and the feared collinearity failure does not materialize at development scale (to be re-checked at 7B).
+\paragraph{Granularity versus optimizability.}
+\label{sec:granularity}
+The coefficient granularity is itself a design choice, and we sweep it directly with everything else held fixed (target Takaichi, nested 4-fold CV, budget 30): \emph{global} (one weight per anchor, 4 dims), the \emph{layer-group} operating point (3 depth groups, 12 dims), and \emph{full layer-wise} (one weight per layer, 96 dims), with the sampler switching from GP to TPE at the high-dimensional end. At 20 trials per fold the held-out NLLs are $2.850$ / $2.857$ / $3.441$ respectively; raising the two low-dimensional settings to 60 trials per fold gives $2.847$ / $2.843$.
+
+Three conclusions follow, and the third is a negative one. First, both low-dimensional settings beat base and best-single at either budget, so the headline result does not depend on the choice. Second, only the layer-group setting \emph{improves} with more search ($2.857\rightarrow2.843$) while the global setting is already converged at 20 trials ($2.850\rightarrow2.847$): the extra dimensions carry usable signal, but they cost search budget to exploit. Third---and we state this plainly---the gap between global and layer-group is at most $0.005$ nats and \emph{changes sign} with the trial budget, far inside the fold-to-fold spread of $\pm0.11$. \textbf{We therefore do not claim that per-depth granularity improves fidelity at development scale.} We claim only that it is expressible, that it is not harmful, and that it is the natural place for the register/ideology distinction to appear at main scale, where the adapters carry ideology rather than register.
+
+The upper bookend is unambiguous: full layer-wise is decisively \emph{worse} than not merging at all ($3.441$ vs.\ base $2.880$), drifting toward the uniform-merge failure. Ninety-six coefficients cannot be located from twenty evaluations, and badly-chosen coefficients actively corrupt the model. The granularity curve is thus non-monotonic with a practical optimum between the bookends, which is the empirical justification for the dimensionality-dependent sampler policy rather than an assumed one.
+
+\paragraph{Anchor orthogonality.} A prerequisite for the merge to have room to interpolate is that anchor task vectors are not collinear. Across the four 0.5B anchors, pairwise $\Delta W$ cosine similarity is at most $0.058$ (mean $0.047$) with consistent delta norms $0.76$--$0.82$. The check repeats at main scale: across the four 7B anchors ($822$M adapted parameters each), pairwise cosine is at most $0.090$ (mean $0.076$) with norms $1.25$--$1.33$. At both scales the anchors are near-orthogonal in weight space, so each contributes genuine residual signal and the feared collinearity failure does not materialize.
+
+Two things change with scale. Delta norms roughly double, and---more informatively---the \emph{structure} of the off-diagonal cosines becomes ideological. At 0.5B the pairwise values are uniform ($0.04$--$0.06$) regardless of party. At 7B they separate cleanly by bloc: every left--left pair (JCP--SDP $0.090$, SDP--DP $0.089$, JCP--DP $0.086$) exceeds every pair involving the lone LDP anchor ($0.063$--$0.065$). With three pairs on each side this is suggestive rather than a significance test, but it is the first direct evidence that the DPO deltas encode ideological position and not only rhetorical register---the scale effect Section~\ref{sec:disc7b} predicts, observed here in weight space rather than in behaviour.
 
 \subsection{Qualitative Analysis and Main-Scale Validation}
 \label{sec:disc7b}
