@@ -14,7 +14,7 @@ caricature. That is cheaper (API, no GPU) and fits the repo's Gemini-first pipel
 convention, but it is a different negative: the DPO signal becomes "prefer the real
 utterance over a capable general LLM's role-play" rather than "over the policy's own."
 If you want the literal spec semantics, generate `rejected` by sampling the base model
-instead (a GPU step in ../idea/persona). Recorded so the choice is explicit.
+instead (a GPU step, see train_one_politician_persona.py). Recorded so the choice is explicit.
 
 The stored `prompt` already carries the 「あなたは〇〇議員です…」 persona header and the
 「〇〇（会派）：」 cue, so it is fed to Gemini verbatim (DPO requires chosen and rejected
@@ -44,7 +44,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
 from google import genai
 
-from params.paths import DATA_DIR
+from paths import DATA_DIR
 
 load_dotenv()
 

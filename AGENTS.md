@@ -49,7 +49,7 @@ If a task references a plan, spec, or not-yet-built feature, read the relevant `
 | `data/` | [DATA-PIPELINES.md](docs/agents/DATA-PIPELINES.md) | Scraping, LLM pipelines, Python scripts |
 | `data/data/` | [DATA-LAYOUT.md](docs/agents/DATA-LAYOUT.md) | Dataset paths, pipeline → S3 mirror mapping |
 | `infra/` | [INFRA.md](docs/agents/INFRA.md) | CDK, AWS deploy, GitHub Actions |
-| `paper/` | [RESEARCHER.md](docs/agents/RESEARCHER.md) | Papers, stance quantification, embeddings, labelling |
+| `paper/`, `research/` | [RESEARCHER.md](docs/agents/RESEARCHER.md) | Papers, experiment code, stance quantification, embeddings, labelling |
 | (cross-cutting) | [CONTRACTS.md](docs/agents/CONTRACTS.md) | Frontend ↔ backend API shapes, adding new datasets |
 | (cross-cutting) | [ENVIRONMENT.md](docs/agents/ENVIRONMENT.md) | Secrets, tooling, agent cautions |
 
@@ -64,6 +64,7 @@ Python scrape / LLM script              → DATA-PIPELINES.md
 Where does this JSON file live?         → DATA-LAYOUT.md
 Deploy, VPC, ECS, CloudFront            → INFRA.md
 UMAP, axes, fine-tuning, LaTeX paper    → RESEARCHER.md
+POLIS personas, LoRA/DPO, model merging → RESEARCHER.md + research/README.md
 UTAS survey data, scaling validation    → DATA-LAYOUT.md + RESEARCHER.md
 Wire frontend to new backend endpoint   → CONTRACTS.md + BACKEND.md + FRONTEND.md
 Run a pipeline locally                  → ENVIRONMENT.md + DATA-PIPELINES.md
@@ -78,6 +79,7 @@ Planned feature / spec / design doc     → specs/README.md → specs/<slug>/
 - **`data/`** — Python pipelines; datasets under `data/data/` (including `u-tokyo-asahi/` UTAS surveys); mirror for API under `s3_mirror/kokkai-doc/`.
 - **`infra/`** — AWS CDK (BackendStack + FrontendStack); branch-per-environment deploys.
 - **`paper/`** — Research LaTeX sources for ideological-scaling work.
+- **`research/`** — Experiment code behind the papers, one dir per project (`polis/`); index at [research/README.md](research/README.md).
 - **`specs/`** — Future project plans; index at [specs/README.md](specs/README.md).
 
 Human-facing overview: [README.md](README.md). Cursor deployment rules: `.cursor/rules/`. Claude Code entry: [CLAUDE.md](CLAUDE.md) (imports this file).

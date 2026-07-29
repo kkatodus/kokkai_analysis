@@ -3,7 +3,118 @@
 Context for resuming work after a session clear. Read [README.md](./README.md) (the spec) first; this file covers only what the spec does not: session state, environment facts, and next actions.
 
 ---
-> ## 🔴 START HERE (latest, 2026-07-07 — paper draft DONE)
+> ## 📁 CODE MOVED (2026-07-29) — read before following any path below
+> All POLIS code now lives in **`research/polis/`** in this repo. The separate `idea/persona` repo is retired
+> and its contents were merged in, along with the POLIS scripts that used to sit in `data/`. Sections below are
+> a chronological log and still name the **old** paths; translate them:
+>
+> | Old | New |
+> |---|---|
+> | `../idea/persona/code/*.py` | `research/polis/*.py` |
+> | `../idea/persona/code/output/` | `research/polis/output/` (gitignored, ~1 GB) |
+> | `data/{polis_option_logprob,export_polis_dpo_pairs,generate_polis_rejected,select_polis_anchors,build_utas_ground_truth}.py` | `research/polis/` (same filenames) |
+> | `artifacts/run_7b_bo_gpu.sh`, `run_7b_bo_overnight.sh` | `research/polis/scripts/` |
+> | `../idea/persona/.venv/bin/python` | `research/.venv/bin/python` (`research/requirements.txt`) |
+>
+> `from params.paths import DATA_DIR` became `from paths import DATA_DIR` (`research/polis/paths.py`), which also
+> honours `KOKKAI_DATA_DIR` / `KOKKAI_S3_MIRROR` for boxes without the data drive. `bo_merge_coeffs.py` no longer
+> needs `KOKKAI_REPO` — the UTAS scorer is a sibling import now. Run logs stay under `specs/.../artifacts/`.
+> Verified after the move: `merge_layer_group.py` self-test at 0.5B prints four distinct NLLs and an exact restore.
+---
+> ## 🔴 START HERE (latest, 2026-07-26 — nested-CV + 7B orthogonality DONE; only the 7B merge table is left)
+> **Two more results are in the paper, both laptop-only.** (1) **Nested 5-fold CV at 0.5B on all 3 genuine held-out
+> targets** (spec §2.4, resume item 6b — was the last open Phase-3 item): POLIS beats best-single in **15/15 folds**
+> and base in **14/15**, unbiased, now `\ref{tab:nested-nll}` in the paper. (2) **7B anchor-delta cosine re-check**
+> (Result D's "re-check at 7B" caveat, now closed): max 0.090 / mean 0.076, norms 1.25–1.33 — and the off-diagonals
+> **separate by bloc at 7B** (every left–left pair ≈0.088 > every pair with the LDP anchor ≈0.064), which at 0.5B they
+> did not. First weight-space evidence that the deltas encode ideology, not only register.
+> **Environment (bit us this session, see "Migration fallout"):** workspace moved root → user `ken`; datasets live in
+> `D:\wsl_data.vhdx` mounted at `/mnt/wsl/wsldata` (use `kdata mount`, added to `~/.zshrc`); HF cache was lost.
+> **Still pending, unchanged:** the **7B merge-method comparison** (base/uniform/best-single/POLIS × NLL + UTAS × 3
+> targets). Driver is written and preflight-gated: **`research/polis/scripts/run_7b_bo_gpu.sh`**. Needs ~31 GB VRAM (15.2 GB model
+> + 13.2 GB fp32 anchor deltas); 40 GB floor, 48 GB comfortable. Estimated **~1 GPU-hour**, i.e. ~$5–20 rented — the
+> "compute wall" is the 8 GB laptop, not the job.
+---
+
+## Session 2026-07-26 — nested CV, 7B orthogonality, migration fallout
+
+**Results added to the paper** (`main.tex` rebuilds clean, 12 pp, xelatex):
+
+1. **Nested 5-fold CV at 0.5B, all 3 held-out targets** (`artifacts/nested_cv_05b/target_{1279,2053,2289}.log`),
+   budget 30 / 40 GP trials per fold, all methods rotated over identical folds:
+
+   | target | base | uniform | best-single | **BO** | Δ vs base (folds won) | Δ vs best-1 (folds won) |
+   |---|---|---|---|---|---|---|
+   | 1279 高市 | 2.875 | 4.046 | 2.932 | **2.842** | +0.033 ± .006 (5/5) | +0.090 ± .026 (5/5) |
+   | 2053 赤嶺 | 2.938 | 4.026 | 2.986 | **2.894** | +0.045 ± .025 (4/5) | +0.092 ± .020 (5/5) |
+   | 2289 枝野 | 3.173 | 4.250 | 3.179 | **3.107** | +0.066 ± .019 (5/5) | +0.072 ± .011 (5/5) |
+
+   **15/15 folds vs best-single, 14/15 vs base** (the miss is one 赤嶺 fold, −0.003 = a wash). Absolute values differ
+   from the single-split Table 1 because CV scores the 30-utterance budget itself, not a disjoint later block — noted
+   in the paper so it doesn't read as an inconsistency. Best-single picked 岸田 in **all 15 folds**, consistent with
+   the standing "岸田 = shared fluent-Diet-register backbone at 0.5B" finding.
+
+2. **7B anchor-delta cosine (Result D at main scale)** — `anchor_delta_cosine.py` on the four `*_qwen7b` adapters,
+   822,083,584 adapted params each, CPU-only (~13 GB RAM), no base model needed:
+   max 0.090 / mean 0.076, norms 1.25–1.33 (0.5B was max 0.058 / mean 0.047, norms 0.76–0.82). Collinearity risk
+   retired at 7B. **New:** bloc structure — JCP–SDP 0.090, SDP–DP 0.089, JCP–DP 0.086 vs **every** LDP pair 0.063–0.065.
+   3 pairs per side, so suggestive not significant; reported that way.
+
+3. **Granularity ablation bookends** (spec §2.4/§4.3, resume item 6b's other half — `bo_granularity_ablation.py`,
+   first ever run). Target 1279, nested 4-fold CV, budget 30. Logs: `artifacts/nested_cv_05b/granularity_1279*.log`.
+
+   | granularity | dims | sampler | 20 trials/fold | 60 trials/fold |
+   |---|---|---|---|---|
+   | global | 4 | GP | 2.8504 | 2.8473 |
+   | layer-group | 12 | GP | 2.8573 | **2.8427** |
+   | full-layer-wise | 96 | TPE | 3.4408 | — (infeasible) |
+
+   (base 2.8804 · uniform 4.0500 · best-single 2.9376 throughout.)
+
+   **⚠️ This forced a correction to the paper.** Two sentences claimed layer-group granularity was "the right knob"
+   and added fidelity "beyond … a global weight". Neither is supported: the global↔layer-group gap is ≤0.005 nats
+   and **changes sign with trial budget**, against a ±0.11 fold spread. Both were rewritten; the paper now says
+   explicitly that per-depth granularity is *expressible and not harmful* but **not shown to improve fidelity at
+   0.5B**. New `\paragraph{Granularity versus optimizability}` (`sec:granularity`) reports the full curve.
+
+   What *is* solid: (a) only layer-group improves with more search (2.857→2.843) while global is converged at 20
+   trials (2.850→2.847) — the extra dims carry usable signal but cost budget; (b) **full-layer-wise at 96 dims is
+   worse than not merging at all** (3.441 vs base 2.880), drifting toward the uniform-merge failure — 20 trials
+   cannot locate 96 coefficients, and bad coefficients actively corrupt the model. That non-monotonic curve is the
+   empirical justification for the GP→TPE dimensionality policy, which was previously just asserted.
+
+   **Caveats:** one target only; per-fold numbers aren't printed by the sweep, so global-vs-layer-group can't be
+   compared *paired* (which would be far more sensitive) — worth adding if this is pursued. And the question is
+   arguably only meaningful at 7B, where adapters carry ideology rather than register; a 7B layer-group-vs-global
+   run would supersede all of this.
+
+**Code fixes (persona repo)** — all three were latent breakage or silent-failure risks:
+- `bo_merge_coeffs.py`: `/root/projects/...` hardcoding → `KOKKAI_REPO` env var defaulting to a path derived from the
+  file location. Fixes the migration; also what makes the GPU port work.
+- `merge_layer_group.py`: **`LayerGroupMerger` now raises if any target module is a meta tensor.** This is the bug that
+  cost ~days (device_map="auto" offload ⇒ in-place ΔW writes silently no-op ⇒ BO optimises a flat objective). It can no
+  longer fail silently.
+- Both: `--device` now pins any device (`cuda`, `cpu`), not just `cpu` vs `auto`.
+
+**New driver: `artifacts/run_7b_bo_gpu.sh`** (supersedes `run_7b_bo_overnight.sh`, the CPU attempt). Env-var paths,
+explicit 7B adapters (the `output/polis_*` glob mixes 0.5B + 7B + smoke dirs — a silent-nonsense trap), full
+budget 30 / test 30 / 40 trials, `NESTED=1` for the CV variant, and a **preflight gate**: runs the merge self-test
+first and aborts unless it reports `[OK]` with four distinct NLLs. Do not skip reading those four numbers.
+
+### Migration fallout (2026-07-21, diagnosed 2026-07-26)
+Workspace moved **root → user `ken`** (uid 1001). Consequences hit this session:
+- Repo now at `/home/ken/workspace/projects/`; **every `/root/projects/...` path in this file and in older code is stale.**
+- **Datasets are in a 92 GB ext4 VHDX, `D:\wsl_data.vhdx`**, mounted at `/mnt/wsl/wsldata` — where `data/data` and
+  `s3_mirror` symlink. `/mnt/wsl` is tmpfs, so it must be remounted after every `wsl --shutdown`. Added **`kdata
+  mount|umount|status`** to `~/.zshrc`. **Trap:** `mount -t drvfs D: /mnt/wsl/wsldata` appears to succeed and shows
+  plausible dirs, but that's the raw exFAT drive, not the image — `kokkai_data/` is missing and everything breaks
+  confusingly. Correct command needs an **Administrator** shell:
+  `Dismount-DiskImage -ImagePath 'D:\wsl_data.vhdx'; wsl --mount --vhd 'D:\wsl_data.vhdx' --name wsldata`.
+- **HF cache lost** — 0.5B re-downloaded automatically; 7B (~15 GB) will re-download on first use.
+- The persona `.venv` still works despite being built under `/root`.
+
+---
+> ## (previous) START HERE (2026-07-07 — paper draft DONE)
 > **The "populate the paper with preliminary findings" task is COMPLETE** (see "✅ PAPER POPULATED" section just
 > below this banner). `paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex` is now a full
 > preliminary draft: all section bodies written, Results A/C/D in `booktabs` tables, honestly framed as preliminary,
@@ -445,7 +556,7 @@ Ken fixed the hard-drive mount (`D:\` → `/mnt/d`, 774 GB free; root ext4 still
 5. ~~**Remaining Phase 0 loose ends:** QLoRA ~3B smoke test; BO backend choice~~ ✅ **DONE** (2026-07-05f). **Phase 0 CLOSED.**
 6. ~~**Phase 3 core:** custom layer-group DARE-TIES merge + Optuna/`GPSampler` BO loop, pilot~~ ✅ **DONE** (2026-07-05g). → sub-tasks:
    a. ~~**DPO-pair export for real held-out targets** → BO pilots on genuine targets~~ ✅ **DONE** (2026-07-05h — BO beats all baselines on 3/3 genuine held-out targets) ~~+ wire §4.4 UTAS metric onto the merged model~~ ✅ **DONE** (same session, `--utas-eval`; mechanism closes, 0.5B numbers degenerate as expected). → **Next real work is (b)/(c) below and item 7.**
-   b. **Nested k-fold CV** wrapper (§2.4) for unbiased selection on the full matrix; ablation bookends (global ~8-dim; ~192-dim full-layer-wise via TuRBO/SAASBO/botorch).
+   b. ~~**Nested k-fold CV** wrapper (§2.4) for unbiased selection on the full matrix~~ ✅ **DONE** (2026-07-26, all 3 held-out targets at 0.5B — 15/15 folds vs best-single, in the paper as `tab:nested-nll`). **Still open:** ablation bookends (global ~4-dim; ~96-dim full-layer-wise at 0.5B) via `bo_granularity_ablation.py` — implemented, never run; laptop-feasible at 0.5B (~4 min/target).
    c. **Mechanism analysis (§4.4):** correlate learned coeffs with anchor–target UTAS/scaling distance + topic overlap. NB: at 0.5B coeffs track *register* (岸田 g0 backbone dominates) not ideology — do this on the 7–8B main run.
 7. **ICL baseline kill check (Phase 2b)** now that real pilot targets exist (1279/2053/2289). NB: at 0.5B all methods sit near the same degenerate floor, so this gate is only decisive at 7–8B — run it there, or expect an inconclusive dev-scale result.
 8. **7–8B main run — NO LONGER Studio-blocked** (2026-07-05i): QLoRA 7B DPO fits the 8 GB laptop; ✅ (a) **full-length anchor 152 run DONE** (188 steps, loss 0.0545, margins 8.79, adapter `output/polis_152_qwen7b/`). ✅ **ALL 4 ANCHORS TRAINED AT 7B** (done 2026-07-06 20:38). Adapters in `../idea/persona/code/output/polis_{152,2377,3631,5520}_qwen7b/`, all clean: 152 loss 0.0545/margins 8.79 · 2377 0.0496/7.08 · 3631 0.0497/9.08 · 5520 0.0475/8.31 · all accuracies 1.0. Overnight throttling stretched wall-time to ~21 h (3631 8.2 h, 5520 9.1 h vs 152's 2.9 h) — throughput only, all rc=0. Next →

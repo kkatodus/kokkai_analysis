@@ -1,0 +1,10 @@
+# LoRA/DPO adapters (~1 GB of safetensors). Reproducible only by ~21 h of GPU
+# training, so they are kept in-tree but out of git -- rsync them to a GPU box.
+polis/output/
+
+# Optuna study databases and BO scratch
+*.db
+*.sqlite3
+
+.venv/
+__pycache__/

@@ -38,7 +38,7 @@ import os
 import re
 import zipfile
 
-from params.paths import DATA_DIR
+from paths import DATA_DIR
 
 UTAS_DIR = os.path.join(DATA_DIR, "u-tokyo-asahi")
 OUT_DIR = os.path.join(DATA_DIR, "polis", "utas_ground_truth")

@@ -1,0 +1,16 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  25%|██▍       | 72/290 [00:00<00:00, 711.57it/s]Loading weights:  56%|█████▌    | 162/290 [00:00<00:00, 818.72it/s]Loading weights:  88%|████████▊ | 254/290 [00:00<00:00, 858.37it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 864.24it/s]
+/home/ken/workspace/projects/idea/persona/code/bo_merge_coeffs.py:115: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=2289 anchors=['152_kishida', '2377_shiokawa', '3631_fukushima', '5520_ueda'] n_groups=3 dims=12 sampler=gp budget=30 folds=5 trials/fold=40 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base           3.1730 ± 0.1962   per-fold [3.309, 3.182, 3.38, 3.183, 2.811]
+  uniform        4.2498 ± 0.2214   per-fold [4.408, 4.211, 4.485, 4.295, 3.849]
+  best-single    3.1786 ± 0.1896   per-fold [3.287, 3.176, 3.395, 3.204, 2.831]
+  BO             3.1066 ± 0.1840   per-fold [3.227, 3.09, 3.314, 3.129, 2.773]
+
+  BO vs base (paired):        +0.0664 ± 0.0194
+  BO vs best-single (paired): +0.0720 ± 0.0112
+  best-single picks per fold: ['152_kishida', '152_kishida', '152_kishida', '152_kishida', '152_kishida']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).

@@ -14,8 +14,8 @@ Design:
   the argmax option, and the 1..N expectation (useful for MAE on Likert items).
 
 This module is model-agnostic and has no dependency on the rest of the repo; run it
-with the persona venv interpreter (torch/transformers/peft), e.g.
-    /root/projects/idea/persona/.venv/bin/python data/polis_option_logprob.py --demo
+with the research venv (torch/transformers/peft), e.g.
+    python polis_option_logprob.py --demo
 """
 from __future__ import annotations
 

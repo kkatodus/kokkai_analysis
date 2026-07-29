@@ -3,7 +3,7 @@
 **Status:** draft
 **Paper skeleton:** [`paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex`](../../paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex)
 **Target venue:** ACL/EMNLP-track NLP conference (method + automatic eval; human eval optional appendix)
-**Code home:** training/merging/BO in the sibling repo `../idea/persona/` (extends `train_one_politician_persona.py` / `validate_persona.py`); this repo holds the spec, DPO-dataset export scripts, UTAS eval assets, and the paper.
+**Code home:** [`research/polis/`](../../research/polis/) — the whole pipeline (dataset export, DPO training, merging, BO, UTAS eval) lives there alongside the spec and the paper. Consolidated 2026-07-29 from the retired `idea/persona` repo plus the POLIS scripts formerly in `data/`; see [research/README.md](../../research/README.md).
 **Related guides:** [RESEARCHER.md](../../docs/agents/RESEARCHER.md) · [DATA-LAYOUT.md](../../docs/agents/DATA-LAYOUT.md) · [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md)
 **Sibling spec:** [`ensemble-scaling-reliability`](../ensemble-scaling-reliability/README.md) — shares the UTAS candidate-name-matching infrastructure (build once, use in both).
 
@@ -39,7 +39,7 @@ Rationale, recorded from design review:
 - The rejected side makes the paper's caricature critique the *literal training signal*: the adapter learns "the real politician, not the LLM's stereotype of them."
 - Ideological contrast **between** anchors comes from the `chosen` side (each anchor's real responses carry their positions). The shared "real Diet register, not LLM role-play" direction across anchors is *desirable* in the merged persona; TIES sign-resolution preserves consistent shared directions while anchor-specific residuals carry the interpolation signal.
 
-Source data: `data/data/repr_speeches_id_organized/{person_id}/all_speeches.jsonl` (+ session/issue context from `data_all_speeches/`). Export script lives in this repo under `data/`; output JSONL matches the `prompt`/`chosen`/`rejected` format the `../idea/persona` trainer already consumes.
+Source data: `data/data/repr_speeches_id_organized/{person_id}/all_speeches.jsonl` (+ session/issue context from `data_all_speeches/`). Export script: `research/polis/export_polis_dpo_pairs.py`; output JSONL matches the `prompt`/`chosen`/`rejected` format `research/polis/train_one_politician_persona.py` consumes.
 
 ### 2.3 Merging: DARE-TIES over anchor LoRA deltas
 
@@ -58,7 +58,7 @@ Source data: `data/data/repr_speeches_id_organized/{person_id}/all_speeches.json
 ## 3. Models & infrastructure
 
 - **Main model:** ~7–8B Japanese-capable instruct — Qwen2.5-7B-Instruct or Llama-3.1-Swallow-8B. Requirement that drove this choice: the headline metric needs reliable Likert-format answering in Japanese, which a 0.5B model may simply fail at.
-- **Dev loop + scale ablation:** Qwen2.5-0.5B-Instruct (current `../idea/persona` default).
+- **Dev loop + scale ablation:** Qwen2.5-0.5B-Instruct (the `research/polis` trainer default).
 - **Dev hardware (now):** local laptop — RTX 3070 Laptop, **8GB VRAM / 64GB RAM**, CUDA 13.2 driver, WSL2, Python 3.10.12, `uv`. The 512GB Mac Studio is delayed, so the entire toolchain is built and validated here first: everything runs at **0.5B** (full LoRA/DPO), with **QLoRA reaching ~3B** to exercise the pipeline near main scale. 7–8B main-run training does **not** fit and is deferred to the Studio.
 - **Main-run hardware (later):** 512GB unified-memory Mac Studio. Memory is not the constraint there; **throughput is**. Cross-platform port: dev is CUDA/PyTorch (TRL/PEFT + bitsandbytes QLoRA); the Studio is Apple Silicon (MLX or TRL/PEFT on MPS). MLX-trained adapters need conversion before PyTorch-side merging/PEFT tooling — the MLX-vs-MPS throughput spike happens **when the Studio arrives**, not now.
 

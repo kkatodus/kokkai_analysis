@@ -6,7 +6,7 @@ source "$(dirname "$0")/_common.sh"
 
 usage() {
   echo "Usage: $(basename "$0") <pillar> [max-depth]" >&2
-  echo "Pillars: backend frontend data infra paper" >&2
+  echo "Pillars: backend frontend data infra paper research" >&2
   exit 1
 }
 
@@ -21,6 +21,7 @@ case "$pillar" in
   data) root="$REPO_ROOT/data" ;;
   infra) root="$REPO_ROOT/infra" ;;
   paper) root="$REPO_ROOT/paper" ;;
+  research) root="$REPO_ROOT/research" ;;
   *)
     echo "Unknown pillar: $pillar" >&2
     usage

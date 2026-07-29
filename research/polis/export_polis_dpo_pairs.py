@@ -14,7 +14,7 @@ an anchor politician in a Diet sitting we emit one training instance:
                prompt, filled by generate_polis_rejected.py (Gemini). This script
                owns only the deterministic prompt/chosen extraction.
 
-The trainer (../idea/persona/code/train_one_politician_persona.py) feeds this JSONL
+The trainer (train_one_politician_persona.py) feeds this JSONL
 straight into TRL's DPOTrainer, which reads string columns `prompt`/`chosen`/
 `rejected` (`accepted` is auto-renamed to `chosen`). Its DPOConfig caps
 prompt+completion at max_length=1024 tokens, so keep the char budget conservative
@@ -38,7 +38,7 @@ import re
 from collections import defaultdict
 from typing import Iterator, List, Optional
 
-from params.paths import DATA_DIR
+from paths import DATA_DIR
 
 ORGANIZED_DIR = os.path.join(DATA_DIR, "repr_speeches_id_organized")
 ALL_SPEECHES_DIR = os.path.join(DATA_DIR, "data_all_speeches")

@@ -33,9 +33,9 @@ import json
 import os
 from collections import defaultdict
 
-from params.paths import DATA_DIR
+from paths import DATA_DIR, S3_MIRROR_DIR
 
-IDEOLOGY_PATH = os.path.join(DATA_DIR, "..", "s3_mirror", "kokkai-doc", "ideology", "ideology.json.gz")
+IDEOLOGY_PATH = os.path.join(S3_MIRROR_DIR, "kokkai-doc", "ideology", "ideology.json.gz")
 ORGANIZED_DIR = os.path.join(DATA_DIR, "repr_speeches_id_organized")
 DEFAULT_OUTPUT = os.path.join(DATA_DIR, "polis", "anchors.json")
 
