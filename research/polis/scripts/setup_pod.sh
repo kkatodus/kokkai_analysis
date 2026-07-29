@@ -5,27 +5,34 @@
 # self-test, which is the only thing that proves the run is worth paying for.
 #
 # ---------------------------------------------------------------------------
-# BEFORE running this, push the two payloads that are NOT in git.
-# From the laptop (with the data drive mounted -- `kdata mount`):
+# ORDER MATTERS: clone FIRST. rsync would create the destination directories,
+# and `git clone` into a non-empty directory fails.
 #
-#   POD="root@<ip> -p <port>"          # from the RunPod "Connect" panel
-#   REPO=~/workspace/projects/kokkai_analysis
-#
-#   # 1. adapters (~522 MB, gitignored)
-#   rsync -avP -e "ssh -p <port>" \
-#     $REPO/research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
-#     root@<ip>:/workspace/kokkai_analysis/research/polis/output/
-#
-#   # 2. the two data inputs (small)
-#   rsync -avP -e "ssh -p <port>" \
-#     $REPO/data/data/polis/dpo_pairs_targets \
-#     $REPO/data/data/polis/utas_ground_truth \
-#     root@<ip>:/workspace/kokkai_data/polis/
-#
-# ---------------------------------------------------------------------------
-# USAGE on the pod:
+# 1. On the pod -- clone (needs the `dev` branch):
 #   git clone https://github.com/kkatodus/kokkai_analysis.git /workspace/kokkai_analysis
 #   cd /workspace/kokkai_analysis && git checkout dev
+#   mkdir -p /workspace/kokkai_data/polis
+#
+# 2. From the laptop -- push the two payloads that are NOT in git.
+#    Needs Full SSH (public IP + TCP port 22): the proxied ssh.runpod.io
+#    connection does not support SCP/SFTP/rsync.
+#    Requires the data drive mounted (`kdata mount`).
+#
+#   REPO=~/workspace/projects/kokkai_analysis
+#   IP=<ip>; PORT=<port>            # from the RunPod "Connect" panel
+#
+#   # adapters (~522 MB, gitignored)
+#   rsync -avP -e "ssh -p $PORT" \
+#     $REPO/research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
+#     root@$IP:/workspace/kokkai_analysis/research/polis/output/
+#
+#   # data inputs (~4 MB)
+#   rsync -avP -e "ssh -p $PORT" \
+#     $REPO/data/data/polis/dpo_pairs_targets \
+#     $REPO/data/data/polis/utas_ground_truth \
+#     root@$IP:/workspace/kokkai_data/polis/
+#
+# 3. Back on the pod:
 #   ./research/polis/scripts/setup_pod.sh
 #
 # Then the actual run (inside tmux -- RunPod SSH sessions drop):
