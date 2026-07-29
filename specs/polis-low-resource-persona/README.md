@@ -4,6 +4,7 @@
 **Paper skeleton:** [`paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex`](../../paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex)
 **Target venue:** ACL/EMNLP-track NLP conference (method + automatic eval; human eval optional appendix)
 **Code home:** [`research/polis/`](../../research/polis/) — the whole pipeline (dataset export, DPO training, merging, BO, UTAS eval) lives there alongside the spec and the paper. Consolidated 2026-07-29 from the retired `idea/persona` repo plus the POLIS scripts formerly in `data/`; see [research/README.md](../../research/README.md).
+**Main-scale run:** [`RUNPOD.md`](./RUNPOD.md) — every command to get the pending 7B merge-method comparison running on a rented GPU.
 **Related guides:** [RESEARCHER.md](../../docs/agents/RESEARCHER.md) · [DATA-LAYOUT.md](../../docs/agents/DATA-LAYOUT.md) · [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md)
 **Sibling spec:** [`ensemble-scaling-reliability`](../ensemble-scaling-reliability/README.md) — shares the UTAS candidate-name-matching infrastructure (build once, use in both).
 

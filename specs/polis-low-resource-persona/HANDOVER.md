@@ -31,7 +31,8 @@ Context for resuming work after a session clear. Read [README.md](./README.md) (
 > **Environment (bit us this session, see "Migration fallout"):** workspace moved root → user `ken`; datasets live in
 > `D:\wsl_data.vhdx` mounted at `/mnt/wsl/wsldata` (use `kdata mount`, added to `~/.zshrc`); HF cache was lost.
 > **Still pending, unchanged:** the **7B merge-method comparison** (base/uniform/best-single/POLIS × NLL + UTAS × 3
-> targets). Driver is written and preflight-gated: **`research/polis/scripts/run_7b_bo_gpu.sh`**. Needs ~31 GB VRAM (15.2 GB model
+> targets). Driver is written and preflight-gated: **`research/polis/scripts/run_7b_bo_gpu.sh`**; step-by-step runbook in
+> **[`RUNPOD.md`](./RUNPOD.md)**. Needs ~31 GB VRAM (15.2 GB model
 > + 13.2 GB fp32 anchor deltas); 40 GB floor, 48 GB comfortable. Estimated **~1 GPU-hour**, i.e. ~$5–20 rented — the
 > "compute wall" is the 8 GB laptop, not the job.
 ---
