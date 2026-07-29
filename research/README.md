@@ -69,12 +69,19 @@ Always pass adapters to the merge scripts **explicitly**. `output/polis_*` globs
 the 0.5B, 7B and smoke directories together, and mixing scales silently produces
 a nonsense merge.
 
-### Main-scale run
+### Main-scale run (rented GPU)
 
 The paper's pending table (base / uniform / best-single / POLIS at 7B) is driven by
 [`polis/scripts/run_7b_bo_gpu.sh`](polis/scripts/run_7b_bo_gpu.sh). It needs ~31 GB
 VRAM (15.2 GB bf16 model + 13.2 GB fp32 anchor deltas + transients), so a 40 GB card
 is the floor and 48 GB is comfortable.
+
+[`polis/scripts/setup_pod.sh`](polis/scripts/setup_pod.sh) prepares a rented box:
+checks VRAM, installs deps against the image's torch, verifies the adapters and data
+were copied over, caches the model on the network volume, and runs the merge
+self-test. Its header carries the `rsync` commands for the two payloads that are not
+in git (adapters, and `data/data/polis/{dpo_pairs_targets,utas_ground_truth}`).
+Time one target with `TRIALS=5 TARGETS=1279` before committing to the full run.
 
 A correct merge requires the whole model on **one** device: under
 `device_map="auto"` the overflow layers become meta tensors and the in-place ΔW
