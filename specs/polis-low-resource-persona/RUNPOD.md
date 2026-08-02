@@ -437,15 +437,20 @@ them away, keeping only the aggregate.
 
 **`[L7]`** · laptop · retrieve the population dump
 ```bash
-REPO=~/workspace/projects/kokkai_analysis
 IP=<pod-ip>; PORT=<pod-port>
-POD=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
 
 rsync -avP -e "ssh -p $PORT" \
-  root@$IP:$POD/utas_population_7b_base.json \
-  root@$IP:$POD/utas_population.log \
-  $REPO/specs/polis-low-resource-persona/artifacts/
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population.log \
+  ~/workspace/projects/kokkai_analysis/specs/polis-low-resource-persona/artifacts/
 ```
+
+Paths are spelled out rather than held in a `$POD`/`$REPO` variable: a partial paste
+leaves the variable unset, it expands to nothing, and rsync then asks the pod for
+`/utas_population_7b_base.json` at the filesystem root — which fails with a
+`link_stat … No such file` that looks like a missing file rather than a missing
+variable. Same trap applies to `$ART` in `P11`; if that one is unset the *output*
+lands at `/` instead.
 
 Named files rather than the whole `artifacts/` directory — the laptop copy also holds
 `bo7b_logs/` and `nested_cv_05b/`, which have no business in this transfer.
