@@ -253,14 +253,12 @@ for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
 # 3. granularity ablation -- lets the paper drop its 0.5B-only concession.
 #    --dpo-dir is REQUIRED here: unlike run_7b_bo_gpu.sh, this script defaults to
 #    $KOKKAI_DATA_DIR/polis/dpo_pairs_full, which §3 never ships to the pod.
-#    No --device: the default device_map="auto" puts the whole model on cuda:0 on
-#    any card that meets §0.
 #    Needs a checkout that includes the probe-merger fix (§6) -- older ones OOM.
 time python research/polis/bo_granularity_ablation.py \
   --target 1279 --budget 30 --folds 4 --trials 20 \
   --groups 1 3 \
   --adapters research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
-  --base Qwen/Qwen2.5-7B-Instruct \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
   --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
   2>&1 | tee "$LOGS/granularity_1279.log"
 
@@ -341,7 +339,7 @@ python bo_granularity_ablation.py \
   --target 1279 --budget 30 --folds 4 --trials 20 \
   --groups 1 3 \
   --adapters output/polis_{152,2377,3631,5520}_qwen7b \
-  --base Qwen/Qwen2.5-7B-Instruct \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
   --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"
 ```
 
@@ -351,12 +349,13 @@ internally. This script's default is `$KOKKAI_DATA_DIR/polis/dpo_pairs_full`
 §3 only ships `dpo_pairs_targets`, so omitting the flag fails with
 `FileNotFoundError: .../dpo_pairs_full/1279.jsonl` after the model has loaded.
 
-`--device` is optional here, unlike in `bo_merge_coeffs.py`. The default
-`device_map="auto"` puts the whole model on `cuda:0` on any card meeting §0, and
-the meta-tensor failure mode §4 warns about is not silent in this path:
-`LayerGroupMerger` raises `RuntimeError` if any target module is offloaded
-(`merge_layer_group.py:98`). Pass `--device cuda` if you want the placement pinned
-explicitly; it changes nothing on hardware that fits the model.
+`--device cuda` for the same reason as everywhere else in this runbook — §4's gate,
+and `run_7b_bo_gpu.sh` pinning `DEVICE=cuda`. It is *technically* optional here:
+the default `device_map="auto"` puts the whole model on `cuda:0` on any card
+meeting §0, and the meta-tensor failure mode §4 warns about is not silent in this
+path (`LayerGroupMerger` raises `RuntimeError` on an offloaded module,
+`merge_layer_group.py:98`). Pass it anyway. One invocation shape across the whole
+runbook is worth more than saving eight characters.
 
 **VRAM.** Each `LayerGroupMerger` pins ~14.8 GB on device (13.2 GB fp32 anchor
 deltas + a 1.6 GB bf16 base snapshot), so only one may be alive at a time next to
@@ -402,6 +401,8 @@ volume bills whether or not anything is running.
 | `ModuleNotFoundError: optuna` | `setup_pod.sh` not run, or its pip step failed. Re-run it. |
 | `FATAL: missing .../2024HoR.json` | Step 3 didn't land, or `KOKKAI_DATA_DIR` is unset. |
 | CUDA OOM during merge | Card below 40 GB, or something else resident. `nvidia-smi` to check. |
+| `FileNotFoundError: .../dpo_pairs_full/<id>.jsonl` | Only `bo_granularity_ablation.py` — its `--dpo-dir` default is the full corpus, which §3 doesn't ship. Pass `--dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"`. |
+| CUDA OOM in the granularity ablation on a card that ran §6 fine | Checkout predates the probe-merger fix (2026-08-02): two `LayerGroupMerger`s at ~14.8 GB each coexisted. `git pull`. |
 | Preflight fine, but BO trials all score the same | Merge applies yet the BO isn't seeing it. Stop — treat as a failed gate. |
 | Calibration shows BO worse than best-single | Expected at `TRIALS=5`: startup trials (6) exceed the budget, so the GP never fits. Not a failure; see §5. |
 | BO still loses to best-single at `TRIALS=40` | A real (negative) result, not a bug. Report it; don't quietly raise `--trials` until it wins. |
