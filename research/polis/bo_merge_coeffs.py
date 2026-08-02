@@ -77,12 +77,18 @@ class NLLScorer:
             ids_p = self.tok(prompt, return_tensors="pt").input_ids.to(self.model.device)
             ids_c = self.tok(cont, return_tensors="pt").input_ids.to(self.model.device)
             ids = torch.cat([ids_p, ids_c], dim=1)
+            # Slice to the continuation *before* the fp32 cast. Scoring the whole
+            # sequence and discarding the prompt part allocates seq_len x vocab x 4
+            # bytes — ~180 MB for a 300-token prompt but ~6.7 GB for an 11k-token ICL
+            # prefix, which OOMs a 48 GB card that already holds the model and the
+            # anchor deltas. Positions are unchanged, so the value is identical.
+            start = ids_p.shape[1] - 1        # logits[:, t] predicts token t+1
             with torch.no_grad():
-                logits = self.model(ids).logits[:, :-1]
+                logits = self.model(ids).logits[:, start:-1]
                 logp = torch.log_softmax(logits.float(), dim=-1)
-                tok_logp = logp.gather(-1, ids[:, 1:].unsqueeze(-1)).squeeze(-1)[0]
-            n_ctx = ids_p.shape[1] - 1
-            tot += -tok_logp[n_ctx:].mean().item()
+                tgt = ids[:, start + 1:]
+                tok_logp = logp.gather(-1, tgt.unsqueeze(-1)).squeeze(-1)[0]
+            tot += -tok_logp.mean().item()
             k += 1
         return tot / max(k, 1)
 
