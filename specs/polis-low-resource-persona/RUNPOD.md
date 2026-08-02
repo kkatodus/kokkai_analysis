@@ -13,6 +13,34 @@ POLIS on held-out NLL *and* UTAS, across the 3 genuine held-out 2024HoR targets
 
 ---
 
+## Snippet index
+
+Every runnable block below carries an ID. **`L#` runs on your laptop, `P#` runs on
+the pod** — mixing those up is the most common way to lose an hour. Cite the ID
+when asking about a block rather than describing its position.
+
+| ID | Where | § | What it does |
+|---|---|---|---|
+| `L1` | laptop | 1 | prerequisites — mount data, push the branch, register the SSH key |
+| `L2` | laptop | 1 | verify the payload exists before you rent a GPU |
+| `P1` | pod | 2 | clone the repo (must happen before the rsync) |
+| `L3` | laptop | 3 | ship the two payloads — adapters + data inputs |
+| `P2` | pod | 4 | bootstrap — deps, model cache, merge self-test |
+| `P3` | pod | 5 | calibration run (TRIALS=5, one target) |
+| `P4` | pod | 5 | check the BO objective isn't flat |
+| `P5` | pod | 5.5 | move the calibration log aside |
+| `P6` | pod | 5.5 | everything after calibration, as one block (~65 min) |
+| `L4` | laptop | 5.5 | retrieve logs after `P6` |
+| `P7` | pod | 6 | single-split then nested, run separately (~52 min) |
+| `P8` | pod | 6.1 | re-run single-split with numeric UTAS scoring (~12 min) |
+| `P9` | pod | 6 | granularity ablation (~10 min) |
+| `L5` | laptop | 7 | retrieve results before destroying the pod |
+| `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
+
+`P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
+
+---
+
 ## 0. Pod requirements
 
 | | |
@@ -27,6 +55,7 @@ POLIS on held-out NLL *and* UTAS, across the 3 genuine held-out 2024HoR targets
 
 ## 1. Laptop — prerequisites
 
+**`[L1]`** · laptop · prerequisites — mount data, push the branch, register the SSH key
 ```bash
 cd ~/workspace/projects/kokkai_analysis
 
@@ -38,6 +67,7 @@ cat ~/.ssh/id_ed25519.pub    # paste into RunPod -> Settings -> SSH Public Keys
 
 Verify the payload is present before paying for a GPU:
 
+**`[L2]`** · laptop · verify the payload exists before you rent a GPU
 ```bash
 du -csh research/polis/output/polis_*_qwen7b | tail -1        # expect 522M
 ls data/data/polis/dpo_pairs_targets                          # expect 1279 2053 2289 .jsonl
@@ -51,6 +81,7 @@ ls data/data/polis/utas_ground_truth/2024HoR.json             # expect present
 **Clone before rsync.** rsync would create the destination directories, and
 `git clone` refuses a non-empty target.
 
+**`[P1]`** · pod · clone the repo (must happen before the rsync)
 ```bash
 git clone https://github.com/kkatodus/kokkai_analysis.git /workspace/kokkai_analysis
 cd /workspace/kokkai_analysis && git checkout dev
@@ -63,6 +94,7 @@ mkdir -p /workspace/kokkai_data/polis
 
 Neither is in git (adapters are ~1 GB of safetensors; datasets live on the SSD).
 
+**`[L3]`** · laptop · ship the two payloads — adapters + data inputs
 ```bash
 REPO=~/workspace/projects/kokkai_analysis
 IP=<pod-ip>; PORT=<pod-port>          # from the RunPod "Connect" panel
@@ -83,6 +115,7 @@ rsync -avP -e "ssh -p $PORT" \
 
 ## 4. Pod — bootstrap
 
+**`[P2]`** · pod · bootstrap — deps, model cache, merge self-test
 ```bash
 cd /workspace/kokkai_analysis
 ./research/polis/scripts/setup_pod.sh
@@ -123,6 +156,7 @@ numbers are flat instead, see the gate above.
 
 RunPod SSH sessions drop; always run inside tmux.
 
+**`[P3]`** · pod · calibration run (TRIALS=5, one target)
 ```bash
 tmux new -s polis
 echo "$TMUX"                 # MUST be non-empty -- see the tmux check below
@@ -181,6 +215,7 @@ at this rate there is no argument for skipping it.
 
 The preflight proves the merge *applies*; this proves the BO *saw* it.
 
+**`[P4]`** · pod · check the BO objective isn't flat
 ```bash
 tail -60 specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log
 ```
@@ -219,6 +254,7 @@ caveat printed by the script applies to the development scale, not to this run.
 your calibration output and the nested run appends onto *that* — three protocols
 concatenated into one file, which makes the deliverable near-unreadable.
 
+**`[P5]`** · pod · move the calibration log aside
 ```bash
 mv specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log \
    specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/calib_1279_trials5.log
@@ -233,6 +269,7 @@ about in between; the individual steps are broken out below if something fails.
 
 Paste **on the pod**, inside tmux:
 
+**`[P6]`** · pod · everything after calibration, as one block (~65 min)
 ```bash
 tmux new -s polis 2>/dev/null || tmux attach -t polis
 cd /workspace/kokkai_analysis
@@ -267,6 +304,7 @@ ls -la "$LOGS"
 
 Then paste **on the laptop** to retrieve — do this *before* destroying the pod:
 
+**`[L4]`** · laptop · retrieve logs after P6
 ```bash
 REPO=~/workspace/projects/kokkai_analysis
 IP=<pod-ip>; PORT=<pod-port>
@@ -294,6 +332,7 @@ the only source for the UTAS half of the table.
 Run single-split **first** — it carries the UTAS half — and rename its logs before
 starting nested, for the append reason in §5.
 
+**`[P7]`** · pod · single-split then nested, run separately (~52 min)
 ```bash
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
@@ -348,6 +387,7 @@ shown to carry any information about the target, however good its NLL.
 
 Only the single-split run computes UTAS, so only it needs re-running:
 
+**`[P8]`** · pod · re-run single-split with numeric UTAS scoring (~12 min)
 ```bash
 LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
 for f in "$LOGS"/single_target_*.log; do mv "$f" "${f%.log}_verbose.log"; done
@@ -369,6 +409,7 @@ at development scale."* 7B is where that claim could land, and at 2 group settin
 × 4 folds × 20 trials it is a small fraction of the nested run's cost. Given the
 session is already paid for, do this rather than skip it.
 
+**`[P9]`** · pod · granularity ablation (~10 min)
 ```bash
 cd research/polis
 python bo_granularity_ablation.py \
@@ -413,6 +454,7 @@ you specifically want the upper bookend at main scale.
 
 **Do this before destroying the pod.** Logs are the deliverable.
 
+**`[L5]`** · laptop · retrieve results before destroying the pod
 ```bash
 REPO=~/workspace/projects/kokkai_analysis
 rsync -avP -e "ssh -p $PORT" \
@@ -457,6 +499,7 @@ the laptop (§7), so the next `git pull` on the pod hits paths it already holds 
 aborts. Confirm nothing on the pod is unique, then move the directory aside — git
 recreates it from the commit:
 
+**`[P10]`** · pod · clear the untracked-logs pull conflict, then pull
 ```bash
 cd /workspace/kokkai_analysis
 for f in specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/*.log; do
