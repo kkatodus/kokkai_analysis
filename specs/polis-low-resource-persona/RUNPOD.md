@@ -46,6 +46,7 @@ when asking about a block rather than describing its position.
 | `L7` | laptop | 6.2 | retrieve the population dump |
 | `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
 | `P12` | pod | 6.3 | single-split again, saving per-config answer vectors (~12 min) |
+| `P13` | pod | 8 | nested 5-fold CV over all 33 targets (~5.5 h) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -81,7 +82,7 @@ Verify the payload is present before paying for a GPU:
 **`[L2]`** · laptop · verify the payload exists before you rent a GPU
 ```bash
 du -csh research/polis/output/polis_*_qwen7b | tail -1        # expect 522M
-ls data/data/polis/dpo_pairs_targets                          # expect 1279 2053 2289 .jsonl
+ls data/data/polis/dpo_pairs_targets | wc -l                   # expect 33 (3 original + 30 expansion)
 ls data/data/polis/utas_ground_truth/2024HoR.json             # expect present
 ```
 
@@ -588,6 +589,39 @@ cd $REPO && git add specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs && 
 
 Then destroy the pod — a stopped pod still bills for its disk, and a network
 volume bills whether or not anything is running.
+
+---
+
+## 8. Target expansion — the n=33 nested run
+
+The 3-target result cannot carry a population claim, and all three are nationally
+prominent. [`targets_n30.json`](targets_n30.json) adds 30 more, 5 from each of 6
+log-spaced speech-volume bands, so the BO advantage can be plotted against target
+prominence instead of averaged into one number. Already exported to
+`dpo_pairs_targets/` (33 files, 7 330 pairs, min 82).
+
+**Nested only.** The single-split protocol existed to carry the UTAS half, which §6.2
+and §6.3 closed. Nested CV is the unbiased NLL estimate and is all this needs.
+
+**`[P13]`** · pod · nested 5-fold CV over all 33 targets (~5.5 h)
+```bash
+tmux new -s polis33
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+time NESTED=1 TARGETS="369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546 1279 2053 2289" \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+```
+
+~10 min/target measured, one preflight at the start. Each target writes
+`bo7b_gpu_logs/target_<id>.log` and a failure only warns, so one bad target does not
+lose the run. Detach with `Ctrl-b d`; check `echo $TMUX` is non-empty first.
+
+The three original targets are re-run here rather than reused: identical protocol and
+seeds, so they should reproduce `+0.0176 / +0.0177 / +0.0287` against best-single. If
+they don't, something in the environment moved and the new 30 aren't comparable to the
+committed results either — that's the check worth making before trusting the pooled
+analysis.
 
 ---
 
