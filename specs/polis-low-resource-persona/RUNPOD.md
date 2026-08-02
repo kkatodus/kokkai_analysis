@@ -19,6 +19,13 @@ Every runnable block below carries an ID. **`L#` runs on your laptop, `P#` runs 
 the pod** — mixing those up is the most common way to lose an hour. Cite the ID
 when asking about a block rather than describing its position.
 
+> **Paste each block whole, from its first line.** Several define a shell variable at
+> the top and use it below. A partial paste leaves the variable unset, it expands to
+> nothing, and the command silently retargets the filesystem root — output lands at
+> `/whatever.log`, or rsync reports `link_stat "/whatever.log": No such file`, which
+> reads as a missing file rather than a missing variable. This bit three times on
+> 2026-08-02.
+
 | ID | Where | § | What it does |
 |---|---|---|---|
 | `L1` | laptop | 1 | prerequisites — mount data, push the branch, register the SSH key |
@@ -420,13 +427,13 @@ adapter and no merge.
 ```bash
 cd /workspace/kokkai_analysis/research/polis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
-ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
 
 python utas_population_eval.py \
   --base Qwen/Qwen2.5-7B-Instruct --device cuda \
-  --gt "$KOKKAI_DATA_DIR/polis/utas_ground_truth/2024HoR.json" \
+  --gt /workspace/kokkai_data/polis/utas_ground_truth/2024HoR.json \
   --include 1279,2053,2289 \
-  --out "$ART/utas_population_7b_base.json" 2>&1 | tee "$ART/utas_population.log"
+  --out /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json \
+  2>&1 | tee /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population.log
 ```
 
 Starts with a self-check that the single-pass scorer matches
@@ -444,12 +451,12 @@ keeps only the aggregate unless `--utas-dump` is set.
 ```bash
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
-LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
-
 time UTAS_NUMERIC=1 \
      UTAS_DUMP=specs/polis-low-resource-persona/artifacts/utas_vectors \
      ./research/polis/scripts/run_7b_bo_gpu.sh
-for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/dump_$(basename "$f")"; done
+cd specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in target_*.log; do mv "$f" "dump_$f"; done
+cd /workspace/kokkai_analysis
 ```
 
 Writes `utas_vectors/<target>_numeric.json`, one file per target holding all four

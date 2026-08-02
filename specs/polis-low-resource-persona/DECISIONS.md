@@ -200,6 +200,41 @@ and the headline rests on NLL.
 > target as one observation. The claim is *no evidence the merge injects identity*,
 > not proof it does not. Another argument for n≈30.
 
+### Anchor self-test — the chain breaks before the merge
+
+Asked whether training the anchors on UTAS answers would help. Ran the control that
+decides it first: the anchors have their own survey answers (152 岸田 and 2377 塩川 in
+2024HoR; 3631 福島 and 5520 上田 in 2022HoC), and their adapters were trained on
+12k–20k of their own speeches. Maximum resource, own answers, no merge, no
+low-resource approximation — if the chain works anywhere it works here.
+
+| anchor | n | constant-3 | adapter | base | beats constant? |
+|---|---|---|---|---|---|
+| 152 岸田 | 33 | 0.697 | 0.816 | 0.873 | no (+0.119) |
+| 2377 塩川 | 22 | **1.682** | 2.218 | 1.998 | no (+0.536) |
+| 3631 福島 | 37 | **1.243** | 0.980 | 1.085 | **yes (−0.263)** |
+| 5520 上田 | 37 | 0.514 | 1.215 | 1.286 | no (+0.701) |
+
+**1 of 4 beats a constant.** And the adapter contributes nothing consistent: MAE(E)
+favours it 3–1, but `within1` favours *base* 2–1 and `exact` is 1–1 with two ties. On
+塩川 the adapter is worse than base outright. Note 岸田 and 上田 answer 3 to half the
+items, so their constants are near-unbeatable and they discriminate little; the
+informative pair is 塩川 and 福島, which split one bad loss and one win.
+
+Consistent with the population sweep: 塩川's real mean is 3.32 while the model's
+natural output sits at ~2.27 and the adapter does not drag it up. 福島's real mean is
+2.89 — close to where the model already is, which is most of why it wins.
+
+**Decision: do not train anchors on UTAS.** The anchors' answers are not the targets'
+answers, so it would not be label leakage — but the 33 items are identical, so it
+would teach the task format, the scale semantics and the population answer
+distribution. The claim would degrade from "personas fitted to speech encode ideology
+an independent instrument can read" to "models trained on surveys answer surveys", and
+the merge would then transport survey-answering *competence*, masking the very
+distinction this session established. Legitimate only as a labelled diagnostic — an
+upper bound isolating whether the merge can transport ideology at all — never as
+evidence for the method.
+
 ### Open
 
 - [ ] Expand targets to n≈30, sampled across the speech-volume range, not the top.
