@@ -322,6 +322,42 @@ Tunable via environment (defaults shown):
 | `TRIALS` | `40` | GP trials per target/fold |
 | `FOLDS` | `5` | nested-CV folds (`NESTED=1` only) |
 | `TARGETS` | `1279 2053 2289` | person_ids |
+| `UTAS_NUMERIC` | `0` | `1` scores UTAS by the 1..N label token instead of the option strings; see §6.1 |
+
+### 6.1 The UTAS metric needs the numeric scorer
+
+The 2026-08-02 run's UTAS half was **not usable**: every config scored at or below
+a dummy predictor that answers the scale midpoint to all 33 items, using no model
+at all.
+
+```
+target      always-3   best config    BO
+Takaichi       1.091   1.089 (uni)   1.330
+Akamine        1.455   1.365 (base)  1.418
+Edano          1.030   1.068 (uni)   1.152
+```
+
+Cause: the default verbose-option scorer softmaxes five length-normalised
+per-token log-probs that all sit in a narrow band, so the expectation collapses
+toward the midpoint whatever the model believes. `score_options_numeric()` in
+`polis_option_logprob.py` is the fix and was never wired through.
+
+`bo_merge_coeffs.py` now prints the constant baselines as rows in the table.
+**Read them first.** A config that does not beat the constant rows has not been
+shown to carry any information about the target, however good its NLL.
+
+Only the single-split run computes UTAS, so only it needs re-running:
+
+```bash
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/single_target_*.log; do mv "$f" "${f%.log}_verbose.log"; done
+
+time UTAS_NUMERIC=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_numeric_$(basename "$f")"; done
+```
+
+The NLL numbers this produces will match the earlier single-split run — the merge
+and BO are untouched, only the survey scoring changed.
 
 Logs: `specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_<id>.log`
 
@@ -411,6 +447,34 @@ volume bills whether or not anything is running.
 | Session died mid-run | Not in tmux. Logs survive; re-run the affected target only via `TARGETS=<id>`. |
 | One log holds several runs jumbled together | The script appends (`>>`). Rename `target_*.log` between protocols, as in §5–6. |
 | Pod restarted, model re-downloading | No network volume (expected), or `HF_HOME` unset. Re-run `setup_pod.sh`. |
+| `git pull` aborts: "untracked working tree files would be overwritten" (the logs) | Expected whenever you commit the logs from the laptop and then pull on the pod — git wants to write the paths the pod already holds. Confirm they match, then move them aside; see below. |
+| Every UTAS config ties or loses to the constant rows | The metric is not discriminating. Re-run with `UTAS_NUMERIC=1` (§6.1); do not report the table as-is. |
+
+### Pulling on the pod after committing logs from the laptop
+
+The logs are written on the pod as untracked files, retrieved and committed from
+the laptop (§7), so the next `git pull` on the pod hits paths it already holds and
+aborts. Confirm nothing on the pod is unique, then move the directory aside — git
+recreates it from the commit:
+
+```bash
+cd /workspace/kokkai_analysis
+for f in specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/*.log; do
+  if git cat-file -e origin/dev:"$f" 2>/dev/null; then
+    git show origin/dev:"$f" | diff -q - "$f" >/dev/null \
+      && echo "SAME       $f" || echo "DIFFERENT  $f"
+  else
+    echo "POD-ONLY   $f"
+  fi
+done
+
+# all SAME -> nothing unique on the pod
+mv specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs /workspace/bo7b_logs_podcopy
+git pull
+```
+
+`DIFFERENT` or `POD-ONLY` means something ran after the rsync and has not been
+retrieved — rsync again before touching anything.
 
 ## Notes
 

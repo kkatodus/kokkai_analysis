@@ -34,6 +34,10 @@ TEST="${TEST:-30}"
 TRIALS="${TRIALS:-40}"
 FOLDS="${FOLDS:-5}"
 TARGETS="${TARGETS:-1279 2053 2289}"
+# UTAS_NUMERIC=1 scores the survey by the 1..N label token instead of the full
+# option strings. The verbose-option default collapses toward the scale midpoint,
+# where the table cannot be told apart from the constant baseline it now prints.
+UTAS_NUMERIC="${UTAS_NUMERIC:-0}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
 # mixing scales silently produces a nonsense merge.
@@ -76,6 +80,7 @@ for T in $TARGETS; do
     MODE=(--nested --budget "$BUDGET" --folds "$FOLDS" --trials "$TRIALS")
   else
     MODE=(--budget "$BUDGET" --test "$TEST" --trials "$TRIALS" --utas-eval "$GT")
+    [ "$UTAS_NUMERIC" = "1" ] && MODE+=(--utas-numeric)
   fi
   "$PY" "$CODE/bo_merge_coeffs.py" \
     --base "$BASE" --device "$DEVICE" \
