@@ -38,6 +38,10 @@ TARGETS="${TARGETS:-1279 2053 2289}"
 # option strings. The verbose-option default collapses toward the scale midpoint,
 # where the table cannot be told apart from the constant baseline it now prints.
 UTAS_NUMERIC="${UTAS_NUMERIC:-0}"
+# UTAS_DUMP=<dir> also saves each config's per-item answer vector, which the printed
+# aggregate discards. utas_rank_metric.py needs those to rank a target against the
+# whole wave instead of scoring it against its own answers alone.
+UTAS_DUMP="${UTAS_DUMP:-}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
 # mixing scales silently produces a nonsense merge.
@@ -81,6 +85,7 @@ for T in $TARGETS; do
   else
     MODE=(--budget "$BUDGET" --test "$TEST" --trials "$TRIALS" --utas-eval "$GT")
     [ "$UTAS_NUMERIC" = "1" ] && MODE+=(--utas-numeric)
+    [ -n "$UTAS_DUMP" ] && MODE+=(--utas-dump "$UTAS_DUMP")
   fi
   "$PY" "$CODE/bo_merge_coeffs.py" \
     --base "$BASE" --device "$DEVICE" \

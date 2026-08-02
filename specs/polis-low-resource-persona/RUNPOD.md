@@ -38,6 +38,7 @@ when asking about a block rather than describing its position.
 | `P11` | pod | 6.2 | administer the wave to all 594 politicians, base model (~10 min) |
 | `L7` | laptop | 6.2 | retrieve the population dump |
 | `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
+| `P12` | pod | 6.3 | single-split again, saving per-config answer vectors (~12 min) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -365,6 +366,7 @@ Tunable via environment (defaults shown):
 | `FOLDS` | `5` | nested-CV folds (`NESTED=1` only) |
 | `TARGETS` | `1279 2053 2289` | person_ids |
 | `UTAS_NUMERIC` | `0` | `1` scores UTAS by the 1..N label token instead of the option strings; see §6.1 |
+| `UTAS_DUMP` | (unset) | directory for per-config answer vectors; see §6.3 |
 
 ### 6.1 The UTAS metric needs the numeric scorer
 
@@ -431,9 +433,40 @@ Starts with a self-check that the single-pass scorer matches
 `score_options_numeric` on real items, then prints a running ETA. `--personas 60`
 gives a fast smoke test first if you want one.
 
-To also capture the *merged* configs' vectors, add `--utas-dump "$ART/utas_vectors"`
-to `P8` — `bo_merge_coeffs.py` currently computes those per-item answers and throws
-them away, keeping only the aggregate.
+### 6.3 Does the merge inject identity the base model lacks?
+
+The base model ranks its own politician at chance (§6.2 result), so the remaining
+question UTAS can answer is whether *merging* changes that. Re-runs the single split
+with the per-item vectors saved this time — `bo_merge_coeffs.py` computes them and
+keeps only the aggregate unless `--utas-dump` is set.
+
+**`[P12]`** · pod · single-split again, saving per-config answer vectors (~12 min)
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+
+time UTAS_NUMERIC=1 \
+     UTAS_DUMP=specs/polis-low-resource-persona/artifacts/utas_vectors \
+     ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/dump_$(basename "$f")"; done
+```
+
+Writes `utas_vectors/<target>_numeric.json`, one file per target holding all four
+configs. Retrieve them with `L7`'s pattern and feed them to `L6` — the dumps are
+auto-detected, so the same command reads both shapes:
+
+```bash
+python utas_rank_metric.py \
+  --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+  --dump "$ART"/utas_population_7b_base.json "$ART"/utas_vectors/*.json
+```
+
+**What decides it:** the per-target table prints each config's rank against the 594.
+If `BO` ranks its target markedly better than `base` does, the merge carries identity
+that name-prompting alone does not — a positive result on an instrument independent
+of NLL. If all four sit together near the constants, the §4.4 line is closed and the
+paper reports it as a limitation.
 
 **`[L7]`** · laptop · retrieve the population dump
 ```bash
