@@ -42,6 +42,9 @@ UTAS_NUMERIC="${UTAS_NUMERIC:-0}"
 # aggregate discards. utas_rank_metric.py needs those to rank a target against the
 # whole wave instead of scoring it against its own answers alone.
 UTAS_DUMP="${UTAS_DUMP:-}"
+# ICL=1 adds spec §4.3 baseline 2 (base model + the target's budget utterances in
+# prompt, no merge). The spec's kill criterion, and it had never been run.
+ICL="${ICL:-0}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
 # mixing scales silently produces a nonsense merge.
@@ -82,10 +85,12 @@ for T in $TARGETS; do
   if [ "${NESTED:-0}" = "1" ]; then
     # Nested CV gives the unbiased estimate but has no --utas-eval path.
     MODE=(--nested --budget "$BUDGET" --folds "$FOLDS" --trials "$TRIALS")
+    [ "$ICL" = "1" ] && MODE+=(--icl)
   else
     MODE=(--budget "$BUDGET" --test "$TEST" --trials "$TRIALS" --utas-eval "$GT")
     [ "$UTAS_NUMERIC" = "1" ] && MODE+=(--utas-numeric)
     [ -n "$UTAS_DUMP" ] && MODE+=(--utas-dump "$UTAS_DUMP")
+    [ "$ICL" = "1" ] && MODE+=(--icl)
   fi
   "$PY" "$CODE/bo_merge_coeffs.py" \
     --base "$BASE" --device "$DEVICE" \

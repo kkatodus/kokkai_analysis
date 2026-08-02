@@ -46,7 +46,7 @@ when asking about a block rather than describing its position.
 | `L7` | laptop | 6.2 | retrieve the population dump |
 | `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
 | `P12` | pod | 6.3 | single-split again, saving per-config answer vectors (~12 min) |
-| `P13` | pod | 8 | nested 5-fold CV over all 33 targets (~5.5 h) |
+| `P13` | pod | 8 | nested 5-fold CV + ICL over all 33 targets (~6 h) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -375,6 +375,7 @@ Tunable via environment (defaults shown):
 | `TARGETS` | `1279 2053 2289` | person_ids |
 | `UTAS_NUMERIC` | `0` | `1` scores UTAS by the 1..N label token instead of the option strings; see §6.1 |
 | `UTAS_DUMP` | (unset) | directory for per-config answer vectors; see §6.3 |
+| `ICL` | `0` | `1` adds spec §4.3 baseline 2 (in-context, no merge) — the kill criterion |
 
 ### 6.1 The UTAS metric needs the numeric scorer
 
@@ -603,15 +604,26 @@ prominence instead of averaged into one number. Already exported to
 **Nested only.** The single-split protocol existed to carry the UTAS half, which §6.2
 and §6.3 closed. Nested CV is the unbiased NLL estimate and is all this needs.
 
-**`[P13]`** · pod · nested 5-fold CV over all 33 targets (~5.5 h)
+**`ICL=1` is not optional here.** `README.md:79` lists seven must-have baselines and
+only four were ever implemented; baseline 2 (ICL — base model with the target's budget
+utterances in prompt, no merge) is the spec's designated **kill criterion**: *"the
+cheapest strong competitor; if it matches POLIS the method is unnecessary."* The
+hypothesis at `README.md:13` claims the merge beats prompting and direct fine-tuning,
+and neither comparison has ever been run. Adds ~1–2 min per target.
+
+**`[P13]`** · pod · nested 5-fold CV + ICL over all 33 targets (~6 h)
 ```bash
 tmux new -s polis33
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
 
-time NESTED=1 TARGETS="369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546 1279 2053 2289" \
+time NESTED=1 ICL=1 TARGETS="1279 2053 2289 369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546" \
   ./research/polis/scripts/run_7b_bo_gpu.sh
 ```
+
+Each target's table gains an `ICL` row and a paired `BO vs ICL` delta. Baselines 3 and
+4 (SFT/DPO on the sparse target data) remain unimplemented — they need a training loop
+per target and are a separate piece of work.
 
 ~10 min/target measured, one preflight at the start. Each target writes
 `bo7b_gpu_logs/target_<id>.log` and a failure only warns, so one bad target does not

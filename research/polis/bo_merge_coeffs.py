@@ -98,6 +98,41 @@ def select_adapters(here: str, adapters_arg, target: str, exclude_target: bool) 
     return adapters
 
 
+def build_icl_prefix(instances: list[tuple[str, str]], shots: int = 0,
+                     max_chars: int = 12000) -> str:
+    """Few-shot demonstration block for spec §4.3 baseline 2 (ICL).
+
+    The baseline is "base model + the target's budget speeches in-prompt", so the
+    demonstrations are the target's own utterances — the `chosen` side — and *not*
+    their debate contexts, which would blow the context window for a 30-utterance
+    budget without adding anything about how this politician speaks.
+
+    ICL sees exactly the instances the BO tunes on, so the two methods are given the
+    same data and differ only in what they do with it. This is the spec's designated
+    kill criterion: if prompting matches an optimised merge on equal data, the merge
+    is not earning its complexity.
+    """
+    kept, total = [], 0
+    for _, chosen in (instances[:shots] if shots else instances):
+        if total + len(chosen) > max_chars:
+            break
+        kept.append(chosen)
+        total += len(chosen)
+    if not kept:
+        return ""
+    body = "\n\n".join(f"・{c}" for c in kept)
+    return ("以下は、あなたがこれまでの国会審議で実際に行った発言です。\n\n"
+            f"{body}\n\n"
+            "上記の発言と同じ立場・話し方で、次の審議に応じてください。\n\n")
+
+
+def icl_nll(scorer, fit_inst, eval_inst, shots: int = 0, max_chars: int = 12000) -> float:
+    """Score `eval_inst` with the target's own utterances prepended. Caller must have
+    the model at BASE weights — ICL is a no-merge baseline."""
+    prefix = build_icl_prefix(fit_inst, shots, max_chars)
+    return scorer.mean_nll([(prefix + p, c) for p, c in eval_inst])
+
+
 def make_sampler(name: str, n_dims: int, trials: int, seed: int = 0):
     """Phase-0 backend policy: GP-BO for low/medium dims, TPE for the high-dim
     full-layer-wise bookend. Returns (kind, sampler)."""
@@ -142,7 +177,8 @@ def best_single(merger, scorer, names, fit_inst, eval_inst, n_g):
     return best, scorer.mean_nll(eval_inst)
 
 
-def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax, seed=0):
+def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax, seed=0,
+              icl=False, icl_shots=0, icl_max_chars=12000):
     """Nested k-fold CV (spec §2.4). Each outer fold is held out while the BO tunes
     on the rest, then scored on the untouched fold; baselines rotate identically.
     Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate)."""
@@ -152,6 +188,8 @@ def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax,
     fold_idx = np.array_split(idx, folds)
 
     rows: dict[str, list[float]] = {"base": [], "uniform": [], "best-single": [], "BO": []}
+    if icl:
+        rows["ICL"] = []
     picks = {"best-single": [], "BO": []}
     for f in range(folds):
         te = [allinst[i] for i in fold_idx[f]]
@@ -159,6 +197,10 @@ def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax,
 
         merger.restore()
         rows["base"].append(scorer.mean_nll(te))
+        if icl:
+            # Still at base weights: ICL is the no-merge baseline, and it sees the
+            # same dev fold the BO tunes on.
+            rows["ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
         merger.apply(np.ones((n_a, n_g)))
         rows["uniform"].append(scorer.mean_nll(te))
 
@@ -246,6 +288,18 @@ def main() -> None:
                          "in a narrow band, so E collapses toward the scale midpoint and the "
                          "metric stops discriminating — compare the constant-baseline row below. "
                          "See score_options_numeric() in polis_option_logprob.py (Phase-0 fix).")
+    ap.add_argument("--icl", action="store_true",
+                    help="also score spec §4.3 baseline 2: the base model with the target's own "
+                         "budget utterances prepended, no merge. The spec calls this the kill "
+                         "criterion — if prompting matches the optimised merge on identical data, "
+                         "the merge is not earning its complexity. Costs one extra eval per fold "
+                         "over a ~9k-token prefix and does no merging, so on the measured nested "
+                         "run it adds ~1-2 min per target, not a multiple.")
+    ap.add_argument("--icl-shots", type=int, default=0,
+                    help="demonstrations to prepend; 0 = the whole budget (the spec's wording)")
+    ap.add_argument("--icl-max-chars", type=int, default=12000,
+                    help="cap on the demonstration block; keeps the prefix inside the context "
+                         "window when a target's utterances are long (Japanese ~1 token/char)")
     ap.add_argument("--utas-dump", metavar="DIR", default=None,
                     help="write each config's per-item answer vector to DIR as JSON. The "
                          "aggregate printed below discards them, and they are what "
@@ -295,15 +349,23 @@ def run_nested(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
           f"trials/fold={args.trials} exclude_target={args.exclude_target}")
 
     rows, picks = nested_cv(merger, scorer, names, allinst, folds,
-                            args.trials, args.sampler, args.cmax)
+                            args.trials, args.sampler, args.cmax,
+                            icl=args.icl, icl_shots=args.icl_shots,
+                            icl_max_chars=args.icl_max_chars)
 
     print("\n======== nested-CV held-out NLL (unbiased, lower=better) ========")
-    for m in ["base", "uniform", "best-single", "BO"]:
+    for m in ["base", "ICL", "uniform", "best-single", "BO"]:
+        if m not in rows:
+            continue
         print(f"  {m:14} {_fmt_stats(rows[m])}   per-fold {[round(v, 3) for v in rows[m]]}")
     bo, base = np.asarray(rows["BO"]), np.asarray(rows["base"])
     bs = np.asarray(rows["best-single"])
     print(f"\n  BO vs base (paired):        {(base - bo).mean():+.4f} ± {(base - bo).std():.4f}")
     print(f"  BO vs best-single (paired): {(bs - bo).mean():+.4f} ± {(bs - bo).std():.4f}")
+    if "ICL" in rows:
+        icl_a = np.asarray(rows["ICL"])
+        print(f"  BO vs ICL (paired):         {(icl_a - bo).mean():+.4f} ± {(icl_a - bo).std():.4f}"
+              f"   [spec §4.3 baseline 2 — the kill criterion]")
     print(f"  best-single picks per fold: {picks['best-single']}")
     print("  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode "
           "register not ideology, so absolute NLL gains are small (§4.4 note).")
@@ -320,6 +382,8 @@ def run_single_split(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
     # ---- baselines -----------------------------------------------------------
     merger.restore()
     base_te = scorer.mean_nll(test)
+    icl_te = (icl_nll(scorer, train, test, args.icl_shots, args.icl_max_chars)
+              if args.icl else None)   # still at base weights: ICL does not merge
     merger.apply(np.ones((n_a, n_g)))
     uni_te = scorer.mean_nll(test)
     single = {}
@@ -338,10 +402,14 @@ def run_single_split(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
     # ---- report --------------------------------------------------------------
     print("\n================ held-out test NLL (lower=better) ================")
     print(f"  base (no adapter)      {base_te:.4f}")
+    if icl_te is not None:
+        print(f"  ICL ({args.icl_shots or len(train)} shots)        {icl_te:.4f}")
     print(f"  uniform merge          {uni_te:.4f}")
     print(f"  best single anchor     {single[best_single_name]:.4f}   ({best_single_name})")
     print(f"  BO layer-group merge   {bo_te:.4f}   (train {best_value:.4f})")
     print(f"\n  BO vs uniform:  {uni_te - bo_te:+.4f}   BO vs best-single: {single[best_single_name] - bo_te:+.4f}")
+    if icl_te is not None:
+        print(f"  BO vs ICL:      {icl_te - bo_te:+.4f}   [spec §4.3 baseline 2 — the kill criterion]")
     print("\nbest coefficients [anchor x group]:")
     print("            " + "".join(f"{'g'+str(g):>8}" for g in range(n_g)))
     for ai, nm in enumerate(names):
