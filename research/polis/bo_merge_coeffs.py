@@ -186,7 +186,7 @@ def best_single(merger, scorer, names, fit_inst, eval_inst, n_g):
 def fold_indices(n: int, folds: int, seed: int = 0) -> list:
     """Outer-fold index split for nested CV.
 
-    Shared so that baselines living in other scripts (`sft_baseline.py`) split the
+    Shared so that baselines living in other scripts (`sparse_target_baselines.py`) split the
     identical instances the identical way and their per-fold numbers *pair* with the
     merge results rather than merely being comparable in aggregate. Do not inline it.
     """

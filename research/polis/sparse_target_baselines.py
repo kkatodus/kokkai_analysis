@@ -1,9 +1,16 @@
-"""SFT-on-the-sparse-target baseline (POLIS spec §4.3 baseline 3).
+"""Fine-tune-on-the-sparse-target baselines (POLIS spec §4.3, baselines 3 and 4).
 
 `README.md:13` states the hypothesis as: an optimised merge of data-rich anchors beats
-*"fine-tuning directly on the sparse data (SFT and DPO)"*. Baselines 3 and 4 were
-never implemented, so the central claim has never been tested against the thing it
-claims to beat. This is baseline 3.
+*"fine-tuning directly on the sparse data (SFT and DPO)"*. Neither was ever
+implemented, so the central claim had never been tested against the thing it claims to
+beat. `--objective sft` is baseline 3, `--objective dpo` is baseline 4.
+
+DPO here mirrors how the *anchors* were trained (`train_one_politician_persona.py`):
+same LoRA shape, same `beta`, and `rejected` from the same Gemini caricature pipeline.
+So "DPO on 30 target utterances" differs from "DPO on 300 anchor utterances" in the
+amount of data and nothing else — which is exactly the low-resource premise under test.
+The reference model is the policy with its adapter disabled, so no second copy of a 7B
+is held in memory.
 
 **Separate script, not a config inside `bo_merge_coeffs.py`, deliberately.**
 `LayerGroupMerger` holds `dict(model.named_parameters())` and writes ΔW in place;
@@ -21,17 +28,27 @@ That is test-set selection, and it is optimistic for SFT — deliberately, since
 baseline this method is claimed to beat should not lose on a bad hyperparameter draw.
 POLIS gets no such treatment. Say so wherever the number is used.
 
-Run from research/polis/ (pilot first, then fix the setting):
-    python sft_baseline.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \\
-        --targets 1279 2053 2289 --grid --out sft_pilot.json
-    python sft_baseline.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \\
+Run from research/polis/. Pilot on the 3 original targets to price a training run and
+pick hyperparameters, then run the rest fixed:
+
+    python sparse_target_baselines.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \\
+        --objective sft --targets 1279 2053 2289 --grid --out sft_pilot.json
+
+    python sparse_target_baselines.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \\
+        --objective dpo --full-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets_full" \\
+        --targets 1279 2053 2289 --grid --out dpo_pilot.json
+
+    python sparse_target_baselines.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \\
+        --objective sft --lr 2e-4 --epochs 8 \\
+        --targets 1279 2053 2289 \\
         --targets-file ../../specs/polis-low-resource-persona/targets_n30.json \\
-        --lr 2e-4 --epochs 8 --out sft_n33.json
+        --out sft_n33.json
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 
 import numpy as np
@@ -48,6 +65,87 @@ LORA_KW = dict(r=16, lora_alpha=32, lora_dropout=0.05, bias="none",
                target_modules=["q_proj", "k_proj", "v_proj", "o_proj"])
 
 
+def load_negatives(target: str, n: int, dpo_dir: str, full_dir: str) -> list:
+    """`rejected` for the first `n` instances, in `load_instances` order.
+
+    Joined by `speechID`, not by row position: `generate_polis_rejected.py` writes rows
+    as its thread pool completes them, so the `_full` file's order is arbitrary and
+    zipping the two files would silently pair each prompt with someone else's negative.
+
+    Returns one entry per instance, `None` where no negative was generated. Rows are
+    never dropped — the list must stay index-aligned with `load_instances`, or the fold
+    split stops matching the merge run's and the per-fold pairing is lost.
+    """
+    by_id = {}
+    with open(os.path.join(full_dir, f"{target}.jsonl"), encoding="utf-8") as f:
+        for line in f:
+            r = json.loads(line)
+            if r.get("rejected") and r.get("speechID"):
+                by_id[r["speechID"]] = r["rejected"]
+    out = []
+    with open(os.path.join(dpo_dir, f"{target}.jsonl"), encoding="utf-8") as f:
+        for line in f:
+            if len(out) >= n:
+                break
+            out.append(by_id.get(json.loads(line).get("speechID")))
+    return out
+
+
+def seq_logp(model, tok, prompt: str, cont: str, max_len: int = 1024):
+    """Summed log P(cont | prompt). Sum, not mean — DPO's log-ratios are over sequences."""
+    ids_p = tok(prompt, return_tensors="pt").input_ids
+    ids_c = tok(cont, return_tensors="pt").input_ids
+    ids = torch.cat([ids_p, ids_c], dim=1)[:, :max_len].to(model.device)
+    start = min(ids_p.shape[1], ids.shape[1]) - 1
+    if start < 0 or start + 1 >= ids.shape[1]:
+        return None                       # continuation truncated away entirely
+    logits = model(ids).logits[:, start:-1]
+    logp = torch.log_softmax(logits.float(), dim=-1)   # sliced first; see NLLScorer
+    tgt = ids[:, start + 1:]
+    return logp.gather(-1, tgt.unsqueeze(-1)).squeeze(-1).sum()
+
+
+
+
+def train_dpo_on(model, tok, pairs, lr: float, epochs: int, beta: float = 0.1,
+                 max_len: int = 1024, seed: int = 0):
+    """DPO on (prompt, chosen, rejected) triples. `pairs` entries with no negative are
+    skipped here but were kept in the instance list to preserve fold alignment.
+
+    Reference log-probs come from the same model with the adapter disabled, and are
+    constant through training, so they are computed once up front rather than every
+    step — that halves the forward passes.
+    """
+    torch.manual_seed(seed)
+    model = get_peft_model(model, LoraConfig(**LORA_KW))
+    usable = [(p, c, r) for p, c, r in pairs if r]
+
+    ref = []
+    model.eval()
+    with torch.no_grad(), model.disable_adapter():
+        for p, c, r in usable:
+            lc, lr_ = seq_logp(model, tok, p, c, max_len), seq_logp(model, tok, p, r, max_len)
+            ref.append(None if lc is None or lr_ is None else (lc.item(), lr_.item()))
+
+    model.train()
+    opt = torch.optim.AdamW([q for q in model.parameters() if q.requires_grad], lr=lr)
+    order = np.random.RandomState(seed).permutation(len(usable))
+    for _ in range(epochs):
+        for j in order:
+            if ref[j] is None:
+                continue
+            p, c, r = usable[j]
+            pol_c, pol_r = seq_logp(model, tok, p, c, max_len), seq_logp(model, tok, p, r, max_len)
+            if pol_c is None or pol_r is None:
+                continue
+            ref_c, ref_r = ref[j]
+            loss = -torch.nn.functional.logsigmoid(
+                beta * ((pol_c - pol_r) - (ref_c - ref_r)))
+            loss.backward()
+            opt.step()
+            opt.zero_grad(set_to_none=True)
+    model.eval()
+    return model
 
 
 def train_lora_on(model, tok, instances, lr: float, epochs: int,
@@ -110,14 +208,30 @@ def run_target(args, tok, model, probe, probe_nll, target: str) -> dict:
     grid = ([(lr, ep) for lr in args.grid_lr for ep in args.grid_epochs]
             if args.grid else [(args.lr, args.epochs)])
 
+    negs = None
+    if args.objective == "dpo":
+        negs = load_negatives(target, len(allinst), args.dpo_dir, args.full_dir)
+        have = sum(1 for x in negs if x)
+        if have == 0:
+            raise RuntimeError(f"no negatives for {target} in {args.full_dir}; "
+                               f"run scripts/gen_target_negatives.sh first")
+        if have < len(allinst):
+            print(f"  {len(allinst) - have}/{len(allinst)} instances have no negative "
+                  f"and are skipped in training (still counted for the fold split)")
+
     per_fold, per_fold_cfg = [], []
     for f in range(folds):
         te = [allinst[i] for i in fidx[f]]
         dev = [allinst[i] for j in range(folds) if j != f for i in fidx[j]]
+        if args.objective == "dpo":
+            dev_pairs = [(allinst[i][0], allinst[i][1], negs[i])
+                         for j in range(folds) if j != f for i in fidx[j]]
         scores = {}
         for lr, ep in grid:
             t0 = time.time()
-            pm = train_lora_on(model, tok, dev, lr, ep, seed=args.seed + f)
+            pm = (train_dpo_on(model, tok, dev_pairs, lr, ep, args.beta, seed=args.seed + f)
+                  if args.objective == "dpo"
+                  else train_lora_on(model, tok, dev, lr, ep, seed=args.seed + f))
             nll = NLLScorer(pm, tok).mean_nll(te)
             scores[(lr, ep)] = nll
             model = pm.unload()          # strips the LoRA layers, returns the base model
@@ -143,7 +257,16 @@ def main() -> None:
     ap.add_argument("--targets", nargs="*", default=[])
     ap.add_argument("--targets-file", default=None,
                     help="targets_n30.json; its person_ids are appended to --targets")
-    ap.add_argument("--dpo-dir", default=DPO_DIR)
+    ap.add_argument("--objective", choices=["sft", "dpo"], default="sft",
+                    help="sft = spec baseline 3, dpo = baseline 4 (needs --full-dir)")
+    ap.add_argument("--dpo-dir", default=DPO_DIR,
+                    help="canonical prompt/chosen files; also fixes instance ORDER, which "
+                         "the fold split depends on")
+    ap.add_argument("--full-dir", default=None,
+                    help="dir with the `rejected` side (dpo_pairs_targets_full), joined by "
+                         "speechID. Required for --objective dpo")
+    ap.add_argument("--beta", type=float, default=0.1,
+                    help="DPO temperature; 0.1 matches the anchors' DPOConfig")
     ap.add_argument("--budget", type=int, default=30)
     ap.add_argument("--folds", type=int, default=5)
     ap.add_argument("--seed", type=int, default=0)
@@ -166,7 +289,9 @@ def main() -> None:
     if not targets:
         raise SystemExit("no targets: pass --targets and/or --targets-file")
 
-    print(f"[sft-baseline] {len(targets)} targets  budget={args.budget} folds={args.folds}  "
+    if args.objective == "dpo" and not args.full_dir:
+        raise SystemExit("--objective dpo requires --full-dir (see scripts/gen_target_negatives.sh)")
+    print(f"[{args.objective}-baseline] {len(targets)} targets  budget={args.budget} folds={args.folds}  "
           f"{'grid' if args.grid else f'lr={args.lr:g} epochs={args.epochs}'}  base={args.base}")
     print("  fold splits come from nested_cv's own fold_indices(), so values pair per fold.")
 
@@ -193,17 +318,18 @@ def main() -> None:
             print(f"  FAILED: {type(e).__name__}: {e}", flush=True)
             results.append({"target": t, "error": f"{type(e).__name__}: {e}"})
             continue
-        print(f"  SFT held-out NLL {r['mean']:.4f} ± {r['std']:.4f}  per-fold {r['per_fold']}",
+        print(f"  {args.objective.upper()} held-out NLL {r['mean']:.4f} ± {r['std']:.4f}  per-fold {r['per_fold']}",
               flush=True)
         results.append(r)
         with open(args.out, "w", encoding="utf-8") as f:   # checkpoint every target
-            json.dump({"base_model": args.base, "budget": args.budget, "folds": args.folds,
+            json.dump({"objective": args.objective, "base_model": args.base,
+                       "budget": args.budget, "folds": args.folds, "beta": args.beta,
                        "seed": args.seed, "grid": args.grid, "results": results}, f,
                       ensure_ascii=False, indent=1)
     ok = [r for r in results if "mean" in r]
     print(f"\ndone: {len(ok)}/{len(targets)} targets in {(time.time()-t0)/60:.1f} min -> {args.out}")
     if ok:
-        print(f"  median SFT held-out NLL {np.median([r['mean'] for r in ok]):.4f}")
+        print(f"  median {args.objective.upper()} held-out NLL {np.median([r['mean'] for r in ok]):.4f}")
     print("  join with the nested-CV logs per fold; SFT's number is optimistic if --grid was used.")
 
 
