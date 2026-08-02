@@ -271,6 +271,47 @@ Cost once unblocked: nested 5-fold at ~10 min/target ⇒ **~5 h GPU for 30**. Th
 single-split protocol is no longer needed — it existed to carry the UTAS half, which
 is now closed.
 
+### Considered and rejected: dropping the "3" answers
+
+Hypothesis: politicians answer 3 (no stance) on policies they don't care about and
+take clear positions elsewhere, so constant-3 wins for a reason unrelated to the
+model's quality — evaluate only on non-3 items.
+
+**The premise is correct.** 31.7% of all 594×33 answers are 3; it is the modal
+response. 64 of 594 members answer 3 to more than half the items (one to all of them),
+median 30%. Per item the 3-rate ranges 9%–61%.
+
+**The conclusion does not follow.** Tested on the population dump, with the constant
+baseline recomputed on each filtered set:
+
+| filter | items | model | best const | model wins |
+|---|---|---|---|---|
+| all | 33 | 1.137 | 0.879 | 9% |
+| drop items >35% population 3-rate | 19 | 1.111 | 0.895 | 25% |
+| drop answers where truth = 3 | 22.6 | 1.162 | 1.000 | 29% |
+| extremes only (truth 1 or 5) | 13.5 | 1.395 | 1.455 | 44% |
+
+The win rate climbs to 44%, but **the model's own MAE gets worse** (1.137 → 1.395).
+The gap narrows because the baseline degrades, not because the model improves. Were
+the hypothesis right — good on clear stances, confused on the mushy middle — model
+error would *fall* when the 3s are removed. It rises, and even on the most favourable
+cut the model loses on 56% of politicians. Consistent with the population sweep: the
+model answers roughly the same thing for everyone (mean 2.271 vs real 2.763,
+name-swap 0.209), so its error is flat across item types.
+
+**Methodology note for the future.** Per-*item* filtering (drop items the whole
+population answers 3 to) is defensible — a property of the instrument, applied
+identically to every politician and method, standard non-discriminating-item removal.
+Per-*answer* filtering (drop items *this* politician answered 3 to) selects the
+evaluation set on the label being predicted; not fatal if the baseline is recomputed
+on the same subset, but it is a labelled subgroup analysis at best. The substantive
+objection is stronger than the statistical one: **knowing when a politician abstains
+is part of simulating them**, so removing those items deletes the more politically
+interesting half of the task.
+
+The fence-sitting rate is worth reporting as a finding — it is part of why survey
+agreement is a hard metric for persona work — but not as a filter.
+
 ### Open
 - [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
       does not discriminate. Retire the main-scale hedge in `sec:granularity`.
