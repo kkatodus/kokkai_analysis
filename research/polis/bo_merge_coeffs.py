@@ -179,6 +179,40 @@ def _fmt_stats(vals: list[float]) -> str:
     return f"{a.mean():.4f} ± {a.std():.4f}"
 
 
+def _utas_constant_baselines(gt: dict, person_id: str) -> list[tuple[str, dict]]:
+    """Score the dummy predictors that answer one fixed value to every UTAS item.
+
+    These are the floor the §4.4 metric has to clear to mean anything: they use no
+    model, no adapter and no merge, so any config that fails to beat them has not
+    been shown to carry information about the target. Two rows are reported — the
+    scale midpoint (what a degenerate scorer collapses to; see --utas-numeric) and
+    the best constant available in hindsight, which is the harder floor.
+
+    Item selection mirrors evaluate_anchor(): unanswered items and items with no
+    Japanese wording are skipped, so the rows are computed over the same set.
+    """
+    ans = gt["answers"][str(person_id)]
+    items = {it["code"]: it for it in gt["items"]}
+    truths = [t for code, t in ans["coded"].items()
+              if t is not None and items.get(code, {}).get("question_ja")]
+    if not truths:
+        return []
+    n_opts = max(len(it["options_ja"]) for it in gt["items"] if it.get("options_ja"))
+    mid = (n_opts + 1) // 2
+
+    def stats(c: int) -> dict:
+        errs = [abs(t - c) for t in truths]
+        return {"mae": round(sum(errs) / len(errs), 3),
+                "within1": round(sum(e <= 1 for e in errs) / len(errs), 3),
+                "exact": round(sum(e == 0 for e in errs) / len(errs), 3)}
+
+    best_c = min(range(1, n_opts + 1), key=lambda c: stats(c)["mae"])
+    rows = [(f"constant({mid}) [midpoint]", stats(mid))]
+    if best_c != mid:
+        rows.append((f"constant({best_c}) [best in hindsight]", stats(best_c)))
+    return rows
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="Qwen/Qwen2.5-0.5B-Instruct")
@@ -205,6 +239,13 @@ def main() -> None:
                     help="also score base/uniform/best-single/BO merges against the target's real "
                          "UTAS answers (spec §4.4 headline metric). Pass a wave file from "
                          "build_utas_ground_truth.py (must be --all-matched to include the target)")
+    ap.add_argument("--utas-numeric", action="store_true",
+                    help="score the UTAS items by the numeric label the model would emit (1..N, "
+                         "one token each) instead of the full option strings. The verbose-option "
+                         "path softmaxes five length-normalised per-token log-probs that all sit "
+                         "in a narrow band, so E collapses toward the scale midpoint and the "
+                         "metric stops discriminating — compare the constant-baseline row below. "
+                         "See score_options_numeric() in polis_option_logprob.py (Phase-0 fix).")
     ap.add_argument("--device", default="auto",
                     help="'auto' = device_map=auto; anything else pins the whole model to that "
                          "device ('cpu', 'cuda'). The merge writes ΔW in place, and under 'auto' "
@@ -314,16 +355,22 @@ def run_single_split(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
             configs = [("base", None), ("uniform", np.ones((n_a, n_g))),
                        (f"best-single({best_single_name})", bs), ("BO", bestC)]
             n_ans = gt["answers"][str(args.target)]["n_answered"]
+            scoring = "numeric-label" if args.utas_numeric else "verbose-option"
             print(f"\n===== §4.4 UTAS headline metric — target {args.target} "
-                  f"({gt['wave']}, {n_ans} answered items) =====")
+                  f"({gt['wave']}, {n_ans} answered items, scoring={scoring}) =====")
             print(f"  {'config':32} {'MAE(E)':>8} {'MAE(arg)':>9} {'within1':>8} {'exact':>7}")
+            for label, stats in _utas_constant_baselines(gt, str(args.target)):
+                print(f"  {label:32} {stats['mae']:>8} {stats['mae']:>9} "
+                      f"{stats['within1']:>8} {stats['exact']:>7}")
             for label, C in configs:
                 merger.restore() if C is None else merger.apply(C)
-                agg = evaluate_anchor(model, tok, gt, str(args.target))["aggregate"]
+                agg = evaluate_anchor(model, tok, gt, str(args.target),
+                                      numeric=args.utas_numeric)["aggregate"]
                 print(f"  {label:32} {agg['mae_expectation']:>8} {agg['mae_argmax']:>9} "
                       f"{agg['within1_acc']:>8} {agg['exact_acc']:>7}")
-            print("  NB: at 0.5B the UTAS metric is degenerate (E pinned ~3.0); this proves the "
-                  "merge→metric path, decisive numbers are a 7–8B task.")
+            print("  NB: the constant rows answer the same value to every item — no model, no "
+                  "adapter, no merge. A config that does not beat them has not been shown to "
+                  "carry any information about this target, however good its NLL.")
 
 
 if __name__ == "__main__":
