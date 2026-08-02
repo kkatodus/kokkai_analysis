@@ -109,7 +109,10 @@ class LayerGroupMerger:
             self.base_weights[mod_path] = w.data.clone()
 
     # ---- layer grouping ------------------------------------------------------
-    def _count_layers(self, adapter_dir: str) -> int:
+    @staticmethod
+    def _count_layers(adapter_dir: str) -> int:
+        """Depth of the adapted stack, from the adapter alone. Static so callers can
+        ask without constructing a merger — one costs ~15GB of device memory at 7B."""
         weights = load_file(os.path.join(adapter_dir, "adapter_model.safetensors"))
         idxs = {int(m.group(1)) for k in weights if (m := _LAYER_RE.search(k))}
         return max(idxs) + 1

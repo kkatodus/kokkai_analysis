@@ -21,10 +21,13 @@ Run from research/polis/ with the research venv:
     python bo_granularity_ablation.py \
         --target 152 --budget 40 --folds 4 --trials 20
 
-At main scale pin the device explicitly, as in bo_merge_coeffs.py:
+At main scale pin the device explicitly, as in bo_merge_coeffs.py. On a box that
+only has the target subset of DPO pairs copied over (a rented GPU), `--dpo-dir`
+must be passed too — the default is `<data>/polis/dpo_pairs_full`:
     python bo_granularity_ablation.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
         --target 1279 --budget 30 --folds 4 --trials 20 --groups 1 3 \
-        --adapters output/polis_{152,2377,3631,5520}_qwen7b
+        --adapters output/polis_{152,2377,3631,5520}_qwen7b \
+        --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"
 """
 from __future__ import annotations
 
@@ -81,10 +84,10 @@ def main() -> None:
     allinst = load_instances(args.target, args.budget, args.dpo_dir)
     folds = min(args.folds, len(allinst))
 
-    # Discover n_layers once (cheap merger build on the clean base model).
-    probe = LayerGroupMerger(model, adapters, n_groups=1, density=args.density)
-    n_layers = probe._n_layers
-    probe.restore()
+    # Read n_layers straight off an adapter. Do NOT build a probe merger for this:
+    # each merger pins ~15GB on device at 7B (fp32 anchor deltas + base snapshot),
+    # and one left alive alongside the loop's merger OOMs a 48GB card.
+    n_layers = LayerGroupMerger._count_layers(adapters[0])
     groups = args.groups or sorted({1, 3, n_layers})
 
     print(f"target={args.target} anchors={names} n_layers={n_layers} "
@@ -102,6 +105,12 @@ def main() -> None:
         rows, _ = nested_cv(merger, scorer, names, allinst, folds,
                             args.trials, args.sampler, args.cmax)
         merger.restore()
+        # Free before the next granularity: `merger = LayerGroupMerger(...)` builds the
+        # replacement *before* rebinding the name, so without this two ~15GB mergers
+        # coexist and the second granularity OOMs.
+        del merger
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         label = {1: "global", 3: "layer-group"}.get(ng, f"{ng}-group")
         if ng == n_layers:
             label = "full-layer-wise"

@@ -150,18 +150,32 @@ target 1279, TRIALS=5 (load + 5 + final)   110 s
 ```
 
 Those 110 s cover model load, ΔW construction, 5 trials, **and** the final eval
-block (4 NLL configs × 30 utterances + 4 UTAS configs × 33 items) — and optuna
-runs at `WARNING` verbosity (`bo_merge_coeffs.py:51`), so there are no per-trial
-timestamps to decompose it with. Treat the per-run figures below as an order of
-magnitude, not a measurement; the first target of the real run gives the true rate.
+block (4 NLL configs × 30 utterances + 4 UTAS configs × 33 items). Optuna runs at
+`WARNING` verbosity (`bo_merge_coeffs.py:51`), so there are no per-trial timestamps
+to decompose it with — but the full run supplies the rate by subtraction.
 
-| Run | Trials | Rough wall clock |
+**Measured on the real run** (same session, single-split, 40 trials/target):
+
+```
+preflight                                    59 s
+target 1279   07:49:09 -> 07:52:53          224 s
+target 2053   07:52:53 -> 07:56:26          213 s
+target 2289   07:56:26 -> 07:59:56          210 s
+total                                     11m45 s
+```
+
+216 s/target at 40 trials vs 110 s at 5 trials ⇒ **~3 s/trial**, with **~95 s
+fixed per target** (load + ΔW build + final NLL/UTAS eval). The re-merge is far
+cheaper than the CPU-era warnings suggest.
+
+| Run | Trials | Wall clock |
 |---|---|---|
-| single-split | 3 targets × 40 | ~30 min |
-| nested 5-fold | 3 × 5 × 40 = 600 | ~2–3 h |
+| single-split | 3 targets × 40 | **~12 min** (measured) |
+| nested 5-fold | 3 × 5 × 40 = 600 | **~40 min** (projected from the above) |
+| granularity, `--groups 1 3` | 2 × 4 folds × 20 | **~10–15 min** |
 
-Both fit comfortably in one session, so budget for doing the granularity ablation
-in §6 as well rather than treating it as optional.
+The whole programme is roughly an hour of GPU. Do the granularity ablation in §6 —
+at this rate there is no argument for skipping it.
 
 ### Check the objective isn't flat
 
@@ -228,20 +242,26 @@ LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
 # keep the 5-trial calibration out of the real logs (skip if already renamed)
 [ -f "$LOGS/target_1279.log" ] && mv "$LOGS/target_1279.log" "$LOGS/calib_1279_trials5.log"
 
-# 1. single-split -- the only source of the UTAS half of the table
+# 1. single-split -- the only source of the UTAS half of the table (~12 min)
 time ./research/polis/scripts/run_7b_bo_gpu.sh
 for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
 
-# 2. nested 5-fold CV -- unbiased estimate + error bars
+# 2. nested 5-fold CV -- unbiased estimate + error bars (~40 min)
 time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
 for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
 
-# 3. granularity ablation -- lets the paper drop its 0.5B-only concession
+# 3. granularity ablation -- lets the paper drop its 0.5B-only concession.
+#    --dpo-dir is REQUIRED here: unlike run_7b_bo_gpu.sh, this script defaults to
+#    $KOKKAI_DATA_DIR/polis/dpo_pairs_full, which §3 never ships to the pod.
+#    No --device: the default device_map="auto" puts the whole model on cuda:0 on
+#    any card that meets §0.
+#    Needs a checkout that includes the probe-merger fix (§6) -- older ones OOM.
 time python research/polis/bo_granularity_ablation.py \
   --target 1279 --budget 30 --folds 4 --trials 20 \
   --groups 1 3 \
   --adapters research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
-  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  --base Qwen/Qwen2.5-7B-Instruct \
+  --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
   2>&1 | tee "$LOGS/granularity_1279.log"
 
 ls -la "$LOGS"
@@ -280,14 +300,14 @@ starting nested, for the append reason in §5.
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
 
-# single-split (NLL + UTAS) -- matches the 0.5B protocol, ~30 min
+# single-split (NLL + UTAS) -- matches the 0.5B protocol, ~12 min
 time ./research/polis/scripts/run_7b_bo_gpu.sh
 
 # separate the two protocols before the second run appends to the same files
 LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
 for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
 
-# nested 5-fold CV (unbiased, error bars) -- ~2-3 h
+# nested 5-fold CV (unbiased, error bars) -- ~40 min
 time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
 
 for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
@@ -321,14 +341,30 @@ python bo_granularity_ablation.py \
   --target 1279 --budget 30 --folds 4 --trials 20 \
   --groups 1 3 \
   --adapters output/polis_{152,2377,3631,5520}_qwen7b \
-  --base Qwen/Qwen2.5-7B-Instruct --device cuda
+  --base Qwen/Qwen2.5-7B-Instruct \
+  --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"
 ```
 
-`--device cuda` matters here for the same reason as §4, though the failure is not
-silent: `LayerGroupMerger` raises `RuntimeError` if any target module is a meta
-tensor (`merge_layer_group.py:98`), so an offloaded model aborts the run rather
-than returning a flat objective. Pin the device anyway — an explicit failure at
-minute zero beats one after the model has loaded.
+`--dpo-dir` is **required on a pod**, unlike in `run_7b_bo_gpu.sh` which sets it
+internally. This script's default is `$KOKKAI_DATA_DIR/polis/dpo_pairs_full`
+(`bo_merge_coeffs.py:57`) — that directory exists on the laptop's data drive but
+§3 only ships `dpo_pairs_targets`, so omitting the flag fails with
+`FileNotFoundError: .../dpo_pairs_full/1279.jsonl` after the model has loaded.
+
+`--device` is optional here, unlike in `bo_merge_coeffs.py`. The default
+`device_map="auto"` puts the whole model on `cuda:0` on any card meeting §0, and
+the meta-tensor failure mode §4 warns about is not silent in this path:
+`LayerGroupMerger` raises `RuntimeError` if any target module is offloaded
+(`merge_layer_group.py:98`). Pass `--device cuda` if you want the placement pinned
+explicitly; it changes nothing on hardware that fits the model.
+
+**VRAM.** Each `LayerGroupMerger` pins ~14.8 GB on device (13.2 GB fp32 anchor
+deltas + a 1.6 GB bf16 base snapshot), so only one may be alive at a time next to
+the 15.2 GB model. Until 2026-08-02 this script built a throwaway `probe` merger
+just to read `n_layers` and kept the loop's previous merger alive across
+granularities — two or three mergers at once, which OOMs a 48 GB card on the first
+forward pass. Fixed; if you see `torch.OutOfMemoryError` here on a card that ran
+§6's single-split fine, your checkout predates the fix.
 
 `--groups 1 3` is deliberate. The default sweeps `[1, 3, n_layers]`, and at 7B that
 third bookend is 4×28 = **112 coefficients** — the most expensive cell by far, to
