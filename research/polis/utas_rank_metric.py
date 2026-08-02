@@ -80,10 +80,13 @@ def analyse_population(gt: dict, dump: dict) -> None:
     print("  ratio ~0 => the answers barely depend on the name: the persona is inert and a")
     print("  flat §4.4 table is a property of the protocol, not of the merge.")
 
-    # The floor is NOT the 50th percentile. A constant vector sits near the centroid
-    # of the population, so it is closer than average to *everyone* and scores well
-    # above chance for free — measured at ~68th percentile on this wave. The only
-    # honest null is the same constant scored the same way, so it is a row here.
+    # A name-independent vector induces ONE fixed distance ordering over the
+    # candidates, so as the persona ranges over the whole candidate set its rank takes
+    # every value 1..n exactly once — median percentile exactly 50%. That is what the
+    # constant rows show on a full sweep. They are still worth printing: under
+    # `--personas N` with N << n the floor is a noisy sample of that ordering and can
+    # land far from 50% (68% was observed at N=60), so the honest comparison is always
+    # against the constants as measured in the same run, never against a nominal 50%.
     n_opts = max(int(max(v)) for v in real.values())
     bases = [("expectation", sims), ("argmax", sim_arg)]
     for c in range(1, n_opts + 1):
@@ -107,9 +110,9 @@ def analyse_population(gt: dict, dump: dict) -> None:
         n = len(ranks)
         print(f"  {label:14} {statistics.median(ranks):12.1f} "
               f"{statistics.median(pcts):10.1f}% {top1 / n:7.3f} {top5 / n:7.3f}")
-    print("  Read against the constant rows, not against 50%: a name-independent vector")
-    print("  already beats chance by sitting near the population centroid. The claim is")
-    print("  'expectation/argmax ranks above every constant', nothing weaker.")
+    print("  Read against the constant rows as measured here, not against a nominal 50%:")
+    print("  on a partial sweep the floor is a noisy sample and can sit well above it.")
+    print("  The claim is 'ranks above every constant', nothing weaker.")
 
 
 def analyse_configs(gt: dict, dump: dict) -> None:

@@ -134,10 +134,47 @@ Asked whether to add personas. They are two different axes:
 > raise n and put the method on its actual thesis. Expect the margin to shrink; a
 > smaller margin on genuinely data-poor politicians is the stronger result.
 
+### Population sweep result — the §4.4 protocol does not measure persona fidelity
+
+594 personas under base 7B, 10.7 min, 1.08 s/persona. The fast scorer's self-check
+against `score_options_numeric` passed.
+
+**Name-swap divergence 0.209.** Simulated vectors spread `0.236` against the real
+politicians' `1.132` — changing the name moves the answers about a fifth as much as
+the politicians actually differ from each other. Not literally inert (0 of 19 900
+persona pairs are identical on expectation), but weak. Per item: median sd across all
+594 personas is `0.186` against the real `1.013`, and **9 of the 33 items have
+sd < 0.05** — for those, the model returns the same answer whoever you say it is.
+
+**Rank at chance.** Median percentile `52.1%` (expectation) against a measured
+constant floor of `50.1%`; top-1 `0.002`, which is exactly 1/594. The model cannot
+identify which politician it is simulating.
+
+**Systematic skew.** Simulated mean `2.271` vs real `2.763` — the personas sit
+uniformly toward "agree" regardless of who they are. The three targets' simulated
+means span `2.155`–`2.406`; their real means span `2.636`–`3.364`. 赤嶺 (JCP) comes
+out at `2.211` against a real `3.364`, nearly indistinguishable from 高市's `2.155`.
+
+**Conclusion.** The flat §4.4 table is a property of the instrument, not evidence
+about the merge. Name-prompted persona conditioning plus option-logprob survey scoring
+does not carry politician identity at this scale, so UTAS results cannot support a
+claim in either direction. The NLL result stands on its own and is unaffected.
+
+> **Correction to the earlier design note.** The rank null *is* 50% on a full sweep,
+> not 68%. A name-independent vector induces one fixed distance ordering, so as the
+> persona ranges over the whole candidate set its rank takes every value exactly once
+> — the five constant rows all land on `50.1%`, as they must. The 68.4% seen earlier
+> came from a fixture with only 60 personas against 594 candidates: sampling noise,
+> not the centroid effect claimed. The constant rows remain the right comparison
+> because they measure the floor under whatever subsampling was actually used.
+
 ### Open
 
-- [ ] Run the population sweep (`P11`) and read the name-swap ratio. If it is ~0, the
-      entire §4.4 line of evidence is a protocol artefact and the paper should say so.
+- [ ] Does the *merge* inject identity the base model lacks? Re-run `P8` with
+      `--utas-dump` (~12 min) and rank the 12 config vectors. Base sits at chance, so
+      this is the remaining question the UTAS instrument can still answer: if
+      BO-merged ranks its target well above base, that is a positive result on an
+      independent instrument. If not, the §4.4 line is closed.
 - [ ] Expand targets to n≈30, sampled across the speech-volume range, not the top.
 - [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
       does not discriminate. Retire the main-scale hedge in `sec:granularity`.

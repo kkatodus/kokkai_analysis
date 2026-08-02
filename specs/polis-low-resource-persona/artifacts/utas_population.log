@@ -1,0 +1,31 @@
+wave=2024HoR  items=33  complete-vector politicians=594  administering to 594 personas  scoring=numeric
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 37.65it/s]Loading weights:  15%|█▌        | 51/339 [00:00<00:01, 277.70it/s]Loading weights:  27%|██▋       | 91/339 [00:00<00:00, 331.11it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 366.86it/s]Loading weights:  51%|█████     | 173/339 [00:00<00:00, 326.03it/s]Loading weights:  61%|██████    | 207/339 [00:00<00:00, 309.82it/s]Loading weights:  71%|███████   | 239/339 [00:00<00:00, 306.65it/s]Loading weights:  80%|███████▉  | 270/339 [00:00<00:00, 292.42it/s]Loading weights:  90%|████████▉ | 304/339 [00:01<00:00, 292.48it/s]Loading weights:  99%|█████████▊| 334/339 [00:01<00:00, 293.63it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 302.65it/s]
+[check] fast scorer == score_options_numeric on 3 items
+  25/594    26.9s elapsed  1.08s/persona  eta 10.2min
+  50/594    53.9s elapsed  1.08s/persona  eta 9.8min
+  75/594    81.0s elapsed  1.08s/persona  eta 9.3min
+  100/594   108.1s elapsed  1.08s/persona  eta 8.9min
+  125/594   135.2s elapsed  1.08s/persona  eta 8.5min
+  150/594   162.3s elapsed  1.08s/persona  eta 8.0min
+  175/594   189.4s elapsed  1.08s/persona  eta 7.6min
+  200/594   216.5s elapsed  1.08s/persona  eta 7.1min
+  225/594   243.6s elapsed  1.08s/persona  eta 6.7min
+  250/594   270.7s elapsed  1.08s/persona  eta 6.2min
+  275/594   297.8s elapsed  1.08s/persona  eta 5.8min
+  300/594   324.9s elapsed  1.08s/persona  eta 5.3min
+  325/594   352.0s elapsed  1.08s/persona  eta 4.9min
+  350/594   379.1s elapsed  1.08s/persona  eta 4.4min
+  375/594   406.2s elapsed  1.08s/persona  eta 4.0min
+  400/594   433.3s elapsed  1.08s/persona  eta 3.5min
+  425/594   460.4s elapsed  1.08s/persona  eta 3.1min
+  450/594   487.4s elapsed  1.08s/persona  eta 2.6min
+  475/594   514.5s elapsed  1.08s/persona  eta 2.1min
+  500/594   541.6s elapsed  1.08s/persona  eta 1.7min
+  525/594   568.7s elapsed  1.08s/persona  eta 1.2min
+  550/594   595.8s elapsed  1.08s/persona  eta 0.8min
+  575/594   622.9s elapsed  1.08s/persona  eta 0.3min
+  594/594   643.5s elapsed  1.08s/persona  eta 0.0min
+
+wrote 594 answer vectors -> /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json
+next: python utas_rank_metric.py --gt /workspace/kokkai_data/polis/utas_ground_truth/2024HoR.json --dump /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json
