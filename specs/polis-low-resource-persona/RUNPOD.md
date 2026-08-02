@@ -36,6 +36,7 @@ when asking about a block rather than describing its position.
 | `P9` | pod | 6 | granularity ablation (~10 min) |
 | `L5` | laptop | 7 | retrieve results before destroying the pod |
 | `P11` | pod | 6.2 | administer the wave to all 594 politicians, base model (~10 min) |
+| `L7` | laptop | 6.2 | retrieve the population dump |
 | `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
@@ -433,6 +434,21 @@ gives a fast smoke test first if you want one.
 To also capture the *merged* configs' vectors, add `--utas-dump "$ART/utas_vectors"`
 to `P8` — `bo_merge_coeffs.py` currently computes those per-item answers and throws
 them away, keeping only the aggregate.
+
+**`[L7]`** · laptop · retrieve the population dump
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>
+POD=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:$POD/utas_population_7b_base.json \
+  root@$IP:$POD/utas_population.log \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+```
+
+Named files rather than the whole `artifacts/` directory — the laptop copy also holds
+`bo7b_logs/` and `nested_cv_05b/`, which have no business in this transfer.
 
 No environment to activate for either block. The pod runs the image's system python
 (`setup_pod.sh` installs into it deliberately — see the Notes), and
