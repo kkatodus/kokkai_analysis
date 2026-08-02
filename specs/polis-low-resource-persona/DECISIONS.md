@@ -235,10 +235,43 @@ distinction this session established. Legitimate only as a labelled diagnostic �
 upper bound isolating whether the merge can transport ideology at all — never as
 evidence for the method.
 
-### Open
+### Target expansion to n=33 — selection done
 
-- [ ] Expand targets to n≈30, sampled across the speech-volume range, not the top.
-      Every negative above is limited by n=3 more than by anything else.
+Open item 1. Selection and protocol settled; export blocked on a filesystem
+permission (see below).
+
+**Framing correction.** The earlier note that the three targets being data-rich
+contradicts the *low-resource* title was too strong. `HANDOVER.md:465` has a fair
+defence: the BO tunes on 30 utterances regardless of how much the target has, so the
+*method* is low-resource either way. The untested axis is not quantity of data but
+**kind of politician** — 高市/赤嶺/枝野 are all nationally prominent, and prominent
+members give prepared set-piece speeches while backbenchers ask committee questions.
+
+**Eligibility.** Complete 33-item UTAS vector, a speech directory, not an anchor, not
+an existing target → **550 eligible**, 517 with the ≥60 pairs a 30/30 split needs.
+Pair yield is ~1:1 with speech records up to the 300 cap (measured 41→40, 81→81,
+149→147, 297→297), so speech count is a direct proxy.
+
+**Sampling: 6 log-spaced bands, 5 each** (`random.Random(20260802)`), recorded in
+[`targets_n30.json`](targets_n30.json). Chosen over a low-profile-only or uniform-random
+draw because it yields a *curve* — BO advantage against target prominence — rather than
+one more mean. Party spread: LDP 11, CDP/DPJ 10, Ishin 3, Komeito 2, JCP 2, DPP 2.
+
+**Protocol: budget 30 / test 30**, identical to the committed runs so the 3 existing
+and 30 new targets pool into one analysis. Targets need prompt/chosen only — no Gemini
+`rejected` step, since a held-out target gets no adapter of its own — so export is
+CPU-only and takes minutes.
+
+> **Blocker.** `/mnt/wsl/wsldata/kokkai_data` is entirely `root:root 755`. Every
+> operation this session was a read, which is why it surfaced only now. The export
+> needs `sudo chown ken:ken /mnt/wsl/wsldata/kokkai_data/polis/dpo_pairs_targets` —
+> one directory, enough to create the new files.
+
+Cost once unblocked: nested 5-fold at ~10 min/target ⇒ **~5 h GPU for 30**. The
+single-split protocol is no longer needed — it existed to carry the UTAS half, which
+is now closed.
+
+### Open
 - [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
       does not discriminate. Retire the main-scale hedge in `sec:granularity`.
 - [ ] Decide whether the anti-correlation between NLL and UTAS is a headline finding
