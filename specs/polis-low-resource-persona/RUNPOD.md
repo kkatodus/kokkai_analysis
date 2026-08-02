@@ -457,6 +457,8 @@ you specifically want the upper bookend at main scale.
 **`[L5]`** · laptop · retrieve results before destroying the pod
 ```bash
 REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>          # from the RunPod "Connect" panel
+
 rsync -avP -e "ssh -p $PORT" \
   root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
   $REPO/specs/polis-low-resource-persona/artifacts/
