@@ -312,6 +312,54 @@ interesting half of the task.
 The fence-sitting rate is worth reporting as a finding — it is part of why survey
 agreement is a hard metric for persona work — but not as a filter.
 
+### The prominence gradient — UTAS measures knowledge, not format
+
+Asked whether the UTAS failure is a format-mismatch problem, and whether to tune the
+BO on a subset of survey items or train anchors on survey data.
+
+**The formats really are far apart.** DPO training prompt: `国会議員「高市早苗（自由民主
+党・無所属の会）」です` + ~500 chars of committee exchange → free-form ~280-char reply.
+UTAS eval: `国会議員、高市早苗です` (no quotes, no party) + a bare proposition → one token
+from `{1,2,3,4,5}`.
+
+**But format is not the bottleneck.** Under that identical prompt and scoring,
+**岸田文雄 ranks at the 96th percentile**, 中谷元 and 河野太郎 at 82%, 麻生 63%. Base model,
+no adapter. The gradient over the whole wave:
+
+| quintile by speech volume | median speeches | median rank pct |
+|---|---|---|
+| most prominent | 3450 | 58.0% |
+| 2nd | 1372 | 53.7% |
+| 3rd | 579 | 53.4% |
+| 4th | 218 | 45.7% |
+| least prominent | 47 | 47.5% |
+
+So the instrument reads positions correctly when the model has the knowledge. It has
+none for backbenchers — the bottom two quintiles sit below chance. **The failure is
+knowledge coverage, not elicitation.**
+
+**Proposal A (tune BO on some UTAS items, test on the rest): rejected.** A
+nearest-neighbour lookup — most similar politician among the other 593 on 16 tuning
+items, copy their held-out 17 — scores MAE **0.647**, against best-constant 0.824 and
+the 7B model's 1.137, beating the constant for 396/594. The setup is solved without an
+LLM, speech, adapters or a merge. It also presumes the target's survey answers, which
+the low-resource scenario does not have; if it did, the speech pipeline would be
+unnecessary.
+
+**Proposal B (train anchors on UTAS): rejected for now.** The waves separate cleanly —
+29 of 33 item codes are shared but **zero questions have identical text**, the codes
+being positional — so cross-wave training would genuinely hold out the questions. Two
+obstacles: no anchor appears in both waves (152/2377 are 2024HoR only, 3631/5520 are
+2022HoC only), so at most half the anchors could be trained; and it targets format
+adaptation, which 岸田's 96% shows is not what is failing.
+
+**Reframing.** POLIS's job is to inject knowledge the base model lacks about
+politicians it has never encountered. That makes the rank metric a *good* instrument
+rather than a broken one, with a falsifiable prediction: **if the method works, its
+targets should move from the backbench level (~47%) toward the prominent level (~58%)**.
+`P12` found no such lift on 3 targets; the n=33 run measures it properly, and the
+volume-stratified sample is already the right design.
+
 ### Open
 - [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
       does not discriminate. Retire the main-scale hedge in `sec:granularity`.
