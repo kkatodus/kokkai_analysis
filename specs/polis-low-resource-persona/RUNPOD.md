@@ -434,6 +434,11 @@ To also capture the *merged* configs' vectors, add `--utas-dump "$ART/utas_vecto
 to `P8` — `bo_merge_coeffs.py` currently computes those per-item answers and throws
 them away, keeping only the aggregate.
 
+No environment to activate for either block. The pod runs the image's system python
+(`setup_pod.sh` installs into it deliberately — see the Notes), and
+`utas_rank_metric.py` is stdlib-only by design, so it runs on a bare interpreter with
+no venv and no numpy.
+
 **`[L6]`** · laptop · read the two metrics (CPU, no model, seconds)
 ```bash
 cd ~/workspace/projects/kokkai_analysis/research/polis
