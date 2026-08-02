@@ -35,6 +35,8 @@ when asking about a block rather than describing its position.
 | `P8` | pod | 6.1 | re-run single-split with numeric UTAS scoring (~12 min) |
 | `P9` | pod | 6 | granularity ablation (~10 min) |
 | `L5` | laptop | 7 | retrieve results before destroying the pod |
+| `P11` | pod | 6.2 | administer the wave to all 594 politicians, base model (~10 min) |
+| `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -398,6 +400,58 @@ for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_numeric_$(basename "$f")
 
 The NLL numbers this produces will match the earlier single-split run — the merge
 and BO are untouched, only the survey scoring changed.
+
+### 6.2 Is the persona inert? — the population sweep
+
+Both scorers left every config at or below a constant-midpoint dummy (see
+[`DECISIONS.md`](DECISIONS.md)). Scoring one politician against their own answers
+cannot tell "the persona is wrong" from "the answers don't depend on the name at
+all" — and if it's the latter, no merge could ever move §4.4 and the table says
+nothing about the method.
+
+The wave has **594 politicians with complete 33-item vectors, 573 of them distinct**,
+and the persona is conditioned on the *name alone* — so this needs no speech, no
+adapter and no merge.
+
+**`[P11]`** · pod · administer the wave to every politician under the base model (~10 min)
+```bash
+cd /workspace/kokkai_analysis/research/polis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+
+python utas_population_eval.py \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  --gt "$KOKKAI_DATA_DIR/polis/utas_ground_truth/2024HoR.json" \
+  --include 1279,2053,2289 \
+  --out "$ART/utas_population_7b_base.json" 2>&1 | tee "$ART/utas_population.log"
+```
+
+Starts with a self-check that the single-pass scorer matches
+`score_options_numeric` on real items, then prints a running ETA. `--personas 60`
+gives a fast smoke test first if you want one.
+
+To also capture the *merged* configs' vectors, add `--utas-dump "$ART/utas_vectors"`
+to `P8` — `bo_merge_coeffs.py` currently computes those per-item answers and throws
+them away, keeping only the aggregate.
+
+**`[L6]`** · laptop · read the two metrics (CPU, no model, seconds)
+```bash
+cd ~/workspace/projects/kokkai_analysis/research/polis
+ART=../../specs/polis-low-resource-persona/artifacts
+
+python utas_rank_metric.py \
+  --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+  --dump "$ART/utas_population_7b_base.json"
+```
+
+**How to read it.** Two blocks:
+
+- *name-swap divergence* — simulated spread over real spread. **Ratio near 0 is the
+  verdict**: the answers barely depend on the name, so §4.4 was never measuring the
+  merge. Near 1 means the model separates politicians about as much as they differ.
+- *rank of the true politician* — compare against the **constant rows, not against
+  50%**. A name-independent vector sits near the population centroid and scores ~68th
+  percentile for free. The claim worth making is "ranks above every constant".
 
 Logs: `specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_<id>.log`
 

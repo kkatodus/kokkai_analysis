@@ -246,6 +246,11 @@ def main() -> None:
                          "in a narrow band, so E collapses toward the scale midpoint and the "
                          "metric stops discriminating — compare the constant-baseline row below. "
                          "See score_options_numeric() in polis_option_logprob.py (Phase-0 fix).")
+    ap.add_argument("--utas-dump", metavar="DIR", default=None,
+                    help="write each config's per-item answer vector to DIR as JSON. The "
+                         "aggregate printed below discards them, and they are what "
+                         "utas_rank_metric.py needs to score the target against the whole "
+                         "wave rather than against its own answers alone.")
     ap.add_argument("--device", default="auto",
                     help="'auto' = device_map=auto; anything else pins the whole model to that "
                          "device ('cpu', 'cuda'). The merge writes ΔW in place, and under 'auto' "
@@ -362,12 +367,25 @@ def run_single_split(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
             for label, stats in _utas_constant_baselines(gt, str(args.target)):
                 print(f"  {label:32} {stats['mae']:>8} {stats['mae']:>9} "
                       f"{stats['within1']:>8} {stats['exact']:>7}")
+            dumped: dict[str, list] = {}
             for label, C in configs:
                 merger.restore() if C is None else merger.apply(C)
-                agg = evaluate_anchor(model, tok, gt, str(args.target),
-                                      numeric=args.utas_numeric)["aggregate"]
+                res = evaluate_anchor(model, tok, gt, str(args.target),
+                                      numeric=args.utas_numeric)
+                agg = res["aggregate"]
+                dumped[label] = res["items"]
                 print(f"  {label:32} {agg['mae_expectation']:>8} {agg['mae_argmax']:>9} "
                       f"{agg['within1_acc']:>8} {agg['exact_acc']:>7}")
+            if args.utas_dump:
+                os.makedirs(args.utas_dump, exist_ok=True)
+                tag = "numeric" if args.utas_numeric else "verbose"
+                out = os.path.join(args.utas_dump, f"{args.target}_{tag}.json")
+                with open(out, "w", encoding="utf-8") as f:
+                    json.dump({"wave": gt["wave"], "target": str(args.target),
+                               "base_model": args.base, "scoring": scoring,
+                               "anchors": names, "coeffs": bestC.tolist(),
+                               "configs": dumped}, f, ensure_ascii=False)
+                print(f"  [utas-dump] per-item vectors -> {out}")
             print("  NB: the constant rows answer the same value to every item — no model, no "
                   "adapter, no merge. A config that does not beat them has not been shown to "
                   "carry any information about this target, however good its NLL.")
