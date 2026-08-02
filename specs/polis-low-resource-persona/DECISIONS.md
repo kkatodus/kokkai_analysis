@@ -168,14 +168,42 @@ claim in either direction. The NLL result stands on its own and is unaffected.
 > not the centroid effect claimed. The constant rows remain the right comparison
 > because they measure the floor under whatever subsampling was actually used.
 
+### The merge does not inject identity either — §4.4 closed
+
+`P12`: same single split, per-config vectors saved, ranked against the 594.
+
+| target | base | uniform | best-single | BO | best constant |
+|---|---|---|---|---|---|
+| 1279 高市 | 34.3% | 37.2% | 40.2% | 39.4% | constant(1) → 67.5% |
+| 2053 赤嶺 | 5.6% | 4.2% | 2.7% | 2.7% | constant(5) → 97.5% |
+| 2289 枝野 | 47.5% | 25.4% | 43.8% | 44.9% | constant(5) → 81.3% |
+
+All twelve cells at or below chance; a constant beats every model config on every
+target. BO against base is +5.1 / −2.9 / −2.6 points — the merge makes it *worse* on
+two of three.
+
+赤嶺 (JCP) is the clearest case. His real answers cluster at 5 (mean 3.364), so
+`constant(5)` ranks him at the 97.5th percentile, while all four model configs put him
+in the **bottom 3–6%** — actively anti-correlated, not merely uninformative. Consistent
+with the population sweep, where simulated-赤嶺 (2.211) was nearly identical to
+simulated-高市 (2.155). The constants swing from 2.7% to 97.5% depending on which
+extreme a target occupies, while every config clusters near the population's low-middle:
+the simulations do not move to where the politician is.
+
+**Decision: stop work on the UTAS metric.** Two scorers, a population control and a
+rank metric all agree it does not carry politician identity at this scale, with or
+without the merge. The paper reports it as a limitation with the diagnostic attached,
+and the headline rests on NLL.
+
+> **Strength caveat.** Per-target rank is one draw and these are noisy. Three targets
+> cannot carry a p-value — "all below chance" is p ≈ 0.125 on sign alone with each
+> target as one observation. The claim is *no evidence the merge injects identity*,
+> not proof it does not. Another argument for n≈30.
+
 ### Open
 
-- [ ] Does the *merge* inject identity the base model lacks? Re-run `P8` with
-      `--utas-dump` (~12 min) and rank the 12 config vectors. Base sits at chance, so
-      this is the remaining question the UTAS instrument can still answer: if
-      BO-merged ranks its target well above base, that is a positive result on an
-      independent instrument. If not, the §4.4 line is closed.
 - [ ] Expand targets to n≈30, sampled across the speech-volume range, not the top.
+      Every negative above is limited by n=3 more than by anything else.
 - [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
       does not discriminate. Retire the main-scale hedge in `sec:granularity`.
 - [ ] Decide whether the anti-correlation between NLL and UTAS is a headline finding
