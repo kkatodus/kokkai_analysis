@@ -101,16 +101,21 @@ landed, caches the model, and ends on the merge self-test.
 > objective for hours without erroring. This is why `--device cuda` is passed
 > explicitly. Stop and debug; do not start the run.
 
-Reference values from the 0.5B self-test (7B numbers differ, but the *shape* —
-four distinct values, exact restore — is the same):
+Measured 7B reference values (2026-08-02, `n_layers=28`, `n_groups=3`,
+`touched_modules=112`, ~57 s including model load):
 
 ```
-base NLL                 = 2.0808
-uniform merge NLL        = 3.4785
-upper-group-only merge   = 2.2633
-lower-group-only merge   = 2.3963
-restored base NLL        = 2.0808  (should match base)
+base NLL                 = 1.0786
+uniform merge NLL        = 2.6322
+upper-group-only merge   = 1.2157
+lower-group-only merge   = 1.7669
+restored base NLL        = 1.0786  (should match base)
 ```
+
+Same shape as the 0.5B self-test (base 2.0808 / uniform 3.4785 / upper 2.2633 /
+lower 2.3963): uniform merging badly damages the model, and the two depth groups
+respond differently. That asymmetry is the whole premise of the method — if your
+numbers are flat instead, see the gate above.
 
 ---
 
@@ -120,18 +125,146 @@ RunPod SSH sessions drop; always run inside tmux.
 
 ```bash
 tmux new -s polis
+echo "$TMUX"                 # MUST be non-empty -- see the tmux check below
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
 
 time TRIALS=5 TARGETS=1279 ./research/polis/scripts/run_7b_bo_gpu.sh
 ```
 
-**Why:** this BO loop has never been run on a GPU. Per-trial cost is now dominated
-by the re-merge (writing ΔW for 4 anchors × 822M adapted params every trial), not
-the forwards, so the old CPU timings predict nothing. Measure seconds-per-trial,
-then multiply: single-split is 3 targets × 40 trials; nested is ~5× that.
+**Why:** per-trial cost is dominated by the re-merge (writing ΔW for 4 anchors ×
+822M adapted params every trial), not the forwards, so the CPU timings predict
+nothing. Measure seconds-per-trial, then multiply.
 
 Detach with `Ctrl-b d`, reattach with `tmux attach -t polis`.
+
+> **Verify tmux actually has the session.** If `Ctrl-b` echoes as `^B` in the
+> terminal instead of being swallowed as the prefix, you are *not* attached and a
+> dropped SSH session will kill the run. `echo $TMUX` is the reliable check.
+
+### Measured calibration (L40S-class card, 2026-08-02)
+
+```
+preflight (model load + 5 evals)            57 s
+target 1279, TRIALS=5 (load + 5 + final)   110 s
+```
+
+Those 110 s cover model load, ΔW construction, 5 trials, **and** the final eval
+block (4 NLL configs × 30 utterances + 4 UTAS configs × 33 items) — and optuna
+runs at `WARNING` verbosity (`bo_merge_coeffs.py:51`), so there are no per-trial
+timestamps to decompose it with. Treat the per-run figures below as an order of
+magnitude, not a measurement; the first target of the real run gives the true rate.
+
+| Run | Trials | Rough wall clock |
+|---|---|---|
+| single-split | 3 targets × 40 | ~30 min |
+| nested 5-fold | 3 × 5 × 40 = 600 | ~2–3 h |
+
+Both fit comfortably in one session, so budget for doing the granularity ablation
+in §6 as well rather than treating it as optional.
+
+### Check the objective isn't flat
+
+The preflight proves the merge *applies*; this proves the BO *saw* it.
+
+```bash
+tail -60 specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log
+```
+
+What you are checking is that the fitted coefficients differ across anchors and
+groups and that train/test NLL are close. Identical values everywhere means stop
+and debug, same as a failed gate.
+
+> ### ⚠️ Do not read the calibration's BO number as a result
+> `make_sampler` sets `n_start = max(6, min(n_dims, max(6, trials // 3)))`
+> (`bo_merge_coeffs.py:106`). At `dims=12` (4 anchors × 3 groups) with `TRIALS=5`
+> that is **6 startup trials for a 5-trial budget** — the GP never fits, and all
+> five trials are random draws.
+>
+> So the calibration will very likely show BO *losing* to best-single. It did on
+> 2026-08-02 (BO 2.3638 vs best-single 2.1763, base 2.2648). That is expected and
+> is **not** a reason to abort. `TRIALS=40` gives 12 startup + 28 GP-guided trials,
+> which is the first configuration whose BO number means anything.
+
+Reference calibration output (target 1279, 5 random trials — pipeline check only):
+
+```
+  base (no adapter)      2.2648
+  uniform merge          2.7738
+  best single anchor     2.1763   (2377_qwen7b)
+  BO layer-group merge   2.3638   (train 2.3506)
+```
+
+Note the UTAS block is *live* at 7B — MAE(E) spanned 1.089–1.375 across configs,
+rather than pinning near 3.0 the way it does at 0.5B. The "degenerate metric"
+caveat printed by the script applies to the development scale, not to this run.
+
+### Move the calibration log aside
+
+`run_7b_bo_gpu.sh` opens `target_<id>.log` with `>>`, so the full run appends onto
+your calibration output and the nested run appends onto *that* — three protocols
+concatenated into one file, which makes the deliverable near-unreadable.
+
+```bash
+mv specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log \
+   specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/calib_1279_trials5.log
+```
+
+---
+
+## 5.5 Everything after calibration, as one block
+
+Calibration passed → run this. It is §6 and §7 concatenated with nothing to think
+about in between; the individual steps are broken out below if something fails.
+
+Paste **on the pod**, inside tmux:
+
+```bash
+tmux new -s polis 2>/dev/null || tmux attach -t polis
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+
+# keep the 5-trial calibration out of the real logs (skip if already renamed)
+[ -f "$LOGS/target_1279.log" ] && mv "$LOGS/target_1279.log" "$LOGS/calib_1279_trials5.log"
+
+# 1. single-split -- the only source of the UTAS half of the table
+time ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
+
+# 2. nested 5-fold CV -- unbiased estimate + error bars
+time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
+
+# 3. granularity ablation -- lets the paper drop its 0.5B-only concession
+time python research/polis/bo_granularity_ablation.py \
+  --target 1279 --budget 30 --folds 4 --trials 20 \
+  --groups 1 3 \
+  --adapters research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  2>&1 | tee "$LOGS/granularity_1279.log"
+
+ls -la "$LOGS"
+```
+
+Then paste **on the laptop** to retrieve — do this *before* destroying the pod:
+
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+
+cd $REPO
+git add specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+git commit -m "POLIS: 7B merge-method comparison results (single-split, nested CV, granularity)"
+```
+
+After the first target's `START`/`END` stamps appear in the log you will know the
+true per-trial rate — check them before walking away, since the nested estimate in
+§5 is extrapolated, not measured.
 
 ---
 
@@ -140,12 +273,24 @@ Detach with `Ctrl-b d`, reattach with `tmux attach -t polis`.
 You need **both**: nested CV has no `--utas-eval` path, so the single-split run is
 the only source for the UTAS half of the table.
 
-```bash
-# single-split (NLL + UTAS) -- matches the 0.5B protocol
-./research/polis/scripts/run_7b_bo_gpu.sh
+Run single-split **first** — it carries the UTAS half — and rename its logs before
+starting nested, for the append reason in §5.
 
-# nested 5-fold CV (unbiased, error bars) -- ~5x the cost
-NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+# single-split (NLL + UTAS) -- matches the 0.5B protocol, ~30 min
+time ./research/polis/scripts/run_7b_bo_gpu.sh
+
+# separate the two protocols before the second run appends to the same files
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
+
+# nested 5-fold CV (unbiased, error bars) -- ~2-3 h
+time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
 ```
 
 Tunable via environment (defaults shown):
@@ -162,12 +307,13 @@ Tunable via environment (defaults shown):
 
 Logs: `specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_<id>.log`
 
-### Optional, same session
+### Granularity ablation — same session, recommended
 
 The granularity sweep in the paper (§`sec:granularity`) is 0.5B-only, which is why
 it currently concedes *"we do not claim that per-depth granularity improves fidelity
-at development scale."* 7B is where that claim could land, and the marginal cost is
-small once the model is loaded.
+at development scale."* 7B is where that claim could land, and at 2 group settings
+× 4 folds × 20 trials it is a small fraction of the nested run's cost. Given the
+session is already paid for, do this rather than skip it.
 
 ```bash
 cd research/polis
@@ -175,8 +321,14 @@ python bo_granularity_ablation.py \
   --target 1279 --budget 30 --folds 4 --trials 20 \
   --groups 1 3 \
   --adapters output/polis_{152,2377,3631,5520}_qwen7b \
-  --base Qwen/Qwen2.5-7B-Instruct
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda
 ```
+
+`--device cuda` matters here for the same reason as §4, though the failure is not
+silent: `LayerGroupMerger` raises `RuntimeError` if any target module is a meta
+tensor (`merge_layer_group.py:98`), so an offloaded model aborts the run rather
+than returning a flat objective. Pin the device anyway — an explicit failure at
+minute zero beats one after the model has loaded.
 
 `--groups 1 3` is deliberate. The default sweeps `[1, 3, n_layers]`, and at 7B that
 third bookend is 4×28 = **112 coefficients** — the most expensive cell by far, to
@@ -214,7 +366,13 @@ volume bills whether or not anything is running.
 | `ModuleNotFoundError: optuna` | `setup_pod.sh` not run, or its pip step failed. Re-run it. |
 | `FATAL: missing .../2024HoR.json` | Step 3 didn't land, or `KOKKAI_DATA_DIR` is unset. |
 | CUDA OOM during merge | Card below 40 GB, or something else resident. `nvidia-smi` to check. |
+| Preflight fine, but BO trials all score the same | Merge applies yet the BO isn't seeing it. Stop — treat as a failed gate. |
+| Calibration shows BO worse than best-single | Expected at `TRIALS=5`: startup trials (6) exceed the budget, so the GP never fits. Not a failure; see §5. |
+| BO still loses to best-single at `TRIALS=40` | A real (negative) result, not a bug. Report it; don't quietly raise `--trials` until it wins. |
+| `RuntimeError: N of M target modules are meta tensors` | Model was offloaded under `device_map="auto"`. Pass `--device cuda` (or `--device cpu` if it genuinely doesn't fit). |
+| `^B` echoes in the terminal | You are not attached to tmux despite thinking you are. `echo $TMUX`; reattach before any long run. |
 | Session died mid-run | Not in tmux. Logs survive; re-run the affected target only via `TARGETS=<id>`. |
+| One log holds several runs jumbled together | The script appends (`>>`). Rename `target_*.log` between protocols, as in §5–6. |
 | Pod restarted, model re-downloading | No network volume (expected), or `HF_HOME` unset. Re-run `setup_pod.sh`. |
 
 ## Notes

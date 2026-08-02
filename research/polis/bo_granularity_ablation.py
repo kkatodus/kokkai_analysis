@@ -20,6 +20,11 @@ is the spec's 8 / 24–32 / ~192 curve.
 Run from research/polis/ with the research venv:
     python bo_granularity_ablation.py \
         --target 152 --budget 40 --folds 4 --trials 20
+
+At main scale pin the device explicitly, as in bo_merge_coeffs.py:
+    python bo_granularity_ablation.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+        --target 1279 --budget 30 --folds 4 --trials 20 --groups 1 3 \
+        --adapters output/polis_{152,2377,3631,5520}_qwen7b
 """
 from __future__ import annotations
 
@@ -51,6 +56,14 @@ def main() -> None:
     ap.add_argument("--trials", type=int, default=20)
     ap.add_argument("--cmax", type=float, default=1.5)
     ap.add_argument("--sampler", choices=["auto", "gp", "tpe"], default="auto")
+    ap.add_argument("--device", default="auto",
+                    help="'auto' = device_map=auto; anything else pins the whole model to that "
+                         "device ('cpu', 'cuda'). Mirrors bo_merge_coeffs.py: the merge writes ΔW "
+                         "in place, and under 'auto' a model too big for the GPU has its overflow "
+                         "layers placed as meta tensors. LayerGroupMerger raises on those rather "
+                         "than merging silently-wrong, but pin explicitly at main scale — 'cuda' "
+                         "on a card that fits the whole model (7B bf16 needs ~31GB incl. the fp32 "
+                         "anchor deltas), 'cpu' otherwise.")
     args = ap.parse_args()
 
     here = os.path.dirname(__file__)
@@ -61,7 +74,8 @@ def main() -> None:
     tok = AutoTokenizer.from_pretrained(args.base)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    model = AutoModelForCausalLM.from_pretrained(args.base, device_map="auto", dtype=torch.bfloat16)
+    device_map = "auto" if args.device == "auto" else {"": args.device}
+    model = AutoModelForCausalLM.from_pretrained(args.base, device_map=device_map, dtype=torch.bfloat16)
     model.eval()
     scorer = NLLScorer(model, tok)
     allinst = load_instances(args.target, args.budget, args.dpo_dir)
