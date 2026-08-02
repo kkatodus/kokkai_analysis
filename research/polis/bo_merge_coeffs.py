@@ -177,15 +177,25 @@ def best_single(merger, scorer, names, fit_inst, eval_inst, n_g):
     return best, scorer.mean_nll(eval_inst)
 
 
+def fold_indices(n: int, folds: int, seed: int = 0) -> list:
+    """Outer-fold index split for nested CV.
+
+    Shared so that baselines living in other scripts (`sft_baseline.py`) split the
+    identical instances the identical way and their per-fold numbers *pair* with the
+    merge results rather than merely being comparable in aggregate. Do not inline it.
+    """
+    idx = np.arange(n)
+    np.random.RandomState(seed).shuffle(idx)
+    return np.array_split(idx, folds)
+
+
 def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax, seed=0,
               icl=False, icl_shots=0, icl_max_chars=12000):
     """Nested k-fold CV (spec §2.4). Each outer fold is held out while the BO tunes
     on the rest, then scored on the untouched fold; baselines rotate identically.
     Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate)."""
     n_a, n_g = len(names), merger.n_groups
-    idx = np.arange(len(allinst))
-    np.random.RandomState(seed).shuffle(idx)
-    fold_idx = np.array_split(idx, folds)
+    fold_idx = fold_indices(len(allinst), folds, seed)
 
     rows: dict[str, list[float]] = {"base": [], "uniform": [], "best-single": [], "BO": []}
     if icl:
