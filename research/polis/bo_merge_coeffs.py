@@ -53,6 +53,11 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 # DPO pairs live on the data drive (`kdata mount`); set KOKKAI_DATA_DIR to point
 # elsewhere, e.g. a rented GPU box that only has the target subset copied over.
 DPO_DIR = os.path.join(DATA_DIR, "polis", "dpo_pairs_full")
+# The held-out targets' pairs. Only this subset is shipped to a pod (RUNPOD.md §3), so
+# scripts that only ever run on targets should default here, not to the full corpus:
+# defaulting to DPO_DIR costs a model load before failing with FileNotFoundError, which
+# has now happened twice on a rented GPU.
+TARGETS_DIR = os.path.join(DATA_DIR, "polis", "dpo_pairs_targets")
 
 
 def load_instances(person_id: str, n: int, dpo_dir: str = DPO_DIR) -> list[tuple[str, str]]:
