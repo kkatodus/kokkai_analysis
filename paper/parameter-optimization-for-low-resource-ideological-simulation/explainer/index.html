@@ -92,6 +92,14 @@
                padding:14px 18px; margin:14px 0; text-align:center; font-size:17px;
                font-family:ui-monospace,monospace; overflow-x:auto; }
   .two { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .ja { font-size:14.5px; line-height:1.9; margin:0 0 10px;
+        font-family:"Hiragino Mincho ProN","Yu Mincho",serif; }
+  .step { border-left:3px solid var(--grid); padding:10px 16px; margin:10px 0;
+          border-radius:0 8px 8px 0; background:var(--code-bg); }
+  .step.on { border-left-color:var(--series-3); background:var(--surface-1); }
+  .step h4 { margin:0 0 4px; font-size:14px; }
+  .step p { margin:0; font-size:14px; color:var(--text-secondary); }
+  .step code { font-size:12px; }
   @media (max-width:900px){ .layout{grid-template-columns:1fr} nav{display:none} main{padding:24px} .two{grid-template-columns:1fr} }
 </style>
 </head>
@@ -100,19 +108,25 @@
 <div class="layout">
 <nav>
   <h2>Contents</h2>
-  <a href="#intro">1 · The problem</a>
-  <a href="#data">2 · Building the data</a>
-  <a href="#dpo">3 · DPO</a>
-  <a href="#lora">4 · LoRA &amp; task vectors</a>
-  <a href="#dare">5 · DARE <em>(interactive)</em></a>
-  <a href="#ties">6 · TIES <em>(interactive)</em></a>
-  <a href="#groups">7 · Layer groups <em>(interactive)</em></a>
-  <a href="#nll">8 · The objective</a>
-  <a href="#bo">9 · Bayesian opt <em>(interactive)</em></a>
-  <a href="#cv">10 · Nested CV</a>
-  <a href="#utas">11 · Survey scoring <em>(interactive)</em></a>
-  <a href="#results">12 · Results</a>
-  <a href="#pitfalls">13 · Engineering traps</a>
+  <a href="#primer">1 · Primer <em>(start here)</em></a>
+  <a href="#intro">2 · The problem</a>
+  <a href="#anchors">3 · Choosing anchors <em>(interactive)</em></a>
+  <a href="#data">4 · Building the data</a>
+  <a href="#dpo">5 · DPO</a>
+  <a href="#lora">6 · LoRA &amp; task vectors <em>(interactive)</em></a>
+  <a href="#dare">7 · DARE <em>(interactive)</em></a>
+  <a href="#ties">8 · TIES <em>(interactive)</em></a>
+  <a href="#groups">9 · Layer groups <em>(interactive)</em></a>
+  <a href="#nll">10 · The objective</a>
+  <a href="#bo">11 · Bayesian opt <em>(interactive)</em></a>
+  <a href="#trace">12 · One trial, start to finish</a>
+  <a href="#cv">13 · Nested CV</a>
+  <a href="#utas">14 · Survey scoring <em>(interactive)</em></a>
+  <a href="#results">15 · Results: does it work?</a>
+  <a href="#broken">16 · When the metric broke</a>
+  <a href="#standing">17 · What stands, what doesn't</a>
+  <a href="#pitfalls">18 · Engineering traps</a>
+  <a href="#run">19 · Run it yourself</a>
 </nav>
 <main>
 
@@ -121,13 +135,133 @@
 <p class="lede">
   How do you simulate a politician who has barely said anything on the record? This is a
   guided tour of the actual code behind the POLIS paper — every concept paired with the
-  lines that implement it. Assumes you know attention, MLPs, and how a language model is
-  trained; everything past that is explained from scratch.
+  lines that implement it, and every number taken from the project's own data files.
+  If you have taken one machine-learning course and know roughly what a neural network
+  and a language model are, §1 will get you the rest of the way.
 </p>
+<div class="callout">
+<span class="lbl">How to read this</span>
+§1–§14 build the method up from scratch; every unfamiliar term gets defined where it first
+appears, and there is a glossary at the end of §1. §15–§17 are the results, and they are
+genuinely mixed: one measurement says the method works, a second says nothing at all, and
+most of the interesting work went into figuring out <em>which</em> of those two conclusions
+to believe. If you only read three sections, read §1, §15, and §16.
+</div>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="primer">
+<h2>1 · Primer: five ideas you need first</h2>
+
+<p>
+  Everything in this paper follows from five ideas. None of them require more than
+  first-year linear algebra. If they are already familiar, skip to §2.
+</p>
+
+<div class="card">
+<h3>① A model is a big pile of numbers</h3>
+<p style="margin-bottom:0">
+  Qwen2.5-7B — the model used here — is about 7.6 <em>billion</em> numbers, organised into
+  matrices. When you feed it text, it multiplies that text (as vectors) through those
+  matrices and produces a probability for every possible next word. The numbers are
+  called <strong>weights</strong>, and they are the entire model. Change them and you
+  change what it says.
+</p>
+</div>
+
+<div class="card">
+<h3>② Fine-tuning means nudging those numbers</h3>
+<p style="margin-bottom:0">
+  To make a model imitate a specific person, you show it that person's text and adjust
+  the weights so their sentences become more likely. The model does not gain a "Kishida
+  module" — every relevant weight simply shifts a little. Write the finished weights as
+  W<sub>after</sub> = W<sub>before</sub> + ΔW. That <strong>ΔW</strong> ("delta W", the
+  change) is the entire product of fine-tuning, and it is a matrix of the same shape as
+  the original.
+</p>
+</div>
+
+<div class="card">
+<h3>③ ΔW is a vector, so you can do arithmetic on it</h3>
+<p>
+  This is the leap. If you flatten a ΔW into one long list of numbers, it is a
+  <strong>vector</strong> — a point, or a direction, in a space with hundreds of millions
+  of dimensions. And vectors can be added, scaled, and averaged.
+</p>
+<p style="margin-bottom:0">
+  So <code>0.5 × ΔW<sub>Kishida</sub> + 0.5 × ΔW<sub>Shiokawa</sub></code> is a perfectly
+  well-defined thing to compute. Whether it <em>means</em> "halfway between those two
+  politicians" is an empirical question — and it is the question the whole paper is
+  testing. This idea is usually called a <strong>task vector</strong>.
+</p>
+</div>
+
+<div class="card">
+<h3>④ "Weight space" is where those vectors live</h3>
+<p>
+  Picture the base model sitting at the origin. Each fine-tuned politician is a point
+  some distance away, in their own direction. Blend those directions and you land
+  somewhere in between — and the set of all reachable blends is the <em>span</em> of
+  your anchors.
+</p>
+<div id="spanViz"></div>
+<p class="tip" style="margin-bottom:0">
+  Schematic — the real space has ~822 million dimensions, and no honest 2-D picture of
+  it exists. What is real is the consequence: a target inside the shaded region can be
+  reached by blending; one outside it cannot. §3 measures how often that actually happens.
+</p>
+</div>
+
+<div class="card">
+<h3>⑤ Log-likelihood: scoring a guess</h3>
+<p>
+  Finally we need a way to say whether one persona is better than another. A language
+  model assigns a probability to every next word, so given a sentence a real politician
+  actually said, you can ask: <em>what probability did this model assign to those exact
+  words?</em>
+</p>
+<p>
+  Probabilities of long sentences are astronomically small, so we take logarithms and
+  add them instead of multiplying — and then flip the sign so that smaller is better.
+  That gives <strong>negative log-likelihood (NLL)</strong>, measured in
+  <em>nats</em> per word.
+</p>
+<p style="margin-bottom:0">
+  Low NLL = the model found the real sentence unsurprising = it is a good imitation.
+  This is the score POLIS optimises, and it appears in every results table.
+</p>
+</div>
+
+<div class="callout">
+<span class="lbl">The whole paper in one sentence</span>
+Fine-tune four data-rich politicians, treat their ΔW as vectors, and for a politician
+with almost no data, <em>search</em> for the blend of those four vectors that makes their
+handful of real sentences least surprising.
+</div>
+
+<div class="card">
+<h3>Glossary — everything you will need, in one place</h3>
+<table>
+<tbody>
+<tr><td><strong>weights</strong></td><td style="text-align:left">The billions of numbers that <em>are</em> the model.</td></tr>
+<tr><td><strong>ΔW</strong></td><td style="text-align:left">"Delta W" — how much fine-tuning changed the weights. Same shape as the weights themselves.</td></tr>
+<tr><td><strong>task vector</strong></td><td style="text-align:left">ΔW viewed as a direction you can scale and add. The paper's central object.</td></tr>
+<tr><td><strong>anchor</strong></td><td style="text-align:left">One of the four data-rich politicians we actually fine-tuned on. We have their ΔW.</td></tr>
+<tr><td><strong>target</strong></td><td style="text-align:left">A politician we are trying to <em>simulate</em> without training on them. We have ~30 sentences.</td></tr>
+<tr><td><strong>merge</strong></td><td style="text-align:left">Adding a weighted combination of anchor ΔWs onto the base model.</td></tr>
+<tr><td><strong>coefficients (C)</strong></td><td style="text-align:left">The 12 numbers that say how much of each anchor to use at each depth. The thing we search for.</td></tr>
+<tr><td><strong>NLL</strong></td><td style="text-align:left">Negative log-likelihood: how surprised the model was by text the target really said. Lower = better.</td></tr>
+<tr><td><strong>nat</strong></td><td style="text-align:left">The unit NLL is measured in — one nat ≈ a factor of 2.7 in probability. Think of it as "bits, but base <em>e</em>".</td></tr>
+<tr><td><strong>held-out</strong></td><td style="text-align:left">Data deliberately hidden from the tuning process, kept only for the final score.</td></tr>
+<tr><td><strong>baseline</strong></td><td style="text-align:left">A dumber method you must beat before your method counts as working.</td></tr>
+<tr><td><strong>UTAS</strong></td><td style="text-align:left">A real academic survey Japanese politicians filled in. Used as an outside check (§14).</td></tr>
+</tbody>
+</table>
+</div>
+</section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="intro">
-<h2>1 · The problem: you cannot fine-tune on data you don't have</h2>
+<h2>2 · The problem: you cannot fine-tune on data you don't have</h2>
 
 <p>
   "Silicon sampling" is the idea of using an LLM to stand in for a human respondent —
@@ -162,8 +296,103 @@
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
+<section id="anchors">
+<h2>3 · Choosing the anchors — and the limit nobody can optimise away</h2>
+
+<p>
+  Before any training happens, someone has to decide <em>which</em> four politicians
+  become the anchors. This choice is more consequential than it looks: a blend of
+  anchors can only ever express positions that lie <strong>between</strong> them. Pick
+  four politicians who all agree with each other and there is nothing to interpolate.
+</p>
+
+<p>
+  The selection is automated. Every politician gets a speech count from their archive,
+  and an ideological position from the project's existing scaling data — a file with
+  55 separate policy "axes" (immigration, defence, nuclear power, …), each placing
+  politicians on a 1-D line.
+</p>
+
+<pre><code><span class="kw">def</span> count_speeches(pid):
+    path = os.path.join(ORGANIZED_DIR, str(pid), <span class="str">"all_speeches.jsonl"</span>)
+    <span class="kw">if</span> <span class="kw">not</span> os.path.isfile(path):
+        <span class="kw">return</span> <span class="str">0</span>
+    <span class="kw">with</span> open(path, <span class="str">"r"</span>, encoding=<span class="str">"utf-8"</span>) <span class="kw">as</span> f:
+        <span class="kw">return</span> sum(<span class="str">1</span> <span class="kw">for</span> _ <span class="kw">in</span> f)</code></pre>
+<p class="srcref">research/polis/select_polis_anchors.py:72–77</p>
+
+<p>
+  The rule is then simple: take the most speech-rich politician from each of the four
+  major blocs. That is what <code>anchors.json</code> records:
+</p>
+
+<table>
+<thead><tr><th>Anchor</th><th style="text-align:left">Party</th><th>person_id</th><th>Speeches</th></tr></thead>
+<tbody>
+<tr><td>岸田文雄 · Kishida</td><td style="text-align:left">自民 · LDP (conservative)</td><td>152</td><td>20,418</td></tr>
+<tr><td>福島みずほ · Fukushima</td><td style="text-align:left">社民 · SDP (left)</td><td>3631</td><td>18,041</td></tr>
+<tr><td>塩川鉄也 · Shiokawa</td><td style="text-align:left">共産 · JCP (communist)</td><td>2377</td><td>12,308</td></tr>
+<tr><td>上田清司 · Ueda</td><td style="text-align:left">民主 · DP-lineage (centre)</td><td>5520</td><td>4,118</td></tr>
+</tbody>
+</table>
+<p class="srcref">data/data/polis/anchors.json — written by select_polis_anchors.py</p>
+
+<p>
+  Compare those totals to the three <em>targets</em> the method is actually tested on,
+  and the sparsity problem stops being abstract. The anchors have tens of thousands of
+  utterances each. POLIS is allowed to look at <strong>30</strong> from each target.
+</p>
+
+<h3>Does the span actually contain the targets?</h3>
+<p>
+  This is the honest question, and the code answers it per axis rather than on average,
+  because each axis has its own arbitrary orientation and averaging across them would be
+  meaningless:
+</p>
+<pre><code><span class="com"># Each axis has its own arbitrary orientation, so we never average x across axes.</span>
+<span class="com"># Coverage is measured PER AXIS: the anchors define [min_x, max_x] and a target is</span>
+<span class="com"># "covered" on that axis iff its x lands inside.</span></code></pre>
+<p class="srcref">research/polis/select_polis_anchors.py:10–14</p>
+
+<p>
+  Below is one real axis from that file — attitudes on foreign workers, with all 587
+  politicians who appear on it. The four anchors are marked, the shaded band is what a
+  blend can reach, and the three held-out targets are plotted against it.
+</p>
+
+<div id="coverageViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--seq-250)"></span>All 587 politicians on this axis</span>
+  <span><span class="swatch" style="background:var(--series-1)"></span>Anchors</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Held-out targets</span>
+</div>
+<p class="tip">
+  Real positions from <code>s3_mirror/kokkai-doc/ideology/ideology.json.gz</code>,
+  axis <code>economy/foreignworkers</code>.
+</p>
+
+<div class="callout warn">
+<span class="lbl">Look at Takaichi</span>
+On this axis she sits at <strong>+0.11</strong>, and the anchor span stops at
+<strong>−0.55</strong>. She is <em>outside</em> what any blend of these four anchors can
+express — the merge cannot reach her, no matter how good the optimiser is. Across every
+axis where all four anchors appear, the targets land inside the span
+<strong>71%</strong> (Takaichi), <strong>67%</strong> (Akamine) and <strong>89%</strong>
+(Edano) of the time. The paper's own headline coverage figure is 0.62 across 55 axes.
+</div>
+
+<p>
+  This is worth sitting with, because it is a structural limit rather than a bug. Roughly
+  a third of the time the target is not inside the reachable region at all, and the best
+  the optimiser can do is get as close to the boundary as possible. More anchors, or
+  better-spread anchors, would shrink the gap — which is exactly why "anchor count and
+  party coverage are unstudied here" appears in the paper's own limitations.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
 <section id="data">
-<h2>2 · Building the data: session-grounded preference pairs</h2>
+<h2>4 · Building the data: session-grounded preference pairs</h2>
 
 <p>
   Before any modelling, we need training examples that capture how a specific politician
@@ -195,11 +424,75 @@ the training signal pushes away from.
   The immediately preceding speech is always kept intact even when truncating, because it is
   usually the <em>question being answered</em> — drop it and the reply becomes incoherent.
 </p>
-<pre><code><span class="com"># prompt = (optional persona instruction) + last K speeches preceding the</span>
-<span class="com">#          utterance in the same sitting + a cue for the anchor to speak,</span>
-<span class="com">#          truncated to a char budget but always keeping the immediately</span>
-<span class="com">#          preceding speech intact.</span></code></pre>
-<p class="srcref">data/export_polis_dpo_pairs.py:8–14</p>
+<pre><code><span class="kw">if</span> <span class="kw">not</span> context:
+    <span class="com"># Always keep the immediately preceding speech (usually the question</span>
+    <span class="com"># being answered), but if it alone blows the budget, head-truncate it</span>
+    <span class="com"># so we keep the tail nearest the answer.</span>
+    <span class="kw">if</span> len(formatted) &gt; max_context_chars:
+        formatted = <span class="str">"…"</span> + formatted[-max_context_chars:]
+<span class="kw">elif</span> used + len(formatted) &gt; max_context_chars:
+    <span class="kw">break</span>                       <span class="com"># older context: drop once over budget</span></code></pre>
+<p class="srcref">research/polis/export_polis_dpo_pairs.py:127–136</p>
+
+<h3>A real training example</h3>
+<p>
+  Abstract descriptions of "caricature" are much less convincing than the real thing.
+  Here is an actual row from <code>dpo_pairs_full/1088.jsonl</code> — Diet member
+  坂井隆憲 (Sakai Takanori, LDP), 12 March 1991, in a committee discussion of the
+  ¥430-trillion public-infrastructure plan. Nothing here is invented for the explainer.
+</p>
+
+<div class="card">
+<p class="eyebrow">prompt — what both sides are conditioned on</p>
+<p class="ja">
+  あなたは日本の国会議員「坂井隆憲（自由民主党）」です。国会審議の以下のやり取りに続けて、あなた自身の発言をしてください。<br><br>
+  <span style="color:var(--text-secondary)">青木保之：我が国の住宅、社会資本の整備推進につきましては、先生今おっしゃいましたように公園、下水あるいは道路、安全の保持等に至りますまで、他の先進国に比べましてまだ立ちおくれている部分がたくさん残っておるわけでございまして…（中略）…この四百三十兆円の計画を着実に、長期的な計画のもとに整備推進していくのが私どもの務めであるというように認識しており、今後とも努力する所存であります。</span><br><br>
+  坂井隆憲（自由民主党）：
+</p>
+<p class="tip" style="margin-bottom:0">
+  A government witness has just given a long defence of the ¥430tn plan. Sakai speaks next.
+</p>
+</div>
+
+<div class="two">
+<div class="card" style="border-left:3px solid var(--series-3)">
+<p class="eyebrow" style="color:var(--series-3)">chosen — what he really said</p>
+<p class="ja">公園事業については、子供から老人に至るまで国民のだれもの憩いの場として、まことに豊かな国民生活の実現を図る上で重要な施設であると思います。我が国の整備水準は、ただいまお話がありましたように、諸外国の都市の公園水準に比べて低いということでありますけれども、<strong>どのような状況なのか、まずその実態についてお伺いしたいと思います。</strong></p>
+<p class="tip" style="margin-bottom:0">
+  He narrows immediately to <em>one</em> item — parks — and ends by asking for specific
+  figures. This is what committee work sounds like: bounded, procedural, and it hands
+  the floor back with a question.
+</p>
+</div>
+<div class="card" style="border-left:3px solid var(--series-2)">
+<p class="eyebrow" style="color:var(--series-2)">rejected — the LLM's version of him</p>
+<p class="ja">先生、社会資本整備の重要性、そしてそれが国民生活の豊かさに直結する点、改めてご指摘いただきありがとうございます。四百三十兆円という巨額の財源を確保し、この計画を長期的な視点で着実に実行していくことは、<strong>まさに我々自由民主党の使命であります。</strong>特に、少子高齢化が進む我が国において…国民の安全・安心を第一に、計画の着実な推進に全力を尽くしてまいります。</p>
+<p class="tip" style="margin-bottom:0">
+  Fluent, warm, and completely generic. It thanks the speaker, restates the premise,
+  invokes <em>the mission of our Liberal Democratic Party</em>, gestures at the ageing
+  population, and pledges total effort. It asks nothing. It could be any LDP member in
+  any decade.
+</p>
+</div>
+</div>
+
+<p>
+  Read those two side by side and the paper's thesis stops being abstract. The caricature
+  is not <em>wrong</em> — it is plausible, on-topic, and correctly partisan. It is wrong
+  in a subtler way: it performs a party identity instead of doing a job. Training on
+  "prefer the left over the right" is training away from exactly that failure.
+</p>
+
+<div class="callout warn">
+<span class="lbl">A choice the code documents against itself</span>
+The paper's spec called for the caricature to come from <em>the model being fine-tuned</em>.
+The implementation uses Gemini 2.5 Flash-Lite instead — cheaper, no GPU — and the source
+file says so in its own docstring rather than quietly diverging: <em>"the DPO signal
+becomes 'prefer the real utterance over a capable general LLM's role-play' rather than
+'over the policy's own.' Recorded so the choice is explicit."</em>
+(<code>generate_polis_rejected.py:10–17</code>) Worth noticing as a habit — a deviation
+written down is a deviation a reviewer can evaluate.
+</div>
 
 <p>
   Context is capped at ~1200 characters as a proxy for the trainer's 1024-token limit
@@ -210,13 +503,17 @@ the training signal pushes away from.
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="dpo">
-<h2>3 · DPO: learning from pairs without a reward model</h2>
+<h2>5 · DPO: learning from pairs without a reward model</h2>
 
 <p>
-  <strong>Direct Preference Optimization</strong> is how each anchor adapter is trained.
-  If you know RLHF, DPO is the shortcut that skips it: classic RLHF trains a separate
-  reward model on human preferences, then optimises the policy against it with RL. DPO
-  proves you can collapse those two steps into a single supervised-looking loss.
+  <strong>Direct Preference Optimization (DPO)</strong> is how each anchor adapter is
+  trained. The setup: you have pairs of responses where one is better than the other, and
+  you want the model to prefer the better one. The classic recipe for this is
+  <strong>RLHF</strong> (reinforcement learning from human feedback), which does it in two
+  stages — first train a separate "reward model" to score responses, then use reinforcement
+  learning to push the language model toward high-scoring output. DPO's contribution is a
+  piece of algebra showing you can skip the middle step entirely: the two stages collapse
+  into one loss function you can minimise with ordinary gradient descent.
 </p>
 
 <div class="mathblock">
@@ -234,9 +531,12 @@ the training signal pushes away from.
       Dividing by the reference is what keeps the model from wandering off — it can only be
       rewarded for moving <em>relatively</em>.</li>
   <li>The difference of the two ratios is a <strong>score</strong>: high when the model has
-      raised the real utterance and lowered the caricature. σ turns it into a probability
-      and the log makes it a loss.</li>
-  <li><strong>β</strong> controls how far the model may drift from the reference.</li>
+      raised the real utterance and lowered the caricature. <strong>σ</strong> is the
+      sigmoid, the S-shaped function that squashes any number into the range (0, 1) — so
+      the score becomes a probability, and taking −log of it makes it a loss that is small
+      when the probability is near 1.</li>
+  <li><strong>β</strong> ("beta") is a dial: small β lets the model drift far from where it
+      started, large β keeps it close. Set to 0.1 here.</li>
 </ul>
 
 <p>
@@ -246,18 +546,43 @@ the training signal pushes away from.
   anchors all trained cleanly to these values.
 </p>
 
+<p>
+  The training configuration is small enough to read in full — and worth reading, because
+  every number in it is a compute-budget decision:
+</p>
+<pre><code>training_args = DPOConfig(
+    per_device_train_batch_size=<span class="str">1</span>,      <span class="com"># DPO is extremely memory heavy</span>
+    gradient_accumulation_steps=<span class="str">8</span>,     <span class="com"># compensate for the tiny batch</span>
+    gradient_checkpointing=<span class="kw">True</span>,        <span class="com"># recompute activations instead of storing</span>
+    learning_rate=<span class="str">5e-5</span>,
+    optim=<span class="str">"paged_adamw_8bit"</span> <span class="kw">if</span> args.quantize <span class="kw">else</span> <span class="str">"adamw_torch"</span>,
+    beta=<span class="str">0.1</span>,                          <span class="com"># DPO temperature / divergence penalty</span>
+    max_length=<span class="str">1024</span>,                   <span class="com"># prompt + completion cap</span>
+)</code></pre>
+<p class="srcref">research/polis/train_one_politician_persona.py:67–83</p>
+<p>
+  A batch size of <em>one</em> is not a typo. DPO holds two models in memory (the policy
+  and its frozen reference) and processes two completions per example, so the memory cost
+  per step is roughly four times ordinary fine-tuning. Accumulating gradients over 8 steps
+  recovers an effective batch of 8 without ever holding 8 examples at once. This is the
+  standard toolkit for training a 7B model on hardware that has no business training one.
+</p>
+
 <div class="callout warn">
-<span class="lbl">Careful</span>
+<span class="lbl">Careful — a distinction that comes back in §15</span>
 High margins mean the adapter reliably separates real from fake. That is <em>not</em> the
-same as having learned ideology. At 0.5B the adapters largely captured <strong>register</strong>
-— the cadence of Diet speech — which is why the strongest-trained anchor kept winning as a
-generic "fluent-parliamentarian" backbone regardless of the target's party. See §12.
+same as having learned ideology. At 0.5B the adapters largely captured
+<strong>register</strong> — the cadence and vocabulary of Diet speech, independent of what
+is being argued — which is why one anchor kept winning as a generic
+"fluent-parliamentarian" backbone regardless of the target's party. Learning <em>how a
+politician talks</em> and learning <em>what a politician believes</em> are separable, and
+almost every finding in §15–§17 turns on which of the two the method actually captured.
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="lora">
-<h2>4 · LoRA and the idea of a "task vector"</h2>
+<h2>6 · LoRA and the idea of a "task vector"</h2>
 
 <p>
   Fine-tuning every weight of a 7B model per politician is unaffordable. <strong>LoRA</strong>
@@ -269,25 +594,63 @@ generic "fluent-parliamentarian" backbone regardless of the target's party. See 
 <div class="mathblock">ΔW = (α / r) · B · A</div>
 
 <p>
-  B·A is an out×in matrix — the same shape as W — but it is built from only
-  r(out+in) parameters instead of out·in. At 7B this makes each anchor adapter a 20 MB file
-  standing in for a 15 GB model. α/r is a fixed scaling constant from the config
+  The trick is one of shape. Multiplying an out×r matrix by an r×in matrix gives an
+  out×in result — <em>the same shape as W</em> — but you only ever stored the two thin
+  factors. Rank r is the width of the bottleneck: everything the adapter learned has to
+  squeeze through 16 dimensions. α/r is a fixed scaling constant from the config
   (α=32, r=16, so the scale is 2).
+</p>
+
+<div class="card">
+<h3>Try it — the real 7B adapter</h3>
+<p>
+  These are the actual module shapes in <code>polis_152_qwen7b</code>: 28 layers × 4
+  attention projections = 112 matrices. Move the rank slider and watch what LoRA buys.
+</p>
+<div class="ctrl">
+  <label>LoRA rank <em>r</em></label>
+  <input type="range" id="loraR" min="1" max="256" step="1" value="16">
+  <span class="val" id="loraRv">16</span>
+</div>
+<div id="loraViz"></div>
+<p id="loraStat" class="tip"></p>
+</div>
+
+<p>
+  At the shipped r=16 that is <strong>10.1 million</strong> stored numbers standing in for
+  <strong>822 million</strong> of full-rank change — an 81× compression. On disk
+  <code>adapter_model.safetensors</code> is <strong>20 MB</strong>, versus ~15 GB for a
+  full copy of the model; the 522 MB you actually have to ship to a GPU box is four of
+  those plus their training checkpoints and tokenizer files. Note also that k_proj and
+  v_proj are 512×3584 rather than 3584×3584: Qwen2.5 uses <em>grouped-query attention</em>,
+  a memory-saving design where several attention heads share one set of keys and values,
+  so those two projections are already narrow — which is why the 112 modules only come to
+  822M rather than the 1.4B you would get from four square projections per layer.
 </p>
 
 <p>
   Here is the conceptual leap the whole paper rests on. Once training is done,
   <strong>ΔW is just a matrix</strong> — a direction in weight space that means "be more
   like Kishida." It can be added, scaled, and combined like any vector. This is the
-  <em>task vector</em> view, and it is what makes "average two personas" a meaningful
-  operation rather than a category error.
+  <em>task vector</em> view from §1③, and it is what makes "average two personas" a
+  meaningful operation rather than a category error.
+</p>
+
+<p>
+  Note what the merge code does first, before anything else: it multiplies the factors
+  back out. LoRA's compression is a <em>storage</em> convenience; the arithmetic happens
+  in the full-size space.
 </p>
 
 <pre><code><span class="kw">for</span> pfx <span class="kw">in</span> prefixes:
     a = next(v <span class="kw">for</span> k, v <span class="kw">in</span> weights.items() <span class="kw">if</span> k.startswith(pfx) <span class="kw">and</span> <span class="str">".lora_A"</span> <span class="kw">in</span> k)
     b = next(v <span class="kw">for</span> k, v <span class="kw">in</span> weights.items() <span class="kw">if</span> k.startswith(pfx) <span class="kw">and</span> <span class="str">".lora_B"</span> <span class="kw">in</span> k)
     delta = (b.float() @ a.float()) * scaling            <span class="com"># [out, in]</span></code></pre>
-<p class="srcref">merge_layer_group.py:78–82 — reconstructing ΔW from the stored factors</p>
+<p class="srcref">research/polis/merge_layer_group.py:79–82 — reconstructing ΔW from the stored factors</p>
+<p class="tip">
+  That <code>.float()</code> is quietly expensive: it promotes each delta to fp32, which
+  is where the 13 GB of resident anchor deltas in §18 comes from.
+</p>
 
 <h3>Does the "space" actually have room?</h3>
 <p>
@@ -299,9 +662,10 @@ generic "fluent-parliamentarian" backbone regardless of the target's party. See 
 </p>
 <div id="cosineViz"></div>
 <p class="tip">
-  Measured at 7B across 822 million adapted parameters per anchor
-  (<code>anchor_delta_cosine.py</code>). Everything is far below the 0.9 danger line, so the
-  anchors genuinely span a space.
+  Measured at 7B across 822,083,584 adapted parameters per anchor. The 0.9 threshold is
+  the script's own kill switch — <code>anchor_delta_cosine.py:96–106</code> prints
+  <code>[WARN] near-collinear anchor pairs</code> and tells you to revisit the design.
+  Everything here is far below it, so the anchors genuinely span a space.
 </p>
 <div class="callout">
 <span class="lbl">The interesting part</span>
@@ -309,12 +673,17 @@ Look at the <em>structure</em>, not just the magnitudes. Every left-party pair (
 more similar to each other than any of them is to the LDP anchor (≈0.064). At 0.5B these
 numbers were uniform regardless of party. Ideology is showing up as geometry — but note
 this is 3 pairs against 3 pairs, so it is suggestive, not a significance test.
+<br><br>
+Keep this in mind through §15 and §16, because it is the strongest pro-ideology evidence in
+the whole project and it does not survive contact with the downstream measurements. The
+anchor <em>directions</em> cluster by party; what gets built out of them does not behave
+like it knows anyone's party. Reconciling those two facts is unfinished business.
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="dare">
-<h2>5 · DARE: drop most of the vector, keep the meaning</h2>
+<h2>7 · DARE: drop most of the vector, keep the meaning</h2>
 
 <p>
   When you add several task vectors together they <em>interfere</em> — unrelated
@@ -335,13 +704,13 @@ this is 3 pairs against 3 pairs, so it is suggestive, not a significance test.
 
 <pre><code>mask = (torch.rand(delta.shape, generator=gen) &lt; self.density)
 delta = torch.where(mask, delta / self.density, torch.zeros_like(delta))</code></pre>
-<p class="srcref">merge_layer_group.py:84–85</p>
+<p class="srcref">research/polis/merge_layer_group.py:84–85</p>
 
 <div class="callout">
 <span class="lbl">Why <code>generator=gen</code> is load-bearing</span>
 The mask is drawn from a <strong>seeded</strong> generator fixed once at construction. If
 the mask were redrawn on each merge, the same coefficients would give a different result
-every time — the optimiser in §9 would be chasing a moving target it cannot model. Freezing
+every time — the optimiser in §11 would be chasing a moving target it cannot model. Freezing
 the randomness makes the objective a deterministic function of the coefficients. This is a
 general principle worth absorbing: <em>stochastic components must be frozen before you
 optimise through them.</em>
@@ -366,7 +735,7 @@ optimise through them.</em>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="ties">
-<h2>6 · TIES: settle the disagreements by vote</h2>
+<h2>8 · TIES: settle the disagreements by vote</h2>
 
 <p>
   DARE reduces collisions but doesn't resolve them. When two anchors <em>do</em> both want
@@ -388,7 +757,7 @@ optimise through them.</em>
     kept    = torch.where(agree, deltas, torch.zeros_like(deltas))
     count   = agree.sum(dim=<span class="str">0</span>).clamp(min=<span class="str">1</span>)
     <span class="kw">return</span> kept.sum(dim=<span class="str">0</span>) / count                        <span class="com"># mean of the winners only</span></code></pre>
-<p class="srcref">merge_layer_group.py:132–139</p>
+<p class="srcref">research/polis/merge_layer_group.py:146–153</p>
 
 <p>
   Note <code>clamp(min=1)</code> — it guards the divide-by-zero when a coordinate is zero
@@ -411,7 +780,7 @@ optimise through them.</em>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="groups">
-<h2>7 · Layer groups: the knob that makes this a search problem</h2>
+<h2>9 · Layer groups: the knob that makes this a search problem</h2>
 
 <p>
   So far a merge needs one weight per anchor. POLIS's contribution is that
@@ -433,7 +802,7 @@ optimise through them.</em>
     <span class="com"># contiguous depth partition: floor(layer / ceil(n_layers / n_groups))</span>
     per = -(-self._n_layers // self.n_groups)  <span class="com"># ceil div</span>
     <span class="kw">return</span> min(layer // per, self.n_groups - <span class="str">1</span>)</code></pre>
-<p class="srcref">merge_layer_group.py:103–108</p>
+<p class="srcref">research/polis/merge_layer_group.py:117–122</p>
 
 <div class="callout">
 <span class="lbl">Why custom code was needed</span>
@@ -460,7 +829,7 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
     merged = self._ties(torch.stack(stacked, dim=<span class="str">0</span>))
     self._params[mod_path + <span class="str">".weight"</span>].data.copy_(
         (base.float() + merged.to(base.device)).to(base.dtype))</code></pre>
-<p class="srcref">merge_layer_group.py:111–130</p>
+<p class="srcref">research/polis/merge_layer_group.py:125–144</p>
 
 <div class="card">
 <h3>Try it — build a coefficient matrix</h3>
@@ -468,16 +837,18 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
 <div id="coefCtrl"></div>
 <div id="coefViz"></div>
 <p class="tip">
-  The preset is the structure the optimiser actually discovered for the LDP target: keep the
-  ideologically-matched anchor, zero the distant ones, and vary the amount by depth — a
-  pattern a single global weight per anchor literally cannot represent.
+  The preset is the solution the optimiser actually found at 7B for target 高市 (LDP): one
+  anchor at full strength in the early layers, a different one at a quarter strength in the
+  middle, a third in the late layers, and the fourth switched off entirely. A single global
+  weight per anchor literally cannot represent this. Whether that expressiveness
+  <em>buys</em> anything is a separate question, and §15 answers it — with a null.
 </p>
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="nll">
-<h2>8 · The objective: how well does this persona predict real sentences?</h2>
+<h2>10 · The objective: how well does this persona predict real sentences?</h2>
 
 <p>
   To search over C we need a number that says how good a merge is. POLIS uses
@@ -496,7 +867,7 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
         tok_logp = logp.gather(-<span class="str">1</span>, ids[:, <span class="str">1</span>:].unsqueeze(-<span class="str">1</span>)).squeeze(-<span class="str">1</span>)[<span class="str">0</span>]
         n_ctx = ids_p.shape[<span class="str">1</span>] - <span class="str">1</span>
         tot += -tok_logp[n_ctx:].mean().item()        <span class="com"># ← score ONLY the reply</span></code></pre>
-<p class="srcref">bo_merge_coeffs.py:76–89</p>
+<p class="srcref">research/polis/bo_merge_coeffs.py:74–87</p>
 
 <p>Three details that are easy to skim past but matter:</p>
 <ul>
@@ -511,15 +882,15 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
 </ul>
 
 <p>
-  NLL is measured in <strong>nats</strong> per token. A drop of 0.07 nats sounds tiny, and
-  in absolute terms it is; §12 explains why the <em>consistency</em> of that gap matters more
-  than its size.
+  NLL is measured in <strong>nats</strong> per token. The gaps this paper reports are around
+  0.02 nats, which sounds like nothing, and in absolute terms it is. §13 and §15 explain why
+  the <em>consistency</em> of that gap across folds carries the result rather than its size.
 </p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="bo">
-<h2>9 · Bayesian optimization: searching when every guess is expensive</h2>
+<h2>11 · Bayesian optimization: searching when every guess is expensive</h2>
 
 <p>
   Now the search. We need the C that minimises held-out NLL, and we face a specific
@@ -570,15 +941,18 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
 </div>
 
 <p>
-  In the real code Optuna supplies the machinery, and the sampler is chosen by
-  dimensionality — GP for the low-dimensional operating point, TPE for the high-dimensional
-  ablation where GPs scale poorly:
+  In the real code the Optuna library supplies the machinery, and the <em>sampler</em> (the
+  thing that proposes the next point to try) is chosen by dimensionality — the Gaussian
+  process for the low-dimensional operating point, and TPE for the high-dimensional
+  ablation where GPs scale poorly. TPE, <em>Tree-structured Parzen Estimator</em>, is a
+  cheaper alternative that skips modelling the objective and instead models "what do good
+  points look like versus bad ones", then samples from the good region:
 </p>
 <pre><code>use_gp = name == <span class="str">"gp"</span> <span class="kw">or</span> (name == <span class="str">"auto"</span> <span class="kw">and</span> n_dims &lt;= <span class="str">32</span>)
 <span class="kw">if</span> use_gp:
     <span class="kw">return</span> <span class="str">"gp"</span>, GPSampler(seed=seed, n_startup_trials=n_start)
 <span class="kw">return</span> <span class="str">"tpe"</span>, TPESampler(seed=seed, multivariate=<span class="kw">True</span>, group=<span class="kw">True</span>, ...)</code></pre>
-<p class="srcref">bo_merge_coeffs.py:103–111</p>
+<p class="srcref">research/polis/bo_merge_coeffs.py:101–109</p>
 
 <p>And the objective itself is only four lines — merge, score, return:</p>
 <pre><code><span class="kw">def</span> objective(trial):
@@ -586,17 +960,57 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
                    <span class="kw">for</span> gi <span class="kw">in</span> range(n_g)] <span class="kw">for</span> ai <span class="kw">in</span> range(n_a)])
     merger.apply(C)
     <span class="kw">return</span> scorer.mean_nll(dev)</code></pre>
-<p class="srcref">bo_merge_coeffs.py:117–121</p>
+<p class="srcref">research/polis/bo_merge_coeffs.py:115–119</p>
 <p>
-  Coefficients are bounded to [0, 1.5]. The upper bound matters: §12 shows that an untuned
+  Coefficients are bounded to [0, 1.5]. The upper bound matters: §15 shows that an untuned
   all-ones merge is <em>worse than not merging at all</em>, so the search has to be able to
   pull weights down toward zero, and must not be allowed to run away upward.
 </p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
+<section id="trace">
+<h2>12 · One trial, start to finish</h2>
+
+<p>
+  Every piece is now on the table. This section follows a <em>single</em> BO trial through
+  the actual call stack, so you can see how the sections connect. Step through it — each
+  stage names the function that runs and what it hands to the next one.
+</p>
+
+<div class="card">
+<div class="row" style="margin-bottom:12px">
+  <button class="primary" id="trStep">Next step</button>
+  <button id="trReset">Restart</button>
+  <span class="tip" id="trInfo" style="align-self:center"></span>
+</div>
+<div id="traceViz"></div>
+<div id="trDetail"></div>
+</div>
+
+<p>
+  Two things about this loop are worth naming explicitly, because they are what make the
+  method affordable at all.
+</p>
+
+<p>
+  <strong>Nothing is trained, and nothing is reloaded.</strong> The model is loaded once.
+  Every trial rewrites weights in place and rewrites them again next trial. Compare that
+  to the obvious alternative — fine-tune the target 40 times with different settings —
+  and the cost difference is the entire reason POLIS can run on 30 utterances.
+</p>
+
+<p>
+  <strong>The expensive part moved.</strong> At 0.5B the forward passes dominated. At 7B
+  the <em>re-merge</em> does: writing ΔW for 4 anchors × 822M adapted parameters, every
+  trial. That inversion is why the project's own runbook insists on a timed 5-trial
+  calibration before committing to a full run — the old timings predict nothing.
+</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
 <section id="cv">
-<h2>10 · Nested cross-validation: not fooling yourself</h2>
+<h2>13 · Nested cross-validation: not fooling yourself</h2>
 
 <p>
   Here is a subtle trap. If you tune 12 coefficients to minimise NLL on 30 sentences and
@@ -622,28 +1036,59 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
     bestC, _, _ = bo_bestC(merger, scorer, dev, ...)   <span class="com"># full BO, inside the fold</span>
     merger.apply(bestC)
     rows[<span class="str">"BO"</span>].append(scorer.mean_nll(te))</code></pre>
-<p class="srcref">bo_merge_coeffs.py:147–176</p>
+<p class="srcref">research/polis/bo_merge_coeffs.py:156–171</p>
 
 <div class="callout">
 <span class="lbl">The design detail that makes it fair</span>
 Every baseline is rotated through <em>identical</em> folds — including
 <code>best_single</code>, which re-picks its winning anchor using only that fold's dev data.
 A baseline allowed to choose using the test fold would be getting information POLIS never
-had. Because all methods see the same folds, the results are <strong>paired</strong>, and
-per-fold differences can be compared directly, which is far more sensitive than comparing
-two averages.
+had.
+</div>
+
+<h3>Paired vs unpaired — the statistic that decides the paper</h3>
+<p>
+  Because every method is scored on the <em>same</em> five folds, the results are
+  <strong>paired</strong>, and that changes which number you should look at. Here is the
+  distinction, because it is the difference between "this works" and "this is noise" in §15.
+</p>
+<p>
+  Suppose method A scores <code>[2.09, 2.24, 2.29]</code> and method B scores
+  <code>[2.11, 2.25, 2.31]</code>. Each list has a spread of about ±0.09 — far bigger than
+  the ~0.02 gap between the two methods. Reported as "2.21 ± 0.09 vs 2.22 ± 0.09" the
+  difference looks hopeless, buried in noise.
+</p>
+<p>
+  But look down the columns instead of across them. Fold 1: A wins by 0.02. Fold 2: A wins
+  by 0.01. Fold 3: A wins by 0.02. The ±0.09 spread is not measurement error at all — it is
+  <em>some folds simply containing harder sentences than others</em>, and both methods face
+  exactly the same hard sentences. Subtract per fold and that shared difficulty cancels
+  out, leaving <code>[0.02, 0.01, 0.02]</code>: a spread of ±0.005 around a mean of 0.017.
+</p>
+<div class="callout warn">
+<span class="lbl">Rule of thumb</span>
+When two methods are evaluated on the same data, always subtract <em>first</em> and average
+<em>second</em>. Averaging first throws away the pairing and inflates your apparent noise
+by whatever the variation between test items happens to be — which here is roughly
+tenfold. This mistake was actually made and caught mid-session on the real results; the
+unpaired reading said "inside noise", the paired reading said "5 of 5 folds".
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="utas">
-<h2>11 · Scoring a survey — and a trap worth internalising</h2>
+<h2>14 · Scoring a survey — and a trap worth internalising</h2>
 
 <p>
-  NLL is an internal proxy. The paper's external metric is different and deliberately
-  untouchable: real politicians answered the <strong>UTAS</strong> academic survey (5-point
-  Likert policy items), and those answers are never used in training or in the optimiser.
-  Nothing in the pipeline can game them.
+  NLL is an internal proxy: it only says the model predicts the target's words well. The
+  paper's external metric is different and deliberately untouchable — real politicians
+  answered the <strong>UTAS</strong> academic survey, a set of policy statements each rated
+  on a 5-point <em>Likert scale</em> from "agree" to "disagree", and those answers are never
+  used in training or in the optimiser. Nothing in the pipeline can game them.
+</p>
+<p class="tip">
+  This section is how the survey is administered and scored. What it <em>measured</em>, and
+  why that turned out to be the hardest question in the project, is §16.
 </p>
 <p>
   To administer a survey to a model, you don't generate text and parse it — free generation
@@ -651,6 +1096,68 @@ two averages.
   and compare log-probabilities. No parsing, and you get a full distribution rather than
   one sample.
 </p>
+
+<h3>What the ground truth actually looks like</h3>
+<p>
+  The 2024 House of Representatives wave has 33 items and coded answers from 676
+  politicians, 594 of whom answered every item. Here are three real items with the three
+  held-out targets' real answers — this is the table the persona is being graded against.
+  (Hold on to that 594: in §16 it stops being a footnote and becomes the experiment.)
+</p>
+
+<table>
+<thead><tr>
+  <th style="width:44%">Item</th>
+  <th>高市 Takaichi<br><span style="font-weight:400">LDP</span></th>
+  <th>赤嶺 Akamine<br><span style="font-weight:400">JCP</span></th>
+  <th>枝野 Edano<br><span style="font-weight:400">CDP</span></th>
+</tr></thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><strong>Q4_1</strong> 日本の防衛能力は強化されるべきである。<br>
+  <span class="tip">Japan's defence capabilities should be strengthened.</span></td>
+  <td><strong>1</strong><br><span class="tip">agree</span></td>
+  <td><strong>5</strong><br><span class="tip">disagree</span></td>
+  <td><strong>2</strong><br><span class="tip">lean agree</span></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q4_5</strong> 社会福祉などの政府サービスが悪化しても、低コストで小さな政府が好ましい。<br>
+  <span class="tip">A smaller, cheaper government is preferable even if welfare services worsen.</span></td>
+  <td><strong>4</strong><br><span class="tip">lean disagree</span></td>
+  <td><strong>5</strong><br><span class="tip">disagree</span></td>
+  <td><strong>5</strong><br><span class="tip">disagree</span></td>
+</tr>
+<tr>
+  <td style="text-align:left"><strong>Q4_11</strong> 日本銀行は政策金利を引き上げるべきだ。<br>
+  <span class="tip">The Bank of Japan should raise its policy rate.</span></td>
+  <td><strong>5</strong><br><span class="tip">disagree</span></td>
+  <td><strong>2</strong><br><span class="tip">lean agree</span></td>
+  <td><strong>2</strong><br><span class="tip">lean agree</span></td>
+</tr>
+</tbody>
+</table>
+<p class="srcref">data/data/polis/utas_ground_truth/2024HoR.json — built by build_utas_ground_truth.py</p>
+
+<p>
+  Q4_1 is the clean case: a 1 / 5 / 2 spread straight down the ideological axis, exactly
+  what a persona simulator should reproduce. Q4_11 shows why this data is harder and more
+  interesting than a left–right slider — on monetary policy the conservative is the
+  <em>dove</em> and the communist is the hawk, inverting the ordering from Q4_1. A model
+  that has merely learned "LDP = right-wing" gets Q4_1 right and Q4_11 exactly backwards.
+</p>
+
+<p>
+  The persona is asked each item through the chat template, with a system prompt that
+  mirrors the DPO training header so the framing is consistent between training and
+  evaluation:
+</p>
+<pre><code><span class="kw">def</span> _persona_system(name: str | <span class="kw">None</span>) -> str:
+    <span class="com">"""Naming the anchor mirrors the DPO training prompt header</span>
+<span class="com">    (「あなたは〇〇議員です…」); pass name=None for the neutral framing."""</span>
+    who = f<span class="str">"、{name}"</span> <span class="kw">if</span> name <span class="kw">else</span> <span class="str">""</span>
+    <span class="kw">return</span> (f<span class="str">"あなたは日本の国会議員{who}です。以下の政策に関する意見について、"</span>
+            <span class="str">"選択肢の中からあなたの立場に最も近いものを一つだけ答えてください。"</span>)</code></pre>
+<p class="srcref">research/polis/polis_option_logprob.py:213–219</p>
 
 <h3>The length bug</h3>
 <p>
@@ -672,7 +1179,7 @@ norm_logprobs.append(lp / max(n, <span class="str">1</span>))
 <span class="com"># options and collapses degenerately.</span>
 probs = torch.softmax(norm_t, dim=<span class="str">0</span>).tolist()
 expectation = sum((i + <span class="str">1</span>) * p <span class="kw">for</span> i, p <span class="kw">in</span> enumerate(probs))</code></pre>
-<p class="srcref">data/polis_option_logprob.py:94–104</p>
+<p class="srcref">research/polis/polis_option_logprob.py:94–104</p>
 
 <div class="card">
 <h3>Try it</h3>
@@ -689,81 +1196,622 @@ expectation = sum((i + <span class="str">1</span>) * p <span class="kw">for</spa
 </div>
 
 <p>
-  The <code>expectation</code> — Σ i·p<sub>i</sub> — is the payoff of scoring this way. It
-  places the persona <em>continuously</em> on the 1–5 scale rather than forcing a discrete
-  pick, so "leans agree" and "strongly agrees" are distinguishable and you can take a mean
-  absolute error against the politician's real coded answer.
+  The <code>expectation</code> — Σ i·p<sub>i</sub>, each possible answer multiplied by its
+  probability — is the payoff of scoring this way. It places the persona
+  <em>continuously</em> on the 1–5 scale rather than forcing a discrete pick, so "leans
+  agree" and "strongly agrees" are distinguishable. You then compare that number to the
+  politician's real coded answer and average the gap across all 33 items, which gives
+  <strong>mean absolute error (MAE)</strong> — literally "on average, how many scale points
+  off were we". MAE of 0 is perfect; MAE of 1 means you are typically one Likert step out.
 </p>
 
+<h3>The second scorer, and why there had to be one</h3>
+<p>
+  Length-normalising fixes the bias toward short options but introduces a subtler problem.
+  After dividing by token count, all five options end up with per-token log-probabilities
+  sitting in a <em>narrow band</em> — they are all fluent Japanese phrases, so none of them
+  is very surprising to the model. Softmax over five near-identical numbers gives five
+  near-equal probabilities, and the expectation Σ i·p<sub>i</sub> of a near-uniform
+  distribution over 1–5 is… almost exactly 3. The metric collapses toward the midpoint
+  whatever the model actually believes.
+</p>
+<p>
+  The alternative is <strong>numeric-label scoring</strong>: don't score the phrase
+  「そう思う」, score the single token <code>"1"</code>, and let the system prompt carry the
+  mapping. One token per option, so length normalisation is moot, and the five candidates
+  are genuinely distinguishable to the model.
+</p>
+<pre><code><span class="kw">def</span> score_options_numeric(model, tokenizer, system, question, options):
+    <span class="com">"""Numeric-label variant of score_options.</span>
+
+<span class="com">    ...the options are enumerated in the *prompt* as a numbered list and only</span>
+<span class="com">    the single label token ("1".."N") the model would emit is scored."""</span></code></pre>
+<p class="srcref">research/polis/polis_option_logprob.py:108–120 — written as the Phase-0 fix</p>
+
 <div class="callout warn">
-<span class="lbl">Scale-gating: an honest negative result</span>
-At 0.5B this metric is a <strong>degenerate floor</strong>. The expectation sits pinned near
-3.0 no matter what you merge, so every method scores the same. A numeric-label variant
-(score the token "1".."5") failed differently — a first-option bias so severe the model
-agreed at p≈0.98 that consumption tax should be raised to 100%. The capability simply isn't
-there at 0.5B. At 7B it appears: the argmax spans the full scale and responds to content.
-The lesson is that <em>an evaluation metric can require more model capability than the
-thing being evaluated.</em>
+<span class="lbl">A bug worth the space it takes to describe</span>
+<code>score_options_numeric()</code> was written specifically to fix the flattening problem
+— and then <strong>was never called</strong>. The evaluation entry point defaults to
+<code>numeric=False</code>, and the string <code>numeric</code> did not appear anywhere in
+<code>bo_merge_coeffs.py</code>. Every survey number in the project was produced by the
+scorer that was known to be broken, for months, because writing the fix and wiring the fix
+are two different tasks and only one of them leaves a satisfying commit. Grep for your own
+fixes in the call graph.
 </div>
+
+<p>
+  Both scorers now run. §15 covers what the method's <em>internal</em> metric says, and §16
+  covers what happened when the survey metric was finally taken seriously — which is the
+  more interesting half of the story.
+</p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="results">
-<h2>12 · Reading the results honestly</h2>
+<h2>15 · Results: does it work?</h2>
 
 <p>
-  Held-out NLL for three real politicians outside the anchor set, each simulated by merging
-  the four anchors, with only 30 of their utterances used for tuning. Lower is better.
+  Everything up to here was development work done at <strong>0.5B</strong> — a model small
+  enough to run on an 8 GB laptop GPU, which is the only reason the pipeline could be
+  debugged at all. But a 0.5B model is barely coherent, and every negative result at that
+  scale carries the same excuse: <em>maybe the model is just too small</em>. Settling the
+  paper meant renting a 48 GB GPU for two hours and rerunning everything at
+  <strong>7B</strong>, 14× larger. This section is that run.
+</p>
+
+<p>
+  The measurement is the nested cross-validation of §13: three real politicians outside the
+  anchor set, each simulated by merging the four anchors, with only 30 of their utterances
+  available and every score computed on a fold those 30 never tuned. Lower NLL is better.
 </p>
 
 <div id="resultsViz"></div>
 <div class="legend">
-  <span><span class="swatch" style="background:var(--series-1)"></span>Base (zero-shot)</span>
-  <span><span class="swatch" style="background:var(--series-2)"></span>Uniform merge</span>
+  <span><span class="swatch" style="background:var(--series-1)"></span>Base (no merge at all)</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Uniform merge (all coefficients = 1)</span>
   <span><span class="swatch" style="background:var(--series-3)"></span>Best single anchor</span>
   <span><span class="swatch" style="background:var(--series-4)"></span>POLIS</span>
 </div>
+<p class="srcref">
+  7B, nested 5-fold CV, budget 30, 40 GP trials per fold —
+  artifacts/bo7b_gpu_logs/nested_target_{1279,2053,2289}.log
+</p>
 
+<h3>What each baseline is there to rule out</h3>
 <table>
-<thead><tr><th>Target</th><th>Base</th><th>Uniform</th><th>Best-single</th><th>POLIS</th></tr></thead>
+<thead><tr><th>Baseline</th><th style="text-align:left">The objection it answers</th></tr></thead>
 <tbody>
-<tr><td>Takaichi (LDP)</td><td>2.875</td><td>4.046</td><td>2.932</td><td><strong>2.842</strong></td></tr>
-<tr><td>Akamine (JCP)</td><td>2.938</td><td>4.026</td><td>2.986</td><td><strong>2.894</strong></td></tr>
-<tr><td>Edano (CDP)</td><td>3.173</td><td>4.250</td><td>3.179</td><td><strong>3.107</strong></td></tr>
+<tr><td><strong>Base</strong></td><td style="text-align:left">"Does merging help at all, or would you do better leaving the model alone?"</td></tr>
+<tr><td><strong>Uniform</strong></td><td style="text-align:left">"Is the <em>tuning</em> doing anything, or would any old merge work?"</td></tr>
+<tr><td><strong>Best-single</strong></td><td style="text-align:left">"Do you need a <em>blend</em>, or would picking the one closest anchor do just as well?" This is the hard one.</td></tr>
 </tbody>
 </table>
-<p class="srcref">0.5B, nested 5-fold CV, budget 30, 40 GP trials per fold</p>
 
 <h3>Three things this shows</h3>
 <p>
   <strong>1 · Tuning does the work.</strong> The uniform all-ones merge is dramatically
-  <em>worse</em> than not merging at all — more than a full nat. Untuned task vectors
-  overshoot and corrupt the model. Every bit of POLIS's advantage comes from choosing
-  coefficients, which is the cleanest possible evidence that the optimisation stage is
-  load-bearing rather than decorative.
+  <em>worse</em> than not merging at all — about half a nat. Untuned task vectors overshoot
+  and corrupt the model. Every bit of POLIS's advantage comes from choosing coefficients,
+  which is the cleanest possible evidence that the optimisation stage is load-bearing
+  rather than decorative.
 </p>
 <p>
-  <strong>2 · The gains are small but relentless.</strong> POLIS beats the best single
-  anchor by only 0.07–0.09 nats — but it does so in <strong>15 out of 15</strong>
-  cross-validation folds, and beats the base model in 14 of 15. With paired folds, that
-  consistency is the real result; the absolute magnitude is limited by what 0.5B adapters
-  can encode.
+  <strong>2 · The gains are small but relentless.</strong> This is where §13's paired
+  reasoning earns its keep. Each dot below is one fold: how much better POLIS did than the
+  best single anchor <em>on that exact fold</em>.
+</p>
+
+<div id="pairedViz"></div>
+<p class="tip">
+  Fifteen folds, one dot each. Fourteen are above zero. The one below is a 赤嶺 fold where
+  POLIS lost by 0.009 nats — a wash rather than a failure.
+</p>
+
+<table>
+<thead><tr>
+  <th>Target</th><th>POLIS − base</th><th>POLIS − best-single</th><th>Folds won vs best-single</th>
+</tr></thead>
+<tbody>
+<tr><td>1279 高市 Takaichi (LDP)</td><td>+0.1159 ± 0.0230</td><td>+0.0176 ± 0.0076</td><td>5 / 5</td></tr>
+<tr><td>2053 赤嶺 Akamine (JCP)</td><td>+0.0820 ± 0.0178</td><td>+0.0177 ± 0.0154</td><td>4 / 5</td></tr>
+<tr><td>2289 枝野 Edano (CDP)</td><td>+0.1143 ± 0.0233</td><td>+0.0287 ± 0.0130</td><td>5 / 5</td></tr>
+</tbody>
+</table>
+<p class="tip">
+  Positive = POLIS better. These are <em>paired</em> deltas: subtract within a fold, then
+  average across folds. The unpaired spread on the same runs is about ±0.08, ten times
+  larger, and reading that number instead is what briefly made this result look like noise.
+</p>
+
+<p>
+  <strong>3 · And the caveat that survived the scale-up.</strong> The best-single column
+  hides something awkward. If the anchors encoded ideology, the winning single anchor for
+  each target should be the ideologically closest one. It isn't. For 高市 (LDP) the best
+  single anchor is <strong>塩川 (Communist)</strong>, in all five folds; for both 赤嶺
+  (Communist) and 枝野 (centre-left) it is <strong>岸田 (LDP)</strong>, in all ten folds.
+  The picks are perfectly consistent — and perfectly uncorrelated with party. What a single
+  anchor supplies is fluent Diet register, not a political position, and POLIS's genuine
+  contribution is the small correction it adds on top.
+</p>
+
+<h3>The granularity ablation: a null result, honestly kept</h3>
+<p>
+  POLIS's stated novelty is <em>per-depth</em> coefficients (§9) — 12 numbers instead of 4.
+  So: does the extra granularity actually buy anything? Run the whole nested CV twice, once
+  with one coefficient per anchor and once with three.
+</p>
+<table>
+<thead><tr><th>Granularity</th><th>Free parameters</th><th>Held-out NLL</th></tr></thead>
+<tbody>
+<tr><td>Global (one weight per anchor)</td><td>4</td><td>2.1557 ± 0.0792</td></tr>
+<tr><td>Layer-group (per-depth)</td><td>12</td><td>2.1563 ± 0.0848</td></tr>
+</tbody>
+</table>
+<p class="srcref">7B, target 1279, nested 4-fold, 20 trials/fold — artifacts/bo7b_gpu_logs/granularity_1279.log</p>
+
+<div class="callout warn">
+<span class="lbl">A hedge that was tested and did not pay out</span>
+The gap is <strong>0.0006</strong> against a spread of ±0.08. Per-depth granularity buys
+nothing. The 0.5B write-up had already conceded this, but softened it: granularity was
+said to be the natural place for a register-versus-ideology split to appear
+<em>at main scale</em>. Main scale has now been run, and the null replicated an order of
+magnitude more tightly. The concession stays; the hedge was deleted. A null that replicates
+across a 14× scale gap, with its own proposed escape route closed off, is a stronger and
+more useful statement than a hedge — it tells the next person not to bother.
+</div>
+<p>
+  The extreme end of the sweep — one coefficient per <em>layer</em>, 112 dimensions — was
+  skipped as too expensive, because 0.5B had already settled it decisively: 96 dimensions
+  scored 3.441 against a base of 2.880. Give a Bayesian optimiser 40 trials in a 96-dim
+  space and it cannot find anything; the search problem outruns the search budget long
+  before the extra expressiveness helps.
+</p>
+
+<div class="callout">
+<span class="lbl">Where this leaves the NLL story</span>
+The method works, in the specific sense it claims to: blending anchor task vectors with
+tuned coefficients predicts a held-out politician's real speech better than not merging,
+better than any single anchor, and much better than an untuned merge — consistently, at
+main scale, on 30 sentences. That is the headline. §16 is what happened to the
+<em>other</em> metric.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="broken">
+<h2>16 · When the metric broke: an anatomy of a null result</h2>
+
+<p>
+  NLL is an internal measure — it says the merged model predicts the target's words well.
+  The claim readers actually care about is bigger: <em>does the simulated politician hold
+  the right opinions?</em> That is what the UTAS survey (§14) was for, and it is where the
+  project spent most of its second day. The answer turned out to be no, and the way that
+  was established is more instructive than the result.
+</p>
+
+<h3>Step 1 · Compare against something stupid</h3>
+<p>
+  The §14 survey table originally listed four model configurations with MAEs around 1.0–1.8
+  and no reference point. Numbers like that are unreadable in isolation. So a
+  <strong>dummy</strong> was added: a "model" that ignores the question, ignores the
+  politician, and answers <strong>3</strong> — the exact scale midpoint — to all 33 items.
+  It uses no model, no adapter and no merge, and takes zero seconds to run.
+</p>
+
+<table>
+<thead><tr><th>Config (target 赤嶺, JCP)</th><th>MAE ↓</th><th>within-1 ↑</th><th>exact ↑</th></tr></thead>
+<tbody>
+<tr><td><strong>constant(3) — the dummy</strong></td><td><strong>1.455</strong></td><td>0.333</td><td>0.212</td></tr>
+<tr><td>base 7B</td><td>1.609</td><td><strong>0.667</strong></td><td>0.182</td></tr>
+<tr><td>uniform merge</td><td>1.700</td><td>0.455</td><td>0.242</td></tr>
+<tr><td>best single anchor</td><td>1.819</td><td>0.515</td><td>0.212</td></tr>
+<tr><td>POLIS</td><td>1.785</td><td>0.545</td><td>0.152</td></tr>
+</tbody>
+</table>
+<p class="srcref">artifacts/bo7b_gpu_logs/single_numeric_target_2053.log — numeric-label scoring</p>
+
+<p>
+  Every model configuration loses to the constant. Across all three targets, <strong>0 of 12
+  configuration×target cells beat the dummy on MAE</strong> — and this is with the
+  <em>better</em> of the two scorers. Under the old verbose scoring the dummy tied the best
+  configuration on one target and beat every configuration on another. Two independent
+  scoring schemes, same verdict.
 </p>
 <p>
-  <strong>3 · And the honest caveat.</strong> At 0.5B the adapters encode
-  <em>register</em> more than ideology. The tell: the Kishida anchor was selected as
-  best-single in all 15 folds — including for the Communist and Constitutional-Democratic
-  targets. It was not acting as an ideology, it was acting as a generic
-  "fluent Diet speech" backbone, because it happened to be the most cleanly trained. The
-  optimiser then added target-specific residual in the other depth groups. Clean
-  ideological recovery is a claim about larger models, and the paper says so rather than
-  overselling the small one.
+  Note that the numeric scorer did fix the thing it was designed to fix — that is the
+  frustrating part. Compare two ways of reading the same output: MAE computed from the
+  expectation Σ i·p<sub>i</sub>, and MAE computed from the single most likely answer. If the
+  probability mass is smeared across all five options, those two disagree, because the
+  expectation drifts to the middle while the argmax does not. On target 高市 under verbose
+  scoring they were 1.330 and 1.545 — smeared. Under numeric scoring, 1.406 and 1.515 —
+  nearly the same number. The model now commits to an answer. It is simply
+  <em>confidently wrong</em> more often than the midpoint guess is accidentally right.
+</p>
+
+<div class="callout warn">
+<span class="lbl">Why a stupid baseline is not optional</span>
+The midpoint dummy wins for a boring structural reason: real survey answers cluster near
+the middle, so "always say 3" is never far off. Any metric where a constant is competitive
+cannot distinguish a good model from a bad one, and you will not discover that by staring
+at your model's scores. <em>Add the dumbest possible baseline before you interpret
+anything.</em>
+</div>
+
+<p>
+  There is exactly one place where the models come out ahead, and it is the exception that
+  proves the rule. 赤嶺's answers are <em>bimodal</em> — 14 of his 33 sit at one end of the
+  scale and 8 at the other, with only 7 in the middle — so "always say 3" is an unusually
+  bad guess for him. On the <strong>within-1</strong> column (fraction of items landing within
+  one scale point of the truth), every configuration beats the dummy, 0.455–0.667 against
+  0.333. The dummy is not strong; the models are just weaker than a lucky structural
+  artefact almost everywhere else.
+</p>
+
+<h3>Step 2 · Separate "wrong persona" from "no persona"</h3>
+<p>
+  Losing to a constant tells you the numbers are bad, but not <em>why</em>. There are two
+  very different diagnoses, and they call for opposite responses:
+</p>
+<div class="two">
+<div class="card" style="border-left:3px solid var(--series-2)">
+<p class="eyebrow" style="color:var(--series-2)">Diagnosis A — wrong persona</p>
+<p style="margin-bottom:0">
+  The persona changes when you change who it is, but lands in the wrong place. The merge is
+  doing something; it is doing it badly. <strong>Response:</strong> improve the merge.
+</p>
+</div>
+<div class="card" style="border-left:3px solid var(--series-1)">
+<p class="eyebrow" style="color:var(--series-1)">Diagnosis B — no persona</p>
+<p style="margin-bottom:0">
+  The persona doesn't change at all when you change who it is. The survey answers are a
+  property of the <em>instrument</em>, not of the politician. <strong>Response:</strong>
+  stop reporting the metric — it cannot support a claim in either direction.
+</p>
+</div>
+</div>
+
+<p>
+  A one-target MAE cannot tell these apart. Distinguishing them needed a different
+  experiment, and two facts made it cheap. First, the persona is conditioned on the
+  politician's <strong>name alone</strong> — the system prompt says "you are Diet member X"
+  and nothing else — so administering the survey needs no speech data, no adapter and no
+  merge. Second, the survey wave contains <strong>594 politicians with complete 33-item
+  answer vectors</strong>, and only 3 had ever been used.
+</p>
+<p>
+  So: run the base 7B model as all 594 personas and administer the survey to each. Total
+  cost, 10.7 minutes.
+</p>
+
+<h3>Step 3 · The population sweep</h3>
+<p>
+  With 594 simulated answer vectors and 594 real ones, two questions become answerable.
+</p>
+
+<p>
+  <strong>Name-swap divergence.</strong> How much do the simulated answers move when the
+  only thing you change is the name in the prompt — compared to how much the real
+  politicians differ from each other? If simulations vary as much as real people do, the
+  persona is carrying identity. If they barely vary, it isn't.
+</p>
+
+<div id="divergeViz"></div>
+<p class="tip">
+  Take two politicians at random and average the gap between their answers, item by item, on
+  the 1–5 scale. Real politicians differ by <strong>1.13 scale points</strong> per item.
+  Their simulations differ by <strong>0.24</strong> — a ratio of 0.209.
+</p>
+
+<p>
+  Not literally inert: of the 19,900 persona pairs, none produce identical answers. But
+  changing the name moves the answers about a fifth as much as real politicians differ.
+  Item by item it is starker — the median item has a standard deviation of 0.186 across all
+  594 personas against 1.013 for the real answers, and <strong>9 of the 33 items have a
+  standard deviation below 0.05</strong>, meaning the model returns effectively the same
+  answer no matter whose name you put in the prompt.
+</p>
+
+<p>
+  <strong>Rank of the true politician.</strong> A cleverer test, designed to survive exactly
+  the failure mode that sank MAE. Take the vector simulated for politician X. Measure its
+  distance to all 594 <em>real</em> vectors and sort them. Where does the real X come in
+  that ranking? Only the ordering matters, so it does not care that everything clusters near
+  the midpoint — it only asks whether X's simulation leans toward the real X relative to
+  everyone else.
+</p>
+<p>
+  Chance is the 50th percentile. Measured: median <strong>52.1%</strong>, against a floor of
+  50.1% established by constant vectors. Top-1 accuracy is 0.002, which is exactly 1/594 —
+  one lucky hit. The model cannot identify which politician it is simulating.
+</p>
+
+<div class="callout">
+<span class="lbl">A design error caught by a known-answer fixture, then corrected again</span>
+The first version of this metric was checked on a small fixture, which reported that a
+constant vector scores the <strong>68.4th</strong> percentile — well above chance — and a
+plausible-sounding explanation was written down: a constant vector sits near the population
+centroid, so it is closer than average to everyone. That explanation was wrong. On the full
+sweep the constants land at exactly 50.1%, as they must: a name-independent vector induces
+one fixed ordering of the 594 candidates, so as the persona ranges over the whole set its
+rank takes every value exactly once. The 68.4% was sampling noise from a 60-persona
+fixture. <strong>A number that confirms a story you find satisfying still needs the
+sanity check that would refute it.</strong>
+</div>
+
+<p>
+  <strong>The skew that explains both.</strong> Simulated answers have a mean of 2.271; real
+  answers average 2.763. Every persona leans "agree", regardless of who it is. The three
+  targets make this concrete:
+</p>
+<table>
+<thead><tr><th>Target</th><th>Real mean answer</th><th>Simulated mean</th></tr></thead>
+<tbody>
+<tr><td>高市 Takaichi (LDP)</td><td>2.636</td><td>2.155</td></tr>
+<tr><td>枝野 Edano (CDP)</td><td>2.939</td><td>2.406</td></tr>
+<tr><td>赤嶺 Akamine (JCP)</td><td>3.364</td><td>2.211</td></tr>
+</tbody>
+</table>
+<p class="tip">
+  The real gap between the conservative and the communist is 0.73 scale points. The
+  simulated gap is 0.06. Simulated-赤嶺 is nearly indistinguishable from simulated-高市.
+</p>
+
+<h3>Step 4 · Does the merge fix it?</h3>
+<p>
+  One escape remained: the sweep used the <em>base</em> model. Perhaps identity is exactly
+  what the merge injects, and the name-only prompt was never expected to carry it. So the
+  rank metric was rerun on each target under all four configurations.
+</p>
+
+<div id="rankViz"></div>
+<p class="tip">
+  Percentile rank of the true politician (higher is better; 50% is chance). Constants
+  computed on the same data as a floor.
+</p>
+
+<table>
+<thead><tr>
+  <th>Target</th><th>Base</th><th>Uniform</th><th>Best-single</th><th>POLIS</th><th>Best constant</th>
+</tr></thead>
+<tbody>
+<tr><td>1279 高市</td><td>34.3%</td><td>37.2%</td><td>40.2%</td><td>39.4%</td><td>67.5% <span class="tip">const(1)</span></td></tr>
+<tr><td>2053 赤嶺</td><td>5.6%</td><td>4.2%</td><td>2.7%</td><td>2.7%</td><td>97.5% <span class="tip">const(5)</span></td></tr>
+<tr><td>2289 枝野</td><td>47.5%</td><td>25.4%</td><td>43.8%</td><td>44.9%</td><td>81.3% <span class="tip">const(5)</span></td></tr>
+</tbody>
+</table>
+<p class="srcref">7B, single split, per-config answer vectors ranked against all 594 real politicians</p>
+
+<p>
+  All twelve cells are at or below chance, and a constant beats every model configuration on
+  every target. Relative to base, POLIS is +5.1 / −2.9 / −2.6 points — the merge makes it
+  <em>worse</em> on two of three.
+</p>
+<p>
+  赤嶺 is the clearest case and worth reading carefully. His real answers cluster at 5, so
+  "always answer 5" ranks him at the 97.5th percentile. Every model configuration puts him
+  in the <strong>bottom 3–6%</strong>. That is not uninformative — it is actively
+  anti-correlated, the simulation pointing away from the man. And it is exactly what the
+  population sweep predicted: the constants swing from 2.7% to 97.5% depending on which end
+  of the scale a target occupies, while every model configuration parks near the
+  population's low-middle regardless. The simulations do not move to where the politician is.
+</p>
+
+<h3>Step 5 · Where in the chain does it break?</h3>
+<p>
+  At this point a natural proposal appears: if the personas can't answer surveys, why not
+  <em>train</em> them on survey answers? Before spending a training run on that, there is a
+  control that settles it, and it is the strongest test available anywhere in this project.
+</p>
+<p>
+  The four anchors have survey answers of their own — they are politicians too. And unlike
+  the targets, they were fine-tuned on <strong>12,000–20,000 of their own speeches</strong>,
+  not 30. So administering the survey to each anchor's own adapter is the maximum-resource
+  case: their real answers, their own fully-trained adapter, no merge, no blending, no
+  low-resource approximation of anything. If the chain from <em>speech</em> to <em>survey
+  answers</em> works anywhere, it works here.
+</p>
+
+<div id="anchorViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--series-4)"></span>Own adapter (12k–20k speeches)</span>
+  <span><span class="swatch" style="background:var(--series-1)"></span>Base model, name only</span>
+  <span><span class="swatch" style="background:var(--muted)"></span>constant(3) — the dummy again</span>
+</div>
+
+<table>
+<thead><tr>
+  <th>Anchor</th><th>Items</th><th>constant(3)</th><th>Own adapter</th><th>Base</th><th>Beats the dummy?</th>
+</tr></thead>
+<tbody>
+<tr><td>152 岸田 Kishida</td><td>33</td><td>0.697</td><td>0.816</td><td>0.873</td><td>no (+0.119)</td></tr>
+<tr><td>2377 塩川 Shiokawa</td><td>22</td><td>1.682</td><td>2.218</td><td>1.998</td><td>no (+0.536)</td></tr>
+<tr><td>3631 福島 Fukushima</td><td>37</td><td>1.243</td><td><strong>0.980</strong></td><td>1.085</td><td><strong>yes (−0.263)</strong></td></tr>
+<tr><td>5520 上田 Ueda</td><td>37</td><td>0.514</td><td>1.215</td><td>1.286</td><td>no (+0.701)</td></tr>
+</tbody>
+</table>
+<p class="srcref">MAE(E), numeric-label scoring — artifacts/anchor_selftest.log</p>
+
+<p>
+  <strong>One of four beats a constant.</strong> And the adapter is not even reliably better
+  than no adapter: MAE favours it 3–1, but within-1 favours the <em>base model</em> 2–1 and
+  exact-match is 1–1 with two ties. On 塩川 the adapter is worse than base outright.
+</p>
+<p>
+  Read the table carefully, though, because two of the four rows are uninformative. 岸田 and
+  上田 answer "3" to roughly half the items, so a constant-3 predictor is near-unbeatable
+  for them and tells you nothing. The informative pair is 塩川 and 福島 — the two with
+  opinions — and they split one heavy loss and one win. The win has a mundane explanation:
+  福島's real answers average 2.89, which is close to where the model's output naturally
+  sits anyway. 塩川's average 3.32, and the model's natural output sits around 2.27, and the
+  adapter does not drag it up there. Exactly the skew the population sweep found.
+</p>
+
+<div class="callout warn">
+<span class="lbl">What this rules out</span>
+The failure is <em>not</em> in the merge, and not in the low-resource approximation. It is in
+the step before both: a model fine-tuned on twenty thousand of a politician's own speeches
+still cannot answer that politician's survey. Speech style and stated policy positions are
+not connected by this pipeline at any resource level. Improving the merge could not have
+fixed it, and neither can more target data.
+</div>
+
+<div class="callout">
+<span class="lbl">Decision: do not train the anchors on survey answers</span>
+This is the tempting fix and it has to be refused, for a reason worth understanding
+precisely. It would <em>not</em> be label leakage — the anchors' answers are not the targets'
+answers, and no target's ground truth would ever be seen. But the 33 items are
+<strong>identical</strong> across politicians, so training on them teaches the task format,
+the meaning of the 1–5 scale, and the population's overall answer distribution. The claim
+would quietly degrade from "personas fitted to speech encode ideology that an independent
+instrument can read" to "models trained on surveys can answer surveys", and the merge would
+then transport survey-answering <em>competence</em> — masking the very distinction this
+whole session was built to establish. It is legitimate only as a labelled diagnostic, an
+upper bound on whether the merge can transport ideology at all. Never as evidence for the
+method.
+</div>
+
+<div class="callout warn">
+<span class="lbl">Decision: stop work on the UTAS metric</span>
+Two scorers, a 594-person population control, a rank metric and a full-resource anchor
+self-test all agree that this protocol does not carry politician identity at this scale —
+with or without the merge, and with or without abundant data. The correct move is not a
+third scorer. The paper reports the survey result as a limitation with the diagnostic
+attached, and the headline rests on NLL. Diagnosis B, and the response that goes with it.
+</div>
+
+<div class="callout">
+<span class="lbl">Strength caveat — stated because it cuts against the conclusion too</span>
+Per-target rank is a single draw and these numbers are noisy. Three targets cannot carry a
+p-value: "all three below chance" is p ≈ 0.125 on sign alone. So the claim is <em>no
+evidence that the merge injects identity</em> — not proof that it doesn't. This is a real
+difference, and it is one more argument for the n≈30 expansion in §17.
+</div>
+
+<h3>The finding that survives all of this</h3>
+<p>
+  There is one positive result hiding in the wreckage, and it is arguably the most
+  interesting thing in the paper. <strong>NLL and the survey metric are anti-correlated.</strong>
+  The uniform merge has by far the worst NLL (2.74–2.99 against a base of 2.25–2.53) yet
+  posts the best or near-best survey score on two targets — and POLIS, which wins on NLL
+  every time, is never the best configuration on the survey.
+</p>
+<p>
+  Optimising how well a model predicts someone's <em>speech</em> does not transfer to
+  getting their <em>stated policy positions</em> right. Those are different targets, and
+  improving one can cost you the other. That is a genuine limit of weight-space persona
+  composition, and stating it plainly is worth more than burying an uninterpretable table.
 </p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
+<section id="standing">
+<h2>17 · What stands, what doesn't, and what to do next</h2>
+
+<table>
+<thead><tr><th style="width:38%">Claim</th><th style="text-align:left">Status</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>Tuned merging beats the alternatives on held-out NLL</strong></td>
+  <td style="text-align:left">
+    <strong>Stands.</strong> Confirmed at 7B, nested CV, paired, 14/15 folds against the
+    hardest baseline. Small margins, consistent sign.
+  </td>
+</tr>
+<tr>
+  <td><strong>Tuning the coefficients is what matters</strong></td>
+  <td style="text-align:left">
+    <strong>Stands.</strong> The untuned uniform merge is worse than not merging.
+  </td>
+</tr>
+<tr>
+  <td><strong>Per-depth granularity helps</strong></td>
+  <td style="text-align:left">
+    <strong>Refuted.</strong> Null at 0.5B, tighter null at 7B. The "it will show up at
+    scale" hedge has been tested and retired.
+  </td>
+</tr>
+<tr>
+  <td><strong>The merge recovers ideology, not just register</strong></td>
+  <td style="text-align:left">
+    <strong>Unsupported.</strong> The best single anchor is uncorrelated with the target's
+    party, and the survey metric shows no identity signal at all.
+  </td>
+</tr>
+<tr>
+  <td><strong>Simulated personas answer surveys like the real politician</strong></td>
+  <td style="text-align:left">
+    <strong>No evidence.</strong> Loses to a constant in 12/12 cells; rank at chance. §16.
+  </td>
+</tr>
+<tr>
+  <td><strong>Speech data can be turned into survey positions at all</strong></td>
+  <td style="text-align:left">
+    <strong>Not with this pipeline.</strong> The anchor self-test breaks upstream of
+    everything else: 1 of 4 fully-trained anchors, on 12k–20k of their own speeches,
+    beats a constant on their own survey.
+  </td>
+</tr>
+</tbody>
+</table>
+
+<p>
+  That last row is the one to sit with, because it reorders the others. The survey failure
+  is not a limitation of low-resource simulation, of the merge, or of n=3 — it is present at
+  full resource with no merge at all. Whatever fixes it is upstream of everything this paper
+  builds.
+</p>
+
+<h3>The limitation that bounds all of the above: n = 3</h3>
+<p>
+  Every result in §15 and §16 rests on three politicians. Per-fold consistency is not a
+  substitute for more people — folds are slices of one person's speech, so five folds give
+  you five looks at the same individual, not five independent tests of the method. Three
+  targets cannot carry a population claim in either direction.
+</p>
+<p>
+  Fixing this is cheap and is the top of the queue. It requires no training at all — just
+  preference pairs per target and about ten minutes of GPU each. <strong>633 politicians</strong>
+  appear in both the 2024 survey wave and the organised speech corpus, 437 of them with at
+  least a megabyte of text. Scaling from 3 to ~30 is a day of compute.
+</p>
+
+<div class="callout warn">
+<span class="lbl">And a framing problem the expansion has to fix</span>
+Ranked by speech volume among those 633, the three current targets are <strong>#9</strong>
+(枝野), <strong>#17</strong> (高市) and <strong>#20</strong> (赤嶺) — the top 3% of the
+corpus. The paper is about <em>low-resource</em> simulation, and it is currently being
+tested on some of the most verbose politicians in the Diet, artificially restricted to 30
+utterances. Sampling the next batch of targets from ranks 200–600 raises n <em>and</em> puts
+the method on its actual thesis. Expect the margin to shrink. A smaller margin on genuinely
+data-poor politicians is the stronger result.
+</div>
+
+<h3>Deferred: more anchors</h3>
+<p>
+  The obvious other axis is anchor count — 4 today, and the original design assumed 8. There
+  is one real argument for it: the granularity null might be an artefact of having only four
+  sources to blend, since with so few directions there may be nothing for per-depth
+  weighting to differentiate. But each anchor is a full training run <em>and</em> ~3.3 GB of
+  resident VRAM, so eight anchors need 26.4 GB of deltas plus a 15.2 GB model — over the
+  limit of a 48 GB card. Speculative and expensive, against targets which are cheap and
+  bound every claim in the paper. Targets first.
+</p>
+
+<div class="callout">
+<span class="lbl">The general shape of this</span>
+The interesting work in this project was not the method — that was mostly assembling known
+pieces. It was the instrumentation: adding a dumb baseline, running a 594-person control,
+inventing a metric that survives the failure mode that killed the previous one, testing the
+chain at maximum resource before trying to improve it at minimum, and correcting two
+statistical mistakes that each pointed the conclusion the wrong way. Notice that four of
+those five are attempts to <em>break</em> the result rather than to strengthen it. A result
+you cannot get a null out of is a result you cannot trust.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
 <section id="pitfalls">
-<h2>13 · Two engineering traps worth more than they look</h2>
+<h2>18 · Engineering traps worth more than they look</h2>
 
 <h3>The silent no-op</h3>
 <p>
@@ -785,7 +1833,7 @@ thing being evaluated.</em>
     <span class="kw">raise</span> RuntimeError(
         f<span class="str">"{len(meta)} of {len(self.modules)} target modules are meta tensors "</span>
         f<span class="str">"(offloaded) ... In-place merge writes would silently no-op."</span>)</code></pre>
-<p class="srcref">merge_layer_group.py:92–104</p>
+<p class="srcref">research/polis/merge_layer_group.py:98–106</p>
 <div class="callout">
 <span class="lbl">Generalisable lesson</span>
 The dangerous bugs in ML systems are rarely crashes — they are the ones that return
@@ -814,13 +1862,180 @@ plausible numbers. When an operation can be silently skipped, assert that it hap
   milliseconds on a GPU and drops 32B from ~129 GB to ~69 GB, which is the difference
   between four cards and one.
 </p>
+
+<h3>What actually went wrong on the day</h3>
+<p>
+  The 7B run in §15 was a rented GPU on a two-hour clock, which is a good stress test of how
+  much of a research pipeline is real. Roughly the first hour went to these four:
+</p>
+<table>
+<thead><tr><th style="width:26%">Symptom</th><th style="text-align:left">Cause, and what it teaches</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>FileNotFoundError</code> on a data file, in one script out of three</td>
+  <td style="text-align:left">
+    That script's <code>--dpo-dir</code> defaulted to the full corpus, which lives on a
+    laptop SSD and was never copied to the rented box. The other two scripts were fine
+    because the shell runner set the path explicitly. <strong>A default that works on your
+    machine is a landmine on someone else's.</strong>
+  </td>
+</tr>
+<tr>
+  <td>Out of memory on a card that had just run the same model fine</td>
+  <td style="text-align:left">
+    The script built a throwaway merger object purely to read <code>n_layers</code> off it,
+    never freed it, then built another. Each one pins ~14.8 GB. Two of those plus a 15.2 GB
+    model overruns 48 GB. Reading the layer count off the adapter file instead dropped peak
+    usage to ~30 GB. <strong>In GPU code, "I just need one field from it" still allocates
+    the whole object.</strong>
+  </td>
+</tr>
+<tr>
+  <td>The runbook and the pasted commands disagreed about <code>--device</code></td>
+  <td style="text-align:left">
+    An uncommitted edit removing <code>--device cuda</code> had been sitting in the working
+    tree and got committed without anyone reading the diff. <strong>Review your own diff
+    before committing, especially the parts you did not write today.</strong>
+  </td>
+</tr>
+<tr>
+  <td>Ran the wrong 52-minute job instead of the right 12-minute one</td>
+  <td style="text-align:left">
+    The instruction was "the snippet below section 6". There were fifteen runnable blocks
+    and no way to name one unambiguously. They all have IDs now. <strong>If a runbook has
+    more than a handful of commands, they need names.</strong>
+  </td>
+</tr>
+<tr>
+  <td>Output written to the filesystem root, three separate times</td>
+  <td style="text-align:left">
+    Several runbook blocks set a shell variable on their first line and use it below. Paste
+    a block starting from line two and the variable is unset — and an unset variable in
+    bash expands to <em>nothing</em>, so <code>"$ART/run.log"</code> silently becomes
+    <code>/run.log</code>. The error you eventually see is "no such file", which sends you
+    hunting for a missing file rather than a missing variable. <strong>Prefer literal paths
+    in a runbook, or <code>set -u</code> so an unset variable is an error rather than an
+    empty string.</strong>
+  </td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="run">
+<h2>19 · Run it yourself</h2>
+
+<p>
+  Everything above is runnable. All the code lives in one directory,
+  <code>research/polis/</code>, and the whole pipeline works at 0.5B scale on a laptop —
+  which is exactly why the development study is at 0.5B.
+</p>
+
+<h3>The one-minute version</h3>
+<p>
+  Each module has a self-test that needs no data beyond the adapters. Start here, because
+  it proves the merge is real:
+</p>
+<pre><code><span class="com"># does the merge apply, reverse exactly, and respond to per-group coefficients?</span>
+python merge_layer_group.py --device cuda
+
+<span class="com"># are the anchors actually pointing in different directions?</span>
+python anchor_delta_cosine.py
+
+<span class="com"># can the model answer a Likert item at all?</span>
+python polis_option_logprob.py --demo</code></pre>
+
+<div class="callout warn">
+<span class="lbl">Read the self-test output, don't just check it exits 0</span>
+<code>merge_layer_group.py</code> prints four NLLs — base, uniform, upper-group-only,
+lower-group-only — plus a restored base. They must be <strong>four distinct numbers</strong>
+and the restore must match base exactly. If they collapse, the merge is silently no-oping
+(§18) and every hour after that is wasted. Printing <code>[OK]</code> is not sufficient;
+that line is reached either way.
+</div>
+
+<h3>The full pipeline, in order</h3>
+<pre><code><span class="com"># 1. pick anchors (writes data/data/polis/anchors.json)</span>
+python select_polis_anchors.py --max-anchors 4
+
+<span class="com"># 2. extract prompt/chosen pairs for one anchor</span>
+python export_polis_dpo_pairs.py --person-id 152 --k 4 --max-pairs 1000
+
+<span class="com"># 3. fill in the `rejected` caricature (needs a Gemini API key)</span>
+python generate_polis_rejected.py --person-id 152
+
+<span class="com"># 4. train that anchor's adapter</span>
+python train_one_politician_persona.py \
+    --data ../../data/data/polis/dpo_pairs_full/152.jsonl \
+    --output output/polis_152_kishida --epochs 1
+
+<span class="com"># 5. ... repeat 2-4 for 2377, 3631, 5520, then optimise the merge</span>
+python bo_merge_coeffs.py --target 1279 --budget 30 --trials 40 \
+    --dpo-dir ../../data/data/polis/dpo_pairs_targets</code></pre>
+
+<p>
+  Step 5 is the experiment. Add <code>--nested</code> for the unbiased cross-validated
+  version (§13), or <code>--utas-eval</code> with a wave file to get the external survey
+  metric (§14) alongside the NLL — and if you do, add <code>--utas-numeric</code>, because
+  the default scorer is the one §14 explains is broken.
+</p>
+
+<h3>The diagnostics from §16</h3>
+<p>
+  These are the two scripts that turned an uninterpretable survey table into a conclusion,
+  and they are the cheapest things in the repository. Neither trains anything; the first
+  needs a GPU for ten minutes, the second runs on a laptop in seconds.
+</p>
+<pre><code><span class="com"># administer the survey to all 594 politicians as name-only personas</span>
+python utas_population_eval.py \
+    --base Qwen/Qwen2.5-7B-Instruct --scoring numeric \
+    --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+    --out population_7b_base.json
+
+<span class="com"># name-swap divergence + rank of the true politician, vs constant baselines</span>
+python utas_rank_metric.py \
+    --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+    --dump population_7b_base.json
+
+<span class="com"># same rank metric, but per merge configuration (--utas-dump writes the vectors)</span>
+python bo_merge_coeffs.py --target 1279 --utas-eval ...2024HoR.json \
+    --utas-numeric --utas-dump utas_vectors/</code></pre>
+<p class="tip">
+  If you take one habit from this walkthrough, take this one: before believing any
+  evaluation number, run the version of it that has no model in it at all.
+</p>
+
+<h3>Two things that will bite you</h3>
+<p>
+  <strong>The data lives on an external drive.</strong> <code>data/data</code> is a symlink;
+  if it looks empty, the disk is not mounted. Every script resolves paths through one
+  module, which also gives you the escape hatch for running on a rented GPU box:
+</p>
+<pre><code>DATA_DIR = os.environ.get(<span class="str">"KOKKAI_DATA_DIR"</span>) <span class="kw">or</span> os.path.join(REPO_ROOT, <span class="str">"data"</span>, <span class="str">"data"</span>)</code></pre>
+<p class="srcref">research/polis/paths.py:20</p>
+
+<p>
+  <strong>Never let the adapter glob run loose.</strong> <code>output/polis_*</code> matches
+  the 0.5B adapters, the 7B adapters <em>and</em> the smoke-test directory all at once, and
+  mixing scales produces a merge that runs happily and means nothing. Pass them explicitly:
+</p>
+<pre><code>--adapters output/polis_{152,2377,3631,5520}_qwen7b</code></pre>
 </section>
 
 <p style="color:var(--muted); font-size:13px; border-top:1px solid var(--border); padding-top:20px">
-  Code referenced: <code>merge_layer_group.py</code>, <code>bo_merge_coeffs.py</code>,
-  <code>anchor_delta_cosine.py</code> (persona repo) ·
-  <code>data/polis_option_logprob.py</code>, <code>data/export_polis_dpo_pairs.py</code>
-  (kokkai repo). Numbers are from the project's own logs.
+  Every file referenced lives in <code>research/polis/</code>:
+  <code>select_polis_anchors.py</code>, <code>export_polis_dpo_pairs.py</code>,
+  <code>generate_polis_rejected.py</code>, <code>train_one_politician_persona.py</code>,
+  <code>merge_layer_group.py</code>, <code>bo_merge_coeffs.py</code>,
+  <code>anchor_delta_cosine.py</code>, <code>polis_option_logprob.py</code>,
+  <code>utas_population_eval.py</code>, <code>utas_rank_metric.py</code>,
+  <code>paths.py</code>. Line numbers were checked against the working tree; data
+  referenced from <code>data/data/polis/</code> and
+  <code>s3_mirror/kokkai-doc/ideology/</code>. The 7B results in §15–§16 come from
+  <code>specs/polis-low-resource-persona/artifacts/</code>, and the reasoning behind each
+  decision is logged in that folder's <code>DECISIONS.md</code>. All numbers are the
+  project's own — none are illustrative.
 </p>
 
 </main>
@@ -901,6 +2116,263 @@ function drawPipeline() {
   const lab = el("text", {x:W/2, y:118, "text-anchor":"middle", fill:css("--muted"),
     "font-size":11}, s);
   lab.textContent = "green = the POLIS method · grey = standard preparation";
+}
+
+/* ---------- 1. weight-space span (schematic) ---------- */
+// 2-D schematic of §1(4). Anchor directions are laid out to echo the real
+// bloc structure (three left-ish anchors, one conservative); the real space
+// is ~822M-dimensional and this is explicitly labelled as a diagram.
+const SPAN_ANCH = [
+  {n:"Kishida",  x: 0.78, y: 0.42},
+  {n:"Ueda",     x: 0.12, y: 0.86},
+  {n:"Fukushima",x:-0.72, y: 0.46},
+  {n:"Shiokawa", x:-0.60, y:-0.30}
+];
+function drawSpan() {
+  const host = $("#spanViz"); const W = 760, H = 330;
+  const s = svg(host, W, H);
+  const cx = W/2, cy = H/2 + 8, R = 118;
+  const P = p => [cx + p.x*R, cy - p.y*R];
+  // reachable region = hull of the anchor points with the origin
+  const pts = SPAN_ANCH.map(P);
+  el("path", {d:"M"+pts.map(p=>p.join(",")).join("L")+"Z",
+    fill:css("--series-1"), "fill-opacity":0.10,
+    stroke:css("--series-1"), "stroke-width":1.5, "stroke-dasharray":"6 4"}, s);
+  // spokes from base
+  SPAN_ANCH.forEach(a => {
+    const [x,y] = P(a);
+    el("line", {x1:cx, y1:cy, x2:x, y2:y, stroke:css("--axis"), "stroke-width":1}, s);
+  });
+  // base model
+  el("circle", {cx, cy, r:7, fill:css("--text-primary")}, s);
+  const bt = el("text", {x:cx, y:cy+24, "text-anchor":"middle", "font-size":12,
+    "font-weight":600, fill:css("--text-primary")}, s);
+  bt.textContent = "base model";
+  const bt2 = el("text", {x:cx, y:cy+39, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  bt2.textContent = "ΔW = 0";
+  // anchors
+  SPAN_ANCH.forEach(a => {
+    const [x,y] = P(a);
+    el("circle", {cx:x, cy:y, r:8, fill:css("--series-1"),
+      stroke:css("--surface-1"), "stroke-width":2}, s);
+    const t = el("text", {x, y: y + (a.y>0 ? -16 : 24), "text-anchor":"middle",
+      "font-size":12, "font-weight":600, fill:css("--text-primary")}, s);
+    t.textContent = a.n;
+  });
+  // a reachable target (inside hull) and an unreachable one (outside)
+  const inside  = {x:-0.18, y: 0.30}, outside = {x: 1.16, y: 0.10};
+  [[inside,"reachable target","inside the span → a blend exists", css("--series-3")],
+   [outside,"Takaichi-like target","outside → no blend can reach it", css("--series-2")]
+  ].forEach(([p,lab,sub,col]) => {
+    const [x,y] = P(p);
+    el("path", {d:`M${x},${y-8} L${x+8},${y} L${x},${y+8} L${x-8},${y} Z`,
+      fill:col, stroke:css("--surface-1"), "stroke-width":2}, s);
+    const t = el("text", {x, y:y-16, "text-anchor":"middle", "font-size":12,
+      "font-weight":600, fill:col}, s);
+    t.textContent = lab;
+    const t2 = el("text", {x, y:y-2+22, "text-anchor":"middle", "font-size":10.5,
+      fill:css("--muted")}, s);
+    t2.textContent = sub;
+  });
+  const cap = el("text", {x:cx, y:H-8, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  cap.textContent = "shaded = every persona expressible as a blend of the four anchors";
+}
+
+/* ---------- 3. anchor-span coverage on a real axis ---------- */
+// Real data: ideology.json.gz, axis economy/foreignworkers, 587 politicians.
+const COV = {
+  lo:-2.7, hi:1.0, n:587,
+  hist:[1,8,8,10,23,24,34,42,46,58,55,41,66,38,33,28,26,14,15,10,4,1,2,0],
+  anchors:[{n:"Fukushima",x:-1.918},{n:"Shiokawa",x:-1.696},
+           {n:"Ueda",x:-1.006},{n:"Kishida",x:-0.546}],
+  targets:[{n:"Akamine",x:-1.850},{n:"Edano",x:-0.751},{n:"Takaichi",x:0.109}]
+};
+function drawCoverage() {
+  const host = $("#coverageViz"); const W = 800, H = 300;
+  const s = svg(host, W, H);
+  const L=44, R=20, T=88, B=54, pw=W-L-R, ph=H-T-B;
+  const X = v => L + (v-COV.lo)/(COV.hi-COV.lo)*pw;
+  const lo = Math.min(...COV.anchors.map(a=>a.x)),
+        hi = Math.max(...COV.anchors.map(a=>a.x));
+  // reachable band
+  el("rect", {x:X(lo), y:T-58, width:X(hi)-X(lo), height:ph+58, rx:4,
+    fill:css("--series-1"), "fill-opacity":0.10,
+    stroke:css("--series-1"), "stroke-width":1, "stroke-dasharray":"5 4"}, s);
+  const bl = el("text", {x:(X(lo)+X(hi))/2, y:T-64, "text-anchor":"middle",
+    "font-size":11, "font-weight":600, fill:css("--series-1")}, s);
+  bl.textContent = "reachable by blending the anchors";
+  // histogram of the population
+  const mx = Math.max(...COV.hist), bw = pw/COV.hist.length;
+  COV.hist.forEach((c,i) => {
+    const h = (c/mx)*ph;
+    el("rect", {x:L+i*bw+0.5, y:T+ph-h, width:bw-1, height:Math.max(h,0.5),
+      fill:css("--seq-250"), "fill-opacity":0.85}, s);
+  });
+  el("line", {x1:L, y1:T+ph, x2:L+pw, y2:T+ph, stroke:css("--axis")}, s);
+  // axis ticks
+  [-2,-1,0,1].forEach(v => {
+    el("line", {x1:X(v), y1:T+ph, x2:X(v), y2:T+ph+5, stroke:css("--axis")}, s);
+    const t = el("text", {x:X(v), y:T+ph+19, "text-anchor":"middle", "font-size":11,
+      fill:css("--muted")}, s);
+    t.textContent = v;
+  });
+  // anchors (below axis) and targets (above)
+  COV.anchors.forEach((a,i) => {
+    const x = X(a.x);
+    el("line", {x1:x, y1:T-4, x2:x, y2:T+ph, stroke:css("--series-1"),
+      "stroke-width":1.5, opacity:0.8}, s);
+    el("circle", {cx:x, cy:T+ph, r:6, fill:css("--series-1"),
+      stroke:css("--surface-1"), "stroke-width":2}, s);
+    const t = el("text", {x, y:T+ph+38+(i%2)*15, "text-anchor":"middle", "font-size":11,
+      fill:css("--series-1"), "font-weight":600}, s);
+    t.textContent = a.n;
+  });
+  COV.targets.forEach((g,i) => {
+    const x = X(g.x), inside = g.x>=lo && g.x<=hi;
+    const col = inside ? css("--series-3") : css("--series-2");
+    const y = T-26 - i*22;
+    el("line", {x1:x, y1:y+6, x2:x, y2:T+ph, stroke:col, "stroke-width":1.5,
+      "stroke-dasharray":"3 3", opacity:0.85}, s);
+    el("path", {d:`M${x},${y-6} L${x+7},${y+3} L${x-7},${y+3} Z`, fill:col}, s);
+    const t = el("text", {x:x+12, y:y+4, "font-size":11.5, "font-weight":600, fill:col}, s);
+    t.textContent = `${g.n} (${g.x.toFixed(2)})${inside ? "" : "  ✗ outside"}`;
+  });
+  const xl = el("text", {x:L+pw/2, y:H-8, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  xl.textContent = "ideological position on axis economy/foreignworkers  ·  587 politicians";
+}
+
+/* ---------- 6. LoRA rank economics (real 7B shapes) ---------- */
+// 28 layers x {q,o: 3584x3584, k,v: 512x3584} = 112 modules, 822,083,584 params.
+const LORA_MODS = [{out:3584, inn:3584, n:56}, {out:512, inn:3584, n:56}];
+const LORA_FULL = LORA_MODS.reduce((a,m)=>a+m.out*m.inn*m.n, 0);
+function drawLora() {
+  const r = parseInt($("#loraR").value, 10);
+  $("#loraRv").textContent = r;
+  const stored = LORA_MODS.reduce((a,m)=>a + r*(m.out+m.inn)*m.n, 0);
+  const host = $("#loraViz"); const W = 800, H = 172;
+  const s = svg(host, W, H);
+  // B (out x r) @ A (r x in) = dW (out x in), drawn to scale for one 3584x3584 module
+  const unit = 96/3584, rw = Math.max(2, r*unit*6);
+  const boxes = [
+    {lab:`B  3584 × ${r}`, w:rw, h:96, col:"--series-1"},
+    {lab:`A  ${r} × 3584`, w:96, h:Math.max(2, r*unit*6), col:"--series-3"},
+    {lab:"ΔW  3584 × 3584", w:96, h:96, col:"--series-4"}
+  ];
+  let x = 34;
+  boxes.forEach((b,i) => {
+    const y = 40 + (96-b.h)/2;
+    el("rect", {x, y, width:b.w, height:b.h, rx:3, fill:css(b.col),
+      "fill-opacity":0.85, stroke:css("--border")}, s);
+    const t = el("text", {x:x+b.w/2, y:158, "text-anchor":"middle", "font-size":11,
+      fill:css("--text-secondary")}, s);
+    t.textContent = b.lab;
+    if (i < 2) {
+      const sym = el("text", {x:x+b.w+22, y:96, "text-anchor":"middle", "font-size":20,
+        fill:css("--muted")}, s);
+      sym.textContent = i===0 ? "×" : "=";
+    }
+    x += b.w + 46;
+  });
+  // bar comparison
+  const BL = 390, bw = W-BL-150;
+  const pctS = stored/LORA_FULL;
+  [["stored on disk", pctS, "--series-1", stored],
+   ["full-rank ΔW",   1,     "--series-4", LORA_FULL]].forEach(([lab,f,col,val],i) => {
+    const y = 52 + i*44;
+    const t = el("text", {x:BL, y:y-6, "font-size":11, fill:css("--text-secondary")}, s);
+    t.textContent = lab;
+    el("rect", {x:BL, y, width:bw, height:20, rx:4, fill:css("--code-bg")}, s);
+    el("rect", {x:BL, y, width:Math.max(bw*f,2), height:20, rx:4,
+      fill:css(col), "fill-opacity":0.9}, s);
+    const v = el("text", {x:BL+bw+10, y:y+15, "font-size":12, "font-weight":600,
+      fill:css("--text-primary")}, s);
+    v.textContent = (val/1e6).toFixed(1)+"M";
+  });
+  const ratio = LORA_FULL/stored;
+  $("#loraStat").innerHTML =
+    `At r=${r}: <strong>${(stored/1e6).toFixed(1)}M</strong> stored numbers express `
+    + `<strong>${(LORA_FULL/1e6).toFixed(0)}M</strong> of weight change — `
+    + `<strong>${ratio.toFixed(1)}×</strong> compression, ~${(stored*2/1e6).toFixed(0)} MB `
+    + `on disk in bf16. `
+    + (r <= 16
+        ? "Everything the persona learned must pass through this bottleneck."
+        : r >= 128
+          ? "At this rank you are close to full fine-tuning — and have lost the point of LoRA."
+          : "Higher rank buys capacity, but every anchor gets proportionally more expensive to merge.");
+}
+
+/* ---------- 12. one BO trial, traced ---------- */
+const TRACE = [
+  {t:"Optuna proposes coefficients",
+   f:"bo_bestC → trial.suggest_float",
+   src:"bo_merge_coeffs.py:115–119",
+   d:"The Gaussian process picks a point it thinks is promising. Out comes a 4×3 matrix C — one number per (anchor, depth-group), each in [0, 1.5]. That is the entire proposal: 12 numbers."},
+  {t:"Restore the base weights",
+   f:"merger.apply → self.base_weights",
+   src:"merge_layer_group.py:129–130",
+   d:"Last trial's merge is still written into the model, so every module starts by reading back its pristine snapshot. Without this, trials would compound on top of each other."},
+  {t:"Scale each anchor's ΔW by its coefficient",
+   f:"am.delta * w",
+   src:"merge_layer_group.py:132–137",
+   d:"For each of the 112 modules, look up which depth group its layer belongs to, and multiply that anchor's pre-masked delta by C[anchor, group]. Coefficients of exactly 0 are skipped outright — the optimiser zeroing an anchor makes the trial cheaper."},
+  {t:"TIES: elect a sign, average the winners",
+   f:"LayerGroupMerger._ties",
+   src:"merge_layer_group.py:146–153",
+   d:"Stack the weighted deltas, take the sign of their sum per coordinate, discard every anchor that disagrees, average the rest. Disagreements are resolved rather than cancelled."},
+  {t:"Write W_base + ΔW into the live model",
+   f:"self._params[...].data.copy_",
+   src:"merge_layer_group.py:142–144",
+   d:"In place, in fp32, cast back to the model's dtype. No new model object, no reload — the same 15 GB of weights are being rewritten. This is the step that silently no-ops on meta tensors (§18)."},
+  {t:"Score the target's real sentences",
+   f:"NLLScorer.mean_nll",
+   src:"bo_merge_coeffs.py:74–87",
+   d:"Feed each held-out utterance its true session context, and measure how surprised the merged model is by what the politician actually said next. Only the reply tokens are scored, never the context."},
+  {t:"Hand one number back to the optimiser",
+   f:"return scorer.mean_nll(dev)",
+   src:"bo_merge_coeffs.py:119",
+   d:"A single float. The GP folds it into its surrogate, its uncertainty at this point collapses to zero, and it proposes the next C. Repeat 40 times."}
+];
+let trStep = 0;
+function drawTrace() {
+  const host = $("#traceViz"); const W = 800, H = 96;
+  const s = svg(host, W, H);
+  const n = TRACE.length, bw = (W-20)/n;
+  TRACE.forEach((st,i) => {
+    const x = 10 + i*bw, on = i < trStep, cur = i === trStep-1;
+    el("rect", {x:x+3, y:30, width:bw-8, height:34, rx:7,
+      fill: on ? css("--series-3") : css("--surface-1"),
+      "fill-opacity": on ? (cur?0.95:0.35) : 1,
+      stroke: cur ? css("--series-3") : css("--border"),
+      "stroke-width": cur ? 2 : 1}, s);
+    const t = el("text", {x:x+bw/2-2, y:52, "text-anchor":"middle", "font-size":13,
+      "font-weight":700,
+      fill: cur ? "#fff" : (on ? css("--text-primary") : css("--muted"))}, s);
+    t.textContent = i+1;
+    if (i < n-1) {
+      el("path", {d:`M${x+bw-4},47 l-5,-3.5 l0,7 z`, fill:css("--axis")}, s);
+    }
+  });
+  const lab = el("text", {x:10, y:20, "font-size":11, fill:css("--muted")}, s);
+  lab.textContent = "one trial · repeated 40× per target, per fold";
+  const lab2 = el("text", {x:W-10, y:20, "text-anchor":"end", "font-size":11,
+    fill:css("--muted")}, s);
+  lab2.textContent = "↺ loops back to step 1";
+  // detail panel
+  const det = $("#trDetail");
+  det.innerHTML = TRACE.map((st,i) => `
+    <div class="step${i < trStep ? " on" : ""}">
+      <h4>${i+1} · ${st.t}</h4>
+      <p><code>${st.f}</code> — <span style="color:var(--muted)">${st.src}</span></p>
+      ${i < trStep ? `<p style="margin-top:6px">${st.d}</p>` : ""}
+    </div>`).join("");
+  $("#trInfo").textContent = trStep === 0
+    ? "Nothing has run yet."
+    : trStep >= TRACE.length
+      ? `All ${TRACE.length} steps — that is one trial. Optuna now proposes the next C.`
+      : `Step ${trStep} of ${TRACE.length}`;
 }
 
 /* ---------- 4. cosine matrix ---------- */
@@ -1039,7 +2511,8 @@ function buildTiesCtrl() {
 
 /* ---------- 7. layer-group coefficients ---------- */
 const NLAYER = 28, NGROUP = 3;
-let COEF = [[0.86,0.00,0.55],[0.00,0.12,0.00],[0.00,0.00,0.31],[0.00,0.22,0.00]];
+// the real 7B solution for target 1279 (高市), artifacts/bo7b_gpu_logs/single_numeric_target_1279.log
+let COEF = [[0.00,0.00,0.00],[1.50,0.00,0.00],[0.00,0.26,0.00],[0.00,0.00,0.71]];
 function groupOf(l) { const per = Math.ceil(NLAYER/NGROUP); return Math.min(Math.floor(l/per), NGROUP-1); }
 function buildCoefCtrl() {
   const host = $("#coefCtrl"); host.innerHTML = "";
@@ -1235,22 +2708,24 @@ $("#lenToggle").onclick = () => {
   drawLen();
 };
 
-/* ---------- 12. results ---------- */
+/* ---------- 12. results (7B nested CV, artifacts/bo7b_gpu_logs/) ---------- */
 const RES = {
-  targets:["Takaichi (LDP)","Akamine (JCP)","Edano (CDP)"],
+  targets:["高市 Takaichi (LDP)","赤嶺 Akamine (JCP)","枝野 Edano (CDP)"],
   series:["Base","Uniform","Best-single","POLIS"],
-  vals:[[2.875,4.046,2.932,2.842],[2.938,4.026,2.986,2.894],[3.173,4.250,3.179,3.107]]
+  vals:[[2.2684,2.7448,2.1701,2.1525],
+        [2.2520,2.7990,2.1878,2.1701],
+        [2.5302,2.9878,2.4446,2.4159]]
 };
 function drawResults() {
   const host = $("#resultsViz"); const W = 800, H = 300;
   const s = svg(host, W, H);
-  const L=52,R=16,T=18,B=54, pw=W-L-R, ph=H-T-B, ymax=4.6;
+  const L=52,R=16,T=18,B=54, pw=W-L-R, ph=H-T-B, ymax=3.3;
   const Y = v => T + (1-v/ymax)*ph;
   const cols = ["--series-1","--series-2","--series-3","--series-4"].map(css);
-  [1,2,3,4].forEach(g => {
+  [1,1.5,2,2.5,3].forEach(g => {
     el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
     const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
-    t.textContent = g;
+    t.textContent = g.toFixed(1);
   });
   el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
   const gw = pw/3;
@@ -1272,7 +2747,180 @@ function drawResults() {
     fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
   yl.textContent = "held-out NLL (lower better)";
   const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
-  note.textContent = "The uniform merge is worse than doing nothing — untuned task vectors overshoot.";
+  note.textContent = "7B, nested 5-fold CV. The uniform merge is worse than doing nothing — untuned task vectors overshoot.";
+}
+
+/* ---------- 15. paired per-fold deltas (BO − best-single) ---------- */
+const FOLDS = [
+  {t:"高市 (LDP)",  bs:[2.085,2.108,2.244,2.312,2.102], bo:[2.064,2.086,2.238,2.285,2.090]},
+  {t:"赤嶺 (JCP)",  bs:[2.284,2.131,2.282,2.302,1.939], bo:[2.250,2.105,2.254,2.311,1.930]},
+  {t:"枝野 (CDP)",  bs:[2.586,2.428,2.631,2.402,2.176], bo:[2.547,2.411,2.604,2.355,2.163]}
+];
+function drawPaired() {
+  const host = $("#pairedViz"); if (!host) return;
+  const W = 800, H = 210, s = svg(host, W, H);
+  const L=132,R=70,T=22,B=44, pw=W-L-R, ph=H-T-B;
+  const lo=-0.02, hi=0.05;
+  const X = v => L + ((v-lo)/(hi-lo))*pw;
+  [-0.02,-0.01,0,0.01,0.02,0.03,0.04,0.05].forEach(g => {
+    const zero = Math.abs(g) < 1e-9;
+    el("line", {x1:X(g),y1:T-4,x2:X(g),y2:T+ph, stroke:zero?css("--axis"):css("--grid"),
+      "stroke-width":zero?1.5:1}, s);
+    const t = el("text", {x:X(g), y:T+ph+18, "text-anchor":"middle", "font-size":11,
+      fill:zero?css("--text-secondary"):css("--muted")}, s);
+    t.textContent = zero ? "0 (tie)" : g.toFixed(2);
+  });
+  const rh = ph/FOLDS.length;
+  FOLDS.forEach((row, i) => {
+    const y = T + i*rh + rh/2;
+    const lt = el("text", {x:L-14, y:y+4, "text-anchor":"end", "font-size":12,
+      fill:css("--text-primary")}, s);
+    lt.textContent = row.t;
+    let won = 0;
+    row.bs.forEach((v, k) => {
+      const d = v - row.bo[k];           // positive = POLIS better
+      if (d > 0) won++;
+      const jit = (k - 2) * 5;           // separate coincident dots vertically
+      el("circle", {cx:X(d), cy:y+jit, r:5,
+        fill: d > 0 ? css("--series-4") : css("--neg"),
+        "fill-opacity":0.85, stroke:css("--surface-1"), "stroke-width":1}, s);
+    });
+    const rt = el("text", {x:L+pw+12, y:y+4, "font-size":12, "font-weight":600,
+      fill:css("--text-secondary")}, s);
+    rt.textContent = won + "/5";
+  });
+  const xl = el("text", {x:L+pw/2, y:H-6, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  xl.textContent = "nats better than the best single anchor, on the same fold →";
+}
+
+/* ---------- 16. name-swap divergence ---------- */
+const DIV = [
+  {lbl:"Two real politicians differ by…", v:1.132, c:"--series-1"},
+  {lbl:"Their two simulations differ by…", v:0.236, c:"--series-2"}
+];
+function drawDiverge() {
+  const host = $("#divergeViz"); if (!host) return;
+  const W = 800, H = 170, s = svg(host, W, H);
+  const L=230,R=110,T=22,B=40, pw=W-L-R, ph=H-T-B, xmax=1.25;
+  const X = v => L + (v/xmax)*pw;
+  [0,0.25,0.5,0.75,1.0,1.25].forEach(g => {
+    el("line", {x1:X(g),y1:T-4,x2:X(g),y2:T+ph, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g), y:T+ph+18, "text-anchor":"middle", "font-size":11,
+      fill:css("--muted")}, s);
+    t.textContent = g.toFixed(2);
+  });
+  const rh = ph/DIV.length;
+  DIV.forEach((d, i) => {
+    const y = T + i*rh + 10, bh = rh - 30;
+    const lt = el("text", {x:L-14, y:y+bh/2+4, "text-anchor":"end", "font-size":13,
+      fill:css("--text-primary")}, s);
+    lt.textContent = d.lbl;
+    el("rect", {x:L, y, width:Math.max(X(d.v)-L,1), height:bh, rx:4,
+      fill:css(d.c), "fill-opacity":0.9}, s);
+    const vt = el("text", {x:X(d.v)+10, y:y+bh/2+4, "font-size":13, "font-weight":600,
+      fill:css("--text-primary")}, s);
+    vt.textContent = d.v.toFixed(3);
+  });
+  const note = el("text", {x:L, y:H-4, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "mean gap per item, 1–5 scale · ratio 0.209 — swapping the name moves the answers a fifth as much as real people differ";
+}
+
+/* ---------- 16. anchor self-test (artifacts/anchor_selftest.log) ---------- */
+const ANCHSELF = [
+  {t:"岸田 (LDP)",      ad:0.816, base:0.873, cst:0.697},
+  {t:"塩川 (JCP)",      ad:2.218, base:1.998, cst:1.682},
+  {t:"福島 (SDP)",      ad:0.980, base:1.085, cst:1.243},
+  {t:"上田 (DP)",       ad:1.215, base:1.286, cst:0.514}
+];
+function drawAnchorSelf() {
+  const host = $("#anchorViz"); if (!host) return;
+  const W = 800, H = 250, s = svg(host, W, H);
+  const L=90,R=16,T=20,B=52, pw=W-L-R, ph=H-T-B, ymax=2.4;
+  const Y = v => T + (1-v/ymax)*ph;
+  const cols = [css("--series-4"), css("--series-1"), css("--muted")];
+  [0.5,1,1.5,2].forEach(g => {
+    el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
+    const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g.toFixed(1);
+  });
+  el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
+  const gw = pw/ANCHSELF.length;
+  ANCHSELF.forEach((row, gi) => {
+    const vals = [row.ad, row.base, row.cst], bw = (gw-44)/3;
+    vals.forEach((v, si) => {
+      const x = L + gi*gw + 22 + si*bw;
+      el("rect", {x:x+1, y:Y(v), width:bw-4, height:T+ph-Y(v), rx:4, fill:cols[si],
+        "fill-opacity": si===2 ? 0.45 : 0.92,
+        stroke: si===2 ? css("--muted") : "none", "stroke-dasharray": si===2?"3 2":""}, s);
+      const t = el("text", {x:x+bw/2, y:Y(v)-6, "text-anchor":"middle", "font-size":10,
+        "font-weight":600, fill:css("--text-primary")}, s);
+      t.textContent = v.toFixed(2);
+    });
+    // mark the one anchor whose adapter beats its constant
+    if (row.ad < row.cst) {
+      const t = el("text", {x:L+gi*gw+gw/2, y:T+ph+36, "text-anchor":"middle",
+        "font-size":11, "font-weight":600, fill:css("--series-3")}, s);
+      t.textContent = "beats the dummy";
+    }
+    const gl = el("text", {x:L+gi*gw+gw/2, y:T+ph+20, "text-anchor":"middle",
+      "font-size":12, fill:css("--text-secondary")}, s);
+    gl.textContent = row.t;
+  });
+  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
+  yl.textContent = "MAE on own survey (lower better)";
+}
+
+/* ---------- 16. rank of the true politician, per config ---------- */
+const RANK = {
+  cfgs:["Base","Uniform","Best-single","POLIS","Best constant"],
+  rows:[
+    {t:"高市 (LDP)",  v:[34.3,37.2,40.2,39.4,67.5]},
+    {t:"赤嶺 (JCP)",  v:[ 5.6, 4.2, 2.7, 2.7,97.5]},
+    {t:"枝野 (CDP)",  v:[47.5,25.4,43.8,44.9,81.3]}
+  ]
+};
+function drawRank() {
+  const host = $("#rankViz"); if (!host) return;
+  const W = 800, H = 300, s = svg(host, W, H);
+  const L=100,R=16,T=28,B=64, pw=W-L-R, ph=H-T-B;
+  const Y = v => T + (1-v/100)*ph;
+  const cols = ["--series-1","--series-2","--series-3","--series-4"].map(css)
+    .concat([css("--muted")]);
+  [0,25,50,75,100].forEach(g => {
+    el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
+    const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g + "%";
+  });
+  // chance line
+  el("line", {x1:L,y1:Y(50),x2:L+pw,y2:Y(50), stroke:css("--text-primary"),
+    "stroke-width":1.5, "stroke-dasharray":"5 4", opacity:0.6}, s);
+  const cl = el("text", {x:L+pw-4, y:Y(50)-7, "text-anchor":"end", "font-size":11,
+    fill:css("--text-secondary")}, s);
+  cl.textContent = "chance (50%) — everything below this line is worse than guessing";
+  el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
+  const gw = pw/RANK.rows.length;
+  RANK.rows.forEach((row, gi) => {
+    const bw = (gw-46)/5;
+    row.v.forEach((v, si) => {
+      const x = L + gi*gw + 23 + si*bw;
+      el("rect", {x:x+1, y:Y(v), width:bw-3, height:T+ph-Y(v), rx:4, fill:cols[si],
+        "fill-opacity": si===4 ? 0.45 : 0.92,
+        stroke: si===4 ? css("--muted") : "none", "stroke-dasharray": si===4?"3 2":""}, s);
+      const t = el("text", {x:x+bw/2, y:Y(v)-6, "text-anchor":"middle", "font-size":10,
+        "font-weight":600, fill:css("--text-primary")}, s);
+      t.textContent = v.toFixed(1);
+    });
+    const gl = el("text", {x:L+gi*gw+gw/2, y:T+ph+20, "text-anchor":"middle",
+      "font-size":12, fill:css("--text-secondary")}, s);
+    gl.textContent = row.t;
+  });
+  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
+  yl.textContent = "percentile rank of the true politician";
+  const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "A constant answer (grey, no model at all) beats every configuration on every target.";
 }
 
 /* ---------- 13. memory ---------- */
@@ -1317,10 +2965,15 @@ function drawMem() {
 
 /* ---------- boot ---------- */
 function redrawAll() {
-  drawPipeline(); drawCosine(); drawDare(); drawTies(); drawCoef();
-  drawBO(); drawLen(); drawResults(); drawMem();
+  drawPipeline(); drawSpan(); drawCoverage(); drawCosine(); drawLora();
+  drawDare(); drawTies(); drawCoef();
+  drawBO(); drawTrace(); drawLen(); drawResults(); drawPaired();
+  drawDiverge(); drawAnchorSelf(); drawRank(); drawMem();
 }
 $("#dareD").oninput = drawDare;
+$("#loraR").oninput = drawLora;
+$("#trStep").onclick = () => { trStep = Math.min(trStep+1, TRACE.length); drawTrace(); };
+$("#trReset").onclick = () => { trStep = 0; drawTrace(); };
 buildTiesCtrl(); buildCoefCtrl();
 redrawAll();
 </script>
