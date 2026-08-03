@@ -827,39 +827,37 @@ If an SFT-trained anchor transfers better than the DPO one, the 0/33 defeat is a
 anchors' objective rather than about merging, and all four should be retrained. If not,
 the negative result stands and four training runs are saved.
 
+**`[L11]`** · laptop · ship the anchor's own pairs (7.6 MB, one file)
+```bash
+cd ~/workspace/projects/kokkai_analysis/data/data/polis/dpo_pairs_full
+rsync -avP -e "ssh -p $PORT" 152.jsonl "root@$IP:/workspace/kokkai_data/polis/dpo_pairs_full/"
+```
+
+The anchors' own pairs live in `dpo_pairs_full`, which §3 does not copy — only the target
+subset goes to a pod. `152.jsonl` holds **1500 pairs**, which is what the DPO anchor was
+trained on, so the SFT twin sees the same data and the comparison isolates the objective.
+
 **`[P18]`** · pod · SFT anchor probe (~1 h)
 ```bash
 tmux new -s anchorsft
-cd /workspace/kokkai_analysis/research/polis
+cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
-ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
-PROBE="1279 2053 2289 2189 1083"
-
-# 1. train one SFT anchor (~20-40 min at --limit 3000)
-python train_anchor_sft.py --person-id 152 --base Qwen/Qwen2.5-7B-Instruct \
-  --device cuda --limit 3000 --out output/polis_152_sft_qwen7b 2>&1 | tee "$ART/anchor_sft_152.log"
-
-# 2. score each anchor ALONE on the probe targets. With a single --adapters entry the
-#    'uniform' row is that anchor applied at coefficient 1.0 -- which is the number
-#    being compared. --trials 8 because only the uniform/base rows are wanted here.
-for A in polis_152_qwen7b polis_152_sft_qwen7b; do
-  for T in $PROBE; do
-    python bo_merge_coeffs.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
-      --target $T --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
-      --adapters "output/$A" --nested --budget 30 --folds 5 --trials 8 \
-      2>&1 | tee -a "$ART/anchor_objective_${A}.log"
-  done
-done
+./research/polis/scripts/run_anchor_probe.sh
 ```
 
-The `WARNING: no improvement on the anchor's own held-out speech` line in step 1 is the
-gate — if it fires, the learning rate is wrong for this data volume and the adapter must
-not be merged. `--limit 3000` is a probe setting; the DPO anchors saw 4k–20k, so raise it
-only once the probe says the objective is what matters.
+Scripted rather than pasted: the inline version was a nested loop over two adapters and
+five targets, which is the shape that has broken on paste four times in this project.
+`ANCHOR=`, `LIMIT=`, `PROBE=`, `SKIP_TRAIN=1` override the defaults.
 
-**What decides it:** compare the `uniform` rows across the two logs, per target. If the
-SFT anchor is consistently lower, retrain all four and re-run `P15`. If they are level,
-the anchors' objective is not the explanation.
+The script gates on the trained adapter beating base on the anchor's **own** held-out
+speech, and refuses to score it otherwise — a broken training run and a real null look
+identical downstream. It ends by printing the `uniform` row per target for both anchors
+side by side, which is the comparison: with a single `--adapters` entry that row *is* the
+anchor applied at coefficient 1.0.
+
+**What decides it:** SFT anchor consistently lower → retrain all four with SFT and re-run
+`P15`. Level → the anchors' objective is not the explanation and the negative result
+stands.
 
 ### 11.2 The anchor-count slope (`P19`)
 
@@ -872,24 +870,13 @@ the curve is not an artefact of one combination.
 ```bash
 cd /workspace/kokkai_analysis
 export KOKKAI_DATA_DIR=/workspace/kokkai_data
-LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
-O=research/polis/output
-A1=$O/polis_152_qwen7b; A2=$O/polis_2377_qwen7b
-A3=$O/polis_3631_qwen7b; A4=$O/polis_5520_qwen7b
-
-for T in 1279 2053 2289 2189 1083 3245; do
-  for K in 2 3 4; do
-    case "$K$T" in
-      2*) SET="$A1 $A2" ;;  3*) SET="$A1 $A2 $A4" ;;  *) SET="$A1 $A2 $A3 $A4" ;;
-    esac
-    python research/polis/bo_merge_coeffs.py --base Qwen/Qwen2.5-7B-Instruct \
-      --device cuda --target $T --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
-      --adapters $SET --nested --budget 30 --folds 5 --trials 40 \
-      >>"$LOGS/anchors${K}_target_${T}.log" 2>&1
-    echo "done K=$K target=$T"
-  done
-done
+./research/polis/scripts/run_anchor_count.sh
 ```
+
+Runs K=2,3,4 over 6 targets, **rotating the anchor subset across targets** — with a fixed
+subset, K=2 would measure one particular pair rather than "two anchors", and the pairs are
+far from equivalent (塩川 wins best-single on 38% of folds, 福島 on 5%). The six pairs and
+four triples are each used at least once. `TARGETS=` and `KS=` override.
 
 Read it with `L9`, one `--glob 'anchors2_target_*.log'` per K. **What decides it:** if the
 `BO` row is flat from K=3 to K=4, training more anchors is not the missing ingredient and
