@@ -457,9 +457,54 @@ this says the merge contributes at all.
 > a full ~7 h re-derivation of every BO rather than a few eval passes. `--dump-picks` /
 > `DUMP_PICKS=` now writes the per-fold coefficient matrices. Set it on every nested run.
 
+## 2026-08-03 (later) — `P15`: the merge composes with prompting
+
+Same pod, 5 h 48 m, all 33 targets `rc=0`. Nested CV with the combined rows.
+
+**The kill criterion is answered in the method's favour.** Exact figures, from the
+`--dump-picks` JSONs rather than the rounded log lines:
+
+| comparison | mean | median | wins | sign p |
+|---|---|---|---|---|
+| **BO+ICL vs ICL** | **+0.0694** | +0.0676 | **33/33** | 2.3e-10 |
+| BO+ICL vs BO | +0.1036 | +0.0676 | 33/33 | 2.3e-10 |
+| best-single+ICL vs ICL | +0.0562 | +0.0554 | 33/33 | 2.3e-10 |
+| **BO+ICL vs best-single+ICL** | **+0.0132** | +0.0163 | **30/33** | 1.4e-06 |
+| BO vs ICL *(the P13 tie)* | −0.0343 | +0.0050 | 17/33 | 1.00 |
+
+Prompting and merging were never alternatives. Merged weights *plus* the prefix beat
+the prefix alone on every target, fold-level 160/165. The `P13` tie was an artefact of
+forcing a choice between two things that stack.
+
+**The decomposition that must not be buried.** Most of the stacking gain comes from
+*any* merge: `best-single+ICL` takes +0.0562 of the +0.0694, leaving **+0.0132 for the
+tuned coefficients** — half the +0.0265 the BO holds prefix-free. Tuning still
+contributes (30/33, p=1.4e-06), but the prefix absorbs about half of what it was
+buying. Reporting only `BO+ICL vs ICL` would overstate the BO's specific contribution.
+
+**Where the tuned merge loses under the prefix** — 3022 津島 (−0.0784), 110 田野瀬
+(−0.0272), 1543 手塚 (−0.0106) — is exactly the three boilerplate speakers where ICL
+beat BO by ~0.33 prefix-free. Coefficients are fitted on prefix-free `dev` and used
+under the prefix, so where the prefix does most of the work the BO optimised the wrong
+objective. The regime mismatch documented in `nested_cv`'s docstring, showing up where
+it was predicted to.
+
+**Decision: reword the hypothesis, don't reinterpret it.** `README.md:13` claims the
+merge *beats* prompting. It does not — prefix-free they tie. The supported claim is
+that **the merge composes with prompting, and the best configuration on every one of 33
+targets uses both**. That is more interesting than the original and it is what the data
+says; quietly reading the old sentence as if it meant this would not survive review.
+
+**Tune-under-the-prefix is now worth its cost.** Before `P15` it was a fishing
+expedition; now it has a specific prediction — the three regime-mismatch losses should
+disappear. Full 33 is ~29 h at 5×; the three failures plus a matched handful of
+controls answers it in ~4 h.
+
 ### Open
-- [ ] `P15`: does `BO+ICL` beat `ICL`? Decides whether the kill criterion is answered or
-      conceded.
+- [x] `P15`: `BO+ICL` beats `ICL` on 33/33. Kill criterion answered — see above.
+- [ ] Tune the BO *inside* the prefix on 3022 / 110 / 1543 plus controls (~4 h), to test
+      whether the regime mismatch explains the three losses.
+- [ ] Reword `README.md:13` and the paper's hypothesis: composes-with, not beats.
 - [ ] Baselines 3 and 4 (SFT / DPO on the sparse target) are implemented
       (`sparse_target_baselines.py`) but have **never run on a GPU**. Target negatives
       are exported (33 files × 30, `dpo_pairs_targets_full`) and not yet shipped to a pod.
