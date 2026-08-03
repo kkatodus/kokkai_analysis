@@ -50,6 +50,7 @@ when asking about a block rather than describing its position.
 | `P14` | pod | 9 | smoke the merge+ICL rows on one target (~12 min) |
 | `P15` | pod | 9 | nested + ICL + the combined rows over all 33 (~7 h) |
 | `L8` | laptop | 9 | retrieve the combined-row logs and the coefficient dumps |
+| `L9` | laptop | 9 | pool every nested log into the paper's table (CPU, seconds) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -709,6 +710,21 @@ rsync -avP -e "ssh -p $PORT" \
   root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_picks \
   $REPO/specs/polis-low-resource-persona/artifacts/
 ```
+
+**`[L9]`** · laptop · pool the logs into the table (CPU, seconds)
+```bash
+cd ~/workspace/projects/kokkai_analysis/research/polis
+python nested_log_summary.py \
+  --logs ../../specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  --glob 'combined_target_*.log' --repetition
+```
+
+Reads the *last* complete block in each log, so the appended-protocol problem and the
+OOM-aborted attempts sitting above the good results do not need cleaning up first. The
+`--glob` is not optional: the artifacts directory holds five protocols side by side and
+the script refuses to pool across them. Stdlib only — no venv, no numpy. Swap the glob
+for `'n33_target_*.log'` to reproduce the `P13` numbers in
+[`DECISIONS.md`](DECISIONS.md).
 
 **What decides it.** Pooled over the 33 targets: if `BO+ICL vs ICL` is positive on most
 of them and `best-single+ICL vs ICL` is not, the merge carries persona information the
