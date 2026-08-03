@@ -43,8 +43,15 @@ UTAS_NUMERIC="${UTAS_NUMERIC:-0}"
 # whole wave instead of scoring it against its own answers alone.
 UTAS_DUMP="${UTAS_DUMP:-}"
 # ICL=1 adds spec §4.3 baseline 2 (base model + the target's budget utterances in
-# prompt, no merge). The spec's kill criterion, and it had never been run.
+# prompt, no merge). The spec's kill criterion, and it had never been run. Under
+# --nested it also scores the combined rows (best-single+ICL, BO+ICL), which is what
+# separates "prompting and merging carry the same information" from "nobody stacked
+# them" -- the two readings of the n=33 tie.
 ICL="${ICL:-0}"
+# DUMP_PICKS=<dir> (nested only) saves each fold's BO coefficients and per-row NLLs.
+# The n=33 run did not, so scoring one more config against those merges meant
+# re-deriving every BO from scratch. Cheap insurance; always set it.
+DUMP_PICKS="${DUMP_PICKS:-}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
 # mixing scales silently produces a nonsense merge.
@@ -86,6 +93,10 @@ for T in $TARGETS; do
     # Nested CV gives the unbiased estimate but has no --utas-eval path.
     MODE=(--nested --budget "$BUDGET" --folds "$FOLDS" --trials "$TRIALS")
     [ "$ICL" = "1" ] && MODE+=(--icl)
+    if [ -n "$DUMP_PICKS" ]; then
+      mkdir -p "$DUMP_PICKS"
+      MODE+=(--dump-picks "$DUMP_PICKS/target_${T}.json")
+    fi
   else
     MODE=(--budget "$BUDGET" --test "$TEST" --trials "$TRIALS" --utas-eval "$GT")
     [ "$UTAS_NUMERIC" = "1" ] && MODE+=(--utas-numeric)

@@ -47,6 +47,9 @@ when asking about a block rather than describing its position.
 | `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
 | `P12` | pod | 6.3 | single-split again, saving per-config answer vectors (~12 min) |
 | `P13` | pod | 8 | nested 5-fold CV + ICL over all 33 targets (~6 h) |
+| `P14` | pod | 9 | smoke the merge+ICL rows on one target (~12 min) |
+| `P15` | pod | 9 | nested + ICL + the combined rows over all 33 (~7 h) |
+| `L8` | laptop | 9 | retrieve the combined-row logs and the coefficient dumps |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -634,6 +637,84 @@ seeds, so they should reproduce `+0.0176 / +0.0177 / +0.0287` against best-singl
 they don't, something in the environment moved and the new 30 aren't comparable to the
 committed results either — that's the check worth making before trusting the pooled
 analysis.
+
+---
+
+## 9. Does the merge add anything prompting does not?
+
+`P13` came back with BO ahead of best-single on **33/33** targets but level with ICL —
+17/33, mean −0.0343, median +0.0050 (see [`DECISIONS.md`](DECISIONS.md)). A tie between
+a weight-space and a prompt-space method has two readings, and no prefix-free row can
+tell them apart: the two carry the *same* information, or they carry different
+information and nothing ever stacked them.
+
+`nested_cv` now scores two combined rows whenever `--icl` is on — `BO+ICL` and
+`best-single+ICL`, the same merged weights with the demonstration prefix in front of
+each held-out prompt. **`BO+ICL vs ICL` is the number that decides it.**
+`best-single+ICL` is the control: without it, a positive result would only show that
+*some* weight-space adaptation composes with prompting, not that the tuned merge does.
+
+The coefficients are still fitted on prefix-free `dev` and only *scored* under the
+prefix. Tuning inside the prefix is the stricter experiment and ~5× the cost — every
+trial would re-score `dev` behind a ~9k-token prefix. Run this first; if the merge adds
+nothing here, that version is unlikely to rescue it.
+
+**`DUMP_PICKS` is new and you should always set it.** `P13` kept its fitted merges only
+in memory, which is why scoring one more config against them costs a full re-derivation
+of every BO rather than a few eval passes.
+
+Smoke one target before spending the night — none of this has run on a GPU:
+
+**`[P14]`** · pod · smoke the merge+ICL rows on one target (~12 min)
+```bash
+cd /workspace/kokkai_analysis && git pull      # needs the combined-row commit
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+
+time NESTED=1 ICL=1 TARGETS=1279 \
+  DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+mv "$LOGS/target_1279.log" "$LOGS/smoke_combined_1279.log"
+```
+
+Seven rows must print, `BO+ICL` and `best-single+ICL` among them, and `BO` must
+reproduce `2.1531` (the `P13` value for this target) — the BO path is untouched by this
+change, so a different number means something else moved.
+
+**`[P15]`** · pod · nested + ICL + combined rows over all 33 (~7 h)
+```bash
+tmux new -s polis33b
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+time NESTED=1 ICL=1 \
+  DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  TARGETS="1279 2053 2289 369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546" \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/combined_$(basename "$f")"; done
+```
+
+~10 min/target as before plus two extra prefixed evals per fold — call it +15%. The
+whole run re-derives the BO because `P13` did not dump its coefficients; with
+`DUMP_PICKS` set this is the last time that is true.
+
+**`[L8]`** · laptop · retrieve the combined-row logs and the coefficient dumps
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+```
+
+**What decides it.** Pooled over the 33 targets: if `BO+ICL vs ICL` is positive on most
+of them and `best-single+ICL vs ICL` is not, the merge carries persona information the
+prefix does not, and the §4.3 tie becomes a statement about *prompting being a strong
+baseline* rather than about the merge being redundant. If `BO+ICL` sits on `ICL`, the
+kill criterion is met on its own terms and the paper says so.
 
 ---
 

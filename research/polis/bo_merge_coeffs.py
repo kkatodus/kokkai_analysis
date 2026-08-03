@@ -199,13 +199,32 @@ def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax,
               icl=False, icl_shots=0, icl_max_chars=12000):
     """Nested k-fold CV (spec §2.4). Each outer fold is held out while the BO tunes
     on the rest, then scored on the untouched fold; baselines rotate identically.
-    Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate)."""
+    Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate).
+
+    With `icl`, two *combined* rows are scored as well — `best-single+ICL` and
+    `BO+ICL`, the same merged weights with the demonstration prefix in front of each
+    held-out prompt. The n=33 run left BO and ICL at parity (17/33 targets, mean
+    -0.0343), and a tie between a weight-space and a prompt-space method has two
+    readings that the prefix-free rows cannot separate: they carry the same
+    information, or they carry different information and nothing ever stacked them.
+    `BO+ICL vs ICL` is the number that decides it. `best-single+ICL` is scored too
+    because without it a positive result would only show that *some* weight-space
+    adaptation composes with prompting, not that the optimised merge does.
+
+    The coefficients are fitted on prefix-free `dev` and only *scored* with the
+    prefix, so the merge is used in a regime it was not tuned for. Tuning under the
+    prefix is the stricter experiment and ~5x the cost (every trial would re-score
+    `dev` behind a ~9k-token prefix); if the merge adds nothing here, that is
+    unlikely to rescue it.
+    """
     n_a, n_g = len(names), merger.n_groups
     fold_idx = fold_indices(len(allinst), folds, seed)
 
     rows: dict[str, list[float]] = {"base": [], "uniform": [], "best-single": [], "BO": []}
     if icl:
         rows["ICL"] = []
+        rows["best-single+ICL"] = []
+        rows["BO+ICL"] = []
     picks = {"best-single": [], "BO": []}
     for f in range(folds):
         te = [allinst[i] for i in fold_idx[f]]
@@ -222,10 +241,16 @@ def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax,
 
         bs_name, bs_te = best_single(merger, scorer, names, dev, te, n_g)
         rows["best-single"].append(bs_te); picks["best-single"].append(bs_name)
+        if icl:
+            # best_single leaves its winning anchor applied, so this is that anchor's
+            # merge plus the prefix -- no re-merge needed.
+            rows["best-single+ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
 
         bestC, _, _ = bo_bestC(merger, scorer, dev, n_a, n_g, trials, sampler_name, cmax, seed=seed + f)
         merger.apply(bestC)
         rows["BO"].append(scorer.mean_nll(te))
+        if icl:
+            rows["BO+ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
         picks["BO"].append(bestC)
 
     merger.restore()
@@ -316,6 +341,11 @@ def main() -> None:
     ap.add_argument("--icl-max-chars", type=int, default=12000,
                     help="cap on the demonstration block; keeps the prefix inside the context "
                          "window when a target's utterances are long (Japanese ~1 token/char)")
+    ap.add_argument("--dump-picks", metavar="JSON", default=None,
+                    help="--nested only: write the per-fold BO coefficient matrices, the "
+                         "best-single picks and every row's per-fold NLLs to JSON. Without this "
+                         "the fitted merges exist only inside the run, so any new config scored "
+                         "against them costs a full re-derivation of the BO (~10 min/target).")
     ap.add_argument("--utas-dump", metavar="DIR", default=None,
                     help="write each config's per-item answer vector to DIR as JSON. The "
                          "aggregate printed below discards them, and they are what "
@@ -370,21 +400,38 @@ def run_nested(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
                             icl_max_chars=args.icl_max_chars)
 
     print("\n======== nested-CV held-out NLL (unbiased, lower=better) ========")
-    for m in ["base", "ICL", "uniform", "best-single", "BO"]:
+    for m in ["base", "ICL", "uniform", "best-single", "BO", "best-single+ICL", "BO+ICL"]:
         if m not in rows:
             continue
-        print(f"  {m:14} {_fmt_stats(rows[m])}   per-fold {[round(v, 3) for v in rows[m]]}")
+        print(f"  {m:16} {_fmt_stats(rows[m])}   per-fold {[round(v, 3) for v in rows[m]]}")
     bo, base = np.asarray(rows["BO"]), np.asarray(rows["base"])
     bs = np.asarray(rows["best-single"])
     print(f"\n  BO vs base (paired):        {(base - bo).mean():+.4f} ± {(base - bo).std():.4f}")
     print(f"  BO vs best-single (paired): {(bs - bo).mean():+.4f} ± {(bs - bo).std():.4f}")
     if "ICL" in rows:
         icl_a = np.asarray(rows["ICL"])
+        boicl = np.asarray(rows["BO+ICL"])
+        bsicl = np.asarray(rows["best-single+ICL"])
         print(f"  BO vs ICL (paired):         {(icl_a - bo).mean():+.4f} ± {(icl_a - bo).std():.4f}"
               f"   [spec §4.3 baseline 2 — the kill criterion]")
+        print(f"  BO+ICL vs ICL (paired):     {(icl_a - boicl).mean():+.4f} ± {(icl_a - boicl).std():.4f}"
+              f"   [does the merge add anything prompting does not?]")
+        print(f"  BO+ICL vs BO (paired):      {(bo - boicl).mean():+.4f} ± {(bo - boicl).std():.4f}")
+        print(f"  best-single+ICL vs ICL:     {(icl_a - bsicl).mean():+.4f} ± {(icl_a - bsicl).std():.4f}"
+              f"   [control: is any merge enough, or the tuned one?]")
     print(f"  best-single picks per fold: {picks['best-single']}")
     print("  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode "
           "register not ideology, so absolute NLL gains are small (§4.4 note).")
+
+    if args.dump_picks:
+        os.makedirs(os.path.dirname(os.path.abspath(args.dump_picks)) or ".", exist_ok=True)
+        with open(args.dump_picks, "w", encoding="utf-8") as fh:
+            json.dump({"target": args.target, "anchors": names, "n_groups": n_g,
+                       "folds": folds, "trials": args.trials, "budget": len(allinst),
+                       "rows": {k: list(map(float, v)) for k, v in rows.items()},
+                       "best_single_picks": picks["best-single"],
+                       "bo_coeffs": [c.tolist() for c in picks["BO"]]}, fh, indent=1)
+        print(f"  [dump-picks] per-fold coefficients + NLLs -> {args.dump_picks}")
 
 
 # --------------------------------------------------------------------------- #
