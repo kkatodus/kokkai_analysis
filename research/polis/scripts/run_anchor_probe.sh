@@ -12,6 +12,7 @@
 #   ANCHOR=2377 ./research/polis/scripts/run_anchor_probe.sh    # probe a different anchor
 #   LIMIT=6000  ./research/polis/scripts/run_anchor_probe.sh    # more training data
 #   SKIP_TRAIN=1 ./research/polis/scripts/run_anchor_probe.sh   # adapter already trained
+#   SKIP_DPO=1   ./research/polis/scripts/run_anchor_probe.sh   # DPO twin already scored
 #
 # ~20-40 min to train at LIMIT=3000, then ~5 min per anchor per target.
 set -uo pipefail
@@ -77,7 +78,11 @@ fi
 # One --adapters entry means the 'uniform' row is that anchor at coefficient 1.0, which
 # is the number being compared. No new evaluation code needed.
 echo ""; echo "=== [2/2] $(date '+%F %T') scoring each anchor alone ==="
-for A in "$DPO_ADAPTER" "$SFT_ADAPTER"; do
+SCORE=("$DPO_ADAPTER" "$SFT_ADAPTER")
+# The identity control trains anchors 2-4 and only needs their own scores: the DPO twins
+# were scored on the same targets by the first run.
+[ "${SKIP_DPO:-0}" = "1" ] && SCORE=("$SFT_ADAPTER")
+for A in "${SCORE[@]}"; do
   TAG="$(basename "$A")"
   LOG="$ART/anchor_objective_${TAG}.log"
   : >"$LOG"
@@ -92,6 +97,13 @@ for A in "$DPO_ADAPTER" "$SFT_ADAPTER"; do
 done
 
 # ---- summary ---------------------------------------------------------------
+if [ "${SKIP_DPO:-0}" = "1" ]; then
+  echo ""
+  echo "=== done (SKIP_DPO=1). Compare across anchors with: ==="
+  echo "  grep -A9 'uniform' $ART/anchor_objective_polis_*_sft_qwen7b.log"
+  exit 0
+fi
+
 echo ""
 echo "=== uniform row = the anchor applied alone (lower is better) ==="
 "$PY" - "$ART/anchor_objective_$(basename "$DPO_ADAPTER").log" \

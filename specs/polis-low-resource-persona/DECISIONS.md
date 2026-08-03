@@ -646,9 +646,50 @@ curve is not tied to one combination. If 3→4 is already flat, extrapolating to
 worth a training run; if it is still climbing at 4, 8 anchors becomes the obvious next
 build and the VRAM work is justified. Needs no new code — `--adapters` is already explicit.
 
+## 2026-08-04 (later) — `P18`: the anchors were the problem, and identity may not exist
+
+One SFT anchor (152 岸田, same 1500 pairs the DPO anchor was trained on, so the only
+difference is the objective), applied at **coefficient 1.0 with no target data and no
+tuning**, on the 5 probe targets:
+
+| target | base | best-single (DPO) | BO (tuned, 4 anchors) | SFT on target's own 24 | **SFT anchor, untuned** |
+|---|---|---|---|---|---|
+| 1083 | 2.4200 | 2.3100 | 2.2875 | 2.2392 | **2.2697** |
+| 1279 | 2.2684 | 2.1701 | 2.1531 | 2.1129 | **2.1218** |
+| 2053 | 2.2520 | 2.1878 | 2.1661 | 2.1467 | **2.1452** |
+| 2189 | 2.3690 | 2.2386 | 2.1962 | 2.1671 | **2.1204** |
+| 2289 | 2.5302 | 2.4446 | 2.4190 | 2.3872 | **2.3726** |
+
+* vs its DPO twin: better on **5/5**, mean **+0.0714** — larger than the BO's entire
+  margin over best-single (+0.0265).
+* vs the tuned 4-anchor DPO merge: better on **5/5**, +0.0384.
+* vs SFT on the target's own 24 utterances: **level** (3/5, +0.0047).
+* vs `BO+ICL`, the best merge configuration in the study: **level** (−0.0006).
+
+So the SFT defeat was substantially an artefact of the anchors' objective. But the
+stronger reading is the one that changes the paper: **an adapter trained on a different
+politician, applied untuned, matches fine-tuning on the target's own data.** Whatever
+transfers here is not specific to the target.
+
+That is now the third independent measurement pointing the same way:
+
+1. best-single picks invert party (LDP targets pick the JCP anchor 53%, JCP targets pick
+   the LDP anchor 80%);
+2. UTAS rank-at-chance with name-swap divergence 0.209;
+3. a foreign anchor matching target-specific fine-tuning.
+
+**Decision: run the identity control before anything else.** Train the other three SFT
+anchors and score each alone on the same 5 targets (`P18` with `ANCHOR=` and
+`SKIP_DPO=1`). If all four land within noise, the transferred quantity is Diet-speech
+*register* and persona identity is not being learned at all — which is the paper's
+central finding and makes the merge machinery beside the point. If they separate, or
+different targets prefer different anchors, identity survives and the DPO objective was
+destroying it; then the merge deserves a full re-run on SFT anchors.
+
 ### Open
-- [ ] `P18`: does an SFT-trained anchor transfer better than the DPO one? Decides whether
-      the 0/33 SFT defeat is about merging or about the anchors' objective.
+- [ ] Identity control: 4 SFT anchors, each scored alone on the probe targets. Register or
+      identity? Everything downstream depends on which.
+- [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
 - [ ] `P19`: anchor-count slope at 2/3/4 — is n=4 already saturated?
 - [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances?
 - [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014. All seven spec baselines
