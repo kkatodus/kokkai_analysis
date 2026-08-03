@@ -1,0 +1,32 @@
+=== [2026-08-02 13:01:36] START target 2289 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 37.81it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:01, 262.01it/s]Loading weights:  28%|██▊       | 94/339 [00:00<00:00, 326.06it/s]Loading weights:  39%|███▊      | 131/339 [00:00<00:00, 342.54it/s]Loading weights:  50%|████▉     | 168/339 [00:00<00:00, 351.02it/s]Loading weights:  60%|██████    | 204/339 [00:00<00:00, 322.57it/s]Loading weights:  70%|██████▉   | 237/339 [00:00<00:00, 318.72it/s]Loading weights:  80%|███████▉  | 270/339 [00:00<00:00, 314.16it/s]Loading weights:  90%|█████████ | 306/339 [00:00<00:00, 326.36it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 323.10it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:107: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+target=2289  anchors=['152_qwen7b', '2377_qwen7b', '3631_qwen7b', '5520_qwen7b']  n_groups=3  dims=12  sampler=gp  train=30 test=30  exclude_target=False
+
+================ held-out test NLL (lower=better) ================
+  base (no adapter)      2.6608
+  uniform merge          3.1101
+  best single anchor     2.5651   (2377_qwen7b)
+  BO layer-group merge   2.5425   (train 2.4152)
+
+  BO vs uniform:  +0.5676   BO vs best-single: +0.0226
+
+best coefficients [anchor x group]:
+                  g0      g1      g2
+  152_qwen7b           0.000   0.000   0.000
+  2377_qwen7b          1.500   0.000   0.404
+  3631_qwen7b          0.000   0.000   0.000
+  5520_qwen7b          0.000   0.000   0.546
+
+===== §4.4 UTAS headline metric — target 2289 (2024HoR, 33 answered items, scoring=numeric-label) =====
+  config                             MAE(E)  MAE(arg)  within1   exact
+  constant(3) [midpoint]               1.03      1.03    0.667   0.303
+  base                                1.201     1.182    0.697   0.242
+  uniform                             1.182     1.697    0.424   0.212
+  best-single(2377_qwen7b)             1.22     1.212    0.636   0.273
+  BO                                  1.223     1.242    0.636   0.242
+  [utas-dump] per-item vectors -> specs/polis-low-resource-persona/artifacts/utas_vectors/2289_numeric.json
+  NB: the constant rows answer the same value to every item — no model, no adapter, no merge. A config that does not beat them has not been shown to carry any information about this target, however good its NLL.
+=== [2026-08-02 13:05:06] END target 2289 rc=0 ===
