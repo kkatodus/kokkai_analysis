@@ -1,0 +1,48 @@
+{
+ "objective": "sft",
+ "base_model": "Qwen/Qwen2.5-7B-Instruct",
+ "budget": 30,
+ "folds": 5,
+ "beta": 0.1,
+ "seed": 0,
+ "grid": true,
+ "results": [
+  {
+   "target": "1279",
+   "folds": 5,
+   "budget": 30,
+   "per_fold": [
+    2.0308,
+    2.0474,
+    2.2024,
+    2.2518,
+    2.0271
+   ],
+   "picked": [
+    {
+     "lr": 5e-05,
+     "epochs": 2
+    },
+    {
+     "lr": 5e-05,
+     "epochs": 2
+    },
+    {
+     "lr": 5e-05,
+     "epochs": 2
+    },
+    {
+     "lr": 5e-05,
+     "epochs": 2
+    },
+    {
+     "lr": 1e-05,
+     "epochs": 8
+    }
+   ],
+   "mean": 2.1119,
+   "std": 0.0956,
+   "selection": "best-of-grid on the held-out fold (optimistic for SFT)"
+  }
+ ]
+}
