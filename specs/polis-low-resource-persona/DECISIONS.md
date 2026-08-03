@@ -360,8 +360,113 @@ targets should move from the backbench level (~47%) toward the prominent level (
 `P12` found no such lift on 3 targets; the n=33 run measures it properly, and the
 volume-stratified sample is already the right design.
 
+## 2026-08-03 — the n=33 run: the population claim lands, the kill criterion does not
+
+`P13` on one L40S-class pod, ~6 h. Nested 5-fold CV with `ICL=1` over all 33 targets —
+the 3 originals plus the 30-target volume-stratified expansion. All 33 finished `rc=0`.
+
+Two `rc=1` lines survive above the good block in `n33_target_{1279,2053}.log`: the
+OOM-killed first attempt from before `86cb00c7`. The runner appends, so read the *last*
+block in each file.
+
+### Reproduction — the environment did not move
+
+| target | committed 2026-08-02 | n=33 re-run |
+|---|---|---|
+| 1279 高市 | +0.0176 ± 0.0076 | +0.0171 ± 0.0058 |
+| 2053 赤嶺 | +0.0177 ± 0.0154 | +0.0217 ± 0.0139 |
+| 2289 枝野 | +0.0287 ± 0.0130 | +0.0256 ± 0.0132 |
+
+Same sign and magnitude, inside the per-fold spread. The drift is `86cb00c7`: slicing
+logits before the fp32 cast changes the reduction order, moving NLL in the last digits
+and sending the GP down a slightly different trajectory. The 30 new targets are
+comparable to the committed results.
+
+### NLL vs the weight-space baselines — the population claim lands
+
+**BO beats best-single on 33/33 targets** (mean `+0.0265`, median `+0.0232`, sd
+`0.0106`; sign test p ≈ 2e-10) and base on 33/33 (`+0.1535`). n=3 was not a fluke of
+three prominent politicians.
+
+More important for the title: **the margin does not decay with target prominence.**
+
+| band | median speeches | BO vs best-single | BO vs ICL |
+|---|---|---|---|
+| originals | — | +0.0215 | +0.0239 |
+| 3000+ | 5855 | +0.0321 | +0.0077 |
+| 1000–3000 | 1817 | +0.0258 | +0.0374 |
+| 500–1000 | 693 | +0.0262 | −0.0476 |
+| 250–500 | 413 | +0.0229 | −0.0660 |
+| 120–250 | 166 | +0.0263 | −0.1470 |
+| 60–120 | 104 | +0.0286 | −0.0250 |
+
+The 2026-08-02 worry — that the method might only work on data-rich set-piece speakers —
+does not materialise. Backbenchers with 82–166 speeches get the same margin as 野田佳彦
+with 8 219.
+
+### The kill criterion is not met
+
+**BO beats ICL on 17/33 targets. Mean `−0.0343`, median `+0.0050`, fold-level 79/165.**
+Parity. `README.md:79` calls baseline 2 the kill criterion — *"if it matches POLIS the
+method is unnecessary"* — and on its own terms it matches.
+
+Fold hygiene checked before believing it: `nested_cv` builds the prefix from `dev` and
+scores `te` at restored base weights (`bo_merge_coeffs.py:219`), so ICL never sees the
+test fold. Not leakage.
+
+**Where ICL wins: repetitive speakers.** Median nearest-neighbour similarity between a
+target's own 30 utterances, against ICL's advantage:
+
+```
+corr(within-target utterance similarity, ICL gain over base) = +0.787
+corr(within-target utterance similarity, BO vs ICL)          = -0.702
+corr(log speech count,                   BO vs ICL)          = +0.324
+```
+
+Three targets carry most of the negative mean — 1543 手塚 (−0.329, self-similarity
+0.40), 110 田野瀬 (−0.325, **0.55**), 3022 津島 (−0.324, 0.23) — against ~0.18 typical.
+When a politician says nearly the same thing every time, 24 in-prompt examples approach
+a lookup table. Drop the two most repetitive and the mean is `−0.015` with BO at 17/31:
+still parity, not a win. 3022 is the honest exception — a large ICL gain at ordinary
+self-similarity — so repetition is the main mechanism, not the only one.
+
+**Framing, not a rescue.** ICL pays a ~9k-token prefix at every inference and needs the
+target's speeches at serving time; the merge pays once and ships a 130 MB adapter. That
+is a real deployment distinction and it is a *cost* argument. It does not restore the
+fidelity claim at `README.md:13`, which says the merge beats prompting.
+
+### Direction: score the merge and the prefix together
+
+A tie between a weight-space and a prompt-space method has two readings, and no
+prefix-free row separates them: they carry the same information, or they carry
+different information and nothing ever stacked them.
+
+`nested_cv` now scores `BO+ICL` and `best-single+ICL` whenever `--icl` is on — the same
+merged weights with the prefix in front of each held-out prompt, reusing the merger
+state already applied, so it costs two extra eval passes per fold and no extra trials.
+**`BO+ICL vs ICL` decides it**; `best-single+ICL` is the control, without which a
+positive result would only show that *some* weight-space adaptation composes with
+prompting rather than the tuned merge specifically. Runbook §9, `P14`/`P15`.
+
+Coefficients are still fitted on prefix-free `dev` and only scored under the prefix —
+the merge is used in a regime it was not tuned for. Tuning inside the prefix is ~5×
+the cost (every trial re-scoring `dev` behind the prefix) and is not worth buying until
+this says the merge contributes at all.
+
+> **Process note.** `P13` kept its fitted merges only in memory, so adding one row costs
+> a full ~7 h re-derivation of every BO rather than a few eval passes. `--dump-picks` /
+> `DUMP_PICKS=` now writes the per-fold coefficient matrices. Set it on every nested run.
+
 ### Open
-- [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms, UTAS
-      does not discriminate. Retire the main-scale hedge in `sec:granularity`.
+- [ ] `P15`: does `BO+ICL` beat `ICL`? Decides whether the kill criterion is answered or
+      conceded.
+- [ ] Baselines 3 and 4 (SFT / DPO on the sparse target) are implemented
+      (`sparse_target_baselines.py`) but have **never run on a GPU**. Target negatives
+      are exported (33 files × 30, `dpo_pairs_targets_full`) and not yet shipped to a pod.
+- [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms at n=33 and
+      does not decay with prominence, ICL ties, UTAS does not discriminate. Retire the
+      main-scale hedge in `sec:granularity`.
 - [ ] Decide whether the anti-correlation between NLL and UTAS is a headline finding
       or a limitation paragraph.
+- [ ] Decide how to present the ICL tie: cost/deployment framing, or a straight
+      concession that prompting matches the merge on held-out NLL.
