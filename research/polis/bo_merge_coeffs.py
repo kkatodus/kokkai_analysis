@@ -200,8 +200,24 @@ def fold_indices(n: int, folds: int, seed: int = 0) -> list:
     return np.array_split(idx, folds)
 
 
+def cap_dev(dev: list, dev_cap: int) -> list:
+    """First `dev_cap` training instances, or all of them when `dev_cap` is 0.
+
+    The budget sweep (spec follow-up to the 2026-08-03 SFT result) shrinks the training
+    data while holding the *test* fold fixed, so every budget's numbers pair with each
+    other and with the committed 30-instance runs. Truncating the front of `dev` rather
+    than resampling makes the small budgets nested subsets of the large ones, which
+    removes sampling noise from the comparison between them.
+
+    Shared by `nested_cv` and `sparse_target_baselines.run_target` for the same reason
+    `fold_indices` is: the merge and fine-tuning sides must see identical data at
+    identical budgets, or the curve compares two different experiments.
+    """
+    return dev[:dev_cap] if dev_cap else dev
+
+
 def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax, seed=0,
-              icl=False, icl_shots=0, icl_max_chars=12000):
+              icl=False, icl_shots=0, icl_max_chars=12000, dev_cap=0):
     """Nested k-fold CV (spec §2.4). Each outer fold is held out while the BO tunes
     on the rest, then scored on the untouched fold; baselines rotate identically.
     Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate).
@@ -233,7 +249,8 @@ def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax,
     picks = {"best-single": [], "BO": []}
     for f in range(folds):
         te = [allinst[i] for i in fold_idx[f]]
-        dev = [allinst[i] for j in range(folds) if j != f for i in fold_idx[j]]
+        dev = cap_dev([allinst[i] for j in range(folds) if j != f for i in fold_idx[j]],
+                      dev_cap)
 
         merger.restore()
         rows["base"].append(scorer.mean_nll(te))
@@ -346,6 +363,12 @@ def main() -> None:
     ap.add_argument("--icl-max-chars", type=int, default=12000,
                     help="cap on the demonstration block; keeps the prefix inside the context "
                          "window when a target's utterances are long (Japanese ~1 token/char)")
+    ap.add_argument("--dev-cap", type=int, default=0,
+                    help="--nested only: train/tune on the first N instances of each dev "
+                         "fold instead of all of them, holding the TEST fold fixed. This is "
+                         "the budget axis: 2026-08-03 found direct SFT beats the merge on "
+                         "33/33 targets at 24 training instances, and the open question is "
+                         "whether that reverses when the data gets scarce enough. 0 = no cap.")
     ap.add_argument("--dump-picks", metavar="JSON", default=None,
                     help="--nested only: write the per-fold BO coefficient matrices, the "
                          "best-single picks and every row's per-fold NLLs to JSON. Without this "
@@ -397,12 +420,13 @@ def run_nested(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
     kind, _ = make_sampler(args.sampler, n_a * n_g, args.trials)
     print(f"[nested-CV] target={args.target} anchors={names} n_groups={n_g} "
           f"dims={n_a * n_g} sampler={kind} budget={len(allinst)} folds={folds} "
-          f"trials/fold={args.trials} exclude_target={args.exclude_target}")
+          f"trials/fold={args.trials} exclude_target={args.exclude_target}"
+          + (f" dev_cap={args.dev_cap}" if args.dev_cap else ""))
 
     rows, picks = nested_cv(merger, scorer, names, allinst, folds,
                             args.trials, args.sampler, args.cmax,
                             icl=args.icl, icl_shots=args.icl_shots,
-                            icl_max_chars=args.icl_max_chars)
+                            icl_max_chars=args.icl_max_chars, dev_cap=args.dev_cap)
 
     print("\n======== nested-CV held-out NLL (unbiased, lower=better) ========")
     for m in ["base", "ICL", "uniform", "best-single", "BO", "best-single+ICL", "BO+ICL"]:
@@ -433,6 +457,7 @@ def run_nested(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
         with open(args.dump_picks, "w", encoding="utf-8") as fh:
             json.dump({"target": args.target, "anchors": names, "n_groups": n_g,
                        "folds": folds, "trials": args.trials, "budget": len(allinst),
+                       "dev_cap": args.dev_cap,
                        "rows": {k: list(map(float, v)) for k, v in rows.items()},
                        "best_single_picks": picks["best-single"],
                        "bo_coeffs": [c.tolist() for c in picks["BO"]]}, fh, indent=1)

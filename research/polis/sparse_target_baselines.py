@@ -57,7 +57,7 @@ from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from bo_merge_coeffs import (NLLScorer, load_instances, fold_indices, icl_nll,
-                             DPO_DIR, TARGETS_DIR)
+                             cap_dev, DPO_DIR, TARGETS_DIR)
 
 # Matches the anchors' adapter_config.json exactly, so "SFT on the target" differs
 # from "DPO on an anchor" only in the objective and the data, not the parameterisation.
@@ -223,10 +223,14 @@ def run_target(args, tok, model, probe, probe_nll, target: str) -> dict:
     per_fold, per_fold_cfg, per_fold_icl = [], [], []
     for f in range(folds):
         te = [allinst[i] for i in fidx[f]]
-        dev = [allinst[i] for j in range(folds) if j != f for i in fidx[j]]
+        # cap_dev, not a local slice: the merge side applies the identical truncation,
+        # so at a given --dev-cap both methods train on exactly the same instances.
+        dev = cap_dev([allinst[i] for j in range(folds) if j != f for i in fidx[j]],
+                      args.dev_cap)
         if args.objective == "dpo":
-            dev_pairs = [(allinst[i][0], allinst[i][1], negs[i])
-                         for j in range(folds) if j != f for i in fidx[j]]
+            dev_pairs = cap_dev([(allinst[i][0], allinst[i][1], negs[i])
+                                 for j in range(folds) if j != f for i in fidx[j]],
+                                args.dev_cap)
         scores, scores_icl = {}, {}
         for lr, ep in grid:
             t0 = time.time()
@@ -259,6 +263,7 @@ def run_target(args, tok, model, probe, probe_nll, target: str) -> dict:
         per_fold_cfg.append({"lr": best[0], "epochs": best[1]})
     a = np.asarray(per_fold)
     out = {"target": target, "folds": folds, "budget": len(allinst),
+           "dev_cap": args.dev_cap,
            "per_fold": [round(v, 4) for v in per_fold], "picked": per_fold_cfg,
            "mean": round(float(a.mean()), 4), "std": round(float(a.std()), 4),
            "selection": "best-of-grid on the held-out fold (optimistic for SFT)"
@@ -300,6 +305,10 @@ def main() -> None:
                          "setting on a few targets, then run the rest fixed.")
     ap.add_argument("--grid-lr", type=float, nargs="*", default=[5e-5, 2e-4])
     ap.add_argument("--grid-epochs", type=int, nargs="*", default=[4, 10])
+    ap.add_argument("--dev-cap", type=int, default=0,
+                    help="train on the first N instances of each dev fold, test fold "
+                         "unchanged. The budget axis -- see bo_merge_coeffs --dev-cap, "
+                         "which applies the same truncation so the two sides stay paired.")
     ap.add_argument("--icl", action="store_true",
                     help="also score each trained adapter WITH the ICL prefix in front of "
                          "every held-out prompt, i.e. SFT+ICL / DPO+ICL. P15 showed the merge "

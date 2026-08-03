@@ -500,7 +500,76 @@ expedition; now it has a specific prediction — the three regime-mismatch losse
 disappear. Full 33 is ~29 h at 5×; the three failures plus a matched handful of
 controls answers it in ~4 h.
 
+## 2026-08-03 (later still) — baseline 3 beats the method
+
+Same pod. Spec §4.3 baseline 3 (`--objective sft`: LoRA on the target's own dev fold)
+had never run on a GPU. It ran, and it wins.
+
+### Getting a fair number out of it
+
+The script's defaults (2e-4, 8 epochs) scored **3.2745** against base 2.2684 — a full
+point *worse* than not training, from memorising 24 examples. Reporting that would have
+been a strawman, which is exactly what the script's own design note warns against.
+
+The grid pilot on 1279 found a 50× spread across six cells (2e-4/8ep → 3.11 on the same
+fold where 5e-5/2ep → 2.03). **Selection bias turned out negligible**: the grid's
+best-held-out mean was 2.1119 and a *fixed* 5e-5/2ep gives 2.1120, because that cell won
+4 of 5 folds outright. So the n=33 run used fixed hyperparameters and carries no
+test-set-selection asterisk. 5e-5/2ep transferred from 1279 to all 33 and won on every
+one.
+
+### The result
+
+33 targets, 40 min, fixed 5e-5 / 2 epochs, `--icl` for the combined row:
+
+| comparison | mean | median | wins | p |
+|---|---|---|---|---|
+| **SFT vs BO** | **+0.0627** | +0.0423 | **33/33** | 2.3e-10 |
+| SFT vs best-single | +0.0892 | +0.0707 | 33/33 | 2.3e-10 |
+| SFT vs ICL | +0.0284 | +0.0442 | 29/33 | 1.1e-05 |
+| **SFT+ICL vs BO+ICL** | **+0.0355** | +0.0294 | **33/33** | 2.3e-10 |
+| SFT+ICL vs ICL | +0.1049 | +0.1000 | 33/33 | 2.3e-10 |
+
+**Direct fine-tuning on 24 utterances beats the anchor merge on every target, with and
+without the prefix.** The best configuration in the whole study is `SFT+ICL`. The
+hypothesis at `README.md:13` — that the merge beats fine-tuning directly on the sparse
+data — is false at this budget.
+
+Three defences, all of which fail:
+
+* *SFT's hyperparameters were tuned.* They were picked on one target and transferred; the
+  BO gets 40 trials per fold per target. POLIS is the more heavily tuned side.
+* *The merge is cheaper.* SFT is 11 s/fold at 7B. The merge needs four anchor training
+  runs plus 40 BO trials per fold, and both ship an adapter — identical serving cost.
+* *NLL is not the only metric.* The other instrument, UTAS, was closed as uninformative
+  earlier the same day. There is no second axis where the merge leads.
+
+**The one real asymmetry.** The prefix adds **+0.1036** on top of BO but only **+0.0765**
+on top of SFT. The merge and prompting carry more complementary information than SFT and
+prompting do — consistent with SFT and the prefix both learning from the same 24
+utterances while the merge imports something from the anchors. It is a genuine mechanism
+and it still loses.
+
+### Direction: the budget axis, the last place a positive claim could live
+
+30 utterances was never derived from anything, and the paper's thesis is *low-resource*.
+The open question is whether there is a budget below which SFT collapses and the merge
+does not. The mechanism is concrete and falsifiable: **the BO fits 12 coefficients, LoRA
+fits ~20M parameters**, so SFT should degrade far faster as data shrinks.
+
+`--dev-cap N` (both scripts, via the shared `cap_dev`) trains on the first N instances of
+each dev fold **with the test fold unchanged**, so every budget's numbers pair with each
+other *and* with the committed 24-instance runs, and the small budgets are nested subsets
+of the large ones — no sampling noise between points on the curve. Runbook §10.
+
+If the curve is flat, the paper is a negative result: a thorough n=33 protocol showing
+anchor merging beats every *merge* baseline while losing to the simplest fine-tuning
+alternative, plus the UTAS instrument analysis. That is publishable and honest, but it is
+a different paper, and the decision should be made deliberately rather than by omission.
+
 ### Open
+- [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances?
+- [ ] DPO (baseline 4) was running at the time of writing — the last unrun cell.
 - [x] `P15`: `BO+ICL` beats `ICL` on 33/33. Kill criterion answered — see above.
 - [ ] Tune the BO *inside* the prefix on 3022 / 110 / 1543 plus controls (~4 h), to test
       whether the regime mismatch explains the three losses.

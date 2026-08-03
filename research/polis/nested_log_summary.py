@@ -124,6 +124,11 @@ def main() -> None:
     ap.add_argument("--dpo-dir", default=os.path.join(HERE, "..", "..", "data", "data",
                                                       "polis", "dpo_pairs_targets"))
     ap.add_argument("--budget", type=int, default=30)
+    ap.add_argument("--baseline-json", action="append", default=[], metavar="FILE",
+                    help="a sparse_target_baselines.py output (sft_n33.json, dpo_n33.json). "
+                         "Its per-fold values pair with the logs' -- both call "
+                         "fold_indices with the same seed -- so the rows join directly. "
+                         "Repeatable.")
     ap.add_argument("--json", default=None, help="write the parsed values here")
     ap.add_argument("--verbose", action="store_true",
                     help="report how many result blocks each log held")
@@ -156,15 +161,46 @@ def main() -> None:
 
     if not targets:
         raise SystemExit(f"no parsable logs matching {args.glob} in {args.logs}")
+
+    # Fine-tuning baselines live in their own JSON because they run in a separate
+    # process (PEFT renames the modules LayerGroupMerger holds references to). They
+    # pair per fold rather than merely in aggregate: both sides call fold_indices with
+    # the same seed, which is why it is shared code and not copied.
+    extra_rows = []
+    for path in args.baseline_json:
+        with open(path, encoding="utf-8") as fh:
+            d = json.load(fh)
+        obj = d.get("objective", "SFT").upper()
+        if d.get("dev_cap"):
+            obj = f"{obj}@{d['dev_cap']}"
+        n_joined = 0
+        for r in d.get("results", []):
+            pid = str(r.get("target"))
+            if "per_fold" not in r or pid not in targets:
+                continue
+            if len(r["per_fold"]) != len(targets[pid]["rows"]["BO"]):
+                print(f"  !! {obj} target {pid}: {len(r['per_fold'])} folds vs the log's "
+                      f"{len(targets[pid]['rows']['BO'])}; skipped")
+                continue
+            targets[pid]["rows"][obj] = r["per_fold"]
+            if "per_fold_icl" in r:
+                targets[pid]["rows"][f"{obj}+ICL"] = r["per_fold_icl"]
+            n_joined += 1
+        extra_rows += [obj] + ([f"{obj}+ICL"] if any(f"{obj}+ICL" in t["rows"]
+                                                     for t in targets.values()) else [])
+        sel = d.get("grid") and "grid-selected (optimistic)" or "fixed hyperparameters"
+        print(f"  joined {n_joined} targets from {os.path.basename(path)}  [{obj}, {sel}]")
+    extra_rows = [r for r in extra_rows if all(r in t["rows"] for t in targets.values())]
+
     has_icl = all("ICL" in t["rows"] for t in targets.values())
     has_comb = all("BO+ICL" in t["rows"] for t in targets.values())
     print(f"\nparsed {len(targets)} targets  "
           f"(ICL rows: {'yes' if has_icl else 'no'}, combined rows: {'yes' if has_comb else 'no'})\n")
 
     # ---- per-target -------------------------------------------------------
-    cols = [c for c in ORDER if all(c in t["rows"] for t in targets.values())]
+    cols = [c for c in ORDER if all(c in t["rows"] for t in targets.values())] + extra_rows
     hdr = (f"{'id':>5} {'name':<10} {'sp':>5} {'band':>9} | "
-           + " ".join(f"{SHORT[c]:>7}" for c in cols) + " | " + f"{'BOvsB1':>8}"
+           + " ".join(f"{SHORT.get(c, c)[:7]:>7}" for c in cols) + " | " + f"{'BOvsB1':>8}"
            + (f" {'BOvsICL':>8}" if has_icl else "")
            + (f" {'B+IvsICL':>8}" if has_comb else ""))
     print(hdr)
@@ -189,6 +225,15 @@ def main() -> None:
         comparisons += [("BO+ICL vs ICL", "ICL", "BO+ICL"),
                         ("BO+ICL vs BO", "BO", "BO+ICL"),
                         ("best-single+ICL vs ICL", "ICL", "best-single+ICL")]
+    # A fine-tuning row beating BO is the spec's baseline 3/4 beating the method, so
+    # these are stated in the same direction as everything else: + means the SECOND
+    # name wins, i.e. + means the baseline beat POLIS.
+    for r in extra_rows:
+        comparisons.append((f"{r} vs BO", "BO", r))
+        if has_comb and not r.endswith("+ICL"):
+            comparisons.append((f"{r} vs base", "base", r))
+        if r.endswith("+ICL") and has_comb:
+            comparisons.append((f"{r} vs BO+ICL", "BO+ICL", r))
 
     print("\n=== pooled (each target = 1 observation) ===")
     n = len(targets)

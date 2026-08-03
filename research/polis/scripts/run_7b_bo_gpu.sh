@@ -52,6 +52,10 @@ ICL="${ICL:-0}"
 # The n=33 run did not, so scoring one more config against those merges meant
 # re-deriving every BO from scratch. Cheap insurance; always set it.
 DUMP_PICKS="${DUMP_PICKS:-}"
+# DEV_CAP=<n> (nested only) trains/tunes on the first n instances of each dev fold with
+# the test fold unchanged -- the budget axis. sparse_target_baselines.py applies the
+# identical truncation, so the merge and fine-tuning curves are measured on the same data.
+DEV_CAP="${DEV_CAP:-0}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
 # mixing scales silently produces a nonsense merge.
@@ -93,6 +97,7 @@ for T in $TARGETS; do
     # Nested CV gives the unbiased estimate but has no --utas-eval path.
     MODE=(--nested --budget "$BUDGET" --folds "$FOLDS" --trials "$TRIALS")
     [ "$ICL" = "1" ] && MODE+=(--icl)
+    [ "$DEV_CAP" != "0" ] && MODE+=(--dev-cap "$DEV_CAP")
     if [ -n "$DUMP_PICKS" ]; then
       mkdir -p "$DUMP_PICKS"
       MODE+=(--dump-picks "$DUMP_PICKS/target_${T}.json")

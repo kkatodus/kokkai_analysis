@@ -51,6 +51,9 @@ when asking about a block rather than describing its position.
 | `P15` | pod | 9 | nested + ICL + the combined rows over all 33 (~7 h) |
 | `L8` | laptop | 9 | retrieve the combined-row logs and the coefficient dumps |
 | `L9` | laptop | 9 | pool every nested log into the paper's table (CPU, seconds) |
+| `P16` | pod | 10 | budget sweep, merge side (~3.5 h) |
+| `P17` | pod | 10 | budget sweep, SFT side (~30 min) |
+| `L10` | laptop | 10 | retrieve and join both sides of the sweep |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -731,6 +734,82 @@ of them and `best-single+ICL vs ICL` is not, the merge carries persona informati
 prefix does not, and the §4.3 tie becomes a statement about *prompting being a strong
 baseline* rather than about the merge being redundant. If `BO+ICL` sits on `ICL`, the
 kill criterion is met on its own terms and the paper says so.
+
+---
+
+## 10. The budget sweep — the last place a positive claim could live
+
+Spec baseline 3 (SFT on the target's own dev fold) beats the merge on **33/33 targets**
+prefix-free and 33/33 with the prefix (see [`DECISIONS.md`](DECISIONS.md)). At a
+24-instance training budget the method is dominated.
+
+That budget was never derived from anything, and the paper's thesis is *low-resource*.
+The testable question: **is there a budget below which SFT collapses and the merge does
+not?** The mechanism is concrete — the BO fits 12 coefficients, LoRA fits ~20M
+parameters — so SFT should degrade much faster as data gets scarce.
+
+`--dev-cap N` trains on the first N instances of each dev fold and **leaves the test
+fold alone**, so results pair across budgets and with the committed 24-instance runs.
+Both scripts call the same `cap_dev`, so at a given cap the two sides train on exactly
+the same instances.
+
+Ten targets spanning the bands keep this to one evening. The merge side is the expensive
+half (40 BO trials/fold regardless of budget):
+
+**`[P16]`** · pod · budget sweep, merge side (~3.5 h)
+```bash
+tmux new -s sweep
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+SWEEP="1279 2053 2289 942 2189 3245 1083 1551 369 2447"
+
+for CAP in 4 8; do
+  NESTED=1 ICL=1 DEV_CAP=$CAP TARGETS="$SWEEP" \
+    DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks_cap$CAP \
+    ./research/polis/scripts/run_7b_bo_gpu.sh
+  for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/cap${CAP}_$(basename "$f")"; done
+done
+```
+
+**`[P17]`** · pod · budget sweep, SFT side (~30 min)
+```bash
+cd /workspace/kokkai_analysis/research/polis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+SWEEP="1279 2053 2289 942 2189 3245 1083 1551 369 2447"
+
+for CAP in 4 8; do
+  python sparse_target_baselines.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+    --objective sft --lr 5e-5 --epochs 2 --icl --dev-cap $CAP \
+    --targets $SWEEP --out "$ART/sft_cap$CAP.json"
+done
+```
+
+Same hyperparameters as the 24-instance run on purpose: re-tuning SFT at each budget
+would confound "SFT degrades with data" with "SFT was retuned". If SFT collapses at cap
+4, re-run *that* point with `--grid` before claiming it — a baseline should not lose on
+a bad draw, and at 4 instances a smaller learning rate may well be the right one.
+
+**`[L10]`** · laptop · retrieve and join both sides of the sweep
+```bash
+D=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+cd ~/workspace/projects/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/bo7b_gpu_logs" .
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/sft_cap4.json" .
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/sft_cap8.json" .
+cd ../../../research/polis
+python nested_log_summary.py --logs ../../specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs --glob 'cap4_target_*.log' --baseline-json ../../specs/polis-low-resource-persona/artifacts/sft_cap4.json
+```
+
+Repeat the last line with `cap8_` / `sft_cap8.json`. The `--glob` must name one cap: the
+script refuses to pool budgets under one heading, for the same reason it refuses to pool
+protocols.
+
+**What decides it.** `SFT vs BO` is `+0.0627` at cap 24. If it shrinks toward zero at cap
+8 and reverses at cap 4, the paper has a genuine low-resource claim with a stated
+crossover point. If it stays positive at every budget, the merge is dominated everywhere
+that matters and the paper is a negative result.
 
 ---
 
