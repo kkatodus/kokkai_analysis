@@ -54,6 +54,8 @@ when asking about a block rather than describing its position.
 | `P16` | pod | 10 | budget sweep, merge side (~3.5 h) |
 | `P17` | pod | 10 | budget sweep, SFT side (~30 min) |
 | `L10` | laptop | 10 | retrieve and join both sides of the sweep |
+| `P18` | pod | 11 | SFT anchor probe — is the anchors' objective the confound? (~1 h) |
+| `P19` | pod | 11 | anchor-count slope at 2/3/4 anchors (~2.5 h) |
 | `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
 
 `P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
@@ -810,6 +812,90 @@ protocols.
 8 and reverses at cap 4, the paper has a genuine low-resource claim with a stated
 crossover point. If it stays positive at every budget, the merge is dominated everywhere
 that matters and the paper is a negative result.
+
+---
+
+## 11. Is it the merge, or the anchors?
+
+DPO ties the merge (24/33 to BO, p=0.014) while SFT beats it 33/33 — and the anchors were
+trained with DPO. Every comparison splits along that line, so two questions come before
+any more method work. Both are cheap. See [`DECISIONS.md`](DECISIONS.md).
+
+### 11.1 The anchors' objective (`P18`)
+
+If an SFT-trained anchor transfers better than the DPO one, the 0/33 defeat is about the
+anchors' objective rather than about merging, and all four should be retrained. If not,
+the negative result stands and four training runs are saved.
+
+**`[P18]`** · pod · SFT anchor probe (~1 h)
+```bash
+tmux new -s anchorsft
+cd /workspace/kokkai_analysis/research/polis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+PROBE="1279 2053 2289 2189 1083"
+
+# 1. train one SFT anchor (~20-40 min at --limit 3000)
+python train_anchor_sft.py --person-id 152 --base Qwen/Qwen2.5-7B-Instruct \
+  --device cuda --limit 3000 --out output/polis_152_sft_qwen7b 2>&1 | tee "$ART/anchor_sft_152.log"
+
+# 2. score each anchor ALONE on the probe targets. With a single --adapters entry the
+#    'uniform' row is that anchor applied at coefficient 1.0 -- which is the number
+#    being compared. --trials 8 because only the uniform/base rows are wanted here.
+for A in polis_152_qwen7b polis_152_sft_qwen7b; do
+  for T in $PROBE; do
+    python bo_merge_coeffs.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+      --target $T --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
+      --adapters "output/$A" --nested --budget 30 --folds 5 --trials 8 \
+      2>&1 | tee -a "$ART/anchor_objective_${A}.log"
+  done
+done
+```
+
+The `WARNING: no improvement on the anchor's own held-out speech` line in step 1 is the
+gate — if it fires, the learning rate is wrong for this data volume and the adapter must
+not be merged. `--limit 3000` is a probe setting; the DPO anchors saw 4k–20k, so raise it
+only once the probe says the objective is what matters.
+
+**What decides it:** compare the `uniform` rows across the two logs, per target. If the
+SFT anchor is consistently lower, retrain all four and re-run `P15`. If they are level,
+the anchors' objective is not the explanation.
+
+### 11.2 The anchor-count slope (`P19`)
+
+The 165 fitted merges already suggest saturation — 福島's coefficient is near-zero in 40%
+of folds, so one of four anchors is switched off most of the time. This measures the slope
+directly, using only anchors that already exist. The subset is rotated across targets so
+the curve is not an artefact of one combination.
+
+**`[P19]`** · pod · anchor-count slope (~2.5 h)
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+O=research/polis/output
+A1=$O/polis_152_qwen7b; A2=$O/polis_2377_qwen7b
+A3=$O/polis_3631_qwen7b; A4=$O/polis_5520_qwen7b
+
+for T in 1279 2053 2289 2189 1083 3245; do
+  for K in 2 3 4; do
+    case "$K$T" in
+      2*) SET="$A1 $A2" ;;  3*) SET="$A1 $A2 $A4" ;;  *) SET="$A1 $A2 $A3 $A4" ;;
+    esac
+    python research/polis/bo_merge_coeffs.py --base Qwen/Qwen2.5-7B-Instruct \
+      --device cuda --target $T --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
+      --adapters $SET --nested --budget 30 --folds 5 --trials 40 \
+      >>"$LOGS/anchors${K}_target_${T}.log" 2>&1
+    echo "done K=$K target=$T"
+  done
+done
+```
+
+Read it with `L9`, one `--glob 'anchors2_target_*.log'` per K. **What decides it:** if the
+`BO` row is flat from K=3 to K=4, training more anchors is not the missing ingredient and
+the VRAM work for 8+ is not worth doing. If it is still improving, 8 anchors becomes the
+next build — and note that needs bf16 deltas (fp32 is ~3.3 GB per anchor, so 8 anchors plus
+the model exceeds 48 GB) and probably `--n-groups 1` to keep the BO's dimensionality sane.
 
 ---
 

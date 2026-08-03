@@ -567,9 +567,92 @@ anchor merging beats every *merge* baseline while losing to the simplest fine-tu
 alternative, plus the UTAS instrument analysis. That is publishable and honest, but it is
 a different paper, and the decision should be made deliberately rather than by omission.
 
+## 2026-08-04 — DPO, and the confound it exposes
+
+Baseline 4 ran: 33 targets, 70 min, fixed 5e-5 / 2 epochs, same folds. Full ordering,
+mean held-out NLL over the 33:
+
+```
+SFT+ICL 2.0687 · DPO+ICL 2.1013 · BO+ICL 2.1042 · best-single+ICL 2.1174
+SFT 2.1452 · ICL 2.1736 · DPO 2.2073 · BO 2.2078 · best-single 2.2343
+base 2.3613 · uniform 2.7689
+```
+
+**DPO ties the merge.** BO wins 24/33 (p=0.014) with means identical to four decimals
+(+0.0006): DPO loses often and narrowly, wins rarely and widely. With the prefix it is a
+clean tie (14/33, p=0.49). DPO beats best-single 33/33, so it is a competent baseline.
+
+### The confound
+
+The anchors were trained with **DPO** (`train_one_politician_persona.py`, `DPOTrainer`,
+beta=0.1). That splits every comparison in two:
+
+| | result |
+|---|---|
+| objective-**matched** — merge-of-DPO-anchors vs DPO-on-sparse-target | merge wins **24/33** |
+| objective-**mismatched** — merge-of-DPO-anchors vs SFT-on-sparse-target | merge loses **0/33** |
+
+So the SFT defeat may not be "merging loses to fine-tuning" but "**SFT is the better
+objective at a 24-instance budget, and the anchors were built with the other one**".
+Consistent with everything else: DPO ≈ BO ≈ merge-of-DPO-anchors, with SFT 0.062 below
+both. DPO needs a synthesised `rejected` side (the Gemini caricature pipeline), which on
+little data may add noise rather than signal.
+
+**Decision: probe before retraining.** `train_anchor_sft.py` trains one SFT anchor
+(`P18`), reusing `sparse_target_baselines.train_lora_on` so an SFT anchor differs from the
+sparse-SFT baseline in data volume alone. If it transfers better than the DPO anchor,
+retrain all four; if not, the negative result stands and four training runs are saved.
+
+### Would more anchors help? — what the 165 fitted merges already say
+
+Asked whether n=4 anchors is the limitation. The `--dump-picks` matrices answer part of it
+without new GPU time.
+
+**Anchor choice does not track ideology — it inverts.** Best-single winner by target party:
+
+| target party | picks |
+|---|---|
+| 自民 (LDP) | 塩川 (**JCP**) 53%, 上田 29% |
+| 共産 (JCP) | 岸田 (**LDP**) 80% |
+| 公明 (Komeito) | 塩川 (JCP) 70% |
+| 立憲 (CDP) | 上田 50%, 岸田 50% |
+
+If anchors carried ideology, an LDP target would not be best served by the Communist
+anchor 62 times out of 165. This is the 0.5B "adapters encode register, not ideology"
+concession, now confirmed at 7B with n=33 and a party breakdown. It also explains why the
+BO only buys +0.0265 over best-single: it is blending registers, not interpolating
+positions.
+
+**The BO already discards capacity at n=4.** Mean coefficient per anchor across 165 folds:
+岸田 0.245, 塩川 0.294, 上田 0.188, **福島 0.135 — near-zero in 40% of folds**. One of four
+anchors is being switched off most of the time. That is what diminishing returns look
+like, and it is the main reason to doubt that 20 anchors would change the result.
+
+**What more anchors would cost, if pursued anyway:**
+
+* *VRAM* — deltas are fp32, ~3.3 GB per anchor. 8 anchors = 26.4 GB + 15.2 GB model, which
+  fits 48 GB only in bf16; 20 anchors is 66 GB fp32 and infeasible without storing LoRA
+  factors and computing ΔW per module on the fly.
+* *Dimensionality* — dims = n_anchors × n_groups. 20 × 3 = 60, past the point where
+  `make_sampler` abandons GP for TPE, and fitting 60 coefficients on 24 instances would
+  overfit. The 0.5B granularity bookend already showed high-dim coefficient search
+  actively corrupting the model (96 dims → 3.441 vs base 2.880). Realistically it needs
+  `n_groups=1` or an anchor-selection step before the BO.
+* *Training* — one run per anchor.
+
+**Decision: measure the slope with the anchors already trained (`P19`) before training
+any.** Nested CV at 2, 3 and 4 anchors, with the subset rotated across targets so the
+curve is not tied to one combination. If 3→4 is already flat, extrapolating to 20 is not
+worth a training run; if it is still climbing at 4, 8 anchors becomes the obvious next
+build and the VRAM work is justified. Needs no new code — `--adapters` is already explicit.
+
 ### Open
+- [ ] `P18`: does an SFT-trained anchor transfer better than the DPO one? Decides whether
+      the 0/33 SFT defeat is about merging or about the anchors' objective.
+- [ ] `P19`: anchor-count slope at 2/3/4 — is n=4 already saturated?
 - [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances?
-- [ ] DPO (baseline 4) was running at the time of writing — the last unrun cell.
+- [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014. All seven spec baselines
+      are now implemented and run.
 - [x] `P15`: `BO+ICL` beats `ICL` on 33/33. Kill criterion answered — see above.
 - [ ] Tune the BO *inside* the prefix on 3022 / 110 / 1543 plus controls (~4 h), to test
       whether the regime mismatch explains the three losses.
