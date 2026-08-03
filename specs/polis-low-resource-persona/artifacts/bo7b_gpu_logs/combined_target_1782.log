@@ -1,0 +1,26 @@
+=== [2026-08-03 06:14:50] START target 1782 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 47.11it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 292.36it/s]Loading weights:  26%|██▌       | 88/339 [00:00<00:00, 316.54it/s]Loading weights:  40%|███▉      | 135/339 [00:00<00:00, 351.44it/s]Loading weights:  51%|█████▏    | 174/339 [00:00<00:00, 357.15it/s]Loading weights:  62%|██████▏   | 210/339 [00:00<00:00, 325.72it/s]Loading weights:  73%|███████▎  | 246/339 [00:00<00:00, 335.67it/s]Loading weights:  83%|████████▎ | 280/339 [00:00<00:00, 330.16it/s]Loading weights:  94%|█████████▎| 317/339 [00:00<00:00, 341.67it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 336.03it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:148: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=1782 anchors=['152_qwen7b', '2377_qwen7b', '3631_qwen7b', '5520_qwen7b'] n_groups=3 dims=12 sampler=gp budget=30 folds=5 trials/fold=40 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.5838 ± 0.1400   per-fold [2.456, 2.714, 2.514, 2.787, 2.448]
+  ICL              2.4633 ± 0.1393   per-fold [2.338, 2.566, 2.394, 2.685, 2.333]
+  uniform          2.9636 ± 0.1206   per-fold [2.821, 3.081, 2.92, 3.129, 2.867]
+  best-single      2.4891 ± 0.1252   per-fold [2.354, 2.597, 2.454, 2.671, 2.369]
+  BO               2.4636 ± 0.1228   per-fold [2.323, 2.57, 2.439, 2.638, 2.348]
+  best-single+ICL  2.4161 ± 0.1271   per-fold [2.297, 2.516, 2.368, 2.611, 2.289]
+  BO+ICL           2.3960 ± 0.1246   per-fold [2.274, 2.491, 2.356, 2.587, 2.272]
+
+  BO vs base (paired):        +0.1202 ± 0.0284
+  BO vs best-single (paired): +0.0255 ± 0.0065
+  BO vs ICL (paired):         -0.0003 ± 0.0307   [spec §4.3 baseline 2 — the kill criterion]
+  BO+ICL vs ICL (paired):     +0.0674 ± 0.0194   [does the merge add anything prompting does not?]
+  BO+ICL vs BO (paired):      +0.0676 ± 0.0145
+  best-single+ICL vs ICL:     +0.0472 ± 0.0156   [control: is any merge enough, or the tuned one?]
+  best-single picks per fold: ['2377_qwen7b', '5520_qwen7b', '5520_qwen7b', '2377_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+  [dump-picks] per-fold coefficients + NLLs -> specs/polis-low-resource-persona/artifacts/bo7b_picks/target_1782.json
+=== [2026-08-03 06:26:26] END target 1782 rc=0 ===
