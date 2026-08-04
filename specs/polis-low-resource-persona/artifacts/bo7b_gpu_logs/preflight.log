@@ -1,12 +1,12 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 37.82it/s]Loading weights:  14%|█▍        | 48/339 [00:00<00:01, 268.76it/s]Loading weights:  24%|██▍       | 82/339 [00:00<00:00, 300.00it/s]Loading weights:  35%|███▌      | 120/339 [00:00<00:00, 329.11it/s]Loading weights:  45%|████▌     | 154/339 [00:00<00:00, 331.21it/s]Loading weights:  55%|█████▌    | 188/339 [00:00<00:00, 332.22it/s]Loading weights:  65%|██████▌   | 222/339 [00:00<00:00, 299.73it/s]Loading weights:  76%|███████▌  | 257/339 [00:00<00:00, 304.47it/s]Loading weights:  87%|████████▋ | 294/339 [00:00<00:00, 319.38it/s]Loading weights:  97%|█████████▋| 330/339 [00:01<00:00, 326.48it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 315.83it/s]
-anchors=['152_qwen7b', '2377_qwen7b', '3631_qwen7b', '5520_qwen7b']  n_layers=28  n_groups=3  touched_modules=112
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 46.99it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 287.57it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 319.03it/s]Loading weights:  38%|███▊      | 130/339 [00:00<00:00, 348.69it/s]Loading weights:  51%|█████     | 172/339 [00:00<00:00, 364.07it/s]Loading weights:  62%|██████▏   | 209/339 [00:00<00:00, 323.07it/s]Loading weights:  73%|███████▎  | 246/339 [00:00<00:00, 329.51it/s]Loading weights:  83%|████████▎ | 282/339 [00:00<00:00, 336.50it/s]Loading weights:  96%|█████████▌| 326/339 [00:00<00:00, 366.39it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 336.76it/s]
+anchors=['152_sft_qwen7b', '2377_sft_qwen7b', '3631_sft_qwen7b', '5520_sft_qwen7b']  n_layers=28  n_groups=3  touched_modules=112
 group of each layer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2]
 
 base NLL                 = 1.0786
-uniform merge NLL        = 2.6322
-upper-group-only merge   = 1.2157
-lower-group-only merge   = 1.7669
+uniform merge NLL        = 1.9362
+upper-group-only merge   = 1.1604
+lower-group-only merge   = 1.7391
 restored base NLL        = 1.0786  (should match base)
 
 [OK] layer-group merge applies, is reversible, and responds to per-group coeffs.
