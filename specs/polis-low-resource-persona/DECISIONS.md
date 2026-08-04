@@ -686,9 +686,94 @@ central finding and makes the merge machinery beside the point. If they separate
 different targets prefer different anchors, identity survives and the DPO objective was
 destroying it; then the merge deserves a full re-run on SFT anchors.
 
+## 2026-08-04 (later still) — SFT anchors restore the hypothesis
+
+Ran the identity control and, on the same anchors, the full nested protocol. Two results
+that point in different directions and are both real.
+
+### The register decomposition — four anchors, five targets
+
+Each SFT anchor applied alone at coefficient 1.0:
+
+| target | base | 岸田(LDP) | 塩川(JCP) | 福島(SDP) | 上田(DPJ) | spread | gap from base | best |
+|---|---|---|---|---|---|---|---|---|
+| 高市 LDP | 2.2684 | 2.1218 | 2.1263 | **2.1125** | 2.1369 | 0.0244 | 0.1559 | 福島 |
+| 赤嶺 JCP | 2.2520 | 2.1452 | **2.1128** | 2.1342 | 2.1469 | 0.0341 | 0.1392 | 塩川 (JCP) |
+| 枝野 CDP | 2.5302 | 2.3726 | 2.3765 | 2.3593 | **2.3376** | 0.0389 | 0.1926 | 上田 (DPJ) |
+| 武田 LDP | 2.3690 | **2.1204** | 2.1578 | 2.1539 | 2.1326 | 0.0374 | 0.2486 | 岸田 (LDP) |
+| 山崎 Komeito | 2.4200 | 2.2697 | 2.2664 | **2.2647** | 2.2661 | 0.0050 | 0.1553 | 福島 |
+
+**Anchor choice explains ~16% of what a persona adapter buys** (mean spread 0.0280 against
+a mean gap from base of 0.1783). Five-sixths is identical whichever politician the adapter
+was trained on: that quantity is Diet-speech *register*, and it is the single largest
+effect anywhere in this project. It stands regardless of everything below, and 上田 (4 118
+speeches) transferring as well as 岸田 (20 418) rules out "the model already knows this
+person" as the explanation.
+
+The residual changed sign, though. Three of five targets prefer an ideologically matching
+anchor (JCP→JCP, CDP→DPJ, LDP→LDP) where the **DPO** anchors had inverted party. n=5,
+p≈0.10 — suggestive only, which is why `anchor_affinity.py` measures it at n=33.
+
+### The hypothesis holds at matched objective
+
+Nested CV, 5 targets, SFT anchors, versus the committed DPO-anchor run and the SFT
+baseline:
+
+| target | base | best1 | BO | BO+ICL | BO (DPO anchors) | sparse SFT | SFT+ICL |
+|---|---|---|---|---|---|---|---|
+| 高市 | 2.2684 | 2.1105 | 2.0811 | **2.0658** | 2.1531 | 2.1129 | 2.0964 |
+| 赤嶺 | 2.2520 | 2.1170 | 2.0984 | **2.0880** | 2.1661 | 2.1467 | 2.1241 |
+| 枝野 | 2.5302 | 2.3388 | 2.3240 | **2.3159** | 2.4190 | 2.3872 | 2.3617 |
+| 武田 | 2.3690 | 2.1204 | 2.0937 | **2.0686** | 2.1962 | 2.1671 | 2.1218 |
+| 山崎 | 2.4200 | 2.2813 | 2.2277 | **2.1870** | 2.2875 | 2.2392 | 2.1959 |
+
+All 5/5:
+
+* `BO` vs `best-single`: **+0.0286** — indistinguishable from the +0.0258 it bought on DPO
+  anchors. **The BO's contribution is independent of the anchor objective**, which is what
+  makes this a fix rather than a different method.
+* SFT anchors vs DPO anchors, same protocol: **+0.0794**.
+* `BO` vs sparse SFT: **+0.0456**. `BO+ICL` vs `SFT+ICL`: **+0.0349**.
+
+**`README.md:13` holds after all** — an optimised merge of data-rich anchors does beat
+fine-tuning directly on the sparse data, once both sides use the same objective. The 0/33
+defeat was measuring the anchors' training objective, not merging. Note the baseline is
+the favoured side: sparse SFT uses 5e-5/2ep chosen by a grid, the anchors 5e-5/1ep chosen
+by nobody.
+
+The prefix's role inverted too: **+0.0200** on top of the SFT-anchor merge against +0.0307
+on top of sparse SFT, the reverse of the DPO-anchor case (+0.1036 vs +0.0765). Better
+anchors already carry much of what the prompt was supplying.
+
+### How to hold both results at once
+
+They are not in tension, and the paper needs both:
+
+* **Most of what any of these methods deliver is register.** ~84% of a single adapter's
+  benefit is anchor-independent; a foreign anchor matches target-specific fine-tuning.
+* **The part that is left responds to method.** Merging beats the best single anchor by a
+  consistent +0.027 across both anchor families, and the merge beats sparse fine-tuning
+  once the objective is matched.
+
+Reporting only the second would overclaim; reporting only the first would miss that the
+method works. The register decomposition is also what makes the small margins
+interpretable — they are small because they are competing over a sixth of the effect.
+
+> **Process note.** The confound was found only because baseline 4 was run. Baselines 3
+> and 4 sat unimplemented through the whole 0.5B phase and the first 7B session, and the
+> 33/33 defeat that looked fatal for two days was an artefact of never having compared
+> like with like. Run every baseline in the spec, early.
+
 ### Open
-- [ ] Identity control: 4 SFT anchors, each scored alone on the probe targets. Register or
-      identity? Everything downstream depends on which.
+- [ ] Full 33-target nested + ICL on SFT anchors (~6 h) — the paper's main table. The
+      5-target result is where the SFT defeat stood before it held at 33/33.
+- [ ] `anchor_affinity.py` at n=33: does the preferred anchor track party once the
+      anchors are SFT-trained? Decides whether the 16% residual is identity or noise.
+- [ ] Re-run the granularity ablation on SFT anchors: the null was measured on anchors
+      whose deltas fought each other (uniform merge 2.63 vs base 1.08; on SFT anchors it
+      is 1.94), so per-depth structure deserves one more look.
+### Superseded open items
+- [x] Identity control: done — anchor choice explains ~16%; the rest is register.
 - [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
 - [ ] `P19`: anchor-count slope at 2/3/4 — is n=4 already saturated?
 - [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances?
