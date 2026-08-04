@@ -84,6 +84,16 @@ def main() -> None:
     if not targets:
         raise SystemExit("no targets")
 
+    # A missing space between two --adapters values concatenates them into one path,
+    # which otherwise surfaces as a safetensors FileNotFoundError on a nonsense path.
+    for a in args.adapters:
+        if not os.path.isfile(os.path.join(a, "adapter_model.safetensors")):
+            extra = ("\n  That path contains a second path -- the shell joined two "
+                     "--adapters values, so a space was lost on paste. Use "
+                     "scripts/run_anchor_affinity.sh."
+                     if a.count("/output/") > 1 else "")
+            raise SystemExit(f"no adapter at {a}{extra}")
+
     names = [os.path.basename(a).replace("polis_", "").replace("_qwen7b", "")
              for a in args.adapters]
     anchor_ids = [n.split("_")[0] for n in names]
