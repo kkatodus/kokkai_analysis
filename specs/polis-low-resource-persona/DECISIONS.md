@@ -772,6 +772,71 @@ interpretable — they are small because they are competing over a sixth of the 
 - [ ] Re-run the granularity ablation on SFT anchors: the null was measured on anchors
       whose deltas fought each other (uniform merge 2.63 vs base 1.08; on SFT anchors it
       is 1.94), so per-depth structure deserves one more look.
+## 2026-08-04 (evening) — the training objective decides whether identity survives
+
+`anchor_affinity.py` over all 33 targets, both anchor families. Each anchor applied alone
+at coefficient 1.0; "match" means the target's best anchor is from the target's own party
+family. The null is a permutation that holds **both** marginals fixed — which anchors win
+how often, and which parties the targets are — because a big-tent family with a popular
+anchor would otherwise match by construction.
+
+| anchors | match | null mean | p | gap from base | anchor share |
+|---|---|---|---|---|---|
+| **SFT** | **17/28 (61%)** | 9.42 | **0.0012** | 0.2186 | 26% |
+| **DPO** | 4/28 (14%) | 7.89 | 0.055 *(low tail)* | 0.1295 | 15% |
+
+**SFT vs DPO, Fisher exact: p = 7.2e-4.** Same four politicians, same 1500 pairs each,
+same LoRA shape, same merge code, same evaluation — only the objective differs.
+
+**The claim that holds:** DPO anchors carry no recoverable party signal; SFT anchors do.
+Not "DPO inverts": 4 against a null of 7.89 is p=0.055 one-tailed, suggestive at best,
+even though 自民 targets pick the JCP anchor 8 times out of 12 under DPO. The *difference
+between the arms* is what is significant, and it is the strongest single result here.
+
+Per family, SFT anchors:
+
+| family | matched | anchors chosen |
+|---|---|---|
+| 共産 JCP | **3/3** | 塩川 ×3 |
+| 民主/立憲 | 9/13 | 上田 ×9, 岸田 ×2, 塩川 ×2 |
+| 自民 LDP | 5/12 | 岸田 ×5, 塩川 ×3, 上田 ×3, 福島 ×1 |
+
+That gradient is evidence the signal is real rather than lucky. The JCP is small,
+disciplined and distinctive, and all three of its targets pick the JCP anchor; the LDP
+spans 高市 to 武田 and its targets scatter. An artefact would not respect party structure
+this way.
+
+Anchor choice accounts for a median **22%** of the adapter's benefit under SFT against
+**13%** under DPO, higher for SFT on 25 of 33 targets.
+
+### What the paper now says
+
+Three claims, in decreasing size of effect:
+
+1. **Most of persona adaptation is register.** ~74–78% of a single adapter's benefit is
+   anchor-independent; an adapter trained on a different politician matches fine-tuning on
+   the target's own data.
+2. **The remainder is ideological, and recoverable.** The preferred anchor tracks party at
+   p=0.0012, strongest where party structure is tightest.
+3. **The training objective determines whether (2) exists at all.** DPO-trained anchors
+   are at chance; the same politicians trained with SFT are far above it. This retroactively
+   explains the party inversion in `best-single` picks, the granularity null, and the
+   sparse-SFT defeat, all of which were measured on DPO anchors.
+
+> **What this cost.** Two days were spent on a 33/33 defeat that turned out to be an
+> artefact of the anchors' objective, and the objective was only implicated because
+> baseline 4 was finally implemented. Every baseline in the spec, early — the one you skip
+> is the one that reinterprets everything else.
+
+### Open
+- [ ] Full 33-target nested + ICL on SFT anchors — running; the paper's main table.
+- [ ] Re-run the granularity ablation on SFT anchors. The null was measured on adapters
+      whose deltas fought each other (uniform merge 2.63 against base 1.08; 1.94 on SFT
+      anchors), so per-depth structure deserves one more look. ~10 min.
+- [ ] Re-run UTAS on SFT anchors. §4.4 was closed on the evidence that personas carry no
+      identity — which is now known to be objective-dependent. The population sweep and
+      rank metric are unchanged and cheap to re-point.
+
 ### Superseded open items
 - [x] Identity control: done — anchor choice explains ~16%; the rest is register.
 - [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
