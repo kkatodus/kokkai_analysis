@@ -58,9 +58,11 @@ DUMP_PICKS="${DUMP_PICKS:-}"
 DEV_CAP="${DEV_CAP:-0}"
 
 # MUST be explicit: output/polis_* globs 0.5B + 7B + smoke dirs together, and
-# mixing scales silently produces a nonsense merge.
-ADAPTERS="$CODE/output/polis_152_qwen7b $CODE/output/polis_2377_qwen7b \
-$CODE/output/polis_3631_qwen7b $CODE/output/polis_5520_qwen7b"
+# mixing scales silently produces a nonsense merge. Overridable so the same protocol can
+# run over the SFT-trained anchors (P18 showed those transfer ~0.07 better than their DPO
+# twins) without editing this file -- but pass full paths, never a glob.
+ADAPTERS="${ADAPTERS:-$CODE/output/polis_152_qwen7b $CODE/output/polis_2377_qwen7b \
+$CODE/output/polis_3631_qwen7b $CODE/output/polis_5520_qwen7b}"
 GT="$DATA_DIR/polis/utas_ground_truth/2024HoR.json"
 DPODIR="$DATA_DIR/polis/dpo_pairs_targets"
 
