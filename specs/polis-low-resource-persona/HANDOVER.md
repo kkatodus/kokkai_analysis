@@ -1,6 +1,9 @@
-# POLIS — session handover (2026-07-04)
+# POLIS — session handover (running log, started 2026-07-04)
 
-Context for resuming work after a session clear. Read [README.md](./README.md) (the spec) first; this file covers only what the spec does not: session state, environment facts, and next actions.
+Context for resuming work after a session clear: session state, environment facts, and next actions.
+**Newest orientation is the 🔴 START HERE block below; everything after it is a chronological log with the
+oldest material at the bottom.** For *findings* and the reasoning behind each change of direction, the
+authoritative file is [DECISIONS.md](./DECISIONS.md), not this one.
 
 ---
 > ## 📁 CODE MOVED (2026-07-29) — read before following any path below
@@ -21,20 +24,103 @@ Context for resuming work after a session clear. Read [README.md](./README.md) (
 > needs `KOKKAI_REPO` — the UTAS scorer is a sibling import now. Run logs stay under `specs/.../artifacts/`.
 > Verified after the move: `merge_layer_group.py` self-test at 0.5B prints four distinct NLLs and an exact restore.
 ---
-> ## 🔴 START HERE (latest, 2026-07-26 — nested-CV + 7B orthogonality DONE; only the 7B merge table is left)
-> **Two more results are in the paper, both laptop-only.** (1) **Nested 5-fold CV at 0.5B on all 3 genuine held-out
-> targets** (spec §2.4, resume item 6b — was the last open Phase-3 item): POLIS beats best-single in **15/15 folds**
-> and base in **14/15**, unbiased, now `\ref{tab:nested-nll}` in the paper. (2) **7B anchor-delta cosine re-check**
-> (Result D's "re-check at 7B" caveat, now closed): max 0.090 / mean 0.076, norms 1.25–1.33 — and the off-diagonals
-> **separate by bloc at 7B** (every left–left pair ≈0.088 > every pair with the LDP anchor ≈0.064), which at 0.5B they
-> did not. First weight-space evidence that the deltas encode ideology, not only register.
-> **Environment (bit us this session, see "Migration fallout"):** workspace moved root → user `ken`; datasets live in
-> `D:\wsl_data.vhdx` mounted at `/mnt/wsl/wsldata` (use `kdata mount`, added to `~/.zshrc`); HF cache was lost.
-> **Still pending, unchanged:** the **7B merge-method comparison** (base/uniform/best-single/POLIS × NLL + UTAS × 3
-> targets). Driver is written and preflight-gated: **`research/polis/scripts/run_7b_bo_gpu.sh`**; step-by-step runbook in
-> **[`RUNPOD.md`](./RUNPOD.md)**. Needs ~31 GB VRAM (15.2 GB model
-> + 13.2 GB fp32 anchor deltas); 40 GB floor, 48 GB comfortable. Estimated **~1 GPU-hour**, i.e. ~$5–20 rented — the
-> "compute wall" is the 8 GB laptop, not the job.
+> ## 🔴 START HERE (latest, 2026-08-05 — the experiments are DONE; what is left is writing `main.tex`)
+>
+> **Every experiment the paper needs has run at 7B on n=33 targets. No result is pending on GPU.**
+> Sessions 2026-08-02 → 2026-08-05 (four rented L40S-class pods, ~20 GPU-hours) closed the main table, all
+> seven spec baselines, the UTAS instrument, the anchor-objective question and the granularity ablation.
+>
+> ### Read in this order
+> 1. **[`DECISIONS.md`](./DECISIONS.md)** — the authoritative record of findings and *why* each direction
+>    changed. **Read the last four entries (2026-08-04 → 2026-08-05); they supersede much of this file.**
+> 2. [`README.md`](./README.md) — the spec (hypothesis, baselines, protocol).
+> 3. [`RUNPOD.md`](./RUNPOD.md) — only if you are renting a GPU. Snippet IDs `L#` laptop / `P#` pod.
+> 4. Everything **below this block** is a chronological session log from 0.5B development and the
+>    migration. Useful for environment archaeology; **stale on results**, and it names pre-2026-07-29 paths.
+>
+> ### The three claims the paper makes, in decreasing effect size
+> 1. **Most of persona adaptation is register, not identity.** ~74–78% of a single adapter's benefit is
+>    anchor-independent; an adapter trained on a *different* politician, applied untuned at coefficient 1.0,
+>    matches fine-tuning on the target's own data. Largest effect in the project.
+> 2. **The remainder is ideological and recoverable.** The preferred anchor tracks the target's party
+>    17/28 against a marginal-preserving permutation null of 9.42, **p=0.0012** — strongest where party
+>    structure is tightest (JCP 3/3, LDP 5/12). Corroborated independently at 13/23 by dev-NLL
+>    `best-single` picks inside nested CV.
+> 3. **The training objective decides whether (2) exists at all.** DPO-trained anchors sit at chance;
+>    the same four politicians, same 1500 pairs, same LoRA shape, trained with **SFT** are far above it.
+>    Fisher exact between arms **p=7.2e-4**. This retroactively explains three earlier results that looked
+>    fatal — the party inversion in `best-single` picks, the granularity null, and a 0/33 defeat to sparse SFT.
+>
+> ### The main table (n=33 targets, nested 5-fold CV, SFT anchors, mean held-out NLL)
+> `BO+ICL` **2.0460** · SFT+ICL 2.0687 · best-single+ICL 2.0729 · `BO` **2.1156** · SFT 2.1452 ·
+> best-single 2.1455 · ICL 2.1736 · base 2.3613 · uniform 2.5558
+>
+> | comparison | mean | wins | sign p | what it settles |
+> |---|---|---|---|---|
+> | BO vs best-single | +0.0299 | 33/33 | 2.3e-10 | tuning the blend works, and is objective-independent |
+> | BO vs ICL | +0.0580 | 27/33 | 3.2e-04 | spec §4.3 **kill criterion passes** prefix-free |
+> | BO vs SFT | +0.0296 | 28/33 | 6.6e-05 | `README.md:13` holds — the merge beats sparse fine-tuning |
+> | BO+ICL vs ICL | +0.1276 | 33/33 | 2.3e-10 | merging and prompting stack; best config uses both |
+> | BO+ICL vs SFT+ICL | +0.0227 | 27/33 | 3.2e-04 | `BO+ICL` is the best configuration in the study |
+>
+> Margins **do not decay with target prominence** (+0.0201 to +0.0420 across a 50× span of speech volume),
+> which is what puts the method on its *low-resource* thesis. Two negatives to report honestly: **UTAS
+> cannot discriminate** (BO vs base +0.7 rank-percentile points, 19/33, p=0.49 — a limitation section with
+> the diagnostic attached, closed for good), and **per-depth granularity loses** to a single global
+> coefficient set 3/3 at equal trial budget.
+>
+> ### What is actually left
+> - **Rewrite `main.tex`** — the only substantive task. §Discussion's "pending on higher-throughput
+>   hardware" table is answered; `sec:granularity` becomes a result rather than a caveat; §4.4 becomes a
+>   limitation. DECISIONS.md's final `### Open` list is the checklist.
+> - Optional, ~25 min GPU: 60 trials at 12 dims to close the granularity equal-budget caveat.
+> - Deferred with reasons in DECISIONS.md: `P19` anchor-count slope, the budget sweep (`P16`/`P17`).
+>
+> ### Traps that have already cost days — read before running anything
+> - **Two anchor families live side by side.** `research/polis/output/polis_<id>_qwen7b` = **DPO**;
+>   `polis_<id>_sft_qwen7b` = **SFT**. Nearly every result before 2026-08-04 is DPO and several reverse on
+>   SFT. The preflight tells you which you loaded: **uniform merge ≈1.94 = SFT, ≈2.63 = DPO.** Check it.
+> - **Never paste an env-prefixed command.** Seven runs were lost to a wrapped line delivering only the
+>   tail, after which `run_7b_bo_gpu.sh` silently used its defaults (single-split, DPO anchors) and looked
+>   like it worked. Use the wrappers in `research/polis/scripts/`: `run_sft33.sh`, `run_granularity_sft.sh`,
+>   `run_utas_sft.sh`, `run_anchor_affinity.sh`, `run_anchor_probe.sh`, `run_anchor_count.sh`. They take
+>   nothing on the command line, verify every adapter exists before loading a 7B model, and rename logs
+>   afterwards. If you need a new protocol, **add a wrapper** rather than composing a long line.
+> - **`run_7b_bo_gpu.sh` appends** (`>>`) to `target_<id>.log`, so a file can hold a calibration run, an
+>   OOM-aborted attempt and the real result stacked. Read the **last** block; `nested_log_summary.py` does.
+> - **Quote figures from `bo7b_picks_*/*.json`, not the logs** — the runner rounds per-fold values to 3 dp.
+> - **Use paired per-fold deltas.** An early "inside noise" reading came from comparing against an
+>   *unpaired* ±0.079 spread; both methods see the same fold, so the paired ±0.008 is the right statistic.
+> - **UTAS must be scored `--utas-numeric`.** The verbose-option default softmaxes five length-normalised
+>   log-probs in a narrow band and collapses to the scale midpoint, which is how the first table became
+>   indistinguishable from a dummy answering 3 to everything.
+> - **The rank-metric null is the printed constant rows, not a nominal 50%**, and dropping items where the
+>   truth is 3 is *not* a legitimate filter (per-item removal is; per-answer selects on the label).
+> - **Pod clocks ran ~9 h behind laptop JST**, so log timestamps read earlier than the session.
+>
+> ### Environment
+> Datasets are on a USB SSD (`D:\wsl_data.vhdx` at `/mnt/wsl/wsldata`) reached by symlink from `data/data`
+> and `s3_mirror`: **`kdata mount` after every WSL restart** or every path silently 404s. On a pod,
+> `export KOKKAI_DATA_DIR=/workspace/kokkai_data` (`research/polis/paths.py` honours it); the newer
+> wrappers default to it when it exists. 7B needs ~31 GB VRAM (15.2 GB model + 13.2 GB fp32 deltas) —
+> 40 GB floor, 48 GB comfortable. Code is `research/polis/`; adapters in `research/polis/output/` are
+> gitignored (~1 GB) and must be rsynced to a pod, as must `dpo_pairs_targets` and `utas_ground_truth`.
+>
+> ### Artifact map (`specs/polis-low-resource-persona/artifacts/`)
+> | path | what |
+> |---|---|
+> | `bo7b_picks_sft33/` (33) | **the main table** — per-fold rows for all 7 configs + BO coefficients |
+> | `bo7b_gpu_logs/sft33_target_*.log` | its logs; read with `nested_log_summary.py --glob 'sft33_target_*.log'` |
+> | `bo7b_picks/` (33) | the DPO-anchor arm, same folds — the comparison that exposed the confound |
+> | `bo7b_picks_sftanchors/` (5) | the 5-target SFT pilot (its prefix-inversion claim is corrected) |
+> | `sft_n33.json`, `dpo_n33.json` | sparse-target baselines 3 and 4, fixed 5e-5/2ep |
+> | `affinity_sft.json`, `affinity.json` | anchor-preference vs party, both arms (`anchor_affinity.py`) |
+> | `utas_vectors_sft/` (33), `utas_vectors/` (3) | per-config UTAS answer vectors, SFT and DPO arms |
+> | `utas_population_7b_base.json` | 594-persona base-model sweep; anchor-independent, do not re-run |
+> | `gran_sft_*.log`, `granularity_1279.log` | granularity, SFT and DPO arms |
+> | `anchor_objective_polis_*_{qwen7b,sft_qwen7b}.log` | each anchor applied alone (`P18`, register decomposition) |
+>
+> Offline readers, all stdlib and CPU-only: `nested_log_summary.py`, `utas_rank_metric.py`.
 ---
 
 ## Session 2026-07-26 — nested CV, 7B orthogonality, migration fallout

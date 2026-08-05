@@ -1007,17 +1007,47 @@ about what transfers, not an artefact of bad anchors.
 final.** Two scorers, a 594-persona population control, a rank metric, a constant floor and
 both anchor families all agree. Nothing further is planned on this instrument.
 
+### Granularity on SFT anchors — the null becomes a loss
+
+`run_granularity_sft.sh`, 3 targets, 4-fold, 20 trials/fold, `--groups 1 3` (4 dims vs 12).
+Ran after the two above; all `rc=0`, ~9 min each.
+
+| target | global (4 dims) | layer-group (12 dims) | global better by | vs best-single: global / groups |
+|---|---|---|---|---|
+| 1279 高市 | **2.0865** ± 0.072 | 2.1025 ± 0.069 | 0.0160 | +0.0267 / +0.0108 |
+| 2053 赤嶺 | **2.0890** ± 0.079 | 2.1147 ± 0.092 | 0.0257 | +0.0265 / +0.0008 |
+| 2289 枝野 | **2.3104** ± 0.190 | 2.3186 ± 0.194 | 0.0082 | +0.0206 / +0.0124 |
+
+**3/3 for global, mean 0.0166** — against **0.0006** on the DPO anchors, where this was a
+dead null. Per-depth weighting does not merely fail to help on anchors that demonstrably
+carry party signal; it gives back **40–97% of the BO's entire advantage over best-single**.
+The mechanism proposed for the original null — deltas fighting each other, so there was
+nothing for per-depth weighting to separate — is eliminated, and the answer got worse
+rather than better.
+
+> **Caveat that must go in the paper with it.** Both cells get 20 trials/fold over 3× the
+> search space, so this cannot separate "per-depth structure does not help" from "12 dims
+> needs more than 20 trials". The defensible claim is the one about **equal trial budget**:
+> at a fixed optimisation budget, finer granularity costs more in search than it buys in
+> expressiveness. Settling the stronger version means ~60 trials at 12 dims (~25 min/target)
+> and it is the only granularity work left worth doing.
+
+**Decision: retire the hedge, and strengthen the concession.** `main.tex:162` concedes
+granularity does not help at development scale but softens it with "the natural place for
+the register/ideology distinction to appear **at main scale**". That hedge has now been
+tested twice at 7B — once on anchors with no recoverable identity and once on anchors with
+it — and pays out neither time. `sec:granularity` should report the global/layer-group
+comparison as a *result at equal budget*, not a caveat.
+
 ### Open
-- [ ] **Granularity ablation on SFT anchors.** Scripted (`run_granularity_sft.sh`, 3
-      targets, ~30 min) and *not run* — the pod session ended first. Still the one cheap
-      item, and `main.tex`'s `sec:granularity` rewrite is blocked on it: the null that
-      retired the main-scale hedge was measured on anchors whose uniform merge scored 2.63
-      against base 1.08, where the SFT anchors give 1.94.
 - [ ] **Rewrite `main.tex`.** §Discussion's pending table is answered by the n=33 SFT-anchor
       run above; the three claims to carry are register (~74–78% anchor-independent),
       recoverable ideology (p=0.0012), and the objective deciding whether the second exists.
-      §4.4 becomes a limitation with the rank diagnostic. Hold `sec:granularity` for the item
-      above.
+      §4.4 becomes a limitation with the rank diagnostic; `sec:granularity` becomes a result
+      at equal trial budget. **Nothing is blocked on GPU any more — this is a writing task.**
+- [ ] Optional: 60 trials at 12 dims on 1279, to separate "granularity does not help" from
+      "12 dims is under-optimised at 20 trials" (~25 min). Only needed if a reviewer presses
+      on the equal-budget caveat.
 - [ ] `P19`: anchor-count slope at 2/3/4 — **better motivated now.** The DPO-era reason to
       doubt more anchors (one of four switched off) does not hold on SFT anchors, where all
       four coefficients sit at 0.222–0.332.
@@ -1028,6 +1058,8 @@ both anchor families all agree. Nothing further is planned on this instrument.
 ### Closed by this session
 - [x] Full 33-target nested + ICL on SFT anchors — the main table, above.
 - [x] Re-run UTAS on SFT anchors — the null survives the objective fix.
+- [x] Granularity on SFT anchors — global beats layer-group 3/3 at equal trial budget; the
+      main-scale hedge is retired on evidence rather than dropped.
 - [x] Tune the BO *inside* the prefix on 3022 / 110 / 1543. Its prediction was that those
       three losses would disappear; they did, on better anchors, without tuning under the
       prefix. No longer justified.
