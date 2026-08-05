@@ -837,24 +837,211 @@ Three claims, in decreasing size of effect:
       identity — which is now known to be objective-dependent. The population sweep and
       rank metric are unchanged and cheap to re-point.
 
-### Superseded open items
-- [x] Identity control: done — anchor choice explains ~16%; the rest is register.
+## 2026-08-05 — the n=33 SFT-anchor table lands; UTAS stays closed anyway
+
+Two runs on one pod: nested 5-fold + ICL over all 33 targets on the SFT anchors (5 h 55 m,
+`sft33_target_*.log`, `bo7b_picks_sft33/`), then the UTAS re-point (2 h,
+`utassft_target_*.log`, `utas_vectors_sft/`). Both `rc=0` on all 33.
+
+> **Two hours lost first, to the same failure as always.** The nested run was pasted as
+> `ADAPTERS=… NESTED=1 ICL=1 DUMP_PICKS=… TARGETS=… ./run_7b_bo_gpu.sh` on one line. The
+> terminal wrapped it, the shell received the tail from `TARGETS=` onward, and the runner
+> fell back to its defaults — single-split, `--utas-eval`, DPO anchors — for all 33
+> targets. The "3× speedup" was single-split doing one BO per target instead of five.
+> Seventh instance in this workflow. Fixed structurally rather than by being careful:
+> `run_sft33.sh`, `run_granularity_sft.sh` and `run_utas_sft.sh` take nothing on the
+> command line, verify every adapter exists before loading a 7B model, and rename their
+> logs afterwards so a later run cannot append into them. **Nothing gets pasted but a
+> script name from here on.**
+
+> **Reading the logs later.** The pod's clock ran ~9 h behind the laptop's JST, so
+> `sft33_*` timestamps say 07:46–13:41 for a session that was 16:46–22:41 local.
+
+### Validation: only the anchors changed
+
+The rows that do not involve an anchor reproduce the committed DPO-anchor run **to four
+decimals** — `base` 2.3613, `ICL` 2.1736, `SFT` 2.1452, `SFT+ICL` 2.0687. Same folds, same
+baselines, same scoring; the arm is the only difference. The preflight confirms it from the
+other side: `anchors=['152_sft_qwen7b', …]` with uniform merge **1.9362** against the DPO
+arm's 2.6322.
+
+### The main table
+
+Mean held-out NLL over 33 targets, computed from the `--dump-picks` matrices rather than
+the log lines (the runner rounds per-fold values to 3 dp):
+
+| config | SFT anchors | DPO anchors | Δ |
+|---|---|---|---|
+| **BO+ICL** | **2.0460** | 2.1042 | +0.0582 |
+| SFT+ICL | 2.0687 | 2.0687 | — |
+| best-single+ICL | 2.0729 | 2.1174 | +0.0445 |
+| **BO** | **2.1156** | 2.2078 | +0.0922 |
+| SFT | 2.1452 | 2.1452 | — |
+| best-single | 2.1455 | 2.2343 | +0.0888 |
+| ICL | 2.1736 | 2.1736 | — |
+| base | 2.3613 | 2.3613 | — |
+| uniform | 2.5558 | 2.7689 | +0.2131 |
+
+`BO+ICL` is now the best configuration in the study, taking the top from `SFT+ICL`.
+
+| comparison | mean | median | wins | sign p | folds |
+|---|---|---|---|---|---|
+| BO vs best-single | **+0.0299** | +0.0272 | 33/33 | 2.3e-10 | 153/165 |
+| BO vs base | +0.2458 | +0.2202 | 33/33 | 2.3e-10 | 165/165 |
+| **BO vs ICL** | **+0.0580** | +0.0726 | **27/33** | 3.2e-04 | 137/165 |
+| **BO vs SFT** | **+0.0296** | +0.0284 | **28/33** | 6.6e-05 | 138/165 |
+| BO+ICL vs ICL | +0.1276 | +0.1262 | 33/33 | 2.3e-10 | 165/165 |
+| BO+ICL vs best-single+ICL | +0.0269 | +0.0233 | 33/33 | 2.3e-10 | 148/165 |
+| BO+ICL vs SFT+ICL | +0.0227 | +0.0210 | 27/33 | 3.2e-04 | 128/165 |
+| BO+ICL vs BO | +0.0696 | +0.0438 | 33/33 | 2.3e-10 | 156/165 |
+| SFT+ICL vs BO | +0.0468 | +0.0318 | 21/33 | 0.16 | 111/165 |
+| SFT vs best-single | +0.0003 | −0.0045 | 14/33 | 1.00 | 95/165 |
+
+**Three things this settles.**
+
+1. **The BO's contribution is independent of the anchors' objective — third measurement.**
+   `BO vs best-single` +0.0299 here, +0.0286 on the 5-target SFT pilot, +0.0265 on DPO
+   anchors at n=33. Whatever the anchors are, tuning the blend buys the same ~0.027.
+2. **The kill criterion passes prefix-free.** `BO vs ICL` +0.0580 on 27/33, p=3.2e-04,
+   where the DPO arm was a dead tie (−0.0343, 17/33, p=1.00). `README.md:79` asks whether
+   prompting makes the method unnecessary; it does not. And they still stack — `BO+ICL vs
+   ICL` is 33/33.
+3. **`README.md:13` holds at full n.** `BO vs SFT` +0.0296 on 28/33 (p=6.6e-05) and
+   `BO+ICL vs SFT+ICL` +0.0227 on 27/33. The 0/33 defeat of 2026-08-03 was measuring the
+   anchors' training objective, not merging — confirmed at 33 targets, not 5.
+
+The decomposition also stops being lopsided. On DPO anchors, `best-single+ICL` took +0.0562
+of the +0.0694 stacking gain, leaving only +0.0132 for the tuned coefficients — half what
+the BO bought prefix-free. Here `BO+ICL vs best-single+ICL` is **+0.0269**, statistically
+indistinguishable from the prefix-free +0.0299. The prefix no longer absorbs the tuning.
+
+> **Correction to the 5-target entry.** It reported the prefix's role as *inverted*:
+> "+0.0200 on top of the SFT-anchor merge against +0.0307 on top of sparse SFT". At n=33
+> `BO+ICL vs BO` is **+0.0696**. Directionally the claim survives — 0.0696 is well under
+> the DPO arm's +0.1036, so better anchors do carry some of what the prompt was supplying —
+> but the inversion itself was an n=5 artefact. Do not repeat the +0.0200 figure.
+
+### No prominence decay, and the prefix wins where it always did
+
+| band | n | BO vs best1 | BO vs ICL | BO+ICL vs ICL | BO vs SFT |
+|---|---|---|---|---|---|
+| originals | 3 | +0.0209 | +0.1021 | +0.1134 | +0.0478 |
+| 3000+ | 5 | +0.0201 | +0.1067 | +0.1389 | +0.0687 |
+| 1000–3000 | 5 | +0.0358 | +0.1272 | +0.1459 | +0.0598 |
+| 500–1000 | 5 | +0.0302 | +0.0696 | +0.1359 | **−0.0076** |
+| 250–500 | 5 | +0.0420 | +0.0400 | +0.1268 | +0.0357 |
+| 120–250 | 5 | +0.0276 | **−0.0624** | +0.1082 | **−0.0186** |
+| 60–120 | 5 | +0.0292 | +0.0407 | +0.1185 | +0.0287 |
+
+`BO vs best-single` is flat from +0.0201 to +0.0420 across a 50× span of speech volume —
+the 2026-08-03 no-decay result replicates on the new anchor family. The single band where
+ICL still beats the merge prefix-free is 120–250, which is where the boilerplate speakers
+live; `1543` alone is −0.1833. Mechanism unchanged from the +0.787 self-similarity
+correlation.
+
+**The regime-mismatch losses are gone.** `BO+ICL vs best-single+ICL` on the three targets
+that lost under the prefix on DPO anchors:
+
+| target | DPO anchors | SFT anchors |
+|---|---|---|
+| 3022 津島 | −0.0784 | **+0.0172** |
+| 110 田野瀬 | −0.0272 | **+0.0096** |
+| 1543 手塚 | −0.0106 | **+0.0152** |
+
+The prediction that motivated tune-inside-the-prefix was that these three would recover.
+They recovered without it, by fixing the anchors instead. That open item loses its specific
+justification and reverts to a fishing expedition.
+
+### Corroboration from the 165 fitted merges
+
+**The party inversion is gone under a second, independent selection rule.** `best-single`
+inside nested CV is picked on prefix-free dev NLL — not the coefficient-1.0 sweep
+`anchor_affinity.py` uses — so it is a separate measurement of the same question. Among the
+23 targets whose party family has an anchor: **13/23 matched**, 共産 **3/3**, 民主/立憲 5/8,
+自民 5/12. On DPO anchors this same statistic inverted (自民 targets picking the JCP anchor
+53% of folds). Two different selection criteria now agree.
+
+**All four anchors carry weight now.** Mean BO coefficient across 165 folds × 3 groups:
+152 岸田 **0.332**, 5520 上田 **0.309**, 2377 塩川 **0.294**, 3631 福島 **0.222** — against
+0.245 / 0.188 / 0.294 / **0.135** on DPO anchors, where 福島 was near-zero in 40% of folds
+and 33 targets picked it as best-single only twice. (The near-zero fraction here is 29–43%
+of *group-slots*, a different denominator, so it is not directly comparable.) This weakens
+the main argument against more anchors: "the BO already discards capacity at n=4" was a
+property of one bad anchor, not of n=4. **`P19` is more interesting than it was, not less.**
+
+### UTAS on SFT anchors — §4.4 closed for good
+
+33 targets, single-split, numeric-label scoring, ranked against the 594-member wave.
+`utas_population_7b_base.json` was not re-run: it is base-model-only and therefore
+anchor-independent. `base` reproduces the committed cells exactly (1279 34.3%, 2053 5.6%,
+2289 47.5%) and its median over the 33 is 52.7% against the population sweep's 52.1%.
+
+| config | median pct | mean | above the measured 50.1% floor | p |
+|---|---|---|---|---|
+| base | 52.7% | 55.2% | 19/33 | 0.49 |
+| uniform | 46.8% | 46.0% | 16/33 | 1.00 |
+| best-single | 56.1% | 55.4% | 21/33 | 0.16 |
+| **BO** | **55.4%** | 55.9% | **19/33** | **0.49** |
+| best constant *(oracle over 5)* | 81.8% | 82.0% | — | — |
+
+Paired, each target one observation: `BO vs base` **+0.7 points, 19/33, p=0.49**;
+`BO vs best-single` +0.4, 14/33; `BO vs best constant` **−26.1 points, 8/32**. On MAE, BO
+1.131 against the constant's 0.935, winning 7/33. The falsifiable prediction from the
+prominence gradient — that a working method moves its targets from the backbench level
+(~47%) toward the prominent level (~58%) — **does not pay out.**
+
+n=3 would have looked like it did: 1279 goes 39.4% → **53.0%**, 2053 2.7% → 8.6%, 2289
+44.9% → 49.7%. All three originals improve on the DPO arm, and at n=33 it washes out. The
+"three targets cannot carry a p-value" caveat earned its keep in the direction that costs a
+claim.
+
+**This is worth having as a result.** The closure no longer has a hole in it. Identity was
+shown yesterday to be objective-dependent, which is exactly the premise §4.4 was closed on,
+so the honest move was to re-measure — and the null survives the fix. That **bounds** the
+objective finding: SFT anchors carry recoverable party signal in *speech-likelihood* space
+(preferred anchor matches party 17/28, p=0.0012; corroborated at 13/23 above) and carry
+none into *stated survey positions*. The NLL/UTAS anti-correlation is therefore a statement
+about what transfers, not an artefact of bad anchors.
+
+**Decision: §4.4 is a limitation section with the diagnostic attached, and it is now
+final.** Two scorers, a 594-persona population control, a rank metric, a constant floor and
+both anchor families all agree. Nothing further is planned on this instrument.
+
+### Open
+- [ ] **Granularity ablation on SFT anchors.** Scripted (`run_granularity_sft.sh`, 3
+      targets, ~30 min) and *not run* — the pod session ended first. Still the one cheap
+      item, and `main.tex`'s `sec:granularity` rewrite is blocked on it: the null that
+      retired the main-scale hedge was measured on anchors whose uniform merge scored 2.63
+      against base 1.08, where the SFT anchors give 1.94.
+- [ ] **Rewrite `main.tex`.** §Discussion's pending table is answered by the n=33 SFT-anchor
+      run above; the three claims to carry are register (~74–78% anchor-independent),
+      recoverable ideology (p=0.0012), and the objective deciding whether the second exists.
+      §4.4 becomes a limitation with the rank diagnostic. Hold `sec:granularity` for the item
+      above.
+- [ ] `P19`: anchor-count slope at 2/3/4 — **better motivated now.** The DPO-era reason to
+      doubt more anchors (one of four switched off) does not hold on SFT anchors, where all
+      four coefficients sit at 0.222–0.332.
+- [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances? Weaker
+      motivation than when it was proposed — it existed as "the last place a positive claim
+      could live", and the claim is no longer in danger at 24.
+
+### Closed by this session
+- [x] Full 33-target nested + ICL on SFT anchors — the main table, above.
+- [x] Re-run UTAS on SFT anchors — the null survives the objective fix.
+- [x] Tune the BO *inside* the prefix on 3022 / 110 / 1543. Its prediction was that those
+      three losses would disappear; they did, on better anchors, without tuning under the
+      prefix. No longer justified.
+- [x] Reword `README.md:13` to "composes-with, not beats" — **dropped, it would have been
+      wrong.** At matched objective the merge both beats prompting (27/33) and composes with
+      it (33/33). State both; the `P15` wording was a DPO-anchor artefact.
+- [x] Decide how to present the ICL tie — there is no tie to present.
+- [x] Decide whether the NLL/UTAS anti-correlation is a headline or a limitation:
+      **limitation, with the diagnostic**, now that it survives the objective fix.
+- [x] Baselines 3 and 4 have "never run on a GPU" — stale since 2026-08-03; both ran, and
+      all seven spec baselines are implemented and run.
+
+### Still-superseded items
+- [x] Identity control: anchor choice explains ~16%; the rest is register.
 - [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
-- [ ] `P19`: anchor-count slope at 2/3/4 — is n=4 already saturated?
-- [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances?
-- [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014. All seven spec baselines
-      are now implemented and run.
-- [x] `P15`: `BO+ICL` beats `ICL` on 33/33. Kill criterion answered — see above.
-- [ ] Tune the BO *inside* the prefix on 3022 / 110 / 1543 plus controls (~4 h), to test
-      whether the regime mismatch explains the three losses.
-- [ ] Reword `README.md:13` and the paper's hypothesis: composes-with, not beats.
-- [ ] Baselines 3 and 4 (SFT / DPO on the sparse target) are implemented
-      (`sparse_target_baselines.py`) but have **never run on a GPU**. Target negatives
-      are exported (33 files × 30, `dpo_pairs_targets_full`) and not yet shipped to a pod.
-- [ ] Rewrite `main.tex` §Discussion: table no longer pending — NLL confirms at n=33 and
-      does not decay with prominence, ICL ties, UTAS does not discriminate. Retire the
-      main-scale hedge in `sec:granularity`.
-- [ ] Decide whether the anti-correlation between NLL and UTAS is a headline finding
-      or a limitation paragraph.
-- [ ] Decide how to present the ICL tie: cost/deployment framing, or a straight
-      concession that prompting matches the merge on held-out NLL.
+- [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014.
+- [x] `P15`: `BO+ICL` beats `ICL` on 33/33.
