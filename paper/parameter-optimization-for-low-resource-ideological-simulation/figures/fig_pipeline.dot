@@ -1,0 +1,64 @@
+digraph pipeline {
+  rankdir=TB;
+  compound=true;
+  ranksep=0.30; nodesep=0.22;
+  graph [bgcolor=white, fontname="IPAexGothic", fontsize=8,
+         fontcolor="#0b0b0b", margin=0];
+  node  [shape=box, style="rounded,filled", fillcolor="#f7f6f3", color="#dedcd6",
+         fontname="IPAexGothic", fontsize=9, fontcolor="#0b0b0b", penwidth=0.9,
+         margin="0.11,0.06"];
+  edge  [color="#52514e", arrowsize=0.55, penwidth=0.9, fontname="IPAexGothic",
+         fontsize=7, fontcolor="#52514e"];
+
+  subgraph cluster_offline {
+    label=<<b>Trained once, offline — data-rich anchors</b>>;
+    labeljust=l; style="rounded"; color="#dedcd6"; margin=8;
+    a0 [label=<<b>岸田文雄</b><br/><font point-size="7" color="#52514e">Kishida, LDP<br/>≈20k speeches</font>>];
+    a1 [label=<<b>塩川鉄也</b><br/><font point-size="7" color="#52514e">Shiokawa, JCP<br/>≈9k speeches</font>>];
+    a2 [label=<<b>福島みずほ</b><br/><font point-size="7" color="#52514e">Fukushima, SDP<br/>≈12k speeches</font>>];
+    a3 [label=<<b>上田清司</b><br/><font point-size="7" color="#52514e">Ueda, DPJ<br/>≈4k speeches</font>>];
+    w0 [label=<ΔW<sup><font point-size="7" color="#2a78d6">(1)</font></sup>>, fillcolor="#cde2fb", color="#2a78d6", fontcolor="#2a78d6", width=0.6, height=0.3];
+    w1 [label=<ΔW<sup><font point-size="7" color="#2a78d6">(2)</font></sup>>, fillcolor="#cde2fb", color="#2a78d6", fontcolor="#2a78d6", width=0.6, height=0.3];
+    w2 [label=<ΔW<sup><font point-size="7" color="#2a78d6">(3)</font></sup>>, fillcolor="#cde2fb", color="#2a78d6", fontcolor="#2a78d6", width=0.6, height=0.3];
+    w3 [label=<ΔW<sup><font point-size="7" color="#2a78d6">(4)</font></sup>>, fillcolor="#cde2fb", color="#2a78d6", fontcolor="#2a78d6", width=0.6, height=0.3];
+    a0 -> w0 [label=<<font point-size="7" color="#52514e">LoRA r=16</font>>];
+    a1 -> w1 [label=<<font point-size="7" color="#52514e">LoRA r=16</font>>];
+    a2 -> w2 [label=<<font point-size="7" color="#52514e">LoRA r=16</font>>];
+    a3 -> w3 [label=<<font point-size="7" color="#52514e">LoRA r=16</font>>];
+    { rank=same; a0; a1; a2; a3; }
+    { rank=same; w0; w1; w2; w3; }
+  }
+
+  merge [shape=box, style="rounded,filled", fillcolor=white, color="#2a78d6",
+         penwidth=1.4, margin="0.16,0.08", label=<
+    <table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td align="center" colspan="2"><b>DARE-TIES merge</b></td></tr>
+      <tr><td align="left"><font point-size="7" color="#52514e">1. DARE: drop 90% of each ΔW, fixed seed → deterministic</font></td>
+          <td align="right"><font point-size="9" color="#2a78d6">W = W<sub>base</sub> + ΔW(C)</font></td></tr>
+      <tr><td align="left"><font point-size="7" color="#52514e">2. scale by c<sub>a,g</sub> — per anchor × depth group</font></td>
+          <td align="right"><font point-size="7" color="#8a8984">exactly reversible:</font></td></tr>
+      <tr><td align="left"><font point-size="7" color="#52514e">3. TIES: elect a sign, average the agreeing contributions</font></td>
+          <td align="right"><font point-size="7" color="#8a8984">no reload per trial</font></td></tr>
+    </table>>];
+
+  subgraph cluster_target {
+    label=<<b>Per sparse target — the only data-poor step</b>>;
+    labeljust=l; style="rounded"; color="#dedcd6"; margin=8;
+    data [label=<<b>target's 30 utterances</b><br/><font point-size="7" color="#52514e">with prior session context</font>>,
+          fillcolor="#fbe0d5", color="#eb6834"];
+    obj  [label=<<b>objective: held-out NLL</b><br/><font point-size="7" color="#52514e">of the real utterances</font>>];
+    bo   [label=<<b>Bayesian optimization</b><br/><font point-size="7" color="#52514e">GPSampler · 40 trials/fold</font>>,
+          fillcolor="#cde2fb", color="#2a78d6"];
+    { rank=same; data; obj; bo; }
+    data -> obj [color="#eb6834"];
+    obj -> bo;
+  }
+
+  w0 -> merge [color="#2a78d6"];
+  w1 -> merge [color="#2a78d6"];
+  w2 -> merge [color="#2a78d6"];
+  w3 -> merge [color="#2a78d6"];
+  merge -> obj [color="#8a8984", style=dashed, label=<<font point-size="7" color="#8a8984">scores W(C)</font>>];
+  bo -> merge [color="#2a78d6", style=dashed, constraint=false,
+               label=<<font point-size="7" color="#2a78d6">proposes C</font>>];
+}

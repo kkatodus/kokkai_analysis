@@ -1,4 +1,8 @@
 \documentclass[11pt,letterpaper]{article}
+% 1in margins give a 6.5in text width, which is what the figures are rendered at
+% (see research/polis/paper_figures.py) so LaTeX never rescales them and their
+% 8pt labels stay 8pt.
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{booktabs} % Publication-quality tables
 \usepackage{amsmath}  % Math environments and symbols
@@ -16,6 +20,8 @@
   \setCJKsansfont{IPAexGothic}
 \fi
 
+\graphicspath{{figures/}}
+
 \title{POLIS: Parameter Optimization for Low-resource Ideological Simulation}
 \author{}
 \date{\today}
@@ -25,195 +31,407 @@
 \maketitle
 
 \begin{abstract}
-    The use of Large Language Models (LLMs) to simulate agentic populations is a rapidly expanding frontier in computational social science. However, current methodologies relying on zero-shot prompting or role-playing frequently suffer from in-group bias, generating caricatures based on demographic stereotypes rather than authentic ideological expressions. While Supervised Fine-Tuning (SFT) mitigates this bias, it is structurally limited by data sparsity; in domains such as political science, high-profile figures possess abundant public transcripts, whereas long-tail demographics have severely limited training data. To achieve grounded persona generation in low-resource settings, we introduce POLIS(Parameter Optimization for Low-resource Ideological Simulation). Rather than attempting to fine-tune on insufficient text, we conceptualize ideology as a continuous latent spectrum. We first train domain-specific LoRA adapters on data-rich personas using Direct Preference Optimization (DPO). For data-sparse target personas, we project these capabilities by interpolating the data-rich adapters using DARE-TIES weight-space arithmetic. To discover the optimal ideological blend without catastrophic stylistic overfitting, we employ Bayesian Optimization to tune the layer-wise mixing coefficients against a cross-validated likelihood objective on the limited target data. By treating fine-tuning-induced weight differences as modular, composable units, our framework synthesizes robust, authentic personas that accurately reflect a target's ideological position without requiring extensive domain data. We demonstrate that this optimized merging approach yields significantly more grounded LLM personas compared to standard SFT in sparse data domains.
+    The use of Large Language Models (LLMs) to simulate agentic populations is a rapidly expanding frontier in computational social science. However, current methodologies relying on zero-shot prompting or role-playing frequently suffer from in-group bias, generating caricatures based on demographic stereotypes rather than authentic ideological expressions. Fine-tuning on a persona's own words mitigates this bias, but it is structurally limited by data sparsity: in domains such as political science, high-profile figures possess abundant public transcripts, whereas long-tail actors have severely limited training data. To achieve grounded persona generation in low-resource settings, we introduce POLIS (Parameter Optimization for Low-resource Ideological Simulation). Rather than attempting to fine-tune on insufficient text, we conceptualize ideology as a continuous latent spectrum: we train adapters on data-rich \emph{anchor} personas, project them onto a data-sparse target by DARE-TIES weight-space arithmetic, and use Bayesian optimization to tune the mixing coefficients against a cross-validated likelihood objective on what little target data exists. Evaluated on 33 held-out members of the Japanese Diet spanning a fifty-fold range of speech volume, the tuned merge improves on the best single anchor for every target, and on both in-context learning and fine-tuning applied directly to the target's own utterances for the large majority; the two forms of adaptation prove complementary, and the strongest configuration combines them. Margins do not decay as targets become data-poorer, which is the condition the low-resource claim requires. Two further findings qualify this result and are, we suggest, the more durable contributions. First, a decomposition against untuned single anchors shows that roughly three quarters of what persona adaptation delivers is anchor-\emph{independent} parliamentary register rather than individual identity, so that an adapter trained on a different politician matches fine-tuning on the target's own data. Second, whether the remaining quarter carries recoverable ideology is determined by the objective used to train the anchors: under supervised fine-tuning a target's preferred anchor tracks its party, whereas under Direct Preference Optimization---on the same politicians, the same data and the same adapter architecture---the same statistic is at chance. We also report a negative result on external validity: none of these gains transfer to agreement with the targets' real answers on an elite policy survey, and we give the diagnostic evidence that locates the failure in the instrument rather than in the merge.
 \end{abstract}
 
-\emph{Preliminary report.} This draft presents the POLIS framework and \textbf{preliminary results}. The full pipeline (DPO alignment $\rightarrow$ layer-wise DARE-TIES merge $\rightarrow$ Bayesian-optimized mixing) is fully implemented and validated end-to-end at a 0.5B-parameter development scale, where our optimized merge beats every baseline on held-out targets. Early main-scale (7B) experiments confirm that the survey-answering metric becomes reliable at scale and that DPO alignment improves ideological fidelity. The full main-scale merge-method comparison is compute-bound (Section~\ref{sec:discussion}) and is deferred to higher-throughput hardware; those tables are marked \emph{pending} where applicable.
-
 \section{Introduction}
-Simulating human populations with LLMs---``silicon sampling''~\cite{argyle2023out}---has become a productive tool for computational social science, from piloting survey instruments to modeling opinion dynamics. Its central failure mode is that off-the-shelf models, when asked to role-play a demographic or a named individual, tend to reproduce \emph{stereotypes}: a flattened, media-derived caricature rather than the target's authentic ideological expression. Supervised fine-tuning (or preference optimization) on the target's own words mitigates this, but only where such words are abundant.
+Simulating human populations with LLMs---``silicon sampling''~\cite{argyle2023out}---has become a productive tool for computational social science, from piloting survey instruments to modeling opinion dynamics. Its central failure mode is that off-the-shelf models, when asked to role-play a demographic or a named individual, tend to reproduce \emph{stereotypes}: a flattened, media-derived caricature rather than the target's authentic ideological expression. Fine-tuning on the target's own words mitigates this, but only where such words are abundant.
 
 This creates a structural sparsity problem that is acute in political science. A handful of high-profile figures (party leaders, cabinet ministers) have tens of thousands of transcribed utterances, while the long tail of backbenchers, challengers, and losing candidates have little or none. It is precisely this long tail that a representative population simulation most needs, and precisely where per-persona fine-tuning fails.
 
-We propose \textbf{POLIS} (Parameter Optimization for Low-resource Ideological Simulation), which reframes the problem from \emph{fine-tuning} to \emph{composition}. We treat ideology as a continuous latent spectrum and the weight-differences induced by DPO fine-tuning as modular, composable units. Concretely, POLIS (i) trains a small set of \emph{anchor} adapters on data-rich personas spanning the ideological spectrum via DPO; (ii) for a data-sparse target, synthesizes a persona by interpolating the anchor adapters in weight space with DARE-TIES; and (iii) uses Bayesian Optimization (BO) to tune the \emph{layer-wise} mixing coefficients against a cross-validated likelihood objective on whatever little target data exists, so that only a handful of target utterances are needed---to \emph{locate} a persona in the space the anchors span, not to \emph{train} one.
+We propose \textbf{POLIS} (Parameter Optimization for Low-resource Ideological Simulation), which reframes the problem from \emph{fine-tuning} to \emph{composition}. We treat ideology as a continuous latent spectrum and the weight-differences induced by adapter fine-tuning as modular, composable units. Concretely, POLIS (i) trains a small set of \emph{anchor} adapters on data-rich personas spanning the ideological spectrum; (ii) for a data-sparse target, synthesizes a persona by interpolating the anchor adapters in weight space with DARE-TIES; and (iii) uses Bayesian Optimization (BO) to tune the mixing coefficients against a cross-validated likelihood objective on whatever little target data exists, so that a handful of target utterances suffices to \emph{locate} a persona in the space the anchors span rather than to \emph{train} one. Figure~\ref{fig:pipeline} gives the whole method; the essential asymmetry is that everything expensive happens once, offline, on politicians who have data, and the only step that touches the sparse target fits twelve parameters.
 
-\paragraph{Contributions.}
+We evaluate on the Japanese National Diet (Kokkai) proceedings with 33 held-out targets drawn from six log-spaced bands of speech volume, so that the sample spans genuine backbenchers as well as prominent members, and with an external instrument---the University of Tokyo--Asahi Shimbun (UTAS) elite candidate survey---that is never used in training or in the optimization objective.
+
+\paragraph{Contributions.} We report three findings, in decreasing order of effect size, and one negative result.
+
 \begin{itemize}
-    \item We formulate low-resource persona generation as weight-space interpolation over DPO anchor adapters, tuned per layer-group by Bayesian optimization against a cross-validated target-likelihood objective.
-    \item We instantiate the framework on Japanese Diet (Kokkai) speech data with an external, training-free evaluation: agreement with real candidate answers to the UTAS (University of Tokyo--Asahi Shimbun) elite survey.
-    \item In a fully validated 0.5B-parameter development study, our layer-wise optimized merge beats zero-shot, best-single-anchor, and uniform-merge baselines on the held-out likelihood objective for \emph{every} genuine held-out target, recovering interpretable per-layer mixing structure. Early 7B experiments show the survey metric becomes non-degenerate at scale and that DPO alignment moves personas toward their true positions.
+    \item \textbf{Most of persona adaptation is register, not identity.} A single anchor adapter applied \emph{untuned} at coefficient $1.0$, trained on a different politician entirely, closes $0.2186$ nats of the gap to the target's real speech, whereas the entire range across our four anchors accounts for only $0.0568$ of that. Roughly $74$--$78\%$ of the benefit of a persona adapter is therefore independent of whose speech trained it. This is the largest effect we measure (Section~\ref{sec:register}).
+    \item \textbf{The remainder is ideological and recoverable, and the training objective decides whether it exists at all.} With supervised anchors, a target's preferred anchor comes from the target's own party family on $17$ of $28$ eligible targets against a marginal-preserving permutation null of $9.43$ ($p=0.0013$), strongest where party structure is tightest. With preference-optimized anchors---the same four politicians, the same 1\,500 pairs each, the same adapter shape---the same statistic sits at chance. Fisher exact between the two arms is $p=7.2\times10^{-4}$ (Sections~\ref{sec:affinity}--\ref{sec:objective}).
+    \item \textbf{The optimized merge is the strongest weight-space configuration, and it composes with prompting.} Under nested 5-fold cross-validation on 33 targets, the tuned merge improves on the best single anchor for $33/33$ targets, on in-context learning for $27/33$, and on LoRA fine-tuning applied to the target's own 24 utterances for $28/33$. Adding an in-context prefix to the merged weights improves on the prefix alone for $33/33$, and that combination is the best configuration we evaluate. Margins do not decay across a 50-fold range of target speech volume, which is what supports the low-resource claim (Sections~\ref{sec:main}--\ref{sec:prominence}).
+    \item \textbf{Negative result: the gains do not reach stated policy positions.} Against the targets' real UTAS answers, ranked among 594 real candidates, the merge is indistinguishable from the base model ($+0.7$ percentile points, $19/33$, $p=0.49$) and far below a constant predictor. We report the diagnostic that establishes this is a property of the instrument rather than a coincidence of one metric (Section~\ref{sec:utas}).
 \end{itemize}
 
 \section{Related Work}
 % 関連研究: LLM-based Agent Simulation, Parameter-Efficient Fine-Tuning (LoRA), Model Merging (DARE, TIES), Bayesian Optimization for Neural Networksなど。
-POLIS sits at the intersection of four lines of work. \textbf{LLM-based agent simulation} uses conditioned LLMs as stand-ins for human respondents and populations~\cite{argyle2023out}. \textbf{Parameter-efficient fine-tuning} makes per-persona adaptation cheap: LoRA~\cite{hu2022lora} learns low-rank weight updates, and QLoRA~\cite{dettmers2023qlora} makes even multi-billion-parameter models tunable on a single commodity GPU. \textbf{Preference optimization}, in particular DPO~\cite{rafailov2023direct}, aligns a policy to preferred over dispreferred completions without a separate reward model. \textbf{Model merging}---TIES~\cite{yadav2023ties} for resolving sign interference and DARE~\cite{yu2024language} for sparsifying task vectors---composes independently trained capabilities in weight space. POLIS combines these: DPO anchors merged with DARE-TIES, with the merge coefficients selected by \textbf{Bayesian optimization}~\cite{shahriari2016taking,akiba2019optuna}. A fuller treatment of ideological scaling of political text~\cite{slapin2008scaling,laver2003extracting,kaneko2026extracting} and its Japanese instantiations is deferred to a later revision.
+POLIS sits at the intersection of four lines of work. \textbf{LLM-based agent simulation} uses conditioned LLMs as stand-ins for human respondents and populations~\cite{argyle2023out}. \textbf{Parameter-efficient fine-tuning} makes per-persona adaptation cheap: LoRA~\cite{hu2022lora} learns low-rank weight updates, and QLoRA~\cite{dettmers2023qlora} makes even multi-billion-parameter models tunable on a single commodity GPU. \textbf{Preference optimization}, in particular DPO~\cite{rafailov2023direct}, aligns a policy to preferred over dispreferred completions without a separate reward model; our results show that the choice between it and plain supervised fine-tuning is decisive for what an adapter transports, which is a point of contact this literature has not examined for persona work. \textbf{Model merging}---TIES~\cite{yadav2023ties} for resolving sign interference and DARE~\cite{yu2024language} for sparsifying task vectors---composes independently trained capabilities in weight space. POLIS combines these, with the merge coefficients selected by \textbf{Bayesian optimization}~\cite{shahriari2016taking,akiba2019optuna}. A fuller treatment of ideological scaling of political text~\cite{slapin2008scaling,laver2003extracting,kaneko2026extracting} and its Japanese instantiations is deferred to a later revision.
 
 \section{Preliminaries}
 % 提案手法を説明するための前提知識（DPOの定式化、DARE-TIESの基本原理など）を簡潔に定義。
-\paragraph{DPO.} Given a prompt $x$ and a preferred/dispreferred completion pair $(y_w, y_l)$, DPO~\cite{rafailov2023direct} optimizes the policy $\pi_\theta$ against a frozen reference $\pi_{\text{ref}}$ by minimizing
+\paragraph{The two anchor objectives.} Given a prompt $x$ and the persona's real continuation $y_w$, \emph{supervised fine-tuning} (SFT) minimizes $\mathcal{L}_{\text{SFT}} = -\mathbb{E}_{(x,y_w)}[\log \pi_\theta(y_w \mid x)]$. Given additionally a dispreferred completion $y_l$, \emph{DPO}~\cite{rafailov2023direct} optimizes the policy $\pi_\theta$ against a frozen reference $\pi_{\text{ref}}$ by minimizing
 \[
 \mathcal{L}_{\text{DPO}} = -\,\mathbb{E}_{(x,y_w,y_l)}\!\left[\log \sigma\!\left(\beta \log \tfrac{\pi_\theta(y_w\mid x)}{\pi_{\text{ref}}(y_w\mid x)} - \beta \log \tfrac{\pi_\theta(y_l\mid x)}{\pi_{\text{ref}}(y_l\mid x)}\right)\right],
 \]
-which raises the likelihood of $y_w$ relative to $y_l$ without a learned reward model.
+which raises the likelihood of $y_w$ \emph{relative to} $y_l$ rather than absolutely. The distinction matters here: DPO's gradient vanishes once the margin is satisfied, so an adapter can separate the real utterance from a caricature without ever moving toward the politician's own distribution. Section~\ref{sec:objective} shows this is what happens.
 
-\paragraph{Task vectors and DARE-TIES.} For a LoRA adapter with matrices $A,B$ and rank $r$, the induced weight change on a module is $\Delta W = (\alpha/r)\,BA$. A merge combines several adapters' $\Delta W$ into one model. DARE~\cite{yu2024language} randomly \emph{drops} a fraction of each task vector's entries and rescales the survivors (reducing interference); TIES~\cite{yadav2023ties} then \emph{elects} a consensus sign per parameter and averages only the agreeing contributions. POLIS applies DARE with a fixed seeded mask (so the objective is deterministic in the mixing coefficients) followed by TIES sign-election.
+\paragraph{Task vectors and DARE-TIES.} For a LoRA adapter with matrices $A,B$ and rank $r$, the induced weight change on a module is $\Delta W = (\alpha/r)\,BA$. A merge combines several adapters' $\Delta W$ into one model. DARE~\cite{yu2024language} randomly \emph{drops} a fraction of each task vector's entries and rescales the survivors (reducing interference); TIES~\cite{yadav2023ties} then \emph{elects} a consensus sign per parameter and averages only the agreeing contributions. POLIS applies DARE with a fixed seeded mask---so the objective is deterministic in the mixing coefficients---followed by TIES sign-election.
 
 \section{The POLIS Framework}
 % 提案手法のコアセクション。アブストラクトのパイプラインに沿って展開。
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_pipeline.pdf}
+\caption{POLIS end to end. Anchor training is a one-off cost paid on politicians with thousands of speeches; a sparse target contributes only an objective. The coefficient search is a closed loop---the optimizer proposes a coefficient matrix $C$, the merge re-writes $W_{\text{base}}+\Delta W(C)$ in place, and the held-out likelihood of the target's real utterances scores it---so no model is retrained or reloaded per trial. The whole low-resource interface is the 30-utterance box.}
+\label{fig:pipeline}
+\end{figure}
+
 \subsection{Problem Formulation}
 % イデオロギーを連続的な潜在スペクトルとして定義し、低資源ペルソナ生成の目的関数を定式化。
-We treat ideology as a continuous latent space and posit that a data-sparse target persona can be expressed as a composition of a small set of data-rich \emph{anchor} personas that span that space. Let $\{\Delta W^{(a)}\}_{a=1}^{K}$ be the DPO-induced weight changes of $K$ anchors. Partitioning the transformer's layers into $G$ contiguous depth-groups, POLIS forms a merged model
+We treat ideology as a continuous latent space and posit that a data-sparse target persona can be expressed as a composition of a small set of data-rich \emph{anchor} personas that span that space. Let $\{\Delta W^{(a)}\}_{a=1}^{K}$ be the fine-tuning-induced weight changes of $K$ anchors. Partitioning the transformer's layers into $G$ contiguous depth-groups, POLIS forms a merged model
 \[
 W = W_{\text{base}} + \mathrm{TIES}\Big(\big\{\, c_{a,g}\cdot \mathrm{DARE}(\Delta W^{(a)}_g) \,\big\}_{a,g}\Big),
 \]
-parameterized by a coefficient matrix $C = [c_{a,g}] \in \mathbb{R}^{K\times G}$. Given only a small set $D_t$ of target utterances, we choose $C$ to minimize the target's held-out negative log-likelihood, $C^\star = \arg\min_C \; \widehat{\mathrm{NLL}}_{D_t}(W(C))$. The persona is thus \emph{located}, not trained: the only free parameters are the $K\times G$ mixing coefficients.
+parameterized by a coefficient matrix $C = [c_{a,g}] \in \mathbb{R}^{K\times G}$. Given only a small set $D_t$ of target utterances, we choose $C$ to minimize the target's held-out negative log-likelihood, $C^\star = \arg\min_C \; \widehat{\mathrm{NLL}}_{D_t}(W(C))$. The persona is thus \emph{located}, not trained: the only free parameters are the $K\times G$ mixing coefficients---12 numbers at our operating point, against the ${\sim}20$M a LoRA adapter fits.
 
-\subsection{Base Persona Alignment via Direct Preference Optimization}
-% データ豊富なペルソナを用いたドメイン特化型LoRAアダプタのDPOによる学習プロセス。
-Each anchor adapter is trained with DPO on \emph{session-grounded} preference pairs drawn from the anchor's Diet speeches. For a real utterance, the \emph{prompt} is the reconstructed prior context of the same sitting (up to $K$ preceding speeches, capped at $\sim$1.2k characters) plus a speaker cue; the \emph{chosen} completion is the politician's actual next utterance; the \emph{rejected} completion is a strong-LLM caricature of that same politician role-playing the same cue (generated with Gemini 2.5-flash-lite). DPO therefore trains the adapter to prefer the politician's authentic register over exactly the stereotype the framework aims to defeat. Adapters use LoRA ($r{=}16$ on \texttt{q,k,v,o\_proj}) over a Qwen2.5-Instruct backbone.
+\subsection{Anchor Alignment}
+% データ豊富なペルソナを用いたドメイン特化型LoRAアダプタの学習プロセス。
+Each anchor adapter is trained on \emph{session-grounded} pairs drawn from the anchor's Diet speeches. For a real utterance, the \emph{prompt} is the reconstructed prior context of the same sitting (up to $K$ preceding speeches, capped at ${\sim}1.2$k characters) plus a speaker cue, and the target completion is the politician's actual next utterance. Adapters use LoRA ($r{=}16$ on \texttt{q,k,v,o\_proj}) over a Qwen2.5-Instruct backbone~\cite{qwen2025qwen25}.
+
+We train each anchor twice, under the two objectives of Section~\ref{sec:objective}. For the DPO arm, the \emph{rejected} completion is a strong-LLM caricature of that same politician answering the same cue (generated with Gemini 2.5-flash-lite), so that DPO trains the adapter to prefer the politician's authentic register over exactly the stereotype the framework aims to defeat. The SFT arm uses the same 1\,500 prompt/completion pairs per anchor with the rejected side discarded, so the two arms differ in the objective alone.
 % TODO(lit-review): literatures to support this subsection
 %   - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11372692
 %   - https://aclanthology.org/2025.coling-main.369/
 %   - Original DPO paper: https://arxiv.org/abs/2305.18290 (cited as rafailov2023direct)
+
 \subsection{Weight-Space Interpolation via DARE-TIES}
 % データが疎なターゲットペルソナに向けて、学習済みアダプタをDARE-TIESを用いて統合・投影する手法。
-For a sparse target, we do not train an adapter. Instead we reconstruct each anchor's $\Delta W$ and combine them with DARE (density $0.1$, i.e.\ $\sim$90\% of each task vector dropped, under a fixed seed) and TIES sign-election, weighted per anchor \emph{and per depth-group} by $C$. A custom merger (rather than a single global weight per adapter) is required precisely because different layer-groups carry different persona information; the merge writes $W_{\text{base}}+\Delta W$ directly into the model and is exactly reversible, so each BO evaluation re-merges from base without any retraining.
+For a sparse target, we do not train an adapter. Instead we reconstruct each anchor's $\Delta W$ and combine them with DARE (density $0.1$, i.e.\ ${\sim}90\%$ of each task vector dropped, under a fixed seed) and TIES sign-election, weighted per anchor \emph{and per depth-group} by $C$. A custom merger is required because PEFT's built-in weighted merge supports only one global weight per adapter; ours writes $W_{\text{base}}+\Delta W$ directly into the model and is exactly reversible, so each BO evaluation re-merges from base with no retraining and no model reload.
+
+Figure~\ref{fig:merge} walks a single parameter through the three stages. The step worth reading carefully is the last: a DARE-dropped entry becomes a \emph{hole}, not a zero vote, so it neither participates in the sign election nor dilutes the mean of the anchors that survive. Only the middle stage---scaling by $c_{a,g}$---is under the optimizer's control; the drop mask is fixed hyperparameter with a fixed seed, which is what makes the objective deterministic in $C$ and therefore a legitimate target for Bayesian optimization.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_merge.pdf}
+\caption{The merge arithmetic at one coordinate of one module. DARE drops $90\%$ of each task vector under a fixed seed and rescales the survivors; the coefficients scale what remains; TIES elects the majority sign and averages \emph{only} the agreeing entries. The dropped anchor is absent from the election rather than voting zero.}
+\label{fig:merge}
+\end{figure}
 % DARE paper: https://arxiv.org/abs/2311.03099 (cited as yu2024language)
 % TIES paper: https://arxiv.org/abs/2306.01708 (cited as yadav2023ties)
 
-\subsection{Layer-wise Mixing Optimization via Bayesian Optimization}
-% 破滅的なスタイルの過適合を防ぎつつ、ターゲットデータに対する交差検証尤度を最大化するための、ベイズ最適化を用いた層ごとの混合係数のチューニング。
-The coefficient matrix $C$ is small (${\sim}K\times G$ dimensions), and each evaluation is expensive (a re-merge plus forward passes over the target's held-out utterances)---the classic regime for \textbf{Gaussian-process Bayesian optimization}. We use Optuna's~\cite{akiba2019optuna} native \texttt{GPSampler}, with the objective being the mean session-grounded NLL of the target's utterances under the merged model, coefficients bounded to $[0, 1.5]$. This tunes \emph{how much} of each anchor to inject at each depth, avoiding both under-specification (base model) and the stylistic overshoot of a uniform all-ones merge.
+\subsection{Mixing Optimization via Bayesian Optimization}
+% ターゲットデータに対する交差検証尤度を最大化するための、ベイズ最適化を用いた混合係数のチューニング。
+The coefficient matrix $C$ is small (${\sim}K\times G$ dimensions) and each evaluation is expensive (a re-merge plus forward passes over held-out utterances)---the classic regime for \textbf{Gaussian-process Bayesian optimization}. We use Optuna's~\cite{akiba2019optuna} native \texttt{GPSampler}, the objective being the mean session-grounded NLL of the target's utterances under the merged model, coefficients bounded to $[0, 1.5]$, with 40 trials per fold. On a synthetic 24-dimensional mixing-coefficient bowl at a 45-evaluation budget, GP-BO reached $0.19$ against TPE's $0.64$ and random search's $1.18$, which is why the GP is the default; TPE is retained for the high-dimensional granularity bookend, where the GP scales poorly (Section~\ref{sec:granularity}).
 % TODO(lit-review): BO / merge-coefficient optimization support
 %   - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11048544
 %   - https://arxiv.org/pdf/2512.09972v5
 
 \section{Experimental Setup}
-\subsection{Datasets}
+\subsection{Data}
 % 使用した政治的/イデオロギー的発言のデータセット（データリッチなドメインとロングテールなドメインの詳細）。
-\paragraph{Anchors and speeches.} We source utterances from the Kokkai (Japanese National Diet) proceedings. We select four data-rich anchors spanning the spectrum, each with thousands of speeches: 岸田文雄 (Kishida, LDP), 塩川鉄也 (Shiokawa, JCP), 福島みずほ (Fukushima, SDP), and 上田清司 (Ueda, independent/DP-lineage). These are the anchors whose DPO adapters are interpolated for every target.
+\paragraph{Anchors.} Four data-rich anchors spanning the spectrum, each with thousands of Diet speeches: 岸田文雄 (Kishida, LDP), 塩川鉄也 (Shiokawa, JCP), 福島みずほ (Fukushima, SDP), and 上田清司 (Ueda, DPJ lineage). Each anchor contributes 1\,500 training pairs. Anchor volume ranges from ${\sim}4$k speech records (Ueda) to ${\sim}20$k (Kishida); Section~\ref{sec:register} uses that spread to rule out ``the model already knows this person'' as an explanation of anchor transfer.
 
-\paragraph{UTAS ground truth.} For external evaluation we use the University of Tokyo--Asahi Shimbun (UTAS) elite candidate surveys, matching each candidate to a Diet \texttt{person\_id} via a name-based matcher. Policy items are 5-point Likert: \texttt{Q4\_*} (agree--disagree) and \texttt{Q5\_*} (A/B position). We use the 2024 House of Representatives wave (33 items) and the 2022 House of Councillors wave (37 items); English items are machine-translated to Japanese once for administration, native-Japanese items used verbatim.
+\paragraph{Targets.} $n=33$ politicians outside the anchor set, each with a complete 33-item UTAS vector, a speech directory, and at least the 60 pairs a 30/30 split requires (550 candidates met the first three conditions, 517 the last). Thirty were sampled from \textbf{six log-spaced bands of speech volume, five per band}, plus three prominent members retained from an earlier pilot. The design is deliberate: a uniform draw would have produced one more mean, whereas banding produces a \emph{curve} of the method's advantage against target prominence (Section~\ref{sec:prominence}). Band medians run from 104 to 8\,324 speech records---a 50-fold span at the extremes. Folding parliamentary group names into party families, the spread is LDP 12, CDP/DPJ/DPP lineage 13, Ishin 3, JCP 3, Komeito 2. Targets need prompt/completion pairs only; a held-out target never receives an adapter of its own.
 
-\paragraph{Models.} Development scale is Qwen2.5-0.5B-Instruct (full-precision LoRA/DPO). Main scale is Qwen2.5-7B-Instruct trained with 4-bit QLoRA (nf4, bf16 compute, \texttt{paged\_adamw\_8bit}, gradient checkpointing). Merges use 3 contiguous depth-groups (0.5B: 24 layers $\rightarrow$ 0--7 / 8--15 / 16--23; 7B: 28 layers $\rightarrow$ 0--9 / 10--19 / 20--27).
+\paragraph{UTAS ground truth.} For external evaluation we use the UTAS elite candidate surveys, matching each candidate to a Diet \texttt{person\_id} through a tiered name matcher (kanji-exact, kanji+kana, kana-exact, then \texttt{pg\_trgm} fuzzy for review only, never auto-accepted). Policy items are 5-point Likert: \texttt{Q4\_*} (agree--disagree) and \texttt{Q5\_*} (A/B position). We use the 2024 House of Representatives wave (33 items, 594 members with complete vectors); English item wording is machine-translated to Japanese once for administration.
+
+\paragraph{Models and merge geometry.} Main scale is Qwen2.5-7B-Instruct~\cite{qwen2025qwen25} with 4-bit QLoRA anchors (nf4, bf16 compute, \texttt{paged\_adamw\_8bit}); a full development study at Qwen2.5-0.5B-Instruct validated the pipeline first (Section~\ref{sec:dev}). Merges use 3 contiguous depth-groups (7B: 28 layers $\rightarrow$ 0--9 / 10--19 / 20--27), giving $4\times3=12$ coefficients. A 7B merge needs ${\sim}31$\,GB of VRAM: $15.2$\,GB for the model and $13.2$\,GB for four fp32 anchor deltas.
 
 \subsection{Baselines}
-% 比較対象（Zero-shot Prompting, Standard SFT, Uniform Model Mergingなど）。
-We compare POLIS's BO-tuned layer-wise merge against: (1) \textbf{Base} --- the zero-shot instruct model with a named-persona system prompt; (2) \textbf{Best-single-anchor} --- the single anchor adapter that best fits the target (standard SFT-transfer); and (3) \textbf{Uniform merge} --- all anchors merged with equal, all-ones coefficients (an untuned DARE-TIES merge). Baseline (1) is the zero-shot/role-play caricature the abstract targets; (2) is the strongest per-persona SFT option available to a sparse target; (3) isolates the contribution of \emph{tuning} the merge.
+% 比較対象。
+We compare POLIS's BO-tuned merge (\textbf{BO}) against six baselines, in two families. \emph{Weight-space:} (1) \textbf{base}---the zero-shot instruct model under a named-persona system prompt, i.e.\ the role-play caricature this work aims to improve upon; (2) \textbf{best-single}---the single anchor adapter with the best dev-fold NLL, which isolates blending from selection; (3) \textbf{uniform}---all anchors merged at all-ones coefficients, which isolates the contribution of \emph{tuning}. \emph{Target-data:} (4) \textbf{ICL}---an in-context prefix of the target's dev-fold utterances, the strongest training-free option; (5) \textbf{SFT} and (6) \textbf{DPO}---LoRA fine-tuned directly on the target's own dev fold, i.e.\ the sparse-data fine-tuning POLIS claims to replace. We additionally score \textbf{BO+ICL}, \textbf{best-single+ICL} and \textbf{SFT+ICL}, since weight-space and prompt-space adaptation turn out to compose rather than compete.
 
-\subsection{Evaluation Metrics}
-% ペルソナのグラウンディング、イデオロギーの正確性、ステレオタイプ/バイアスの評価指標（自動評価および人手評価）。
-\textbf{(i) Held-out session-grounded NLL} (the BO objective, reported on a disjoint test split): the mean negative log-likelihood the persona assigns to the target's real utterances given prior session context---a direct grounding/fidelity proxy, lower is better. \textbf{(ii) UTAS agreement} (external, training-free): we administer each answered survey item to the persona and read off an answer via an option-log-probability scorer, reporting per-item argmax and expectation $\mathbb{E}[1..5]$ against the candidate's real coded answer, aggregated as MAE(argmax), MAE($\mathbb{E}$), exact-match, and within-1 accuracy. UTAS is deliberately external: it is never used in training or in the BO objective, so it cannot be gamed by the optimization.
+Baselines (5) and (6) use fixed hyperparameters ($5\times10^{-5}$, 2 epochs) transferred from a grid pilot on one target. Selection bias from that pilot is negligible---the grid's best held-out mean was $2.1119$ and the fixed cell gives $2.1120$, because that cell won 4 of 5 folds outright---so these rows are not subject to a test-set selection bias. The anchors' own hyperparameters ($5\times10^{-5}$, 1 epoch) were never tuned at all, so \textbf{the fine-tuning baselines are the favoured side of that comparison}.
 
-\section{Results and Analysis}
+\subsection{Protocol and Metrics}
+\paragraph{Nested cross-validation.} Every number in Section~\ref{sec:main} comes from nested 5-fold cross-validation: each outer fold is held out while the BO tunes coefficients on the remaining folds and is then scored on the untouched fold, with all baselines rotated over identical folds. This matters for the fine-tuning comparison in particular, since a single split would give the merge the benefit of an optimistic point estimate. Figure~\ref{fig:protocol} shows what each method is permitted to see on one outer fold, which settles three questions at once: the coefficients never touch the test fold, the in-context prefix is built from the dev folds only, and merge, fine-tuning and prompting are each handed the same 24 instances.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_protocol.pdf}
+\caption{The evaluation protocol on one outer fold. The four dev folds are the entire low-resource budget and every method receives all of them; the test fold is scored once, paired across methods. Coefficients are fitted on prefix-free dev data, and the in-context rows are scored with the merge restored to base weights, so no configuration sees its test fold before scoring.}
+\label{fig:protocol}
+\end{figure}
+
+\paragraph{(i) Held-out session-grounded NLL} (the BO objective, reported on the held-out fold): the mean negative log-likelihood the persona assigns to the target's real utterances given prior session context. Lower is better. Because folds are shared across methods, we report \textbf{paired per-fold differences} throughout, and treat each \emph{target} as one observation for significance (a two-sided exact binomial sign test); fold counts are quoted as a descriptive measure of consistency only, since five folds of one politician are not five independent observations. Pairing is essential rather than merely preferable here: the \emph{unpaired} spread across folds is $\pm0.079$, dominated by some folds being intrinsically harder than others, against a paired spread of $\pm0.008$. Margins an order of magnitude smaller than the unpaired spread are nonetheless resolved by the paired contrast, and reporting the former would understate the resolution the design achieves.
+
+\paragraph{(ii) UTAS rank percentile} (external, training-free): we administer each answered survey item to the persona, read off an answer via numeric-label option log-probabilities, and compute the L1 distance from the resulting 33-vector to those of all 594 real candidates in the wave, reporting where the target's own politician lands. Only the ordering is scored, so the metric survives every persona clustering near the scale midpoint---the regime in which absolute MAE proved uninformative. The null is the \emph{measured} percentile of a constant predictor, not a nominal 50\%. UTAS is never used in training or in the BO objective.
+
+\section{Results}
 \subsection{Main Results}
-% 提案手法（POLIS）とベースラインの比較。低資源環境での優位性を示す。
-Table~\ref{tab:main-nll} reports the headline development-scale result: held-out session-grounded NLL for three \emph{genuine held-out targets}---politicians outside the anchor set, spanning the spectrum---each simulated by merging the four anchors and tuning the coefficients on a low-resource budget of only 30 utterances (40 GP trials; 30 held-out test utterances).
+\label{sec:main}
+% 提案手法（POLIS）とベースラインの比較。
+Table~\ref{tab:main} reports the full ordering over 33 targets for both anchor arms, and Figure~\ref{fig:forest} the paired effect sizes with confidence intervals. The best configuration we evaluate is \texttt{BO+ICL} at $2.0460$ nats; the tuned merge alone, at $2.1156$, leads every prefix-free baseline.
 
 \begin{table}[t]
 \centering
-\caption{Development-scale (0.5B) held-out session-grounded NLL (lower is better) for genuine held-out targets. All four anchors are merged; budget 30 / test 30 / 40 GP trials. POLIS beats every baseline on every target.}
-\label{tab:main-nll}
-\begin{tabular}{llrrrr}
+\caption{Mean held-out session-grounded NLL over 33 targets under nested 5-fold cross-validation (lower is better). Rows that involve no anchor are identical across arms by construction, and reproduce to four decimals---the arms differ only in the anchors' training objective. Computed from the retained per-fold values at full precision.}
+\label{tab:main}
+\begin{tabular}{lrrr}
 \toprule
-Target & Party & Base & Uniform & Best-single & \textbf{POLIS (BO)} \\
+Configuration & SFT anchors & DPO anchors & $\Delta$ \\
 \midrule
-高市早苗 (Takaichi) & LDP & 2.870 & 4.010 & 2.914 & \textbf{2.823} \\
-赤嶺政賢 (Akamine)  & JCP & 3.256 & 4.224 & 3.269 & \textbf{3.186} \\
-枝野幸男 (Edano)    & CDP & 3.317 & 4.356 & 3.320 & \textbf{3.250} \\
+\textbf{BO+ICL} (POLIS + prefix) & \textbf{2.0460} & 2.1042 & $+0.0582$ \\
+SFT+ICL                          & 2.0687 & 2.0687 & --- \\
+best-single+ICL                  & 2.0729 & 2.1174 & $+0.0445$ \\
+DPO+ICL                          & 2.1013 & 2.1013 & --- \\
+\textbf{BO} (POLIS)              & \textbf{2.1156} & 2.2078 & $+0.0922$ \\
+SFT (target's own 24 utterances) & 2.1452 & 2.1452 & --- \\
+best-single                      & 2.1455 & 2.2343 & $+0.0888$ \\
+ICL                              & 2.1736 & 2.1736 & --- \\
+DPO (target's own 24 utterances) & 2.2073 & 2.2073 & --- \\
+base (zero-shot named persona)   & 2.3613 & 2.3613 & --- \\
+uniform merge                    & 2.5558 & 2.7689 & $+0.2131$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-POLIS beats the zero-shot base, the best single anchor, and (by more than a full nat) the uniform merge on all three targets. Two structural findings support the design:
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_forest.pdf}
+\caption{Paired per-target improvements in held-out NLL, SFT anchors, with 95\% confidence intervals over the 33 targets; positive means the first-named configuration wins. Annotations give the mean, the number of targets won, and the two-sided sign-test $p$. Grey marks the one comparison that does not clear $p<0.05$.}
+\label{fig:forest}
+\end{figure}
+
+Four results in Figure~\ref{fig:forest} carry the argument.
+
 \begin{itemize}
-    \item \textbf{Tuning does real work.} The uniform all-ones merge is substantially \emph{worse} than the base model everywhere---untuned task vectors overshoot and corrupt the model. POLIS's advantage over uniform is entirely from selecting coefficients.
-    \item \textbf{Interpretable structure emerges.} For the LDP target, BO zeroed the ideologically distant anchors and kept the LDP anchor with a per-depth-group weighting that a single global weight cannot express. Whether that added expressiveness actually buys fidelity is a separate question, which we test directly in Section~\ref{sec:granularity}.
+    \item \textbf{Tuning the blend contributes, and contributes equally whatever the anchors are.} \texttt{BO} improves on \texttt{best-single} by $+0.0299$ for $33/33$ targets ($p=2.3\times10^{-10}$). The same statistic is $+0.0286$ on a 5-target SFT pilot and $+0.0265$ on the DPO arm at $n=33$: three estimates of the search's contribution, agreeing at ${\sim}0.027$ across anchor families. Whatever the anchors carry, tuning how much of each to inject at each depth contributes the same amount.
+    \item \textbf{Prompting does not make the method unnecessary.} \texttt{BO} improves on \texttt{ICL} by $+0.0580$ for $27/33$ targets ($p=3.2\times10^{-4}$). This comparison was specified in advance as a falsification criterion---if in-context learning matches the merge on equal data, the merge does not earn its complexity---and on the DPO arm the two were level ($-0.0343$, $17/33$, $p=1.00$). The criterion is met only once the anchors use the matched objective, which is itself the point of Section~\ref{sec:objective}.
+    \item \textbf{The merge improves on fine-tuning applied to the sparse data.} \texttt{BO} improves on \texttt{SFT} by $+0.0296$ for $28/33$ targets ($p=6.6\times10^{-5}$), and \texttt{BO+ICL} on \texttt{SFT+ICL} by $+0.0227$ for $27/33$. This is the study's central hypothesis, and it holds despite the fine-tuning baseline being the more carefully tuned of the two. On DPO anchors the same comparison was reversed for all 33 targets; Section~\ref{sec:objective} accounts for this.
+    \item \textbf{Merging and prompting compose.} \texttt{BO+ICL} improves on \texttt{ICL} for $33/33$ targets ($+0.1276$, and in all $165$ folds) and on \texttt{BO} for $33/33$: the two forms of adaptation are complementary rather than alternative. The tuned coefficients moreover retain their contribution under the prefix, \texttt{BO+ICL} against \texttt{best-single+ICL} being $+0.0269$, statistically indistinguishable from the $+0.0299$ obtained prefix-free. On DPO anchors the prefix absorbed roughly half of the tuning's contribution ($+0.0132$ of $+0.0694$); on SFT anchors it does not.
 \end{itemize}
-\paragraph{Unbiased estimate via nested cross-validation.} Table~\ref{tab:main-nll} rests on a single train/test split, which yields an optimistic point estimate and no error bar. Table~\ref{tab:nested-nll} repeats the comparison under \emph{nested 5-fold cross-validation}: each outer fold is held out while the BO tunes coefficients on the remaining folds and is then scored on the untouched fold, with every baseline rotated over identical folds. The ranking is unchanged and the margins hold.
+
+One null in the same comparison set deserves attention. \texttt{SFT} and \texttt{best-single} are level ($+0.0003$, $14/33$, $p=0.49$): fine-tuning on 24 of the target's own utterances is worth approximately as much as adopting one data-rich politician's adapter unmodified. This is a strong indication of how little of persona adaptation is target-specific, and it anticipates the decomposition in Section~\ref{sec:register}.
+
+\subsection{The Margin Does Not Decay With Target Prominence}
+\label{sec:prominence}
+A method for \emph{low-resource} simulation has to be checked on the resource axis, not only in aggregate. Table~\ref{tab:bands} and Figure~\ref{fig:prominence} break the paired margins out by the band the target was sampled from.
 
 \begin{table}[t]
 \centering
-\caption{Development-scale (0.5B) nested 5-fold cross-validated held-out NLL (mean $\pm$ s.d.\ across folds; lower is better), for the same three held-out targets as Table~\ref{tab:main-nll}. Budget 30 utterances, 40 GP trials per fold, all methods rotated over identical folds.}
-\label{tab:nested-nll}
-\begin{tabular}{llrrrr}
+\caption{Paired improvements by prominence band (SFT anchors). \texttt{BO} vs \texttt{best-single} is flat across a 50-fold span of speech volume. The band where \texttt{ICL} still wins prefix-free is 120--250, which is where the study's most repetitive speakers happen to fall.}
+\label{tab:bands}
+\begin{tabular}{lrrrrr}
 \toprule
-Target & Party & Base & Uniform & Best-single & \textbf{POLIS (BO)} \\
+Band (speech records) & $n$ & median & BO vs best-1 & BO vs ICL & BO+ICL vs ICL \\
 \midrule
-高市早苗 (Takaichi) & LDP & $2.875_{\pm.14}$ & $4.046_{\pm.12}$ & $2.932_{\pm.14}$ & \textbf{2.842}$_{\pm.14}$ \\
-赤嶺政賢 (Akamine)  & JCP & $2.938_{\pm.17}$ & $4.026_{\pm.19}$ & $2.986_{\pm.16}$ & \textbf{2.894}$_{\pm.15}$ \\
-枝野幸男 (Edano)    & CDP & $3.173_{\pm.20}$ & $4.250_{\pm.22}$ & $3.179_{\pm.19}$ & \textbf{3.107}$_{\pm.18}$ \\
+originals   & 3 & 8324 & $+0.0209$ & $+0.1021$ & $+0.1134$ \\
+3000+       & 5 & 5855 & $+0.0201$ & $+0.1067$ & $+0.1389$ \\
+1000--3000  & 5 & 1817 & $+0.0358$ & $+0.1272$ & $+0.1459$ \\
+500--1000   & 5 &  693 & $+0.0302$ & $+0.0696$ & $+0.1359$ \\
+250--500    & 5 &  413 & $+0.0420$ & $+0.0400$ & $+0.1268$ \\
+120--250    & 5 &  166 & $+0.0276$ & $\mathbf{-0.0624}$ & $+0.1082$ \\
+60--120     & 5 &  104 & $+0.0292$ & $+0.0407$ & $+0.1185$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Because folds are paired across methods, the per-fold \emph{differences} are the honest signal at this scale, and they are far tighter than the fold-to-fold spread of the absolute values. POLIS improves on the best single anchor by $+0.072$ to $+0.092$ nats, winning \textbf{15 of 15 folds}, and on the base model by $+0.033$ to $+0.066$ nats, winning \textbf{14 of 15}; the sole exception is one Akamine fold where the two sit within $0.003$ nats. It is this consistency, not the absolute magnitude, that the development scale establishes. (Absolute values differ slightly from Table~\ref{tab:main-nll} because cross-validation scores the 30-utterance budget itself, whereas the single split scores a disjoint later block of the target's speeches.)
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_prominence.pdf}
+\caption{Per-target paired margins against the target's speech volume (log scale), with band medians as the trend. We plot band medians rather than a regression line because the sample was \emph{drawn} in log-spaced bands; a fit would imply a smoothness the design does not establish. Backbenchers with 82--166 speech records receive the same merge advantage as members with over 8\,000.}
+\label{fig:prominence}
+\end{figure}
 
-A caveat we state plainly: at 0.5B the DPO adapters primarily encode \emph{register/rhetoric} rather than fine-grained ideology (the strongest, cleanest-trained anchor tends to serve as a shared ``fluent-Diet-register'' backbone in the lower layers, with target-specific residual added elsewhere). Clean \emph{ideological} coefficient recovery is expected only at main scale; see Section~\ref{sec:disc7b}.
+\texttt{BO} vs \texttt{best-single} runs from $+0.0201$ to $+0.0420$ with no trend, and \texttt{BO+ICL} vs \texttt{ICL} from $+0.1082$ to $+0.1459$. Because the BO tunes on 30 utterances regardless of how much text the target has, the \emph{method} is low-resource by construction; what this analysis measures is the untested axis of which \emph{kind} of politician it serves---prominent members deliver prepared set-piece speeches, backbenchers ask committee questions---and we find little dependence on that distinction.
 
-\subsection{Ablation Studies}
-% 各モジュールの貢献度分析（例：層ごとの最適化 vs 全層一律の混合、DPO vs SFTなど）。
-Two ablations are implicit in Table~\ref{tab:main-nll}. \textbf{Merge tuning:} POLIS vs.\ \emph{Uniform} isolates the BO stage---removing it (equal coefficients) is worse than not merging at all. \textbf{Composition vs.\ selection:} POLIS vs.\ \emph{Best-single} isolates blending---even the best single anchor is beaten, so combining anchors adds fidelity beyond selecting any one of them.
+The single exception is informative. Prefix-free, \texttt{ICL} outperforms the merge in the 120--250 band, driven by targets whose own utterances are near-duplicates of one another. Median nearest-neighbour similarity among a target's 30 utterances correlates $+0.787$ with ICL's gain over base and $-0.702$ with the merge's advantage over ICL, against a correlation of only $+0.324$ with log speech count. Where a politician's contributions are highly self-similar, 24 in-prompt examples approach a lookup table, and no weight-space method is competitive with that. The effect is a property of the individual target rather than of its resource level.
 
-\paragraph{Granularity versus optimizability.}
-\label{sec:granularity}
-The coefficient granularity is itself a design choice, and we sweep it directly with everything else held fixed (target Takaichi, nested 4-fold CV, budget 30): \emph{global} (one weight per anchor, 4 dims), the \emph{layer-group} operating point (3 depth groups, 12 dims), and \emph{full layer-wise} (one weight per layer, 96 dims), with the sampler switching from GP to TPE at the high-dimensional end. At 20 trials per fold the held-out NLLs are $2.850$ / $2.857$ / $3.441$ respectively; raising the two low-dimensional settings to 60 trials per fold gives $2.847$ / $2.843$.
+\subsection{Most of Persona Adaptation Is Register, Not Identity}
+\label{sec:register}
+The comparisons so far are between methods. The following control addresses a prior question: how much of what \emph{any} of them delivers is specific to the person being simulated?
 
-Three conclusions follow, and the third is a negative one. First, both low-dimensional settings beat base and best-single at either budget, so the headline result does not depend on the choice. Second, only the layer-group setting \emph{improves} with more search ($2.857\rightarrow2.843$) while the global setting is already converged at 20 trials ($2.850\rightarrow2.847$): the extra dimensions carry usable signal, but they cost search budget to exploit. Third---and we state this plainly---the gap between global and layer-group is at most $0.005$ nats and \emph{changes sign} with the trial budget, far inside the fold-to-fold spread of $\pm0.11$. \textbf{We therefore do not claim that per-depth granularity improves fidelity at development scale.} We claim only that it is expressible, that it is not harmful, and that it is the natural place for the register/ideology distinction to appear at main scale, where the adapters carry ideology rather than register.
+We apply each anchor adapter \emph{alone}, at coefficient $1.0$, with no target data, no tuning and no merge, and score all 33 targets against all four anchors. If adapters carry identity, a target should be well served by an ideologically close anchor and poorly by a distant one; the spread across the four anchors would then be comparable to the gap they open against the base model.
 
-The upper bookend is unambiguous: full layer-wise is decisively \emph{worse} than not merging at all ($3.441$ vs.\ base $2.880$), drifting toward the uniform-merge failure. Ninety-six coefficients cannot be located from twenty evaluations, and badly-chosen coefficients actively corrupt the model. The granularity curve is thus non-monotonic with a practical optimum between the bookends, which is the empirical justification for the dimensionality-dependent sampler policy rather than an assumed one.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_register.pdf}
+\caption{Decomposition of what one untuned anchor adapter buys. \textbf{A:} per target, the NLL gain of the \emph{best} anchor over the base model, split into the part every anchor achieves (anchor-independent) and the range across the four anchors (anchor-dependent). \textbf{B:} pooled over 33 targets, by anchor training objective. Roughly three quarters of the benefit does not depend on whose speech trained the adapter.}
+\label{fig:register}
+\end{figure}
 
-\paragraph{Anchor orthogonality.} A prerequisite for the merge to have room to interpolate is that anchor task vectors are not collinear. Across the four 0.5B anchors, pairwise $\Delta W$ cosine similarity is at most $0.058$ (mean $0.047$) with consistent delta norms $0.76$--$0.82$. The check repeats at main scale: across the four 7B anchors ($822$M adapted parameters each), pairwise cosine is at most $0.090$ (mean $0.076$) with norms $1.25$--$1.33$. At both scales the anchors are near-orthogonal in weight space, so each contributes genuine residual signal and the feared collinearity failure does not materialize.
+It is not (Figure~\ref{fig:register}). Pooled over 33 targets, the best anchor closes $0.2186$ nats against the base model while the full range across anchors is $0.0568$---so anchor choice accounts for $26\%$ of the benefit by pooled means and a median of $22\%$ per target. \textbf{Between $74$ and $78\%$ of what a persona adapter delivers is anchor-independent}, and that quantity is Diet-speech register: institutional phrasing, deference structure, the rhythm of committee exchange. It is the largest effect we measure, and it is invisible to any design that compares persona methods only with one another.
 
-Two things change with scale. Delta norms roughly double, and---more informatively---the \emph{structure} of the off-diagonal cosines becomes ideological. At 0.5B the pairwise values are uniform ($0.04$--$0.06$) regardless of party. At 7B they separate cleanly by bloc: every left--left pair (JCP--SDP $0.090$, SDP--DP $0.089$, JCP--DP $0.086$) exceeds every pair involving the lone LDP anchor ($0.063$--$0.065$). With three pairs on each side this is suggestive rather than a significance test, but it is the first direct evidence that the DPO deltas encode ideological position and not only rhetorical register---the scale effect Section~\ref{sec:disc7b} predicts, observed here in weight space rather than in behaviour.
+Three checks indicate that this is a property of persona adapters rather than an artefact of our particular anchor set. First, 上田 (${\sim}4$k speech records) transfers about as well as 岸田 (${\sim}20$k), which rules out the base model simply knowing the more famous politician. Second, an untuned foreign anchor is \emph{level} with LoRA fine-tuning on the target's own 24 utterances (on a 5-target probe: $3/5$, $+0.0047$) and level with the best merge configuration---an adapter trained on a different politician entirely matches target-specific fine-tuning. Third, the null in Section~\ref{sec:main} points the same way: \texttt{SFT} and \texttt{best-single} tie at $n=33$.
 
-\subsection{Qualitative Analysis and Main-Scale Validation}
-\label{sec:disc7b}
-% 実際の生成テキストの事例（Case Studies）。POLISがステレオタイプを回避し、いかに自然なイデオロギー表現を獲得しているかを示す。
-The UTAS survey metric is only meaningful if the model can answer Likert items competently. Table~\ref{tab:floor} shows this is the pivotal scale effect. At 0.5B the survey metric is a \textbf{degenerate floor}: MAE($\mathbb{E}$) is flat (1.11--1.14) across base, uniform, best-single, and POLIS, with $\mathbb{E}$ pinned near 3.0 and argmax collapsing (a numeric-label variant fails too, with a first-option/``agree'' bias so strong it agrees, at $p\approx0.98$, that consumption tax should be raised to 100\%). The 0.5B study therefore validates the \emph{mechanism} (the NLL objective in Table~\ref{tab:main-nll}), not the survey headline.
+This also makes the magnitude of the reported margins interpretable (Figure~\ref{fig:scale}). The tuned merge's $+0.0299$ over \texttt{best-single} is not competing against $0.2186$ nats of persona fidelity; it is competing over the ${\sim}0.057$ that anchor identity contributes at all. Read against the right denominator, tuning the blend recovers roughly half of the available anchor-dependent signal---and it lands \emph{outside} the anchors' own range, which a selection-only method cannot do.
 
-At \textbf{7B the floor breaks}. Comparing the base 7B model to its Kishida DPO adapter on the 2024 HoR wave (33 items, named persona):
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_scale.pdf}
+\caption{The scale disparity that governs every margin in this paper. \textbf{A:} one untuned anchor closes $0.2186$ nats against the base model, of which only $26\%$ depends on which politician trained it. \textbf{B:} the same axis magnified $3\times$. Every method comparison in Section~\ref{sec:main} happens inside this window, and the tuned merge lands past its right-hand edge.}
+\label{fig:scale}
+\end{figure}
+
+\subsection{The Remainder Is Ideological and Recoverable}
+\label{sec:affinity}
+If the anchor-dependent quarter is identity rather than noise, the anchor a target prefers should track the target's politics. We test that on all 33 targets, folding parliamentary group names into party families and restricting to the 28 targets whose family has an anchor at all: LDP (12), the CDP/DPJ lineage (13, into which we fold the DPP as its splinter), and the JCP (3). No target is SDP, so 福島's family contributes no matchable target, and the five Ishin and Komeito targets can never match by construction---which is why a chance rate of $1/4$ is not the appropriate null.
+
+Nor would $1/4$ be appropriate even restricted to the eligible targets: a large family holding a frequently preferred anchor would match by construction. We therefore permute the observed anchor preferences against the observed target families with \textbf{both marginals held fixed}---which anchors win how often, and which parties the targets are---and compare to the resulting distribution.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_affinity.pdf}
+\caption{Does a target's preferred anchor come from its own party family? \textbf{A:} by family, both anchor arms, against the permutation null. \textbf{B:} the observed count against each arm's own marginal-preserving permutation null. The SFT arm sits in the null's upper tail ($p=0.001$); the DPO arm sits at or below its centre.}
+\label{fig:affinity}
+\end{figure}
+
+With SFT anchors the preferred anchor matches the target's family on \textbf{$17$ of $28$} targets against a null mean of $9.43$, $p=0.0013$ (Figure~\ref{fig:affinity}). The gradient across families in Table~\ref{tab:affinity} is what distinguishes this from a chance arrangement.
 
 \begin{table}[t]
 \centering
-\caption{Main-scale (7B) UTAS agreement for the Kishida persona, 2024 HoR, 33 items. At 7B argmax is content-responsive (0.5B collapsed), and DPO alignment improves fidelity on 3/4 metrics with none worse.}
-\label{tab:floor}
+\caption{Anchor preference by target party family, SFT anchors. The signal is strongest where party structure is tightest.}
+\label{tab:affinity}
+\begin{tabular}{llll}
+\toprule
+Family & Matched & Anchors chosen \\
+\midrule
+共産 JCP        & \textbf{3/3}  & 塩川 $\times3$ \\
+民主/立憲 CDP/DPJ & 9/13 & 上田 $\times9$, 岸田 $\times2$, 塩川 $\times2$ \\
+自民 LDP        & 5/12 & 岸田 $\times5$, 塩川 $\times3$, 上田 $\times3$, 福島 $\times1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The JCP is small, cohesive and lexically distinctive, and all three of its targets prefer the JCP anchor; the LDP is internally heterogeneous, spanning 高市 to 武田, and its targets are dispersed across anchors. An artefact of the measurement would not be expected to respect party structure in this direction.
+
+\paragraph{Robustness to the selection rule, and its limit as evidence.} The \texttt{best-single} winner within nested cross-validation is chosen by prefix-free dev-fold likelihood, a different rule from the coefficient-$1.0$ sweep above, and might therefore be expected to furnish independent corroboration. It does not: the two rules select \emph{the same anchor on all 28 eligible targets}, yielding an identical $17/28$ and an identical per-family breakdown. The result is thus robust to how the preferred anchor is identified, but it constitutes one measurement rather than two, and we do not present it as replication.
+
+\subsection{The Training Objective Decides Whether Identity Survives}
+\label{sec:objective}
+Every experiment above was also run on a second set of anchors: the same four politicians, the same 1\,500 pairs each, the same LoRA shape, the same merge code and the same folds, trained with DPO instead of SFT. The two arms diverge sharply, and Table~\ref{tab:objective} collects the divergence in one place.
+
+\begin{table}[t]
+\centering
+\caption{The same measurements under the two anchor objectives. Only the anchors' training objective differs.}
+\label{tab:objective}
+\begin{tabular}{lrr}
+\toprule
+Measurement & SFT anchors & DPO anchors \\
+\midrule
+Preferred anchor matches target's party & \textbf{17/28} ($p=0.0013$) & 4/28 (at chance) \\
+Anchor-dependent share of the benefit (median) & 22\% & 13\% \\
+Gain of one untuned anchor over base (mean) & $0.2186$ & $0.1295$ \\
+\texttt{BO} vs \texttt{ICL} (falsification criterion) & $+0.0580$, 27/33 & $-0.0343$, 17/33 \\
+\texttt{BO} vs \texttt{SFT} on sparse target & $+0.0296$, 28/33 & $-0.0627$, \textbf{0/33} \\
+\texttt{BO} vs \texttt{best-single} & $+0.0299$, 33/33 & $+0.0265$, 33/33 \\
+Uniform-merge NLL (delta interference) & $2.5558$ & $2.7689$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Fisher exact on the party-match counts between arms is $\mathbf{p=7.2\times10^{-4}}$. The claim we make is precisely that \emph{difference}: DPO anchors carry no recoverable party signal, SFT anchors do. We do not claim DPO \emph{inverts} party---$4$ matches against a null of $7.90$ is only suggestive one-tailed---even though LDP targets picked the JCP anchor 8 times in 12 under DPO.
+
+This accounts, in retrospect, for three results that had appeared to undermine the framework, all of which were measured on DPO anchors: the party inversion in \texttt{best-single} picks, a granularity null (Section~\ref{sec:granularity}), and a $0/33$ defeat to sparse SFT. It also has a mechanical reading, sketched in Figure~\ref{fig:objgeom} and consistent with the preliminaries: DPO's objective is satisfied by separating the real utterance from the caricature, so with a synthesized rejected side on limited data the whole half-space of directions that beat the caricature is a solution, and most of it carries no information about the politician. SFT has no such slack---its gradient points at the politician's own distribution throughout. The uniform-merge row tells the same story in weight space: DPO deltas interfere with one another far more destructively ($2.7689$ against base $2.3613$) than SFT deltas do ($2.5558$), which is what one expects of task vectors pointing in directions unrelated to their politicians.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_objective_geometry.pdf}
+\caption{Why the objective decides, schematically. \textbf{A:} maximizing the likelihood of the real utterance drives the policy toward the politician throughout training. \textbf{B:} a preference margin against a synthesized caricature is satisfied anywhere in a half-space, most of which is unrelated to the politician's position; the gradient vanishes once the margin holds. The measured consequence is printed under each panel---same four politicians, same 1\,500 pairs, same adapter shape.}
+\label{fig:objgeom}
+\end{figure}
+
+We draw a methodological point from this rather than only a result. The anchors' objective was not a designed factor of the study; it became one because the two sparse-target fine-tuning baselines were implemented and disagreed, which is what made the objective visible as a confound at all. Where a pipeline contains a choice that is incidental to the hypothesis---as the anchor objective was to ours---a comparison that holds it fixed can invert when it is varied, and the baselines that expose this are precisely those most easily deferred as uninformative.
+
+\subsection{Ablations}
+\label{sec:ablations}
+\paragraph{Coefficient granularity: expressiveness against optimizability.}
+\label{sec:granularity}
+Per-depth coefficients are the design choice that distinguishes our merger from a global weighted merge, so we sweep granularity directly with everything else fixed (Figure~\ref{fig:granularity}). At 7B on SFT anchors, nested 4-fold, 20 trials per fold: a single global weight per anchor (4 dims) beats the layer-group operating point (12 dims) on \textbf{3 of 3 targets}, by $0.0160$ / $0.0257$ / $0.0082$ nats. Since \texttt{BO} beats \texttt{best-single} by ${\sim}0.027$, per-depth granularity gives back $40$--$97\%$ of the tuning's entire advantage.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_granularity.pdf}
+\caption{\textbf{A:} 7B, SFT anchors, equal trial budget: a global coefficient per anchor beats per-depth-group coefficients on all three targets. Whiskers show the \emph{unpaired} across-fold standard deviation. Per-fold values were not retained for this sweep, so the global--layer-group difference cannot be evaluated as a paired contrast, and the whiskers should not be read as an interval on that difference. \textbf{B:} the full dimensionality curve at 0.5B. Ninety-six coefficients are worse than not merging at all.}
+\label{fig:granularity}
+\end{figure}
+
+The caveat belongs with the result. Both settings receive 20 trials per fold over search spaces differing by a factor of three, so the comparison cannot separate ``per-depth structure does not help'' from ``12 dimensions requires more than 20 trials''. What is supported is the claim at \textbf{equal optimization budget}: at a fixed trial count, finer granularity costs more in search than it returns in expressiveness. Separating the two accounts would require approximately 60 trials at 12 dimensions, and is the only granularity question we regard as open.
+
+A natural conjecture is that per-depth structure should emerge at main scale, where adapters carry ideology rather than register alone (Section~\ref{sec:register}). It does not. The comparison has now been made twice at 7B---once on anchors with no recoverable party signal ($2.1557$ against $2.1563$, a null of $0.0006$) and once on anchors that demonstrably carry it ($3/3$ favouring the global setting)---and the conjecture is unsupported in both. Per-depth weighting is expressible in our formulation and is not harmful, but we do not claim it improves fidelity at any scale we have measured.
+
+The upper bookend, from the 0.5B sweep, is unambiguous and is what justifies the sampler policy rather than merely asserting it: full layer-wise merging (96 dims, TPE) scores $3.4408$ against a base model at $2.8804$---decisively \emph{worse than not merging}, drifting toward the uniform-merge failure mode. Ninety-six coefficients cannot be located from twenty evaluations, and badly chosen coefficients actively corrupt the model. The granularity curve is therefore non-monotonic with a practical optimum at low dimensionality.
+
+\paragraph{Anchor orthogonality.} A prerequisite for interpolation to have room is that the anchor task vectors are not collinear. Across the four 7B anchors ($822$M adapted parameters each), pairwise $\Delta W$ cosine similarity is at most $0.090$ (mean $0.076$) with delta norms $1.25$--$1.33$; at 0.5B it is at most $0.058$ (mean $0.047$) with norms $0.76$--$0.82$. The collinearity risk does not materialize at either scale. Two things change with scale: norms roughly double, and the off-diagonal structure becomes ideological. At 0.5B the pairwise values are uniform ($0.04$--$0.06$) regardless of party; at 7B every left--left pair (JCP--SDP $0.090$, SDP--DP $0.089$, JCP--DP $0.086$) exceeds every pair involving the lone LDP anchor ($0.063$--$0.065$). With three pairs per side this is suggestive, not a test, but it is the same ideological signal Section~\ref{sec:affinity} finds behaviourally, observed in weight space.
+
+\paragraph{Coefficient usage.} Figure~\ref{fig:coeffs} shows the mean fitted coefficient per anchor over $165$ folds $\times\ 3$ depth groups. On SFT anchors all four carry weight ($0.222$--$0.332$); on DPO anchors 福島 sits at $0.135$ and is near zero in most folds, and $54$--$68\%$ of DPO coefficient slots are switched off against $29$--$43\%$ under SFT. This bears on whether more anchors would help. Observing that the optimizer already discards capacity at $K=4$ would be an argument against enlarging the anchor set; the SFT arm shows that behaviour to be a property of one poorly transferring anchor rather than of $K=4$ itself, which leaves the anchor-count question genuinely open (Section~\ref{sec:discussion}). The fitted depth structure is also non-uniform---岸田 concentrates in the lower and middle groups ($0.382$/$0.468$/$0.145$), 福島 in the upper ($0.196$/$0.150$/$0.321$)---but by Section~\ref{sec:granularity} we do not claim this structure improves fidelity.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_coeffs.pdf}
+\caption{What the optimizer does with each anchor. \textbf{A:} mean fitted coefficient, pooled over 165 folds $\times$ 3 depth groups. Under DPO the optimizer switches one anchor off; under SFT all four contribute. \textbf{B:} the same SFT coefficients broken out by depth group---structure is present (Kishida concentrates below, Fukushima above), but Section~\ref{sec:granularity} shows it does not buy fidelity at equal search budget.}
+\label{fig:coeffs}
+\end{figure}
+
+\subsection{Development-Scale Validation}
+\label{sec:dev}
+The full pipeline was developed and validated at Qwen2.5-0.5B-Instruct before any 7B compute was committed, and the ordering established there survived the scale-up. Under nested 5-fold cross-validation on three held-out targets, the tuned merge improved on \texttt{best-single} in $15/15$ folds ($+0.072$ to $+0.092$ nats) and on the base model in $14/15$ (the exception a difference of $0.003$), against a uniform merge more than a full nat \emph{worse} than base. Two observations at this scale shaped the main study. First, the failure of the uniform merge establishes that the contribution of tuning is a question to be tested rather than assumed: untuned task vectors are actively harmful, so any benefit of the merge must be attributed to coefficient selection. Second, \texttt{best-single} selected the same anchor in all 15 folds regardless of the target's party---the register effect that Section~\ref{sec:register} quantifies at 7B, visible here but not then interpreted as such.
+
+\section{The Survey Instrument: A Negative Result}
+\label{sec:utas}
+Held-out likelihood measures whether a persona talks like its target. Our external instrument asks something stronger: whether it holds the target's positions. It does not---see Table~\ref{tab:utas} and Figure~\ref{fig:utas}.
+
+\begin{table}[t]
+\centering
+\caption{UTAS rank percentile of the true politician among 594 real candidates in the 2024 HoR wave (higher is better), 33 targets, SFT anchors. The floor is the \emph{measured} percentile of a name-independent constant predictor; the oracle row picks the best of the five constants per target.}
+\label{tab:utas}
 \begin{tabular}{lrrrr}
 \toprule
-Model & MAE(argmax) & MAE($\mathbb{E}$) & exact & within-1 \\
+Configuration & median pct & mean pct & above the $50.1\%$ floor & MAE($\mathbb{E}$) \\
 \midrule
-Base 7B                 & 1.485 & 1.151 & 0.152 & 0.545 \\
-\textbf{Kishida DPO 7B} & \textbf{1.455} & \textbf{1.067} & \textbf{0.212} & 0.545 \\
+base                     & $52.7\%$ & $55.2\%$ & 19/33 & $1.151$ \\
+uniform                  & $46.8\%$ & $46.0\%$ & 16/33 & $1.090$ \\
+best-single              & $56.1\%$ & $55.4\%$ & 21/33 & $1.084$ \\
+\textbf{BO}              & $55.4\%$ & $55.9\%$ & 19/33 & $1.131$ \\
+best constant \emph{(oracle over 5)} & $81.8\%$ & $82.0\%$ & --- & $0.935$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-At 7B the argmax spans the full 1--5 scale and responds to item content, and the DPO adapter improves alignment on 3 of 4 metrics with none worse---confirming both that the survey metric is usable at scale and that DPO alignment moves the persona toward its true survey positions. A residual bias remains (both models lean the A/B items high; absolute MAE is moderate), which motivates numeric-label scoring with permutation-based (PriDe-style) order de-biasing~\cite{zhao2021calibrate} as the next methods step, buildable only at $\geq$7B where the model is competent enough to validate it.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_utas.pdf}
+\caption{\textbf{A:} per-target rank percentile by configuration, with the measured constant-predictor floor. \textbf{B:} the merge against the base model target by target; points above the diagonal are where merging helps. It helps on 19 of 33, which is chance.}
+\label{fig:utas}
+\end{figure}
+
+Paired with each target as one observation, \texttt{BO} vs \texttt{base} is $+0.7$ percentile points on $19/33$ ($p=0.49$), \texttt{BO} vs \texttt{best-single} is $+0.4$ on $14/33$, and \texttt{BO} vs the best constant is $-26.1$ points on $8/33$. On absolute MAE the merge scores $1.131$ against the constant's $0.935$. The falsifiable prediction we had derived from the instrument's own behaviour---that a working method should move its targets from the backbench level toward the prominent level---is not borne out.
+
+\paragraph{Why this is a property of the instrument, not a coincidence.} Four controls converge.
+
+\begin{enumerate}
+    \item \textbf{Two scorers, both failing.} Verbose-option scoring softmaxes five length-normalized log-probabilities that all sit in a narrow band, so the expectation collapses toward the scale midpoint whatever the model believes; numeric-label scoring fixes that (MAE($\mathbb{E}$) and MAE(argmax) nearly coincide under it, against a $0.2$ gap under verbose) and the model then commits to answers that are simply wrong more often than the midpoint guess.
+    \item \textbf{A 594-persona population sweep.} Since the persona is conditioned on the name alone, the instrument can be run over the whole wave with no adapter and no merge. Changing only the name moves the answers $0.236$ in mean pairwise L1 against the real politicians' $1.132$---a \textbf{name-swap divergence of $0.209$}. Per item, the median standard deviation across all 594 personas is $0.186$ against the real $1.013$, and \textbf{9 of 33 items have sd $<0.05$}: for those, the model returns the same answer whoever you say it is. Simulated answers average $2.271$ against the real $2.763$, i.e.\ a uniform skew toward agreement independent of who is being simulated. Median rank over the sweep is $52.1\%$ and top-1 accuracy is $0.002$, which is exactly $1/594$.
+    \item \textbf{A measured null.} A name-independent vector induces one fixed distance ordering, so over a full sweep its rank takes every value exactly once and the median percentile is $50.1\%$ by construction---which is what the constant rows return. This is why we compare against measured constants rather than an assumed $50\%$: under subsampling the floor is a noisy sample of that ordering and can sit far from it---on a 60-persona subset we measure $68.4\%$---so a nominal null would misstate the comparison for any partial sweep.
+    \item \textbf{A knowledge gradient, not a format gap.} Broken out by speech volume over the population sweep, median rank falls from $57.7\%$ in the most prominent quintile (median 3\,632 records) to $50.2\%$ in the least (median 92): the instrument reads positions correctly when the model has the knowledge, and has none for backbenchers. The failure is knowledge coverage, not elicitation---which is precisely the gap POLIS was built to fill, and it does not fill it.
+\end{enumerate}
+
+\paragraph{Three repairs considered and rejected.} Each of the following would have produced a more favourable table without licensing a stronger claim, and we record the grounds for rejecting them. (i) \emph{Dropping items the target answered 3 to.} The premise is right---$31.7\%$ of all answers are the midpoint---but filtering on the label being predicted is a labelled subgroup analysis, and empirically the model's own MAE \emph{rises} ($1.137\rightarrow1.395$) on the most favourable cut while the baseline degrades faster; the gap narrows for the wrong reason. Per-\emph{item} filtering (dropping items the whole population answers 3 to) is legitimate and also does not rescue it. Substantively, knowing when a politician abstains is part of simulating them. (ii) \emph{Tuning the BO on some survey items and testing on the rest.} A nearest-neighbour lookup---find the most similar politician on 16 tuning items, copy their held-out 17---scores MAE $0.647$ against the 7B model's $1.137$, so the setup is solved without an LLM, speech, adapters, or a merge; it also presumes the target's survey answers, which the low-resource scenario does not have. (iii) \emph{Training the anchors on survey data.} The waves separate cleanly (29 of 33 item codes are shared but no two questions have identical text), so it would not be label leakage---but with 33 identical items it would teach the task format, the scale semantics, and the population answer distribution, degrading the claim from ``personas fitted to speech encode ideology an independent instrument can read'' to ``models trained on surveys answer surveys''. A control run first settled it anyway: given maximum resource, their own survey answers and no merge at all, only 1 of the 4 anchors beat a constant predictor.
+
+\paragraph{What the negative result bounds.} This is not a gap in Section~\ref{sec:objective} but its boundary. The instrument was administered again in full after the objective effect was established, since our earlier reading of it had rested on the premise that these personas carry no identity at all---a premise that turned out to be objective-dependent---and the null survives the correction. SFT anchors therefore carry recoverable party signal in \emph{speech-likelihood} space and carry none into \emph{stated survey positions}. The anti-correlation between the two metrics---the uniform merge has by far the worst likelihood and near-best survey agreement on some targets---is thus a statement about what transfers rather than an artefact of poorly trained anchors. Two scorers, a population control, a rank metric, a measured floor and both anchor families agree on this point.
 
 \section{Discussion and Limitations}
 \label{sec:discussion}
 % 本手法の限界（計算コスト、対象ドメインの広がりなど）や将来の展望。
-\paragraph{Survey answering is a scale-gated capability.} At 0.5B, Likert competence is absent (Table~\ref{tab:floor}); the development study can only validate the NLL mechanism, not the survey headline. This is a property of the base model, not of POLIS, and it resolves at 7B.
+\paragraph{What the method delivers, read against the register finding.} The result is best stated in two layers. Most of what any persona method delivers in this setting is parliamentary register, obtainable from any data-rich politician's adapter at no tuning cost. Conditional on that, tuning the blend yields a consistent ${\sim}0.027$ nats over the best single anchor---approximately half the anchor-dependent signal available---and this increment tracks party structure. Reporting the second layer alone would overstate the method; reporting the first alone would obscure that it works. The practical implication concerns cost rather than accuracy: a single adapter from a well-documented actor transfers broadly, and the merge and search apparatus is required only for the residual.
 
-\paragraph{Compute is the binding constraint on the main-scale merge comparison.} Correctly writing merged $\Delta W$ into a 7B model on an 8\,GB GPU forces full-CPU forward passes: with device offload (\texttt{device\_map="auto"}) the overflow layers become meta tensors and the in-place weight writes silently no-op, so a correct merge must keep the whole model in CPU RAM. Correct-but-CPU 7B forwards over $\sim$1.3k-token session contexts are minutes each; a single UTAS evaluation is tractable, but a full BO run (hundreds of forwards $\times$ trials) is days on the laptop. The full 7B merge-method comparison (base/uniform/best-single/POLIS on NLL \emph{and} UTAS across the three targets)---the main-scale version of Table~\ref{tab:main-nll}---is therefore \textbf{pending on higher-throughput hardware} and is the primary open item.
+\paragraph{Deployment cost, not only accuracy.} \texttt{ICL} pays a ${\sim}9$k-token prefix at every inference and needs the target's speeches at serving time; the merge pays once and ships a 130\,MB adapter. Since the two compose, the deployment question is not which to choose but whether the prefix is affordable.
 
-\paragraph{Coefficients encode register at 0.5B.} As noted, development-scale coefficients track fluent-Diet-register more than ideology; the interpretation of mixing coefficients as ideological positions is a main-scale expectation to be confirmed, not a development-scale result.
+\paragraph{Scope.} Four anchors, one legislature, one language, one backbone family. The anchor-count slope is unmeasured and the considerations cut both ways: the optimizer does not discard capacity at $K=4$ once the anchors are well trained, but memory scales at ${\sim}3.3$\,GB of fp32 delta per anchor ($K=8$ needs bf16 deltas on a 48\,GB card, $K=20$ needs on-the-fly $\Delta W$ reconstruction), and dimensionality grows as $K\times G$ into the region where Section~\ref{sec:granularity} shows coefficient search failing. A realistic $K=20$ needs $G=1$ or an anchor-selection stage before the BO.
 
-\paragraph{Scope.} Results are on Japanese Diet speech with four anchors; anchor count, party coverage, and cross-domain transfer are unstudied here.
+\paragraph{Budget.} The 30-utterance budget is a convention of this study rather than a quantity we derived or optimized. A budget effect has a concrete mechanism---the search fits 12 coefficients where LoRA fits ${\sim}20$M parameters, so fine-tuning should degrade the faster as data shrink---and our comparison is made at a budget where the merge already leads. The behaviour below 24 instances is therefore unmeasured rather than uninformative, and is the most direct extension of this work.
+
+\paragraph{Statistical treatment.} The per-fold consistency figures we quote (e.g.\ 153 of 165 folds) are descriptive; five folds of one politician are correlated, so every $p$-value in this paper takes each target as one observation. Where a claim rests on three targets, as the granularity ablation does, we state the fact and attach no $p$-value. The caution is earned: on a three-target sample the survey metric appeared to improve under the merge, and at $n=33$ the effect vanished entirely (Section~\ref{sec:utas}).
+
+\paragraph{Verification of the merge.} One failure mode warrants mention because it is silent rather than merely inconvenient. Writing merged weights in place requires that every target module hold a materialized tensor; where a module is a placeholder---as it is for any layer offloaded past device capacity---the write succeeds and changes nothing, and the optimizer then searches a constant objective while appearing to converge. We therefore gate every run behind a self-test requiring four distinct likelihoods under four coefficient settings and exact restoration of the base value, and we recommend any weight-space merging study adopt a comparable check: a flat objective is not distinguishable from a difficult one by inspection of the trace alone.
 
 \section{Conclusion}
-We introduced POLIS, a framework that reframes low-resource persona simulation from fine-tuning to composition: DPO anchor adapters merged with DARE-TIES, with layer-wise mixing coefficients selected by Bayesian optimization against a small target-likelihood budget. The full pipeline is validated at development scale, where it beats zero-shot, best-single-anchor, and uniform-merge baselines on held-out likelihood for every genuine held-out target and recovers interpretable per-layer structure. Early 7B experiments confirm the external survey metric becomes reliable at scale and that DPO alignment improves ideological fidelity. Completing the main-scale merge-method comparison on higher-throughput hardware is the immediate next step toward grounded, non-caricatured persona simulation for the long tail of political actors.
+POLIS reframes low-resource persona simulation from fine-tuning to composition: anchor adapters merged with DARE-TIES, with mixing coefficients selected by Bayesian optimization against a small target-likelihood budget. On 33 held-out members of the Japanese Diet under nested cross-validation, the tuned merge beats the best single anchor on every target, beats in-context learning on 27, beats fine-tuning on the target's own utterances on 28, and composes with prompting to produce the study's best configuration on all 33---with no decay across a 50-fold range of target speech volume.
+
+The findings we expect to outlast the specific method are the two that came from controls rather than comparisons. Roughly three quarters of what persona adaptation delivers is anchor-independent register, so an adapter trained on a different politician matches fine-tuning on the target's own data; and whether the remaining quarter carries recoverable ideology is decided by the anchors' training objective, with two arms differing in nothing else landing on opposite sides of a permutation null. Against an external elite survey, none of it transfers to stated policy positions, and we report the diagnostic that shows why. For persona work generally, the implication is that a persona method should be measured against an untuned foreign adapter before it is measured against another persona method---otherwise most of what is being reported is register.
 
 \section*{Ethics Statement}
 % 社会的影響、バイアスの取り扱い、生成されたペルソナの悪用防止に関する倫理的配慮。
-This work simulates the ideological positions of real, named public figures from their public parliamentary record and public survey responses. Personas are approximations, not the individuals, and can err or misrepresent; they must not be presented as authentic statements by these figures, used to fabricate quotations, or deployed to impersonate or manipulate. All source data (Diet proceedings, UTAS surveys) are public elite records; the intent is scholarly analysis of political discourse and the reduction of stereotype bias in population simulation, and we caution against downstream persuasive or deceptive use.
+This work simulates the ideological positions of real, named public figures from their public parliamentary record and public survey responses. Personas are approximations, not the individuals, and can err or misrepresent; they must not be presented as authentic statements by these figures, used to fabricate quotations, or deployed to impersonate or manipulate. Our own results sharpen this caution in a specific way: because most of what these adapters transfer is institutional register rather than individual identity, a fluent, plausible-sounding persona output is weak evidence that the model has captured the person, and the survey results in Section~\ref{sec:utas} show it demonstrably has not captured their positions. Outputs should not be read as evidence about what a named politician believes. All source data (Diet proceedings, UTAS surveys) are public elite records; the intent is scholarly analysis of political discourse and the reduction of stereotype bias in population simulation, and we caution against downstream persuasive or deceptive use.
 
 \section*{Acknowledgements}
 
 \bibliography{references}
 \bibliographystyle{plain}
 
-% \appendix
-% \section{Implementation Details} % ハイパーパラメータやプロンプトの詳細など
+% Generated from the shipped corpus by research/polis/paper_examples.py. Regenerate
+% rather than editing: the instances are pulled by fixed person id and index.
+\input{appendix_examples}
 
 \end{document}

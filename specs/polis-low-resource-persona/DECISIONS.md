@@ -1077,3 +1077,218 @@ comparison as a *result at equal budget*, not a caveat.
 - [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
 - [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014.
 - [x] `P15`: `BO+ICL` beats `ICL` on 33/33.
+
+## 2026-08-05 (later) — `main.tex` is written, and recomputing every number moved two
+
+The paper was rewritten against a single script rather than against this file:
+**`research/polis/paper_numbers.py`** re-derives every figure the paper quotes from the
+committed artifacts (stdlib only, ~10 s, CPU) and writes
+`artifacts/paper_numbers.json`; **`research/polis/paper_figures.py`** renders seven
+vector PDFs into `paper/.../figures/` from that JSON. The split is deliberate — the
+analysis has to run on a bare pod interpreter, the plotting needs matplotlib
+(`research/.venv`, created this session). Nothing in the paper is transcribed from a
+log line.
+
+Everything reproduced except the two below. Reproduced exactly: the 9-config main
+table, all 13 paired comparisons in both arms, the 7-band prominence table, the
+register decomposition (0.2186 / 0.0568, 26% of means, 22% median), the affinity test
+(17/28, null 9.43, p=0.0013; DPO 4/28, null 7.90; Fisher 7.2e-4) including the per-family
+3/3 · 9/13 · 5/12, the mean coefficients, the granularity sweep, and every UTAS row.
+
+### Correction: `best-single` picks are *not* independent corroboration of the affinity test
+
+The 2026-08-05 entry above reports "13/23 matched, 共産 3/3, 民主/立憲 5/8, 自民 5/12"
+from the nested-CV `best-single` picks and calls it a **second, independent** selection
+rule agreeing with `anchor_affinity.py`'s 17/28. Recomputed from
+`bo7b_picks_sft33/*.json`: the modal `best-single` pick and the coefficient-1.0 best
+anchor are **the same anchor on all 28 eligible targets**, so the statistic is also
+17/28 with an identical per-family split, not 13/23.
+
+Both rules score a single anchor by dev-fold NLL, so on reflection agreement is what
+should have been expected; they are one measurement, robust to the selection rule. The
+23 was probably computed with a party-family map that mis-folded LDP targets — the
+group name **"自由民主党・無所属の会" contains "民主" as a substring**, so any
+`in`-test that checks the DPJ/CDP keys before the LDP ones silently files every LDP
+target under 民主. `anchor_affinity.py` guards this with an *ordered* FAMILY list;
+`paper_numbers.py` now copies that list verbatim rather than reimplementing it, which
+is how the discrepancy surfaced. **Do not repeat "two independent selection rules".**
+The paper states it as a robustness check and says so explicitly.
+
+### Correction: `SFT vs best-single` sign-test p
+
+The main table gives that row as `+0.0003 · −0.0045 · 14/33 · p=1.00`. Mean, median,
+wins and fold count all reproduce; the p does not — a two-sided exact binomial at 14/33
+is **0.49**. Either way it is the null the paper reports (sparse fine-tuning is level
+with borrowing one anchor wholesale), so nothing downstream changes.
+
+### What the paper does with the material
+
+18 pages, xelatex, 2 overfull hboxes, 0 undefined references. Structural decisions
+worth recording because they are judgement calls, not transcription:
+
+- **The abstract was rewritten**, against the "kept verbatim" instruction of 2026-07-07.
+  It named DPO as *the* anchor objective and claimed POLIS beats standard SFT outright;
+  both are now known to be objective-dependent in the direction that reverses the claim.
+  The original is preserved in a source comment. This needs Ken's eyes.
+- **The register decomposition leads the contributions**, ahead of the main table. It is
+  the largest effect and the one a reader can least easily get elsewhere; the framing
+  used is that a persona method should be benchmarked against an untuned *foreign*
+  adapter before it is benchmarked against another persona method.
+- **`geometry` with 1in margins** was added: default `article` on letterpaper gives a
+  4.75in text width, which was shrinking 6.5in figures to 72% and their 8pt labels to
+  5.8pt. Figures are rendered at the final text width and never rescaled.
+- **The granularity figure drops its error bars from the bar tops to thin whiskers with
+  an explicit caption warning** — the sweep emits only an *unpaired* fold spread
+  (±0.07–0.19) against a 0.008–0.026 effect, and drawing that as an error bar on the
+  comparison would misrepresent a limitation of the logging as a null.
+- **§Limitations records the shell-wrapping failure mode** (seven lost runs) and the
+  meta-tensor silent no-op, as reproducibility hazards rather than as apologies.
+
+## 2026-08-06 — five explanatory figures, and the right tool for each
+
+Ken asked for figures showing what the framework *does*, not just what it scored, and
+suggested HTML or SVG. The paper went from 7 figures to 12 (21 pages). What matters for
+a later agent is the split that fell out of it, because the first attempt got it wrong.
+
+| kind | tool | figures |
+|---|---|---|
+| structural — boxes, arrows, grouping | **Graphviz** (`paper_diagrams.py`, `dot` binary only) | pipeline, merge arithmetic, evaluation protocol |
+| quantitative & geometric | **matplotlib** (`paper_figures.py`) | the 9 measurement plots, plus the scale decomposition and the objective sketch |
+
+**Hand-authored SVG was tried first and abandoned.** It rendered fine (cairosvg shapes
+CJK correctly through fontconfig, and vector PDF with embedded fonts came out clean), but
+every edit moved a label into another label: five diagrams needed a text-width estimator,
+a wrapper and three rounds of collision fixes, and they still looked hand-placed. Ken's
+verdict was blunt and correct. **With `dot` the only things specified are content,
+grouping and rank** — the part that carries meaning — and layout is not a thing that can
+be got wrong. `paper_schematics.py` and its SVGs are deleted; don't resurrect that
+approach for anything box-and-arrow.
+
+Three things worth keeping from the exercise:
+
+- **Graphviz caveat: watch the natural width.** The pipeline first laid out `rankdir=LR`
+  at **11.9 in**, which `width=\textwidth` would have shrunk to 55%, taking 9 pt labels to
+  5 pt. Recast `rankdir=TB` with the four anchors on one rank it lands at 6.04 in.
+  `render()` now prints each diagram's natural width and flags anything outside 5.6–6.9 in.
+- **Unicode is not a substitute for markup.** `ΔW⁽¹⁾`, subscript `cₐ,ᵧ` and `ℝ⁴ˣ³` are all
+  tofu in IPAexGothic *and* DejaVu Sans. Graphviz `<sup>`/`<sub>` in HTML-like labels, or
+  matplotlib mathtext, always render.
+- **The coefficient matrix moved to `paper_figures.py`.** It was drawn as a table inside the
+  merge diagram; it is a *measurement*, so it belongs with the plots — it is now panel B of
+  `fig_coeffs`, a sequential-ramp heatmap by depth group.
+
+The two new non-diagram figures each make a claim legible that the tables state numerically:
+`fig_scale` draws the register/identity decomposition to scale and magnifies the identity
+window, which is the honest answer to "why are all these margins ~0.03"; `fig_objective_geometry`
+sketches why a margin objective need not move toward the target, which is the mechanism
+behind the p=7.2e-4 result. Both print the measurement they explain, so the sketch cannot
+drift from the data.
+
+## 2026-08-06 (later) — the data appendix, and a length effect nobody had looked at
+
+Ken asked for training-data examples in the paper. `research/polis/paper_examples.py`
+writes `appendix_examples.tex` (which `main.tex` `\input`s): an anchor DPO triple, a
+sparse-target pair, the ICL prefix template, the UTAS elicitation prompt, and two
+corpus-statistics tables. Paper is now **25 pages**.
+
+Instances are pulled by **fixed person id and index**, not sampled, so the appendix is
+stable across runs and every example carries its `speechID` for anyone who wants to find
+it in the Diet record. English glosses are author translations hard-coded in the script
+beside the record they gloss — deliberately not in the data, so it stays obvious they are
+not part of the corpus.
+
+### New finding, straight out of the appendix table: sparse targets speak in *longer* turns
+
+Median completion length by band runs **266 chars at 3000+ speeches → 448 at 60–120**, a
+1.7× rise in the *opposite* direction to speech count. Frequent speakers accumulate a
+record through many short interventions; a backbencher's record is a handful of long
+committee questions.
+
+This matters beyond the appendix. It is a plausible partial explanation of the
+no-prominence-decay result (`BO vs best-single` flat from +0.0201 to +0.0420 across a 50×
+speech-count span): **a fixed 30-utterance budget buys more text on a sparse target than
+the speech count suggests.** Nobody had measured instance *length* against band before —
+every prominence analysis to date used speech-record counts as the resource proxy. It is
+stated in the appendix as a caveat on that proxy. If the budget sweep (`P16`/`P17`) is
+ever run, the right x-axis is arguably characters, not utterances.
+
+Also worth knowing: the **300-instance extraction cap binds for every band except the two
+sparsest**, so for most targets the binding constraint is the 30-utterance budget, not
+data availability. That is the precise sense in which the method is low-resource by
+construction rather than by circumstance.
+
+### The example itself earns its page
+
+The picked anchor instance (`2377`/idx 15, 塩川 on non-regular staff paid below minimum
+wage) shows what the DPO `rejected` side actually is, and it is not a strawman: the Gemini
+caricature is fluent, on-topic and argues the same side. What it lacks is **procedure** —
+it names no official, ties nothing to an ongoing policy movement, and ends in a
+generalisation where the real utterance ends in a specific institutional demand ("conduct
+a survey of actual conditions, President of the Personnel Authority"). That is exactly the
+distinction §Objective says can be won without moving toward the politician's own
+distribution, so the example does argumentative work rather than just illustrating format.
+
+## 2026-08-06 (later still) — register pass: the prose was drifting into a lab notebook
+
+Ken's verdict on §4.3's "An implementation hazard worth recording" (meta tensors,
+`device_map="auto"`, the self-test gate) was that it does not belong in an academic
+paper, plus a request to review the language throughout. External feedback arrived in
+the same direction: the writing was "occasionally crossing from academic prose into a
+post-mortem blog post style."
+
+**Both readings are right, and the cause is traceable.** The paper was written directly
+against this file. DECISIONS.md is deliberately a narrative of wrong turns — that is its
+job — and roughly twenty passages had inherited its register: process history ("an early
+reading of these margins as 'inside noise' came from…"), self-referential drafting notes
+("a previous draft conceded…"), confessional asides ("we observed 68.4% on a
+60-persona fixture and briefly mistook it for a centroid effect"), and internal
+vocabulary ("kill criterion", "test-set-selection asterisk", "the hedge pays out").
+**Writing a paper from a decision log imports the log's voice; budget an explicit register
+pass for it.**
+
+### Removed outright
+- **§4.3's meta-tensor paragraph.** Deleted from Methods.
+- **§Discussion's "Reproducibility hazards, recorded because they cost us days"** — the
+  seven lost runs to wrapped shell commands, the appending log files. Replaced by one
+  measured paragraph, *Verification of the merge*, that states the silent-no-op failure
+  mode in general terms and recommends a self-test for any weight-space merging study.
+  **Flagged to Ken as a judgement call**: the content survives once, in the right section
+  and in an academic register, rather than twice in engineering prose. Cutting it
+  entirely is defensible.
+- **The LaTeX comment under the abstract** explaining that the abstract had been
+  rewritten. A reviewer saw it. Provenance of that decision belongs here, not in the
+  source, so: the abstract was rewritten because the 2026-07-07 original named DPO as
+  *the* anchor objective and claimed POLIS beats standard SFT outright, both of which the
+  objective finding reverses. That supersedes the "keep the abstract verbatim"
+  instruction of 2026-07-07 — a future agent should not restore it.
+- **§6.5's "The methodological lesson is blunt."** Rewritten as a general point about
+  incidental pipeline choices becoming confounds, without the two-days-lost narration.
+
+### One accuracy fix, not a style fix
+"the **pre-registered** kill criterion" → "specified in advance as a falsification
+criterion". Nothing was lodged in a public registry; it was written into `README.md` §4.3
+before the run. "Pre-registered" is a term of art and claiming it would have been wrong.
+
+### Abstract slimmed
+Per the external feedback that it was "doing too much heavy lifting": the exact $p$-values
+and the per-target win counts came out and now live in the Introduction's contributions
+list and in Results, where they already were. The abstract keeps the framing, the
+qualitative result, no-decay, the two qualifying findings and the negative result.
+
+### Open
+- [ ] **Ken to review the rewritten abstract and the paper's framing.** The three-claim
+      ordering (register → recoverable ideology → objective) is a substantive editorial
+      choice; so is leading with a decomposition rather than the main table.
+- [ ] **Decide whether *Verification of the merge* stays in §Discussion at all.** It is
+      the surviving remnant of the paragraph Ken cut.
+- [ ] 12 figures + 7 tables in 25 pages is a lot. If the paper needs to shrink for a venue
+      limit, `fig_merge` and `fig_coeffs`-B are the most expendable; `fig_pipeline`,
+      `fig_register`, `fig_scale` and `fig_affinity` carry the three claims, and the
+      appendix is the natural home for anything cut.
+- [ ] The appendix glosses are author translations and have had no second pair of eyes.
+      Worth a check by someone before submission.
+- [ ] Related Work and Preliminaries remain thin and need a real literature review.
+- [ ] Related Work and Preliminaries are still thin and need a real literature review,
+      not our data. The `% TODO(lit-review)` URL comments Ken left are preserved in place.
+- [ ] Optional GPU, unchanged in motivation: 60 trials at 12 dims (equal-budget caveat),
+      `P19` anchor-count slope, the budget sweep.

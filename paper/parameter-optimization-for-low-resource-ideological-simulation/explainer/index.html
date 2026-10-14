@@ -112,7 +112,7 @@
   <a href="#intro">2 · The problem</a>
   <a href="#anchors">3 · Choosing anchors <em>(interactive)</em></a>
   <a href="#data">4 · Building the data</a>
-  <a href="#dpo">5 · DPO</a>
+  <a href="#dpo">5 · The two objectives</a>
   <a href="#lora">6 · LoRA &amp; task vectors <em>(interactive)</em></a>
   <a href="#dare">7 · DARE <em>(interactive)</em></a>
   <a href="#ties">8 · TIES <em>(interactive)</em></a>
@@ -123,13 +123,15 @@
   <a href="#cv">13 · Nested CV</a>
   <a href="#utas">14 · Survey scoring <em>(interactive)</em></a>
   <a href="#results">15 · Results: does it work?</a>
-  <a href="#icl">16 · The baseline that ties</a>
-  <a href="#upset">17 · Fine-tuning wins</a>
-  <a href="#broken">18 · The survey metric</a>
-  <a href="#standing">19 · What stands, what doesn't</a>
-  <a href="#assess">20 · Assessment &amp; advice</a>
-  <a href="#pitfalls">21 · Engineering traps</a>
-  <a href="#run">22 · Run it yourself</a>
+  <a href="#icl">16 · The baseline that nearly killed it</a>
+  <a href="#upset">17 · Fine-tuning wins — then doesn't</a>
+  <a href="#register">18 · Register, not identity</a>
+  <a href="#objective">19 · The objective decides</a>
+  <a href="#broken">20 · The survey metric</a>
+  <a href="#standing">21 · What stands, what doesn't</a>
+  <a href="#assess">22 · Assessment &amp; advice</a>
+  <a href="#pitfalls">23 · Engineering traps</a>
+  <a href="#run">24 · Run it yourself</a>
 </nav>
 <main>
 
@@ -145,14 +147,24 @@
 <div class="callout">
 <span class="lbl">How to read this</span>
 §1–§14 build the method up from scratch; every unfamiliar term gets defined where it first
-appears, and there is a glossary at the end of §1. §15–§19 are the results, and they read
-like a plot: the method beats every weight-space baseline on 33 politicians, <em>ties</em> a
-much simpler baseline nobody had run, turns out to <em>stack</em> with that baseline — and
-then loses outright to the simplest method in the study, in a way that calls into question
-whether anything person-specific is being learned at all. §20 steps out of the walkthrough
-voice entirely: an editorial assessment of what is fragile in this research and how to
-harden it. If you only read four sections, read §1, §15, §17 and §20.
+appears, and there is a glossary at the end of §1. §15–§21 are the results, and they read
+like a plot: the method beats every weight-space baseline on 33 politicians, then
+<em>ties</em> a much simpler baseline nobody had run, then <em>loses outright</em> to the
+simplest method in the study — and then a one-hour control shows that all three of those
+results were measuring a choice made months earlier and never varied, the objective the
+anchor adapters were trained with. Fixing it reverses the two defeats. What survives is
+two findings that came from controls rather than comparisons: roughly three quarters of
+what any persona adapter delivers is not about the person at all, and whether the
+remaining quarter carries ideology is decided by that training objective. §22 steps out of
+the walkthrough voice entirely: an editorial assessment of what is fragile in this research
+and how to harden it. If you only read five sections, read §1, §15, §18, §19 and §22.
 </div>
+<p class="tip">
+  Written against the paper as submitted (<code>main.tex</code>, 25 pages) and the project's
+  decision log as of <strong>2026-08-06</strong>. Every result number here is read from
+  <code>artifacts/paper_numbers.json</code>, the same file the paper's tables and figures
+  are generated from.
+</p>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="primer">
@@ -509,11 +521,24 @@ written down is a deviation a reviewer can evaluate.
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="dpo">
-<h2>5 · DPO: learning from pairs without a reward model</h2>
+<h2>5 · The two anchor objectives</h2>
+
+<div class="callout warn">
+<span class="lbl">Read this section knowing where it ends up</span>
+Each anchor was eventually trained <strong>twice</strong> — once with DPO, once with plain
+supervised fine-tuning (SFT) — on the same politician, the same 1,500 pairs and the same
+adapter shape, differing in the loss function alone. That was not the plan. DPO was chosen
+early, fixed, and never varied, and for months every downstream comparison silently
+conditioned on it. It turned out to be the single most consequential choice in the project:
+§19 shows the two arms landing on opposite sides of a permutation test, and two of the
+results in §16 and §17 reverse when it changes. So read the DPO derivation below for what
+it is, and hold on to one property of it — <em>the gradient vanishes once the preference
+margin is satisfied</em> — because that is the mechanism the whole reversal turns on.
+</div>
 
 <p>
-  <strong>Direct Preference Optimization (DPO)</strong> is how each anchor adapter is
-  trained. The setup: you have pairs of responses where one is better than the other, and
+  <strong>Direct Preference Optimization (DPO)</strong> is how each anchor adapter was
+  trained first. The setup: you have pairs of responses where one is better than the other, and
   you want the model to prefer the better one. The classic recipe for this is
   <strong>RLHF</strong> (reinforcement learning from human feedback), which does it in two
   stages — first train a separate "reward model" to score responses, then use reinforcement
@@ -574,15 +599,38 @@ written down is a deviation a reviewer can evaluate.
   standard toolkit for training a 7B model on hardware that has no business training one.
 </p>
 
+<h3>The other arm: plain supervised fine-tuning</h3>
+<p>
+  SFT is the ordinary thing, and its loss fits on one line: maximise the log-probability of
+  what the politician actually said, given the context. No reference model, no pairs, no
+  <code>rejected</code> side — the same 1,500 instances with the third column thrown away.
+</p>
+<div class="mathblock">L<sub>SFT</sub> = − log π<sub>θ</sub>(y<sub>w</sub> | x)</div>
+<p>
+  Put the two side by side and one difference matters more than it looks. SFT's gradient
+  points at the politician's own distribution and keeps pointing there for the whole run:
+  the only way to reduce the loss is to make <em>their</em> words more likely. DPO's
+  gradient points at a <em>margin</em> — once the real utterance is comfortably more likely
+  than the caricature, σ saturates, the gradient vanishes, and training stops. Any direction
+  in weight space that beats the caricature satisfies it, and most of those directions carry
+  no information about the politician at all.
+</p>
+<p>
+  That is an argument, not a measurement. §19 is the measurement, and it comes out where the
+  argument says it should.
+</p>
+
 <div class="callout warn">
-<span class="lbl">Careful — a distinction that comes back in §15</span>
-High margins mean the adapter reliably separates real from fake. That is <em>not</em> the
+<span class="lbl">Careful — a distinction that runs through everything after §15</span>
+High DPO margins mean the adapter reliably separates real from fake. That is <em>not</em> the
 same as having learned ideology. At 0.5B the adapters largely captured
 <strong>register</strong> — the cadence and vocabulary of Diet speech, independent of what
 is being argued — which is why one anchor kept winning as a generic
 "fluent-parliamentarian" backbone regardless of the target's party. Learning <em>how a
 politician talks</em> and learning <em>what a politician believes</em> are separable, and
-almost every finding in §15–§18 turns on which of the two the method actually captured.
+§18 ends up putting a number on the split: about <strong>three quarters register, one
+quarter identity</strong>, with §19 showing that the quarter exists only under one of the
+two objectives above.
 </div>
 </section>
 
@@ -655,7 +703,7 @@ almost every finding in §15–§18 turns on which of the two the method actuall
 <p class="srcref">research/polis/merge_layer_group.py:79–82 — reconstructing ΔW from the stored factors</p>
 <p class="tip">
   That <code>.float()</code> is quietly expensive: it promotes each delta to fp32, which
-  is where the 13 GB of resident anchor deltas in §21 comes from.
+  is where the 13 GB of resident anchor deltas in §23 comes from.
 </p>
 
 <h3>Does the "space" actually have room?</h3>
@@ -677,13 +725,17 @@ almost every finding in §15–§18 turns on which of the two the method actuall
 <span class="lbl">The interesting part</span>
 Look at the <em>structure</em>, not just the magnitudes. Every left-party pair (≈0.088) is
 more similar to each other than any of them is to the LDP anchor (≈0.064). At 0.5B these
-numbers were uniform regardless of party. Ideology is showing up as geometry — but note
-this is 3 pairs against 3 pairs, so it is suggestive, not a significance test.
+numbers were uniform regardless of party — norms also roughly double with scale (0.76–0.82
+at 0.5B, 1.25–1.33 at 7B). Ideology is showing up as geometry; note that this is 3 pairs
+against 3 pairs, so it is suggestive, not a significance test.
 <br><br>
-Keep this in mind through §15 and §18, because it is among the strongest pro-ideology evidence in
-the whole project and it does not survive contact with the downstream measurements. The
-anchor <em>directions</em> cluster by party; what gets built out of them does not behave
-like it knows anyone's party. Reconciling those two facts is unfinished business.
+Hold on to it through §18 and §19. For a long stretch of this project it looked like the
+strongest pro-ideology evidence anywhere in it <em>and</em> like the one finding that did
+not survive contact with the downstream measurements: the anchor directions clustered by
+party, and nothing built out of them behaved like it knew anyone's party. §19 reconciles
+the two. The behavioural signal was there all along and was being destroyed by the anchors'
+training objective — and the cosine structure above was measured on the arm where it
+survives.
 </div>
 </section>
 
@@ -847,7 +899,10 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
   anchor at full strength in the early layers, a different one at a quarter strength in the
   middle, a third in the late layers, and the fourth switched off entirely. A single global
   weight per anchor literally cannot represent this. Whether that expressiveness
-  <em>buys</em> anything is a separate question, and §15 answers it — with a null.
+  <em>buys</em> anything is a separate question — and the answer, twice measured at 7B, is
+  no: §15 shows a global weight per anchor <em>beating</em> the per-depth matrix at equal
+  search budget. The structure is real (§19 shows what the optimiser does with each anchor
+  by depth) and it is not harmful, but it is not what makes the method work.
 </p>
 </div>
 </section>
@@ -959,6 +1014,13 @@ direct tensor arithmetic. That is the reason <code>merge_layer_group.py</code> e
     <span class="kw">return</span> <span class="str">"gp"</span>, GPSampler(seed=seed, n_startup_trials=n_start)
 <span class="kw">return</span> <span class="str">"tpe"</span>, TPESampler(seed=seed, multivariate=<span class="kw">True</span>, group=<span class="kw">True</span>, ...)</code></pre>
 <p class="srcref">research/polis/bo_merge_coeffs.py:101–109</p>
+<p class="tip">
+  That threshold is not a guess. On a synthetic 24-dimensional mixing-coefficient bowl at a
+  45-evaluation budget — the same shape of problem, cheap enough to run thousands of times —
+  GP-BO reached <strong>0.19</strong> against TPE's <strong>0.64</strong> and random search's
+  <strong>1.18</strong>. The GP is the default because it was measured to be, and TPE is kept
+  for the high-dimensional granularity bookend where GPs scale badly.
+</p>
 
 <p>And the objective itself is only four lines — merge, score, return:</p>
 <pre><code><span class="kw">def</span> objective(trial):
@@ -1094,7 +1156,7 @@ unpaired reading said "inside noise", the paired reading said "5 of 5 folds".
 </p>
 <p class="tip">
   This section is how the survey is administered and scored. What it <em>measured</em>, and
-  why that turned out to be the hardest question in the project, is §18.
+  why that turned out to be the hardest question in the project, is §20.
 </p>
 <p>
   To administer a survey to a model, you don't generate text and parse it — free generation
@@ -1108,7 +1170,7 @@ unpaired reading said "inside noise", the paired reading said "5 of 5 folds".
   The 2024 House of Representatives wave has 33 items and coded answers from 676
   politicians, 594 of whom answered every item. Here are three real items with the three
   held-out targets' real answers — this is the table the persona is being graded against.
-  (Hold on to that 594: in §18 it stops being a footnote and becomes the experiment.)
+  (Hold on to that 594: in §20 it stops being a footnote and becomes the experiment.)
 </p>
 
 <table>
@@ -1246,8 +1308,8 @@ fixes in the call graph.
 </div>
 
 <p>
-  Both scorers now run. §15 and §16 cover what the method's <em>internal</em> metric says, and
-  §18 covers what happened when the survey metric was finally taken seriously — which is the
+  Both scorers now run. §15–§19 cover what the method's <em>internal</em> metric says, and
+  §20 covers what happened when the survey metric was finally taken seriously — which is the
   more interesting half of the story.
 </p>
 </section>
@@ -1262,58 +1324,133 @@ fixes in the call graph.
   debugged at all. But a 0.5B model is barely coherent, and every negative result at that
   scale carries the same excuse: <em>maybe the model is just too small</em>. Settling the
   paper meant renting a 48 GB GPU and rerunning everything at <strong>7B</strong>, 14×
-  larger. That took two sessions: a two-hour one on three politicians, and later a six-hour
-  one on thirty-three. This section is both, in that order, because the gap between them is
-  the difference between a result and a claim.
+  larger. That took five sessions over five days, and the ordering of configurations changed
+  twice along the way.
 </p>
 
 <p>
   The measurement is the nested cross-validation of §13: a real politician outside the
   anchor set, simulated by merging the four anchors, with only 30 of their utterances
   available and every score computed on a fold those 30 never tuned. Lower NLL is better.
-  Here is what it looks like for three targets:
+  Eleven configurations are scored over the same 165 folds — 33 targets × 5 outer folds —
+  and every one of them, <em>including</em> the ones that do not involve an anchor at all,
+  is scored twice: once with DPO-trained anchors and once with SFT-trained anchors (§5).
 </p>
 
-<div id="resultsViz"></div>
-<div class="legend">
-  <span><span class="swatch" style="background:var(--series-1)"></span>Base (no merge at all)</span>
-  <span><span class="swatch" style="background:var(--series-2)"></span>Uniform merge (all coefficients = 1)</span>
-  <span><span class="swatch" style="background:var(--series-3)"></span>Best single anchor</span>
-  <span><span class="swatch" style="background:var(--series-4)"></span>POLIS</span>
+<div class="callout">
+<span class="lbl">The validation that makes the two arms comparable</span>
+The four rows that never touch an anchor — <code>base</code>, <code>ICL</code>,
+<code>SFT</code>, <code>SFT+ICL</code> — reproduce across the two arms
+<strong>to four decimal places</strong>. Same folds, same baselines, same scoring; the
+anchors' training objective is genuinely the only thing that differs between the columns
+below. That is worth checking before believing any between-arm comparison, and it is cheap:
+the numbers either match or your protocol moved.
 </div>
+
+<h3>The full ordering</h3>
+<div id="orderViz"></div>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--series-4)"></span>Anchor merge (the paper's method)</span>
+  <span><span class="swatch" style="background:var(--series-2)"></span>Fine-tune the target directly</span>
+  <span><span class="swatch" style="background:var(--series-1)"></span>Prompting only</span>
+  <span><span class="swatch" style="background:var(--muted)"></span>No adaptation</span>
+</div>
+
+<table>
+<thead><tr><th>Configuration</th><th>SFT anchors</th><th>DPO anchors</th><th>Δ</th></tr></thead>
+<tbody>
+<tr><td><strong>BO + ICL</strong> <span class="tip">(POLIS + prefix)</span></td><td><strong>2.0460</strong></td><td>2.1042</td><td>+0.0582</td></tr>
+<tr><td>SFT + ICL</td><td>2.0687</td><td>2.0687</td><td>—</td></tr>
+<tr><td>best-single + ICL</td><td>2.0729</td><td>2.1174</td><td>+0.0445</td></tr>
+<tr><td>DPO + ICL</td><td>2.1013</td><td>2.1013</td><td>—</td></tr>
+<tr><td><strong>BO</strong> <span class="tip">(POLIS)</span></td><td><strong>2.1156</strong></td><td>2.2078</td><td>+0.0922</td></tr>
+<tr><td>SFT <span class="tip">(target's own 24 utterances)</span></td><td>2.1452</td><td>2.1452</td><td>—</td></tr>
+<tr><td>best-single</td><td>2.1455</td><td>2.2343</td><td>+0.0888</td></tr>
+<tr><td>ICL</td><td>2.1736</td><td>2.1736</td><td>—</td></tr>
+<tr><td>DPO <span class="tip">(target's own 24 utterances)</span></td><td>2.2073</td><td>2.2073</td><td>—</td></tr>
+<tr><td>base <span class="tip">(zero-shot named persona)</span></td><td>2.3613</td><td>2.3613</td><td>—</td></tr>
+<tr><td>uniform merge</td><td>2.5558</td><td>2.7689</td><td>+0.2131</td></tr>
+</tbody>
+</table>
 <p class="srcref">
-  7B, nested 5-fold CV, budget 30, 40 GP trials per fold —
-  artifacts/bo7b_gpu_logs/nested_target_{1279,2053,2289}.log
+  Mean held-out NLL over 33 targets, nested 5-fold CV. Computed from the per-fold
+  <code>--dump-picks</code> matrices at full precision, not from the rounded log lines —
+  artifacts/paper_numbers.json
+</p>
+
+<p>
+  Read the Δ column first. <strong>Every row that involves an anchor improves by 0.04–0.21
+  nats when the anchors are trained with SFT instead of DPO</strong>, and every row that
+  doesn't is identical. That single column is worth more than the ordering itself, and §19
+  is about what it means.
 </p>
 
 <h3>What each baseline is there to rule out</h3>
 <table>
-<thead><tr><th>Baseline</th><th style="text-align:left">The objection it answers</th></tr></thead>
+<thead><tr><th style="width:26%">Baseline</th><th style="text-align:left">The objection it answers</th></tr></thead>
 <tbody>
-<tr><td><strong>Base</strong></td><td style="text-align:left">"Does merging help at all, or would you do better leaving the model alone?"</td></tr>
-<tr><td><strong>Uniform</strong></td><td style="text-align:left">"Is the <em>tuning</em> doing anything, or would any old merge work?"</td></tr>
-<tr><td><strong>Best-single</strong></td><td style="text-align:left">"Do you need a <em>blend</em>, or would picking the one closest anchor do just as well?" This is the hard one.</td></tr>
+<tr><td><strong>base</strong></td><td style="text-align:left">"Does merging help at all, or would you do better leaving the model alone?"</td></tr>
+<tr><td><strong>uniform</strong></td><td style="text-align:left">"Is the <em>tuning</em> doing anything, or would any old merge work?"</td></tr>
+<tr><td><strong>best-single</strong></td><td style="text-align:left">"Do you need a <em>blend</em>, or would picking the one closest anchor do just as well?" This isolates blending from selection.</td></tr>
+<tr><td><strong>ICL</strong></td><td style="text-align:left">"Would putting the same 24 sentences in the prompt do the same job for free?" The cheapest strong competitor — §16.</td></tr>
+<tr><td><strong>SFT / DPO on target</strong></td><td style="text-align:left">"Can you just fine-tune on the sparse data after all?" This is the founding assumption of the whole project — §17.</td></tr>
 </tbody>
 </table>
 <p class="tip">
-  All three are <em>weight-space</em> baselines — they all ask whether some other way of
-  editing the weights would do as well. There is a fourth baseline that doesn't touch the
-  weights at all, and it turns out to matter more than any of these. It has its own section:
-  §16.
+  The first three are <em>weight-space</em> baselines: other ways of editing the weights. The
+  last two are the ones that don't play the game at all, and they are the two that rewrote
+  the paper. Both were in the original spec from day one. Both ran last.
 </p>
+
+<h3>The population result, on the final anchors</h3>
+<p>
+  Each row below is one of the 33 targets: how much better the tuned merge did than the best
+  single anchor, on that target's own held-out folds.
+</p>
+
+<div id="n33Viz"></div>
+<p class="tip">
+  Sorted by margin. Every one of the 33 is positive.
+</p>
+
+<table>
+<thead><tr>
+  <th>Comparison (SFT anchors)</th><th>Mean</th><th>Median</th><th>Targets won</th><th>Sign p</th><th>Folds</th>
+</tr></thead>
+<tbody>
+<tr><td>BO vs base</td><td>+0.2458</td><td>+0.2202</td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td><td>165/165</td></tr>
+<tr><td>BO vs uniform</td><td>+0.4402</td><td>+0.4348</td><td>33 / 33</td><td>2×10⁻¹⁰</td><td>165/165</td></tr>
+<tr><td><strong>BO vs best-single</strong></td><td><strong>+0.0299</strong></td><td>+0.0272</td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td><td>153/165</td></tr>
+<tr><td><strong>BO vs ICL</strong></td><td><strong>+0.0580</strong></td><td>+0.0726</td><td><strong>27 / 33</strong></td><td>3.2×10⁻⁴</td><td>137/165</td></tr>
+<tr><td><strong>BO vs SFT-on-target</strong></td><td><strong>+0.0296</strong></td><td>+0.0284</td><td><strong>28 / 33</strong></td><td>6.6×10⁻⁵</td><td>138/165</td></tr>
+<tr><td>BO + ICL vs ICL</td><td>+0.1276</td><td>+0.1262</td><td>33 / 33</td><td>2×10⁻¹⁰</td><td>165/165</td></tr>
+<tr><td>BO + ICL vs best-single + ICL</td><td>+0.0269</td><td>+0.0233</td><td>33 / 33</td><td>2×10⁻¹⁰</td><td>148/165</td></tr>
+<tr><td>BO + ICL vs SFT + ICL</td><td>+0.0227</td><td>+0.0210</td><td>27 / 33</td><td>3.2×10⁻⁴</td><td>128/165</td></tr>
+<tr><td>SFT-on-target vs best-single</td><td>+0.0003</td><td>−0.0045</td><td>14 / 33 <span class="tip">(null)</span></td><td>0.49</td><td>95/165</td></tr>
+</tbody>
+</table>
+<p class="srcref">artifacts/bo7b_picks_sft33/ — 33 targets × 5 folds, ~6 h GPU</p>
+
+<div class="callout warn">
+<span class="lbl">Do not skip the last row</span>
+<code>SFT-on-target</code> and <code>best-single</code> are <strong>level</strong>: fine-tuning
+on 24 of a politician's own sentences is worth about as much as adopting one data-rich
+<em>different</em> politician's adapter unmodified, with no tuning and no target data at all.
+That is a null, it is the only null in the table, and it is the most informative line on this
+page. §18 is what happens when you take it seriously.
+</div>
 
 <h3>Zooming in: what a paired comparison looks like</h3>
 <p>
-  Before the population result, here is §13's paired reasoning made concrete on the three
-  targets above. Each dot is one fold: how much better POLIS did than the best single anchor
-  <em>on that exact fold</em>.
+  §13's paired reasoning, made concrete on the first three targets ever run. Each dot is one
+  fold: how much better the merge did than the best single anchor <em>on that exact fold</em>.
 </p>
 <div id="pairedViz"></div>
 <p class="tip">
-  Fifteen folds, one dot each. Fourteen are above zero; the one below is a 赤嶺 fold where
-  POLIS lost by 0.009 nats — a wash rather than a failure. The <em>unpaired</em> spread on
-  these same runs is about ±0.08, ten times the effect, which is what briefly made this
-  result look like noise.
+  Fifteen folds, one dot each, from the first two-hour 7B session. Fourteen are above zero;
+  the one below is a 赤嶺 fold lost by 0.009 nats — a wash rather than a failure. The
+  <em>unpaired</em> spread on these same runs is about ±0.08, ten times the effect, which is
+  what briefly made the result look like noise.
 </p>
 
 <div class="callout warn">
@@ -1322,22 +1459,24 @@ This was the binding limitation for a long time, and it is worth being blunt abo
 Five cross-validation folds are five slices of <em>one person's</em> speech — they tell you
 the estimate is stable, not that the method generalises to anyone else. With n=3 you have
 three observations, and "it worked on all three" is p ≈ 0.125 on a coin-flip null. The
-whole result was one unlucky draw away from meaning nothing.
+whole result was one unlucky draw away from meaning nothing — and §20 contains a case where
+n=3 pointed the wrong way and n=33 cost the claim.
 </div>
 
-<h3>Scaling to 33 targets</h3>
+<h3>How the 33 were chosen</h3>
 <p>
-  Fixing this needed no new training — a held-out target never gets an adapter, so adding
-  one costs only its preference pairs and about ten minutes of GPU. Of the politicians with
-  a complete survey vector and a speech archive, <strong>550 were eligible</strong> and 517
-  had enough material for a 30/30 split. Thirty were sampled, five from each of six
-  log-spaced bands of speech volume.
+  Expanding cost no new training — a held-out target never gets an adapter, so adding one
+  costs only its prompt/completion pairs and about ten minutes of GPU. Of the politicians
+  with a complete survey vector and a speech archive, <strong>550 were eligible</strong> and
+  517 had enough material for a 30/30 split. Thirty were sampled, five from each of six
+  log-spaced bands of speech volume, plus the three originals.
 </p>
 <p>
   The banding is the important design choice. A uniform random draw would have given one
   more average; sampling across the volume range gives a <em>curve</em>, so the method's
   advantage can be plotted against how prominent the target is rather than averaged over it.
-  The 33 targets span 82 speeches (斎藤裕喜) to 8,219 (野田佳彦), across six parties.
+  The 33 span 82 speeches (斎藤裕喜) to 9,139 (枝野幸男) across six parties: LDP 12,
+  CDP/DPJ/DPP lineage 13, Ishin 3, JCP 3, Komeito 2.
 </p>
 
 <div class="callout">
@@ -1352,47 +1491,46 @@ backbenchers ask committee questions, and those are different prediction problem
 the axis the banded sample actually probes.
 </div>
 
-<h3>The population result</h3>
+<h3>The margin does not decay with prominence</h3>
 <p>
-  Each dot below is one of the 33 targets: how much better POLIS did than the best single
-  anchor, on that target's own held-out folds.
-</p>
-
-<div id="n33Viz"></div>
-<p class="tip">
-  Sorted by margin. Every one of the 33 is positive. Sign test p ≈ 2×10⁻¹⁰.
+  This is the claim the paper's title depends on, and it is the reason the sample was banded
+  rather than drawn uniformly.
 </p>
 
 <table>
-<thead><tr><th>Comparison</th><th>Mean</th><th>Median</th><th>Targets won</th><th>Folds won</th></tr></thead>
+<thead><tr>
+  <th>Band</th><th>n</th><th>Median speeches</th><th>BO vs best-1</th><th>BO vs ICL</th><th>BO+ICL vs ICL</th>
+</tr></thead>
 <tbody>
-<tr><td>POLIS vs base</td><td>+0.1534</td><td>+0.1504</td><td><strong>33 / 33</strong></td><td>165 / 165</td></tr>
-<tr><td>POLIS vs best-single</td><td>+0.0265</td><td>+0.0230</td><td><strong>33 / 33</strong></td><td>159 / 165</td></tr>
-</tbody>
-</table>
-<p class="srcref">7B, nested 5-fold CV × 33 targets, ~6 h GPU — pooled by nested_log_summary.py from n33_target_*.log</p>
-
-<p>
-  The n=3 result was not a fluke of three prominent politicians. And the margin
-  <strong>does not decay as targets get more obscure</strong>, which is the claim the
-  paper's title actually depends on:
-</p>
-
-<table>
-<thead><tr><th>Band</th><th>Median speeches</th><th>POLIS vs best-single</th></tr></thead>
-<tbody>
-<tr><td>3000+</td><td>5,855</td><td>+0.0319</td></tr>
-<tr><td>1000–3000</td><td>1,817</td><td>+0.0257</td></tr>
-<tr><td>500–1000</td><td>693</td><td>+0.0262</td></tr>
-<tr><td>250–500</td><td>413</td><td>+0.0228</td></tr>
-<tr><td>120–250</td><td>166</td><td>+0.0264</td></tr>
-<tr><td>60–120</td><td>104</td><td>+0.0286</td></tr>
+<tr><td>originals</td><td>3</td><td>8,324</td><td>+0.0209</td><td>+0.1021</td><td>+0.1134</td></tr>
+<tr><td>3000+</td><td>5</td><td>5,855</td><td>+0.0201</td><td>+0.1067</td><td>+0.1389</td></tr>
+<tr><td>1000–3000</td><td>5</td><td>1,817</td><td>+0.0358</td><td>+0.1272</td><td>+0.1459</td></tr>
+<tr><td>500–1000</td><td>5</td><td>693</td><td>+0.0302</td><td>+0.0696</td><td>+0.1359</td></tr>
+<tr><td>250–500</td><td>5</td><td>413</td><td>+0.0420</td><td>+0.0400</td><td>+0.1268</td></tr>
+<tr><td>120–250</td><td>5</td><td>166</td><td>+0.0276</td><td><strong>−0.0624</strong></td><td>+0.1082</td></tr>
+<tr><td>60–120</td><td>5</td><td>104</td><td>+0.0292</td><td>+0.0407</td><td>+0.1185</td></tr>
 </tbody>
 </table>
 <p class="tip">
-  Backbenchers with 82–166 recorded speeches get the same margin as 野田佳彦 with 8,219. If
-  anything the flattest row is the most prominent band, not the least.
+  <code>BO vs best-single</code> runs from +0.0201 to +0.0420 with no trend across a
+  <strong>50-fold</strong> span of speech volume. Backbenchers with 82–166 recorded speeches
+  get the same merge advantage as members with over 8,000. The one band where prompting still
+  wins prefix-free is 120–250, and §16 explains why that is a property of those particular
+  politicians rather than of their resource level.
 </p>
+
+<div class="callout">
+<span class="lbl">A caveat on the resource proxy, found late and worth knowing</span>
+Every prominence analysis here uses <em>speech-record count</em> as the measure of how
+data-poor a target is. Building the paper's data appendix surfaced something nobody had
+measured: median completion length runs from <strong>266 characters</strong> in the 3000+
+band to <strong>448</strong> in the 60–120 band — a 1.7× rise in the <em>opposite</em>
+direction to speech count. Frequent speakers accumulate a record through many short
+interventions; a backbencher's record is a handful of long committee questions. So a fixed
+30-utterance budget buys <em>more text</em> on a sparse target than the speech count
+suggests, which is a plausible partial explanation of the flat line above. If the budget
+sweep is ever run, the right x-axis is arguably characters, not utterances.
+</div>
 
 <div class="callout">
 <span class="lbl">A reproduction check worth copying</span>
@@ -1405,118 +1543,160 @@ numbers <em>not</em> reproduced, the 30 new targets would not have been comparab
 three and the pooled analysis would have been invalid. Cheap check, load-bearing conclusion.
 </div>
 
-<h3>Two more things this shows</h3>
+<h3>Tuning does the work</h3>
 <p>
-  <strong>1 · Tuning does the work.</strong> The uniform all-ones merge is dramatically
-  <em>worse</em> than not merging at all — about half a nat. Untuned task vectors overshoot
-  and corrupt the model. Every bit of POLIS's advantage comes from choosing coefficients,
-  which is the cleanest possible evidence that the optimisation stage is load-bearing
-  rather than decorative.
+  The uniform all-ones merge is dramatically <em>worse</em> than not merging at all — 2.5558
+  against a base of 2.3613 on SFT anchors, and 2.7689 on DPO anchors. Untuned task vectors
+  overshoot and corrupt the model. Every bit of the merge's advantage comes from choosing
+  coefficients, which is the cleanest possible evidence that the optimisation stage is
+  load-bearing rather than decorative. It is also why the coefficient bounds in §11 have to
+  reach down to zero: the search's main job is turning things <em>off</em>.
 </p>
 <p>
-  <strong>2 · The caveat that survived the scale-up.</strong> The best-single column
-  hides something awkward. If the anchors encoded ideology, the winning single anchor for
-  each target should be the ideologically closest one. It isn't. For 高市 (LDP) the best
-  single anchor is <strong>塩川 (Communist)</strong>, in all five folds; for both 赤嶺
-  (Communist) and 枝野 (centre-left) it is <strong>岸田 (LDP)</strong>, in all ten folds.
-  The picks are perfectly consistent within a target — and perfectly uncorrelated with
-  party. Across all 33 targets the pattern holds: two anchors (塩川 and 岸田) take 91% of
-  every fold's pick, essentially regardless of who is being simulated. What a single anchor
-  supplies is fluent Diet register, not a political position, and POLIS's genuine
-  contribution is the small correction it adds on top.
+  And the amount it buys is strikingly stable. <code>BO vs best-single</code> is
+  <strong>+0.0299</strong> on the 33 SFT-anchor targets, <strong>+0.0286</strong> on a
+  5-target SFT pilot, and <strong>+0.0265</strong> on 33 DPO-anchor targets: three estimates
+  of the search's contribution, agreeing at ~0.027 across anchor families that differ in
+  everything else. Whatever the anchors carry, tuning how much of each to inject at each
+  depth contributes the same amount.
 </p>
 
-<h3>The granularity ablation: a null result, honestly kept</h3>
+<h3>The granularity ablation: from a null to a loss</h3>
 <p>
-  POLIS's stated novelty is <em>per-depth</em> coefficients (§9) — 12 numbers instead of 4.
-  So: does the extra granularity actually buy anything? Run the whole nested CV twice, once
-  with one coefficient per anchor and once with three.
+  Per-depth coefficients (§9) are the design choice that distinguishes this merger from a
+  plain global weighted merge — 12 numbers instead of 4. So: does the extra granularity buy
+  anything? Run the whole nested CV twice, once with one coefficient per anchor and once
+  with three, everything else fixed.
 </p>
 <table>
-<thead><tr><th>Granularity</th><th>Free parameters</th><th>Held-out NLL</th></tr></thead>
+<thead><tr>
+  <th>Target</th><th>Global (4 dims)</th><th>Layer-group (12 dims)</th><th>Global better by</th>
+</tr></thead>
 <tbody>
-<tr><td>Global (one weight per anchor)</td><td>4</td><td>2.1557 ± 0.0792</td></tr>
-<tr><td>Layer-group (per-depth)</td><td>12</td><td>2.1563 ± 0.0848</td></tr>
+<tr><td>1279 高市</td><td><strong>2.0865</strong> ± 0.072</td><td>2.1025 ± 0.069</td><td>0.0160</td></tr>
+<tr><td>2053 赤嶺</td><td><strong>2.0890</strong> ± 0.079</td><td>2.1147 ± 0.092</td><td>0.0257</td></tr>
+<tr><td>2289 枝野</td><td><strong>2.3104</strong> ± 0.190</td><td>2.3186 ± 0.194</td><td>0.0082</td></tr>
 </tbody>
 </table>
-<p class="srcref">7B, target 1279, nested 4-fold, 20 trials/fold — artifacts/bo7b_gpu_logs/granularity_1279.log</p>
+<p class="srcref">7B, SFT anchors, nested 4-fold, 20 trials/fold — run_granularity_sft.sh</p>
+
+<p>
+  <strong>3 of 3 for the global setting, mean 0.0166.</strong> On the DPO anchors this same
+  comparison was a dead null (2.1557 vs 2.1563, a gap of 0.0006). So per-depth weighting does
+  not merely fail to help on anchors that demonstrably carry party signal — it gives back
+  <strong>40–97% of the tuning's entire advantage</strong> over best-single.
+</p>
 
 <div class="callout warn">
-<span class="lbl">A hedge that was tested and did not pay out</span>
-The gap is <strong>0.0006</strong> against a spread of ±0.08. Per-depth granularity buys
-nothing. The 0.5B write-up had already conceded this, but softened it: granularity was
-said to be the natural place for a register-versus-ideology split to appear
-<em>at main scale</em>. Main scale has now been run, and the null replicated an order of
-magnitude more tightly. The concession stays; the hedge was deleted. A null that replicates
-across a 14× scale gap, with its own proposed escape route closed off, is a stronger and
-more useful statement than a hedge — it tells the next person not to bother.
+<span class="lbl">The caveat that has to travel with the result</span>
+Both settings get 20 trials per fold over search spaces differing by a factor of three, so
+this comparison cannot separate "per-depth structure does not help" from "12 dimensions
+needs more than 20 trials". What is supported is the claim at <strong>equal optimisation
+budget</strong>: at a fixed trial count, finer granularity costs more in search than it
+returns in expressiveness. Settling the stronger version needs roughly 60 trials at 12 dims
+(~25 min of GPU) and is the only granularity question still open.
+<br><br>
+Note also what the whiskers above are <em>not</em>. They are the <em>unpaired</em> across-fold
+spread (±0.07–0.19) against an effect of 0.008–0.026, because per-fold values were not
+retained for this sweep. By §13's rule they cannot be read as an interval on the difference,
+and the paper's version of this figure carries the same warning in its caption.
 </div>
+
 <p>
-  The extreme end of the sweep — one coefficient per <em>layer</em>, 112 dimensions — was
-  skipped as too expensive, because 0.5B had already settled it decisively: 96 dimensions
-  scored 3.441 against a base of 2.880. Give a Bayesian optimiser 40 trials in a 96-dim
-  space and it cannot find anything; the search problem outruns the search budget long
-  before the extra expressiveness helps.
+  There was a hedge here, and it is worth recording that it died. The 0.5B write-up conceded
+  granularity didn't help, but softened it: per-depth structure was said to be the natural
+  place for a register-versus-ideology split to appear <em>at main scale</em>. That has now
+  been tested twice at 7B — once on anchors with no recoverable party signal and once on
+  anchors that demonstrably carry it — and it pays out neither time. The conjecture is
+  unsupported at every scale measured.
+</p>
+<p>
+  The upper bookend, from the 0.5B sweep, is unambiguous: full layer-wise merging (96 dims,
+  TPE) scores <strong>3.4408</strong> against a base of 2.8804 — decisively <em>worse than
+  not merging</em>, drifting toward the uniform-merge failure mode. Ninety-six coefficients
+  cannot be located from twenty evaluations, and badly chosen coefficients actively corrupt
+  the model. The granularity curve is non-monotonic with a practical optimum at low
+  dimensionality.
 </p>
 
 <div class="callout">
+<span class="lbl">Development-scale validation, in one paragraph</span>
+The whole pipeline was built and validated at Qwen2.5-0.5B before any 7B compute was
+committed, and the ordering established there survived a 14× scale-up. Nested 5-fold CV on
+three targets: the tuned merge improved on <code>best-single</code> in <strong>15/15
+folds</strong> (+0.072 to +0.092 nats) and on base in 14/15, against a uniform merge more
+than a full nat <em>worse</em> than base. Two things from that scale shaped the main study —
+the uniform-merge failure established that the contribution of tuning was a question to be
+tested rather than assumed, and <code>best-single</code> picking the same anchor in all 15
+folds regardless of party was the register effect of §18, visible two months before anyone
+interpreted it as such.
+</div>
+
+<div class="callout">
 <span class="lbl">Where this leaves the NLL story</span>
-Against every weight-space alternative, the method works: blending anchor task vectors with
-tuned coefficients predicts a held-out politician's real speech better than not merging,
-better than any single anchor, and much better than an untuned merge — on 33 politicians,
-at main scale, on 30 sentences each, with no decay as the target gets more obscure. That is
-a genuine population claim. §16 is the baseline that complicates it.
+Against every weight-space alternative the method works, on 33 politicians, at main scale,
+on 30 sentences each, with no decay as the target gets more obscure. The next two sections
+are the two baselines that don't edit weights at all — and on the first anchors trained,
+they beat it.
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="icl">
-<h2>16 · The baseline that ties — and what happened when they were stacked</h2>
+<h2>16 · The baseline that nearly killed it — and what happened when they were stacked</h2>
 
 <p>
-  Every baseline in §15 edits the weights. There is an obvious alternative that doesn't:
-  <strong>just put the target's sentences in the prompt.</strong> Take the same 30 utterances
-  the optimiser tunes on, paste them in front of the question as examples, and ask the base
-  model to continue. No training, no adapters, no merging, no search. This is
+  Every baseline in §15's first three rows edits the weights. There is an obvious alternative
+  that doesn't: <strong>just put the target's sentences in the prompt.</strong> Take the same
+  30 utterances the optimiser tunes on, paste them in front of the question as examples, and
+  ask the base model to continue. No training, no adapters, no merging, no search. This is
   <strong>in-context learning (ICL)</strong>, and it is the cheapest thing anyone would try
   before reading the paper.
 </p>
 
 <div class="callout warn">
-<span class="lbl">The project's own kill criterion</span>
+<span class="lbl">The project's own falsification criterion</span>
 This baseline was written into the original spec as one of seven required comparisons, with
 an unusually honest label attached: <em>"the cheapest strong competitor; if it matches POLIS
 the method is unnecessary."</em> The paper's central hypothesis claims the merge beats
 prompting. Four of the seven baselines had been implemented. This was not one of them, and
 it had never been run.
+<br><br>
+(It is stated in the paper as "specified in advance as a falsification criterion", not as
+<em>pre-registered</em>. Nothing was lodged in a public registry — it was written into the
+project's own spec before the run. "Pre-registered" is a term of art and claiming it would
+have been wrong.)
 </div>
 
-<h3>The result</h3>
+<h3>The result, first time</h3>
 <p>
-  It was run with the n=33 batch, same folds, same protocol. POLIS beats it on
-  <strong>17 of 33</strong> targets — mean −0.0343, median +0.0050, and 79 of 165 folds.
-  That is a coin flip.
+  It was run with the n=33 batch, same folds, same protocol, on the anchors that existed at
+  the time — the DPO ones. The merge beat it on <strong>17 of 33</strong> targets — mean
+  −0.0343, median +0.0050, 80 of 165 folds. That is a coin flip, and by the criterion's own
+  terms the method was unnecessary.
 </p>
 
 <div id="iclViz"></div>
 <p class="tip">
-  Same 33 targets, sorted. Above zero POLIS wins, below zero prompting wins. Compare the
-  shape with the all-positive chart in §15 — against best-single the method is uniform and
-  small; against prompting it is huge in both directions and centred on nothing.
+  Same 33 targets, sorted, both anchor arms. The DPO arm (grey) is centred on nothing and
+  enormous in both directions; the SFT arm (gold) is what the same comparison looks like
+  once the anchors are fixed — 27 of 33 above zero, mean +0.0580, p = 3.2×10⁻⁴. The change
+  is entirely in the anchors: identical folds, identical prefix, identical ICL scores.
 </p>
 
 <p>
   Before believing a null, check the plumbing. The demonstration prefix is built from the
   <em>dev</em> half of each fold and the model is scored at restored base weights, so ICL
-  never sees the test fold. It is not leakage; it is a real tie.
+  never sees the test fold. It was not leakage. It was a real tie — against anchors that
+  turned out to be carrying almost nothing about the politicians they were trained on.
 </p>
 
 <h3>Why the variance is so large — a mechanism, not a shrug</h3>
 <p>
-  The interesting part is that the mean and the median disagree in sign. POLIS wins slightly
-  more often than it loses, but when it loses it loses <em>enormously</em>: three targets
-  account for most of the negative mean, each around −0.33 nats, an order of magnitude
-  bigger than any of POLIS's wins.
+  The interesting part is that the mean and the median disagree in sign. The merge won
+  slightly more often than it lost, but when it lost it lost <em>enormously</em>: three
+  targets account for most of the negative mean, each around −0.33 nats, an order of
+  magnitude bigger than any of the merge's wins.
 </p>
 <p>
   The explanation is measurable. For each target, compute how similar their own 30
@@ -1537,9 +1717,15 @@ corr(log speech count,                   BO vs ICL)          = <span class="str"
 <p>
   It is tempting to stop there and call the tie an artefact of two weird politicians. It
   isn't. Drop the two most repetitive targets and the mean moves from −0.034 to −0.015 with
-  POLIS at 17 of 31 — still parity, just less dramatic parity. And 3022 津島 posts a large
+  the merge at 17 of 31 — still parity, just less dramatic parity. And 3022 津島 posts a large
   ICL win at perfectly ordinary self-similarity, so repetition is the main mechanism but not
   the only one.
+</p>
+<p class="tip">
+  The mechanism outlives the tie. On the final SFT anchors the merge wins overall, but the
+  120–250 band — where the boilerplate speakers live — is still the one band where prompting
+  wins prefix-free (−0.0624), and 1543 手塚 alone is −0.1833. This is a property of the
+  individual politician, not of their resource level.
 </p>
 
 <h3>What a tie licenses you to say — the interim position</h3>
@@ -1570,8 +1756,11 @@ corr(log speech count,                   BO vs ICL)          = <span class="str"
 </div>
 </div>
 <p class="tip">
-  Hold on to the right-hand card. The next experiment rescues the method — and when it does,
-  the temptation to reach for exactly that move comes straight back.
+  Hold on to the right-hand card. Two experiments later the method is rescued twice over — it
+  stacks with prompting, and once the anchors are fixed it beats prompting outright — and each
+  time the temptation to reach for exactly that move comes straight back. The cost argument is
+  still true, and it is still a different claim. It survives into the paper's discussion as a
+  <em>deployment</em> point, which is where it belongs.
 </p>
 
 <h3>The experiment that decides it, and why it wasn't obvious</h3>
@@ -1586,11 +1775,17 @@ corr(log speech count,                   BO vs ICL)          = <span class="str"
       them — in which case combining should beat either.</li>
 </ul>
 <p>
-  So the deciding measurement is not POLIS vs ICL at all. It is <strong>POLIS+ICL vs
-  ICL</strong>: the merged weights <em>with</em> the demonstration prefix in front of them.
-  If adding the merge on top of prompting improves things, the merge carries information the
-  prefix does not, and §15's result becomes a statement about prompting being a strong
-  baseline rather than about the merge being pointless.
+  So the deciding measurement is not the merge versus ICL at all. It is
+  <strong>BO+ICL versus ICL</strong>: the merged weights <em>with</em> the demonstration prefix
+  in front of them. If adding the merge on top of prompting improves things, the merge carries
+  information the prefix does not, and the tie becomes a statement about prompting being a
+  strong baseline rather than about the merge being pointless.
+</p>
+<p>
+  Note that this costs almost nothing to add: it is the same fitted merge scored with the
+  prefix in front of each held-out prompt, reusing the merger state already applied. Two extra
+  evaluation passes per fold and no extra optimisation trials. The reason it had not been done
+  is not expense — it is that nobody had framed the two as things that could combine.
 </p>
 <p>
   There is a control that has to run alongside it: <strong>best-single+ICL</strong>. Without
@@ -1601,96 +1796,123 @@ corr(log speech count,                   BO vs ICL)          = <span class="str"
 
 <h3>The answer: they stack</h3>
 <p>
-  The run happened — 33 targets, 5 h 48 m — and it came back decisively.
+  The run happened — 33 targets, 5 h 48 m — and it came back decisively. Both arms are shown,
+  because the comparison between them is now the point.
 </p>
 
 <table>
-<thead><tr><th>Comparison</th><th>Mean</th><th>Median</th><th>Targets won</th><th>Sign test p</th></tr></thead>
+<thead><tr>
+  <th>Comparison</th><th>SFT anchors</th><th>won</th><th>DPO anchors</th><th>won</th>
+</tr></thead>
 <tbody>
-<tr><td><strong>POLIS+ICL vs ICL</strong></td><td><strong>+0.0694</strong></td><td>+0.0676</td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td></tr>
-<tr><td>POLIS+ICL vs POLIS</td><td>+0.1036</td><td>+0.0676</td><td>33 / 33</td><td>2×10⁻¹⁰</td></tr>
-<tr><td>best-single+ICL vs ICL <span class="tip">(the control)</span></td><td>+0.0562</td><td>+0.0554</td><td>33 / 33</td><td>2×10⁻¹⁰</td></tr>
-<tr><td><strong>POLIS+ICL vs best-single+ICL</strong></td><td><strong>+0.0132</strong></td><td>+0.0163</td><td><strong>30 / 33</strong></td><td>1.4×10⁻⁶</td></tr>
-<tr><td>POLIS vs ICL <span class="tip">(the tie, for reference)</span></td><td>−0.0343</td><td>+0.0050</td><td>17 / 33</td><td>1.00</td></tr>
+<tr><td><strong>BO+ICL vs ICL</strong></td><td><strong>+0.1276</strong></td><td><strong>33/33</strong></td><td>+0.0694</td><td>33/33</td></tr>
+<tr><td>BO+ICL vs BO</td><td>+0.0696</td><td>33/33</td><td>+0.1036</td><td>33/33</td></tr>
+<tr><td>best-single+ICL vs ICL <span class="tip">(the control)</span></td><td>+0.1007</td><td>33/33</td><td>+0.0562</td><td>33/33</td></tr>
+<tr><td><strong>BO+ICL vs best-single+ICL</strong></td><td><strong>+0.0269</strong></td><td><strong>33/33</strong></td><td>+0.0132</td><td>30/33</td></tr>
+<tr><td>BO vs ICL <span class="tip">(prefix-free)</span></td><td>+0.0580</td><td>27/33</td><td>−0.0343</td><td>17/33</td></tr>
 </tbody>
 </table>
-<p class="srcref">7B, nested 5-fold CV × 33 targets — combined_target_*.log, pooled by nested_log_summary.py</p>
+<p class="srcref">7B, nested 5-fold CV × 33 targets — bo7b_picks/ and bo7b_picks_sft33/</p>
 
 <p>
   <strong>Prompting and merging were never alternatives.</strong> Merged weights <em>plus</em>
-  the prefix beat the prefix alone on every single target, 160 of 165 folds. The tie in the
-  previous section was an artefact of forcing a choice between two things that stack.
+  the prefix beat the prefix alone on every single target, on both arms — 165 of 165 folds on
+  the SFT anchors. The tie in the previous section was an artefact of forcing a choice between
+  two things that stack, on top of anchors that were themselves the problem.
 </p>
 
 <div class="callout">
 <span class="lbl">Why the control was worth insisting on</span>
-Look at the third and fourth rows. If the experiment had stopped at "POLIS+ICL beats ICL by
-+0.0694, 33/33", the natural reading would be that the tuned merge contributes +0.0694 on
-top of prompting. It does not. Swapping in the <em>untuned</em> best-single merge already
-buys +0.0562 of that. The measurement without its control would have credited the paper's
-contribution with more than five times what it actually earns.
+Look at the first and fourth rows. If the experiment had stopped at "BO+ICL beats ICL by
++0.1276, 33/33", the natural reading would be that the tuned merge contributes +0.1276 on top
+of prompting. It does not. Swapping in the <em>untuned</em> best-single merge already buys
++0.1007 of that. The measurement without its control would have credited the paper's specific
+contribution with nearly five times what it actually earns. That ratio is the single most
+useful thing this section produces, and it holds on both arms.
 </div>
 
 <h3>The decomposition — and the number not to bury</h3>
 <p>
-  Read the stack from the bottom up. Each step is what that step alone adds:
+  Read each stack from the bottom up. Each step is what that step alone adds on top of
+  prompting:
 </p>
 
 <div id="stackViz"></div>
 <p class="tip">
-  Of the +0.0694 that merging adds on top of prompting, <strong>+0.0562 comes from merging
-  at all</strong> and only <strong>+0.0132 from tuning the coefficients</strong> — the part
-  that is actually POLIS.
+  Left: the final SFT anchors. Right: the DPO anchors the tie was measured on. In both cases
+  most of the stacking gain comes from having <em>any</em> merge in front of the prefix; the
+  tuned coefficients are the smaller slice.
 </p>
 
 <p>
-  That +0.0132 is real: 30 of 33 targets, p = 1.4×10⁻⁶. But prefix-free, tuning was worth
-  +0.0265 (§15). <strong>The prefix absorbs about half of what the tuning was buying.</strong>
-  Which makes sense — some of what the optimiser was recovering from 30 utterances is simply
-  present in the prompt once you put those same utterances there.
+  There is a real difference between the two arms, though, and it goes the method's way. On
+  DPO anchors the tuned coefficients kept only <strong>+0.0132</strong> under the prefix
+  against <strong>+0.0265</strong> prefix-free — the prompt absorbed about half of what the
+  optimiser was buying, which makes sense if some of what it recovered from 30 utterances is
+  simply present in the prompt once you put those same utterances there. On SFT anchors that
+  absorption disappears: <strong>+0.0269</strong> under the prefix against
+  <strong>+0.0299</strong> prefix-free, statistically indistinguishable. Better anchors carry
+  something the prompt does not have.
 </p>
 
-<h3>Where it loses, and why that's reassuring</h3>
+<h3>Where it loses, and how that got fixed</h3>
 <p>
-  Three targets are the exception, where tuned coefficients do <em>worse</em> than the untuned
-  merge under the prefix: 津島 (−0.079), 田野瀬 (−0.027), 手塚 (−0.010). Those are the same
-  three boilerplate speakers from the previous page — the ones where prompting alone beat
-  POLIS by around 0.33 nats.
+  On the DPO anchors, three targets were exceptions — tuned coefficients did <em>worse</em>
+  than the untuned merge under the prefix: 津島 (−0.0784), 田野瀬 (−0.0272), 手塚 (−0.0106).
+  Those are the same three boilerplate speakers from the previous page.
 </p>
 <p>
-  This is a satisfying kind of failure, because it was predicted before it was observed. The
+  This was a satisfying kind of failure, because it was predicted before it was observed. The
   coefficients are fitted on prefix-free data and then <em>used</em> under the prefix, so the
   optimiser tuned for a situation that no longer holds. Where the prefix does most of the
   work, the merge was optimised against the wrong objective. That regime mismatch is written
-  into the function's own docstring as a known caveat, and it shows up exactly where it was
+  into the function's own docstring as a known caveat, and it showed up exactly where it was
   said it would.
 </p>
 <p>
-  It also converts a vague follow-up into a specific one. Tuning the coefficients
-  <em>inside</em> the prefix costs roughly five times as much, so before this result it was a
-  fishing expedition. Now it carries a prediction: those three losses should disappear.
-  Running the three plus a matched handful of controls answers it in about four hours instead
-  of twenty-nine.
+  It also converted a vague follow-up into a specific one: tuning the coefficients
+  <em>inside</em> the prefix costs roughly five times as much, so before this it was a fishing
+  expedition, and now it carried a prediction — those three losses should disappear.
+</p>
+
+<table>
+<thead><tr><th>BO+ICL vs best-single+ICL</th><th>DPO anchors</th><th>SFT anchors</th></tr></thead>
+<tbody>
+<tr><td>3022 津島</td><td>−0.0784</td><td><strong>+0.0172</strong></td></tr>
+<tr><td>110 田野瀬</td><td>−0.0272</td><td><strong>+0.0096</strong></td></tr>
+<tr><td>1543 手塚</td><td>−0.0106</td><td><strong>+0.0152</strong></td></tr>
+</tbody>
+</table>
+
+<p>
+  <strong>They recovered — without the experiment that was designed to recover them.</strong>
+  Fixing the anchors fixed the regime mismatch as a side effect. The queued follow-up lost its
+  specific justification and reverted to a fishing expedition, which is a good outcome and an
+  irritating one: the prediction was right about <em>what</em> would happen and wrong about
+  <em>why</em>.
 </p>
 
 <div class="callout warn">
-<span class="lbl">Decision: reword the hypothesis, don't reinterpret it</span>
-The project's written hypothesis says the merge <strong>beats</strong> prompting. It doesn't
-— prefix-free they tie, and that is what §16 opened with. What the data supports is a
-different sentence: <strong>the merge composes with prompting, and the best configuration on
-every one of 33 targets uses both.</strong>
+<span class="lbl">A decision that was made and then correctly unmade</span>
+When the tie stood, the conclusion drawn was: the written hypothesis says the merge
+<em>beats</em> prompting, it doesn't, so reword it to "composes with" and say that you
+reworded it. That was the right call on the evidence available, and it was written down as
+such.
 <br><br>
-That is arguably a more interesting claim than the original. The temptation is therefore to
-leave the old sentence in place and let readers understand it in the new, kinder way — and
-that is precisely the move to refuse. A hypothesis quietly re-read to match its result is
-the most common way a paper stops being falsifiable. Change the sentence, and say that you
-changed it.
+Then the anchors were fixed and the reword was <strong>dropped</strong> — because at matched
+objective the merge both beats prompting (27/33, p = 3.2×10⁻⁴) <em>and</em> composes with it
+(33/33). The original sentence was true after all. Note what protected the project here: the
+reword had been recorded as a decision with its evidence attached, so when the evidence
+changed there was something specific to revisit. A hypothesis quietly re-read to match its
+result is the most common way a paper stops being falsifiable — but a hypothesis loudly
+rewritten against a confounded result is its own kind of mistake, and the defence against
+both is the same. Write down which measurement made you change your mind.
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="upset">
-<h2>17 · The upset: plain fine-tuning wins — and "identity" itself comes into question</h2>
+<h2>17 · The upset: plain fine-tuning wins — and then doesn't</h2>
 
 <p>
   Everything in this project rests on one founding assumption, stated back in §2: <em>you
@@ -1698,8 +1920,14 @@ changed it.
   pre-trained anchors instead. The original spec listed seven required baselines, and two of
   them test exactly that assumption — supervised fine-tuning (SFT) and DPO applied
   <strong>directly to the target's own 24 dev-fold utterances</strong>, no anchors, no merge.
-  They were implemented. They had never been run on a GPU. They ran last, and the founding
-  assumption did not survive.
+  They were implemented. They had never been run on a GPU. They ran last, and for two days
+  the founding assumption did not survive.
+</p>
+<p class="tip">
+  This section is the project's central wrong turn, told in the order it happened. If you
+  only want the answer: the defeat was real, reproducible, 33/33 — and it was measuring the
+  anchors' training objective rather than the merge. The measurement that showed this took
+  one hour of GPU and is at the end of this section.
 </p>
 
 <h3>First: getting a fair number out of the competitor</h3>
@@ -1729,57 +1957,52 @@ its competitor must get the same courtesy or the comparison is theatre.
 <h3>The result</h3>
 
 <table>
-<thead><tr><th>Comparison</th><th>Mean</th><th>Targets won</th><th>Sign test p</th></tr></thead>
+<thead><tr><th>Comparison <span class="tip">(DPO anchors)</span></th><th>Mean</th><th>Targets won</th><th>Sign test p</th></tr></thead>
 <tbody>
-<tr><td><strong>SFT vs POLIS</strong></td><td><strong>+0.0627</strong></td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td></tr>
-<tr><td>SFT vs best-single</td><td>+0.0892</td><td>33 / 33</td><td>2×10⁻¹⁰</td></tr>
-<tr><td>SFT vs ICL</td><td>+0.0284</td><td>29 / 33</td><td>1.1×10⁻⁵</td></tr>
-<tr><td><strong>SFT+ICL vs POLIS+ICL</strong></td><td><strong>+0.0355</strong></td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td></tr>
+<tr><td><strong>SFT-on-target vs BO</strong></td><td><strong>+0.0627</strong></td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td></tr>
+<tr><td>SFT-on-target vs best-single</td><td>+0.0892</td><td>33 / 33</td><td>2×10⁻¹⁰</td></tr>
+<tr><td>SFT-on-target vs ICL</td><td>+0.0284</td><td>29 / 33</td><td>1.1×10⁻⁵</td></tr>
+<tr><td><strong>SFT+ICL vs BO+ICL</strong></td><td><strong>+0.0355</strong></td><td><strong>33 / 33</strong></td><td>2×10⁻¹⁰</td></tr>
 </tbody>
 </table>
 <p class="srcref">artifacts/sft_n33.json vs the bo7b_picks dumps — 33 targets, 40 min of GPU, 11 s per fold</p>
 
 <p>
-  Fine-tuning on 24 utterances beats the anchor merge on every target, with and without the
-  prompting prefix. Here is the full ordering of every configuration in the study, pooled
-  over the 33 targets:
-</p>
-
-<div id="orderViz"></div>
-<div class="legend">
-  <span><span class="swatch" style="background:var(--series-2)"></span>Fine-tune the target directly</span>
-  <span><span class="swatch" style="background:var(--series-4)"></span>Anchor merge (the paper's method)</span>
-  <span><span class="swatch" style="background:var(--series-1)"></span>Prompting only</span>
-  <span><span class="swatch" style="background:var(--muted)"></span>No adaptation</span>
-</div>
-<p class="tip">
-  The best configuration in the entire study is SFT+ICL — the two simplest techniques,
-  combined. Every green bar sits below a red one. (Treat the near-ties in the middle —
-  DPO+ICL 2.1013 vs POLIS+ICL 2.1042 — as ties; only the large paired gaps are safe.)
+  Fine-tuning on 24 utterances beat the anchor merge on <em>every</em> target, with and
+  without the prompting prefix, and <code>SFT+ICL</code> became the best configuration in the
+  study. Not 28 of 33. Not "on average". Thirty-three of thirty-three, and 165 of 165 folds
+  against the merge alone.
 </p>
 
 <p>
-  Three defences suggest themselves, and the decision log walks through why each fails.
+  Three defences suggest themselves, and at the time each of them failed.
   <em>"SFT's hyperparameters were tuned"</em> — they were picked once and transferred, while
-  POLIS gets 40 optimiser trials per fold per target; POLIS is the more heavily tuned side.
-  <em>"The merge is cheaper"</em> — SFT is 11 seconds per fold, the merge needs four anchor
-  training runs plus the optimisation, and both ship an adapter, so serving cost is
-  identical. <em>"NLL isn't the only metric"</em> — the only other instrument was closed as
-  uninformative in §18. There is no axis on which the merge leads.
+  the merge gets 40 optimiser trials per fold per target; the merge is the more heavily tuned
+  side. <em>"The merge is cheaper"</em> — SFT is 11 seconds per fold, the merge needs four
+  anchor training runs plus the optimisation, and both ship an adapter, so serving cost is
+  identical. <em>"NLL isn't the only metric"</em> — the only other instrument had been closed
+  as uninformative the same day (§20). There was no axis on which the merge led.
 </p>
 <p>
-  One genuine asymmetry survives: the prefix adds <strong>+0.1036</strong> on top of the
+  One genuine asymmetry survived: the prefix added <strong>+0.1036</strong> on top of the
   merge but only <strong>+0.0765</strong> on top of SFT. SFT and the prompt both learn from
   the same 24 utterances, so they overlap; the merge imports something from the anchors that
-  the prompt doesn't have. A real mechanism, honestly noted — and it still loses.
+  the prompt doesn't have. A real mechanism, honestly noted — and it still lost.
 </p>
+<div class="callout warn">
+<span class="lbl">What the right defence would have been, and nobody had it</span>
+None of the three defences above is <em>"the two sides were not trained the same way."</em>
+That sentence was not available, because the anchors' objective had been fixed months earlier
+and had stopped being visible as a choice. It took a fourth baseline — the one that looked
+most redundant — to make it visible again.
+</div>
 
 <h3>The confound that reopens the case</h3>
 <p>
   A day later, baseline 4 ran: <strong>DPO</strong> on the target's own utterances, same
-  protocol. It <em>ties</em> the merge — POLIS wins 24/33 but the pooled means are identical
-  to three decimals (2.2078 vs 2.2073; DPO loses often and narrowly, wins rarely and
-  widely). And that tie is the observation that cracks the SFT result open, because of a
+  protocol. It <em>ties</em> the merge — the merge wins 24/33 but the pooled means are
+  identical to three decimals (2.2078 vs 2.2073; DPO loses often and narrowly, wins rarely
+  and widely). And that tie is the observation that cracks the SFT result open, because of a
   fact set in §5 and long forgotten: <strong>the four anchors were trained with DPO.</strong>
 </p>
 
@@ -1801,6 +2024,16 @@ its competitor must get the same courtesy or the comparison is theatre.
   politician, same 1,500 pairs, only the objective changed — and see what it does.
 </p>
 
+<div class="callout">
+<span class="lbl">The general rule this is an instance of</span>
+Any pipeline choice that is expensive to vary tends to get made once and then stop looking
+like a choice. It is still a factor in every experiment downstream of it; it is just an
+<em>invisible</em> one, and its effect gets attributed to whatever you were actually
+comparing. The cure is a one-unit probe: before committing to four training runs, do one
+both ways. An hour of GPU here overturned a headline result that two days had been spent
+believing.
+</div>
+
 <h3>The probe that changed the question</h3>
 <p>
   That one anchor (岸田, SFT) was applied to five probe targets at <strong>coefficient 1.0,
@@ -1809,7 +2042,7 @@ its competitor must get the same courtesy or the comparison is theatre.
 </p>
 
 <table>
-<thead><tr><th>Target</th><th>Base</th><th>Tuned 4-anchor merge</th><th>SFT on own 24 utts</th><th>Foreign SFT anchor, untuned</th></tr></thead>
+<thead><tr><th>Target</th><th>Base</th><th>Tuned 4-anchor merge <span class="tip">(DPO)</span></th><th>SFT on own 24 utts</th><th>Foreign SFT anchor, untuned</th></tr></thead>
 <tbody>
 <tr><td>1083 山崎</td><td>2.4200</td><td>2.2875</td><td>2.2392</td><td><strong>2.2697</strong></td></tr>
 <tr><td>1279 高市</td><td>2.2684</td><td>2.1531</td><td>2.1129</td><td><strong>2.1218</strong></td></tr>
@@ -1818,82 +2051,334 @@ its competitor must get the same courtesy or the comparison is theatre.
 <tr><td>2289 枝野</td><td>2.5302</td><td>2.4190</td><td>2.3872</td><td><strong>2.3726</strong></td></tr>
 </tbody>
 </table>
-<p class="srcref">P18, 5 probe targets — table from DECISIONS.md (no committed run log)</p>
+<p class="srcref">P18, 5 probe targets — artifacts/anchor_sft_152.log</p>
 
 <p>
-  Read the last two columns together, because they are the whole story. The untuned foreign
-  anchor beats its DPO twin on 5/5 (+0.0714 — larger than POLIS's entire margin over
-  best-single), beats the tuned four-anchor merge on 5/5, and is <strong>level with
-  fine-tuning on the target's own data</strong> (3/5, +0.0047). An adapter trained
-  exclusively on 岸田 predicts 赤嶺 — a Communist with opposite politics — as well as an
-  adapter trained on 赤嶺 himself.
+  The untuned foreign anchor beats its DPO twin on 5/5 (<strong>+0.0714</strong> — larger
+  than the tuned merge's entire margin over best-single), beats the tuned four-anchor DPO
+  merge on 5/5, and is level with <code>BO+ICL</code>, the best merge configuration in the
+  study at that point.
+</p>
+<p>
+  So the objective was the problem, and the queued work was obvious: retrain all four anchors
+  with SFT and re-run the programme. That is what produced the SFT column of §15, and it
+  reversed both of the defeats — the ICL tie became a 27/33 win, the 0/33 sweep became a
+  28/33 win the other way.
 </p>
 
 <div class="callout warn">
-<span class="lbl">Whatever is transferring, it is not the person</span>
-This is now the third independent measurement pointing the same way:
+<span class="lbl">But look at the last two columns again</span>
+The untuned foreign anchor is also <strong>level with fine-tuning on the target's own
+data</strong> (3/5, +0.0047). An adapter trained exclusively on 岸田 predicts 赤嶺 — a
+Communist with opposite politics — about as well as an adapter trained on 赤嶺 himself, with
+no tuning, no merge and no target data whatsoever.
 <br><br>
-1 · The best-single picks <strong>invert party</strong> — across 165 fitted folds, LDP
-targets are best served by the Communist anchor 53% of the time, and Communist targets by
-the LDP anchor 80% of the time.<br>
-2 · The survey instrument found <strong>name-swap divergence 0.209 and rank at chance</strong>
-(§18) — the personas do not answer as their politician.<br>
-3 · A <strong>foreign anchor, untuned, matches target-specific fine-tuning</strong> on the
-very metric the whole study optimises.
-<br><br>
-The consistent explanation: what every one of these methods is transporting is
-<em>Diet-speech register</em> — the shared cadence, formality and structure of parliamentary
-Japanese — plus generic adaptation, not anything specific to the individual being simulated.
+That is not a statement about DPO. It is a statement about what a persona adapter transports
+at all, and no amount of fixing the anchors makes it go away. §15's null — <code>SFT</code>
+level with <code>best-single</code> at n=33 — is the same observation at full sample size.
+<strong>This is the finding that outlives the method</strong>, and §18 is where it gets
+measured properly.
 </div>
 
 <p>
-  The coefficient matrices tell the same story from another angle: across the 165 fitted
-  merges, the optimiser holds anchor 福島 near zero in 40% of folds — with only four sources
-  to blend, it is already discarding one. That is what diminishing returns look like, and it
-  is the main reason to doubt that training more anchors would change anything.
-</p>
-
-<h3>The experiment everything now hangs on</h3>
-<p>
-  The decision log queues one control above all others, and it is the right one: train the
-  remaining three SFT anchors and score <strong>each anchor alone</strong> on the same probe
-  targets. Two outcomes, cleanly separated:
-</p>
-<div class="two">
-<div class="card" style="border-left:3px solid var(--series-2)">
-<p class="eyebrow" style="color:var(--series-2)">All four land within noise of each other</p>
-<p style="margin-bottom:0">
-  Then the transferred quantity is register, full stop. Persona identity is not being
-  learned by any of this machinery, and the merge apparatus is beside the point. That
-  becomes the paper's central finding — a genuine, well-instrumented negative result about
-  task-vector persona transfer.
-</p>
-</div>
-<div class="card" style="border-left:3px solid var(--series-3)">
-<p class="eyebrow" style="color:var(--series-3)">They separate, or targets prefer different anchors</p>
-<p style="margin-bottom:0">
-  Then identity survives and the DPO objective was destroying it — the entire n=33 programme
-  was run on anchors built the wrong way, and the merge deserves a full re-run on SFT
-  anchors before any conclusion is drawn.
-</p>
-</div>
-</div>
-
-<p>
-  There is one more place a positive claim could still live: the <strong>budget axis</strong>.
-  The 30-utterance budget was never derived from anything, and the mechanism is concrete —
-  the optimiser fits <strong>12 numbers</strong>, LoRA fits <strong>~20 million</strong>, so
-  SFT should collapse as the data shrinks toward 4–8 utterances long before a 12-parameter
-  search does. The sweep infrastructure is built (nested-subset budgets, so every point on
-  the curve pairs with every other); if the curve turns out flat, the log says plainly what
-  follows: the paper is a negative result, and <em>"the decision should be made deliberately
-  rather than by omission."</em>
+  There is one more place the fine-tuning comparison could still turn: the <strong>budget
+  axis</strong>. The 30-utterance budget was never derived from anything, and the mechanism is
+  concrete — the optimiser fits <strong>12 numbers</strong>, LoRA fits <strong>~20
+  million</strong>, so fine-tuning should degrade faster as the data shrinks toward 4–8
+  utterances. The sweep infrastructure is built (nested-subset budgets, so every point on the
+  curve pairs with every other), and it has never been run. Its motivation is weaker than it
+  was: it existed as "the last place a positive claim could live", and the claim is no longer
+  in danger at 24. It is now simply the most direct unmeasured extension of the work.
 </p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
+<section id="register">
+<h2>18 · Most of persona adaptation is register, not identity</h2>
+
+<p>
+  Every comparison so far is between methods: merge versus prompt versus fine-tune. This
+  section asks a question that sits underneath all of them, and that no comparison between
+  persona methods can answer. <strong>How much of what any of them delivers is specific to
+  the person being simulated?</strong>
+</p>
+
+<p>
+  The control is embarrassingly simple, which is part of why it took months to run. Take one
+  anchor adapter. Apply it <em>alone</em>, at coefficient 1.0. No merge, no tuning, no target
+  data, not even the 30 utterances. Score it on all 33 targets. Then do that for all four
+  anchors, so every target is scored against every anchor.
+</p>
+<p>
+  If adapters carry identity, the prediction is sharp: a target should be well served by an
+  ideologically close anchor and badly served by a distant one, so the <em>spread</em> across
+  the four anchors should be comparable to the <em>gap</em> they open against the base model.
+</p>
+
+<div id="regViz"></div>
+<p class="tip">
+  One row per target, sorted by total benefit. The solid bar is the part <em>every</em> anchor
+  achieves — the floor across all four. The pale bar on top is the range between the best and
+  worst anchor, which is the most that anchor <em>choice</em> can possibly be worth.
+</p>
+
+<h3>It is not close</h3>
+<table>
+<thead><tr><th>Pooled over 33 targets</th><th>SFT anchors</th><th>DPO anchors</th></tr></thead>
+<tbody>
+<tr><td>Gap from base, best anchor</td><td><strong>0.2186</strong></td><td>0.1295</td></tr>
+<tr><td>Range across the four anchors</td><td>0.0568</td><td>0.0198</td></tr>
+<tr><td>Anchor-dependent share, by pooled means</td><td>26%</td><td>15%</td></tr>
+<tr><td>Anchor-dependent share, median per target</td><td>22%</td><td>13%</td></tr>
+</tbody>
+</table>
+<p class="srcref">artifacts/affinity_sft.json, affinity.json — anchor_affinity.py, each anchor at coefficient 1.0</p>
+
+<p>
+  <strong>Between 74 and 78% of what a persona adapter delivers does not depend on whose
+  speech trained it.</strong> That quantity is Diet-speech <em>register</em>: institutional
+  phrasing, deference structure, the rhythm of committee exchange — the things every member
+  of the Japanese Diet does the same way regardless of party. It is the single largest effect
+  measured anywhere in this project, and it is invisible to any experimental design that
+  compares persona methods only with one another.
+</p>
+
+<h3>Three checks that this is real</h3>
+<div class="card">
+<h3 style="margin-top:0">1 · It is not "the model already knows the famous one"</h3>
+<p style="margin-bottom:0">
+  The obvious alternative explanation is that transfer works because the base model already
+  knows these politicians from pretraining, so the adapters are nudging existing knowledge
+  rather than teaching register. But 上田清司 (~4,000 speech records) transfers about as well
+  as 岸田文雄 (~20,400, a sitting prime minister during the corpus period). A 5× difference in
+  public profile makes essentially no difference to how well the adapter travels.
+</p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">2 · A foreign anchor matches target-specific fine-tuning</h3>
+<p style="margin-bottom:0">
+  From §17's probe: an untuned adapter trained on a <em>different</em> politician is level
+  with LoRA fine-tuning on the target's own 24 utterances (3/5, +0.0047). At n=33 the same
+  comparison is <code>SFT</code> vs <code>best-single</code>: +0.0003, 14/33, p = 0.49 — a
+  clean null. Two sample sizes, same answer.
+</p>
+</div>
+<div class="card">
+<h3 style="margin-top:0">3 · It was visible at 0.5B before anyone interpreted it</h3>
+<p style="margin-bottom:0">
+  In the development study, <code>best-single</code> selected the same anchor in all 15 folds
+  regardless of the target's party. That was written down at the time as a curiosity. It was
+  this effect, two months early and a 14× scale down.
+</p>
+</div>
+
+<h3>Why this makes every margin in §15 interpretable</h3>
+<p>
+  This is the honest answer to the obvious objection — <em>why are all these effects around
+  0.03 nats?</em>
+</p>
+
+<div id="scaleViz"></div>
+<p class="tip">
+  Everything in §15 and §16 happens inside the small pale window. The tuned merge's +0.0299
+  over best-single is not competing against 0.2186 nats of persona fidelity; it is competing
+  over the ~0.057 that anchor identity contributes at all.
+</p>
+
+<p>
+  Read against the right denominator, tuning the blend recovers roughly <strong>half of the
+  available anchor-dependent signal</strong> — and it lands <em>outside</em> the anchors' own
+  range, which is something a selection-only method cannot do by construction. The margins are
+  small because the thing they are competing over is small, not because the method barely
+  works.
+</p>
+
+<div class="callout">
+<span class="lbl">The recommendation this generalises to</span>
+Almost every persona-simulation paper benchmarks its method against other persona methods:
+prompting, fine-tuning, retrieval, a different merge. None of those comparisons can tell you
+whether <em>any</em> of the machinery is capturing the individual, because they all share the
+same register floor. <strong>A persona method should be measured against an untuned adapter
+trained on somebody else before it is measured against another persona method.</strong> If
+the foreign adapter matches it, most of what is being reported is genre.
+<br><br>
+The control costs one forward pass per target. It is the cheapest experiment in this entire
+project and it produced its largest number.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
+<section id="objective">
+<h2>19 · The training objective decides whether identity survives</h2>
+
+<p>
+  Three quarters of the effect is register. The remaining quarter — 0.0568 nats of spread
+  across anchors — is either individual identity or it is noise, and §18 cannot tell which.
+  Here is a test that can. <strong>If the anchor-dependent part is ideology, then the anchor
+  a target prefers should track the target's politics.</strong>
+</p>
+
+<h3>Building a null that isn't a lie</h3>
+<p>
+  The obvious null is 1/4 — four anchors, pick one at random. It is wrong twice over.
+</p>
+<p>
+  First, only 28 of the 33 targets are even eligible: the anchors cover LDP, JCP, SDP and the
+  DPJ lineage, and the five Ishin and Komeito targets can never match by construction. No
+  target is SDP, so 福島's family contributes no matchable target either.
+</p>
+<p>
+  Second — and this is the subtle one — a large party family holding a frequently-preferred
+  anchor would match <em>by construction</em>. If 13 of the 28 targets are DPJ-lineage and the
+  DPJ anchor happens to be a good all-round adapter, you get matches for free. So the null is
+  a permutation that holds <strong>both marginals fixed</strong>: which anchors win how often,
+  and which parties the targets are. Shuffle the pairing between them ten thousand times and
+  see where the observed count lands.
+</p>
+
+<div id="affinityViz"></div>
+<p class="tip">
+  The permutation null for each arm, with the observed match count marked. Same four
+  politicians, same 1,500 training pairs each, same LoRA shape, same merge code, same folds,
+  same evaluation. Only the loss function differs.
+</p>
+
+<table>
+<thead><tr>
+  <th>Anchors</th><th>Matched</th><th>Null mean</th><th>p</th><th>Gap from base</th><th>Anchor share</th>
+</tr></thead>
+<tbody>
+<tr><td><strong>SFT</strong></td><td><strong>17 / 28</strong> (61%)</td><td>9.43</td><td><strong>0.0013</strong></td><td>0.2186</td><td>26%</td></tr>
+<tr><td><strong>DPO</strong></td><td>4 / 28 (14%)</td><td>7.90</td><td>at chance</td><td>0.1295</td><td>15%</td></tr>
+</tbody>
+</table>
+<p class="srcref">anchor_affinity.py over all 33 targets, both arms — affinity_sft.json / affinity.json</p>
+
+<p>
+  <strong>Fisher exact between the two arms: p = 7.2×10⁻⁴.</strong> The claim being made is
+  precisely that <em>difference</em>. DPO anchors carry no recoverable party signal; SFT
+  anchors do.
+</p>
+
+<div class="callout warn">
+<span class="lbl">What is not being claimed</span>
+Not that DPO <em>inverts</em> party. Four matches against a null mean of 7.90 is p = 0.055
+one-tailed — suggestive at best — even though LDP targets picked the Communist anchor 8 times
+out of 12 under DPO, which is exactly the "party inversion" this walkthrough reported as fact
+in an earlier version. The inversion was always a low-tail wobble in a null distribution, and
+saying more than "no signal" would have been reading a story into noise a second time.
+</div>
+
+<h3>The gradient is what makes it convincing</h3>
+<table>
+<thead><tr><th>Family (SFT anchors)</th><th>Matched</th><th style="text-align:left">Anchors chosen</th></tr></thead>
+<tbody>
+<tr><td>共産 JCP</td><td><strong>3 / 3</strong></td><td style="text-align:left">塩川 ×3</td></tr>
+<tr><td>民主/立憲 CDP–DPJ</td><td>9 / 13</td><td style="text-align:left">上田 ×9, 岸田 ×2, 塩川 ×2</td></tr>
+<tr><td>自民 LDP</td><td>5 / 12</td><td style="text-align:left">岸田 ×5, 塩川 ×3, 上田 ×3, 福島 ×1</td></tr>
+</tbody>
+</table>
+<p>
+  The signal is strongest exactly where party structure is tightest. The JCP is small,
+  disciplined and lexically distinctive, and all three of its targets prefer the JCP anchor.
+  The LDP spans 高市早苗 to 武田良太 and its targets scatter across all four. A measurement
+  artefact would not be expected to respect party structure in that direction — that is the
+  part of this result that a permutation p-value alone doesn't give you.
+</p>
+
+<div class="callout warn">
+<span class="lbl">A correction that cost a claim: this is one measurement, not two</span>
+An earlier reading of these results said the finding was <em>independently corroborated</em>:
+the <code>best-single</code> winner inside nested CV is picked by prefix-free dev-fold
+likelihood, a different rule from the coefficient-1.0 sweep, and it also matched party —
+reported as 13/23. Recomputing it from the fitted merge dumps: the two rules pick <strong>the
+same anchor on all 28 eligible targets</strong>, giving an identical 17/28 with an identical
+per-family split.
+<br><br>
+So the result is robust to how the preferred anchor is identified, which is worth something —
+but it is one measurement, not two, and on reflection agreement is what should have been
+expected, since both rules score a single anchor by dev-fold NLL. The paper states it as a
+robustness check and says so explicitly.
+<br><br>
+<strong>Where the 23 came from is worth knowing if you write Japanese-language code.</strong>
+The LDP parliamentary group name 「自由民主党・無所属の会」 contains 「民主」 as a
+<em>substring</em>. Any party-family map that tests the DPJ/CDP keys with a plain
+<code>in</code> check before the LDP ones silently files every LDP target under the DPJ. The
+production script guards this with an <em>ordered</em> family list; the paper's number script
+reimplemented the logic, got a different answer, and that discrepancy is how the error
+surfaced. Two implementations disagreeing is a feature.
+</div>
+
+<h3>Why the objective would do this</h3>
+<p>
+  Go back to §5. SFT's gradient points at the politician's own distribution throughout
+  training — the only way to lower the loss is to make their words more likely. DPO's
+  objective is satisfied by <em>separating</em> the real utterance from the caricature, and
+  its gradient vanishes once that margin holds. With a synthesised rejected side and limited
+  data, the whole half-space of directions that beat the caricature is a solution, and most of
+  that half-space carries no information about the politician.
+</p>
+<p>
+  Two independent observations agree with that reading. First, the appendix example makes the
+  DPO negative concrete and shows it is not a strawman: the Gemini caricature of 塩川鉄也 on
+  non-regular staff paid below minimum wage is fluent, on-topic, and argues the same side.
+  What it lacks is <strong>procedure</strong> — it names no official, ties nothing to an
+  ongoing policy movement, and ends in a generalisation where the real utterance ends in a
+  specific institutional demand. Beating that does not require moving toward 塩川.
+</p>
+<p>
+  Second, the weight space says the same thing. The uniform merge — all four deltas added at
+  coefficient 1.0 — scores <strong>2.5558</strong> on SFT anchors and <strong>2.7689</strong>
+  on DPO anchors, against a base of 2.3613. DPO deltas interfere with each other far more
+  destructively, which is what you would expect of task vectors pointing in directions
+  unrelated to the politicians that produced them.
+</p>
+
+<h3>What the optimiser does with each anchor</h3>
+<div id="anchcoefViz"></div>
+<p class="tip">
+  Mean fitted coefficient per anchor over 165 folds × 3 depth groups, both arms.
+</p>
+<p>
+  On SFT anchors all four contribute (0.222–0.332) and 29–43% of coefficient slots are
+  switched off. On DPO anchors 福島 sits at 0.135 and is near zero in most folds, and 54–68%
+  of slots are off. This bears directly on a question the project had considered settled.
+</p>
+<div class="callout">
+<span class="lbl">An argument that dissolved</span>
+The main reason to doubt that <em>more anchors</em> would help used to be: the optimiser
+already discards capacity at four, holding 福島 near zero in 40% of folds, so what would a
+fifth add? On SFT anchors that behaviour turns out to be a property of <strong>one badly
+trained anchor</strong>, not of K=4. All four now carry weight. The anchor-count question is
+genuinely open again — which is an uncomfortable place for it to be, since answering it costs
+training runs and VRAM (§23), but it is where the evidence puts it.
+</div>
+<p>
+  The fitted depth structure is also non-uniform, and readable: 岸田 concentrates in the lower
+  and middle groups (0.382 / 0.468 / 0.145) while 福島 concentrates in the upper (0.196 /
+  0.150 / 0.321). It is tempting to read that as early layers carrying lexical register and
+  late layers carrying stance. Resist it — §15's granularity ablation shows that removing this
+  structure entirely makes the merge <em>better</em> at equal search budget, so whatever the
+  pattern is, it is not buying fidelity.
+</p>
+
+<div class="callout warn">
+<span class="lbl">The methodological point, which is bigger than the result</span>
+The anchors' objective was never a designed factor of this study. It became one because two
+sparse-target fine-tuning baselines were finally implemented and <em>disagreed with each
+other</em> — and that disagreement is the only reason the objective became visible as a
+confound at all.
+<br><br>
+Generalise it: where a pipeline contains a choice incidental to the hypothesis, a comparison
+that holds it fixed can invert when it is varied. And the baselines most likely to expose
+such a choice are precisely the ones that look least informative and get deferred. Run every
+baseline in the spec, early. The one you skip is the one that reinterprets everything else.
+</div>
+</section>
+
+<!-- ────────────────────────────────────────────────────── -->
 <section id="broken">
-<h2>18 · The survey metric: an anatomy of a null, and its reframing</h2>
+<h2>20 · The survey metric: an anatomy of a null, and its reframing</h2>
 
 <p>
   NLL is an internal measure — it says the merged model predicts the target's words well.
@@ -1919,7 +2404,7 @@ Japanese — plus generic adaptation, not anything specific to the individual be
 <tr><td>base 7B</td><td>1.609</td><td><strong>0.667</strong></td><td>0.182</td></tr>
 <tr><td>uniform merge</td><td>1.700</td><td>0.455</td><td>0.242</td></tr>
 <tr><td>best single anchor</td><td>1.819</td><td>0.515</td><td>0.212</td></tr>
-<tr><td>POLIS</td><td>1.785</td><td>0.545</td><td>0.152</td></tr>
+<tr><td>BO <span class="tip">(the tuned merge)</span></td><td>1.785</td><td>0.545</td><td>0.152</td></tr>
 </tbody>
 </table>
 <p class="srcref">artifacts/bo7b_gpu_logs/single_numeric_target_2053.log — numeric-label scoring</p>
@@ -2074,40 +2559,59 @@ sanity check that would refute it.</strong>
 <p>
   One escape remained: the sweep used the <em>base</em> model. Perhaps identity is exactly
   what the merge injects, and the name-only prompt was never expected to carry it. So the
-  rank metric was rerun on each target under all four configurations.
+  rank metric was rerun on each target under all four configurations — first on three targets,
+  and later, after §19 changed what the anchors were, on all 33.
 </p>
 
 <div id="rankViz"></div>
 <p class="tip">
-  Percentile rank of the true politician (higher is better; 50% is chance). Constants
-  computed on the same data as a floor.
+  Percentile rank of the true politician among 594 real candidates (higher is better). The
+  measured constant floor and the per-target best constant are drawn as reference lines.
 </p>
 
 <table>
 <thead><tr>
-  <th>Target</th><th>Base</th><th>Uniform</th><th>Best-single</th><th>POLIS</th><th>Best constant</th>
+  <th>Configuration <span class="tip">(SFT anchors, n=33)</span></th><th>Median pct</th><th>Mean pct</th>
+  <th>Above the 50.1% floor</th><th>MAE(𝔼)</th>
 </tr></thead>
 <tbody>
-<tr><td>1279 高市</td><td>34.3%</td><td>37.2%</td><td>40.2%</td><td>39.4%</td><td>67.5% <span class="tip">const(1)</span></td></tr>
-<tr><td>2053 赤嶺</td><td>5.6%</td><td>4.2%</td><td>2.7%</td><td>2.7%</td><td>97.5% <span class="tip">const(5)</span></td></tr>
-<tr><td>2289 枝野</td><td>47.5%</td><td>25.4%</td><td>43.8%</td><td>44.9%</td><td>81.3% <span class="tip">const(5)</span></td></tr>
+<tr><td>base</td><td>52.7%</td><td>55.2%</td><td>19 / 33</td><td>1.151</td></tr>
+<tr><td>uniform</td><td>46.8%</td><td>46.0%</td><td>16 / 33</td><td>1.090</td></tr>
+<tr><td>best-single</td><td>56.1%</td><td>55.4%</td><td>21 / 33</td><td>1.084</td></tr>
+<tr><td><strong>BO</strong></td><td><strong>55.4%</strong></td><td>55.9%</td><td><strong>19 / 33</strong></td><td>1.131</td></tr>
+<tr><td>best constant <span class="tip">(oracle over 5)</span></td><td><strong>81.8%</strong></td><td>82.0%</td><td>—</td><td><strong>0.935</strong></td></tr>
 </tbody>
 </table>
-<p class="srcref">7B, single split, per-config answer vectors ranked against all 594 real politicians</p>
+<p class="srcref">7B, single split × 33 targets, numeric-label scoring, ranked against the 594-member 2024HoR wave — utas_vectors_sft/</p>
 
 <p>
-  All twelve cells are at or below chance, and a constant beats every model configuration on
-  every target. Relative to base, POLIS is +5.1 / −2.9 / −2.6 points — the merge makes it
-  <em>worse</em> on two of three.
+  Paired, with each target as one observation: <code>BO</code> vs <code>base</code> is
+  <strong>+0.7 percentile points on 19/33, p = 0.49</strong>. <code>BO</code> vs
+  <code>best-single</code> is +0.4 on 14/33. <code>BO</code> vs the best constant is
+  <strong>−26.1 points on 8/33</strong>. On absolute MAE the merge scores 1.131 against the
+  constant's 0.935. There is no reading of this table on which the merge helps.
 </p>
+
+<div class="callout warn">
+<span class="lbl">Where n=3 pointed the wrong way</span>
+On the three original targets alone, the SFT-anchor re-point looks like progress: 高市 goes
+39.4% → <strong>53.0%</strong>, 赤嶺 2.7% → 8.6%, 枝野 44.9% → 49.7%. All three improve on
+the DPO arm. At n=33 it washes out completely.
+<br><br>
+That is the "three targets cannot carry a p-value" caveat from §15 earning its keep in the
+direction that <em>costs</em> a claim — which is the only direction in which such a caveat is
+worth anything. Had the survey work stopped at three targets after the anchors were fixed,
+this page would be reporting a positive external result.
+</div>
+
 <p>
-  赤嶺 is the clearest case and worth reading carefully. His real answers cluster at 5, so
-  "always answer 5" ranks him at the 97.5th percentile. Every model configuration puts him
-  in the <strong>bottom 3–6%</strong>. That is not uninformative — it is actively
-  anti-correlated, the simulation pointing away from the man. And it is exactly what the
-  population sweep predicted: the constants swing from 2.7% to 97.5% depending on which end
-  of the scale a target occupies, while every model configuration parks near the
-  population's low-middle regardless. The simulations do not move to where the politician is.
+  The per-target picture on the older three-target run makes the failure mode concrete. 赤嶺's
+  real answers cluster at 5, so "always answer 5" ranked him at the 97.5th percentile while
+  every model configuration put him in the <strong>bottom 3–6%</strong> — not uninformative
+  but actively anti-correlated, the simulation pointing away from the man. Exactly what the
+  population sweep predicts: constants swing from 2.7% to 97.5% depending on which end of the
+  scale a target occupies, while every model configuration parks near the population's
+  low-middle regardless. The simulations do not move to where the politician is.
 </p>
 
 <h3>Step 5 · Where in the chain does it break?</h3>
@@ -2186,37 +2690,42 @@ method.
 
 <div class="callout warn">
 <span class="lbl">Decision: stop chasing absolute survey accuracy</span>
-Two scorers, a 594-person population control, a rank metric and a full-resource anchor
-self-test all agree that this protocol does not carry politician identity at this scale —
-with or without the merge, and with or without abundant data. The correct move is not a
-third scorer. The paper reports the survey result as a limitation with the diagnostic
+Two scorers, a 594-person population control, a rank metric, a measured constant floor and a
+full-resource anchor self-test all agree that this protocol does not carry politician identity
+at this scale — with or without the merge, and with or without abundant data. The correct move
+is not a third scorer. The paper reports the survey result as a limitation with the diagnostic
 attached, and the headline rests on NLL.
-<br><br>
-That was the conclusion, and it was reversed in one important respect a day later. Keep
-reading.
 </div>
 
 <div class="callout">
-<span class="lbl">Strength caveat — stated because it cuts against the conclusion too</span>
-Per-target rank is a single draw and these numbers are noisy. Three targets cannot carry a
-p-value: "all three below chance" is p ≈ 0.125 on sign alone. So the claim is <em>no
-evidence that the merge injects identity</em> — not proof that it doesn't. This is a real
-difference, and it is one more argument for the target expansion of §15.
+<span class="lbl">The closure was re-opened once, on principle, and it held</span>
+This section was closed on the evidence that these personas carry no identity at all. §19 then
+showed that premise to be <strong>objective-dependent</strong> — SFT anchors do carry
+recoverable party signal — which meant the closure rested on something that had turned out not
+to be true in general. So the whole instrument was re-administered on the new anchors, at 33
+targets, at a cost of two hours of GPU.
+<br><br>
+The null survived. That is what makes this a result rather than an abandoned thread, and it
+puts a <strong>boundary</strong> on §19: SFT anchors carry recoverable party signal in
+<em>speech-likelihood</em> space and carry none of it into <em>stated survey positions</em>.
+Re-running a closed negative result after its premise changes is unglamorous and it is what
+turns "we gave up on that" into "we know where the effect stops."
 </div>
 
 <h3>The finding that survives all of this</h3>
 <p>
-  There is one positive result hiding in the wreckage, and it is arguably the most
-  interesting thing in the paper. <strong>NLL and the survey metric are anti-correlated.</strong>
-  The uniform merge has by far the worst NLL (2.74–2.99 against a base of 2.25–2.53) yet
-  posts the best or near-best survey score on two targets — and POLIS, which wins on NLL
-  every time, is never the best configuration on the survey.
+  <strong>NLL and the survey metric are anti-correlated.</strong> The uniform merge has by far
+  the worst NLL — 2.5558 on SFT anchors, 2.7689 on DPO anchors, against a base of 2.3613 — yet
+  posts the best or near-best survey score on some targets, and the tuned merge, which wins on
+  NLL every time, is never the best survey configuration.
 </p>
 <p>
-  Optimising how well a model predicts someone's <em>speech</em> does not transfer to
-  getting their <em>stated policy positions</em> right. Those are different targets, and
-  improving one can cost you the other. That is a genuine limit of weight-space persona
-  composition, and stating it plainly is worth more than burying an uninterpretable table.
+  Optimising how well a model predicts someone's <em>speech</em> does not transfer to getting
+  their <em>stated policy positions</em> right. Those are different targets, and improving one
+  can cost you the other. Because this now survives the objective fix, it is a statement about
+  <em>what transfers</em> rather than an artefact of badly trained anchors — which is a much
+  stronger thing to be able to say, and it is the difference between a limitation and an
+  excuse.
 </p>
 
 <h3>A rejected fix, and the reason it's instructive</h3>
@@ -2293,13 +2802,13 @@ your absolute score has not helped you, it has just handicapped your opponent.
 
 <div id="promViz"></div>
 <table>
-<thead><tr><th>Quintile by speech volume</th><th>Median speeches</th><th>Median rank percentile</th></tr></thead>
+<thead><tr><th>Quintile by speech volume</th><th>n</th><th>Median speeches</th><th>Median rank percentile</th></tr></thead>
 <tbody>
-<tr><td>Most prominent</td><td>3,450</td><td>58.0%</td></tr>
-<tr><td>2nd</td><td>1,372</td><td>53.7%</td></tr>
-<tr><td>3rd</td><td>579</td><td>53.4%</td></tr>
-<tr><td>4th</td><td>218</td><td>45.7%</td></tr>
-<tr><td>Least prominent</td><td>47</td><td>47.5%</td></tr>
+<tr><td>Most prominent</td><td>110</td><td>3,632</td><td>57.7%</td></tr>
+<tr><td>2nd</td><td>110</td><td>1,493</td><td>54.4%</td></tr>
+<tr><td>3rd</td><td>110</td><td>673</td><td>52.9%</td></tr>
+<tr><td>4th</td><td>110</td><td>287</td><td>47.7%</td></tr>
+<tr><td>Least prominent</td><td>114</td><td>92</td><td>50.2%</td></tr>
 </tbody>
 </table>
 
@@ -2310,15 +2819,21 @@ prime ministers and has never heard of backbenchers, and the survey score tracks
 perfectly. Which means the rank metric is not a broken instrument — it is a <em>good</em>
 one, and it hands the project a falsifiable prediction: injecting knowledge about an unknown
 politician is precisely what POLIS claims to do, so <strong>if the method works, its targets
-should move from the backbench level (~47%) toward the prominent level (~58%)</strong>.
+should move from the backbench level toward the prominent level</strong>.
 </div>
 
-<p class="tip">
-  That prediction has not been tested. The single-split run found no such lift, but on three
-  targets — and the n=33 batch was NLL-only, because the survey half had been written off by
-  then. The volume-stratified sample is already exactly the right design for it; the run
-  simply hasn't happened.
-</p>
+<div class="callout warn">
+<span class="lbl">That prediction has now been tested, and it does not pay out</span>
+The 33-target re-point in Step 4 is exactly the measurement this called for — the
+volume-stratified sample was already the right design, and it was run on the anchors that
+demonstrably carry party signal in speech space. The merge moves its targets by
+<strong>+0.7 percentile points, on 19 of 33, p = 0.49</strong>.
+<br><br>
+So the reframing was correct about the instrument and wrong about the outcome. The metric
+does read positions when the knowledge is there; the method does not put the knowledge there.
+That is the cleanest statement of what this negative result bounds, and it is worth more than
+the reframing would have been if it had come out the other way.
+</div>
 
 <h3>Two more rejected proposals, briefly</h3>
 <p>
@@ -2342,93 +2857,128 @@ should move from the backbench level (~47%) toward the prominent level (~58%)</s
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="standing">
-<h2>19 · What stands, what doesn't, and what to do next</h2>
+<h2>21 · What stands, what doesn't, and what to do next</h2>
+
+<p>
+  Every claim below is stated on the final configuration — SFT anchors, 33 targets, nested
+  cross-validation — with the earlier reading noted where it differed, because several of
+  these were reported the other way round for days.
+</p>
 
 <table>
-<thead><tr><th style="width:36%">Claim</th><th style="text-align:left">Status</th></tr></thead>
+<thead><tr><th style="width:34%">Claim</th><th style="text-align:left">Status</th></tr></thead>
 <tbody>
+<tr>
+  <td><strong>Most of what a persona adapter delivers is register, not identity</strong></td>
+  <td style="text-align:left">
+    <strong>Stands, and is the largest effect in the project.</strong> One untuned anchor
+    trained on a different politician closes 0.2186 nats against base; the entire range across
+    four anchors is 0.0568. Roughly 74–78% of the benefit is anchor-independent, and an adapter
+    trained on somebody else matches fine-tuning on the target's own data (14/33, p = 0.49).
+    §18.
+  </td>
+</tr>
+<tr>
+  <td><strong>The remaining quarter is ideological and recoverable</strong></td>
+  <td style="text-align:left">
+    <strong>Stands, under SFT anchors.</strong> A target's preferred anchor comes from its own
+    party family on 17 of 28 eligible targets against a marginal-preserving permutation null of
+    9.43, p = 0.0013 — strongest where party structure is tightest (JCP 3/3, LDP 5/12). §19.
+  </td>
+</tr>
+<tr>
+  <td><strong>The anchors' training objective decides whether that signal exists at all</strong></td>
+  <td style="text-align:left">
+    <strong>Stands, Fisher p = 7.2×10⁻⁴.</strong> Same four politicians, same 1,500 pairs, same
+    adapter shape, same folds; DPO anchors sit at chance on the same statistic. This
+    retroactively explains the party inversion, the granularity null and the sparse-SFT defeat,
+    all of which were measured on DPO anchors. §19.
+  </td>
+</tr>
 <tr>
   <td><strong>Tuned merging beats every weight-space alternative on held-out NLL</strong></td>
   <td style="text-align:left">
-    <strong>Stands, at population scale.</strong> 33/33 targets against best-single
-    (p ≈ 2×10⁻¹⁰) and 33/33 against base, nested CV, paired. Margins are small
-    (~0.027 nats) and the sign is essentially never wrong.
+    <strong>Stands, at population scale, on both arms.</strong> 33/33 against best-single
+    (+0.0299) and 33/33 against base (+0.2458). The margin is small because it is competing over
+    the ~0.057 that anchor identity contributes at all — read §18 before reading it as small.
   </td>
 </tr>
 <tr>
   <td><strong>It works on low-profile politicians, not just famous ones</strong></td>
   <td style="text-align:left">
-    <strong>Stands.</strong> The margin does not decay across six bands of speech volume.
-    Backbenchers with ~100 recorded speeches get the same benefit as former prime ministers.
+    <strong>Stands.</strong> +0.0201 to +0.0420 across a 50-fold span of speech volume with no
+    trend. One caveat found late: sparse targets speak in <em>longer</em> turns (266 → 448
+    median characters), so a fixed 30-utterance budget buys more text at the sparse end than the
+    speech count implies.
   </td>
 </tr>
 <tr>
   <td><strong>Tuning the coefficients is what matters</strong></td>
   <td style="text-align:left">
-    <strong>Stands.</strong> The untuned uniform merge is worse than not merging.
+    <strong>Stands.</strong> The untuned uniform merge is half a nat worse than not merging.
+    And the tuning's contribution is ~0.027 across three independent estimates on two anchor
+    families — it is a property of the search, not of the anchors.
   </td>
 </tr>
 <tr>
   <td><strong>The merge beats prompting</strong></td>
   <td style="text-align:left">
-    <strong>Refuted, and the hypothesis has been reworded.</strong> Prefix-free they tie:
-    17/33 targets, 79/165 folds. The written claim is being changed rather than reread. §16.
+    <strong>Stands at matched objective — after being refuted and formally withdrawn.</strong>
+    On DPO anchors it was a dead tie (17/33, p = 1.00) and the hypothesis was rewritten to
+    "composes with". On SFT anchors it is +0.0580 on 27/33, p = 3.2×10⁻⁴, and the rewrite was
+    dropped. §16.
   </td>
 </tr>
 <tr>
   <td><strong>The merge <em>composes</em> with prompting</strong></td>
   <td style="text-align:left">
-    <strong>Stands, strongly.</strong> POLIS+ICL beats ICL alone on 33/33 targets and
-    160/165 folds (+0.0694). The best configuration on every target uses both. This is the
-    replacement claim, and it is more interesting than the original.
+    <strong>Stands, strongly, on both arms.</strong> BO+ICL beats ICL alone on 33/33 targets and
+    165/165 folds (+0.1276), and is the best configuration in the study. Both claims are true
+    at once: it beats prompting <em>and</em> stacks with it.
   </td>
 </tr>
 <tr>
   <td><strong>The <em>tuned coefficients</em> matter once you are also prompting</strong></td>
   <td style="text-align:left">
-    <strong>Stands, but smaller than it looks.</strong> +0.0132 on 30/33 (p = 1.4×10⁻⁶) —
-    real, but only half the +0.0265 it is worth prefix-free. Of the +0.0694 that merging adds
-    to prompting, +0.0562 comes from merging <em>at all</em>. Reporting the headline without
-    this decomposition would overstate the paper's own contribution five-fold.
+    <strong>Stands, and no longer shrinks under the prefix.</strong> +0.0269 on 33/33, against
+    +0.0299 prefix-free — indistinguishable. On DPO anchors the prefix absorbed half of it
+    (+0.0132). But note the decomposition either way: of the +0.1276 that merging adds to
+    prompting, +0.1007 comes from merging <em>at all</em>.
   </td>
 </tr>
 <tr>
   <td><strong>You cannot usefully fine-tune on ~30 sentences</strong></td>
   <td style="text-align:left">
-    <strong>Refuted at this budget.</strong> SFT on the target's own 24 utterances beats the
-    merge 33/33 with and without the prefix; SFT+ICL is the best configuration in the study.
-    §17. One confound keeps the case open: the anchors were trained with DPO, and
-    objective-matched the merge still wins 24/33.
-  </td>
-</tr>
-<tr>
-  <td><strong>The adapters carry the <em>person</em>, not just the genre</strong></td>
-  <td style="text-align:left">
-    <strong>In serious doubt.</strong> Party-inverted anchor picks, a survey instrument at
-    chance, and a foreign anchor matching target-specific fine-tuning all point at register
-    transfer. The identity control (§17) is the experiment that decides it.
+    <strong>Stands at this budget, after a 0/33 defeat that turned out to be a confound.</strong>
+    The merge beats SFT-on-target 28/33 (p = 6.6×10⁻⁵) and SFT+ICL 27/33. Unmeasured below 24
+    instances, which is where the mechanism (12 parameters vs ~20M) predicts the gap should
+    widen. §17.
   </td>
 </tr>
 <tr>
   <td><strong>Per-depth granularity helps</strong></td>
   <td style="text-align:left">
-    <strong>Refuted.</strong> Null at 0.5B, tighter null at 7B. The "it will show up at
-    scale" hedge has been tested and retired.
-  </td>
-</tr>
-<tr>
-  <td><strong>The merge recovers ideology, not just register</strong></td>
-  <td style="text-align:left">
-    <strong>Unsupported.</strong> Two anchors take 91% of best-single picks regardless of
-    the target's party, and the survey metric shows no identity signal.
+    <strong>Refuted, and it got worse.</strong> A null at 0.5B, a tighter null on DPO anchors
+    (0.0006), and on SFT anchors a <em>loss</em> — global beats layer-group 3/3, giving back
+    40–97% of the tuning's advantage. Claim holds at equal trial budget only; ~60 trials at 12
+    dims would settle the stronger version. §15.
   </td>
 </tr>
 <tr>
   <td><strong>Simulated personas answer surveys like the real politician</strong></td>
   <td style="text-align:left">
-    <strong>No evidence — but the metric was misdiagnosed.</strong> Loses to a constant in
-    12/12 cells and ranks at chance; however the survey score tracks how well-known the
-    politician is, not how the persona was built. §18.
+    <strong>No, and the null survived the objective fix.</strong> +0.7 percentile points over
+    base on 19/33 (p = 0.49), 26 points below a constant predictor. Re-measured at n=33 on the
+    anchors that <em>do</em> carry party signal in speech space, which is what makes this a
+    boundary on §19 rather than an abandoned thread. §20.
+  </td>
+</tr>
+<tr>
+  <td><strong>More anchors would not help — the optimiser already discards capacity</strong></td>
+  <td style="text-align:left">
+    <strong>Withdrawn.</strong> That argument rested on 福島 sitting near zero in 40% of folds,
+    which turned out to be a property of one badly trained anchor. On SFT anchors all four sit
+    at 0.222–0.332. The anchor-count question is open again.
   </td>
 </tr>
 </tbody>
@@ -2436,82 +2986,74 @@ should move from the backbench level (~47%) toward the prominent level (~58%)</s
 
 <h3>The queue, in the project's own order</h3>
 
+<div class="card">
+<h3 style="margin-top:0">1 · Sixty trials at twelve dimensions</h3>
+<p style="margin-bottom:0">
+  ~25 minutes of GPU on one target. The granularity result is currently defensible only at
+  equal trial budget; this separates "per-depth structure does not help" from "12 dims is
+  under-optimised at 20 trials". Cheap, and the only thing a reviewer is likely to press on.
+</p>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">2 · The anchor-count slope, from adapters already on disk</h3>
+<p style="margin-bottom:0">
+  Nested CV at 2, 3 and 4 anchors with the subset rotated across targets, so the curve is not
+  tied to one combination. Needs no new training — <code>--adapters</code> is already explicit.
+  If 3→4 is flat, extrapolating to 20 is fantasy and four training runs are saved; if it is
+  still climbing, eight anchors becomes the obvious next build and the VRAM work in §23 is
+  justified. Better motivated than it was, since the argument against it just dissolved.
+</p>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">3 · The budget sweep</h3>
+<p style="margin-bottom:0">
+  ~4 h. Does the ordering reverse at 4–8 instances? Nested-subset budgets are built so every
+  point on the curve pairs with every other. Weaker motivation than when it was proposed — it
+  existed as "the last place a positive claim could live", and the claim is no longer in danger
+  at 24 — but it is the most direct extension of the low-resource thesis, and §15's
+  characters-per-utterance finding suggests the x-axis should be characters.
+</p>
+</div>
+
 <div class="card" style="border-left:3px solid var(--series-2)">
-<h3 style="margin-top:0">1 · The identity control — everything downstream depends on it</h3>
+<h3 style="margin-top:0">4 · The one that would change the paper: different-politician negatives</h3>
 <p style="margin-bottom:0">
-  Train the remaining three SFT anchors and score each <em>alone</em> on the probe targets
-  (§17). If all four foreign anchors land within noise of each other, the transferred
-  quantity is register and persona identity is not being learned — which becomes the paper's
-  central finding. If they separate, the DPO objective was destroying identity and the whole
-  merge programme deserves a re-run on SFT anchors. Roughly an hour of GPU per anchor, and
-  no other experiment is worth running before this one.
+  §22 argues this at length. Briefly: the DPO negative is <em>real X</em> versus <em>an LLM
+  playing X</em>, so both sides argue X's positions and the only gradient available pushes on
+  authenticity of register — which is exactly what §18 measures the adapters as having learned.
+  A pair construction carrying positional signal exists in the same corpus at zero extra cost:
+  <em>real X</em> versus <strong>a real utterance by an opposing-party politician</strong> on
+  comparable context. That changes the preference direction from "human, not LLM" to "X's
+  stance, not Y's stance". It is the most promising untried idea here.
 </p>
 </div>
-
-<div class="card">
-<h3 style="margin-top:0">2 · The budget sweep — the last home for a positive claim</h3>
-<p style="margin-bottom:0">
-  SFT wins at 24 utterances. The mechanism argument says it should collapse at 4–8 while a
-  12-parameter search does not. Nested-subset budgets are built so every point on the curve
-  pairs with every other (~4 h). If the curve is flat, the paper is a negative result — a
-  conclusion the log says should be reached deliberately, not by omission.
-</p>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">3 · The anchor-count slope, from data already on disk</h3>
-<p style="margin-bottom:0">
-  Before anyone trains more anchors: nested CV at 2, 3 and 4 anchors with the subset rotated
-  across targets. The 165 fitted coefficient matrices already hint at the answer — 福島 is
-  held near zero in 40% of folds, so capacity is being discarded at n=4. If 3→4 is flat,
-  extrapolating to 20 is fantasy and four training runs are saved.
-</p>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">4 · Tuning inside the prefix, and the survey prediction</h3>
-<p style="margin-bottom:0">
-  Two cheaper follow-ups with specific predictions attached: tuning the coefficients
-  <em>inside</em> the ICL prefix should recover the three boilerplate-speaker losses of §16
-  (~4 h on the failures plus controls); and §18's knowledge-injection prediction — targets
-  climbing from the backbench ~47th percentile toward the prominent ~58th — has still never
-  been measured on more than three targets, despite the volume-stratified n=33 sample being
-  exactly the right design for it.
-</p>
-</div>
-
-<h3>Deferred: more anchors</h3>
-<p>
-  The obvious remaining axis is anchor count — 4 today, and the original design assumed 8.
-  There is one real argument for it: the granularity null might be an artefact of having only
-  four sources to blend, since with so few directions there may be nothing for per-depth
-  weighting to differentiate. But each anchor is a full training run <em>and</em> ~3.3 GB of
-  resident VRAM, so eight anchors need 26.4 GB of deltas plus a 15.2 GB model — over the
-  limit of a 48 GB card. Speculative and expensive, against two questions above that are
-  cheap and decide whether any of this matters. Deferred.
-</p>
 
 <div class="callout">
 <span class="lbl">The general shape of this</span>
 The interesting work in this project was not the method — that was mostly assembling known
 pieces. It was the instrumentation: adding a dumb baseline, running a 594-person control,
-inventing a metric that survives the failure mode that killed the previous one, testing the
-chain at maximum resource before trying to improve it at minimum, re-running old targets to
-prove the environment hadn't drifted, and running the one baseline most likely to make the
-whole method redundant. Notice how many of those are attempts to <em>break</em> the result
-rather than to strengthen it.
+inventing a rank metric that survives the failure mode that killed MAE, testing the chain at
+maximum resource before trying to improve it at minimum, re-running old targets to prove the
+environment hadn't drifted, running the one baseline most likely to make the whole method
+redundant, and re-opening a closed negative result when its premise turned out to be
+conditional. Notice how many of those are attempts to <em>break</em> a result rather than to
+strengthen one.
 <br><br>
-Two of them paid off in opposite directions on consecutive days. The prompting baseline
-nearly killed the method; stacking it rescued the method — and then the
-<em>control</em> on that rescue showed the paper's own contribution was five times smaller
-than the headline number suggested. A result you cannot get a null out of is a result you
-cannot trust, and the most useful entries in this log are the ones where the answer changed.
+The pattern is worth stating plainly, because it repeated three times. A baseline nearly killed
+the method; stacking it rescued the method; the <em>control</em> on that rescue showed the
+contribution was five times smaller than the headline; and then a one-hour probe showed that
+every one of those measurements had been conditioned on an invisible choice. Each step was
+someone trying to falsify the previous one. A result you cannot get a null out of is a result
+you cannot trust — and the most useful entries in the decision log are the ones where the
+answer changed.
 </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="assess">
-<h2>20 · An assessment: what is fragile, and how to make this research robust</h2>
+<h2>22 · An assessment: what is fragile, and how to make this research robust</h2>
 
 <p>
   Everything before this point reports the project's own artifacts and decisions. This
@@ -2522,22 +3064,32 @@ cannot trust, and the most useful entries in this log are the ones where the ans
 
 <h3>Credit where due</h3>
 <p>
-  The process here is better than most published work in this area. Constant baselines
-  before interpretation; a control arm (best-single+ICL) on every rescue; re-running old
-  targets to prove the environment didn't drift; a decision log that records wrong turns
-  instead of erasing them; fixed transferred hyperparameters for the rival method instead of
-  a strawman. The reason the project keeps producing painful results is that it keeps
-  building instruments capable of producing them. That is the right failure mode.
+  The process here is better than most published work in this area. Constant baselines before
+  interpretation; a control arm (best-single+ICL) on every rescue; re-running old targets to
+  prove the environment didn't drift; a decision log that records wrong turns instead of
+  erasing them; fixed transferred hyperparameters for the rival method instead of a strawman;
+  re-opening a closed negative result once its premise turned out to be conditional. The reason
+  the project keeps producing painful results is that it keeps building instruments capable of
+  producing them. That is the right failure mode.
+</p>
+<p>
+  Two things deserve specific credit because they are unusual. First, when the anchor objective
+  was implicated, the response was a <strong>one-anchor probe</strong> rather than four training
+  runs on a hunch — an hour of GPU that overturned a headline result. Second, the paper is
+  generated from <code>paper_numbers.py</code>, a single stdlib script that re-derives every
+  quoted figure from committed artifacts. Nothing in it is transcribed from a log line, and
+  running it is how two errors in the decision log were caught (a mis-stated p-value, and a
+  "second independent selection rule" that was the same rule twice).
 </p>
 <p class="tip">
-  The load-bearing code paths behind §15–§17 were reviewed for this assessment: fold
+  The load-bearing code paths behind §15–§19 were reviewed for this assessment: fold
   pairing (the baselines import <code>fold_indices</code> from the merge script rather than
   reimplementing it, and neither side exposes a seed to drift on), ICL prefix hygiene
   (dev-fold only, scored at base weights, one shared builder), the continuation-only NLL
   slice, the per-fold adapter-removal guard, and the <code>speechID</code> join on DPO
   negatives. One suspected silent-drop bug — instances whose prompt fills the 1024-token
   training cap — was chased down with the real tokenizer and does not occur (target prompts
-  top out at 851 tokens). The comparisons in §17 are implemented the way they are described.
+  top out at 851 tokens). The comparisons in §15–§17 are implemented the way they are described.
 </p>
 
 <h3>Design weaknesses</h3>
@@ -2546,79 +3098,89 @@ cannot trust, and the most useful entries in this log are the ones where the ans
 <h3 style="margin-top:0">1 · The cheapest killer baselines ran last</h3>
 <p style="margin-bottom:0">
   ICL costs nothing to implement. SFT is 11 seconds a fold. Both were in the spec from day
-  one as required baselines — one labelled the <em>kill criterion</em> — and both ran months
-  after the method was built, tuned, scaled and written up. Each rewrote the paper's
-  conclusion within a day of running. The general rule this violates: <strong>run the
-  baseline most likely to kill the method before investing in the method.</strong> Had ICL
-  and SFT run first, the entire research programme would have been designed around "what do
-  anchors add that the target's own 24 sentences don't?" — which is where it has arrived
-  anyway, two GPU-rental cycles later.
+  one as required baselines — one labelled the kill criterion — and both ran months after the
+  method was built, tuned, scaled and written up. Each rewrote the paper's conclusion within a
+  day of running, and the <em>fourth</em> baseline (DPO-on-target), which looked like the most
+  redundant of the seven, is the one that exposed the confound behind both. The general rule:
+  <strong>run the baseline most likely to kill the method before investing in the method</strong>
+  — and run all of them, because the informative one is not identifiable in advance.
 </p>
 </div>
 
 <div class="card">
-<h3 style="margin-top:0">2 · A fixed upstream choice became a hidden confound</h3>
+<h3 style="margin-top:0">2 · A fixed upstream choice was a hidden confound for the entire study</h3>
 <p style="margin-bottom:0">
-  The anchor training objective (DPO) was chosen once, early, and never varied — and every
-  downstream comparison silently conditioned on it. When SFT-on-target won 33/33, it took a
-  separate insight to notice the result confounded <em>objective</em> with <em>method</em>.
-  Any parameter that expensive to change (four training runs) deserves a one-unit probe
-  early: train one anchor both ways, compare, then commit. The P18 probe that eventually did
-  this took an hour of GPU and overturned a headline result.
+  This is now demonstrated rather than suspected, so it is worth restating at full strength.
+  The anchor training objective was chosen once, early, never varied, and <em>every</em>
+  downstream comparison silently conditioned on it — the ICL tie, the 0/33 fine-tuning defeat,
+  the granularity null, the party inversion, and the first reading of the survey null. Four of
+  those five reversed or changed meaning when it was varied. Any parameter that expensive to
+  change deserves a one-unit probe before commitment. It is also worth asking, of any pipeline,
+  <em>which choice here has never been varied?</em> — and treating the answer as a live
+  confound rather than a settled fact.
 </p>
 </div>
 
-<div class="card">
-<h3 style="margin-top:0">3 · The DPO negative can only teach authenticity, not position</h3>
+<div class="card" style="border-left:3px solid var(--series-2)">
+<h3 style="margin-top:0">3 · The DPO negative can only teach authenticity, not position — and this is now measured</h3>
 <p style="margin-bottom:0">
-  The training pairs are <em>real X</em> vs <em>an LLM role-playing X</em> (§4). Both sides
-  are X-flavoured and both argue X's positions — what differs is authenticity of register.
-  So the only gradient available pushes on register, which is precisely what every
-  measurement says the adapters learned. A pair construction that carries positional signal
-  exists in the same corpus at zero extra cost: <em>real X</em> vs <strong>a real utterance
-  by a different politician</strong> on comparable context, ideally opposing-party. Then the
-  preference direction is "X's stance, not Y's stance" rather than "human, not LLM". If the
-  identity control comes back negative, this is the first thing to change before concluding
-  identity cannot be learned.
+  The training pairs are <em>real X</em> vs <em>an LLM role-playing X</em> (§4). Both sides are
+  X-flavoured and both argue X's positions; what differs is authenticity of register. So the
+  only gradient available pushes on register — and §18 measures the adapters as having learned
+  overwhelmingly register, with §19 showing the ideological residue surviving only under the
+  objective that <em>doesn't</em> use these negatives. The paper's own appendix example makes
+  the point concretely: the caricature is fluent, on-topic and correctly partisan, and what it
+  lacks is procedural specificity, not a position.
+  <br><br>
+  A pair construction carrying positional signal exists in the same corpus at zero extra cost:
+  <em>real X</em> vs <strong>a real utterance by a different politician</strong> on comparable
+  context, ideally opposing-party. The preference direction becomes "X's stance, not Y's stance"
+  rather than "human, not LLM". <strong>This is the single most promising untried idea in the
+  project</strong>, and unlike most of the queue it could plausibly move the survey result
+  rather than just the likelihood.
 </p>
 </div>
 
 <div class="card">
-<h3 style="margin-top:0">4 · The objective metric cannot see the thing being claimed</h3>
+<h3 style="margin-top:0">4 · The objective metric mostly cannot see the thing being claimed</h3>
 <p style="margin-bottom:0">
   Held-out NLL over full utterances is dominated by function words, honorifics and
   parliamentary boilerplate; the tokens that encode a policy position are a small minority.
-  A method can win every NLL comparison in this study while learning nothing about ideology
-  — which is, on the register reading, exactly what happened. The claim is about
-  <em>positions</em>; the optimiser and every headline table measure <em>token
-  likelihood</em>. Options: score NLL only on content-bearing spans; evaluate on
-  stance-labelled statements; or move to a behavioural instrument such as roll-call votes,
-  which give many labelled decisions per politician and put the bill text in the prompt so
-  the metric is not gated on the model's prior knowledge of the person.
+  §18 quantifies exactly this — three quarters of the measurable effect is genre. The
+  qualification the earlier version of this assessment could not make is that the metric is not
+  <em>blind</em>: §19 extracts a party signal at p = 0.0013 from the same likelihoods, so
+  there is ideology in there. It is just outnumbered four to one. Options remain: score NLL only
+  on content-bearing spans; evaluate on stance-labelled statements; or move to a behavioural
+  instrument such as roll-call votes, which give many labelled decisions per politician and put
+  the bill text in the prompt, so the metric is not gated on the model's prior knowledge of the
+  person.
 </p>
 </div>
 
 <div class="card">
 <h3 style="margin-top:0">5 · Unquestioned constants: the budget and the persona prompt</h3>
 <p style="margin-bottom:0">
-  The 30-utterance budget was never derived — the log admits this — and the whole
-  SFT-vs-merge verdict may invert below it; the sweep is rightly queued. Similarly the
-  evaluation persona is conditioned on the bare name, while training prompts carry name
-  <em>plus party</em> in a different format. Cheap ablations (name+party at eval; budget at
-  4/8/16) pin down how much of each result is an artefact of these constants.
+  The 30-utterance budget was never derived — the log says so — and the sweep is still unrun.
+  The evaluation persona is conditioned on the bare name while training prompts carry name
+  <em>plus party</em> in a different format; nobody has ablated that. Both are cheap
+  (name+party at eval; budget at 4/8/16) and both would pin down how much of a result is an
+  artefact of a constant. Add a third to the list on the strength of §15's appendix finding:
+  <strong>utterances are the wrong unit</strong> for a low-resource budget when median
+  utterance length varies 1.7× across the resource range.
 </p>
 </div>
 
 <h3>Statistical weaknesses</h3>
 
 <div class="card">
-<h3 style="margin-top:0">6 · "Best configuration in the study" is a post-hoc selection</h3>
+<h3 style="margin-top:0">6 · "Best configuration in the study" is still a post-hoc selection</h3>
 <p style="margin-bottom:0">
-  Eleven configurations are ranked on the same 165 folds, and the winner (SFT+ICL) is then
-  described as best. With 33/33 paired wins the top-vs-merge gap is safe, but the fine
-  ordering is not — DPO+ICL (2.1013) vs POLIS+ICL (2.1042) is a 14/33 coin flip reported to
-  four decimals. The paper should rank only where the paired sign test is decisive and
-  explicitly mark the rest as ties.
+  Eleven configurations are ranked on the same 165 folds and the winner is then described as
+  best. This is better than it was — BO+ICL beats the runner-up SFT+ICL on 27/33 with
+  p = 3.2×10⁻⁴, so the top of the table is now a paired result rather than a decimal-place
+  comparison. But the fine ordering below it is not: several adjacent rows differ by less than
+  their paired resolution, and the paper is right to rank only where the sign test is decisive
+  and to mark the rest as ties.
 </p>
 </div>
 
@@ -2626,32 +3188,35 @@ cannot trust, and the most useful entries in this log are the ones where the ans
 <h3 style="margin-top:0">7 · One draw of 33 targets is carrying many analyses</h3>
 <p style="margin-bottom:0">
   The 33-target sample was drawn once, and every subsequent claim — prominence bands,
-  self-similarity correlations, the SFT verdict, the coefficient post-mortems — is computed
-  on it. Each analysis is fine alone; together they are a garden of forking paths on a
-  single sample. The fix is unusually cheap here: <strong>517 politicians remain
-  eligible</strong>, so the headline claims can be re-confirmed on a fresh 30-target draw
-  for about five GPU-hours. Designate the current sample exploratory and the fresh draw
-  confirmatory, and decide the confirmatory claims <em>before</em> running it.
+  self-similarity correlations, the fine-tuning verdict, the affinity test, the coefficient
+  post-mortems, the survey re-point — is computed on it. Each analysis is fine alone; together
+  they are a garden of forking paths on a single sample. The fix is unusually cheap here:
+  <strong>517 politicians remain eligible</strong>, so the headline claims can be re-confirmed
+  on a fresh 30-target draw for about five GPU-hours. Designate the current sample exploratory
+  and the fresh draw confirmatory, and decide the confirmatory claims <em>before</em> running
+  it. This is now the highest-value statistical work available, precisely because the claims
+  have stopped moving.
 </p>
 </div>
 
 <div class="card">
-<h3 style="margin-top:0">8 · Single seed, and 33 targets that share one model</h3>
+<h3 style="margin-top:0">8 · Single seed, and 33 targets that share four anchors</h3>
 <p style="margin-bottom:0">
-  The fold split, the optimiser and the DARE masks all run at one fixed seed; headline
-  numbers should be shown stable across two or three. And the sign tests treat the 33
-  targets as independent draws, but they share the same four anchors and the same base
-  model — for anchor-specific conclusions (like the party-inversion finding) the effective
-  sample is smaller than 33, and p ≈ 2×10⁻¹⁰ overstates the certainty. The direction is
-  fine; the decimal places of the p-values are not.
+  The fold split, the optimiser and the DARE masks all run at one fixed seed; headline numbers
+  should be shown stable across two or three. And the sign tests treat the 33 targets as
+  independent draws, but they share the same four anchors and the same base model. For
+  anchor-specific conclusions this matters most: the affinity test's 28 observations are 28
+  targets against <em>four</em> anchors, so the effective sample for "SFT anchors carry party"
+  is smaller than 28 and p = 0.0013 is optimistic. The permutation null is the right instrument
+  and the direction is well supported; the decimal places are not.
 </p>
 </div>
 
 <h3>The instruments are underpowered for the question being asked</h3>
 <p>
-  One analysis, run for this walkthrough on the committed 594-persona dump, reframes the
-  survey chapter. The rank metric and MAE both read "no identity signal" — but they are
-  low-power instruments, and a more sensitive one finds signal they cannot see:
+  One analysis, run for this walkthrough on the committed 594-persona dump rather than by the
+  project, reframes the survey chapter. The rank metric and MAE both read "no identity signal" —
+  but they are low-power instruments, and a more sensitive one finds signal they cannot see:
 </p>
 <ul>
   <li>Per-item correlation between simulated and real answers across all 594 politicians:
@@ -2664,47 +3229,58 @@ cannot trust, and the most useful entries in this log are the ones where the ans
 <p>
   Weak, but real, and partly individual rather than party-level. The rank-among-594 metric
   needs roughly r ≈ 0.7 before it moves off 50%, so at r ≈ 0.2 it reads chance <em>no matter
-  what an intervention does</em> — it cannot register progress. A population-level
-  correlation at n = 594 has a standard error near 0.04 and detects a change of 0.1.
+  what an intervention does</em> — it cannot register progress. A population-level correlation
+  at n = 594 has a standard error near 0.04 and detects a change of 0.1.
   <strong>Steer by the sensitive instrument; keep the rank metric as the honest headline
-  check.</strong> "No identity" should be revised to "identity signal of r ≈ 0.2, invisible
-  to the metrics used so far" — a different claim, with different next steps.
+  check.</strong> "No identity" should be read as "identity signal of r ≈ 0.2, invisible to the
+  metrics used so far" — a different claim, with different next steps.
+</p>
+<p class="tip">
+  §19 is the same lesson learned independently inside the project, in the other measurement
+  space. A permutation test on which anchor a target prefers found ideology at p = 0.0013 in
+  exactly the likelihoods where the headline comparisons had shown nothing but register. When a
+  metric reads "no signal", the first question is whether it could have read anything else.
 </p>
 
 <h3>The path forward, ranked</h3>
 <ol>
-  <li><strong>Run the identity control first</strong> (§17 — already queued; this assessment
-      concurs). Every other decision branches on register-vs-identity.</li>
-  <li><strong>Run the budget sweep</strong> — the only regime where the low-resource merge
-      claim can still beat SFT, with a concrete mechanism (12 parameters vs 20M) making it
-      falsifiable in ~4 hours.</li>
-  <li><strong>If identity survives: rebuild the anchors</strong> — SFT objective,
-      different-politician negatives (point 3), then re-run the merge programme once, not
-      piecemeal.</li>
+  <li><strong>Rebuild the negatives, not the method</strong> — real-opposing-politician
+      completions instead of LLM caricatures (point 3). It is the only queued change that
+      targets the thing every measurement says is missing, and it costs one export plus four
+      training runs.</li>
+  <li><strong>Pre-commit and run a confirmatory 30-target draw</strong> (point 7). Five GPU
+      hours converts a well-instrumented exploratory study into a confirmed one, and the claims
+      are finally stable enough to pre-commit.</li>
   <li><strong>Re-power the external metric before re-running it</strong> — population
       correlation as the steering instrument, and evaluate roll-call votes as a behavioural
       ground truth with real statistical depth per politician.</li>
-  <li><strong>Reword the hypothesis in writing now</strong>, before the next results arrive
-      — composes-with, not beats — and pre-commit the confirmatory claims for a fresh target
-      draw. A hypothesis edited after each result is not a hypothesis.</li>
+  <li><strong>Close the two cheap open ablations</strong> — 60 trials at 12 dims, and the
+      anchor-count slope from adapters already on disk. Both are under half an hour of GPU
+      and both currently sit as caveats in the paper.</li>
+  <li><strong>Seed stability on the headline rows</strong> (point 8). Two extra seeds on
+      three targets is enough to say the numbers do not depend on one draw of a DARE mask.</li>
 </ol>
 
 <div class="callout">
-<span class="lbl">The honest-paper option is a good paper</span>
-If the identity control lands on register and the budget curve is flat, the assembled
-material is already a coherent, publishable contribution: <em>task-vector persona
-composition at 7B transports parliamentary register, not individual identity</em> — with an
-n=33 protocol, seven baselines, a 594-person diagnostic toolkit, an instrument-power
-analysis, and a decision log showing exactly how the positive readings died. Negative
-results with this level of instrumentation are rarer and more useful than the paper
-originally planned. The log itself says the choice should be deliberate; this assessment's
-view is that it would also be respectable.
+<span class="lbl">What the paper ended up being, and whether that was the right call</span>
+It would have been defensible to write this as a pure negative result: <em>task-vector persona
+composition at 7B transports parliamentary register, not individual identity</em>. For two days
+that was the honest reading, and the decision log says explicitly that the choice should be
+made deliberately rather than by omission.
+<br><br>
+The objective finding is what made a different paper possible, and the shape the paper chose —
+leading the contributions with the register decomposition rather than the main table, then the
+recoverable ideology, then the objective — is an editorial judgement worth noticing. It puts
+the largest effect first even though the largest effect is the least flattering one, and it
+means a reader meets "three quarters of this is genre" before meeting "and our method wins".
+This assessment's view is that this is the correct ordering, and that the negative result on
+the survey instrument is worth as much as either. Negative results with this level of
+instrumentation are rarer and more useful than the paper originally planned to be.
 </div>
 </section>
-
 <!-- ────────────────────────────────────────────────────── -->
 <section id="pitfalls">
-<h2>21 · Engineering traps worth more than they look</h2>
+<h2>23 · Engineering traps worth more than they look</h2>
 
 <h3>The silent no-op</h3>
 <p>
@@ -2731,6 +3307,13 @@ view is that it would also be respectable.
 <span class="lbl">Generalisable lesson</span>
 The dangerous bugs in ML systems are rarely crashes — they are the ones that return
 plausible numbers. When an operation can be silently skipped, assert that it happened.
+<br><br>
+This one is worth generalising past the specific bug, and the paper does so in its discussion:
+a flat objective is <em>not distinguishable from a difficult one</em> by looking at the
+optimisation trace. The optimiser converges either way. So every run here is gated behind a
+self-test requiring four distinct likelihoods under four coefficient settings plus exact
+restoration of the base value — and any weight-space merging study should adopt something
+equivalent, because the failure mode is not specific to meta tensors.
 </div>
 
 <h3>Memory that scales the wrong way</h3>
@@ -2758,7 +3341,7 @@ plausible numbers. When an operation can be silently skipped, assert that it hap
 
 <h3>What actually went wrong on the day</h3>
 <p>
-  The first 7B session — the three-target run that §15 opens with — was a rented GPU on a
+  The first 7B session — the three-target run whose paired folds §15 plots — was a rented GPU on a
   two-hour clock, which is a good stress test of how much of a research pipeline is real.
   Roughly the first hour went to these four:
 </p>
@@ -2825,13 +3408,43 @@ plausible numbers. When an operation can be silently skipped, assert that it hap
     empty string.</strong>
   </td>
 </tr>
+<tr>
+  <td>Two hours of rented GPU spent running the wrong protocol on all 33 targets</td>
+  <td style="text-align:left">
+    The command was one line of environment-variable prefixes:
+    <code>ADAPTERS=… NESTED=1 ICL=1 DUMP_PICKS=… TARGETS=… ./run_7b_bo_gpu.sh</code>. The
+    terminal <strong>wrapped</strong> it, the shell received only the tail from
+    <code>TARGETS=</code> onward, and the runner silently fell back to its defaults —
+    single-split, wrong anchors, survey evaluation on — for every target. It even looked like
+    good news: single-split does one optimisation per target instead of five, so it presented
+    as a "3× speedup".
+    <br><br>
+    This was the <em>seventh</em> instance of the same failure in this workflow, which is the
+    point. It was finally fixed structurally rather than by resolving to be careful: there are
+    now purpose-built scripts that take <strong>nothing on the command line</strong>, verify
+    every adapter exists before loading a 7B model, and rename their logs afterwards so a later
+    run cannot append into them. <strong>If a mistake has happened seven times, the mistake is
+    in the interface, not in the operator.</strong>
+  </td>
+</tr>
 </tbody>
 </table>
+
+<h3>A clock that lies, and logs that append</h3>
+<p>
+  Two smaller ones from the same sessions, both of which cost time reading results rather than
+  producing them. The rented pod's clock ran about nine hours behind local time, so log
+  timestamps for an evening session read as morning — harmless until you are trying to work out
+  which of two runs came first. And the batch runner <em>appends</em>, so an aborted attempt
+  sits above the good block in the same file; the summariser was taught to read only the last
+  complete block, which is the right fix, but anyone reading the raw log by eye will find the
+  failed run first.
+</p>
 </section>
 
 <!-- ────────────────────────────────────────────────────── -->
 <section id="run">
-<h2>22 · Run it yourself</h2>
+<h2>24 · Run it yourself</h2>
 
 <p>
   Everything above is runnable. All the code lives in one directory,
@@ -2858,7 +3471,7 @@ python polis_option_logprob.py --demo</code></pre>
 <code>merge_layer_group.py</code> prints four NLLs — base, uniform, upper-group-only,
 lower-group-only — plus a restored base. They must be <strong>four distinct numbers</strong>
 and the restore must match base exactly. If they collapse, the merge is silently no-oping
-(§21) and every hour after that is wasted. Printing <code>[OK]</code> is not sufficient;
+(§23) and every hour after that is wasted. Printing <code>[OK]</code> is not sufficient;
 that line is reached either way.
 </div>
 
@@ -2869,13 +3482,18 @@ python select_polis_anchors.py --max-anchors 4
 <span class="com"># 2. extract prompt/chosen pairs for one anchor</span>
 python export_polis_dpo_pairs.py --person-id 152 --k 4 --max-pairs 1000
 
-<span class="com"># 3. fill in the `rejected` caricature (needs a Gemini API key)</span>
+<span class="com"># 3. fill in the `rejected` caricature -- DPO arm only, needs a Gemini API key</span>
 python generate_polis_rejected.py --person-id 152
 
-<span class="com"># 4. train that anchor's adapter</span>
+<span class="com"># 4a. train that anchor's adapter with DPO (uses prompt/chosen/rejected)</span>
 python train_one_politician_persona.py \
     --data ../../data/data/polis/dpo_pairs_full/152.jsonl \
     --output output/polis_152_kishida --epochs 1
+
+<span class="com"># 4b. ... or with SFT (same file, `rejected` ignored). This is the arm the</span>
+<span class="com">#     paper's main table uses, and the difference is the whole of §19.</span>
+python train_anchor_sft.py --person-id 152 \
+    --output output/polis_152_sft_qwen7b
 
 <span class="com"># 5. ... repeat 2-4 for 2377, 3631, 5520, then optimise the merge</span>
 python bo_merge_coeffs.py --target 1279 --budget 30 --trials 40 \
@@ -2890,11 +3508,10 @@ python bo_merge_coeffs.py --target 1279 --budget 30 --trials 40 \
 
 <h3>The population run (§15 and §16)</h3>
 <p>
-  The 33-target batch is driven through one shell runner with everything set by environment
-  variable. This is the command that produced the headline result, and the two flags after
-  <code>NESTED=1</code> are the ones worth knowing about: <code>ICL=1</code> adds the
-  prompting baseline of §16, and <code>DUMP_PICKS</code> saves each fold's fitted
-  coefficients so the next question doesn't cost another seven hours.
+  The 33-target batch is driven through one shell runner. The general-purpose entry point takes
+  everything by environment variable — <code>ICL=1</code> adds the prompting baseline of §16,
+  and <code>DUMP_PICKS</code> saves each fold's fitted coefficients so the next question
+  doesn't cost another seven hours of re-derivation:
 </p>
 <pre><code><span class="com"># ~10 min per target; run it inside tmux, the SSH session will drop</span>
 NESTED=1 ICL=1 \
@@ -2910,9 +3527,17 @@ python nested_log_summary.py \
   The <code>--glob</code> is not optional — the artifacts directory holds five protocols side
   by side and the summariser refuses to pool across them. It also reads only the
   <em>last</em> complete block in each file, so aborted attempts sitting above the good
-  results don't need cleaning up first. Swap the glob for
-  <code>'combined_target_*.log'</code> to get the stacked rows of §16.
+  results don't need cleaning up first.
 </p>
+<div class="callout warn">
+<span class="lbl">Prefer the fixed scripts to the flexible one</span>
+That command is exactly the shape that cost two hours of rented GPU when a terminal wrapped it
+(§23). The runs behind the paper's tables use single-purpose scripts that take
+<strong>no arguments at all</strong> — <code>run_sft33.sh</code>,
+<code>run_granularity_sft.sh</code>, <code>run_utas_sft.sh</code> — each of which verifies every
+adapter exists before loading a 7B model and renames its log afterwards so a later run cannot
+append into it. Nothing gets pasted but a script name.
+</div>
 
 <h3>The baselines that decided whether any of this was necessary</h3>
 <p>
@@ -2930,7 +3555,7 @@ python nested_log_summary.py \
   small grid search is already optimistic enough.
 </p>
 
-<h3>The diagnostics from §18</h3>
+<h3>The diagnostics from §20</h3>
 <p>
   These are the two scripts that turned an uninterpretable survey table into a conclusion,
   and they are the cheapest things in the repository. Neither trains anything; the first
@@ -2966,10 +3591,50 @@ python bo_merge_coeffs.py --target 1279 --utas-eval ...2024HoR.json \
 
 <p>
   <strong>Never let the adapter glob run loose.</strong> <code>output/polis_*</code> matches
-  the 0.5B adapters, the 7B adapters <em>and</em> the smoke-test directory all at once, and
-  mixing scales produces a merge that runs happily and means nothing. Pass them explicitly:
+  the 0.5B adapters, the 7B adapters, the SFT arm, the DPO arm <em>and</em> the smoke-test
+  directory all at once, and mixing scales or arms produces a merge that runs happily and means
+  nothing. Pass them explicitly, and note that the suffix is the only thing distinguishing the
+  two anchor families:
 </p>
-<pre><code>--adapters output/polis_{152,2377,3631,5520}_qwen7b</code></pre>
+<pre><code><span class="com"># DPO arm (the original)            SFT arm (the paper's main table)</span>
+--adapters output/polis_{152,2377,3631,5520}_qwen7b
+--adapters output/polis_{152,2377,3631,5520}_sft_qwen7b</code></pre>
+
+<h3>Rebuilding the paper from the artifacts</h3>
+<p>
+  Nothing in <code>main.tex</code> is transcribed from a log line. Two scripts stand between the
+  committed run outputs and the document, and the split between them is deliberate — the
+  analysis has to run on a bare pod interpreter, the plotting needs matplotlib:
+</p>
+<pre><code><span class="com"># re-derive every number the paper quotes; stdlib only, ~10 s, no GPU</span>
+python research/polis/paper_numbers.py
+<span class="com">#   -> specs/polis-low-resource-persona/artifacts/paper_numbers.json</span>
+
+<span class="com"># the 9 measurement plots + the scale and objective sketches (needs research/.venv)</span>
+python research/polis/paper_figures.py
+
+<span class="com"># the 3 structural diagrams -- Graphviz `dot`, not hand-authored SVG</span>
+python research/polis/paper_diagrams.py
+
+<span class="com"># the data appendix: real training instances, pulled by fixed id + index</span>
+python research/polis/paper_examples.py</code></pre>
+<p class="tip">
+  Every number on this page comes from that JSON. Running <code>paper_numbers.py</code> is also
+  how two errors in the decision log were found — a sign-test p quoted as 1.00 that is actually
+  0.49, and a "second independent selection rule" that turned out to be the same rule twice
+  (§19). <strong>Deriving your write-up from a script rather than from your notes is a
+  correctness check, not just a convenience.</strong>
+</p>
+<div class="callout">
+<span class="lbl">One drawing lesson, recorded because the first attempt was wrong</span>
+The structural diagrams were first hand-authored as SVG. They rendered fine, and every edit
+moved one label into another: five diagrams needed a text-width estimator, a wrapper and three
+rounds of collision fixes, and they still looked hand-placed. With Graphviz the only things
+specified are <em>content, grouping and rank</em> — the part that carries meaning — and layout
+is not a thing that can be got wrong. Quantitative and geometric figures stayed in matplotlib.
+Watch the natural width, though: the pipeline diagram first laid out at 11.9 inches, which
+<code>\\textwidth</code> would have shrunk to 55%, taking 9 pt labels to 5 pt.
+</div>
 </section>
 
 <p style="color:var(--muted); font-size:13px; border-top:1px solid var(--border); padding-top:20px">
@@ -2980,12 +3645,18 @@ python bo_merge_coeffs.py --target 1279 --utas-eval ...2024HoR.json \
   <code>anchor_delta_cosine.py</code>, <code>polis_option_logprob.py</code>,
   <code>utas_population_eval.py</code>, <code>utas_rank_metric.py</code>,
   <code>nested_log_summary.py</code>, <code>sparse_target_baselines.py</code>,
-  <code>train_anchor_sft.py</code>, <code>paths.py</code>. Line numbers were checked against the working tree; data
+  <code>train_anchor_sft.py</code>, <code>anchor_affinity.py</code>,
+  <code>paper_numbers.py</code>, <code>paper_figures.py</code>,
+  <code>paper_diagrams.py</code>, <code>paper_examples.py</code>,
+  <code>paths.py</code>. Line numbers were checked against the working tree; data
   referenced from <code>data/data/polis/</code> and
-  <code>s3_mirror/kokkai-doc/ideology/</code>. The 7B results in §15–§18 come from
-  <code>specs/polis-low-resource-persona/artifacts/</code>; the runbook is that folder's
-  <code>RUNPOD.md</code> and the reasoning behind every decision is in its
-  <code>DECISIONS.md</code>. All numbers are the project's own — none are illustrative.
+  <code>s3_mirror/kokkai-doc/ideology/</code>. The 7B results in §15–§20 come from
+  <code>specs/polis-low-resource-persona/artifacts/</code> — every result figure on this page
+  is read from <code>paper_numbers.json</code> in that folder, the same file the paper's tables
+  are generated from. The runbook is that folder's <code>RUNPOD.md</code> and the reasoning
+  behind every decision is in its <code>DECISIONS.md</code>. The paper itself is
+  <code>paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex</code>.
+  All numbers are the project's own — none are illustrative.
 </p>
 
 </main>
@@ -3040,10 +3711,10 @@ function drawPipeline() {
   const s = svg(host, W, H);
   const stages = [
     {t:"Diet transcripts", s:"session-grounded pairs", key:0},
-    {t:"DPO anchors", s:"4 LoRA adapters", key:0},
+    {t:"Anchor adapters", s:"4 LoRA · SFT or DPO", key:0},
     {t:"DARE + TIES", s:"weight-space merge", key:1},
     {t:"Bayesian opt", s:"tune C (K×G)", key:1},
-    {t:"Persona", s:"evaluated on UTAS", key:1}
+    {t:"Persona", s:"held-out NLL + UTAS", key:1}
   ];
   const bw = 138, gap = (W - stages.length*bw) / (stages.length-1);
   stages.forEach((st, i) => {
@@ -3275,7 +3946,7 @@ const TRACE = [
   {t:"Write W_base + ΔW into the live model",
    f:"self._params[...].data.copy_",
    src:"merge_layer_group.py:142–144",
-   d:"In place, in fp32, cast back to the model's dtype. No new model object, no reload — the same 15 GB of weights are being rewritten. This is the step that silently no-ops on meta tensors (§21)."},
+   d:"In place, in fp32, cast back to the model's dtype. No new model object, no reload — the same 15 GB of weights are being rewritten. This is the step that silently no-ops on meta tensors (§23)."},
   {t:"Score the target's real sentences",
    f:"NLLScorer.mean_nll",
    src:"bo_merge_coeffs.py:74–87",
@@ -3658,48 +4329,6 @@ $("#lenToggle").onclick = () => {
   drawLen();
 };
 
-/* ---------- 12. results (7B nested CV, artifacts/bo7b_gpu_logs/) ---------- */
-const RES = {
-  targets:["高市 Takaichi (LDP)","赤嶺 Akamine (JCP)","枝野 Edano (CDP)"],
-  series:["Base","Uniform","Best-single","POLIS"],
-  vals:[[2.2684,2.7448,2.1701,2.1525],
-        [2.2520,2.7990,2.1878,2.1701],
-        [2.5302,2.9878,2.4446,2.4159]]
-};
-function drawResults() {
-  const host = $("#resultsViz"); const W = 800, H = 300;
-  const s = svg(host, W, H);
-  const L=52,R=16,T=18,B=54, pw=W-L-R, ph=H-T-B, ymax=3.3;
-  const Y = v => T + (1-v/ymax)*ph;
-  const cols = ["--series-1","--series-2","--series-3","--series-4"].map(css);
-  [1,1.5,2,2.5,3].forEach(g => {
-    el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
-    const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
-    t.textContent = g.toFixed(1);
-  });
-  el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
-  const gw = pw/3;
-  RES.vals.forEach((row,gi) => {
-    const bw = (gw-40)/4;
-    row.forEach((v,si) => {
-      const x = L + gi*gw + 20 + si*bw;
-      el("rect", {x:x+1, y:Y(v), width:bw-3, height:T+ph-Y(v), rx:4,
-        fill:cols[si], "fill-opacity":0.92}, s);
-      const t = el("text", {x:x+bw/2, y:Y(v)-6, "text-anchor":"middle", "font-size":10,
-        "font-weight":600, fill:css("--text-primary")}, s);
-      t.textContent = v.toFixed(2);      // direct labels = the contrast relief rule
-    });
-    const gl = el("text", {x:L+gi*gw+gw/2, y:T+ph+20, "text-anchor":"middle",
-      "font-size":12, fill:css("--text-secondary")}, s);
-    gl.textContent = RES.targets[gi];
-  });
-  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
-    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
-  yl.textContent = "held-out NLL (lower better)";
-  const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
-  note.textContent = "7B, nested 5-fold CV. The uniform merge is worse than doing nothing — untuned task vectors overshoot.";
-}
-
 /* ---------- 15. paired per-fold deltas (BO − best-single) ---------- */
 const FOLDS = [
   {t:"高市 (LDP)",  bs:[2.085,2.108,2.244,2.312,2.102], bo:[2.064,2.086,2.238,2.285,2.090]},
@@ -3776,29 +4405,46 @@ function drawDiverge() {
   note.textContent = "mean gap per item, 1–5 scale · ratio 0.209 — swapping the name moves the answers a fifth as much as real people differ";
 }
 
-/* ---------- 15/16. the 33 targets (nested_log_summary.py over n33_target_*.log) ----------
-   [person_id, name, speeches (0 = one of the 3 originals), BO-vs-best1, BO-vs-ICL]        */
+/* ---------- 15/16. the 33 targets (paper_numbers.json, comparisons.{sft,dpo}) ----------
+   [person_id, name, speeches, BO-vs-best1 (sft), BO-vs-ICL (sft), BO-vs-ICL (dpo)]        */
 const N33 = [
-  [1279,"高市早苗",0,0.0172,0.0232],   [2053,"赤嶺政賢",0,0.0216,0.0136],
-  [2289,"枝野幸男",0,0.0256,0.0348],   [808,"野田佳彦",8219,0.0436,0.0268],
-  [2546,"安住淳",5855,0.0210,0.0242],  [942,"浜田靖一",5855,0.0630,-0.0286],
-  [2732,"宮本徹",4776,0.0218,0.0420],  [225,"柴山昌彦",4075,0.0102,-0.0258],
-  [2189,"武田良太",2252,0.0422,0.0170],[1434,"笠浩史",2026,0.0248,0.0434],
-  [5518,"尾辻かな子",1817,0.0164,0.0370],[2171,"北神圭朗",1398,0.0210,0.0528],
-  [14,"若宮健嗣",1249,0.0242,0.0366],  [989,"近藤和也",956,0.0154,0.0048],
-  [3022,"津島淳",832,0.0192,-0.3240],  [3245,"遠藤良太",693,0.0298,0.0112],
-  [1782,"空本誠喜",650,0.0254,-0.0004],[2853,"平賀高成",639,0.0412,0.0704],
-  [1083,"山崎正恭",452,0.0222,0.0082], [110,"田野瀬太道",423,0.0208,-0.3252],
-  [277,"高橋美穂",413,0.0204,-0.0196], [230,"和田義明",373,0.0192,-0.0110],
-  [1982,"金城泰邦",364,0.0316,0.0174], [2025,"柴田勝之",230,0.0370,-0.1788],
-  [640,"八木哲也",179,0.0146,-0.1224], [1543,"手塚仁雄",166,0.0212,-0.3292],
-  [1551,"小竹凱",166,0.0364,-0.0294],  [1547,"東克哉",140,0.0230,-0.0748],
-  [1572,"五十嵐清",114,0.0374,0.0124], [2704,"岡野純子",104,0.0286,-0.0628],
-  [688,"高見康裕",104,0.0252,-0.0232], [369,"山本左近",103,0.0350,-0.0380],
-  [2447,"斎藤裕喜",82,0.0168,-0.0134]
+  [2289,"枝野幸男",9139,0.0148,0.1298,0.0348],
+  [2053,"赤嶺政賢",8324,0.0186,0.0813,0.0137],
+  [808,"野田佳彦",8219,0.0239,0.0726,0.0267],
+  [1279,"高市早苗",7666,0.0293,0.0951,0.0232],
+  [942,"浜田靖一",5855,0.0232,0.1358,-0.0286],
+  [2546,"安住淳",5855,0.0076,0.1371,0.0242],
+  [2732,"宮本徹",4776,0.0185,0.1254,0.0421],
+  [225,"柴山昌彦",4075,0.0272,0.0625,-0.0258],
+  [2189,"武田良太",2252,0.0267,0.1197,0.0172],
+  [1434,"笠浩史",2026,0.0200,0.1182,0.0433],
+  [5518,"尾辻かな子",1817,0.0467,0.1272,0.0371],
+  [2171,"北神圭朗",1398,0.0266,0.1520,0.0528],
+  [14,"若宮健嗣",1249,0.0590,0.1188,0.0365],
+  [989,"近藤和也",956,0.0153,0.0753,0.0050],
+  [3022,"津島淳",832,0.0519,-0.0284,-0.3242],
+  [3245,"遠藤良太",693,0.0283,0.0755,0.0108],
+  [1782,"空本誠喜",650,0.0400,0.0483,-0.0003],
+  [2853,"平賀高成",639,0.0156,0.1773,0.0706],
+  [1083,"山崎正恭",452,0.0536,0.0682,0.0084],
+  [110,"田野瀬太道",423,0.0433,-0.0480,-0.3253],
+  [277,"高橋美穂",413,0.0348,0.0409,-0.0194],
+  [230,"和田義明",373,0.0384,0.0612,-0.0112],
+  [1982,"金城泰邦",364,0.0400,0.0777,0.0173],
+  [2025,"柴田勝之",230,0.0285,-0.0886,-0.1789],
+  [640,"八木哲也",179,0.0096,-0.0583,-0.1226],
+  [1543,"手塚仁雄",166,0.0146,-0.1833,-0.3291],
+  [1551,"小竹凱",166,0.0438,0.0259,-0.0295],
+  [1547,"東克哉",140,0.0414,-0.0074,-0.0747],
+  [1572,"五十嵐清",114,0.0257,0.0874,0.0123],
+  [688,"高見康裕",104,0.0272,0.0408,-0.0231],
+  [2704,"岡野純子",104,0.0571,0.0068,-0.0631],
+  [369,"山本左近",103,0.0100,0.0391,-0.0378],
+  [2447,"斎藤裕喜",82,0.0260,0.0291,-0.0132]
 ];
-// shared lollipop renderer: one row per target, sorted by the value being shown
-function drawTargets(hostId, col, lo, hi, ticks, caption) {
+// shared lollipop renderer: one row per target, sorted by the value being shown.
+// `extra` draws a second, fainter series on the same row (the DPO arm).
+function drawTargets(hostId, col, lo, hi, ticks, caption, extra) {
   const host = $(hostId); if (!host) return;
   const rows = N33.slice().sort((a,b) => b[col] - a[col]);
   const W = 800, rh = 15, T = 30, B = 44, L = 96, R = 92;
@@ -3818,8 +4464,18 @@ function drawTargets(hostId, col, lo, hi, ticks, caption) {
     const nm = el("text", {x:L-10, y:y+4, "text-anchor":"end", "font-size":10.5,
       fill:css("--text-secondary")}, s);
     nm.textContent = r[1];
+    if (extra !== undefined) {                    // faint comparison series behind
+      const w = r[extra];
+      el("line", {x1:X(0), y1:y, x2:X(w), y2:y, stroke:css("--muted"),
+        "stroke-width":2, "stroke-opacity":0.30}, s);
+      el("circle", {cx:X(w), cy:y, r:3, fill:css("--muted"), "fill-opacity":0.55}, s);
+      if (w < lo) {
+        const t = el("text", {x:X(lo)+7, y:y+3.5, "font-size":9.5, fill:css("--muted")}, s);
+        t.textContent = "◀ " + w.toFixed(2);
+      }
+    }
     el("line", {x1:X(0), y1:y, x2:X(v), y2:y,
-      stroke: v>0?css("--series-4"):css("--neg"), "stroke-width":2, "stroke-opacity":0.5}, s);
+      stroke: v>0?css("--series-4"):css("--neg"), "stroke-width":2, "stroke-opacity":0.55}, s);
     el("circle", {cx:X(v), cy:y, r:3.6, fill: v>0?css("--series-4"):css("--neg")}, s);
     if (clipped) {          // arrow marking a value pushed off the axis
       const t = el("text", {x:X(lo)+7, y:y+3.5, "font-size":10, fill:css("--neg")}, s);
@@ -3831,111 +4487,312 @@ function drawTargets(hostId, col, lo, hi, ticks, caption) {
 }
 function drawN33() {
   drawTargets("#n33Viz", 3, 0, 0.07, [0,0.02,0.04,0.06],
-    "nats better than the best single anchor — 33 of 33 above zero");
+    "nats better than the best single anchor, SFT anchors — 33 of 33 above zero");
 }
 function drawIcl() {
-  drawTargets("#iclViz", 4, -0.12, 0.09, [-0.12,-0.08,-0.04,0,0.04,0.08],
-    "POLIS minus prompting · right = merge wins, left = prompting wins · 3 values clipped");
+  drawTargets("#iclViz", 4, -0.12, 0.20, [-0.12,-0.08,-0.04,0,0.05,0.10,0.15,0.20],
+    "merge minus prompting · gold = SFT anchors (27/33), grey = DPO anchors (17/33) · values below −0.12 clipped",
+    5);
 }
 
-/* ---------- 16. what each layer of the stack adds, in nats ---------- */
-const STACK = [
-  {lbl:"Prompting alone (ICL)",        add:0,       c:"--muted",    note:"the baseline everything is measured against"},
-  {lbl:"+ any merge at all",           add:0.0562,  c:"--series-3", note:"best-single + prefix · 33/33"},
-  {lbl:"+ tuning the coefficients",    add:0.0132,  c:"--series-4", note:"the part that is POLIS · 30/33"}
+/* ---------- 18. the register decomposition (register.sft.per_target) ----------
+   [name, gap from base of the BEST anchor, spread across the four anchors]      */
+const REG33 = [
+  ["枝野幸男",0.1914,0.0350],["赤嶺政賢",0.1350,0.0326],["野田佳彦",0.1539,0.0340],
+  ["高市早苗",0.1579,0.0278],["浜田靖一",0.3140,0.1311],["安住淳",0.2511,0.0786],
+  ["宮本徹",0.1723,0.0639],["柴山昌彦",0.2225,0.0391],["武田良太",0.2486,0.0346],
+  ["笠浩史",0.2166,0.0860],["尾辻かな子",0.1832,0.0627],["北神圭朗",0.2512,0.0577],
+  ["若宮健嗣",0.2069,0.0499],["近藤和也",0.2084,0.0515],["津島淳",0.4580,0.2676],
+  ["遠藤良太",0.1735,0.0341],["空本誠喜",0.1357,0.0151],["平賀高成",0.2457,0.0711],
+  ["山崎正恭",0.1548,0.0046],["田野瀬太道",0.6120,0.2092],["高橋美穂",0.1222,0.0287],
+  ["和田義明",0.1922,0.0199],["金城泰邦",0.1657,0.0164],["柴田勝之",0.1816,0.0321],
+  ["八木哲也",0.2089,0.0487],["手塚仁雄",0.3335,0.1460],["小竹凱",0.1744,0.0227],
+  ["東克哉",0.1876,0.0248],["五十嵐清",0.2235,0.0347],["高見康裕",0.1508,0.0341],
+  ["岡野純子",0.1478,0.0219],["山本左近",0.2853,0.0391],["斎藤裕喜",0.1478,0.0200]
 ];
-function drawStack() {
-  const host = $("#stackViz"); if (!host) return;
-  const W = 800, H = 210, s = svg(host, W, H);
-  const L=210, R=118, T=30, B=48, pw=W-L-R, ph=H-T-B, xmax=0.08;
+function drawRegister() {
+  const host = $("#regViz"); if (!host) return;
+  const rows = REG33.slice().sort((a,b) => b[1] - a[1]);
+  const W = 800, rh = 15, T = 46, B = 46, L = 96, R = 108;
+  const H = T + rows.length*rh + B, pw = W-L-R, xmax = 0.65;
+  const s = svg(host, W, H);
   const X = v => L + (v/xmax)*pw;
-  [0,0.02,0.04,0.06,0.08].forEach(g => {
-    el("line", {x1:X(g),y1:T-10,x2:X(g),y2:T+ph, stroke:css("--grid")}, s);
-    const t = el("text", {x:X(g),y:T-16,"text-anchor":"middle","font-size":11,fill:css("--muted")}, s);
+  [0,0.1,0.2,0.3,0.4,0.5,0.6].forEach(g => {
+    el("line", {x1:X(g), y1:T-10, x2:X(g), y2:T+rows.length*rh+4, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g), y:T-16, "text-anchor":"middle", "font-size":11,
+      fill:css("--muted")}, s);
+    t.textContent = g.toFixed(1);
+  });
+  rows.forEach((r, i) => {
+    const y = T + i*rh + 2, bh = rh - 4;
+    const floor = r[1] - r[2];                    // what EVERY anchor achieves
+    const nm = el("text", {x:L-10, y:y+bh-1, "text-anchor":"end", "font-size":10.5,
+      fill:css("--text-secondary")}, s);
+    nm.textContent = r[0];
+    el("rect", {x:X(0), y, width:Math.max(X(floor)-X(0),1), height:bh, rx:2,
+      fill:css("--seq-400"), "fill-opacity":0.85}, s);
+    el("rect", {x:X(floor), y, width:Math.max(X(r[1])-X(floor),1), height:bh, rx:2,
+      fill:css("--series-2"), "fill-opacity":0.55}, s);
+    const vt = el("text", {x:X(r[1])+8, y:y+bh-1, "font-size":10,
+      fill:css("--muted")}, s);
+    vt.textContent = (100*r[2]/r[1]).toFixed(0) + "% choice";
+  });
+  const l1 = el("text", {x:L, y:22, "font-size":11.5, "font-weight":600,
+    fill:css("--seq-400")}, s);
+  l1.textContent = "■ anchor-independent (register)";
+  const l2 = el("text", {x:L+230, y:22, "font-size":11.5, "font-weight":600,
+    fill:css("--series-2")}, s);
+  l2.textContent = "■ range across the four anchors";
+  const note = el("text", {x:L, y:H-14, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "nats closed against the base model by ONE anchor adapter, untuned, at coefficient 1.0";
+}
+
+/* ---------- 18. the scale disparity that governs every margin ---------- */
+const SCALE = [
+  {lbl:"One untuned foreign anchor, vs base", v:0.2186, c:"--seq-400",
+   note:"§18 — the whole effect"},
+  {lbl:"Range across the four anchors",        v:0.0568, c:"--series-2",
+   note:"the most anchor CHOICE can be worth"},
+  {lbl:"Tuned merge, vs best single anchor",   v:0.0299, c:"--series-4",
+   note:"§15 — the paper's headline margin"},
+  {lbl:"Tuned merge, vs fine-tuning on target",v:0.0296, c:"--series-4",
+   note:"§17 — the founding-assumption test"}
+];
+function drawScale() {
+  const host = $("#scaleViz"); if (!host) return;
+  const W = 800, H = 214, s = svg(host, W, H);
+  const L=278, R=96, T=34, B=44, pw=W-L-R, ph=H-T-B, xmax=0.24;
+  const X = v => L + (v/xmax)*pw;
+  [0,0.05,0.10,0.15,0.20].forEach(g => {
+    el("line", {x1:X(g),y1:T-12,x2:X(g),y2:T+ph, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g),y:T-18,"text-anchor":"middle","font-size":11,fill:css("--muted")}, s);
     t.textContent = g.toFixed(2);
   });
-  const rh = ph/STACK.length;
-  let cum = 0;
-  STACK.forEach((d,i) => {
-    const y = T + i*rh + 6, bh = rh-26;
-    const lt = el("text", {x:L-12, y:y+bh/2+1, "text-anchor":"end", "font-size":13,
+  // the window everything else competes inside
+  el("rect", {x:X(0), y:T-12, width:X(0.0568)-X(0), height:ph+12, rx:3,
+    fill:css("--series-2"), "fill-opacity":0.10}, s);
+  const rh = ph/SCALE.length;
+  SCALE.forEach((d,i) => {
+    const y = T + i*rh + 5, bh = rh-20;
+    const lt = el("text", {x:L-12, y:y+bh/2+1, "text-anchor":"end", "font-size":12.5,
       fill:css("--text-primary")}, s);
     lt.textContent = d.lbl;
     const st = el("text", {x:L-12, y:y+bh/2+15, "text-anchor":"end", "font-size":10,
       fill:css("--muted")}, s);
     st.textContent = d.note;
-    if (d.add > 0) {
-      // faint bar for what was already there, solid for this step's contribution
+    el("rect", {x:X(0), y, width:Math.max(X(d.v)-X(0),1.5), height:bh, rx:3,
+      fill:css(d.c), "fill-opacity":0.92}, s);
+    const vt = el("text", {x:X(d.v)+9, y:y+bh/2+4, "font-size":12, "font-weight":600,
+      fill:css("--text-primary")}, s);
+    vt.textContent = d.v.toFixed(4);
+  });
+  const note = el("text", {x:L, y:H-12, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "nats · the shaded strip is everything anchor identity can possibly be worth";
+}
+
+/* ---------- 19. anchor affinity vs a marginal-preserving permutation null ----------
+   null_hist from anchor_affinity.py (10k permutations, both marginals fixed)      */
+const AFF = {
+  sft: {obs:17, n:28, p:"0.0013", mean:9.43, hist:{5:0.0282,6:0.0608,7:0.1047,8:0.1447,
+        9:0.1670,10:0.1613,11:0.1326,12:0.0924,13:0.0532,14:0.0258,15:0.0110,16:0.0040,17:0.0010,18:0.0003}},
+  dpo: {obs:4,  n:28, p:"at chance", mean:7.90, hist:{2:0.0036,3:0.0137,4:0.0378,5:0.0791,
+        6:0.1301,7:0.1689,8:0.1796,9:0.1566,10:0.1124,11:0.0671,12:0.0326,13:0.0128,14:0.0041}}
+};
+function drawAffinity() {
+  const host = $("#affinityViz"); if (!host) return;
+  const W = 800, H = 300, s = svg(host, W, H);
+  const L=54, R=18, T=34, B=52, pw=W-L-R, ph=(H-T-B-34)/2;
+  const lo=0, hi=20, ymax=0.20;
+  const X = k => L + ((k+0.5)/(hi-lo))*pw, bw = pw/(hi-lo) - 2;
+  [["sft","SFT anchors","--series-4"],["dpo","DPO anchors","--muted"]].forEach(([key,lab,col],ai) => {
+    const a = AFF[key], T0 = T + ai*(ph+34);
+    const Y = v => T0 + (1-v/ymax)*ph;
+    el("line", {x1:L, y1:T0+ph, x2:L+pw, y2:T0+ph, stroke:css("--axis")}, s);
+    const lt = el("text", {x:L, y:T0-12, "font-size":12.5, "font-weight":600,
+      fill:css(col)}, s);
+    lt.textContent = lab + " — permutation null";
+    for (const k in a.hist) {
+      const v = a.hist[k], x = X(+k);
+      el("rect", {x:x-bw/2, y:Y(v), width:bw, height:Math.max(T0+ph-Y(v),0.5), rx:2,
+        fill:css("--seq-250"), "fill-opacity":0.85}, s);
+    }
+    // observed
+    const ox = X(a.obs);
+    el("line", {x1:ox, y1:T0-6, x2:ox, y2:T0+ph, stroke:css(col), "stroke-width":2.5}, s);
+    el("circle", {cx:ox, cy:T0-6, r:5, fill:css(col)}, s);
+    const ot = el("text", {x:ox + (a.obs>12?-10:10), y:T0+14,
+      "text-anchor": a.obs>12?"end":"start", "font-size":12, "font-weight":700,
+      fill:css(col)}, s);
+    ot.textContent = `observed ${a.obs}/28  ·  p = ${a.p}`;
+    // null mean
+    const mx = X(a.mean);
+    el("line", {x1:mx, y1:T0+6, x2:mx, y2:T0+ph, stroke:css("--text-secondary"),
+      "stroke-width":1.2, "stroke-dasharray":"4 3", opacity:0.7}, s);
+    const mt = el("text", {x:mx, y:T0+ph+16, "text-anchor":"middle", "font-size":10,
+      fill:css("--muted")}, s);
+    mt.textContent = "null mean " + a.mean.toFixed(2);
+  });
+  for (let k=0;k<=hi;k+=4) {
+    const t = el("text", {x:X(k), y:H-24, "text-anchor":"middle", "font-size":11,
+      fill:css("--muted")}, s);
+    t.textContent = k;
+  }
+  const xl = el("text", {x:L+pw/2, y:H-6, "text-anchor":"middle", "font-size":11,
+    fill:css("--muted")}, s);
+  xl.textContent = "targets whose preferred anchor comes from their own party family (of 28 eligible)";
+}
+
+/* ---------- 19. mean fitted coefficient per anchor, both arms (coeffs.*) ---------- */
+const ANCHCOEF = [
+  {n:"岸田 Kishida (LDP)", sft:0.332, dpo:0.245},
+  {n:"上田 Ueda (DPJ)",    sft:0.309, dpo:0.188},
+  {n:"塩川 Shiokawa (JCP)",sft:0.294, dpo:0.294},
+  {n:"福島 Fukushima (SDP)",sft:0.222, dpo:0.135}
+];
+function drawAnchCoef() {
+  const host = $("#anchcoefViz"); if (!host) return;
+  const W = 800, H = 210, s = svg(host, W, H);
+  const L=180, R=90, T=34, B=44, pw=W-L-R, ph=H-T-B, xmax=0.40;
+  const X = v => L + (v/xmax)*pw;
+  [0,0.1,0.2,0.3,0.4].forEach(g => {
+    el("line", {x1:X(g),y1:T-12,x2:X(g),y2:T+ph, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g),y:T-18,"text-anchor":"middle","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g.toFixed(1);
+  });
+  const rh = ph/ANCHCOEF.length;
+  ANCHCOEF.forEach((d,i) => {
+    const y = T + i*rh + 4, bh = (rh-14)/2;
+    const lt = el("text", {x:L-12, y:y+rh/2-4, "text-anchor":"end", "font-size":12,
+      fill:css("--text-primary")}, s);
+    lt.textContent = d.n;
+    [[d.sft,"--series-4","SFT"],[d.dpo,"--muted","DPO"]].forEach(([v,col],k) => {
+      const yy = y + k*bh;
+      el("rect", {x:X(0), y:yy, width:Math.max(X(v)-X(0),1), height:bh-2, rx:2,
+        fill:css(col), "fill-opacity": k? 0.55 : 0.92}, s);
+      const vt = el("text", {x:X(v)+8, y:yy+bh-4, "font-size":10.5,
+        fill: k ? css("--muted") : css("--text-primary"),
+        "font-weight": k?400:600}, s);
+      vt.textContent = v.toFixed(3);
+    });
+  });
+  const l1 = el("text", {x:L, y:H-12, "font-size":11, fill:css("--muted")}, s);
+  l1.textContent = "upper bar = SFT anchors, lower = DPO · mean over 165 folds × 3 depth groups";
+}
+
+/* ---------- 16. what each layer of the stack adds over prompting, in nats ---------- */
+const STACK = [
+  {arm:"SFT anchors", tot:0.1276, steps:[
+    {lbl:"+ any merge at all",        add:0.1007, c:"--series-3", note:"best-single + prefix · 33/33"},
+    {lbl:"+ tuning the coefficients", add:0.0269, c:"--series-4", note:"the specific contribution · 33/33"}]},
+  {arm:"DPO anchors", tot:0.0694, steps:[
+    {lbl:"+ any merge at all",        add:0.0562, c:"--series-3", note:"best-single + prefix · 33/33"},
+    {lbl:"+ tuning the coefficients", add:0.0132, c:"--series-4", note:"the specific contribution · 30/33"}]}
+];
+function drawStack() {
+  const host = $("#stackViz"); if (!host) return;
+  const W = 800, H = 268, s = svg(host, W, H);
+  const L=214, R=104, T=42, B=44, pw=W-L-R, xmax=0.14;
+  const armH = (H-T-B-26)/2;
+  const X = v => L + (v/xmax)*pw;
+  [0,0.03,0.06,0.09,0.12].forEach(g => {
+    el("line", {x1:X(g),y1:T-14,x2:X(g),y2:H-B, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g),y:T-20,"text-anchor":"middle","font-size":11,fill:css("--muted")}, s);
+    t.textContent = g.toFixed(2);
+  });
+  STACK.forEach((arm, ai) => {
+    const T0 = T + ai*(armH+26);
+    const at = el("text", {x:L-12, y:T0-6, "text-anchor":"end", "font-size":12,
+      "font-weight":700, fill:css("--text-primary")}, s);
+    at.textContent = arm.arm;
+    const ref = el("text", {x:L+6, y:T0-6, "font-size":11, fill:css("--muted")}, s);
+    ref.textContent = "prompting alone (ICL) = 0";
+    el("line", {x1:X(0), y1:T0-2, x2:X(0), y2:T0+armH, stroke:css("--axis"), "stroke-width":2}, s);
+    const rh = armH/arm.steps.length;
+    let cum = 0;
+    arm.steps.forEach((d,i) => {
+      const y = T0 + i*rh + 3, bh = rh-20;
+      const lt = el("text", {x:L-12, y:y+bh/2+1, "text-anchor":"end", "font-size":12.5,
+        fill:css("--text-primary")}, s);
+      lt.textContent = d.lbl;
+      const st = el("text", {x:L-12, y:y+bh/2+14, "text-anchor":"end", "font-size":10,
+        fill:css("--muted")}, s);
+      st.textContent = d.note;
       el("rect", {x:X(0), y, width:Math.max(X(cum)-X(0),0), height:bh, rx:3,
         fill:css("--text-secondary"), "fill-opacity":0.14}, s);
       el("rect", {x:X(cum), y, width:Math.max(X(cum+d.add)-X(cum),1), height:bh, rx:3,
         fill:css(d.c), "fill-opacity":0.92}, s);
       cum += d.add;
-      const vt = el("text", {x:X(cum)+10, y:y+bh/2+4, "font-size":12, "font-weight":600,
+      const vt = el("text", {x:X(cum)+9, y:y+bh/2+4, "font-size":12, "font-weight":600,
         fill:css("--text-primary")}, s);
       vt.textContent = "+" + d.add.toFixed(4);
-    } else {
-      el("line", {x1:X(0), y1:y-2, x2:X(0), y2:y+bh+2, stroke:css("--axis"), "stroke-width":2}, s);
-      const vt = el("text", {x:X(0)+10, y:y+bh/2+4, "font-size":12, fill:css("--muted")}, s);
-      vt.textContent = "0 — reference";
-    }
+    });
   });
-  const tot = el("text", {x:L, y:H-10, "font-size":11, fill:css("--muted")}, s);
-  tot.textContent = "cumulative +0.0694 nats over prompting alone · lower NLL is better, so right is better";
+  const tot = el("text", {x:L, y:H-12, "font-size":11, fill:css("--muted")}, s);
+  tot.textContent = "cumulative +0.1276 (SFT) and +0.0694 (DPO) nats over prompting alone · right is better";
 }
 
-/* ---------- 17. full ordering of every config (pooled mean NLL over 33) ----------
-   fam: ft = fine-tune target directly, merge = anchor merge, icl = prompting, none  */
+/* ---------- 15. full ordering of every config, both anchor arms (nll.* ) ----------
+   fam: ft = fine-tune target directly, merge = anchor merge, icl = prompting, none
+   dpo = same config scored on the DPO anchors; null where no anchor is involved   */
 const ORDER = [
-  {n:"SFT + ICL",        v:2.0687, fam:"ft"},
-  {n:"DPO + ICL",        v:2.1013, fam:"ft"},
-  {n:"POLIS + ICL",      v:2.1042, fam:"merge"},
-  {n:"best-single + ICL",v:2.1174, fam:"merge"},
-  {n:"SFT",              v:2.1452, fam:"ft"},
-  {n:"ICL",              v:2.1736, fam:"icl"},
-  {n:"DPO",              v:2.2073, fam:"ft"},
-  {n:"POLIS",            v:2.2078, fam:"merge"},
-  {n:"best-single",      v:2.2343, fam:"merge"},
-  {n:"base",             v:2.3613, fam:"none"},
-  {n:"uniform merge",    v:2.7689, fam:"merge"}
+  {n:"BO + ICL",         v:2.0460, fam:"merge", dpo:2.1042},
+  {n:"SFT + ICL",        v:2.0687, fam:"ft",    dpo:null},
+  {n:"best-single + ICL",v:2.0729, fam:"merge", dpo:2.1174},
+  {n:"DPO + ICL",        v:2.1013, fam:"ft",    dpo:null},
+  {n:"BO",               v:2.1156, fam:"merge", dpo:2.2078},
+  {n:"SFT",              v:2.1452, fam:"ft",    dpo:null},
+  {n:"best-single",      v:2.1455, fam:"merge", dpo:2.2343},
+  {n:"ICL",              v:2.1736, fam:"icl",   dpo:null},
+  {n:"DPO",              v:2.2073, fam:"ft",    dpo:null},
+  {n:"base",             v:2.3613, fam:"none",  dpo:null},
+  {n:"uniform merge",    v:2.5558, fam:"merge", dpo:2.7689}
 ];
 function drawOrder() {
   const host = $("#orderViz"); if (!host) return;
-  const W = 800, rh = 26, T = 30, B = 40, L = 150, R = 76;
+  const W = 800, rh = 28, T = 46, B = 44, L = 150, R = 76;
   const H = T + ORDER.length*rh + B, pw = W-L-R;
   const s = svg(host, W, H);
   const lo = 2.0, hi = 2.8;
   const X = v => L + ((v-lo)/(hi-lo))*pw;
   const col = {ft:"--series-2", merge:"--series-4", icl:"--series-1", none:"--muted"};
   [2.0,2.2,2.4,2.6,2.8].forEach(g => {
-    el("line", {x1:X(g), y1:T-8, x2:X(g), y2:T+ORDER.length*rh+2, stroke:css("--grid")}, s);
-    const t = el("text", {x:X(g), y:T-14, "text-anchor":"middle", "font-size":11,
+    el("line", {x1:X(g), y1:T-10, x2:X(g), y2:T+ORDER.length*rh+2, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g), y:T-16, "text-anchor":"middle", "font-size":11,
       fill:css("--muted")}, s);
     t.textContent = g.toFixed(1);
   });
+  const hd = el("text", {x:L, y:20, "font-size":11.5, fill:css("--muted")}, s);
+  hd.textContent = "solid = SFT anchors  ·  ◇ = the same configuration on DPO anchors";
   ORDER.forEach((d, i) => {
-    const y = T + i*rh + 4, bh = rh - 9;
+    const y = T + i*rh + 5, bh = rh - 12;
+    const best = d.n === "BO + ICL";
     const lt = el("text", {x:L-10, y:y+bh/2+4, "text-anchor":"end", "font-size":12,
-      "font-weight": d.n==="SFT + ICL"||d.n==="POLIS + ICL" ? 600 : 400,
-      fill:css("--text-primary")}, s);
+      "font-weight": best ? 700 : 400, fill:css("--text-primary")}, s);
     lt.textContent = d.n;
     el("rect", {x:X(lo), y, width:Math.max(X(d.v)-X(lo),1), height:bh, rx:3,
-      fill:css(col[d.fam]), "fill-opacity":0.88}, s);
-    const vt = el("text", {x:X(d.v)+8, y:y+bh/2+4, "font-size":11, "font-weight":600,
-      fill:css("--text-primary")}, s);
+      fill:css(col[d.fam]), "fill-opacity": best ? 1 : 0.85}, s);
+    if (d.dpo !== null) {          // ghost marker for the other arm
+      const gx = X(d.dpo), gy = y + bh/2;
+      el("path", {d:`M${gx},${gy-6} L${gx+6},${gy} L${gx},${gy+6} L${gx-6},${gy} Z`,
+        fill:"none", stroke:css("--muted"), "stroke-width":1.5}, s);
+      el("line", {x1:X(d.v)+2, y1:gy, x2:gx-7, y2:gy, stroke:css("--muted"),
+        "stroke-width":1, "stroke-dasharray":"2 2", opacity:0.7}, s);
+    }
+    const vt = el("text", {x:X(d.v)-8, y:y+bh/2+4, "text-anchor":"end", "font-size":11,
+      "font-weight":600, fill:"#fff"}, s);
     vt.textContent = d.v.toFixed(4);
   });
-  const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
-  note.textContent = "mean held-out NLL over 33 targets (axis starts at 2.0) · lower = better";
+  const note = el("text", {x:L, y:H-10, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "mean held-out NLL over 33 targets, nested 5-fold CV (axis starts at 2.0) · lower = better";
 }
 
 /* ---------- 17. prominence gradient (base model, no adapter) ---------- */
 const PROM = [
-  {q:"Most prominent", sp:3450, pct:58.0},
-  {q:"2nd",            sp:1372, pct:53.7},
-  {q:"3rd",            sp: 579, pct:53.4},
-  {q:"4th",            sp: 218, pct:45.7},
-  {q:"Least prominent",sp:  47, pct:47.5}
+  {q:"Most prominent", sp:3632, pct:57.7},
+  {q:"2nd",            sp:1493, pct:54.4},
+  {q:"3rd",            sp: 673, pct:52.9},
+  {q:"4th",            sp: 287, pct:47.7},
+  {q:"Least prominent",sp:  92, pct:50.2}
 ];
 function drawProm() {
   const host = $("#promViz"); if (!host) return;
@@ -4019,55 +4876,90 @@ function drawAnchorSelf() {
   yl.textContent = "MAE on own survey (lower better)";
 }
 
-/* ---------- 16. rank of the true politician, per config ---------- */
-const RANK = {
-  cfgs:["Base","Uniform","Best-single","POLIS","Best constant"],
-  rows:[
-    {t:"高市 (LDP)",  v:[34.3,37.2,40.2,39.4,67.5]},
-    {t:"赤嶺 (JCP)",  v:[ 5.6, 4.2, 2.7, 2.7,97.5]},
-    {t:"枝野 (CDP)",  v:[47.5,25.4,43.8,44.9,81.3]}
-  ]
-};
+/* ---------- 20. UTAS rank of the true politician, 33 targets, SFT anchors ----------
+   [name, base pct, BO pct, best-constant pct]  -- utas.sft.per_target             */
+const UTAS33 = [
+  ["枝野幸男",47.5,49.7,81.3],
+  ["赤嶺政賢",5.6,8.6,97.5],
+  ["野田佳彦",67.2,77.1,72.1],
+  ["高市早苗",34.3,52.7,67.5],
+  ["浜田靖一",97.6,88.4,97.6],
+  ["安住淳",80.3,76.3,81.8],
+  ["宮本徹",44.4,55.2,93.1],
+  ["柴山昌彦",58.6,47.8,99.5],
+  ["武田良太",55.9,36.5,97.1],
+  ["笠浩史",96.5,81.0,81.0],
+  ["尾辻かな子",33.2,62.1,92.8],
+  ["北神圭朗",2.7,0.8,74.4],
+  ["若宮健嗣",34.5,38.4,70.7],
+  ["近藤和也",91.9,84.8,75.6],
+  ["津島淳",13.1,37.5,72.9],
+  ["遠藤良太",75.3,84.2,54.7],
+  ["空本誠喜",95.6,99.2,85.0],
+  ["平賀高成",2.4,0.5,99.5],
+  ["山崎正恭",98.5,99.8,85.7],
+  ["田野瀬太道",88.9,97.1,97.5],
+  ["高橋美穂",45.8,55.4,80.0],
+  ["和田義明",52.7,27.1,78.3],
+  ["金城泰邦",76.4,80.6,48.1],
+  ["柴田勝之",21.9,74.6,62.8],
+  ["八木哲也",57.1,96.5,98.8],
+  ["手塚仁雄",51.0,32.5,78.1],
+  ["小竹凱",42.9,58.9,58.4],
+  ["東克哉",39.9,40.4,82.3],
+  ["五十嵐清",87.5,57.6,86.7],
+  ["高見康裕",86.9,24.9,91.6],
+  ["岡野純子",52.4,42.9,99.0],
+  ["山本左近",67.0,58.6,78.5],
+  ["斎藤裕喜",15.2,16.3,85.0]
+];
+const UTAS_SUMMARY = [
+  {n:"base",        med:52.7, c:"--series-1"},
+  {n:"uniform",     med:46.8, c:"--series-2"},
+  {n:"best-single", med:56.1, c:"--series-3"},
+  {n:"BO",          med:55.4, c:"--series-4"},
+  {n:"best constant", med:81.8, c:"--muted"}
+];
 function drawRank() {
   const host = $("#rankViz"); if (!host) return;
-  const W = 800, H = 300, s = svg(host, W, H);
-  const L=100,R=16,T=28,B=64, pw=W-L-R, ph=H-T-B;
-  const Y = v => T + (1-v/100)*ph;
-  const cols = ["--series-1","--series-2","--series-3","--series-4"].map(css)
-    .concat([css("--muted")]);
+  const rows = UTAS33.slice().sort((a,b) => b[2] - a[2]);
+  const W = 800, rh = 15, T = 76, B = 52, L = 96, R = 40;
+  const H = T + rows.length*rh + B, pw = W-L-R;
+  const s = svg(host, W, H);
+  const X = v => L + (v/100)*pw;
   [0,25,50,75,100].forEach(g => {
-    el("line", {x1:L,y1:Y(g),x2:L+pw,y2:Y(g),stroke:css("--grid")}, s);
-    const t = el("text", {x:L-8,y:Y(g)+4,"text-anchor":"end","font-size":11,fill:css("--muted")}, s);
+    el("line", {x1:X(g), y1:T-10, x2:X(g), y2:T+rows.length*rh+4, stroke:css("--grid")}, s);
+    const t = el("text", {x:X(g), y:T+rows.length*rh+20, "text-anchor":"middle",
+      "font-size":11, fill:css("--muted")}, s);
     t.textContent = g + "%";
   });
-  // chance line
-  el("line", {x1:L,y1:Y(50),x2:L+pw,y2:Y(50), stroke:css("--text-primary"),
-    "stroke-width":1.5, "stroke-dasharray":"5 4", opacity:0.6}, s);
-  const cl = el("text", {x:L+pw-4, y:Y(50)-7, "text-anchor":"end", "font-size":11,
-    fill:css("--text-secondary")}, s);
-  cl.textContent = "chance (50%) — everything below this line is worse than guessing";
-  el("line", {x1:L,y1:T+ph,x2:L+pw,y2:T+ph,stroke:css("--axis")}, s);
-  const gw = pw/RANK.rows.length;
-  RANK.rows.forEach((row, gi) => {
-    const bw = (gw-46)/5;
-    row.v.forEach((v, si) => {
-      const x = L + gi*gw + 23 + si*bw;
-      el("rect", {x:x+1, y:Y(v), width:bw-3, height:T+ph-Y(v), rx:4, fill:cols[si],
-        "fill-opacity": si===4 ? 0.45 : 0.92,
-        stroke: si===4 ? css("--muted") : "none", "stroke-dasharray": si===4?"3 2":""}, s);
-      const t = el("text", {x:x+bw/2, y:Y(v)-6, "text-anchor":"middle", "font-size":10,
-        "font-weight":600, fill:css("--text-primary")}, s);
-      t.textContent = v.toFixed(1);
-    });
-    const gl = el("text", {x:L+gi*gw+gw/2, y:T+ph+20, "text-anchor":"middle",
-      "font-size":12, fill:css("--text-secondary")}, s);
-    gl.textContent = row.t;
+  // the measured constant floor
+  el("line", {x1:X(50.1), y1:T-14, x2:X(50.1), y2:T+rows.length*rh+4,
+    stroke:css("--text-primary"), "stroke-width":1.5, "stroke-dasharray":"5 4", opacity:0.6}, s);
+  const fl = el("text", {x:X(50.1)+6, y:T-18, "font-size":11, fill:css("--text-secondary")}, s);
+  fl.textContent = "measured constant floor, 50.1%";
+  // summary medians across the top
+  UTAS_SUMMARY.forEach((d,i) => {
+    const y = 20 + Math.floor(i/3)*18, x = L + (i%3)*168;
+    el("rect", {x, y:y-9, width:10, height:10, rx:2, fill:css(d.c),
+      "fill-opacity": d.n==="best constant"?0.5:0.9}, s);
+    const t = el("text", {x:x+16, y:y, "font-size":11, fill:css("--text-secondary")}, s);
+    t.textContent = `${d.n}: median ${d.med.toFixed(1)}%`;
   });
-  const yl = el("text", {x:14, y:T+ph/2, "text-anchor":"middle", "font-size":11,
-    fill:css("--muted"), transform:`rotate(-90 14 ${T+ph/2})`}, s);
-  yl.textContent = "percentile rank of the true politician";
-  const note = el("text", {x:L, y:H-8, "font-size":11, fill:css("--muted")}, s);
-  note.textContent = "A constant answer (grey, no model at all) beats every configuration on every target.";
+  rows.forEach((r, i) => {
+    const y = T + i*rh + rh/2;
+    const nm = el("text", {x:L-10, y:y+4, "text-anchor":"end", "font-size":10.5,
+      fill:css("--text-secondary")}, s);
+    nm.textContent = r[0];
+    // connector base -> BO
+    el("line", {x1:X(r[1]), y1:y, x2:X(r[2]), y2:y, stroke:css("--axis"),
+      "stroke-width":1.5, "stroke-opacity":0.45}, s);
+    el("circle", {cx:X(r[3]), cy:y, r:3.6, fill:css("--muted"), "fill-opacity":0.55}, s);
+    el("circle", {cx:X(r[1]), cy:y, r:3, fill:css("--series-1"), "fill-opacity":0.8}, s);
+    el("circle", {cx:X(r[2]), cy:y, r:3.8, fill:css("--series-4")}, s);
+  });
+  const note = el("text", {x:L, y:H-14, "font-size":11, fill:css("--muted")}, s);
+  note.textContent = "percentile rank of the true politician among 594 real candidates · blue = base, gold = the tuned merge, grey = that target's best constant";
 }
 
 /* ---------- 13. memory ---------- */
@@ -4114,9 +5006,10 @@ function drawMem() {
 function redrawAll() {
   drawPipeline(); drawSpan(); drawCoverage(); drawCosine(); drawLora();
   drawDare(); drawTies(); drawCoef();
-  drawBO(); drawTrace(); drawLen(); drawResults(); drawPaired();
-  drawN33(); drawIcl(); drawStack(); drawOrder(); drawDiverge();
-  drawAnchorSelf(); drawRank(); drawProm(); drawMem();
+  drawBO(); drawTrace(); drawLen(); drawPaired();
+  drawOrder(); drawN33(); drawIcl(); drawStack();
+  drawRegister(); drawScale(); drawAffinity(); drawAnchCoef();
+  drawDiverge(); drawAnchorSelf(); drawRank(); drawProm(); drawMem();
 }
 $("#dareD").oninput = drawDare;
 $("#loraR").oninput = drawLora;
