@@ -204,7 +204,7 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 	if routed is None:
 		log.warning("route postponed (Postgres down); %d issue(s) stay queued", len(state.pending_issues()))
 	else:
-		dry_paths += routed.paths_written
+		dry_paths = sorted(set(dry_paths) | set(routed.paths_written))
 		if routed.new_unmatched and not args.dry_run:
 			notifier.unmatched(routed.new_unmatched)
 

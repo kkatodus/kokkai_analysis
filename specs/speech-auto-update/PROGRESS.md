@@ -1,6 +1,6 @@
 # Speech auto-update: progress & handoff
 
-**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** review dry run → real backfill (§7 step 7)
+**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** add 原田和広 / 木村義雄 to `person` → §4.10 repair → Phase 2 (launchd)
 
 Read this first when picking the work back up in a fresh session. The design is in `README.md`; this file covers where things stand, what the environment looks like, and the traps found along the way.
 
@@ -11,7 +11,7 @@ Read this first when picking the work back up in a fresh session. The design is 
 | Phase (spec §9) | State |
 |---|---|
 | 0 · Prerequisites | ✅ Done |
-| 1 · Build `data/speech_update/` + dry-run + backfill | 🟡 Code, tests and full dry run done (§6). **Real backfill not run yet**, waiting on the user's review |
+| 1 · Build `data/speech_update/` + dry-run + backfill | ✅ Done 2026-10-14. Backfill uploaded, and a re-run is a no-op (§6) |
 | 2 · launchd schedule | Not started |
 | 3 · Cloud move (optional) | Not started |
 | §4.10 · One-off Postgres `speeches` repair | Not started (needs the Phase 1 resolver/route code) |
@@ -97,6 +97,12 @@ Read this first when picking the work back up in a fresh session. The design is 
   - **原田和広** (はらだまさひろ, 立憲) and **木村義雄** (きむらよしお, 自民) → not in `person`. Add them, then `route --retry-unmatched`.
   - Other likely duplicate pairs in `person`: 金田勝年 5673/5728, 高橋千鶴子 1746/5725. 鬼木誠 1070/3960 and 山田太郎 848/3819 are genuinely different people.
 
+**`person` dedupe (2026-10-14, user-approved).** Backup: `~/kokkaidoc-person-pre-dedupe-20261014.dump` (`person`, `election_result`, `x_account`). Web research confirmed each pair is one person. Kept the older rows, which have the fuller histories, and dropped **5724 (寺田学 → 2603), 5725 (高橋千鶴子 → 1746), 5728 (金田勝年 → 5673), 5727 (大津力 → 5278)**. 5278 is the ID `parliamentMembers/sangiin_20250911.json` uses. Every election on a dropped row already existed on the kept one. 5673 inherited X account `katutosh555`. Readings fixed: 5673 → かねだかつとし, 5278 → おおつつとむ. `person` now has 4,814 rows.
+- **Not done (blocked by the auto-mode permission check; needs the user):** (a) `person` 5838 藤田誠 is an empty duplicate of 5839 (no elections, no X account, empty `electionHistory/5838.jsonl`; the 衆議院 list uses 5839). Delete it. (b) `politicians/table.csv(.gz)` (served by `/parliamentMember/all`) still lists 5724/5725/5727/5728 and the old readings. Edit it (or regenerate it from `person`) and upload. `electionHistory/{5724,5725,5727,5728}.jsonl` stay in S3 as orphans, because the job's IAM user can't delete.
+
+**Backfill (2026-10-14):** `python -m speech_update all`, window 2025-10-19 → 2026-10-14, 9.5 min. 1,040 meetings (892 new, 143 changed) · all_speeches **+68,559 added / 8,880 updated across 799 people** (262 via same-name disambiguation) · **5,993 files uploaded** to `s3://kokkai-doc-bucket-dev/kokkai-doc/`. Spot-checked sizes in S3 against the mirror. A second run checked 18 meetings, found 0 changes and uploaded nothing. `last_run.json` until = 2026-10-14.
+- Still unmatched (`s3_mirror/.speech-update/unmatched_speakers.jsonl`): **原田和広** (はらだまさひろ, 立憲民主党・無所属) and **木村義雄** (きむらよしお, 自由民主党・無所属の会), 1 issue each. Add them to `person`, then run `route --retry-unmatched` + `upload`.
+
 ## 7. Next steps (Phase 1)
 
 1. `data/requirements-speech-update.txt` + a venv for it.
@@ -106,5 +112,6 @@ Read this first when picking the work back up in a fresh session. The design is 
 5. `route.py` (merge by `speechID`, newest-first, topic files, `--retry-unmatched`, `upsert_speeches_bulk` behind `--no-db-speeches`; DB writes stay off until the §4.10 repair).
 6. `upload.py` (changed paths only, issues first, `AWS_PROFILE=kokkai-speech-update`, no delete) · `state.py` (lock, resumable state in `s3_mirror/.speech-update/`) · `notify.py` (Slack).
 1–6 ✅ done in session 2 (see §6).
-7. **First run:** ✅ dry run done (§6). ⏭ After the user OKs it: (optionally) a staged upload to `SPEECH_UPDATE_S3_PREFIX=kokkai-doc-staging-test`, then `cd data && ../.venv-speech-update/bin/python -m speech_update all` for the real backfill. Then fix the `person` duplicates/missing members and run `route --retry-unmatched` + `upload`.
+7. **First run:** ✅ dry run + backfill done (§6). (Original plan: (optionally) a staged upload to `SPEECH_UPDATE_S3_PREFIX=kokkai-doc-staging-test`, then `cd data && ../.venv-speech-update/bin/python -m speech_update all` for the real backfill. Then fix the `person` duplicates/missing members and run `route --retry-unmatched` + `upload`.)
+8. ⏭ Add the 2 unmatched members; resolve the two blocked cleanups above; §4.10 table repair; Phase 2 launchd (`install-speech-update-schedule.sh`, run `./scripts/update-speeches.sh` daily 04:00).
 8. Then the §4.10 table repair, then Phase 2 (launchd).

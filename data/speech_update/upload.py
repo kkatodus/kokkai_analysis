@@ -33,7 +33,10 @@ class Uploader:
 		self.workers = workers
 		if client is None:
 			import boto3
-			client = boto3.Session(profile_name=aws_profile or None).client("s3")
+			from botocore.config import Config as BotoConfig
+			client = boto3.Session(profile_name=aws_profile or None).client(
+				"s3", config=BotoConfig(max_pool_connections=max(10, workers * 2)),
+			)
 		self.client = client
 
 	def key_for(self, rel_path: str) -> str:
