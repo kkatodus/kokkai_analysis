@@ -1,6 +1,6 @@
 # Speech auto-update: progress & handoff
 
-**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** user swaps `speeches_rebuilt` in + installs launchd; decide on filling the 1.09M unfiled speeches (§6b)
+**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** watch the first scheduled runs; drop `speeches_pre_repair` when happy; source the 279 missing historical members (§6b)
 
 Read this first when picking the work back up in a fresh session. The design is in `README.md`; this file covers where things stand, what the environment looks like, and the traps found along the way.
 
@@ -12,9 +12,9 @@ Read this first when picking the work back up in a fresh session. The design is 
 |---|---|
 | 0 · Prerequisites | ✅ Done |
 | 1 · Build `data/speech_update/` + dry-run + backfill | ✅ Done 2026-10-14. Backfill uploaded, and a re-run is a no-op (§6) |
-| 2 · launchd schedule | Not started |
+| 2 · launchd schedule | ✅ Installed 2026-10-14 (daily 04:00); watch logs for a week (§6b) |
 | 3 · Cloud move (optional) | Not started |
-| §4.10 · One-off Postgres `speeches` repair | Not started (needs the Phase 1 resolver/route code) |
+| §4.10 · One-off Postgres `speeches` repair | ✅ Rebuilt + swapped in 2026-10-14; S3 person files filled to match (§6b) |
 
 **All spec questions Q1–Q10 are decided** (spec §8). Short version: work in `s3_mirror/` directly · match speakers via Postgres · newest-first ordering · revalidate frontend if a token is available · daily 04:00 · Slack webhook · ignore S3 `speeches/` · upload to the dev bucket only · upsert into Postgres `speeches` (after repair) · the "backfill" became the table repair.
 
@@ -117,7 +117,7 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 
 **Full-mirror audit** (`python -m speech_update.audit`, ~2.5 min, read-only; report in `s3_mirror/.speech-update/audit-20261014.json`, issue list in `audit-issues-with-missing.txt`):
 - 108,172 issues, 7,684,893 speeches that resolve to a `person`.
-- **1,091,102 of those (14%) are missing from the speaker's `all_speeches.jsonl`.** That's 3,347 people across 28,998 issues (e.g. 中曽根康弘 2423: 4,951; 宮沢喜一 111: 4,524). The old reorganize run never covered the whole mirror. Fix: `python -m speech_update.audit --queue && python -m speech_update route && python -m speech_update upload`. It rewrites ~3.3k person files (several GB to S3), so it's **waiting on the user's OK**.
+- **1,091,102 of those (14%) are missing from the speaker's `all_speeches.jsonl`.** That's 3,347 people across 28,998 issues (e.g. 中曽根康弘 2423: 4,951; 宮沢喜一 111: 4,524). The old reorganize run never covered the whole mirror. Fix: `python -m speech_update.audit --queue && python -m speech_update route && python -m speech_update upload`. **Done 2026-10-14** with the user's OK (`route --no-db-speeches`, since the DB already had them): +1,091,102 added / 120 updated across 4,087 people, 17,806 files uploaded (~18 min). Re-audit: **0 missing**; S3 person files and Postgres `speeches` now hold the same 7,684,893 speeches.
 - **279 member speakers / 642,928 speeches don't resolve.** Most are historical members missing from `person` (佐藤榮作 is in as 佐藤栄作, but the kana fallback is ambiguous with 佐藤栄佐久; 塩崎恭久, 江田五月, 愛知揆一, 稲葉誠一 aren't there at all). Filling `person` is a separate data-sourcing task.
 
 **§4.10 repair:**
@@ -128,7 +128,7 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 - **Swapped 2026-10-14** (with the user's OK): `speeches` → `speeches_pre_repair` (7,048,027 rows, kept for now), `speeches_rebuilt` → `speeches` (7,684,893 rows). Constraints renamed to `speeches_pkey` / `speeches_person_id_fkey` (old table: `speeches_pre_repair_*`). DB writes are now on by default in `config.py`.
   Once happy: `DROP TABLE speeches_pre_repair;` (`~/kokkaidoc-speeches-pre-repair.dump` is the backup).
 
-**Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. Installing was **blocked by the permission check (persistence)**, so the user has to run it: `./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev` (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
+**Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. **Installed by the user 2026-10-14** (`./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev`; check with `… status`) (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
 
 ## 7. Next steps (Phase 1)
 

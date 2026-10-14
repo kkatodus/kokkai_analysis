@@ -262,6 +262,6 @@ This has to happen before the scheduled job starts writing to the table (Q9). It
 - [x] `state.py` lock + resumable state
 - [x] `notify.py` Slack webhook (failure / unmatched / success) + macOS fallback
 - [x] `scripts/update-speeches.sh` wrapper
-- [x] `install-speech-update-schedule.sh` (Phase 2; not installed yet)
+- [x] `install-speech-update-schedule.sh` (Phase 2; installed 2026-10-14)
 - [x] Tests (unittest, temp-dir fixtures instead of committed ones) + resolver regression (`check_resolver.py`)
 - [x] Update DATA-PIPELINES.md / DATA-LAYOUT.md / `agent-help.sh`
