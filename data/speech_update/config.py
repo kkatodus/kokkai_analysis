@@ -21,7 +21,7 @@ class Config:
 	lookback_days: int
 	min_request_interval: float
 	min_issue_count: int       # refuse to run against a half-synced mirror
-	db_speeches: bool          # upsert into Postgres `speeches` (off until the §4.10 repair)
+	db_speeches: bool          # upsert into Postgres `speeches` (on since the §4.10 repair)
 
 	@property
 	def issues_dir(self) -> Path:
@@ -46,5 +46,5 @@ def load_config() -> Config:
 		lookback_days=int(env("SPEECH_UPDATE_LOOKBACK_DAYS", "60")),
 		min_request_interval=float(env("SPEECH_UPDATE_MIN_INTERVAL", "3")),
 		min_issue_count=int(env("SPEECH_UPDATE_MIN_ISSUES", "75000")),
-		db_speeches=env("SPEECH_UPDATE_DB_SPEECHES", "0") == "1",
+		db_speeches=env("SPEECH_UPDATE_DB_SPEECHES", "1") == "1",
 	)

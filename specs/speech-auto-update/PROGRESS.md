@@ -75,7 +75,7 @@ Read this first when picking the work back up in a fresh session. The design is 
 
 **Decisions made while building**
 - Upload uses **boto3** (thread pool, profile `kokkai-speech-update`) instead of per-directory `aws s3 cp`, because a backfill touches ~8.6k files in ~2.5k directories. Content types match what `aws s3` set on the existing objects.
-- Postgres `speeches` writes are **off by default** (`SPEECH_UPDATE_DB_SPEECHES=0`; `--db-speeches` turns them on) until the §4.10 repair is done. After the repair, flip the default in `config.py` or set the env var in the wrapper.
+- Postgres `speeches` writes were off by default until the §4.10 repair. Since the swap (2026-10-14) they are **on by default** (`SPEECH_UPDATE_DB_SPEECHES=1`; `--no-db-speeches` or `SPEECH_UPDATE_DB_SPEECHES=0` turns them off).
 - Resolver additions on top of spec §4.5, both for same-name candidates only: (a) a unique `name_kana == speakerYomi` match wins; (b) `立憲民主` → `立憲民主党` alias, since NDL 会派 names drop the 党. Party matching compares whole names only (`民主党` is a substring of `自由民主党`).
 - Unmatched speakers with **no `speakerGroup`** (officials, witnesses) are skipped silently and counted. Only speakers that have a group go to `unmatched_speakers.jsonl` and Slack.
 - Slack is off for manual runs. `--notify` turns it on, and the wrapper passes it. The wrapper's first attempt sets `SPEECH_UPDATE_NOTIFY_FAILURE=0`, so only the retry's failure is posted.
@@ -125,15 +125,8 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 - `create_speech_db_with_persons.py` zip bug fixed (pairs built in one loop). The `.ipynb` wasn't touched.
 - The rename/TRUNCATE of `speeches` was **blocked by the permission check**, so the rebuild went into a **new table `speeches_rebuilt`** (`route --db-only --all-issues --db-table speeches_rebuilt`, 7 min). `speeches` itself is untouched.
 - Verification: 7,684,893 rows, 4,705 people, 1947-05-20 → 2026-10-05, 0 `会議録情報` rows. `speaker` = `person.name_kanji` exactly for 92.9% (old table: 6.9%). The rest are resolver kana matches for 旧字体/variant names (宮澤喜一→宮沢喜一, 田中角榮→田中角栄, 福島みずほ→福島瑞穂). For 50 random people, every speechID in their S3 `all_speeches.jsonl` is in the table (11 identical, 39 have extra = the audit gap above).
-- **User step: swap the tables, then turn DB writes on:**
-  ```sql
-  BEGIN;
-  ALTER TABLE speeches RENAME TO speeches_pre_repair;
-  ALTER TABLE speeches_rebuilt RENAME TO speeches;
-  COMMIT;
-  -- once happy: DROP TABLE speeches_pre_repair;  (the dump above is the backup)
-  ```
-  Then set `SPEECH_UPDATE_DB_SPEECHES=1` (export it in `scripts/update-speeches.sh`, or flip the default in `config.py`).
+- **Swapped 2026-10-14** (with the user's OK): `speeches` → `speeches_pre_repair` (7,048,027 rows, kept for now), `speeches_rebuilt` → `speeches` (7,684,893 rows). Constraints renamed to `speeches_pkey` / `speeches_person_id_fkey` (old table: `speeches_pre_repair_*`). DB writes are now on by default in `config.py`.
+  Once happy: `DROP TABLE speeches_pre_repair;` (`~/kokkaidoc-speeches-pre-repair.dump` is the backup).
 
 **Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. Installing was **blocked by the permission check (persistence)**, so the user has to run it: `./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev` (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
 
