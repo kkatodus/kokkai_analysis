@@ -8,6 +8,7 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 |---|---|---|
 | [`ensemble-scaling-reliability`](ensemble-scaling-reliability/README.md) | draft | Methods paper (KOKKAI DOC sequel): embedding-model instability in LLM-based ideological scaling + latent-space ensembles as the fix, validated vs UTAS and human Bradley-Terry comparisons |
 | [`polis-low-resource-persona`](polis-low-resource-persona/README.md) | draft | POLIS paper: personas for low-resource Diet politicians via BO-tuned DARE-TIES merging of DPO anchor adapters, evaluated on UTAS answer agreement vs SFT/DPO/ICL baselines |
+| [speech-auto-update](speech-auto-update/README.md) | planned | Scheduled incremental fetch of new NDL speeches → `issues/` + `repr_speeches_id_organized/`, upload changed files to S3 |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 
