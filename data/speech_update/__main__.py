@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import re
 import subprocess
 import sys
 import time
@@ -79,14 +80,14 @@ def connect_postgres():
 		return None
 
 
-def make_router(cfg: Config, conn, dry_run: bool, write_files: bool = True, db_speeches: bool = False):
+def make_router(cfg: Config, conn, dry_run: bool, write_files: bool = True, db_speeches: bool = False, db_table: str = "speeches"):
 	from utils.speech_topics import load_topics
 	from .resolver import SpeakerResolver
 	from .route import Router
 	return Router(
 		SpeakerResolver(conn.cursor()), cfg.persons_dir, load_topics(str(cfg.topics_file)),
 		dry_run=dry_run, write_files=write_files,
-		db_conn=conn if db_speeches else None,
+		db_conn=conn if db_speeches else None, db_table=db_table,
 	)
 
 
@@ -124,8 +125,18 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 			if not getattr(args, "all_issues", False):
 				raise SystemExit("--db-only needs --all-issues")
 			issue_ids = sorted(os.listdir(cfg.issues_dir))
-			log.info("rebuilding Postgres speeches from %d issues (TRUNCATE first if repairing, spec §4.10)", len(issue_ids))
-			router = make_router(cfg, conn, args.dry_run, write_files=False, db_speeches=not args.dry_run)
+			if not re.fullmatch(r"[a-z_][a-z0-9_]*", args.db_table):
+				raise SystemExit(f"bad --db-table: {args.db_table!r}")
+			log.info("writing %d issues into Postgres table %s (spec §4.10)", len(issue_ids), args.db_table)
+			if not args.dry_run:
+				with conn.cursor() as cur:
+					cur.execute(f"CREATE TABLE IF NOT EXISTS {args.db_table} (LIKE speeches INCLUDING ALL)")
+					cur.execute(
+						"SELECT 1 FROM pg_constraint WHERE conrelid = %s::regclass AND contype = 'f'", (args.db_table,))
+					if not cur.fetchone():
+						cur.execute(f"ALTER TABLE {args.db_table} ADD FOREIGN KEY (person_id) REFERENCES person(person_id)")
+				conn.commit()
+			router = make_router(cfg, conn, args.dry_run, write_files=False, db_speeches=not args.dry_run, db_table=args.db_table)
 			return router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
 
 		router = make_router(cfg, conn, args.dry_run, db_speeches=db_speeches)
@@ -246,6 +257,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 	parser.add_argument("--retry-unmatched", action="store_true", help="route: re-resolve issues with unmatched speakers")
 	parser.add_argument("--db-only", action="store_true", help="route: only write Postgres speeches (with --all-issues)")
 	parser.add_argument("--all-issues", action="store_true", help="route --db-only: every issue in the mirror")
+	parser.add_argument("--db-table", default="speeches", help="route --db-only: target table (created LIKE speeches if missing)")
 	parser.add_argument("--db-speeches", dest="db_speeches", action="store_true", default=None, help="upsert into Postgres speeches")
 	parser.add_argument("--no-db-speeches", dest="db_speeches", action="store_false")
 	parser.add_argument("--notify", action="store_true", help="send Slack notifications (the scheduler sets this)")

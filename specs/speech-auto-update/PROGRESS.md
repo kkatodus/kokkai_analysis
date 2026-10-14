@@ -1,6 +1,6 @@
 # Speech auto-update: progress & handoff
 
-**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** add 原田和広 / 木村義雄 to `person` → §4.10 repair → Phase 2 (launchd)
+**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** user swaps `speeches_rebuilt` in + installs launchd; decide on filling the 1.09M unfiled speeches (§6b)
 
 Read this first when picking the work back up in a fresh session. The design is in `README.md`; this file covers where things stand, what the environment looks like, and the traps found along the way.
 
@@ -112,6 +112,30 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 - Some person files already contained duplicate `speechID` lines (e.g. 1212 has 24). They're left as they are.
 - **Bigger gap found:** those 201 meetings contain **44 more former members missing from `person`** (e.g. 小池百合子, 塩崎恭久, 江田五月, 櫻内義雄, 山本孝史). They're now in `unmatched_speakers.jsonl` (190 entries). The 2,193 unrouted speeches above suggest the old reorganize run never covered every issue either. A full-mirror audit (route every issue `--dry-run`, then list missing members) is worth a separate task.
 - **Uploaded 2026-10-14:** 342 files (the 340 changed paths + `politicians/table.csv(.gz)`). Sizes checked against the mirror; nothing left in `changed_paths.txt`.
+
+## 6b. Session 2, later (2026-10-14): audit, §4.10 rebuild, Phase 2 prep
+
+**Full-mirror audit** (`python -m speech_update.audit`, ~2.5 min, read-only; report in `s3_mirror/.speech-update/audit-20261014.json`, issue list in `audit-issues-with-missing.txt`):
+- 108,172 issues, 7,684,893 speeches that resolve to a `person`.
+- **1,091,102 of those (14%) are missing from the speaker's `all_speeches.jsonl`.** That's 3,347 people across 28,998 issues (e.g. 中曽根康弘 2423: 4,951; 宮沢喜一 111: 4,524). The old reorganize run never covered the whole mirror. Fix: `python -m speech_update.audit --queue && python -m speech_update route && python -m speech_update upload`. It rewrites ~3.3k person files (several GB to S3), so it's **waiting on the user's OK**.
+- **279 member speakers / 642,928 speeches don't resolve.** Most are historical members missing from `person` (佐藤榮作 is in as 佐藤栄作, but the kana fallback is ambiguous with 佐藤栄佐久; 塩崎恭久, 江田五月, 愛知揆一, 稲葉誠一 aren't there at all). Filling `person` is a separate data-sourcing task.
+
+**§4.10 repair:**
+- Backup: `~/kokkaidoc-speeches-pre-repair.dump` (2.3 GB, `pg_dump -Fc -t speeches`).
+- `create_speech_db_with_persons.py` zip bug fixed (pairs built in one loop). The `.ipynb` wasn't touched.
+- The rename/TRUNCATE of `speeches` was **blocked by the permission check**, so the rebuild went into a **new table `speeches_rebuilt`** (`route --db-only --all-issues --db-table speeches_rebuilt`, 7 min). `speeches` itself is untouched.
+- Verification: 7,684,893 rows, 4,705 people, 1947-05-20 → 2026-10-05, 0 `会議録情報` rows. `speaker` = `person.name_kanji` exactly for 92.9% (old table: 6.9%). The rest are resolver kana matches for 旧字体/variant names (宮澤喜一→宮沢喜一, 田中角榮→田中角栄, 福島みずほ→福島瑞穂). For 50 random people, every speechID in their S3 `all_speeches.jsonl` is in the table (11 identical, 39 have extra = the audit gap above).
+- **User step: swap the tables, then turn DB writes on:**
+  ```sql
+  BEGIN;
+  ALTER TABLE speeches RENAME TO speeches_pre_repair;
+  ALTER TABLE speeches_rebuilt RENAME TO speeches;
+  COMMIT;
+  -- once happy: DROP TABLE speeches_pre_repair;  (the dump above is the backup)
+  ```
+  Then set `SPEECH_UPDATE_DB_SPEECHES=1` (export it in `scripts/update-speeches.sh`, or flip the default in `config.py`).
+
+**Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. Installing was **blocked by the permission check (persistence)**, so the user has to run it: `./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev` (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
 
 ## 7. Next steps (Phase 1)
 

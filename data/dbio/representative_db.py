@@ -231,14 +231,16 @@ def insert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech]) ->
 	print(f"Inserted {len(rows)} speeches")
     
 
-def upsert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech], page_size: int = 1000) -> None:
+def upsert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech], page_size: int = 1000, table: str = "speeches") -> None:
 	"""Insert speeches, overwriting existing rows with the same speech_id (NDL corrections)."""
 	if not rows:
 		return
+	if not re.fullmatch(r"[a-z_][a-z0-9_]*", table):
+		raise ValueError(f"bad table name: {table!r}")
 	execute_values(
 		cur,
-		"""
-		INSERT INTO speeches
+		f"""
+		INSERT INTO {table}
 		(issue_id, name_of_house, name_of_meeting, date, pdf_url, speech_id, speaker, speech, speech_url, person_id)
 		VALUES %s
 		ON CONFLICT (speech_id) DO UPDATE SET

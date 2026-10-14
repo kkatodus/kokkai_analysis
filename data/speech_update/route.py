@@ -115,6 +115,7 @@ class Router:
 		dry_run: bool = False,
 		write_files: bool = True,
 		db_conn=None,
+		db_table: str = "speeches",
 		chunk_size: int = 300,
 	):
 		self.resolver = resolver
@@ -123,6 +124,7 @@ class Router:
 		self.dry_run = dry_run
 		self.write_files = write_files
 		self.db_conn = db_conn
+		self.db_table = db_table
 		self.chunk_size = chunk_size
 
 	def route(self, meetings: Iterable[Meeting]) -> RouteResult:
@@ -193,7 +195,7 @@ class Router:
 
 		if db_rows and not self.dry_run:
 			with self.db_conn.cursor() as cur:
-				upsert_speeches_bulk(cur, list(db_rows.values()))
+				upsert_speeches_bulk(cur, list(db_rows.values()), table=self.db_table)
 			self.db_conn.commit()
 		result.db_rows += len(db_rows)
 		log.info("routed %d issues so far: %d speeches matched, %d persons touched", result.issues, result.matched, len(result.persons))

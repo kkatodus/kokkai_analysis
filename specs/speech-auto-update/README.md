@@ -254,14 +254,14 @@ This has to happen before the scheduled job starts writing to the table (Q9). It
 - [x] `fetch.py` + change detection + atomic writes
 - [x] `resolver.py`: wrap `get_politician_id_by_name(stop_for_input=False)` + same-name disambiguation via `election_result` + cache
 - [x] `route.py` merge + ordering + topic files + `--retry-unmatched`
-- [ ] (§4.10) Back up + fix zip misalignment in `create_speech_db_with_persons.py`
-- [ ] (§4.10) `route --db-only --all-issues` rebuild of `speeches` + verification queries
+- [x] (§4.10) Back up + fix zip misalignment in `create_speech_db_with_persons.py`
+- [x] (§4.10) `route --db-only --all-issues` rebuild (into `speeches_rebuilt`; swap pending) + verification queries
 - [x] (Q9) `upsert_speeches_bulk()` (`ON CONFLICT (speech_id) DO UPDATE`) and wire it into route, behind `--no-db-speeches`
 - [x] `data/requirements-speech-update.txt` (psycopg2-binary, python-dotenv, requests, boto3; pydantic dropped)
 - [x] `upload.py` changed-path upload, issues first
 - [x] `state.py` lock + resumable state
 - [x] `notify.py` Slack webhook (failure / unmatched / success) + macOS fallback
 - [x] `scripts/update-speeches.sh` wrapper
-- [ ] `install-speech-update-schedule.sh` (Phase 2)
+- [x] `install-speech-update-schedule.sh` (Phase 2; not installed yet)
 - [x] Tests (unittest, temp-dir fixtures instead of committed ones) + resolver regression (`check_resolver.py`)
 - [x] Update DATA-PIPELINES.md / DATA-LAYOUT.md / `agent-help.sh`
