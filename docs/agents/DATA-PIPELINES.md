@@ -44,6 +44,16 @@ Python scripts for scraping, processing, and LLM-based analysis. Intermediate an
 | `convert_shape_to_geojson.py` | `data/data_geo/senkyoku2022/` |
 | `reorganize_all_repr_speeches.py` | `repr_speeches_id_organized/` per `person_id` |
 
+### Incremental speech updater — `speech_update/`
+
+`collect_all_speeches.py` + `reorganize_all_repr_speeches.py` are full one-off crawls. For keeping speeches current, use the `speech_update` package (spec: `specs/speech-auto-update/`). It works directly in `s3_mirror/kokkai-doc/` and uploads only changed files to `kokkai-doc-bucket-dev`.
+
+- Own venv (`data/requirements.txt` doesn't install on macOS): `/opt/homebrew/bin/python3 -m venv .venv-speech-update && .venv-speech-update/bin/pip install -r data/requirements-speech-update.txt`
+- Run from `data/`: `../.venv-speech-update/bin/python -m speech_update all [--dry-run] [--from YYYY-MM-DD]`. Stages: `fetch` (NDL `/api/meeting` date window, 60-day lookback) → `route` (speaker → `person_id` via Postgres, merge by `speechID`) → `upload` (boto3, profile `kokkai-speech-update`, never deletes).
+- Scheduled wrapper: `./scripts/update-speeches.sh` (retry once, Slack on failure).
+- State, logs and `unmatched_speakers.jsonl` live in `s3_mirror/.speech-update/`. After adding a new member to Postgres `person`: `route --retry-unmatched`, then `upload`.
+- Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s speech_update/tests -t .`; resolver regression: `python -m speech_update.check_resolver`.
+
 ## Analysis / LLM workflows
 
 | Script | Purpose |

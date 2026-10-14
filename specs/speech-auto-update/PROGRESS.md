@@ -1,6 +1,6 @@
 # Speech auto-update: progress & handoff
 
-**Last updated:** 2026-10-13 (end of session 1) · **Spec:** [README.md](README.md) (status `planned`) · **Next:** Phase 1
+**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** review dry run → real backfill (§7 step 7)
 
 Read this first when picking the work back up in a fresh session. The design is in `README.md`; this file covers where things stand, what the environment looks like, and the traps found along the way.
 
@@ -10,8 +10,8 @@ Read this first when picking the work back up in a fresh session. The design is 
 
 | Phase (spec §9) | State |
 |---|---|
-| 0 · Prerequisites | ✅ Done except the Mac requirements file, which gets created as the first Phase 1 task |
-| 1 · Build `data/speech_update/` + dry-run + backfill | ⏭ **Next.** Nothing written yet |
+| 0 · Prerequisites | ✅ Done |
+| 1 · Build `data/speech_update/` + dry-run + backfill | 🟡 Code, tests and full dry run done (§6). **Real backfill not run yet**, waiting on the user's review |
 | 2 · launchd schedule | Not started |
 | 3 · Cloud move (optional) | Not started |
 | §4.10 · One-off Postgres `speeches` repair | Not started (needs the Phase 1 resolver/route code) |
@@ -67,7 +67,37 @@ Read this first when picking the work back up in a fresh session. The design is 
 - `load_dotenv()` with no path fails when Python reads from stdin (`find_dotenv` assertion). Pass the path explicitly.
 - `dev` tracks both `data/NOTES.MD` and `data/NOTES.md`. On macOS one always shows as modified (noted in PR #51). Never `git add -A` on a `dev` checkout.
 
-## 6. Next steps (Phase 1)
+## 6. Session 2 (2026-10-14): Phase 1 build
+
+**Code** (on `dev`): `data/speech_update/` (`models`, `config`, `ndl_client`, `fetch`, `resolver`, `route`, `upload`, `state`, `notify`, `__main__`, `check_resolver`, `tests/`), `data/utils/speech_topics.py`, `upsert_speeches_bulk()` in `dbio/representative_db.py`, `scripts/update-speeches.sh`, `data/requirements-speech-update.txt`.
+
+**Venv:** `.venv-speech-update/` at the repo root (gitignored), Homebrew Python 3.15. Create it with `/opt/homebrew/bin/python3 -m venv .venv-speech-update && .venv-speech-update/bin/pip install -r data/requirements-speech-update.txt`. Run everything from `data/`.
+
+**Decisions made while building**
+- Upload uses **boto3** (thread pool, profile `kokkai-speech-update`) instead of per-directory `aws s3 cp`, because a backfill touches ~8.6k files in ~2.5k directories. Content types match what `aws s3` set on the existing objects.
+- Postgres `speeches` writes are **off by default** (`SPEECH_UPDATE_DB_SPEECHES=0`; `--db-speeches` turns them on) until the §4.10 repair is done. After the repair, flip the default in `config.py` or set the env var in the wrapper.
+- Resolver additions on top of spec §4.5, both for same-name candidates only: (a) a unique `name_kana == speakerYomi` match wins; (b) `立憲民主` → `立憲民主党` alias, since NDL 会派 names drop the 党. Party matching compares whole names only (`民主党` is a substring of `自由民主党`).
+- Unmatched speakers with **no `speakerGroup`** (officials, witnesses) are skipped silently and counted. Only speakers that have a group go to `unmatched_speakers.jsonl` and Slack.
+- Slack is off for manual runs. `--notify` turns it on, and the wrapper passes it. The wrapper's first attempt sets `SPEECH_UPDATE_NOTIFY_FAILURE=0`, so only the retry's failure is posted.
+- Frontend revalidation (Q4): **skipped.** Revalidation is a Next.js server action (`app/actions/revalidate`). No token-callable endpoint exists.
+- The legacy scripts (`collect_all_speeches.py`, `reorganize_all_repr_speeches.py`) are unchanged. The one exception is the `\s` escape fix in `utils/string_process.py` (it's a raw string now; behaviour is the same).
+
+**Gotchas**
+- NDL's CloudFront returns **403 to the default `python-requests` User-Agent**. The client sets its own UA.
+- The latest issue in the mirror is **2025-12-18**, so with no state the default window is `2025-10-19 → today`.
+
+**Verification**
+- 24 unit tests pass: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s speech_update/tests -t .`
+- Resolver regression over **all 4,525** person dirs: 588,389 / 588,393 distinct (speaker, yomi, group, date) keys agree (100.00%). The 4 misses (福島みずほ ×3, 櫻田義孝 ×1) have no yomi/group. The old script filled them from its name-only cache; the new code skips them as non-members.
+- **Full dry run** (`python -m speech_update all --dry-run`, 5.5 min, 104 NDL requests): 1,040 meetings · **892 new, 143 changed** · 98,589 speeches → 77,066 matched (83 via same-name disambiguation), 20,093 non-member skipped · `all_speeches` **+68,186 added / 8,880 updated across 796 people** · would upload 2,070 issue files + 6,524 person files.
+  - The 143 "changed" issues are genuine. NDL replaced preliminary records with final ones that now have `pdfURL`, `startPage` and new create/update times. Speech counts are unchanged.
+- Unmatched member speakers in that window (before the resolver fixes above; 鬼木誠 and 大津力 resolve now):
+  - **寺田学** → `person` 2603 and 5724 are duplicate rows for the same person (identical election histories). Merge or delete one, then `route --retry-unmatched`.
+  - **大津力** → 5278 (`おおつとむ`) and 5727 (`おおつつとむ`) also look like duplicates. The resolver now picks 5727 by yomi.
+  - **原田和広** (はらだまさひろ, 立憲) and **木村義雄** (きむらよしお, 自民) → not in `person`. Add them, then `route --retry-unmatched`.
+  - Other likely duplicate pairs in `person`: 金田勝年 5673/5728, 高橋千鶴子 1746/5725. 鬼木誠 1070/3960 and 山田太郎 848/3819 are genuinely different people.
+
+## 7. Next steps (Phase 1)
 
 1. `data/requirements-speech-update.txt` + a venv for it.
 2. `data/speech_update/models.py`: move `SpeechRecord`/`MeetingRecord`/`from_dict` out of `collect_all_speeches.py`.
@@ -75,5 +105,6 @@ Read this first when picking the work back up in a fresh session. The design is 
 4. `resolver.py` (spec §4.5) + a regression check against existing `all_speeches.jsonl` (target ≥99% agreement).
 5. `route.py` (merge by `speechID`, newest-first, topic files, `--retry-unmatched`, `upsert_speeches_bulk` behind `--no-db-speeches`; DB writes stay off until the §4.10 repair).
 6. `upload.py` (changed paths only, issues first, `AWS_PROFILE=kokkai-speech-update`, no delete) · `state.py` (lock, resumable state in `s3_mirror/.speech-update/`) · `notify.py` (Slack).
-7. **First run:** `python -m speech_update all --dry-run --from 2026-09-01` → review the diff summary with the user → real backfill from Dec 2025.
+1–6 ✅ done in session 2 (see §6).
+7. **First run:** ✅ dry run done (§6). ⏭ After the user OKs it: (optionally) a staged upload to `SPEECH_UPDATE_S3_PREFIX=kokkai-doc-staging-test`, then `cd data && ../.venv-speech-update/bin/python -m speech_update all` for the real backfill. Then fix the `person` duplicates/missing members and run `route --retry-unmatched` + `upload`.
 8. Then the §4.10 table repair, then Phase 2 (launchd).

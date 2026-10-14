@@ -45,7 +45,7 @@ Keyed by Postgres `person_id`.
 
 - `all_speeches.jsonl` — **complete** speech archive for that politician
 - Topic files (`Defence.jsonl`, etc.) — subsets matching `resource/experiment_config.json` search words
-- Built by `reorganize_all_repr_speeches.py`
+- Built by `reorganize_all_repr_speeches.py`; kept current in `s3_mirror/` by `data/speech_update/` (lines sorted newest meeting first, keyed by `speechID`)
 
 ### Per-politician topic summaries — `idea_summaries/`
 

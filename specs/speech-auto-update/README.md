@@ -1,6 +1,6 @@
 # Speech auto-update
 
-**Status:** planned · **Owner:** kenchan · **Created:** 2026-10-13
+**Status:** in progress (Phase 1 code done) · **Owner:** kenchan · **Created:** 2026-10-13
 
 > Picking this up in a new session? Start with [PROGRESS.md](PROGRESS.md) — current state, environment facts and next steps.
 
@@ -249,18 +249,19 @@ This has to happen before the scheduled job starts writing to the table (Q9). It
 
 ## 10. Task checklist
 
-- [ ] Extract `SpeechRecord`/`MeetingRecord`/`from_dict` into `data/speech_update/models.py`
-- [ ] `ndl_client.py` with paging, retry and rate limiting
-- [ ] `fetch.py` + change detection + atomic writes
-- [ ] `resolver.py`: wrap `get_politician_id_by_name(stop_for_input=False)` + same-name disambiguation via `election_result` + cache
-- [ ] `route.py` merge + ordering + topic files + `--retry-unmatched`
+- [x] Extract `SpeechRecord`/`MeetingRecord`/`from_dict` into `data/speech_update/models.py`
+- [x] `ndl_client.py` with paging, retry and rate limiting
+- [x] `fetch.py` + change detection + atomic writes
+- [x] `resolver.py`: wrap `get_politician_id_by_name(stop_for_input=False)` + same-name disambiguation via `election_result` + cache
+- [x] `route.py` merge + ordering + topic files + `--retry-unmatched`
 - [ ] (§4.10) Back up + fix zip misalignment in `create_speech_db_with_persons.py`
 - [ ] (§4.10) `route --db-only --all-issues` rebuild of `speeches` + verification queries
-- [ ] (Q9) `upsert_speeches_bulk()` (`ON CONFLICT (speech_id) DO UPDATE`) and wire it into route, behind `--no-db-speeches`
-- [ ] `data/requirements-speech-update.txt` (psycopg2-binary, python-dotenv, requests, pydantic)
-- [ ] `upload.py` changed-path upload, issues first
-- [ ] `state.py` lock + resumable state
-- [ ] `notify.py` Slack webhook (failure / unmatched / success) + macOS fallback
-- [ ] `scripts/update-speeches.sh` wrapper + `install-speech-update-schedule.sh`
-- [ ] Tests + fixtures
-- [ ] Update DATA-PIPELINES.md / DATA-LAYOUT.md / `agent-help.sh`
+- [x] (Q9) `upsert_speeches_bulk()` (`ON CONFLICT (speech_id) DO UPDATE`) and wire it into route, behind `--no-db-speeches`
+- [x] `data/requirements-speech-update.txt` (psycopg2-binary, python-dotenv, requests, boto3; pydantic dropped)
+- [x] `upload.py` changed-path upload, issues first
+- [x] `state.py` lock + resumable state
+- [x] `notify.py` Slack webhook (failure / unmatched / success) + macOS fallback
+- [x] `scripts/update-speeches.sh` wrapper
+- [ ] `install-speech-update-schedule.sh` (Phase 2)
+- [x] Tests (unittest, temp-dir fixtures instead of committed ones) + resolver regression (`check_resolver.py`)
+- [x] Update DATA-PIPELINES.md / DATA-LAYOUT.md / `agent-help.sh`

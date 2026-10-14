@@ -22,3 +22,4 @@ paper/**/*.spl
 paper/**/*.synctex.gz
 paper/**/*.toc
 paper/**/*.zip
+.venv-speech-update/
