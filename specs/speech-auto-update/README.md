@@ -2,6 +2,8 @@
 
 **Status:** planned · **Owner:** kenchan · **Created:** 2026-10-13
 
+> Picking this up in a new session? Start with [PROGRESS.md](PROGRESS.md) — current state, environment facts and next steps.
+
 Keep the Diet speech data current without manual runs. A scheduled job pulls newly published meeting records from the NDL Kokkai API, folds them into the API-served datasets, and pushes only the changed files to the S3 data lake.
 
 Related guides: [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md), [DATA-LAYOUT.md](../../docs/agents/DATA-LAYOUT.md), [INFRA.md](../../docs/agents/INFRA.md)
