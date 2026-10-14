@@ -77,8 +77,12 @@ def merge_person_file(path: Path, incoming: Dict[str, dict], dry_run: bool) -> T
 			index[speech_id] = len(existing)
 			existing.append(line)
 			added += 1
-		elif existing[i] != line:
-			existing[i] = line
+			continue
+		# keep fields other pipelines added to the line (is_relevant, is_productive,
+		# quality_reason from process_relevance_data.py); NDL fields and meta are replaced
+		merged = line | {k: v for k, v in existing[i].items() if k not in line}
+		if existing[i] != merged:
+			existing[i] = merged
 			updated += 1
 	if not (added or updated):
 		return 0, 0, False

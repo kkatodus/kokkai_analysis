@@ -103,6 +103,16 @@ Read this first when picking the work back up in a fresh session. The design is 
 **Backfill (2026-10-14):** `python -m speech_update all`, window 2025-10-19 → 2026-10-14, 9.5 min. 1,040 meetings (892 new, 143 changed) · all_speeches **+68,559 added / 8,880 updated across 799 people** (262 via same-name disambiguation) · **5,993 files uploaded** to `s3://kokkai-doc-bucket-dev/kokkai-doc/`. Spot-checked sizes in S3 against the mirror. A second run checked 18 meetings, found 0 changes and uploaded nothing. `last_run.json` until = 2026-10-14.
 - Still unmatched (`s3_mirror/.speech-update/unmatched_speakers.jsonl`): **原田和広** (はらだまさひろ, 立憲民主党・無所属) and **木村義雄** (きむらよしお, 自由民主党・無所属の会), 1 issue each. Add them to `person`, then run `route --retry-unmatched` + `upload`.
 
+**New members (2026-10-14):** added to Postgres with web-verified election histories:
+- **5868 木村義雄**: 衆院 旧香川1区/香川2区 1986–2005 (7 wins), 2009 loss; 参院比例 2010 loss, 2013 win, 2019 loss, 2022 loss, then 繰り上げ当選 2026-01-30 into the 2022 seat. Source: Wikipedia results table; 参議院 profile 7013016.
+- **5869 原田和広**: 第50回衆院選 比例東北ブロック (立憲) 繰り上げ当選 2025-09-18 (総務省 notice). His 2026 result couldn't be verified, so it's omitted.
+
+Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing files byte-for-byte) and appended both to `politicians/table.csv(.gz)` (CRLF; signatures quoted iff they start with a digit, matching the file). Routed the **201** mirror issues where either speaks: all_speeches +4,018 (1,825 for the two new people, **2,193 for existing people whose speeches in these older meetings had never been routed**) / 105 updated across 137 people.
+- The 105 "updates" only **added** `is_relevant`/`is_productive`/`quality_reason`, which some `issues/` files carry. Checked against the S3 originals: no field was dropped or altered. The merge now keeps extra fields on existing lines anyway (test added).
+- Some person files already contained duplicate `speechID` lines (e.g. 1212 has 24). They're left as they are.
+- **Bigger gap found:** those 201 meetings contain **44 more former members missing from `person`** (e.g. 小池百合子, 塩崎恭久, 江田五月, 櫻内義雄, 山本孝史). They're now in `unmatched_speakers.jsonl` (190 entries). The 2,193 unrouted speeches above suggest the old reorganize run never covered every issue either. A full-mirror audit (route every issue `--dry-run`, then list missing members) is worth a separate task.
+- **Upload pending:** 340 changed paths (+ `politicians/table.csv(.gz)`) are queued in `changed_paths.txt`. The user runs the upload.
+
 ## 7. Next steps (Phase 1)
 
 1. `data/requirements-speech-update.txt` + a venv for it.

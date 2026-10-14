@@ -189,6 +189,17 @@ class RouteTest(unittest.TestCase):
 		self.assertEqual(merge_person_file(path, second, dry_run=False), (1, 1, True))
 		self.assertEqual([(l["speechID"], l["speech"]) for l in self._lines(1)], [("x", "new"), ("y", "y")])
 
+	def test_merge_keeps_fields_added_by_other_pipelines(self):
+		path = self.persons / "1" / "all_speeches.jsonl"
+		meta = {"date": "2026-01-01", "issueID": "B"}
+		annotated = {"speechID": "x", "speechOrder": 1, "speech": "old", "meta": meta, "is_relevant": True, "quality_reason": "r"}
+		merge_person_file(path, {"x": annotated}, dry_run=False)
+		plain = {"speechID": "x", "speechOrder": 1, "speech": "old", "meta": meta}
+		self.assertEqual(merge_person_file(path, {"x": plain}, dry_run=False), (0, 0, False))
+		corrected = dict(plain, speech="new")
+		self.assertEqual(merge_person_file(path, {"x": corrected}, dry_run=False), (0, 1, True))
+		self.assertEqual(self._lines(1)[0], dict(corrected, is_relevant=True, quality_reason="r"))
+
 	def test_route_merges_topics_and_queues_unmatched_members(self):
 		resolver = mock.Mock()
 		resolver.resolve.side_effect = lambda speaker, yomi, group, d: {
