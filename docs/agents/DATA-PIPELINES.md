@@ -55,6 +55,15 @@ Python scripts for scraping, processing, and LLM-based analysis. Intermediate an
 - **Speaker review** (spec: `specs/speaker-review/`): unsure matches (kanji differ beyond old/new forms, election-history pick, speech outside the elected career) are held, not filed, and queued in Postgres `speaker_review`. Review with `python -m speech_update.review` (interactive; `list`, `decide`, `scan`, `apply` also available). The nightly run applies decisions and moves already-filed speeches.
 - Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s speech_update/tests -t .`; resolver regression: `python -m speech_update.check_resolver`.
 
+### Monthly member list updater — `member_update/`
+
+Replaces `collect_repr_list.py` (Selenium) for keeping `parliamentMembers/{shugiin,sangiin}_YYYYMMDD.json` current (spec: `specs/member-auto-update/`). Same venv and S3 profile as `speech_update`.
+
+- Run from `data/`: `../.venv-speech-update/bin/python -m member_update all [--dry-run] [--house shugiin|sangiin]`. It scrapes shugiin.go.jp (10 pages) and sangiin.go.jp (`giin/current/` → current session), attaches `person_id`s (link → previous snapshot → name → reading), writes a new dated snapshot only if something changed, and uploads it.
+- Members with no `person` row get `person_id: null` and are queued in `s3_mirror/.member-update/pending_members.json`. `member_update pending` writes a JSON template per member. Fill in a verified `election_data`, then `member_update add FILE` (Postgres `person` + `election_result`, `electionHistory/<id>.jsonl`, appends `politicians/table.csv(.gz)`), then `all`, then `speech_update route --retry-unmatched && speech_update upload`. If a member exists under another name: `member_update link HOUSE NAME PERSON_ID`.
+- Schedule: `./scripts/install-member-update-schedule.sh install|status|run-now` (1st of the month, 05:00) runs `./scripts/update-members.sh` (retry once, Slack summary every run).
+- Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s member_update/tests -t .`
+
 ## Analysis / LLM workflows
 
 | Script | Purpose |

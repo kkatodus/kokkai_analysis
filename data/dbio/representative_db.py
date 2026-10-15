@@ -263,7 +263,7 @@ def upsert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech], pa
 	)
 
 
-def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonFile) -> None:
+def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonFile) -> PersonId:
     sig = generate_election_signature(raw)
     person = Person(
         name_kanji=raw["name_kanji"],
@@ -287,6 +287,7 @@ def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonF
             )
         )
     insert_elections_bulk(cur, results)
+    return pid
 
 def insert_x_account(cur: psycopg2.extensions.cursor, person_id: PersonId, account_id: str) -> None:
     cur.execute(

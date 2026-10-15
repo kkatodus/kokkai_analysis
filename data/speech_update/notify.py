@@ -17,9 +17,10 @@ MAX_LISTED = 20
 
 
 class Notifier:
-	def __init__(self, webhook_url: str | None, enabled: bool = True):
+	def __init__(self, webhook_url: str | None, enabled: bool = True, title: str = "Kokkai speech update"):
 		self.webhook_url = (webhook_url or "").strip().strip('"').strip("'") or None
 		self.enabled = enabled
+		self.title = title
 
 	def send(self, text: str) -> None:
 		if not self.enabled:
@@ -37,12 +38,11 @@ class Notifier:
 			log.warning("SLACK_WEBHOOK_URL not set; falling back to a macOS notification")
 		self._mac_notification(text)
 
-	@staticmethod
-	def _mac_notification(text: str) -> None:
+	def _mac_notification(self, text: str) -> None:
 		first_line = text.splitlines()[0][:200].replace('"', "'")
 		try:
 			subprocess.run(
-				["osascript", "-e", f'display notification "{first_line}" with title "Kokkai speech update"'],
+				["osascript", "-e", f'display notification "{first_line}" with title "{self.title}"'],
 				check=False, timeout=10, capture_output=True,
 			)
 		except Exception as e:  # noqa: BLE001
@@ -86,5 +86,5 @@ class Notifier:
 		)
 
 
-def from_env(enabled: bool) -> Notifier:
-	return Notifier(os.environ.get("SLACK_WEBHOOK_URL"), enabled=enabled)
+def from_env(enabled: bool, title: str = "Kokkai speech update") -> Notifier:
+	return Notifier(os.environ.get("SLACK_WEBHOOK_URL"), enabled=enabled, title=title)
