@@ -8,7 +8,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, NamedTuple, Optional, Set
 
-REASONS = ("kanji_differs", "election_pick", "before_career", "after_career")
+REASONS = ("kanji_differs", "election_pick", "out_of_term", "not_serving")
+AUTO_NOTE = "auto: outside every elected term and not speaking as a member"
 STATUSES = ("pending", "confirmed", "unlinked", "reassigned")
 MAX_SAMPLES = 3
 
@@ -106,11 +107,14 @@ def load_decisions(cur) -> Dict[ReviewKey, Decision]:
 	}
 
 
-def record_held(conn, held: Dict[ReviewKey, HeldItem], routed_issues: Iterable[str], backlog: bool = False) -> List[ReviewKey]:
-	"""Upsert held speeches as pending rows. Pending rows' issue links for `routed_issues` are
-	replaced, so a re-routed issue drops speeches that no longer need review.
-	`backlog=True` (review scan): the speeches are already filed under person_id.
-	Returns the keys that weren't in the table before."""
+def record_held(conn, held: Dict[ReviewKey, HeldItem], routed_issues: Iterable[str], backlog: bool = False,
+		dropped: Optional[Dict[ReviewKey, HeldItem]] = None) -> List[ReviewKey]:
+	"""Upsert held speeches as pending rows, and `dropped` (not_serving) ones as rows already
+	decided `unlinked`. Pending rows' issue links for `routed_issues` are replaced, so a
+	re-routed issue drops speeches that no longer need review.
+	`backlog=True` (review scan): the speeches are already filed under person_id, so dropped
+	rows are left unapplied for `apply` to remove them.
+	Returns the pending keys that weren't in the table before."""
 	from psycopg2.extras import execute_values
 
 	ensure_tables(conn)
@@ -124,20 +128,25 @@ def record_held(conn, held: Dict[ReviewKey, HeldItem], routed_issues: Iterable[s
 				(routed,),
 			)
 		issue_rows = []
-		for key, item in held.items():
+		items = [(k, v, "pending") for k, v in held.items()] + [(k, v, "unlinked") for k, v in (dropped or {}).items()]
+		for key, item, status in items:
+			auto = status == "unlinked"
 			cur.execute(
-				"""INSERT INTO speaker_review (speaker, speaker_yomi, person_id, reason, groups, positions, sample_speech_ids, applied_person_id)
-				VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+				"""INSERT INTO speaker_review (speaker, speaker_yomi, person_id, reason, groups, positions, sample_speech_ids,
+					applied_person_id, status, note, decided_at, applied_at)
+				VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+					CASE WHEN %s THEN now() END, CASE WHEN %s AND NOT %s THEN now() END)
 				ON CONFLICT (speaker, speaker_yomi, person_id, reason) DO UPDATE SET
 					groups = ARRAY(SELECT DISTINCT unnest(speaker_review.groups || EXCLUDED.groups) ORDER BY 1),
 					positions = ARRAY(SELECT DISTINCT unnest(speaker_review.positions || EXCLUDED.positions) ORDER BY 1),
 					sample_speech_ids = CASE WHEN cardinality(speaker_review.sample_speech_ids) > 0
 						THEN speaker_review.sample_speech_ids ELSE EXCLUDED.sample_speech_ids END
 				RETURNING id, (xmax = 0)""",
-				(*key, sorted(item.groups), sorted(item.positions), item.samples, key.person_id if backlog else None),
+				(*key, sorted(item.groups), sorted(item.positions), item.samples, key.person_id if backlog else None,
+				 status, AUTO_NOTE if auto else None, auto, auto, backlog),
 			)
 			review_id, inserted = cur.fetchone()
-			if inserted:
+			if inserted and not auto:
 				new_keys.append(key)
 			issue_rows.extend((review_id, issue_id, n, first, last) for issue_id, (n, first, last) in item.issues.items())
 		if issue_rows:

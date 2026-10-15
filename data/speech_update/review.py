@@ -91,7 +91,7 @@ def apply_decisions(cfg: Config, state: State, conn, dry_run: bool = False, db_s
 				c.execute("DELETE FROM speeches WHERE speech_id = ANY(%s)", (sorted(unlinked),))
 				result.db_deleted = c.rowcount
 			conn.commit()
-		result.new_review = store.record_held(conn, routed.held, routed.routed_issues)
+		result.new_review = store.record_held(conn, routed.held, routed.routed_issues, dropped=routed.dropped)
 		store.mark_applied(conn, {r["id"]: target_of(r) for r in rows})
 		state.add_pending_paths(result.paths_written)
 	log.info(
@@ -109,12 +109,15 @@ def scan(cfg: Config, conn) -> None:
 	log.info("scanning %d issues for matches that need review", len(issue_ids))
 	router = make_router(cfg, conn, dry_run=False, write_files=False, db_speeches=False)
 	routed = router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
-	new = store.record_held(conn, routed.held, routed.routed_issues, backlog=True)
+	new = store.record_held(conn, routed.held, routed.routed_issues, backlog=True, dropped=routed.dropped)
 	by_reason: Dict[str, List[int]] = defaultdict(lambda: [0, 0])
-	for key, item in routed.held.items():
+	for key, item in [*routed.held.items(), *routed.dropped.items()]:
 		by_reason[key.reason][0] += 1
 		by_reason[key.reason][1] += item.speeches
-	log.info("scan done: %d matched, %d held for review in %d pair(s) (%d new)", routed.matched, routed.held_speeches, len(routed.held), len(new))
+	log.info(
+		"scan done: %d matched, %d held for review in %d pair(s) (%d new); %d not serving in %d pair(s) (unlinked automatically, removed by `apply`)",
+		routed.matched, routed.held_speeches, len(routed.held), len(new), routed.not_serving, len(routed.dropped),
+	)
 	for reason, (pairs, n) in sorted(by_reason.items()):
 		log.info("  %-14s %5d pair(s) %9d speech(es)", reason, pairs, n)
 
@@ -124,8 +127,8 @@ def scan(cfg: Config, conn) -> None:
 REASON_TEXT = {
 	"kanji_differs": "NDL name differs from the politician's kanji (beyond old/new character forms)",
 	"election_pick": "picked among same-name politicians by election history",
-	"before_career": "speeches more than a year before this politician's first win",
-	"after_career": "speeches more than 7 years after this politician's last win",
+	"out_of_term": "speaking as a member (with a group) outside this politician's elected terms: missing election data, or someone else",
+	"not_serving": "outside every elected term and not speaking as a member (unlinked automatically)",
 }
 
 

@@ -5,7 +5,8 @@ lines are keyed by speechID (existing IDs are replaced, new ones added, nothing
 is deleted here; see remove_from_person_dir) and sorted newest meeting first.
 Optionally upserts the same speeches into the Postgres `speeches` table.
 Matches the resolver flags for review are held: not filed, not written to
-Postgres, collected in RouteResult.held (specs/speaker-review).
+Postgres, collected in RouteResult.held; speeches made outside the person's
+elected terms are dropped (RouteResult.dropped) (specs/speaker-review).
 """
 from __future__ import annotations
 
@@ -42,6 +43,7 @@ class RouteResult:
 	procedural: int = 0
 	non_member_skipped: int = 0
 	unlinked: int = 0   # decided "not this person" in speaker_review
+	not_serving: int = 0  # outside every elected term, not speaking as a member
 	held_speeches: int = 0
 	added: int = 0      # new lines in all_speeches.jsonl files
 	updated: int = 0    # replaced lines in all_speeches.jsonl files
@@ -52,6 +54,7 @@ class RouteResult:
 	new_unmatched: List[dict] = field(default_factory=list)  # not seen in earlier runs
 	routed_issues: List[str] = field(default_factory=list)
 	held: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))
+	dropped: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))  # not_serving
 	new_review: List[ReviewKey] = field(default_factory=list)  # keys first queued by this run
 
 
@@ -185,6 +188,10 @@ class Router:
 					continue
 				if res.reason == "unlinked":
 					result.unlinked += 1
+					continue
+				if res.reason == "not_serving":
+					result.not_serving += 1
+					result.dropped[res.review_key].add(speech, meta)
 					continue
 				if res.confidence == "review":
 					result.held_speeches += 1

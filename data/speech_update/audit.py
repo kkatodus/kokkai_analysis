@@ -74,7 +74,7 @@ def main() -> int:
 			res = resolver.resolve(s.get("speaker"), s.get("speakerYomi"), s.get("speakerGroup"), meta["date"])
 			if res.reason == "procedural":
 				continue
-			if res.reason == "unlinked" or res.confidence == "review":
+			if res.reason in ("unlinked", "not_serving") or res.confidence == "review":
 				# decided "not this person", or held for review (specs/speaker-review)
 				totals["unlinked_speeches" if res.reason == "unlinked" else "held_for_review"] += 1
 				continue

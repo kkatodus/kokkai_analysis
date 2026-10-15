@@ -163,10 +163,10 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 		result = router.route(meetings)
 		log.info(
 			"route done: %d speeches, %d matched (%d by election history), %d non-member skipped, "
-			"%d unmatched member speaker(s); %d held for review in %d pair(s); "
+			"%d unmatched member speaker(s); %d held for review in %d pair(s); %d not serving; "
 			"all_speeches +%d added / %d updated across %d person(s); %d DB rows",
 			result.speeches, result.matched, result.disambiguated, result.non_member_skipped,
-			len({u["speaker"] for u in result.unmatched_members}), result.held_speeches, len(result.held),
+			len({u["speaker"] for u in result.unmatched_members}), result.held_speeches, len(result.held), result.not_serving,
 			result.added, result.updated, len(result.persons), result.db_rows if db_speeches else 0,
 		)
 		for name, yomi, group, reason in sorted({(u["speaker"], u["speakerYomi"], u["speakerGroup"], u["reason"]) for u in result.unmatched_members}):
@@ -189,7 +189,7 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 
 def record_review(conn, result) -> None:
 	from . import review_store
-	result.new_review = review_store.record_held(conn, result.held, result.routed_issues)
+	result.new_review = review_store.record_held(conn, result.held, result.routed_issues, dropped=result.dropped)
 	for key in result.new_review:
 		log.warning("new speaker match to review: %s (%s) → #%d [%s]", *key)
 

@@ -11,6 +11,10 @@
    kanji differ beyond old/new character forms, when it was picked by election
    history, or when the meeting is outside the person's elected career. Human
    decisions in `speaker_review` override flagged matches.
+5. Service terms: a speech outside every elected term of the person, made
+   without a parliamentary group (so not as a sitting member), is not
+   attributed at all ("not_serving"). With a group the speaker *was* a member,
+   so the election data is incomplete or it's someone else: flagged for review.
 """
 from __future__ import annotations
 
@@ -62,15 +66,52 @@ def party_matches(party: Optional[str], speaker_group: Optional[str]) -> bool:
 	return any(_norm_party(part) == party for part in GROUP_SPLIT_RE.split(speaker_group or "") if part)
 
 
-# a speech this far outside the person's wins is flagged (spec speaker-review §3.1)
-CAREER_BEFORE = timedelta(days=365)
-CAREER_AFTER = timedelta(days=7 * 365)
+# service terms (spec speaker-review §3.1): a Diet win starts a term that runs for
+# the house's term length, or until the next election in that house the person
+# stood in, plus a grace period (an upper-house term outlasts the election day)
+TERM_LENGTH = {"衆": timedelta(days=4 * 365 + 1), "参": timedelta(days=6 * 365 + 2)}
+TERM_GRACE = timedelta(days=30)
+LOCAL_ELECTION_RE = re.compile(r"議会|知事|市長|区長|町長|村長")
+UPPER_DISTRICT_RE = re.compile(r"(?:県|都|府|道)選挙区$|比例区$|全国区$|地方区$")
+LOWER_DISTRICT_RE = re.compile(r"区$|ブロック$")
+Term = Tuple[date, date]
+
+
+def election_house(election_name: Optional[str], district: Optional[str]) -> Optional[str]:
+	"""'衆' / '参' for a Diet election, None for local or House of Peers elections."""
+	name = election_name or ""
+	if LOCAL_ELECTION_RE.search(name) or "貴族院" in name:
+		return None
+	if "衆議院" in name:
+		return "衆"
+	if "参議院" in name:
+		return "参"
+	d = (district or "").strip()
+	if UPPER_DISTRICT_RE.search(d):
+		return "参"
+	if LOWER_DISTRICT_RE.search(d):
+		return "衆"
+	return None
+
+
+def service_terms(elections: List[Tuple[date, Optional[str], bool]]) -> List[Term]:
+	"""elections: (date, house, won) sorted by date → [(start, end incl. grace)]."""
+	terms = []
+	for i, (d, house, won) in enumerate(elections):
+		if not won or house is None:
+			continue
+		end = d + TERM_LENGTH[house]
+		later = [d2 for d2, h2, _ in elections[i + 1:] if h2 == house and d2 > d]
+		if later:
+			end = min(end, later[0])
+		terms.append((d, end + TERM_GRACE))
+	return terms
 
 
 @dataclass(frozen=True)
 class Resolution:
 	person_id: Optional[int]
-	reason: str  # "name" | "disambiguated" | "procedural" | "ambiguous" | "not_found" | "unlinked"
+	reason: str  # "name" | "disambiguated" | "reviewed" | "procedural" | "ambiguous" | "not_found" | "unlinked" | "not_serving"
 	confidence: str = "sure"  # "sure" | "review" (held until a human decides)
 	review_key: Optional[ReviewKey] = None  # set whenever the match was flagged, decided or not
 
@@ -85,6 +126,7 @@ class SpeakerResolver:
 		self._by_kana: Dict[str, List[int]] = {}
 		self._wins: Dict[int, List[Tuple[date, Optional[str]]]] = {}
 		self._people: Optional[Dict[int, Tuple[str, Optional[str]]]] = None
+		self._terms: Dict[int, List[Term]] = {}
 		self.lookups = 0
 
 	def resolve(self, speaker: Optional[str], yomi: Optional[str], group: Optional[str], meeting_date: str) -> Resolution:
@@ -96,42 +138,49 @@ class SpeakerResolver:
 		person_id, candidates = self._base[key]
 		day = date.fromisoformat(meeting_date)
 		if person_id is not None:
-			return self._checked(Resolution(person_id, "name"), speaker, yomi, day, by_election=False)
+			return self._checked(Resolution(person_id, "name"), speaker, yomi, group, day, by_election=False)
 		if len(candidates) > 1:
 			by_kana = [pid for pid in candidates if pid in self._kana_matches(yomi)]
 			if len(by_kana) == 1:
-				return self._checked(Resolution(by_kana[0], "disambiguated"), speaker, yomi, day, by_election=False)
+				return self._checked(Resolution(by_kana[0], "disambiguated"), speaker, yomi, group, day, by_election=False)
 			pid = self._disambiguate(candidates, group, day)
 			if pid is None:
 				return Resolution(None, "ambiguous")
-			return self._checked(Resolution(pid, "disambiguated"), speaker, yomi, day, by_election=True)
+			return self._checked(Resolution(pid, "disambiguated"), speaker, yomi, group, day, by_election=True)
 		return Resolution(None, "not_found")
 
 	# --- confidence (specs/speaker-review §3.1) ---
 
-	def flag_reason(self, speaker: str, yomi: Optional[str], person_id: int, day: date, by_election: bool) -> Optional[str]:
+	def in_term(self, person_id: int, day: date) -> bool:
+		self.people()
+		return any(start <= day <= end for start, end in self._terms.get(person_id, ()))
+
+	def flag_reason(self, speaker: str, yomi: Optional[str], group: Optional[str], person_id: int, day: date, by_election: bool) -> Optional[str]:
 		name_kanji, name_kana = self.people().get(person_id, ("", None))
+		serving = self.in_term(person_id, day)
+		if not serving and not group:
+			return "not_serving"
 		if not same_name(speaker, name_kanji) and not (
 			(has_kana(speaker) or has_kana(name_kanji)) and same_reading(yomi, name_kana)
 		):
 			return "kanji_differs"
 		if by_election:
 			return "election_pick"
-		wins = [d for d, _ in self._wins_of(person_id)]
-		if wins and day < min(wins) - CAREER_BEFORE:
-			return "before_career"
-		if wins and day > max(wins) + CAREER_AFTER:
-			return "after_career"
+		if not serving:
+			return "out_of_term"
 		return None
 
-	def _checked(self, res: Resolution, speaker: str, yomi: Optional[str], day: date, by_election: bool) -> Resolution:
+	def _checked(self, res: Resolution, speaker: str, yomi: Optional[str], group: Optional[str], day: date, by_election: bool) -> Resolution:
 		if not self.flag:
 			return res
-		reason = self.flag_reason(speaker, yomi, res.person_id, day, by_election)
+		reason = self.flag_reason(speaker, yomi, group, res.person_id, day, by_election)
 		if reason is None:
 			return res
 		key = ReviewKey(speaker, yomi or "", res.person_id, reason)
 		decision = self.decisions().get(key)
+		if reason == "not_serving" and (decision is None or decision.status == "pending"):
+			# not attributed without asking; a "confirmed" decision can still override
+			return Resolution(None, "not_serving", "sure", key)
 		if decision is None or decision.status == "pending":
 			return Resolution(res.person_id, res.reason, "review", key)
 		if decision.status == "confirmed":
@@ -146,16 +195,22 @@ class SpeakerResolver:
 		return self._decisions
 
 	def people(self) -> Dict[int, Tuple[str, Optional[str]]]:
-		"""person_id → (name_kanji, name_kana); loads every person and election win once."""
+		"""person_id → (name_kanji, name_kana); loads every person, election win and term once."""
 		if self._people is None:
 			self.cur.execute("SELECT person_id, name_kanji, name_kana FROM person")
 			self._people = {int(pid): (kanji, kana) for pid, kanji, kana in self.cur.fetchall()}
-			self.cur.execute("SELECT person_id, election_date, party, result FROM election_result")
+			self.cur.execute(
+				"SELECT person_id, election_date, election_name, district, party, result FROM election_result ORDER BY person_id, election_date"
+			)
 			wins: Dict[int, List[Tuple[date, Optional[str]]]] = {pid: [] for pid in self._people}
-			for pid, d, party, result in self.cur.fetchall():
-				if (result or "").strip() not in LOSING_RESULTS:
+			elections: Dict[int, List[Tuple[date, Optional[str], bool]]] = {}
+			for pid, d, name, district, party, result in self.cur.fetchall():
+				won = (result or "").strip() not in LOSING_RESULTS
+				if won:
 					wins.setdefault(int(pid), []).append((d, party))
+				elections.setdefault(int(pid), []).append((d, election_house(name, district), won))
 			self._wins.update(wins)
+			self._terms = {pid: service_terms(rows) for pid, rows in elections.items()}
 		return self._people
 
 	def _lookup(self, speaker: str, yomi: Optional[str], group: Optional[str]) -> Tuple[Optional[int], List[int]]:

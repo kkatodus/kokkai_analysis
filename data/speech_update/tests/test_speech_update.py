@@ -307,43 +307,73 @@ class ConfidenceTest(unittest.TestCase):
 		111: ("宮沢喜一", "みやざわきいち"),
 		500: ("中村正雄", "なかむらまさお"),
 	}
-	WINS = {
-		2648: [(date(1983, 12, 18), "日本社会党")],
-		1977: [(date(1990, 2, 18), "自由民主党"), (date(2026, 2, 8), "自由民主党")],
-		3631: [(date(1998, 7, 12), "社会民主党")],
-		111: [(date(1953, 4, 24), "自由党"), (date(1990, 2, 18), "自由民主党")],
-		500: [(date(1947, 4, 25), "日本社会党")],
+	TERMS = {
+		2648: [(date(1983, 12, 18), date(1997, 8, 17))],
+		1977: [(date(1990, 2, 18), date(2030, 3, 10))],
+		3631: [(date(1998, 7, 12), date(2030, 8, 1))],
+		111: [(date(1953, 4, 24), date(1996, 11, 19))],
+		500: [(date(1947, 4, 25), date(1987, 8, 1))],
 	}
 
-	def resolve(self, speaker, yomi, pid, day, decisions=None):
+	def resolve(self, speaker, yomi, pid, day, decisions=None, group="会派"):
 		r = SpeakerResolver(mock.Mock(), decisions=decisions or {})
 		r._people = self.PEOPLE
-		r._wins = self.WINS
+		r._terms = self.TERMS
 		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=pid):
-			return r.resolve(speaker, yomi, "会派", day)
+			return r.resolve(speaker, yomi, group, day)
+
+	def test_service_terms(self):
+		elections = [
+			(date(1983, 12, 18), "衆", True),
+			(date(1986, 7, 6), "衆", False),   # lost: the 1983 term ends here
+			(date(1990, 2, 18), "衆", True),   # no later election: full 4-year term
+			(date(1995, 7, 23), "参", True),
+			(date(1999, 4, 1), None, True),    # local election: no term
+		]
+		self.assertEqual(resolver_mod.service_terms(elections), [
+			(date(1983, 12, 18), date(1986, 8, 5)),
+			(date(1990, 2, 18), date(1994, 3, 20)),
+			(date(1995, 7, 23), date(2001, 8, 22)),
+		])
+		self.assertEqual(resolver_mod.election_house("補欠選挙", "大分県選挙区"), "参")
+		self.assertEqual(resolver_mod.election_house("補欠選挙", "愛媛2区"), "衆")
+		self.assertEqual(resolver_mod.election_house("同", "東海ブロック"), "衆")
+		self.assertIsNone(resolver_mod.election_house("浦安市議会議員選挙", "千葉県浦安市"))
 
 	def test_sure_matches(self):
 		self.assertEqual(self.resolve("宮澤喜一", "みやざわきいち", 111, "1975-01-01").confidence, "sure")
 		self.assertEqual(self.resolve("福島みずほ", "ふくしまみずほ", 3631, "2005-01-01").confidence, "sure")
-		self.assertEqual(self.resolve("鈴木俊一", "すずきしゅんいち", 1977, "2000-01-01").confidence, "sure")
+		self.assertEqual(self.resolve("鈴木俊一", "すずきしゅんいち", 1977, "2000-01-01", group=None).confidence, "sure")
 
 	def test_flags(self):
-		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01")
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1985-01-01")
 		self.assertEqual((r.person_id, r.confidence, r.review_key), (2648, "review", ReviewKey("中村正雄", "なかむらまさお", 2648, "kanji_differs")))
-		self.assertEqual(self.resolve("鈴木俊一", "すずきしゅんいち", 1977, "1960-01-01").review_key.reason, "before_career")
-		self.assertEqual(self.resolve("宮澤喜一", "みやざわきいち", 111, "2005-01-01").review_key.reason, "after_career")
-		# kana name whose reading doesn't match the person
+		# a member (has a group) outside the known terms: election data gap or someone else
+		self.assertEqual(self.resolve("宮澤喜一", "みやざわきいち", 111, "2005-01-01").review_key.reason, "out_of_term")
 		self.assertEqual(self.resolve("福島みずほ", "ふくしまみづほ", 3631, "2005-01-01").review_key.reason, "kanji_differs")
+
+	def test_not_serving_is_dropped_without_review(self):
+		# 鈴木俊一 the civil servant, 1960: no group, outside #1977's terms
+		r = self.resolve("鈴木俊一", "", 1977, "1960-01-01", group=None)
+		self.assertEqual((r.person_id, r.reason, r.confidence), (None, "not_serving", "sure"))
+		self.assertEqual(r.review_key, ReviewKey("鈴木俊一", "", 1977, "not_serving"))
+		# even when the kanji differ
+		self.assertEqual(self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", group=None).reason, "not_serving")
+		# a "confirmed" decision overrides
+		key = ReviewKey("鈴木俊一", "", 1977, "not_serving")
+		r = self.resolve("鈴木俊一", "", 1977, "1960-01-01", {key: Decision(1, "confirmed")}, group=None)
+		self.assertEqual((r.person_id, r.confidence), (1977, "sure"))
 
 	def test_decisions_override(self):
 		key = ReviewKey("中村正雄", "なかむらまさお", 2648, "kanji_differs")
-		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "reassigned", 500)})
+		day = "1985-01-01"
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, day, {key: Decision(1, "reassigned", 500)})
 		self.assertEqual((r.person_id, r.confidence, r.reason), (500, "sure", "reviewed"))
-		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "unlinked")})
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, day, {key: Decision(1, "unlinked")})
 		self.assertEqual((r.person_id, r.reason), (None, "unlinked"))
-		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "confirmed")})
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, day, {key: Decision(1, "confirmed")})
 		self.assertEqual((r.person_id, r.confidence), (2648, "sure"))
-		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "pending")})
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, day, {key: Decision(1, "pending")})
 		self.assertEqual(r.confidence, "review")
 
 
@@ -356,17 +386,21 @@ class ReviewRouteTest(unittest.TestCase):
 		self.tmp.cleanup()
 
 	def test_held_and_unlinked_speeches_are_not_filed(self):
-		key = ReviewKey("山田一郎", "やまだいちろう", 7, "before_career")
+		key = ReviewKey("山田一郎", "やまだいちろう", 7, "out_of_term")
+		gone = ReviewKey("鈴木太郎", "", 9, "not_serving")
 		resolver = mock.Mock()
 		resolver.resolve.side_effect = lambda speaker, yomi, group, d: {
 			"山田一郎": resolver_mod.Resolution(7, "name", "review", key),
 			"田中次郎": resolver_mod.Resolution(None, "unlinked", "sure", key),
 			"佐藤三郎": resolver_mod.Resolution(8, "name"),
+			"鈴木太郎": resolver_mod.Resolution(None, "not_serving", "sure", gone),
 		}[speaker]
 		meta = {"issueID": "B", "date": "2026-10-05"}
-		speeches = [speech("B", 1), speech("B", 2), speech("B", 3, speaker="田中次郎"), speech("B", 4, speaker="佐藤三郎")]
+		speeches = [speech("B", 1), speech("B", 2), speech("B", 3, speaker="田中次郎"), speech("B", 4, speaker="佐藤三郎"),
+			speech("B", 5, speaker="鈴木太郎", group=None)]
 		r = Router(resolver, self.persons, TOPICS).route([(meta, speeches)])
-		self.assertEqual((r.matched, r.held_speeches, r.unlinked, r.added), (1, 2, 1, 1))
+		self.assertEqual((r.matched, r.held_speeches, r.unlinked, r.not_serving, r.added), (1, 2, 1, 1, 1))
+		self.assertEqual(list(r.dropped), [gone])
 		self.assertEqual(r.held[key].issues, {"B": [2, "2026-10-05", "2026-10-05"]})
 		self.assertEqual(r.held[key].samples, ["B_001", "B_002"])
 		self.assertFalse((self.persons / "7").exists())

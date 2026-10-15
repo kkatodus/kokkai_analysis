@@ -132,7 +132,7 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 
 ## 6c. 2026-10-15: speaker review
 
-Confidence levels for speaker matches, built per [specs/speaker-review](../speaker-review/README.md): unsure matches are held and queued in Postgres `speaker_review`, reviewed with `python -m speech_update.review`, and applied by the nightly run. Backlog scan queued 762 pairs / 183,559 speeches; they stay filed where they are until decided.
+Confidence levels for speaker matches, built per [specs/speaker-review](../speaker-review/README.md): unsure matches are held and queued in Postgres `speaker_review`, reviewed with `python -m speech_update.review`, and applied by the nightly run. Per the user, speeches made outside a politician's elected terms without a 会派 are not attributed (`not_serving`): 164,025 speeches across 713 people, removed 2026-10-15. 145 pairs / 40,948 speeches are queued for review and stay filed where they are until decided. The election data is missing many 2025 upper-house and 2026 lower-house winners.
 
 ## 7. Next steps (Phase 1)
 
