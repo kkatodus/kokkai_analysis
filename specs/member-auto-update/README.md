@@ -1,6 +1,6 @@
 # Member list auto-update
 
-**Status:** in-progress (built 2026-10-15; schedule not installed yet) · **Code:** `data/member_update/` · **Related:** [speech-auto-update](../speech-auto-update/README.md), [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md)
+**Status:** in-progress (built 2026-10-15; first run 2026-10-15 uploaded `*_20261015.json`, live on prod; schedule not installed yet) · **Code:** `data/member_update/` · **Related:** [speech-auto-update](../speech-auto-update/README.md), [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md)
 
 ## 1. Goal
 
@@ -18,7 +18,7 @@ Before this, the lists were refreshed by hand: Selenium in `collect_repr_list.py
 | Match | `person_id` from, in order: `links.json` (manual) → previous snapshot (same name + reading) → unique name in `person` (旧字体 folded, `[旧姓]` ignored) → unique reading (reported as "matched by reading only"). Never fuzzy. |
 | Unresolved | Kept with `person_id: null` (the frontend copes), listed in `pending_members.json`, posted to Slack. The user adds them (§3). Nothing is fabricated. |
 | Write | A new `{house}_{YYYYMMDD}.json` only when the rows differ from the latest file. The backend serves the file that sorts last in S3. Older files are kept. |
-| Upload | Changed paths only, via the speech updater's `Uploader` (profile `kokkai-speech-update`, never deletes). |
+| Upload | Changed paths only, via the speech updater's `Uploader` (profile `kokkai-speech-update`, never deletes), to `kokkai-doc-bucket-dev`. Prod reads that bucket too, so an upload is live on kokkaidoc.com (INFRA.md § Data lake). |
 | Notify | Slack summary every run: joined, left, and 会派/district/name changes, reading-only matches, pending members. |
 
 State lives in `s3_mirror/.member-update/`: `lock`, `last_run.json`, `changed_paths.txt`, `pending_members.json`, `links.json`, `new_members/` (templates), `backups/` (table.csv before each `add`), `logs/`.

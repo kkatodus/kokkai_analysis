@@ -32,7 +32,7 @@ Read this first when picking the work back up in a fresh session. The design is 
 - `s3_mirror/kokkai-doc/` = full copy of `s3://kokkai-doc-bucket-dev/kokkai-doc/`: **465,884 files, 50 GB**. A dry-run sync showed it matches the bucket. The bucket's 2 extra objects are empty folder placeholders.
 - Prefixes: `electionHistory/` (4,818) · `geo/` · `ideology/` · `issues/` (**107,280** meetings) · `parliamentMembers/` · `politicians/` · `relevance_and_productivity/` · `repr_speeches_id_organized/` (4,525 people) · `speeches/` (107,157, duplicates `issues/`, not read by the backend).
 - Refresh: `./scripts/sync-s3-mirror.sh [--background] [--env dev]`. Logs go to `s3_mirror/.sync-logs/`.
-- Only **`kokkai-doc-bucket-dev`** exists. `-staging` and `-prod` (named in `infra/lib/config/environments.ts`) don't.
+- Only **`kokkai-doc-bucket-dev`** exists. `-staging` and `-prod` (named in `infra/lib/config/environments.ts` on `dev`) don't. **The prod backend reads `kokkai-doc-bucket-dev` too** (verified 2026-10-15 from the running ECS task definition; `prd`'s `environments.ts` was repointed in `5a22df84`), so every upload here is live on prod. See `docs/agents/INFRA.md` § Data lake.
 - The S3 speech data was last written around **2025-12-28**. The first Phase 1 run needs to backfill Dec 2025 → now.
 
 ### Postgres
