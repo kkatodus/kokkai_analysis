@@ -77,6 +77,23 @@ LOWER_DISTRICT_RE = re.compile(r"区$|ブロック$")
 Term = Tuple[date, date]
 
 
+# NDL fills speakerGroup for some witnesses and officials from the person's later
+# party (正力松太郎 testifying in 1953 under 自由民主党), so a group alone doesn't
+# mean the speaker sat in the Diet. These roles and speech headers never do.
+NON_MEMBER_ROLES = {"参考人", "証人", "公述人"}
+NON_MEMBER_HEADER_RE = re.compile(r"政府委員|説明員|政府参考人|参考人|公述人|証人|最高裁判所|会計検査院|人事院")
+
+
+def member_group(speech: dict) -> Optional[str]:
+	"""The speech's speakerGroup if it was made as a Diet member, else None."""
+	if (speech.get("speakerRole") or "") in NON_MEMBER_ROLES:
+		return None
+	header = (speech.get("speech") or "").split("\u3000", 1)[0][:40]
+	if header.startswith("○") and NON_MEMBER_HEADER_RE.search(header):
+		return None
+	return speech.get("speakerGroup") or None
+
+
 def election_house(election_name: Optional[str], district: Optional[str]) -> Optional[str]:
 	"""'衆' / '参' for a Diet election, None for local or House of Peers elections."""
 	name = election_name or ""

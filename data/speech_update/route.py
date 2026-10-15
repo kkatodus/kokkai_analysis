@@ -22,7 +22,7 @@ from utils.speech_topics import identify_topic_for_speech
 
 from .fetch import read_issue
 from .models import person_line
-from .resolver import SpeakerResolver
+from .resolver import SpeakerResolver, member_group
 from .review_store import HeldItem, ReviewKey
 from .state import write_atomic
 
@@ -55,6 +55,7 @@ class RouteResult:
 	routed_issues: List[str] = field(default_factory=list)
 	held: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))
 	dropped: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))  # not_serving
+	decided: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))  # resolved by a decision
 	new_review: List[ReviewKey] = field(default_factory=list)  # keys first queued by this run
 
 
@@ -182,10 +183,14 @@ class Router:
 			result.routed_issues.append(meta["issueID"])
 			for speech in speeches:
 				result.speeches += 1
-				res = self.resolver.resolve(speech.get("speaker"), speech.get("speakerYomi"), speech.get("speakerGroup"), meta["date"])
+				group = member_group(speech)
+				res = self.resolver.resolve(speech.get("speaker"), speech.get("speakerYomi"), group, meta["date"])
 				if res.reason == "procedural":
 					result.procedural += 1
 					continue
+				if res.review_key is not None and res.confidence == "sure" and res.reason != "not_serving":
+					# keeps the decision's issue links complete, so `apply` revisits these issues
+					result.decided[res.review_key].add(speech, meta)
 				if res.reason == "unlinked":
 					result.unlinked += 1
 					continue
@@ -198,7 +203,7 @@ class Router:
 					result.held[res.review_key].add(speech, meta)
 					continue
 				if res.person_id is None:
-					if not speech.get("speakerGroup"):
+					if not group:
 						# officials, witnesses, etc.: not Diet members
 						result.non_member_skipped += 1
 						continue

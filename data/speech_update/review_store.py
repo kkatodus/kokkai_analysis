@@ -108,12 +108,14 @@ def load_decisions(cur) -> Dict[ReviewKey, Decision]:
 
 
 def record_held(conn, held: Dict[ReviewKey, HeldItem], routed_issues: Iterable[str], backlog: bool = False,
-		dropped: Optional[Dict[ReviewKey, HeldItem]] = None) -> List[ReviewKey]:
+		dropped: Optional[Dict[ReviewKey, HeldItem]] = None, decided: Optional[Dict[ReviewKey, HeldItem]] = None) -> List[ReviewKey]:
 	"""Upsert held speeches as pending rows, and `dropped` (not_serving) ones as rows already
 	decided `unlinked`. Pending rows' issue links for `routed_issues` are replaced, so a
 	re-routed issue drops speeches that no longer need review.
 	`backlog=True` (review scan): the speeches are already filed under person_id, so dropped
 	rows are left unapplied for `apply` to remove them.
+	`decided`: speeches that resolved through an existing decision; only their issue links
+	are recorded.
 	Returns the pending keys that weren't in the table before."""
 	from psycopg2.extras import execute_values
 
@@ -149,6 +151,12 @@ def record_held(conn, held: Dict[ReviewKey, HeldItem], routed_issues: Iterable[s
 			if inserted and not auto:
 				new_keys.append(key)
 			issue_rows.extend((review_id, issue_id, n, first, last) for issue_id, (n, first, last) in item.issues.items())
+		for key, item in (decided or {}).items():
+			cur.execute(
+				"SELECT id FROM speaker_review WHERE speaker = %s AND speaker_yomi = %s AND person_id = %s AND reason = %s", key)
+			row = cur.fetchone()
+			if row:
+				issue_rows.extend((row[0], issue_id, n, first, last) for issue_id, (n, first, last) in item.issues.items())
 		if issue_rows:
 			execute_values(
 				cur,

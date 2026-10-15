@@ -189,7 +189,7 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 
 def record_review(conn, result) -> None:
 	from . import review_store
-	result.new_review = review_store.record_held(conn, result.held, result.routed_issues, dropped=result.dropped)
+	result.new_review = review_store.record_held(conn, result.held, result.routed_issues, dropped=result.dropped, decided=result.decided)
 	for key in result.new_review:
 		log.warning("new speaker match to review: %s (%s) → #%d [%s]", *key)
 

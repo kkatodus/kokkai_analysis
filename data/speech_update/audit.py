@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 from .__main__ import connect_postgres
 from .config import load_config
 from .fetch import read_issue
-from .resolver import SpeakerResolver
+from .resolver import SpeakerResolver, member_group
 from .state import State, write_atomic
 
 log = logging.getLogger("speech_update.audit")
@@ -71,7 +71,8 @@ def main() -> int:
 			continue
 		meta, speeches = issue
 		for s in speeches:
-			res = resolver.resolve(s.get("speaker"), s.get("speakerYomi"), s.get("speakerGroup"), meta["date"])
+			group = member_group(s)
+			res = resolver.resolve(s.get("speaker"), s.get("speakerYomi"), group, meta["date"])
 			if res.reason == "procedural":
 				continue
 			if res.reason in ("unlinked", "not_serving") or res.confidence == "review":
@@ -79,7 +80,7 @@ def main() -> int:
 				totals["unlinked_speeches" if res.reason == "unlinked" else "held_for_review"] += 1
 				continue
 			if res.person_id is None:
-				if s.get("speakerGroup"):
+				if group:
 					u = unmatched[(s["speaker"], s.get("speakerYomi"), res.reason)]
 					u["issues"].add(issue_id)
 					u["speeches"] += 1

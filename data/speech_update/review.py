@@ -27,6 +27,7 @@ from .__main__ import connect_postgres, make_router, setup_logging
 from .config import Config, load_config
 from .fetch import read_issue
 from .review_store import ReviewKey
+from .resolver import member_group
 from .route import iter_issues_from_disk, remove_from_person_dir
 from .state import LockHeld, State
 from .variants import same_name, same_reading
@@ -69,7 +70,7 @@ def apply_decisions(cfg: Config, state: State, conn, dry_run: bool = False, db_s
 	unlinked: Set[str] = set()
 	for meta, speeches in iter_issues_from_disk(cfg.issues_dir, issue_ids):
 		for s in speeches:
-			res = router.resolver.resolve(s.get("speaker"), s.get("speakerYomi"), s.get("speakerGroup"), meta["date"])
+			res = router.resolver.resolve(s.get("speaker"), s.get("speakerYomi"), member_group(s), meta["date"])
 			row = by_key.get(res.review_key) if res.review_key else None
 			if row is None:
 				continue
@@ -91,7 +92,7 @@ def apply_decisions(cfg: Config, state: State, conn, dry_run: bool = False, db_s
 				c.execute("DELETE FROM speeches WHERE speech_id = ANY(%s)", (sorted(unlinked),))
 				result.db_deleted = c.rowcount
 			conn.commit()
-		result.new_review = store.record_held(conn, routed.held, routed.routed_issues, dropped=routed.dropped)
+		result.new_review = store.record_held(conn, routed.held, routed.routed_issues, dropped=routed.dropped, decided=routed.decided)
 		store.mark_applied(conn, {r["id"]: target_of(r) for r in rows})
 		state.add_pending_paths(result.paths_written)
 	log.info(
@@ -109,7 +110,15 @@ def scan(cfg: Config, conn) -> None:
 	log.info("scanning %d issues for matches that need review", len(issue_ids))
 	router = make_router(cfg, conn, dry_run=False, write_files=False, db_speeches=False)
 	routed = router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
-	new = store.record_held(conn, routed.held, routed.routed_issues, backlog=True, dropped=routed.dropped)
+	new = store.record_held(conn, routed.held, routed.routed_issues, backlog=True, dropped=routed.dropped, decided=routed.decided)
+	# after a rule change, speeches already on disk can newly fall under an applied
+	# decision; re-applying every decision reconciles files and Postgres with them
+	with conn.cursor() as cur:
+		cur.execute("UPDATE speaker_review SET applied_at = NULL WHERE status <> 'pending' AND applied_at IS NOT NULL")
+		reapply = cur.rowcount
+	conn.commit()
+	if reapply:
+		log.info("%d decided row(s) marked for re-apply; run `python -m speech_update.review apply`", reapply)
 	by_reason: Dict[str, List[int]] = defaultdict(lambda: [0, 0])
 	for key, item in [*routed.held.items(), *routed.dropped.items()]:
 		by_reason[key.reason][0] += 1

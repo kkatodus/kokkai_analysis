@@ -364,6 +364,16 @@ class ConfidenceTest(unittest.TestCase):
 		r = self.resolve("鈴木俊一", "", 1977, "1960-01-01", {key: Decision(1, "confirmed")}, group=None)
 		self.assertEqual((r.person_id, r.confidence), (1977, "sure"))
 
+	def test_member_group_ignores_witnesses_and_officials(self):
+		mg = resolver_mod.member_group
+		self.assertEqual(mg({"speakerGroup": "自由民主党", "speech": "○石破委員\u3000質問します"}), "自由民主党")
+		self.assertEqual(mg({"speakerGroup": "自由民主党", "speech": "○国務大臣（石破茂君）\u3000お答えします"}), "自由民主党")
+		self.assertIsNone(mg({"speakerGroup": "自由民主党", "speakerRole": "参考人", "speech": "○正力参考人\u3000"}))
+		self.assertIsNone(mg({"speakerGroup": "自由民主党", "speech": "○政府委員（斎藤昇君）\u3000北海道の"}))
+		self.assertIsNone(mg({"speakerGroup": "自由党", "speech": "○説明員（坂本實君）\u3000御説明"}))
+		self.assertIsNone(mg({"speakerGroup": "緑風会", "speech": "○田中最高裁判所長官\u3000初めに"}))
+		self.assertIsNone(mg({"speakerGroup": "", "speech": "○山田委員\u3000"}))
+
 	def test_decisions_override(self):
 		key = ReviewKey("中村正雄", "なかむらまさお", 2648, "kanji_differs")
 		day = "1985-01-01"
