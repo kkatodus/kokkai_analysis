@@ -55,6 +55,7 @@ class Notifier:
 			"✅ Speech update {window_from} → {window_until}: {meetings_checked} meetings checked, "
 			"{meetings_new} new / {meetings_changed} changed; {speeches_added} speeches added, "
 			"{speeches_updated} updated; {files_uploaded} files uploaded; {duration_s:.0f}s".format(**summary)
+			+ (" · {review_pending} speaker match(es) awaiting review".format(**summary) if summary.get("review_pending") else "")
 		)
 
 	def failure(self, stage: str, error: str, log_path: str) -> None:
@@ -70,6 +71,18 @@ class Notifier:
 			+ "\nAdd them to Postgres `person` (create_local_db_for_politicians.py), then run "
 			"`cd data && ../.venv-speech-update/bin/python -m speech_update route --retry-unmatched "
 			"&& ../.venv-speech-update/bin/python -m speech_update upload`"
+		)
+
+
+	def review_needed(self, keys: List[tuple], pending: int) -> None:
+		lines = [f"• {k[0]} ({k[1]}) → #{k[2]} [{k[3]}]" for k in keys[:MAX_LISTED]]
+		if len(keys) > MAX_LISTED:
+			lines.append(f"…and {len(keys) - MAX_LISTED} more")
+		self.send(
+			f"🔎 {len(keys)} new speaker match(es) need review ({pending} pending in total); "
+			"their speeches are held until you decide:\n" + "\n".join(lines)
+			+ "\nReview: `cd data && ../.venv-speech-update/bin/python -m speech_update.review` "
+			"(decisions go live in the next nightly run)"
 		)
 
 

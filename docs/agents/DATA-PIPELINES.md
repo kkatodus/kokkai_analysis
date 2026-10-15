@@ -52,6 +52,7 @@ Python scripts for scraping, processing, and LLM-based analysis. Intermediate an
 - Run from `data/`: `../.venv-speech-update/bin/python -m speech_update all [--dry-run] [--from YYYY-MM-DD]`. Stages: `fetch` (NDL `/api/meeting` date window, 60-day lookback) → `route` (speaker → `person_id` via Postgres, merge by `speechID`) → `upload` (boto3, profile `kokkai-speech-update`, never deletes).
 - Scheduled wrapper: `./scripts/update-speeches.sh` (retry once, Slack on failure).
 - State, logs and `unmatched_speakers.jsonl` live in `s3_mirror/.speech-update/`. After adding a new member to Postgres `person`: `route --retry-unmatched`, then `upload`.
+- **Speaker review** (spec: `specs/speaker-review/`): unsure matches (kanji differ beyond old/new forms, election-history pick, speech outside the elected career) are held, not filed, and queued in Postgres `speaker_review`. Review with `python -m speech_update.review` (interactive; `list`, `decide`, `scan`, `apply` also available). The nightly run applies decisions and moves already-filed speeches.
 - Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s speech_update/tests -t .`; resolver regression: `python -m speech_update.check_resolver`.
 
 ## Analysis / LLM workflows

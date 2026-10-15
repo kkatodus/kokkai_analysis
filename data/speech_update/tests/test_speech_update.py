@@ -13,9 +13,11 @@ from speech_update.fetch import diff_issue, fetch, latest_issue_date, read_issue
 from speech_update.models import META_KEYS, meeting_from_api
 from speech_update.ndl_client import NdlClient, NdlError, NdlRejected
 from speech_update.resolver import SpeakerResolver, party_matches
-from speech_update.route import Router, merge_person_file, sort_lines
+from speech_update.review_store import Decision, ReviewKey
+from speech_update.route import Router, merge_person_file, remove_from_person_dir, sort_lines
 from speech_update.state import State
 from speech_update.upload import Uploader, upload_order
+from speech_update.variants import normalise_name, same_name
 
 TOPICS = [{"topic_name_en": "Defence", "search_words": ["防衛"]}]
 
@@ -242,7 +244,7 @@ class ResolverTest(unittest.TestCase):
 	def _resolver(self, wins):
 		cur = mock.Mock()
 		cur.fetchall.side_effect = lambda: wins[cur.execute.call_args[0][1][0]]
-		return SpeakerResolver(cur)
+		return SpeakerResolver(cur, flag=False)
 
 	def test_same_name_disambiguated_by_winning_party_before_meeting(self):
 		# 鬼木誠: 1070 LDP (lower house), 3960 CDP (upper house, from 2022)
@@ -278,12 +280,110 @@ class ResolverTest(unittest.TestCase):
 
 	def test_procedural_and_cache(self):
 		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=10) as g:
-			r = SpeakerResolver(mock.Mock())
+			r = SpeakerResolver(mock.Mock(), flag=False)
 			self.assertEqual(r.resolve("会議録情報", None, None, "2026-01-01").reason, "procedural")
 			self.assertEqual(r.resolve("", None, None, "2026-01-01").reason, "procedural")
 			r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1969-01-01")
 			r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1970-01-01")
 			self.assertEqual(g.call_count, 1)
+
+
+class VariantsTest(unittest.TestCase):
+	def test_old_forms_and_kana_match_but_different_characters_do_not(self):
+		self.assertTrue(same_name("宮澤喜一", "宮沢喜一"))
+		self.assertTrue(same_name("淡谷悠藏", "淡谷悠蔵"))
+		self.assertTrue(same_name("佐佐弘雄", "佐々弘雄"))
+		self.assertTrue(same_name("春名直章", "春名 直章"))
+		self.assertEqual(normalise_name("ジョッキ"), normalise_name("ジョツキ"))
+		self.assertFalse(same_name("中村正雄", "中村正男"))
+		self.assertFalse(same_name("太田正孝", "太田昌孝"))
+
+
+class ConfidenceTest(unittest.TestCase):
+	PEOPLE = {
+		2648: ("中村正男", "なかむらまさお"),
+		1977: ("鈴木俊一", "すずきしゅんいち"),
+		3631: ("福島瑞穂", "ふくしまみずほ"),
+		111: ("宮沢喜一", "みやざわきいち"),
+		500: ("中村正雄", "なかむらまさお"),
+	}
+	WINS = {
+		2648: [(date(1983, 12, 18), "日本社会党")],
+		1977: [(date(1990, 2, 18), "自由民主党"), (date(2026, 2, 8), "自由民主党")],
+		3631: [(date(1998, 7, 12), "社会民主党")],
+		111: [(date(1953, 4, 24), "自由党"), (date(1990, 2, 18), "自由民主党")],
+		500: [(date(1947, 4, 25), "日本社会党")],
+	}
+
+	def resolve(self, speaker, yomi, pid, day, decisions=None):
+		r = SpeakerResolver(mock.Mock(), decisions=decisions or {})
+		r._people = self.PEOPLE
+		r._wins = self.WINS
+		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=pid):
+			return r.resolve(speaker, yomi, "会派", day)
+
+	def test_sure_matches(self):
+		self.assertEqual(self.resolve("宮澤喜一", "みやざわきいち", 111, "1975-01-01").confidence, "sure")
+		self.assertEqual(self.resolve("福島みずほ", "ふくしまみずほ", 3631, "2005-01-01").confidence, "sure")
+		self.assertEqual(self.resolve("鈴木俊一", "すずきしゅんいち", 1977, "2000-01-01").confidence, "sure")
+
+	def test_flags(self):
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01")
+		self.assertEqual((r.person_id, r.confidence, r.review_key), (2648, "review", ReviewKey("中村正雄", "なかむらまさお", 2648, "kanji_differs")))
+		self.assertEqual(self.resolve("鈴木俊一", "すずきしゅんいち", 1977, "1960-01-01").review_key.reason, "before_career")
+		self.assertEqual(self.resolve("宮澤喜一", "みやざわきいち", 111, "2005-01-01").review_key.reason, "after_career")
+		# kana name whose reading doesn't match the person
+		self.assertEqual(self.resolve("福島みずほ", "ふくしまみづほ", 3631, "2005-01-01").review_key.reason, "kanji_differs")
+
+	def test_decisions_override(self):
+		key = ReviewKey("中村正雄", "なかむらまさお", 2648, "kanji_differs")
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "reassigned", 500)})
+		self.assertEqual((r.person_id, r.confidence, r.reason), (500, "sure", "reviewed"))
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "unlinked")})
+		self.assertEqual((r.person_id, r.reason), (None, "unlinked"))
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "confirmed")})
+		self.assertEqual((r.person_id, r.confidence), (2648, "sure"))
+		r = self.resolve("中村正雄", "なかむらまさお", 2648, "1960-01-01", {key: Decision(1, "pending")})
+		self.assertEqual(r.confidence, "review")
+
+
+class ReviewRouteTest(unittest.TestCase):
+	def setUp(self):
+		self.tmp = tempfile.TemporaryDirectory()
+		self.persons = Path(self.tmp.name) / "repr_speeches_id_organized"
+
+	def tearDown(self):
+		self.tmp.cleanup()
+
+	def test_held_and_unlinked_speeches_are_not_filed(self):
+		key = ReviewKey("山田一郎", "やまだいちろう", 7, "before_career")
+		resolver = mock.Mock()
+		resolver.resolve.side_effect = lambda speaker, yomi, group, d: {
+			"山田一郎": resolver_mod.Resolution(7, "name", "review", key),
+			"田中次郎": resolver_mod.Resolution(None, "unlinked", "sure", key),
+			"佐藤三郎": resolver_mod.Resolution(8, "name"),
+		}[speaker]
+		meta = {"issueID": "B", "date": "2026-10-05"}
+		speeches = [speech("B", 1), speech("B", 2), speech("B", 3, speaker="田中次郎"), speech("B", 4, speaker="佐藤三郎")]
+		r = Router(resolver, self.persons, TOPICS).route([(meta, speeches)])
+		self.assertEqual((r.matched, r.held_speeches, r.unlinked, r.added), (1, 2, 1, 1))
+		self.assertEqual(r.held[key].issues, {"B": [2, "2026-10-05", "2026-10-05"]})
+		self.assertEqual(r.held[key].samples, ["B_001", "B_002"])
+		self.assertFalse((self.persons / "7").exists())
+		self.assertEqual(r.unmatched_members, [])
+
+	def test_remove_from_person_dir(self):
+		meta = {"date": "2026-01-01", "issueID": "B"}
+		line = lambda sid: {"speechID": sid, "speechOrder": 1, "meta": meta}
+		merge_person_file(self.persons / "7" / "all_speeches.jsonl", {s: line(s) for s in ("a", "b", "c")}, dry_run=False)
+		merge_person_file(self.persons / "7" / "Defence.jsonl", {"b": line("b")}, dry_run=False)
+		removed, written = remove_from_person_dir(self.persons, 7, {"b", "zz"}, dry_run=False)
+		self.assertEqual(removed, 1)
+		self.assertEqual(written, ["repr_speeches_id_organized/7/Defence.jsonl", "repr_speeches_id_organized/7/all_speeches.jsonl"])
+		with open(self.persons / "7" / "all_speeches.jsonl", encoding="utf-8") as f:
+			self.assertEqual([json.loads(l)["speechID"] for l in f], ["a", "c"])
+		self.assertEqual((self.persons / "7" / "Defence.jsonl").read_text(), "")
+		self.assertEqual(remove_from_person_dir(self.persons, 99, {"a"}, dry_run=False), (0, []))
 
 
 class StateTest(unittest.TestCase):

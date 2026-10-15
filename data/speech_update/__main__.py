@@ -7,6 +7,9 @@
   route --db-only --all-issues   rebuild Postgres `speeches` from every issue (§4.10)
   upload                   upload changed_paths.txt
 
+Unsure speaker matches are held for review: python -m speech_update.review
+(specs/speaker-review). `all` applies decided reviews before uploading.
+
 --dry-run fetches and computes diffs but writes nothing to the mirror, S3 or Postgres.
 """
 from __future__ import annotations
@@ -137,7 +140,11 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 						cur.execute(f"ALTER TABLE {args.db_table} ADD FOREIGN KEY (person_id) REFERENCES person(person_id)")
 				conn.commit()
 			router = make_router(cfg, conn, args.dry_run, write_files=False, db_speeches=not args.dry_run, db_table=args.db_table)
-			return router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
+			result = router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
+			log.info("%d speech(es) held for review in %d pair(s)", result.held_speeches, len(result.held))
+			if not args.dry_run:
+				record_review(conn, result)
+			return result
 
 		router = make_router(cfg, conn, args.dry_run, db_speeches=db_speeches)
 		if getattr(args, "retry_unmatched", False):
@@ -156,10 +163,11 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 		result = router.route(meetings)
 		log.info(
 			"route done: %d speeches, %d matched (%d by election history), %d non-member skipped, "
-			"%d unmatched member speaker(s); all_speeches +%d added / %d updated across %d person(s); %d DB rows",
+			"%d unmatched member speaker(s); %d held for review in %d pair(s); "
+			"all_speeches +%d added / %d updated across %d person(s); %d DB rows",
 			result.speeches, result.matched, result.disambiguated, result.non_member_skipped,
-			len({u["speaker"] for u in result.unmatched_members}), result.added, result.updated,
-			len(result.persons), result.db_rows if db_speeches else 0,
+			len({u["speaker"] for u in result.unmatched_members}), result.held_speeches, len(result.held),
+			result.added, result.updated, len(result.persons), result.db_rows if db_speeches else 0,
 		)
 		for name, yomi, group, reason in sorted({(u["speaker"], u["speakerYomi"], u["speakerGroup"], u["reason"]) for u in result.unmatched_members}):
 			n = sum(1 for u in result.unmatched_members if u["speaker"] == name)
@@ -167,6 +175,7 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 		if not args.dry_run:
 			replacing = issue_ids if getattr(args, "retry_unmatched", False) else result.routed_issues
 			result.new_unmatched = state.record_unmatched(result.unmatched_members, replacing_issues=replacing)
+			record_review(conn, result)
 			state.add_pending_paths(result.paths_written)
 			if not getattr(args, "retry_unmatched", False):
 				state.clear_pending_issues(result.routed_issues)
@@ -176,6 +185,37 @@ def run_route(cfg: Config, state: State, args, dry_meetings: Optional[list] = No
 	finally:
 		if own_conn:
 			conn.close()
+
+
+def record_review(conn, result) -> None:
+	from . import review_store
+	result.new_review = review_store.record_held(conn, result.held, result.routed_issues)
+	for key in result.new_review:
+		log.warning("new speaker match to review: %s (%s) → #%d [%s]", *key)
+
+
+def run_apply(cfg: Config, state: State, args):
+	"""Apply decided speaker reviews (specs/speaker-review). None if Postgres is down or nothing to do."""
+	from .review import apply_decisions
+	conn = connect_postgres()
+	if conn is None:
+		return None
+	try:
+		db_speeches = args.db_speeches if args.db_speeches is not None else cfg.db_speeches
+		return apply_decisions(cfg, state, conn, dry_run=args.dry_run, db_speeches=db_speeches)
+	finally:
+		conn.close()
+
+
+def review_pending() -> int:
+	from . import review_store
+	conn = connect_postgres()
+	if conn is None:
+		return 0
+	try:
+		return review_store.pending_count(conn.cursor())
+	finally:
+		conn.close()
 
 
 def run_upload(cfg: Config, state: State, args, dry_paths: Optional[List[str]] = None) -> int:
@@ -218,6 +258,18 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 		dry_paths = sorted(set(dry_paths) | set(routed.paths_written))
 		if routed.new_unmatched and not args.dry_run:
 			notifier.unmatched(routed.new_unmatched)
+	applied = None
+	if routed is not None:
+		try:
+			applied = run_apply(cfg, state, args)
+		except Exception as e:
+			raise StageError("review apply", e) from e
+		if applied:
+			dry_paths = sorted(set(dry_paths) | set(applied.paths_written))
+	new_review = (routed.new_review if routed else []) + (applied.new_review if applied else [])
+	pending = review_pending() if not args.dry_run else 0
+	if new_review and not args.dry_run:
+		notifier.review_needed(new_review, pending)
 
 	try:
 		uploaded = run_upload(cfg, state, args, dry_paths=dry_paths)
@@ -235,6 +287,10 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 		"speeches_updated": routed.updated if routed else 0,
 		"persons_touched": len(routed.persons) if routed else 0,
 		"unmatched_member_speakers": len({u["speaker"] for u in routed.unmatched_members}) if routed else 0,
+		"speeches_held_for_review": routed.held_speeches if routed else 0,
+		"review_new": len(new_review),
+		"review_pending": pending,
+		"review_decisions_applied": applied.decisions if applied else 0,
 		"route_postponed": routed is None,
 		"files_uploaded": uploaded,
 		"files_to_upload": len(dry_paths) if args.dry_run else uploaded,

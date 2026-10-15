@@ -2,8 +2,10 @@
 
 repr_speeches_id_organized/{person_id}/all_speeches.jsonl and /{Topic}.jsonl:
 lines are keyed by speechID (existing IDs are replaced, new ones added, nothing
-is deleted) and sorted newest meeting first. Optionally upserts the same
-speeches into the Postgres `speeches` table.
+is deleted here; see remove_from_person_dir) and sorted newest meeting first.
+Optionally upserts the same speeches into the Postgres `speeches` table.
+Matches the resolver flags for review are held: not filed, not written to
+Postgres, collected in RouteResult.held (specs/speaker-review).
 """
 from __future__ import annotations
 
@@ -12,7 +14,7 @@ import logging
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional, Tuple
+from typing import Dict, Iterable, Iterator, List, Optional, Set, Tuple
 
 from dbio.representative_db import PersonId, Speech, upsert_speeches_bulk
 from utils.speech_topics import identify_topic_for_speech
@@ -20,6 +22,7 @@ from utils.speech_topics import identify_topic_for_speech
 from .fetch import read_issue
 from .models import person_line
 from .resolver import SpeakerResolver
+from .review_store import HeldItem, ReviewKey
 from .state import write_atomic
 
 log = logging.getLogger(__name__)
@@ -38,6 +41,8 @@ class RouteResult:
 	disambiguated: int = 0
 	procedural: int = 0
 	non_member_skipped: int = 0
+	unlinked: int = 0   # decided "not this person" in speaker_review
+	held_speeches: int = 0
 	added: int = 0      # new lines in all_speeches.jsonl files
 	updated: int = 0    # replaced lines in all_speeches.jsonl files
 	db_rows: int = 0
@@ -46,6 +51,8 @@ class RouteResult:
 	unmatched_members: List[dict] = field(default_factory=list)
 	new_unmatched: List[dict] = field(default_factory=list)  # not seen in earlier runs
 	routed_issues: List[str] = field(default_factory=list)
+	held: Dict[ReviewKey, HeldItem] = field(default_factory=lambda: defaultdict(HeldItem))
+	new_review: List[ReviewKey] = field(default_factory=list)  # keys first queued by this run
 
 
 def iter_issues_from_disk(issues_dir: Path, issue_ids: Iterable[str]) -> Iterator[Meeting]:
@@ -89,6 +96,28 @@ def merge_person_file(path: Path, incoming: Dict[str, dict], dry_run: bool) -> T
 	if not dry_run:
 		write_atomic(path, "".join(json.dumps(l, ensure_ascii=False) + "\n" for l in sort_lines(existing)))
 	return added, updated, True
+
+
+def remove_from_person_dir(persons_dir: Path, person_id: int, speech_ids: Set[str], dry_run: bool) -> Tuple[int, List[str]]:
+	"""Drop `speech_ids` from every jsonl file of one person. Returns (lines removed from
+	all_speeches, rel paths written). Files are rewritten, never deleted."""
+	removed = 0
+	written: List[str] = []
+	person_dir = persons_dir / str(person_id)
+	if not person_dir.is_dir():
+		return 0, []
+	for path in sorted(person_dir.glob("*.jsonl")):
+		with open(path, encoding="utf-8") as f:
+			lines = [l for l in f if l.strip()]
+		kept = [l for l in lines if json.loads(l)["speechID"] not in speech_ids]
+		if len(kept) == len(lines):
+			continue
+		if path.stem == ALL_SPEECHES:
+			removed += len(lines) - len(kept)
+		if not dry_run:
+			write_atomic(path, "".join(kept))
+		written.append(f"{PERSONS_PREFIX}/{person_id}/{path.name}")
+	return removed, written
 
 
 def to_db_row(speech: dict, meta: dict, person_id: int) -> Speech:
@@ -153,6 +182,13 @@ class Router:
 				res = self.resolver.resolve(speech.get("speaker"), speech.get("speakerYomi"), speech.get("speakerGroup"), meta["date"])
 				if res.reason == "procedural":
 					result.procedural += 1
+					continue
+				if res.reason == "unlinked":
+					result.unlinked += 1
+					continue
+				if res.confidence == "review":
+					result.held_speeches += 1
+					result.held[res.review_key].add(speech, meta)
 					continue
 				if res.person_id is None:
 					if not speech.get("speakerGroup"):

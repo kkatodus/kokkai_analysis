@@ -7,17 +7,24 @@
    ones who won an election on or before the meeting date for a party that
    matches `speakerGroup`. Exactly one left → that person.
 3. Never fuzzy-match. Anything else is unmatched.
+4. Confidence (specs/speaker-review): a match is flagged for review when the
+   kanji differ beyond old/new character forms, when it was picked by election
+   history, or when the meeting is outside the person's elected career. Human
+   decisions in `speaker_review` override flagged matches.
 """
 from __future__ import annotations
 
 import logging
 import re
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, timedelta
 from typing import Dict, List, Optional, Tuple
 
 from dbio.representative_db import get_person_by_column, get_politician_id_by_name
 from utils.string_process import clean_repr_name
+
+from .review_store import Decision, ReviewKey, load_decisions
+from .variants import has_kana, same_name, same_reading
 
 log = logging.getLogger(__name__)
 
@@ -55,18 +62,29 @@ def party_matches(party: Optional[str], speaker_group: Optional[str]) -> bool:
 	return any(_norm_party(part) == party for part in GROUP_SPLIT_RE.split(speaker_group or "") if part)
 
 
+# a speech this far outside the person's wins is flagged (spec speaker-review §3.1)
+CAREER_BEFORE = timedelta(days=365)
+CAREER_AFTER = timedelta(days=7 * 365)
+
+
 @dataclass(frozen=True)
 class Resolution:
 	person_id: Optional[int]
-	reason: str  # "name" | "disambiguated" | "procedural" | "ambiguous" | "not_found"
+	reason: str  # "name" | "disambiguated" | "procedural" | "ambiguous" | "not_found" | "unlinked"
+	confidence: str = "sure"  # "sure" | "review" (held until a human decides)
+	review_key: Optional[ReviewKey] = None  # set whenever the match was flagged, decided or not
 
 
 class SpeakerResolver:
-	def __init__(self, cur):
+	def __init__(self, cur, decisions: Optional[Dict[ReviewKey, Decision]] = None, flag: bool = True):
+		"""`decisions` defaults to the `speaker_review` table; `flag=False` turns confidence checks off."""
 		self.cur = cur
+		self.flag = flag
+		self._decisions = decisions
 		self._base: Dict[Tuple[str, Optional[str], Optional[str]], Tuple[Optional[int], List[int]]] = {}
 		self._by_kana: Dict[str, List[int]] = {}
 		self._wins: Dict[int, List[Tuple[date, Optional[str]]]] = {}
+		self._people: Optional[Dict[int, Tuple[str, Optional[str]]]] = None
 		self.lookups = 0
 
 	def resolve(self, speaker: Optional[str], yomi: Optional[str], group: Optional[str], meeting_date: str) -> Resolution:
@@ -76,15 +94,69 @@ class SpeakerResolver:
 		if key not in self._base:
 			self._base[key] = self._lookup(speaker, yomi, group)
 		person_id, candidates = self._base[key]
+		day = date.fromisoformat(meeting_date)
 		if person_id is not None:
-			return Resolution(person_id, "name")
+			return self._checked(Resolution(person_id, "name"), speaker, yomi, day, by_election=False)
 		if len(candidates) > 1:
 			by_kana = [pid for pid in candidates if pid in self._kana_matches(yomi)]
 			if len(by_kana) == 1:
-				return Resolution(by_kana[0], "disambiguated")
-			pid = self._disambiguate(candidates, group, date.fromisoformat(meeting_date))
-			return Resolution(pid, "disambiguated") if pid is not None else Resolution(None, "ambiguous")
+				return self._checked(Resolution(by_kana[0], "disambiguated"), speaker, yomi, day, by_election=False)
+			pid = self._disambiguate(candidates, group, day)
+			if pid is None:
+				return Resolution(None, "ambiguous")
+			return self._checked(Resolution(pid, "disambiguated"), speaker, yomi, day, by_election=True)
 		return Resolution(None, "not_found")
+
+	# --- confidence (specs/speaker-review §3.1) ---
+
+	def flag_reason(self, speaker: str, yomi: Optional[str], person_id: int, day: date, by_election: bool) -> Optional[str]:
+		name_kanji, name_kana = self.people().get(person_id, ("", None))
+		if not same_name(speaker, name_kanji) and not (
+			(has_kana(speaker) or has_kana(name_kanji)) and same_reading(yomi, name_kana)
+		):
+			return "kanji_differs"
+		if by_election:
+			return "election_pick"
+		wins = [d for d, _ in self._wins_of(person_id)]
+		if wins and day < min(wins) - CAREER_BEFORE:
+			return "before_career"
+		if wins and day > max(wins) + CAREER_AFTER:
+			return "after_career"
+		return None
+
+	def _checked(self, res: Resolution, speaker: str, yomi: Optional[str], day: date, by_election: bool) -> Resolution:
+		if not self.flag:
+			return res
+		reason = self.flag_reason(speaker, yomi, res.person_id, day, by_election)
+		if reason is None:
+			return res
+		key = ReviewKey(speaker, yomi or "", res.person_id, reason)
+		decision = self.decisions().get(key)
+		if decision is None or decision.status == "pending":
+			return Resolution(res.person_id, res.reason, "review", key)
+		if decision.status == "confirmed":
+			return Resolution(res.person_id, res.reason, "sure", key)
+		if decision.status == "reassigned":
+			return Resolution(decision.new_person_id, "reviewed", "sure", key)
+		return Resolution(None, "unlinked", "sure", key)
+
+	def decisions(self) -> Dict[ReviewKey, Decision]:
+		if self._decisions is None:
+			self._decisions = load_decisions(self.cur)
+		return self._decisions
+
+	def people(self) -> Dict[int, Tuple[str, Optional[str]]]:
+		"""person_id → (name_kanji, name_kana); loads every person and election win once."""
+		if self._people is None:
+			self.cur.execute("SELECT person_id, name_kanji, name_kana FROM person")
+			self._people = {int(pid): (kanji, kana) for pid, kanji, kana in self.cur.fetchall()}
+			self.cur.execute("SELECT person_id, election_date, party, result FROM election_result")
+			wins: Dict[int, List[Tuple[date, Optional[str]]]] = {pid: [] for pid in self._people}
+			for pid, d, party, result in self.cur.fetchall():
+				if (result or "").strip() not in LOSING_RESULTS:
+					wins.setdefault(int(pid), []).append((d, party))
+			self._wins.update(wins)
+		return self._people
 
 	def _lookup(self, speaker: str, yomi: Optional[str], group: Optional[str]) -> Tuple[Optional[int], List[int]]:
 		self.lookups += 1

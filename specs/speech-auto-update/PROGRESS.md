@@ -1,6 +1,6 @@
 # Speech auto-update: progress & handoff
 
-**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** watch the first scheduled runs; drop `speeches_pre_repair` when happy; source the 279 missing historical members (§6b)
+**Last updated:** 2026-10-14 (session 2) · **Spec:** [README.md](README.md) · **Next:** work through the speaker review queue ([speaker-review](../speaker-review/README.md)); drop `speeches_pre_repair` when happy; source the 279 missing historical members (§6b)
 
 Read this first when picking the work back up in a fresh session. The design is in `README.md`; this file covers where things stand, what the environment looks like, and the traps found along the way.
 
@@ -129,6 +129,10 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
   Once happy: `DROP TABLE speeches_pre_repair;` (`~/kokkaidoc-speeches-pre-repair.dump` is the backup).
 
 **Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. **Installed by the user 2026-10-14** (`./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev`; check with `… status`) (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
+
+## 6c. 2026-10-15: speaker review
+
+Confidence levels for speaker matches, built per [specs/speaker-review](../speaker-review/README.md): unsure matches are held and queued in Postgres `speaker_review`, reviewed with `python -m speech_update.review`, and applied by the nightly run. Backlog scan queued 762 pairs / 183,559 speeches; they stay filed where they are until decided.
 
 ## 7. Next steps (Phase 1)
 
