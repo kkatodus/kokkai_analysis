@@ -165,6 +165,9 @@ For each finished batch: write §3.5's fields onto the exchange's first speech i
 
 ## 5. Checklist
 
+- [x] Hide the old labels on the site: `SHOW_SPEECH_QUALITY = false` in `frontend/app/lib/config/features.ts` (PR #52, live 2026-10-18). Flip it back with the new labels.
+- [x] Archive the old labels: `s3_mirror/.speech-quality-archive/v1-20261018/` (96,180 labels with reasons, 1,379 per-person Unproductive/Irrelevant files, `aggregate_processed.jsonl`). Stripped `is_relevant` / `is_productive` / `quality_reason` from 6,152 `issues/` files and 6,356 per-person files, uploaded 2026-10-18.
+- [ ] Delete the 1,379 per-person `Unproductive.jsonl` / `Irrelevant.jsonl` and `relevance_and_productivity/aggregate_processed.jsonl` from S3 (needs an admin profile: the speech-update user can't delete), and copy the archive to S3
 - [ ] Phase 1: gold-set page with the §3 scheme; user labels ~150 exchanges
 - [ ] Phase 1: prompt v1; run the three candidates; report by field and by party; user picks
 - [ ] Exchange segmenter + test against the 6,152 labelled meetings (≥95% boundary match)
