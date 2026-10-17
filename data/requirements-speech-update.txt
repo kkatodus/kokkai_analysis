@@ -1,0 +1,6 @@
+# Minimal deps for data/speech_update (the scheduled NDL speech updater).
+# data/requirements.txt pins CUDA torch builds that don't install on macOS.
+psycopg2-binary==2.9.11
+python-dotenv==1.2.1
+requests>=2.32,<3
+boto3>=1.35,<2

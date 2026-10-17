@@ -8,6 +8,10 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 |---|---|---|
 | [`ensemble-scaling-reliability`](ensemble-scaling-reliability/README.md) | draft | Methods paper (KOKKAI DOC sequel): embedding-model instability in LLM-based ideological scaling + latent-space ensembles as the fix, validated vs UTAS and human Bradley-Terry comparisons |
 | [`polis-low-resource-persona`](polis-low-resource-persona/README.md) | draft | POLIS paper: personas for low-resource Diet politicians via BO-tuned DARE-TIES merging of DPO anchor adapters, evaluated on UTAS answer agreement vs SFT/DPO/ICL baselines |
+| [speech-auto-update](speech-auto-update/README.md) | planned | Scheduled incremental fetch of new NDL speeches → `issues/` + `repr_speeches_id_organized/`, upload changed files to S3 |
+| [member-auto-update](member-auto-update/README.md) | in-progress | Monthly scrape of the official 衆/参 member lists → new `parliamentMembers/` snapshot with `person_id`s; members missing from `person` queued for a verified `add` |
+| [speaker-review](speaker-review/README.md) | in-progress | Confidence levels for speech → politician matches; unsure pairs held for a human decision (`python -m speech_update review`), decisions applied nightly |
+| [speech-quality-labels](speech-quality-labels/README.md) | planned | LLM labels for every exchange since 2000 and nightly: Diet function, contribution, failure patterns (private scandal, redundancy, evasion, softballs …) charged to questioner or answerer; $100/month cap with Slack spend reports |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 

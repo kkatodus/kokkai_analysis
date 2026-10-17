@@ -68,13 +68,27 @@ Ideological scaling / embedding artifacts are synced to `s3_mirror/kokkai-doc/id
 
 Topics (English names, Japanese search words, BERT labels) live in `data/resource/experiment_config.json`. Used by opinion collection, labelling, and summary pipelines.
 
+## Experiment code (`research/`)
+
+Code for the papers lives in [`research/`](../../research/README.md), one directory
+per project. Datasets resolve through `research/polis/paths.py` (`DATA_DIR` →
+`data/data`, overridable with `KOKKAI_DATA_DIR` for GPU boxes without the drive).
+
+| Path | What |
+|---|---|
+| `research/polis/` | POLIS — low-resource persona simulation via DPO + LoRA anchors merged with DARE-TIES, mixing coefficients tuned by Optuna GP-BO. Covers the whole pipeline: anchor selection → session-grounded DPO pair export → Gemini caricature `rejected` → `train_one_politician_persona.py` (TRL `DPOTrainer`, PEFT; `--quantize` for 4-bit QLoRA at 7B) → `merge_layer_group.py` / `bo_merge_coeffs.py` → `polis_option_logprob.py` UTAS scoring. Paper: `paper/parameter-optimization-for-low-resource-ideological-simulation/`; plan and handover: `specs/polis-low-resource-persona/`. |
+| `research/polis/output/` | Trained LoRA adapters, **gitignored** (~1 GB). Four anchors at 0.5B and 7B. |
+
+Consolidated 2026-07-29 from the separate `idea/persona` repo plus the POLIS
+scripts that used to live in `data/`; older notes referencing either location
+describe the same files.
+
 ## Related code (sibling repos)
 
 Separate git repos alongside this one (`../idea/`), not part of `kokkai_analysis`:
 
 | Path | What |
 |---|---|
-| `../idea/persona/code/` | LLM politician-persona simulation via DPO + LoRA (TRL `DPOTrainer`, PEFT). `train_one_politician_persona.py` fine-tunes on `prompt`/`chosen`/`rejected` JSONL (default `Qwen/Qwen2.5-0.5B-Instruct`); `validate_persona.py` diffs base vs. base+adapter. Downstream generative use of per-politician stance summaries. |
 | `../idea/scaling/survey/` | Human pairwise-comparison web app (Next.js frontend + FastAPI backend, Firestore/CSV) collecting "which speech is more pro-X" labels per topic — a human-label source for the ideological-scaling axes in `paper/`. Frontend runs a non-standard Next.js: read `node_modules/next/dist/docs/` before editing. |
 
 ## When working on research

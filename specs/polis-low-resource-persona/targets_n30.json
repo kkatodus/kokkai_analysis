@@ -1,0 +1,221 @@
+{
+ "purpose": "n=30 held-out target expansion for the POLIS NLL evaluation (DECISIONS.md, open item 1).",
+ "wave": "2024HoR",
+ "eligibility": "complete 33-item UTAS vector + speech dir under repr_speeches_id_organized + not an anchor (152/2377/3631/5520) + not an existing target (1279/2053/2289); 550 eligible, 517 with the >=60 pairs a 30/30 split needs",
+ "sampling": "6 log-spaced bands by speech-record count, 5 drawn uniformly per band, random.Random(20260802)",
+ "protocol": "budget 30 / test 30, matching the committed 1279/2053/2289 runs so old and new pool into one analysis",
+ "export": "export_polis_dpo_pairs.py --person-id <id> --max-pairs 300 --output-dir data/data/polis/dpo_pairs_targets (prompt/chosen only; no Gemini rejected step -- targets get no adapter of their own)",
+ "note": "pair yield is ~1:1 with speech records up to the 300 cap (measured 41->40, 81->81, 149->147, 297->297)",
+ "targets": [
+  {
+   "person_id": 369,
+   "name": "山本左近",
+   "speeches": 103,
+   "band": "60-120",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 2447,
+   "name": "斎藤裕喜",
+   "speeches": 82,
+   "band": "60-120",
+   "party": "立憲民主党・無所属"
+  },
+  {
+   "person_id": 1572,
+   "name": "五十嵐清",
+   "speeches": 114,
+   "band": "60-120",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 688,
+   "name": "高見康裕",
+   "speeches": 104,
+   "band": "60-120",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 2704,
+   "name": "岡野純子",
+   "speeches": 104,
+   "band": "60-120",
+   "party": "国民民主党・無所属クラブ"
+  },
+  {
+   "person_id": 1543,
+   "name": "手塚仁雄",
+   "speeches": 166,
+   "band": "120-250",
+   "party": "民主党・無所属クラブ"
+  },
+  {
+   "person_id": 1547,
+   "name": "東克哉",
+   "speeches": 140,
+   "band": "120-250",
+   "party": "立憲民主党・無所属"
+  },
+  {
+   "person_id": 640,
+   "name": "八木哲也",
+   "speeches": 179,
+   "band": "120-250",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 1551,
+   "name": "小竹凱",
+   "speeches": 166,
+   "band": "120-250",
+   "party": "国民民主党・無所属クラブ"
+  },
+  {
+   "person_id": 2025,
+   "name": "柴田勝之",
+   "speeches": 230,
+   "band": "120-250",
+   "party": "立憲民主党・無所属"
+  },
+  {
+   "person_id": 230,
+   "name": "和田義明",
+   "speeches": 373,
+   "band": "250-500",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 110,
+   "name": "田野瀬太道",
+   "speeches": 423,
+   "band": "250-500",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 1982,
+   "name": "金城泰邦",
+   "speeches": 364,
+   "band": "250-500",
+   "party": "公明党"
+  },
+  {
+   "person_id": 1083,
+   "name": "山崎正恭",
+   "speeches": 452,
+   "band": "250-500",
+   "party": "公明党"
+  },
+  {
+   "person_id": 277,
+   "name": "高橋美穂",
+   "speeches": 413,
+   "band": "250-500",
+   "party": "日本維新の会"
+  },
+  {
+   "person_id": 2853,
+   "name": "平賀高成",
+   "speeches": 639,
+   "band": "500-1000",
+   "party": "日本共産党"
+  },
+  {
+   "person_id": 3245,
+   "name": "遠藤良太",
+   "speeches": 693,
+   "band": "500-1000",
+   "party": "日本維新の会"
+  },
+  {
+   "person_id": 989,
+   "name": "近藤和也",
+   "speeches": 956,
+   "band": "500-1000",
+   "party": "立憲民主党・無所属"
+  },
+  {
+   "person_id": 3022,
+   "name": "津島淳",
+   "speeches": 832,
+   "band": "500-1000",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 1782,
+   "name": "空本誠喜",
+   "speeches": 650,
+   "band": "500-1000",
+   "party": "日本維新の会"
+  },
+  {
+   "person_id": 2171,
+   "name": "北神圭朗",
+   "speeches": 1398,
+   "band": "1000-3000",
+   "party": "民主党・無所属クラブ"
+  },
+  {
+   "person_id": 2189,
+   "name": "武田良太",
+   "speeches": 2252,
+   "band": "1000-3000",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 14,
+   "name": "若宮健嗣",
+   "speeches": 1249,
+   "band": "1000-3000",
+   "party": "自由民主党"
+  },
+  {
+   "person_id": 5518,
+   "name": "尾辻かな子",
+   "speeches": 1817,
+   "band": "1000-3000",
+   "party": "立憲民主党・無所属フォーラム"
+  },
+  {
+   "person_id": 1434,
+   "name": "笠浩史",
+   "speeches": 2026,
+   "band": "1000-3000",
+   "party": "民主党・無所属クラブ"
+  },
+  {
+   "person_id": 2732,
+   "name": "宮本徹",
+   "speeches": 4776,
+   "band": "3000-+",
+   "party": "日本共産党"
+  },
+  {
+   "person_id": 808,
+   "name": "野田佳彦",
+   "speeches": 8219,
+   "band": "3000-+",
+   "party": "民主党・無所属クラブ"
+  },
+  {
+   "person_id": 225,
+   "name": "柴山昌彦",
+   "speeches": 4075,
+   "band": "3000-+",
+   "party": "自由民主党・無所属の会"
+  },
+  {
+   "person_id": 942,
+   "name": "浜田靖一",
+   "speeches": 5855,
+   "band": "3000-+",
+   "party": "自由民主党"
+  },
+  {
+   "person_id": 2546,
+   "name": "安住淳",
+   "speeches": 5855,
+   "band": "3000-+",
+   "party": "民主党・無所属クラブ"
+  }
+ ]
+}

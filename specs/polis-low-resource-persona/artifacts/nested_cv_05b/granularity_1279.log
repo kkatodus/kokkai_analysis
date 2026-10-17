@@ -1,0 +1,22 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 65/290 [00:00<00:00, 649.56it/s]Loading weights:  63%|██████▎   | 183/290 [00:00<00:00, 953.29it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 995.07it/s]
+target=1279 anchors=['152_kishida', '2377_shiokawa', '3631_fukushima', '5520_ueda'] n_layers=24 budget=30 folds=4 trials/fold=20
+granularity sweep n_groups=[1, 3, 24] (dims=[4, 12, 96])
+
+/home/ken/workspace/projects/idea/persona/code/bo_merge_coeffs.py:115: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[global           n_groups= 1 dims=  4 sampler=gp]  BO=2.8504±0.1092  base=2.8804  uniform=4.0500  best-single=2.9376
+[layer-group      n_groups= 3 dims= 12 sampler=gp]  BO=2.8573±0.1196  base=2.8804  uniform=4.0500  best-single=2.9376
+/home/ken/workspace/projects/idea/persona/code/bo_merge_coeffs.py:116: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  return "tpe", TPESampler(seed=seed, multivariate=True, group=True,
+/home/ken/workspace/projects/idea/persona/code/bo_merge_coeffs.py:116: ExperimentalWarning: Argument ``group`` is an experimental feature. The interface can change in the future.
+  return "tpe", TPESampler(seed=seed, multivariate=True, group=True,
+[full-layer-wise  n_groups=24 dims= 96 sampler=tpe]  BO=3.4408±0.1142  base=2.8804  uniform=4.0500  best-single=2.9376
+
+============ granularity vs held-out NLL (nested-CV, lower=better) ============
+  granularity       dims sampler               BO   BOvsBase  BOvsBest1
+  global               4      gp   2.8504±0.109    +0.0300    +0.0872
+  layer-group         12      gp   2.8573±0.120    +0.0231    +0.0803
+  full-layer-wise     96     tpe   3.4408±0.114    -0.5604    -0.5032
+
+  NB: the curve shows whether finer per-depth granularity buys fidelity vs. its harder optimisation (GP→TPE at the high-dim end). At 0.5B expect modest, possibly non-monotonic gains — adapters encode register not ideology; the shape is the deliverable, decisive magnitudes are a 7–8B task.

@@ -1,0 +1,1294 @@
+# POLIS — decision log
+
+Running record of what was tried, what it showed, and where the direction changed.
+Chronological, newest at the bottom. The point is that a null result six months from
+now should be traceable to the reasoning that produced it, including the wrong turns.
+
+Companion to [`RUNPOD.md`](RUNPOD.md) (how to run it) and
+[`README.md`](README.md) (what the plan was). Snippet IDs (`P8`, `L5`, …) refer to
+RUNPOD.md's index.
+
+**Adding an entry:** date, what was decided or found, and *why* — the why is the part
+that isn't recoverable from git later.
+
+---
+
+## 2026-08-02 — the 7B main-scale session
+
+One rented L40S-class pod (48 GB), ~2 h of GPU. Goal: settle the table
+`main.tex` §Discussion marks *pending on higher-throughput hardware*.
+
+### Getting it running
+
+| # | Problem | Cause | Resolution |
+|---|---|---|---|
+| 1 | `FileNotFoundError: dpo_pairs_full/1279.jsonl` in the granularity ablation | `bo_granularity_ablation.py` defaults `--dpo-dir` to the full corpus, which lives on the laptop SSD and was never shipped to the pod. `run_7b_bo_gpu.sh` sets it internally, so the other two protocols were unaffected | pass `--dpo-dir …/dpo_pairs_targets` (`a9a1f12b`) |
+| 2 | CUDA OOM before the first trial, on a card that had just run the other protocols fine | The script built a throwaway `probe` merger only to read `n_layers`, never dropped it, then built another per granularity. Each `LayerGroupMerger` pins ~14.8 GB (13.2 GB fp32 anchor deltas + 1.6 GB bf16 base snapshot); two of those plus the 15.2 GB model overruns 48 GB | read `n_layers` off the adapter, `del` + `empty_cache` between granularities (`a9a1f12b`). Peak now ~30 GB |
+| 3 | Runbook and pasted commands disagreed on `--device` | An uncommitted edit removing `--device cuda` was sitting in the working tree and got committed without being read | pin `--device cuda` everywhere, matching §4's gate and the runner's `DEVICE=cuda` (`e78d9f52`) |
+| 4 | Ran `P7` (52 min, old scoring) when `P8` (12 min) was meant | "the snippet below section 6" is ambiguous — there are 15 runnable blocks and no way to name one | every block now carries an ID; `L#` laptop, `P#` pod (`df09d6e4`) |
+
+### Results
+
+**NLL — the method works.** Nested 5-fold CV, paired per-fold deltas:
+
+| target | BO vs base | BO vs best-single | folds favouring BO |
+|---|---|---|---|
+| 1279 高市 | +0.1159 ± 0.0230 | +0.0176 ± 0.0076 | 5/5 |
+| 2053 赤嶺 | +0.0820 ± 0.0178 | +0.0177 ± 0.0154 | 4/5 |
+| 2289 枝野 | +0.1143 ± 0.0233 | +0.0287 ± 0.0130 | 5/5 |
+
+14 of 15 folds. `best-single` picks are unanimous within each target.
+
+> **Correction made mid-session.** The margin over best-single was first read as
+> "inside noise" from the granularity script's *unpaired* ±0.079 spread. That spread
+> is dominated by some folds being harder than others; both methods face the same
+> fold, so the paired delta (±0.008) is the right statistic. Report paired.
+
+**Granularity — a null, and the hedge dies with it.** Nested 4-fold, target 1279:
+global (4 dims) `2.1557 ± 0.0792` vs layer-group (12 dims) `2.1563 ± 0.0848`. A gap
+of 0.0006 against a ±0.08 spread — an order of magnitude tighter a null than the
+0.5B result. `main.tex:162` already concedes granularity doesn't help at development
+scale but softens it with "the natural place for the register/ideology distinction to
+appear **at main scale**". That hedge is now tested and does not pay out. **Decision:
+keep the concession, retire the hedge.** A null replicating across a 14× scale gap
+with its proposed mechanism ruled out is a stronger statement than either.
+
+The 112-dim upper bookend was skipped (`--groups 1 3`); 0.5B settled it decisively
+(96 dims → 3.441 vs base 2.880) and it is the most expensive cell.
+
+**UTAS — does not support a claim, under either scorer.**
+
+The §4.4 table was checked against a dummy that answers the scale midpoint to all 33
+items, using no model at all. Under the original verbose-option scoring the dummy tied
+the best config on one target and beat every config on another. Under numeric-label
+scoring, **0 of 12 config×target cells beat the dummy on MAE** — worse in absolute
+terms than verbose.
+
+Root cause of the first round: `evaluate_anchor` defaults to `numeric=False`, and the
+verbose path softmaxes five length-normalised per-token log-probs that all sit in a
+narrow band, so the expectation collapses toward the midpoint whatever the model
+believes. `score_options_numeric()` had been written as the Phase-0 fix for exactly
+this and was never wired through — the string `numeric` did not appear in
+`bo_merge_coeffs.py`.
+
+The numeric scorer did fix what it was meant to: `MAE(E)` and `MAE(arg)` were far
+apart under verbose (1.330 vs 1.545 on 1279) and nearly coincide under numeric (1.406
+vs 1.515). The distribution is sharp now — the model commits to an answer instead of
+hedging at 3. It is simply wrong more often than the midpoint guess.
+
+One place with signal: on 2053 (赤嶺, bimodal — 8 hard disagrees, 14 hard agrees, so
+the midpoint is a poor guess) every config beats the dummy on `within1`, 0.455–0.667
+against 0.333.
+
+**The finding worth reporting:** NLL and UTAS are anti-correlated. `uniform` has by
+far the worst NLL (2.74–2.99 vs base 2.25–2.53) yet the best or near-best UTAS on two
+targets, and BO is never the best UTAS config. Optimising speech-level likelihood does
+not transfer to stated policy positions. That is a real limit of the method and
+stating it plainly beats burying an uninterpretable table.
+
+### Direction change: stop chasing absolute MAE
+
+Two scorers both failed to clear a constant floor, so the next move is not a third
+scorer. Two facts reframed it:
+
+* the persona is conditioned on the **name alone** (`_persona_system`), so UTAS needs
+  no speech, adapter or merge — it can run over the whole wave;
+* the wave has **594 politicians with complete 33-item vectors, 573 of them distinct**,
+  against which only 3 were ever used.
+
+New instruments (`utas_population_eval.py`, `utas_rank_metric.py`):
+
+1. **Name-swap divergence.** How far simulated vectors move when only the name
+   changes, relative to how far the real politicians differ. A ratio near 0 means the
+   persona is *inert* and a flat §4.4 table says nothing about the merge — this
+   separates "wrong persona" from "no persona", which one-target MAE cannot.
+2. **Rank of the true politician.** Distance from a simulated vector to all 594 real
+   ones; where does its own politician land. Only the ordering matters, so it survives
+   everyone clustering near the midpoint — the regime that sank MAE.
+
+> **Design correction, caught by a known-answer fixture.** The null for the rank
+> metric is *not* the 50th percentile. A constant vector sits near the population
+> centroid and is therefore closer than average to everyone: an all-3 predictor scores
+> the **68.4th** percentile on this wave for free. The constants are now printed as
+> rows in the rank table, and the claim to make is "ranks above every constant".
+
+### Scale: targets before anchors
+
+Asked whether to add personas. They are two different axes:
+
+* **Targets** (held-out, evaluated on) — n=3 today. Needs DPO pairs per target, no
+  training. **633 politicians** are in both the 2024HoR wave and the organized speech
+  corpus, 437 with ≥1 MB of text. ~10 min GPU per target for nested CV. **This is the
+  priority**: n=3 cannot carry a population claim, and per-fold consistency is not a
+  substitute because folds are slices of one person.
+* **Anchors** (trained, merged from) — 4 today, spec §2.4 assumed 8. Each is a
+  training run *and* ~3.3 GB of VRAM: 8 anchors = 26.4 GB of deltas + 15.2 GB model
+  exceeds a 48 GB card, so it needs an 80 GB card or bf16 deltas. The one argument for
+  it is that the granularity null may be a 4-anchor artefact — with four sources to
+  blend there may be nothing for per-depth weighting to differentiate. Speculative and
+  costly. **Deferred.**
+
+> **Framing problem to fix.** Ranked by speech volume among the 633, the current
+> targets are **#9 (枝野), #17 (高市), #20 (赤嶺)** — the top 3% of the corpus. The
+> paper is about *low-resource* simulation. Sampling targets from ranks 200–600 would
+> raise n and put the method on its actual thesis. Expect the margin to shrink; a
+> smaller margin on genuinely data-poor politicians is the stronger result.
+
+### Population sweep result — the §4.4 protocol does not measure persona fidelity
+
+594 personas under base 7B, 10.7 min, 1.08 s/persona. The fast scorer's self-check
+against `score_options_numeric` passed.
+
+**Name-swap divergence 0.209.** Simulated vectors spread `0.236` against the real
+politicians' `1.132` — changing the name moves the answers about a fifth as much as
+the politicians actually differ from each other. Not literally inert (0 of 19 900
+persona pairs are identical on expectation), but weak. Per item: median sd across all
+594 personas is `0.186` against the real `1.013`, and **9 of the 33 items have
+sd < 0.05** — for those, the model returns the same answer whoever you say it is.
+
+**Rank at chance.** Median percentile `52.1%` (expectation) against a measured
+constant floor of `50.1%`; top-1 `0.002`, which is exactly 1/594. The model cannot
+identify which politician it is simulating.
+
+**Systematic skew.** Simulated mean `2.271` vs real `2.763` — the personas sit
+uniformly toward "agree" regardless of who they are. The three targets' simulated
+means span `2.155`–`2.406`; their real means span `2.636`–`3.364`. 赤嶺 (JCP) comes
+out at `2.211` against a real `3.364`, nearly indistinguishable from 高市's `2.155`.
+
+**Conclusion.** The flat §4.4 table is a property of the instrument, not evidence
+about the merge. Name-prompted persona conditioning plus option-logprob survey scoring
+does not carry politician identity at this scale, so UTAS results cannot support a
+claim in either direction. The NLL result stands on its own and is unaffected.
+
+> **Correction to the earlier design note.** The rank null *is* 50% on a full sweep,
+> not 68%. A name-independent vector induces one fixed distance ordering, so as the
+> persona ranges over the whole candidate set its rank takes every value exactly once
+> — the five constant rows all land on `50.1%`, as they must. The 68.4% seen earlier
+> came from a fixture with only 60 personas against 594 candidates: sampling noise,
+> not the centroid effect claimed. The constant rows remain the right comparison
+> because they measure the floor under whatever subsampling was actually used.
+
+### The merge does not inject identity either — §4.4 closed
+
+`P12`: same single split, per-config vectors saved, ranked against the 594.
+
+| target | base | uniform | best-single | BO | best constant |
+|---|---|---|---|---|---|
+| 1279 高市 | 34.3% | 37.2% | 40.2% | 39.4% | constant(1) → 67.5% |
+| 2053 赤嶺 | 5.6% | 4.2% | 2.7% | 2.7% | constant(5) → 97.5% |
+| 2289 枝野 | 47.5% | 25.4% | 43.8% | 44.9% | constant(5) → 81.3% |
+
+All twelve cells at or below chance; a constant beats every model config on every
+target. BO against base is +5.1 / −2.9 / −2.6 points — the merge makes it *worse* on
+two of three.
+
+赤嶺 (JCP) is the clearest case. His real answers cluster at 5 (mean 3.364), so
+`constant(5)` ranks him at the 97.5th percentile, while all four model configs put him
+in the **bottom 3–6%** — actively anti-correlated, not merely uninformative. Consistent
+with the population sweep, where simulated-赤嶺 (2.211) was nearly identical to
+simulated-高市 (2.155). The constants swing from 2.7% to 97.5% depending on which
+extreme a target occupies, while every config clusters near the population's low-middle:
+the simulations do not move to where the politician is.
+
+**Decision: stop work on the UTAS metric.** Two scorers, a population control and a
+rank metric all agree it does not carry politician identity at this scale, with or
+without the merge. The paper reports it as a limitation with the diagnostic attached,
+and the headline rests on NLL.
+
+> **Strength caveat.** Per-target rank is one draw and these are noisy. Three targets
+> cannot carry a p-value — "all below chance" is p ≈ 0.125 on sign alone with each
+> target as one observation. The claim is *no evidence the merge injects identity*,
+> not proof it does not. Another argument for n≈30.
+
+### Anchor self-test — the chain breaks before the merge
+
+Asked whether training the anchors on UTAS answers would help. Ran the control that
+decides it first: the anchors have their own survey answers (152 岸田 and 2377 塩川 in
+2024HoR; 3631 福島 and 5520 上田 in 2022HoC), and their adapters were trained on
+12k–20k of their own speeches. Maximum resource, own answers, no merge, no
+low-resource approximation — if the chain works anywhere it works here.
+
+| anchor | n | constant-3 | adapter | base | beats constant? |
+|---|---|---|---|---|---|
+| 152 岸田 | 33 | 0.697 | 0.816 | 0.873 | no (+0.119) |
+| 2377 塩川 | 22 | **1.682** | 2.218 | 1.998 | no (+0.536) |
+| 3631 福島 | 37 | **1.243** | 0.980 | 1.085 | **yes (−0.263)** |
+| 5520 上田 | 37 | 0.514 | 1.215 | 1.286 | no (+0.701) |
+
+**1 of 4 beats a constant.** And the adapter contributes nothing consistent: MAE(E)
+favours it 3–1, but `within1` favours *base* 2–1 and `exact` is 1–1 with two ties. On
+塩川 the adapter is worse than base outright. Note 岸田 and 上田 answer 3 to half the
+items, so their constants are near-unbeatable and they discriminate little; the
+informative pair is 塩川 and 福島, which split one bad loss and one win.
+
+Consistent with the population sweep: 塩川's real mean is 3.32 while the model's
+natural output sits at ~2.27 and the adapter does not drag it up. 福島's real mean is
+2.89 — close to where the model already is, which is most of why it wins.
+
+**Decision: do not train anchors on UTAS.** The anchors' answers are not the targets'
+answers, so it would not be label leakage — but the 33 items are identical, so it
+would teach the task format, the scale semantics and the population answer
+distribution. The claim would degrade from "personas fitted to speech encode ideology
+an independent instrument can read" to "models trained on surveys answer surveys", and
+the merge would then transport survey-answering *competence*, masking the very
+distinction this session established. Legitimate only as a labelled diagnostic — an
+upper bound isolating whether the merge can transport ideology at all — never as
+evidence for the method.
+
+### Target expansion to n=33 — selection done
+
+Open item 1. Selection and protocol settled; export blocked on a filesystem
+permission (see below).
+
+**Framing correction.** The earlier note that the three targets being data-rich
+contradicts the *low-resource* title was too strong. `HANDOVER.md:465` has a fair
+defence: the BO tunes on 30 utterances regardless of how much the target has, so the
+*method* is low-resource either way. The untested axis is not quantity of data but
+**kind of politician** — 高市/赤嶺/枝野 are all nationally prominent, and prominent
+members give prepared set-piece speeches while backbenchers ask committee questions.
+
+**Eligibility.** Complete 33-item UTAS vector, a speech directory, not an anchor, not
+an existing target → **550 eligible**, 517 with the ≥60 pairs a 30/30 split needs.
+Pair yield is ~1:1 with speech records up to the 300 cap (measured 41→40, 81→81,
+149→147, 297→297), so speech count is a direct proxy.
+
+**Sampling: 6 log-spaced bands, 5 each** (`random.Random(20260802)`), recorded in
+[`targets_n30.json`](targets_n30.json). Chosen over a low-profile-only or uniform-random
+draw because it yields a *curve* — BO advantage against target prominence — rather than
+one more mean. Party spread: LDP 11, CDP/DPJ 10, Ishin 3, Komeito 2, JCP 2, DPP 2.
+
+**Protocol: budget 30 / test 30**, identical to the committed runs so the 3 existing
+and 30 new targets pool into one analysis. Targets need prompt/chosen only — no Gemini
+`rejected` step, since a held-out target gets no adapter of its own — so export is
+CPU-only and takes minutes.
+
+> **Blocker.** `/mnt/wsl/wsldata/kokkai_data` is entirely `root:root 755`. Every
+> operation this session was a read, which is why it surfaced only now. The export
+> needs `sudo chown ken:ken /mnt/wsl/wsldata/kokkai_data/polis/dpo_pairs_targets` —
+> one directory, enough to create the new files.
+
+Cost once unblocked: nested 5-fold at ~10 min/target ⇒ **~5 h GPU for 30**. The
+single-split protocol is no longer needed — it existed to carry the UTAS half, which
+is now closed.
+
+### Considered and rejected: dropping the "3" answers
+
+Hypothesis: politicians answer 3 (no stance) on policies they don't care about and
+take clear positions elsewhere, so constant-3 wins for a reason unrelated to the
+model's quality — evaluate only on non-3 items.
+
+**The premise is correct.** 31.7% of all 594×33 answers are 3; it is the modal
+response. 64 of 594 members answer 3 to more than half the items (one to all of them),
+median 30%. Per item the 3-rate ranges 9%–61%.
+
+**The conclusion does not follow.** Tested on the population dump, with the constant
+baseline recomputed on each filtered set:
+
+| filter | items | model | best const | model wins |
+|---|---|---|---|---|
+| all | 33 | 1.137 | 0.879 | 9% |
+| drop items >35% population 3-rate | 19 | 1.111 | 0.895 | 25% |
+| drop answers where truth = 3 | 22.6 | 1.162 | 1.000 | 29% |
+| extremes only (truth 1 or 5) | 13.5 | 1.395 | 1.455 | 44% |
+
+The win rate climbs to 44%, but **the model's own MAE gets worse** (1.137 → 1.395).
+The gap narrows because the baseline degrades, not because the model improves. Were
+the hypothesis right — good on clear stances, confused on the mushy middle — model
+error would *fall* when the 3s are removed. It rises, and even on the most favourable
+cut the model loses on 56% of politicians. Consistent with the population sweep: the
+model answers roughly the same thing for everyone (mean 2.271 vs real 2.763,
+name-swap 0.209), so its error is flat across item types.
+
+**Methodology note for the future.** Per-*item* filtering (drop items the whole
+population answers 3 to) is defensible — a property of the instrument, applied
+identically to every politician and method, standard non-discriminating-item removal.
+Per-*answer* filtering (drop items *this* politician answered 3 to) selects the
+evaluation set on the label being predicted; not fatal if the baseline is recomputed
+on the same subset, but it is a labelled subgroup analysis at best. The substantive
+objection is stronger than the statistical one: **knowing when a politician abstains
+is part of simulating them**, so removing those items deletes the more politically
+interesting half of the task.
+
+The fence-sitting rate is worth reporting as a finding — it is part of why survey
+agreement is a hard metric for persona work — but not as a filter.
+
+### The prominence gradient — UTAS measures knowledge, not format
+
+Asked whether the UTAS failure is a format-mismatch problem, and whether to tune the
+BO on a subset of survey items or train anchors on survey data.
+
+**The formats really are far apart.** DPO training prompt: `国会議員「高市早苗（自由民主
+党・無所属の会）」です` + ~500 chars of committee exchange → free-form ~280-char reply.
+UTAS eval: `国会議員、高市早苗です` (no quotes, no party) + a bare proposition → one token
+from `{1,2,3,4,5}`.
+
+**But format is not the bottleneck.** Under that identical prompt and scoring,
+**岸田文雄 ranks at the 96th percentile**, 中谷元 and 河野太郎 at 82%, 麻生 63%. Base model,
+no adapter. The gradient over the whole wave:
+
+| quintile by speech volume | median speeches | median rank pct |
+|---|---|---|
+| most prominent | 3450 | 58.0% |
+| 2nd | 1372 | 53.7% |
+| 3rd | 579 | 53.4% |
+| 4th | 218 | 45.7% |
+| least prominent | 47 | 47.5% |
+
+So the instrument reads positions correctly when the model has the knowledge. It has
+none for backbenchers — the bottom two quintiles sit below chance. **The failure is
+knowledge coverage, not elicitation.**
+
+**Proposal A (tune BO on some UTAS items, test on the rest): rejected.** A
+nearest-neighbour lookup — most similar politician among the other 593 on 16 tuning
+items, copy their held-out 17 — scores MAE **0.647**, against best-constant 0.824 and
+the 7B model's 1.137, beating the constant for 396/594. The setup is solved without an
+LLM, speech, adapters or a merge. It also presumes the target's survey answers, which
+the low-resource scenario does not have; if it did, the speech pipeline would be
+unnecessary.
+
+**Proposal B (train anchors on UTAS): rejected for now.** The waves separate cleanly —
+29 of 33 item codes are shared but **zero questions have identical text**, the codes
+being positional — so cross-wave training would genuinely hold out the questions. Two
+obstacles: no anchor appears in both waves (152/2377 are 2024HoR only, 3631/5520 are
+2022HoC only), so at most half the anchors could be trained; and it targets format
+adaptation, which 岸田's 96% shows is not what is failing.
+
+**Reframing.** POLIS's job is to inject knowledge the base model lacks about
+politicians it has never encountered. That makes the rank metric a *good* instrument
+rather than a broken one, with a falsifiable prediction: **if the method works, its
+targets should move from the backbench level (~47%) toward the prominent level (~58%)**.
+`P12` found no such lift on 3 targets; the n=33 run measures it properly, and the
+volume-stratified sample is already the right design.
+
+## 2026-08-03 — the n=33 run: the population claim lands, the kill criterion does not
+
+`P13` on one L40S-class pod, ~6 h. Nested 5-fold CV with `ICL=1` over all 33 targets —
+the 3 originals plus the 30-target volume-stratified expansion. All 33 finished `rc=0`.
+
+Two `rc=1` lines survive above the good block in `n33_target_{1279,2053}.log`: the
+OOM-killed first attempt from before `86cb00c7`. The runner appends, so read the *last*
+block in each file.
+
+### Reproduction — the environment did not move
+
+| target | committed 2026-08-02 | n=33 re-run |
+|---|---|---|
+| 1279 高市 | +0.0176 ± 0.0076 | +0.0171 ± 0.0058 |
+| 2053 赤嶺 | +0.0177 ± 0.0154 | +0.0217 ± 0.0139 |
+| 2289 枝野 | +0.0287 ± 0.0130 | +0.0256 ± 0.0132 |
+
+Same sign and magnitude, inside the per-fold spread. The drift is `86cb00c7`: slicing
+logits before the fp32 cast changes the reduction order, moving NLL in the last digits
+and sending the GP down a slightly different trajectory. The 30 new targets are
+comparable to the committed results.
+
+### NLL vs the weight-space baselines — the population claim lands
+
+**BO beats best-single on 33/33 targets** (mean `+0.0265`, median `+0.0232`, sd
+`0.0106`; sign test p ≈ 2e-10) and base on 33/33 (`+0.1535`). n=3 was not a fluke of
+three prominent politicians.
+
+More important for the title: **the margin does not decay with target prominence.**
+
+| band | median speeches | BO vs best-single | BO vs ICL |
+|---|---|---|---|
+| originals | — | +0.0215 | +0.0239 |
+| 3000+ | 5855 | +0.0321 | +0.0077 |
+| 1000–3000 | 1817 | +0.0258 | +0.0374 |
+| 500–1000 | 693 | +0.0262 | −0.0476 |
+| 250–500 | 413 | +0.0229 | −0.0660 |
+| 120–250 | 166 | +0.0263 | −0.1470 |
+| 60–120 | 104 | +0.0286 | −0.0250 |
+
+The 2026-08-02 worry — that the method might only work on data-rich set-piece speakers —
+does not materialise. Backbenchers with 82–166 speeches get the same margin as 野田佳彦
+with 8 219.
+
+### The kill criterion is not met
+
+**BO beats ICL on 17/33 targets. Mean `−0.0343`, median `+0.0050`, fold-level 79/165.**
+Parity. `README.md:79` calls baseline 2 the kill criterion — *"if it matches POLIS the
+method is unnecessary"* — and on its own terms it matches.
+
+Fold hygiene checked before believing it: `nested_cv` builds the prefix from `dev` and
+scores `te` at restored base weights (`bo_merge_coeffs.py:219`), so ICL never sees the
+test fold. Not leakage.
+
+**Where ICL wins: repetitive speakers.** Median nearest-neighbour similarity between a
+target's own 30 utterances, against ICL's advantage:
+
+```
+corr(within-target utterance similarity, ICL gain over base) = +0.787
+corr(within-target utterance similarity, BO vs ICL)          = -0.702
+corr(log speech count,                   BO vs ICL)          = +0.324
+```
+
+Three targets carry most of the negative mean — 1543 手塚 (−0.329, self-similarity
+0.40), 110 田野瀬 (−0.325, **0.55**), 3022 津島 (−0.324, 0.23) — against ~0.18 typical.
+When a politician says nearly the same thing every time, 24 in-prompt examples approach
+a lookup table. Drop the two most repetitive and the mean is `−0.015` with BO at 17/31:
+still parity, not a win. 3022 is the honest exception — a large ICL gain at ordinary
+self-similarity — so repetition is the main mechanism, not the only one.
+
+**Framing, not a rescue.** ICL pays a ~9k-token prefix at every inference and needs the
+target's speeches at serving time; the merge pays once and ships a 130 MB adapter. That
+is a real deployment distinction and it is a *cost* argument. It does not restore the
+fidelity claim at `README.md:13`, which says the merge beats prompting.
+
+### Direction: score the merge and the prefix together
+
+A tie between a weight-space and a prompt-space method has two readings, and no
+prefix-free row separates them: they carry the same information, or they carry
+different information and nothing ever stacked them.
+
+`nested_cv` now scores `BO+ICL` and `best-single+ICL` whenever `--icl` is on — the same
+merged weights with the prefix in front of each held-out prompt, reusing the merger
+state already applied, so it costs two extra eval passes per fold and no extra trials.
+**`BO+ICL vs ICL` decides it**; `best-single+ICL` is the control, without which a
+positive result would only show that *some* weight-space adaptation composes with
+prompting rather than the tuned merge specifically. Runbook §9, `P14`/`P15`.
+
+Coefficients are still fitted on prefix-free `dev` and only scored under the prefix —
+the merge is used in a regime it was not tuned for. Tuning inside the prefix is ~5×
+the cost (every trial re-scoring `dev` behind the prefix) and is not worth buying until
+this says the merge contributes at all.
+
+> **Process note.** `P13` kept its fitted merges only in memory, so adding one row costs
+> a full ~7 h re-derivation of every BO rather than a few eval passes. `--dump-picks` /
+> `DUMP_PICKS=` now writes the per-fold coefficient matrices. Set it on every nested run.
+
+## 2026-08-03 (later) — `P15`: the merge composes with prompting
+
+Same pod, 5 h 48 m, all 33 targets `rc=0`. Nested CV with the combined rows.
+
+**The kill criterion is answered in the method's favour.** Exact figures, from the
+`--dump-picks` JSONs rather than the rounded log lines:
+
+| comparison | mean | median | wins | sign p |
+|---|---|---|---|---|
+| **BO+ICL vs ICL** | **+0.0694** | +0.0676 | **33/33** | 2.3e-10 |
+| BO+ICL vs BO | +0.1036 | +0.0676 | 33/33 | 2.3e-10 |
+| best-single+ICL vs ICL | +0.0562 | +0.0554 | 33/33 | 2.3e-10 |
+| **BO+ICL vs best-single+ICL** | **+0.0132** | +0.0163 | **30/33** | 1.4e-06 |
+| BO vs ICL *(the P13 tie)* | −0.0343 | +0.0050 | 17/33 | 1.00 |
+
+Prompting and merging were never alternatives. Merged weights *plus* the prefix beat
+the prefix alone on every target, fold-level 160/165. The `P13` tie was an artefact of
+forcing a choice between two things that stack.
+
+**The decomposition that must not be buried.** Most of the stacking gain comes from
+*any* merge: `best-single+ICL` takes +0.0562 of the +0.0694, leaving **+0.0132 for the
+tuned coefficients** — half the +0.0265 the BO holds prefix-free. Tuning still
+contributes (30/33, p=1.4e-06), but the prefix absorbs about half of what it was
+buying. Reporting only `BO+ICL vs ICL` would overstate the BO's specific contribution.
+
+**Where the tuned merge loses under the prefix** — 3022 津島 (−0.0784), 110 田野瀬
+(−0.0272), 1543 手塚 (−0.0106) — is exactly the three boilerplate speakers where ICL
+beat BO by ~0.33 prefix-free. Coefficients are fitted on prefix-free `dev` and used
+under the prefix, so where the prefix does most of the work the BO optimised the wrong
+objective. The regime mismatch documented in `nested_cv`'s docstring, showing up where
+it was predicted to.
+
+**Decision: reword the hypothesis, don't reinterpret it.** `README.md:13` claims the
+merge *beats* prompting. It does not — prefix-free they tie. The supported claim is
+that **the merge composes with prompting, and the best configuration on every one of 33
+targets uses both**. That is more interesting than the original and it is what the data
+says; quietly reading the old sentence as if it meant this would not survive review.
+
+**Tune-under-the-prefix is now worth its cost.** Before `P15` it was a fishing
+expedition; now it has a specific prediction — the three regime-mismatch losses should
+disappear. Full 33 is ~29 h at 5×; the three failures plus a matched handful of
+controls answers it in ~4 h.
+
+## 2026-08-03 (later still) — baseline 3 beats the method
+
+Same pod. Spec §4.3 baseline 3 (`--objective sft`: LoRA on the target's own dev fold)
+had never run on a GPU. It ran, and it wins.
+
+### Getting a fair number out of it
+
+The script's defaults (2e-4, 8 epochs) scored **3.2745** against base 2.2684 — a full
+point *worse* than not training, from memorising 24 examples. Reporting that would have
+been a strawman, which is exactly what the script's own design note warns against.
+
+The grid pilot on 1279 found a 50× spread across six cells (2e-4/8ep → 3.11 on the same
+fold where 5e-5/2ep → 2.03). **Selection bias turned out negligible**: the grid's
+best-held-out mean was 2.1119 and a *fixed* 5e-5/2ep gives 2.1120, because that cell won
+4 of 5 folds outright. So the n=33 run used fixed hyperparameters and carries no
+test-set-selection asterisk. 5e-5/2ep transferred from 1279 to all 33 and won on every
+one.
+
+### The result
+
+33 targets, 40 min, fixed 5e-5 / 2 epochs, `--icl` for the combined row:
+
+| comparison | mean | median | wins | p |
+|---|---|---|---|---|
+| **SFT vs BO** | **+0.0627** | +0.0423 | **33/33** | 2.3e-10 |
+| SFT vs best-single | +0.0892 | +0.0707 | 33/33 | 2.3e-10 |
+| SFT vs ICL | +0.0284 | +0.0442 | 29/33 | 1.1e-05 |
+| **SFT+ICL vs BO+ICL** | **+0.0355** | +0.0294 | **33/33** | 2.3e-10 |
+| SFT+ICL vs ICL | +0.1049 | +0.1000 | 33/33 | 2.3e-10 |
+
+**Direct fine-tuning on 24 utterances beats the anchor merge on every target, with and
+without the prefix.** The best configuration in the whole study is `SFT+ICL`. The
+hypothesis at `README.md:13` — that the merge beats fine-tuning directly on the sparse
+data — is false at this budget.
+
+Three defences, all of which fail:
+
+* *SFT's hyperparameters were tuned.* They were picked on one target and transferred; the
+  BO gets 40 trials per fold per target. POLIS is the more heavily tuned side.
+* *The merge is cheaper.* SFT is 11 s/fold at 7B. The merge needs four anchor training
+  runs plus 40 BO trials per fold, and both ship an adapter — identical serving cost.
+* *NLL is not the only metric.* The other instrument, UTAS, was closed as uninformative
+  earlier the same day. There is no second axis where the merge leads.
+
+**The one real asymmetry.** The prefix adds **+0.1036** on top of BO but only **+0.0765**
+on top of SFT. The merge and prompting carry more complementary information than SFT and
+prompting do — consistent with SFT and the prefix both learning from the same 24
+utterances while the merge imports something from the anchors. It is a genuine mechanism
+and it still loses.
+
+### Direction: the budget axis, the last place a positive claim could live
+
+30 utterances was never derived from anything, and the paper's thesis is *low-resource*.
+The open question is whether there is a budget below which SFT collapses and the merge
+does not. The mechanism is concrete and falsifiable: **the BO fits 12 coefficients, LoRA
+fits ~20M parameters**, so SFT should degrade far faster as data shrinks.
+
+`--dev-cap N` (both scripts, via the shared `cap_dev`) trains on the first N instances of
+each dev fold **with the test fold unchanged**, so every budget's numbers pair with each
+other *and* with the committed 24-instance runs, and the small budgets are nested subsets
+of the large ones — no sampling noise between points on the curve. Runbook §10.
+
+If the curve is flat, the paper is a negative result: a thorough n=33 protocol showing
+anchor merging beats every *merge* baseline while losing to the simplest fine-tuning
+alternative, plus the UTAS instrument analysis. That is publishable and honest, but it is
+a different paper, and the decision should be made deliberately rather than by omission.
+
+## 2026-08-04 — DPO, and the confound it exposes
+
+Baseline 4 ran: 33 targets, 70 min, fixed 5e-5 / 2 epochs, same folds. Full ordering,
+mean held-out NLL over the 33:
+
+```
+SFT+ICL 2.0687 · DPO+ICL 2.1013 · BO+ICL 2.1042 · best-single+ICL 2.1174
+SFT 2.1452 · ICL 2.1736 · DPO 2.2073 · BO 2.2078 · best-single 2.2343
+base 2.3613 · uniform 2.7689
+```
+
+**DPO ties the merge.** BO wins 24/33 (p=0.014) with means identical to four decimals
+(+0.0006): DPO loses often and narrowly, wins rarely and widely. With the prefix it is a
+clean tie (14/33, p=0.49). DPO beats best-single 33/33, so it is a competent baseline.
+
+### The confound
+
+The anchors were trained with **DPO** (`train_one_politician_persona.py`, `DPOTrainer`,
+beta=0.1). That splits every comparison in two:
+
+| | result |
+|---|---|
+| objective-**matched** — merge-of-DPO-anchors vs DPO-on-sparse-target | merge wins **24/33** |
+| objective-**mismatched** — merge-of-DPO-anchors vs SFT-on-sparse-target | merge loses **0/33** |
+
+So the SFT defeat may not be "merging loses to fine-tuning" but "**SFT is the better
+objective at a 24-instance budget, and the anchors were built with the other one**".
+Consistent with everything else: DPO ≈ BO ≈ merge-of-DPO-anchors, with SFT 0.062 below
+both. DPO needs a synthesised `rejected` side (the Gemini caricature pipeline), which on
+little data may add noise rather than signal.
+
+**Decision: probe before retraining.** `train_anchor_sft.py` trains one SFT anchor
+(`P18`), reusing `sparse_target_baselines.train_lora_on` so an SFT anchor differs from the
+sparse-SFT baseline in data volume alone. If it transfers better than the DPO anchor,
+retrain all four; if not, the negative result stands and four training runs are saved.
+
+### Would more anchors help? — what the 165 fitted merges already say
+
+Asked whether n=4 anchors is the limitation. The `--dump-picks` matrices answer part of it
+without new GPU time.
+
+**Anchor choice does not track ideology — it inverts.** Best-single winner by target party:
+
+| target party | picks |
+|---|---|
+| 自民 (LDP) | 塩川 (**JCP**) 53%, 上田 29% |
+| 共産 (JCP) | 岸田 (**LDP**) 80% |
+| 公明 (Komeito) | 塩川 (JCP) 70% |
+| 立憲 (CDP) | 上田 50%, 岸田 50% |
+
+If anchors carried ideology, an LDP target would not be best served by the Communist
+anchor 62 times out of 165. This is the 0.5B "adapters encode register, not ideology"
+concession, now confirmed at 7B with n=33 and a party breakdown. It also explains why the
+BO only buys +0.0265 over best-single: it is blending registers, not interpolating
+positions.
+
+**The BO already discards capacity at n=4.** Mean coefficient per anchor across 165 folds:
+岸田 0.245, 塩川 0.294, 上田 0.188, **福島 0.135 — near-zero in 40% of folds**. One of four
+anchors is being switched off most of the time. That is what diminishing returns look
+like, and it is the main reason to doubt that 20 anchors would change the result.
+
+**What more anchors would cost, if pursued anyway:**
+
+* *VRAM* — deltas are fp32, ~3.3 GB per anchor. 8 anchors = 26.4 GB + 15.2 GB model, which
+  fits 48 GB only in bf16; 20 anchors is 66 GB fp32 and infeasible without storing LoRA
+  factors and computing ΔW per module on the fly.
+* *Dimensionality* — dims = n_anchors × n_groups. 20 × 3 = 60, past the point where
+  `make_sampler` abandons GP for TPE, and fitting 60 coefficients on 24 instances would
+  overfit. The 0.5B granularity bookend already showed high-dim coefficient search
+  actively corrupting the model (96 dims → 3.441 vs base 2.880). Realistically it needs
+  `n_groups=1` or an anchor-selection step before the BO.
+* *Training* — one run per anchor.
+
+**Decision: measure the slope with the anchors already trained (`P19`) before training
+any.** Nested CV at 2, 3 and 4 anchors, with the subset rotated across targets so the
+curve is not tied to one combination. If 3→4 is already flat, extrapolating to 20 is not
+worth a training run; if it is still climbing at 4, 8 anchors becomes the obvious next
+build and the VRAM work is justified. Needs no new code — `--adapters` is already explicit.
+
+## 2026-08-04 (later) — `P18`: the anchors were the problem, and identity may not exist
+
+One SFT anchor (152 岸田, same 1500 pairs the DPO anchor was trained on, so the only
+difference is the objective), applied at **coefficient 1.0 with no target data and no
+tuning**, on the 5 probe targets:
+
+| target | base | best-single (DPO) | BO (tuned, 4 anchors) | SFT on target's own 24 | **SFT anchor, untuned** |
+|---|---|---|---|---|---|
+| 1083 | 2.4200 | 2.3100 | 2.2875 | 2.2392 | **2.2697** |
+| 1279 | 2.2684 | 2.1701 | 2.1531 | 2.1129 | **2.1218** |
+| 2053 | 2.2520 | 2.1878 | 2.1661 | 2.1467 | **2.1452** |
+| 2189 | 2.3690 | 2.2386 | 2.1962 | 2.1671 | **2.1204** |
+| 2289 | 2.5302 | 2.4446 | 2.4190 | 2.3872 | **2.3726** |
+
+* vs its DPO twin: better on **5/5**, mean **+0.0714** — larger than the BO's entire
+  margin over best-single (+0.0265).
+* vs the tuned 4-anchor DPO merge: better on **5/5**, +0.0384.
+* vs SFT on the target's own 24 utterances: **level** (3/5, +0.0047).
+* vs `BO+ICL`, the best merge configuration in the study: **level** (−0.0006).
+
+So the SFT defeat was substantially an artefact of the anchors' objective. But the
+stronger reading is the one that changes the paper: **an adapter trained on a different
+politician, applied untuned, matches fine-tuning on the target's own data.** Whatever
+transfers here is not specific to the target.
+
+That is now the third independent measurement pointing the same way:
+
+1. best-single picks invert party (LDP targets pick the JCP anchor 53%, JCP targets pick
+   the LDP anchor 80%);
+2. UTAS rank-at-chance with name-swap divergence 0.209;
+3. a foreign anchor matching target-specific fine-tuning.
+
+**Decision: run the identity control before anything else.** Train the other three SFT
+anchors and score each alone on the same 5 targets (`P18` with `ANCHOR=` and
+`SKIP_DPO=1`). If all four land within noise, the transferred quantity is Diet-speech
+*register* and persona identity is not being learned at all — which is the paper's
+central finding and makes the merge machinery beside the point. If they separate, or
+different targets prefer different anchors, identity survives and the DPO objective was
+destroying it; then the merge deserves a full re-run on SFT anchors.
+
+## 2026-08-04 (later still) — SFT anchors restore the hypothesis
+
+Ran the identity control and, on the same anchors, the full nested protocol. Two results
+that point in different directions and are both real.
+
+### The register decomposition — four anchors, five targets
+
+Each SFT anchor applied alone at coefficient 1.0:
+
+| target | base | 岸田(LDP) | 塩川(JCP) | 福島(SDP) | 上田(DPJ) | spread | gap from base | best |
+|---|---|---|---|---|---|---|---|---|
+| 高市 LDP | 2.2684 | 2.1218 | 2.1263 | **2.1125** | 2.1369 | 0.0244 | 0.1559 | 福島 |
+| 赤嶺 JCP | 2.2520 | 2.1452 | **2.1128** | 2.1342 | 2.1469 | 0.0341 | 0.1392 | 塩川 (JCP) |
+| 枝野 CDP | 2.5302 | 2.3726 | 2.3765 | 2.3593 | **2.3376** | 0.0389 | 0.1926 | 上田 (DPJ) |
+| 武田 LDP | 2.3690 | **2.1204** | 2.1578 | 2.1539 | 2.1326 | 0.0374 | 0.2486 | 岸田 (LDP) |
+| 山崎 Komeito | 2.4200 | 2.2697 | 2.2664 | **2.2647** | 2.2661 | 0.0050 | 0.1553 | 福島 |
+
+**Anchor choice explains ~16% of what a persona adapter buys** (mean spread 0.0280 against
+a mean gap from base of 0.1783). Five-sixths is identical whichever politician the adapter
+was trained on: that quantity is Diet-speech *register*, and it is the single largest
+effect anywhere in this project. It stands regardless of everything below, and 上田 (4 118
+speeches) transferring as well as 岸田 (20 418) rules out "the model already knows this
+person" as the explanation.
+
+The residual changed sign, though. Three of five targets prefer an ideologically matching
+anchor (JCP→JCP, CDP→DPJ, LDP→LDP) where the **DPO** anchors had inverted party. n=5,
+p≈0.10 — suggestive only, which is why `anchor_affinity.py` measures it at n=33.
+
+### The hypothesis holds at matched objective
+
+Nested CV, 5 targets, SFT anchors, versus the committed DPO-anchor run and the SFT
+baseline:
+
+| target | base | best1 | BO | BO+ICL | BO (DPO anchors) | sparse SFT | SFT+ICL |
+|---|---|---|---|---|---|---|---|
+| 高市 | 2.2684 | 2.1105 | 2.0811 | **2.0658** | 2.1531 | 2.1129 | 2.0964 |
+| 赤嶺 | 2.2520 | 2.1170 | 2.0984 | **2.0880** | 2.1661 | 2.1467 | 2.1241 |
+| 枝野 | 2.5302 | 2.3388 | 2.3240 | **2.3159** | 2.4190 | 2.3872 | 2.3617 |
+| 武田 | 2.3690 | 2.1204 | 2.0937 | **2.0686** | 2.1962 | 2.1671 | 2.1218 |
+| 山崎 | 2.4200 | 2.2813 | 2.2277 | **2.1870** | 2.2875 | 2.2392 | 2.1959 |
+
+All 5/5:
+
+* `BO` vs `best-single`: **+0.0286** — indistinguishable from the +0.0258 it bought on DPO
+  anchors. **The BO's contribution is independent of the anchor objective**, which is what
+  makes this a fix rather than a different method.
+* SFT anchors vs DPO anchors, same protocol: **+0.0794**.
+* `BO` vs sparse SFT: **+0.0456**. `BO+ICL` vs `SFT+ICL`: **+0.0349**.
+
+**`README.md:13` holds after all** — an optimised merge of data-rich anchors does beat
+fine-tuning directly on the sparse data, once both sides use the same objective. The 0/33
+defeat was measuring the anchors' training objective, not merging. Note the baseline is
+the favoured side: sparse SFT uses 5e-5/2ep chosen by a grid, the anchors 5e-5/1ep chosen
+by nobody.
+
+The prefix's role inverted too: **+0.0200** on top of the SFT-anchor merge against +0.0307
+on top of sparse SFT, the reverse of the DPO-anchor case (+0.1036 vs +0.0765). Better
+anchors already carry much of what the prompt was supplying.
+
+### How to hold both results at once
+
+They are not in tension, and the paper needs both:
+
+* **Most of what any of these methods deliver is register.** ~84% of a single adapter's
+  benefit is anchor-independent; a foreign anchor matches target-specific fine-tuning.
+* **The part that is left responds to method.** Merging beats the best single anchor by a
+  consistent +0.027 across both anchor families, and the merge beats sparse fine-tuning
+  once the objective is matched.
+
+Reporting only the second would overclaim; reporting only the first would miss that the
+method works. The register decomposition is also what makes the small margins
+interpretable — they are small because they are competing over a sixth of the effect.
+
+> **Process note.** The confound was found only because baseline 4 was run. Baselines 3
+> and 4 sat unimplemented through the whole 0.5B phase and the first 7B session, and the
+> 33/33 defeat that looked fatal for two days was an artefact of never having compared
+> like with like. Run every baseline in the spec, early.
+
+### Open
+- [ ] Full 33-target nested + ICL on SFT anchors (~6 h) — the paper's main table. The
+      5-target result is where the SFT defeat stood before it held at 33/33.
+- [ ] `anchor_affinity.py` at n=33: does the preferred anchor track party once the
+      anchors are SFT-trained? Decides whether the 16% residual is identity or noise.
+- [ ] Re-run the granularity ablation on SFT anchors: the null was measured on anchors
+      whose deltas fought each other (uniform merge 2.63 vs base 1.08; on SFT anchors it
+      is 1.94), so per-depth structure deserves one more look.
+## 2026-08-04 (evening) — the training objective decides whether identity survives
+
+`anchor_affinity.py` over all 33 targets, both anchor families. Each anchor applied alone
+at coefficient 1.0; "match" means the target's best anchor is from the target's own party
+family. The null is a permutation that holds **both** marginals fixed — which anchors win
+how often, and which parties the targets are — because a big-tent family with a popular
+anchor would otherwise match by construction.
+
+| anchors | match | null mean | p | gap from base | anchor share |
+|---|---|---|---|---|---|
+| **SFT** | **17/28 (61%)** | 9.42 | **0.0012** | 0.2186 | 26% |
+| **DPO** | 4/28 (14%) | 7.89 | 0.055 *(low tail)* | 0.1295 | 15% |
+
+**SFT vs DPO, Fisher exact: p = 7.2e-4.** Same four politicians, same 1500 pairs each,
+same LoRA shape, same merge code, same evaluation — only the objective differs.
+
+**The claim that holds:** DPO anchors carry no recoverable party signal; SFT anchors do.
+Not "DPO inverts": 4 against a null of 7.89 is p=0.055 one-tailed, suggestive at best,
+even though 自民 targets pick the JCP anchor 8 times out of 12 under DPO. The *difference
+between the arms* is what is significant, and it is the strongest single result here.
+
+Per family, SFT anchors:
+
+| family | matched | anchors chosen |
+|---|---|---|
+| 共産 JCP | **3/3** | 塩川 ×3 |
+| 民主/立憲 | 9/13 | 上田 ×9, 岸田 ×2, 塩川 ×2 |
+| 自民 LDP | 5/12 | 岸田 ×5, 塩川 ×3, 上田 ×3, 福島 ×1 |
+
+That gradient is evidence the signal is real rather than lucky. The JCP is small,
+disciplined and distinctive, and all three of its targets pick the JCP anchor; the LDP
+spans 高市 to 武田 and its targets scatter. An artefact would not respect party structure
+this way.
+
+Anchor choice accounts for a median **22%** of the adapter's benefit under SFT against
+**13%** under DPO, higher for SFT on 25 of 33 targets.
+
+### What the paper now says
+
+Three claims, in decreasing size of effect:
+
+1. **Most of persona adaptation is register.** ~74–78% of a single adapter's benefit is
+   anchor-independent; an adapter trained on a different politician matches fine-tuning on
+   the target's own data.
+2. **The remainder is ideological, and recoverable.** The preferred anchor tracks party at
+   p=0.0012, strongest where party structure is tightest.
+3. **The training objective determines whether (2) exists at all.** DPO-trained anchors
+   are at chance; the same politicians trained with SFT are far above it. This retroactively
+   explains the party inversion in `best-single` picks, the granularity null, and the
+   sparse-SFT defeat, all of which were measured on DPO anchors.
+
+> **What this cost.** Two days were spent on a 33/33 defeat that turned out to be an
+> artefact of the anchors' objective, and the objective was only implicated because
+> baseline 4 was finally implemented. Every baseline in the spec, early — the one you skip
+> is the one that reinterprets everything else.
+
+### Open
+- [ ] Full 33-target nested + ICL on SFT anchors — running; the paper's main table.
+- [ ] Re-run the granularity ablation on SFT anchors. The null was measured on adapters
+      whose deltas fought each other (uniform merge 2.63 against base 1.08; 1.94 on SFT
+      anchors), so per-depth structure deserves one more look. ~10 min.
+- [ ] Re-run UTAS on SFT anchors. §4.4 was closed on the evidence that personas carry no
+      identity — which is now known to be objective-dependent. The population sweep and
+      rank metric are unchanged and cheap to re-point.
+
+## 2026-08-05 — the n=33 SFT-anchor table lands; UTAS stays closed anyway
+
+Two runs on one pod: nested 5-fold + ICL over all 33 targets on the SFT anchors (5 h 55 m,
+`sft33_target_*.log`, `bo7b_picks_sft33/`), then the UTAS re-point (2 h,
+`utassft_target_*.log`, `utas_vectors_sft/`). Both `rc=0` on all 33.
+
+> **Two hours lost first, to the same failure as always.** The nested run was pasted as
+> `ADAPTERS=… NESTED=1 ICL=1 DUMP_PICKS=… TARGETS=… ./run_7b_bo_gpu.sh` on one line. The
+> terminal wrapped it, the shell received the tail from `TARGETS=` onward, and the runner
+> fell back to its defaults — single-split, `--utas-eval`, DPO anchors — for all 33
+> targets. The "3× speedup" was single-split doing one BO per target instead of five.
+> Seventh instance in this workflow. Fixed structurally rather than by being careful:
+> `run_sft33.sh`, `run_granularity_sft.sh` and `run_utas_sft.sh` take nothing on the
+> command line, verify every adapter exists before loading a 7B model, and rename their
+> logs afterwards so a later run cannot append into them. **Nothing gets pasted but a
+> script name from here on.**
+
+> **Reading the logs later.** The pod's clock ran ~9 h behind the laptop's JST, so
+> `sft33_*` timestamps say 07:46–13:41 for a session that was 16:46–22:41 local.
+
+### Validation: only the anchors changed
+
+The rows that do not involve an anchor reproduce the committed DPO-anchor run **to four
+decimals** — `base` 2.3613, `ICL` 2.1736, `SFT` 2.1452, `SFT+ICL` 2.0687. Same folds, same
+baselines, same scoring; the arm is the only difference. The preflight confirms it from the
+other side: `anchors=['152_sft_qwen7b', …]` with uniform merge **1.9362** against the DPO
+arm's 2.6322.
+
+### The main table
+
+Mean held-out NLL over 33 targets, computed from the `--dump-picks` matrices rather than
+the log lines (the runner rounds per-fold values to 3 dp):
+
+| config | SFT anchors | DPO anchors | Δ |
+|---|---|---|---|
+| **BO+ICL** | **2.0460** | 2.1042 | +0.0582 |
+| SFT+ICL | 2.0687 | 2.0687 | — |
+| best-single+ICL | 2.0729 | 2.1174 | +0.0445 |
+| **BO** | **2.1156** | 2.2078 | +0.0922 |
+| SFT | 2.1452 | 2.1452 | — |
+| best-single | 2.1455 | 2.2343 | +0.0888 |
+| ICL | 2.1736 | 2.1736 | — |
+| base | 2.3613 | 2.3613 | — |
+| uniform | 2.5558 | 2.7689 | +0.2131 |
+
+`BO+ICL` is now the best configuration in the study, taking the top from `SFT+ICL`.
+
+| comparison | mean | median | wins | sign p | folds |
+|---|---|---|---|---|---|
+| BO vs best-single | **+0.0299** | +0.0272 | 33/33 | 2.3e-10 | 153/165 |
+| BO vs base | +0.2458 | +0.2202 | 33/33 | 2.3e-10 | 165/165 |
+| **BO vs ICL** | **+0.0580** | +0.0726 | **27/33** | 3.2e-04 | 137/165 |
+| **BO vs SFT** | **+0.0296** | +0.0284 | **28/33** | 6.6e-05 | 138/165 |
+| BO+ICL vs ICL | +0.1276 | +0.1262 | 33/33 | 2.3e-10 | 165/165 |
+| BO+ICL vs best-single+ICL | +0.0269 | +0.0233 | 33/33 | 2.3e-10 | 148/165 |
+| BO+ICL vs SFT+ICL | +0.0227 | +0.0210 | 27/33 | 3.2e-04 | 128/165 |
+| BO+ICL vs BO | +0.0696 | +0.0438 | 33/33 | 2.3e-10 | 156/165 |
+| SFT+ICL vs BO | +0.0468 | +0.0318 | 21/33 | 0.16 | 111/165 |
+| SFT vs best-single | +0.0003 | −0.0045 | 14/33 | 1.00 | 95/165 |
+
+**Three things this settles.**
+
+1. **The BO's contribution is independent of the anchors' objective — third measurement.**
+   `BO vs best-single` +0.0299 here, +0.0286 on the 5-target SFT pilot, +0.0265 on DPO
+   anchors at n=33. Whatever the anchors are, tuning the blend buys the same ~0.027.
+2. **The kill criterion passes prefix-free.** `BO vs ICL` +0.0580 on 27/33, p=3.2e-04,
+   where the DPO arm was a dead tie (−0.0343, 17/33, p=1.00). `README.md:79` asks whether
+   prompting makes the method unnecessary; it does not. And they still stack — `BO+ICL vs
+   ICL` is 33/33.
+3. **`README.md:13` holds at full n.** `BO vs SFT` +0.0296 on 28/33 (p=6.6e-05) and
+   `BO+ICL vs SFT+ICL` +0.0227 on 27/33. The 0/33 defeat of 2026-08-03 was measuring the
+   anchors' training objective, not merging — confirmed at 33 targets, not 5.
+
+The decomposition also stops being lopsided. On DPO anchors, `best-single+ICL` took +0.0562
+of the +0.0694 stacking gain, leaving only +0.0132 for the tuned coefficients — half what
+the BO bought prefix-free. Here `BO+ICL vs best-single+ICL` is **+0.0269**, statistically
+indistinguishable from the prefix-free +0.0299. The prefix no longer absorbs the tuning.
+
+> **Correction to the 5-target entry.** It reported the prefix's role as *inverted*:
+> "+0.0200 on top of the SFT-anchor merge against +0.0307 on top of sparse SFT". At n=33
+> `BO+ICL vs BO` is **+0.0696**. Directionally the claim survives — 0.0696 is well under
+> the DPO arm's +0.1036, so better anchors do carry some of what the prompt was supplying —
+> but the inversion itself was an n=5 artefact. Do not repeat the +0.0200 figure.
+
+### No prominence decay, and the prefix wins where it always did
+
+| band | n | BO vs best1 | BO vs ICL | BO+ICL vs ICL | BO vs SFT |
+|---|---|---|---|---|---|
+| originals | 3 | +0.0209 | +0.1021 | +0.1134 | +0.0478 |
+| 3000+ | 5 | +0.0201 | +0.1067 | +0.1389 | +0.0687 |
+| 1000–3000 | 5 | +0.0358 | +0.1272 | +0.1459 | +0.0598 |
+| 500–1000 | 5 | +0.0302 | +0.0696 | +0.1359 | **−0.0076** |
+| 250–500 | 5 | +0.0420 | +0.0400 | +0.1268 | +0.0357 |
+| 120–250 | 5 | +0.0276 | **−0.0624** | +0.1082 | **−0.0186** |
+| 60–120 | 5 | +0.0292 | +0.0407 | +0.1185 | +0.0287 |
+
+`BO vs best-single` is flat from +0.0201 to +0.0420 across a 50× span of speech volume —
+the 2026-08-03 no-decay result replicates on the new anchor family. The single band where
+ICL still beats the merge prefix-free is 120–250, which is where the boilerplate speakers
+live; `1543` alone is −0.1833. Mechanism unchanged from the +0.787 self-similarity
+correlation.
+
+**The regime-mismatch losses are gone.** `BO+ICL vs best-single+ICL` on the three targets
+that lost under the prefix on DPO anchors:
+
+| target | DPO anchors | SFT anchors |
+|---|---|---|
+| 3022 津島 | −0.0784 | **+0.0172** |
+| 110 田野瀬 | −0.0272 | **+0.0096** |
+| 1543 手塚 | −0.0106 | **+0.0152** |
+
+The prediction that motivated tune-inside-the-prefix was that these three would recover.
+They recovered without it, by fixing the anchors instead. That open item loses its specific
+justification and reverts to a fishing expedition.
+
+### Corroboration from the 165 fitted merges
+
+**The party inversion is gone under a second, independent selection rule.** `best-single`
+inside nested CV is picked on prefix-free dev NLL — not the coefficient-1.0 sweep
+`anchor_affinity.py` uses — so it is a separate measurement of the same question. Among the
+23 targets whose party family has an anchor: **13/23 matched**, 共産 **3/3**, 民主/立憲 5/8,
+自民 5/12. On DPO anchors this same statistic inverted (自民 targets picking the JCP anchor
+53% of folds). Two different selection criteria now agree.
+
+**All four anchors carry weight now.** Mean BO coefficient across 165 folds × 3 groups:
+152 岸田 **0.332**, 5520 上田 **0.309**, 2377 塩川 **0.294**, 3631 福島 **0.222** — against
+0.245 / 0.188 / 0.294 / **0.135** on DPO anchors, where 福島 was near-zero in 40% of folds
+and 33 targets picked it as best-single only twice. (The near-zero fraction here is 29–43%
+of *group-slots*, a different denominator, so it is not directly comparable.) This weakens
+the main argument against more anchors: "the BO already discards capacity at n=4" was a
+property of one bad anchor, not of n=4. **`P19` is more interesting than it was, not less.**
+
+### UTAS on SFT anchors — §4.4 closed for good
+
+33 targets, single-split, numeric-label scoring, ranked against the 594-member wave.
+`utas_population_7b_base.json` was not re-run: it is base-model-only and therefore
+anchor-independent. `base` reproduces the committed cells exactly (1279 34.3%, 2053 5.6%,
+2289 47.5%) and its median over the 33 is 52.7% against the population sweep's 52.1%.
+
+| config | median pct | mean | above the measured 50.1% floor | p |
+|---|---|---|---|---|
+| base | 52.7% | 55.2% | 19/33 | 0.49 |
+| uniform | 46.8% | 46.0% | 16/33 | 1.00 |
+| best-single | 56.1% | 55.4% | 21/33 | 0.16 |
+| **BO** | **55.4%** | 55.9% | **19/33** | **0.49** |
+| best constant *(oracle over 5)* | 81.8% | 82.0% | — | — |
+
+Paired, each target one observation: `BO vs base` **+0.7 points, 19/33, p=0.49**;
+`BO vs best-single` +0.4, 14/33; `BO vs best constant` **−26.1 points, 8/32**. On MAE, BO
+1.131 against the constant's 0.935, winning 7/33. The falsifiable prediction from the
+prominence gradient — that a working method moves its targets from the backbench level
+(~47%) toward the prominent level (~58%) — **does not pay out.**
+
+n=3 would have looked like it did: 1279 goes 39.4% → **53.0%**, 2053 2.7% → 8.6%, 2289
+44.9% → 49.7%. All three originals improve on the DPO arm, and at n=33 it washes out. The
+"three targets cannot carry a p-value" caveat earned its keep in the direction that costs a
+claim.
+
+**This is worth having as a result.** The closure no longer has a hole in it. Identity was
+shown yesterday to be objective-dependent, which is exactly the premise §4.4 was closed on,
+so the honest move was to re-measure — and the null survives the fix. That **bounds** the
+objective finding: SFT anchors carry recoverable party signal in *speech-likelihood* space
+(preferred anchor matches party 17/28, p=0.0012; corroborated at 13/23 above) and carry
+none into *stated survey positions*. The NLL/UTAS anti-correlation is therefore a statement
+about what transfers, not an artefact of bad anchors.
+
+**Decision: §4.4 is a limitation section with the diagnostic attached, and it is now
+final.** Two scorers, a 594-persona population control, a rank metric, a constant floor and
+both anchor families all agree. Nothing further is planned on this instrument.
+
+### Granularity on SFT anchors — the null becomes a loss
+
+`run_granularity_sft.sh`, 3 targets, 4-fold, 20 trials/fold, `--groups 1 3` (4 dims vs 12).
+Ran after the two above; all `rc=0`, ~9 min each.
+
+| target | global (4 dims) | layer-group (12 dims) | global better by | vs best-single: global / groups |
+|---|---|---|---|---|
+| 1279 高市 | **2.0865** ± 0.072 | 2.1025 ± 0.069 | 0.0160 | +0.0267 / +0.0108 |
+| 2053 赤嶺 | **2.0890** ± 0.079 | 2.1147 ± 0.092 | 0.0257 | +0.0265 / +0.0008 |
+| 2289 枝野 | **2.3104** ± 0.190 | 2.3186 ± 0.194 | 0.0082 | +0.0206 / +0.0124 |
+
+**3/3 for global, mean 0.0166** — against **0.0006** on the DPO anchors, where this was a
+dead null. Per-depth weighting does not merely fail to help on anchors that demonstrably
+carry party signal; it gives back **40–97% of the BO's entire advantage over best-single**.
+The mechanism proposed for the original null — deltas fighting each other, so there was
+nothing for per-depth weighting to separate — is eliminated, and the answer got worse
+rather than better.
+
+> **Caveat that must go in the paper with it.** Both cells get 20 trials/fold over 3× the
+> search space, so this cannot separate "per-depth structure does not help" from "12 dims
+> needs more than 20 trials". The defensible claim is the one about **equal trial budget**:
+> at a fixed optimisation budget, finer granularity costs more in search than it buys in
+> expressiveness. Settling the stronger version means ~60 trials at 12 dims (~25 min/target)
+> and it is the only granularity work left worth doing.
+
+**Decision: retire the hedge, and strengthen the concession.** `main.tex:162` concedes
+granularity does not help at development scale but softens it with "the natural place for
+the register/ideology distinction to appear **at main scale**". That hedge has now been
+tested twice at 7B — once on anchors with no recoverable identity and once on anchors with
+it — and pays out neither time. `sec:granularity` should report the global/layer-group
+comparison as a *result at equal budget*, not a caveat.
+
+### Open
+- [ ] **Rewrite `main.tex`.** §Discussion's pending table is answered by the n=33 SFT-anchor
+      run above; the three claims to carry are register (~74–78% anchor-independent),
+      recoverable ideology (p=0.0012), and the objective deciding whether the second exists.
+      §4.4 becomes a limitation with the rank diagnostic; `sec:granularity` becomes a result
+      at equal trial budget. **Nothing is blocked on GPU any more — this is a writing task.**
+- [ ] Optional: 60 trials at 12 dims on 1279, to separate "granularity does not help" from
+      "12 dims is under-optimised at 20 trials" (~25 min). Only needed if a reviewer presses
+      on the equal-budget caveat.
+- [ ] `P19`: anchor-count slope at 2/3/4 — **better motivated now.** The DPO-era reason to
+      doubt more anchors (one of four switched off) does not hold on SFT anchors, where all
+      four coefficients sit at 0.222–0.332.
+- [ ] Budget sweep (`P16`/`P17`, ~4 h): does the ordering reverse at 4–8 instances? Weaker
+      motivation than when it was proposed — it existed as "the last place a positive claim
+      could live", and the claim is no longer in danger at 24.
+
+### Closed by this session
+- [x] Full 33-target nested + ICL on SFT anchors — the main table, above.
+- [x] Re-run UTAS on SFT anchors — the null survives the objective fix.
+- [x] Granularity on SFT anchors — global beats layer-group 3/3 at equal trial budget; the
+      main-scale hedge is retired on evidence rather than dropped.
+- [x] Tune the BO *inside* the prefix on 3022 / 110 / 1543. Its prediction was that those
+      three losses would disappear; they did, on better anchors, without tuning under the
+      prefix. No longer justified.
+- [x] Reword `README.md:13` to "composes-with, not beats" — **dropped, it would have been
+      wrong.** At matched objective the merge both beats prompting (27/33) and composes with
+      it (33/33). State both; the `P15` wording was a DPO-anchor artefact.
+- [x] Decide how to present the ICL tie — there is no tie to present.
+- [x] Decide whether the NLL/UTAS anti-correlation is a headline or a limitation:
+      **limitation, with the diagnostic**, now that it survives the objective fix.
+- [x] Baselines 3 and 4 have "never run on a GPU" — stale since 2026-08-03; both ran, and
+      all seven spec baselines are implemented and run.
+
+### Still-superseded items
+- [x] Identity control: anchor choice explains ~16%; the rest is register.
+- [x] `P18`: the SFT anchor beats its DPO twin 5/5 (+0.0714) and matches sparse SFT.
+- [x] DPO (baseline 4): ties the merge, 24/33 to BO at p=0.014.
+- [x] `P15`: `BO+ICL` beats `ICL` on 33/33.
+
+## 2026-08-05 (later) — `main.tex` is written, and recomputing every number moved two
+
+The paper was rewritten against a single script rather than against this file:
+**`research/polis/paper_numbers.py`** re-derives every figure the paper quotes from the
+committed artifacts (stdlib only, ~10 s, CPU) and writes
+`artifacts/paper_numbers.json`; **`research/polis/paper_figures.py`** renders seven
+vector PDFs into `paper/.../figures/` from that JSON. The split is deliberate — the
+analysis has to run on a bare pod interpreter, the plotting needs matplotlib
+(`research/.venv`, created this session). Nothing in the paper is transcribed from a
+log line.
+
+Everything reproduced except the two below. Reproduced exactly: the 9-config main
+table, all 13 paired comparisons in both arms, the 7-band prominence table, the
+register decomposition (0.2186 / 0.0568, 26% of means, 22% median), the affinity test
+(17/28, null 9.43, p=0.0013; DPO 4/28, null 7.90; Fisher 7.2e-4) including the per-family
+3/3 · 9/13 · 5/12, the mean coefficients, the granularity sweep, and every UTAS row.
+
+### Correction: `best-single` picks are *not* independent corroboration of the affinity test
+
+The 2026-08-05 entry above reports "13/23 matched, 共産 3/3, 民主/立憲 5/8, 自民 5/12"
+from the nested-CV `best-single` picks and calls it a **second, independent** selection
+rule agreeing with `anchor_affinity.py`'s 17/28. Recomputed from
+`bo7b_picks_sft33/*.json`: the modal `best-single` pick and the coefficient-1.0 best
+anchor are **the same anchor on all 28 eligible targets**, so the statistic is also
+17/28 with an identical per-family split, not 13/23.
+
+Both rules score a single anchor by dev-fold NLL, so on reflection agreement is what
+should have been expected; they are one measurement, robust to the selection rule. The
+23 was probably computed with a party-family map that mis-folded LDP targets — the
+group name **"自由民主党・無所属の会" contains "民主" as a substring**, so any
+`in`-test that checks the DPJ/CDP keys before the LDP ones silently files every LDP
+target under 民主. `anchor_affinity.py` guards this with an *ordered* FAMILY list;
+`paper_numbers.py` now copies that list verbatim rather than reimplementing it, which
+is how the discrepancy surfaced. **Do not repeat "two independent selection rules".**
+The paper states it as a robustness check and says so explicitly.
+
+### Correction: `SFT vs best-single` sign-test p
+
+The main table gives that row as `+0.0003 · −0.0045 · 14/33 · p=1.00`. Mean, median,
+wins and fold count all reproduce; the p does not — a two-sided exact binomial at 14/33
+is **0.49**. Either way it is the null the paper reports (sparse fine-tuning is level
+with borrowing one anchor wholesale), so nothing downstream changes.
+
+### What the paper does with the material
+
+18 pages, xelatex, 2 overfull hboxes, 0 undefined references. Structural decisions
+worth recording because they are judgement calls, not transcription:
+
+- **The abstract was rewritten**, against the "kept verbatim" instruction of 2026-07-07.
+  It named DPO as *the* anchor objective and claimed POLIS beats standard SFT outright;
+  both are now known to be objective-dependent in the direction that reverses the claim.
+  The original is preserved in a source comment. This needs Ken's eyes.
+- **The register decomposition leads the contributions**, ahead of the main table. It is
+  the largest effect and the one a reader can least easily get elsewhere; the framing
+  used is that a persona method should be benchmarked against an untuned *foreign*
+  adapter before it is benchmarked against another persona method.
+- **`geometry` with 1in margins** was added: default `article` on letterpaper gives a
+  4.75in text width, which was shrinking 6.5in figures to 72% and their 8pt labels to
+  5.8pt. Figures are rendered at the final text width and never rescaled.
+- **The granularity figure drops its error bars from the bar tops to thin whiskers with
+  an explicit caption warning** — the sweep emits only an *unpaired* fold spread
+  (±0.07–0.19) against a 0.008–0.026 effect, and drawing that as an error bar on the
+  comparison would misrepresent a limitation of the logging as a null.
+- **§Limitations records the shell-wrapping failure mode** (seven lost runs) and the
+  meta-tensor silent no-op, as reproducibility hazards rather than as apologies.
+
+## 2026-08-06 — five explanatory figures, and the right tool for each
+
+Ken asked for figures showing what the framework *does*, not just what it scored, and
+suggested HTML or SVG. The paper went from 7 figures to 12 (21 pages). What matters for
+a later agent is the split that fell out of it, because the first attempt got it wrong.
+
+| kind | tool | figures |
+|---|---|---|
+| structural — boxes, arrows, grouping | **Graphviz** (`paper_diagrams.py`, `dot` binary only) | pipeline, merge arithmetic, evaluation protocol |
+| quantitative & geometric | **matplotlib** (`paper_figures.py`) | the 9 measurement plots, plus the scale decomposition and the objective sketch |
+
+**Hand-authored SVG was tried first and abandoned.** It rendered fine (cairosvg shapes
+CJK correctly through fontconfig, and vector PDF with embedded fonts came out clean), but
+every edit moved a label into another label: five diagrams needed a text-width estimator,
+a wrapper and three rounds of collision fixes, and they still looked hand-placed. Ken's
+verdict was blunt and correct. **With `dot` the only things specified are content,
+grouping and rank** — the part that carries meaning — and layout is not a thing that can
+be got wrong. `paper_schematics.py` and its SVGs are deleted; don't resurrect that
+approach for anything box-and-arrow.
+
+Three things worth keeping from the exercise:
+
+- **Graphviz caveat: watch the natural width.** The pipeline first laid out `rankdir=LR`
+  at **11.9 in**, which `width=\textwidth` would have shrunk to 55%, taking 9 pt labels to
+  5 pt. Recast `rankdir=TB` with the four anchors on one rank it lands at 6.04 in.
+  `render()` now prints each diagram's natural width and flags anything outside 5.6–6.9 in.
+- **Unicode is not a substitute for markup.** `ΔW⁽¹⁾`, subscript `cₐ,ᵧ` and `ℝ⁴ˣ³` are all
+  tofu in IPAexGothic *and* DejaVu Sans. Graphviz `<sup>`/`<sub>` in HTML-like labels, or
+  matplotlib mathtext, always render.
+- **The coefficient matrix moved to `paper_figures.py`.** It was drawn as a table inside the
+  merge diagram; it is a *measurement*, so it belongs with the plots — it is now panel B of
+  `fig_coeffs`, a sequential-ramp heatmap by depth group.
+
+The two new non-diagram figures each make a claim legible that the tables state numerically:
+`fig_scale` draws the register/identity decomposition to scale and magnifies the identity
+window, which is the honest answer to "why are all these margins ~0.03"; `fig_objective_geometry`
+sketches why a margin objective need not move toward the target, which is the mechanism
+behind the p=7.2e-4 result. Both print the measurement they explain, so the sketch cannot
+drift from the data.
+
+## 2026-08-06 (later) — the data appendix, and a length effect nobody had looked at
+
+Ken asked for training-data examples in the paper. `research/polis/paper_examples.py`
+writes `appendix_examples.tex` (which `main.tex` `\input`s): an anchor DPO triple, a
+sparse-target pair, the ICL prefix template, the UTAS elicitation prompt, and two
+corpus-statistics tables. Paper is now **25 pages**.
+
+Instances are pulled by **fixed person id and index**, not sampled, so the appendix is
+stable across runs and every example carries its `speechID` for anyone who wants to find
+it in the Diet record. English glosses are author translations hard-coded in the script
+beside the record they gloss — deliberately not in the data, so it stays obvious they are
+not part of the corpus.
+
+### New finding, straight out of the appendix table: sparse targets speak in *longer* turns
+
+Median completion length by band runs **266 chars at 3000+ speeches → 448 at 60–120**, a
+1.7× rise in the *opposite* direction to speech count. Frequent speakers accumulate a
+record through many short interventions; a backbencher's record is a handful of long
+committee questions.
+
+This matters beyond the appendix. It is a plausible partial explanation of the
+no-prominence-decay result (`BO vs best-single` flat from +0.0201 to +0.0420 across a 50×
+speech-count span): **a fixed 30-utterance budget buys more text on a sparse target than
+the speech count suggests.** Nobody had measured instance *length* against band before —
+every prominence analysis to date used speech-record counts as the resource proxy. It is
+stated in the appendix as a caveat on that proxy. If the budget sweep (`P16`/`P17`) is
+ever run, the right x-axis is arguably characters, not utterances.
+
+Also worth knowing: the **300-instance extraction cap binds for every band except the two
+sparsest**, so for most targets the binding constraint is the 30-utterance budget, not
+data availability. That is the precise sense in which the method is low-resource by
+construction rather than by circumstance.
+
+### The example itself earns its page
+
+The picked anchor instance (`2377`/idx 15, 塩川 on non-regular staff paid below minimum
+wage) shows what the DPO `rejected` side actually is, and it is not a strawman: the Gemini
+caricature is fluent, on-topic and argues the same side. What it lacks is **procedure** —
+it names no official, ties nothing to an ongoing policy movement, and ends in a
+generalisation where the real utterance ends in a specific institutional demand ("conduct
+a survey of actual conditions, President of the Personnel Authority"). That is exactly the
+distinction §Objective says can be won without moving toward the politician's own
+distribution, so the example does argumentative work rather than just illustrating format.
+
+## 2026-08-06 (later still) — register pass: the prose was drifting into a lab notebook
+
+Ken's verdict on §4.3's "An implementation hazard worth recording" (meta tensors,
+`device_map="auto"`, the self-test gate) was that it does not belong in an academic
+paper, plus a request to review the language throughout. External feedback arrived in
+the same direction: the writing was "occasionally crossing from academic prose into a
+post-mortem blog post style."
+
+**Both readings are right, and the cause is traceable.** The paper was written directly
+against this file. DECISIONS.md is deliberately a narrative of wrong turns — that is its
+job — and roughly twenty passages had inherited its register: process history ("an early
+reading of these margins as 'inside noise' came from…"), self-referential drafting notes
+("a previous draft conceded…"), confessional asides ("we observed 68.4% on a
+60-persona fixture and briefly mistook it for a centroid effect"), and internal
+vocabulary ("kill criterion", "test-set-selection asterisk", "the hedge pays out").
+**Writing a paper from a decision log imports the log's voice; budget an explicit register
+pass for it.**
+
+### Removed outright
+- **§4.3's meta-tensor paragraph.** Deleted from Methods.
+- **§Discussion's "Reproducibility hazards, recorded because they cost us days"** — the
+  seven lost runs to wrapped shell commands, the appending log files. Replaced by one
+  measured paragraph, *Verification of the merge*, that states the silent-no-op failure
+  mode in general terms and recommends a self-test for any weight-space merging study.
+  **Flagged to Ken as a judgement call**: the content survives once, in the right section
+  and in an academic register, rather than twice in engineering prose. Cutting it
+  entirely is defensible.
+- **The LaTeX comment under the abstract** explaining that the abstract had been
+  rewritten. A reviewer saw it. Provenance of that decision belongs here, not in the
+  source, so: the abstract was rewritten because the 2026-07-07 original named DPO as
+  *the* anchor objective and claimed POLIS beats standard SFT outright, both of which the
+  objective finding reverses. That supersedes the "keep the abstract verbatim"
+  instruction of 2026-07-07 — a future agent should not restore it.
+- **§6.5's "The methodological lesson is blunt."** Rewritten as a general point about
+  incidental pipeline choices becoming confounds, without the two-days-lost narration.
+
+### One accuracy fix, not a style fix
+"the **pre-registered** kill criterion" → "specified in advance as a falsification
+criterion". Nothing was lodged in a public registry; it was written into `README.md` §4.3
+before the run. "Pre-registered" is a term of art and claiming it would have been wrong.
+
+### Abstract slimmed
+Per the external feedback that it was "doing too much heavy lifting": the exact $p$-values
+and the per-target win counts came out and now live in the Introduction's contributions
+list and in Results, where they already were. The abstract keeps the framing, the
+qualitative result, no-decay, the two qualifying findings and the negative result.
+
+### Open
+- [ ] **Ken to review the rewritten abstract and the paper's framing.** The three-claim
+      ordering (register → recoverable ideology → objective) is a substantive editorial
+      choice; so is leading with a decomposition rather than the main table.
+- [ ] **Decide whether *Verification of the merge* stays in §Discussion at all.** It is
+      the surviving remnant of the paragraph Ken cut.
+- [ ] 12 figures + 7 tables in 25 pages is a lot. If the paper needs to shrink for a venue
+      limit, `fig_merge` and `fig_coeffs`-B are the most expendable; `fig_pipeline`,
+      `fig_register`, `fig_scale` and `fig_affinity` carry the three claims, and the
+      appendix is the natural home for anything cut.
+- [ ] The appendix glosses are author translations and have had no second pair of eyes.
+      Worth a check by someone before submission.
+- [ ] Related Work and Preliminaries remain thin and need a real literature review.
+- [ ] Related Work and Preliminaries are still thin and need a real literature review,
+      not our data. The `% TODO(lit-review)` URL comments Ken left are preserved in place.
+- [ ] Optional GPU, unchanged in motivation: 60 trials at 12 dims (equal-budget caveat),
+      `P19` anchor-count slope, the budget sweep.
