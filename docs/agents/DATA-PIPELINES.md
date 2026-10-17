@@ -44,6 +44,26 @@ Python scripts for scraping, processing, and LLM-based analysis. Intermediate an
 | `convert_shape_to_geojson.py` | `data/data_geo/senkyoku2022/` |
 | `reorganize_all_repr_speeches.py` | `repr_speeches_id_organized/` per `person_id` |
 
+### Incremental speech updater — `speech_update/`
+
+`collect_all_speeches.py` + `reorganize_all_repr_speeches.py` are full one-off crawls. For keeping speeches current, use the `speech_update` package (spec: `specs/speech-auto-update/`). It works directly in `s3_mirror/kokkai-doc/` and uploads only changed files to `kokkai-doc-bucket-dev`.
+
+- Own venv (`data/requirements.txt` doesn't install on macOS): `/opt/homebrew/bin/python3 -m venv .venv-speech-update && .venv-speech-update/bin/pip install -r data/requirements-speech-update.txt`
+- Run from `data/`: `../.venv-speech-update/bin/python -m speech_update all [--dry-run] [--from YYYY-MM-DD]`. Stages: `fetch` (NDL `/api/meeting` date window, 60-day lookback) → `route` (speaker → `person_id` via Postgres, merge by `speechID`) → `upload` (boto3, profile `kokkai-speech-update`, never deletes).
+- Scheduled wrapper: `./scripts/update-speeches.sh` (retry once, Slack on failure).
+- State, logs and `unmatched_speakers.jsonl` live in `s3_mirror/.speech-update/`. After adding a new member to Postgres `person`: `route --retry-unmatched`, then `upload`.
+- **Speaker review** (spec: `specs/speaker-review/`): speeches made outside the politician's elected terms without a 会派 are not attributed at all (`not_serving`). Unsure matches (kanji differ beyond old/new forms, election-history pick, a member speaking outside their known terms) are held, not filed, and queued in Postgres `speaker_review`. Review with `python -m speech_update.review` (interactive; `list`, `decide`, `scan`, `apply` also available). The nightly run applies decisions and moves already-filed speeches.
+- Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s speech_update/tests -t .`; resolver regression: `python -m speech_update.check_resolver`.
+
+### Monthly member list updater — `member_update/`
+
+Replaces `collect_repr_list.py` (Selenium) for keeping `parliamentMembers/{shugiin,sangiin}_YYYYMMDD.json` current (spec: `specs/member-auto-update/`). Same venv and S3 profile as `speech_update`.
+
+- Run from `data/`: `../.venv-speech-update/bin/python -m member_update all [--dry-run] [--house shugiin|sangiin]`. It scrapes shugiin.go.jp (10 pages) and sangiin.go.jp (`giin/current/` → current session), attaches `person_id`s (link → previous snapshot → name → reading), writes a new dated snapshot only if something changed, and uploads it.
+- Members with no `person` row get `person_id: null` and are queued in `s3_mirror/.member-update/pending_members.json`. `member_update pending` writes a JSON template per member. Fill in a verified `election_data`, then `member_update add FILE` (Postgres `person` + `election_result`, `electionHistory/<id>.jsonl`, appends `politicians/table.csv(.gz)`), then `all`, then `speech_update route --retry-unmatched && speech_update upload`. If a member exists under another name: `member_update link HOUSE NAME PERSON_ID`.
+- Schedule: `./scripts/install-member-update-schedule.sh install|status|run-now` (1st of the month, 05:00) runs `./scripts/update-members.sh` (retry once, Slack summary every run).
+- Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s member_update/tests -t .`
+
 ## Analysis / LLM workflows
 
 | Script | Purpose |

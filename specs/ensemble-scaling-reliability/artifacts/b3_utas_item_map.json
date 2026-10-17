@@ -1,0 +1,142 @@
+{
+  "wave": "2021HoR",
+  "source_csv": "2021UTASP20211126_excludedQ11.csv",
+  "topics": {
+    "Defence": {
+      "primary": "Q6_1",
+      "items": {
+        "Q6_1": {
+          "pro_sign": -1,
+          "missing": [
+            99
+          ],
+          "kind": "likert5",
+          "text": "Japan's defense capabilities should be strengthened (1 agree - 5 disagree)",
+          "n_cohort": 442,
+          "party_means": {
+            "立憲民主党": -2.7,
+            "自由民主党": -1.53,
+            "公明党": -2.7,
+            "日本維新の会": -1.29,
+            "無所属": -1.91,
+            "国民民主党": -1.91,
+            "日本共産党": -4.8
+          }
+        },
+        "SQ8_2": {
+          "pro_sign": 1,
+          "missing": [
+            66,
+            99
+          ],
+          "kind": "binary",
+          "text": "Specify the right of collective self-defense in the constitution (1 yes / 0 no)",
+          "n_cohort": 329,
+          "party_means": {
+            "自由民主党": 0.32,
+            "公明党": 0.0,
+            "日本維新の会": 0.17,
+            "立憲民主党": 0.0,
+            "無所属": 0.22,
+            "国民民主党": 0.09
+          }
+        },
+        "SQ8_1": {
+          "pro_sign": 1,
+          "missing": [
+            66,
+            99
+          ],
+          "kind": "binary",
+          "text": "Specify the maintenance of the SDF in the constitution (1 yes / 0 no)",
+          "n_cohort": 329,
+          "party_means": {
+            "自由民主党": 0.9,
+            "公明党": 0.0,
+            "日本維新の会": 0.39,
+            "立憲民主党": 0.04,
+            "無所属": 0.44,
+            "国民民主党": 0.36
+          }
+        },
+        "Q7_1": {
+          "pro_sign": -1,
+          "missing": [
+            99
+          ],
+          "kind": "ab5",
+          "text": "A strengthen Japan-US Security Treaty / B be cautious",
+          "n_cohort": 441,
+          "party_means": {
+            "立憲民主党": -2.97,
+            "自由民主党": -1.61,
+            "公明党": -2.09,
+            "日本維新の会": -1.93,
+            "無所属": -1.91,
+            "国民民主党": -1.91,
+            "日本共産党": -5.0
+          }
+        },
+        "Q6_2": {
+          "pro_sign": -1,
+          "missing": [
+            99
+          ],
+          "kind": "likert5",
+          "text": "Should not hesitate to attack enemy bases if attack expected",
+          "n_cohort": 438,
+          "party_means": {
+            "立憲民主党": -4.0,
+            "自由民主党": -2.27,
+            "公明党": -4.03,
+            "日本維新の会": -2.07,
+            "無所属": -2.36,
+            "国民民主党": -3.18,
+            "日本共産党": -5.0
+          }
+        }
+      }
+    },
+    "NuclearPower": {
+      "primary": "Q7_5",
+      "items": {
+        "Q7_5": {
+          "pro_sign": 1,
+          "missing": [
+            99
+          ],
+          "kind": "ab5",
+          "text": "A abolish nuclear power now / B keep as future power source",
+          "n_cohort": 438,
+          "party_means": {
+            "立憲民主党": 2.22,
+            "自由民主党": 3.97,
+            "公明党": 3.06,
+            "日本維新の会": 3.37,
+            "無所属": 3.45,
+            "国民民主党": 3.36,
+            "日本共産党": 1.0
+          }
+        },
+        "Q6_14": {
+          "pro_sign": -1,
+          "missing": [
+            99
+          ],
+          "kind": "likert5",
+          "text": "Fukushima treated-water ocean release is unavoidable (1 agree - 5 disagree)",
+          "n_cohort": 442,
+          "party_means": {
+            "立憲民主党": -3.78,
+            "自由民主党": -2.03,
+            "公明党": -2.33,
+            "日本維新の会": -1.39,
+            "無所属": -2.18,
+            "国民民主党": -2.18,
+            "日本共産党": -5.0
+          }
+        }
+      }
+    }
+  }
+}

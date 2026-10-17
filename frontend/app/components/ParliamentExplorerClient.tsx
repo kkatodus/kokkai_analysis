@@ -24,6 +24,7 @@ import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, 
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
 import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
+import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
 import { useModal } from "@/app/lib/hooks/useModal";
 import {
   DisclaimerPanel,
@@ -313,34 +314,36 @@ function ParliamentExplorerClientInner({
             }
             right={
               <>
-                <Card>
-                  <CardHeader
-                    title="発言の関連度・生産性（AI判定）"
-                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。この情報を参考にする前に、かならず注意事項をご確認ください。"
-                    action={
-                      <DisclaimerToggleButton
-                        pressed={showRelevanceDisclaimer}
-                        onClick={() => setShowRelevanceDisclaimer((v) => !v)}
-                      />
-                    }
-                  />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showRelevanceDisclaimer ? (
-                      <DisclaimerPanel>
-                        <RelevanceProductivityDisclaimerContent />
-                      </DisclaimerPanel>
-                    ) : (
-                      <RelevanceProductivityBarList
-                        relevanceAndProductivityData={relevanceAndProductivityData}
-                        allParliamentMemberTable={allParliamentMemberTable}
-                        selectedPersonId={selectedPersonId}
-                        onSelectPersonId={(id) =>
-                          handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
-                        }
-                      />
-                    )}
-                  </div>
-                </Card>
+                {SHOW_SPEECH_QUALITY && (
+                  <Card>
+                    <CardHeader
+                      title="発言の関連度・生産性（AI判定）"
+                      subtitle="クリックすると議員詳細が開きます。並び替えもできます。この情報を参考にする前に、かならず注意事項をご確認ください。"
+                      action={
+                        <DisclaimerToggleButton
+                          pressed={showRelevanceDisclaimer}
+                          onClick={() => setShowRelevanceDisclaimer((v) => !v)}
+                        />
+                      }
+                    />
+                    <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                      {showRelevanceDisclaimer ? (
+                        <DisclaimerPanel>
+                          <RelevanceProductivityDisclaimerContent />
+                        </DisclaimerPanel>
+                      ) : (
+                        <RelevanceProductivityBarList
+                          relevanceAndProductivityData={relevanceAndProductivityData}
+                          allParliamentMemberTable={allParliamentMemberTable}
+                          selectedPersonId={selectedPersonId}
+                          onSelectPersonId={(id) =>
+                            handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
+                          }
+                        />
+                      )}
+                    </div>
+                  </Card>
+                )}
 
                 <Card>
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />

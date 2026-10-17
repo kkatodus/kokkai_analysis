@@ -70,24 +70,22 @@ try:
                 continue
             speeches = iterate_speeches(speeches_jsonl_path, meta_data_json_path)
             meta_data = read_meta_data(meta_data_json_path)
-            persons = []
+            # Build (speech, person) pairs in one loop. The old version appended to
+            # `persons` only for non-skipped speeches and then zip()ed it with all
+            # `speeches`, shifting every person_id onto the wrong speech (spec
+            # specs/speech-auto-update §4.10). Prefer `python -m speech_update route
+            # --db-only --all-issues`, which uses the same resolver as the S3 files.
+            speeches_to_insert = []
             for speech in speeches:
                 if speech["speaker"] == "会議録情報":
                     continue
                 if speech["speechID"] in already_retrieved_speeches:
                     continue
-                
+
                 persons_retrieved = get_person_by_column(cur, "name_kanji", speech["speaker"])
                 if not persons_retrieved or len(persons_retrieved) > 1:
-                    persons.append(None)
-                else:
-                    persons.append(persons_retrieved[0])
-            print(persons)
-            #prepare insert speeches
-            speeches_to_insert = []
-            for speech, person in zip(speeches, persons):
-                if person is None:
                     continue
+                person = persons_retrieved[0]
                 speeches_to_insert.append(Speech(
                     issue_id=meta_data["issueID"],
                     name_of_house=meta_data["nameOfHouse"],

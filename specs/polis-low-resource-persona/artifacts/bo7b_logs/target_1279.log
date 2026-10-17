@@ -1,0 +1,7 @@
+=== [2026-07-06 23:14:44] START target 1279 ===
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   5%|▌         | 18/339 [00:00<00:01, 178.19it/s]Loading weights:  11%|█         | 36/339 [00:00<00:02, 150.72it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:02, 133.29it/s]Loading weights:  21%|██        | 72/339 [00:00<00:01, 153.46it/s]Loading weights:  26%|██▌       | 88/339 [00:00<00:01, 149.20it/s]Loading weights:  32%|███▏      | 108/339 [00:00<00:01, 163.15it/s]Loading weights:  39%|███▉      | 133/339 [00:00<00:01, 186.26it/s]Loading weights:  47%|████▋     | 158/339 [00:00<00:00, 205.07it/s]Loading weights:  53%|█████▎    | 179/339 [00:01<00:00, 167.17it/s]Loading weights:  58%|█████▊    | 197/339 [00:01<00:00, 164.86it/s]Loading weights:  65%|██████▍   | 219/339 [00:01<00:00, 177.04it/s]Loading weights:  72%|███████▏  | 245/339 [00:01<00:00, 195.78it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 236.13it/s]
+/root/projects/idea/persona/code/bo_merge_coeffs.py:109: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+=== [2026-07-07 11:12:36] END target 1279 rc=143 ===
+/usr/local/python_3.14.2/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-4479-lzdgw9xy'}
+  warnings.warn(

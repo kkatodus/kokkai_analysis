@@ -1,13 +1,23 @@
 # from openai import OpenAI,AsyncOpenAI
 # import tiktoken
 from dotenv import load_dotenv
+import logging
 import os
+import random
 import time
 import os
 # from agents import Agent, Runner, WebSearchTool, RunConfig, set_default_openai_client, HostedMCPTool
 from google import genai
+from google.genai import errors as genai_errors
 from google.genai import types
 # import anthropic
+
+logger = logging.getLogger(__name__)
+
+# HTTP status codes that mean "retry later" rather than "your request is broken":
+# 429 = RESOURCE_EXHAUSTED (rate limit / quota), 503 = UNAVAILABLE (model overloaded),
+# 500 = INTERNAL, 504 = DEADLINE_EXCEEDED. These are handled with exponential backoff.
+RETRYABLE_STATUS_CODES = {429, 500, 503, 504}
 
 # OPENAI_TOKEN_LIMIT = 128000
 load_dotenv()
@@ -170,18 +180,68 @@ class DeepResearchGemini:
 		self.client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 		self.model_name = model_name
 	
-	def prompt(self, prompt, system_prompt="", shorten_ok=True, retry=2):
+	@staticmethod
+	def _is_retryable(exc: Exception) -> bool:
+		"""True when the API is busy/overloaded and the call is worth retrying."""
+		if isinstance(exc, genai_errors.ServerError):
+			# 5xx from the model backend (500/503/504) are all transient.
+			return True
+		if isinstance(exc, genai_errors.ClientError):
+			# Only 429 (RESOURCE_EXHAUSTED) is retryable among 4xx; others are our fault.
+			return getattr(exc, "code", None) in RETRYABLE_STATUS_CODES
+		return False
+
+	def prompt(
+		self,
+		prompt,
+		system_prompt="",
+		shorten_ok=True,
+		retry=5,
+		base_delay=2.0,
+		max_delay=60.0,
+	):
+		"""Send a prompt to Gemini, retrying with exponential backoff + jitter when
+		the API is busy (429 RESOURCE_EXHAUSTED / 503 UNAVAILABLE / other 5xx).
+
+		Args:
+			retry: max number of attempts (not just extra tries).
+			base_delay: initial backoff in seconds; doubles each attempt.
+			max_delay: cap on the backoff sleep in seconds.
+		"""
 		print("---------------------------------------------------------------")
 
 		# Make the request
 		print("PROMPTING GEMINI")
 
 		print(system_prompt+"\n\n\n"+prompt)
-		response = self.client.models.generate_content(
-			model=self.model_name,
-			contents=system_prompt+"\n\n\n"+prompt,
-			config={"tools": [{"google_search": {}}]},
-		)
+
+		last_exc: Exception | None = None
+		for attempt in range(retry):
+			try:
+				response = self.client.models.generate_content(
+					model=self.model_name,
+					contents=system_prompt+"\n\n\n"+prompt,
+					config={"tools": [{"google_search": {}}]},
+				)
+				break
+			except Exception as exc:
+				if not self._is_retryable(exc) or attempt == retry - 1:
+					raise
+				last_exc = exc
+				# Exponential backoff with full jitter: sleep ~ U(0, min(cap, base * 2**attempt)).
+				delay = min(max_delay, base_delay * (2 ** attempt))
+				delay = random.uniform(0, delay)
+				logger.warning(
+					"Gemini busy (%s); attempt %d/%d, backing off %.1fs",
+					getattr(exc, "code", type(exc).__name__),
+					attempt + 1,
+					retry,
+					delay,
+				)
+				time.sleep(delay)
+		else:  # pragma: no cover - loop always breaks or raises
+			raise RuntimeError("Gemini request failed after retries") from last_exc
+
 		print("RESPONSE", response)
 		response_text = response.text
 		# supports = response.candidates[0].grounding_metadata.grounding_supports

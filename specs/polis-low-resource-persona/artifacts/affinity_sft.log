@@ -1,0 +1,48 @@
+[affinity] 33 targets x 4 anchors: ['152_sft', '2377_sft', '3631_sft', '5520_sft']
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 46.76it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 291.23it/s]Loading weights:  26%|██▋       | 89/339 [00:00<00:00, 320.16it/s]Loading weights:  39%|███▊      | 131/339 [00:00<00:00, 358.45it/s]Loading weights:  51%|█████     | 172/339 [00:00<00:00, 368.37it/s]Loading weights:  62%|██████▏   | 209/339 [00:00<00:00, 325.68it/s]Loading weights:  72%|███████▏  | 244/339 [00:00<00:00, 325.12it/s]Loading weights:  83%|████████▎ | 281/339 [00:00<00:00, 337.66it/s]Loading weights:  94%|█████████▎| 317/339 [00:00<00:00, 336.35it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 335.63it/s]
+  [1/33] 1279 高市早苗       base 2.2684  best 3631_sft (2.1105)  spread 0.0278  [0.2 min]
+  [2/33] 2053 赤嶺政賢       base 2.2520  best 2377_sft (2.1170)  spread 0.0326  [0.4 min]
+  [3/33] 2289 枝野幸男       base 2.5302  best 5520_sft (2.3388)  spread 0.0350  [0.6 min]
+  [4/33] 369 山本左近       base 2.2113  best 152_sft (1.9260)  spread 0.0391  [0.8 min]
+  [5/33] 2447 斎藤裕喜       base 2.4333  best 5520_sft (2.2855)  spread 0.0200  [1.0 min]
+  [6/33] 1572 五十嵐清       base 2.0964  best 2377_sft (1.8729)  spread 0.0347  [1.2 min]
+  [7/33] 688 高見康裕       base 2.2003  best 2377_sft (2.0496)  spread 0.0341  [1.5 min]
+  [8/33] 2704 岡野純子       base 2.6164  best 5520_sft (2.4686)  spread 0.0219  [1.7 min]
+  [9/33] 1543 手塚仁雄       base 1.9419  best 152_sft (1.6085)  spread 0.1460  [1.8 min]
+  [10/33] 1547 東克哉        base 2.5418  best 5520_sft (2.3542)  spread 0.0248  [2.1 min]
+  [11/33] 640 八木哲也       base 2.0834  best 5520_sft (1.8745)  spread 0.0487  [2.3 min]
+  [12/33] 1551 小竹凱        base 2.5741  best 152_sft (2.3997)  spread 0.0227  [2.5 min]
+  [13/33] 2025 柴田勝之       base 2.1913  best 2377_sft (2.0097)  spread 0.0321  [2.7 min]
+  [14/33] 230 和田義明       base 2.1492  best 2377_sft (1.9570)  spread 0.0199  [2.9 min]
+  [15/33] 110 田野瀬太道      base 2.0894  best 152_sft (1.4774)  spread 0.2092  [3.1 min]
+  [16/33] 1982 金城泰邦       base 2.0712  best 3631_sft (1.9055)  spread 0.0164  [3.3 min]
+  [17/33] 1083 山崎正恭       base 2.4200  best 5520_sft (2.2652)  spread 0.0046  [3.6 min]
+  [18/33] 277 高橋美穂       base 2.4987  best 5520_sft (2.3765)  spread 0.0287  [3.8 min]
+  [19/33] 2853 平賀高成       base 2.4905  best 2377_sft (2.2449)  spread 0.0711  [4.0 min]
+  [20/33] 3245 遠藤良太       base 2.4420  best 2377_sft (2.2685)  spread 0.0341  [4.2 min]
+  [21/33] 989 近藤和也       base 2.7841  best 5520_sft (2.5757)  spread 0.0515  [4.4 min]
+  [22/33] 3022 津島淳        base 2.2324  best 5520_sft (1.7744)  spread 0.2676  [4.6 min]
+  [23/33] 1782 空本誠喜       base 2.5838  best 5520_sft (2.4481)  spread 0.0151  [4.8 min]
+  [24/33] 2171 北神圭朗       base 2.6582  best 5520_sft (2.4070)  spread 0.0577  [5.0 min]
+  [25/33] 2189 武田良太       base 2.3690  best 152_sft (2.1204)  spread 0.0346  [5.2 min]
+  [26/33] 14 若宮健嗣       base 2.1414  best 152_sft (1.9345)  spread 0.0499  [5.4 min]
+  [27/33] 5518 尾辻かな子      base 2.6977  best 2377_sft (2.5145)  spread 0.0627  [5.6 min]
+  [28/33] 1434 笠浩史        base 2.6889  best 5520_sft (2.4723)  spread 0.0860  [5.8 min]
+  [29/33] 2732 宮本徹        base 2.5485  best 2377_sft (2.3762)  spread 0.0639  [6.0 min]
+  [30/33] 808 野田佳彦       base 2.5054  best 5520_sft (2.3516)  spread 0.0340  [6.2 min]
+  [31/33] 225 柴山昌彦       base 2.1423  best 152_sft (1.9198)  spread 0.0391  [6.4 min]
+  [32/33] 942 浜田靖一       base 2.0780  best 5520_sft (1.7640)  spread 0.1311  [6.6 min]
+  [33/33] 2546 安住淳        base 2.3915  best 5520_sft (2.1404)  spread 0.0786  [6.8 min]
+
+=== anchor preference vs target party ===
+  targets with a party recorded : 33
+  ...whose family has an anchor : 28  (only these can match; chance = 1/4 = 0.25)
+  preferred anchor matches party: 17/28
+  spread across anchors, mean   : 0.0568
+  gap from base, mean           : 0.2186
+  anchor choice explains        : 26% of the adapter's benefit
+  best-anchor counts            : [('5520_sft', 15), ('2377_sft', 9), ('152_sft', 7), ('3631_sft', 2)]
+
+done in 6.8 min -> /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/affinity_sft.json
+  A match rate near chance means the residual is noise and the transferred quantity is register alone.
