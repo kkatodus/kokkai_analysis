@@ -11,6 +11,7 @@ import {
   SEGMENT_PALETTES,
   type SpeechSegment,
 } from "@/app/components/features/issue/speechSegmentation";
+import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
 
 interface IssuePaneProps {
   issueId: string;
@@ -51,6 +52,7 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
 
   const segments: SpeechSegment[] = (() => {
     if (!orderedSpeeches.length) return [];
+    if (!SHOW_SPEECH_QUALITY) return [{ startIndex: 0, endIndex: orderedSpeeches.length, kind: "unknown" }];
     return buildSpeechSegments(orderedSpeeches);
   })();
 
