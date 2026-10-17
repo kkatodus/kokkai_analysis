@@ -11,7 +11,7 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 | [speech-auto-update](speech-auto-update/README.md) | planned | Scheduled incremental fetch of new NDL speeches → `issues/` + `repr_speeches_id_organized/`, upload changed files to S3 |
 | [member-auto-update](member-auto-update/README.md) | in-progress | Monthly scrape of the official 衆/参 member lists → new `parliamentMembers/` snapshot with `person_id`s; members missing from `person` queued for a verified `add` |
 | [speaker-review](speaker-review/README.md) | in-progress | Confidence levels for speech → politician matches; unsure pairs held for a human decision (`python -m speech_update review`), decisions applied nightly |
-| [speech-quality-labels](speech-quality-labels/README.md) | planned | LLM relevance/productivity labels for every exchange since 2000 (newest first) and nightly for new meetings, under a $100/month cap with spend reported in Slack |
+| [speech-quality-labels](speech-quality-labels/README.md) | planned | LLM labels for every exchange since 2000 and nightly: Diet function, contribution, failure patterns (private scandal, redundancy, evasion, softballs …) charged to questioner or answerer; $100/month cap with Slack spend reports |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 
