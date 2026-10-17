@@ -6,6 +6,7 @@
 import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
 import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getAllRelevanceAndProductivityData } from "@/app/lib/server/dataFetcher";
+import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
@@ -52,7 +53,7 @@ export default async function ParliamentExplorerPage({
     getAllParliamentMemberTable(),
     getVotingDistrictGeoJsonData(),
     getIdeologyData(),
-	getAllRelevanceAndProductivityData(),
+	SHOW_SPEECH_QUALITY ? getAllRelevanceAndProductivityData() : Promise.resolve(null),
   ]);
 
   // Get selectedId from URL search params (for shareable links)

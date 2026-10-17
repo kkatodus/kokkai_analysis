@@ -3,6 +3,10 @@ import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 import type { SpeechRecord } from "@/app/types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
+import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
+
+// Tabs that list speeches by AI quality label (hidden while SHOW_SPEECH_QUALITY is off)
+const QUALITY_TOPIC_KEYS = new Set(["Unproductive", "Irrelevant"]);
 
 
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
@@ -78,7 +82,9 @@ export function SpeechRecordCard({
 }: SpeechRecordCardProps) {
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
 
-  const topicsForTabs = (speechTopics ?? []).slice().sort((a, b) => {
+  const topicsForTabs = (speechTopics ?? [])
+    .filter((t) => SHOW_SPEECH_QUALITY || !QUALITY_TOPIC_KEYS.has(normalizeTopicLabelKey(t.topicKey)))
+    .sort((a, b) => {
     const aKey = normalizeTopicLabelKey(a.topicKey);
     const bKey = normalizeTopicLabelKey(b.topicKey);
 
@@ -221,7 +227,7 @@ export function SpeechRecordCard({
                       <div className="flex flex-wrap items-center gap-2">
                         <div className="truncate text-[12px] font-semibold text-gray-50">{s.speaker}</div>
                         <div className="flex flex-wrap gap-1.5">
-                          {s.is_relevant && (
+                          {SHOW_SPEECH_QUALITY && s.is_relevant && (
                             <span
                               className={
                                 "rounded-full border px-2 py-0.5 text-[10px] font-semibold " +
@@ -234,7 +240,7 @@ export function SpeechRecordCard({
                               関連性: {s.is_relevant === "True" ? "高い" : "低い"}
                             </span>
                           )}
-                          {s.is_productive && (
+                          {SHOW_SPEECH_QUALITY && s.is_productive && (
                             <span
                               className={
                                 "rounded-full border px-2 py-0.5 text-[10px] font-semibold " +
