@@ -167,7 +167,7 @@ For each finished batch: write §3.5's fields onto the exchange's first speech i
 
 - [x] Hide the old labels on the site: `SHOW_SPEECH_QUALITY = false` in `frontend/app/lib/config/features.ts` (PR #52, live 2026-10-18). Flip it back with the new labels.
 - [x] Archive the old labels: `s3_mirror/.speech-quality-archive/v1-20261018/` (96,180 labels with reasons, 1,379 per-person Unproductive/Irrelevant files, `aggregate_processed.jsonl`). Stripped `is_relevant` / `is_productive` / `quality_reason` from 6,152 `issues/` files and 6,356 per-person files, uploaded 2026-10-18.
-- [ ] Delete the 1,379 per-person `Unproductive.jsonl` / `Irrelevant.jsonl` and `relevance_and_productivity/aggregate_processed.jsonl` from S3 (needs an admin profile: the speech-update user can't delete), and copy the archive to S3
+- [x] Deleted the 1,379 per-person `Unproductive.jsonl` / `Irrelevant.jsonl` and `relevance_and_productivity/aggregate_processed.jsonl` from S3 and the mirror (2026-10-18); archive copied to `s3://kokkai-doc-bucket-dev/archive/speech-quality-v1-20261018/`
 - [x] Phase 1 gold set: 169 exchanges labelled by Claude (`claude-opus-5-5`), not the user, in `data/speech_quality/gold/` (2026-10-17). Comparisons measure agreement with Opus; user to spot-check the 22 listed in its README
 - [ ] Phase 1: gold-set page with the §3 scheme (optional now; for the spot-check and later relabelling)
 - [ ] Phase 1: prompt v1; run the three candidates; report by field and by party; user picks
