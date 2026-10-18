@@ -9,6 +9,11 @@
                            electionHistory/<id>.jsonl, politicians/table.csv)
   link HOUSE NAME ID       pin a member to an existing person_id (ID "none" removes it)
   upload                   upload files left by add / a failed upload
+  alias list [ID...]       other names people go by (person_alias), used by the
+  alias add ID NAME [--kana K] [--kind K] [--note T]     speech resolver and the matcher;
+  alias remove ALIAS_ID    after adding, move filed speeches with
+                           `python -m speech_update.review refile NAME`
+  merge DROP KEEP          fold duplicate person DROP into KEEP (see merge.py)
 
 --dry-run scrapes and matches but writes nothing to the mirror, S3 or Postgres.
 """
@@ -26,6 +31,8 @@ from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
 
+from speech_update import aliases
+from speech_update.aliases import all_names
 from speech_update.notify import MAX_LISTED, Notifier, from_env
 from speech_update.state import LockHeld, State, write_atomic
 
@@ -148,8 +155,7 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 	conn = connect_postgres()
 	try:
 		with conn.cursor() as cur:
-			cur.execute("SELECT person_id, name_kanji, name_kana FROM person")
-			matcher = MemberMatcher(cur.fetchall(), load_links(cfg))
+			matcher = MemberMatcher(all_names(cur), load_links(cfg))
 	finally:
 		conn.close()
 
@@ -344,6 +350,56 @@ def run_link(cfg: Config, args) -> int:
 	return 0
 
 
+def run_alias(args) -> int:
+	conn = connect_postgres()
+	try:
+		with conn, conn.cursor() as cur:
+			if args.action == "list":
+				for aid, pid, own, kanji, kana, kind, source, note in aliases.listing(cur, [int(x) for x in args.args]):
+					print(f"[{aid}] #{pid} {own}: {kanji} ({kana or '-'}) {kind}{f'  {source}' if source else ''}{f'  {note}' if note else ''}")
+			elif args.action == "add":
+				if len(args.args) != 2:
+					print("usage: alias add PERSON_ID NAME [--kana K] [--kind K] [--note T]", file=sys.stderr)
+					return 2
+				pid, name = int(args.args[0]), args.args[1]
+				cur.execute("SELECT name_kanji FROM person WHERE person_id = %s", (pid,))
+				row = cur.fetchone()
+				if not row:
+					print(f"person {pid} doesn't exist", file=sys.stderr)
+					return 2
+				added = aliases.add(cur, pid, name, args.kana, args.kind, "manual", args.note)
+				print(f"#{pid} {row[0]}: {name} ({args.kana or '-'}) {'added' if added else 'already there'}")
+				print(f"Move speeches already filed: ../.venv-speech-update/bin/python -m speech_update.review refile {name}")
+			elif args.action == "remove":
+				print("removed" if aliases.remove(cur, int(args.args[0])) else "no such alias")
+	finally:
+		conn.close()
+	return 0
+
+
+def run_merge(cfg: Config, state: State, args) -> int:
+	from speech_update.config import load_config as speech_config
+	from .merge import merge
+	speech_state = State(speech_config().state_dir)  # the speech files are the speech updater's
+	speech_state.acquire_lock()
+	conn = connect_postgres()
+	try:
+		res = merge(cfg, conn, args.drop, args.keep, args.alias_kind)
+	finally:
+		conn.close()
+		speech_state.release_lock()
+	state.add_pending_paths(res.changed)
+	print(
+		f"#{args.drop} merged into #{args.keep}: {res.elections_moved} election(s) moved, {res.elections_dropped} duplicate(s) dropped, "
+		f"{res.speeches_moved} speech row(s) moved, speech file lines added {res.lines_added or 'none'}"
+	)
+	print(f"backup: {res.backup_dir}")
+	print(f"{len(set(res.changed))} file(s) queued: `{PY} upload`")
+	if res.s3_delete:
+		print(f"{len(res.s3_delete)} S3 object(s) to delete with admin credentials: {res.backup_dir / 's3_delete.txt'}")
+	return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
 	parser = argparse.ArgumentParser(prog="member_update", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 	sub = parser.add_subparsers(dest="command", required=True)
@@ -360,6 +416,16 @@ def main(argv: Optional[List[str]] = None) -> int:
 	p_link.add_argument("house")
 	p_link.add_argument("name")
 	p_link.add_argument("person_id")
+	p_alias = sub.add_parser("alias")
+	p_alias.add_argument("action", choices=("list", "add", "remove"))
+	p_alias.add_argument("args", nargs="*")
+	p_alias.add_argument("--kana")
+	p_alias.add_argument("--kind", default="other", choices=aliases.KINDS)
+	p_alias.add_argument("--note")
+	p_merge = sub.add_parser("merge")
+	p_merge.add_argument("drop", type=int)
+	p_merge.add_argument("keep", type=int)
+	p_merge.add_argument("--alias-kind", default="other", choices=aliases.KINDS, help="kind of alias DROP's name becomes")
 	p_up = sub.add_parser("upload")
 	p_up.set_defaults(dry_run=False)
 	args = parser.parse_args(argv)
@@ -372,6 +438,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 		return 0
 	if args.command == "link":
 		return run_link(cfg, args)
+	if args.command == "alias":
+		return run_alias(args)
 
 	log_path = setup_logging(state)
 	notify = getattr(args, "notify", False)
@@ -389,6 +457,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 			run_all(cfg, state, args, notifier)
 		elif args.command == "add":
 			return run_add(cfg, state, args)
+		elif args.command == "merge":
+			return run_merge(cfg, state, args)
 		elif args.command == "upload":
 			run_upload(cfg, state, args)
 		return 0
