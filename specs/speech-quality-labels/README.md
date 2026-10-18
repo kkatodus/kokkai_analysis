@@ -33,7 +33,7 @@ The user ruled out a fine-tuned BERT classifier: this is too nuanced. An LLM jud
 4. **Report spend in Slack**: nightly, at thresholds, and monthly.
 5. Rebuild the per-politician totals from the corrected speech → politician links, separately for asking and answering.
 
-Not in scope now: meetings before 2000 (same mechanism later), a review UI for labels.
+Not in scope now: meetings before 2000 (same mechanism later), a review UI for labels. Plenary sessions (本会議, mostly 代表質問 read from a script) are out of scope (user, 2026-10-18): only committee exchanges are labelled.
 
 ## 3. What the labels mean (decided with the user, 2026-10-17)
 
@@ -58,7 +58,7 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 |---|---|---|
 | `private_scandal` | Private life unrelated to public office: personal conduct, family, gaffes outside the job. Scandals involving public money or official power are **not** this; they're `oversight`. A public official's private habits used to insinuate wrongdoing **are** this (user, 2026-10-18). Possible blackmail or other leverage over a senior official is **not**: it's a security/oversight matter. | questioner |
 | `redundant` | Repeats a question already answered, in this meeting or earlier in the session, with no new angle or evidence. A legitimate subject can still be redundant: this is how "fixation" is caught. | questioner |
-| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question. **Not** evasive (user, 2026-10-18): an answer that turns on genuine legal nuance ("it depends on the circumstances"); declining because the matter belongs to another ministry. | **answerer** |
+| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question. **Not** evasive (user, 2026-10-18): an answer that turns on genuine legal nuance ("it depends on the circumstances"); declining because the matter belongs to another ministry. Privacy or "individual case" refusals count only when the excuse doesn't fit (user, 2026-10-18): shielding a private person (a detainee, a citizen's medical details) is legitimate; using it to avoid questions about the government's own conduct is evasive. | **answerer** |
 | `procedural_dispute` | Fighting over time, demanding a word be withdrawn, heckling | whoever starts it (either, or both) |
 | `grandstanding` | A speech with no real question; party advertising | questioner |
 | `softball` | A question that only invites a prepared, favourable answer: praise plus "your thoughts", "please explain the merits", inviting attacks on another party, mostly thanks | questioner |
@@ -97,7 +97,7 @@ A public "productivity" score has to hold up for every party. Scandal pursuit is
 
 ### 4.1 Phase 1: evaluation (model and prompt)
 
-- **Gold set:** the user labels ~150 exchanges with the §3 scheme on a small local page that shows the exchange, its agenda and the earlier exchanges in the meeting. Stratified across eras (2000s / 2010s / 2020s), houses, committee vs plenary, ruling vs opposition questioners, oversampling likely failures (old "not productive" labels, 予算委員会 scandal days).
+- **Gold set:** the user labels ~150 exchanges with the §3 scheme on a small local page that shows the exchange, its agenda and the earlier exchanges in the meeting. Stratified across eras (2000s / 2010s / 2020s), houses, 予算委員会 vs other committees, ruling vs opposition questioners, oversampling likely failures (old "not productive" labels, 予算委員会 scandal days).
 - **Candidates:** Gemini 3.8 Flash, 3.5 Flash-Lite, and a local Qwen3 14B (MLX) as a reference; the same prompt and context.
 - **Score:** per field (`contribution`, each issue, `responsible`, `function`), with recall on the failure classes, **broken down by the questioner's party**; cost per 1,000 exchanges.
 - **Decide (user):** the model and the prompt. The 96k old labels are replaced, since the definitions changed; the old values stay in the ledger.

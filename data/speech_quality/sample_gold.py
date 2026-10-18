@@ -128,8 +128,8 @@ def cmd_scan(_args) -> int:
 
 # stratum → (filter, how many); strata are drawn in this order and never reuse an exchange
 def _fits(r: dict) -> bool:
-	limit = 25000 if r["meeting_kind"] == "plenary" else 12000
-	return 400 <= r["chars"] <= limit
+	# plenary sessions (代表質問) are out of scope (user, 2026-10-18)
+	return r["meeting_kind"] != "plenary" and 400 <= r["chars"] <= 12000
 
 
 STRATA = [
@@ -140,7 +140,6 @@ STRATA = [
 	("kw_softball", lambda r: r["ruling"] and r["hits"].get("softball", 0) >= 2, 12),
 	("kw_attack", lambda r: r["hits"].get("attack", 0) >= 1, 6),
 	("kw_redundant", lambda r: r["hits"].get("redundant", 0) >= 2, 8),
-	("random_plenary", lambda r: r["meeting_kind"] == "plenary", 15),
 	("random_budget", lambda r: r["meeting_kind"] == "budget", 25),
 	("random_committee", lambda r: r["meeting_kind"] == "committee", 40),
 ]

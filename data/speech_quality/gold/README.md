@@ -25,14 +25,14 @@ The exchange texts used for labelling are in `s3_mirror/.speech-quality/gold_tex
 `speech_quality/segment.py` splits a meeting into exchanges: a new exchange starts when a
 member other than the current questioner speaks; a chair turn that closes questioning
 (質疑終局, 議題とします, 趣旨説明…) ends it. `sample_gold.py scan` builds a pool of
-exchanges (400–12,000 chars, plenary up to 25,000) with keyword hits; `draw` takes
+committee exchanges (400–12,000 chars; plenary excluded since 2026-10-18) with keyword hits; `draw` takes
 strata round-robin over (era, house) cells, at most one exchange per meeting per
 stratum, seed `20261018`:
 
 - keyword strata to oversample problems: private scandal 12, public scandal 12,
   evasive 10, procedural dispute 10, softball (ruling-party questioners) 12,
   personal attack 6, redundant 8
-- random: plenary 15, 予算委員会 25, other committees 40
+- random: 予算委員会 25, other committees 40 (the v1 draw also took 15 plenary; those 18 rows are now `excluded`)
 
 Keyword precision for private scandals and redundancy was low, so `draw --supplement`
 (seed `20261019`, meetings already sampled excluded) added 16 more, plus 7 exchanges
@@ -90,3 +90,11 @@ python3 -m speech_quality.sample_gold merge             # labels_v1 + samples �
 
 `sample_v1.jsonl` was drawn before the 座長 and （続） segmenter fixes; a fresh `draw`
 will not reproduce it exactly. Keep the committed manifests as the reference.
+
+## User review (2026-10-18)
+
+The user checked the 22 spot-check exchanges and set rules now in the spec §3: legal nuance and
+another ministry's jurisdiction are not evasion; privacy refusals are evasion only when they shield
+the government's own conduct; a public official's private habit is a private scandal, possible
+blackmail is not. Plenary sessions are out of scope: the 18 plenary rows are kept in
+`labels_v1.jsonl` with `excluded: true` and left out of `gold_v1.jsonl` (151 exchanges).
