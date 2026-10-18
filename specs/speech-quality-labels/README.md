@@ -56,9 +56,9 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 
 | Issue | Meaning | Charged to |
 |---|---|---|
-| `private_scandal` | Private life unrelated to public office: personal conduct, family, gaffes outside the job. Scandals involving public money or official power are **not** this; they're `oversight`. | questioner |
+| `private_scandal` | Private life unrelated to public office: personal conduct, family, gaffes outside the job. Scandals involving public money or official power are **not** this; they're `oversight`. A public official's private habits used to insinuate wrongdoing **are** this (user, 2026-10-18). Possible blackmail or other leverage over a senior official is **not**: it's a security/oversight matter. | questioner |
 | `redundant` | Repeats a question already answered, in this meeting or earlier in the session, with no new angle or evidence. A legitimate subject can still be redundant: this is how "fixation" is caught. | questioner |
-| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question | **answerer** |
+| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question. **Not** evasive (user, 2026-10-18): an answer that turns on genuine legal nuance ("it depends on the circumstances"); declining because the matter belongs to another ministry. | **answerer** |
 | `procedural_dispute` | Fighting over time, demanding a word be withdrawn, heckling | whoever starts it (either, or both) |
 | `grandstanding` | A speech with no real question; party advertising | questioner |
 | `softball` | A question that only invites a prepared, favourable answer: praise plus "your thoughts", "please explain the merits", inviting attacks on another party, mostly thanks | questioner |
