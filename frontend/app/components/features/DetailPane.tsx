@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { AllParliamentMemberTableData, ElectionHistoryData, RelevanceAndProductivityData, SpeechRecord } from "@/app/types";
+import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
 import { fetchElectionHistory } from "@/app/lib/services/electionHistoryService";
 import { fetchFirstPageOfAllTopics, fetchSpeechPage } from "@/app/lib/services/speechesService";
 import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCard";
@@ -347,62 +348,64 @@ export function DetailPane({
             {personMeta?.name_kana ?? "（かな不明）"}
           </div>
 
-          <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
-            <div className="mb-1 flex items-center justify-between gap-2">
-              <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合）</div>
-              <div className="text-[11px] text-gray-400">
-                分類された発言数:{" "}
-                {relevanceStats && Number.isFinite(relevanceStats.Total_Count) ? relevanceStats.Total_Count : "—"}
+          {SHOW_SPEECH_QUALITY && (
+            <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合）</div>
+                <div className="text-[11px] text-gray-400">
+                  分類された発言数:{" "}
+                  {relevanceStats && Number.isFinite(relevanceStats.Total_Count) ? relevanceStats.Total_Count : "—"}
+                </div>
               </div>
-            </div>
 
-            {relevanceStats ? (
-              (() => {
-                const tt = normalizeProp(relevanceStats.prop_R_True_P_True);
-                const tf = normalizeProp(relevanceStats.prop_R_True_P_False);
-                const ff = normalizeProp(relevanceStats.prop_R_False_P_False);
-                return (
-                  <>
-                    <div className="h-3 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
-                      <div className="flex h-full w-full">
-                        <div
-                          className="h-full bg-emerald-500/80"
-                          style={{ width: `${Math.round(tt * 10000) / 100}%` }}
-                          title={`関連×生産性あり: ${percentLabel(tt)}`}
-                        />
-                        <div
-                          className="h-full bg-amber-500/80"
-                          style={{ width: `${Math.round(tf * 10000) / 100}%` }}
-                          title={`関連×生産性なし: ${percentLabel(tf)}`}
-                        />
-                        <div
-                          className="h-full bg-rose-500/80"
-                          style={{ width: `${Math.round(ff * 10000) / 100}%` }}
-                          title={`非関連×生産性なし: ${percentLabel(ff)}`}
-                        />
+              {relevanceStats ? (
+                (() => {
+                  const tt = normalizeProp(relevanceStats.prop_R_True_P_True);
+                  const tf = normalizeProp(relevanceStats.prop_R_True_P_False);
+                  const ff = normalizeProp(relevanceStats.prop_R_False_P_False);
+                  return (
+                    <>
+                      <div className="h-3 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+                        <div className="flex h-full w-full">
+                          <div
+                            className="h-full bg-emerald-500/80"
+                            style={{ width: `${Math.round(tt * 10000) / 100}%` }}
+                            title={`関連×生産性あり: ${percentLabel(tt)}`}
+                          />
+                          <div
+                            className="h-full bg-amber-500/80"
+                            style={{ width: `${Math.round(tf * 10000) / 100}%` }}
+                            title={`関連×生産性なし: ${percentLabel(tf)}`}
+                          />
+                          <div
+                            className="h-full bg-rose-500/80"
+                            style={{ width: `${Math.round(ff * 10000) / 100}%` }}
+                            title={`非関連×生産性なし: ${percentLabel(ff)}`}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
-                      <div className="flex items-center gap-1">
-                        <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
-                        関連×生産性あり: {percentLabel(tt)}
+                      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
+                          関連×生産性あり: {percentLabel(tt)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
+                          関連×生産性なし: {percentLabel(tf)}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
+                          非関連×生産性なし: {percentLabel(ff)}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
-                        関連×生産性なし: {percentLabel(tf)}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
-                        非関連×生産性なし: {percentLabel(ff)}
-                      </div>
-                    </div>
-                  </>
-                );
-              })()
-            ) : (
-              <div className="text-[11px] text-gray-500">関連度・生産性データがありません。</div>
-            )}
-          </div>
+                    </>
+                  );
+                })()
+              ) : (
+                <div className="text-[11px] text-gray-500">関連度・生産性データがありません。</div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">
