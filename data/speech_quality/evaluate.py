@@ -4,10 +4,11 @@ From data/:
   python3 -m speech_quality.evaluate run MODEL [--limit N] [--workers N]
   python3 -m speech_quality.evaluate score [MODEL...]
 
-MODEL is a Gemini model id (gemini-3.8-flash, gemini-3.5-flash-lite) or
-ollama:<name> (ollama:qwen3:14b, needs `ollama serve`). Results are cached per
-exchange in s3_mirror/.speech-quality/eval/<prompt version>/<model>/, so a rerun
-only labels what's missing. Gemini needs GEMINI_API_KEY in data/.env.
+MODEL is a Gemini model id (gemini-3.8-flash, gemini-3.5-flash-lite), a Claude
+model id (claude-sonnet-5-5, claude-haiku-5-5) or ollama:<name> (ollama:qwen3:14b,
+needs `ollama serve`). Results are cached per exchange in
+s3_mirror/.speech-quality/eval/<prompt version>/<model>/, so a rerun only labels
+what's missing. Gemini needs GEMINI_API_KEY and Claude ANTHROPIC_API_KEY in data/.env.
 """
 from __future__ import annotations
 
@@ -31,6 +32,7 @@ WORK = DATA_DIR.parent / "s3_mirror" / ".speech-quality"
 EVAL_DIR = WORK / "eval" / PROMPT_VERSION
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434") + "/api/chat"
 
 # Batch API prices per 1M tokens (input, output incl. thinking), checked 2026-10-17; the spec's §4.4 table
@@ -38,6 +40,9 @@ BATCH_PRICE = {
 	"gemini-3.8-flash": (0.375, 1.875),
 	"gemini-3.5-flash-lite": (0.15, 1.25),
 	"gemini-3-flash-preview": (0.25, 1.50),
+	# Claude batch prices, checked 2026-10-18 (platform.claude.com pricing; Haiku's is for prompts under 100K)
+	"claude-sonnet-5-5": (1.00, 5.00),
+	"claude-haiku-5-5": (0.05, 0.25),
 }
 QUESTIONER_ISSUES = {"private_scandal", "redundant", "grandstanding", "softball"}
 
@@ -98,6 +103,48 @@ def call_gemini(model: str, system: str, user: str, session: requests.Session) -
 	raise RuntimeError(f"{model}: gave up after retries ({r.status_code} {r.text[:200]})")
 
 
+def _strict(schema):
+	"""Claude's structured output wants additionalProperties: false on every object."""
+	if isinstance(schema, dict):
+		out = {k: _strict(v) for k, v in schema.items()}
+		if out.get("type") == "object":
+			out["additionalProperties"] = False
+		return out
+	if isinstance(schema, list):
+		return [_strict(v) for v in schema]
+	return schema
+
+
+def call_claude(model: str, system: str, user: str, session: requests.Session) -> dict:
+	"""Structured output with the label schema; the system prompt is cached across exchanges."""
+	headers = {"x-api-key": os.environ["ANTHROPIC_API_KEY"], "anthropic-version": "2023-06-01"}
+	body = {
+		"model": model,
+		"max_tokens": 2048,
+		"system": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
+		"messages": [{"role": "user", "content": user}],
+		"output_config": {"format": {"type": "json_schema", "schema": _strict(SCHEMA)}},
+	}
+	for attempt in range(6):
+		r = session.post(ANTHROPIC_URL, json=body, headers=headers, timeout=300)
+		if r.status_code in (429, 500, 502, 503, 504, 529):
+			time.sleep(min(60, 4 * 2 ** attempt))
+			continue
+		if r.status_code != 200:
+			raise RuntimeError(f"{r.status_code} {r.text[:300]}")
+		d = r.json()
+		labels = json.loads("".join(c["text"] for c in d["content"] if c["type"] == "text"))
+		u = d.get("usage", {})
+		return {
+			"labels": labels,
+			"usage": {
+				"input": u.get("input_tokens", 0) + u.get("cache_read_input_tokens", 0) + u.get("cache_creation_input_tokens", 0),
+				"output": u.get("output_tokens", 0),
+			},
+		}
+	raise RuntimeError(f"{model}: gave up after retries ({r.status_code} {r.text[:200]})")
+
+
 def call_ollama(model: str, system: str, user: str, session: requests.Session) -> dict:
 	body = {
 		"model": model,
@@ -122,6 +169,8 @@ def label_one(model: str, ex: dict, session: requests.Session) -> dict:
 	t0 = time.time()
 	if model.startswith("ollama:"):
 		out = call_ollama(model.split(":", 1)[1], system, user, session)
+	elif model.startswith("claude-"):
+		out = call_claude(model, system, user, session)
 	else:
 		out = call_gemini(model, system, user, session)
 	out.setdefault("seconds", time.time() - t0)
@@ -258,7 +307,7 @@ def cmd_score(args) -> int:
 	)
 	report = []
 	for m in models:
-		m_id = m if m.startswith(("gemini", "ollama:")) else m.replace("ollama_", "ollama:", 1)
+		m_id = m if m.startswith(("gemini", "claude", "ollama:")) else m.replace("ollama_", "ollama:", 1)
 		s = score_model(m_id, gold)
 		if s:
 			report.append(s)
