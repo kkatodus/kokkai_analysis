@@ -124,9 +124,11 @@ A public "productivity" score has to hold up for every party. Scandal pursuit is
 
 New meetings have no exchange boundaries, so the job draws them: a new exchange starts when the chair gives the floor to a member to ask questions (the chair's turn naming the next questioner, or the questioner's first turn after it) and runs until the next one. Plenary: each 代表質問 with its answers is one exchange. Procedural turns outside any exchange are not labelled. Tested against the 6,152 meetings that already have labels: boundaries should match on ≥95% of exchanges before use.
 
+*Result (2026-10-19):* the old labels turned out to be per question turn, not per questioner, so their starts can't match (26.8% do). The meaningful check passes: 98.8% of the 91,176 old committee labels fall inside a new exchange. Committee exchanges with an answer since 2000: ~124,600 (1.09B characters), far fewer than the 480k in §4.4, which counted turns. Measured cost with prompt v3 is ~$2.75 per 1,000, so the backlog is ~$340 at the launch price.
+
 ### 4.3 Context for each exchange
 
-Meeting name, date, house, agenda items (from the record's opening section), **one-line summaries of the earlier exchanges in the same meeting** (for `redundant`), the full exchange (speaker, role, text), and the §3 definitions. Output is JSON matching §3, with thinking off or minimal. Very long exchanges are truncated in the middle with a marker.
+Meeting name, date, house, agenda items (from the record's opening section), **one-line summaries of the earlier exchanges in the same meeting** (for `redundant`), the full exchange (speaker, role, text), and the §3 definitions. Output is JSON matching §3, with thinking off or minimal. *(Batch mode rejects `thinkingLevel: minimal`, as of 2026-10-19, so batches use `low`; v3 scored 0.92 at low vs 0.93 at minimal, and thinking adds almost no output tokens.)* Very long exchanges are truncated in the middle with a marker.
 
 **Second pass (later):** redundancy across a whole session. Find earlier questions to the same minister on the same subject in the session (embeddings), and show them to the model for exchanges where it matters.
 
@@ -187,12 +189,14 @@ For each finished batch: write §3.5's fields onto the exchange's first speech i
 - [x] Deleted the 1,379 per-person `Unproductive.jsonl` / `Irrelevant.jsonl` and `relevance_and_productivity/aggregate_processed.jsonl` from S3 and the mirror (2026-10-18); archive copied to `s3://kokkai-doc-bucket-dev/archive/speech-quality-v1-20261018/`
 - [x] Phase 1 gold set: 169 exchanges labelled by Claude (`claude-opus-5-5`), not the user, in `data/speech_quality/gold/` (2026-10-17). Comparisons measure agreement with Opus; user to spot-check the 22 listed in its README
 - [ ] Phase 1: gold-set page with the §3 scheme (optional now; for the spot-check and later relabelling)
-- [ ] Phase 1: prompt v1; run the three candidates; report by field and by party; user picks
-- [ ] Exchange segmenter (prototype: `data/speech_quality/segment.py`) + test against the 6,152 labelled meetings (≥95% boundary match)
-- [ ] Ledger and price tables, cap check, Gemini Batch client (`GEMINI_API_KEY` in `data/.env`)
-- [ ] Writer + per-role aggregate rebuild + upload
-- [ ] Slack lines, thresholds, monthly summary
-- [ ] Nightly `label` stage; backlog newest first
+- [x] Phase 1: prompts v1–v3; Gemini, Claude and Qwen compared by field and by party; user picked Gemini 3.8 Flash with v3 (2026-10-18, §4.1)
+- [x] Exchange segmenter (`data/speech_quality/segment.py`) + test against the 6,152 labelled meetings (98.8% coverage; see §4.2)
+- [x] Ledger and price tables, cap check, Gemini Batch client: `speech_quality/ledger.py`, `gemini_batch.py`, `label_job.py` (2026-10-19)
+- [x] Writer onto `issues/{id}/speeches.jsonl` (`quality` object + the §3.5 fields) + upload (2026-10-19)
+- [ ] Per-person files and per-role aggregate rebuild (`Unproductive.jsonl` / `aggregate_processed.jsonl` successors), from `label_result`
+- [x] Slack line in the nightly summary; 50/80/100% alerts
+- [ ] Monthly summary on the 1st; price check
+- [x] Nightly `label` stage in `speech_update all`; backlog newest first (2026-10-19)
 - [ ] User: Cloud Billing budget at $120 with email alerts
 - [ ] Session-wide redundancy pass (4.3)
 - [ ] Frontend: show `function`, issues and per-role totals (separate spec; touches `frontend/`, which deploys)

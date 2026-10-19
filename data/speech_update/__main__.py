@@ -1,11 +1,14 @@
 """CLI: python -m speech_update [fetch|route|upload|all] (run from data/).
 
-  all                      fetch → route → upload (what the scheduler runs)
+  all                      fetch → route → label → upload (what the scheduler runs)
   fetch  [--from D] [--until D]
   route                    route issues left by fetch (changed_issues.json)
   route --retry-unmatched  re-resolve issues with unmatched member speakers
   route --db-only --all-issues   rebuild Postgres `speeches` from every issue (§4.10)
   upload                   upload changed_paths.txt
+
+The label stage collects and submits Gemini batches of exchange labels under the
+monthly cap (python -m speech_quality.label_job; specs/speech-quality-labels §4.8).
 
 Unsure speaker matches are held for review: python -m speech_update.review
 (specs/speaker-review). `all` applies decided reviews before uploading.
@@ -218,6 +221,24 @@ def review_pending() -> int:
 		conn.close()
 
 
+def run_label(cfg: Config, state: State, issue_ids: List[str]):
+	"""Collect finished label batches and submit new ones. None if Postgres or the key is missing."""
+	if not os.environ.get("GEMINI_API_KEY"):
+		log.warning("GEMINI_API_KEY not set; skipping the label stage")
+		return None
+	from speech_quality.label_job import run
+	conn = connect_postgres()
+	if conn is None:
+		return None
+	try:
+		summary = run(conn, cfg.issues_dir, cfg.state_dir.parent / ".speech-quality" / "batches", new_issues=issue_ids)
+	finally:
+		conn.close()
+	state.add_pending_paths(summary.paths)
+	log.info("label stage: %s", summary.slack_line())
+	return summary
+
+
 def run_upload(cfg: Config, state: State, args, dry_paths: Optional[List[str]] = None) -> int:
 	from .upload import Uploader, upload_order
 	if args.dry_run:
@@ -271,6 +292,18 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 	if new_review and not args.dry_run:
 		notifier.review_needed(new_review, pending)
 
+	labels = None
+	if routed is not None and not args.dry_run:
+		try:
+			labels = run_label(cfg, state, routed.routed_issues)
+		except Exception as e:  # labels must not hold up the speech upload
+			log.exception("label stage failed")
+			if args.notify:
+				notifier.failure("label", f"{type(e).__name__}: {e}", "(speech upload continues)")
+		if labels:
+			for alert in labels.alerts:
+				notifier.send(alert)
+
 	try:
 		uploaded = run_upload(cfg, state, args, dry_paths=dry_paths)
 	except Exception as e:
@@ -292,6 +325,7 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 		"review_pending": pending,
 		"review_decisions_applied": applied.decisions if applied else 0,
 		"route_postponed": routed is None,
+		"labels": labels.slack_line() if labels else None,
 		"files_uploaded": uploaded,
 		"files_to_upload": len(dry_paths) if args.dry_run else uploaded,
 		"duration_s": round(time.monotonic() - started, 1),

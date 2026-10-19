@@ -56,6 +56,7 @@ class Notifier:
 			"{meetings_new} new / {meetings_changed} changed; {speeches_added} speeches added, "
 			"{speeches_updated} updated; {files_uploaded} files uploaded; {duration_s:.0f}s".format(**summary)
 			+ (" · {review_pending} speaker match(es) awaiting review".format(**summary) if summary.get("review_pending") else "")
+			+ (f"\n{summary['labels']}" if summary.get("labels") else "")
 		)
 
 	def failure(self, stage: str, error: str, log_path: str) -> None:
