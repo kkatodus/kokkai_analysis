@@ -197,13 +197,38 @@ SUPPLEMENT_MANUAL = [
 ]
 
 
+# Second hand-picked supplement (2026-10-18): after plenary was excluded only 3 private_scandal
+# cases were left. Committee exchanges found by searching question text for named scandals
+# (女性問題, 不倫, 愛人, 週刊誌 stories about ministers, 経歴詐称, 酩酊, 秘書の酒気帯び, 総理秘書官),
+# read and kept: six where the questioner pursues a private matter, and six near-misses that
+# look like scandal but are about public money, official duty or the election law.
+SUPPLEMENT2_MANUAL = [
+	("119005261X00920160208#7", "sup2_private"),    # 高木毅: alleged underwear theft decades ago
+	("114705206X02020000512#2", "sup2_private"),    # PM Mori's alleged 1958 arrest, via criminal-record rules
+	("117404536X00320100325#4", "sup2_private"),    # 中井洽: hostess with a dormitory card key
+	("119604889X00520180328#2", "sup2_private"),    # 福井照: #MeToo weekly-magazine story
+	("121105261X00520230202#2", "sup2_private"),    # 松野's policy secretary drink-driving
+	("121205124X00220231108#4", "sup2_private"),    # 山田太郎 resignation (brief mention)
+	("119604536X00320180403#7", "sup2_near_miss"),  # 福井照: donations, 統一教会 telegram (public)
+	("119805124X01720190531#4", "sup2_near_miss"),  # 白須賀: absent while on duty, hit-and-run
+	("119604260X00920180413#7", "sup2_near_miss"),  # 福田次官 harassment of reporters
+	("115915261X00320040204#2", "sup2_near_miss"),  # 古賀潤一郎 学歴詐称 (election law)
+	("117104376X00420090216#3", "sup2_near_miss"),  # 中川昭一 G7 press conference
+	("121105261X00220230130#9", "sup2_near_miss"),  # 岸田翔太郎: official car, embassy staff
+]
+
+
 def gold_id(r: dict) -> str:
 	return f"{r['issue_id']}#{r['index']}"
 
 
 def cmd_draw(args) -> int:
 	pool = [json.loads(l) for l in POOL_FILE.open(encoding="utf-8")]
-	if args.supplement:
+	if args.supplement2:
+		by_id = {gold_id(r): r for r in pool}
+		sample = [{**by_id[g], "stratum": name} for g, name in SUPPLEMENT2_MANUAL]
+		sample_file, texts_file = GOLD_DIR / "sample_v1_supplement2.jsonl", WORK_DIR / "gold_texts_v1_supplement2.jsonl"
+	elif args.supplement:
 		main = {json.loads(l)["issue_id"] for l in (GOLD_DIR / "sample_v1.jsonl").open(encoding="utf-8")}
 		sample = draw(pool, random.Random(SEED + 1), SUPPLEMENT, main)
 		by_id = {gold_id(r): r for r in pool}
@@ -249,8 +274,10 @@ def _read_jsonl(path: Path) -> Dict[str, dict]:
 
 
 def cmd_merge(_args) -> int:
-	sample = {**_read_jsonl(GOLD_DIR / "sample_v1.jsonl"), **_read_jsonl(GOLD_DIR / "sample_v1_supplement.jsonl")}
-	texts = {**_read_jsonl(TEXTS_FILE), **_read_jsonl(WORK_DIR / "gold_texts_v1_supplement.jsonl")}
+	sample, texts = {}, {}
+	for suffix in ("", "_supplement", "_supplement2"):
+		sample.update(_read_jsonl(GOLD_DIR / f"sample_v1{suffix}.jsonl"))
+		texts.update(_read_jsonl(WORK_DIR / f"gold_texts_v1{suffix}.jsonl"))
 	labels = [json.loads(l) for l in (GOLD_DIR / "labels_v1.jsonl").open(encoding="utf-8") if l.strip()]
 	missing = set(sample) - {l["gold_id"] for l in labels}
 	if missing:
@@ -281,6 +308,7 @@ def main(argv: Optional[List[str]] = None) -> int:
 	sub.add_parser("scan")
 	p_draw = sub.add_parser("draw")
 	p_draw.add_argument("--supplement", action="store_true", help="draw the targeted supplement instead of the main sample")
+	p_draw.add_argument("--supplement2", action="store_true", help="write the hand-picked private_scandal supplement")
 	sub.add_parser("merge")
 	args = p.parse_args(argv)
 	return {"scan": cmd_scan, "draw": cmd_draw, "merge": cmd_merge}[args.cmd](args)
