@@ -1,4 +1,4 @@
-"""Prompt v2 for exchange labels (specs/speech-quality-labels §3, §4.3).
+"""Prompt v3 for exchange labels (specs/speech-quality-labels §3, §4.3).
 
 `system_prompt()` holds the definitions; `exchange_prompt()` renders one
 exchange with its meeting context; `SCHEMA` is the JSON the model must return.
@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import List
 
-PROMPT_VERSION = "v2"
+PROMPT_VERSION = "v3"
 
 FUNCTIONS = ("legislation", "oversight", "policy", "representation", "procedural", "none")
 ISSUES = ("private_scandal", "redundant", "evasive", "procedural_dispute", "grandstanding", "softball", "personal_attack")
@@ -79,10 +79,11 @@ SYSTEM = """あなたは日本の国会審議を評価する専門家です。�
 - procedural_dispute（by=始めた側、双方なら both）: 時間をめぐる争い、発言撤回の要求、やじ、審議中断。
 - grandstanding（by=questioner）: 実質的な質問のない演説、党の宣伝。
 - softball（by=questioner）: 用意された好意的な答弁を引き出すだけの質問（称賛＋「御所見を」、「意義を説明してください」、他党攻撃の誘い、感謝ばかり）。党派ではなくやり取りで判断する。与党議員が自分の政府に厳しく問うのは該当しない。具体的な約束を引き出した質問も該当しない。持ち時間の大半が「決意をお聞かせください」「御所見を」「意義を御説明ください」と政府に用意された説明を述べさせるだけ、または答弁への称賛・感謝が中心なら extent=most。冒頭や締めの一問だけなら part。
+  提案の形をとっていても、政府がすでに進めている施策や質問者の党の提言をなぞって「前向きな御答弁を」「決意を」と賛同を求め、政府が同意・称賛するだけなら softball（提案ではない）。政府から前向きな答弁を引き出したこと自体は成果ではない。見分け方: 質問者は政府がまだしていないこと・したくないことを求めたか、政府の説明の穴を突いたか。どちらもなければ softball の可能性が高い。
 - personal_attack（by=行った側）: 政策ではなく人格・能力への攻撃。
 
 ## contribution（やり取り全体として）
-- substantive: functionに照らして実質的な成果があった（事実が明らかになった、法案の問題点が検証された、具体的な約束が出た、質問者が具体的な政策提案・改善策を示して記録に残った）。質問者が具体的な提案をしたのに答弁が紋切り型だった場合も substantive（答弁の不足は答弁者の問題で、はぐらかしが明らかなら evasive）
+- substantive: functionに照らして実質的な成果があった（事実が明らかになった、法案の問題点が検証された、具体的な約束が出た、質問者が政府のまだしていない具体的な政策・改善策を示して記録に残った）。そうした提案をしたのに答弁が紋切り型だった場合も substantive（答弁の不足は答弁者の問題で、はぐらかしが明らかなら evasive）
 - limited: 一部に意味はあるが、成果は限られる（質問自体が一般的・散漫で掘り下げがない等）
 - none: 政治を前に進める要素がほぼない
 
@@ -91,7 +92,7 @@ SYSTEM = """あなたは日本の国会審議を評価する専門家です。�
 ## outcomes（該当するものすべて）
 - new_information: これまで公になっていなかった事実や数字が答弁で出た
 - commitment: 「検討する」以上の約束（具体的なものに限る。単なる「検討します」は含めない）
-- proposal: 具体的な政策提案が記録に残った
+- proposal: 政府がまだ採用していない具体的な政策・改善策を質問者が示した（既存の施策や政府方針の確認・後押しは含めない）
 
 ## topic: 政策分野。次のいずれかが主題なら選び、当てはまらなければ other: {topics}。
 

@@ -63,7 +63,7 @@ User rules of 2026-10-18 (benefit of the doubt; only `most` counts against produ
 proposal with a stock answer is `substantive`) changed 9 rows: 7 `limited` → `substantive`
 (`117013950X01120081218#5`, `116805253X00320071205#4`, `118015261X02120120613#2`, `121005261X00420221024#0`,
 `121704536X00320250403#8`, `116215259X01220050802#9`, `121314319X01620240530#0`), and `private_scandal`
-dropped from the two boundary calls above-and-before (`119604889X00520180328#2`, `114705206X02020000512#2`:
+dropped from two boundary calls (`119604889X00520180328#2`, `114705206X02020000512#2`:
 PM Mori's alleged arrest record) as not clearly private. 7 `private_scandal` cases remain.
 
 ## Label schema notes

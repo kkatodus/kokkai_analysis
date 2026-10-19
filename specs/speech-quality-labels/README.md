@@ -106,6 +106,19 @@ A public "productivity" score has to hold up for every party. Scandal pursuit is
 - **Score:** per field (`contribution`, each issue, `responsible`, `function`), with recall on the failure classes, **broken down by the questioner's party**; cost per 1,000 exchanges.
 - **Decide (user):** the model and the prompt. The 96k old labels are replaced, since the definitions changed; the old values stay in the ledger.
 - Cost: a few dollars.
+- **Result (2026-10-18):** the gold set was labelled by Claude Opus and spot-checked by the user (`data/speech_quality/gold/`). Run with `python -m speech_quality.evaluate run|score`; per-exchange results in `s3_mirror/.speech-quality/eval/<prompt>/`. Also tried: Claude Sonnet 5.5 and Haiku 5.5, Gemini with low thinking. Productive-flag agreement and error rate by questioner:
+
+  | Model, prompt | Agreement | Errors, ruling / opposition | $ per 1,000 (batch) |
+  |---|---|---|---|
+  | **Gemini 3.8 Flash, v3, minimal thinking** | **0.93** | **0.15 / 0.04** | **2.64** |
+  | Gemini 3.8 Flash, v3, low thinking | 0.92 | 0.20 / 0.04 | 2.65 |
+  | Gemini 3.8 Flash, v2 | 0.90 | 0.24 / 0.05 | 2.60 |
+  | Claude Sonnet 5.5, v2 | 0.93 | 0.17 / 0.04 | 11.67 |
+  | Claude Haiku 5.5, v2 | 0.89 | 0.27 / 0.06 | 0.64 |
+  | Gemini 3.5 Flash-Lite, v2 | 0.89 | 0.27 / 0.06 | 1.09 |
+  | Qwen3 14B (local), v1 | 0.49 (all issues counted) | — | 30 s per exchange |
+
+  **Decided (user): Gemini 3.8 Flash**; Sonnet was too expensive. Prompt v3 fixes Flash's main blind spot (a ruling-party member's own plan plus "please answer positively" read as a proposal). Its remaining misses are mostly lenient (ruling-party softballs), in line with the benefit-of-the-doubt rule. v3 was tuned on this gold set, so it needs a check on fresh exchanges before the backfill.
 
 ### 4.2 Unit of labelling: exchanges
 

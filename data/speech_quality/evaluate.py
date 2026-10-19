@@ -68,7 +68,9 @@ def result_path(model: str, gold_id: str) -> Path:
 # --- model calls ---
 
 def call_gemini(model: str, system: str, user: str, session: requests.Session) -> dict:
+	"""`model` may end in +low / +medium / +high for that thinking level (default minimal)."""
 	key = os.environ["GEMINI_API_KEY"]
+	model, _, level = model.partition("+")
 	body = {
 		"systemInstruction": {"parts": [{"text": system}]},
 		"contents": [{"role": "user", "parts": [{"text": user}]}],
@@ -76,7 +78,7 @@ def call_gemini(model: str, system: str, user: str, session: requests.Session) -
 			"temperature": 0,
 			"responseMimeType": "application/json",
 			"responseJsonSchema": SCHEMA,
-			"thinkingConfig": {"thinkingLevel": "minimal"},
+			"thinkingConfig": {"thinkingLevel": level or "minimal"},
 		},
 	}
 	for attempt in range(6):
@@ -295,7 +297,7 @@ def score_model(model: str, gold: List[dict]) -> Optional[str]:
 	lines += ["", "Contribution (gold → model): " + ", ".join(f"{a}→{b} {c}" for (a, b), c in sorted(conf.items()))]
 	per_in, per_out = usage["input"] / n, usage["output"] / n
 	lines.append(f"\nTokens per exchange: input {per_in:,.0f}, output {per_out:,.0f}; mean {sum(secs) / n:.1f}s per exchange")
-	price = BATCH_PRICE.get(model)
+	price = BATCH_PRICE.get(model.partition("+")[0])
 	if price:
 		cost = (per_in * price[0] + per_out * price[1]) / 1e6
 		lines.append(f"Batch cost: ${cost * 1000:.2f} per 1,000 exchanges")
