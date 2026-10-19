@@ -1,4 +1,4 @@
-"""Prompt v1 for exchange labels (specs/speech-quality-labels §3, §4.3).
+"""Prompt v2 for exchange labels (specs/speech-quality-labels §3, §4.3).
 
 `system_prompt()` holds the definitions; `exchange_prompt()` renders one
 exchange with its meeting context; `SCHEMA` is the JSON the model must return.
@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import List
 
-PROMPT_VERSION = "v1"
+PROMPT_VERSION = "v2"
 
 FUNCTIONS = ("legislation", "oversight", "policy", "representation", "procedural", "none")
 ISSUES = ("private_scandal", "redundant", "evasive", "procedural_dispute", "grandstanding", "softball", "personal_attack")
@@ -56,6 +56,9 @@ SCHEMA = {
 SYSTEM = """あなたは日本の国会審議を評価する専門家です。委員会での一つの「やり取り」（ある委員の質問の持ち時間と、それに対する政府側などの答弁）を読み、下の基準でラベルを付けてください。
 目的は、日本の政治を前に進めないやり取り（公務と無関係な私生活スキャンダルへの固執、同じ質問の繰り返し、答弁のはぐらかしなど）を見つけることです。党派によって基準を変えてはいけません。
 
+## 基本原則: 疑わしきは本人に有利に
+否定的なラベル（issues、contribution の limited/none）は、ラベルが公開されて議員や大臣の評判に関わるため、問題が明らかな場合にだけ付けてください。迷ったら付けない、迷ったら有利な方を選ぶ。質問者にも答弁者にも同じく適用します。
+
 ## function（何のためのやり取りか。良し悪しではなく種類）
 - legislation: 法案の審査（内容、穴、修正）
 - oversight: 政府の行為の監視（公金、権限行使、行政の失敗、公職や公金に関わる不祥事を含む）
@@ -66,18 +69,21 @@ SYSTEM = """あなたは日本の国会審議を評価する専門家です。�
 主たるものを一つ選ぶ。
 
 ## issues（問題点。該当するものをすべて。なければ空配列）
-各問題に by（責任者: questioner/answerer/both）と extent（part: 一部 / most: 大部分）を付ける。
+各問題に by（責任者: questioner/answerer/both）と extent を付ける。
+- most: やり取りの大半（時間の半分以上）がその問題に費やされた
+- part: 一部だけ（冒頭や締めの一言、途中の脱線、一問だけなど）。迷ったら part
+一部に問題があっても、やり取り全体の評価は残りの部分で決まります。
 - private_scandal（by=questioner）: 公務と無関係な私生活（個人の行状、家族、職務外の失言）。公金や公的権限に関わる不祥事は該当せず oversight。公職者の私的な趣味・行状を材料に不正をほのめかすのは該当する。公職者への脅迫・弱みの可能性は安全保障・監視の問題で該当しない。
 - redundant（by=questioner）: この会議や会期中にすでに答弁された質問を、新しい角度や証拠なしに繰り返す。答弁がはぐらかされたので再質問するのは該当しない。複数の参考人に同じ質問をするのも該当しない。
-- evasive（by=answerer）: 答弁のはぐらかし。正当な理由のない「お答えは差し控える」、紋切り型の答弁の読み上げ、別の質問への回答。該当しない: 本当に法的な判断が場合による答弁、他省庁の所管だとして答えないこと、私人（被拘禁者、市民の医療情報など）を守るためのプライバシーを理由とする拒否。政府自身の行為についての質問を「個別の事案」「プライバシー」でかわすのは該当する。
+- evasive（by=answerer）: 具体的な質問に対する明らかな答弁のはぐらかし。正当な理由のない「お答えは差し控える」、紋切り型の答弁の読み上げ、別の質問への回答。該当しない: 本当に法的な判断が場合による答弁、他省庁の所管だとして答えないこと、私人（被拘禁者、市民の医療情報など）を守るためのプライバシーを理由とする拒否。政府自身の行為についての質問を「個別の事案」「プライバシー」でかわすのは該当する。提案に対して「検討します」と答えるだけなのは、それ自体では該当しない。
 - procedural_dispute（by=始めた側、双方なら both）: 時間をめぐる争い、発言撤回の要求、やじ、審議中断。
 - grandstanding（by=questioner）: 実質的な質問のない演説、党の宣伝。
-- softball（by=questioner）: 用意された好意的な答弁を引き出すだけの質問（称賛＋「御所見を」、「意義を説明してください」、他党攻撃の誘い、感謝ばかり）。党派ではなくやり取りで判断する。与党議員が自分の政府に厳しく問うのは該当しない。具体的な約束を引き出した質問も該当しない。
+- softball（by=questioner）: 用意された好意的な答弁を引き出すだけの質問（称賛＋「御所見を」、「意義を説明してください」、他党攻撃の誘い、感謝ばかり）。党派ではなくやり取りで判断する。与党議員が自分の政府に厳しく問うのは該当しない。具体的な約束を引き出した質問も該当しない。持ち時間の大半が「決意をお聞かせください」「御所見を」「意義を御説明ください」と政府に用意された説明を述べさせるだけ、または答弁への称賛・感謝が中心なら extent=most。冒頭や締めの一問だけなら part。
 - personal_attack（by=行った側）: 政策ではなく人格・能力への攻撃。
 
 ## contribution（やり取り全体として）
-- substantive: functionに照らして実質的な成果があった（事実が明らかになった、法案の問題点が検証された、具体的な約束や提案が出た）
-- limited: 一部に意味はあるが、成果は限られる（答弁が一般論にとどまる等）
+- substantive: functionに照らして実質的な成果があった（事実が明らかになった、法案の問題点が検証された、具体的な約束が出た、質問者が具体的な政策提案・改善策を示して記録に残った）。質問者が具体的な提案をしたのに答弁が紋切り型だった場合も substantive（答弁の不足は答弁者の問題で、はぐらかしが明らかなら evasive）
+- limited: 一部に意味はあるが、成果は限られる（質問自体が一般的・散漫で掘り下げがない等）
 - none: 政治を前に進める要素がほぼない
 
 ## responsible: 不足の原因を作った側。issues の by から導く（質問者側だけなら questioner、答弁者側だけなら answerer、両方なら both、issues がなければ neither）。

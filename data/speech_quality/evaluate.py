@@ -29,7 +29,7 @@ from .prompt import ISSUES, OUTCOMES, PROMPT_VERSION, SCHEMA, exchange_prompt, s
 DATA_DIR = Path(__file__).resolve().parents[1]
 GOLD = DATA_DIR / "speech_quality" / "gold" / "gold_v1.jsonl"
 WORK = DATA_DIR.parent / "s3_mirror" / ".speech-quality"
-EVAL_DIR = WORK / "eval" / PROMPT_VERSION
+EVAL_DIR = WORK / "eval" / os.environ.get("EVAL_PROMPT", PROMPT_VERSION)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
@@ -226,10 +226,12 @@ def prf(tp: int, fp: int, fn: int) -> str:
 	return f"P {p:.2f} R {r:.2f} F1 {f:.2f} (gold {tp + fn}, model {tp + fp})"
 
 
-def issue_types(labels: dict, side: Optional[str] = None) -> set:
+def issue_types(labels: dict, side: Optional[str] = None, most: bool = False) -> set:
 	out = set()
 	for i in labels.get("issues") or []:
 		t = i["type"] if isinstance(i, dict) else i
+		if most and isinstance(i, dict) and i.get("extent") != "most":
+			continue
 		if side == "questioner" and t not in QUESTIONER_ISSUES and not (isinstance(i, dict) and i.get("by") in ("questioner", "both")):
 			continue
 		out.add(t)
@@ -237,8 +239,8 @@ def issue_types(labels: dict, side: Optional[str] = None) -> set:
 
 
 def productive(labels: dict) -> bool:
-	"""The compatibility flag (spec §3.5): contribution ≠ none and no questioner-side issue."""
-	return labels.get("contribution") != "none" and not issue_types(labels, "questioner")
+	"""The compatibility flag (spec §3.5): contribution ≠ none and no questioner-side issue covering most of it."""
+	return labels.get("contribution") != "none" and not issue_types(labels, "questioner", most=True)
 
 
 def bloc(g: dict) -> str:
@@ -259,7 +261,7 @@ def score_model(model: str, gold: List[dict]) -> Optional[str]:
 	if not pairs:
 		return None
 	n = len(pairs)
-	lines = [f"## {model}  ({n}/{len(gold)} exchanges, prompt {PROMPT_VERSION})", ""]
+	lines = [f"## {model}  ({n}/{len(gold)} exchanges, prompt {EVAL_DIR.name})", ""]
 	acc = lambda f: sum(g["labels"].get(f) == m.get(f) for g, m in pairs) / n
 	lines.append(
 		f"Exact match: function {acc('function'):.2f} · contribution {acc('contribution'):.2f} · "
@@ -267,7 +269,7 @@ def score_model(model: str, gold: List[dict]) -> Optional[str]:
 	)
 	prod = sum(productive(g["labels"]) == productive(m) for g, m in pairs) / n
 	anyq = sum(bool(issue_types(g["labels"], "questioner")) == bool(issue_types(m, "questioner")) for g, m in pairs) / n
-	lines.append(f"Productive flag (§3.5) agreement {prod:.2f} · any questioner-side issue agreement {anyq:.2f}")
+	lines.append(f"Productive flag (§3.5) agreement {prod:.2f} · any questioner-side issue (part or most) agreement {anyq:.2f}")
 	lines += ["", "| issue | precision / recall / F1 |", "|---|---|"]
 	for t in ISSUES:
 		tp = sum(t in issue_types(g["labels"]) and t in issue_types(m) for g, m in pairs)
@@ -279,14 +281,14 @@ def score_model(model: str, gold: List[dict]) -> Optional[str]:
 		fp = sum(o not in g["labels"]["outcomes"] and o in (m.get("outcomes") or []) for g, m in pairs)
 		fn = sum(o in g["labels"]["outcomes"] and o not in (m.get("outcomes") or []) for g, m in pairs)
 		lines.append(f"| outcome: {o} | {prf(tp, fp, fn)} |")
-	lines += ["", "Fairness (§3.6): questioner-side issue rate, gold vs model, and productive-flag errors", "",
-		"| questioner | n | gold rate | model rate | flag errors |", "|---|---|---|---|---|"]
+	lines += ["", "Fairness (§3.6): share flagged unproductive, gold vs model, and productive-flag errors", "",
+		"| questioner | n | gold unproductive | model unproductive | flag errors |", "|---|---|---|---|---|"]
 	groups: Dict[str, list] = defaultdict(list)
 	for g, m in pairs:
 		groups[bloc(g)].append((g, m))
 	for name, ps in sorted(groups.items()):
-		gr = sum(bool(issue_types(g["labels"], "questioner")) for g, _ in ps) / len(ps)
-		mr = sum(bool(issue_types(m, "questioner")) for _, m in ps) / len(ps)
+		gr = sum(not productive(g["labels"]) for g, _ in ps) / len(ps)
+		mr = sum(not productive(m) for _, m in ps) / len(ps)
 		err = sum(productive(g["labels"]) != productive(m) for g, m in ps) / len(ps)
 		lines.append(f"| {name} | {len(ps)} | {gr:.2f} | {mr:.2f} | {err:.2f} |")
 	conf = Counter((g["labels"]["contribution"], m.get("contribution")) for g, m in pairs)
@@ -311,7 +313,7 @@ def cmd_score(args) -> int:
 		s = score_model(m_id, gold)
 		if s:
 			report.append(s)
-	text = f"# Gold-set evaluation, prompt {PROMPT_VERSION}\n\n" + "\n\n".join(report) + "\n"
+	text = f"# Gold-set evaluation, prompt {EVAL_DIR.name}\n\n" + "\n\n".join(report) + "\n"
 	print(text)
 	out = EVAL_DIR / "report.md"
 	out.parent.mkdir(parents=True, exist_ok=True)

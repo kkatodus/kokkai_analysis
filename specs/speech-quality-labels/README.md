@@ -39,6 +39,8 @@ Not in scope now: meetings before 2000 (same mechanism later), a review UI for l
 
 An exchange **contributes** if it serves one of the Diet's functions. It is judged on whether it did that well, and failures are charged to whoever caused them.
 
+**Benefit of the doubt (user, 2026-10-18).** A negative label is a public reputational claim, so a mislabel against someone costs more than a missed problem. Issues and `limited` / `none` are given only when the problem is clear; when unsure, label in the person's favour. This applies to questioners and answerers alike.
+
 ### 3.1 `function`: what the exchange is for
 
 | Value | Meaning | Example |
@@ -64,11 +66,13 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 | `softball` | A question that only invites a prepared, favourable answer: praise plus "your thoughts", "please explain the merits", inviting attacks on another party, mostly thanks | questioner |
 | `personal_attack` | Character or ability instead of policy | whoever does it |
 
+Each issue has an `extent`: `most` (more than half of the exchange) or `part` (an opening line, a closing question, a digression). Only `most` counts against the productive flag (§3.5, user 2026-10-18); `part` issues are kept for profiles. When unsure, `part`.
+
 `softball` is judged on the exchange, **not the party**: a ruling-party member asking a hard question of their own government isn't one, and a question that gets a real commitment (「来年度も確保されるのか」→「確保します」) isn't one either.
 
 ### 3.3 The other fields
 
-- `contribution`: `substantive` / `limited` / `none` for the exchange as a whole.
+- `contribution`: `substantive` / `limited` / `none` for the exchange as a whole. A concrete proposal on the record is a contribution even when the answer is stock, so it is `substantive`; the stock answer is the answerer's shortfall (`evasive` if it clearly dodges) (user, 2026-10-18). `limited` is for questioning that stays general or shallow.
 - `responsible`: `questioner` / `answerer` / `both` / `neither`. Who caused the shortfall, from the issues above.
 - `outcomes`: any of `new_information` (facts or figures not previously public), `commitment` (「検討する」 or firmer), `proposal` (a concrete policy proposal on the record).
 - `topic`: the policy area (the site's topic list plus `other`). This replaces relevance. Being off the meeting's agenda is no longer a fault in itself.
@@ -83,7 +87,7 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 ### 3.5 Compatibility with the current site
 
 Until the frontend uses the new fields, the old ones are derived:
-- `is_productive` = `contribution` ≠ `none` and no questioner-side issue
+- `is_productive` = `contribution` ≠ `none` and no questioner-side issue with `extent` = `most`
 - `is_relevant` = `function` ≠ `none`
 - `quality_reason` = `reason`
 
