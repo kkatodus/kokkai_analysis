@@ -15,7 +15,7 @@ From data/:
 Settings (data/.env or environment): GEMINI_API_KEY, SPEECH_LABEL_ENABLED (1),
 SPEECH_LABEL_MODEL (gemini-3.8-flash), SPEECH_LABEL_MONTHLY_CAP_USD (100),
 SPEECH_LABEL_RESERVE_USD (5), SPEECH_LABEL_BATCH_SIZE (1000),
-SPEECH_LABEL_MAX_BACKLOG_BATCHES (2, in flight at once).
+SPEECH_LABEL_MAX_BACKLOG_BATCHES (3, in flight at once).
 """
 from __future__ import annotations
 
@@ -46,7 +46,7 @@ class Settings:
 	cap: float = 100.0
 	reserve: float = 5.0
 	batch_size: int = 1000
-	max_backlog_batches: int = 2
+	max_backlog_batches: int = 3
 	enabled: bool = True
 
 	@classmethod
@@ -57,7 +57,7 @@ class Settings:
 			cap=float(env("SPEECH_LABEL_MONTHLY_CAP_USD", "100")),
 			reserve=float(env("SPEECH_LABEL_RESERVE_USD", "5")),
 			batch_size=int(env("SPEECH_LABEL_BATCH_SIZE", "1000")),
-			max_backlog_batches=int(env("SPEECH_LABEL_MAX_BACKLOG_BATCHES", "2")),
+			max_backlog_batches=int(env("SPEECH_LABEL_MAX_BACKLOG_BATCHES", "3")),
 			enabled=env("SPEECH_LABEL_ENABLED", "1") == "1",
 		)
 
