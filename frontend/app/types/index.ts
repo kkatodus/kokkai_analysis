@@ -9,26 +9,58 @@ export interface PersonIdeologyData {
 	y: number;
 	repr: string;
 	hiragana:string;
+	house?: string;
 	party: string;
+	party_full?: string | null;
 	color: string;
 	ref_point: string;
 	person_id:number|null;
+	/** v2 (topic-scaling-refresh): sitting member at publish time */
+	current?: boolean;
+	n_opinions?: number | null;
+	n_speeches?: number | null;
+	last_speech?: string | null;
+}
+
+export interface IdeologyWindow {
+	from: string | null;
+	to: string | null;
+}
+
+export interface IdeologySubTopic {
+	topic: string;
+	sub_topic: string;
+	sub_topic_jp?: string;
+	axis?: { pro: string; con: string };
+	"1d":{
+		data: PersonIdeologyData[]
+	}
+	"2d": {
+		data: PersonIdeologyData[]
+	}
+	/** v2: UMAP layout fitted on current members only */
+	"2d_current"?: {
+		data: PersonIdeologyData[]
+	}
+}
+
+export interface IdeologyTopic {
+	topic: string;
+	topic_en?: string;
+	topic_jp?: string;
+	window?: IdeologyWindow;
+	n_scaled?: number;
+	n_current?: number;
+	sub_topics: IdeologySubTopic[];
 }
 
 export interface IdeologyData {
-	data: {
-		topic: string;
-		sub_topics:{
-			topic: string;
-			sub_topic: string;
-			"1d":{
-				data: PersonIdeologyData[]
-			}
-			"2d": {
-				data: PersonIdeologyData[]
-			}
-		}[]
-	}[]
+	version?: number;
+	generated_at?: string;
+	embed_model?: string;
+	summary_model?: string;
+	current_members_as_of?: string | null;
+	data: IdeologyTopic[];
 }
 
 

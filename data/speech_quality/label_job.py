@@ -123,7 +123,7 @@ def collect(conn, gb: GeminiBatch, issues_dir: Path, summary: LabelSummary) -> S
 	"""Fold finished batches into label_result. Returns the issue ids that got labels."""
 	touched: Set[str] = set()
 	with conn.cursor() as cur:
-		cur.execute("SELECT id, name, model FROM label_batch WHERE status = 'submitted' ORDER BY id")
+		cur.execute("SELECT id, name, model FROM label_batch WHERE status = 'submitted' AND kind IN ('new', 'backlog') ORDER BY id")
 		batches = cur.fetchall()
 	for batch_id, name, model in batches:
 		job = gb.get(name)

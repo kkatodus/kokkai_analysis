@@ -2,7 +2,16 @@
   {
     "topic_id": 1,
     "topic_name": "防衛",
-	"topic_name_en": "Defence",
+    "topic_name_en": "Defence",
+    "slug": "defence",
+    "window": {
+      "from": "2000-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
     "search_words": [
       "防衛",
       "自衛隊",
@@ -42,7 +51,16 @@
   {
     "topic_id": 2,
     "topic_name": "少子化",
-	"topic_name_en": "DecliningBirthrate",
+    "topic_name_en": "DecliningBirthrate",
+    "slug": "aging",
+    "window": {
+      "from": "2000-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
     "search_words": [
       "少子化",
       "出生率",
@@ -76,7 +94,16 @@
   {
     "topic_id": 4,
     "topic_name": "原発",
-	"topic_name_en": "NuclearPower",
+    "topic_name_en": "NuclearPower",
+    "slug": "nuclear",
+    "window": {
+      "from": "2011-03-11",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
     "search_words": [
       "原発",
       "原子力発電",
@@ -118,7 +145,16 @@
   {
     "topic_id": 5,
     "topic_name": "気候変動",
-	"topic_name_en": "ClimateChange",
+    "topic_name_en": "ClimateChange",
+    "slug": "climatechange",
+    "window": {
+      "from": "2015-12-12",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
     "search_words": [
       "気候変動",
       "温暖化",
@@ -152,7 +188,16 @@
   {
     "topic_id": 6,
     "topic_name": "経済対策",
-	"topic_name_en": "Economy",
+    "topic_name_en": "Economy",
+    "slug": "economy",
+    "window": {
+      "from": "2000-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
     "search_words": [
       "経済",
       "景気",
@@ -187,78 +232,140 @@
     }
   },
   {
-	"topic_id": 7,
-	"topic_name": "物価高対策・減税と賃上げ",
-	"topic_name_en": "LivingCostandTax",
-	"search_words": [
-		"物価",
-		"インフレ",
-		"消費税",
-		"減税",
-		"賃上げ"
-	]
+    "topic_id": 7,
+    "topic_name": "物価高対策・減税と賃上げ",
+    "topic_name_en": "LivingCostandTax",
+    "slug": "livingcostandtax",
+    "window": {
+      "from": "2022-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "物価",
+      "インフレ",
+      "消費税",
+      "減税",
+      "賃上げ"
+    ]
   },
   {
-	"topic_id": 8,
-	"topic_name": "社会保障全般の見直し（医療・介護）",
-	"topic_name_en": "SocialSecurity",
-	"search_words": [
-		"社会保障",
-		"医療保険",
-		"介護保険",
-		"給付負担",
-		"保険料"
-	]
+    "topic_id": 8,
+    "topic_name": "社会保障全般の見直し（医療・介護）",
+    "topic_name_en": "SocialSecurity",
+    "slug": "socialsecurity",
+    "window": {
+      "from": "2000-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "社会保障",
+      "医療保険",
+      "介護保険",
+      "給付負担",
+      "保険料"
+    ]
   },
   {
-	"topic_id": 9,
-	"topic_name": "年金制度改革・基礎年金底上げ",
-	"topic_name_en": "Pension",
-	"search_words": [
-		"年金改革",
-		"基礎年金",
-		"厚生年金",
-		"年金財源",
-		"世代間公平"
-	]
+    "topic_id": 9,
+    "topic_name": "年金制度改革・基礎年金底上げ",
+    "topic_name_en": "Pension",
+    "slug": "pension",
+    "window": {
+      "from": "2004-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "年金改革",
+      "基礎年金",
+      "厚生年金",
+      "年金財源",
+      "世代間公平"
+    ]
   },
   {
-	"topic_id": 10,
-	"topic_name": "夫婦別姓",
-	"topic_name_en": "FamilySeparate",
-	"search_words": [
-		"夫婦別姓",
-		"戸籍法",
-		"旧姓"
-	]
+    "topic_id": 10,
+    "topic_name": "夫婦別姓",
+    "topic_name_en": "FamilySeparate",
+    "slug": "familyseparate",
+    "window": {
+      "from": "2000-01-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "夫婦別姓",
+      "戸籍法",
+      "旧姓"
+    ]
   },
   {
-	"topic_id": 11,
-	"topic_name": "オンライン投票",
-	"topic_name_en": "OnlineVoting",
-	"search_words": [
-		"オンライン投票",
-		"電子投票",
-		"ネット投票"
-	]
+    "topic_id": 11,
+    "topic_name": "オンライン投票",
+    "topic_name_en": "OnlineVoting",
+    "slug": "onlinevoting",
+    "window": {
+      "from": "2013-04-19",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "オンライン投票",
+      "電子投票",
+      "ネット投票"
+    ]
   },
   {
-	"topic_id": 12,
-	"topic_name": "マイナンバー",
-	"topic_name_en": "MyNumber",
-	"search_words": [
-		"マイナンバー"
-	]
+    "topic_id": 12,
+    "topic_name": "マイナンバー",
+    "topic_name_en": "MyNumber",
+    "slug": "mynumber",
+    "window": {
+      "from": "2015-10-05",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "マイナンバー"
+    ]
   },
   {
-	"topic_id": 13,
-	"topic_name": "LGBT",
-	"topic_name_en": "LGBT",
-	"search_words": [
-		"LGBT",
-		"同性婚",
-		"理解増進法"
-	]
+    "topic_id": 13,
+    "topic_name": "LGBT",
+    "topic_name_en": "LGBT",
+    "slug": "lgbtq",
+    "window": {
+      "from": "2015-04-01",
+      "to": null
+    },
+    "scaling": {
+      "enabled": true,
+      "min_opinions": 3
+    },
+    "search_words": [
+      "LGBT",
+      "同性婚",
+      "理解増進法"
+    ]
   }
-  
 ]

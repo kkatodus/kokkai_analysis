@@ -3,6 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import type { IdeologyData, PersonIdeologyData } from "@/app/types";
+
+const SCOPE_STORAGE_KEY = "kokkai.ideology.scope";
+type Scope = "all" | "current";
 import { ZoomControls } from "@/app/components/shared/ZoomControls";
 import { EmptyState } from "@/app/components/shared/EmptyState";
 import availableConfig from "@/app/data/available.json";
@@ -84,6 +87,24 @@ export function IdeologicalScatterPlot({
   const [selectedTopicIdx, setSelectedTopicIdx] = useState<number>(0);
   const [selectedSubTopicIdx, setSelectedSubTopicIdx] = useState<number>(0);
   const [mode, setMode] = useState<"2d" | "1d">("1d");
+  // "all" = every representative scaled in the topic's window; "current" = sitting members only.
+  const [scope, setScope] = useState<Scope>("all");
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(SCOPE_STORAGE_KEY);
+      if (saved === "all" || saved === "current") setScope(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+  const changeScope = (next: Scope) => {
+    setScope(next);
+    try {
+      window.localStorage.setItem(SCOPE_STORAGE_KEY, next);
+    } catch {
+      /* storage unavailable */
+    }
+  };
 
   const filteredTopics = useMemo(() => {
     return topics.filter((t) => {
@@ -143,11 +164,37 @@ export function IdeologicalScatterPlot({
     return { axis, showSpectrum };
   }, [selectedTopic?.topic, selectedSubTopic?.topic, selectedSubTopic?.sub_topic]);
 
+  // v2 files flag each point with `current`; a v1 file has no flag, so the toggle is disabled.
+  const hasScope = useMemo(
+    () => Boolean(selectedSubTopic?.["1d"]?.data?.some((d) => typeof d.current === "boolean")),
+    [selectedSubTopic],
+  );
+  const effectiveScope: Scope = hasScope ? scope : "all";
+
   const points: PersonIdeologyData[] = useMemo(() => {
     if (!selectedSubTopic) return [];
-    const bucket = (selectedSubTopic as any)[mode] as { data: PersonIdeologyData[] } | undefined;
-    return bucket?.data ?? [];
-  }, [selectedSubTopic, mode]);
+    if (mode === "2d" && effectiveScope === "current") {
+      // the job precomputes a UMAP layout for current members only
+      const cur = selectedSubTopic["2d_current"]?.data;
+      if (cur && cur.length) return cur;
+      return (selectedSubTopic["2d"]?.data ?? []).filter((d) => d.ref_point !== "none" || d.current !== false);
+    }
+    const bucket = selectedSubTopic[mode] as { data: PersonIdeologyData[] } | undefined;
+    const all = bucket?.data ?? [];
+    if (effectiveScope === "current") return all.filter((d) => d.current !== false);
+    return all;
+  }, [selectedSubTopic, mode, effectiveScope]);
+
+  const windowLabel = useMemo(() => {
+    const w = selectedTopic?.window;
+    if (!w || !w.from) return "";
+    const fmt = (d: string) => d.replace(/-/g, "/");
+    const span = `${fmt(w.from)} 〜 ${w.to ? fmt(w.to) : "現在"}`;
+    const n = selectedTopic?.n_scaled;
+    const c = selectedTopic?.n_current;
+    const counts = n != null ? `・${n}人${c != null ? `（現職 ${c}人）` : ""}` : "";
+    return `対象期間 ${span}${counts}`;
+  }, [selectedTopic]);
 
   const titleLabel = useMemo(() => {
     if (!selectedSubTopic) return "";
@@ -233,10 +280,17 @@ export function IdeologicalScatterPlot({
       .attr("stroke-width", 1.25)
       .style("cursor", "pointer")
       .on("mousemove", (event, d) => {
+        const extra = [
+          d.current === false ? "元議員" : "",
+          d.n_opinions != null ? `意見 ${d.n_opinions}` : "",
+          d.last_speech ? `最終発言 ${d.last_speech.replace(/-/g, "/")}` : "",
+        ]
+          .filter(Boolean)
+          .join(" • ");
         const meta =
-          mode === "2d"
+          (mode === "2d"
             ? `${d.party} • x:${d.x.toFixed(2)} y:${d.y.toFixed(2)}`
-            : `${d.party} • x:${d.x.toFixed(2)}`;
+            : `${d.party} • x:${d.x.toFixed(2)}`) + (extra ? ` • ${extra}` : "");
         onTooltipShowRef.current({ title: d.repr, meta }, event.clientX, event.clientY);
       })
       .on("mouseleave", () => onTooltipHideRef.current())
@@ -372,7 +426,35 @@ export function IdeologicalScatterPlot({
             2D
           </button>
         </div>
+
+        <div
+          className="flex shrink-0 items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95"
+          title={hasScope ? "全議員（期間内）と現職のみを切り替え" : "このデータには現職フラグがありません"}
+        >
+          <button
+            onClick={() => changeScope("all")}
+            className={`px-3 py-1 text-[11px] ${
+              effectiveScope === "all" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
+            }`}
+            disabled={!filteredTopics.length || !hasScope}
+          >
+            全議員
+          </button>
+          <button
+            onClick={() => changeScope("current")}
+            className={`px-3 py-1 text-[11px] ${
+              effectiveScope === "current" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
+            }`}
+            disabled={!filteredTopics.length || !hasScope}
+          >
+            現職のみ
+          </button>
+        </div>
       </div>
+
+      {windowLabel && (
+        <div className="mb-2 text-[10px] text-gray-400">{windowLabel}</div>
+      )}
 
       {mode === "1d" && selectedAxis.showSpectrum && selectedAxis.axis && (
         <div className="mb-2 grid gap-2 rounded-xl border border-slate-400/15 bg-slate-900/40 p-2 text-[11px] text-gray-200 sm:grid-cols-2">

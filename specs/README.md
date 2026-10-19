@@ -12,6 +12,7 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 | [member-auto-update](member-auto-update/README.md) | in-progress | Monthly scrape of the official 衆/参 member lists → new `parliamentMembers/` snapshot with `person_id`s; members missing from `person` queued for a verified `add` |
 | [speaker-review](speaker-review/README.md) | in-progress | Confidence levels for speech → politician matches; unsure pairs held for a human decision (`python -m speech_update review`), decisions applied nightly |
 | [speech-quality-labels](speech-quality-labels/README.md) | planned | LLM labels for every exchange since 2000 and nightly: Diet function, contribution, failure patterns (private scandal, redundancy, evasion, softballs …) charged to questioner or answerer; $100/month cap with Slack spend reports |
+| [topic-scaling-refresh](topic-scaling-refresh/README.md) | in-progress | Monthly re-summarise/re-embed/re-project of politicians per topic inside per-topic time windows; all-vs-current toggle in the scatter plot; topic and window suggestions posted to Slack for manual editing |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 

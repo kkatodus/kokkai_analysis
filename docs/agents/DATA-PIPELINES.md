@@ -66,6 +66,15 @@ Replaces `collect_repr_list.py` (Selenium) for keeping `parliamentMembers/{shugi
 - Schedule: `./scripts/install-member-update-schedule.sh install|status|run-now` (1st of the month, 05:00) runs `./scripts/update-members.sh` (retry once, Slack summary every run).
 - Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s member_update/tests -t .`
 
+### Monthly topic scaling refresh — `topic_scaling/`
+
+Keeps `ideology/ideology.json.gz` (the scatter plot) current (spec: `specs/topic-scaling-refresh/`). Own venv `.venv-topic-scaling` (Homebrew python3.12 + torch; `data/requirements-topic-scaling.txt`), same S3 profile as `speech_update`.
+
+- Run from `data/`: `../.venv-topic-scaling/bin/python -m topic_scaling all|select|summarize|embed|project|suggest|status [--dry-run] [--topic T] [--limit N] [--publish-partial]`. Stages: `select` (per topic `window` in `resource/experiment_config.json`, search-word sentences → `kkatodus/jp-speech-classifier` 意見文 gate, cached per speech in `s3_mirror/.topic-scaling/opinions/`; `opinion_hash` is the change key) → `summarize` (Gemini Batch stance summaries, 3 runs per pair, `kind='summary'` rows in the label ledger, shares `SPEECH_LABEL_MONTHLY_CAP_USD`) → `embed` (`sbintuitions/sarashina-embedding-v2-1b` on MPS, cached `.npz`) → `project` (1D axis projection between the generated for/against speeches in `data/axis/{topic}/examples/`, UMAP 2D for everyone and for current members) → `publish` (v2 file + `ideology/history/` copy, upload) → `suggest` (volume curves → Slack).
+- Topics need `slug` and `window.from` in `experiment_config.json`; sub-topics need `slug` in `data/axis/{topic}/{topic}_axis.json`. The job never edits those files: it posts suggestions to Slack and the user edits by hand.
+- `select --estimate` sizes a backfill without the classifier. `scripts/update-topic-scaling.sh` is the launchd entry (2nd and 3rd of each month, `install-topic-scaling-schedule.sh`).
+- Tests: `cd data && ../.venv-topic-scaling/bin/python -m pytest topic_scaling/tests -q`
+
 ## Analysis / LLM workflows
 
 | Script | Purpose |

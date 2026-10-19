@@ -35,6 +35,7 @@ Data
   sync-s3-mirror.sh          Pull the S3 data lake into s3_mirror/ (--env, --background)
   update-speeches.sh         Incremental NDL speech update → s3_mirror + S3 (--dry-run)
   update-members.sh          Monthly Diet member list refresh → parliamentMembers/ + S3 (--dry-run)
+  update-topic-scaling.sh    Monthly ideology rescale (summaries → embeddings → ideology.json.gz + S3) (--dry-run)
 
 Typical flow
   1. ./scripts/route-task.sh "fix speech API pagination"
