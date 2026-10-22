@@ -14,13 +14,14 @@ from typing import Dict, Iterable, Iterator, List, Optional
 
 from speech_update.state import write_atomic
 
+from .batch_client import BatchRequest, tokens_est
 from .prompt import PROMPT_VERSION, SCHEMA, exchange_prompt, system_prompt
 from .segment import Exchange, segment
 
 SINCE = "2000-01-01"
 MIN_CHARS = 200          # shorter exchanges are procedural one-liners
-TOKENS_PER_CHAR = 0.6    # Gemini on Japanese, measured 0.56 on the gold set (max 0.63)
-OUTPUT_TOKENS_EST = 160  # measured 137 with v3
+OUTPUT_TOKENS_EST = 160  # Gemini, measured 137 with v3; batch_client.output_est scales it per provider
+MAX_TOKENS = 4096        # Claude: labels plus low-effort thinking
 
 
 @dataclass
@@ -55,8 +56,8 @@ class Unit:
 	def user_prompt(self) -> str:
 		return exchange_prompt(self.prompt_dict())
 
-	def tokens_est(self) -> int:
-		return int((len(SYSTEM) + len(self.user_prompt())) * TOKENS_PER_CHAR)
+	def tokens_est(self, model: str) -> int:
+		return tokens_est(model, len(SYSTEM) + len(self.user_prompt()))
 
 
 SYSTEM = system_prompt()
@@ -100,21 +101,11 @@ def due(units: Iterable[Unit], done: Dict[str, str], pending: set) -> Iterator[U
 		yield u
 
 
-def batch_line(u: Unit) -> dict:
-	return {
-		"key": u.key,
-		"request": {
-			"systemInstruction": {"parts": [{"text": SYSTEM}]},
-			"contents": [{"role": "user", "parts": [{"text": u.user_prompt()}]}],
-			"generationConfig": {
-				"temperature": 0,
-				"responseMimeType": "application/json",
-				"responseJsonSchema": SCHEMA,
-				# batch mode rejects "minimal"; v3 scored 0.92 at low vs 0.93 at minimal (spec §4.1)
-				"thinkingConfig": {"thinkingLevel": "low"},
-			},
-		},
-	}
+def request_for(u: Unit) -> BatchRequest:
+	# Gemini batch mode rejects thinking "minimal"; v3 scored 0.92 at low vs 0.93 at minimal (spec §4.1).
+	# Claude 5.5 models think by default; "low" effort is the matching depth. Temperature is Gemini-only.
+	return BatchRequest(key=u.key, system=SYSTEM, user=u.user_prompt(), json_schema=SCHEMA, temperature=0,
+		max_tokens=MAX_TOKENS, effort="low")
 
 
 # --- writing labels onto speech lines (§3.5, §4.7) ---
@@ -187,12 +178,11 @@ def write_issues(cur, issues_dir: Path, issue_ids: Iterable[str]) -> List[str]:
 	return changed
 
 
-def parse_response(resp: dict) -> Optional[dict]:
-	"""Labels from a GenerateContentResponse, or None if it failed or doesn't fit the schema."""
+def parse_labels(text: str) -> Optional[dict]:
+	"""Labels from a model's JSON answer, or None if it isn't JSON or doesn't fit the schema."""
 	try:
-		parts = resp["candidates"][0]["content"]["parts"]
-		labels = json.loads("".join(p.get("text", "") for p in parts if not p.get("thought")))
-	except (KeyError, IndexError, ValueError, TypeError):
+		labels = json.loads(text)
+	except (ValueError, TypeError):
 		return None
 	need = ("function", "issues", "contribution", "responsible", "outcomes", "topic", "reason")
 	if not isinstance(labels, dict) or any(k not in labels for k in need):
@@ -200,10 +190,5 @@ def parse_response(resp: dict) -> Optional[dict]:
 	return labels
 
 
-def usage(resp: dict) -> tuple:
-	u = resp.get("usageMetadata") or {}
-	return u.get("promptTokenCount", 0), u.get("candidatesTokenCount", 0) + u.get("thoughtsTokenCount", 0)
-
-
-__all__ = ["Unit", "units_for_issue", "issues_newest_first", "due", "batch_line", "write_issues", "parse_response",
-	"usage", "productive", "PROMPT_VERSION", "OUTPUT_TOKENS_EST"]
+__all__ = ["Unit", "units_for_issue", "issues_newest_first", "due", "request_for", "write_issues", "parse_labels",
+	"productive", "PROMPT_VERSION", "OUTPUT_TOKENS_EST"]

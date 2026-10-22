@@ -146,9 +146,10 @@ def test_build_requests_shuffles_per_run_and_is_deterministic():
 	bodies = [r.prompt.split("\n\n")[-1] for r in reqs]
 	assert len(set(bodies)) > 1 and all(sorted(b.split("\n")) == sorted(bodies[0].split("\n")) for b in bodies)
 	assert bodies == [r.prompt.split("\n\n")[-1] for r in build_requests(pair, t, 3, 42)]
-	assert "原発" in reqs[0].prompt and reqs[0].tokens_est() > 0
-	line = reqs[0].batch_line()
-	assert line["key"] == "10:NuclearPower:0" and line["request"]["contents"][0]["parts"][0]["text"] == reqs[0].prompt
+	assert "原発" in reqs[0].prompt and reqs[0].tokens_est("gemini-3.5-flash-lite") > 0
+	assert reqs[0].tokens_est("claude-opus-5-5") > reqs[0].tokens_est("gemini-3.5-flash-lite")
+	br = reqs[0].request()
+	assert br.key == "10:NuclearPower:0" and br.user == reqs[0].prompt and br.json_schema is None
 
 
 def test_strip_preamble():

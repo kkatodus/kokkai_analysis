@@ -2,7 +2,7 @@
 
   all        select → summarize → embed → project → publish → suggest, one Slack report
   select     [--estimate] [--topic T ...] [--limit N]   window filter + opinion gate → select.json
-  summarize  [--dry-run] [--max-batches N]            collect finished Gemini batches, submit changed pairs
+  summarize  [--dry-run] [--max-batches N]            collect finished summary batches, submit changed pairs
   embed      [--topic T ...]                           embed summaries + reference speeches
   project    [--topic T ...] [--publish-partial]       1D/2D per sub-topic → ideology.json.gz (+ upload)
   suggest                                              volume curves + candidate topics → Slack
@@ -12,7 +12,7 @@
 
 Publishing happens only when no summary batch is in flight and no changed pair is
 waiting for budget, unless --publish-partial is given (used during the backfill).
---dry-run never writes to the mirror, S3, Gemini or Postgres (select's opinion cache is still written).
+--dry-run never writes to the mirror, S3, the LLM providers or Postgres (select's opinion cache is still written).
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ from typing import Dict, List, Optional, Tuple
 
 from dotenv import load_dotenv
 
-from .config import AxisError, Config, SubTopic, Topic, load_axes, load_config, load_topics
+from .config import DATA_DIR, AxisError, Config, SubTopic, Topic, load_axes, load_config, load_topics
 from .state import LockHeld, State, read_json
 
 log = logging.getLogger("topic_scaling")
@@ -94,8 +94,8 @@ def run_summarize(cfg: Config, state: State, topics: List[Topic], pairs, args, c
 	from .summarize import run_summarize as _summarize
 	if conn is None:
 		raise RuntimeError("Postgres is required for the summary ledger")
-	if not os.getenv("GEMINI_API_KEY"):
-		raise RuntimeError("GEMINI_API_KEY is not set")
+	if not (os.getenv("ANTHROPIC_API_KEY") or os.getenv("GEMINI_API_KEY")):
+		raise RuntimeError("neither ANTHROPIC_API_KEY nor GEMINI_API_KEY is set")
 	return _summarize(conn, cfg, state, topics, pairs, dry_run=args.dry_run, max_batches=args.max_batches)
 
 
@@ -290,8 +290,9 @@ def main(argv: Optional[List[str]] = None) -> int:
 	p.add_argument("--axes", action="store_true", help="onboard: generate axes + reference speeches with Gemini")
 	args = p.parse_args(argv)
 
+	# .env first, so TOPIC_SCALING_* / SPEECH_LABEL_* settings in it reach load_config()
+	load_dotenv(os.environ.get("TOPIC_SCALING_ENV_FILE", DATA_DIR / ".env"))
 	cfg = load_config()
-	load_dotenv(cfg.env_file)
 	state = State(cfg.state_dir)
 	log_path = setup_logging(state)
 	topics = load_topics(cfg.topics_file, cfg.min_opinions)
@@ -321,13 +322,16 @@ def main(argv: Optional[List[str]] = None) -> int:
 				print(f"{name:20s} in-window {e['persons_in_window']:5d}  scaled {e['scaled']:5d}  below gate {e['below_gate']:5d}  changed {e['changed']:5d}"
 					+ (f"  [{e['skip_reason']}]" if e.get("skip_reason") else ""))
 			if args.estimate:
-				from .summarize import OUTPUT_TOKENS_EST, TOKENS_PER_CHAR, instruction
+				from speech_quality.batch_client import output_est, tokens_est
+				from .summarize import OUTPUT_TOKENS_EST, instruction
 				n_pairs = sum(e["scaled"] for e in sel["topics"].values())
 				chars = sum(len(" ".join(pr.opinions)) + len(instruction("X")) for pr in pairs.values())
-				tin = chars * TOKENS_PER_CHAR * cfg.summary_runs
-				tout = OUTPUT_TOKENS_EST * cfg.summary_runs * n_pairs
-				print(f"\n{n_pairs} pairs × {cfg.summary_runs} runs: ~{tin / 1e6:.1f}M input + ~{tout / 1e6:.2f}M output tokens")
-				print(f"≈ ${tin / 1e6 * 0.15 + tout / 1e6 * 1.25:.2f} on gemini-3.5-flash-lite, ${tin / 1e6 * 0.375 + tout / 1e6 * 1.875:.2f} on gemini-3.8-flash (batch prices)")
+				# batch prices per 1M tokens, as in speech_quality.ledger.PRICES
+				for model, pin, pout in (("claude-sonnet-5-5", 1.0, 5.0), ("gemini-3.5-flash-lite", 0.15, 1.25), ("gemini-3.8-flash", 0.375, 1.875)):
+					tin = tokens_est(model, chars) * cfg.summary_runs
+					tout = output_est(model, OUTPUT_TOKENS_EST) * cfg.summary_runs * n_pairs
+					print(f"{n_pairs} pairs × {cfg.summary_runs} runs on {model}: ~{tin / 1e6:.1f}M input + ~{tout / 1e6:.2f}M output tokens"
+						f" ≈ ${tin / 1e6 * pin + tout / 1e6 * pout:.2f}")
 				print("(search-word sentences are an upper bound on opinions; the classifier keeps roughly a third)")
 		elif args.stage == "summarize":
 			conn = connect_postgres()

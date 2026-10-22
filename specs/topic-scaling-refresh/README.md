@@ -105,8 +105,8 @@ Output: `state/select.json` listing `{person_id, topic, n_opinions, opinion_hash
 ### 4.4 Summarize: Gemini Batch under the shared cap
 
 - Prompt: the existing `SummaryPrompt` (anonymised, `SUMMARY_RUNS = 3` runs per pair, same as production and the paper's A3). Topic name in the prompt is `topic_name`.
-- Model: `gemini-3.5-flash-lite` (the summariser the paper diagnoses; cheapest). Open question Q3 if the user wants 3.8 Flash.
-- Transport: `speech_quality.gemini_batch.GeminiBatch`, moved to a shared `data/llm/gemini_batch.py` (the quality job keeps working through a re-export).
+- Model: `claude-sonnet-5-5` since 2026-10-22 (`TOPIC_SCALING_SUMMARY_MODEL`), with `gemini-3.5-flash-lite` (the summariser the paper diagnoses; cheapest) as the fallback (`TOPIC_SCALING_SUMMARY_FALLBACK_MODEL`) when Claude can't take a batch. The fallback model is also what the axis and agenda helpers call, as they still talk to Gemini directly.
+- Transport: `speech_quality.batch_client` (Claude Message Batches or Gemini Batch behind one interface; `submit_with_fallback`). Temperature 0.7 applies to Gemini only; Claude 5.5 samples at its default and the per-run shuffle keeps the runs apart. `summary.json` records the model(s) behind its runs.
 - Ledger: the same `label_batch` / `label_price` tables with `kind = 'summary'` added to the `CHECK` constraint, and a new `summary_result(person_id, topic, opinion_hash, batch_id, model, prompt_version, run_idx, summary, tokens…)`. `month_spend()` already sums every kind, so the cap is shared with no further change. `SPEECH_LABEL_MONTHLY_CAP_USD` stays the single cap.
 - **Priority within the cap (proposal, Q1):** new-meeting labels first, then this month's summary changes, then the label backlog. The summary step prices its batch with the same character estimate the label job uses and submits only if `month_spend + estimate <= cap`; otherwise the changed pairs wait and the Slack line says so.
 - Output: `s3_mirror/.topic-scaling/summaries/{person_id}/{topic}/summary.json` with the production schema (`person_id, topic_en, topic_jp, opinion_count, summaries[]`) plus `opinion_hash, window, model, prompt_version, generated_at`, and `opinions.json` for provenance. Batches finish within 24 h, so the monthly run is two launchd firings: submit on day 2, collect and continue on day 3 (§4.8), the same collect-then-submit shape as the label job.
@@ -297,7 +297,7 @@ State in `s3_mirror/.topic-scaling/` (gitignored): `lock`, `last_run.json`, `sel
 
 ## 6. Credentials and cost
 
-- Gemini key: `GEMINI_API_KEY` in `data/.env` (exists). Shared `$100/month` cap via the ledger. Google Cloud billing budget at $120 is the backstop.
+- Keys: `ANTHROPIC_API_KEY` (summaries, default) and `GEMINI_API_KEY` (fallback, axes, agenda suggestions) in `data/.env` (both exist). Per-provider monthly caps shared with the label job via the ledger: Claude `SPEECH_LABEL_CLAUDE_MONTHLY_CAP_USD` (100), Gemini `SPEECH_LABEL_MONTHLY_CAP_USD` (100). Google Cloud billing budget at $120 is the backstop for Gemini.
 - AWS: `kokkai-speech-update` profile; its policy already covers `kokkai-doc/*`.
 - Google Custom Search: `SEARCH_ENGINE_ID` exists; the CSE JSON API's free tier is 100 queries/day, far above the monthly need.
 - Local compute: classifier + sarashina + UMAP on the M6 (24 GB). First run: classifier over roughly 1–2 M segments, a few hours under `caffeinate`; monthly runs minutes.

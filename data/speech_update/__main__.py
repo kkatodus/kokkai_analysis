@@ -223,8 +223,8 @@ def review_pending() -> int:
 
 def run_label(cfg: Config, state: State, issue_ids: List[str]):
 	"""Collect finished label batches and submit new ones. None if Postgres or the key is missing."""
-	if not os.environ.get("GEMINI_API_KEY"):
-		log.warning("GEMINI_API_KEY not set; skipping the label stage")
+	if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("GEMINI_API_KEY")):
+		log.warning("neither ANTHROPIC_API_KEY nor GEMINI_API_KEY is set; skipping the label stage")
 		return None
 	from speech_quality.label_job import run
 	conn = connect_postgres()

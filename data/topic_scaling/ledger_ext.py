@@ -72,6 +72,14 @@ def results_for(cur, person_id: int, topic: str, opinion_hash: str, prompt_versi
 	return {int(i): s for i, s in cur.fetchall()}
 
 
+def models_for(cur, person_id: int, topic: str, opinion_hash: str, prompt_version: str) -> List[str]:
+	"""Distinct models behind the stored runs (more than one after a provider fallback)."""
+	cur.execute("""SELECT DISTINCT model FROM summary_result
+		WHERE person_id = %s AND topic = %s AND opinion_hash = %s AND prompt_version = %s ORDER BY model""",
+		(person_id, topic, opinion_hash, prompt_version))
+	return [r[0] for r in cur.fetchall()]
+
+
 def store_result(cur, batch_id: int, model: str, prompt_version: str, person_id: int, topic: str, run_idx: int,
 		opinion_hash: str, summary: str, tokens: tuple) -> None:
 	cur.execute("""INSERT INTO summary_result (person_id, topic, run_idx, opinion_hash, batch_id, model, prompt_version,

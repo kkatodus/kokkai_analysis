@@ -76,18 +76,27 @@ CREATE INDEX IF NOT EXISTS label_result_issue ON label_result (issue_id);
 CREATE INDEX IF NOT EXISTS label_result_questioner ON label_result (questioner_person_id);
 CREATE TABLE IF NOT EXISTS label_alert (
 	month date NOT NULL,
+	provider text NOT NULL DEFAULT 'gemini',
 	threshold int NOT NULL,
 	sent_at timestamptz NOT NULL DEFAULT now(),
-	PRIMARY KEY (month, threshold)
+	PRIMARY KEY (month, provider, threshold)
 );
 """
 
-# Batch prices per 1M tokens (ai.google.dev pricing, checked 2026-10-17; spec §4.4)
+# Batch prices per 1M tokens: Gemini from ai.google.dev (checked 2026-10-17; spec §4.4), Claude at
+# half the Messages API list price (platform.claude.com, checked 2026-10-22; Haiku's is for prompts under 100K).
 PRICES = [
 	("gemini-3.8-flash", "2026-01-01", 0.375, 1.875),
 	("gemini-3.8-flash", "2027-01-01", 0.75, 3.75),
 	("gemini-3.5-flash-lite", "2026-01-01", 0.15, 1.25),
+	("claude-opus-5-5", "2026-01-01", 2.00, 10.00),
+	("claude-sonnet-5-5", "2026-01-01", 1.00, 5.00),
+	("claude-haiku-5-5", "2026-01-01", 0.05, 0.25),
 ]
+# Prompt-cache multipliers on the input price: reads 0.1× (0.05× on Opus 5.5), writes 1.25× (5-minute TTL).
+CACHE_READ_MULT = {"claude-opus-5-5": 0.05}
+CACHE_READ_DEFAULT = 0.1
+CACHE_WRITE_MULT = 1.25
 
 
 def ensure(cur) -> None:
@@ -95,6 +104,16 @@ def ensure(cur) -> None:
 	cur.execute(DDL)
 	cur.executemany(
 		"INSERT INTO label_price VALUES (%s, %s, %s, %s) ON CONFLICT DO NOTHING", PRICES)
+	# 2026-10-22: alerts became per provider (Claude credits and Gemini money have separate caps)
+	cur.execute("SELECT 1 FROM information_schema.columns WHERE table_name = 'label_alert' AND column_name = 'provider'")
+	if not cur.fetchone():
+		cur.execute("ALTER TABLE label_alert ADD COLUMN provider text NOT NULL DEFAULT 'gemini'")
+		cur.execute("ALTER TABLE label_alert DROP CONSTRAINT label_alert_pkey")
+		cur.execute("ALTER TABLE label_alert ADD PRIMARY KEY (month, provider, threshold)")
+
+
+def provider_of(model: str) -> str:
+	return "claude" if model.startswith("claude-") else "gemini"
 
 
 def price(cur, model: str, day: date) -> Tuple[float, float]:
@@ -109,25 +128,34 @@ def price(cur, model: str, day: date) -> Tuple[float, float]:
 	return float(row[0]), float(row[1])
 
 
-def cost(cur, model: str, day: date, input_tokens: float, output_tokens: float) -> float:
+def cost(cur, model: str, day: date, input_tokens: float, output_tokens: float, cache_read: float = 0,
+		cache_write: float = 0) -> float:
+	"""`input_tokens` is everything billed as input; cached reads/writes within it are repriced."""
 	pin, pout = price(cur, model, day)
-	return (input_tokens * pin + output_tokens * pout) / 1e6
+	plain = input_tokens - cache_read - cache_write
+	read_mult = CACHE_READ_MULT.get(model, CACHE_READ_DEFAULT)
+	return (plain * pin + cache_read * pin * read_mult + cache_write * pin * CACHE_WRITE_MULT + output_tokens * pout) / 1e6
 
 
 def month_start(today: Optional[date] = None) -> date:
 	return (today or date.today()).replace(day=1)
 
 
-def month_spend(cur, today: Optional[date] = None) -> float:
-	"""Actual cost collected this month + estimates of batches still in flight."""
+def month_spend(cur, today: Optional[date] = None, provider: Optional[str] = None) -> float:
+	"""Actual cost collected this month + estimates of batches still in flight, for one provider or all."""
 	start = month_start(today)
+	like = f"{provider}-%" if provider else "%"
 	cur.execute(
 		"""SELECT coalesce(sum(cost_usd) FILTER (WHERE status = 'succeeded' AND finished_at >= %s), 0)
 		        + coalesce(sum(cost_est) FILTER (WHERE status = 'submitted'), 0)
-		FROM label_batch""",
-		(start,),
+		FROM label_batch WHERE model LIKE %s""",
+		(start, like),
 	)
 	return float(cur.fetchone()[0])
+
+
+def spend_by_provider(cur, today: Optional[date] = None) -> Dict[str, float]:
+	return {p: month_spend(cur, today, p) for p in ("claude", "gemini")}
 
 
 def in_flight(cur, kind: Optional[str] = None) -> int:
@@ -146,13 +174,24 @@ def done_and_pending(cur, prompt_version: str) -> Tuple[Dict[str, str], Set[str]
 	return done, {r[0] for r in cur.fetchall()}
 
 
-def alerts_sent(cur, today: Optional[date] = None) -> Set[int]:
-	cur.execute("SELECT threshold FROM label_alert WHERE month = %s", (month_start(today),))
+def alerts_sent(cur, provider: str, today: Optional[date] = None) -> Set[int]:
+	cur.execute("SELECT threshold FROM label_alert WHERE month = %s AND provider = %s", (month_start(today), provider))
 	return {r[0] for r in cur.fetchall()}
 
 
-def mark_alert(cur, threshold: int, today: Optional[date] = None) -> None:
-	cur.execute("INSERT INTO label_alert (month, threshold) VALUES (%s, %s) ON CONFLICT DO NOTHING", (month_start(today), threshold))
+def mark_alert(cur, provider: str, threshold: int, today: Optional[date] = None) -> None:
+	cur.execute("INSERT INTO label_alert (month, provider, threshold) VALUES (%s, %s, %s) ON CONFLICT DO NOTHING",
+		(month_start(today), provider, threshold))
+
+
+def spend_line(spend: Dict[str, float], caps: Dict[str, float], today: Optional[date] = None) -> str:
+	"""'October: Claude $12.00 of $1000 (1%) · Gemini $29.08 of $100 (29%)'."""
+	parts = []
+	for p in ("claude", "gemini"):
+		cap = caps.get(p, 0)
+		pct = 100 * spend.get(p, 0) / cap if cap else 0
+		parts.append(f"{p.capitalize()} ${spend.get(p, 0):.2f} of ${cap:.0f} ({pct:.0f}%)")
+	return f"{(today or date.today()):%B}: " + " · ".join(parts)
 
 
 def person_ids(cur, speech_ids: Iterable[str]) -> Dict[str, int]:

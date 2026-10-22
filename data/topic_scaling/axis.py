@@ -60,7 +60,7 @@ def generate_axes(cfg: Config, state: State, topic: Topic, model: Optional[str] 
 	instruction = (PROMPTS / "extract_axis.txt").read_text(encoding="utf-8").replace("TOPIC", topic.name_jp)
 	body = "\n\n".join(summaries)
 	prompt = f"{instruction}\n{body}\n{'-' * 56}{JSON_SUFFIX}"
-	raw = gemini(model or cfg.summary_model, prompt, AXIS_SYSTEM, json_mode=True, temperature=0.3)
+	raw = gemini(model or cfg.summary_fallback_model, prompt, AXIS_SYSTEM, json_mode=True, temperature=0.3)
 	entries = json.loads(raw)
 	if isinstance(entries, dict):
 		entries = entries.get("axes") or entries.get("topics") or []
@@ -81,7 +81,7 @@ def generate_examples(cfg: Config, topic: Topic, entry: dict, n: int = 10, model
 	result = {"topic": entry["topic"]}
 	for side in ("pro", "con"):
 		instruction = template.replace("TOPIC", entry["topic"]).replace("STANCE", entry[side])
-		opinions = [gemini(model or cfg.summary_model, instruction, EXAMPLE_SYSTEM) for _ in range(n)]
+		opinions = [gemini(model or cfg.summary_fallback_model, instruction, EXAMPLE_SYSTEM) for _ in range(n)]
 		result[side] = {"opinions": [o.strip() for o in opinions if o.strip()], "instruction": instruction, "stance": entry[side]}
 	return result
 

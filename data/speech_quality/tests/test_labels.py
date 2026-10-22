@@ -88,9 +88,10 @@ class LabelsTest(unittest.TestCase):
 			def fetchone(self):
 				return (1000.0, 1000.0)  # $1000 per 1M tokens: each unit costs about $1
 
-		self.assertEqual(len(take(iter(units), 10, 1e9, Cur(), "m")), 2)
-		self.assertEqual(len(take(iter(units), 1, 1e9, Cur(), "m")), 1)
-		self.assertEqual(take(iter(units), 10, 0.01, Cur(), "m"), [])
+		for model in ("gemini-3.8-flash", "claude-opus-5-5"):
+			self.assertEqual(len(take(iter(units), 10, 1e9, Cur(), model)), 2)
+			self.assertEqual(len(take(iter(units), 1, 1e9, Cur(), model)), 1)
+			self.assertEqual(take(iter(units), 10, 0.01, Cur(), model), [])
 
 
 if __name__ == "__main__":

@@ -124,8 +124,9 @@ def run_agendas(cfg: Config, topics: List[Topic], months: int = 6, max_items: in
 	items = "\n".join(f"{n:4d}  {it}" for it, n in top)
 	existing = "\n".join(f"- {t.name_en} / {t.name_jp}: {'、'.join(t.search_words[:8])}" for t in topics)
 	prompt = PROMPT.format(months=months, existing=existing, n=max_candidates, items=items)
-	cands = gemini_json(model or cfg.summary_model, prompt)
-	lines = [f"New topic candidates from {len(counts)} agenda items in {meetings} meetings since {since} (Gemini, {model or cfg.summary_model}):"]
+	model = model or cfg.summary_fallback_model
+	cands = gemini_json(model, prompt)
+	lines = [f"New topic candidates from {len(counts)} agenda items in {meetings} meetings since {since} (Gemini, {model}):"]
 	lines += render(cands[:max_candidates]) or ["  (none)"]
 	lines.append("  Paste an entry into data/resource/experiment_config.json with a window, then run `python -m topic_scaling onboard --topic <TopicNameEn>` (and `--axes` once it has summaries)")
 	return lines, cands

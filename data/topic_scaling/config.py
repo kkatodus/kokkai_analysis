@@ -34,15 +34,34 @@ class Config:
 	aws_profile: str
 	embed_model: str
 	summary_model: str
+	summary_fallback_model: str   # used when summary_model's provider can't take a batch; also the Gemini
+	                              # model for the axis / agenda helpers, which call Gemini directly
 	summary_runs: int
 	summary_prompt_version: str
-	cap: float                 # shared monthly cap (USD) with the quality labels
+	cap: float                 # Gemini monthly cap (USD), shared with the quality labels
+	claude_cap: float          # Claude monthly cap (USD, prepaid credits), shared with the quality labels
 	reserve: float             # kept free for the nightly label job
-	batch_size: int            # requests per Gemini batch
+	batch_size: int            # requests per batch
 	max_batches: int           # batches submitted per run
 	min_opinions: int          # default gate, overridable per topic
 	umap_neighbors: int
 	seed: int
+
+	@property
+	def caps(self) -> dict:
+		return {"claude": self.claude_cap, "gemini": self.cap}
+
+	def cap_for(self, model: str) -> float:
+		return self.caps["claude" if model.startswith("claude-") else "gemini"]
+
+	def active_summary_model(self, spend: dict) -> tuple:
+		"""(model to submit to, fallback for it, note): the summary model while its provider has room for
+		at least the reserve; otherwise the fallback model on its own cap, with no further fallback."""
+		p = "claude" if self.summary_model.startswith("claude-") else "gemini"
+		if self.summary_fallback_model and self.cap_for(self.summary_model) - spend.get(p, 0) < self.reserve:
+			return self.summary_fallback_model, None, (f"{self.summary_model} cap reached (${spend.get(p, 0):.2f} of "
+				f"${self.cap_for(self.summary_model):.0f}); using {self.summary_fallback_model}")
+		return self.summary_model, self.summary_fallback_model, None
 
 	@property
 	def persons_dir(self) -> Path:
@@ -78,13 +97,15 @@ def load_config() -> Config:
 		s3_prefix=env("SPEECH_UPDATE_S3_PREFIX", "kokkai-doc"),
 		aws_profile=env("SPEECH_UPDATE_AWS_PROFILE", "kokkai-speech-update"),
 		embed_model=env("TOPIC_SCALING_EMBED_MODEL", "sbintuitions/sarashina-embedding-v2-1b"),
-		summary_model=env("TOPIC_SCALING_SUMMARY_MODEL", "gemini-3.5-flash-lite"),
+		summary_model=env("TOPIC_SCALING_SUMMARY_MODEL", "claude-sonnet-5-5"),
+		summary_fallback_model=env("TOPIC_SCALING_SUMMARY_FALLBACK_MODEL", "gemini-3.5-flash-lite"),
 		summary_runs=int(env("TOPIC_SCALING_SUMMARY_RUNS", "3")),
 		summary_prompt_version=env("TOPIC_SCALING_SUMMARY_PROMPT_VERSION", "s1"),
 		cap=float(env("SPEECH_LABEL_MONTHLY_CAP_USD", "100")),
+		claude_cap=float(env("SPEECH_LABEL_CLAUDE_MONTHLY_CAP_USD", "100")),
 		reserve=float(env("TOPIC_SCALING_RESERVE_USD", env("SPEECH_LABEL_RESERVE_USD", "5"))),
 		batch_size=int(env("TOPIC_SCALING_BATCH_SIZE", "600")),
-		max_batches=int(env("TOPIC_SCALING_MAX_BATCHES", "20")),
+		max_batches=int(env("TOPIC_SCALING_MAX_BATCHES", "50")),
 		min_opinions=int(env("TOPIC_SCALING_MIN_OPINIONS", "3")),
 		umap_neighbors=int(env("TOPIC_SCALING_UMAP_NEIGHBORS", "30")),
 		seed=int(env("TOPIC_SCALING_SEED", "42")),
