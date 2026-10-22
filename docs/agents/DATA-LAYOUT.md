@@ -22,6 +22,7 @@ Raw and intermediate pipeline outputs stay in `data/data/`. The FastAPI backend 
 | `data_all_speeches/` (per issue) | `issues/{issueID}/` | `routers/speeches.py` |
 | `relevance_data/aggregate_processed.jsonl` | `relevance_and_productivity/` | `routers/speeches.py` |
 | (derived from repr/geo pipelines) | `parliamentMembers/`, `politicians/`, `geo/`, `ideology/` | `routers/parliamentMember.py`, etc. |
+| (fetched by `data/person_images/`) | `person_images/{person_id}.jpg` + `person_images/index.json` (source, licence, attribution) | none yet; frontend can read the index |
 | `s3_mirror/.topic-scaling/` (summaries, embeddings, opinion cache) | `ideology/ideology.json.gz` + `ideology/history/ideology-YYYY-MM-DD.json.gz` | `routers/ideology.py` (written by `data/topic_scaling`) |
 
 When adding a new dataset the frontend should consume, expect a pipeline step under `data/data/` **and** an upload/sync into `s3_mirror/kokkai-doc/`.

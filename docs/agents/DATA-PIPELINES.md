@@ -66,6 +66,10 @@ Replaces `collect_repr_list.py` (Selenium) for keeping `parliamentMembers/{shugi
 - Schedule: `./scripts/install-member-update-schedule.sh install|status|run-now` (1st of the month, 05:00) runs `./scripts/update-members.sh` (retry once, Slack summary every run).
 - Tests: `cd data && ../.venv-speech-update/bin/python -m unittest discover -s member_update/tests -t .`
 
+### Politician portraits — `person_images/`
+
+- Run from `data/`: `../.venv-speech-update/bin/python -m person_images run [--limit N] [--refresh] [--no-upload] [--only-current]` / `status`. One portrait per Postgres `person`: current members get the House profile photo (URL derived from the `link` in the latest `parliamentMembers` snapshot), everyone else a Wikimedia Commons image found through Wikidata (kanji-name search, accepted only for humans with a Diet seat in P39 or described as 政治家), downloaded as a 512 px thumbnail with licence and attribution from `extmetadata`. Output `s3_mirror/kokkai-doc/person_images/{person_id}.jpg` (JPEG, longest side ≤ 512) plus `index.json` (source, source_url, licence, attribution, credit, size; `status: none` when nothing was found). Resumable: persons in `index.json` are skipped unless `--refresh`. Polite fetcher: 1 s between House requests, 0.3 s on Wikimedia, contact UA. Tests: `python -m unittest person_images.tests.test_person_images`.
+
 ### Monthly topic scaling refresh — `topic_scaling/`
 
 Keeps `ideology/ideology.json.gz` (the scatter plot) current (spec: `specs/topic-scaling-refresh/`). Own venv `.venv-topic-scaling` (Homebrew python3.12 + torch; `data/requirements-topic-scaling.txt`), same S3 profile as `speech_update`.
