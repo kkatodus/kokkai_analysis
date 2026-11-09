@@ -4,7 +4,8 @@
 
 | Variable | Required for |
 |---|---|
-| `GEMINI_API_KEY` | Most current Python pipelines (`DeepResearchGemini`) |
+| `ANTHROPIC_API_KEY` | Nightly exchange labels and monthly stance summaries (`speech_quality/batch_client.py`, Claude Message Batches); `speech_quality.evaluate` |
+| `GEMINI_API_KEY` | Most current Python pipelines (`DeepResearchGemini`); fallback provider for the label and summary batches |
 | `OPENAI_API_KEY` | Legacy only (`quantify_politician_stance_to_topics.py`) |
 | `PSQL_DATABASE_PASSWORD` | Postgres via `dbio/` |
 | `API_KEY` | FastAPI backend (local + deployed) |

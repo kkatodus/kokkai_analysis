@@ -33,11 +33,13 @@ The user ruled out a fine-tuned BERT classifier: this is too nuanced. An LLM jud
 4. **Report spend in Slack**: nightly, at thresholds, and monthly.
 5. Rebuild the per-politician totals from the corrected speech → politician links, separately for asking and answering.
 
-Not in scope now: meetings before 2000 (same mechanism later), a review UI for labels.
+Not in scope now: meetings before 2000 (same mechanism later), a review UI for labels. Plenary sessions (本会議, mostly 代表質問 read from a script) are out of scope (user, 2026-10-18): only committee exchanges are labelled.
 
 ## 3. What the labels mean (decided with the user, 2026-10-17)
 
 An exchange **contributes** if it serves one of the Diet's functions. It is judged on whether it did that well, and failures are charged to whoever caused them.
+
+**Benefit of the doubt (user, 2026-10-18).** A negative label is a public reputational claim, so a mislabel against someone costs more than a missed problem. Issues and `limited` / `none` are given only when the problem is clear; when unsure, label in the person's favour. This applies to questioners and answerers alike.
 
 ### 3.1 `function`: what the exchange is for
 
@@ -56,19 +58,21 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 
 | Issue | Meaning | Charged to |
 |---|---|---|
-| `private_scandal` | Private life unrelated to public office: personal conduct, family, gaffes outside the job. Scandals involving public money or official power are **not** this; they're `oversight`. | questioner |
+| `private_scandal` | Private life unrelated to public office: personal conduct, family, gaffes outside the job. Scandals involving public money or official power are **not** this; they're `oversight`. A public official's private habits used to insinuate wrongdoing **are** this (user, 2026-10-18). Possible blackmail or other leverage over a senior official is **not**: it's a security/oversight matter. | questioner |
 | `redundant` | Repeats a question already answered, in this meeting or earlier in the session, with no new angle or evidence. A legitimate subject can still be redundant: this is how "fixation" is caught. | questioner |
-| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question | **answerer** |
+| `evasive` | Non-answer: 「お答えは差し控える」 without a real reason, reading a stock answer, answering a different question. **Not** evasive (user, 2026-10-18): an answer that turns on genuine legal nuance ("it depends on the circumstances"); declining because the matter belongs to another ministry. Privacy or "individual case" refusals count only when the excuse doesn't fit (user, 2026-10-18): shielding a private person (a detainee, a citizen's medical details) is legitimate; using it to avoid questions about the government's own conduct is evasive. | **answerer** |
 | `procedural_dispute` | Fighting over time, demanding a word be withdrawn, heckling | whoever starts it (either, or both) |
 | `grandstanding` | A speech with no real question; party advertising | questioner |
 | `softball` | A question that only invites a prepared, favourable answer: praise plus "your thoughts", "please explain the merits", inviting attacks on another party, mostly thanks | questioner |
 | `personal_attack` | Character or ability instead of policy | whoever does it |
 
+Each issue has an `extent`: `most` (more than half of the exchange) or `part` (an opening line, a closing question, a digression). Only `most` counts against the productive flag (§3.5, user 2026-10-18); `part` issues are kept for profiles. When unsure, `part`.
+
 `softball` is judged on the exchange, **not the party**: a ruling-party member asking a hard question of their own government isn't one, and a question that gets a real commitment (「来年度も確保されるのか」→「確保します」) isn't one either.
 
 ### 3.3 The other fields
 
-- `contribution`: `substantive` / `limited` / `none` for the exchange as a whole.
+- `contribution`: `substantive` / `limited` / `none` for the exchange as a whole. A concrete proposal on the record is a contribution even when the answer is stock, so it is `substantive`; the stock answer is the answerer's shortfall (`evasive` if it clearly dodges) (user, 2026-10-18). `limited` is for questioning that stays general or shallow.
 - `responsible`: `questioner` / `answerer` / `both` / `neither`. Who caused the shortfall, from the issues above.
 - `outcomes`: any of `new_information` (facts or figures not previously public), `commitment` (「検討する」 or firmer), `proposal` (a concrete policy proposal on the record).
 - `topic`: the policy area (the site's topic list plus `other`). This replaces relevance. Being off the meeting's agenda is no longer a fault in itself.
@@ -83,11 +87,13 @@ An exchange **contributes** if it serves one of the Diet's functions. It is judg
 ### 3.5 Compatibility with the current site
 
 Until the frontend uses the new fields, the old ones are derived:
-- `is_productive` = `contribution` ≠ `none` and no questioner-side issue
+- `is_productive` = `contribution` ≠ `none` and no questioner-side issue with `extent` = `most`
 - `is_relevant` = `function` ≠ `none`
 - `quality_reason` = `reason`
 
 The new fields go alongside them on the same speech line (`quality: {function, contribution, issues, responsible, outcomes, topic}`), so nothing breaks.
+
+**Superseded 2026-11-09:** the user decided compatibility is not needed; the site was rebuilt around the new fields ([speech-quality-ui](../speech-quality-ui/README.md)) and the derived fields are no longer written.
 
 ### 3.6 Fairness check
 
@@ -97,19 +103,34 @@ A public "productivity" score has to hold up for every party. Scandal pursuit is
 
 ### 4.1 Phase 1: evaluation (model and prompt)
 
-- **Gold set:** the user labels ~150 exchanges with the §3 scheme on a small local page that shows the exchange, its agenda and the earlier exchanges in the meeting. Stratified across eras (2000s / 2010s / 2020s), houses, committee vs plenary, ruling vs opposition questioners, oversampling likely failures (old "not productive" labels, 予算委員会 scandal days).
+- **Gold set:** the user labels ~150 exchanges with the §3 scheme on a small local page that shows the exchange, its agenda and the earlier exchanges in the meeting. Stratified across eras (2000s / 2010s / 2020s), houses, 予算委員会 vs other committees, ruling vs opposition questioners, oversampling likely failures (old "not productive" labels, 予算委員会 scandal days).
 - **Candidates:** Gemini 3.8 Flash, 3.5 Flash-Lite, and a local Qwen3 14B (MLX) as a reference; the same prompt and context.
 - **Score:** per field (`contribution`, each issue, `responsible`, `function`), with recall on the failure classes, **broken down by the questioner's party**; cost per 1,000 exchanges.
 - **Decide (user):** the model and the prompt. The 96k old labels are replaced, since the definitions changed; the old values stay in the ledger.
 - Cost: a few dollars.
+- **Result (2026-10-18):** the gold set was labelled by Claude Opus and spot-checked by the user (`data/speech_quality/gold/`). Run with `python -m speech_quality.evaluate run|score`; per-exchange results in `s3_mirror/.speech-quality/eval/<prompt>/`. Also tried: Claude Sonnet 5.5 and Haiku 5.5, Gemini with low thinking. Productive-flag agreement and error rate by questioner:
+
+  | Model, prompt | Agreement | Errors, ruling / opposition | $ per 1,000 (batch) |
+  |---|---|---|---|
+  | **Gemini 3.8 Flash, v3, minimal thinking** | **0.93** | **0.15 / 0.04** | **2.64** |
+  | Gemini 3.8 Flash, v3, low thinking | 0.92 | 0.20 / 0.04 | 2.65 |
+  | Gemini 3.8 Flash, v2 | 0.90 | 0.24 / 0.05 | 2.60 |
+  | Claude Sonnet 5.5, v2 | 0.93 | 0.17 / 0.04 | 11.67 |
+  | Claude Haiku 5.5, v2 | 0.89 | 0.27 / 0.06 | 0.64 |
+  | Gemini 3.5 Flash-Lite, v2 | 0.89 | 0.27 / 0.06 | 1.09 |
+  | Qwen3 14B (local), v1 | 0.49 (all issues counted) | — | 30 s per exchange |
+
+  **Decided (user): Gemini 3.8 Flash**; Sonnet was too expensive. Prompt v3 fixes Flash's main blind spot (a ruling-party member's own plan plus "please answer positively" read as a proposal). Its remaining misses are mostly lenient (ruling-party softballs), in line with the benefit-of-the-doubt rule. v3 was tuned on this gold set, so it needs a check on fresh exchanges before the backfill.
 
 ### 4.2 Unit of labelling: exchanges
 
 New meetings have no exchange boundaries, so the job draws them: a new exchange starts when the chair gives the floor to a member to ask questions (the chair's turn naming the next questioner, or the questioner's first turn after it) and runs until the next one. Plenary: each 代表質問 with its answers is one exchange. Procedural turns outside any exchange are not labelled. Tested against the 6,152 meetings that already have labels: boundaries should match on ≥95% of exchanges before use.
 
+*Result (2026-10-19):* the old labels turned out to be per question turn, not per questioner, so their starts can't match (26.8% do). The meaningful check passes: 98.8% of the 91,176 old committee labels fall inside a new exchange. Committee exchanges with an answer since 2000: ~124,600 (1.09B characters), far fewer than the 480k in §4.4, which counted turns. Measured cost with prompt v3 is ~$2.75 per 1,000, so the backlog is ~$340 at the launch price.
+
 ### 4.3 Context for each exchange
 
-Meeting name, date, house, agenda items (from the record's opening section), **one-line summaries of the earlier exchanges in the same meeting** (for `redundant`), the full exchange (speaker, role, text), and the §3 definitions. Output is JSON matching §3, with thinking off or minimal. Very long exchanges are truncated in the middle with a marker.
+Meeting name, date, house, agenda items (from the record's opening section), **one-line summaries of the earlier exchanges in the same meeting** (for `redundant`), the full exchange (speaker, role, text), and the §3 definitions. Output is JSON matching §3, with thinking off or minimal. *(Batch mode rejects `thinkingLevel: minimal`, as of 2026-10-19, so batches use `low`; v3 scored 0.92 at low vs 0.93 at minimal, and thinking adds almost no output tokens.)* Very long exchanges are truncated in the middle with a marker.
 
 **Second pass (later):** redundancy across a whole session. Find earlier questions to the same minister on the same subject in the session (embeddings), and show them to the model for exchanges where it matters.
 
@@ -147,6 +168,7 @@ label_price   model, valid_from, input_per_m, output_per_m   -- batch prices, da
 - **Before submitting**, the job prices the batch (`countTokens`, free, or a character estimate) and submits only if spend + estimate ≤ cap. Otherwise the backlog waits for next month; new meetings are still labelled unless that would pass the cap.
 - `SPEECH_LABEL_MONTHLY_CAP_USD=100`. Prices are dated rows, so the 2027 change needs no code change.
 - **Backstop:** a Google Cloud Billing budget on the Gemini project at $120/month with email alerts (set up once by the user). It doesn't stop spending; it catches a ledger bug.
+- **Providers (2026-10-22):** the default model is `claude-sonnet-5-5` (Claude Message Batches, `ANTHROPIC_API_KEY`; 0.93 agreement with the Opus gold set, user's choice over Opus and Haiku on 2026-10-22), with `gemini-3.8-flash` as the fallback when Claude can't take a batch (missing key, auth or billing error, quota, outage; the Slack line says so). `SPEECH_LABEL_MODEL` / `SPEECH_LABEL_FALLBACK_MODEL` override both. `speech_quality/batch_client.py` holds both providers behind one interface; a batch is collected from the provider its `label_batch.model` names. Each provider has its own monthly cap, shared by the label and summary jobs: `SPEECH_LABEL_CLAUDE_MONTHLY_CAP_USD` (default 100; set it to the prepaid balance to use up) and `SPEECH_LABEL_MONTHLY_CAP_USD` (100, Gemini money). The user's rule (2026-10-22): use the Claude credits up first, then Gemini. So Claude is throttled only by its own cap; once that cap is reached, or when Claude can't take a batch, batches go to Gemini within Gemini's cap. On 2026-10-22 the whole summary backlog ($231.71 actual, 24,663 Sonnet requests) was submitted against an assumed $1,000 cap and overdrew the user's $133 balance, hence the low default and the rule: ask for the balance before setting this cap. Up to 10 backlog batches of 1,000 are in flight a night. Claude's cache reads and writes are repriced in `ledger.cost`; the 50/80/100% alerts are per provider (`label_alert.provider`). Claude batch prices are half of list: Opus 5.5 $2 / $10, Sonnet 5.5 $1 / $5, Haiku 5.5 $0.05 / $0.25 per 1M tokens, and Claude counts about 1.7× the tokens Gemini does on the same Japanese prompt, so a Sonnet exchange costs roughly 4–5× a Gemini one (about $13 per 1,000 before caching; Opus about $25–30).
 
 ### 4.6 Slack
 
@@ -165,17 +187,24 @@ For each finished batch: write §3.5's fields onto the exchange's first speech i
 
 ## 5. Checklist
 
-- [ ] Phase 1: gold-set page with the §3 scheme; user labels ~150 exchanges
-- [ ] Phase 1: prompt v1; run the three candidates; report by field and by party; user picks
-- [ ] Exchange segmenter + test against the 6,152 labelled meetings (≥95% boundary match)
-- [ ] Ledger and price tables, cap check, Gemini Batch client (`GEMINI_API_KEY` in `data/.env`)
-- [ ] Writer + per-role aggregate rebuild + upload
-- [ ] Slack lines, thresholds, monthly summary
-- [ ] Nightly `label` stage; backlog newest first
+- [x] Hide the old labels on the site: `SHOW_SPEECH_QUALITY = false` in `frontend/app/lib/config/features.ts` (PR #52, live 2026-10-18). Flip it back with the new labels.
+- [x] Archive the old labels: `s3_mirror/.speech-quality-archive/v1-20261018/` (96,180 labels with reasons, 1,379 per-person Unproductive/Irrelevant files, `aggregate_processed.jsonl`). Stripped `is_relevant` / `is_productive` / `quality_reason` from 6,152 `issues/` files and 6,356 per-person files, uploaded 2026-10-18.
+- [x] Deleted the 1,379 per-person `Unproductive.jsonl` / `Irrelevant.jsonl` and `relevance_and_productivity/aggregate_processed.jsonl` from S3 and the mirror (2026-10-18); archive copied to `s3://kokkai-doc-bucket-dev/archive/speech-quality-v1-20261018/`
+- [x] Phase 1 gold set: 169 exchanges labelled by Claude (`claude-opus-5-5`), not the user, in `data/speech_quality/gold/` (2026-10-17). Comparisons measure agreement with Opus; user to spot-check the 22 listed in its README
+- [ ] Phase 1: gold-set page with the §3 scheme (optional now; for the spot-check and later relabelling)
+- [x] Phase 1: prompts v1–v3; Gemini, Claude and Qwen compared by field and by party; user picked Gemini 3.8 Flash with v3 (2026-10-18, §4.1)
+- [x] Exchange segmenter (`data/speech_quality/segment.py`) + test against the 6,152 labelled meetings (98.8% coverage; see §4.2)
+- [x] Ledger and price tables, cap check, Gemini Batch client: `speech_quality/ledger.py`, `gemini_batch.py`, `label_job.py` (2026-10-19)
+- [x] Claude Message Batches as the default provider, Gemini as fallback: `speech_quality/batch_client.py` (2026-10-22, §4.5)
+- [x] Writer onto `issues/{id}/speeches.jsonl` (`quality` object + the §3.5 fields) + upload (2026-10-19)
+- [x] Per-person files and per-role aggregate from `label_result`: `speech_quality/publish.py` → `speech_quality/aggregate.json` + `persons/{id}.jsonl` (2026-11-09, [speech-quality-ui](../speech-quality-ui/README.md) §2)
+- [x] Slack line in the nightly summary; 50/80/100% alerts
+- [ ] Monthly summary on the 1st; price check
+- [x] Nightly `label` stage in `speech_update all`; backlog newest first (2026-10-19)
 - [ ] User: Cloud Billing budget at $120 with email alerts
 - [ ] Session-wide redundancy pass (4.3)
-- [ ] Frontend: show `function`, issues and per-role totals (separate spec; touches `frontend/`, which deploys)
-- [ ] Docs: DATA-PIPELINES.md, DATA-LAYOUT.md, site methodology note
+- [x] Frontend: show `function`, issues and per-role totals — [speech-quality-ui](../speech-quality-ui/README.md) (2026-11-09)
+- [x] Docs: DATA-PIPELINES.md, DATA-LAYOUT.md, site methodology note (2026-11-09, with the UI rebuild)
 
 ## 6. Open questions
 

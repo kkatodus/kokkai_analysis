@@ -8,6 +8,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Dict, Iterable, List, NamedTuple, Optional, Set
 
+from . import aliases
+
 REASONS = ("kanji_differs", "election_pick", "out_of_term", "not_serving")
 AUTO_NOTE = "auto: outside every elected term and not speaking as a member"
 STATUSES = ("pending", "confirmed", "unlinked", "reassigned")
@@ -209,7 +211,7 @@ def decide(conn, review_id: int, status: str, new_person_id: Optional[int] = Non
 	if (status == "reassigned") != (new_person_id is not None):
 		raise ValueError("reassigned needs a person id (and only reassigned takes one)")
 	with conn.cursor() as cur:
-		cur.execute("SELECT person_id FROM speaker_review WHERE id = %s", (review_id,))
+		cur.execute("SELECT person_id, reason, speaker, speaker_yomi FROM speaker_review WHERE id = %s", (review_id,))
 		row = cur.fetchone()
 		if row is None:
 			raise ValueError(f"no review item {review_id}")
@@ -224,6 +226,9 @@ def decide(conn, review_id: int, status: str, new_person_id: Optional[int] = Non
 			"decided_at = now(), applied_at = NULL WHERE id = %s",
 			(status, new_person_id, note, review_id),
 		)
+		if status == "confirmed" and row[1] == "kanji_differs":
+			# the record's spelling is another name for this person (specs/speaker-review §3.5)
+			aliases.add(cur, row[0], row[2], row[3], "ndl", f"speaker_review #{review_id}")
 	conn.commit()
 
 

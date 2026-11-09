@@ -3,8 +3,8 @@
 In order, first hit wins:
 1. `links.json`: a manual house+name → person_id link (`python -m member_update link`).
 2. Carry-over: the same name and reading in the previous snapshot of the house.
-3. Name: exactly one `person` whose name matches (旧字体 folded, maiden name in
-   [...] ignored); with several, the one whose kana also matches.
+3. Name: exactly one `person` whose name or `person_alias` name matches (旧字体
+   folded, maiden name in [...] ignored); with several, the one whose kana also matches.
 4. Reading: exactly one `person` with the same kana (上野ほたる → 上野蛍).
    Reported separately so a wrong pick is easy to spot.
 Anything else stays `person_id: null` and goes to the review queue.
@@ -14,7 +14,7 @@ from __future__ import annotations
 import re
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from speech_update.variants import normalise_name
 
@@ -57,16 +57,19 @@ class MatchResult:
 
 class MemberMatcher:
 	def __init__(self, persons: Iterable[Tuple[int, str, Optional[str]]], links: Optional[Dict[str, int]] = None):
+		"""`persons`: (person_id, name_kanji, name_kana), each person's own row before its aliases."""
 		self.names: Dict[int, str] = {}
 		self.by_name: Dict[str, List[int]] = defaultdict(list)
 		self.by_kana: Dict[str, List[int]] = defaultdict(list)
-		self.kana: Dict[int, str] = {}
+		self.kana: Dict[int, Set[str]] = defaultdict(set)
 		for pid, kanji, kana in persons:
-			self.names[pid] = kanji
-			self.by_name[name_key(kanji)].append(pid)
+			self.names.setdefault(pid, kanji)
+			if pid not in self.by_name[name_key(kanji)]:
+				self.by_name[name_key(kanji)].append(pid)
 			if kana:
-				self.kana[pid] = normalise_name(kana)
-				self.by_kana[normalise_name(kana)].append(pid)
+				self.kana[pid].add(normalise_name(kana))
+				if pid not in self.by_kana[normalise_name(kana)]:
+					self.by_kana[normalise_name(kana)].append(pid)
 		self.links = links or {}
 
 	def match_house(self, house: str, rows: List[dict], previous: List[dict], result: MatchResult) -> None:
@@ -94,7 +97,7 @@ class MemberMatcher:
 		if len(same_name) == 1:
 			return same_name[0], "name", None
 		if len(same_name) > 1:
-			hits = [p for p in same_name if self.kana.get(p) == kana]
+			hits = [p for p in same_name if kana in self.kana.get(p, ())]
 			if len(hits) == 1:
 				return hits[0], "name", None
 			return None, None, Unresolved(house, row, "ambiguous", sorted(same_name))

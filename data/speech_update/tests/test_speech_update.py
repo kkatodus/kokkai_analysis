@@ -241,10 +241,12 @@ class ResolverTest(unittest.TestCase):
 		self.assertFalse(party_matches("民主党", "自由民主党・無所属の会"))
 		self.assertFalse(party_matches(None, "自由民主党"))
 
-	def _resolver(self, wins):
+	def _resolver(self, wins, names):
 		cur = mock.Mock()
 		cur.fetchall.side_effect = lambda: wins[cur.execute.call_args[0][1][0]]
-		return SpeakerResolver(cur, flag=False)
+		r = SpeakerResolver(cur, flag=False)
+		r.set_names(names)
+		return r
 
 	def test_same_name_disambiguated_by_winning_party_before_meeting(self):
 		# 鬼木誠: 1070 LDP (lower house), 3960 CDP (upper house, from 2022)
@@ -252,40 +254,48 @@ class ResolverTest(unittest.TestCase):
 			1070: [(date(2012, 12, 16), "自由民主党", "当選")],
 			3960: [(date(2022, 7, 10), "立憲民主党", "当選")],
 		}
-		people = [mock.Mock(person_id=1070), mock.Mock(person_id=3960)]
-		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=None), \
-			mock.patch.object(resolver_mod, "get_person_by_column", return_value=people):
-			r = self._resolver(wins)
-			self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主・社民・無所属", "2023-03-01"), resolver_mod.Resolution(3960, "disambiguated"))
-			self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "社民・無所属", "2023-03-01").reason, "ambiguous")
-			self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主党・社民・無所属", "2023-03-01"), resolver_mod.Resolution(3960, "disambiguated"))
-			self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "自由民主党・無所属の会", "2023-03-01"), resolver_mod.Resolution(1070, "disambiguated"))
-			# CDP win is after this meeting date
-			self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主党・社民・無所属", "2020-01-01").reason, "ambiguous")
+		r = self._resolver(wins, [(1070, "鬼木誠", "おにきまこと"), (3960, "鬼木誠", "おにきまこと")])
+		self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主・社民・無所属", "2023-03-01"), resolver_mod.Resolution(3960, "disambiguated"))
+		self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "社民・無所属", "2023-03-01").reason, "ambiguous")
+		self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主党・社民・無所属", "2023-03-01"), resolver_mod.Resolution(3960, "disambiguated"))
+		self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "自由民主党・無所属の会", "2023-03-01"), resolver_mod.Resolution(1070, "disambiguated"))
+		# CDP win is after this meeting date
+		self.assertEqual(r.resolve("鬼木誠", "おにきまこと", "立憲民主党・社民・無所属", "2020-01-01").reason, "ambiguous")
 
 	def test_same_name_disambiguated_by_kana(self):
 		# 大津力: 5278 おおつとむ, 5727 おおつつとむ
-		people = [mock.Mock(person_id=5278), mock.Mock(person_id=5727)]
-		lookup = lambda cur, col, val: people if col == "name_kanji" else [p for p in people if val == "おおつつとむ" and p.person_id == 5727]
-		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=None), \
-			mock.patch.object(resolver_mod, "get_person_by_column", side_effect=lookup):
-			self.assertEqual(self._resolver({}).resolve("大津力", "おおつつとむ", "参政党", "2026-03-01"), resolver_mod.Resolution(5727, "disambiguated"))
+		r = self._resolver({}, [(5278, "大津力", "おおつとむ"), (5727, "大津力", "おおつつとむ")])
+		self.assertEqual(r.resolve("大津力", "おおつつとむ", "参政党", "2026-03-01"), resolver_mod.Resolution(5727, "disambiguated"))
 
 	def test_duplicate_person_rows_stay_unmatched(self):
 		wins = {2603: [(date(2024, 10, 27), "立憲民主党", "当選")], 5724: [(date(2024, 10, 27), "立憲民主党", "当選")]}
-		people = [mock.Mock(person_id=2603), mock.Mock(person_id=5724)]
-		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=None), \
-			mock.patch.object(resolver_mod, "get_person_by_column", return_value=people):
-			self.assertEqual(self._resolver(wins).resolve("寺田学", "てらたまなぶ", "立憲民主党・無所属", "2026-03-01").reason, "ambiguous")
+		r = self._resolver(wins, [(2603, "寺田学", "てらたまなぶ"), (5724, "寺田学", "てらたまなぶ")])
+		self.assertEqual(r.resolve("寺田学", "てらたまなぶ", "立憲民主党・無所属", "2026-03-01").reason, "ambiguous")
+
+	def test_kanji_then_unique_kana(self):
+		r = self._resolver({}, [(1, "福島瑞穂", "ふくしまみずほ"), (2, "上野蛍", "うえのほたる"), (3, "上野蛍", "うえのけい")])
+		self.assertEqual(r.resolve("福島瑞穂 君", None, None, "2026-01-01"), resolver_mod.Resolution(1, "name"))
+		self.assertEqual(r.resolve("福島みずほ", "ふくしまみずほ", None, "2026-01-01"), resolver_mod.Resolution(1, "name"))
+		self.assertEqual(r.resolve("誰か", "だれか", None, "2026-01-01").reason, "not_found")
+
+	def test_aliases_match_like_names(self):
+		# 金子恵美（えみ） #1745 is never written with the suffix; 金子恵美 #1042 is another person
+		names = [(1042, "金子恵美", "かねこめぐみ"), (1745, "金子恵美（えみ）", "かねこえみ"), (1745, "金子恵美", None),
+			(3020, "山本譲司", "やまもとじょうじ"), (3020, "山本ジョージ", "やまもとじょーじ")]
+		r = self._resolver({}, names)
+		self.assertEqual(r.resolve("金子恵美", "かねこえみ", "民主党", "2016-01-01"), resolver_mod.Resolution(1745, "disambiguated"))
+		self.assertEqual(r.resolve("金子恵美", "かねこめぐみ", "自由民主党", "2016-01-01"), resolver_mod.Resolution(1042, "disambiguated"))
+		self.assertEqual(r.resolve("山本ジョージ", "やまもとじょじ", "無所属", "2026-06-03"), resolver_mod.Resolution(3020, "name"))
+		r._terms = {3020: [(date(2026, 2, 8), date(2030, 3, 10))]}
+		self.assertIsNone(r.flag_reason("山本ジョージ", "やまもとじょじ", "無所属", 3020, date(2026, 6, 3), by_election=False))
 
 	def test_procedural_and_cache(self):
-		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=10) as g:
-			r = SpeakerResolver(mock.Mock(), flag=False)
-			self.assertEqual(r.resolve("会議録情報", None, None, "2026-01-01").reason, "procedural")
-			self.assertEqual(r.resolve("", None, None, "2026-01-01").reason, "procedural")
-			r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1969-01-01")
-			r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1970-01-01")
-			self.assertEqual(g.call_count, 1)
+		r = self._resolver({}, [(10, "菅野和太郎", "かんのわたろう")])
+		self.assertEqual(r.resolve("会議録情報", None, None, "2026-01-01").reason, "procedural")
+		self.assertEqual(r.resolve("", None, None, "2026-01-01").reason, "procedural")
+		r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1969-01-01")
+		r.resolve("菅野和太郎", "かんのわたろう", "自由民主党", "1970-01-01")
+		self.assertEqual(r.lookups, 1)
 
 
 class VariantsTest(unittest.TestCase):
@@ -319,7 +329,7 @@ class ConfidenceTest(unittest.TestCase):
 		r = SpeakerResolver(mock.Mock(), decisions=decisions or {})
 		r._people = self.PEOPLE
 		r._terms = self.TERMS
-		with mock.patch.object(resolver_mod, "get_politician_id_by_name", return_value=pid):
+		with mock.patch.object(r, "_lookup", return_value=(pid, [])):
 			return r.resolve(speaker, yomi, group, day)
 
 	def test_service_terms(self):

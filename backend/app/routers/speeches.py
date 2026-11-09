@@ -78,14 +78,25 @@ async def get_first_page_of_all_topics(
 		"first_pages_of_all_topics": first_pages_of_all_topics,
 	}
 
-@router.get("/get_all_relevance_stats", summary="Getting all stats of all representatives about their speech relevance and productivity")
-async def get_all_relevance_stats(
+@router.get("/quality/aggregate", summary="Exchange-label counts for every labelled politician (specs/speech-quality-ui §2.1)")
+async def quality_aggregate(
 	storage: Storage = Depends(get_storage)
 	):
+	return storage.read_json("kokkai-doc/speech_quality/aggregate.json")
 
-	lines = storage.read_jsonl("kokkai-doc/relevance_and_productivity/aggregate_processed.jsonl")
+
+@router.get("/quality/person", summary="One politician's labelled exchanges, newest first (specs/speech-quality-ui §2.2)")
+async def quality_person(
+	person_id: str,
+	storage: Storage = Depends(get_storage)
+	):
+	try:
+		lines = storage.read_jsonl(f"kokkai-doc/speech_quality/persons/{person_id}.jsonl")
+	except Exception as e:
+		print(f"[INFO: quality_person] no exchange file for person {person_id}: {e}")
+		lines = []
 	return {
-		"data": lines,
+		"exchanges": lines,
 	}
 
 @router.get("/get_issue_by_id", summary="Get issue by id")

@@ -1,13 +1,18 @@
 "use client";
 
-import type { IssueSpeechRecord } from "@/app/types";
+import type { IssueSpeechRecord, QualityContribution, SpeechQuality } from "@/app/types";
+import { CONTRIBUTION_STYLE } from "@/app/lib/quality";
 
-export type SegmentKind = "rt_pt" | "rt_pf" | "rf_pf" | "unknown";
+export type SegmentKind = QualityContribution | "unknown";
 
 export type SpeechSegment = {
   startIndex: number; // inclusive
   endIndex: number; // exclusive
   kind: SegmentKind;
+  /** The exchange label, on labelled segments. */
+  quality?: SpeechQuality;
+  /** Index of the speech that carries the label (the exchange's first speech). */
+  starterIndex?: number;
 };
 
 export type SegmentPalette = {
@@ -16,76 +21,60 @@ export type SegmentPalette = {
 };
 
 export const SEGMENT_PALETTES: Record<Exclude<SegmentKind, "unknown">, SegmentPalette> = {
-  // Match colors used in RelevanceProductivityBarList:
-  // emerald = 関連×生産性あり
-  rt_pt: {
-    ringCss: "rgba(16,185,129,0.55)", // emerald-500-ish
-    itemClassName: "border-emerald-400/30 border-l-emerald-400/70 bg-emerald-500/10",
-  },
-  // amber = 関連×生産性なし
-  rt_pf: {
-    ringCss: "rgba(245,158,11,0.55)", // amber-500-ish
-    itemClassName: "border-amber-400/30 border-l-amber-400/70 bg-amber-500/10",
-  },
-  // rose = 非関連×生産性なし
-  rf_pf: {
-    ringCss: "rgba(244,63,94,0.55)", // rose-500-ish
-    itemClassName: "border-rose-400/30 border-l-rose-400/70 bg-rose-500/10",
-  },
+  substantive: { ringCss: CONTRIBUTION_STYLE.substantive.ring, itemClassName: CONTRIBUTION_STYLE.substantive.item },
+  limited: { ringCss: CONTRIBUTION_STYLE.limited.ring, itemClassName: CONTRIBUTION_STYLE.limited.item },
+  none: { ringCss: CONTRIBUTION_STYLE.none.ring, itemClassName: CONTRIBUTION_STYLE.none.item },
 };
 
-function hasLabel(s: IssueSpeechRecord): boolean {
-  // Only treat explicit booleans (encoded as "True"/"False") as segment starters.
-  // Undefined/missing and null should NOT start a new segment.
-  return s.is_productive === "True" || s.is_productive === "False" || s.is_relevant === "True" || s.is_relevant === "False";
-}
-
-function toBool(v: IssueSpeechRecord["is_productive"] | IssueSpeechRecord["is_relevant"]): boolean | null {
-  if (v === "True") return true;
-  if (v === "False") return false;
-  return null;
-}
-
-export function classifySegmentKind(s: IssueSpeechRecord): SegmentKind {
-  const r = toBool(s.is_relevant);
-  const p = toBool(s.is_productive);
-  if (r === true && p === true) return "rt_pt";
-  if (r === true && p === false) return "rt_pf";
-  if (r === false && p === false) return "rf_pf";
-  return "unknown";
+function qualityOf(s: IssueSpeechRecord): SpeechQuality | null {
+  const q = s.quality;
+  if (!q || typeof q !== "object") return null;
+  if (!q.contribution || !Array.isArray(q.speech_ids)) return null;
+  return q;
 }
 
 /**
- * Build continuous segments using sparse flags.
+ * Build segments from the `quality` objects on exchange-starting speeches (specs/speech-quality-ui §2.3).
  *
- * Rule:
- * - Until the first occurrence of labels, keep default (kind=unknown).
- * - After first occurrence, each labeled speech defines the segment kind until the next labeled speech.
+ * Every speech listed in a label's `speech_ids` belongs to that exchange; speeches that no label
+ * covers (opening remarks, meetings before the labelled window, plenary) stay `unknown`.
+ * Segments are the maximal runs of consecutive speeches with the same label.
  */
 export function buildSpeechSegments(speeches: IssueSpeechRecord[]): SpeechSegment[] {
   const n = speeches.length;
   if (!n) return [];
 
-  const labeledIndices: number[] = [];
-  for (let i = 0; i < n; i++) {
-    if (hasLabel(speeches[i])) labeledIndices.push(i);
-  }
+  const indexById = new Map<string, number>();
+  speeches.forEach((s, i) => indexById.set(String(s.speechID), i));
 
-  if (!labeledIndices.length) {
-    return [{ startIndex: 0, endIndex: n, kind: "unknown" }];
-  }
+  // which label (by starter index) owns each speech
+  const owner: Array<number | null> = Array.from({ length: n }, () => null);
+  const labels = new Map<number, SpeechQuality>();
+  speeches.forEach((s, i) => {
+    const q = qualityOf(s);
+    if (!q) return;
+    labels.set(i, q);
+    owner[i] = i;
+    for (const id of q.speech_ids) {
+      const j = indexById.get(String(id));
+      if (j !== undefined && owner[j] === null) owner[j] = i;
+    }
+  });
 
   const segments: SpeechSegment[] = [];
-  const first = labeledIndices[0];
-  if (first > 0) segments.push({ startIndex: 0, endIndex: first, kind: "unknown" });
-
-  for (let k = 0; k < labeledIndices.length; k++) {
-    const start = labeledIndices[k];
-    const end = k + 1 < labeledIndices.length ? labeledIndices[k + 1] : n;
-    const kind = classifySegmentKind(speeches[start]);
-    segments.push({ startIndex: start, endIndex: end, kind });
+  let start = 0;
+  for (let i = 1; i <= n; i++) {
+    if (i === n || owner[i] !== owner[start]) {
+      const o = owner[start];
+      if (o === null) {
+        segments.push({ startIndex: start, endIndex: i, kind: "unknown" });
+      } else {
+        const q = labels.get(o)!;
+        segments.push({ startIndex: start, endIndex: i, kind: q.contribution, quality: q, starterIndex: o });
+      }
+      start = i;
+    }
   }
-
   return segments;
 }
 
@@ -101,4 +90,3 @@ export function buildAccentByIndex(
   }
   return out;
 }
-

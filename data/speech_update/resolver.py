@@ -1,7 +1,7 @@
 """SpeakerResolver: NDL speaker → Postgres person_id (spec §4.5).
 
-1. `get_politician_id_by_name(..., stop_for_input=False)`, unchanged: a single
-   match on cleaned kanji name, else a single match on kana.
+1. A single match on cleaned kanji name, else a single match on kana, over
+   `person` names and their `person_alias` rows (aliases.py).
 2. Same-name disambiguation when several people share the kanji name: if
    exactly one has `speakerYomi` as their kana, that person. Otherwise keep the
    ones who won an election on or before the meeting date for a party that
@@ -24,9 +24,9 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Dict, List, Optional, Tuple
 
-from dbio.representative_db import get_person_by_column, get_politician_id_by_name
 from utils.string_process import clean_repr_name
 
+from .aliases import all_names
 from .review_store import Decision, ReviewKey, load_decisions
 from .variants import has_kana, same_name, same_reading
 
@@ -140,7 +140,9 @@ class SpeakerResolver:
 		self.flag = flag
 		self._decisions = decisions
 		self._base: Dict[Tuple[str, Optional[str], Optional[str]], Tuple[Optional[int], List[int]]] = {}
+		self._by_kanji: Dict[str, List[int]] = {}
 		self._by_kana: Dict[str, List[int]] = {}
+		self._names: Dict[int, List[Tuple[str, Optional[str]]]] = {}
 		self._wins: Dict[int, List[Tuple[date, Optional[str]]]] = {}
 		self._people: Optional[Dict[int, Tuple[str, Optional[str]]]] = None
 		self._terms: Dict[int, List[Term]] = {}
@@ -173,12 +175,13 @@ class SpeakerResolver:
 		return any(start <= day <= end for start, end in self._terms.get(person_id, ()))
 
 	def flag_reason(self, speaker: str, yomi: Optional[str], group: Optional[str], person_id: int, day: date, by_election: bool) -> Optional[str]:
-		name_kanji, name_kana = self.people().get(person_id, ("", None))
+		names = self._names.get(person_id) or [self.people().get(person_id, ("", None))]
 		serving = self.in_term(person_id, day)
 		if not serving and not group:
 			return "not_serving"
-		if not same_name(speaker, name_kanji) and not (
-			(has_kana(speaker) or has_kana(name_kanji)) and same_reading(yomi, name_kana)
+		if not any(
+			same_name(speaker, kanji) or ((has_kana(speaker) or has_kana(kanji)) and same_reading(yomi, kana))
+			for kanji, kana in names
 		):
 			return "kanji_differs"
 		if by_election:
@@ -214,8 +217,7 @@ class SpeakerResolver:
 	def people(self) -> Dict[int, Tuple[str, Optional[str]]]:
 		"""person_id → (name_kanji, name_kana); loads every person, election win and term once."""
 		if self._people is None:
-			self.cur.execute("SELECT person_id, name_kanji, name_kana FROM person")
-			self._people = {int(pid): (kanji, kana) for pid, kanji, kana in self.cur.fetchall()}
+			self.set_names(all_names(self.cur))
 			self.cur.execute(
 				"SELECT person_id, election_date, election_name, district, party, result FROM election_result ORDER BY person_id, election_date"
 			)
@@ -230,13 +232,28 @@ class SpeakerResolver:
 			self._terms = {pid: service_terms(rows) for pid, rows in elections.items()}
 		return self._people
 
+	def set_names(self, rows: List[Tuple[int, str, Optional[str]]]) -> None:
+		"""Index (person_id, name_kanji, name_kana) rows: each person's own row first, then aliases."""
+		self._people = {}
+		self._names, self._by_kanji, self._by_kana = {}, {}, {}
+		for pid, kanji, kana in rows:
+			self._people.setdefault(pid, (kanji, kana))
+			self._names.setdefault(pid, []).append((kanji, kana))
+			for index, key in ((self._by_kanji, kanji), (self._by_kana, kana)):
+				key = clean_repr_name(key or "")
+				if key and pid not in index.setdefault(key, []):
+					index[key].append(pid)
+
 	def _lookup(self, speaker: str, yomi: Optional[str], group: Optional[str]) -> Tuple[Optional[int], List[int]]:
 		self.lookups += 1
-		pid = get_politician_id_by_name(self.cur, speaker, yomi or "", group or "", stop_for_input=False)
-		if pid is not None:
-			return int(pid), []
-		same_name = get_person_by_column(self.cur, "name_kanji", clean_repr_name(speaker))
-		return None, [int(p.person_id) for p in same_name]
+		self.people()
+		same_name = self._by_kanji.get(clean_repr_name(speaker), [])
+		if len(same_name) == 1:
+			return same_name[0], []
+		if same_name:
+			return None, list(same_name)
+		same_kana = self._kana_matches(yomi)
+		return (same_kana[0] if len(same_kana) == 1 else None), []
 
 	def _disambiguate(self, candidates: List[int], group: Optional[str], meeting_date: date) -> Optional[int]:
 		left = [
@@ -246,11 +263,8 @@ class SpeakerResolver:
 		return left[0] if len(left) == 1 else None
 
 	def _kana_matches(self, yomi: Optional[str]) -> List[int]:
-		if not yomi:
-			return []
-		if yomi not in self._by_kana:
-			self._by_kana[yomi] = [int(p.person_id) for p in get_person_by_column(self.cur, "name_kana", clean_repr_name(yomi))]
-		return self._by_kana[yomi]
+		self.people()
+		return self._by_kana.get(clean_repr_name(yomi), []) if yomi else []
 
 	def _wins_of(self, person_id: int) -> List[Tuple[date, Optional[str]]]:
 		if person_id not in self._wins:

@@ -5,6 +5,11 @@
   python -m speech_update.review list [--reason R] [--status S] [--limit N]
   python -m speech_update.review decide ID confirm|unlink|reassign [PERSON_ID] [--note TEXT]
   python -m speech_update.review apply [--dry-run]   move speeches per decisions (the nightly run does this too)
+  python -m speech_update.review refile NAME... [--scan] [--dry-run]
+                                                 re-resolve every speech by these speakers and move the ones
+                                                 that now resolve elsewhere (after `member_update alias add`
+                                                 or `merge`); --scan also reads every issue on disk, for
+                                                 speakers that were never matched
 
 Decisions: confirm = right person; unlink = not this person (and not anyone in
 `person`); reassign = a different person_id. Changed files are queued for the
@@ -98,6 +103,66 @@ def apply_decisions(cfg: Config, state: State, conn, dry_run: bool = False, db_s
 	log.info(
 		"apply done: %d decision(s); %d speech(es) removed from old files, %d filed (+%d added); %d DB row(s) deleted; %d file(s) to upload",
 		result.decisions, result.moved, routed.added + routed.updated, routed.added, result.db_deleted, len(set(result.paths_written)),
+	)
+	return result
+
+
+# --- refile (after a name change: specs/speaker-review §3.5) ---
+
+def refile(cfg: Config, state: State, conn, speakers: List[str], scan_disk: bool = False, dry_run: bool = False, db_speeches: bool = True) -> ApplyResult:
+	"""Re-resolve every speech by `speakers`; move the ones whose person changed."""
+	names = set(speakers)
+	with conn.cursor() as cur:
+		cur.execute("SELECT speech_id, issue_id, person_id FROM speeches WHERE speaker = ANY(%s)", (sorted(names),))
+		filed = {sid: (iid, pid) for sid, iid, pid in cur.fetchall()}
+	issue_ids = {iid for iid, _ in filed.values()} | {e["issueID"] for e in state.unmatched() if e["speaker"] in names}
+	if scan_disk:
+		needles = [f'"speaker": "{n}"' for n in names]
+		for d in cfg.issues_dir.iterdir():
+			p = d / "speeches.jsonl"
+			if p.exists() and any(n in p.read_text(encoding="utf-8") for n in needles):
+				issue_ids.add(d.name)
+	issue_ids = sorted(issue_ids)
+	log.info("refiling %d speaker name(s) across %d issue(s)%s", len(names), len(issue_ids), " (dry run)" if dry_run else "")
+
+	router = make_router(cfg, conn, dry_run, db_speeches=db_speeches and not dry_run)
+	result = ApplyResult(issues=len(issue_ids))
+	removals: Dict[int, Set[str]] = defaultdict(set)
+	gone: Set[str] = set()
+	moves: Dict[tuple, int] = defaultdict(int)
+	for meta, speeches in iter_issues_from_disk(cfg.issues_dir, issue_ids):
+		for s in speeches:
+			if s.get("speaker") not in names:
+				continue
+			res = router.resolver.resolve(s.get("speaker"), s.get("speakerYomi"), member_group(s), meta["date"])
+			new = res.person_id if res.confidence == "sure" else None
+			old = filed.get(s["speechID"], (None, None))[1]
+			if old is not None and old != new:
+				removals[old].add(s["speechID"])
+				if new is None:
+					gone.add(s["speechID"])
+			if old != new:
+				moves[(s.get("speaker"), old, new, res.reason)] += 1
+	for (speaker, old, new, reason), n in sorted(moves.items(), key=lambda kv: -kv[1]):
+		log.info("  %s: #%s → #%s (%s) × %d", speaker, old, new, reason, n)
+
+	for pid, ids in sorted(removals.items()):
+		n, written = remove_from_person_dir(cfg.persons_dir, pid, ids, dry_run)
+		result.moved += n
+		result.paths_written += written
+	routed = router.route(iter_issues_from_disk(cfg.issues_dir, issue_ids))
+	result.paths_written += routed.paths_written
+	if not dry_run:
+		if gone and db_speeches:
+			with conn.cursor() as c:
+				c.execute("DELETE FROM speeches WHERE speech_id = ANY(%s)", (sorted(gone),))
+				result.db_deleted = c.rowcount
+			conn.commit()
+		result.new_review = store.record_held(conn, routed.held, routed.routed_issues, dropped=routed.dropped, decided=routed.decided)
+		state.add_pending_paths(result.paths_written)
+	log.info(
+		"refile done: %d speech(es) removed from old files, %d filed (+%d added); %d held for review; %d DB row(s) deleted; %d file(s) to upload",
+		result.moved, routed.added + routed.updated, routed.added, routed.held_speeches, result.db_deleted, len(set(result.paths_written)),
 	)
 	return result
 
@@ -274,13 +339,18 @@ def main(argv: Optional[List[str]] = None) -> int:
 	p_apply = sub.add_parser("apply")
 	p_apply.add_argument("--dry-run", action="store_true")
 	p_apply.add_argument("--no-db-speeches", action="store_true")
+	p_refile = sub.add_parser("refile")
+	p_refile.add_argument("speakers", nargs="+")
+	p_refile.add_argument("--scan", action="store_true")
+	p_refile.add_argument("--dry-run", action="store_true")
+	p_refile.add_argument("--no-db-speeches", action="store_true")
 	args = parser.parse_args(argv)
 	command = args.command or "next"
 
 	cfg = load_config()
 	load_dotenv(cfg.env_file)
 	state = State(cfg.state_dir)
-	if command in ("scan", "apply"):
+	if command in ("scan", "apply", "refile"):
 		setup_logging(state)
 	conn = connect_postgres()
 	if conn is None:
@@ -304,6 +374,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 			try:
 				if command == "scan":
 					scan(cfg, conn)
+				elif command == "refile":
+					refile(cfg, state, conn, args.speakers, args.scan, args.dry_run, not args.no_db_speeches and cfg.db_speeches)
 				elif apply_decisions(cfg, state, conn, dry_run=args.dry_run, db_speeches=not args.no_db_speeches and cfg.db_speeches) is None:
 					log.info("no decided items waiting to be applied")
 			finally:

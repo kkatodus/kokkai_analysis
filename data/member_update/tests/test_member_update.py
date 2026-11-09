@@ -123,6 +123,17 @@ class MatchTests(unittest.TestCase):
 		self.assertIsNone(rows[0]["person_id"])
 		self.assertEqual(result.unresolved[0].candidates, [6, 7])
 
+	def test_aliases_count_as_names(self):
+		persons = self.PERSONS + [
+			(8, "金子恵美", "かねこめぐみ"), (9, "金子恵美（えみ）", "かねこえみ"),
+			(9, "金子恵美", None), (10, "山本譲司", "やまもとじょうじ"), (10, "山本ジョージ", "やまもとじょーじ"),
+		]
+		rows = [row("金子 恵美", "かねこ えみ"), row("山本ジョージ", "やまもと  じょーじ")]
+		result = MatchResult()
+		MemberMatcher(persons).match_house("shugiin", rows, [], result)
+		self.assertEqual([r["person_id"] for r in rows], [9, 10])
+		self.assertEqual(dict(result.by_method), {"name": 2})
+
 
 class SnapshotTests(unittest.TestCase):
 	def test_diff_pairs_by_person_id(self):

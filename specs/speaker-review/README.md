@@ -60,6 +60,12 @@ The resolver loads decisions at start: `confirmed` → sure (same person); `reas
 - **Review:** `review` (interactive) shows one pair at a time, biggest first: speaker, reading, reason, group / position, date range, two quotes, the candidate's elections, and other people with the same name or reading. Keys: `y` confirm, `n` unlink, `r <id>` reassign, `s` skip, `q` quit. `review decide <id> confirm|unlink|reassign <pid>` does the same non-interactively; `review list` prints the queue.
 - **Apply** (`review apply`, also run nightly): for decided, unapplied rows, re-resolve their issues; remove moved/unlinked speeches from the old person's `all_speeches.jsonl` and topic files; route the issues again (files them under the new person, upserts Postgres); delete DB rows for unlinked speeches; mark `applied_at`; queue changed paths for upload.
 
+### 3.5 Other names (`person_alias`)
+
+People change names or go by more than one (山本譲司 / 山本ジョージ, 内山航 / 内山こう), and some `person` rows carry a suffix no record uses (`金子恵美（えみ）`, `田中昭一（千葉）`). `person_alias (person_id, name_kanji, name_kana, kind, source, note)` lists the other names (`kind`: legal, common, former, ndl = how the Diet record writes it, other). The speech resolver and the member-list matcher index every alias exactly like `person.name_kanji` / `name_kana`, so a name shared with someone else goes through the usual same-name disambiguation.
+
+Rows come from `python -m member_update alias add ID NAME [--kana] [--kind]`, from `member_update merge DROP KEEP` (DROP's name), and from confirming a `kanji_differs` review. Adding a name doesn't move speeches already filed: `python -m speech_update.review refile NAME... [--scan]` re-resolves every speech by those speakers and moves the ones that now resolve elsewhere (`--scan` also reads issues on disk, for names that never matched).
+
 ### 3.4 Non-goals
 
 - No fuzzy matching. The only automatic decision is `not_serving`; every other rule only decides *whether* to ask.
@@ -87,6 +93,7 @@ The resolver loads decisions at start: `confirmed` → sure (same person); `reas
 - [x] User decisions (2026-10-15): #23 原彪 confirmed (read both はらたけし and はらひょう); #41 佐藤隆 confirmed (same person: upper house 1967–76, then lower house). Already filed, so nothing moved.
 - [x] Filled the missing 2025 upper-house and 2026 lower-house wins (2026-10-16): winners parsed from the ja.wikipedia result tables (465 / 125, party from the cell colour), matched to `person` by unique name, 171 `election_result` rows added and appended to `electionHistory/<id>.jsonl` (backups in `s3_mirror/.member-update/backups/election-fill-20261016/`). Every winner of both elections now has a row. 参 rows have an empty `election_freq` (the official list gives no term count).
 - [x] #841 split (2026-10-16): 高山聡史 is now #5870 (his two チームみらい rows moved off 高山智司 #841); 山本裕三 (静岡3, first elected 2026) added as #5871, since the member list had linked him to the novelist 山本有三 #4431 by reading. Member-list links fixed for both and for 金子恵美 (→ #1745); their speeches re-routed.
-- [ ] #1745 is stored as `金子恵美（えみ）`, so name matching never reaches her and her 2014–17 in-term speeches went to LDP #1042 (かねこめぐみ) unflagged. Waiting on the user.
-- [ ] Duplicate `person` rows found while filling: 内山航 #5780 / 内山こう #5781 (same member, Niigata 1); 山本譲司 #3020 / 山本ジョージ #5858 (same person, ran for れいわ in 2026).
+- [x] `person_alias` + `member_update alias` / `merge` + `review refile` (2026-10-18, user's request: "a db with known different names for a person id … adapting to people changing their names"). Seeded with 15 spellings from confirmed `kanji_differs` reviews and the plain names of the 9 `（…）`-suffixed rows.
+- [x] #1745 金子恵美（えみ）: alias 金子恵美; `refile` moved her 441 speeches of 2014–17 (all 民主/民進 groups) off LDP #1042, who is recorded as 金子めぐみ from 2015. The other suffixed rows (田中昭一, 森清, 工藤晃, 岡田広) had never matched: 2,950 speeches filed after 6 `election_pick` reviews, each confirmed by party and dates.
+- [x] Duplicates merged (user, 2026-10-18): #5780 内山航 → #5781 内山こう (alias, legal); #5858 山本ジョージ → #3020 山本譲司 (alias, common; his 2026 れいわ win moved, 4 speeches merged). Backups in `.member-update/backups/merge-*`; the dropped ids' S3 files deleted.
 - [x] Docs: DATA-PIPELINES.md, speech-auto-update PROGRESS.md
