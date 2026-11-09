@@ -11,7 +11,6 @@ import type {
 } from "@/app/types";
 import { EmptyState } from "@/app/components/shared/EmptyState";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
-import { ContributionBar } from "@/app/components/visualizations/SpeechQualityBarList";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
 import {
   ANSWERER_ISSUE_TYPES,
@@ -45,19 +44,69 @@ function Section({ title, children, aside }: { title: string; children: React.Re
   );
 }
 
-function Stat({ label, n, share, baseline }: { label: string; n: number; share: number; baseline?: number | null }) {
+/**
+ * One metric as a row: label, a bar for this person's share with a tick at the corpus baseline, and the count.
+ * `segments` splits the bar (e.g. 一部 / 大半 of an issue); otherwise `share` fills it in `color`.
+ * `max` is the scale's right edge (1 for compositional groups, a group-wide max for sparse ones).
+ */
+function MetricRow({
+  label,
+  n,
+  share,
+  baseline,
+  color,
+  segments,
+  max = 1,
+  dim = false,
+}: {
+  label: string;
+  n: number;
+  share: number;
+  baseline?: number | null;
+  color: string;
+  segments?: Array<{ share: number; color: string; title: string }>;
+  max?: number;
+  dim?: boolean;
+}) {
+  const w = (x: number) => `${Math.round(Math.min(1, x / max) * 10000) / 100}%`;
   return (
-    <div className="flex items-baseline justify-between gap-2 text-[11px]">
-      <div className="truncate text-gray-200">{label}</div>
-      <div className="shrink-0 tabular-nums text-gray-100">
-        {n} 件 <span className="text-gray-400">({pct(share, 1)}</span>
+    <div className={"grid grid-cols-[7.5rem_1fr_auto] items-center gap-2 text-[11px] " + (dim ? "opacity-60" : "")}>
+      <div className="truncate text-gray-200" title={label}>
+        {label}
+      </div>
+      <div className="relative h-2.5 overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+        <div className="flex h-full">
+          {segments
+            ? segments.map((sg, i) => <div key={i} className={`h-full ${sg.color}`} style={{ width: w(sg.share) }} title={sg.title} />)
+            : <div className={`h-full ${color}`} style={{ width: w(share) }} />}
+        </div>
         {baseline !== undefined && baseline !== null && (
-          <span className="text-gray-500">・全体 {pct(baseline, 1)}</span>
+          <div className="absolute inset-y-0 w-px bg-white/70" style={{ left: w(baseline) }} title={`全体 ${pct(baseline, 1)}`} />
         )}
-        <span className="text-gray-400">)</span>
+      </div>
+      <div className="w-[7.5rem] text-right tabular-nums text-gray-100">
+        {pct(share, 1)} <span className="text-gray-500">({n} 件)</span>
       </div>
     </div>
   );
+}
+
+function Group({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-2 first:mt-0">
+      <div className="mb-1 flex items-baseline justify-between gap-2">
+        <div className="text-[11px] font-semibold text-gray-200">{title}</div>
+        {note && <div className="text-[10px] text-gray-500">{note}</div>}
+      </div>
+      <div className="grid gap-1">{children}</div>
+    </div>
+  );
+}
+
+/** Right edge for a sparse group: the largest share in view with a little headroom, at least 10%. */
+function scaleFor(shares: number[]): number {
+  const m = Math.max(0.1, ...shares.filter((x) => Number.isFinite(x)));
+  return Math.min(1, Math.ceil(m * 1.25 * 20) / 20);
 }
 
 export function PersonQualityPanel({
@@ -132,93 +181,157 @@ export function PersonQualityPanel({
     <>
       {q && q.n > 0 && (
         <Section title="質問者として" aside={`${q.n} 件・${yearMonth(q.first)}〜${yearMonth(q.last)}`}>
-          <ContributionBar counts={q.contribution} className="h-2.5" />
-          <div className="mt-1 grid gap-0.5">
+          <div className="mb-2 text-[10px] text-gray-500">棒はこの人の割合、白い縦線は全議員の平均。</div>
+
+          <Group title="成果（やり取り全体として）">
             {CONTRIBUTIONS.map((c) => (
-              <div key={c} className="flex items-center gap-1.5">
-                <span className={`inline-block h-2 w-2 shrink-0 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
-                <div className="min-w-0 flex-1">
-                  <Stat
-                    label={CONTRIBUTION_JA[c]}
-                    n={q.contribution[c]}
-                    share={rate(q.contribution[c], q.n)}
-                    baseline={tq ? rate(tq.contribution[c], tq.n) : null}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-2 text-[11px] font-semibold text-gray-200">何のためのやり取りか</div>
-          <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
-            <div className="flex h-full w-full">
-              {FUNCTIONS.map((f) => (
-                <div
-                  key={f}
-                  className={`h-full ${FUNCTION_STYLE[f].bar}`}
-                  style={{ width: `${Math.round(rate(q.function[f], q.n) * 10000) / 100}%` }}
-                  title={`${FUNCTION_JA[f]}: ${pct(rate(q.function[f], q.n), 1)}`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-gray-400">
-            {FUNCTIONS.filter((f) => q.function[f] > 0).map((f) => (
-              <div key={f} className="flex items-center gap-1">
-                <span className={`inline-block h-2 w-2 rounded-full ${FUNCTION_STYLE[f].dot}`} />
-                {FUNCTION_JA[f]} {pct(rate(q.function[f], q.n))}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-2 text-[11px] font-semibold text-gray-200">成果</div>
-          <div className="mt-0.5 grid gap-0.5">
-            {OUTCOMES.map((o) => (
-              <Stat key={o} label={OUTCOME_JA[o]} n={q.outcomes[o]} share={rate(q.outcomes[o], q.n)} baseline={tq ? rate(tq.outcomes[o], tq.n) : null} />
-            ))}
-          </div>
-
-          <div className="mt-2 text-[11px] font-semibold text-gray-200">指摘された問題点（質問者側）</div>
-          <div className="mt-0.5 grid gap-0.5">
-            <Stat label="問題点が一つ以上" n={q.flagged?.any ?? 0} share={rate(q.flagged?.any, q.n)} baseline={tq ? rate(tq.flagged?.any, tq.n) : null} />
-            {QUESTIONER_ISSUE_TYPES.filter((t) => issueTotal(q.issues[t]) > 0).map((t) => (
-              <Stat
-                key={t}
-                label={`${ISSUE_JA[t]}${q.issues[t].most ? `（うち大半 ${q.issues[t].most}）` : ""}`}
-                n={issueTotal(q.issues[t])}
-                share={rate(issueTotal(q.issues[t]), q.n)}
-                baseline={tq ? rate(issueTotal(tq.issues[t]), tq.n) : null}
+              <MetricRow
+                key={c}
+                label={CONTRIBUTION_JA[c]}
+                n={q.contribution[c]}
+                share={rate(q.contribution[c], q.n)}
+                baseline={tq ? rate(tq.contribution[c], tq.n) : null}
+                color={CONTRIBUTION_STYLE[c].bar}
               />
             ))}
-            {QUESTIONER_ISSUE_TYPES.every((t) => issueTotal(q.issues[t]) === 0) && (
-              <div className="text-[11px] text-gray-400">指摘なし</div>
-            )}
-          </div>
+          </Group>
+
+          <Group title="何のためのやり取りか">
+            {FUNCTIONS.filter((f) => q.function[f] > 0 || (tq && rate(tq.function[f], tq.n) >= 0.01)).map((f) => (
+              <MetricRow
+                key={f}
+                label={FUNCTION_JA[f]}
+                n={q.function[f]}
+                share={rate(q.function[f], q.n)}
+                baseline={tq ? rate(tq.function[f], tq.n) : null}
+                color={FUNCTION_STYLE[f].bar}
+              />
+            ))}
+          </Group>
+
+          {(() => {
+            const max = scaleFor([...OUTCOMES.map((o) => rate(q.outcomes[o], q.n)), ...(tq ? OUTCOMES.map((o) => rate(tq.outcomes[o], tq.n)) : [])]);
+            return (
+              <Group title="成果の内訳" note={max < 1 ? `目盛 0〜${pct(max)}` : undefined}>
+                {OUTCOMES.map((o) => (
+                  <MetricRow
+                    key={o}
+                    label={OUTCOME_JA[o]}
+                    n={q.outcomes[o]}
+                    share={rate(q.outcomes[o], q.n)}
+                    baseline={tq ? rate(tq.outcomes[o], tq.n) : null}
+                    color="bg-sky-500/80"
+                    max={max}
+                  />
+                ))}
+              </Group>
+            );
+          })()}
+
+          {(() => {
+            const types = QUESTIONER_ISSUE_TYPES;
+            const max = scaleFor([
+              rate(q.flagged?.any, q.n),
+              ...(tq ? [rate(tq.flagged?.any, tq.n)] : []),
+              ...types.map((t) => rate(issueTotal(q.issues[t]), q.n)),
+              ...(tq ? types.map((t) => rate(issueTotal(tq.issues[t]), tq.n)) : []),
+            ]);
+            return (
+              <Group title="指摘された問題点（質問者側）" note={`${max < 1 ? `目盛 0〜${pct(max)}・` : ""}濃い色は大半を占めたもの`}>
+                <MetricRow
+                  label="問題点が一つ以上"
+                  n={q.flagged?.any ?? 0}
+                  share={rate(q.flagged?.any, q.n)}
+                  baseline={tq ? rate(tq.flagged?.any, tq.n) : null}
+                  color="bg-amber-500/80"
+                  segments={[
+                    { share: rate((q.flagged?.any ?? 0) - (q.flagged?.most ?? 0), q.n), color: "bg-amber-500/70", title: "一部に問題" },
+                    { share: rate(q.flagged?.most, q.n), color: "bg-rose-500/85", title: "大半が問題" },
+                  ]}
+                  max={max}
+                />
+                {types.map((t) => (
+                  <MetricRow
+                    key={t}
+                    label={ISSUE_JA[t]}
+                    n={issueTotal(q.issues[t])}
+                    share={rate(issueTotal(q.issues[t]), q.n)}
+                    baseline={tq ? rate(issueTotal(tq.issues[t]), tq.n) : null}
+                    color="bg-amber-500/80"
+                    segments={[
+                      { share: rate(q.issues[t].part, q.n), color: "bg-amber-500/70", title: `一部: ${q.issues[t].part} 件` },
+                      { share: rate(q.issues[t].most, q.n), color: "bg-rose-500/85", title: `大半: ${q.issues[t].most} 件` },
+                    ]}
+                    max={max}
+                    dim={issueTotal(q.issues[t]) === 0}
+                  />
+                ))}
+              </Group>
+            );
+          })()}
         </Section>
       )}
-
     </>
   );
   const a_section = (
     <>
       {a && a.n > 0 && (
         <Section title="答弁者として" aside={`${a.n} 件・${yearMonth(a.first)}〜${yearMonth(a.last)}`}>
-          <div className="grid gap-0.5">
-            {ANSWERER_ISSUE_TYPES.map((t) => (
-              <Stat
-                key={t}
-                label={`${ISSUE_JA[t]}${a.issues[t].most ? `（うち大半 ${a.issues[t].most}）` : ""}`}
-                n={issueTotal(a.issues[t])}
-                share={rate(issueTotal(a.issues[t]), a.n)}
-                baseline={ta ? rate(issueTotal(ta.issues[t]), ta.n) : null}
-              />
-            ))}
-            <Stat label="新事実が出た答弁" n={a.outcomes.new_information} share={rate(a.outcomes.new_information, a.n)} baseline={ta ? rate(ta.outcomes.new_information, ta.n) : null} />
-            <Stat label="具体的な約束をした答弁" n={a.outcomes.commitment} share={rate(a.outcomes.commitment, a.n)} baseline={ta ? rate(ta.outcomes.commitment, ta.n) : null} />
-          </div>
+          {(() => {
+            const types = ANSWERER_ISSUE_TYPES;
+            const max = scaleFor([
+              rate(a.flagged?.any, a.n),
+              ...types.map((t) => rate(issueTotal(a.issues[t]), a.n)),
+              rate(a.outcomes.new_information, a.n),
+              rate(a.outcomes.commitment, a.n),
+              ...(ta
+                ? [rate(ta.flagged?.any, ta.n), ...types.map((t) => rate(issueTotal(ta.issues[t]), ta.n)), rate(ta.outcomes.new_information, ta.n), rate(ta.outcomes.commitment, ta.n)]
+                : []),
+            ]);
+            return (
+              <>
+                <div className="mb-2 text-[10px] text-gray-500">
+                  棒はこの人の割合、白い縦線は全答弁者の平均。{max < 1 ? `目盛 0〜${pct(max)}。` : ""}
+                </div>
+                <Group title="指摘された問題点（答弁者側）" note="濃い色は大半を占めたもの">
+                <MetricRow
+                  label="問題点が一つ以上"
+                  n={a.flagged?.any ?? 0}
+                  share={rate(a.flagged?.any, a.n)}
+                  baseline={ta ? rate(ta.flagged?.any, ta.n) : null}
+                  color="bg-amber-500/80"
+                  segments={[
+                    { share: rate((a.flagged?.any ?? 0) - (a.flagged?.most ?? 0), a.n), color: "bg-amber-500/70", title: "一部に問題" },
+                    { share: rate(a.flagged?.most, a.n), color: "bg-rose-500/85", title: "大半が問題" },
+                  ]}
+                  max={max}
+                />
+                {types.map((t) => (
+                  <MetricRow
+                    key={t}
+                    label={ISSUE_JA[t]}
+                    n={issueTotal(a.issues[t])}
+                    share={rate(issueTotal(a.issues[t]), a.n)}
+                    baseline={ta ? rate(issueTotal(ta.issues[t]), ta.n) : null}
+                    color="bg-amber-500/80"
+                    segments={[
+                      { share: rate(a.issues[t].part, a.n), color: "bg-amber-500/70", title: `一部: ${a.issues[t].part} 件` },
+                      { share: rate(a.issues[t].most, a.n), color: "bg-rose-500/85", title: `大半: ${a.issues[t].most} 件` },
+                    ]}
+                    max={max}
+                    dim={issueTotal(a.issues[t]) === 0}
+                  />
+                ))}
+                </Group>
+                <Group title="答弁がもたらしたもの">
+                  <MetricRow label="新事実が出た" n={a.outcomes.new_information} share={rate(a.outcomes.new_information, a.n)} baseline={ta ? rate(ta.outcomes.new_information, ta.n) : null} color="bg-sky-500/80" max={max} />
+                  <MetricRow label="具体的な約束" n={a.outcomes.commitment} share={rate(a.outcomes.commitment, a.n)} baseline={ta ? rate(ta.outcomes.commitment, ta.n) : null} color="bg-sky-500/80" max={max} />
+                </Group>
+              </>
+            );
+          })()}
         </Section>
       )}
-
     </>
   );
 
