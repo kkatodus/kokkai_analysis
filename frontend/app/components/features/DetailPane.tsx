@@ -8,7 +8,7 @@ import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCa
 import { SpeechRecordCard, type SpeechTopicState } from "@/app/components/features/SpeechRecordCard";
 import { PersonQualityPanel } from "@/app/components/features/PersonQualityPanel";
 import { ContributionBar } from "@/app/components/visualizations/SpeechQualityBarList";
-import { indexExchanges, pct, rate } from "@/app/lib/quality";
+import { indexExchanges, issueTotal, pct, rate } from "@/app/lib/quality";
 
 interface DetailPaneProps {
   personId: string;
@@ -373,7 +373,7 @@ export function DetailPane({
             {personMeta?.name_kana ?? "（かな不明）"}
           </div>
 
-          {qualityPerson?.as_questioner && qualityPerson.as_questioner.n > 0 && (
+          {qualityPerson && (qualityPerson.as_questioner?.n || qualityPerson.as_answerer?.n) ? (
             <button
               type="button"
               onClick={() => setActivePanel("quality")}
@@ -383,30 +383,51 @@ export function DetailPane({
               <div className="mb-1 flex items-center justify-between gap-2">
                 <div className="text-[11px] font-semibold text-gray-200">やり取りの評価（AI判定）</div>
                 <div className="text-[11px] text-gray-400">
-                  質問 {qualityPerson.as_questioner.n} 件
-                  {qualityPerson.as_answerer?.n ? `・答弁 ${qualityPerson.as_answerer.n} 件` : ""}
+                  {qualityPerson.as_questioner?.n ? `質問 ${qualityPerson.as_questioner.n} 件` : ""}
+                  {qualityPerson.as_questioner?.n && qualityPerson.as_answerer?.n ? "・" : ""}
+                  {qualityPerson.as_answerer?.n ? `答弁 ${qualityPerson.as_answerer.n} 件` : ""}
                 </div>
               </div>
-              <ContributionBar counts={qualityPerson.as_questioner.contribution} className="h-2.5" />
-              <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
-                <div className="flex items-center gap-1">
-                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
-                  実質的な成果あり {pct(rate(qualityPerson.as_questioner.contribution.substantive, qualityPerson.as_questioner.n))}
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
-                  限定的 {pct(rate(qualityPerson.as_questioner.contribution.limited, qualityPerson.as_questioner.n))}
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
-                  成果なし {pct(rate(qualityPerson.as_questioner.contribution.none, qualityPerson.as_questioner.n))}
-                </div>
-                <div className="ml-auto">
-                  問題点の指摘 {pct(rate(qualityPerson.as_questioner.flagged?.any, qualityPerson.as_questioner.n))}
-                </div>
-              </div>
+              {(() => {
+                const q = qualityPerson.as_questioner;
+                const a = qualityPerson.as_answerer;
+                // summarise the role this person mostly plays
+                if (q && q.n > 0 && q.n >= (a?.n ?? 0)) {
+                  return (
+                    <>
+                      <ContributionBar counts={q.contribution} className="h-2.5" />
+                      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
+                          実質的な成果あり {pct(rate(q.contribution.substantive, q.n))}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
+                          限定的 {pct(rate(q.contribution.limited, q.n))}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
+                          成果なし {pct(rate(q.contribution.none, q.n))}
+                        </div>
+                        <div className="ml-auto">問題点の指摘 {pct(rate(q.flagged?.any, q.n))}</div>
+                      </div>
+                    </>
+                  );
+                }
+                if (a && a.n > 0) {
+                  return (
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+                      <div>答弁者として</div>
+                      <div>答弁のはぐらかし {pct(rate(issueTotal(a.issues.evasive), a.n), 1)}</div>
+                      <div>新事実が出た答弁 {pct(rate(a.outcomes.new_information, a.n), 1)}</div>
+                      <div>具体的な約束 {pct(rate(a.outcomes.commitment, a.n), 1)}</div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
             </button>
-          )}
+          ) : null}
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">

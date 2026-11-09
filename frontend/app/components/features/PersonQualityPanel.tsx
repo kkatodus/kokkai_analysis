@@ -127,8 +127,9 @@ export function PersonQualityPanel({
   const selectCls =
     "h-7 max-w-full rounded-lg border border-slate-400/30 bg-slate-950/40 px-1.5 text-[11px] text-gray-100 outline-none focus:border-cyan-400/60";
 
-  return (
-    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-0.5">
+  const answererFirst = (a?.n ?? 0) > (q?.n ?? 0);
+  const q_section = (
+    <>
       {q && q.n > 0 && (
         <Section title="質問者として" aside={`${q.n} 件・${yearMonth(q.first)}〜${yearMonth(q.last)}`}>
           <ContributionBar counts={q.contribution} className="h-2.5" />
@@ -196,6 +197,10 @@ export function PersonQualityPanel({
         </Section>
       )}
 
+    </>
+  );
+  const a_section = (
+    <>
       {a && a.n > 0 && (
         <Section title="答弁者として" aside={`${a.n} 件・${yearMonth(a.first)}〜${yearMonth(a.last)}`}>
           <div className="grid gap-0.5">
@@ -213,6 +218,14 @@ export function PersonQualityPanel({
           </div>
         </Section>
       )}
+
+    </>
+  );
+
+  return (
+    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-0.5">
+      {answererFirst ? a_section : q_section}
+      {answererFirst ? q_section : a_section}
 
       <Section title="やり取り一覧" aside={exchanges ? `${filtered.length} / ${exchanges.length} 件` : undefined}>
         <div className="mb-2 flex flex-wrap gap-1.5">
