@@ -309,6 +309,15 @@ export function metricGroups(): Array<{ group: string; metrics: QualityMetric[] 
   return out;
 }
 
+/** The answerer-side issue types a person was flagged for, most frequent first, as shares of the exchanges they answered. */
+export function topAnswererIssues(a: QualityAnswerCounts | null, limit = 2, minShare = 0.03): Array<{ type: QualityIssueType; share: number }> {
+  if (!a || !a.n) return [];
+  return ANSWERER_ISSUE_TYPES.map((type) => ({ type, share: rate(issueTotal(a.issues[type]), a.n) }))
+    .filter((x) => x.share >= minShare)
+    .sort((a, b) => b.share - a.share)
+    .slice(0, limit);
+}
+
 /** The questioner-side issue types a person was flagged for, most frequent first, as shares of their exchanges. */
 export function topIssues(q: QualityCounts | null, limit = 2, minShare = 0.03): Array<{ type: QualityIssueType; share: number }> {
   if (!q || !q.n) return [];

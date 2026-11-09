@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { AllParliamentMemberTableData, QualityAggregate, QualityPerson } from "@/app/types";
+import type { AllParliamentMemberTableData, QualityAggregate, QualityAnswerCounts, QualityPerson } from "@/app/types";
 import {
   CONTRIBUTION_JA,
   CONTRIBUTION_STYLE,
@@ -13,6 +13,7 @@ import {
   metricValue,
   pct,
   rate,
+  topAnswererIssues,
   topIssues,
   yearMonth,
   type QualityMetricKey,
@@ -40,6 +41,20 @@ export function ContributionBar({
             />
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+/** Answers with no issue on the answerer's side (emerald) vs answers with one (amber). */
+export function AnswerBar({ counts, className = "h-3" }: { counts: QualityAnswerCounts | null | undefined; className?: string }) {
+  const n = counts?.n ?? 0;
+  const flagged = rate(counts?.flagged?.any, n);
+  return (
+    <div className={`${className} w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10`}>
+      <div className="flex h-full w-full">
+        <div className="h-full bg-emerald-500/80" style={{ width: `${Math.round((1 - flagged) * 10000) / 100}%` }} title={`問題点なしの答弁: ${pct(1 - flagged, 1)}`} />
+        <div className="h-full bg-amber-500/80" style={{ width: `${Math.round(flagged * 10000) / 100}%` }} title={`問題点が指摘された答弁: ${pct(flagged, 1)}`} />
       </div>
     </div>
   );
@@ -200,12 +215,25 @@ export function SpeechQualityBarList({
       </div>
 
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-gray-400">
-        {CONTRIBUTIONS.map((c) => (
-          <div key={c} className="flex items-center gap-1">
-            <span className={`inline-block h-2 w-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
-            {CONTRIBUTION_JA[c]}
-          </div>
-        ))}
+        {metric.role === "answerer" ? (
+          <>
+            <div className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
+              問題点なしの答弁
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
+              問題点が指摘された答弁
+            </div>
+          </>
+        ) : (
+          CONTRIBUTIONS.map((c) => (
+            <div key={c} className="flex items-center gap-1">
+              <span className={`inline-block h-2 w-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
+              {CONTRIBUTION_JA[c]}
+            </div>
+          ))
+        )}
         <div className="ml-auto text-gray-500" title={metric.hint}>
           {metric.label}
           {baseline && metric.kind === "share" ? `・全体 ${pct(baseline.value, 1)}` : ""}
@@ -251,8 +279,11 @@ export function SpeechQualityBarList({
             const meta = personIndex.get(p.person_id) ?? null;
             const name = meta?.name_kanji ?? p.name ?? `person_id=${personId}`;
             const isSelected = selectedPersonId != null && String(selectedPersonId) === personId;
+            const asAnswerer = metric.role === "answerer";
             const q = p.as_questioner;
-            const issues = topIssues(q);
+            const a = p.as_answerer;
+            const range = asAnswerer ? a : q;
+            const issues = asAnswerer ? topAnswererIssues(a) : topIssues(q);
 
             return (
               <button
@@ -267,7 +298,7 @@ export function SpeechQualityBarList({
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="truncate text-[13px] font-semibold text-gray-100">{name}</div>
-                    <div className="truncate text-[10px] text-gray-500">{p.group ?? meta?.election_signature ?? ""}</div>
+                    <div className="truncate text-[10px] text-gray-500">{p.group ?? ""}</div>
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="text-[13px] font-semibold text-gray-100" title={metric.label}>
@@ -280,10 +311,10 @@ export function SpeechQualityBarList({
                 </div>
 
                 <div className="mt-2">
-                  <ContributionBar counts={q?.contribution ?? null} />
+                  {asAnswerer ? <AnswerBar counts={a} /> : <ContributionBar counts={q?.contribution ?? null} />}
                   <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[10px] text-gray-500">
                     <div className="truncate">
-                      {q ? `${yearMonth(q.first)}〜${yearMonth(q.last)}` : "質問者としての記録なし"}
+                      {range ? `${yearMonth(range.first)}〜${yearMonth(range.last)}` : asAnswerer ? "答弁者としての記録なし" : "質問者としての記録なし"}
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {issues.map((i) => (
