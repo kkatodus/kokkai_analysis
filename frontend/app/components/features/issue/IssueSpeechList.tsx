@@ -84,6 +84,7 @@ export function IssueSpeechList({
                       contribution={note.quality.contribution}
                       issues={note.quality.issues}
                       outcomes={note.quality.outcomes}
+                      prefixed
                     />
                   </div>
                   <div className="text-gray-100/90">{note.quality.reason}</div>

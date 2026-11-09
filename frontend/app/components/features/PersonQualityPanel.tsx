@@ -396,7 +396,7 @@ export function PersonQualityPanel({
                   </button>
                 </div>
                 <div className="mt-1">
-                  <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} />
+                  <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} prefixed />
                 </div>
                 <button
                   type="button"

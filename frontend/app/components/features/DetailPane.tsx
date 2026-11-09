@@ -389,7 +389,7 @@ export function DetailPane({
                   {qualityPerson.as_questioner?.n && qualityPerson.as_answerer?.n ? "・" : ""}
                   {qualityPerson.as_answerer?.n ? `答弁 ${qualityPerson.as_answerer.n} 件` : ""}
                   <span className={"ml-2 rounded-full border px-1.5 py-0.5 text-[10px] " + (activePanel === "quality" ? "border-cyan-400/40 bg-cyan-500/15 text-cyan-100" : "border-slate-400/25 text-gray-300")}>
-                    {activePanel === "quality" ? "表示中" : "やり取りタブで詳しく →"}
+                    {activePanel === "quality" ? "表示中" : "タブを開く →"}
                   </span>
                 </div>
               </div>
