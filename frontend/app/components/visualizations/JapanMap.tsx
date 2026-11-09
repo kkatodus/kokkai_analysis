@@ -69,7 +69,8 @@ export function JapanMap({
 		const rgb = (c: [number, number, number]) => `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
 		const counts = new Map<string, number>();
 		let other = 0;
-		for (const { kaiha } of Object.values(ku2Party)) {
+		for (const [district, { kaiha }] of Object.entries(ku2Party)) {
+			if (district.includes("比例")) continue; // proportional blocks are not drawn on the map
 			if (PARTY2RGBCOLOR[kaiha]) counts.set(kaiha, (counts.get(kaiha) ?? 0) + 1);
 			else other += 1;
 		}
