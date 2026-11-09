@@ -8,6 +8,7 @@ const SCOPE_STORAGE_KEY = "kokkai.ideology.scope";
 type Scope = "all" | "current";
 import { ZoomControls } from "@/app/components/shared/ZoomControls";
 import { EmptyState } from "@/app/components/shared/EmptyState";
+import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
 import availableConfig from "@/app/data/available.json";
 
 type AvailableAxis = { pro: string; con: string };
@@ -184,6 +185,28 @@ export function IdeologicalScatterPlot({
     if (effectiveScope === "current") return all.filter((d) => d.current !== false);
     return all;
   }, [selectedSubTopic, mode, effectiveScope]);
+
+  // Legend for the plotted points: one chip per colour. Several parties can share a colour
+  // (e.g. 民主 → 民進 → 国民 are all blue); the chip lists them. Grey marks small or defunct
+  // parties the scaling job does not colour individually, shown as その他.
+  const legendItems = useMemo<PartyLegendItem[]>(() => {
+    const byColor = new Map<string, Map<string, number>>();
+    for (const d of points) {
+      if (d.ref_point && d.ref_point !== "none") continue; // reference points are not politicians
+      const color = d.color || "#38bdf8";
+      const parties = byColor.get(color) ?? new Map<string, number>();
+      parties.set(d.party, (parties.get(d.party) ?? 0) + 1);
+      byColor.set(color, parties);
+    }
+    const items: PartyLegendItem[] = [];
+    for (const [color, parties] of byColor) {
+      const count = Array.from(parties.values()).reduce((a, b) => a + b, 0);
+      const names = Array.from(parties.entries()).sort((a, b) => b[1] - a[1]).map(([p]) => p);
+      const label = color === "grey" ? "その他" : names.join("・");
+      items.push({ label, color, count });
+    }
+    return items.sort((a, b) => (a.label === "その他" ? 1 : b.label === "その他" ? -1 : b.count! - a.count!));
+  }, [points]);
 
   const windowLabel = useMemo(() => {
     const w = selectedTopic?.window;
@@ -481,11 +504,15 @@ export function IdeologicalScatterPlot({
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onReset={handleReset} />
             <div className="absolute bottom-2 left-2 text-[10px] text-gray-400">
               {titleLabel ? `${titleLabel} • ` : ""}
-              {mode === "2d" ? "スクロールでズーム、ドラッグでパン" : "スクロールでズーム、ドラッグでパン"}
+              スクロールでズーム、ドラッグでパン
             </div>
           </>
         )}
       </div>
+
+      {legendItems.length > 0 && (
+        <PartyLegend items={legendItems} caption="色＝発言時の会派" className="mt-2" />
+      )}
     </div>
   );
 }

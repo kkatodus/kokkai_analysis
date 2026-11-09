@@ -3,7 +3,7 @@ import { GeoJsonLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import {Map} from 'react-map-gl/maplibre';
 import type { PickingInfo } from 'deck.gl';
-import { PARTY2RGBCOLOR } from '@/app/lib/config/parties';
+import { PARTY2RGBCOLOR, PARTY_FALLBACK_RGB } from '@/app/lib/config/parties';
 // import useLowerKu2Party from 'state/useLowerKu2Party';
 
 // eslint-disable-next-line no-unused-vars
@@ -61,12 +61,7 @@ function VoteDistrictMap({
       return [51, 255, 51];
     }
     const party = ku2Party[kuname]?.kaiha;
-    const color = PARTY2RGBCOLOR[party];
-    // if (color === undefined) {
-    //   return [255, 255, 255];
-    // }
-
-    return color || [255, 255, 255];
+    return PARTY2RGBCOLOR[party] || PARTY_FALLBACK_RGB;
   };
 
   const getElevation : (f: any) => number = (f: any) => {

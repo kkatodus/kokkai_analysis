@@ -195,5 +195,14 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	国民: [0, 110, 255],     // vivid blue
 	維教: [190, 255, 0],     // lime neon
 	Ｎ党: [255, 0, 140],     // neon fuchsia
-	中道: [128, 0, 128],     // purple
+	中道: [190, 210, 40],    // olive-lime (kept apart from 無's purple)
+	参政: [255, 170, 60],    // amber (kept apart from 立憲's orange and 維新's yellow)
+	みらい: [0, 210, 180],   // teal
+	みら: [0, 210, 180],     // teal (Sangiin short form of みらい)
+	志士: [200, 200, 200],   // light grey
+	保守: [170, 110, 60],    // brown
+	社民: [255, 105, 180],   // hot pink
   };
+
+  /** Districts whose party has no entry above are drawn in this colour (and listed as その他 in legends). */
+  export const PARTY_FALLBACK_RGB: [number, number, number] = [255, 255, 255];
