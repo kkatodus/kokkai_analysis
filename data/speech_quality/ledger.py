@@ -110,6 +110,8 @@ def ensure(cur) -> None:
 		cur.execute("ALTER TABLE label_alert ADD COLUMN provider text NOT NULL DEFAULT 'gemini'")
 		cur.execute("ALTER TABLE label_alert DROP CONSTRAINT label_alert_pkey")
 		cur.execute("ALTER TABLE label_alert ADD PRIMARY KEY (month, provider, threshold)")
+	# 2026-11-09: the questioner's 会派 at the time, for the site's per-person aggregate (specs/speech-quality-ui §2)
+	cur.execute("ALTER TABLE label_result ADD COLUMN IF NOT EXISTS questioner_group text")
 
 
 def provider_of(model: str) -> str:

@@ -1,4 +1,4 @@
-"""Exchanges to label and the labels written back (specs/speech-quality-labels §4.2, §4.7).
+"""Exchanges to label and the labels written back (specs/speech-quality-labels §4.2, §4.7; specs/speech-quality-ui §2.3).
 
 A unit is one committee exchange since 2000 with an answer (plenary is out of scope),
 keyed by its first speech. `content_hash` changes when NDL corrects the text, which
@@ -108,29 +108,17 @@ def request_for(u: Unit) -> BatchRequest:
 		max_tokens=MAX_TOKENS, effort="low")
 
 
-# --- writing labels onto speech lines (§3.5, §4.7) ---
-
-def productive(labels: dict) -> bool:
-	"""§3.5: contribution ≠ none and no questioner-side issue covering most of the exchange."""
-	if labels.get("contribution") == "none":
-		return False
-	for i in labels.get("issues") or []:
-		if i.get("extent") == "most" and i.get("by") in ("questioner", "both"):
-			return False
-	return True
-
+# --- writing labels onto speech lines (§4.7; specs/speech-quality-ui §2.3) ---
 
 def speech_fields(row: dict) -> dict:
-	q = {k: row[k] for k in ("function", "contribution", "issues", "responsible", "outcomes", "topic")}
+	"""The `quality` object the site reads from an exchange's first speech."""
+	q = {k: row[k] for k in ("function", "contribution", "issues", "responsible", "outcomes", "topic", "reason")}
 	q.update(model=row["model"], prompt=row["prompt_version"], speech_ids=row["speech_ids"])
-	return {
-		"quality": q,
-		"is_relevant": str(row["function"] != "none"),
-		"is_productive": str(productive(row)),
-		"quality_reason": row["reason"],
-	}
+	return {"quality": q}
 
 
+# `is_relevant` / `is_productive` / `quality_reason` were the old site's fields (labels spec §3.5);
+# they are stripped from any line rewritten since 2026-11-09 (specs/speech-quality-ui §1).
 QUALITY_KEYS = ("quality", "is_relevant", "is_productive", "quality_reason")
 
 
@@ -191,4 +179,4 @@ def parse_labels(text: str) -> Optional[dict]:
 
 
 __all__ = ["Unit", "units_for_issue", "issues_newest_first", "due", "request_for", "write_issues", "parse_labels",
-	"productive", "PROMPT_VERSION", "OUTPUT_TOKENS_EST"]
+	"PROMPT_VERSION", "OUTPUT_TOKENS_EST"]

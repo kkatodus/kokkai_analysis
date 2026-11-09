@@ -5,6 +5,7 @@ From data/:
   python -m speech_quality.label_job status
   python -m speech_quality.label_job run [--max-batches N] [--batch-size N] [--dry-run]
   python -m speech_quality.label_job write ISSUE_ID...     # rewrite labels onto speech lines
+  python -m speech_quality.label_job write --all           # every labelled meeting (e.g. after a format change)
 
 `run` is also the `label` stage of `python -m speech_update all`:
   1. collect finished batches into label_result and write them onto the speech lines;
@@ -42,7 +43,7 @@ from typing import Dict, Iterable, Iterator, List, Optional, Set
 
 from psycopg2.extras import Json
 
-from . import ledger
+from . import ledger, publish
 from .batch_client import FallbackOverBudget, client_for, output_est, provider_for, submit_with_fallback
 from .labels import (OUTPUT_TOKENS_EST, PROMPT_VERSION, Unit, due, issues_newest_first, parse_labels, request_for,
 	units_for_issue, write_issues)
@@ -132,18 +133,19 @@ def _store(cur, batch_id: int, model: str, unit: Unit, req_hash: str, labels: di
 	answerers = sorted({pids[t.speech_id] for t in ex.turns if t.kind == "answerer" and t.speech_id in pids})
 	cur.execute(
 		"""INSERT INTO label_result (start_speech_id, issue_id, exchange_index, speech_ids, date, questioner,
-			questioner_person_id, answerer_person_ids, batch_id, model, prompt_version, content_hash,
+			questioner_group, questioner_person_id, answerer_person_ids, batch_id, model, prompt_version, content_hash,
 			function, contribution, issues, responsible, outcomes, topic, reason, input_tokens, output_tokens, labelled_at)
-		VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, now())
+		VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, now())
 		ON CONFLICT (start_speech_id) DO UPDATE SET
 			issue_id = EXCLUDED.issue_id, exchange_index = EXCLUDED.exchange_index, speech_ids = EXCLUDED.speech_ids,
-			date = EXCLUDED.date, questioner = EXCLUDED.questioner, questioner_person_id = EXCLUDED.questioner_person_id,
+			date = EXCLUDED.date, questioner = EXCLUDED.questioner, questioner_group = EXCLUDED.questioner_group,
+			questioner_person_id = EXCLUDED.questioner_person_id,
 			answerer_person_ids = EXCLUDED.answerer_person_ids, batch_id = EXCLUDED.batch_id, model = EXCLUDED.model,
 			prompt_version = EXCLUDED.prompt_version, content_hash = EXCLUDED.content_hash, function = EXCLUDED.function,
 			contribution = EXCLUDED.contribution, issues = EXCLUDED.issues, responsible = EXCLUDED.responsible,
 			outcomes = EXCLUDED.outcomes, topic = EXCLUDED.topic, reason = EXCLUDED.reason,
 			input_tokens = EXCLUDED.input_tokens, output_tokens = EXCLUDED.output_tokens, labelled_at = now()""",
-		(unit.key, unit.issue_id, ex.index, ex.speech_ids, unit.date, ex.questioner, pids.get(unit.key), answerers,
+		(unit.key, unit.issue_id, ex.index, ex.speech_ids, unit.date, ex.questioner, ex.questioner_group, pids.get(unit.key), answerers,
 			batch_id, model, PROMPT_VERSION, req_hash, labels["function"], labels["contribution"],
 			Json(labels.get("issues") or []), labels["responsible"], list(labels.get("outcomes") or []), labels["topic"],
 			labels["reason"], tokens[0], tokens[1]),
@@ -292,6 +294,8 @@ def run(conn, issues_dir: Path, work_dir: Path, new_issues: Iterable[str] = (), 
 	new_issues = set(new_issues)
 	with conn.cursor() as cur:
 		summary.paths = [] if dry_run else write_issues(cur, issues_dir, touched | new_issues)
+		if touched:  # the site's per-person files and aggregate (specs/speech-quality-ui §2.4)
+			summary.paths += publish.rebuild(cur, issues_dir.parent, publish.persons_for_issues(cur, touched), issues_dir)
 	conn.commit()
 
 	if s.enabled:
@@ -393,7 +397,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 	r.add_argument("--batch-size", type=int)
 	r.add_argument("--dry-run", action="store_true")
 	w = sub.add_parser("write")
-	w.add_argument("issue_ids", nargs="+")
+	w.add_argument("issue_ids", nargs="*")
+	w.add_argument("--all", action="store_true", help="every meeting in label_result")
 	args = p.parse_args(argv)
 
 	cfg = load_config()
@@ -415,7 +420,11 @@ def main(argv: Optional[List[str]] = None) -> int:
 	try:
 		if args.cmd == "write":
 			with conn.cursor() as cur:
-				paths = write_issues(cur, cfg.issues_dir, args.issue_ids)
+				ids = args.issue_ids
+				if args.all:
+					cur.execute("SELECT DISTINCT issue_id FROM label_result")
+					ids = [r[0] for r in cur.fetchall()]
+				paths = write_issues(cur, cfg.issues_dir, ids)
 			state.add_pending_paths(paths)
 			print(f"{len(paths)} file(s) changed; upload with `python -m speech_update upload`")
 			return 0

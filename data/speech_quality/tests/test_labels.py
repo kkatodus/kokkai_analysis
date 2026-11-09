@@ -54,22 +54,18 @@ class LabelsTest(unittest.TestCase):
 		(self.issues / "I20250101" / "meta.json").write_text(json.dumps({"date": "2025-01-01", "nameOfMeeting": "本会議"}))
 		self.assertEqual(labels.units_for_issue(self.issues, "I20250101"), [])
 
-	def test_productive_counts_only_most(self):
-		self.assertTrue(labels.productive({"contribution": "limited", "issues": [{"type": "softball", "by": "questioner", "extent": "part"}]}))
-		self.assertFalse(labels.productive({"contribution": "limited", "issues": [{"type": "softball", "by": "questioner", "extent": "most"}]}))
-		self.assertTrue(labels.productive({"contribution": "limited", "issues": [{"type": "evasive", "by": "answerer", "extent": "most"}]}))
-		self.assertFalse(labels.productive({"contribution": "none", "issues": []}))
-
 	def test_write_puts_label_on_first_speech_and_clears_stale(self):
 		labels.write_issue(self.issues, "I20250101", [row("X_004", issues=[{"type": "grandstanding", "by": "questioner", "extent": "most"}])])
 		ls = self.lines()
-		self.assertEqual(ls[4]["is_productive"], "False")
+		self.assertNotIn("is_productive", ls[4])
 		self.assertEqual(ls[4]["quality"]["function"], "policy")
+		self.assertEqual(ls[4]["quality"]["issues"][0]["type"], "grandstanding")
+		self.assertIn("reason", ls[4]["quality"])
 		self.assertNotIn("quality", ls[2])
 		self.assertTrue(labels.write_issue(self.issues, "I20250101", [row("X_002")]))
 		ls = self.lines()
 		self.assertNotIn("quality", ls[4])
-		self.assertEqual(ls[2]["is_productive"], "True")
+		self.assertEqual(ls[2]["quality"]["speech_ids"][0], "X_002")
 		self.assertFalse(labels.write_issue(self.issues, "I20250101", [row("X_002")]))
 
 	def test_hash_changes_with_text(self):

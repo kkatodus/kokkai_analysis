@@ -20,17 +20,16 @@ import { DetailPane } from "@/app/components/features/DetailPane";
 import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, RelevanceAndProductivityData } from "@/app/types";
+import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, QualityAggregate } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
-import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
-import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
+import { SpeechQualityBarList } from "@/app/components/visualizations/SpeechQualityBarList";
 import { useModal } from "@/app/lib/hooks/useModal";
 import {
   DisclaimerPanel,
   DisclaimerToggleButton,
   IdeologyDisclaimerContent,
-  RelevanceProductivityDisclaimerContent,
+  SpeechQualityDisclaimerContent,
 } from "@/app/components/shared/VisualizationDisclaimer";
 
 interface ParliamentExplorerClientProps {
@@ -39,7 +38,7 @@ interface ParliamentExplorerClientProps {
   initialSelectedPersonId?: string | null;
   ideologyData: IdeologyData | null;
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
-  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
+  qualityAggregate: QualityAggregate | null;
 }
 
 export function ParliamentExplorerClient({
@@ -48,7 +47,7 @@ export function ParliamentExplorerClient({
   initialSelectedPersonId,
   ideologyData,	
   allParliamentMemberTable,
-  relevanceAndProductivityData,
+  qualityAggregate,
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
@@ -58,7 +57,7 @@ export function ParliamentExplorerClient({
         initialSelectedPersonId={initialSelectedPersonId}
         ideologyData={ideologyData}
         allParliamentMemberTable={allParliamentMemberTable}
-        relevanceAndProductivityData={relevanceAndProductivityData}
+        qualityAggregate={qualityAggregate}
       />
     </ModalProvider>
   );
@@ -70,7 +69,7 @@ function ParliamentExplorerClientInner({
   initialSelectedPersonId,
   ideologyData,
   allParliamentMemberTable,
-  relevanceAndProductivityData,
+  qualityAggregate,
 }: ParliamentExplorerClientProps) {
   // Initialize state from server-provided initialSelectedId
   const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
@@ -81,7 +80,7 @@ function ParliamentExplorerClientInner({
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
   const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
-  const [showRelevanceDisclaimer, setShowRelevanceDisclaimer] = useState(false);
+  const [showQualityDisclaimer, setShowQualityDisclaimer] = useState(false);
   const { currentModals, addModal } = useModal();
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
@@ -314,36 +313,34 @@ function ParliamentExplorerClientInner({
             }
             right={
               <>
-                {SHOW_SPEECH_QUALITY && (
-                  <Card>
-                    <CardHeader
-                      title="発言の関連度・生産性（AI判定）"
-                      subtitle="クリックすると議員詳細が開きます。並び替えもできます。この情報を参考にする前に、かならず注意事項をご確認ください。"
-                      action={
-                        <DisclaimerToggleButton
-                          pressed={showRelevanceDisclaimer}
-                          onClick={() => setShowRelevanceDisclaimer((v) => !v)}
-                        />
-                      }
-                    />
-                    <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                      {showRelevanceDisclaimer ? (
-                        <DisclaimerPanel>
-                          <RelevanceProductivityDisclaimerContent />
-                        </DisclaimerPanel>
-                      ) : (
-                        <RelevanceProductivityBarList
-                          relevanceAndProductivityData={relevanceAndProductivityData}
-                          allParliamentMemberTable={allParliamentMemberTable}
-                          selectedPersonId={selectedPersonId}
-                          onSelectPersonId={(id) =>
-                            handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
-                          }
-                        />
-                      )}
-                    </div>
-                  </Card>
-                )}
+                <Card>
+                  <CardHeader
+                    title="やり取りの評価（AI判定）"
+                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、かならず注意事項をご確認ください。"
+                    action={
+                      <DisclaimerToggleButton
+                        pressed={showQualityDisclaimer}
+                        onClick={() => setShowQualityDisclaimer((v) => !v)}
+                      />
+                    }
+                  />
+                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                    {showQualityDisclaimer ? (
+                      <DisclaimerPanel>
+                        <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
+                      </DisclaimerPanel>
+                    ) : (
+                      <SpeechQualityBarList
+                        aggregate={qualityAggregate}
+                        allParliamentMemberTable={allParliamentMemberTable}
+                        selectedPersonId={selectedPersonId}
+                        onSelectPersonId={(id) =>
+                          handlePoliticianSelect(id, { source: "speech_quality_bars" })
+                        }
+                      />
+                    )}
+                  </div>
+                </Card>
 
                 <Card>
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
@@ -369,7 +366,7 @@ function ParliamentExplorerClientInner({
         isOpen={selectedPersonId !== null}
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
-        relevanceAndProductivityData={relevanceAndProductivityData}
+        qualityAggregate={qualityAggregate}
 		setSelectedIssueId={setSelectedIssueId}
         setSelectedIssueSpeechId={setSelectedIssueSpeechId}
       />

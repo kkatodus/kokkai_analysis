@@ -14,7 +14,7 @@ import type {
   ParliamentMemberData,
   IdeologyData,
   AllParliamentMemberTableData,
-  RelevanceAndProductivityData,
+  QualityAggregate,
 } from "@/app/types";
 
 
@@ -171,12 +171,16 @@ export async function getAllParliamentMemberTable(): Promise<AllParliamentMember
 	}
 }
 
-export async function getAllRelevanceAndProductivityData(): Promise<RelevanceAndProductivityData[] | null> {
+/**
+ * Exchange-label aggregate for every labelled politician (specs/speech-quality-ui §2.1).
+ * Read raw: the file is over 1 MB and grows with the backlog, so it must not go through Next's data cache.
+ */
+export async function getSpeechQualityAggregate(): Promise<QualityAggregate | null> {
 	try {
-		const data = await fetchApi<any>(API_ENDPOINTS.allRelevanceAndProductivityData, { cache: true });
-		return data.data as RelevanceAndProductivityData[];
+		const buf = await fetchApiRaw(API_ENDPOINTS.speechQualityAggregate, { cache: true });
+		return JSON.parse(new TextDecoder("utf-8").decode(new Uint8Array(buf))) as QualityAggregate;
 	} catch (error) {
-		console.error("Failed to fetch all relevance and productivity data from API, falling back to mock data:", error);
+		console.error("Failed to fetch the speech quality aggregate from API:", error);
 		return null;
 	}
 }

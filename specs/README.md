@@ -11,7 +11,8 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 | [speech-auto-update](speech-auto-update/README.md) | planned | Scheduled incremental fetch of new NDL speeches → `issues/` + `repr_speeches_id_organized/`, upload changed files to S3 |
 | [member-auto-update](member-auto-update/README.md) | in-progress | Monthly scrape of the official 衆/参 member lists → new `parliamentMembers/` snapshot with `person_id`s; members missing from `person` queued for a verified `add` |
 | [speaker-review](speaker-review/README.md) | in-progress | Confidence levels for speech → politician matches; unsure pairs held for a human decision (`python -m speech_update review`), decisions applied nightly |
-| [speech-quality-labels](speech-quality-labels/README.md) | planned | LLM labels for every exchange since 2000 and nightly: Diet function, contribution, failure patterns (private scandal, redundancy, evasion, softballs …) charged to questioner or answerer; $100/month cap with Slack spend reports |
+| [speech-quality-labels](speech-quality-labels/README.md) | in-progress | LLM labels for every exchange since 2000 and nightly: Diet function, contribution, failure patterns (private scandal, redundancy, evasion, softballs …) charged to questioner or answerer; $100/month cap with Slack spend reports |
+| [speech-quality-ui](speech-quality-ui/README.md) | in-progress | Site rebuilt around the new exchange labels: per-person aggregate + exchange files from `label_result`, `/speeches/quality/*`, ranking card, やり取り tab, meeting-view segments, new 注意事項 |
 | [topic-scaling-refresh](topic-scaling-refresh/README.md) | in-progress | Monthly re-summarise/re-embed/re-project of politicians per topic inside per-topic time windows; all-vs-current toggle in the scatter plot; topic and window suggestions posted to Slack for manual editing |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`

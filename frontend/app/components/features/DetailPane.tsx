@@ -1,39 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { AllParliamentMemberTableData, ElectionHistoryData, RelevanceAndProductivityData, SpeechRecord } from "@/app/types";
-import { SHOW_SPEECH_QUALITY } from "@/app/lib/config/features";
+import type { AllParliamentMemberTableData, ElectionHistoryData, QualityAggregate, QualityExchange, SpeechRecord } from "@/app/types";
 import { fetchElectionHistory } from "@/app/lib/services/electionHistoryService";
-import { fetchFirstPageOfAllTopics, fetchSpeechPage } from "@/app/lib/services/speechesService";
+import { fetchFirstPageOfAllTopics, fetchPersonQuality, fetchSpeechPage } from "@/app/lib/services/speechesService";
 import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCard";
 import { SpeechRecordCard, type SpeechTopicState } from "@/app/components/features/SpeechRecordCard";
+import { PersonQualityPanel } from "@/app/components/features/PersonQualityPanel";
+import { ContributionBar } from "@/app/components/visualizations/SpeechQualityBarList";
+import { indexExchanges, pct, rate } from "@/app/lib/quality";
 
 interface DetailPaneProps {
   personId: string;
   isOpen: boolean;
   onClose: () => void;
   allParliamentMemberTable?: AllParliamentMemberTableData[] | null;
-  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
+  qualityAggregate: QualityAggregate | null;
   setSelectedIssueId: (issueId: string | null) => void;
   setSelectedIssueSpeechId: (speechId: string | null) => void;
-}
-
-function clamp01(n: number): number {
-  if (!Number.isFinite(n)) return 0;
-  if (n < 0) return 0;
-  if (n > 1) return 1;
-  return n;
-}
-
-function normalizeProp(raw: number): number {
-  // Expected 0..1, but tolerate 0..100.
-  if (!Number.isFinite(raw)) return 0;
-  const n = raw > 1.00001 ? raw / 100 : raw;
-  return clamp01(n);
-}
-
-function percentLabel(n01: number): string {
-  return `${Math.round(clamp01(n01) * 1000) / 10}%`;
 }
 
 function normalizeTopicKey(topic: string): string {
@@ -51,7 +35,7 @@ export function DetailPane({
   isOpen,
   onClose,
   allParliamentMemberTable,
-  relevanceAndProductivityData,
+  qualityAggregate,
   setSelectedIssueId,
   setSelectedIssueSpeechId,
 }: DetailPaneProps) {
@@ -61,7 +45,7 @@ export function DetailPane({
   const resizeStartWidthRef = useRef<number>(380);
   const resizingRef = useRef<boolean>(false);
 
-  const [activePanel, setActivePanel] = useState<"speeches" | "history">("speeches");
+  const [activePanel, setActivePanel] = useState<"speeches" | "quality" | "history">("speeches");
   const [history, setHistory] = useState<ElectionHistoryData[] | null>(null);
   const [historyError, setHistoryError] = useState<string | null>(null);
 
@@ -69,6 +53,10 @@ export function DetailPane({
   const [speechError, setSpeechError] = useState<string | null>(null);
   const [selectedTopicKey, setSelectedTopicKey] = useState<string | null>(null);
   const [speechLoading, setSpeechLoading] = useState(false);
+
+  const [exchanges, setExchanges] = useState<QualityExchange[] | null>(null);
+  const [exchangesError, setExchangesError] = useState<string | null>(null);
+  const [exchangesLoading, setExchangesLoading] = useState(false);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -136,10 +124,33 @@ export function DetailPane({
     return personIndex.get(Number(personId)) ?? null;
   }, [personIndex, personId]);
 
-  const relevanceStats = useMemo(() => {
-    const arr = relevanceAndProductivityData ?? [];
+  const qualityPerson = useMemo(() => {
+    const arr = qualityAggregate?.persons ?? [];
     return arr.find((d) => String(d.person_id) === String(personId)) ?? null;
-  }, [relevanceAndProductivityData, personId]);
+  }, [qualityAggregate, personId]);
+
+  const exchangeIndex = useMemo(() => indexExchanges(exchanges), [exchanges]);
+
+  useEffect(() => {
+    if (!isOpen || !personId) return;
+    let cancelled = false;
+    setExchanges(null);
+    setExchangesError(null);
+    setExchangesLoading(true);
+    (async () => {
+      try {
+        const data = await fetchPersonQuality(personId);
+        if (!cancelled) setExchanges(data);
+      } catch (e) {
+        if (!cancelled) setExchangesError(e instanceof Error ? e.message : "Unknown error");
+      } finally {
+        if (!cancelled) setExchangesLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, personId]);
 
   useEffect(() => {
     if (!isOpen || !personId) return;
@@ -331,6 +342,20 @@ export function DetailPane({
               <button
                 type="button"
                 role="tab"
+                aria-selected={activePanel === "quality"}
+                onClick={() => setActivePanel("quality")}
+                className={
+                  "rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors " +
+                  (activePanel === "quality"
+                    ? "bg-cyan-500/20 text-cyan-100"
+                    : "text-gray-300 hover:bg-slate-900/50")
+                }
+              >
+                やり取り
+              </button>
+              <button
+                type="button"
+                role="tab"
                 aria-selected={activePanel === "history"}
                 onClick={() => setActivePanel("history")}
                 className={
@@ -348,71 +373,60 @@ export function DetailPane({
             {personMeta?.name_kana ?? "（かな不明）"}
           </div>
 
-          {SHOW_SPEECH_QUALITY && (
-            <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
+          {qualityPerson?.as_questioner && qualityPerson.as_questioner.n > 0 && (
+            <button
+              type="button"
+              onClick={() => setActivePanel("quality")}
+              className="mt-2 w-full rounded-xl border border-slate-400/15 bg-slate-950/20 p-2 text-left transition-colors hover:bg-white/5"
+              title="やり取りの評価を見る"
+            >
               <div className="mb-1 flex items-center justify-between gap-2">
-                <div className="text-[11px] font-semibold text-gray-200">関連度・生産性（割合）</div>
+                <div className="text-[11px] font-semibold text-gray-200">やり取りの評価（AI判定）</div>
                 <div className="text-[11px] text-gray-400">
-                  分類された発言数:{" "}
-                  {relevanceStats && Number.isFinite(relevanceStats.Total_Count) ? relevanceStats.Total_Count : "—"}
+                  質問 {qualityPerson.as_questioner.n} 件
+                  {qualityPerson.as_answerer?.n ? `・答弁 ${qualityPerson.as_answerer.n} 件` : ""}
                 </div>
               </div>
-
-              {relevanceStats ? (
-                (() => {
-                  const tt = normalizeProp(relevanceStats.prop_R_True_P_True);
-                  const tf = normalizeProp(relevanceStats.prop_R_True_P_False);
-                  const ff = normalizeProp(relevanceStats.prop_R_False_P_False);
-                  return (
-                    <>
-                      <div className="h-3 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
-                        <div className="flex h-full w-full">
-                          <div
-                            className="h-full bg-emerald-500/80"
-                            style={{ width: `${Math.round(tt * 10000) / 100}%` }}
-                            title={`関連×生産性あり: ${percentLabel(tt)}`}
-                          />
-                          <div
-                            className="h-full bg-amber-500/80"
-                            style={{ width: `${Math.round(tf * 10000) / 100}%` }}
-                            title={`関連×生産性なし: ${percentLabel(tf)}`}
-                          />
-                          <div
-                            className="h-full bg-rose-500/80"
-                            style={{ width: `${Math.round(ff * 10000) / 100}%` }}
-                            title={`非関連×生産性なし: ${percentLabel(ff)}`}
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
-                          関連×生産性あり: {percentLabel(tt)}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
-                          関連×生産性なし: {percentLabel(tf)}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
-                          非関連×生産性なし: {percentLabel(ff)}
-                        </div>
-                      </div>
-                    </>
-                  );
-                })()
-              ) : (
-                <div className="text-[11px] text-gray-500">関連度・生産性データがありません。</div>
-              )}
-            </div>
+              <ContributionBar counts={qualityPerson.as_questioner.contribution} className="h-2.5" />
+              <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+                <div className="flex items-center gap-1">
+                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
+                  実質的な成果あり {pct(rate(qualityPerson.as_questioner.contribution.substantive, qualityPerson.as_questioner.n))}
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
+                  限定的 {pct(rate(qualityPerson.as_questioner.contribution.limited, qualityPerson.as_questioner.n))}
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="inline-block h-2 w-2 rounded-full bg-rose-500/80" />
+                  成果なし {pct(rate(qualityPerson.as_questioner.contribution.none, qualityPerson.as_questioner.n))}
+                </div>
+                <div className="ml-auto">
+                  問題点の指摘 {pct(rate(qualityPerson.as_questioner.flagged?.any, qualityPerson.as_questioner.n))}
+                </div>
+              </div>
+            </button>
           )}
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">
           {activePanel === "history" ? (
             <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
+          ) : activePanel === "quality" ? (
+            <PersonQualityPanel
+              person={qualityPerson}
+              totals={qualityAggregate?.totals ?? null}
+              exchanges={exchanges}
+              loading={exchangesLoading}
+              error={exchangesError}
+              onSelectIssueId={(issueId, speechId) => {
+                setSelectedIssueId(issueId);
+                setSelectedIssueSpeechId(speechId ?? null);
+              }}
+            />
           ) : (
             <SpeechRecordCard
+              exchangeIndex={exchangeIndex}
               speechTopics={speechTopics}
               speechError={speechError}
               speechLoading={speechLoading}

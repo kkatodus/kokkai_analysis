@@ -93,6 +93,8 @@ Until the frontend uses the new fields, the old ones are derived:
 
 The new fields go alongside them on the same speech line (`quality: {function, contribution, issues, responsible, outcomes, topic}`), so nothing breaks.
 
+**Superseded 2026-11-09:** the user decided compatibility is not needed; the site was rebuilt around the new fields ([speech-quality-ui](../speech-quality-ui/README.md)) and the derived fields are no longer written.
+
 ### 3.6 Fairness check
 
 A public "productivity" score has to hold up for every party. Scandal pursuit is mostly opposition behaviour and softballs mostly ruling-party behaviour, so the rubric counts both. The evaluation (4.1) checks that error rates against the user's labels are similar across parties, not just overall accuracy, and the site's methodology note says so.
@@ -195,14 +197,14 @@ For each finished batch: write §3.5's fields onto the exchange's first speech i
 - [x] Ledger and price tables, cap check, Gemini Batch client: `speech_quality/ledger.py`, `gemini_batch.py`, `label_job.py` (2026-10-19)
 - [x] Claude Message Batches as the default provider, Gemini as fallback: `speech_quality/batch_client.py` (2026-10-22, §4.5)
 - [x] Writer onto `issues/{id}/speeches.jsonl` (`quality` object + the §3.5 fields) + upload (2026-10-19)
-- [ ] Per-person files and per-role aggregate rebuild (`Unproductive.jsonl` / `aggregate_processed.jsonl` successors), from `label_result`
+- [x] Per-person files and per-role aggregate from `label_result`: `speech_quality/publish.py` → `speech_quality/aggregate.json` + `persons/{id}.jsonl` (2026-11-09, [speech-quality-ui](../speech-quality-ui/README.md) §2)
 - [x] Slack line in the nightly summary; 50/80/100% alerts
 - [ ] Monthly summary on the 1st; price check
 - [x] Nightly `label` stage in `speech_update all`; backlog newest first (2026-10-19)
 - [ ] User: Cloud Billing budget at $120 with email alerts
 - [ ] Session-wide redundancy pass (4.3)
-- [ ] Frontend: show `function`, issues and per-role totals (separate spec; touches `frontend/`, which deploys)
-- [ ] Docs: DATA-PIPELINES.md, DATA-LAYOUT.md, site methodology note
+- [x] Frontend: show `function`, issues and per-role totals — [speech-quality-ui](../speech-quality-ui/README.md) (2026-11-09)
+- [x] Docs: DATA-PIPELINES.md, DATA-LAYOUT.md, site methodology note (2026-11-09, with the UI rebuild)
 
 ## 6. Open questions
 

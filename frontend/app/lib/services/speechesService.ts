@@ -1,4 +1,4 @@
-import type { FirstPageOfAllTopics, SpeechPageResponse } from "@/app/types";
+import type { FirstPageOfAllTopics, QualityExchange, SpeechPageResponse } from "@/app/types";
 
 function normalizeTopicForGetEndpoint(topic: string): string {
   // Backend `/speeches/get` appends `.jsonl`, while `/get_first_page_of_all_topics`
@@ -44,3 +44,16 @@ export async function fetchSpeechPage(
 }
 
 
+
+/** One politician's labelled exchanges, newest first (specs/speech-quality-ui §2.2). Empty when none are labelled. */
+export async function fetchPersonQuality(personId: string): Promise<QualityExchange[]> {
+  const res = await fetch(`/api/speeches/quality_person?person_id=${encodeURIComponent(personId)}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`Request failed: ${res.status} ${res.statusText}${text ? ` — ${text}` : ""}`);
+  }
+  const data = (await res.json()) as { exchanges?: unknown };
+  return Array.isArray(data.exchanges) ? (data.exchanges as QualityExchange[]) : [];
+}

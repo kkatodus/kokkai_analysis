@@ -8,7 +8,7 @@ Base URL configured in `frontend/app/lib/config/api.ts`. Most routes require `X-
 
 | Area | Endpoints | Data source |
 |---|---|---|
-| Speeches | `/speeches/*` | `s3_mirror/kokkai-doc/` — issues, organized speeches, relevance |
+| Speeches | `/speeches/*` | `s3_mirror/kokkai-doc/` — issues, organized speeches, exchange quality labels (`speech_quality/`) |
 | Parliament members | `/parliamentMembers/*`, `/politicians/*` | Member metadata from pipeline sync |
 | Election history | `/electionHistory/*` | Per-`person_id` JSONL timelines |
 | Geo | `/geo/*` | District / city data |
@@ -33,11 +33,18 @@ point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point:
 
 `1d.x` is the projection onto the sub-topic axis (0 = midpoint, positive = pro); the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
 
+### Exchange quality labels (`/speeches/quality/*`, spec `specs/speech-quality-ui/`)
+
+- `GET /speeches/quality/aggregate` → `kokkai-doc/speech_quality/aggregate.json`: `{ version, generated_at, prompt_version, models, coverage: {from, to, exchanges, meetings}, totals: {as_questioner, as_answerer}, persons: [{ person_id, name, group, as_questioner: Counts|null, as_answerer: AnswerCounts|null }] }`. Fetched server-side in `page.tsx` (raw, >1 MB) and passed to `SpeechQualityBarList` and `DetailPane`.
+- `GET /speeches/quality/person?person_id=` → `{ exchanges: [{ role, start_speech_id, issue_id, date, house, meeting, questioner, questioner_group, orders, function, contribution, issues, responsible, outcomes, topic, reason, model }] }`, newest first; empty when nothing is labelled. Proxied by `app/api/speeches/quality_person`.
+- Meeting view: the exchange's first speech in `/speeches/get_issue_by_id` carries `quality: { function, contribution, issues, responsible, outcomes, topic, reason, model, prompt, speech_ids }`; `speechSegmentation.ts` turns `speech_ids` into coloured segments.
+- TypeScript shapes: `Quality*` in `frontend/app/types/index.ts`; Japanese vocabulary in `frontend/app/lib/quality.ts` (mirror of `data/speech_quality/prompt.py`).
+
 ## Next.js API routes (`frontend/app/api/`)
 
 Some browser-facing calls go through Next.js route handlers instead of hitting FastAPI directly:
 
-- `app/api/speeches/*` — speech fetch, availability, first page of topics, issue by ID
+- `app/api/speeches/*` — speech fetch, availability, first page of topics, issue by ID, a person's labelled exchanges (`quality_person`)
 - `app/api/electionHistory/route.ts`
 - `app/api/donors/route.ts`
 - `app/api/payment/*` — create payment intent / session

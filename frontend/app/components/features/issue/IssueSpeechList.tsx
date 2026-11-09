@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { IssueSpeechRecord } from "@/app/types";
 import type { SegmentKind } from "@/app/components/features/issue/speechSegmentation";
 import { SEGMENT_PALETTES, type SpeechSegment } from "@/app/components/features/issue/speechSegmentation";
+import { ExchangeChips } from "@/app/components/features/QualityChips";
+import { CONTRIBUTION_STYLE } from "@/app/lib/quality";
 
 function clamp(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n));
@@ -32,18 +34,16 @@ export function IssueSpeechList({
 
   const safeIndex = useMemo(() => clamp(selectedIndex, 0, Math.max(0, speeches.length - 1)), [selectedIndex, speeches]);
 
+  // One header per labelled exchange, on its first speech: what it was for, what it produced, and why.
   const segmentNoteByStartIndex = useMemo(() => {
-    const map = new Map<number, { kind: Exclude<SegmentKind, "unknown">; reason: string }>();
+    const map = new Map<number, SpeechSegment>();
     for (const seg of segments ?? []) {
-      if (seg.kind === "unknown") continue;
-      if (seg.kind === "rt_pt") continue; // skip productive+relevant segments
-      const starter = speeches[seg.startIndex];
-      const reason = String(starter?.quality_reason ?? "").trim();
-      if (!reason) continue;
-      map.set(seg.startIndex, { kind: seg.kind, reason });
+      if (seg.kind === "unknown" || !seg.quality) continue;
+      if (seg.starterIndex !== undefined && seg.starterIndex !== seg.startIndex) continue; // a run split by an interjection
+      map.set(seg.startIndex, seg);
     }
     return map;
-  }, [segments, speeches]);
+  }, [segments]);
 
   useEffect(() => {
     const el = itemRefs.current[safeIndex];
@@ -71,17 +71,22 @@ export function IssueSpeechList({
           const note = segmentNoteByStartIndex.get(i) ?? null;
           return (
             <div key={key} className="grid gap-1.5">
-              {note ? (
+              {note && note.quality ? (
                 <div
                   className={
-                    "rounded-lg border px-2 py-1 text-[11px] text-gray-200 " +
-                    (note.kind === "rt_pf"
-                      ? "border-amber-400/25 bg-amber-500/10"
-                      : "border-rose-400/25 bg-rose-500/10")
+                    "rounded-lg border px-2 py-1.5 text-[11px] text-gray-200 " + CONTRIBUTION_STYLE[note.quality.contribution].note
                   }
                 >
-                  <span className="mr-2 font-semibold">判定理由</span>
-                  <span className="text-gray-100/90">{note.reason}</span>
+                  <div className="mb-1 flex flex-wrap items-center gap-1">
+                    <span className="mr-1 font-semibold">AI判定</span>
+                    <ExchangeChips
+                      fn={note.quality.function}
+                      contribution={note.quality.contribution}
+                      issues={note.quality.issues}
+                      outcomes={note.quality.outcomes}
+                    />
+                  </div>
+                  <div className="text-gray-100/90">{note.quality.reason}</div>
                 </div>
               ) : null}
 
