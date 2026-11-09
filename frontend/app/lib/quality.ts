@@ -232,50 +232,81 @@ export function yearMonth(d: string | null | undefined): string {
   return `${y}年${Number(m)}月`;
 }
 
-/** Per-person metrics the explorer can rank by. Each returns null when the denominator is too small to mean anything. */
-export type QualityMetricKey =
-  | "substantive"
-  | "flagged"
-  | "softball"
-  | "grandstanding"
-  | "proposal"
-  | "new_information"
-  | "evasive";
+/** Per-person metrics the explorer can rank by: every count in the aggregate, as a share of the role's exchanges. */
+export type QualityMetricKey = string;
 
-export const QUALITY_METRICS: Array<{
+export interface QualityMetric {
   key: QualityMetricKey;
   label: string;
+  group: string;
   role: "questioner" | "answerer";
+  /** share = numerator / exchanges in that role; count = the raw number of exchanges */
+  kind: "share" | "count";
   hint: string;
-}> = [
-  { key: "substantive", label: "実質的な成果があった割合", role: "questioner", hint: "質問者として始めたやり取りのうち、contribution が「実質的」のもの" },
-  { key: "flagged", label: "問題点が指摘された割合", role: "questioner", hint: "質問者側に一つ以上の問題点が付いたやり取り" },
-  { key: "softball", label: "お膳立て質問の割合", role: "questioner", hint: "用意された好意的な答弁を引き出すだけの質問が指摘されたやり取り" },
-  { key: "grandstanding", label: "演説・宣伝の割合", role: "questioner", hint: "実質的な質問のない演説が指摘されたやり取り" },
-  { key: "proposal", label: "新しい提案を示した割合", role: "questioner", hint: "政府がまだ採用していない具体的な提案が出たやり取り" },
-  { key: "new_information", label: "新事実を引き出した割合", role: "questioner", hint: "公になっていなかった事実・数字が答弁で出たやり取り" },
-  { key: "evasive", label: "答弁のはぐらかしの割合（答弁者として）", role: "answerer", hint: "答弁者として関わったやり取りのうち、はぐらかしが指摘されたもの" },
+  value: (q: QualityCounts | null, a: QualityAnswerCounts | null) => { num: number; den: number } | null;
+}
+
+const qShare = (f: (q: QualityCounts) => number) => (q: QualityCounts | null) => (q && q.n ? { num: f(q), den: q.n } : null);
+const aShare = (f: (a: QualityAnswerCounts) => number) => (_q: QualityCounts | null, a: QualityAnswerCounts | null) =>
+  a && a.n ? { num: f(a), den: a.n } : null;
+
+export const QUALITY_METRICS: QualityMetric[] = [
+  { key: "n_q", label: "やり取り数（質問者として）", group: "件数", role: "questioner", kind: "count", hint: "質問者として始めたやり取りの数", value: (q) => (q ? { num: q.n, den: 1 } : null) },
+  { key: "n_a", label: "やり取り数（答弁者として）", group: "件数", role: "answerer", kind: "count", hint: "答弁者として関わったやり取りの数", value: (_q, a) => (a ? { num: a.n, den: 1 } : null) },
+
+  ...CONTRIBUTIONS.map((c): QualityMetric => ({
+    key: `contribution_${c}`, label: `${CONTRIBUTION_JA[c]}の割合`, group: "成果（質問者として）", role: "questioner", kind: "share",
+    hint: CONTRIBUTION_DESC_JA[c], value: qShare((q) => q.contribution[c]),
+  })),
+  ...OUTCOMES.map((o): QualityMetric => ({
+    key: `outcome_${o}`, label: `${OUTCOME_JA[o]}割合`, group: "成果の内訳（質問者として）", role: "questioner", kind: "share",
+    hint: OUTCOME_JA[o], value: qShare((q) => q.outcomes[o]),
+  })),
+
+  { key: "flagged_any", label: "問題点が指摘された割合", group: "問題点（質問者側）", role: "questioner", kind: "share", hint: "質問者側に一つ以上の問題点が付いたやり取り", value: qShare((q) => q.flagged?.any ?? 0) },
+  { key: "flagged_most", label: "大半が問題とされた割合", group: "問題点（質問者側）", role: "questioner", kind: "share", hint: "やり取りの大半を占める問題点が質問者側に付いたもの", value: qShare((q) => q.flagged?.most ?? 0) },
+  ...QUESTIONER_ISSUE_TYPES.map((t): QualityMetric => ({
+    key: `issue_${t}`, label: `${ISSUE_JA[t]}の割合`, group: "問題点（質問者側）", role: "questioner", kind: "share",
+    hint: ISSUE_DESC_JA[t], value: qShare((q) => issueTotal(q.issues[t])),
+  })),
+
+  ...FUNCTIONS.map((f): QualityMetric => ({
+    key: `function_${f}`, label: `${FUNCTION_JA[f]}の割合`, group: "何のためのやり取りか", role: "questioner", kind: "share",
+    hint: FUNCTION_DESC_JA[f], value: qShare((q) => q.function[f]),
+  })),
+
+  { key: "a_flagged_any", label: "問題点が指摘された割合（答弁者として）", group: "答弁者として", role: "answerer", kind: "share", hint: "答弁者側に一つ以上の問題点が付いたやり取り", value: aShare((a) => a.flagged?.any ?? 0) },
+  ...ANSWERER_ISSUE_TYPES.map((t): QualityMetric => ({
+    key: `a_issue_${t}`, label: `${ISSUE_JA[t]}の割合（答弁者として）`, group: "答弁者として", role: "answerer", kind: "share",
+    hint: ISSUE_DESC_JA[t], value: aShare((a) => issueTotal(a.issues[t])),
+  })),
+  { key: "a_outcome_new_information", label: "新事実が出た割合（答弁者として）", group: "答弁者として", role: "answerer", kind: "share", hint: "答弁で新しい事実・数字が出たやり取り", value: aShare((a) => a.outcomes.new_information) },
+  { key: "a_outcome_commitment", label: "具体的な約束をした割合（答弁者として）", group: "答弁者として", role: "answerer", kind: "share", hint: "「検討する」以上の具体的な約束をした答弁", value: aShare((a) => a.outcomes.commitment) },
 ];
 
+export const DEFAULT_METRIC_KEY: QualityMetricKey = "contribution_substantive";
+
+export function metricByKey(key: QualityMetricKey): QualityMetric {
+  return QUALITY_METRICS.find((m) => m.key === key) ?? QUALITY_METRICS[0];
+}
+
+/** `value` is the share (0..1) or the count; `n` is the number of exchanges in the metric's role. */
 export function metricValue(p: QualityPerson, key: QualityMetricKey): { value: number; n: number } | null {
-  const q: QualityCounts | null = p.as_questioner;
-  const a: QualityAnswerCounts | null = p.as_answerer;
-  switch (key) {
-    case "substantive":
-      return q ? { value: rate(q.contribution.substantive, q.n), n: q.n } : null;
-    case "flagged":
-      return q ? { value: rate(q.flagged?.any, q.n), n: q.n } : null;
-    case "softball":
-      return q ? { value: rate(issueTotal(q.issues.softball), q.n), n: q.n } : null;
-    case "grandstanding":
-      return q ? { value: rate(issueTotal(q.issues.grandstanding), q.n), n: q.n } : null;
-    case "proposal":
-      return q ? { value: rate(q.outcomes.proposal, q.n), n: q.n } : null;
-    case "new_information":
-      return q ? { value: rate(q.outcomes.new_information, q.n), n: q.n } : null;
-    case "evasive":
-      return a ? { value: rate(issueTotal(a.issues.evasive), a.n), n: a.n } : null;
+  const m = metricByKey(key);
+  const v = m.value(p.as_questioner, p.as_answerer);
+  if (!v) return null;
+  const n = m.role === "answerer" ? (p.as_answerer?.n ?? 0) : (p.as_questioner?.n ?? 0);
+  return { value: m.kind === "count" ? v.num : rate(v.num, v.den), n };
+}
+
+export function metricGroups(): Array<{ group: string; metrics: QualityMetric[] }> {
+  const out: Array<{ group: string; metrics: QualityMetric[] }> = [];
+  for (const m of QUALITY_METRICS) {
+    const g = out.find((x) => x.group === m.group);
+    if (g) g.metrics.push(m);
+    else out.push({ group: m.group, metrics: [m] });
   }
+  return out;
 }
 
 /** The questioner-side issue types a person was flagged for, most frequent first, as shares of their exchanges. */

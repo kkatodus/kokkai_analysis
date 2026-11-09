@@ -6,8 +6,10 @@ import {
   CONTRIBUTION_JA,
   CONTRIBUTION_STYLE,
   CONTRIBUTIONS,
+  DEFAULT_METRIC_KEY,
   ISSUE_JA,
-  QUALITY_METRICS,
+  metricByKey,
+  metricGroups,
   metricValue,
   pct,
   rate,
@@ -54,13 +56,14 @@ export function SpeechQualityBarList({
   selectedPersonId?: string | null;
   onSelectPersonId: (personId: string) => void;
 }) {
-  const [metricKey, setMetricKey] = useState<QualityMetricKey>("substantive");
+  const [metricKey, setMetricKey] = useState<QualityMetricKey>(DEFAULT_METRIC_KEY);
   const [sortDir, setSortDir] = useState<"desc" | "asc">("desc");
   const [minCount, setMinCount] = useState<number>(20);
   const [pageSize, setPageSize] = useState<number>(25);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
-  const metric = QUALITY_METRICS.find((m) => m.key === metricKey) ?? QUALITY_METRICS[0];
+  const metric = metricByKey(metricKey);
+  const fmt = (v: number) => (metric.kind === "count" ? `${v.toLocaleString()} 件` : pct(v, 1));
 
   const personIndex = useMemo(() => {
     const map = new Map<number, AllParliamentMemberTableData>();
@@ -153,10 +156,14 @@ export function SpeechQualityBarList({
             }}
             className="h-8 max-w-[260px] rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 outline-none focus:border-cyan-400/60"
           >
-            {QUALITY_METRICS.map((m) => (
-              <option key={m.key} value={m.key}>
-                {m.label}
-              </option>
+            {metricGroups().map((g) => (
+              <optgroup key={g.group} label={g.group}>
+                {g.metrics.map((m) => (
+                  <option key={m.key} value={m.key}>
+                    {m.label}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
           <button
@@ -201,7 +208,7 @@ export function SpeechQualityBarList({
         ))}
         <div className="ml-auto text-gray-500" title={metric.hint}>
           {metric.label}
-          {baseline ? `・全体 ${pct(baseline.value, 1)}` : ""}
+          {baseline && metric.kind === "share" ? `・全体 ${pct(baseline.value, 1)}` : ""}
           {aggregate.coverage.from ? `・対象 ${yearMonth(aggregate.coverage.from)}〜${yearMonth(aggregate.coverage.to)}` : ""}
         </div>
       </div>
@@ -264,7 +271,7 @@ export function SpeechQualityBarList({
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="text-[13px] font-semibold text-gray-100" title={metric.label}>
-                      {pct(value, 1)}
+                      {fmt(value)}
                     </div>
                     <div className="text-[10px] text-gray-500">
                       {metric.role === "answerer" ? "答弁" : "質問"} {n} 件
