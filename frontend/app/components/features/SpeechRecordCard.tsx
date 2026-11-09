@@ -197,7 +197,7 @@ export function SpeechRecordCard({
                           if (!ex) return null;
                           return (
                             <div title={`AI判定: ${ex.reason}`}>
-                              <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} compact />
+                              <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} compact prefixed />
                             </div>
                           );
                         })()}
