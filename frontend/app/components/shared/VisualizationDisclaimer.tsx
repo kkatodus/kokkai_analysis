@@ -79,13 +79,11 @@ export function IdeologyDisclaimerContent() {
 
 export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: QualityAggregate | null }) {
   const cov = aggregate?.coverage ?? null;
-  const modelEntries = Object.entries(aggregate?.models ?? {}).sort((a, b) => b[1] - a[1]);
-  const modelTotal = modelEntries.reduce((n, [, c]) => n + c, 0);
-  const modelText = modelEntries.length
-    ? modelEntries
-        .map(([m, c]) => `${m}（${c.toLocaleString()} 件、${Math.round((c / modelTotal) * 1000) / 10}%）`)
-        .join("、")
-    : "gemini-3.8-flash";
+  // Models that labelled at least 1% of the exchanges (a two-exchange smoke test on another model is left out).
+  const allModels = Object.entries(aggregate?.models ?? {}).sort((a, b) => b[1] - a[1]);
+  const modelTotal = allModels.reduce((n, [, c]) => n + c, 0);
+  const modelEntries = allModels.filter(([, c]) => c >= modelTotal * 0.01);
+  const modelText = modelEntries.length ? modelEntries.map(([m]) => m).join("、") : "gemini-3.8-flash";
 
   return (
     <>
