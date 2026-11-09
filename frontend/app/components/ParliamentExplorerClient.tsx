@@ -449,7 +449,8 @@ function ParliamentExplorerClientInner({
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
 
-        {tourStep !== null && (
+        {/* the tour steps aside while a modal (donation, disclaimer) is open and resumes at the same step */}
+        {tourStep !== null && currentModals.length === 0 && (
           <Tutorial
             steps={TOUR_STEPS}
             stepIndex={tourStep}
