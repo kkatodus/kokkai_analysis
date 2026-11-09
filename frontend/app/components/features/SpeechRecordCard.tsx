@@ -95,7 +95,7 @@ export function SpeechRecordCard({
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40">
+    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40" data-tour="speech-card">
       <div className="flex items-center justify-between px-2 pb-1 pt-2">
         <div className="text-[13px] font-semibold text-gray-50">発言（トピック別）</div>
         {speechLoading && <LoadingIndicator variant="dots" size="sm" />}

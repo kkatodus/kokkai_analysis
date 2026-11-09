@@ -18,6 +18,9 @@ interface DetailPaneProps {
   qualityAggregate: QualityAggregate | null;
   setSelectedIssueId: (issueId: string | null) => void;
   setSelectedIssueSpeechId: (speechId: string | null) => void;
+  /** the guided tour asks for a tab; `nonce` changes on every request */
+  panelRequest?: { panel: (typeof PANEL_ORDER)[number]; nonce: number } | null;
+  onPanelChange?: (panel: (typeof PANEL_ORDER)[number]) => void;
 }
 
 function normalizeTopicKey(topic: string): string {
@@ -40,6 +43,8 @@ export function DetailPane({
   qualityAggregate,
   setSelectedIssueId,
   setSelectedIssueSpeechId,
+  panelRequest,
+  onPanelChange,
 }: DetailPaneProps) {
   const [paneWidthPx, setPaneWidthPx] = useState<number>(380);
   const [isNarrow, setIsNarrow] = useState(false);
@@ -48,6 +53,13 @@ export function DetailPane({
   const resizingRef = useRef<boolean>(false);
 
   const [activePanel, setActivePanel] = useState<(typeof PANEL_ORDER)[number]>("speeches");
+
+  useEffect(() => {
+    if (panelRequest) setActivePanel(panelRequest.panel);
+  }, [panelRequest]);
+  useEffect(() => {
+    onPanelChange?.(activePanel);
+  }, [activePanel, onPanelChange]);
   const [history, setHistory] = useState<ElectionHistoryData[] | null>(null);
   const [historyError, setHistoryError] = useState<string | null>(null);
 
@@ -289,6 +301,7 @@ export function DetailPane({
       <div
         className="fixed inset-y-4 right-4 z-40 max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
         style={{ width: isNarrow ? "100%" : `${paneWidthPx}px` }}
+        data-tour="detail-pane"
       >
       <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-linear-to-br from-[#020617] to-[#020617] p-3.5 shadow-2xl">
         {/* Left resize handle (desktop only) */}
