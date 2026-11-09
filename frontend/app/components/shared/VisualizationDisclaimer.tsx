@@ -17,6 +17,7 @@ import {
   yearMonth,
 } from "@/app/lib/quality";
 import { QUALITY_PROMPT_VERSION, QUALITY_SYSTEM_PROMPT } from "@/app/lib/qualityPrompt";
+import { CONTRIBUTION_STYLE, FUNCTION_STYLE, ISSUE_CHIP, ISSUE_CHIP_PART, OUTCOME_CHIP, OUTCOME_SHORT_JA } from "@/app/lib/quality";
 
 export function DisclaimerToggleButton({
   pressed,
@@ -77,6 +78,43 @@ export function IdeologyDisclaimerContent() {
   );
 }
 
+function Slide({ title, kicker, children, className = "" }: { title: string; kicker?: string; children: ReactNode; className?: string }) {
+  return (
+    <section className={"rounded-2xl border border-slate-400/15 bg-slate-950/40 p-3 " + className}>
+      {kicker && <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-300/80">{kicker}</div>}
+      <div className="mb-2 text-[14px] font-semibold text-gray-50">{title}</div>
+      {children}
+    </section>
+  );
+}
+
+function StatTile({ label, value, sub }: { label: string; value: string; sub?: string }) {
+  return (
+    <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 px-3 py-2">
+      <div className="text-[10px] text-gray-400">{label}</div>
+      <div className="text-[16px] font-semibold tabular-nums text-gray-50">{value}</div>
+      {sub && <div className="text-[10px] text-gray-500">{sub}</div>}
+    </div>
+  );
+}
+
+function Callout({ tone, title, children }: { tone: "info" | "warn" | "good"; title: string; children: ReactNode }) {
+  const cls =
+    tone === "warn"
+      ? "border-amber-400/30 bg-amber-500/10"
+      : tone === "good"
+        ? "border-emerald-400/30 bg-emerald-500/10"
+        : "border-cyan-400/30 bg-cyan-500/10";
+  return (
+    <div className={"rounded-xl border p-2.5 " + cls}>
+      <div className="mb-0.5 text-[11px] font-semibold text-gray-50">{title}</div>
+      <div className="text-[11px] leading-relaxed text-gray-200">{children}</div>
+    </div>
+  );
+}
+
+const pill = "rounded-full border px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap ";
+
 export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: QualityAggregate | null }) {
   const cov = aggregate?.coverage ?? null;
   // Models that labelled at least 1% of the exchanges (a two-exchange smoke test on another model is left out).
@@ -86,109 +124,183 @@ export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: Quali
   const modelText = modelEntries.length ? modelEntries.map(([m]) => m).join("、") : "gemini-3.8-flash";
 
   return (
-    <>
-      <div>
-        「やり取りの評価」は、国会会議録（一次情報）の委員会質疑を、<strong>大規模言語モデル（LLM）が自動的に分類</strong>した結果です。
-        これはシステムによる<strong>推定的・参考的な分析</strong>であり、議員や大臣個人の能力、意図、誠実性、政治的立場や価値を断定・保証するものではありません。
-        最終的な判断は、当サイトから開ける会議録の<strong>原文をご自身でご確認のうえ</strong>行ってください。
-      </div>
+    <div className="space-y-3">
+      {/* 1. what this is */}
+      <Slide kicker="01 これは何？" title="委員会の「やり取り」をAIが分類した参考情報です">
+        <p className="text-[12px] leading-relaxed text-gray-200">
+          国会会議録（一次情報）の委員会質疑を、大規模言語モデル（LLM）が「何のための議論か」「成果があったか」「問題点があったか」の3つの軸で分類しています。
+          議員や大臣の能力・意図・誠実性・政治的立場を断定するものではありません。
+        </p>
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          <StatTile label="対象期間" value={cov?.from ? `${yearMonth(cov.from)}〜` : "—"} sub={cov?.to ? `${yearMonth(cov.to)} まで（順次さかのぼり中）` : undefined} />
+          <StatTile label="やり取り" value={cov ? cov.exchanges.toLocaleString() : "—"} sub="2000年以降の委員会質疑が対象" />
+          <StatTile label="会議" value={cov ? cov.meetings.toLocaleString() : "—"} sub="本会議は対象外" />
+        </div>
+        <div className="mt-2">
+          <Callout tone="warn" title="必ず原文を確認してください">
+            表示は推定です。各やり取りから会議録の原文を開けますので、判断はご自身で行ってください。
+          </Callout>
+        </div>
+      </Slide>
 
-      <div>
-        <div className="mb-1 font-semibold text-gray-100">対象と単位</div>
-        <ul className="ml-4 list-disc space-y-1">
-          <li>
-            評価の単位は「やり取り」です。ある委員の質問の持ち時間と、それに対する政府側などの答弁をひとまとまりとして扱い、個々の発言は評価しません。
-          </li>
-          <li>
-            対象は2000年以降の<strong>委員会</strong>質疑で、新しい会議から順にさかのぼって追加しています。本会議、ごく短い手続き的なやり取り、答弁のないやり取りは対象外です。
-            {cov?.from && (
-              <>
-                {" "}現在の対象期間: <strong>{yearMonth(cov.from)}〜{yearMonth(cov.to)}</strong>（{cov.exchanges.toLocaleString()} やり取り、{cov.meetings.toLocaleString()} 会議）。
-              </>
-            )}
-          </li>
-          <li>
-            質問者としての集計はその人が始めたやり取り、答弁者としての集計はその人が答弁したやり取りについて行っています。発言者の同定（氏名→議員）は自動で行っており、同定できなかった発言は集計に含まれません。
-          </li>
-          <li>
-            否定的なラベルは「疑わしきは本人に有利に」を原則とし、問題が明らかな場合にだけ付くようモデルに指示しています。党派によって基準を変えてはならないことも明示しています。
-          </li>
-        </ul>
-      </div>
+      {/* 2. unit */}
+      <Slide kicker="02 評価の単位" title="発言ひとつではなく、「質問の持ち時間＋それへの答弁」をひとまとまりで見ます">
+        <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
+          <div className="mb-1 text-[10px] text-gray-400">ひとつの やり取り</div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className={pill + "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"}>質問者 A</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-slate-400/40 bg-slate-500/15 text-slate-100"}>大臣</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"}>質問者 A</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-slate-400/40 bg-slate-500/15 text-slate-100"}>政府参考人</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"}>質問者 A</span>
+            <span className="text-gray-500">…</span>
+          </div>
+          <div className="mt-2 grid gap-1 text-[11px] text-gray-300 sm:grid-cols-2">
+            <div>・ 次の委員に質問者が替わるところで、やり取りが切り替わります</div>
+            <div>・ ラベルは やり取り全体に一つ。質問者側と答弁者側の問題点は区別します</div>
+            <div>・ ごく短い手続き的なやり取り、答弁のないやり取りは対象外</div>
+            <div>・ 会議名・日付・会派・同じ会議での前のやり取りの冒頭も文脈として渡します</div>
+          </div>
+        </div>
+      </Slide>
 
-      <div>
-        <div className="mb-1 font-semibold text-gray-100">ラベルの意味</div>
-        <div className="space-y-2">
-          <div>
-            <div className="text-gray-200">何のためのやり取りか（種類。良し悪しではありません）</div>
-            <ul className="ml-4 list-disc">
+      {/* 3. the three axes */}
+      <Slide kicker="03 3つの軸" title="何のため ／ 成果 ／ 問題点">
+        <div className="grid gap-2">
+          <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
+            <div className="mb-1 text-[12px] font-semibold text-gray-50">何のためのやり取りか</div>
+            <div className="mb-2 text-[10px] text-gray-400">種類の分類。良し悪しではありません。主なものを一つ。</div>
+            <div className="grid gap-1.5">
               {FUNCTIONS.map((f) => (
-                <li key={f}>
-                  <strong>{FUNCTION_JA[f]}</strong>: {FUNCTION_DESC_JA[f]}
-                </li>
+                <div key={f} className="flex items-start gap-2">
+                  <span className={pill + "w-[7.5rem] shrink-0 text-center " + FUNCTION_STYLE[f].chip}>{FUNCTION_JA[f]}</span>
+                  <span className="text-[11px] leading-snug text-gray-300">{FUNCTION_DESC_JA[f]}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
-          <div>
-            <div className="text-gray-200">成果（やり取り全体として）</div>
-            <ul className="ml-4 list-disc">
+
+          <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
+            <div className="mb-1 text-[12px] font-semibold text-gray-50">成果（やり取り全体として）</div>
+            <div className="mb-2 text-[10px] text-gray-400">棒グラフの色はこの3段階です。</div>
+            <div className="grid gap-1.5 sm:grid-cols-3">
               {CONTRIBUTIONS.map((c) => (
-                <li key={c}>
-                  <strong>{CONTRIBUTION_JA[c]}</strong>: {CONTRIBUTION_DESC_JA[c]}
-                </li>
+                <div key={c} className={"rounded-lg border p-2 " + CONTRIBUTION_STYLE[c].note}>
+                  <div className="flex items-center gap-1.5">
+                    <span className={`inline-block h-2.5 w-2.5 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
+                    <span className="text-[11px] font-semibold text-gray-50">{CONTRIBUTION_JA[c]}</span>
+                  </div>
+                  <div className="mt-0.5 text-[11px] leading-snug text-gray-300">{CONTRIBUTION_DESC_JA[c]}</div>
+                </div>
               ))}
-            </ul>
-            <div className="mt-1 text-gray-400">
-              成果の内訳: {OUTCOMES.map((o) => OUTCOME_JA[o]).join("・")}。既存の施策や政府方針の確認・後押しは「提案」に含めません。
+            </div>
+            <div className="mt-2 text-[10px] text-gray-400">成果の内訳</div>
+            <div className="mt-1 flex flex-wrap gap-1">
+              {OUTCOMES.map((o) => (
+                <span key={o} className={pill + OUTCOME_CHIP} title={OUTCOME_JA[o]}>
+                  {OUTCOME_SHORT_JA[o]}
+                </span>
+              ))}
+              <span className="text-[10px] text-gray-400">既存施策の確認・後押しは「提案」に含めません</span>
             </div>
           </div>
-          <div>
-            <div className="text-gray-200">問題点（該当する場合のみ。質問者側か答弁者側か、やり取りの一部か大半かを区別）</div>
-            <ul className="ml-4 list-disc">
+
+          <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
+            <div className="mb-1 text-[12px] font-semibold text-gray-50">問題点（該当する場合のみ）</div>
+            <div className="mb-2 text-[10px] text-gray-400">
+              誰の問題か（<span className="text-gray-200">質問者／答弁者</span>）と、やり取りの
+              <span className={pill + ISSUE_CHIP_PART + " mx-1"}>一部</span>か
+              <span className={pill + ISSUE_CHIP + " mx-1"}>大半</span>かを区別します。
+            </div>
+            <div className="grid gap-1.5">
               {ISSUE_TYPES.map((t) => (
-                <li key={t}>
-                  <strong>{ISSUE_JA[t]}</strong>: {ISSUE_DESC_JA[t]}
-                </li>
+                <div key={t} className="flex items-start gap-2">
+                  <span className={pill + "w-[8.5rem] shrink-0 text-center " + (t === "evasive" ? "border-violet-400/30 bg-violet-500/15 text-violet-100" : ISSUE_CHIP_PART)}>
+                    {ISSUE_JA[t]}
+                    {t === "evasive" && <span className="ml-1 font-normal opacity-80">答弁</span>}
+                  </span>
+                  <span className="text-[11px] leading-snug text-gray-300">{ISSUE_DESC_JA[t]}</span>
+                </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </Slide>
+
+      {/* 4. who gets counted */}
+      <Slide kicker="04 誰に数えるか" title="質問者としての記録と、答弁者としての記録を分けて集計します">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-2.5">
+            <div className="text-[12px] font-semibold text-cyan-100">質問者として</div>
+            <ul className="mt-1 ml-4 list-disc space-y-0.5 text-[11px] text-gray-200">
+              <li>その人が始めたやり取りが対象</li>
+              <li>何のため・成果・成果の内訳</li>
+              <li>質問者側の問題点（お膳立て、演説、繰り返し、私生活、人格攻撃、議事の争い）</li>
             </ul>
-            <div className="mt-1 text-gray-400">
-              一部にだけ問題があっても、やり取り全体の成果は残りの部分で判断されます。「成果」の割合と「問題点」の割合は別々の指標です。
-            </div>
+          </div>
+          <div className="rounded-xl border border-violet-400/25 bg-violet-500/10 p-2.5">
+            <div className="text-[12px] font-semibold text-violet-100">答弁者として</div>
+            <ul className="mt-1 ml-4 list-disc space-y-0.5 text-[11px] text-gray-200">
+              <li>大臣・副大臣・政府参考人・法案提出者として答えたやり取りが対象</li>
+              <li>答弁者側の問題点（はぐらかし、人格攻撃、議事の争い）</li>
+              <li>答弁から新事実が出たか、具体的な約束をしたか</li>
+            </ul>
           </div>
         </div>
-      </div>
+        <div className="mt-2 text-[11px] text-gray-400">
+          発言者と議員の対応付けは自動で行っています。対応付けできなかった発言は、どの議員にも数えられません。
+        </div>
+      </Slide>
 
-      <div>
-        <div className="mb-1 font-semibold text-gray-100">公平性について</div>
-        <div>
-          不祥事の追及は主に野党、お膳立て質問は主に与党の行動であるため、基準は双方を数えるよう設計しています。
-          また、公金や公的権限に関わる不祥事の追及は「行政監視」として正当な機能に数え、公務と無関係な私生活への固執だけを問題点としています。
-          それでもモデルの判断には誤りや偏りが含まれ得ます。
+      {/* 5. how to read */}
+      <Slide kicker="05 読み方の注意" title="数字を見るときに知っておいてほしいこと">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <Callout tone="good" title="疑わしきは本人に有利に">
+            否定的なラベルは、問題が明らかな場合にだけ付くようモデルに指示しています。迷ったら付けません。質問者にも答弁者にも同じです。
+          </Callout>
+          <Callout tone="info" title="「成果」と「問題点」は別の指標">
+            冒頭の一言が演説的でも、残りが実質的なら成果は「実質的」です。問題点の割合が高くても成果がないとは限りません。
+          </Callout>
+          <Callout tone="info" title="党派で基準を変えません">
+            不祥事の追及は主に野党、お膳立て質問は主に与党の行動なので、基準は双方を数えます。公金・公的権限に関わる不祥事の追及は正当な「行政監視」で、私生活への固執だけを問題点とします。
+          </Callout>
+          <Callout tone="warn" title="それでも誤りや偏りはあります">
+            モデルの判断には誤りが含まれます。ランキングは件数が少ない人ほどぶれます（最低やり取り数で絞れます）。
+          </Callout>
         </div>
-      </div>
+      </Slide>
 
-      <details className="rounded-lg border border-slate-400/15 bg-slate-950/10 px-3 py-2">
-        <summary className="cursor-pointer select-none text-[11px] font-semibold text-gray-100 hover:text-white">
-          使用したLLMモデルとプロンプト（展開）
-        </summary>
-        <div className="mt-2 space-y-2 text-[12px] leading-relaxed text-gray-300">
+      {/* 6. method */}
+      <Slide kicker="06 手法" title="使用したモデルとプロンプト" className="bg-slate-950/20">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-gray-300">
           <div>
-            <span className="font-semibold text-gray-200">モデル：</span>
-            <span className="font-mono text-[11px] text-gray-200">{modelText}</span>
-            <span className="ml-2 text-[11px] text-gray-400">（バッチ処理、temperature 0、思考レベル low）</span>
+            <span className="text-gray-400">モデル：</span>
+            <span className="font-mono text-gray-100">{modelText}</span>
           </div>
           <div>
-            <div className="mb-1 font-semibold text-gray-200">プロンプト（{QUALITY_PROMPT_VERSION}）：</div>
-            <pre className="max-h-72 overflow-auto whitespace-pre-wrap rounded-md border border-slate-400/15 bg-black/20 p-2 text-[11px] text-gray-200">
-              {QUALITY_SYSTEM_PROMPT}
-            </pre>
-            <div className="text-[11px] text-gray-400">
-              各やり取りには、会議名・日付・質問者と会派、同じ会議でそれ以前にあったやり取りの冒頭、そして評価対象のやり取り全文を付けて渡しています。
-              結果を再現する際には、モデルのバージョン、前処理・後処理、設定の差により結果が変わり得ます。
-            </div>
+            <span className="text-gray-400">設定：</span>バッチ処理、temperature 0、思考レベル low
+          </div>
+          <div>
+            <span className="text-gray-400">プロンプト：</span>
+            {QUALITY_PROMPT_VERSION}
           </div>
         </div>
-      </details>
-    </>
+        <details className="mt-2 rounded-lg border border-slate-400/15 bg-slate-950/30 px-3 py-2">
+          <summary className="cursor-pointer select-none text-[11px] font-semibold text-gray-100 hover:text-white">
+            プロンプト全文を表示
+          </summary>
+          <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded-md border border-slate-400/15 bg-black/20 p-2 text-[11px] text-gray-200">
+            {QUALITY_SYSTEM_PROMPT}
+          </pre>
+          <div className="mt-1 text-[11px] text-gray-400">
+            結果を再現する際には、モデルのバージョン、前処理・後処理、設定の差により結果が変わり得ます。
+          </div>
+        </details>
+      </Slide>
+    </div>
   );
 }
