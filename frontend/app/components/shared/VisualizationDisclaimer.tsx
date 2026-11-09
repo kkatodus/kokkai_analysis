@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import type { QualityAggregate } from "@/app/types";
+import type { IdeologyData, QualityAggregate } from "@/app/types";
 import {
   CONTRIBUTION_DESC_JA,
   CONTRIBUTION_JA,
@@ -57,24 +57,147 @@ export function DisclaimerPanel({ children, title = "注意事項" }: { children
   );
 }
 
-export function IdeologyDisclaimerContent() {
+export function IdeologyDisclaimerContent({ ideologyData }: { ideologyData?: IdeologyData | null }) {
+  const topics = ideologyData?.data ?? [];
+  const subTopics = topics.reduce((n, t) => n + (t.sub_topics?.length ?? 0), 0);
+  const maxScaled = Math.max(0, ...topics.map((t) => t.n_scaled ?? 0));
+  const generated = ideologyData?.generated_at ? ideologyData.generated_at.slice(0, 10) : null;
+  const fmt = (d: string | null | undefined) => (d ? yearMonth(d) : null);
+
   return (
-    <>
-      <div>
-        この可視化は、議員の発言データから<strong>推定</strong>した「政治的な立場」を示します。推定には誤差・偏りが含まれる可能性があり、政治家の立場を正確に反映しているわけではありません。
-      </div>
-	  <div>
-		この可視化の手法は、以下の論文を参考にしています。
-		<ul>
-			<li>
-				<a href="https://arxiv.org/abs/2505.07118" target="_blank" rel="noopener noreferrer">
-				KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives
-				</a>
-			</li>
-		</ul>
-	  </div>
-      <div>表示は参考情報としてご利用ください。最終的な判断には一次情報（議員の会議録など）も併せてご確認ください。</div>
-    </>
+    <div className="space-y-3">
+      <Slide kicker="01 これは何？" title="国会での発言から、論点ごとの「立場」を推定した参考情報です">
+        <p className="text-[12px] leading-relaxed text-gray-200">
+          各議員が国会で述べた意見を論点ごとに要約し、その文章の意味をベクトル（数値の並び）に変換して、
+          「賛成」「反対」の基準文との近さや、議員どうしの近さを図にしています。
+          投票行動や公約ではなく<strong>国会での発言</strong>だけが材料で、推定には誤差と偏りが含まれます。
+        </p>
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          <StatTile label="トピック" value={topics.length ? String(topics.length) : "—"} sub={subTopics ? `${subTopics} の論点（軸）` : undefined} />
+          <StatTile label="推定された議員" value={maxScaled ? `最大 ${maxScaled.toLocaleString()} 人` : "—"} sub="トピックごとに異なります" />
+          <StatTile label="最終更新" value={generated ?? "—"} sub={ideologyData?.current_members_as_of ? `現職判定 ${ideologyData.current_members_as_of.slice(0, 10)}` : undefined} />
+        </div>
+        <div className="mt-2">
+          <Callout tone="warn" title="立場を断定するものではありません">
+            図の位置は「その論点について国会でどう語ったか」の推定です。点をクリックすると発言そのものを確認できますので、判断はご自身で行ってください。
+          </Callout>
+        </div>
+      </Slide>
+
+      <Slide kicker="02 どう推定しているか" title="発言 → 意見の要約 → 数値化 → 配置">
+        <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className={pill + "border-slate-400/40 bg-slate-500/15 text-slate-100"}>① 発言の収集</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-slate-400/40 bg-slate-500/15 text-slate-100"}>② 意見文の抽出</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"}>③ 論点ごとの要約（LLM）</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-violet-400/40 bg-violet-500/15 text-violet-100"}>④ ベクトル化</span>
+            <span className="text-gray-500">→</span>
+            <span className={pill + "border-emerald-400/40 bg-emerald-500/15 text-emerald-100"}>⑤ 軸への投影／2D配置</span>
+          </div>
+          <div className="mt-2 grid gap-1 text-[11px] text-gray-300 sm:grid-cols-2">
+            <div>① トピックの検索語を含む発言を、トピックごとの期間内から集めます</div>
+            <div>② 分類モデルで「意見を述べている文」だけを残します（3文未満の人は推定しません）</div>
+            <div>③ LLMがその人の意見を論点ごとに要約します（複数回行い平均します）</div>
+            <div>④ 要約文を埋め込みモデルで数値ベクトルにします</div>
+            <div className="sm:col-span-2">⑤ 「賛成」「反対」の基準となる文章（生成した模範発言）との位置関係で1次元に、議員どうしの近さで2次元に配置します</div>
+          </div>
+        </div>
+      </Slide>
+
+      <Slide kicker="03 2つの見方" title="1D と 2D は別のものを見せています">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-2.5">
+            <div className="text-[12px] font-semibold text-cyan-100">1D：賛成 ↔ 反対 の軸</div>
+            <div className="mt-1 flex items-center gap-1 text-[10px] text-gray-300">
+              <span>反対</span>
+              <div className="relative h-1.5 flex-1 rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+                <div className="absolute inset-y-0 left-1/2 w-px bg-white/60" />
+              </div>
+              <span>賛成</span>
+            </div>
+            <ul className="mt-1.5 ml-4 list-disc space-y-0.5 text-[11px] text-gray-200">
+              <li>論点ごとに「賛成の模範発言」と「反対の模範発言」を両端に置き、その直線上に各議員を投影します</li>
+              <li>中央の線が中間点。左右の距離は相対的なもので、絶対的な強さではありません</li>
+              <li>上下の並びは順位で、意味はありません</li>
+            </ul>
+          </div>
+          <div className="rounded-xl border border-violet-400/25 bg-violet-500/10 p-2.5">
+            <div className="text-[12px] font-semibold text-violet-100">2D：近い人ほど似た語り方</div>
+            <ul className="mt-1.5 ml-4 list-disc space-y-0.5 text-[11px] text-gray-200">
+              <li>高次元のベクトルをUMAPで平面に圧縮したもの。縦軸・横軸そのものに意味はありません</li>
+              <li>近くにある議員は、その論点について似た内容・論調で語っています</li>
+              <li>「賛成」「反対」の基準点も同じ図に置いています</li>
+              <li>「現職のみ」では現職だけで配置し直すため、位置関係が変わります</li>
+            </ul>
+          </div>
+        </div>
+      </Slide>
+
+      <Slide kicker="04 対象と期間" title="トピックごとに、対象とする発言の期間が違います">
+        {topics.length ? (
+          <div className="grid gap-1">
+            {topics.map((t) => (
+              <div key={t.topic} className="grid grid-cols-[1fr_auto_auto] items-center gap-2 rounded-lg border border-slate-400/10 bg-slate-900/50 px-2 py-1 text-[11px]">
+                <div className="truncate text-gray-100">{t.topic_jp ?? t.topic_en ?? t.topic}</div>
+                <div className="text-gray-400">
+                  {fmt(t.window?.from) ?? "—"}〜{fmt(t.window?.to) ?? "現在"}
+                </div>
+                <div className="tabular-nums text-gray-300">
+                  {t.n_scaled?.toLocaleString() ?? "—"} 人{t.n_current != null ? <span className="text-gray-500">（現職 {t.n_current}）</span> : null}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-[11px] text-gray-400">トピック情報を読み込めませんでした。</div>
+        )}
+        <div className="mt-2 text-[11px] text-gray-400">
+          期間外の発言は使いません。期間内にその論点で意見を述べていない議員は図に現れません（沈黙は「中立」ではなく「不明」です）。
+        </div>
+      </Slide>
+
+      <Slide kicker="05 読み方の注意" title="図を読むときに知っておいてほしいこと">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <Callout tone="info" title="発言だけが材料です">
+            採決での投票、公約、党の方針は使っていません。国会で語った内容と、実際の行動が違うことはあり得ます。
+          </Callout>
+          <Callout tone="warn" title="発言が少ない人ほどぶれます">
+            要約の材料が数文しかない議員の位置は不安定です。大臣など答弁側の発言は「意見」として拾われにくく、位置がずれることがあります。
+          </Callout>
+          <Callout tone="warn" title="モデルに依存します">
+            要約するLLMや埋め込みモデルを替えると位置は動きます。この不安定さ自体を研究対象にした後続の論文を準備中です。
+          </Callout>
+          <Callout tone="good" title="原文にたどれます">
+            点をクリックすると詳細パネルが開き、その議員の発言を論点ごとに読めます。図は入口として使ってください。
+          </Callout>
+        </div>
+      </Slide>
+
+      <Slide kicker="06 手法" title="使用したモデルと参考文献" className="bg-slate-950/20">
+        <div className="grid gap-1 text-[11px] text-gray-300">
+          <div>
+            <span className="text-gray-400">要約：</span>
+            <span className="font-mono text-gray-100">{ideologyData?.summary_model ?? "—"}</span>
+          </div>
+          <div>
+            <span className="text-gray-400">埋め込み：</span>
+            <span className="font-mono text-gray-100">{ideologyData?.embed_model ?? "cl-tohoku/bert-base-japanese-v3"}</span>
+          </div>
+          <div>
+            <span className="text-gray-400">2D配置：</span>UMAP（n_neighbors=30）
+          </div>
+          <div>
+            <span className="text-gray-400">論文：</span>
+            <a href="https://arxiv.org/abs/2505.07118" target="_blank" rel="noopener noreferrer" className="text-cyan-200 underline-offset-2 hover:underline">
+              KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives
+            </a>
+          </div>
+        </div>
+      </Slide>
+    </div>
   );
 }
 

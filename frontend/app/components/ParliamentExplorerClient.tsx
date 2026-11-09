@@ -230,7 +230,7 @@ function ParliamentExplorerClientInner({
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     {showIdeologyDisclaimer ? (
                       <DisclaimerPanel>
-                        <IdeologyDisclaimerContent />
+                        <IdeologyDisclaimerContent ideologyData={ideologyData} />
                       </DisclaimerPanel>
                     ) : (
                       <IdeologicalScatterPlot
