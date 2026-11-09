@@ -70,7 +70,7 @@ export function JapanMap({
 		const counts = new Map<string, number>();
 		let other = 0;
 		for (const [district, { kaiha }] of Object.entries(ku2Party)) {
-			if (district.includes("比例")) continue; // proportional blocks are not drawn on the map
+			if (/比例|[（(]比[）)]/.test(district)) continue; // proportional blocks (e.g. 「（比）北関東」) are not on the map
 			if (PARTY2RGBCOLOR[kaiha]) counts.set(kaiha, (counts.get(kaiha) ?? 0) + 1);
 			else other += 1;
 		}
