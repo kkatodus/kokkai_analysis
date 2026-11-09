@@ -30,6 +30,8 @@ function topicDisplayName(topic: string): string {
 }
 
 
+const PANEL_ORDER = ["speeches", "quality", "history"] as const;
+
 export function DetailPane({
   personId,
   isOpen,
@@ -45,7 +47,7 @@ export function DetailPane({
   const resizeStartWidthRef = useRef<number>(380);
   const resizingRef = useRef<boolean>(false);
 
-  const [activePanel, setActivePanel] = useState<"speeches" | "quality" | "history">("speeches");
+  const [activePanel, setActivePanel] = useState<(typeof PANEL_ORDER)[number]>("speeches");
   const [history, setHistory] = useState<ElectionHistoryData[] | null>(null);
   const [historyError, setHistoryError] = useState<string | null>(null);
 
@@ -386,6 +388,9 @@ export function DetailPane({
                   {qualityPerson.as_questioner?.n ? `質問 ${qualityPerson.as_questioner.n} 件` : ""}
                   {qualityPerson.as_questioner?.n && qualityPerson.as_answerer?.n ? "・" : ""}
                   {qualityPerson.as_answerer?.n ? `答弁 ${qualityPerson.as_answerer.n} 件` : ""}
+                  <span className={"ml-2 rounded-full border px-1.5 py-0.5 text-[10px] " + (activePanel === "quality" ? "border-cyan-400/40 bg-cyan-500/15 text-cyan-100" : "border-slate-400/25 text-gray-300")}>
+                    {activePanel === "quality" ? "表示中" : "やり取りタブで詳しく →"}
+                  </span>
                 </div>
               </div>
               {(() => {
@@ -430,37 +435,45 @@ export function DetailPane({
           ) : null}
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden pr-1">
-          {activePanel === "history" ? (
-            <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
-          ) : activePanel === "quality" ? (
-            <PersonQualityPanel
-              person={qualityPerson}
-              totals={qualityAggregate?.totals ?? null}
-              exchanges={exchanges}
-              loading={exchangesLoading}
-              error={exchangesError}
-              onSelectIssueId={(issueId, speechId) => {
-                setSelectedIssueId(issueId);
-                setSelectedIssueSpeechId(speechId ?? null);
-              }}
-            />
-          ) : (
-            <SpeechRecordCard
-              exchangeIndex={exchangeIndex}
-              speechTopics={speechTopics}
-              speechError={speechError}
-              speechLoading={speechLoading}
-              selectedTopicKey={selectedTopicKey}
-              setSelectedTopicKey={setSelectedTopicKeySafe}
-              selectedTopic={selectedTopic}
-              ensureSpeechPage={ensureSpeechPage}
-              onSelectIssueId={(issueId, speechId) => {
-                setSelectedIssueId(issueId);
-                setSelectedIssueSpeechId(speechId ?? null);
-              }}
-            />
-          )}
+        {/* The three views sit side by side and slide, so switching reads as a tab change, not a collapse. */}
+        <div className="min-h-0 flex-1 overflow-hidden pr-1">
+          <div
+            className="flex h-full w-[300%] transition-transform duration-300 ease-out motion-reduce:transition-none"
+            style={{ transform: `translateX(-${PANEL_ORDER.indexOf(activePanel) * (100 / 3)}%)` }}
+          >
+            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "speeches"} inert={activePanel !== "speeches"}>
+              <SpeechRecordCard
+                exchangeIndex={exchangeIndex}
+                speechTopics={speechTopics}
+                speechError={speechError}
+                speechLoading={speechLoading}
+                selectedTopicKey={selectedTopicKey}
+                setSelectedTopicKey={setSelectedTopicKeySafe}
+                selectedTopic={selectedTopic}
+                ensureSpeechPage={ensureSpeechPage}
+                onSelectIssueId={(issueId, speechId) => {
+                  setSelectedIssueId(issueId);
+                  setSelectedIssueSpeechId(speechId ?? null);
+                }}
+              />
+            </div>
+            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "quality"} inert={activePanel !== "quality"}>
+              <PersonQualityPanel
+                person={qualityPerson}
+                totals={qualityAggregate?.totals ?? null}
+                exchanges={exchanges}
+                loading={exchangesLoading}
+                error={exchangesError}
+                onSelectIssueId={(issueId, speechId) => {
+                  setSelectedIssueId(issueId);
+                  setSelectedIssueSpeechId(speechId ?? null);
+                }}
+              />
+            </div>
+            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "history"} inert={activePanel !== "history"}>
+              <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
