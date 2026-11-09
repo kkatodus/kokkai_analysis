@@ -29,6 +29,7 @@ class PublishTest(unittest.TestCase):
 	def test_aggregate_counts_per_role(self):
 		agg = publish.aggregate(ROWS, {1: "甲", 2: "乙", 9: "大臣"})
 		self.assertEqual(agg["coverage"], {"from": "2024-06-01", "to": "2025-01-01", "exchanges": 4, "meetings": 2})
+		self.assertEqual(agg["models"], {"gemini-3.8-flash": 4})
 		by = {p["person_id"]: p for p in agg["persons"]}
 		self.assertEqual(sorted(by), [1, 2, 9])
 		p1 = by[1]

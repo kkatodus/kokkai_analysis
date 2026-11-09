@@ -79,7 +79,13 @@ export function IdeologyDisclaimerContent() {
 
 export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: QualityAggregate | null }) {
   const cov = aggregate?.coverage ?? null;
-  const models = aggregate?.models ?? [];
+  const modelEntries = Object.entries(aggregate?.models ?? {}).sort((a, b) => b[1] - a[1]);
+  const modelTotal = modelEntries.reduce((n, [, c]) => n + c, 0);
+  const modelText = modelEntries.length
+    ? modelEntries
+        .map(([m, c]) => `${m}（${c.toLocaleString()} 件、${Math.round((c / modelTotal) * 1000) / 10}%）`)
+        .join("、")
+    : "gemini-3.8-flash";
 
   return (
     <>
@@ -170,7 +176,7 @@ export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: Quali
         <div className="mt-2 space-y-2 text-[12px] leading-relaxed text-gray-300">
           <div>
             <span className="font-semibold text-gray-200">モデル：</span>
-            <span className="font-mono text-[11px] text-gray-200">{models.length ? models.join(", ") : "gemini-3.8-flash"}</span>
+            <span className="font-mono text-[11px] text-gray-200">{modelText}</span>
             <span className="ml-2 text-[11px] text-gray-400">（バッチ処理、temperature 0、思考レベル low）</span>
           </div>
           <div>

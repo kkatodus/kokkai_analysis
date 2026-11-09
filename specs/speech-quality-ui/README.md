@@ -15,7 +15,7 @@ Everything lives under `s3_mirror/kokkai-doc/speech_quality/`, uploaded by the n
 ### 2.1 `aggregate.json` — one file for the explorer
 
 ```
-{ version: 1, generated_at, prompt_version: "v3", models: ["gemini-3.8-flash", …],
+{ version: 1, generated_at, prompt_version: "v3", models: {"gemini-3.8-flash": 51020, …},   // exchanges per model
   coverage: { from: "2015-09-10", to: "2026-10-05", exchanges: 51021, meetings: 6012 },
   totals: { as_questioner: Counts, as_answerer: AnswerCounts },           // whole corpus, for baselines
   persons: [ { person_id, name, group,                                      // group = latest 会派 seen as questioner

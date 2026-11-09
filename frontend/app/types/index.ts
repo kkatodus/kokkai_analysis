@@ -276,7 +276,8 @@ export interface QualityAggregate {
 	version: number;
 	generated_at: string;
 	prompt_version: string;
-	models: string[];
+	/** model → number of exchanges it labelled */
+	models: Record<string, number>;
 	coverage: { from: string | null; to: string | null; exchanges: number; meetings: number };
 	totals: { as_questioner: QualityCounts; as_answerer: QualityAnswerCounts };
 	persons: QualityPerson[];

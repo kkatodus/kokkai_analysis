@@ -108,12 +108,12 @@ def aggregate(rows: List[dict], names: Dict[int, str], generated_at: Optional[da
 	group_at: Dict[int, tuple] = {}   # person → (date, group) of their latest exchange as questioner
 	tq, ta = new_counts(), new_answer_counts()
 	issues: Set[str] = set()
-	models: Set[str] = set()
+	models: Counter = Counter()
 	for r in rows:
 		add_as_questioner(tq, r)
 		add_as_answerer(ta, r)
 		issues.add(r["issue_id"])
-		models.add(r["model"])
+		models[r["model"]] += 1
 		pid = r["questioner_person_id"]
 		if pid is not None:
 			add_as_questioner(q.setdefault(pid, new_counts()), r)
@@ -132,7 +132,7 @@ def aggregate(rows: List[dict], names: Dict[int, str], generated_at: Optional[da
 		"version": VERSION,
 		"generated_at": (generated_at or datetime.now().astimezone()).isoformat(timespec="seconds"),
 		"prompt_version": PROMPT_VERSION,
-		"models": sorted(models),
+		"models": dict(models.most_common()),   # model → exchanges labelled by it
 		"coverage": {"from": tq["first"], "to": tq["last"], "exchanges": tq["n"], "meetings": len(issues)},
 		"totals": {"as_questioner": tq, "as_answerer": ta},
 		"persons": persons,
