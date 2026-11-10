@@ -23,8 +23,8 @@ tour (「使い方」) helps, but only after they have already landed in the mid
 | Audience / tone | Young Japanese adults, casual but trustworthy (です・ます, short lines, no slang) | Politics site: personality without losing credibility. Disclaimers stay but move to a calm section near the end. |
 | Hero promise | 「その議員、国会で何してる？」 accountability angle | The exchange-quality labels are the differentiator; the page is sequenced to pay this question off. |
 | Sample data | Fictional member 「国会 太郎」, party 「サンプル党」, fictional exchanges, small 「サンプル」 badge | No real politician carries an AI verdict on a marketing page; data never goes stale. |
-| Playback | Each section plays once on entering the viewport, then idles; 「もう一度見る」 replay; reduced-motion shows the final frame | Works on phones, predictable to build, accessible. |
-| Sections | Eight, in the order of §5 | Thorough as requested; seat charts are mentioned inside the map section rather than getting their own. |
+| Playback | Each chapter plays once when it becomes active, then idles; 「もう一度見る」 replay per chapter; 「最初から再生」 autoplays the whole panel; reduced-motion shows the final frame | Works on phones, predictable to build, accessible. |
+| Sections | Eight, in the order of §5 — **revised 2026-11-11:** §5.2–5.6 are chapters of one pinned 「機能ツアー」 panel (§5.9) rather than separate sections | Thorough as requested; seat charts are mentioned inside the map section rather than getting their own. |
 | Return visits | Always show the landing; sticky 「ダッシュボードへ」 button | No cookie logic, SEO-stable, one click for regulars. |
 | Map replica | Inline simplified SVG of Japan with ~10 highlighted districts | Avoids pulling deck.gl + maplibre + multi-MB GeoJSON into the landing bundle. |
 | Visual style | Same dark navy (#111827 → #020617) + neon party palette + cyan/indigo accents + Geist; bigger type, more whitespace | Replicas look identical to what the visitor lands on in `/app`. |
@@ -225,6 +225,22 @@ Copy (adapted from the tour's 「このサイトは一人で運営していま�
 
 Stage: none. A soft cyan→indigo glow behind the buttons (static).
 
+### 5.9 機能ツアー panel (revised 2026-11-11, replaces separate sections for 5.2–5.6)
+
+One `section` of height `5 × 100svh` with a `sticky top-16` viewport-high panel inside. Scroll position through the
+section selects the chapter (`useScroll` progress × 5); the panel stays pinned while the chapter's copy crossfades and
+its stage remounts and plays. Layout: desktop = rail (markers) ｜ copy 4/11 ｜ stage 7/11; phone = horizontal marker
+row + progress bar, stage, compact copy.
+
+- **Rail**: one marker per chapter (発言 ／ 会議 ／ 比べる ／ 立場 ／ 地図) with a cyan progress fill tracking scroll
+  progress; markers are buttons that scroll to the middle of that chapter's band (`aria-current="step"` on the active one).
+- **「最初から再生」**: scrolls to chapter 1 and then to each next chapter after `durationMs + 1.8 s`; any wheel, touch
+  or key press stops it (the button becomes 「停止」).
+- **Scroll prompt**: the hero ends with a bouncing chevron labelled 「スクロールして機能を見る」 linking to `#tour`
+  (`scroll-behavior: smooth`, static under reduced motion).
+- §5.7 (どうやって？) and §5.8 (一人で運営) stay separate, below the panel. §5.7 is now six steps: collect → match
+  speakers → segment exchanges → label (with the live label vocabulary from `quality.ts`) → scale stances → limits.
+
 ### Sticky header
 
 `LandingHeader`: logo + dot, 「このプロジェクトについて」, 「ダッシュボードへ」 (cyan, same style as the dashboard's donate button). Transparent over the hero; gains `bg-[#020617]/80 backdrop-blur` after 80 px scroll. On phones the two links collapse to the single 「ダッシュボードへ」 button.
@@ -238,7 +254,8 @@ frontend/app/
   components/landing/
     LandingHeader.tsx
     Hero.tsx
-    FeatureSection.tsx            copy + Stage + replay; IntersectionObserver trigger
+    FeatureTour.tsx               pinned tour panel: rail, autoplay, chapter copy + stage (§5.9)
+    chapters.ts                   chapter copy, marker labels and stage components, in order
     Stage.tsx                     card frame, サンプル badge, reduced-motion handling
     stages/
       SearchStage.tsx             §5.1
@@ -327,6 +344,9 @@ Rules:
 
 - **Map outlines** come from `@svg-maps/japan` 2.0.0 (CC BY 4.0), Douglas–Peucker-simplified to ≈ 14 KB in `stages/japanPrefectures.ts`; the footer credits the source. Hand-tracing 47 prefectures was not worth it.
 - **Method-section icons** fade and spring in rather than stroke-draw; `react-icons` glyphs are filled paths, not strokes.
+- **One panel, not five sections** (user change 2026-11-11, §5.9): the feature chapters live in a single pinned,
+  scroll-driven panel with a marker rail and autoplay; the hero gained a scroll-down prompt; the method section grew to
+  six steps.
 - **Playback** is step-based: each stage has a `TIMES` array and `useTimeline` returns the number of beats elapsed, so the final frame is simply "every beat done". That frame is also the SSR output (`initial={false}` when not playing), which avoids both layout shift and hydration warnings.
 - **Cursor** targets `data-cursor="…"` elements and measures them at each beat instead of using hand-tuned coordinates, so it survives responsive layouts.
 - **Sample counts** were nudged so the 最低やり取り数 step (20 → 50) removes exactly two rows: 国会 太郎 has 58 exchanges everywhere, not 42.

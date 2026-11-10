@@ -39,7 +39,6 @@ export function MapStage({ pb, frame }: { pb: Playback; frame: StageFrame }) {
         <g transform="translate(0 8)">
           {JAPAN_PREFECTURES.map((p, i) => {
             const party = MAP_DISTRICTS[p.id];
-            const isPulse = pulsing && p.id === pulseId;
             return (
               <motion.path
                 key={p.id}

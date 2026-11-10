@@ -3,6 +3,8 @@
 /** §5.1 — hero: the accountability question, two CTAs, and the search replica playing on load. */
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { FiChevronDown } from "react-icons/fi";
 import { Stage } from "./Stage";
 import { track } from "./track";
 import { useStagePlayback } from "./useStagePlayback";
@@ -10,10 +12,11 @@ import { SEARCH_DURATION_MS, SearchStage } from "./stages/SearchStage";
 
 export function Hero() {
   const [frame, pb] = useStagePlayback(SEARCH_DURATION_MS, { threshold: 0.2, onSeen: () => track("LandingSectionView", { section: "hero" }) });
+  const reduced = useReducedMotion();
   return (
     <section className="relative -mt-16 overflow-hidden pt-16">
       <div aria-hidden="true" className="landing-drift pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-10 sm:pt-16 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-12 lg:gap-12 lg:pb-20">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-10 sm:pt-16 lg:min-h-[calc(100svh-10rem)] lg:grid-cols-12 lg:gap-12 lg:pb-10">
         <div className="lg:col-span-5">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] text-gray-400">
             <span className="h-2 w-2 rounded-full bg-linear-to-br from-cyan-400 to-indigo-600 shadow-lg shadow-cyan-400/90" />
@@ -45,6 +48,19 @@ export function Hero() {
             <SearchStage pb={pb} frame={frame} />
           </Stage>
         </div>
+      </div>
+      {/* scroll prompt into the feature tour */}
+      <div className="relative mx-auto flex w-full max-w-6xl justify-center px-4 pb-6">
+        <a
+          href="#tour"
+          onClick={() => track("LandingCTA", { cta: "scroll", location: "hero" })}
+          className="flex flex-col items-center gap-1 text-xs text-gray-400 transition hover:text-cyan-100"
+        >
+          スクロールして機能を見る
+          <motion.span animate={reduced ? undefined : { y: [0, 6, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }} className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-400/25 bg-slate-900/40">
+            <FiChevronDown className="h-5 w-5" />
+          </motion.span>
+        </a>
       </div>
     </section>
   );

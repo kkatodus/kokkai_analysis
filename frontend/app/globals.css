@@ -40,7 +40,15 @@ body {
   }
 }
 
-/* Landing page (specs/landing-page §5.1, §5.5): slow background drift and the scatter's idle "breathing". */
+/* Landing page (specs/landing-page §5.1, §5.5): anchor scrolling, slow background drift and the scatter's idle "breathing". */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 .landing-drift {
   background:
     radial-gradient(40rem 40rem at 20% 20%, rgba(34, 211, 238, 0.08), transparent 60%),

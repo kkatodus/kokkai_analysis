@@ -19,6 +19,7 @@ export function Stage({
   sample = false,
   children,
   className = "",
+  frameClassName = "aspect-[4/3] max-lg:aspect-[3/4] max-lg:max-h-[70vh]",
 }: {
   frame: StageFrame;
   pb: Playback;
@@ -28,13 +29,15 @@ export function Stage({
   sample?: boolean;
   children: ReactNode;
   className?: string;
+  /** size of the card; the default keeps a fixed aspect ratio so there is no layout shift */
+  frameClassName?: string;
 }) {
   return (
     <div className={`w-full ${className}`}>
       <div
         ref={frame}
         aria-hidden="true"
-        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/5 bg-linear-to-br from-gray-800 to-[#020617] shadow-2xl max-lg:aspect-[3/4] max-lg:max-h-[70vh]"
+        className={`relative w-full overflow-hidden rounded-2xl border border-white/5 bg-linear-to-br from-gray-800 to-[#020617] shadow-2xl ${frameClassName}`}
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-60"
@@ -50,7 +53,7 @@ export function Stage({
         )}
       </div>
       <p className="sr-only">{description}</p>
-      <div className="mt-2 flex h-7 items-center justify-end">
+      <div className="mt-2 flex h-7 shrink-0 items-center justify-end">
         {!pb.reduced && pb.idle && (
           <button
             type="button"
