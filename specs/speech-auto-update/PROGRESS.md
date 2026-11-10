@@ -128,7 +128,7 @@ Wrote `electionHistory/{5868,5869}.jsonl` (same generator reproduces existing fi
 - **Swapped 2026-10-14** (with the user's OK): `speeches` → `speeches_pre_repair` (7,048,027 rows, kept for now), `speeches_rebuilt` → `speeches` (7,684,893 rows). Constraints renamed to `speeches_pkey` / `speeches_person_id_fkey` (old table: `speeches_pre_repair_*`). DB writes are now on by default in `config.py`.
   Once happy: `DROP TABLE speeches_pre_repair;` (`~/kokkaidoc-speeches-pre-repair.dump` is the backup).
 
-**Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. **Installed by the user 2026-10-14** (`./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev`; check with `… status`) (the job runs from that worktree: code, venv, `s3_mirror` and `data/.env` symlinks). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
+**Phase 2:** `scripts/install-speech-update-schedule.sh install|uninstall|status|run-now` written. **Installed by the user 2026-10-14** (`./scripts/install-speech-update-schedule.sh install` from `../kokkai_analysis-dev`; check with `… status`) (the job ran from that worktree until 2026-11-10; it now runs from the main `kokkai_analysis` checkout on `prd`, reinstalled with the same command from there — code, `.venv-speech-update`, `s3_mirror` and `data/.env` all live in that checkout). The wrapper was tested under `env -i` (launchd's bare environment) with `--dry-run` and works.
 
 ## 6c. 2026-10-15: speaker review
 
