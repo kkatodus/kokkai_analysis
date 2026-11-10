@@ -224,8 +224,8 @@ export function SpeechRecordCard({
                         }
                         title={
                           s.meta?.issueID ?? s.issueID
-                            ? `この発言の issueID を選択: ${String(s.meta?.issueID ?? s.issueID)}`
-                            : "issueID が見つかりません"
+                            ? "この発言が行われた会議を開く"
+                            : "この発言の会議情報が見つかりません"
                         }
                       >
                         会議を閲覧する

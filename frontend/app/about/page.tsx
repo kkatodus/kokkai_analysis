@@ -59,7 +59,7 @@ export default function AboutPage() {
       logo: "website"
     },
     {
-      title: "学部卒業論文の発表をトロント大学の恩師の前でした様子をyoutubeにアップしました！",
+      title: "学部卒業論文をトロント大学の恩師の前で発表した様子をYouTubeにアップしました！",
       description: "英語でKOKKAIDOCの論文についてプレゼンしています。",
       href: "https://www.youtube.com/watch?v=8HOCEHbDsrE&t=181s",
       embed: "https://www.youtube.com/embed/8HOCEHbDsrE?si=B3TYzgpcSKwjGdeu",
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <Section title="趣旨">
             <p>
               当サイトは国会で議論されている法案について、各党がどのような投票をしているか、どのような討論をしているかを簡単に検索できるように作成されました。
-              当サイトの情報が利用者の投票に役立つことを祈ります。
+              当サイトの情報が皆さまの投票の参考になれば幸いです。
             </p>
           </Section>
 
@@ -196,7 +196,7 @@ export default function AboutPage() {
           <Section title="免責事項">
             <p>
               当サイト管理者は利用者が当サイトにて公開されている情報を用いて行う一切の行為について責任を負いません。
-              当サイトの利用は各利用者の自己責任にて行っていただけます。
+              当サイトの利用は、各利用者の自己責任にて行ってください。
             </p>
             <span className="text-lg font-bold ">データの正確性、完全性、最新性について最善を尽くしていますが、誤りがある場合もあります。ご了承ください。</span>
 

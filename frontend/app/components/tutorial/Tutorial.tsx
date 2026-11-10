@@ -254,7 +254,7 @@ export function Tutorial({
               onClick={isLast ? onFinish : onNext}
               className="rounded-lg border border-cyan-400/50 bg-cyan-500/20 px-3 py-1.5 text-[12px] font-semibold text-cyan-50 hover:bg-cyan-500/30"
             >
-              {isLast ? "完了" : step.action && !done && !doneFlash ? "あとで・次へ" : "次へ"}
+              {isLast ? "完了" : step.action && !done && !doneFlash ? "飛ばして次へ" : "次へ"}
             </button>
           </div>
         </div>

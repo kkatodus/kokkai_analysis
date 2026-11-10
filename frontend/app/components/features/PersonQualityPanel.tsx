@@ -390,7 +390,7 @@ export function PersonQualityPanel({
                     type="button"
                     onClick={() => onSelectIssueId(ex.issue_id, ex.start_speech_id)}
                     className="shrink-0 cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50"
-                    title="この やり取り の位置で会議を開く"
+                    title="このやり取りの位置で会議を開く"
                   >
                     会議を閲覧する
                   </button>

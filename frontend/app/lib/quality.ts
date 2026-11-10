@@ -59,15 +59,22 @@ export const FUNCTION_DESC_JA: Record<QualityFunction, string> = {
 };
 
 export const CONTRIBUTION_JA: Record<QualityContribution, string> = {
-  substantive: "実質的な成果あり",
+  substantive: "成果あり",
   limited: "成果は限定的",
   none: "成果なし",
 };
 
 export const CONTRIBUTION_SHORT_JA: Record<QualityContribution, string> = {
-  substantive: "実質的",
+  substantive: "成果あり",
   limited: "限定的",
   none: "成果なし",
+};
+
+/** Metric labels in the ranking "並び替え" menu ("成果は限定的の割合" would not read naturally). */
+export const CONTRIBUTION_METRIC_JA: Record<QualityContribution, string> = {
+  substantive: "成果ありの割合",
+  limited: "成果が限定的な割合",
+  none: "成果なしの割合",
 };
 
 export const CONTRIBUTION_DESC_JA: Record<QualityContribution, string> = {
@@ -100,6 +107,12 @@ export const OUTCOME_JA: Record<QualityOutcome, string> = {
   new_information: "新事実が出た",
   commitment: "具体的な約束",
   proposal: "新しい提案",
+};
+
+export const OUTCOME_METRIC_JA: Record<QualityOutcome, string> = {
+  new_information: "新事実が出た割合",
+  commitment: "具体的な約束を引き出した割合",
+  proposal: "新しい提案をした割合",
 };
 
 export const OUTCOME_SHORT_JA: Record<QualityOutcome, string> = {
@@ -255,11 +268,11 @@ export const QUALITY_METRICS: QualityMetric[] = [
   { key: "n_a", label: "やり取り数（答弁者として）", group: "件数", role: "answerer", kind: "count", hint: "答弁者として関わったやり取りの数", value: (_q, a) => (a ? { num: a.n, den: 1 } : null) },
 
   ...CONTRIBUTIONS.map((c): QualityMetric => ({
-    key: `contribution_${c}`, label: `${CONTRIBUTION_JA[c]}の割合`, group: "成果（質問者として）", role: "questioner", kind: "share",
+    key: `contribution_${c}`, label: CONTRIBUTION_METRIC_JA[c], group: "成果（質問者として）", role: "questioner", kind: "share",
     hint: CONTRIBUTION_DESC_JA[c], value: qShare((q) => q.contribution[c]),
   })),
   ...OUTCOMES.map((o): QualityMetric => ({
-    key: `outcome_${o}`, label: `${OUTCOME_JA[o]}割合`, group: "成果の内訳（質問者として）", role: "questioner", kind: "share",
+    key: `outcome_${o}`, label: OUTCOME_METRIC_JA[o], group: "成果の内訳（質問者として）", role: "questioner", kind: "share",
     hint: OUTCOME_JA[o], value: qShare((q) => q.outcomes[o]),
   })),
 

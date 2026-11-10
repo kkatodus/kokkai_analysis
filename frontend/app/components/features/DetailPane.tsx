@@ -417,7 +417,7 @@ export function DetailPane({
                       <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
                         <div className="flex items-center gap-1">
                           <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
-                          実質的な成果あり {pct(rate(q.contribution.substantive, q.n))}
+                          成果あり {pct(rate(q.contribution.substantive, q.n))}
                         </div>
                         <div className="flex items-center gap-1">
                           <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
