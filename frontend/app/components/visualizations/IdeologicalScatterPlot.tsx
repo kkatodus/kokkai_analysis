@@ -495,7 +495,7 @@ export function IdeologicalScatterPlot({
       <div ref={containerRef} className="relative overflow-hidden">
         {(!ideologyData || !filteredTopics.length || !selectedSubTopic) ? (
           <div className="flex h-[280px] items-center justify-center">
-            <EmptyState message="政治思想データが見つかりませんでした" />
+            <EmptyState message="立場の推定データが見つかりませんでした" />
           </div>
         ) : (
           <>

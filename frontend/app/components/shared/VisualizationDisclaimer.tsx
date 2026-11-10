@@ -269,7 +269,7 @@ export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: Quali
       {/* 2. unit */}
       <Slide kicker="02 評価の単位" title="発言ひとつではなく、「質問の持ち時間＋それへの答弁」をひとまとまりで見ます">
         <div className="rounded-xl border border-slate-400/15 bg-slate-900/60 p-2.5">
-          <div className="mb-1 text-[10px] text-gray-400">ひとつの やり取り</div>
+          <div className="mb-1 text-[10px] text-gray-400">ひとつのやり取り</div>
           <div className="flex flex-wrap items-center gap-1.5">
             <span className={pill + "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"}>質問者 A</span>
             <span className="text-gray-500">→</span>
@@ -284,7 +284,7 @@ export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: Quali
           </div>
           <div className="mt-2 grid gap-1 text-[11px] text-gray-300 sm:grid-cols-2">
             <div>・ 次の委員に質問者が替わるところで、やり取りが切り替わります</div>
-            <div>・ ラベルは やり取り全体に一つ。質問者側と答弁者側の問題点は区別します</div>
+            <div>・ ラベルはやり取り全体に一つ。質問者側と答弁者側の問題点は区別します</div>
             <div>・ ごく短い手続き的なやり取り、答弁のないやり取りは対象外</div>
             <div>・ 会議名・日付・会派・同じ会議での前のやり取りの冒頭も文脈として渡します</div>
           </div>
@@ -386,7 +386,7 @@ export function SpeechQualityDisclaimerContent({ aggregate }: { aggregate: Quali
             否定的なラベルは、問題が明らかな場合にだけ付くようモデルに指示しています。迷ったら付けません。質問者にも答弁者にも同じです。
           </Callout>
           <Callout tone="info" title="「成果」と「問題点」は別の指標">
-            冒頭の一言が演説的でも、残りが実質的なら成果は「実質的」です。問題点の割合が高くても成果がないとは限りません。
+            冒頭の一言が演説的でも、残りに中身があれば成果は「成果あり」です。問題点の割合が高くても成果がないとは限りません。
           </Callout>
           <Callout tone="info" title="党派で基準を変えません">
             不祥事の追及は主に野党、お膳立て質問は主に与党の行動なので、基準は双方を数えます。公金・公的権限に関わる不祥事の追及は正当な「行政監視」で、私生活への固執だけを問題点とします。

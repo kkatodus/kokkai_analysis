@@ -139,7 +139,7 @@ export function HistoricalReprSearch({
 
       <div className="mt-2 max-h-[220px] overflow-y-auto overscroll-contain pr-1">
         {!allParliamentMemberTable ? (
-          <EmptyState message="歴代議員データが未読み込みです。" className="py-2" />
+          <EmptyState message="歴代議員データを読み込んでいます…" className="py-2" />
         ) : !normalizedQuery ? (
           popularRows.length > 0 ? (
             <div>

@@ -114,7 +114,7 @@ function PoliticianPreviewWindow({
 									subtitle="都道府県選挙区"
 									emptyMessage={
 										hasDistrict
-											? "この選挙区に紐づく参議院（都道府県）の議員が見つかりません。"
+											? "この都道府県選出の参議院議員が見つかりません。"
 											: "地図上で選挙区をクリックしてください。"
 									}
 								>
