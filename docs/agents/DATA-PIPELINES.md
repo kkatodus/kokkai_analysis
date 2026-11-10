@@ -79,6 +79,11 @@ Keeps `ideology/ideology.json.gz` (the scatter plot) current (spec: `specs/topic
 - `select --estimate` sizes a backfill without the classifier. `scripts/update-topic-scaling.sh` is the launchd entry (2nd and 3rd of each month, `install-topic-scaling-schedule.sh`).
 - Tests: `cd data && ../.venv-topic-scaling/bin/python -m pytest topic_scaling/tests -q`
 
+### Weekly Postgres backup — `scripts/backup-db.sh`
+
+- Spec: `specs/db-backup/README.md`. Bash only: `pg_dump -Fc` of `kokkaidoc` (excluding the frozen `speeches_pre_repair`), `pg_restore --list` check, `aws s3 cp --storage-class STANDARD_IA` (profile `kokkai-speech-update`) to `s3://kokkai-doc-bucket-dev/backups/postgres/kokkaidoc-<ts>.dump` + `latest.txt`; local dump deleted afterwards. Bucket lifecycle expires `backups/` after 60 days.
+- Schedule: `./scripts/install-db-backup-schedule.sh install|status|run-now` (Sundays 06:00) from the main `prd` checkout. `--dry-run` dumps and verifies without uploading. State and logs: `s3_mirror/.db-backup/`. Restore procedure is in the spec.
+
 ## Analysis / LLM workflows
 
 | Script | Purpose |
