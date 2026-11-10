@@ -24,3 +24,6 @@ paper/**/*.toc
 paper/**/*.zip
 .venv-speech-update/
 .venv-topic-scaling/
+
+.vercel
+.env*

@@ -1,8 +1,68 @@
 "use client";
 
-import { useMemo, useState, useDeferredValue } from "react";
+import { useEffect, useMemo, useState, useDeferredValue } from "react";
 import type { AllParliamentMemberTableData } from "@/app/types";
 import { EmptyState } from "@/app/components/shared/EmptyState";
+
+const POPULAR_LIMIT = 10;
+
+type PopularItem = { person_id: string; count: number };
+
+/** Shared, server-side ranking of politicians most often picked from this panel. */
+function usePopularPoliticians(enabled: boolean): PopularItem[] {
+  const [items, setItems] = useState<PopularItem[]>([]);
+  useEffect(() => {
+    if (!enabled) return;
+    const ac = new AbortController();
+    fetch("/api/popular-politicians", { signal: ac.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json: { items?: PopularItem[] } | null) => {
+        if (json?.items) setItems(json.items);
+      })
+      .catch(() => {});
+    return () => ac.abort();
+  }, [enabled]);
+  return items;
+}
+
+function MemberRow({
+  member,
+  isSelected,
+  rank,
+  onClick,
+}: {
+  member: AllParliamentMemberTableData;
+  isSelected: boolean;
+  rank?: number;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full rounded-xl border bg-[#020617] px-2.5 py-2 text-left transition ${
+        isSelected
+          ? "border-cyan-300/40 shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_28px_rgba(34,211,238,0.18)]"
+          : "border-white/5 hover:border-cyan-300/25 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_22px_rgba(34,211,238,0.12)]"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex min-w-0 items-start gap-2">
+          {rank !== undefined ? (
+            <span className="mt-0.5 w-4 shrink-0 text-right text-[11px] tabular-nums text-cyan-300/70">
+              {rank}
+            </span>
+          ) : null}
+          <div className="min-w-0">
+            <div className="truncate text-[13px] font-semibold text-gray-50">{member.name_kanji}</div>
+            <div className="truncate text-[11px] text-gray-400">{member.name_kana}</div>
+          </div>
+        </div>
+        <div className="shrink-0 text-[10px] text-gray-500">{member.person_id}</div>
+      </div>
+    </button>
+  );
+}
 
 type Props = {
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
@@ -19,6 +79,16 @@ export function HistoricalReprSearch({
   const deferredQuery = useDeferredValue(query);
 
   const normalizedQuery = deferredQuery.trim().toLowerCase();
+
+  const popular = usePopularPoliticians(Boolean(allParliamentMemberTable));
+  const popularRows = useMemo(() => {
+    if (!allParliamentMemberTable || popular.length === 0) return [];
+    const byId = new Map(allParliamentMemberTable.map((r) => [r.person_id, r]));
+    return popular
+      .map((p) => byId.get(p.person_id))
+      .filter((r): r is AllParliamentMemberTableData => Boolean(r))
+      .slice(0, POPULAR_LIMIT);
+  }, [allParliamentMemberTable, popular]);
 
   const results = useMemo(() => {
     if (!allParliamentMemberTable) return null;
@@ -71,44 +141,40 @@ export function HistoricalReprSearch({
         {!allParliamentMemberTable ? (
           <EmptyState message="歴代議員データが未読み込みです。" className="py-2" />
         ) : !normalizedQuery ? (
-          <div className="py-2 text-center text-[11px] text-gray-400">
-            漢字・かな表記で検索できます。
-          </div>
+          popularRows.length > 0 ? (
+            <div>
+              <div className="px-1 pb-1.5 text-[10px] font-medium tracking-wide text-gray-400">
+                よく検索されている議員
+              </div>
+              <div className="grid gap-2">
+                {popularRows.map((r, i) => (
+                  <MemberRow
+                    key={r.person_id}
+                    member={r}
+                    rank={i + 1}
+                    isSelected={Boolean(selectedPersonId && selectedPersonId === r.person_id)}
+                    onClick={() => onSelect(r.person_id, { queryLength: 0 })}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="py-2 text-center text-[11px] text-gray-400">
+              漢字・かな表記で検索できます。
+            </div>
+          )
         ) : results && results.length === 0 ? (
           <EmptyState message="該当する議員が見つかりません。" className="py-2" />
         ) : (
           <div className="grid gap-2">
-            {results?.map((r) => {
-              const isSelected = Boolean(selectedPersonId && selectedPersonId === r.person_id);
-              return (
-                <button
-                  key={r.person_id}
-                  type="button"
-                  onClick={() => {
-                    onSelect(r.person_id, { queryLength: normalizedQuery.length });
-                  }}
-                  className={`w-full rounded-xl border bg-[#020617] px-2.5 py-2 text-left transition ${
-                    isSelected
-                      ? "border-cyan-300/40 shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_28px_rgba(34,211,238,0.18)]"
-                      : "border-white/5 hover:border-cyan-300/25 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_22px_rgba(34,211,238,0.12)]"
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <div className="truncate text-[13px] font-semibold text-gray-50">
-                        {r.name_kanji}
-                      </div>
-                      <div className="truncate text-[11px] text-gray-400">
-                        {r.name_kana}
-                      </div>
-                    </div>
-                    <div className="shrink-0 text-[10px] text-gray-500">
-                      {r.person_id}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
+            {results?.map((r) => (
+              <MemberRow
+                key={r.person_id}
+                member={r}
+                isSelected={Boolean(selectedPersonId && selectedPersonId === r.person_id)}
+                onClick={() => onSelect(r.person_id, { queryLength: normalizedQuery.length })}
+              />
+            ))}
           </div>
         )}
       </div>

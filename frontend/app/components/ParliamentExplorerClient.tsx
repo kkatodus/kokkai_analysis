@@ -127,6 +127,16 @@ function ParliamentExplorerClientInner({
           personId: id,
           queryLength: meta?.queryLength ?? null,
         });
+        // Feed the shared "frequently searched" ranking (server-side, Upstash Redis).
+        // Only count selections made from the search panel; fire-and-forget.
+        if (source === "historical_search" && typeof window !== "undefined") {
+          fetch("/api/popular-politicians", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ person_id: id }),
+            keepalive: true,
+          }).catch(() => {});
+        }
       } else {
         track("ClosePoliticianDetail", { source });
       }
