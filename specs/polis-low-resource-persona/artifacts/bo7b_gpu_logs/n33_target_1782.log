@@ -1,0 +1,20 @@
+=== [2026-08-02 19:05:18] START target 1782 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 37.82it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 290.32it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 315.37it/s]Loading weights:  37%|███▋      | 127/339 [00:00<00:00, 335.60it/s]Loading weights:  49%|████▉     | 167/339 [00:00<00:00, 358.11it/s]Loading weights:  60%|█████▉    | 203/339 [00:00<00:00, 327.76it/s]Loading weights:  70%|██████▉   | 237/339 [00:00<00:00, 323.68it/s]Loading weights:  80%|███████▉  | 270/339 [00:00<00:00, 315.55it/s]Loading weights:  90%|█████████ | 306/339 [00:00<00:00, 326.80it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 325.80it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:148: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=1782 anchors=['152_qwen7b', '2377_qwen7b', '3631_qwen7b', '5520_qwen7b'] n_groups=3 dims=12 sampler=gp budget=30 folds=5 trials/fold=40 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base           2.5838 ± 0.1400   per-fold [2.456, 2.714, 2.514, 2.787, 2.448]
+  ICL            2.4633 ± 0.1393   per-fold [2.338, 2.566, 2.394, 2.685, 2.333]
+  uniform        2.9636 ± 0.1206   per-fold [2.821, 3.081, 2.92, 3.129, 2.867]
+  best-single    2.4891 ± 0.1252   per-fold [2.354, 2.597, 2.454, 2.671, 2.369]
+  BO             2.4636 ± 0.1228   per-fold [2.323, 2.57, 2.439, 2.638, 2.348]
+
+  BO vs base (paired):        +0.1202 ± 0.0284
+  BO vs best-single (paired): +0.0255 ± 0.0065
+  BO vs ICL (paired):         -0.0003 ± 0.0307   [spec §4.3 baseline 2 — the kill criterion]
+  best-single picks per fold: ['2377_qwen7b', '5520_qwen7b', '5520_qwen7b', '2377_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+=== [2026-08-02 19:16:23] END target 1782 rc=0 ===

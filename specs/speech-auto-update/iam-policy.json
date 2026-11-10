@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListDataLakePrefix",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::kokkai-doc-bucket-dev",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": ["kokkai-doc/", "kokkai-doc/*"]
+        }
+      }
+    },
+    {
+      "Sid": "ReadWriteDataLakeObjects",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "arn:aws:s3:::kokkai-doc-bucket-dev/kokkai-doc/*"
+    }
+  ]
+}

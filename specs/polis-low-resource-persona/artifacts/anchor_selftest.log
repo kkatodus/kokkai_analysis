@@ -1,0 +1,338 @@
+===== anchor 152  --adapter output/polis_152_qwen7b  wave=2024HoR =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 56.81it/s]Loading weights:  16%|█▌        | 54/339 [00:00<00:00, 295.69it/s]Loading weights:  30%|██▉       | 101/339 [00:00<00:00, 366.31it/s]Loading weights:  42%|████▏     | 144/339 [00:00<00:00, 390.01it/s]Loading weights:  55%|█████▍    | 185/339 [00:00<00:00, 385.15it/s]Loading weights:  66%|██████▌   | 224/339 [00:00<00:00, 355.99it/s]Loading weights:  77%|███████▋  | 260/339 [00:00<00:00, 355.18it/s]Loading weights:  90%|████████▉ | 305/339 [00:00<00:00, 379.16it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 364.92it/s]
+========================================================================
+UTAS eval — 岸田文雄 (person_id 152), 2024HoR, adapter=output/polis_152_qwen7b
+persona=named  scoring=numeric-label  items scored: 33
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        1      1     1.00      0
+  Q4_2        3      4     3.92      1
+  Q4_3        1      1     1.00      0
+  Q4_4        3      3     2.36      0
+  Q4_5        4      4     4.34      0
+  Q4_6        2      1     1.02      1
+  Q4_7        2      1     1.25      1
+  Q4_8        3      1     1.11      2
+  Q4_9        3      1     1.01      2
+  Q4_10       3      1     1.00      2
+  Q4_11       3      3     3.35      0
+  Q4_12       3      4     3.87      1
+  Q4_13       3      1     1.72      2
+  Q4_14       2      1     1.00      1
+  Q4_15       2      2     1.83      0
+  Q4_16       2      1     1.27      1
+  Q4_17       2      1     1.09      1
+  Q4_18       3      2     2.25      1
+  Q4_19       3      2     2.33      1
+  Q5_1        1      1     1.08      0
+  Q5_2        3      2     1.97      1
+  Q5_3        3      3     3.26      0
+  Q5_4        3      2     3.15      1
+  Q5_5        2      3     3.48      1
+  Q5_6        5      3     3.23      2
+  Q5_7        4      3     3.16      1
+  Q5_8        3      3     3.27      0
+  Q5_9        3      2     2.37      1
+  Q5_10       1      1     1.27      0
+  Q5_11       1      3     3.43      2
+  Q5_12       3      3     2.82      0
+  Q5_13       1      1     1.00      0
+  Q5_14       3      4     4.28      1
+------------------------------------------------------------------------
+  MAE(argmax)=0.818  MAE(E)=0.816  exact=0.364  within1=0.818
+===== anchor 152  BASE (no adapter)  wave=2024HoR =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 57.05it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:01, 285.43it/s]Loading weights:  28%|██▊       | 96/339 [00:00<00:00, 348.48it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 365.62it/s]Loading weights:  51%|█████     | 173/339 [00:00<00:00, 364.68it/s]Loading weights:  62%|██████▏   | 210/339 [00:00<00:00, 329.40it/s]Loading weights:  76%|███████▌  | 256/339 [00:00<00:00, 359.16it/s]Loading weights:  86%|████████▋ | 293/339 [00:00<00:00, 342.64it/s]Loading weights:  99%|█████████▊| 334/339 [00:00<00:00, 360.52it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 345.49it/s]
+========================================================================
+UTAS eval — 岸田文雄 (person_id 152), 2024HoR, base model
+persona=named  scoring=numeric-label  items scored: 33
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        1      1     1.00      0
+  Q4_2        3      4     3.34      1
+  Q4_3        1      1     1.00      0
+  Q4_4        3      3     2.35      0
+  Q4_5        4      4     4.18      0
+  Q4_6        2      1     1.00      1
+  Q4_7        2      2     1.65      0
+  Q4_8        3      1     1.04      2
+  Q4_9        3      1     1.00      2
+  Q4_10       3      1     1.00      2
+  Q4_11       3      3     3.06      0
+  Q4_12       3      3     3.34      0
+  Q4_13       3      3     3.07      0
+  Q4_14       2      1     1.00      1
+  Q4_15       2      2     1.62      0
+  Q4_16       2      1     1.05      1
+  Q4_17       2      1     1.01      1
+  Q4_18       3      1     1.50      2
+  Q4_19       3      1     1.45      2
+  Q5_1        1      1     1.12      0
+  Q5_2        3      2     2.00      1
+  Q5_3        3      4     3.89      1
+  Q5_4        3      4     3.91      1
+  Q5_5        2      4     4.00      2
+  Q5_6        5      3     3.41      2
+  Q5_7        4      3     3.19      1
+  Q5_8        3      4     3.94      1
+  Q5_9        3      2     1.87      1
+  Q5_10       1      1     1.07      0
+  Q5_11       1      4     3.80      3
+  Q5_12       3      4     2.78      1
+  Q5_13       1      1     1.00      0
+  Q5_14       3      4     4.01      1
+------------------------------------------------------------------------
+  MAE(argmax)=0.909  MAE(E)=0.873  exact=0.364  within1=0.758
+===== anchor 2377  --adapter output/polis_2377_qwen7b  wave=2024HoR =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 58.39it/s]Loading weights:  16%|█▌        | 54/339 [00:00<00:00, 291.20it/s]Loading weights:  30%|██▉       | 101/339 [00:00<00:00, 370.05it/s]Loading weights:  44%|████▎     | 148/339 [00:00<00:00, 395.25it/s]Loading weights:  56%|█████▋    | 191/339 [00:00<00:00, 403.57it/s]Loading weights:  68%|██████▊   | 232/339 [00:00<00:00, 364.56it/s]Loading weights:  83%|████████▎ | 280/339 [00:00<00:00, 387.68it/s]Loading weights:  97%|█████████▋| 328/339 [00:00<00:00, 409.51it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 384.28it/s]
+========================================================================
+UTAS eval — 塩川鉄也 (person_id 2377), 2024HoR, adapter=output/polis_2377_qwen7b
+persona=named  scoring=numeric-label  items scored: 22
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        5      1     1.00      4
+  Q4_2        5      4     3.74      1
+  Q4_3        1      1     1.00      0
+  Q4_4        5      3     2.69      2
+  Q4_5        5      1     1.22      4
+  Q4_6        3      1     1.00      2
+  Q4_7        3      4     4.01      1
+  Q4_8        1      3     3.09      2
+  Q4_9        5      1     1.01      4
+  Q4_10       2      1     1.03      1
+  Q4_11       2      1     1.36      1
+  Q4_12       5      3     3.47      2
+  Q4_13       5      1     1.07      4
+  Q4_14       5      1     1.00      4
+  Q4_15       5      1     1.55      4
+  Q4_16       1      3     3.20      2
+  Q4_17       1      1     1.69      0
+  Q4_18       1      3     3.08      2
+  Q4_19       2      4     3.56      2
+  Q5_6        1      3     3.13      2
+  Q5_10       5      1     1.38      4
+  Q5_11       5      4     3.44      1
+------------------------------------------------------------------------
+  MAE(argmax)=2.227  MAE(E)=2.218  exact=0.091  within1=0.318
+===== anchor 2377  BASE (no adapter)  wave=2024HoR =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 47.28it/s]Loading weights:  15%|█▌        | 51/339 [00:00<00:01, 270.74it/s]Loading weights:  26%|██▋       | 89/339 [00:00<00:00, 314.20it/s]Loading weights:  37%|███▋      | 126/339 [00:00<00:00, 328.37it/s]Loading weights:  49%|████▉     | 166/339 [00:00<00:00, 352.44it/s]Loading weights:  60%|█████▉    | 202/339 [00:00<00:00, 326.70it/s]Loading weights:  70%|██████▉   | 236/339 [00:00<00:00, 322.37it/s]Loading weights:  80%|███████▉  | 270/339 [00:00<00:00, 319.75it/s]Loading weights:  90%|█████████ | 306/339 [00:00<00:00, 330.52it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 325.03it/s]
+========================================================================
+UTAS eval — 塩川鉄也 (person_id 2377), 2024HoR, base model
+persona=named  scoring=numeric-label  items scored: 22
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        5      1     1.00      4
+  Q4_2        5      3     3.26      2
+  Q4_3        1      1     1.00      0
+  Q4_4        5      3     2.81      2
+  Q4_5        5      4     3.88      1
+  Q4_6        3      1     1.00      2
+  Q4_7        3      4     3.73      1
+  Q4_8        1      3     2.96      2
+  Q4_9        5      1     1.00      4
+  Q4_10       2      1     1.00      1
+  Q4_11       2      1     1.67      1
+  Q4_12       5      4     3.46      1
+  Q4_13       5      1     2.44      4
+  Q4_14       5      1     1.00      4
+  Q4_15       5      1     1.15      4
+  Q4_16       1      3     3.01      2
+  Q4_17       1      1     1.15      0
+  Q4_18       1      3     2.91      2
+  Q4_19       2      3     2.85      1
+  Q5_6        1      4     3.66      3
+  Q5_10       5      1     1.38      4
+  Q5_11       5      4     3.27      1
+------------------------------------------------------------------------
+  MAE(argmax)=2.091  MAE(E)=1.998  exact=0.091  within1=0.409
+===== anchor 3631  --adapter output/polis_3631_qwen7b  wave=2022HoC =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 57.13it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:01, 283.94it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 310.77it/s]Loading weights:  37%|███▋      | 126/339 [00:00<00:00, 328.50it/s]Loading weights:  48%|████▊     | 162/339 [00:00<00:00, 339.35it/s]Loading weights:  58%|█████▊    | 196/339 [00:00<00:00, 318.93it/s]Loading weights:  68%|██████▊   | 231/339 [00:00<00:00, 317.04it/s]Loading weights:  79%|███████▉  | 268/339 [00:00<00:00, 313.87it/s]Loading weights:  90%|████████▉ | 305/339 [00:00<00:00, 328.02it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 322.60it/s]
+========================================================================
+UTAS eval — 福島瑞穂 (person_id 3631), 2022HoC, adapter=output/polis_3631_qwen7b
+persona=named  scoring=numeric-label  items scored: 37
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        5      1     1.06      4
+  Q4_2        5      5     4.05      0
+  Q4_3        4      3     3.25      1
+  Q4_4        4      3     3.10      1
+  Q4_5        1      1     1.00      0
+  Q4_6        5      3     3.08      2
+  Q4_7        5      1     2.91      4
+  Q4_8        3      1     1.00      2
+  Q4_9        3      3     3.53      0
+  Q4_10       3      1     1.00      2
+  Q4_11       3      1     1.79      2
+  Q4_12       1      1     2.19      0
+  Q4_13       1      1     1.00      0
+  Q4_14       1      3     2.61      2
+  Q4_15       3      1     1.43      2
+  Q4_16       1      1     1.01      0
+  Q4_17       2      1     1.00      1
+  Q4_18       1      1     1.34      0
+  Q4_19       5      3     3.13      2
+  Q4_20       5      5     4.38      0
+  Q4_21       3      3     2.63      0
+  Q4_22       4      3     3.83      1
+  Q4_23       3      1     1.07      2
+  Q4_24       1      1     1.00      0
+  Q4_25       1      1     1.29      0
+  Q4_26       1      1     1.00      0
+  Q4_27       1      1     1.03      0
+  Q5_1        5      3     3.30      2
+  Q5_2        5      4     3.81      1
+  Q5_3        4      3     3.10      1
+  Q5_4        3      3     3.32      0
+  Q5_5        2      2     1.91      0
+  Q5_6        1      3     3.15      2
+  Q5_7        4      3     3.07      1
+  Q5_8        2      3     3.25      1
+  Q5_9        3      3     2.97      0
+  Q5_10       3      3     2.60      0
+------------------------------------------------------------------------
+  MAE(argmax)=0.973  MAE(E)=0.98  exact=0.459  within1=0.676
+===== anchor 3631  BASE (no adapter)  wave=2022HoC =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 57.38it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:01, 280.85it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 311.21it/s]Loading weights:  37%|███▋      | 126/339 [00:00<00:00, 327.46it/s]Loading weights:  48%|████▊     | 163/339 [00:00<00:00, 341.45it/s]Loading weights:  58%|█████▊    | 198/339 [00:00<00:00, 316.15it/s]Loading weights:  69%|██████▉   | 234/339 [00:00<00:00, 320.04it/s]Loading weights:  79%|███████▉  | 269/339 [00:00<00:00, 327.08it/s]Loading weights:  90%|████████▉ | 305/339 [00:00<00:00, 333.58it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 323.33it/s]
+========================================================================
+UTAS eval — 福島瑞穂 (person_id 3631), 2022HoC, base model
+persona=named  scoring=numeric-label  items scored: 37
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        5      1     1.51      4
+  Q4_2        5      3     3.15      2
+  Q4_3        4      3     3.09      1
+  Q4_4        4      3     3.01      1
+  Q4_5        1      1     1.00      0
+  Q4_6        5      3     3.02      2
+  Q4_7        5      1     1.56      4
+  Q4_8        3      1     1.00      2
+  Q4_9        3      3     3.04      0
+  Q4_10       3      1     1.00      2
+  Q4_11       3      2     2.02      1
+  Q4_12       1      1     1.95      0
+  Q4_13       1      1     1.00      0
+  Q4_14       1      3     2.71      2
+  Q4_15       3      1     1.34      2
+  Q4_16       1      1     1.00      0
+  Q4_17       2      1     1.00      1
+  Q4_18       1      1     1.17      0
+  Q4_19       5      3     3.09      2
+  Q4_20       5      4     4.07      1
+  Q4_21       3      3     3.15      0
+  Q4_22       4      3     3.19      1
+  Q4_23       3      1     1.05      2
+  Q4_24       1      1     1.00      0
+  Q4_25       1      1     1.02      0
+  Q4_26       1      1     1.00      0
+  Q4_27       1      1     1.01      0
+  Q5_1        5      3     3.06      2
+  Q5_2        5      4     3.90      1
+  Q5_3        4      3     3.04      1
+  Q5_4        3      4     3.92      1
+  Q5_5        2      2     1.95      0
+  Q5_6        1      3     3.10      2
+  Q5_7        4      3     3.03      1
+  Q5_8        2      3     3.47      1
+  Q5_9        3      2     2.25      1
+  Q5_10       3      2     2.06      1
+------------------------------------------------------------------------
+  MAE(argmax)=1.108  MAE(E)=1.085  exact=0.324  within1=0.676
+===== anchor 5520  --adapter output/polis_5520_qwen7b  wave=2022HoC =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 56.73it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:01, 282.07it/s]Loading weights:  26%|██▋       | 89/339 [00:00<00:00, 300.34it/s]Loading weights:  37%|███▋      | 126/339 [00:00<00:00, 325.92it/s]Loading weights:  48%|████▊     | 163/339 [00:00<00:00, 340.50it/s]Loading weights:  58%|█████▊    | 198/339 [00:00<00:00, 315.81it/s]Loading weights:  69%|██████▉   | 234/339 [00:00<00:00, 323.32it/s]Loading weights:  80%|███████▉  | 270/339 [00:00<00:00, 329.56it/s]Loading weights:  93%|█████████▎| 316/339 [00:00<00:00, 360.16it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 334.78it/s]
+========================================================================
+UTAS eval — 上田清司 (person_id 5520), 2022HoC, adapter=output/polis_5520_qwen7b
+persona=named  scoring=numeric-label  items scored: 37
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        2      1     1.00      1
+  Q4_2        4      4     3.85      0
+  Q4_3        3      4     4.06      1
+  Q4_4        2      4     3.82      2
+  Q4_5        2      1     1.00      1
+  Q4_6        3      3     2.86      0
+  Q4_7        4      1     1.67      3
+  Q4_8        3      1     1.00      2
+  Q4_9        3      4     4.00      1
+  Q4_10       2      1     1.02      1
+  Q4_11       3      1     1.41      2
+  Q4_12       3      1     1.09      2
+  Q4_13       2      1     1.00      1
+  Q4_14       2      1     2.15      1
+  Q4_15       3      1     1.30      2
+  Q4_16       3      1     1.01      2
+  Q4_17       3      1     1.00      2
+  Q4_18       5      1     2.18      4
+  Q4_19       3      4     3.97      1
+  Q4_20       3      4     4.43      1
+  Q4_21       3      1     2.76      2
+  Q4_22       3      4     4.28      1
+  Q4_23       4      1     1.06      3
+  Q4_24       4      1     1.00      3
+  Q4_25       3      3     2.31      0
+  Q4_26       2      1     1.00      1
+  Q4_27       3      1     1.07      2
+  Q5_1        2      1     2.56      1
+  Q5_2        3      2     2.99      1
+  Q5_3        3      3     2.64      0
+  Q5_4        4      4     3.45      0
+  Q5_5        2      2     1.78      0
+  Q5_6        3      4     3.65      1
+  Q5_7        4      3     3.15      1
+  Q5_8        3      3     3.40      0
+  Q5_9        5      3     2.73      2
+  Q5_10       3      1     2.04      2
+------------------------------------------------------------------------
+  MAE(argmax)=1.351  MAE(E)=1.215  exact=0.189  within1=0.595
+===== anchor 5520  BASE (no adapter)  wave=2022HoC =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/339 [00:00<00:05, 57.10it/s]Loading weights:  16%|█▌        | 54/339 [00:00<00:00, 299.33it/s]Loading weights:  29%|██▉       | 100/339 [00:00<00:00, 361.22it/s]Loading weights:  42%|████▏     | 144/339 [00:00<00:00, 389.18it/s]Loading weights:  55%|█████▍    | 185/339 [00:00<00:00, 385.00it/s]Loading weights:  66%|██████▌   | 224/339 [00:00<00:00, 354.47it/s]Loading weights:  77%|███████▋  | 260/339 [00:00<00:00, 351.53it/s]Loading weights:  87%|████████▋ | 296/339 [00:00<00:00, 350.09it/s]Loading weights:  98%|█████████▊| 332/339 [00:00<00:00, 340.33it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 347.48it/s]
+========================================================================
+UTAS eval — 上田清司 (person_id 5520), 2022HoC, base model
+persona=named  scoring=numeric-label  items scored: 37
+------------------------------------------------------------------------
+  item    truth argmax  E[1..5]  |err|
+  Q4_1        2      1     1.00      1
+  Q4_2        4      3     3.51      1
+  Q4_3        3      4     4.01      1
+  Q4_4        2      3     3.34      1
+  Q4_5        2      1     1.00      1
+  Q4_6        3      3     2.95      0
+  Q4_7        4      1     1.07      3
+  Q4_8        3      1     1.00      2
+  Q4_9        3      4     3.97      1
+  Q4_10       2      1     1.00      1
+  Q4_11       3      2     1.98      1
+  Q4_12       3      1     1.04      2
+  Q4_13       2      1     1.00      1
+  Q4_14       2      1     2.37      1
+  Q4_15       3      1     1.05      2
+  Q4_16       3      1     1.00      2
+  Q4_17       3      1     1.00      2
+  Q4_18       5      1     1.94      4
+  Q4_19       3      4     3.58      1
+  Q4_20       3      4     4.05      1
+  Q4_21       3      4     3.94      1
+  Q4_22       3      3     3.45      0
+  Q4_23       4      1     1.01      3
+  Q4_24       4      1     1.00      3
+  Q4_25       3      1     1.08      2
+  Q4_26       2      1     1.00      1
+  Q4_27       3      1     1.04      2
+  Q5_1        2      2     1.90      0
+  Q5_2        3      3     3.32      0
+  Q5_3        3      2     2.18      1
+  Q5_4        4      4     3.42      0
+  Q5_5        2      2     1.85      0
+  Q5_6        3      3     3.37      0
+  Q5_7        4      3     3.05      1
+  Q5_8        3      3     3.41      0
+  Q5_9        5      1     1.50      4
+  Q5_10       3      2     1.65      1
+------------------------------------------------------------------------
+  MAE(argmax)=1.297  MAE(E)=1.286  exact=0.216  within1=0.676

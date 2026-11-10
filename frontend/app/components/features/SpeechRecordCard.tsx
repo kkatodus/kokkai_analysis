@@ -1,9 +1,9 @@
 import { EmptyState } from "@/app/components/shared/EmptyState";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
-import type { SpeechRecord } from "@/app/types";
+import type { QualityExchange, SpeechRecord } from "@/app/types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-
+import { ExchangeChips } from "@/app/components/features/QualityChips";
 
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
   // From `data/resource/experiment_config.json` (topic_name_en -> topic_name)
@@ -19,8 +19,6 @@ const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
   OnlineVoting: "オンライン投票",
   MyNumber: "マイナンバー",
   LGBT: "LGBT",
-  Unproductive: "議題にとって生産性の低いと判別された発言",
-  Irrelevant: "議題にとって関連性の低いと判別された発言",
 };
 
 function normalizeTopicLabelKey(raw: string): string {
@@ -64,6 +62,8 @@ interface SpeechRecordCardProps {
   selectedTopic: SpeechTopicState | null;
   ensureSpeechPage: (topicKey: string, pageNumber: number) => Promise<void>;
   onSelectIssueId?: (issueId: string, speechId?: string | null) => void;
+  /** speechID → the labelled exchange it belongs to (specs/speech-quality-ui §4) */
+  exchangeIndex?: Map<string, QualityExchange>;
 }
 
 export function SpeechRecordCard({
@@ -75,55 +75,27 @@ export function SpeechRecordCard({
   selectedTopic,
   ensureSpeechPage,
   onSelectIssueId,
+  exchangeIndex,
 }: SpeechRecordCardProps) {
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
 
-  const topicsForTabs = (speechTopics ?? []).slice().sort((a, b) => {
+  const topicsForTabs = [...(speechTopics ?? [])].sort((a, b) => {
     const aKey = normalizeTopicLabelKey(a.topicKey);
     const bKey = normalizeTopicLabelKey(b.topicKey);
-
-    const priority = (k: string) => {
-      // Order: All speeches → Unproductive → Irrelevant → everything else
-      if (k === "all_speeches" || k === "allSpeeches") return 0;
-      if (k === "Unproductive") return 1;
-      if (k === "Irrelevant") return 2;
-      return 3;
-    };
-
-    const ap = priority(aKey);
-    const bp = priority(bKey);
-    if (ap !== bp) return ap - bp;
-
-    // Stable ordering for the rest
-    const al = translateTopicName(a.topicKey || a.displayName);
-    const bl = translateTopicName(b.topicKey || b.displayName);
-    return al.localeCompare(bl, "ja");
+    const isAll = (k: string) => k === "all_speeches" || k === "allSpeeches";
+    if (isAll(aKey) !== isAll(bKey)) return isAll(aKey) ? -1 : 1;
+    return translateTopicName(a.topicKey || a.displayName).localeCompare(translateTopicName(b.topicKey || b.displayName), "ja");
   });
 
-  const topicTabClassName = (topicKey: string, active: boolean) => {
-    const key = normalizeTopicLabelKey(topicKey);
-    const isAll = key === "all_speeches" || key === "allSpeeches";
-    const isUnproductive = key === "Unproductive";
-    const isIrrelevant = key === "Irrelevant";
-
+  const topicTabClassName = (_topicKey: string, active: boolean) => {
     const base =
       "rounded-full border px-2 py-0.5 text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/30 ";
-
-    if (active) {
-      if (isUnproductive) return base + "border-amber-400/60 bg-amber-500/20 text-amber-100";
-      if (isIrrelevant) return base + "border-rose-400/60 bg-rose-500/20 text-rose-100";
-      // Default active (incl. all speeches)
-      return base + (isAll ? "border-cyan-400/60 bg-cyan-500/15 text-cyan-100" : "border-cyan-400/60 bg-cyan-500/15 text-cyan-100");
-    }
-
-    if (isUnproductive) return base + "border-amber-400/25 bg-amber-500/10 text-amber-100 hover:border-amber-400/40 hover:bg-amber-500/15";
-    if (isIrrelevant) return base + "border-rose-400/25 bg-rose-500/10 text-rose-100 hover:border-rose-400/40 hover:bg-rose-500/15";
-
+    if (active) return base + "border-cyan-400/60 bg-cyan-500/15 text-cyan-100";
     return base + "border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-slate-400/40 hover:bg-white/5";
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40">
+    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40" data-tour="speech-card">
       <div className="flex items-center justify-between px-2 pb-1 pt-2">
         <div className="text-[13px] font-semibold text-gray-50">発言（トピック別）</div>
         {speechLoading && <LoadingIndicator variant="dots" size="sm" />}
@@ -220,34 +192,15 @@ export function SpeechRecordCard({
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <div className="truncate text-[12px] font-semibold text-gray-50">{s.speaker}</div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {s.is_relevant && (
-                            <span
-                              className={
-                                "rounded-full border px-2 py-0.5 text-[10px] font-semibold " +
-                                (s.is_relevant === "True"
-                                  ? "border-emerald-400/30 bg-emerald-500/15 text-emerald-100"
-                                  : "border-rose-400/30 bg-rose-500/10 text-rose-100")
-                              }
-                              title={s.quality_reason ? `関連: ${s.quality_reason}` : undefined}
-                            >
-                              関連性: {s.is_relevant === "True" ? "高い" : "低い"}
-                            </span>
-                          )}
-                          {s.is_productive && (
-                            <span
-                              className={
-                                "rounded-full border px-2 py-0.5 text-[10px] font-semibold " +
-                                (s.is_productive === "True"
-                                  ? "border-sky-400/30 bg-sky-500/15 text-sky-100"
-                                  : "border-amber-400/30 bg-amber-500/10 text-amber-100")
-                              }
-                              title={s.quality_reason ? `生産性: ${s.quality_reason}` : undefined}
-                            >
-                              生産性: {s.is_productive === "True" ? "高い" : "低い"}
-                            </span>
-                          )}
-                        </div>
+                        {(() => {
+                          const ex = exchangeIndex?.get(String(s.speechID));
+                          if (!ex) return null;
+                          return (
+                            <div title={`AI判定: ${ex.reason}`}>
+                              <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} compact prefixed />
+                            </div>
+                          );
+                        })()}
                       </div>
                       <div className="mt-0.5 text-[11px] text-gray-400">
                         {s.meta?.date ?? ""} {s.meta?.nameOfMeeting ? `・ ${s.meta.nameOfMeeting}` : ""}

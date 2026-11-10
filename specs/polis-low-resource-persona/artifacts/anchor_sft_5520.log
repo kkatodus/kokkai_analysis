@@ -1,0 +1,7 @@
+[anchor-sft] person=5520 train=1460 holdout=40 lr=5e-05 epochs=1 base=Qwen/Qwen2.5-7B-Instruct
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 47.17it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:01, 271.88it/s]Loading weights:  26%|██▋       | 89/339 [00:00<00:00, 308.74it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 362.83it/s]Loading weights:  53%|█████▎    | 179/339 [00:00<00:00, 383.79it/s]Loading weights:  64%|██████▍   | 218/339 [00:00<00:00, 362.54it/s]Loading weights:  76%|███████▌  | 256/339 [00:00<00:00, 367.02it/s]Loading weights:  86%|████████▋ | 293/339 [00:00<00:00, 355.78it/s]Loading weights:  98%|█████████▊| 332/339 [00:00<00:00, 365.79it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 351.63it/s]
+  base held-out NLL 2.7944
+  trained held-out NLL 2.4853  (+0.3090 vs base, 4.2 min)
+  -> /workspace/kokkai_analysis/research/polis/output/polis_5520_sft_qwen7b
+  compare against the DPO anchor with bo_merge_coeffs --nested --adapters <one adapter>: with a single anchor the 'uniform' row IS that anchor's score.

@@ -1,0 +1,8 @@
+{
+  "model": "bert-ja-v3",
+  "hf": "cl-tohoku/bert-base-japanese-v3",
+  "scope": "term",
+  "topic": "Defence",
+  "n": 10,
+  "dim": 768
+}

@@ -1,0 +1,947 @@
+# POLIS — 7B main-scale run on a rented GPU (runbook)
+
+Every command needed to get the pending 7B merge-method comparison running on a
+RunPod box, in order. Copy-paste top to bottom.
+
+**What this produces:** the paper's pending table — base / uniform / best-single /
+POLIS on held-out NLL *and* UTAS, across the 3 genuine held-out 2024HoR targets
+(1279 高市, 2053 赤嶺, 2289 枝野). See
+[`paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex`](../../paper/parameter-optimization-for-low-resource-ideological-simulation/main.tex)
+§Discussion, which currently marks it *pending on higher-throughput hardware*.
+
+**Code:** [`research/polis/`](../../research/polis/) · **Guide:** [`research/README.md`](../../research/README.md)
+
+---
+
+## Snippet index
+
+Every runnable block below carries an ID. **`L#` runs on your laptop, `P#` runs on
+the pod** — mixing those up is the most common way to lose an hour. Cite the ID
+when asking about a block rather than describing its position.
+
+> **Paste each block whole, from its first line.** Several define a shell variable at
+> the top and use it below. A partial paste leaves the variable unset, it expands to
+> nothing, and the command silently retargets the filesystem root — output lands at
+> `/whatever.log`, or rsync reports `link_stat "/whatever.log": No such file`, which
+> reads as a missing file rather than a missing variable. This bit three times on
+> 2026-08-02.
+
+| ID | Where | § | What it does |
+|---|---|---|---|
+| `L1` | laptop | 1 | prerequisites — mount data, push the branch, register the SSH key |
+| `L2` | laptop | 1 | verify the payload exists before you rent a GPU |
+| `P1` | pod | 2 | clone the repo (must happen before the rsync) |
+| `L3` | laptop | 3 | ship the two payloads — adapters + data inputs |
+| `P2` | pod | 4 | bootstrap — deps, model cache, merge self-test |
+| `P3` | pod | 5 | calibration run (TRIALS=5, one target) |
+| `P4` | pod | 5 | check the BO objective isn't flat |
+| `P5` | pod | 5.5 | move the calibration log aside |
+| `P6` | pod | 5.5 | everything after calibration, as one block (~65 min) |
+| `L4` | laptop | 5.5 | retrieve logs after `P6` |
+| `P7` | pod | 6 | single-split then nested, run separately (~52 min) |
+| `P8` | pod | 6.1 | re-run single-split with numeric UTAS scoring (~12 min) |
+| `P9` | pod | 6 | granularity ablation (~10 min) |
+| `L5` | laptop | 7 | retrieve results before destroying the pod |
+| `P11` | pod | 6.2 | administer the wave to all 594 politicians, base model (~10 min) |
+| `L7` | laptop | 6.2 | retrieve the population dump |
+| `L6` | laptop | 6.2 | read name-swap divergence + rank metric (CPU, seconds) |
+| `P12` | pod | 6.3 | single-split again, saving per-config answer vectors (~12 min) |
+| `P13` | pod | 8 | nested 5-fold CV + ICL over all 33 targets (~6 h) |
+| `P14` | pod | 9 | smoke the merge+ICL rows on one target (~12 min) |
+| `P15` | pod | 9 | nested + ICL + the combined rows over all 33 (~7 h) |
+| `L8` | laptop | 9 | retrieve the combined-row logs and the coefficient dumps |
+| `L9` | laptop | 9 | pool every nested log into the paper's table (CPU, seconds) |
+| `P16` | pod | 10 | budget sweep, merge side (~3.5 h) |
+| `P17` | pod | 10 | budget sweep, SFT side (~30 min) |
+| `L10` | laptop | 10 | retrieve and join both sides of the sweep |
+| `P18` | pod | 11 | SFT anchor probe — is the anchors' objective the confound? (~1 h) |
+| `P19` | pod | 11 | anchor-count slope at 2/3/4 anchors (~2.5 h) |
+| `P10` | pod | Troubleshooting | clear the untracked-logs pull conflict, then pull |
+
+`P6` is `P7` + `P9` concatenated — run *either* `P6` *or* the pair, never both.
+
+---
+
+## 0. Pod requirements
+
+| | |
+|---|---|
+| VRAM | **~31 GB** (15.2 GB bf16 model + 13.2 GB fp32 anchor deltas + transients). 40 GB floor; 48 GB comfortable. |
+| Cards that fit | A40 48 · L40 / L40S 48 · A6000 / RTX 6000 Ada 48 · A100 80 · H100 80 |
+| Template | RunPod **PyTorch** (ships torch; sshd pre-configured) |
+| Networking | **Public IP + exposed TCP port 22** — required. The proxied `ssh.runpod.io` connection does not support SCP/SFTP/rsync, and you must move 522 MB of adapters. |
+| Network volume | Optional. Saves one 15 GB model download per pod restart; forces Secure Cloud (Community Cloud pods cannot attach one) and pins every future pod to that datacenter. |
+
+---
+
+## 1. Laptop — prerequisites
+
+**`[L1]`** · laptop · prerequisites — mount data, push the branch, register the SSH key
+```bash
+cd ~/workspace/projects/kokkai_analysis
+
+kdata mount                  # datasets live on the external SSD
+git push origin dev          # the pod clones this branch
+
+cat ~/.ssh/id_ed25519.pub    # paste into RunPod -> Settings -> SSH Public Keys
+```
+
+Verify the payload is present before paying for a GPU:
+
+**`[L2]`** · laptop · verify the payload exists before you rent a GPU
+```bash
+du -csh research/polis/output/polis_*_qwen7b | tail -1        # expect 522M
+ls data/data/polis/dpo_pairs_targets | wc -l                   # expect 33 (3 original + 30 expansion)
+ls data/data/polis/utas_ground_truth/2024HoR.json             # expect present
+```
+
+---
+
+## 2. Pod — clone
+
+**Clone before rsync.** rsync would create the destination directories, and
+`git clone` refuses a non-empty target.
+
+**`[P1]`** · pod · clone the repo (must happen before the rsync)
+```bash
+git clone https://github.com/kkatodus/kokkai_analysis.git /workspace/kokkai_analysis
+cd /workspace/kokkai_analysis && git checkout dev
+mkdir -p /workspace/kokkai_data/polis
+```
+
+---
+
+## 3. Laptop — ship the two payloads
+
+Neither is in git (adapters are ~1 GB of safetensors; datasets live on the SSD).
+
+**`[L3]`** · laptop · ship the two payloads — adapters + data inputs
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>          # from the RunPod "Connect" panel
+
+# adapters (~522 MB)
+rsync -avP -e "ssh -p $PORT" \
+  $REPO/research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
+  root@$IP:/workspace/kokkai_analysis/research/polis/output/
+
+# data inputs (~4 MB)
+rsync -avP -e "ssh -p $PORT" \
+  $REPO/data/data/polis/dpo_pairs_targets \
+  $REPO/data/data/polis/utas_ground_truth \
+  root@$IP:/workspace/kokkai_data/polis/
+```
+
+---
+
+## 4. Pod — bootstrap
+
+**`[P2]`** · pod · bootstrap — deps, model cache, merge self-test
+```bash
+cd /workspace/kokkai_analysis
+./research/polis/scripts/setup_pod.sh
+```
+
+Checks VRAM, installs deps against the image's torch, verifies both payloads
+landed, caches the model, and ends on the merge self-test.
+
+> ### ⚠️ The gate
+> The self-test must print **four DISTINCT NLLs** (base / uniform / upper-only /
+> lower-only) and an exact restore. `[OK]` alone is **not** sufficient.
+>
+> If they are not distinct, the merge is not biting and every hour after this is
+> wasted. Cause: under `device_map="auto"` the overflow layers become meta tensors
+> and the merger's in-place ΔW writes silently no-op — the BO then optimises a flat
+> objective for hours without erroring. This is why `--device cuda` is passed
+> explicitly. Stop and debug; do not start the run.
+
+Measured 7B reference values (2026-08-02, `n_layers=28`, `n_groups=3`,
+`touched_modules=112`, ~57 s including model load):
+
+```
+base NLL                 = 1.0786
+uniform merge NLL        = 2.6322
+upper-group-only merge   = 1.2157
+lower-group-only merge   = 1.7669
+restored base NLL        = 1.0786  (should match base)
+```
+
+Same shape as the 0.5B self-test (base 2.0808 / uniform 3.4785 / upper 2.2633 /
+lower 2.3963): uniform merging badly damages the model, and the two depth groups
+respond differently. That asymmetry is the whole premise of the method — if your
+numbers are flat instead, see the gate above.
+
+---
+
+## 5. Pod — calibrate before committing
+
+RunPod SSH sessions drop; always run inside tmux.
+
+**`[P3]`** · pod · calibration run (TRIALS=5, one target)
+```bash
+tmux new -s polis
+echo "$TMUX"                 # MUST be non-empty -- see the tmux check below
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+time TRIALS=5 TARGETS=1279 ./research/polis/scripts/run_7b_bo_gpu.sh
+```
+
+**Why:** per-trial cost is dominated by the re-merge (writing ΔW for 4 anchors ×
+822M adapted params every trial), not the forwards, so the CPU timings predict
+nothing. Measure seconds-per-trial, then multiply.
+
+Detach with `Ctrl-b d`, reattach with `tmux attach -t polis`.
+
+> **Verify tmux actually has the session.** If `Ctrl-b` echoes as `^B` in the
+> terminal instead of being swallowed as the prefix, you are *not* attached and a
+> dropped SSH session will kill the run. `echo $TMUX` is the reliable check.
+
+### Measured calibration (L40S-class card, 2026-08-02)
+
+```
+preflight (model load + 5 evals)            57 s
+target 1279, TRIALS=5 (load + 5 + final)   110 s
+```
+
+Those 110 s cover model load, ΔW construction, 5 trials, **and** the final eval
+block (4 NLL configs × 30 utterances + 4 UTAS configs × 33 items). Optuna runs at
+`WARNING` verbosity (`bo_merge_coeffs.py:51`), so there are no per-trial timestamps
+to decompose it with — but the full run supplies the rate by subtraction.
+
+**Measured on the real run** (same session, single-split, 40 trials/target):
+
+```
+preflight                                    59 s
+target 1279   07:49:09 -> 07:52:53          224 s
+target 2053   07:52:53 -> 07:56:26          213 s
+target 2289   07:56:26 -> 07:59:56          210 s
+total                                     11m45 s
+```
+
+216 s/target at 40 trials vs 110 s at 5 trials ⇒ **~3 s/trial**, with **~95 s
+fixed per target** (load + ΔW build + final NLL/UTAS eval). The re-merge is far
+cheaper than the CPU-era warnings suggest.
+
+| Run | Trials | Wall clock |
+|---|---|---|
+| single-split | 3 targets × 40 | **~12 min** (measured) |
+| nested 5-fold | 3 × 5 × 40 = 600 | **~40 min** (projected from the above) |
+| granularity, `--groups 1 3` | 2 × 4 folds × 20 | **~10–15 min** |
+
+The whole programme is roughly an hour of GPU. Do the granularity ablation in §6 —
+at this rate there is no argument for skipping it.
+
+### Check the objective isn't flat
+
+The preflight proves the merge *applies*; this proves the BO *saw* it.
+
+**`[P4]`** · pod · check the BO objective isn't flat
+```bash
+tail -60 specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log
+```
+
+What you are checking is that the fitted coefficients differ across anchors and
+groups and that train/test NLL are close. Identical values everywhere means stop
+and debug, same as a failed gate.
+
+> ### ⚠️ Do not read the calibration's BO number as a result
+> `make_sampler` sets `n_start = max(6, min(n_dims, max(6, trials // 3)))`
+> (`bo_merge_coeffs.py:106`). At `dims=12` (4 anchors × 3 groups) with `TRIALS=5`
+> that is **6 startup trials for a 5-trial budget** — the GP never fits, and all
+> five trials are random draws.
+>
+> So the calibration will very likely show BO *losing* to best-single. It did on
+> 2026-08-02 (BO 2.3638 vs best-single 2.1763, base 2.2648). That is expected and
+> is **not** a reason to abort. `TRIALS=40` gives 12 startup + 28 GP-guided trials,
+> which is the first configuration whose BO number means anything.
+
+Reference calibration output (target 1279, 5 random trials — pipeline check only):
+
+```
+  base (no adapter)      2.2648
+  uniform merge          2.7738
+  best single anchor     2.1763   (2377_qwen7b)
+  BO layer-group merge   2.3638   (train 2.3506)
+```
+
+Note the UTAS block is *live* at 7B — MAE(E) spanned 1.089–1.375 across configs,
+rather than pinning near 3.0 the way it does at 0.5B. The "degenerate metric"
+caveat printed by the script applies to the development scale, not to this run.
+
+### Move the calibration log aside
+
+`run_7b_bo_gpu.sh` opens `target_<id>.log` with `>>`, so the full run appends onto
+your calibration output and the nested run appends onto *that* — three protocols
+concatenated into one file, which makes the deliverable near-unreadable.
+
+**`[P5]`** · pod · move the calibration log aside
+```bash
+mv specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_1279.log \
+   specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/calib_1279_trials5.log
+```
+
+---
+
+## 5.5 Everything after calibration, as one block
+
+Calibration passed → run this. It is §6 and §7 concatenated with nothing to think
+about in between; the individual steps are broken out below if something fails.
+
+Paste **on the pod**, inside tmux:
+
+**`[P6]`** · pod · everything after calibration, as one block (~65 min)
+```bash
+tmux new -s polis 2>/dev/null || tmux attach -t polis
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+
+# keep the 5-trial calibration out of the real logs (skip if already renamed)
+[ -f "$LOGS/target_1279.log" ] && mv "$LOGS/target_1279.log" "$LOGS/calib_1279_trials5.log"
+
+# 1. single-split -- the only source of the UTAS half of the table (~12 min)
+time ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
+
+# 2. nested 5-fold CV -- unbiased estimate + error bars (~40 min)
+time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
+
+# 3. granularity ablation -- lets the paper drop its 0.5B-only concession.
+#    --dpo-dir is REQUIRED here: unlike run_7b_bo_gpu.sh, this script defaults to
+#    $KOKKAI_DATA_DIR/polis/dpo_pairs_full, which §3 never ships to the pod.
+#    Needs a checkout that includes the probe-merger fix (§6) -- older ones OOM.
+time python research/polis/bo_granularity_ablation.py \
+  --target 1279 --budget 30 --folds 4 --trials 20 \
+  --groups 1 3 \
+  --adapters research/polis/output/polis_{152,2377,3631,5520}_qwen7b \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets" \
+  2>&1 | tee "$LOGS/granularity_1279.log"
+
+ls -la "$LOGS"
+```
+
+Then paste **on the laptop** to retrieve — do this *before* destroying the pod:
+
+**`[L4]`** · laptop · retrieve logs after P6
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+
+cd $REPO
+git add specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+git commit -m "POLIS: 7B merge-method comparison results (single-split, nested CV, granularity)"
+```
+
+After the first target's `START`/`END` stamps appear in the log you will know the
+true per-trial rate — check them before walking away, since the nested estimate in
+§5 is extrapolated, not measured.
+
+---
+
+## 6. Pod — the actual runs
+
+You need **both**: nested CV has no `--utas-eval` path, so the single-split run is
+the only source for the UTAS half of the table.
+
+Run single-split **first** — it carries the UTAS half — and rename its logs before
+starting nested, for the append reason in §5.
+
+**`[P7]`** · pod · single-split then nested, run separately (~52 min)
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+# single-split (NLL + UTAS) -- matches the 0.5B protocol, ~12 min
+time ./research/polis/scripts/run_7b_bo_gpu.sh
+
+# separate the two protocols before the second run appends to the same files
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_$(basename "$f")"; done
+
+# nested 5-fold CV (unbiased, error bars) -- ~40 min
+time NESTED=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/nested_$(basename "$f")"; done
+```
+
+Tunable via environment (defaults shown):
+
+| Var | Default | Meaning |
+|---|---|---|
+| `BASE` | `Qwen/Qwen2.5-7B-Instruct` | base model |
+| `DEVICE` | `cuda` | must pin one device; see the gate above |
+| `BUDGET` | `30` | target utterances the BO tunes on |
+| `TEST` | `30` | held-out test utterances |
+| `TRIALS` | `40` | GP trials per target/fold |
+| `FOLDS` | `5` | nested-CV folds (`NESTED=1` only) |
+| `TARGETS` | `1279 2053 2289` | person_ids |
+| `UTAS_NUMERIC` | `0` | `1` scores UTAS by the 1..N label token instead of the option strings; see §6.1 |
+| `UTAS_DUMP` | (unset) | directory for per-config answer vectors; see §6.3 |
+| `ICL` | `0` | `1` adds spec §4.3 baseline 2 (in-context, no merge) — the kill criterion |
+
+### 6.1 The UTAS metric needs the numeric scorer
+
+The 2026-08-02 run's UTAS half was **not usable**: every config scored at or below
+a dummy predictor that answers the scale midpoint to all 33 items, using no model
+at all.
+
+```
+target      always-3   best config    BO
+Takaichi       1.091   1.089 (uni)   1.330
+Akamine        1.455   1.365 (base)  1.418
+Edano          1.030   1.068 (uni)   1.152
+```
+
+Cause: the default verbose-option scorer softmaxes five length-normalised
+per-token log-probs that all sit in a narrow band, so the expectation collapses
+toward the midpoint whatever the model believes. `score_options_numeric()` in
+`polis_option_logprob.py` is the fix and was never wired through.
+
+`bo_merge_coeffs.py` now prints the constant baselines as rows in the table.
+**Read them first.** A config that does not beat the constant rows has not been
+shown to carry any information about the target, however good its NLL.
+
+Only the single-split run computes UTAS, so only it needs re-running:
+
+**`[P8]`** · pod · re-run single-split with numeric UTAS scoring (~12 min)
+```bash
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/single_target_*.log; do mv "$f" "${f%.log}_verbose.log"; done
+
+time UTAS_NUMERIC=1 ./research/polis/scripts/run_7b_bo_gpu.sh
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/single_numeric_$(basename "$f")"; done
+```
+
+The NLL numbers this produces will match the earlier single-split run — the merge
+and BO are untouched, only the survey scoring changed.
+
+### 6.2 Is the persona inert? — the population sweep
+
+Both scorers left every config at or below a constant-midpoint dummy (see
+[`DECISIONS.md`](DECISIONS.md)). Scoring one politician against their own answers
+cannot tell "the persona is wrong" from "the answers don't depend on the name at
+all" — and if it's the latter, no merge could ever move §4.4 and the table says
+nothing about the method.
+
+The wave has **594 politicians with complete 33-item vectors, 573 of them distinct**,
+and the persona is conditioned on the *name alone* — so this needs no speech, no
+adapter and no merge.
+
+**`[P11]`** · pod · administer the wave to every politician under the base model (~10 min)
+```bash
+cd /workspace/kokkai_analysis/research/polis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+python utas_population_eval.py \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  --gt /workspace/kokkai_data/polis/utas_ground_truth/2024HoR.json \
+  --include 1279,2053,2289 \
+  --out /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json \
+  2>&1 | tee /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population.log
+```
+
+Starts with a self-check that the single-pass scorer matches
+`score_options_numeric` on real items, then prints a running ETA. `--personas 60`
+gives a fast smoke test first if you want one.
+
+### 6.3 Does the merge inject identity the base model lacks?
+
+The base model ranks its own politician at chance (§6.2 result), so the remaining
+question UTAS can answer is whether *merging* changes that. Re-runs the single split
+with the per-item vectors saved this time — `bo_merge_coeffs.py` computes them and
+keeps only the aggregate unless `--utas-dump` is set.
+
+**`[P12]`** · pod · single-split again, saving per-config answer vectors (~12 min)
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+time UTAS_NUMERIC=1 \
+     UTAS_DUMP=specs/polis-low-resource-persona/artifacts/utas_vectors \
+     ./research/polis/scripts/run_7b_bo_gpu.sh
+cd specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in target_*.log; do mv "$f" "dump_$f"; done
+cd /workspace/kokkai_analysis
+```
+
+Writes `utas_vectors/<target>_numeric.json`, one file per target holding all four
+configs. Retrieve them with `L7`'s pattern and feed them to `L6` — the dumps are
+auto-detected, so the same command reads both shapes:
+
+```bash
+python utas_rank_metric.py \
+  --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+  --dump "$ART"/utas_population_7b_base.json "$ART"/utas_vectors/*.json
+```
+
+**What decides it:** the per-target table prints each config's rank against the 594.
+If `BO` ranks its target markedly better than `base` does, the merge carries identity
+that name-prompting alone does not — a positive result on an instrument independent
+of NLL. If all four sit together near the constants, the §4.4 line is closed and the
+paper reports it as a limitation.
+
+**`[L7]`** · laptop · retrieve the population dump
+```bash
+IP=<pod-ip>; PORT=<pod-port>
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population_7b_base.json \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_population.log \
+  ~/workspace/projects/kokkai_analysis/specs/polis-low-resource-persona/artifacts/
+```
+
+Paths are spelled out rather than held in a `$POD`/`$REPO` variable: a partial paste
+leaves the variable unset, it expands to nothing, and rsync then asks the pod for
+`/utas_population_7b_base.json` at the filesystem root — which fails with a
+`link_stat … No such file` that looks like a missing file rather than a missing
+variable. Same trap applies to `$ART` in `P11`; if that one is unset the *output*
+lands at `/` instead.
+
+Named files rather than the whole `artifacts/` directory — the laptop copy also holds
+`bo7b_logs/` and `nested_cv_05b/`, which have no business in this transfer.
+
+No environment to activate for either block. The pod runs the image's system python
+(`setup_pod.sh` installs into it deliberately — see the Notes), and
+`utas_rank_metric.py` is stdlib-only by design, so it runs on a bare interpreter with
+no venv and no numpy.
+
+**`[L6]`** · laptop · read the two metrics (CPU, no model, seconds)
+```bash
+cd ~/workspace/projects/kokkai_analysis/research/polis
+ART=../../specs/polis-low-resource-persona/artifacts
+
+python utas_rank_metric.py \
+  --gt ../../data/data/polis/utas_ground_truth/2024HoR.json \
+  --dump "$ART/utas_population_7b_base.json"
+```
+
+**How to read it.** Two blocks:
+
+- *name-swap divergence* — simulated spread over real spread. **Ratio near 0 is the
+  verdict**: the answers barely depend on the name, so §4.4 was never measuring the
+  merge. Near 1 means the model separates politicians about as much as they differ.
+- *rank of the true politician* — compare against the **constant rows, not against
+  50%**. A name-independent vector sits near the population centroid and scores ~68th
+  percentile for free. The claim worth making is "ranks above every constant".
+
+Logs: `specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/target_<id>.log`
+
+### Granularity ablation — same session, recommended
+
+The granularity sweep in the paper (§`sec:granularity`) is 0.5B-only, which is why
+it currently concedes *"we do not claim that per-depth granularity improves fidelity
+at development scale."* 7B is where that claim could land, and at 2 group settings
+× 4 folds × 20 trials it is a small fraction of the nested run's cost. Given the
+session is already paid for, do this rather than skip it.
+
+**`[P9]`** · pod · granularity ablation (~10 min)
+```bash
+cd research/polis
+python bo_granularity_ablation.py \
+  --target 1279 --budget 30 --folds 4 --trials 20 \
+  --groups 1 3 \
+  --adapters output/polis_{152,2377,3631,5520}_qwen7b \
+  --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+  --dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"
+```
+
+`--dpo-dir` is **required on a pod**, unlike in `run_7b_bo_gpu.sh` which sets it
+internally. This script's default is `$KOKKAI_DATA_DIR/polis/dpo_pairs_full`
+(`bo_merge_coeffs.py:57`) — that directory exists on the laptop's data drive but
+§3 only ships `dpo_pairs_targets`, so omitting the flag fails with
+`FileNotFoundError: .../dpo_pairs_full/1279.jsonl` after the model has loaded.
+
+`--device cuda` for the same reason as everywhere else in this runbook — §4's gate,
+and `run_7b_bo_gpu.sh` pinning `DEVICE=cuda`. It is *technically* optional here:
+the default `device_map="auto"` puts the whole model on `cuda:0` on any card
+meeting §0, and the meta-tensor failure mode §4 warns about is not silent in this
+path (`LayerGroupMerger` raises `RuntimeError` on an offloaded module,
+`merge_layer_group.py:98`). Pass it anyway. One invocation shape across the whole
+runbook is worth more than saving eight characters.
+
+**VRAM.** Each `LayerGroupMerger` pins ~14.8 GB on device (13.2 GB fp32 anchor
+deltas + a 1.6 GB bf16 base snapshot), so only one may be alive at a time next to
+the 15.2 GB model. Until 2026-08-02 this script built a throwaway `probe` merger
+just to read `n_layers` and kept the loop's previous merger alive across
+granularities — two or three mergers at once, which OOMs a 48 GB card on the first
+forward pass. Fixed; if you see `torch.OutOfMemoryError` here on a card that ran
+§6's single-split fine, your checkout predates the fix.
+
+`--groups 1 3` is deliberate. The default sweeps `[1, 3, n_layers]`, and at 7B that
+third bookend is 4×28 = **112 coefficients** — the most expensive cell by far, to
+re-derive a result 0.5B already settled decisively (96 dims scored 3.441 vs base
+2.880; badly-chosen coefficients actively corrupt the model). Add `28` back only if
+you specifically want the upper bookend at main scale.
+
+---
+
+## 7. Laptop — retrieve results
+
+**Do this before destroying the pod.** Logs are the deliverable.
+
+**`[L5]`** · laptop · retrieve results before destroying the pod
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>          # from the RunPod "Connect" panel
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+
+cd $REPO && git add specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs && git commit
+```
+
+Then destroy the pod — a stopped pod still bills for its disk, and a network
+volume bills whether or not anything is running.
+
+---
+
+## 8. Target expansion — the n=33 nested run
+
+The 3-target result cannot carry a population claim, and all three are nationally
+prominent. [`targets_n30.json`](targets_n30.json) adds 30 more, 5 from each of 6
+log-spaced speech-volume bands, so the BO advantage can be plotted against target
+prominence instead of averaged into one number. Already exported to
+`dpo_pairs_targets/` (33 files, 7 330 pairs, min 82).
+
+**Nested only.** The single-split protocol existed to carry the UTAS half, which §6.2
+and §6.3 closed. Nested CV is the unbiased NLL estimate and is all this needs.
+
+**`ICL=1` is not optional here.** `README.md:79` lists seven must-have baselines and
+only four were ever implemented; baseline 2 (ICL — base model with the target's budget
+utterances in prompt, no merge) is the spec's designated **kill criterion**: *"the
+cheapest strong competitor; if it matches POLIS the method is unnecessary."* The
+hypothesis at `README.md:13` claims the merge beats prompting and direct fine-tuning,
+and neither comparison has ever been run. Adds ~1–2 min per target.
+
+**`[P13]`** · pod · nested 5-fold CV + ICL over all 33 targets (~6 h)
+```bash
+tmux new -s polis33
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+time NESTED=1 ICL=1 TARGETS="1279 2053 2289 369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546" \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+```
+
+Each target's table gains an `ICL` row and a paired `BO vs ICL` delta. Baselines 3 and
+4 (SFT/DPO on the sparse target data) remain unimplemented — they need a training loop
+per target and are a separate piece of work.
+
+~10 min/target measured, one preflight at the start. Each target writes
+`bo7b_gpu_logs/target_<id>.log` and a failure only warns, so one bad target does not
+lose the run. Detach with `Ctrl-b d`; check `echo $TMUX` is non-empty first.
+
+The three original targets are re-run here rather than reused: identical protocol and
+seeds, so they should reproduce `+0.0176 / +0.0177 / +0.0287` against best-single. If
+they don't, something in the environment moved and the new 30 aren't comparable to the
+committed results either — that's the check worth making before trusting the pooled
+analysis.
+
+---
+
+## 9. Does the merge add anything prompting does not?
+
+`P13` came back with BO ahead of best-single on **33/33** targets but level with ICL —
+17/33, mean −0.0343, median +0.0050 (see [`DECISIONS.md`](DECISIONS.md)). A tie between
+a weight-space and a prompt-space method has two readings, and no prefix-free row can
+tell them apart: the two carry the *same* information, or they carry different
+information and nothing ever stacked them.
+
+`nested_cv` now scores two combined rows whenever `--icl` is on — `BO+ICL` and
+`best-single+ICL`, the same merged weights with the demonstration prefix in front of
+each held-out prompt. **`BO+ICL vs ICL` is the number that decides it.**
+`best-single+ICL` is the control: without it, a positive result would only show that
+*some* weight-space adaptation composes with prompting, not that the tuned merge does.
+
+The coefficients are still fitted on prefix-free `dev` and only *scored* under the
+prefix. Tuning inside the prefix is the stricter experiment and ~5× the cost — every
+trial would re-score `dev` behind a ~9k-token prefix. Run this first; if the merge adds
+nothing here, that version is unlikely to rescue it.
+
+**`DUMP_PICKS` is new and you should always set it.** `P13` kept its fitted merges only
+in memory, which is why scoring one more config against them costs a full re-derivation
+of every BO rather than a few eval passes.
+
+Smoke one target before spending the night — none of this has run on a GPU:
+
+**`[P14]`** · pod · smoke the merge+ICL rows on one target (~12 min)
+```bash
+cd /workspace/kokkai_analysis && git pull      # needs the combined-row commit
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+
+time NESTED=1 ICL=1 TARGETS=1279 \
+  DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+mv "$LOGS/target_1279.log" "$LOGS/smoke_combined_1279.log"
+```
+
+Seven rows must print, `BO+ICL` and `best-single+ICL` among them, and `BO` must
+reproduce `2.1531` (the `P13` value for this target) — the BO path is untouched by this
+change, so a different number means something else moved.
+
+**`[P15]`** · pod · nested + ICL + combined rows over all 33 (~7 h)
+```bash
+tmux new -s polis33b
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+
+time NESTED=1 ICL=1 \
+  DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  TARGETS="1279 2053 2289 369 2447 1572 688 2704 1543 1547 640 1551 2025 230 110 1982 1083 277 2853 3245 989 3022 1782 2171 2189 14 5518 1434 2732 808 225 942 2546" \
+  ./research/polis/scripts/run_7b_bo_gpu.sh
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/combined_$(basename "$f")"; done
+```
+
+~10 min/target as before plus two extra prefixed evals per fold — call it +15%. The
+whole run re-derives the BO because `P13` did not dump its coefficients; with
+`DUMP_PICKS` set this is the last time that is true.
+
+**`[L8]`** · laptop · retrieve the combined-row logs and the coefficient dumps
+```bash
+REPO=~/workspace/projects/kokkai_analysis
+IP=<pod-ip>; PORT=<pod-port>
+
+rsync -avP -e "ssh -p $PORT" \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  root@$IP:/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/bo7b_picks \
+  $REPO/specs/polis-low-resource-persona/artifacts/
+```
+
+**`[L9]`** · laptop · pool the logs into the table (CPU, seconds)
+```bash
+cd ~/workspace/projects/kokkai_analysis/research/polis
+python nested_log_summary.py \
+  --logs ../../specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs \
+  --glob 'combined_target_*.log' --repetition
+```
+
+Reads the *last* complete block in each log, so the appended-protocol problem and the
+OOM-aborted attempts sitting above the good results do not need cleaning up first. The
+`--glob` is not optional: the artifacts directory holds five protocols side by side and
+the script refuses to pool across them. Stdlib only — no venv, no numpy. Swap the glob
+for `'n33_target_*.log'` to reproduce the `P13` numbers in
+[`DECISIONS.md`](DECISIONS.md).
+
+**What decides it.** Pooled over the 33 targets: if `BO+ICL vs ICL` is positive on most
+of them and `best-single+ICL vs ICL` is not, the merge carries persona information the
+prefix does not, and the §4.3 tie becomes a statement about *prompting being a strong
+baseline* rather than about the merge being redundant. If `BO+ICL` sits on `ICL`, the
+kill criterion is met on its own terms and the paper says so.
+
+---
+
+## 10. The budget sweep — the last place a positive claim could live
+
+Spec baseline 3 (SFT on the target's own dev fold) beats the merge on **33/33 targets**
+prefix-free and 33/33 with the prefix (see [`DECISIONS.md`](DECISIONS.md)). At a
+24-instance training budget the method is dominated.
+
+That budget was never derived from anything, and the paper's thesis is *low-resource*.
+The testable question: **is there a budget below which SFT collapses and the merge does
+not?** The mechanism is concrete — the BO fits 12 coefficients, LoRA fits ~20M
+parameters — so SFT should degrade much faster as data gets scarce.
+
+`--dev-cap N` trains on the first N instances of each dev fold and **leaves the test
+fold alone**, so results pair across budgets and with the committed 24-instance runs.
+Both scripts call the same `cap_dev`, so at a given cap the two sides train on exactly
+the same instances.
+
+Ten targets spanning the bands keep this to one evening. The merge side is the expensive
+half (40 BO trials/fold regardless of budget):
+
+**`[P16]`** · pod · budget sweep, merge side (~3.5 h)
+```bash
+tmux new -s sweep
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+LOGS=specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs
+SWEEP="1279 2053 2289 942 2189 3245 1083 1551 369 2447"
+
+for CAP in 4 8; do
+  NESTED=1 ICL=1 DEV_CAP=$CAP TARGETS="$SWEEP" \
+    DUMP_PICKS=specs/polis-low-resource-persona/artifacts/bo7b_picks_cap$CAP \
+    ./research/polis/scripts/run_7b_bo_gpu.sh
+  for f in "$LOGS"/target_*.log; do mv "$f" "$LOGS/cap${CAP}_$(basename "$f")"; done
+done
+```
+
+**`[P17]`** · pod · budget sweep, SFT side (~30 min)
+```bash
+cd /workspace/kokkai_analysis/research/polis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+ART=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+SWEEP="1279 2053 2289 942 2189 3245 1083 1551 369 2447"
+
+for CAP in 4 8; do
+  python sparse_target_baselines.py --base Qwen/Qwen2.5-7B-Instruct --device cuda \
+    --objective sft --lr 5e-5 --epochs 2 --icl --dev-cap $CAP \
+    --targets $SWEEP --out "$ART/sft_cap$CAP.json"
+done
+```
+
+Same hyperparameters as the 24-instance run on purpose: re-tuning SFT at each budget
+would confound "SFT degrades with data" with "SFT was retuned". If SFT collapses at cap
+4, re-run *that* point with `--grid` before claiming it — a baseline should not lose on
+a bad draw, and at 4 instances a smaller learning rate may well be the right one.
+
+**`[L10]`** · laptop · retrieve and join both sides of the sweep
+```bash
+D=/workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+cd ~/workspace/projects/kokkai_analysis/specs/polis-low-resource-persona/artifacts
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/bo7b_gpu_logs" .
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/sft_cap4.json" .
+rsync -avP -e "ssh -p $PORT" "root@$IP:$D/sft_cap8.json" .
+cd ../../../research/polis
+python nested_log_summary.py --logs ../../specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs --glob 'cap4_target_*.log' --baseline-json ../../specs/polis-low-resource-persona/artifacts/sft_cap4.json
+```
+
+Repeat the last line with `cap8_` / `sft_cap8.json`. The `--glob` must name one cap: the
+script refuses to pool budgets under one heading, for the same reason it refuses to pool
+protocols.
+
+**What decides it.** `SFT vs BO` is `+0.0627` at cap 24. If it shrinks toward zero at cap
+8 and reverses at cap 4, the paper has a genuine low-resource claim with a stated
+crossover point. If it stays positive at every budget, the merge is dominated everywhere
+that matters and the paper is a negative result.
+
+---
+
+## 11. Is it the merge, or the anchors?
+
+DPO ties the merge (24/33 to BO, p=0.014) while SFT beats it 33/33 — and the anchors were
+trained with DPO. Every comparison splits along that line, so two questions come before
+any more method work. Both are cheap. See [`DECISIONS.md`](DECISIONS.md).
+
+### 11.1 The anchors' objective (`P18`)
+
+If an SFT-trained anchor transfers better than the DPO one, the 0/33 defeat is about the
+anchors' objective rather than about merging, and all four should be retrained. If not,
+the negative result stands and four training runs are saved.
+
+**`[L11]`** · laptop · ship the anchor's own pairs (7.6 MB, one file)
+```bash
+cd ~/workspace/projects/kokkai_analysis/data/data/polis/dpo_pairs_full
+rsync -avP -e "ssh -p $PORT" 152.jsonl "root@$IP:/workspace/kokkai_data/polis/dpo_pairs_full/"
+```
+
+The anchors' own pairs live in `dpo_pairs_full`, which §3 does not copy — only the target
+subset goes to a pod. `152.jsonl` holds **1500 pairs**, which is what the DPO anchor was
+trained on, so the SFT twin sees the same data and the comparison isolates the objective.
+
+**`[P18]`** · pod · SFT anchor probe (~1 h)
+```bash
+tmux new -s anchorsft
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+./research/polis/scripts/run_anchor_probe.sh
+```
+
+Scripted rather than pasted: the inline version was a nested loop over two adapters and
+five targets, which is the shape that has broken on paste four times in this project.
+`ANCHOR=`, `LIMIT=`, `PROBE=`, `SKIP_TRAIN=1` override the defaults.
+
+The script gates on the trained adapter beating base on the anchor's **own** held-out
+speech, and refuses to score it otherwise — a broken training run and a real null look
+identical downstream. It ends by printing the `uniform` row per target for both anchors
+side by side, which is the comparison: with a single `--adapters` entry that row *is* the
+anchor applied at coefficient 1.0.
+
+**What decides it:** SFT anchor consistently lower → retrain all four with SFT and re-run
+`P15`. Level → the anchors' objective is not the explanation and the negative result
+stands.
+
+### 11.2 The anchor-count slope (`P19`)
+
+The 165 fitted merges already suggest saturation — 福島's coefficient is near-zero in 40%
+of folds, so one of four anchors is switched off most of the time. This measures the slope
+directly, using only anchors that already exist. The subset is rotated across targets so
+the curve is not an artefact of one combination.
+
+**`[P19]`** · pod · anchor-count slope (~2.5 h)
+```bash
+cd /workspace/kokkai_analysis
+export KOKKAI_DATA_DIR=/workspace/kokkai_data
+./research/polis/scripts/run_anchor_count.sh
+```
+
+Runs K=2,3,4 over 6 targets, **rotating the anchor subset across targets** — with a fixed
+subset, K=2 would measure one particular pair rather than "two anchors", and the pairs are
+far from equivalent (塩川 wins best-single on 38% of folds, 福島 on 5%). The six pairs and
+four triples are each used at least once. `TARGETS=` and `KS=` override.
+
+Read it with `L9`, one `--glob 'anchors2_target_*.log'` per K. **What decides it:** if the
+`BO` row is flat from K=3 to K=4, training more anchors is not the missing ingredient and
+the VRAM work for 8+ is not worth doing. If it is still improving, 8 anchors becomes the
+next build — and note that needs bf16 deltas (fp32 is ~3.3 GB per anchor, so 8 anchors plus
+the model exceeds 48 GB) and probably `--n-groups 1` to keep the BO's dimensionality sane.
+
+---
+
+## Troubleshooting
+
+| Symptom | Cause / fix |
+|---|---|
+| Self-test NLLs identical or only two distinct values | Merge not biting (meta-tensor no-op). Confirm `--device cuda` and that the model fits VRAM. **Do not run the BO.** |
+| `rsync: connection unexpectedly closed` | You're on the proxied `ssh.runpod.io` connection. Redeploy with public IP + TCP 22. |
+| `git clone` says destination not empty | You rsynced before cloning. Move the files aside, clone, move back. |
+| `ModuleNotFoundError: optuna` | `setup_pod.sh` not run, or its pip step failed. Re-run it. |
+| `FATAL: missing .../2024HoR.json` | Step 3 didn't land, or `KOKKAI_DATA_DIR` is unset. |
+| CUDA OOM during merge | Card below 40 GB, or something else resident. `nvidia-smi` to check. |
+| `FileNotFoundError: .../dpo_pairs_full/<id>.jsonl` | Only `bo_granularity_ablation.py` — its `--dpo-dir` default is the full corpus, which §3 doesn't ship. Pass `--dpo-dir "$KOKKAI_DATA_DIR/polis/dpo_pairs_targets"`. |
+| CUDA OOM in the granularity ablation on a card that ran §6 fine | Checkout predates the probe-merger fix (2026-08-02): two `LayerGroupMerger`s at ~14.8 GB each coexisted. `git pull`. |
+| Preflight fine, but BO trials all score the same | Merge applies yet the BO isn't seeing it. Stop — treat as a failed gate. |
+| Calibration shows BO worse than best-single | Expected at `TRIALS=5`: startup trials (6) exceed the budget, so the GP never fits. Not a failure; see §5. |
+| BO still loses to best-single at `TRIALS=40` | A real (negative) result, not a bug. Report it; don't quietly raise `--trials` until it wins. |
+| `RuntimeError: N of M target modules are meta tensors` | Model was offloaded under `device_map="auto"`. Pass `--device cuda` (or `--device cpu` if it genuinely doesn't fit). |
+| `^B` echoes in the terminal | You are not attached to tmux despite thinking you are. `echo $TMUX`; reattach before any long run. |
+| Session died mid-run | Not in tmux. Logs survive; re-run the affected target only via `TARGETS=<id>`. |
+| One log holds several runs jumbled together | The script appends (`>>`). Rename `target_*.log` between protocols, as in §5–6. |
+| Pod restarted, model re-downloading | No network volume (expected), or `HF_HOME` unset. Re-run `setup_pod.sh`. |
+| `git pull` aborts: "untracked working tree files would be overwritten" (the logs) | Expected whenever you commit the logs from the laptop and then pull on the pod — git wants to write the paths the pod already holds. Confirm they match, then move them aside; see below. |
+| Every UTAS config ties or loses to the constant rows | The metric is not discriminating. Re-run with `UTAS_NUMERIC=1` (§6.1); do not report the table as-is. |
+
+### Pulling on the pod after committing logs from the laptop
+
+The logs are written on the pod as untracked files, retrieved and committed from
+the laptop (§7), so the next `git pull` on the pod hits paths it already holds and
+aborts. Confirm nothing on the pod is unique, then move the directory aside — git
+recreates it from the commit:
+
+**`[P10]`** · pod · clear the untracked-logs pull conflict, then pull
+```bash
+cd /workspace/kokkai_analysis
+for f in specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs/*.log; do
+  if git cat-file -e origin/dev:"$f" 2>/dev/null; then
+    git show origin/dev:"$f" | diff -q - "$f" >/dev/null \
+      && echo "SAME       $f" || echo "DIFFERENT  $f"
+  else
+    echo "POD-ONLY   $f"
+  fi
+done
+
+# all SAME -> nothing unique on the pod
+mv specs/polis-low-resource-persona/artifacts/bo7b_gpu_logs /workspace/bo7b_logs_podcopy
+git pull
+```
+
+`DIFFERENT` or `POD-ONLY` means something ran after the rsync and has not been
+retrieved — rsync again before touching anything.
+
+## Notes
+
+- Always pass adapters **explicitly**. `output/polis_*` globs the 0.5B, 7B and
+  smoke directories together, and mixing scales silently produces a nonsense merge.
+- `research/polis/paths.py` honours `KOKKAI_DATA_DIR` / `KOKKAI_S3_MIRROR`, which is
+  how the pod finds data without the SSD symlink.
+- Don't `pip install -r research/requirements.txt` on the pod: it pins
+  torch 2.12+cu130 and the whole `nvidia-*` wheel set, which fights the image's
+  torch. `setup_pod.sh` installs the right subset.

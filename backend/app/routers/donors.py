@@ -25,6 +25,7 @@ DONORS = [
     "桜井美空",
     "Sumitarou(SumiYama)",
     "日本人である事の幸せ、KAZUTO",
+    "猫の又兵衛",
 ]
 
 

@@ -6,7 +6,13 @@ disable-model-invocation: true
 
 Read [AGENTS.md](../../../AGENTS.md) first (the index — it is short).
 
-Then read **only** the guide files that match the task. Do not read every file in `docs/agents/` unless the task truly spans all areas.
+Use **`./scripts/` helpers** to save tokens before opening files:
+
+1. `./scripts/route-task.sh "<task>"` — pick guide(s)
+2. `./scripts/show-guide.sh <name>` — load one guide (`backend`, `data-layout`, …)
+3. `./scripts/list-api-routes.sh`, `list-frontend-routes.sh`, `list-data-dirs.sh`, or `tree-pillar.sh` as needed
+
+Run `./scripts/agent-help.sh` for the full list. Do not read every file in `docs/agents/` unless the task truly spans all areas.
 
 ## Routing
 

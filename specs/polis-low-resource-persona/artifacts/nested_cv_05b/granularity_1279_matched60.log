@@ -1,0 +1,16 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 83/290 [00:00<00:00, 810.20it/s]Loading weights:  71%|███████▏  | 207/290 [00:00<00:00, 1057.19it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 1065.23it/s]
+target=1279 anchors=['152_kishida', '2377_shiokawa', '3631_fukushima', '5520_ueda'] n_layers=24 budget=30 folds=4 trials/fold=60
+granularity sweep n_groups=[1, 3] (dims=[4, 12])
+
+/home/ken/workspace/projects/idea/persona/code/bo_merge_coeffs.py:115: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[global           n_groups= 1 dims=  4 sampler=gp]  BO=2.8473±0.1068  base=2.8804  uniform=4.0500  best-single=2.9376
+[layer-group      n_groups= 3 dims= 12 sampler=gp]  BO=2.8427±0.1153  base=2.8804  uniform=4.0500  best-single=2.9376
+
+============ granularity vs held-out NLL (nested-CV, lower=better) ============
+  granularity       dims sampler               BO   BOvsBase  BOvsBest1
+  global               4      gp   2.8473±0.107    +0.0331    +0.0903
+  layer-group         12      gp   2.8427±0.115    +0.0377    +0.0949
+
+  NB: the curve shows whether finer per-depth granularity buys fidelity vs. its harder optimisation (GP→TPE at the high-dim end). At 0.5B expect modest, possibly non-monotonic gains — adapters encode register not ideology; the shape is the deliverable, decisive magnitudes are a 7–8B task.

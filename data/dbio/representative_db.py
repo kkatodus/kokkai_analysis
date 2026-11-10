@@ -231,7 +231,39 @@ def insert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech]) ->
 	print(f"Inserted {len(rows)} speeches")
     
 
-def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonFile) -> None:
+def upsert_speeches_bulk(cur: psycopg2.extensions.cursor, rows: list[Speech], page_size: int = 1000, table: str = "speeches") -> None:
+	"""Insert speeches, overwriting existing rows with the same speech_id (NDL corrections)."""
+	if not rows:
+		return
+	if not re.fullmatch(r"[a-z_][a-z0-9_]*", table):
+		raise ValueError(f"bad table name: {table!r}")
+	execute_values(
+		cur,
+		f"""
+		INSERT INTO {table}
+		(issue_id, name_of_house, name_of_meeting, date, pdf_url, speech_id, speaker, speech, speech_url, person_id)
+		VALUES %s
+		ON CONFLICT (speech_id) DO UPDATE SET
+			issue_id = EXCLUDED.issue_id,
+			name_of_house = EXCLUDED.name_of_house,
+			name_of_meeting = EXCLUDED.name_of_meeting,
+			date = EXCLUDED.date,
+			pdf_url = EXCLUDED.pdf_url,
+			speaker = EXCLUDED.speaker,
+			speech = EXCLUDED.speech,
+			speech_url = EXCLUDED.speech_url,
+			person_id = EXCLUDED.person_id;
+		""",
+		[
+			(s.issue_id, s.name_of_house, s.name_of_meeting, s.date, s.pdf_url,
+			 s.speech_id, s.speaker, s.speech, s.speech_url, int(s.person_id))
+			for s in rows
+		],
+		page_size=page_size,
+	)
+
+
+def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonFile) -> PersonId:
     sig = generate_election_signature(raw)
     person = Person(
         name_kanji=raw["name_kanji"],
@@ -255,6 +287,7 @@ def upsert_person_and_elections(cur: psycopg2.extensions.cursor, raw: RawPersonF
             )
         )
     insert_elections_bulk(cur, results)
+    return pid
 
 def insert_x_account(cur: psycopg2.extensions.cursor, person_id: PersonId, account_id: str) -> None:
     cur.execute(

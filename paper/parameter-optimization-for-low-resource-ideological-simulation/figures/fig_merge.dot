@@ -1,0 +1,45 @@
+digraph merge {
+  rankdir=LR;
+  ranksep=0.22; nodesep=0.16;
+  graph [bgcolor=white, fontname="IPAexGothic", fontsize=8,
+         fontcolor="#0b0b0b", margin=0];
+  node  [shape=box, style="rounded,filled", fillcolor="#f7f6f3", color="#dedcd6",
+         fontname="IPAexGothic", fontsize=9, fontcolor="#0b0b0b", penwidth=0.9,
+         margin="0.11,0.06"];
+  edge  [color="#52514e", arrowsize=0.55, penwidth=0.9, fontname="IPAexGothic",
+         fontsize=7, fontcolor="#52514e"];
+
+  raw [shape=none, margin=0, label=<
+    <table border="0" cellborder="0" cellspacing="3" cellpadding="2">
+      <tr><td colspan="2" align="left"><font point-size="7" color="#8a8984">at one coordinate</font></td></tr>
+      <tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(1)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">+0.8</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(2)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">−0.6</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(3)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">0</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(4)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">+0.4</font></td></tr>
+    </table>>];
+
+  dare [shape=none, margin=0, label=<
+    <table border="0" cellborder="0" cellspacing="3" cellpadding="2">
+      <tr><td colspan="2" align="left"><font point-size="7" color="#8a8984">after DARE</font></td></tr>
+      <tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(1)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">+8.0</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(2)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">dropped</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(3)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">0</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(4)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">+4.0</font></td></tr>
+    </table>>];
+
+  scaled [shape=none, margin=0, label=<
+    <table border="0" cellborder="0" cellspacing="3" cellpadding="2">
+      <tr><td colspan="2" align="left"><font point-size="7" color="#8a8984">after scaling by c<sub>a,g</sub></font></td></tr>
+      <tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(1)</font></sup></td><td width="38" align="center" bgcolor="#cde2fb" border="1" color="#2a78d6"><font point-size="9" color="#0b0b0b">+2.7</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(2)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">—</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(3)</font></sup></td><td width="38" align="center" bgcolor="#ffffff" border="1" color="#dedcd6"><font point-size="9" color="#0b0b0b">0</font></td></tr><tr><td align="right"><font point-size="7" color="#52514e">ΔW</font><sup><font point-size="6" color="#52514e">(4)</font></sup></td><td width="38" align="center" bgcolor="#cde2fb" border="1" color="#2a78d6"><font point-size="9" color="#0b0b0b">+1.2</font></td></tr>
+    </table>>];
+
+  ties [shape=box, style="rounded,filled", fillcolor="#f7f6f3", color="#dedcd6",
+        margin="0.14,0.09", label=<
+    <table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td align="left"><b>TIES</b></td></tr>
+      <tr><td align="left"><font point-size="7" color="#52514e">elect the majority sign,</font></td></tr>
+      <tr><td align="left"><font point-size="7" color="#52514e">average only the agreeing entries</font></td></tr>
+      <tr><td align="left">surviving signs { +, + } → +</td></tr>
+      <tr><td align="left"><font color="#2a78d6">mean(+2.7, +1.2) = +1.95</font></td></tr>
+      <tr><td align="left"><font color="#2a78d6">W = W<sub>base</sub> + 1.95</font></td></tr>
+    </table>>];
+
+  raw  -> dare   [label=<<font point-size="7" color="#52514e">drop 90%,</font><br/><font point-size="7" color="#52514e">fixed seed</font>>];
+  dare -> scaled [label=<<font point-size="7" color="#52514e">the only step</font><br/><font point-size="7" color="#52514e">the BO controls</font>>,
+                  color="#2a78d6"];
+  scaled -> ties;
+}

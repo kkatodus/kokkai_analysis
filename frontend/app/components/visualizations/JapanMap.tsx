@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import type { ParliamentMemberData } from "@/app/types";
 import VoteDistrictMap from "./components/VoteDistrictMap";
 import PoliticianPreviewWindow from "./components/PoliticianPreviewWindow";
+import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
+import { PARTY2RGBCOLOR, PARTY_FALLBACK_RGB } from "@/app/lib/config/parties";
 
 interface JapanMapProps {
   votingDistrictGeoJsonData: any;
@@ -61,6 +63,23 @@ export function JapanMap({
 		return map;
 	  }, [parliamentMemberData]);
 
+	// Legend: one chip per party colour on the map, counted in single-member districts.
+	// Parties without a configured colour share the fallback colour and are grouped as その他.
+	const legendItems = useMemo<PartyLegendItem[]>(() => {
+		const rgb = (c: [number, number, number]) => `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+		const counts = new Map<string, number>();
+		let other = 0;
+		for (const [district, { kaiha }] of Object.entries(ku2Party)) {
+			if (/比例|[（(]比[）)]/.test(district)) continue; // proportional blocks (e.g. 「（比）北関東」) are not on the map
+			if (PARTY2RGBCOLOR[kaiha]) counts.set(kaiha, (counts.get(kaiha) ?? 0) + 1);
+			else other += 1;
+		}
+		const items = Array.from(counts, ([label, count]) => ({ label, color: rgb(PARTY2RGBCOLOR[label]), count }))
+			.sort((a, b) => b.count - a.count);
+		if (other) items.push({ label: "その他", color: rgb(PARTY_FALLBACK_RGB), count: other });
+		return items;
+	}, [ku2Party]);
+
   return (
     <div className="relative" id="japan-map">
 		<div className="absolute right-3 top-3 z-30">
@@ -87,6 +106,7 @@ export function JapanMap({
 			ku2Party={ku2Party}
 			resetCounter={mapResetCounter}
 		/>
+		<PartyLegend items={legendItems} caption="色＝小選挙区の当選者の会派" className="mt-2" />
     </div>
   );
 }

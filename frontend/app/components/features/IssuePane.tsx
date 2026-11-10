@@ -178,6 +178,7 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
     <div
       className="fixed inset-y-4 left-4 z-40 max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
       style={{ width: isNarrow ? "100%" : `${paneWidthPx}px` }}
+      data-tour="issue-pane"
     >
       <div className="relative flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-linear-to-br from-[#020617] to-[#020617] p-3.5 shadow-2xl">
         {/* Right resize handle (desktop only) */}

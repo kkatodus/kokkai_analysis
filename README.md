@@ -19,8 +19,8 @@ This project integrates **computational political science**, **LLM-based text an
 
 # 📣 メディア掲載
 
-- 📘 **arXiv (2025)** — _KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives_
-  [https://arxiv.org/abs/2505.07118]（アップロード済論文）
+- 📘 **arXiv (2025)** — _KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives_  
+  [arXiv:2505.07118](https://arxiv.org/abs/2505.07118) · [LaTeX source](paper/kokkaidoc-an-llm-driven-framework-for-scaling-parliamentary-repr/)（アップロード済論文）
 - 📝 Note.com — [https://note.com/yo4shi80/n/n000c987b5a3b](https://note.com/yo4shi80/n/n000c987b5a3b)
 - 📰 ABEMA Times — [https://times.abema.tv/articles/-/10179655](https://times.abema.tv/articles/-/10179655)
 - 🧪 Techno-Edge — [https://www.techno-edge.net/article/2025/05/19/4367.html](https://www.techno-edge.net/article/2025/05/19/4367.html)
@@ -152,9 +152,13 @@ The platform measures **how party positions shift across 20+ years**, revealing:
 
 # 📄 論文について
 
-**Paper:** _KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives_
-**Authors:** Ken Kato & Christopher Cochrane
-**PDF:** [https://arxiv.org/abs/2505.07118]
+**Paper:** _KOKKAI DOC: An LLM-driven framework for scaling parliamentary representatives_  
+**Authors:** Ken Kato & Christopher Cochrane  
+**PDF:** [arXiv:2505.07118](https://arxiv.org/abs/2505.07118)  
+**LaTeX source:** [`paper/kokkaidoc-an-llm-driven-framework-for-scaling-parliamentary-repr/`](paper/kokkaidoc-an-llm-driven-framework-for-scaling-parliamentary-repr/)
+
+The published paper describing the KOKKAI DOC platform and methodology lives in the repo under `paper/` alongside ongoing research drafts.
+公開済み論文の LaTeX ソースは `paper/kokkaidoc-an-llm-driven-framework-for-scaling-parliamentary-repr/` にあります。
 
 ### Key Innovations
 
@@ -263,10 +267,16 @@ flowchart TD
 
 ```
 .
-├── api/            # Express.js backend
-├── frontend/       # React SPA
+├── api/            # Express.js backend (legacy)
+├── backend/        # FastAPI backend
+├── frontend/       # Next.js app
 ├── data/           # LLM pipeline, scraping, embeddings
+├── paper/          # LaTeX research papers
+│   ├── kokkaidoc-an-llm-driven-framework-for-scaling-parliamentary-repr/  # published (arXiv 2025)
+│   ├── latent-space-ensembles-for-dynamic-ideological-scaling/
+│   └── parameter-optimization-for-low-resource-ideological-simulation/
 ├── infra/          # AWS CDK (S3 + CloudFront)
+├── specs/          # Planned project specs
 ├── memo/           # Notes
 └── .github/workflows/ # CI/CD
 ```

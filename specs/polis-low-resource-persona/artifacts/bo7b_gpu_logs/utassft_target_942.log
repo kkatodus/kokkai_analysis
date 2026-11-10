@@ -1,0 +1,32 @@
+=== [2026-08-04 15:53:17] START target 942 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 39.50it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:00, 295.17it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 330.28it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 378.96it/s]Loading weights:  51%|█████▏    | 174/339 [00:00<00:00, 373.54it/s]Loading weights:  63%|██████▎   | 212/339 [00:00<00:00, 348.29it/s]Loading weights:  76%|███████▌  | 256/339 [00:00<00:00, 372.12it/s]Loading weights:  87%|████████▋ | 294/339 [00:00<00:00, 357.74it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 357.81it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+target=942  anchors=['152_sft_qwen7b', '2377_sft_qwen7b', '3631_sft_qwen7b', '5520_sft_qwen7b']  n_groups=3  dims=12  sampler=gp  train=30 test=30  exclude_target=False
+
+================ held-out test NLL (lower=better) ================
+  base (no adapter)      2.1666
+  uniform merge          2.3152
+  best single anchor     1.9261   (5520_sft_qwen7b)
+  BO layer-group merge   1.9095   (train 1.7326)
+
+  BO vs uniform:  +0.4057   BO vs best-single: +0.0166
+
+best coefficients [anchor x group]:
+                  g0      g1      g2
+  152_sft_qwen7b       0.741   0.129   0.000
+  2377_sft_qwen7b      0.000   0.000   0.203
+  3631_sft_qwen7b      0.000   0.000   0.097
+  5520_sft_qwen7b      0.000   0.856   0.607
+
+===== §4.4 UTAS headline metric — target 942 (2024HoR, 33 answered items, scoring=numeric-label) =====
+  config                             MAE(E)  MAE(arg)  within1   exact
+  constant(3) [midpoint]              0.576     0.576     0.97   0.455
+  base                                0.883      1.03    0.788   0.182
+  uniform                             0.633     1.606    0.455    0.03
+  best-single(5520_sft_qwen7b)        1.078     1.212    0.667   0.182
+  BO                                  0.901     0.848    0.848   0.303
+  [utas-dump] per-item vectors -> /workspace/kokkai_analysis/specs/polis-low-resource-persona/artifacts/utas_vectors_sft/942_numeric.json
+  NB: the constant rows answer the same value to every item — no model, no adapter, no merge. A config that does not beat them has not been shown to carry any information about this target, however good its NLL.
+=== [2026-08-04 15:56:27] END target 942 rc=0 ===

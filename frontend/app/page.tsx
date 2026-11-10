@@ -5,7 +5,7 @@
 
 import { Suspense } from "react";
 import { ParliamentExplorerClient } from "@/app/components/ParliamentExplorerClient";
-import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getAllRelevanceAndProductivityData } from "@/app/lib/server/dataFetcher";
+import { getVotingDistrictGeoJsonData, getParliamentMemberData, getIdeologyData, getAllParliamentMemberTable, getSpeechQualityAggregate } from "@/app/lib/server/dataFetcher";
 import { isUsingMockData } from "@/app/lib/services/dataService";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
@@ -47,12 +47,12 @@ export default async function ParliamentExplorerPage({
   const params = await searchParams;
   
   // Fetch all initial data in parallel on the server
-  const [parliamentMemberData, allParliamentMemberTable, votingDistrictGeoJsonData, ideologyData, relevanceAndProductivityData] = await Promise.all([
+  const [parliamentMemberData, allParliamentMemberTable, votingDistrictGeoJsonData, ideologyData, qualityAggregate] = await Promise.all([
     getParliamentMemberData(),
     getAllParliamentMemberTable(),
     getVotingDistrictGeoJsonData(),
     getIdeologyData(),
-	getAllRelevanceAndProductivityData(),
+	getSpeechQualityAggregate(),
   ]);
 
   // Get selectedId from URL search params (for shareable links)
@@ -66,7 +66,7 @@ export default async function ParliamentExplorerPage({
         votingDistrictGeoJsonData={votingDistrictGeoJsonData}
         ideologyData={ideologyData}
         initialSelectedPersonId={selectedPersonId}
-		relevanceAndProductivityData={relevanceAndProductivityData}
+		qualityAggregate={qualityAggregate}
       />
     </Suspense>
   );

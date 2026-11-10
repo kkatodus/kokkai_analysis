@@ -1,0 +1,556 @@
+"""Bayesian optimisation of layer-group merge coefficients (POLIS spec §2.4, Phase 3).
+
+Ties together the Phase-3 pieces: the custom layer-group DARE-TIES merge
+(`LayerGroupMerger`) is wrapped as an Optuna objective, and a Bayesian-optimisation
+sampler searches the [n_anchors × n_groups] mixing-coefficient matrix to minimise the
+target's session-grounded NLL under the merged model.
+
+Each BO evaluation = re-merge (no training) + forward passes over the target's
+budget instances → cheap. The tuned coefficients are compared against three spec
+baselines:
+  * base model (no adapter)                     [spec baseline 1, weights-only]
+  * uniform DARE-TIES merge of all anchors      [spec baseline 5]
+  * best single anchor adapter                  [spec baseline 6]
+
+Two evaluation protocols:
+
+* **single split** (default): first `--budget` instances are the BO objective, next
+  `--test` are the held-out generalisation check. Fast pilot / smoke-test framing;
+  also the path that runs the §4.4 UTAS headline metric (`--utas-eval`).
+* **nested k-fold CV** (`--nested`, spec §2.4/§7): the canonical objective. Outer
+  k-fold (k = min(5, budget)) gives an *unbiased* generalisation estimate — each
+  outer fold is held out while the BO tunes coefficients on the other folds, then
+  scored on the untouched fold; rotate and aggregate mean±std. Every baseline is
+  rotated the same way, so the comparison is apples-to-apples. This replaces the
+  single train/test split's optimistic point estimate.
+
+Sampler selection (`--sampler auto`, Phase-0 finding): `GPSampler` (GP-BO) for
+low/medium dimensionality (≤32 dims), `TPESampler` for the high-dim full-layer-wise
+ablation bookend where GP scales poorly.
+
+Run from research/polis/ with the research venv:
+    python bo_merge_coeffs.py --target 152 --budget 30 --trials 40   # single-split pilot
+    python bo_merge_coeffs.py --target 152 --nested --budget 40 --trials 24  # nested CV
+"""
+from __future__ import annotations
+
+import argparse
+import glob
+import json
+import os
+
+import numpy as np
+import torch
+import optuna
+from optuna.samplers import GPSampler, TPESampler
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from merge_layer_group import LayerGroupMerger
+from paths import DATA_DIR
+
+optuna.logging.set_verbosity(optuna.logging.WARNING)
+
+# DPO pairs live on the data drive (`kdata mount`); set KOKKAI_DATA_DIR to point
+# elsewhere, e.g. a rented GPU box that only has the target subset copied over.
+DPO_DIR = os.path.join(DATA_DIR, "polis", "dpo_pairs_full")
+# The held-out targets' pairs. Only this subset is shipped to a pod (RUNPOD.md §3), so
+# scripts that only ever run on targets should default here, not to the full corpus:
+# defaulting to DPO_DIR costs a model load before failing with FileNotFoundError, which
+# has now happened twice on a rented GPU.
+TARGETS_DIR = os.path.join(DATA_DIR, "polis", "dpo_pairs_targets")
+
+
+def load_instances(person_id: str, n: int, dpo_dir: str = DPO_DIR) -> list[tuple[str, str]]:
+    path = os.path.join(dpo_dir, f"{person_id}.jsonl")
+    out = []
+    with open(path) as f:
+        for line in f:
+            r = json.loads(line)
+            out.append((r["prompt"], r["chosen"]))
+            if len(out) >= n:
+                break
+    return out
+
+
+class NLLScorer:
+    def __init__(self, model, tokenizer):
+        self.model, self.tok = model, tokenizer
+
+    def mean_nll(self, instances: list[tuple[str, str]]) -> float:
+        tot, k = 0.0, 0
+        for prompt, cont in instances:
+            ids_p = self.tok(prompt, return_tensors="pt").input_ids.to(self.model.device)
+            ids_c = self.tok(cont, return_tensors="pt").input_ids.to(self.model.device)
+            ids = torch.cat([ids_p, ids_c], dim=1)
+            # Slice to the continuation *before* the fp32 cast. Scoring the whole
+            # sequence and discarding the prompt part allocates seq_len x vocab x 4
+            # bytes — ~180 MB for a 300-token prompt but ~6.7 GB for an 11k-token ICL
+            # prefix, which OOMs a 48 GB card that already holds the model and the
+            # anchor deltas. Positions are unchanged, so the value is identical.
+            start = ids_p.shape[1] - 1        # logits[:, t] predicts token t+1
+            with torch.no_grad():
+                logits = self.model(ids).logits[:, start:-1]
+                logp = torch.log_softmax(logits.float(), dim=-1)
+                tgt = ids[:, start + 1:]
+                tok_logp = logp.gather(-1, tgt.unsqueeze(-1)).squeeze(-1)[0]
+            tot += -tok_logp.mean().item()
+            k += 1
+        return tot / max(k, 1)
+
+
+# --------------------------------------------------------------------------- #
+# Reusable pieces (also imported by bo_granularity_ablation.py)
+# --------------------------------------------------------------------------- #
+def select_adapters(here: str, adapters_arg, target: str, exclude_target: bool) -> list[str]:
+    adapters = adapters_arg or sorted(glob.glob(os.path.join(here, "output", "polis_*")))
+    adapters = [a for a in adapters if os.path.isfile(os.path.join(a, "adapter_model.safetensors"))]
+    if exclude_target:
+        adapters = [a for a in adapters if not os.path.basename(a).startswith(f"polis_{target}_")]
+    return adapters
+
+
+def build_icl_prefix(instances: list[tuple[str, str]], shots: int = 0,
+                     max_chars: int = 12000) -> str:
+    """Few-shot demonstration block for spec §4.3 baseline 2 (ICL).
+
+    The baseline is "base model + the target's budget speeches in-prompt", so the
+    demonstrations are the target's own utterances — the `chosen` side — and *not*
+    their debate contexts, which would blow the context window for a 30-utterance
+    budget without adding anything about how this politician speaks.
+
+    ICL sees exactly the instances the BO tunes on, so the two methods are given the
+    same data and differ only in what they do with it. This is the spec's designated
+    kill criterion: if prompting matches an optimised merge on equal data, the merge
+    is not earning its complexity.
+    """
+    kept, total = [], 0
+    for _, chosen in (instances[:shots] if shots else instances):
+        if total + len(chosen) > max_chars:
+            break
+        kept.append(chosen)
+        total += len(chosen)
+    if not kept:
+        return ""
+    body = "\n\n".join(f"・{c}" for c in kept)
+    return ("以下は、あなたがこれまでの国会審議で実際に行った発言です。\n\n"
+            f"{body}\n\n"
+            "上記の発言と同じ立場・話し方で、次の審議に応じてください。\n\n")
+
+
+def icl_nll(scorer, fit_inst, eval_inst, shots: int = 0, max_chars: int = 12000) -> float:
+    """Score `eval_inst` with the target's own utterances prepended. Caller must have
+    the model at BASE weights — ICL is a no-merge baseline."""
+    prefix = build_icl_prefix(fit_inst, shots, max_chars)
+    return scorer.mean_nll([(prefix + p, c) for p, c in eval_inst])
+
+
+def make_sampler(name: str, n_dims: int, trials: int, seed: int = 0):
+    """Phase-0 backend policy: GP-BO for low/medium dims, TPE for the high-dim
+    full-layer-wise bookend. Returns (kind, sampler)."""
+    use_gp = name == "gp" or (name == "auto" and n_dims <= 32)
+    if use_gp:
+        n_start = max(6, min(n_dims, max(6, trials // 3)))
+        return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+    return "tpe", TPESampler(seed=seed, multivariate=True, group=True,
+                             n_startup_trials=max(8, n_dims // 8))
+
+
+def bo_bestC(merger, scorer, dev, n_a, n_g, trials, sampler_name, cmax, seed=0):
+    """Run the BO over the [n_a x n_g] coefficient matrix; objective = mean NLL on
+    `dev`. Returns (bestC, best_value, sampler_kind)."""
+    def objective(trial):
+        C = np.array([[trial.suggest_float(f"a{ai}_g{gi}", 0.0, cmax)
+                       for gi in range(n_g)] for ai in range(n_a)])
+        merger.apply(C)
+        return scorer.mean_nll(dev)
+
+    kind, sampler = make_sampler(sampler_name, n_a * n_g, trials, seed)
+    study = optuna.create_study(direction="minimize", sampler=sampler)
+    study.optimize(objective, n_trials=trials, show_progress_bar=False)
+    bestC = np.array([[study.best_params[f"a{ai}_g{gi}"] for gi in range(n_g)]
+                      for ai in range(n_a)])
+    return bestC, study.best_value, kind
+
+
+def best_single(merger, scorer, names, fit_inst, eval_inst, n_g):
+    """Pick the single anchor with lowest NLL on `fit_inst`, score it on `eval_inst`.
+    Returns (anchor_name, eval_nll)."""
+    n_a = len(names)
+    scores = {}
+    for ai, nm in enumerate(names):
+        C = np.zeros((n_a, n_g)); C[ai, :] = 1.0
+        merger.apply(C)
+        scores[nm] = scorer.mean_nll(fit_inst)
+    best = min(scores, key=scores.get)
+    ai = names.index(best)
+    C = np.zeros((n_a, n_g)); C[ai, :] = 1.0
+    merger.apply(C)
+    return best, scorer.mean_nll(eval_inst)
+
+
+def fold_indices(n: int, folds: int, seed: int = 0) -> list:
+    """Outer-fold index split for nested CV.
+
+    Shared so that baselines living in other scripts (`sparse_target_baselines.py`) split the
+    identical instances the identical way and their per-fold numbers *pair* with the
+    merge results rather than merely being comparable in aggregate. Do not inline it.
+    """
+    idx = np.arange(n)
+    np.random.RandomState(seed).shuffle(idx)
+    return np.array_split(idx, folds)
+
+
+def cap_dev(dev: list, dev_cap: int) -> list:
+    """First `dev_cap` training instances, or all of them when `dev_cap` is 0.
+
+    The budget sweep (spec follow-up to the 2026-08-03 SFT result) shrinks the training
+    data while holding the *test* fold fixed, so every budget's numbers pair with each
+    other and with the committed 30-instance runs. Truncating the front of `dev` rather
+    than resampling makes the small budgets nested subsets of the large ones, which
+    removes sampling noise from the comparison between them.
+
+    Shared by `nested_cv` and `sparse_target_baselines.run_target` for the same reason
+    `fold_indices` is: the merge and fine-tuning sides must see identical data at
+    identical budgets, or the curve compares two different experiments.
+    """
+    return dev[:dev_cap] if dev_cap else dev
+
+
+def nested_cv(merger, scorer, names, allinst, folds, trials, sampler_name, cmax, seed=0,
+              icl=False, icl_shots=0, icl_max_chars=12000, dev_cap=0):
+    """Nested k-fold CV (spec §2.4). Each outer fold is held out while the BO tunes
+    on the rest, then scored on the untouched fold; baselines rotate identically.
+    Returns a dict method -> list of per-fold held-out NLLs (unbiased estimate).
+
+    With `icl`, two *combined* rows are scored as well — `best-single+ICL` and
+    `BO+ICL`, the same merged weights with the demonstration prefix in front of each
+    held-out prompt. The n=33 run left BO and ICL at parity (17/33 targets, mean
+    -0.0343), and a tie between a weight-space and a prompt-space method has two
+    readings that the prefix-free rows cannot separate: they carry the same
+    information, or they carry different information and nothing ever stacked them.
+    `BO+ICL vs ICL` is the number that decides it. `best-single+ICL` is scored too
+    because without it a positive result would only show that *some* weight-space
+    adaptation composes with prompting, not that the optimised merge does.
+
+    The coefficients are fitted on prefix-free `dev` and only *scored* with the
+    prefix, so the merge is used in a regime it was not tuned for. Tuning under the
+    prefix is the stricter experiment and ~5x the cost (every trial would re-score
+    `dev` behind a ~9k-token prefix); if the merge adds nothing here, that is
+    unlikely to rescue it.
+    """
+    n_a, n_g = len(names), merger.n_groups
+    fold_idx = fold_indices(len(allinst), folds, seed)
+
+    rows: dict[str, list[float]] = {"base": [], "uniform": [], "best-single": [], "BO": []}
+    if icl:
+        rows["ICL"] = []
+        rows["best-single+ICL"] = []
+        rows["BO+ICL"] = []
+    picks = {"best-single": [], "BO": []}
+    for f in range(folds):
+        te = [allinst[i] for i in fold_idx[f]]
+        dev = cap_dev([allinst[i] for j in range(folds) if j != f for i in fold_idx[j]],
+                      dev_cap)
+
+        merger.restore()
+        rows["base"].append(scorer.mean_nll(te))
+        if icl:
+            # Still at base weights: ICL is the no-merge baseline, and it sees the
+            # same dev fold the BO tunes on.
+            rows["ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
+        merger.apply(np.ones((n_a, n_g)))
+        rows["uniform"].append(scorer.mean_nll(te))
+
+        bs_name, bs_te = best_single(merger, scorer, names, dev, te, n_g)
+        rows["best-single"].append(bs_te); picks["best-single"].append(bs_name)
+        if icl:
+            # best_single leaves its winning anchor applied, so this is that anchor's
+            # merge plus the prefix -- no re-merge needed.
+            rows["best-single+ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
+
+        bestC, _, _ = bo_bestC(merger, scorer, dev, n_a, n_g, trials, sampler_name, cmax, seed=seed + f)
+        merger.apply(bestC)
+        rows["BO"].append(scorer.mean_nll(te))
+        if icl:
+            rows["BO+ICL"].append(icl_nll(scorer, dev, te, icl_shots, icl_max_chars))
+        picks["BO"].append(bestC)
+
+    merger.restore()
+    return rows, picks
+
+
+def _fmt_stats(vals: list[float]) -> str:
+    a = np.asarray(vals)
+    return f"{a.mean():.4f} ± {a.std():.4f}"
+
+
+def _utas_constant_baselines(gt: dict, person_id: str) -> list[tuple[str, dict]]:
+    """Score the dummy predictors that answer one fixed value to every UTAS item.
+
+    These are the floor the §4.4 metric has to clear to mean anything: they use no
+    model, no adapter and no merge, so any config that fails to beat them has not
+    been shown to carry information about the target. Two rows are reported — the
+    scale midpoint (what a degenerate scorer collapses to; see --utas-numeric) and
+    the best constant available in hindsight, which is the harder floor.
+
+    Item selection mirrors evaluate_anchor(): unanswered items and items with no
+    Japanese wording are skipped, so the rows are computed over the same set.
+    """
+    ans = gt["answers"][str(person_id)]
+    items = {it["code"]: it for it in gt["items"]}
+    truths = [t for code, t in ans["coded"].items()
+              if t is not None and items.get(code, {}).get("question_ja")]
+    if not truths:
+        return []
+    n_opts = max(len(it["options_ja"]) for it in gt["items"] if it.get("options_ja"))
+    mid = (n_opts + 1) // 2
+
+    def stats(c: int) -> dict:
+        errs = [abs(t - c) for t in truths]
+        return {"mae": round(sum(errs) / len(errs), 3),
+                "within1": round(sum(e <= 1 for e in errs) / len(errs), 3),
+                "exact": round(sum(e == 0 for e in errs) / len(errs), 3)}
+
+    best_c = min(range(1, n_opts + 1), key=lambda c: stats(c)["mae"])
+    rows = [(f"constant({mid}) [midpoint]", stats(mid))]
+    if best_c != mid:
+        rows.append((f"constant({best_c}) [best in hindsight]", stats(best_c)))
+    return rows
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--base", default="Qwen/Qwen2.5-0.5B-Instruct")
+    ap.add_argument("--target", required=True, help="person_id whose utterances are the objective")
+    ap.add_argument("--dpo-dir", default=DPO_DIR,
+                    help="dir holding {target}.jsonl (prompt/chosen). Use dpo_pairs_targets "
+                         "for genuine held-out targets outside the anchor set")
+    ap.add_argument("--exclude-target", action="store_true",
+                    help="withhold the target's own adapter from the merge (leave-one-out)")
+    ap.add_argument("--adapters", nargs="*")
+    ap.add_argument("--n-groups", type=int, default=3)
+    ap.add_argument("--density", type=float, default=0.1)
+    ap.add_argument("--budget", type=int, default=30, help="train instances (BO objective)")
+    ap.add_argument("--test", type=int, default=30, help="held-out instances (single-split mode)")
+    ap.add_argument("--trials", type=int, default=40)
+    ap.add_argument("--cmax", type=float, default=1.5, help="per-coefficient upper bound")
+    ap.add_argument("--sampler", choices=["auto", "gp", "tpe"], default="auto",
+                    help="BO backend; auto = GP for <=32 dims, TPE above (Phase-0 policy)")
+    ap.add_argument("--nested", action="store_true",
+                    help="nested k-fold CV unbiased estimate (spec §2.4) instead of single split")
+    ap.add_argument("--folds", type=int, default=0,
+                    help="outer folds for --nested; 0 => min(5, budget) per spec §7")
+    ap.add_argument("--utas-eval", metavar="GROUND_TRUTH_JSON", default=None,
+                    help="also score base/uniform/best-single/BO merges against the target's real "
+                         "UTAS answers (spec §4.4 headline metric). Pass a wave file from "
+                         "build_utas_ground_truth.py (must be --all-matched to include the target)")
+    ap.add_argument("--utas-numeric", action="store_true",
+                    help="score the UTAS items by the numeric label the model would emit (1..N, "
+                         "one token each) instead of the full option strings. The verbose-option "
+                         "path softmaxes five length-normalised per-token log-probs that all sit "
+                         "in a narrow band, so E collapses toward the scale midpoint and the "
+                         "metric stops discriminating — compare the constant-baseline row below. "
+                         "See score_options_numeric() in polis_option_logprob.py (Phase-0 fix).")
+    ap.add_argument("--icl", action="store_true",
+                    help="also score spec §4.3 baseline 2: the base model with the target's own "
+                         "budget utterances prepended, no merge. The spec calls this the kill "
+                         "criterion — if prompting matches the optimised merge on identical data, "
+                         "the merge is not earning its complexity. Costs one extra eval per fold "
+                         "over a ~9k-token prefix and does no merging, so on the measured nested "
+                         "run it adds ~1-2 min per target, not a multiple.")
+    ap.add_argument("--icl-shots", type=int, default=0,
+                    help="demonstrations to prepend; 0 = the whole budget (the spec's wording)")
+    ap.add_argument("--icl-max-chars", type=int, default=12000,
+                    help="cap on the demonstration block; keeps the prefix inside the context "
+                         "window when a target's utterances are long (Japanese ~1 token/char)")
+    ap.add_argument("--dev-cap", type=int, default=0,
+                    help="--nested only: train/tune on the first N instances of each dev "
+                         "fold instead of all of them, holding the TEST fold fixed. This is "
+                         "the budget axis: 2026-08-03 found direct SFT beats the merge on "
+                         "33/33 targets at 24 training instances, and the open question is "
+                         "whether that reverses when the data gets scarce enough. 0 = no cap.")
+    ap.add_argument("--dump-picks", metavar="JSON", default=None,
+                    help="--nested only: write the per-fold BO coefficient matrices, the "
+                         "best-single picks and every row's per-fold NLLs to JSON. Without this "
+                         "the fitted merges exist only inside the run, so any new config scored "
+                         "against them costs a full re-derivation of the BO (~10 min/target).")
+    ap.add_argument("--utas-dump", metavar="DIR", default=None,
+                    help="write each config's per-item answer vector to DIR as JSON. The "
+                         "aggregate printed below discards them, and they are what "
+                         "utas_rank_metric.py needs to score the target against the whole "
+                         "wave rather than against its own answers alone.")
+    ap.add_argument("--device", default="auto",
+                    help="'auto' = device_map=auto; anything else pins the whole model to that "
+                         "device ('cpu', 'cuda'). The merge writes ΔW in place, and under 'auto' "
+                         "a model too big for the GPU has its overflow layers placed as meta "
+                         "tensors, where those writes silently no-op (upper-group merge == base). "
+                         "LayerGroupMerger now raises instead of merging silently-wrong, but "
+                         "prefer pinning explicitly: 'cuda' on a GPU that fits the whole model "
+                         "(7B bf16 needs ~31GB incl. the fp32 anchor deltas), 'cpu' otherwise. "
+                         "CPU forwards are ~1-3 min at 7B: fine for a few UTAS evals, infeasible "
+                         "for a full BO.")
+    args = ap.parse_args()
+
+    here = os.path.dirname(__file__)
+    adapters = select_adapters(here, args.adapters, args.target, args.exclude_target)
+    names = [os.path.basename(a).replace("polis_", "") for a in adapters]
+
+    tok = AutoTokenizer.from_pretrained(args.base)
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
+    device_map = "auto" if args.device == "auto" else {"": args.device}
+    model = AutoModelForCausalLM.from_pretrained(args.base, device_map=device_map, dtype=torch.bfloat16)
+    model.eval()
+    merger = LayerGroupMerger(model, adapters, n_groups=args.n_groups, density=args.density)
+    scorer = NLLScorer(model, tok)
+    n_a, n_g = merger.n_anchors, merger.n_groups
+
+    if args.nested:
+        run_nested(args, model, tok, merger, scorer, names, n_a, n_g)
+    else:
+        run_single_split(args, model, tok, merger, scorer, names, n_a, n_g)
+    merger.restore()
+
+
+# --------------------------------------------------------------------------- #
+def run_nested(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
+    folds = args.folds or min(5, args.budget)
+    allinst = load_instances(args.target, args.budget, args.dpo_dir)
+    folds = min(folds, len(allinst))
+    kind, _ = make_sampler(args.sampler, n_a * n_g, args.trials)
+    print(f"[nested-CV] target={args.target} anchors={names} n_groups={n_g} "
+          f"dims={n_a * n_g} sampler={kind} budget={len(allinst)} folds={folds} "
+          f"trials/fold={args.trials} exclude_target={args.exclude_target}"
+          + (f" dev_cap={args.dev_cap}" if args.dev_cap else ""))
+
+    rows, picks = nested_cv(merger, scorer, names, allinst, folds,
+                            args.trials, args.sampler, args.cmax,
+                            icl=args.icl, icl_shots=args.icl_shots,
+                            icl_max_chars=args.icl_max_chars, dev_cap=args.dev_cap)
+
+    print("\n======== nested-CV held-out NLL (unbiased, lower=better) ========")
+    for m in ["base", "ICL", "uniform", "best-single", "BO", "best-single+ICL", "BO+ICL"]:
+        if m not in rows:
+            continue
+        print(f"  {m:16} {_fmt_stats(rows[m])}   per-fold {[round(v, 3) for v in rows[m]]}")
+    bo, base = np.asarray(rows["BO"]), np.asarray(rows["base"])
+    bs = np.asarray(rows["best-single"])
+    print(f"\n  BO vs base (paired):        {(base - bo).mean():+.4f} ± {(base - bo).std():.4f}")
+    print(f"  BO vs best-single (paired): {(bs - bo).mean():+.4f} ± {(bs - bo).std():.4f}")
+    if "ICL" in rows:
+        icl_a = np.asarray(rows["ICL"])
+        boicl = np.asarray(rows["BO+ICL"])
+        bsicl = np.asarray(rows["best-single+ICL"])
+        print(f"  BO vs ICL (paired):         {(icl_a - bo).mean():+.4f} ± {(icl_a - bo).std():.4f}"
+              f"   [spec §4.3 baseline 2 — the kill criterion]")
+        print(f"  BO+ICL vs ICL (paired):     {(icl_a - boicl).mean():+.4f} ± {(icl_a - boicl).std():.4f}"
+              f"   [does the merge add anything prompting does not?]")
+        print(f"  BO+ICL vs BO (paired):      {(bo - boicl).mean():+.4f} ± {(bo - boicl).std():.4f}")
+        print(f"  best-single+ICL vs ICL:     {(icl_a - bsicl).mean():+.4f} ± {(icl_a - bsicl).std():.4f}"
+              f"   [control: is any merge enough, or the tuned one?]")
+    print(f"  best-single picks per fold: {picks['best-single']}")
+    print("  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode "
+          "register not ideology, so absolute NLL gains are small (§4.4 note).")
+
+    if args.dump_picks:
+        os.makedirs(os.path.dirname(os.path.abspath(args.dump_picks)) or ".", exist_ok=True)
+        with open(args.dump_picks, "w", encoding="utf-8") as fh:
+            json.dump({"target": args.target, "anchors": names, "n_groups": n_g,
+                       "folds": folds, "trials": args.trials, "budget": len(allinst),
+                       "dev_cap": args.dev_cap,
+                       "rows": {k: list(map(float, v)) for k, v in rows.items()},
+                       "best_single_picks": picks["best-single"],
+                       "bo_coeffs": [c.tolist() for c in picks["BO"]]}, fh, indent=1)
+        print(f"  [dump-picks] per-fold coefficients + NLLs -> {args.dump_picks}")
+
+
+# --------------------------------------------------------------------------- #
+def run_single_split(args, model, tok, merger, scorer, names, n_a, n_g) -> None:
+    allinst = load_instances(args.target, args.budget + args.test, args.dpo_dir)
+    train, test = allinst[:args.budget], allinst[args.budget:args.budget + args.test]
+    kind, _ = make_sampler(args.sampler, n_a * n_g, args.trials)
+    print(f"target={args.target}  anchors={names}  n_groups={n_g}  dims={n_a * n_g}  "
+          f"sampler={kind}  train={len(train)} test={len(test)}  exclude_target={args.exclude_target}")
+
+    # ---- baselines -----------------------------------------------------------
+    merger.restore()
+    base_te = scorer.mean_nll(test)
+    icl_te = (icl_nll(scorer, train, test, args.icl_shots, args.icl_max_chars)
+              if args.icl else None)   # still at base weights: ICL does not merge
+    merger.apply(np.ones((n_a, n_g)))
+    uni_te = scorer.mean_nll(test)
+    single = {}
+    for ai, nm in enumerate(names):
+        C = np.zeros((n_a, n_g)); C[ai, :] = 1.0
+        merger.apply(C)
+        single[nm] = scorer.mean_nll(test)
+    best_single_name = min(single, key=single.get)
+
+    # ---- BO over layer-group coefficients ------------------------------------
+    bestC, best_value, _ = bo_bestC(merger, scorer, train, n_a, n_g,
+                                    args.trials, args.sampler, args.cmax)
+    merger.apply(bestC)
+    bo_te = scorer.mean_nll(test)
+
+    # ---- report --------------------------------------------------------------
+    print("\n================ held-out test NLL (lower=better) ================")
+    print(f"  base (no adapter)      {base_te:.4f}")
+    if icl_te is not None:
+        print(f"  ICL ({args.icl_shots or len(train)} shots)        {icl_te:.4f}")
+    print(f"  uniform merge          {uni_te:.4f}")
+    print(f"  best single anchor     {single[best_single_name]:.4f}   ({best_single_name})")
+    print(f"  BO layer-group merge   {bo_te:.4f}   (train {best_value:.4f})")
+    print(f"\n  BO vs uniform:  {uni_te - bo_te:+.4f}   BO vs best-single: {single[best_single_name] - bo_te:+.4f}")
+    if icl_te is not None:
+        print(f"  BO vs ICL:      {icl_te - bo_te:+.4f}   [spec §4.3 baseline 2 — the kill criterion]")
+    print("\nbest coefficients [anchor x group]:")
+    print("            " + "".join(f"{'g'+str(g):>8}" for g in range(n_g)))
+    for ai, nm in enumerate(names):
+        print(f"  {nm[:18]:18}" + "".join(f"{bestC[ai, g]:8.3f}" for g in range(n_g)))
+
+    # ---- §4.4 UTAS headline metric (real answers, not the NLL proxy) ----------
+    if args.utas_eval:
+        from polis_option_logprob import evaluate_anchor  # sibling module
+        with open(args.utas_eval, encoding="utf-8") as f:
+            gt = json.load(f)
+        if str(args.target) not in gt.get("answers", {}):
+            print(f"\n[utas-eval] target {args.target} absent from {args.utas_eval} "
+                  f"(rebuild ground truth with --all-matched) — skipping.")
+        else:
+            bs = np.zeros((n_a, n_g)); bs[names.index(best_single_name), :] = 1.0
+            configs = [("base", None), ("uniform", np.ones((n_a, n_g))),
+                       (f"best-single({best_single_name})", bs), ("BO", bestC)]
+            n_ans = gt["answers"][str(args.target)]["n_answered"]
+            scoring = "numeric-label" if args.utas_numeric else "verbose-option"
+            print(f"\n===== §4.4 UTAS headline metric — target {args.target} "
+                  f"({gt['wave']}, {n_ans} answered items, scoring={scoring}) =====")
+            print(f"  {'config':32} {'MAE(E)':>8} {'MAE(arg)':>9} {'within1':>8} {'exact':>7}")
+            for label, stats in _utas_constant_baselines(gt, str(args.target)):
+                print(f"  {label:32} {stats['mae']:>8} {stats['mae']:>9} "
+                      f"{stats['within1']:>8} {stats['exact']:>7}")
+            dumped: dict[str, list] = {}
+            for label, C in configs:
+                merger.restore() if C is None else merger.apply(C)
+                res = evaluate_anchor(model, tok, gt, str(args.target),
+                                      numeric=args.utas_numeric)
+                agg = res["aggregate"]
+                dumped[label] = res["items"]
+                print(f"  {label:32} {agg['mae_expectation']:>8} {agg['mae_argmax']:>9} "
+                      f"{agg['within1_acc']:>8} {agg['exact_acc']:>7}")
+            if args.utas_dump:
+                os.makedirs(args.utas_dump, exist_ok=True)
+                tag = "numeric" if args.utas_numeric else "verbose"
+                out = os.path.join(args.utas_dump, f"{args.target}_{tag}.json")
+                with open(out, "w", encoding="utf-8") as f:
+                    json.dump({"wave": gt["wave"], "target": str(args.target),
+                               "base_model": args.base, "scoring": scoring,
+                               "anchors": names, "coeffs": bestC.tolist(),
+                               "configs": dumped}, f, ensure_ascii=False)
+                print(f"  [utas-dump] per-item vectors -> {out}")
+            print("  NB: the constant rows answer the same value to every item — no model, no "
+                  "adapter, no merge. A config that does not beat them has not been shown to "
+                  "carry any information about this target, however good its NLL.")
+
+
+if __name__ == "__main__":
+    main()

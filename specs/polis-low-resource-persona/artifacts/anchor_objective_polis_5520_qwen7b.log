@@ -1,0 +1,85 @@
+=== target 1279 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 47.25it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 294.37it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 325.31it/s]Loading weights:  38%|███▊      | 130/339 [00:00<00:00, 352.99it/s]Loading weights:  51%|█████     | 172/339 [00:00<00:00, 366.98it/s]Loading weights:  62%|██████▏   | 209/339 [00:00<00:00, 324.63it/s]Loading weights:  72%|███████▏  | 245/339 [00:00<00:00, 331.06it/s]Loading weights:  82%|████████▏ | 279/339 [00:00<00:00, 332.62it/s]Loading weights:  93%|█████████▎| 316/339 [00:00<00:00, 342.96it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 332.51it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=1279 anchors=['5520_qwen7b'] n_groups=3 dims=3 sampler=gp budget=30 folds=5 trials/fold=8 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.2684 ± 0.1004   per-fold [2.174, 2.204, 2.397, 2.385, 2.182]
+  uniform          2.1930 ± 0.0947   per-fold [2.112, 2.125, 2.258, 2.349, 2.121]
+  best-single      2.1930 ± 0.0947   per-fold [2.112, 2.125, 2.258, 2.349, 2.121]
+  BO               2.1574 ± 0.0950   per-fold [2.08, 2.097, 2.246, 2.297, 2.067]
+
+  BO vs base (paired):        +0.1109 ± 0.0220
+  BO vs best-single (paired): +0.0356 ± 0.0158
+  best-single picks per fold: ['5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+=== target 2053 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:06, 47.90it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 290.09it/s]Loading weights:  28%|██▊       | 94/339 [00:00<00:00, 342.50it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 367.17it/s]Loading weights:  51%|█████     | 173/339 [00:00<00:00, 364.23it/s]Loading weights:  62%|██████▏   | 210/339 [00:00<00:00, 329.63it/s]Loading weights:  76%|███████▌  | 256/339 [00:00<00:00, 358.47it/s]Loading weights:  86%|████████▋ | 293/339 [00:00<00:00, 344.40it/s]Loading weights: 100%|██████████| 339/339 [00:00<00:00, 347.65it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=2053 anchors=['5520_qwen7b'] n_groups=3 dims=3 sampler=gp budget=30 folds=5 trials/fold=8 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.2520 ± 0.1305   per-fold [2.322, 2.18, 2.36, 2.369, 2.029]
+  uniform          2.2132 ± 0.1376   per-fold [2.305, 2.171, 2.29, 2.339, 1.962]
+  best-single      2.2132 ± 0.1376   per-fold [2.305, 2.171, 2.29, 2.339, 1.962]
+  BO               2.1757 ± 0.1378   per-fold [2.259, 2.112, 2.258, 2.314, 1.935]
+
+  BO vs base (paired):        +0.0763 ± 0.0183
+  BO vs best-single (paired): +0.0375 ± 0.0128
+  best-single picks per fold: ['5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+=== target 2289 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|▏         | 5/339 [00:00<00:07, 47.23it/s]Loading weights:  16%|█▌        | 53/339 [00:00<00:00, 288.05it/s]Loading weights:  27%|██▋       | 90/339 [00:00<00:00, 315.49it/s]Loading weights:  37%|███▋      | 126/339 [00:00<00:00, 331.74it/s]Loading weights:  48%|████▊     | 162/339 [00:00<00:00, 340.54it/s]Loading weights:  58%|█████▊    | 197/339 [00:00<00:00, 323.22it/s]Loading weights:  68%|██████▊   | 232/339 [00:00<00:00, 331.07it/s]Loading weights:  78%|███████▊  | 266/339 [00:00<00:00, 331.67it/s]Loading weights:  88%|████████▊ | 300/339 [00:00<00:00, 332.03it/s]Loading weights:  99%|█████████▊| 334/339 [00:01<00:00, 331.57it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 323.65it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=2289 anchors=['5520_qwen7b'] n_groups=3 dims=3 sampler=gp budget=30 folds=5 trials/fold=8 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.5302 ± 0.1516   per-fold [2.675, 2.555, 2.693, 2.439, 2.289]
+  uniform          2.4517 ± 0.1581   per-fold [2.584, 2.441, 2.642, 2.403, 2.189]
+  best-single      2.4517 ± 0.1581   per-fold [2.584, 2.441, 2.642, 2.403, 2.189]
+  BO               2.4240 ± 0.1540   per-fold [2.553, 2.419, 2.607, 2.375, 2.167]
+
+  BO vs base (paired):        +0.1063 ± 0.0265
+  BO vs best-single (paired): +0.0278 ± 0.0051
+  best-single picks per fold: ['5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+=== target 2189 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:09, 36.14it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:01, 264.84it/s]Loading weights:  28%|██▊       | 96/339 [00:00<00:00, 338.41it/s]Loading weights:  40%|████      | 136/339 [00:00<00:00, 356.14it/s]Loading weights:  51%|█████     | 172/339 [00:00<00:00, 353.22it/s]Loading weights:  61%|██████▏   | 208/339 [00:00<00:00, 318.00it/s]Loading weights:  71%|███████   | 241/339 [00:00<00:00, 319.31it/s]Loading weights:  81%|████████  | 274/339 [00:00<00:00, 319.25it/s]Loading weights:  91%|█████████ | 307/339 [00:00<00:00, 318.68it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 321.90it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=2189 anchors=['5520_qwen7b'] n_groups=3 dims=3 sampler=gp budget=30 folds=5 trials/fold=8 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.3690 ± 0.1300   per-fold [2.28, 2.435, 2.214, 2.33, 2.585]
+  uniform          2.2403 ± 0.1379   per-fold [2.131, 2.391, 2.087, 2.173, 2.42]
+  best-single      2.2403 ± 0.1379   per-fold [2.131, 2.391, 2.087, 2.173, 2.42]
+  BO               2.2123 ± 0.1368   per-fold [2.088, 2.34, 2.074, 2.151, 2.409]
+
+  BO vs base (paired):        +0.1567 ± 0.0351
+  BO vs best-single (paired): +0.0280 ± 0.0166
+  best-single picks per fold: ['5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).
+=== target 1083 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   1%|          | 4/339 [00:00<00:08, 39.83it/s]Loading weights:  15%|█▌        | 52/339 [00:00<00:00, 289.06it/s]Loading weights:  28%|██▊       | 94/339 [00:00<00:00, 345.80it/s]Loading weights:  38%|███▊      | 130/339 [00:00<00:00, 347.02it/s]Loading weights:  49%|████▉     | 167/339 [00:00<00:00, 354.06it/s]Loading weights:  60%|█████▉    | 203/339 [00:00<00:00, 323.73it/s]Loading weights:  70%|██████▉   | 236/339 [00:00<00:00, 316.86it/s]Loading weights:  79%|███████▉  | 269/339 [00:00<00:00, 310.80it/s]Loading weights:  90%|█████████ | 306/339 [00:00<00:00, 327.80it/s]Loading weights: 100%|██████████| 339/339 [00:01<00:00, 327.56it/s]
+/workspace/kokkai_analysis/research/polis/bo_merge_coeffs.py:153: ExperimentalWarning: GPSampler is experimental (supported from v3.6.0). The interface can change in the future.
+  return "gp", GPSampler(seed=seed, n_startup_trials=n_start)
+[nested-CV] target=1083 anchors=['5520_qwen7b'] n_groups=3 dims=3 sampler=gp budget=30 folds=5 trials/fold=8 exclude_target=False
+
+======== nested-CV held-out NLL (unbiased, lower=better) ========
+  base             2.4200 ± 0.1530   per-fold [2.582, 2.341, 2.172, 2.433, 2.572]
+  uniform          2.3194 ± 0.1257   per-fold [2.46, 2.234, 2.126, 2.338, 2.439]
+  best-single      2.3194 ± 0.1257   per-fold [2.46, 2.234, 2.126, 2.338, 2.439]
+  BO               2.2982 ± 0.1342   per-fold [2.448, 2.217, 2.086, 2.316, 2.424]
+
+  BO vs base (paired):        +0.1218 ± 0.0207
+  BO vs best-single (paired): +0.0211 ± 0.0101
+  best-single picks per fold: ['5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b', '5520_qwen7b']
+  NB: paired deltas across folds are the honest signal; at 0.5B adapters encode register not ideology, so absolute NLL gains are small (§4.4 note).

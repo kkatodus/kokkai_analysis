@@ -1,0 +1,46 @@
+digraph protocol {
+  rankdir=TB;
+  ranksep=0.34; nodesep=0.35;
+  graph [bgcolor=white, fontname="IPAexGothic", fontsize=8,
+         fontcolor="#0b0b0b", margin=0];
+  node  [shape=box, style="rounded,filled", fillcolor="#f7f6f3", color="#dedcd6",
+         fontname="IPAexGothic", fontsize=9, fontcolor="#0b0b0b", penwidth=0.9,
+         margin="0.11,0.06"];
+  edge  [color="#52514e", arrowsize=0.55, penwidth=0.9, fontname="IPAexGothic",
+         fontsize=7, fontcolor="#52514e"];
+
+  strip [shape=none, margin=0, label=<
+    <table border="0" cellborder="1" cellspacing="3" cellpadding="4" color="#dedcd6">
+      <tr><td colspan="5" border="0" align="left">
+        <b>Nested 5-fold CV — one outer fold shown</b></td></tr>
+      <tr><td width="74" align="center" bgcolor="#cde2fb"><font point-size="9">dev (6)</font></td><td width="74" align="center" bgcolor="#cde2fb"><font point-size="9">dev (6)</font></td><td width="74" align="center" bgcolor="#cde2fb"><font point-size="9">dev (6)</font></td><td width="74" align="center" bgcolor="#fbe0d5"><font point-size="9">test (6)</font></td><td width="74" align="center" bgcolor="#cde2fb"><font point-size="9">dev (6)</font></td></tr>
+      <tr><td colspan="5" border="0" align="left">
+        <font point-size="7" color="#52514e">30 utterances in 5 folds; each is held out in turn and every method is rotated over identical folds.</font></td></tr>
+      <tr><td colspan="5" border="0" align="left">
+        <font point-size="7" color="#52514e">The four dev folds — 24 instances — are the whole low-resource budget, and each method below gets all of them.</font></td></tr>
+    </table>>];
+
+  polis [label=<<b>POLIS (BO)</b><br/><font point-size="7" color="#52514e">40 GP trials search C</font><br/><font point-size="7" color="#52514e">12 coefficients fitted</font>>,
+         fillcolor="#cde2fb", color="#2a78d6"];
+  ft    [label=<<b>SFT / DPO baselines</b><br/><font point-size="7" color="#52514e">LoRA on the dev folds<br/>≈20M parameters fitted</font>>];
+  icl   [label=<<b>ICL baseline</b><br/><font point-size="7" color="#52514e">the dev utterances become<br/>an in-prompt prefix</font>>];
+
+  strip -> polis [color="#2a78d6"];
+  strip -> ft;
+  strip -> icl;
+
+  score [label=<<b>scored on the untouched test fold</b><br/><font point-size="7" color="#52514e">paired — the same 6 utterances for every method</font>>,
+         fillcolor="#fbe0d5", color="#eb6834"];
+  polis -> score [color="#2a78d6"];
+  ft -> score;
+  icl -> score;
+
+  note [shape=box, style="rounded,dashed", color="#dedcd6", fillcolor=white,
+        margin="0.16,0.09", label=<
+    <table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+      <tr><td align="left"><b>No leakage by construction.</b>&nbsp;
+        <font point-size="8" color="#52514e">The in-context prefix is built from dev only, and the merge is</font></td></tr>
+      <tr><td align="left"><font point-size="8" color="#52514e">scored with the model restored to base weights, so the test fold enters exactly once — at scoring time.</font></td></tr>
+    </table>>];
+  score -> note [style=invis];
+}

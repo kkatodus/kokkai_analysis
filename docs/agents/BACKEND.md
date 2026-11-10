@@ -28,7 +28,7 @@ Public health check: `GET /health` (no API key).
 The backend does **not** read `data/data/` pipeline paths directly. It reads from:
 
 - **Local dev:** `s3_mirror/kokkai-doc/` (default when `ENVIRONMENT=local`)
-- **Deployed:** S3 data-lake bucket (`kokkai-doc-data-lake-bucket-{env}`)
+- **Deployed:** S3 data-lake bucket `kokkai-doc-bucket-dev` (prefix `kokkai-doc/`). It's shared by dev **and prod**; see INFRA.md § Data lake
 
 See [DATA-LAYOUT.md](./DATA-LAYOUT.md) for the pipeline → mirror mapping table.
 

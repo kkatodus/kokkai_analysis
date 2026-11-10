@@ -71,7 +71,7 @@ PERSON_ID_FILTER = None   # e.g. "10" — one politician only; None = all
 TOPICS_TO_COVER = ["Defence"]  # English topic names; None = all topics on disk
 MIN_OPINIONS = 3
 SUMMARY_RUNS = 3          # multiple summaries per topic for embedding diversity
-MODEL = "gemini-2.5-flash"  # project default; see AGENTS.md
+MODEL = "gemini-2.5-flash-lite"  # project default; see AGENTS.md
 FORCE_REGENERATE = False  # set True to overwrite existing summary.json files
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -363,21 +363,22 @@ class IdeaSummaryGenerator:
 # In[ ]:
 
 
-generator = IdeaSummaryGenerator(
-	model=MODEL,
-	min_opinions=MIN_OPINIONS,
-	summary_runs=SUMMARY_RUNS,
-)
+if __name__ == "__main__":
+	generator = IdeaSummaryGenerator(
+		model=MODEL,
+		min_opinions=MIN_OPINIONS,
+		summary_runs=SUMMARY_RUNS,
+	)
 
-results = generator.run(
-	person_id_filter=PERSON_ID_FILTER,
-	topics_to_cover=TOPICS_TO_COVER,
-	force=FORCE_REGENERATE,
-)
+	results = generator.run(
+		person_id_filter=PERSON_ID_FILTER,
+		topics_to_cover=TOPICS_TO_COVER,
+		force=FORCE_REGENERATE,
+	)
 
-print(f"New summaries: {results['processed']}")
-print(f"Skipped (already exist): {results['skipped']}")
-print(f"Output dir: {OUTPUT_DIR}")
+	print(f"New summaries: {results['processed']}")
+	print(f"Skipped (already exist): {results['skipped']}")
+	print(f"Output dir: {OUTPUT_DIR}")
 
 
 # In[ ]:

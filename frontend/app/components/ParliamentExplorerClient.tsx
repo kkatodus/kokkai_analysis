@@ -6,7 +6,7 @@
  * Receives initial data from Server Component
  */
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { track } from "@vercel/analytics";
 
 import { Header } from "@/app/components/layout/Header";
@@ -20,16 +20,19 @@ import { DetailPane } from "@/app/components/features/DetailPane";
 import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
-import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, RelevanceAndProductivityData } from "@/app/types";
+import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, QualityAggregate } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
-import { RelevanceProductivityBarList } from "@/app/components/visualizations/RelevanceProductivityBarList";
+import { SpeechQualityBarList } from "@/app/components/visualizations/SpeechQualityBarList";
 import { useModal } from "@/app/lib/hooks/useModal";
+import { TUTORIAL_SEEN_KEY, TutorialContext } from "@/app/lib/hooks/useTutorial";
+import { Tutorial } from "@/app/components/tutorial/Tutorial";
+import { TOUR_SAMPLE, TOUR_STEPS, type DetailPanel, type TourActions, type TourState } from "@/app/components/tutorial/tutorialSteps";
 import {
   DisclaimerPanel,
   DisclaimerToggleButton,
   IdeologyDisclaimerContent,
-  RelevanceProductivityDisclaimerContent,
+  SpeechQualityDisclaimerContent,
 } from "@/app/components/shared/VisualizationDisclaimer";
 
 interface ParliamentExplorerClientProps {
@@ -38,7 +41,7 @@ interface ParliamentExplorerClientProps {
   initialSelectedPersonId?: string | null;
   ideologyData: IdeologyData | null;
   allParliamentMemberTable: AllParliamentMemberTableData[] | null;
-  relevanceAndProductivityData: RelevanceAndProductivityData[] | null;
+  qualityAggregate: QualityAggregate | null;
 }
 
 export function ParliamentExplorerClient({
@@ -47,7 +50,7 @@ export function ParliamentExplorerClient({
   initialSelectedPersonId,
   ideologyData,	
   allParliamentMemberTable,
-  relevanceAndProductivityData,
+  qualityAggregate,
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
@@ -57,7 +60,7 @@ export function ParliamentExplorerClient({
         initialSelectedPersonId={initialSelectedPersonId}
         ideologyData={ideologyData}
         allParliamentMemberTable={allParliamentMemberTable}
-        relevanceAndProductivityData={relevanceAndProductivityData}
+        qualityAggregate={qualityAggregate}
       />
     </ModalProvider>
   );
@@ -69,7 +72,7 @@ function ParliamentExplorerClientInner({
   initialSelectedPersonId,
   ideologyData,
   allParliamentMemberTable,
-  relevanceAndProductivityData,
+  qualityAggregate,
 }: ParliamentExplorerClientProps) {
   // Initialize state from server-provided initialSelectedId
   const [selectedPersonIdState, setSelectedPersonId] = useState<string | null>(initialSelectedPersonId ?? null);
@@ -80,8 +83,13 @@ function ParliamentExplorerClientInner({
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
   const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
-  const [showRelevanceDisclaimer, setShowRelevanceDisclaimer] = useState(false);
+  const [showQualityDisclaimer, setShowQualityDisclaimer] = useState(false);
   const { currentModals, addModal } = useModal();
+
+  // guided tour (specs/speech-quality-ui follow-up): state lives here so steps can drive the panes
+  const [tourStep, setTourStep] = useState<number | null>(null);
+  const [detailPanel, setDetailPanel] = useState<DetailPanel | null>(null);
+  const [panelRequest, setPanelRequest] = useState<{ panel: DetailPanel; nonce: number } | null>(null);
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
   useEffect(() => {
@@ -119,6 +127,16 @@ function ParliamentExplorerClientInner({
           personId: id,
           queryLength: meta?.queryLength ?? null,
         });
+        // Feed the shared "frequently searched" ranking (server-side, Upstash Redis).
+        // Only count selections made from the search panel; fire-and-forget.
+        if (source === "historical_search" && typeof window !== "undefined") {
+          fetch("/api/popular-politicians", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ person_id: id }),
+            keepalive: true,
+          }).catch(() => {});
+        }
       } else {
         track("ClosePoliticianDetail", { source });
       }
@@ -149,6 +167,61 @@ function ParliamentExplorerClientInner({
   const handleTooltipHide = useCallback(() => {
     setTooltipData(null);
   }, []);
+
+  const markTutorialSeen = () => {
+    try {
+      window.localStorage.setItem(TUTORIAL_SEEN_KEY, "1");
+    } catch {}
+  };
+  const startTutorial = useCallback(() => {
+    setTourStep(0);
+    markTutorialSeen();
+  }, []);
+  const stopTutorial = useCallback(() => {
+    setTourStep(null);
+    markTutorialSeen();
+  }, []);
+  const tutorialContext = useMemo(
+    () => ({ active: tourStep !== null, start: startTutorial, stop: stopTutorial }),
+    [tourStep, startTutorial, stopTutorial]
+  );
+  const tourState: TourState = {
+    personOpen: selectedPersonId !== null,
+    issueOpen: selectedIssueIdState !== null,
+    detailPanel,
+  };
+  const tourActions: TourActions = {
+    openSamplePerson: () => handlePoliticianSelect(TOUR_SAMPLE.personId, { source: "tutorial" }),
+    closePerson: () => handlePoliticianSelect(null, { source: "tutorial" }),
+    openSampleIssue: () => {
+      setSelectedIssueId(TOUR_SAMPLE.issueId);
+      setSelectedIssueSpeechId(TOUR_SAMPLE.speechId);
+    },
+    closeIssue: () => {
+      setSelectedIssueId(null);
+      setSelectedIssueSpeechId(null);
+    },
+    setDetailPanel: (panel) => setPanelRequest((r) => ({ panel, nonce: (r?.nonce ?? 0) + 1 })),
+    openDonation: () => {
+      track("OpenDonationModal", { location: "tutorial" });
+      if (!currentModals.includes("donation")) addModal("donation");
+    },
+  };
+
+  // first visit: start the tour once the donation modal (or any other) has been closed
+  useEffect(() => {
+    if (typeof window === "undefined" || tourStep !== null) return;
+    let seen = "1";
+    try {
+      seen = window.localStorage.getItem(TUTORIAL_SEEN_KEY) ?? "";
+    } catch {}
+    if (seen || currentModals.length > 0) return;
+    const t = window.setTimeout(() => {
+      track("StartTutorial", { location: "first_visit" });
+      startTutorial();
+    }, 800);
+    return () => window.clearTimeout(t);
+  }, [currentModals, tourStep, startTutorial]);
 
   // Auto-open donation modal for first-time visitors or when URL requests it (e.g. from /payment-cancel).
   useEffect(() => {
@@ -188,6 +261,7 @@ function ParliamentExplorerClientInner({
   }, [addModal, currentModals]);
 
   return (
+    <TutorialContext.Provider value={tutorialContext}>
       <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
         <div className="w-full">
           <div className="flex flex-col gap-4">
@@ -197,7 +271,7 @@ function ParliamentExplorerClientInner({
           <ResizableContainer
             left={
               <>
-                <Card>
+                <Card data-tour="search">
                   <CardHeader
                     title="歴代議員検索"
                     subtitle="漢字・かな表記で検索できます。クリックで選択します。"
@@ -216,7 +290,7 @@ function ParliamentExplorerClientInner({
                   </div>
                 </Card>
 
-                <Card>
+                <Card data-tour="ideology-card">
                   <CardHeader
                     title="政治的な立場の推定（AIの埋め込みベクトルによる推定）"
                     subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
@@ -230,7 +304,7 @@ function ParliamentExplorerClientInner({
                   <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     {showIdeologyDisclaimer ? (
                       <DisclaimerPanel>
-                        <IdeologyDisclaimerContent />
+                        <IdeologyDisclaimerContent ideologyData={ideologyData} />
                       </DisclaimerPanel>
                     ) : (
                       <IdeologicalScatterPlot
@@ -246,7 +320,7 @@ function ParliamentExplorerClientInner({
                   </div>
                 
                 </Card>
-                <Card>
+                <Card data-tour="map-card">
                   <CardHeader
                     title="選挙区地図"
                     subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
@@ -313,36 +387,36 @@ function ParliamentExplorerClientInner({
             }
             right={
               <>
-                <Card>
+                <Card data-tour="quality-card">
                   <CardHeader
-                    title="発言の関連度・生産性（AI判定）"
-                    subtitle="クリックすると議員詳細が開きます。並び替えもできます。この情報を参考にする前に、かならず注意事項をご確認ください。"
+                    title="やり取りの評価（AI判定）"
+                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、かならず注意事項をご確認ください。"
                     action={
                       <DisclaimerToggleButton
-                        pressed={showRelevanceDisclaimer}
-                        onClick={() => setShowRelevanceDisclaimer((v) => !v)}
+                        pressed={showQualityDisclaimer}
+                        onClick={() => setShowQualityDisclaimer((v) => !v)}
                       />
                     }
                   />
                   <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showRelevanceDisclaimer ? (
+                    {showQualityDisclaimer ? (
                       <DisclaimerPanel>
-                        <RelevanceProductivityDisclaimerContent />
+                        <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
                       </DisclaimerPanel>
                     ) : (
-                      <RelevanceProductivityBarList
-                        relevanceAndProductivityData={relevanceAndProductivityData}
+                      <SpeechQualityBarList
+                        aggregate={qualityAggregate}
                         allParliamentMemberTable={allParliamentMemberTable}
                         selectedPersonId={selectedPersonId}
                         onSelectPersonId={(id) =>
-                          handlePoliticianSelect(id, { source: "relevance_productivity_bars" })
+                          handlePoliticianSelect(id, { source: "speech_quality_bars" })
                         }
                       />
                     )}
                   </div>
                 </Card>
 
-                <Card>
+                <Card data-tour="seats">
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
                   <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
@@ -366,9 +440,11 @@ function ParliamentExplorerClientInner({
         isOpen={selectedPersonId !== null}
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
-        relevanceAndProductivityData={relevanceAndProductivityData}
+        qualityAggregate={qualityAggregate}
 		setSelectedIssueId={setSelectedIssueId}
         setSelectedIssueSpeechId={setSelectedIssueSpeechId}
+        panelRequest={panelRequest}
+        onPanelChange={setDetailPanel}
       />
 
       <IssuePane
@@ -382,7 +458,28 @@ function ParliamentExplorerClientInner({
       />
 
         <Tooltip data={tooltipData} x={tooltipPos.x} y={tooltipPos.y} />
+
+        {/* the tour steps aside while a modal (donation, disclaimer) is open and resumes at the same step */}
+        {tourStep !== null && currentModals.length === 0 && (
+          <Tutorial
+            steps={TOUR_STEPS}
+            stepIndex={tourStep}
+            state={tourState}
+            actions={tourActions}
+            onNext={() => setTourStep((i) => Math.min(TOUR_STEPS.length - 1, (i ?? 0) + 1))}
+            onBack={() => setTourStep((i) => Math.max(0, (i ?? 0) - 1))}
+            onSkip={() => {
+              track("SkipTutorial", { step: TOUR_STEPS[tourStep]?.id ?? "" });
+              stopTutorial();
+            }}
+            onFinish={() => {
+              track("FinishTutorial", {});
+              stopTutorial();
+            }}
+          />
+        )}
       </div>
+    </TutorialContext.Provider>
   );
 }
 
