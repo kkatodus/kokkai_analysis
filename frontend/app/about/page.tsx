@@ -98,12 +98,20 @@ export default function AboutPage() {
             <h1 className="text-xl font-semibold text-gray-50">このプロジェクトについて</h1>
             <div className="mt-1 text-sm text-gray-400">KOKKAI DOC</div>
           </div>
-          <Link
-            href="/"
-            className="rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
-          >
-            トップへ戻る
-          </Link>
+          <div className="flex shrink-0 items-center gap-2">
+            <Link
+              href="/"
+              className="rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
+            >
+              トップへ
+            </Link>
+            <Link
+              href="/app"
+              className="rounded-full border border-cyan-400/20 bg-linear-to-br from-cyan-500/20 to-indigo-600/20 px-3 py-1.5 text-xs font-medium text-cyan-100 transition hover:border-cyan-400/40 hover:bg-cyan-500/25"
+            >
+              ダッシュボードへ
+            </Link>
+          </div>
         </div>
 
         <div className="grid gap-3">

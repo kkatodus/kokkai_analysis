@@ -39,3 +39,28 @@ body {
     font-size: 10px;
   }
 }
+
+/* Landing page (specs/landing-page §5.1, §5.5): slow background drift and the scatter's idle "breathing". */
+.landing-drift {
+  background:
+    radial-gradient(40rem 40rem at 20% 20%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(36rem 36rem at 80% 70%, rgba(79, 70, 229, 0.08), transparent 60%);
+  animation: landing-drift 20s ease-in-out infinite alternate;
+}
+@keyframes landing-drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+.landing-breathe {
+  animation: landing-breathe 3s ease-in-out infinite;
+}
+@keyframes landing-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-drift,
+  .landing-breathe {
+    animation: none;
+  }
+}
