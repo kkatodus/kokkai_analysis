@@ -6,7 +6,6 @@
 import type { Metadata } from "next";
 import { TrackOnMount } from "@/app/components/analytics/TrackOnMount";
 import { FeatureTour } from "@/app/components/landing/FeatureTour";
-import { Hero } from "@/app/components/landing/Hero";
 import { LandingHeader } from "@/app/components/landing/LandingHeader";
 import { MethodSection } from "@/app/components/landing/MethodSection";
 import { SupportSection } from "@/app/components/landing/SupportSection";
@@ -33,7 +32,6 @@ export default function LandingPage() {
       <TrackOnMount event="LandingView" />
       <LandingHeader />
       <main>
-        <Hero />
         <FeatureTour />
         <MethodSection />
         <SupportSection />

@@ -225,19 +225,20 @@ Copy (adapted from the tour's 「このサイトは一人で運営していま�
 
 Stage: none. A soft cyan→indigo glow behind the buttons (static).
 
-### 5.9 機能ツアー panel (revised 2026-11-11, replaces separate sections for 5.2–5.6)
+### 5.9 機能ツアー panel (revised 2026-11-11, replaces the hero and the separate sections for 5.1–5.6)
 
-One `section` of height `5 × 100svh` with a `sticky top-16` viewport-high panel inside. Scroll position through the
-section selects the chapter (`useScroll` progress × 5); the panel stays pinned while the chapter's copy crossfades and
-its stage remounts and plays. Layout: desktop = rail (markers) ｜ copy 4/11 ｜ stage 7/11; phone = horizontal marker
-row + progress bar, stage, compact copy.
+The first screen *is* the panel. One `section` of height `6 × 100svh` with a `sticky top-16` viewport-high panel
+inside. A messaging band sits at the top (H1 「その議員、国会で何してる？」, the one-line description, the two CTAs);
+below it the tour. Scroll position through the section selects the chapter (`useScroll` progress × 6); the panel
+stays pinned while the chapter's copy crossfades and its stage remounts and plays. Layout: desktop = band, then rail
+(markers) ｜ copy 4/11 ｜ stage 7/11; phone = band, horizontal marker row + progress bar, stage (≤ 50 svh), compact copy.
 
-- **Rail**: one marker per chapter (発言 ／ 会議 ／ 比べる ／ 立場 ／ 地図) with a cyan progress fill tracking scroll
+- **Rail**: one marker per chapter (検索 ／ 発言 ／ 会議 ／ 比べる ／ 立場 ／ 地図) with a cyan progress fill tracking scroll
   progress; markers are buttons that scroll to the middle of that chapter's band (`aria-current="step"` on the active one).
 - **「最初から再生」**: scrolls to chapter 1 and then to each next chapter after `durationMs + 1.8 s`; any wheel, touch
   or key press stops it (the button becomes 「停止」).
-- **Scroll prompt**: the hero ends with a bouncing chevron labelled 「スクロールして機能を見る」 linking to `#tour`
-  (`scroll-behavior: smooth`, static under reduced motion).
+- **Scroll prompt**: a pill with a bouncing chevron 「スクロールして機能を見る」 at the bottom of the panel, shown only
+  on chapter 1; it scrolls to chapter 2 (`scroll-behavior: smooth`, static under reduced motion).
 - §5.7 (どうやって？) and §5.8 (一人で運営) stay separate, below the panel. §5.7 is now six steps: collect → match
   speakers → segment exchanges → label (with the live label vocabulary from `quality.ts`) → scale stances → limits.
 
@@ -253,8 +254,7 @@ frontend/app/
   app/page.tsx                    → today's page.tsx moved here (ISR 600)
   components/landing/
     LandingHeader.tsx
-    Hero.tsx
-    FeatureTour.tsx               pinned tour panel: rail, autoplay, chapter copy + stage (§5.9)
+    FeatureTour.tsx               first screen + pinned tour panel: messaging band, rail, autoplay, chapter copy + stage (§5.9)
     chapters.ts                   chapter copy, marker labels and stage components, in order
     Stage.tsx                     card frame, サンプル badge, reduced-motion handling
     stages/
@@ -344,9 +344,9 @@ Rules:
 
 - **Map outlines** come from `@svg-maps/japan` 2.0.0 (CC BY 4.0), Douglas–Peucker-simplified to ≈ 14 KB in `stages/japanPrefectures.ts`; the footer credits the source. Hand-tracing 47 prefectures was not worth it.
 - **Method-section icons** fade and spring in rather than stroke-draw; `react-icons` glyphs are filled paths, not strokes.
-- **One panel, not five sections** (user change 2026-11-11, §5.9): the feature chapters live in a single pinned,
-  scroll-driven panel with a marker rail and autoplay; the hero gained a scroll-down prompt; the method section grew to
-  six steps.
+- **One panel, not a hero plus five sections** (user change 2026-11-11, §5.9): the first screen is the pinned,
+  scroll-driven panel — messaging band on top, search replica as chapter 1, marker rail, autoplay and a scroll-down
+  prompt; the method section grew to six steps.
 - **Playback** is step-based: each stage has a `TIMES` array and `useTimeline` returns the number of beats elapsed, so the final frame is simply "every beat done". That frame is also the SSR output (`initial={false}` when not playing), which avoids both layout shift and hydration warnings.
 - **Cursor** targets `data-cursor="…"` elements and measures them at each beat instead of using hand-tuned coordinates, so it survives responsive layouts.
 - **Sample counts** were nudged so the 最低やり取り数 step (20 → 50) removes exactly two rows: 国会 太郎 has 58 exchanges everywhere, not 42.

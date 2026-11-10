@@ -1,4 +1,4 @@
-/** The chapters of the feature tour panel (specs/landing-page §5.2–5.6), in order. */
+/** The chapters of the feature tour panel (specs/landing-page §5.1–5.6), in order. */
 
 import type { ComponentType } from "react";
 import type { Playback, StageFrame } from "./useStagePlayback";
@@ -7,6 +7,7 @@ import { ISSUE_DURATION_MS, IssuePaneStage } from "./stages/IssuePaneStage";
 import { MAP_DURATION_MS, MapStage } from "./stages/MapStage";
 import { RANKING_DURATION_MS, RankingStage } from "./stages/RankingStage";
 import { SCATTER_DURATION_MS, ScatterStage } from "./stages/ScatterStage";
+import { SEARCH_DURATION_MS, SearchStage } from "./stages/SearchStage";
 
 export interface Chapter {
   id: string;
@@ -24,6 +25,16 @@ export interface Chapter {
 }
 
 export const CHAPTERS: Chapter[] = [
+  {
+    id: "search",
+    short: "検索",
+    title: "議員を、名前で探す。",
+    body: "歴代の衆参議員を名前で検索できます。現職も元職も、ひらがなでも。選ぶと、その議員の詳細パネルが開きます。",
+    caption: "地図の選挙区や立場の図からも、同じパネルを開けます。",
+    description: "議員検索の例：名前を打ち込むと候補が出て、選ぶと詳細パネルが開きます。",
+    Component: SearchStage,
+    durationMs: SEARCH_DURATION_MS,
+  },
   {
     id: "speeches",
     short: "発言",
