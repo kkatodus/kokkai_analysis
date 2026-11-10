@@ -67,7 +67,7 @@ export function ProportionalReprList({ parliamentMemberData, onPoliticianSelect 
   }
 
   if (!shugiin.length && !sangiin.length) {
-    return <EmptyState message="（比）の議員データが見つかりません。" className="py-8" />;
+    return <EmptyState message="比例代表の議員データが見つかりません。" className="py-8" />;
   }
 
   const renderHouse = (

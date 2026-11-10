@@ -103,7 +103,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
       {page === "donors" ? (
         <>
           <p className="text-sm leading-relaxed text-gray-300">
-            以下にKOKKAI DOCの活動を4000円以上の募金で支援してくださった皆様のお名前を心より感謝を込めて掲載いたします。掲載名の変更・非掲載をご希望の方は{" "}
+            KOKKAI DOCの活動を4,000円以上のご支援で支えてくださった皆様のお名前を、感謝を込めて以下に掲載しています。掲載名の変更・非掲載をご希望の方は{" "}
             <span className="whitespace-nowrap text-blue-500">kokkai.doc[アット]gmail.com</span>{" "}
             までご連絡ください。
           </p>
@@ -195,7 +195,7 @@ export function DonateModal({ removeModal }: DonateModalProps) {
                   !subscription ? "bg-blue-600/60 text-blue-50" : "text-gray-200 hover:bg-slate-800"
                 }`}
               >
-                一度応援する
+                今回だけ応援する
               </button>
               <button
                 type="button"

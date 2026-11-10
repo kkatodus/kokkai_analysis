@@ -24,7 +24,7 @@ export default function TermsPage() {
             href="/about"
             className="rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1.5 text-xs font-medium text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
           >
-            このプロジェクトについてへ戻る
+            「このプロジェクトについて」へ戻る
           </Link>
         </div>
 

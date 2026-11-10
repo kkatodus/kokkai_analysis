@@ -292,7 +292,7 @@ function ParliamentExplorerClientInner({
 
                 <Card data-tour="ideology-card">
                   <CardHeader
-                    title="政治的な立場の推定（AIの埋め込みベクトルによる推定）"
+                    title="政治的な立場の推定（発言の埋め込みベクトルから算出）"
                     subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
                     action={
                       <DisclaimerToggleButton
@@ -390,7 +390,7 @@ function ParliamentExplorerClientInner({
                 <Card data-tour="quality-card">
                   <CardHeader
                     title="やり取りの評価（AI判定）"
-                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、かならず注意事項をご確認ください。"
+                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、必ず注意事項をご確認ください。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showQualityDisclaimer}
