@@ -20,6 +20,7 @@ import { DetailPane } from "@/app/components/features/DetailPane";
 import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
+import { DashboardReadySignal } from "@/app/components/loading/LoadingSignal";
 import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, QualityAggregate } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
@@ -54,6 +55,7 @@ export function ParliamentExplorerClient({
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
+      <DashboardReadySignal />
       <ParliamentExplorerClientInner
         parliamentMemberData={parliamentMemberData}
         votingDistrictGeoJsonData={votingDistrictGeoJsonData}

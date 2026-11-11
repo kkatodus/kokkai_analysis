@@ -20,7 +20,7 @@ Raw and intermediate pipeline outputs stay in `data/data/`. The FastAPI backend 
 | `repr_speeches_id_organized/` | `repr_speeches_id_organized/` | `routers/speeches.py` |
 | `election_history/` | `electionHistory/` | `routers/electionHistory.py` |
 | `data_all_speeches/` (per issue) | `issues/{issueID}/` | `routers/speeches.py` |
-| Postgres `label_result` (via `data/speech_quality/publish.py`) | `speech_quality/aggregate.json` + `speech_quality/persons/{person_id}.jsonl`; `quality` object on exchange-starting lines in `issues/{id}/speeches.jsonl` | `routers/speeches.py` (`/speeches/quality/*`, `/speeches/get_issue_by_id`) |
+| Postgres `label_result` (via `data/speech_quality/publish.py`) | `speech_quality/aggregate.json` + `speech_quality/persons/{person_id}.jsonl` + `speech_quality/site_stats.json`; `quality` object on exchange-starting lines in `issues/{id}/speeches.jsonl` | `routers/speeches.py` (`/speeches/quality/*`, `/speeches/get_issue_by_id`) |
 | (derived from repr/geo pipelines) | `parliamentMembers/`, `politicians/`, `geo/`, `ideology/` | `routers/parliamentMember.py`, etc. |
 | (fetched by `data/person_images/`) | `person_images/{person_id}.jpg` + `person_images/index.json` (source, licence, attribution) | none yet; frontend can read the index |
 | `s3_mirror/.topic-scaling/` (summaries, embeddings, opinion cache) | `ideology/ideology.json.gz` + `ideology/history/ideology-YYYY-MM-DD.json.gz` | `routers/ideology.py` (written by `data/topic_scaling`) |
@@ -52,7 +52,7 @@ Keyed by Postgres `person_id`.
 
 ### Exchange quality labels — `s3_mirror/kokkai-doc/speech_quality/`
 
-Not under `data/data/`: built straight from Postgres `label_result` by `python -m speech_quality.publish` (spec `specs/speech-quality-ui/`). `aggregate.json` holds per-person counts (function, contribution, issues, outcomes, as questioner and as answerer) plus corpus totals and the coverage window; `persons/{person_id}.jsonl` lists one person's labelled exchanges newest first. The old relevance copies (`*_with_prd_and_rl/`, `relevance_data/`) are legacy and no longer read.
+Not under `data/data/`: built straight from Postgres `label_result` by `python -m speech_quality.publish` (spec `specs/speech-quality-ui/`). `aggregate.json` holds per-person counts (function, contribution, issues, outcomes, as questioner and as answerer) plus corpus totals and the coverage window; `persons/{person_id}.jsonl` lists one person's labelled exchanges newest first. `site_stats.json` (~3 KB, spec `specs/dashboard-loading/` §8) holds site-wide numbers for the dashboard loading cards: corpus size from the `speeches` table since 2000, label coverage and site-wide shares, and top-5 current members by neutral counts (speeches, exchanges, lower-house terms; current = newest `parliamentMembers/` snapshot). Rewritten on every `rebuild()`; alone with `--site-stats`. The old relevance copies (`*_with_prd_and_rl/`, `relevance_data/`) are legacy and no longer read.
 
 ### Topic-classified opinions — `data_repr_speeches/` (often gitignored)
 

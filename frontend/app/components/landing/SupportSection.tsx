@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { BsTwitterX, BsYoutube } from "react-icons/bs";
+import { LinkPending } from "./LinkPending";
 import { track } from "./track";
 
 export function SupportSection() {
@@ -22,14 +23,14 @@ export function SupportSection() {
               onClick={() => track("LandingCTA", { cta: "donate", location: "support" })}
               className="inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-linear-to-br from-cyan-500/30 to-indigo-600/30 px-6 py-3 text-sm font-semibold text-cyan-50 shadow-lg shadow-cyan-500/20 transition hover:border-cyan-400/50 hover:from-cyan-500/40 hover:to-indigo-600/40"
             >
-              募金について見る
+              <LinkPending>募金について見る</LinkPending>
             </Link>
             <Link
               href="/app"
               onClick={() => track("LandingCTA", { cta: "open_app", location: "support" })}
               className="inline-flex items-center justify-center rounded-full border border-slate-400/25 bg-slate-900/40 px-6 py-3 text-sm font-semibold text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
             >
-              ダッシュボードを開く
+              <LinkPending>ダッシュボードを開く</LinkPending>
             </Link>
           </div>
         </div>
