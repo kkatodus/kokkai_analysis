@@ -15,6 +15,7 @@ import { FaPlay, FaStop } from "react-icons/fa6";
 import { FiChevronDown } from "react-icons/fi";
 import { CHAPTERS } from "./chapters";
 import { Stage } from "./Stage";
+import { LinkPending } from "./LinkPending";
 import { track } from "./track";
 import { useStagePlayback } from "./useStagePlayback";
 
@@ -158,14 +159,14 @@ export function FeatureTour() {
                 onClick={() => track("LandingCTA", { cta: "open_app", location: "hero" })}
                 className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-full border border-cyan-400/30 bg-linear-to-br from-cyan-500/30 to-indigo-600/30 px-4 py-2.5 text-sm font-semibold text-cyan-50 shadow-lg shadow-cyan-500/20 transition hover:border-cyan-400/50 hover:from-cyan-500/40 hover:to-indigo-600/40 sm:flex-none sm:px-6 sm:py-3"
               >
-                ダッシュボードを開く
+                <LinkPending>ダッシュボードを開く</LinkPending>
               </Link>
               <Link
                 href="/app?tour=1"
                 onClick={() => track("LandingCTA", { cta: "tour", location: "hero" })}
                 className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-full border border-slate-400/25 bg-slate-900/40 px-4 py-2.5 text-sm font-semibold text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65 sm:flex-none sm:px-6 sm:py-3"
               >
-                使い方を見ながら試す
+                <LinkPending>使い方を見ながら試す</LinkPending>
               </Link>
             </div>
           </div>
