@@ -1,0 +1,899 @@
+{
+ "topic": "socialsecurity",
+ "axis_notes": {
+  "sustainability": "ILL-DEFINED: both statements favour reform and sparing the working generation; read as pro = prioritise sustainability reforms (restraint/efficiency/burden restructuring), con = resist cuts/burden-raising reviews",
+  "benefitburdenbalance": "pro = clear benefit-burden link and fair burden-sharing across/within generations (ability-based, elderly pay their share); con = oppose burden increases on patients/elderly/low-income as unfair",
+  "consumptionhaxforsocialsecurity": "pro = support consumption tax (and its hikes) as social security funding; con = oppose hikes / call it unsuitable or want cuts",
+  "longtermdareinsurancereform": "ILL-DEFINED: pro says 'enhance LTC', con says 'reforms may lower quality' (opposition wants both); read as pro = supportive of LTC insurance reform/review direction, con = critical of reforms as cutting benefits/raising user burden",
+  "younggenerationburden": "ILL-DEFINED: both statements favour relieving young/working generation; read as pro = prioritise relieving young/working-generation burden (shift from elderly-centred system), con = resist shifting burden onto elderly / reject elderly-vs-young framing"
+ },
+ "labels": {
+  "5": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "50": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "74": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "201": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "neutral"
+  },
+  "205": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "221": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "255": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "296": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "neutral"
+  },
+  "379": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "388": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "433": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "486": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "552": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "568": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "681": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "708": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "806": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "876": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "901": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "911": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "1084": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "1102": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1126": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "1144": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "neutral",
+   "younggenerationburden": "pro"
+  },
+  "1172": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "1178": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "1214": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "1279": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1313": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "1349": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "1387": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1423": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1483": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "1505": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1576": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "1711": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1762": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1800": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1853": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "1917": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "1961": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "1974": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "con"
+  },
+  "1977": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "2048": {
+   "sustainability": "na",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2116": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2118": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "2141": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "2172": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "2287": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2356": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "con"
+  },
+  "2377": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "2416": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2494": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "2515": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "2546": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "2547": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "2591": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "2655": {
+   "sustainability": "con",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "neutral"
+  },
+  "2735": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2747": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "2810": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "2824": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "2837": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "2899": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "2943": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "2945": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "2974": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "3002": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "3051": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "3078": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "3192": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "3364": {
+   "sustainability": "na",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "3390": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "3400": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "3468": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "3479": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "3544": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "3559": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "3695": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "3797": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "3804": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "neutral",
+   "younggenerationburden": "na"
+  },
+  "3931": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "neutral",
+   "younggenerationburden": "na"
+  },
+  "3969": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "con"
+  },
+  "3977": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "4020": {
+   "sustainability": "con",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "4021": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "4063": {
+   "sustainability": "con",
+   "benefitburdenbalance": "neutral",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "4139": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "4216": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "neutral",
+   "younggenerationburden": "na"
+  },
+  "4227": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "4243": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "4320": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "4405": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "4505": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "4515": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "4608": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "con"
+  },
+  "4694": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "pro"
+  },
+  "4773": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "4816": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "neutral",
+   "younggenerationburden": "pro"
+  },
+  "4890": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "4941": {
+   "sustainability": "con",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "5070": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "5108": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "con"
+  },
+  "5133": {
+   "sustainability": "neutral",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "5266": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "con"
+  },
+  "5433": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "pro"
+  },
+  "5494": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "5495": {
+   "sustainability": "na",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "5505": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "5514": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "5517": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "na"
+  },
+  "5541": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "neutral",
+   "longtermdareinsurancereform": "pro",
+   "younggenerationburden": "na"
+  },
+  "5664": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "na",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "5696": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "pro",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "pro"
+  },
+  "5701": {
+   "sustainability": "pro",
+   "benefitburdenbalance": "pro",
+   "consumptionhaxforsocialsecurity": "na",
+   "longtermdareinsurancereform": "na",
+   "younggenerationburden": "neutral"
+  },
+  "5715": {
+   "sustainability": "con",
+   "benefitburdenbalance": "con",
+   "consumptionhaxforsocialsecurity": "con",
+   "longtermdareinsurancereform": "con",
+   "younggenerationburden": "na"
+  },
+  "350": {
+   "benefitburdenbalance": "neutral"
+  },
+  "579": {
+   "benefitburdenbalance": "con"
+  },
+  "591": {
+   "benefitburdenbalance": "neutral"
+  },
+  "839": {
+   "benefitburdenbalance": "pro"
+  },
+  "1234": {
+   "benefitburdenbalance": "neutral"
+  },
+  "1372": {
+   "benefitburdenbalance": "neutral"
+  },
+  "1524": {
+   "benefitburdenbalance": "con"
+  },
+  "1566": {
+   "benefitburdenbalance": "na"
+  },
+  "2162": {
+   "benefitburdenbalance": "con"
+  },
+  "2191": {
+   "benefitburdenbalance": "neutral"
+  },
+  "2324": {
+   "benefitburdenbalance": "pro"
+  },
+  "3040": {
+   "benefitburdenbalance": "neutral"
+  },
+  "3117": {
+   "benefitburdenbalance": "con"
+  },
+  "3153": {
+   "benefitburdenbalance": "pro"
+  },
+  "3219": {
+   "benefitburdenbalance": "pro"
+  },
+  "3312": {
+   "benefitburdenbalance": "neutral"
+  },
+  "3316": {
+   "benefitburdenbalance": "neutral"
+  },
+  "3500": {
+   "benefitburdenbalance": "pro"
+  },
+  "3518": {
+   "benefitburdenbalance": "pro"
+  },
+  "4270": {
+   "benefitburdenbalance": "pro"
+  },
+  "4294": {
+   "benefitburdenbalance": "con"
+  },
+  "4870": {
+   "benefitburdenbalance": "neutral"
+  },
+  "5091": {
+   "benefitburdenbalance": "neutral"
+  },
+  "5204": {
+   "benefitburdenbalance": "pro"
+  },
+  "5544": {
+   "benefitburdenbalance": "na"
+  }
+ }
+}

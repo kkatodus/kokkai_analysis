@@ -1,0 +1,1129 @@
+{
+ "version": 1,
+ "generated_at": "2026-11-11",
+ "ideology_generated_at": "2026-11-11T14:42:13+09:00",
+ "method": "Anonymised run-1 stance summaries of politicians sampled at 30 quantiles per sub-topic axis (round 1), then up to 25 more near each fitted boundary (round 2), hand-labelled pro/con/neutral/na against the axis by Claude Opus 5.5. Cut points from a 3-zone ordinal fit on 1D x (con < neutral_from <= neutral < neutral_to <= pro). midpoint=(neutral_from+neutral_to)/2. ci90 = bootstrap of the midpoint. pct_* = share of all scaled politicians on each side.",
+ "status_values": {
+  "calibrated": "both sides present and ordered along x; show midpoint and band",
+  "one_sided_pro": "almost everyone who addresses this sub-topic leans pro; there is no real con side on the plot",
+  "unclear": "labels do not line up with x (or too few); do not show a midpoint"
+ },
+ "topics": {
+  "defence": {
+   "constitution": {
+    "sub_topic_jp": "自衛隊の憲法明記",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -1.1333,
+    "neutral_from": -1.2327,
+    "neutral_to": -1.0339,
+    "midpoint_ci90": [
+     -1.27,
+     -1.013
+    ],
+    "pct_con_side": 0.183,
+    "pct_neutral": 0.126,
+    "pct_pro_side": 0.691,
+    "first_pro_person_id": 4935,
+    "last_con_person_id": 4840,
+    "counts": {
+     "pro": 27,
+     "con": 19,
+     "neutral": 4,
+     "na": 135
+    },
+    "auc": 0.94,
+    "agreement": 0.91,
+    "axis_reading": "Core: support writing the SDF (or self-defence/国防軍) into the constitution vs opposing 9条 amendment/明記."
+   },
+   "defencebudget": {
+    "sub_topic_jp": "防衛予算の増額",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": 0.213,
+    "neutral_from": 0.213,
+    "neutral_to": 0.213,
+    "midpoint_ci90": [
+     0.146,
+     0.337
+    ],
+    "pct_con_side": 0.485,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.515,
+    "first_pro_person_id": 481,
+    "last_con_person_id": 4935,
+    "counts": {
+     "pro": 51,
+     "con": 45,
+     "neutral": 17,
+     "na": 72
+    },
+    "auc": 0.852,
+    "agreement": 0.757,
+    "axis_reading": "Core: support increasing defence spending/strengthening capability; opposing only the tax-financing while backing the increase counted as pro; supporting need but criticising scale/priority roughly equally = neutral."
+   },
+   "collectiveselfdefence": {
+    "sub_topic_jp": "集団的自衛権の行使",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": 0.0588,
+    "neutral_from": 0.0588,
+    "neutral_to": 0.0588,
+    "midpoint_ci90": [
+     -0.072,
+     0.268
+    ],
+    "pct_con_side": 0.525,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.475,
+    "first_pro_person_id": 578,
+    "last_con_person_id": 273,
+    "counts": {
+     "pro": 34,
+     "con": 45,
+     "neutral": 11,
+     "na": 95
+    },
+    "auc": 0.831,
+    "agreement": 0.761,
+    "axis_reading": "Core: support exercising (incl. limited) collective self-defence / 平和安全法制. Pro statement oddly adds 憲法に明記; ignored. Opposing overseas dispatch alone not counted."
+   },
+   "foodsecurity": {
+    "sub_topic_jp": "食料安全保障の強化",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 34,
+     "con": 0,
+     "neutral": 1,
+     "na": 81
+    },
+    "auc": null,
+    "agreement": 0.986,
+    "axis_reading": "Ill-defined con: con statement is not opposition to food security (it is crowding-out worry / private role). Pro = treats food self-sufficiency as a security priority; con essentially unused; most members na."
+   }
+  },
+  "aging": {
+   "workemployment": {
+    "sub_topic_jp": "少子化対策としての就業と雇用環境改善",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 44,
+     "con": 1,
+     "neutral": 0,
+     "na": 48
+    },
+    "auc": 0.341,
+    "agreement": 0.978,
+    "axis_reading": "Ill-defined: pro and con are compatible (con only says employment alone is insufficient). Read as: pro = treats stable employment/wages/work-environment as a key fertility lever; con = doubts economic/employment causes of low fertility (only 3553)."
+   },
+   "educationcost": {
+    "sub_topic_jp": "少子化対策としての教育負担軽減",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 42,
+     "con": 6,
+     "neutral": 2,
+     "na": 43
+    },
+    "auc": 0.563,
+    "agreement": 0.87,
+    "axis_reading": "Core: support free/cheaper education (preschool to university) as child policy. Con = cautious/opposes free education; members who say waitlist (待機児童) must come before preschool 無償化 were labelled con (priority/quality objection, not cost), neutral if they also back other free education."
+   },
+   "budgetpriority": {
+    "sub_topic_jp": "防衛費と少子化対策予算の優先順位",
+    "status": "unclear",
+    "counts": {
+     "pro": 10,
+     "con": 0,
+     "neutral": 1,
+     "na": 82
+    },
+    "auc": null,
+    "agreement": 0.955,
+    "axis_reading": "Core: prioritise childcare/child budget over defence spending (pro) vs defence is essential first (con). Members worried about burden of both defence and childcare without choosing = na/neutral. No con found."
+   },
+   "parentalleave": {
+    "sub_topic_jp": "育児休業の拡充と参加促進",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 58,
+     "con": 0,
+     "neutral": 1,
+     "na": 34
+    },
+    "auc": null,
+    "agreement": 0.992,
+    "axis_reading": "Core: expand/promote parental leave for both parents (pro) vs concern about burden on firms (con). Members critical only of design or skeptical of fertility effect but backing uptake still pro; no con found."
+   }
+  },
+  "nuclear": {
+   "restart": {
+    "sub_topic_jp": "原発の再稼働について",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": -0.5147,
+    "neutral_from": -0.6576,
+    "neutral_to": -0.3719,
+    "midpoint_ci90": [
+     -0.619,
+     -0.463
+    ],
+    "pct_con_side": 0.426,
+    "pct_neutral": 0.304,
+    "pct_pro_side": 0.27,
+    "first_pro_person_id": 1925,
+    "last_con_person_id": 1024,
+    "counts": {
+     "pro": 75,
+     "con": 59,
+     "neutral": 34,
+     "na": 32
+    },
+    "auc": 0.821,
+    "agreement": 0.747,
+    "axis_reading": "pro = supports restarting reactors that pass regulatory review (incl. conditional); con = opposes/strongly resists restarts"
+   },
+   "newbuildandextendlifetime": {
+    "sub_topic_jp": "原発の新設や運転期間延長について",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": 0.2888,
+    "neutral_from": 0.2137,
+    "neutral_to": 0.364,
+    "midpoint_ci90": [
+     0.236,
+     0.373
+    ],
+    "pct_con_side": 0.57,
+    "pct_neutral": 0.262,
+    "pct_pro_side": 0.168,
+    "first_pro_person_id": 5177,
+    "last_con_person_id": 2111,
+    "counts": {
+     "pro": 18,
+     "con": 58,
+     "neutral": 14,
+     "na": 110
+    },
+    "auc": 0.913,
+    "agreement": 0.856,
+    "axis_reading": "pro = supports new builds/replacement or operating-life extension; con = opposes them (40-year rule, no new build)"
+   },
+   "export": {
+    "sub_topic_jp": "原発の輸出について",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.7087,
+    "neutral_from": -0.7173,
+    "neutral_to": -0.7,
+    "midpoint_ci90": [
+     -0.768,
+     -0.635
+    ],
+    "pct_con_side": 0.667,
+    "pct_neutral": 0.021,
+    "pct_pro_side": 0.312,
+    "first_pro_person_id": 69,
+    "last_con_person_id": 240,
+    "counts": {
+     "pro": 8,
+     "con": 36,
+     "neutral": 7,
+     "na": 149
+    },
+    "auc": 0.924,
+    "agreement": 0.882,
+    "axis_reading": "pro = supports exporting nuclear plants/technology; con = opposes export"
+   },
+   "abolishandrenewable": {
+    "sub_topic_jp": "原発廃止と再生可能エネルギーの導入",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": -0.8259,
+    "neutral_from": -1.0059,
+    "neutral_to": -0.646,
+    "midpoint_ci90": [
+     -0.889,
+     -0.703
+    ],
+    "pct_con_side": 0.103,
+    "pct_neutral": 0.412,
+    "pct_pro_side": 0.485,
+    "first_pro_person_id": 3149,
+    "last_con_person_id": 2186,
+    "counts": {
+     "pro": 86,
+     "con": 49,
+     "neutral": 31,
+     "na": 34
+    },
+    "auc": 0.795,
+    "agreement": 0.729,
+    "axis_reading": "pro = phase out nuclear and shift to renewables; con = keep nuclear in the mix alongside renewables (gov't 'reduce dependence but use as baseload' line coded con or neutral depending on emphasis)"
+   },
+   "fukushimasupport": {
+    "sub_topic_jp": "福島第一原発事故後の被害者支援と賠償問題",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 68,
+     "con": 1,
+     "neutral": 1,
+     "na": 38
+    },
+    "auc": 0.882,
+    "agreement": 0.979,
+    "axis_reading": "ILL-DEFINED: pro and con statements are not opposites (con = nationwide burden-sharing rather than only local govts/firms). Read as pro = pushes for fuller victim support/compensation and state responsibility; con = favours spreading costs to all consumers/limiting support; most people pro or na"
+   }
+  },
+  "climatechange": {
+   "fossilfuelreduction": {
+    "sub_topic_jp": "化石燃料依存からの脱却と再生可能エネルギーの推進について",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": -0.2933,
+    "neutral_from": -0.5376,
+    "neutral_to": -0.049,
+    "midpoint_ci90": [
+     -0.447,
+     -0.111
+    ],
+    "pct_con_side": 0.034,
+    "pct_neutral": 0.182,
+    "pct_pro_side": 0.784,
+    "first_pro_person_id": 2899,
+    "last_con_person_id": 588,
+    "counts": {
+     "pro": 84,
+     "con": 13,
+     "neutral": 23,
+     "na": 7
+    },
+    "auc": 0.864,
+    "agreement": 0.842,
+    "axis_reading": "pro = rapid shift off fossil fuels / maximise renewables, coal phase-out; con = fossil reduction must be gradual, keep thermal/coal for stable supply; 'all options incl. LNG/thermal transition' coded neutral"
+   },
+   "nuclearenergyuse": {
+    "sub_topic_jp": "原子力発電の利用の是非について",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.4834,
+    "neutral_from": -0.4834,
+    "neutral_to": -0.4834,
+    "midpoint_ci90": [
+     -0.512,
+     -0.442
+    ],
+    "pct_con_side": 0.26,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.74,
+    "first_pro_person_id": 5613,
+    "last_con_person_id": 5496,
+    "counts": {
+     "pro": 39,
+     "con": 23,
+     "neutral": 6,
+     "na": 59
+    },
+    "auc": 0.921,
+    "agreement": 0.868,
+    "axis_reading": "pro = use/restart nuclear for decarbonisation; con = reduce/oppose nuclear dependence in favour of renewables"
+   },
+   "carbonneutralgoal": {
+    "sub_topic_jp": "カーボンニュートラル目標の実現に向けた具体策について",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 66,
+     "con": 5,
+     "neutral": 7,
+     "na": 0
+    },
+    "auc": 0.364,
+    "agreement": 0.897,
+    "axis_reading": "SOMEWHAT ILL-DEFINED: both sides accept CN; read as pro = accelerate/ambitious CN via investment, tech, renewables (incl. H2/ammonia); con = prioritise economic realism, avoid rapid transition, stress burden/costs. Left critics of H2/ammonia who want faster cuts coded pro"
+   },
+   "localvsnatinalrole": {
+    "sub_topic_jp": "気候変動対策における地方と国の役割について",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 31,
+     "con": 0,
+     "neutral": 1,
+     "na": 46
+    },
+    "auc": null,
+    "agreement": 0.984,
+    "axis_reading": "pro = local governments/communities lead (local production-consumption of renewables) with national financial support; con = national-led uniform policy, local role complementary; almost nobody argues the con side, so most are pro or na"
+   }
+  },
+  "economy": {
+   "smallbusinesssupport": {
+    "sub_topic_jp": "中小企業支援の強化について",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 106,
+     "con": 1,
+     "neutral": 3,
+     "na": 28
+    },
+    "auc": 1.0,
+    "agreement": 0.986,
+    "axis_reading": "pro = strengthen SME support (funding, price pass-through, subsidies); con = selective/limited support, avoid propping up uncompetitive firms or excessive intervention."
+   },
+   "consumptiontaxreduction": {
+    "sub_topic_jp": "消費税の減税について",
+    "status": "unclear",
+    "counts": {
+     "pro": 36,
+     "con": 25,
+     "neutral": 8,
+     "na": 69
+    },
+    "auc": 0.494,
+    "agreement": 0.652,
+    "axis_reading": "pro = cut/abolish consumption tax or clearly oppose hikes on regressivity/demand grounds; con = support raising/maintaining it as social-security revenue; conditional/mixed = neutral."
+   },
+   "foreignworkers": {
+    "sub_topic_jp": "外国人労働者の受け入れについて",
+    "status": "unclear",
+    "counts": {
+     "pro": 5,
+     "con": 3,
+     "neutral": 0,
+     "na": 130
+    },
+    "auc": 1.0,
+    "agreement": null,
+    "axis_reading": "pro = expand acceptance of foreign workers; con = cautious/restrictive. Rarely addressed in economy summaries."
+   },
+   "monetarypolicyreview": {
+    "sub_topic_jp": "金融緩和政策の見直し",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": 0.5752,
+    "neutral_from": 0.5752,
+    "neutral_to": 0.5752,
+    "midpoint_ci90": [
+     0.427,
+     0.591
+    ],
+    "pct_con_side": 0.615,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.385,
+    "first_pro_person_id": 609,
+    "last_con_person_id": 2537,
+    "counts": {
+     "pro": 15,
+     "con": 15,
+     "neutral": 3,
+     "na": 130
+    },
+    "auc": 0.92,
+    "agreement": 0.894,
+    "axis_reading": "Inverted framing: pro = review/normalise/exit easing (side effects, weak yen); con = maintain or strengthen easing / avoid hasty rate hikes."
+   },
+   "governmentintervention": {
+    "sub_topic_jp": "政府の積極的な経済介入について",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 96,
+     "con": 13,
+     "neutral": 27,
+     "na": 2
+    },
+    "auc": 0.753,
+    "agreement": 0.805,
+    "axis_reading": "pro = active state role (fiscal stimulus, industrial policy, public works, labour/market regulation); con = deregulation, structural reform, private-led, fiscal restraint over stimulus."
+   }
+  },
+  "livingcostandtax": {
+   "taxreductionmeasures": {
+    "sub_topic_jp": "物価高対策の財政的手段としての減税",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 60,
+     "con": 7,
+     "neutral": 12,
+     "na": 3
+    },
+    "auc": 0.64,
+    "agreement": 0.861,
+    "axis_reading": "pro = supports tax cuts (esp. consumption-tax cut) as a cost-of-living measure; con = opposes/cautious on tax cuts for fiscal reasons; opposing consumption-tax cut while backing a one-off income-tax cut = neutral"
+   },
+   "wageincreasepromotion": {
+    "sub_topic_jp": "賃上げの促進とその実施環境",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 71,
+     "con": 0,
+     "neutral": 5,
+     "na": 6
+    },
+    "auc": null,
+    "agreement": 0.967,
+    "axis_reading": "pro = wants wage rises actively promoted/supported by policy; con = caution because of the burden on firms; doubts about specific tools (wage tax credit) alone are not con"
+   },
+   "consumptionhaxincrease": {
+    "sub_topic_jp": "消費税の引き上げとその影響",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": -0.5482,
+    "neutral_from": -0.78,
+    "neutral_to": -0.3165,
+    "midpoint_ci90": [
+     -0.912,
+     -0.316
+    ],
+    "pct_con_side": 0.705,
+    "pct_neutral": 0.266,
+    "pct_pro_side": 0.029,
+    "first_pro_person_id": 4608,
+    "last_con_person_id": 2943,
+    "counts": {
+     "pro": 16,
+     "con": 45,
+     "neutral": 3,
+     "na": 43
+    },
+    "auc": 0.792,
+    "agreement": 0.789,
+    "axis_reading": "pro = defends/raises consumption tax as stable social-security revenue; con = opposes consumption-tax increases or wants it cut"
+   },
+   "smallbusinesssupport": {
+    "sub_topic_jp": "中小企業支援の重要性",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 58,
+     "con": 0,
+     "neutral": 1,
+     "na": 23
+    },
+    "auc": null,
+    "agreement": 0.992,
+    "axis_reading": "ILL-DEFINED: con statement still calls for (better) SME support; read as pro = calls for SME support, con = skeptical of/opposes SME support; criticism of big-firm favouritism counted as pro"
+   }
+  },
+  "socialsecurity": {
+   "sustainability": {
+    "sub_topic_jp": "社会保障制度の持続可能性の確保",
+    "status": "unclear",
+    "counts": {
+     "pro": 74,
+     "con": 28,
+     "neutral": 11,
+     "na": 3
+    },
+    "auc": 0.569,
+    "agreement": 0.712,
+    "axis_reading": "ILL-DEFINED: both statements favour reform and sparing the working generation; read as pro = prioritise sustainability reforms (restraint/efficiency/burden restructuring), con = resist cuts/burden-raising reviews"
+   },
+   "benefitburdenbalance": {
+    "sub_topic_jp": "受益と負担のバランス",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": 0.5644,
+    "neutral_from": 0.5061,
+    "neutral_to": 0.6227,
+    "midpoint_ci90": [
+     0.492,
+     0.689
+    ],
+    "pct_con_side": 0.194,
+    "pct_neutral": 0.114,
+    "pct_pro_side": 0.692,
+    "first_pro_person_id": 1141,
+    "last_con_person_id": 335,
+    "counts": {
+     "pro": 73,
+     "con": 29,
+     "neutral": 18,
+     "na": 21
+    },
+    "auc": 0.795,
+    "agreement": 0.754,
+    "axis_reading": "pro = clear benefit-burden link and fair burden-sharing across/within generations (ability-based, elderly pay their share); con = oppose burden increases on patients/elderly/low-income as unfair"
+   },
+   "consumptionhaxforsocialsecurity": {
+    "sub_topic_jp": "消費税の社会保障への利用",
+    "status": "unclear",
+    "counts": {
+     "pro": 49,
+     "con": 19,
+     "neutral": 11,
+     "na": 37
+    },
+    "auc": 0.762,
+    "agreement": 0.753,
+    "axis_reading": "pro = support consumption tax (and its hikes) as social security funding; con = oppose hikes / call it unsuitable or want cuts"
+   },
+   "longtermdareinsurancereform": {
+    "sub_topic_jp": "介護保険制度の改正",
+    "status": "unclear",
+    "counts": {
+     "pro": 23,
+     "con": 29,
+     "neutral": 5,
+     "na": 59
+    },
+    "auc": 0.682,
+    "agreement": 0.675,
+    "axis_reading": "ILL-DEFINED: pro says 'enhance LTC', con says 'reforms may lower quality' (opposition wants both); read as pro = supportive of LTC insurance reform/review direction, con = critical of reforms as cutting benefits/raising user burden"
+   },
+   "younggenerationburden": {
+    "sub_topic_jp": "若い世代への負担軽減",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 53,
+     "con": 6,
+     "neutral": 4,
+     "na": 53
+    },
+    "auc": 0.682,
+    "agreement": 0.873,
+    "axis_reading": "ILL-DEFINED: both statements favour relieving young/working generation; read as pro = prioritise relieving young/working-generation burden (shift from elderly-centred system), con = resist shifting burden onto elderly / reject elderly-vs-young framing"
+   }
+  },
+  "pension": {
+   "basicpensionsubsidy": {
+    "sub_topic_jp": "基礎年金の国庫負担割合の引き上げ",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 38,
+     "con": 1,
+     "neutral": 6,
+     "na": 26
+    },
+    "auc": 0.763,
+    "agreement": 0.944,
+    "axis_reading": "pro = supports raising/securing the state (tax) share of the basic pension (1/3 -> 1/2 or more), even if objecting to a particular tax source; con = doubts/opposes raising it on fiscal grounds"
+   },
+   "basicpensionbottomup": {
+    "sub_topic_jp": "基礎年金の底上げ",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 40,
+     "con": 8,
+     "neutral": 4,
+     "na": 19
+    },
+    "auc": 0.609,
+    "agreement": 0.808,
+    "axis_reading": "pro = wants basic pension level raised/protected (stop macro slide on basic pension, minimum-guarantee top-ups); con = holds current level adequate or opposes top-up schemes (e.g. tax-funded minimum pension) for fiscal reasons"
+   },
+   "employeespensionissue": {
+    "sub_topic_jp": "厚生年金の未加入者問題",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 48,
+     "con": 1,
+     "neutral": 4,
+     "na": 18
+    },
+    "auc": 0.375,
+    "agreement": 0.953,
+    "axis_reading": "pro = extend employees' pension coverage (part-timers, unenrolled firms); con = resists expansion (burden on firms etc.); support conditional mainly on SME burden = neutral"
+   },
+   "pensionsystemunification": {
+    "sub_topic_jp": "年金制度の一元化",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 30,
+     "con": 4,
+     "neutral": 1,
+     "na": 36
+    },
+    "auc": 0.775,
+    "agreement": 0.871,
+    "axis_reading": "pro = supports unifying schemes (KNK/kyosai, or all incl. national pension); con = cautious/opposed to unification"
+   },
+   "pensionreformtransparency": {
+    "sub_topic_jp": "年金改革の透明性",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": -0.79,
+    "neutral_from": -0.79,
+    "neutral_to": -0.79,
+    "midpoint_ci90": [
+     -0.843,
+     -0.701
+    ],
+    "pct_con_side": 0.37,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.63,
+    "first_pro_person_id": 3051,
+    "last_con_person_id": 4227,
+    "counts": {
+     "pro": 25,
+     "con": 23,
+     "neutral": 1,
+     "na": 47
+    },
+    "auc": 0.842,
+    "agreement": 0.806,
+    "axis_reading": "ILL-DEFINED: both statements call for transparency; read as pro = constructive call for clearer explanation/information to restore trust, con = accuses reform process of being opaque/untrustworthy (misleading figures, forced votes, hidden decisions)"
+   }
+  },
+  "familyseparate": {
+   "selectivefamilyseparate": {
+    "sub_topic_jp": "選択的夫婦別姓制度の導入",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.0344,
+    "neutral_from": -0.0843,
+    "neutral_to": 0.0155,
+    "midpoint_ci90": [
+     -0.362,
+     0.027
+    ],
+    "pct_con_side": 0.368,
+    "pct_neutral": 0.111,
+    "pct_pro_side": 0.521,
+    "first_pro_person_id": 2576,
+    "last_con_person_id": 2376,
+    "counts": {
+     "pro": 43,
+     "con": 19,
+     "neutral": 5,
+     "na": 2
+    },
+    "auc": 0.889,
+    "agreement": 0.821,
+    "axis_reading": "pro = supports introducing selective separate surnames; con = opposes/cautious"
+   },
+   "oldnameuse": {
+    "sub_topic_jp": "旧姓の使用と通称使用の拡大",
+    "status": "unclear",
+    "counts": {
+     "pro": 12,
+     "con": 19,
+     "neutral": 2,
+     "na": 19
+    },
+    "auc": 0.333,
+    "agreement": 0.636,
+    "axis_reading": "pro = favours expanding/legalising maiden-name (通称/婚前氏) use as the remedy; con = says old-name use is insufficient/opposes legalising it (both pro-別姓 'insufficient' and anti-legal-basis views)"
+   },
+   "governmentstance": {
+    "sub_topic_jp": "政府や自民党の姿勢",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 28,
+     "con": 6,
+     "neutral": 2,
+     "na": 16
+    },
+    "auc": 0.729,
+    "agreement": 0.833,
+    "axis_reading": "ill-defined (both statements criticise govt); read pro = criticises govt/LDP inaction and demands it act toward 別姓, con = defends cautious govt stance / wait for public consensus"
+   }
+  },
+  "onlinevoting": {
+   "introduction": {
+    "sub_topic_jp": "オンライン投票の導入",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.3224,
+    "neutral_from": -0.3791,
+    "neutral_to": -0.2656,
+    "midpoint_ci90": [
+     -0.624,
+     -0.311
+    ],
+    "pct_con_side": 0.294,
+    "pct_neutral": 0.147,
+    "pct_pro_side": 0.559,
+    "first_pro_person_id": 3042,
+    "last_con_person_id": 5505,
+    "counts": {
+     "pro": 21,
+     "con": 6,
+     "neutral": 5,
+     "na": 2
+    },
+    "auc": 0.944,
+    "agreement": 0.891,
+    "axis_reading": "pro = supports introducing online/internet voting; con = cautious/opposed (persons 1605 and 4540 talk about online betting for horse racing (ネット投票), not elections -> all na)"
+   },
+   "electoralsystemimpact": {
+    "sub_topic_jp": "選挙制度への影響",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": 0.0803,
+    "neutral_from": 0.0118,
+    "neutral_to": 0.1489,
+    "midpoint_ci90": [
+     0.04,
+     0.16
+    ],
+    "pct_con_side": 0.294,
+    "pct_neutral": 0.088,
+    "pct_pro_side": 0.618,
+    "first_pro_person_id": 5843,
+    "last_con_person_id": 5505,
+    "counts": {
+     "pro": 17,
+     "con": 5,
+     "neutral": 3,
+     "na": 9
+    },
+    "auc": 1.0,
+    "agreement": 0.96,
+    "axis_reading": "pro = sees online voting as positive reform (participation, overseas voters, resilience); con = sees it as threatening the foundations/fairness of the electoral system"
+   },
+   "technicalchallenges": {
+    "sub_topic_jp": "技術的課題と信頼性",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.3775,
+    "neutral_from": -0.4312,
+    "neutral_to": -0.3238,
+    "midpoint_ci90": [
+     -0.456,
+     -0.345
+    ],
+    "pct_con_side": 0.235,
+    "pct_neutral": 0.147,
+    "pct_pro_side": 0.618,
+    "first_pro_person_id": 1593,
+    "last_con_person_id": 3153,
+    "counts": {
+     "pro": 11,
+     "con": 6,
+     "neutral": 3,
+     "na": 14
+    },
+    "auc": 1.0,
+    "agreement": 0.975,
+    "axis_reading": "vague; pro = technical issues (security, ID) solvable and benefits (speed, cost) outweigh; con = security/ID risks too high for now"
+   },
+   "transparencyfairness": {
+    "sub_topic_jp": "透明性と公正性の確保",
+    "status": "unclear",
+    "counts": {
+     "pro": 3,
+     "con": 7,
+     "neutral": 1,
+     "na": 23
+    },
+    "auc": 0.857,
+    "agreement": 0.864,
+    "axis_reading": "vague; pro = fairness/transparency can be secured (or online voting improves it); con = absence of 立会人/管理者 endangers fairness, needs caution"
+   },
+   "gradualintroduction": {
+    "sub_topic_jp": "段階的導入",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 17,
+     "con": 2,
+     "neutral": 4,
+     "na": 11
+    },
+    "auc": 0.618,
+    "agreement": 0.826,
+    "axis_reading": "pro = supports staged rollout (overseas voters first, pilots, e-voting first); con = opposes overseas-first/stepwise path or using it as a stepping stone"
+   }
+  },
+  "mynumber": {
+   "popularizationconcerns": {
+    "sub_topic_jp": "マイナンバー制度の普及と懸念",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.7405,
+    "neutral_from": -0.7913,
+    "neutral_to": -0.6897,
+    "midpoint_ci90": [
+     -0.936,
+     -0.668
+    ],
+    "pct_con_side": 0.191,
+    "pct_neutral": 0.077,
+    "pct_pro_side": 0.732,
+    "first_pro_person_id": 254,
+    "last_con_person_id": 793,
+    "counts": {
+     "pro": 74,
+     "con": 28,
+     "neutral": 13,
+     "na": 0
+    },
+    "auc": 0.94,
+    "agreement": 0.843,
+    "axis_reading": "pro = supports spreading/using the My Number system and card; con = primarily concerned/opposed (privacy, forced uptake)"
+   },
+   "onlinequalificationconfirmation": {
+    "sub_topic_jp": "オンライン資格確認の導入",
+    "status": "unclear",
+    "counts": {
+     "pro": 7,
+     "con": 3,
+     "neutral": 0,
+     "na": 65
+    },
+    "auc": 0.857,
+    "agreement": 0.9,
+    "axis_reading": "pro = supports card-based online insurance qualification checks in clinics; con = opposes / stresses harm to clinics, elderly, disabled"
+   },
+   "privacysecurity": {
+    "sub_topic_jp": "個人情報保護とマイナンバーのセキュリティ",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.3371,
+    "neutral_from": -0.3775,
+    "neutral_to": -0.2967,
+    "midpoint_ci90": [
+     -0.475,
+     -0.268
+    ],
+    "pct_con_side": 0.441,
+    "pct_neutral": 0.082,
+    "pct_pro_side": 0.477,
+    "first_pro_person_id": 5701,
+    "last_con_person_id": 1126,
+    "counts": {
+     "pro": 37,
+     "con": 28,
+     "neutral": 11,
+     "na": 39
+    },
+    "auc": 0.903,
+    "agreement": 0.803,
+    "axis_reading": "pro = system is/can be made safe, concerns are misunderstanding or fixable human error; con = leaks/trust loss show serious unresolved privacy risk"
+   },
+   "mandatory": {
+    "sub_topic_jp": "マイナンバー制度の義務化",
+    "status": "calibrated",
+    "confidence": "medium",
+    "midpoint": 0.3066,
+    "neutral_from": 0.3066,
+    "neutral_to": 0.3066,
+    "midpoint_ci90": [
+     0.215,
+     0.817
+    ],
+    "pct_con_side": 0.409,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.591,
+    "first_pro_person_id": 76,
+    "last_con_person_id": 4694,
+    "counts": {
+     "pro": 12,
+     "con": 24,
+     "neutral": 0,
+     "na": 39
+    },
+    "auc": 0.799,
+    "agreement": 0.75,
+    "axis_reading": "pro = supports mandatory card acquisition or mandatory My Number linkage (e.g. bank accounts); con = insists acquisition stay voluntary / opposes de facto compulsion"
+   },
+   "healthinsuranceintegration": {
+    "sub_topic_jp": "健康保険証との一体化について",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": 0.1946,
+    "neutral_from": 0.1391,
+    "neutral_to": 0.2501,
+    "midpoint_ci90": [
+     0.063,
+     0.208
+    ],
+    "pct_con_side": 0.405,
+    "pct_neutral": 0.068,
+    "pct_pro_side": 0.527,
+    "first_pro_person_id": 3659,
+    "last_con_person_id": 4340,
+    "counts": {
+     "pro": 35,
+     "con": 28,
+     "neutral": 7,
+     "na": 45
+    },
+    "auc": 0.958,
+    "agreement": 0.871,
+    "axis_reading": "pro = supports merging insurance card into My Number card / abolishing paper card; con = opposes abolition or wants paper card kept"
+   },
+   "digitalization": {
+    "sub_topic_jp": "マイナンバー制度のデジタル化",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.1683,
+    "neutral_from": -0.2628,
+    "neutral_to": -0.0738,
+    "midpoint_ci90": [
+     -0.294,
+     -0.074
+    ],
+    "pct_con_side": 0.123,
+    "pct_neutral": 0.136,
+    "pct_pro_side": 0.741,
+    "first_pro_person_id": 457,
+    "last_con_person_id": 1746,
+    "counts": {
+     "pro": 66,
+     "con": 15,
+     "neutral": 9,
+     "na": 25
+    },
+    "auc": 0.923,
+    "agreement": 0.878,
+    "axis_reading": "pro = My Number-driven digitalisation is key to efficiency; con = card-centred/formal digitalisation insufficient, risks leaving people behind"
+   }
+  },
+  "lgbtq": {
+   "samesexmarriage": {
+    "sub_topic_jp": "同性婚を法制化すべきか",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": -0.2845,
+    "neutral_from": -0.2845,
+    "neutral_to": -0.2845,
+    "midpoint_ci90": [
+     -0.362,
+     -0.1
+    ],
+    "pct_con_side": 0.194,
+    "pct_neutral": 0.0,
+    "pct_pro_side": 0.806,
+    "first_pro_person_id": 1126,
+    "last_con_person_id": 2760,
+    "counts": {
+     "pro": 36,
+     "con": 15,
+     "neutral": 5,
+     "na": 5
+    },
+    "auc": 0.969,
+    "agreement": 0.884,
+    "axis_reading": "pro = supports legalising same-sex marriage; con = opposes or 'extremely cautious' govt line amounting to not introducing"
+   },
+   "antidiscriminationlaw": {
+    "sub_topic_jp": "LGBT差別禁止法／理解増進法の制定",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 34,
+     "con": 2,
+     "neutral": 1,
+     "na": 24
+    },
+    "auc": 0.838,
+    "agreement": 0.932,
+    "axis_reading": "pro = supports enacting an LGBT anti-discrimination or understanding-promotion law (incl. wanting a stronger one); con = opposes new law / existing law suffices"
+   },
+   "constitution24": {
+    "sub_topic_jp": "憲法24条の解釈（同性婚が想定されているか）",
+    "status": "unclear",
+    "counts": {
+     "pro": 14,
+     "con": 4,
+     "neutral": 2,
+     "na": 41
+    },
+    "auc": 0.661,
+    "agreement": 0.775,
+    "axis_reading": "pro = Art.24 does not bar same-sex marriage (13/14 support it); con = Art.24 presumes opposite-sex marriage ('想定していない')"
+   },
+   "publicunderstanding": {
+    "sub_topic_jp": "国民的理解・家族観が整うまで法整備を待つべきか",
+    "status": "calibrated",
+    "confidence": "high",
+    "midpoint": 0.2284,
+    "neutral_from": 0.1342,
+    "neutral_to": 0.3226,
+    "midpoint_ci90": [
+     0.178,
+     0.328
+    ],
+    "pct_con_side": 0.239,
+    "pct_neutral": 0.298,
+    "pct_pro_side": 0.463,
+    "first_pro_person_id": 824,
+    "last_con_person_id": 5505,
+    "counts": {
+     "pro": 7,
+     "con": 12,
+     "neutral": 3,
+     "na": 39
+    },
+    "auc": 0.964,
+    "agreement": 0.909,
+    "axis_reading": "pro = legislate now, don't wait for consensus; con = wait for national consensus/understanding, watch trends"
+   },
+   "internationalimpact": {
+    "sub_topic_jp": "国際的評価・経済への影響",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 15,
+     "con": 0,
+     "neutral": 0,
+     "na": 46
+    },
+    "auc": null,
+    "agreement": 1.0,
+    "axis_reading": "pro = cites G7/international standards or economic costs as reason to act; con = domestic matter, no need to follow foreign pressure"
+   },
+   "transgendertoilet": {
+    "sub_topic_jp": "トランスジェンダーのトイレ・更衣室利用",
+    "status": "unclear",
+    "counts": {
+     "pro": 2,
+     "con": 2,
+     "neutral": 1,
+     "na": 56
+    },
+    "auc": 1.0,
+    "agreement": null,
+    "axis_reading": "pro = gender-identity-based facility use fine / safety fears unfounded; con = body-based separation or safety concerns take priority"
+   },
+   "religiousinfluence": {
+    "sub_topic_jp": "宗教団体（旧統一教会など）と政策決定への影響",
+    "status": "unclear",
+    "counts": {
+     "pro": 8,
+     "con": 0,
+     "neutral": 0,
+     "na": 53
+    },
+    "auc": null,
+    "agreement": null,
+    "axis_reading": "pro = religious groups (ex-Unification Church) distorted policy, must be cut off; con = influence overstated"
+   },
+   "selectivesurname": {
+    "sub_topic_jp": "選択的夫婦別姓の導入",
+    "status": "one_sided_pro",
+    "counts": {
+     "pro": 19,
+     "con": 1,
+     "neutral": 0,
+     "na": 41
+    },
+    "auc": 0.947,
+    "agreement": 0.95,
+    "axis_reading": "pro = supports introducing selective separate surnames; con = opposes"
+   },
+   "participationrights": {
+    "sub_topic_jp": "法案作成における当事者参加・合理的配慮の明記",
+    "status": "unclear",
+    "counts": {
+     "pro": 1,
+     "con": 0,
+     "neutral": 0,
+     "na": 60
+    },
+    "auc": null,
+    "agreement": null,
+    "axis_reading": "pro = law should mandate LGBT stakeholder participation / reasonable accommodation; con = against detailed mandates"
+   },
+   "foreignspouse": {
+    "sub_topic_jp": "外国人同性配偶者への在留資格",
+    "status": "unclear",
+    "counts": {
+     "pro": 4,
+     "con": 3,
+     "neutral": 1,
+     "na": 53
+    },
+    "auc": 1.0,
+    "agreement": null,
+    "axis_reading": "pro = grant residence status to foreign same-sex spouses; con = not uniformly, case-by-case suffices"
+   }
+  }
+ }
+}

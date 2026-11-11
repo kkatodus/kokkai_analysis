@@ -1,0 +1,1320 @@
+{
+ "topic": "nuclear",
+ "axis_notes": {
+  "restart": "pro = supports restarting reactors that pass regulatory review (incl. conditional); con = opposes/strongly resists restarts",
+  "newbuildandextendlifetime": "pro = supports new builds/replacement or operating-life extension; con = opposes them (40-year rule, no new build)",
+  "export": "pro = supports exporting nuclear plants/technology; con = opposes export",
+  "abolishandrenewable": "pro = phase out nuclear and shift to renewables; con = keep nuclear in the mix alongside renewables (gov't 'reduce dependence but use as baseload' line coded con or neutral depending on emphasis)",
+  "fukushimasupport": "ILL-DEFINED: pro and con statements are not opposites (con = nationwide burden-sharing rather than only local govts/firms). Read as pro = pushes for fuller victim support/compensation and state responsibility; con = favours spreading costs to all consumers/limiting support; most people pro or na"
+ },
+ "labels": {
+  "5": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "11": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "56": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "58": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "74": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "145": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "152": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "186": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "225": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "333": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "422": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "457": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "486": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "505": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "579": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "589": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "599": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "708": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "pro",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "761": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "790": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "831": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "937": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "1056": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "1137": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1152": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1215": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1279": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "1313": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "1443": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1483": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "na"
+  },
+  "1645": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "1676": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "1745": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1746": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1782": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "pro",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "1819": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "1994": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "1996": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2041": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "2120": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "2171": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2353": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2356": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2416": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "2604": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "na"
+  },
+  "2663": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "neutral",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2747": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "2810": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "2826": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "2948": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "3045": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "3059": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "neutral",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3189": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "3190": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "3211": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "3282": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "3348": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3364": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3478": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3512": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "3566": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3589": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "3659": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "3786": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "3789": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "3857": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "3922": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "3969": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "3975": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4188": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "4243": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "4246": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "4258": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4267": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4270": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4279": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "4307": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "4342": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4343": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "4415": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "4452": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4491": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "neutral",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4517": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "na"
+  },
+  "4733": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4878": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "4879": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "neutral",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4890": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "4906": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "4915": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "4935": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "pro",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "na"
+  },
+  "4936": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral",
+   "fukushimasupport": "pro"
+  },
+  "5014": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "5025": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "5064": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "5117": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "neutral"
+  },
+  "5258": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "5392": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "neutral",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "na"
+  },
+  "5426": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "5505": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "5514": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "pro",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "pro"
+  },
+  "5515": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "5517": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "pro",
+   "abolishandrenewable": "con",
+   "fukushimasupport": "con"
+  },
+  "5542": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "na"
+  },
+  "5643": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "5703": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na",
+   "fukushimasupport": "pro"
+  },
+  "5710": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "5712": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "5717": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro",
+   "fukushimasupport": "pro"
+  },
+  "13": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "46": {
+   "restart": "na",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "86": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "170": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "240": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "na"
+  },
+  "350": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "420": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "479": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1025": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1048": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "1095": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1135": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1146": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1170": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "1188": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "1312": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1338": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1348": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1354": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1385": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "1499": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "1502": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1505": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1583": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1585": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1630": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "1651": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "neutral",
+   "abolishandrenewable": "con"
+  },
+  "1672": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "1679": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1684": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "1765": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1815": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "pro",
+   "abolishandrenewable": "con"
+  },
+  "1889": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1896": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "1938": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "1956": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2021": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "2055": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2136": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2264": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2321": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2324": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2337": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2362": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "2439": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2474": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "2507": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2547": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2596": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "2619": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2644": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2743": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "2899": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "2906": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "3084": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "3087": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "3095": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "pro",
+   "abolishandrenewable": "neutral"
+  },
+  "3271": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "3295": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "na"
+  },
+  "3426": {
+   "restart": "na",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "3468": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "3498": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "3518": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "3553": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "pro",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "3601": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "3636": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "3653": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "na"
+  },
+  "3910": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "3950": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "con",
+   "abolishandrenewable": "pro"
+  },
+  "3960": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4167": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "4227": {
+   "restart": "con",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4485": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4498": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4542": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "4685": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4740": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "4781": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "4983": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "pro",
+   "export": "pro",
+   "abolishandrenewable": "neutral"
+  },
+  "4996": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "5082": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "neutral",
+   "abolishandrenewable": "neutral"
+  },
+  "5183": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "5194": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "5279": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "5414": {
+   "restart": "con",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "5440": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "5502": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "5503": {
+   "restart": "na",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "na"
+  },
+  "5593": {
+   "restart": "na",
+   "newbuildandextendlifetime": "con",
+   "export": "na",
+   "abolishandrenewable": "pro"
+  },
+  "5696": {
+   "restart": "neutral",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "neutral"
+  },
+  "5701": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "na",
+   "export": "na",
+   "abolishandrenewable": "con"
+  },
+  "5702": {
+   "restart": "pro",
+   "newbuildandextendlifetime": "neutral",
+   "export": "na",
+   "abolishandrenewable": "con"
+  }
+ }
+}

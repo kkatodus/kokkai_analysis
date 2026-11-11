@@ -5,10 +5,17 @@
     y = rank index within the party-sorted list (as the live file).
 2D: UMAP over the topic's politician embeddings + the two reference vectors, fitted twice:
     everyone scaled in the window ("2d") and current members only ("2d_current").
+Midpoints: data/axis/midpoints.json (hand-labelled, see data/axis/midpoints/README.md) gives where on x stances
+    really switch from con to pro. Calibrated sub-topics get axis.midpoint / neutral_from / neutral_to; sub-topics
+    found to have no real split (one_sided_pro, unclear) are left out of the file. Sub-topics not in the file yet
+    are published without a midpoint.
 """
 from __future__ import annotations
 
+import json
 import logging
+from functools import lru_cache
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
@@ -19,6 +26,24 @@ from .members import DEFAULT_COLOR, PARTY_COLOR
 from .state import State
 
 log = logging.getLogger("topic_scaling.project")
+
+
+@lru_cache(maxsize=None)
+def load_midpoints(path: Path) -> Dict[str, Dict[str, dict]]:
+	"""{topic slug: {sub-topic slug: entry}} from midpoints.json; empty when the file is missing."""
+	if not path.exists():
+		log.warning("no midpoints file %s; every sub-topic published without a midpoint", path)
+		return {}
+	with open(path, encoding="utf-8") as f:
+		return json.load(f).get("topics") or {}
+
+
+def axis_block(sub: SubTopic, entry: Optional[dict]) -> dict:
+	axis = {"pro": sub.pro, "con": sub.con}
+	if entry and entry.get("status") == "calibrated":
+		for k in ("midpoint", "neutral_from", "neutral_to", "confidence"):
+			axis[k] = entry[k]
+	return axis
 
 
 def umap_2d(matrix: np.ndarray, n_neighbors: int, seed: int) -> np.ndarray:
@@ -71,8 +96,13 @@ def project_topic(cfg: Config, state: State, topic: Topic, subs: List[SubTopic],
 		return None
 	E = np.vstack(vectors)
 	is_current = np.array([pid in current_ids for pid, _ in rows])
+	midpoints = load_midpoints(cfg.axis_dir / "midpoints.json").get(topic.slug, {})
 	sub_blocks = []
 	for sub in subs:
+		entry = midpoints.get(sub.slug)
+		if entry and entry.get("status") != "calibrated":
+			log.info("%s: %s (no real con/pro split), left out", sub.key, entry.get("status"))
+			continue
 		refs = reference_vectors(cfg, state, sub, None)
 		if refs is None:
 			log.warning("%s: no reference vectors yet, skipped", sub.key)
@@ -92,7 +122,7 @@ def project_topic(cfg: Config, state: State, topic: Topic, subs: List[SubTopic],
 		two_d_current = _layout(cfg, E, rows, metas, is_current, pro, con, is_current, rows_extra=None) if is_current.any() else {"data": []}
 		sub_blocks.append({
 			"topic": topic.slug, "sub_topic": sub.slug, "sub_topic_jp": sub.name_jp,
-			"axis": {"pro": sub.pro, "con": sub.con},
+			"axis": axis_block(sub, entry),
 			"1d": {"data": one_d}, "2d": two_d, "2d_current": two_d_current,
 		})
 	if not sub_blocks:
