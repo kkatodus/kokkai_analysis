@@ -20,7 +20,7 @@ export interface Chapter {
   /** one sentence for screen readers */
   description: string;
   Component: ComponentType<{ pb: Playback; frame: StageFrame }>;
-  /** one-shot play length; autoplay waits this plus reading time before the next chapter */
+  /** length of one play; autoplay waits this plus reading time before the next chapter */
   durationMs: number;
 }
 
