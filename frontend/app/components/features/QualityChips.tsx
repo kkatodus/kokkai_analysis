@@ -1,66 +1,63 @@
 "use client";
 
 import type { QualityContribution, QualityFunction, QualityIssue, QualityOutcome } from "@/app/types";
+import { Badge, type BadgeTone } from "@/app/components/shared/Badge";
 import {
   CONTRIBUTION_SHORT_JA,
-  CONTRIBUTION_STYLE,
   FUNCTION_JA,
-  FUNCTION_STYLE,
-  ISSUE_CHIP,
-  ISSUE_CHIP_PART,
   ISSUE_JA,
-  OUTCOME_CHIP,
   OUTCOME_SHORT_JA,
   SIDE_JA,
   EXTENT_JA,
 } from "@/app/lib/quality";
 
-const BASE = "rounded-full border px-2 py-0.5 text-[10px] font-semibold whitespace-nowrap ";
-
-/** "種類：" style prefix, shown where the chips appear without surrounding context (the 発言 tab). */
-function Prefix({ text, show }: { text: string; show?: boolean }) {
-  return show ? <span className="mr-0.5 font-normal opacity-75">{text}：</span> : null;
-}
+// DESIGN.md "Chips and badges": the labels are read-only status, so they are badges ("label：value").
+// The quality scale uses the semantic tones: 成果あり → success, 限定的 → warning, 成果なし → error.
+const CONTRIBUTION_TONE: Record<QualityContribution, BadgeTone> = {
+  substantive: "success",
+  limited: "warning",
+  none: "error",
+};
 
 export function FunctionChip({ value, title, prefixed }: { value: QualityFunction; title?: string; prefixed?: boolean }) {
   return (
-    <span className={BASE + FUNCTION_STYLE[value].chip} title={title}>
-      <Prefix text="種類" show={prefixed} />
+    <Badge tone="neutral" label={prefixed ? "種類" : undefined} title={title}>
       {FUNCTION_JA[value] ?? value}
-    </span>
+    </Badge>
   );
 }
 
 export function ContributionChip({ value, title, prefixed }: { value: QualityContribution; title?: string; prefixed?: boolean }) {
   return (
-    <span className={BASE + CONTRIBUTION_STYLE[value].chip} title={title}>
-      <Prefix text="成果" show={prefixed} />
+    <Badge tone={CONTRIBUTION_TONE[value] ?? "neutral"} label={prefixed ? "成果" : undefined} title={title}>
       {CONTRIBUTION_SHORT_JA[value] ?? value}
-    </span>
+    </Badge>
   );
 }
 
 export function IssueChip({ issue, prefixed }: { issue: QualityIssue; prefixed?: boolean }) {
-  const cls = issue.extent === "most" ? ISSUE_CHIP : ISSUE_CHIP_PART;
+  const by = issue.by === "answerer" ? "答弁" : issue.by === "both" ? "双方" : "";
   return (
-    <span className={BASE + cls} title={`${SIDE_JA[issue.by] ?? issue.by}・やり取りの${EXTENT_JA[issue.extent] ?? issue.extent}`}>
-      <Prefix text="問題点" show={prefixed} />
+    <Badge
+      tone={issue.extent === "most" ? "error" : "warning"}
+      label={prefixed ? "問題点" : undefined}
+      title={`${SIDE_JA[issue.by] ?? issue.by}・やり取りの${EXTENT_JA[issue.extent] ?? issue.extent}`}
+    >
       {ISSUE_JA[issue.type] ?? issue.type}
-      <span className="ml-1 font-normal opacity-80">{issue.by === "answerer" ? "答弁" : issue.by === "both" ? "双方" : ""}</span>
-    </span>
+      {by ? <span className="ml-1 font-normal">（{by}）</span> : null}
+    </Badge>
   );
 }
 
 export function OutcomeChip({ value, prefixed }: { value: QualityOutcome; prefixed?: boolean }) {
   return (
-    <span className={BASE + OUTCOME_CHIP}>
-      <Prefix text="成果の内訳" show={prefixed} />
+    <Badge tone="info" label={prefixed ? "成果の内訳" : undefined}>
       {OUTCOME_SHORT_JA[value] ?? value}
-    </span>
+    </Badge>
   );
 }
 
-/** The full set of chips for one exchange label. */
+/** The full set of badges for one exchange label. */
 export function ExchangeChips({
   fn,
   contribution,
@@ -74,7 +71,7 @@ export function ExchangeChips({
   issues: QualityIssue[];
   outcomes: QualityOutcome[];
   compact?: boolean;
-  /** prefix each chip with its category (種類／成果／問題点） */
+  /** prefix each badge with its category (種類／成果／問題点） */
   prefixed?: boolean;
 }) {
   return (

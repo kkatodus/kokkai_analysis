@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import type {
   QualityAggregate,
   QualityContribution,
@@ -9,13 +9,17 @@ import type {
   QualityIssueType,
   QualityPerson,
 } from "@/app/types";
-import { EmptyState } from "@/app/components/shared/EmptyState";
-import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { Button } from "@/app/components/shared/Button";
+import { Heading, Panel } from "@/app/components/shared/Card";
+import { ExpandableText } from "@/app/components/shared/ExpandableText";
+import { Select } from "@/app/components/shared/inputs";
+import { Pager } from "@/app/components/shared/Pager";
+import { Empty, ErrorState, Loading } from "@/app/components/shared/states";
+import { formatJaDate } from "@/app/components/features/SpeechRecordCard";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
 import {
   ANSWERER_ISSUE_TYPES,
   CONTRIBUTION_JA,
-  CONTRIBUTION_STYLE,
   CONTRIBUTIONS,
   FUNCTION_JA,
   FUNCTION_STYLE,
@@ -32,15 +36,33 @@ import {
 
 const PAGE = 20;
 
+/** Semantic fills for the quality bars (DESIGN.md "Data colours": success / warning / error, info for outcomes). */
+const BAR_PART = "bg-warning";
+const BAR_MOST = "bg-error";
+const BAR_OUTCOME = "bg-info";
+const CONTRIBUTION_BAR: Record<QualityContribution, string> = {
+  substantive: "bg-success",
+  limited: "bg-warning",
+  none: "bg-error",
+};
+/** Leading edge of an exchange row, by contribution. */
+const CONTRIBUTION_EDGE: Record<QualityContribution, string> = {
+  substantive: "border-l-success",
+  limited: "border-l-warning",
+  none: "border-l-error",
+};
+
 function Section({ title, children, aside }: { title: string; children: React.ReactNode; aside?: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
-      <div className="mb-1.5 flex items-center justify-between gap-2">
-        <div className="text-[12px] font-semibold text-gray-100">{title}</div>
-        {aside && <div className="text-[10px] text-gray-400">{aside}</div>}
+    <Panel>
+      <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+        <Heading level={3} size="title-sm">
+          {title}
+        </Heading>
+        {aside && <div className="text-caption text-ink-muted">{aside}</div>}
       </div>
       {children}
-    </div>
+    </Panel>
   );
 }
 
@@ -70,22 +92,22 @@ function MetricRow({
 }) {
   const w = (x: number) => `${Math.round(Math.min(1, x / max) * 10000) / 100}%`;
   return (
-    <div className={"grid grid-cols-[7.5rem_1fr_auto] items-center gap-2 text-[11px] " + (dim ? "opacity-60" : "")}>
-      <div className="truncate text-gray-200" title={label}>
+    <div className={"grid grid-cols-[minmax(0,7.5rem)_minmax(2.5rem,1fr)_auto] items-center gap-2 text-caption " + (dim ? "text-ink-muted" : "")}>
+      <div className={"truncate " + (dim ? "text-ink-muted" : "text-ink")} title={label}>
         {label}
       </div>
-      <div className="relative h-2.5 overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+      <div className="relative h-2.5 overflow-hidden rounded-full bg-surface-raised ring-1 ring-line">
         <div className="flex h-full">
           {segments
             ? segments.map((sg, i) => <div key={i} className={`h-full ${sg.color}`} style={{ width: w(sg.share) }} title={sg.title} />)
             : <div className={`h-full ${color}`} style={{ width: w(share) }} />}
         </div>
         {baseline !== undefined && baseline !== null && (
-          <div className="absolute inset-y-0 w-px bg-white/70" style={{ left: w(baseline) }} title={`全体 ${pct(baseline, 1)}`} />
+          <div className="absolute inset-y-0 w-px bg-ink-strong" style={{ left: w(baseline) }} title={`全体：${pct(baseline, 1)}`} />
         )}
       </div>
-      <div className="w-[7.5rem] text-right tabular-nums text-gray-100">
-        {pct(share, 1)} <span className="text-gray-500">({n} 件)</span>
+      <div className="min-w-24 text-right text-data text-ink-strong">
+        {pct(share, 1)} <span className="text-ink-muted">（{n.toLocaleString()}件）</span>
       </div>
     </div>
   );
@@ -94,9 +116,9 @@ function MetricRow({
 function Group({ title, note, children }: { title: string; note?: string; children: React.ReactNode }) {
   return (
     <div className="mt-2 first:mt-0">
-      <div className="mb-1 flex items-baseline justify-between gap-2">
-        <div className="text-[11px] font-semibold text-gray-200">{title}</div>
-        {note && <div className="text-[10px] text-gray-500">{note}</div>}
+      <div className="mb-1 flex flex-wrap items-baseline justify-between gap-x-2">
+        <h4 className="text-label-md text-ink">{title}</h4>
+        {note && <div className="text-caption text-ink-muted">{note}</div>}
       </div>
       <div className="grid gap-1">{children}</div>
     </div>
@@ -129,7 +151,7 @@ export function PersonQualityPanel({
   const [contribution, setContribution] = useState<QualityContribution | "all">("all");
   const [issue, setIssue] = useState<QualityIssueType | "all">("all");
   const [page, setPage] = useState(0);
-  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
+  const listHeadingId = useId();
 
   const q = person?.as_questioner ?? null;
   const a = person?.as_answerer ?? null;
@@ -155,33 +177,23 @@ export function PersonQualityPanel({
   const resetPage = () => setPage(0);
 
   if (loading && !exchanges) {
-    return (
-      <div className="p-2">
-        <LoadingIndicator label="読み込み中" size="sm" />
-      </div>
-    );
+    return <Loading rows={4} label="やり取りの評価を読み込み中…" />;
   }
   if (error) {
-    return <div className="px-2 pb-2 text-xs text-red-300">やり取りの評価データを読み込めませんでした</div>;
+    return <ErrorState message="やり取りの評価データを読み込めませんでした。時間をおいて開き直してください。" />;
   }
   if (!person && !(exchanges && exchanges.length)) {
     return (
-      <EmptyState
-        message="この議員のやり取りはまだAI判定されていません（対象は2015年9月以降の委員会での質疑で、順次さかのぼって追加しています）。"
-        className="py-4"
-      />
+      <Empty message="この議員のやり取りはまだAI判定されていません（対象は2015年9月以降の委員会での質疑で、順次さかのぼって追加しています）。" />
     );
   }
-
-  const selectCls =
-    "h-7 max-w-full rounded-lg border border-slate-400/30 bg-slate-950/40 px-1.5 text-[11px] text-gray-100 focus:border-cyan-400/60";
 
   const answererFirst = (a?.n ?? 0) > (q?.n ?? 0);
   const q_section = (
     <>
       {q && q.n > 0 && (
-        <Section title="質問者として" aside={`${q.n} 件・${yearMonth(q.first)}〜${yearMonth(q.last)}`}>
-          <div className="mb-2 text-[10px] text-gray-500">棒はこの人の割合、白い縦線は全議員の平均。</div>
+        <Section title="質問者として" aside={`${q.n.toLocaleString()}件・${yearMonth(q.first)}〜${yearMonth(q.last)}`}>
+          <p className="mb-2 text-caption text-ink-muted">棒はこの人の割合、白い縦線は全議員の平均です。</p>
 
           <Group title="成果（やり取り全体として）">
             {CONTRIBUTIONS.map((c) => (
@@ -191,7 +203,7 @@ export function PersonQualityPanel({
                 n={q.contribution[c]}
                 share={rate(q.contribution[c], q.n)}
                 baseline={tq ? rate(tq.contribution[c], tq.n) : null}
-                color={CONTRIBUTION_STYLE[c].bar}
+                color={CONTRIBUTION_BAR[c]}
               />
             ))}
           </Group>
@@ -212,7 +224,7 @@ export function PersonQualityPanel({
           {(() => {
             const max = scaleFor([...OUTCOMES.map((o) => rate(q.outcomes[o], q.n)), ...(tq ? OUTCOMES.map((o) => rate(tq.outcomes[o], tq.n)) : [])]);
             return (
-              <Group title="成果の内訳" note={max < 1 ? `目盛 0〜${pct(max)}` : undefined}>
+              <Group title="成果の内訳" note={max < 1 ? `目盛：0〜${pct(max)}` : undefined}>
                 {OUTCOMES.map((o) => (
                   <MetricRow
                     key={o}
@@ -220,7 +232,7 @@ export function PersonQualityPanel({
                     n={q.outcomes[o]}
                     share={rate(q.outcomes[o], q.n)}
                     baseline={tq ? rate(tq.outcomes[o], tq.n) : null}
-                    color="bg-sky-500/80"
+                    color={BAR_OUTCOME}
                     max={max}
                   />
                 ))}
@@ -237,16 +249,16 @@ export function PersonQualityPanel({
               ...(tq ? types.map((t) => rate(issueTotal(tq.issues[t]), tq.n)) : []),
             ]);
             return (
-              <Group title="指摘された問題点（質問者側）" note={`${max < 1 ? `目盛 0〜${pct(max)}・` : ""}濃い色は大半を占めたもの`}>
+              <Group title="指摘された問題点（質問者側）" note={`${max < 1 ? `目盛：0〜${pct(max)}・` : ""}濃い色は大半を占めたもの`}>
                 <MetricRow
                   label="問題点が一つ以上"
                   n={q.flagged?.any ?? 0}
                   share={rate(q.flagged?.any, q.n)}
                   baseline={tq ? rate(tq.flagged?.any, tq.n) : null}
-                  color="bg-amber-500/80"
+                  color={BAR_PART}
                   segments={[
-                    { share: rate((q.flagged?.any ?? 0) - (q.flagged?.most ?? 0), q.n), color: "bg-amber-500/70", title: "一部に問題" },
-                    { share: rate(q.flagged?.most, q.n), color: "bg-rose-500/85", title: "大半が問題" },
+                    { share: rate((q.flagged?.any ?? 0) - (q.flagged?.most ?? 0), q.n), color: BAR_PART, title: "一部に問題" },
+                    { share: rate(q.flagged?.most, q.n), color: BAR_MOST, title: "大半が問題" },
                   ]}
                   max={max}
                 />
@@ -257,10 +269,10 @@ export function PersonQualityPanel({
                     n={issueTotal(q.issues[t])}
                     share={rate(issueTotal(q.issues[t]), q.n)}
                     baseline={tq ? rate(issueTotal(tq.issues[t]), tq.n) : null}
-                    color="bg-amber-500/80"
+                    color={BAR_PART}
                     segments={[
-                      { share: rate(q.issues[t].part, q.n), color: "bg-amber-500/70", title: `一部: ${q.issues[t].part} 件` },
-                      { share: rate(q.issues[t].most, q.n), color: "bg-rose-500/85", title: `大半: ${q.issues[t].most} 件` },
+                      { share: rate(q.issues[t].part, q.n), color: BAR_PART, title: `一部：${q.issues[t].part}件` },
+                      { share: rate(q.issues[t].most, q.n), color: BAR_MOST, title: `大半：${q.issues[t].most}件` },
                     ]}
                     max={max}
                     dim={issueTotal(q.issues[t]) === 0}
@@ -276,7 +288,7 @@ export function PersonQualityPanel({
   const a_section = (
     <>
       {a && a.n > 0 && (
-        <Section title="答弁者として" aside={`${a.n} 件・${yearMonth(a.first)}〜${yearMonth(a.last)}`}>
+        <Section title="答弁者として" aside={`${a.n.toLocaleString()}件・${yearMonth(a.first)}〜${yearMonth(a.last)}`}>
           {(() => {
             const types = ANSWERER_ISSUE_TYPES;
             const max = scaleFor([
@@ -290,19 +302,19 @@ export function PersonQualityPanel({
             ]);
             return (
               <>
-                <div className="mb-2 text-[10px] text-gray-500">
-                  棒はこの人の割合、白い縦線は全答弁者の平均。{max < 1 ? `目盛 0〜${pct(max)}。` : ""}
-                </div>
+                <p className="mb-2 text-caption text-ink-muted">
+                  棒はこの人の割合、白い縦線は全答弁者の平均です。{max < 1 ? `目盛：0〜${pct(max)}。` : ""}
+                </p>
                 <Group title="指摘された問題点（答弁者側）" note="濃い色は大半を占めたもの">
                 <MetricRow
                   label="問題点が一つ以上"
                   n={a.flagged?.any ?? 0}
                   share={rate(a.flagged?.any, a.n)}
                   baseline={ta ? rate(ta.flagged?.any, ta.n) : null}
-                  color="bg-amber-500/80"
+                  color={BAR_PART}
                   segments={[
-                    { share: rate((a.flagged?.any ?? 0) - (a.flagged?.most ?? 0), a.n), color: "bg-amber-500/70", title: "一部に問題" },
-                    { share: rate(a.flagged?.most, a.n), color: "bg-rose-500/85", title: "大半が問題" },
+                    { share: rate((a.flagged?.any ?? 0) - (a.flagged?.most ?? 0), a.n), color: BAR_PART, title: "一部に問題" },
+                    { share: rate(a.flagged?.most, a.n), color: BAR_MOST, title: "大半が問題" },
                   ]}
                   max={max}
                 />
@@ -313,10 +325,10 @@ export function PersonQualityPanel({
                     n={issueTotal(a.issues[t])}
                     share={rate(issueTotal(a.issues[t]), a.n)}
                     baseline={ta ? rate(issueTotal(ta.issues[t]), ta.n) : null}
-                    color="bg-amber-500/80"
+                    color={BAR_PART}
                     segments={[
-                      { share: rate(a.issues[t].part, a.n), color: "bg-amber-500/70", title: `一部: ${a.issues[t].part} 件` },
-                      { share: rate(a.issues[t].most, a.n), color: "bg-rose-500/85", title: `大半: ${a.issues[t].most} 件` },
+                      { share: rate(a.issues[t].part, a.n), color: BAR_PART, title: `一部：${a.issues[t].part}件` },
+                      { share: rate(a.issues[t].most, a.n), color: BAR_MOST, title: `大半：${a.issues[t].most}件` },
                     ]}
                     max={max}
                     dim={issueTotal(a.issues[t]) === 0}
@@ -324,8 +336,8 @@ export function PersonQualityPanel({
                 ))}
                 </Group>
                 <Group title="答弁がもたらしたもの">
-                  <MetricRow label="新事実が出た" n={a.outcomes.new_information} share={rate(a.outcomes.new_information, a.n)} baseline={ta ? rate(ta.outcomes.new_information, ta.n) : null} color="bg-sky-500/80" max={max} />
-                  <MetricRow label="具体的な約束" n={a.outcomes.commitment} share={rate(a.outcomes.commitment, a.n)} baseline={ta ? rate(ta.outcomes.commitment, ta.n) : null} color="bg-sky-500/80" max={max} />
+                  <MetricRow label="新事実が出た" n={a.outcomes.new_information} share={rate(a.outcomes.new_information, a.n)} baseline={ta ? rate(ta.outcomes.new_information, ta.n) : null} color={BAR_OUTCOME} max={max} />
+                  <MetricRow label="具体的な約束" n={a.outcomes.commitment} share={rate(a.outcomes.commitment, a.n)} baseline={ta ? rate(ta.outcomes.commitment, ta.n) : null} color={BAR_OUTCOME} max={max} />
                 </Group>
               </>
             );
@@ -336,112 +348,82 @@ export function PersonQualityPanel({
   );
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-0.5">
+    <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1 pb-3">
       {answererFirst ? a_section : q_section}
       {answererFirst ? q_section : a_section}
 
-      <Section title="やり取り一覧" aside={exchanges ? `${filtered.length} / ${exchanges.length} 件` : undefined}>
-        <div className="mb-2 flex flex-wrap gap-1.5">
-          <select className={selectCls} value={role} onChange={(e) => { setRole(e.target.value as typeof role); resetPage(); }}>
+      <section aria-labelledby={listHeadingId} className="pt-1">
+        <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-2">
+          <Heading level={3} size="title-sm" id={listHeadingId}>
+            やり取り一覧
+          </Heading>
+          {exchanges && (
+            <div className="text-data text-ink-muted">
+              {filtered.length.toLocaleString()} / {exchanges.length.toLocaleString()}件
+            </div>
+          )}
+        </div>
+        <div className="mb-3 flex flex-wrap gap-2">
+          <Select size="sm" aria-label="質問と答弁で絞り込む" className="max-w-full" value={role} onChange={(e) => { setRole(e.target.value as typeof role); resetPage(); }}>
             <option value="all">質問・答弁すべて</option>
             <option value="questioner">質問者として</option>
             <option value="answerer">答弁者として</option>
-          </select>
-          <select className={selectCls} value={fn} onChange={(e) => { setFn(e.target.value as typeof fn); resetPage(); }}>
+          </Select>
+          <Select size="sm" aria-label="種類で絞り込む" className="max-w-full" value={fn} onChange={(e) => { setFn(e.target.value as typeof fn); resetPage(); }}>
             <option value="all">種類すべて</option>
             {FUNCTIONS.map((f) => (
               <option key={f} value={f}>{FUNCTION_JA[f]}</option>
             ))}
-          </select>
-          <select className={selectCls} value={contribution} onChange={(e) => { setContribution(e.target.value as typeof contribution); resetPage(); }}>
+          </Select>
+          <Select size="sm" aria-label="成果で絞り込む" className="max-w-full" value={contribution} onChange={(e) => { setContribution(e.target.value as typeof contribution); resetPage(); }}>
             <option value="all">成果すべて</option>
             {CONTRIBUTIONS.map((c) => (
               <option key={c} value={c}>{CONTRIBUTION_JA[c]}</option>
             ))}
-          </select>
-          <select className={selectCls} value={issue} onChange={(e) => { setIssue(e.target.value as typeof issue); resetPage(); }}>
+          </Select>
+          <Select size="sm" aria-label="問題点で絞り込む" className="max-w-full" value={issue} onChange={(e) => { setIssue(e.target.value as typeof issue); resetPage(); }}>
             <option value="all">問題点で絞り込む</option>
             {[...QUESTIONER_ISSUE_TYPES, "evasive" as const].map((t) => (
               <option key={t} value={t}>{ISSUE_JA[t]}</option>
             ))}
-          </select>
+          </Select>
         </div>
 
-        {loading && <LoadingIndicator variant="dots" size="sm" />}
-        {!loading && filtered.length === 0 && <div className="text-[11px] text-gray-400">該当するやり取りがありません。</div>}
+        {loading && <Loading label="やり取りを読み込み中…" />}
+        {!loading && filtered.length === 0 && <Empty message="この条件に該当するやり取りはありません。絞り込みを変えてください。" />}
 
-        <div className="grid gap-1.5">
-          {pageRows.map((ex) => {
-            const key = ex.start_speech_id;
-            const isExpanded = expanded.has(key);
-            return (
-              <div key={key} className={"rounded-lg border border-l-4 p-2 " + CONTRIBUTION_STYLE[ex.contribution].item}>
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0 text-[11px] text-gray-300">
-                    <span className="text-gray-100">{ex.date}</span>
-                    {ex.meeting ? ` ・ ${ex.house ?? ""}${ex.meeting}` : ""}
-                    {ex.role !== "questioner" && (
-                      <span className="ml-1 text-gray-400">
-                        {ex.role === "answerer" ? `（${ex.questioner} の質問に答弁）` : "（質問と答弁）"}
-                      </span>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => onSelectIssueId(ex.issue_id, ex.start_speech_id)}
-                    className="shrink-0 cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50"
-                    title="このやり取りの位置で会議を開く"
-                  >
-                    会議を閲覧する
-                  </button>
+        <ul className="grid gap-2">
+          {pageRows.map((ex) => (
+            <li
+              key={ex.start_speech_id}
+              className={"rounded-lg border border-l-2 border-line bg-surface-raised p-3 " + CONTRIBUTION_EDGE[ex.contribution]}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0 text-caption text-ink-muted">
+                  <span className="text-ink">{formatJaDate(ex.date)}</span>
+                  {ex.meeting ? `・${ex.house ?? ""}${ex.meeting}` : ""}
+                  {ex.role !== "questioner" && (
+                    <span className="ml-1">
+                      {ex.role === "answerer" ? `（${ex.questioner}の質問に答弁）` : "（質問と答弁）"}
+                    </span>
+                  )}
                 </div>
-                <div className="mt-1">
-                  <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} prefixed />
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setExpanded((prev) => {
-                      const next = new Set(prev);
-                      if (next.has(key)) next.delete(key);
-                      else next.add(key);
-                      return next;
-                    })
-                  }
-                  className={"mt-1 w-full text-left text-[11px] leading-relaxed text-gray-200 " + (isExpanded ? "" : "line-clamp-2")}
-                  title={isExpanded ? "折りたたむ" : "全文を表示"}
-                >
-                  {ex.reason}
-                </button>
+                <Button size="sm" onClick={() => onSelectIssueId(ex.issue_id, ex.start_speech_id)} title="このやり取りの位置で会議を開く">
+                  会議を閲覧する
+                </Button>
               </div>
-            );
-          })}
-        </div>
+              <div className="mt-2">
+                <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} prefixed />
+              </div>
+              <ExpandableText lines={2} className="mt-2 text-body-md text-ink">
+                {ex.reason}
+              </ExpandableText>
+            </li>
+          ))}
+        </ul>
 
-        {pageCount > 1 && (
-          <div className="mt-2 flex items-center justify-between text-[11px] text-gray-400">
-            <button
-              type="button"
-              disabled={pageSafe <= 0}
-              onClick={() => setPage((p) => Math.max(0, p - 1))}
-              className="rounded border border-slate-400/20 bg-slate-950/20 px-2 py-0.5 text-gray-200 disabled:opacity-50"
-            >
-              前へ
-            </button>
-            <div>
-              {pageSafe + 1} / {pageCount}
-            </div>
-            <button
-              type="button"
-              disabled={pageSafe >= pageCount - 1}
-              onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
-              className="rounded border border-slate-400/20 bg-slate-950/20 px-2 py-0.5 text-gray-200 disabled:opacity-50"
-            >
-              次へ
-            </button>
-          </div>
-        )}
-      </Section>
+        <Pager className="mt-3" page={pageSafe + 1} pageCount={pageCount} onChange={(p) => setPage(p - 1)} />
+      </section>
     </div>
   );
 }
