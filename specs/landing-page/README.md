@@ -309,7 +309,7 @@ Rules:
 
 ## 10. SEO and metadata
 
-- `app/page.tsx` exports `metadata`: title 「KOKKAI DOC ｜ その議員、国会で何してる？」, the existing description, OpenGraph image `public/og-landing.png` (1200×630, dark navy, logo + H1, generated once by hand), `alternates.canonical = https://kokkaidoc.com/`.
+- `app/page.tsx` exports `metadata`: title 「KOKKAI DOC ｜ その議員、国会で何してる？」, the existing description, OpenGraph image `public/og-image.png` (1200×630 screenshot of the live landing page; also the site-wide default in `app/layout.tsx`), `alternates.canonical = https://kokkaidoc.com/`.
 - `/app` keeps title 「KOKKAI DOC」 and gets `robots: { index: true }`; nothing is noindexed.
 - Add `app/sitemap.ts` listing `/`, `/app`, `/about`, `/privacy`, `/terms`. (None exists today.)
 - Lighthouse SEO/accessibility ≥ 95 before merge.
@@ -327,7 +327,7 @@ Rules:
 - [x] `sampleData.ts`.
 - [x] Stages 5.1–5.6.
 - [x] Hero, Method, Support, LandingHeader, footer.
-- [x] `sitemap.ts`, metadata, OG image (`public/og-landing.png`, rendered from an HTML template in headless Chrome).
+- [x] `sitemap.ts`, metadata, OG image (`public/og-image.png`, headless-Chrome screenshot of the live landing page, 2026-11-11).
 - [x] Reduced-motion pass (stages render their final frame, replay button and cursor hidden), keyboard pass (only header links, CTAs and replay buttons are focusable), bundle check (landing HTML references ≈ 260 KB gz of JS including the Next/React runtime; no deck.gl, maplibre or d3 chunk).
 - [x] Analytics events (§9).
 - [x] `docs/agents/FRONTEND.md` routes updated.
