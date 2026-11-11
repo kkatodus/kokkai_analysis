@@ -1,5 +1,6 @@
-import { EmptyState } from "@/app/components/shared/EmptyState";
-import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { Badge } from "@/app/components/shared/Badge";
+import { Heading } from "@/app/components/shared/Card";
+import { Empty, ErrorState, Loading } from "@/app/components/shared/states";
 import type { ElectionHistoryData } from "@/app/types";
 
 interface ElectionHistoryCardProps {
@@ -8,53 +9,62 @@ interface ElectionHistoryCardProps {
   sorted: ElectionHistoryData[] | null;
 }
 
+const digits = (s: string) => {
+  const m = String(s ?? "").match(/\d+/);
+  return m ? Number(m[0]) : null;
+};
+
+/** "2026年2月8日" from the source's year / month / day fields ("2026年", "2月", "8日"). */
+export function electionDate(h: ElectionHistoryData): string {
+  const y = digits(h.year);
+  const m = digits(h.month);
+  const d = digits(h.day);
+  if (y === null) return [h.year, h.month, h.day].filter(Boolean).join("");
+  return `${y}年${m !== null ? `${m}月` : ""}${m !== null && d !== null ? `${d}日` : ""}`;
+}
+
+/** 衆議院 / 参議院 from an election name such as 「第51回衆議院議員総選挙」. */
+export function electionHouse(h: ElectionHistoryData): string | null {
+  const m = String(h.election_name ?? "").match(/衆議院|参議院/);
+  return m ? m[0] : null;
+}
+
 export function ElectionHistoryCard({ history, historyError, sorted }: ElectionHistoryCardProps) {
   return (
-    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40 p-2">
-      <div className="mb-1 flex items-center justify-between">
-        <div className="text-[13px] font-semibold text-gray-50">選挙履歴</div>
-      </div>
+    <section aria-labelledby="election-history-heading" className="flex min-h-0 flex-1 flex-col">
+      <Heading level={3} size="title-sm" id="election-history-heading" className="mb-2">
+        選挙履歴
+      </Heading>
 
       <div className="min-h-0 flex-1 overflow-y-auto pr-1">
-        {historyError && (
-          <div className="text-xs text-red-300">Failed to load election history: {historyError}</div>
-        )}
-        {!historyError && history === null && (
-          <div className="py-2">
-            <LoadingIndicator label="読み込み中" size="sm" />
-          </div>
-        )}
-        {!historyError && history !== null && history.length === 0 && (
-          <EmptyState message="選挙履歴が見つかりません。" className="py-2" />
-        )}
+        {historyError && <ErrorState message="選挙履歴を読み込めませんでした。時間をおいて開き直してください。" />}
+        {!historyError && history === null && <Loading rows={4} label="選挙履歴を読み込み中…" />}
+        {!historyError && history !== null && history.length === 0 && <Empty message="この議員の選挙履歴は見つかりませんでした。" />}
         {!historyError && sorted && sorted.length > 0 && (
-          <div className="grid gap-2">
+          <ul className="grid gap-2">
             {sorted.map((h, idx) => (
-              <div
+              <li
                 key={`${h.year}-${h.month}-${h.day}-${h.election_name}-${idx}`}
-                className="rounded-lg border border-slate-400/15 bg-[#020617] p-2"
+                className="rounded-lg border border-line bg-surface-raised p-3"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="truncate text-sm font-semibold text-gray-50">{h.election_name}</div>
-                    <div className="mt-0.5 text-[11px] text-gray-400">
-                      {h.year}/{h.month}/{h.day} ・ {h.election_freq}
+                    <div className="text-title-sm text-ink-strong">{h.election_name}</div>
+                    <div className="mt-0.5 text-caption text-ink-muted">
+                      {electionDate(h)}
+                      {h.election_freq ? ` ${h.election_freq}` : ""}
                     </div>
                   </div>
-                  <div className="shrink-0 rounded-full border border-slate-400/30 px-2 py-0.5 text-[11px] text-gray-200">
-                    {h.result}
-                  </div>
+                  {h.result ? <Badge className="shrink-0">{h.result}</Badge> : null}
                 </div>
-                <div className="mt-1 text-[11px] text-gray-300">
-                  {h.party} ・ {h.district}
+                <div className="mt-1 text-body-sm text-ink">
+                  {[h.party, h.district].filter(Boolean).join("・")}
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
-    </div>
+    </section>
   );
 }
-
-

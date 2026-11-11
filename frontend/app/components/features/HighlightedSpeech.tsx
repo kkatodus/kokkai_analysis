@@ -21,12 +21,12 @@ interface HighlightedSpeechProps {
   className?: string;
 }
 
-/** 「防衛: 自衛隊 / 原発: 原発」 — every keyword in the span, grouped by topic */
+/** 「防衛：自衛隊 / 原発：原発」 — every keyword in the span, grouped by topic */
 function spanLabel(span: KeywordSpan, nameJa: Map<string, string>): string {
   return spanTopics(span)
     .map((t) => {
       const words = span.keywords.filter((k) => k.topic === t).map((k) => k.word);
-      return `${nameJa.get(t) ?? t}: ${words.join("、")}`;
+      return `${nameJa.get(t) ?? t}：${words.join("、")}`;
     })
     .join(" / ");
 }
@@ -73,7 +73,7 @@ export function HighlightedSpeech({ text, topics, mode, collapsed, className = "
           if (e.pointerType === "mouse") return;
           setTapped((cur) => (cur === label ? null : label));
         }}
-        className={"rounded px-0.5 " + markClass(span, mode)}
+        className={"rounded-sm px-0.5 " + markClass(span, mode)}
       >
         {shownText.slice(span.start, span.end)}
       </mark>
@@ -89,9 +89,9 @@ export function HighlightedSpeech({ text, topics, mode, collapsed, className = "
         {parts}
         {excerpt?.truncatedEnd ? "…" : ""}
       </div>
-      {excerpt ? <div className="mt-1 text-[10px] text-gray-400">一致 {spans.length.toLocaleString()}件</div> : null}
+      {excerpt ? <div className="mt-1 text-caption text-ink-muted">一致：{spans.length.toLocaleString()}件</div> : null}
       {tapped ? (
-        <div className="mt-1 inline-block max-w-full rounded border border-slate-400/30 bg-slate-800 px-1.5 py-0.5 text-[10px] text-gray-100">
+        <div role="status" className="mt-1 inline-block max-w-full rounded-lg border border-line bg-surface-control px-2 py-1 text-caption text-ink">
           {tapped}
         </div>
       ) : null}
