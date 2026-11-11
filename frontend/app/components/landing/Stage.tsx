@@ -2,19 +2,16 @@
 
 /**
  * Card frame around every replica (specs/landing-page §5): dashboard-card chrome, 「サンプル」 pill,
- * fixed aspect ratio (no layout shift), aria-hidden content with a visually-hidden description,
- * and the 「もう一度見る」 replay button once the one-shot play has finished.
+ * fixed aspect ratio (no layout shift) and aria-hidden content with a visually-hidden description.
+ * The replica loops on its own while visible (see useStagePlayback).
  */
 
 import type { ReactNode } from "react";
-import { FaRotateLeft } from "react-icons/fa6";
 import type { Playback, StageFrame } from "./useStagePlayback";
-import { track } from "./track";
 
 export function Stage({
   frame,
   pb,
-  section,
   description,
   sample = false,
   children,
@@ -23,7 +20,6 @@ export function Stage({
 }: {
   frame: StageFrame;
   pb: Playback;
-  section: string;
   /** one sentence for screen readers; the copy next to the stage explains the rest */
   description: string;
   sample?: boolean;
@@ -53,21 +49,6 @@ export function Stage({
         )}
       </div>
       <p className="sr-only">{description}</p>
-      <div className="mt-2 flex h-7 shrink-0 items-center justify-end">
-        {!pb.reduced && pb.idle && (
-          <button
-            type="button"
-            onClick={() => {
-              track("LandingReplay", { section });
-              pb.replay();
-            }}
-            className="flex items-center gap-1.5 rounded-full border border-slate-400/25 bg-slate-900/40 px-3 py-1 text-xs text-gray-300 transition hover:border-cyan-400/45 hover:text-cyan-50"
-          >
-            <FaRotateLeft className="h-3 w-3" />
-            もう一度見る
-          </button>
-        )}
-      </div>
     </div>
   );
 }
