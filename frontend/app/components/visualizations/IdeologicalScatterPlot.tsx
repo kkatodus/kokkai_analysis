@@ -446,7 +446,7 @@ export function IdeologicalScatterPlot({
             setSelectedTopicIdx(Number(e.target.value));
             setSelectedSubTopicIdx(0);
           }}
-          className="min-w-[120px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200 outline-none"
+          className="min-w-[120px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200"
           disabled={!filteredTopics.length}
         >
           {filteredTopics.map((t, idx) => {
@@ -463,7 +463,7 @@ export function IdeologicalScatterPlot({
         <select
           value={selectedSubTopicIdx}
           onChange={(e) => setSelectedSubTopicIdx(Number(e.target.value))}
-          className="min-w-[140px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200 outline-none"
+          className="min-w-[140px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200"
           disabled={!filteredSubTopics.length}
         >
           {filteredSubTopics.map((s, idx) => {

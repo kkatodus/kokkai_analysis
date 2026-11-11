@@ -36,7 +36,7 @@ export function DisclaimerToggleButton({
       onClick={onClick}
       aria-pressed={pressed}
       className={
-        "rounded-full border px-3 py-1 text-[11px] font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400/40 " +
+        "rounded-full border px-3 py-1 text-[11px] font-semibold transition-all " +
         (pressed
           ? "border-cyan-400/50 bg-cyan-500/15 text-cyan-100 hover:bg-cyan-500/20"
           : "border-slate-400/30 bg-slate-950/20 text-gray-200 hover:bg-white/5")

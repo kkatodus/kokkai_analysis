@@ -9,6 +9,12 @@ Next.js App Router application. Deployed as static export or SSR depending on bu
 - `frontend/app/lib/` — services, hooks, server helpers, config
 - `frontend/app/api/` — Next.js route handlers that proxy or wrap backend calls
 
+## Design system
+
+- [`frontend/DESIGN.md`](../../frontend/DESIGN.md) — target colours, type scale, radii, spacing, component recipes and content rules (DESIGN.md format: YAML tokens + prose). Read it before adding or restyling UI.
+- Tokens are Tailwind utilities from `@theme` in `app/globals.css` (`bg-surface-raised`, `text-body-md`, `z-(--z-modal)`); use them in new code. Older UI is migrated area by area: [`specs/design-system/`](../../specs/design-system/README.md).
+- `npm run lint` runs `scripts/check-design-tokens.mjs` first: it fails if off-system class counts rise above `design-baseline.json`. After a migration lowers them, run it with `--update`.
+
 ## Main experience
 
 - **Landing page (`/`):** `app/page.tsx` + `components/landing/` — static intro with animated replicas of the dashboard cards (Framer Motion via the `motion` package, fictional sample data in `components/landing/sampleData.ts`); spec in `specs/landing-page/`

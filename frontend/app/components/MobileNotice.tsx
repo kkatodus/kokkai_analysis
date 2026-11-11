@@ -44,7 +44,7 @@ export function MobileNotice() {
   return (
     <div
       role="status"
-      className="fixed inset-x-3 bottom-3 z-[90] flex items-start gap-3 rounded-2xl border border-cyan-400/30 bg-[#0b1220]/95 p-4 text-sm text-gray-200 shadow-xl shadow-black/40 backdrop-blur"
+      className="fixed inset-x-3 bottom-3 z-(--z-notice) flex items-start gap-3 rounded-2xl border border-cyan-400/30 bg-[#0b1220]/95 p-4 text-sm text-gray-200 shadow-xl shadow-black/40 backdrop-blur"
     >
       <span aria-hidden="true" className="mt-0.5 text-lg leading-none">🖥️</span>
       <p className="flex-1 leading-relaxed">

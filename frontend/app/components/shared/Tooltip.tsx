@@ -28,7 +28,7 @@ export function Tooltip({ data, x, y }: TooltipProps) {
 
   return (
     <div
-      className="pointer-events-none fixed z-50 max-w-[220px] rounded-lg border border-slate-400/35 bg-[#020617] p-1.5 text-xs text-gray-50 shadow-2xl"
+      className="pointer-events-none fixed z-(--z-tooltip) max-w-[220px] rounded-lg border border-slate-400/35 bg-[#020617] p-1.5 text-xs text-gray-50 shadow-2xl"
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,

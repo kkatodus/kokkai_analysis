@@ -174,7 +174,7 @@ export function PersonQualityPanel({
   }
 
   const selectCls =
-    "h-7 max-w-full rounded-lg border border-slate-400/30 bg-slate-950/40 px-1.5 text-[11px] text-gray-100 outline-none focus:border-cyan-400/60";
+    "h-7 max-w-full rounded-lg border border-slate-400/30 bg-slate-950/40 px-1.5 text-[11px] text-gray-100 focus:border-cyan-400/60";
 
   const answererFirst = (a?.n ?? 0) > (q?.n ?? 0);
   const q_section = (

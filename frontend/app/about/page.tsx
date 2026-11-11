@@ -249,7 +249,7 @@ export default function AboutPage() {
               {mediaCoverages.map((m) => (
                 <div
                   key={m.href}
-                  className="flex flex-col rounded-xl border border-slate-400/15 bg-[#020617] p-3 transition hover:border-slate-400/30 hover:bg-slate-900/40"
+                  className="flex min-w-0 flex-col rounded-xl border border-slate-400/15 bg-[#020617] p-3 transition hover:border-slate-400/30 hover:bg-slate-900/40"
                 >
                   <div className="flex items-start gap-3">
                     <div className="mt-0.5 shrink-0 rounded-lg border border-red-500/20 bg-red-500/10 p-2 text-red-200">

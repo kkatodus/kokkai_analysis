@@ -127,7 +127,7 @@ export function IssueSpeechList({
                       target="_blank"
                       rel="noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_18px_rgba(34,211,238,0.18)] focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
+                      className="cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_18px_rgba(34,211,238,0.18)]"
                       title="国会会議録の原文ページを開く"
                     >
                       原文を開く

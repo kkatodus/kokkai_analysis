@@ -160,7 +160,7 @@ export function Tutorial({
   const paragraphs = step.body.split("\n").filter((l) => l.trim().length > 0);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[60]" aria-live="polite">
+    <div className="pointer-events-none fixed inset-0 z-(--z-tour)" aria-live="polite">
       {/* dim everything except the hole; the four blocks swallow clicks, the hole lets them through */}
       {hole ? (
         <>
