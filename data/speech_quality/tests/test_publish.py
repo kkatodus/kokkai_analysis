@@ -80,6 +80,9 @@ class SiteStatsTest(unittest.TestCase):
 		doc = publish.site_stats(agg, current, {1: "甲", 9: "大臣", 7: "丙"}, {1: 40, 7: 90, 2: 500},
 			{"speeches": 630, "meetings": 12, "from": "2000-01-20"}, 4815)
 		self.assertEqual(doc["current_members"], {"lower": 2, "upper": 1})
+		self.assertNotIn("data_bytes", doc)
+		self.assertEqual(publish.site_stats(agg, current, {}, {}, {"speeches": 0, "meetings": 0, "from": None}, 0,
+			data_bytes=123)["data_bytes"], 123)
 		self.assertEqual(doc["labels"]["exchanges"], 4)
 		self.assertEqual(doc["labels"]["persons"], 3)
 		self.assertEqual(doc["function_share"]["oversight"], 0.25)
