@@ -98,6 +98,14 @@ class SiteStatsTest(unittest.TestCase):
 		# terms only for the lower house
 		self.assertEqual([(p["person_id"], p["n"]) for p in doc["top_terms_lower_current"]], [(9, 8), (1, 3)])
 
+	def test_mirror_bytes_sums_files(self):
+		with tempfile.TemporaryDirectory() as d:
+			(Path(d) / "a").mkdir()
+			(Path(d) / "a" / "x.json").write_bytes(b"12345")
+			(Path(d) / "y.json").write_bytes(b"678")
+			self.assertEqual(publish.mirror_bytes(Path(d)), 8)
+			self.assertIsNone(publish.mirror_bytes(Path(d) / "a" / "missing"))
+
 	def test_current_members_reads_newest_snapshot(self):
 		with tempfile.TemporaryDirectory() as d:
 			m = Path(d) / "parliamentMembers"
