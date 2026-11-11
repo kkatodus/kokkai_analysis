@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { THIN_EVIDENCE_OPINIONS } from "@/app/lib/stances";
 import * as d3 from "d3";
 import type { IdeologyData, PersonIdeologyData } from "@/app/types";
@@ -8,7 +8,9 @@ import type { IdeologyData, PersonIdeologyData } from "@/app/types";
 const SCOPE_STORAGE_KEY = "kokkai.ideology.scope";
 type Scope = "all" | "current";
 import { ZoomControls } from "@/app/components/shared/ZoomControls";
-import { EmptyState } from "@/app/components/shared/EmptyState";
+import { Empty } from "@/app/components/shared/states";
+import { Field, Select } from "@/app/components/shared/inputs";
+import { SegmentedControl } from "@/app/components/shared/Tabs";
 import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
 import availableConfig from "@/app/data/available.json";
 
@@ -28,6 +30,13 @@ type AvailableTopic = {
 };
 type AvailableConfig = { availability: AvailableTopic[] };
 
+/** 2025-08-05 → 2025年8月5日 (DESIGN.md "Content"). */
+function jaDate(d: string): string {
+  const [y, m, day] = d.slice(0, 10).split("-");
+  if (!y || !m) return d;
+  return day ? `${y}年${Number(m)}月${Number(day)}日` : `${y}年${Number(m)}月`;
+}
+
 interface IdeologicalScatterPlotProps {
   ideologyData: IdeologyData | null;
   selectedPersonId: string | null;
@@ -46,6 +55,7 @@ export function IdeologicalScatterPlot({
 }: IdeologicalScatterPlotProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const fieldId = useId();
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   // Keep callback refs so D3 handlers don't force a full redraw when parent re-renders.
   const onPoliticianSelectRef = useRef(onPoliticianSelect);
@@ -226,12 +236,11 @@ export function IdeologicalScatterPlot({
   const windowLabel = useMemo(() => {
     const w = selectedTopic?.window;
     if (!w || !w.from) return "";
-    const fmt = (d: string) => d.replace(/-/g, "/");
-    const span = `${fmt(w.from)} 〜 ${w.to ? fmt(w.to) : "現在"}`;
+    const span = `${jaDate(w.from)}〜${w.to ? jaDate(w.to) : "現在"}`;
     const n = selectedTopic?.n_scaled;
     const c = selectedTopic?.n_current;
-    const counts = n != null ? `・${n}人${c != null ? `（現職 ${c}人）` : ""}` : "";
-    return `対象期間 ${span}${counts}`;
+    const counts = n != null ? `・${n.toLocaleString()}人${c != null ? `（現職${c.toLocaleString()}人）` : ""}` : "";
+    return `対象期間：${span}${counts}`;
   }, [selectedTopic]);
 
   const titleLabel = useMemo(() => {
@@ -280,21 +289,21 @@ export function IdeologicalScatterPlot({
     // - 1D: show only left/right labels (no y-axis labels/lines)
     // - 2D: show no axes at all (clean scatter)
     if (mode === "1d") {
-      const xLowLabel = selectedAxis.showSpectrum ? "反対" : "x (low)";
-      const xHighLabel = selectedAxis.showSpectrum ? "賛成" : "x (high)";
+      const xLowLabel = selectedAxis.showSpectrum ? "反対" : "x 小";
+      const xHighLabel = selectedAxis.showSpectrum ? "賛成" : "x 大";
 
       const labelY = innerHeight - 4;
       g.append("text")
         .attr("x", 0)
         .attr("y", labelY)
-        .attr("class", "fill-gray-400 text-[10px]")
+        .attr("class", "fill-ink-muted text-caption")
         .text(xLowLabel);
 
       g.append("text")
         .attr("x", innerWidth - 2)
         .attr("y", labelY)
         .attr("text-anchor", "end")
-        .attr("class", "fill-gray-400 text-[10px]")
+        .attr("class", "fill-ink-muted text-caption")
         .text(xHighLabel);
 
       // Where stances really switch from con to pro (hand-calibrated; raw x = 0 is not the political middle)
@@ -323,9 +332,9 @@ export function IdeologicalScatterPlot({
           .attr("stroke-width", 1);
         g.append("text")
           .attr("x", xm)
-          .attr("y", 10)
+          .attr("y", 12)
           .attr("text-anchor", "middle")
-          .attr("class", "fill-gray-300 text-[10px]")
+          .attr("class", "fill-ink text-caption")
           .text("賛否の分かれ目");
       }
     }
@@ -353,7 +362,7 @@ export function IdeologicalScatterPlot({
         const extra = [
           d.current === false ? "元議員" : "",
           d.n_opinions != null ? `意見 ${d.n_opinions}` : "",
-          d.last_speech ? `最終発言 ${d.last_speech.replace(/-/g, "/")}` : "",
+          d.last_speech ? `最終発言 ${jaDate(d.last_speech)}` : "",
         ]
           .filter(Boolean)
           .join(" • ");
@@ -439,127 +448,109 @@ export function IdeologicalScatterPlot({
   return (
     <div className="relative">
       {/* Controls */}
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <select
-          value={selectedTopicIdx}
-          onChange={(e) => {
-            setSelectedTopicIdx(Number(e.target.value));
-            setSelectedSubTopicIdx(0);
-          }}
-          className="min-w-[120px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200"
-          disabled={!filteredTopics.length}
-        >
-          {filteredTopics.map((t, idx) => {
-            const cfg = findTopicCfg(t.topic);
-            const label = cfg?.jpn ?? t.topic;
-            return (
-              <option key={`${t.topic}-${idx}`} value={idx}>
-                {label}
-              </option>
-            );
-          })}
-        </select>
-
-        <select
-          value={selectedSubTopicIdx}
-          onChange={(e) => setSelectedSubTopicIdx(Number(e.target.value))}
-          className="min-w-[140px] flex-1 rounded-full border border-slate-400/60 bg-slate-900/95 px-2 py-1.5 text-[11px] text-gray-200"
-          disabled={!filteredSubTopics.length}
-        >
-          {filteredSubTopics.map((s, idx) => {
-            const cfg = findSubtopicCfg(s.topic ?? selectedTopic?.topic, s.sub_topic);
-            const label = cfg?.jpn ?? (s.sub_topic || s.topic);
-            return (
-              <option key={`${s.topic}-${s.sub_topic}-${idx}`} value={idx}>
-                {label}
-              </option>
-            );
-          })}
-        </select>
-
-        <div className="flex shrink-0 items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95">
-          <button
-            onClick={() => setMode("1d")}
-            className={`px-3 py-1 text-[11px] ${
-              mode === "1d" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
-            }`}
+      <div className="mb-3 flex flex-wrap items-end gap-2">
+        <Field label="トピック" htmlFor={`${fieldId}-topic`} className="min-w-[8rem] flex-1">
+          <Select
+            id={`${fieldId}-topic`}
+            size="sm"
+            value={selectedTopicIdx}
+            onChange={(e) => {
+              setSelectedTopicIdx(Number(e.target.value));
+              setSelectedSubTopicIdx(0);
+            }}
             disabled={!filteredTopics.length}
           >
-            1D
-          </button>
-          <button
-            onClick={() => setMode("2d")}
-            className={`px-3 py-1 text-[11px] ${
-              mode === "2d" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
-            }`}
-            disabled={!filteredTopics.length}
-          >
-            2D
-          </button>
-        </div>
+            {filteredTopics.map((t, idx) => {
+              const cfg = findTopicCfg(t.topic);
+              const label = cfg?.jpn ?? t.topic;
+              return (
+                <option key={`${t.topic}-${idx}`} value={idx}>
+                  {label}
+                </option>
+              );
+            })}
+          </Select>
+        </Field>
 
-        <div
-          className="flex shrink-0 items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95"
-          title={hasScope ? "全議員（期間内）と現職のみを切り替え" : "このデータには現職フラグがありません"}
-        >
-          <button
-            onClick={() => changeScope("all")}
-            className={`px-3 py-1 text-[11px] ${
-              effectiveScope === "all" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
-            }`}
-            disabled={!filteredTopics.length || !hasScope}
+        <Field label="論点" htmlFor={`${fieldId}-sub`} className="min-w-[9rem] flex-1">
+          <Select
+            id={`${fieldId}-sub`}
+            size="sm"
+            value={selectedSubTopicIdx}
+            onChange={(e) => setSelectedSubTopicIdx(Number(e.target.value))}
+            disabled={!filteredSubTopics.length}
           >
-            全議員
-          </button>
-          <button
-            onClick={() => changeScope("current")}
-            className={`px-3 py-1 text-[11px] ${
-              effectiveScope === "current" ? "bg-blue-600/90 text-white" : "text-gray-200 hover:bg-white/5"
-            }`}
-            disabled={!filteredTopics.length || !hasScope}
-          >
-            現職のみ
-          </button>
+            {filteredSubTopics.map((s, idx) => {
+              const cfg = findSubtopicCfg(s.topic ?? selectedTopic?.topic, s.sub_topic);
+              const label = cfg?.jpn ?? (s.sub_topic || s.topic);
+              return (
+                <option key={`${s.topic}-${s.sub_topic}-${idx}`} value={idx}>
+                  {label}
+                </option>
+              );
+            })}
+          </Select>
+        </Field>
+
+        <SegmentedControl<"1d" | "2d">
+          label="表示方法"
+          items={[
+            { value: "1d", label: "1D", disabled: !filteredTopics.length },
+            { value: "2d", label: "2D", disabled: !filteredTopics.length },
+          ]}
+          value={mode}
+          onChange={setMode}
+        />
+
+        <div title={hasScope ? "全議員（期間内）と現職のみを切り替え" : "このデータには現職フラグがありません"}>
+          <SegmentedControl<Scope>
+            label="表示する議員"
+            items={[
+              { value: "all", label: "全議員", disabled: !filteredTopics.length || !hasScope },
+              { value: "current", label: "現職のみ", disabled: !filteredTopics.length || !hasScope },
+            ]}
+            value={effectiveScope}
+            onChange={changeScope}
+          />
         </div>
       </div>
 
-      {windowLabel && (
-        <div className="mb-2 text-[10px] text-gray-400">{windowLabel}</div>
-      )}
+      {windowLabel && <p className="mb-2 text-caption text-ink-muted">{windowLabel}</p>}
 
       {mode === "1d" && selectedAxis.showSpectrum && selectedAxis.axis && (
-        <div className="mb-2 grid gap-2 rounded-xl border border-slate-400/15 bg-slate-900/40 p-2 text-[11px] text-gray-200 sm:grid-cols-2">
+        <div className="mb-2 grid gap-2 rounded-lg bg-surface-raised p-3 text-body-sm text-ink sm:grid-cols-2">
           <div>
-            <div className="mb-1 text-[10px] font-semibold text-gray-300">反対（左）</div>
-            <div className="leading-relaxed text-gray-200">{selectedAxis.axis.con}</div>
+            <p className="mb-1 text-label-sm text-ink-muted">反対（左）</p>
+            <p>{selectedAxis.axis.con}</p>
           </div>
           <div>
-            <div className="mb-1 text-[10px] font-semibold text-gray-300">賛成（右）</div>
-            <div className="leading-relaxed text-gray-200">{selectedAxis.axis.pro}</div>
+            <p className="mb-1 text-label-sm text-ink-muted">賛成（右）</p>
+            <p>{selectedAxis.axis.pro}</p>
           </div>
         </div>
       )}
 
       <div ref={containerRef} className="relative overflow-hidden">
         {(!ideologyData || !filteredTopics.length || !selectedSubTopic) ? (
-          <div className="flex h-[280px] items-center justify-center">
-            <EmptyState message="立場の推定データが見つかりませんでした" />
-          </div>
+          <Empty message="立場の推定データが見つかりませんでした。" className="h-[280px]" />
         ) : (
           <>
             {/* Keep zoom/pan drawing clipped to the plot area so it doesn't cover controls/header */}
             <svg ref={svgRef} className="h-[280px] w-full overflow-hidden" />
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onReset={handleReset} />
-            <div className="absolute bottom-2 left-2 text-[10px] text-gray-400">
-              {titleLabel ? `${titleLabel} • ` : ""}
-              スクロールでズーム、ドラッグでパン
-            </div>
           </>
         )}
       </div>
 
+      {ideologyData && filteredTopics.length > 0 && selectedSubTopic && (
+        <p className="mt-1 text-caption text-ink-muted">
+          {titleLabel ? `${titleLabel}・` : ""}
+          スクロールでズーム、ドラッグでパン
+        </p>
+      )}
+
       {legendItems.length > 0 && (
-        <PartyLegend items={legendItems} caption="色＝発言時の会派" className="mt-2" />
+        <PartyLegend items={legendItems} caption="色＝発言時の会派" unit="人" className="mt-2" />
       )}
     </div>
   );

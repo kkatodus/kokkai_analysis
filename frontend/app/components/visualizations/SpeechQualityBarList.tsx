@@ -2,9 +2,17 @@
 
 import { useMemo, useState } from "react";
 import type { AllParliamentMemberTableData, QualityAggregate, QualityAnswerCounts, QualityPerson } from "@/app/types";
+import { Legend } from "@/app/components/shared/Legend";
+import { Empty, ErrorState } from "@/app/components/shared/states";
+import { Pager } from "@/app/components/shared/Pager";
+import { Badge } from "@/app/components/shared/Badge";
+import { Field, Select, TextInput } from "@/app/components/shared/inputs";
+import { SegmentedControl } from "@/app/components/shared/Tabs";
+import { selectedClass } from "@/app/components/shared/Chip";
+import { cx } from "@/app/components/shared/cx";
+import type { QualityContribution } from "@/app/types";
 import {
   CONTRIBUTION_JA,
-  CONTRIBUTION_STYLE,
   CONTRIBUTIONS,
   DEFAULT_METRIC_KEY,
   ISSUE_JA,
@@ -19,6 +27,15 @@ import {
   type QualityMetricKey,
 } from "@/app/lib/quality";
 
+// Quality scale (DESIGN.md "Data colours"): 成果あり → 成果は限定的 → 成果なし on success / warning / error.
+const CONTRIBUTION_FILL: Record<QualityContribution, { bar: string; color: string }> = {
+  substantive: { bar: "bg-success", color: "var(--color-success)" },
+  limited: { bar: "bg-warning", color: "var(--color-warning)" },
+  none: { bar: "bg-error", color: "var(--color-error)" },
+};
+
+const barTrack = "w-full overflow-hidden rounded-sm bg-surface-hover";
+
 export function ContributionBar({
   counts,
   className = "h-3",
@@ -28,16 +45,16 @@ export function ContributionBar({
 }) {
   const n = counts ? counts.substantive + counts.limited + counts.none : 0;
   return (
-    <div className={`${className} w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10`}>
+    <div className={cx(className, barTrack)}>
       <div className="flex h-full w-full">
         {CONTRIBUTIONS.map((c) => {
           const r = rate(counts?.[c], n);
           return (
             <div
               key={c}
-              className={`h-full ${CONTRIBUTION_STYLE[c].bar}`}
+              className={cx("h-full", CONTRIBUTION_FILL[c].bar)}
               style={{ width: `${Math.round(r * 10000) / 100}%` }}
-              title={`${CONTRIBUTION_JA[c]}: ${pct(r, 1)}`}
+              title={`${CONTRIBUTION_JA[c]}：${pct(r, 1)}`}
             />
           );
         })}
@@ -46,15 +63,15 @@ export function ContributionBar({
   );
 }
 
-/** Answers with no issue on the answerer's side (emerald) vs answers with one (amber). */
+/** Answers with no issue on the answerer's side (success) vs answers with one (warning). */
 export function AnswerBar({ counts, className = "h-3" }: { counts: QualityAnswerCounts | null | undefined; className?: string }) {
   const n = counts?.n ?? 0;
   const flagged = rate(counts?.flagged?.any, n);
   return (
-    <div className={`${className} w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10`}>
+    <div className={cx(className, barTrack)}>
       <div className="flex h-full w-full">
-        <div className="h-full bg-emerald-500/80" style={{ width: `${Math.round((1 - flagged) * 10000) / 100}%` }} title={`問題点なしの答弁: ${pct(1 - flagged, 1)}`} />
-        <div className="h-full bg-amber-500/80" style={{ width: `${Math.round(flagged * 10000) / 100}%` }} title={`問題点が指摘された答弁: ${pct(flagged, 1)}`} />
+        <div className="h-full bg-success" style={{ width: `${Math.round((1 - flagged) * 10000) / 100}%` }} title={`問題点なしの答弁：${pct(1 - flagged, 1)}`} />
+        <div className="h-full bg-warning" style={{ width: `${Math.round(flagged * 10000) / 100}%` }} title={`問題点が指摘された答弁：${pct(flagged, 1)}`} />
       </div>
     </div>
   );
@@ -78,7 +95,7 @@ export function SpeechQualityBarList({
   const [pageIndex, setPageIndex] = useState<number>(0);
 
   const metric = metricByKey(metricKey);
-  const fmt = (v: number) => (metric.kind === "count" ? `${v.toLocaleString()} 件` : pct(v, 1));
+  const fmt = (v: number) => (metric.kind === "count" ? `${v.toLocaleString()}件` : pct(v, 1));
 
   const personIndex = useMemo(() => {
     const map = new Map<number, AllParliamentMemberTableData>();
@@ -117,10 +134,10 @@ export function SpeechQualityBarList({
   const pageRows = rows.slice(pagination.start, pagination.end);
 
   if (!aggregate) {
-    return <div className="py-6 text-center text-sm text-gray-400">やり取りの評価データを読み込めませんでした。</div>;
+    return <ErrorState message="やり取りの評価データを読み込めませんでした。時間をおいてページを再読み込みしてください。" />;
   }
   if (!aggregate.persons.length) {
-    return <div className="py-6 text-center text-sm text-gray-400">やり取りの評価データがありません。</div>;
+    return <Empty message="やり取りの評価データがありません。" />;
   }
 
   const thresholdSafe = Number.isFinite(minCount) ? Math.max(0, Math.floor(minCount)) : 0;
@@ -131,45 +148,26 @@ export function SpeechQualityBarList({
     return metricValue(fake, metricKey);
   })();
 
+  const legendItems =
+    metric.role === "answerer"
+      ? [
+          { label: "問題点なしの答弁", color: "var(--color-success)" },
+          { label: "問題点が指摘された答弁", color: "var(--color-warning)" },
+        ]
+      : CONTRIBUTIONS.map((c) => ({ label: CONTRIBUTION_JA[c], color: CONTRIBUTION_FILL[c].color }));
+
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-gray-300">
-          <div>
-            議員別（{pagination.total} 人 / 全 {aggregate.persons.length} 人）
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-[11px] text-gray-400" htmlFor="sq-threshold">
-              最低やり取り数
-            </label>
-            <input
-              id="sq-threshold"
-              type="number"
-              min={0}
-              step={1}
-              value={thresholdSafe}
-              onChange={(e) => {
-                const next = Math.max(0, Math.floor(Number(e.target.value)));
-                setMinCount(Number.isFinite(next) ? next : 0);
-                setPageIndex(0);
-              }}
-              className="h-8 w-24 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <label className="text-[11px] text-gray-400" htmlFor="sq-sort">
-            並び替え
-          </label>
-          <select
+      <div className="flex flex-wrap items-end gap-x-3 gap-y-2">
+        <Field label="並び替え" htmlFor="sq-sort" className="min-w-[10rem] flex-1">
+          <Select
             id="sq-sort"
+            size="sm"
             value={metricKey}
             onChange={(e) => {
               setMetricKey(e.target.value as QualityMetricKey);
               setPageIndex(0);
             }}
-            className="h-8 max-w-[260px] rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
           >
             {metricGroups().map((g) => (
               <optgroup key={g.group} label={g.group}>
@@ -180,104 +178,82 @@ export function SpeechQualityBarList({
                 ))}
               </optgroup>
             ))}
-          </select>
-          <button
-            type="button"
-            onClick={() => {
-              setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+          </Select>
+        </Field>
+        <SegmentedControl<"desc" | "asc">
+          label="並び順"
+          items={[
+            { value: "desc", label: "高い順" },
+            { value: "asc", label: "低い順" },
+          ]}
+          value={sortDir}
+          onChange={(d) => {
+            setSortDir(d);
+            setPageIndex(0);
+          }}
+        />
+        <Field label="最低やり取り数" htmlFor="sq-threshold" className="w-28">
+          <TextInput
+            id="sq-threshold"
+            type="number"
+            size="sm"
+            min={0}
+            step={1}
+            value={thresholdSafe}
+            onChange={(e) => {
+              const next = Math.max(0, Math.floor(Number(e.target.value)));
+              setMinCount(Number.isFinite(next) ? next : 0);
               setPageIndex(0);
             }}
-            className="h-8 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 hover:bg-white/5"
-            aria-label="Toggle sort direction"
-          >
-            {sortDir === "desc" ? "↓" : "↑"}
-          </button>
-
-          <label className="ml-2 text-[11px] text-gray-400" htmlFor="sq-page-size">
-            表示件数
-          </label>
-          <select
+          />
+        </Field>
+        <Field label="表示件数" htmlFor="sq-page-size" className="w-24">
+          <Select
             id="sq-page-size"
+            size="sm"
             value={pagination.size}
             onChange={(e) => {
               setPageSize(Number(e.target.value));
               setPageIndex(0);
             }}
-            className="h-8 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
           >
             {[10, 25, 50, 100].map((n) => (
               <option key={n} value={n}>
-                {n}
+                {n}件
               </option>
             ))}
-          </select>
-        </div>
+          </Select>
+        </Field>
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-gray-400">
-        {metric.role === "answerer" ? (
-          <>
-            <div className="flex items-center gap-1">
-              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/80" />
-              問題点なしの答弁
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="inline-block h-2 w-2 rounded-full bg-amber-500/80" />
-              問題点が指摘された答弁
-            </div>
-          </>
-        ) : (
-          CONTRIBUTIONS.map((c) => (
-            <div key={c} className="flex items-center gap-1">
-              <span className={`inline-block h-2 w-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
-              {CONTRIBUTION_JA[c]}
-            </div>
-          ))
-        )}
-        <div className="ml-auto text-gray-500" title={metric.hint}>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+        <Legend items={legendItems} />
+        <p className="text-caption text-ink-muted" title={metric.hint}>
           {metric.label}
-          {baseline && metric.kind === "share" ? `・全体 ${pct(baseline.value, 1)}` : ""}
-          {aggregate.coverage.from ? `・対象 ${yearMonth(aggregate.coverage.from)}〜${yearMonth(aggregate.coverage.to)}` : ""}
-        </div>
+          {baseline && metric.kind === "share" ? `・全体${pct(baseline.value, 1)}` : ""}
+          {aggregate.coverage.from ? `・対象${yearMonth(aggregate.coverage.from)}〜${yearMonth(aggregate.coverage.to)}` : ""}
+        </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
-        <div className="text-[11px] text-gray-400">
-          {pagination.total === 0 ? (
-            <>条件に一致する議員がいません（最低やり取り数: {thresholdSafe}）</>
-          ) : (
-            <>
-              {pagination.start + 1}–{pagination.end} / {pagination.total}（ページ {pagination.idx + 1} /{" "}
-              {pagination.pageCount}）
-            </>
-          )}
-        </div>
-        <div className="flex items-center gap-1.5">
-          {[
-            { label: "最初", to: 0, disabled: pagination.idx === 0 },
-            { label: "前へ", to: Math.max(0, pagination.idx - 1), disabled: pagination.idx === 0 },
-            { label: "次へ", to: Math.min(pagination.pageCount - 1, pagination.idx + 1), disabled: pagination.idx >= pagination.pageCount - 1 },
-            { label: "最後", to: pagination.pageCount - 1, disabled: pagination.idx >= pagination.pageCount - 1 },
-          ].map((b) => (
-            <button
-              key={b.label}
-              type="button"
-              onClick={() => setPageIndex(b.to)}
-              disabled={b.disabled}
-              className="h-8 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 enabled:hover:bg-white/5 disabled:opacity-40"
-            >
-              {b.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="text-body-sm text-ink" aria-live="polite">
+        {pagination.total === 0 ? (
+          <>条件に一致する議員がいません（最低やり取り数：{thresholdSafe.toLocaleString()}）</>
+        ) : (
+          <>
+            議員別 {(pagination.start + 1).toLocaleString()}〜{pagination.end.toLocaleString()}人目
+            <span className="text-ink-muted">
+              （該当{pagination.total.toLocaleString()}人／全{aggregate.persons.length.toLocaleString()}人）
+            </span>
+          </>
+        )}
+      </p>
 
       <div className="max-h-[420px] overflow-auto pr-1">
-        <div className="flex flex-col gap-1.5">
+        <ul className="flex flex-col gap-2">
           {pageRows.map(({ p, value, n }) => {
             const personId = String(p.person_id);
             const meta = personIndex.get(p.person_id) ?? null;
-            const name = meta?.name_kanji ?? p.name ?? `person_id=${personId}`;
+            const name = meta?.name_kanji ?? p.name ?? "氏名不明";
             const isSelected = selectedPersonId != null && String(selectedPersonId) === personId;
             const asAnswerer = metric.role === "answerer";
             const q = p.as_questioner;
@@ -286,50 +262,54 @@ export function SpeechQualityBarList({
             const issues = asAnswerer ? topAnswererIssues(a) : topIssues(q);
 
             return (
-              <button
-                key={personId}
-                type="button"
-                onClick={() => onSelectPersonId(personId)}
-                className={
-                  "group w-full rounded-xl border p-2 text-left transition-colors " +
-                  (isSelected ? "border-cyan-400/60 bg-cyan-500/10" : "border-slate-400/15 bg-slate-950/20 hover:bg-white/5")
-                }
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <div className="truncate text-[13px] font-semibold text-gray-100">{name}</div>
-                    <div className="truncate text-[10px] text-gray-500">{p.group ?? ""}</div>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <div className="text-[13px] font-semibold text-gray-100" title={metric.label}>
-                      {fmt(value)}
+              <li key={personId}>
+                <button
+                  type="button"
+                  onClick={() => onSelectPersonId(personId)}
+                  className={cx(
+                    "w-full rounded-lg border p-3 text-left transition-colors duration-150",
+                    isSelected ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised hover:bg-surface-hover",
+                  )}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className={cx("truncate text-title-sm", isSelected ? "text-on-primary-soft" : "text-ink-strong")}>{name}</div>
+                      <div className="truncate text-caption text-ink-muted">{p.group ?? ""}</div>
                     </div>
-                    <div className="text-[10px] text-gray-500">
-                      {metric.role === "answerer" ? "答弁" : "質問"} {n} 件
+                    <div className="shrink-0 text-right">
+                      <div className="text-title-sm text-ink-strong tabular-nums" title={metric.label}>
+                        {fmt(value)}
+                      </div>
+                      <div className="text-data text-ink-muted">
+                        {metric.role === "answerer" ? "答弁" : "質問"}
+                        {n.toLocaleString()}件
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="mt-2">
-                  {asAnswerer ? <AnswerBar counts={a} /> : <ContributionBar counts={q?.contribution ?? null} />}
-                  <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[10px] text-gray-500">
-                    <div className="truncate">
-                      {range ? `${yearMonth(range.first)}〜${yearMonth(range.last)}` : asAnswerer ? "答弁者としての記録なし" : "質問者としての記録なし"}
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {issues.map((i) => (
-                        <span key={i.type} className="rounded-full border border-amber-400/25 bg-amber-500/10 px-1.5 text-amber-100/90">
-                          {ISSUE_JA[i.type]} {pct(i.share)}
-                        </span>
-                      ))}
+                  <div className="mt-2">
+                    {asAnswerer ? <AnswerBar counts={a} /> : <ContributionBar counts={q?.contribution ?? null} />}
+                    <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-caption text-ink-muted">
+                      <div className="truncate">
+                        {range ? `${yearMonth(range.first)}〜${yearMonth(range.last)}` : asAnswerer ? "答弁者としての記録なし" : "質問者としての記録なし"}
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {issues.map((i) => (
+                          <Badge key={i.type} tone="warning">
+                            {ISSUE_JA[i.type]} {pct(i.share)}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
+
+      <Pager page={pagination.idx + 1} pageCount={pagination.pageCount} onChange={(pg) => setPageIndex(pg - 1)} />
     </div>
   );
 }

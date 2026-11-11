@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import type { ParliamentMemberData, ShugiinPolitician, SangiinPolitician } from "@/app/types";
-import { EmptyState } from "@/app/components/shared/EmptyState";
+import { Empty } from "@/app/components/shared/states";
 import { PartyPieChart, type PieDatum } from "./PartyPieChart";
 import { PARTY2PARTY, PARTY2RGBCOLOR } from "@/app/lib/config/parties";
 
@@ -53,8 +53,8 @@ export function SeatDistributionChart({
     return buildSeatData(reprs as any);
   }, [parliamentMemberData, house]);
 
-  if (!data) return <EmptyState message="No data loaded." className="py-8" />;
-  if (!data.length) return <EmptyState message="No seat data available." className="py-8" />;
+  if (!data) return <Empty message="議員データを読み込めませんでした。" />;
+  if (!data.length) return <Empty message="議席のデータがありません。" />;
 
   return <PartyPieChart data={data} />;
 }
