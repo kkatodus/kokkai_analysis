@@ -25,7 +25,7 @@ export type SiteStats = {
   top_questioners_current: Ranked[];
   top_answerers_current: Ranked[];
   top_terms_lower_current: Ranked[];
-  /** total size of the data bucket in bytes; absent when the publisher could not read it */
+  /** approximate size of all site data in bytes (local mirror of the bucket); absent when unknown */
   data_bytes?: number;
 };
 
