@@ -1,4 +1,5 @@
 import type { FirstPageOfAllTopics, QualityExchange, SpeechPageResponse } from "@/app/types";
+import type { KeywordTopic } from "@/app/lib/highlightKeywords";
 
 function normalizeTopicForGetEndpoint(topic: string): string {
   // Backend `/speeches/get` appends `.jsonl`, while `/get_first_page_of_all_topics`
@@ -56,4 +57,26 @@ export async function fetchPersonQuality(personId: string): Promise<QualityExcha
   }
   const data = (await res.json()) as { exchanges?: unknown };
   return Array.isArray(data.exchanges) ? (data.exchanges as QualityExchange[]) : [];
+}
+
+
+let speechTopicsPromise: Promise<KeywordTopic[]> | null = null;
+
+/**
+ * Topic names and search words (specs/topic-keyword-highlight §5), fetched once per session.
+ * A failed request is not cached, so the next caller retries.
+ */
+export function fetchSpeechTopics(): Promise<KeywordTopic[]> {
+  if (!speechTopicsPromise) {
+    speechTopicsPromise = (async () => {
+      const res = await fetch("/api/speeches/topics");
+      if (!res.ok) throw new Error(`Request failed: ${res.status} ${res.statusText}`);
+      const data = (await res.json()) as { topics?: unknown };
+      return Array.isArray(data.topics) ? (data.topics as KeywordTopic[]) : [];
+    })().catch((e) => {
+      speechTopicsPromise = null;
+      throw e;
+    });
+  }
+  return speechTopicsPromise;
 }

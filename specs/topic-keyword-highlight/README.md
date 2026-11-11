@@ -1,6 +1,8 @@
 # Topic keyword highlighting in 発言（トピック別）
 
-Status: planned (spec agreed 2026-11-11, not built).
+Status: built 2026-11-11. `topics/topics.json` goes live with the first nightly run after the merge (or `python -m speech_update publish-topics`).
+
+Implementation notes: the mobile "popover" is a small label line under the speech text (no floating box, so nothing can overflow the card). Short speeches (≤220 chars) are shown in full with highlights rather than as an excerpt. Frontend unit tests run with Node's built-in runner (`npm test`).
 
 ## 1. Goal
 

@@ -48,6 +48,10 @@ point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point:
 
 Topics are in `experiment_config.json` order. Only (person, topic) pairs plotted in the ideology file are written; orphan files are never deleted, so the frontend shows a topic only when the loaded ideology data plots the person on it. TypeScript: `PersonStances` / `PersonStanceTopic` in `frontend/app/types/index.ts`.
 
+### Topic search words (`/speeches/topics`, spec `specs/topic-keyword-highlight/`)
+
+- `GET /speeches/topics` → `kokkai-doc/topics/topics.json` as-is (404 if missing). Proxied by `app/api/speeches/topics` (1 h revalidate); `fetchSpeechTopics()` caches it per session. `lib/highlightKeywords.ts` re-finds the words in each speech (exact substring, longest match wins) for `HighlightedSpeech` in 発言（トピック別）. Frontend tests: `cd frontend && npm test`.
+
 ### Exchange quality labels (`/speeches/quality/*`, spec `specs/speech-quality-ui/`)
 
 - `GET /speeches/quality/aggregate` → `kokkai-doc/speech_quality/aggregate.json`: `{ version, generated_at, prompt_version, models, coverage: {from, to, exchanges, meetings}, totals: {as_questioner, as_answerer}, persons: [{ person_id, name, group, as_questioner: Counts|null, as_answerer: AnswerCounts|null }] }`. Fetched server-side in `page.tsx` (raw, >1 MB) and passed to `SpeechQualityBarList` and `DetailPane`.
@@ -59,7 +63,7 @@ Topics are in `experiment_config.json` order. Only (person, topic) pairs plotted
 
 Some browser-facing calls go through Next.js route handlers instead of hitting FastAPI directly:
 
-- `app/api/speeches/*` — speech fetch, availability, first page of topics, issue by ID, a person's labelled exchanges (`quality_person`)
+- `app/api/speeches/*` — speech fetch, availability, first page of topics, issue by ID, a person's labelled exchanges (`quality_person`), topic search words (`topics`)
 - `app/api/ideology/person` — a person's stance summaries (`/ideology/person`)
 - `app/api/electionHistory/route.ts`
 - `app/api/donors/route.ts`
