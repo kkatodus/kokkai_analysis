@@ -18,26 +18,6 @@ export const PARTIES = [
 	"NHK党"
 ]
 
-export const PARTY_COLORS: { [key: string]: string } = {
-	"日本共産党": "red-600",
-	"日本維新の会": "blue-600",
-	"無所属連合": "green-600",
-	"日本保守党": "yellow-500",
-	"立憲民主党": "purple-600",
-	"参政党": "orange-600",
-	"国民民主党": "pink-600",
-	"チームみらい": "amber-700",
-	"日本誠真会": "gray-600",
-	"社会民主党": "teal-600",
-	"れいわ新選組": "lime-600",
-	"日本改革党": "cyan-600",
-	"自由民主党": "gray-900",
-	"再生の道": "red-500",
-	"公明党": "blue-500",
-	"NHK党": "green-500",
-	"中道改革連合": "purple-500",
-}
-
 
 export const PARTY2PARTY: { [key: string]: string } = {
 	自民: '自民',
@@ -156,28 +136,6 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	CDP: '立憲民主党',
 	CRA: '中道改革連合',
   };
-  
-  export const PARTY2COLORLIST: { party: string; color: string }[] = [
-	{ party: '自民', color: 'black' },
-	{ party: '国民', color: 'blue' },
-	{ party: '立憲', color: 'orange' },
-	{ party: '公明', color: 'aqua' },
-	{ party: '共産', color: 'red' },
-	{ party: '維新', color: 'gold' },
-	{ party: 'れ新', color: 'green' },
-	{ party: '無', color: 'purple' },
-	{ party: '有志', color: 'grey' },
-	//   { party: '維教', color: 'gold' },
-	{ party: 'Ｎ党', color: 'pink' },
-	{ party: '参政', color: 'brown' },
-	{ party: '沖縄', color: 'teal' },
-	{ party: '中道', color: 'purple' },
-  ];
-  
-  export const PARTY2COLOR: { [key: string]: string } = PARTY2COLORLIST.reduce((acc: { [key: string]: string }, curr: { party: string; color: string }) => {
-	acc[curr.party] = curr.color;
-	return acc;
-  }, {});
   
   export const PARTY2RGBCOLOR: { [key: string]: [number, number, number] } = {
 	// Neon palette for the site's dark navy background (#111827 → #020617).

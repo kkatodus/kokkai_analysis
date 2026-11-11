@@ -345,4 +345,4 @@ export interface QualityExchange {
 	model: string;
 }
 
-export type Modal = "donation" | "disclaimer"
+export type Modal = "donation"
