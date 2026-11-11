@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GeoJsonLayer } from '@deck.gl/layers';
 import DeckGL from '@deck.gl/react';
 import {Map} from 'react-map-gl/maplibre';
@@ -15,6 +15,10 @@ const INITIAL_VIEW_STATE = {
   pitch: 60,
   bearing: -20,
 };
+
+// Idle spin: degrees of bearing per second, and how long after the user lets go before it resumes.
+const AUTO_ROTATE_DEG_PER_SEC = 4;
+const AUTO_ROTATE_RESUME_MS = 3000;
 
 const MAP_STYLE = 'mapbox://styles/kkatodus/clnkx6x1z002601p7c4vl398t';
 
@@ -44,6 +48,26 @@ function VoteDistrictMap({
   useEffect(() => {
     setViewState(INITIAL_VIEW_STATE);
   }, [resetCounter]);
+
+  // Slowly orbit the map while nobody is touching it. Any drag/zoom pauses the spin;
+  // it picks up again from wherever the user left the camera once they've been idle a moment.
+  const interactingRef = useRef(false);
+  const lastInteractionRef = useRef(0);
+  useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    let prev = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(now - prev, 100); // avoid a jump after a backgrounded tab
+      prev = now;
+      if (!interactingRef.current && now - lastInteractionRef.current > AUTO_ROTATE_RESUME_MS) {
+        setViewState((v) => ({ ...v, bearing: (v.bearing + (AUTO_ROTATE_DEG_PER_SEC * dt) / 1000) % 360 }));
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
 
 
@@ -99,7 +123,16 @@ function VoteDistrictMap({
     <div className="relative h-[500px] ">
       <DeckGL
         viewState={viewState as any}
-        onViewStateChange={({ viewState: next }) => setViewState(next as any)}
+        onViewStateChange={({ viewState: next, interactionState }) => {
+          if (interactionState && Object.values(interactionState).some(Boolean)) {
+            lastInteractionRef.current = performance.now();
+          }
+          setViewState(next as any);
+        }}
+        onInteractionStateChange={(state) => {
+          interactingRef.current = Object.values(state).some(Boolean);
+          lastInteractionRef.current = performance.now();
+        }}
         controller
         layers={[geojsonLayer]}
         getTooltip={getToolTip}
