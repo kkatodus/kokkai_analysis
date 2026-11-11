@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 from collections import Counter, defaultdict
 from datetime import date, datetime
@@ -170,7 +171,7 @@ def site_stats(agg: dict, current: Dict[int, dict], names: Dict[int, str], speec
 	current       person_id → {"house": "lower" | "upper", "group": short party name, "terms_lower": int | None}
 	speech_counts person_id → speeches since CORPUS_FROM (current members only is enough)
 	corpus        {"speeches": int, "meetings": int, "from": "YYYY-MM-DD"} for speeches since CORPUS_FROM
-	data_bytes    total size of the data bucket (None when unknown; the field is then left out)
+	data_bytes    total size of the local data mirror (None when unknown; the field is then left out)
 	"""
 	tq = agg["totals"]["as_questioner"]
 	n = tq["n"]
@@ -233,23 +234,20 @@ def speech_counts(cur, since: str = CORPUS_FROM) -> tuple:
 		"from": str(first) if first else None}
 
 
-def bucket_bytes() -> Optional[int]:
-	"""Size of the data bucket from S3's daily CloudWatch metric (one cheap call; listing the bucket would
-	take thousands). Needs cloudwatch:GetMetricStatistics on the job's AWS user; None when that fails."""
+def mirror_bytes(mirror_root: Path) -> Optional[int]:
+	"""Total size of the local mirror of the data bucket: a close enough estimate of everything collected
+	and analysed for the site (~15 s walk). None when the walk fails."""
 	try:
-		import boto3
-		from datetime import timedelta, timezone
-		from speech_update.config import load_config
-		cfg = load_config()
-		cw = boto3.Session(profile_name=cfg.aws_profile or None).client("cloudwatch", region_name="ap-northeast-1")
-		end = datetime.now(timezone.utc)
-		res = cw.get_metric_statistics(Namespace="AWS/S3", MetricName="BucketSizeBytes",
-			Dimensions=[{"Name": "BucketName", "Value": cfg.bucket}, {"Name": "StorageType", "Value": "StandardStorage"}],
-			StartTime=end - timedelta(days=3), EndTime=end, Period=86400, Statistics=["Average"])
-		points = sorted(res.get("Datapoints", []), key=lambda p: p["Timestamp"])
-		return int(points[-1]["Average"]) if points else None
+		total = 0
+		for d, _, files in os.walk(mirror_root):
+			for f in files:
+				try:
+					total += os.stat(os.path.join(d, f)).st_size
+				except OSError:
+					pass
+		return total or None
 	except Exception as e:
-		log.warning("bucket size unavailable: %s", e)
+		log.warning("mirror size unavailable: %s", e)
 		return None
 
 
@@ -259,7 +257,7 @@ def write_site_stats(cur, mirror_root: Path, agg: dict) -> str:
 	names = person_names(cur, current)
 	cur.execute("SELECT count(*) FROM person")
 	n_total = int(cur.fetchone()[0])
-	doc = site_stats(agg, current, names, per_person, corpus, n_total, data_bytes=bucket_bytes())
+	doc = site_stats(agg, current, names, per_person, corpus, n_total, data_bytes=mirror_bytes(mirror_root))
 	write_atomic(mirror_root / SITE_STATS_PATH, json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
 	return SITE_STATS_PATH
 

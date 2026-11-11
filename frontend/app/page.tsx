@@ -21,7 +21,8 @@ export const metadata: Metadata = {
     siteName: "KOKKAI DOC",
     locale: "ja_JP",
     type: "website",
-    images: [{ url: "https://kokkaidoc.com/og-landing.png", width: 1200, height: 630, alt: "KOKKAI DOC ｜ その議員、国会で何してる？" }],
+    // screenshot of this page (headless Chrome, 1200×630); www so crawlers skip the apex redirect
+    images: [{ url: "https://www.kokkaidoc.com/og-image.png", width: 1200, height: 630, alt: "KOKKAI DOC ｜ その議員、国会で何してる？" }],
   },
   twitter: { card: "summary_large_image", site: "@kokkaidoc" },
 };
