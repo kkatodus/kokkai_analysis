@@ -3,12 +3,10 @@
 import { Modal } from "@/app/types";
 import { useModal } from "@/app/lib/hooks/useModal";
 import { DonateModal } from "./modals/DonateModal";
-import { DisclaimerModal } from "./modals/DisclaimerModal";
 import React from "react";
 
 const modalComponents = {
 	donation: DonateModal,
-	disclaimer: DisclaimerModal,
 }
 export function ModalManager() {
 	const { currentModals, addModal, removeModal } = useModal();

@@ -103,6 +103,11 @@ h1, h2, h3 {
   font-variant-numeric: tabular-nums;
 }
 
+/* selected list row: 2px primary leading edge (DESIGN.md "Lists and pagers") */
+@utility edge-primary {
+  box-shadow: inset 2px 0 0 var(--color-primary);
+}
+
 /* Landing page (specs/landing-page §5.1, §5.5): anchor scrolling, slow background drift and the scatter's idle "breathing". */
 html {
   scroll-behavior: smooth;
@@ -142,5 +147,23 @@ html {
   .landing-breathe,
   .loading-shimmer {
     animation: none;
+  }
+}
+
+/* DESIGN.md "Layout": controls reach 44px on coarse pointers through an invisible hit area. */
+@layer components {
+  @media (pointer: coarse) {
+    .hit-target {
+      position: relative;
+    }
+    .hit-target::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
   }
 }
