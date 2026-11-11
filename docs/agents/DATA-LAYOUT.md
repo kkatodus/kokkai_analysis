@@ -22,6 +22,7 @@ Raw and intermediate pipeline outputs stay in `data/data/`. The FastAPI backend 
 | `data_all_speeches/` (per issue) | `issues/{issueID}/` | `routers/speeches.py` |
 | Postgres `label_result` (via `data/speech_quality/publish.py`) | `speech_quality/aggregate.json` + `speech_quality/persons/{person_id}.jsonl` + `speech_quality/site_stats.json`; `quality` object on exchange-starting lines in `issues/{id}/speeches.jsonl` | `routers/speeches.py` (`/speeches/quality/*`, `/speeches/get_issue_by_id`) |
 | (derived from repr/geo pipelines) | `parliamentMembers/`, `politicians/`, `geo/`, `ideology/` | `routers/parliamentMember.py`, etc. |
+| `data/resource/experiment_config.json` (via `speech_update/topics.py`) | `topics/topics.json` — `{ version, generated_at, topics: [{ topic_name_en, topic_name, search_words }] }` | `routers/speeches.py` (`/speeches/topics`) |
 | (fetched by `data/person_images/`) | `person_images/{person_id}.jpg` + `person_images/index.json` (source, licence, attribution) | none yet; frontend can read the index |
 | `s3_mirror/.topic-scaling/` (summaries, embeddings, opinion cache) | `ideology/ideology.json.gz` + `ideology/history/ideology-YYYY-MM-DD.json.gz` | `routers/ideology.py` (written by `data/topic_scaling`) |
 | `s3_mirror/.topic-scaling/summaries/` + `select.json` + opinion cache | `ideology/persons/{person_id}.json` (stance summaries, counts, contributing speech IDs; only changed files uploaded, never deleted) | `routers/ideology.py` `/ideology/person` (spec `specs/stance-summaries-panel/`) |

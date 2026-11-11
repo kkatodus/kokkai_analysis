@@ -2,11 +2,14 @@ import { EmptyState } from "@/app/components/shared/EmptyState";
 import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 import type { QualityExchange, SpeechRecord } from "@/app/types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
+import { HighlightedSpeech } from "@/app/components/features/HighlightedSpeech";
+import { useSpeechTopics } from "@/app/lib/hooks/useSpeechTopics";
+import { topicHighlightColor } from "@/app/lib/topicHighlightColors";
 
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
-  // From `data/resource/experiment_config.json` (topic_name_en -> topic_name)
+  // Fallback until /api/speeches/topics loads (`data/resource/experiment_config.json` topic_name_en -> topic_name)
   Defence: "防衛",
   DecliningBirthrate: "少子化",
   NuclearPower: "原発",
@@ -27,13 +30,17 @@ function normalizeTopicLabelKey(raw: string): string {
   return noExt.replace(/\s+/g, "");
 }
 
-function translateTopicName(raw: string): string {
+function isAllSpeechesKey(key: string): boolean {
+  return key === "all_speeches" || key === "allSpeeches";
+}
+
+function translateTopicName(raw: string, namesFromApi?: Map<string, string>): string {
   const key = normalizeTopicLabelKey(raw);
   if (!key) return raw;
 
-  if (key === "all_speeches" || key === "allSpeeches") return "全発言";
+  if (isAllSpeechesKey(key)) return "全発言";
 
-  const direct = TOPIC_NAME_JA_BY_EN[key];
+  const direct = namesFromApi?.get(key) ?? TOPIC_NAME_JA_BY_EN[key];
   if (direct) return direct;
 
   const lower = key.toLowerCase();
@@ -84,13 +91,27 @@ export function SpeechRecordCard({
 }: SpeechRecordCardProps) {
   const showMarks = !!markedSpeeches && markedSpeeches.topicKey === selectedTopicKey;
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
+  const keywordTopics = useSpeechTopics();
+  const topicNamesJa = useMemo(
+    () => new Map((keywordTopics ?? []).map((t) => [t.topic_name_en, t.topic_name])),
+    [keywordTopics]
+  );
+  const selectedKey = selectedTopic ? normalizeTopicLabelKey(selectedTopic.topicKey) : "";
+  const highlightMode: "topic" | "all" = isAllSpeechesKey(selectedKey) ? "all" : "topic";
+  // topic tab: that topic's words only; 全発言: every topic (specs/topic-keyword-highlight §6)
+  const highlightTopics = useMemo(
+    () => (highlightMode === "all" ? keywordTopics ?? [] : (keywordTopics ?? []).filter((t) => t.topic_name_en === selectedKey)),
+    [keywordTopics, highlightMode, selectedKey]
+  );
 
   const topicsForTabs = [...(speechTopics ?? [])].sort((a, b) => {
     const aKey = normalizeTopicLabelKey(a.topicKey);
     const bKey = normalizeTopicLabelKey(b.topicKey);
-    const isAll = (k: string) => k === "all_speeches" || k === "allSpeeches";
-    if (isAll(aKey) !== isAll(bKey)) return isAll(aKey) ? -1 : 1;
-    return translateTopicName(a.topicKey || a.displayName).localeCompare(translateTopicName(b.topicKey || b.displayName), "ja");
+    if (isAllSpeechesKey(aKey) !== isAllSpeechesKey(bKey)) return isAllSpeechesKey(aKey) ? -1 : 1;
+    return translateTopicName(a.topicKey || a.displayName, topicNamesJa).localeCompare(
+      translateTopicName(b.topicKey || b.displayName, topicNamesJa),
+      "ja"
+    );
   });
 
   const topicTabClassName = (_topicKey: string, active: boolean) => {
@@ -128,14 +149,18 @@ export function SpeechRecordCard({
             <div className="mb-2 flex flex-wrap gap-1.5">
               {topicsForTabs.map((t) => {
                 const active = t.topicKey === selectedTopicKey;
-                const label = translateTopicName(t.topicKey || t.displayName);
+                const label = translateTopicName(t.topicKey || t.displayName, topicNamesJa);
+                const tabKey = normalizeTopicLabelKey(t.topicKey);
+                // colour dot = legend for the 全発言 highlights
+                const dot = !isAllSpeechesKey(tabKey) && keywordTopics?.length ? topicHighlightColor(tabKey).dot : null;
                 return (
                   <button
                     key={t.topicKey}
                     type="button"
                     onClick={() => setSelectedTopicKey(t.topicKey)}
-                    className={topicTabClassName(t.topicKey, active)}
+                    className={topicTabClassName(t.topicKey, active) + (dot ? " inline-flex items-center gap-1" : "")}
                   >
+                    {dot ? <span aria-hidden className={"h-1.5 w-1.5 shrink-0 rounded-full " + dot} /> : null}
                     {label}
                   </button>
                 );
@@ -260,14 +285,13 @@ export function SpeechRecordCard({
                       </button>
                     )}
                   </div>
-                  <div
-                    className={
-                      "mt-1 whitespace-pre-wrap text-[12px] leading-relaxed text-gray-200 " +
-                      (isExpanded ? "" : "line-clamp-6")
-                    }
-                  >
-                    {speechText}
-                  </div>
+                  <HighlightedSpeech
+                    text={speechText}
+                    topics={highlightTopics}
+                    mode={highlightMode}
+                    collapsed={isLong && !isExpanded}
+                    className="mt-1 text-[12px] leading-relaxed text-gray-200"
+                  />
 
                   {isLong && (
                     <div className="mt-2 flex items-center justify-end">
