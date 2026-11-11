@@ -13,9 +13,10 @@
  */
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { track } from "@/app/components/landing/track";
-import { buildDeck, type LoadingCardItem } from "./content";
+import { buildDeck, mergeAfter, order, type LoadingCardItem } from "./content";
+import { buildStatsCards, type SiteStats } from "./content/siteStats";
 import { LoadingCard } from "./LoadingCard";
 import { LoadingProgress } from "./LoadingProgress";
 import { CARD_DELAY_MS, FAST_PATH_MS, SLOW_MS, loadingStore, readOptOut, readSeen, writeOptOut, writeSeen } from "./loadingStore";
@@ -30,8 +31,13 @@ export function LoadingOverlay() {
   // Per-visitor settings and the card deck are read once when the /app layout mounts (client only;
   // the overlay renders nothing on the server and during hydration, so these never reach markup).
   const [optOut, setOptOut] = useState(() => isClient() && readOptOut());
-  const [deck] = useState<LoadingCardItem[]>(() => (isClient() ? buildDeck(readSeen()) : []));
+  const [deck, setDeck] = useState<LoadingCardItem[]>(() => (isClient() ? buildDeck(readSeen()) : []));
   const [cardIdx, setCardIdx] = useState(0);
+  const cardIdxRef = useRef(0);
+  useEffect(() => {
+    cardIdxRef.current = cardIdx;
+  }, [cardIdx]);
+  const statsRequested = useRef(false);
 
   // Start the clock if the dashboard is not here yet (the only way to notice a direct visit, see
   // loadingStore). Runs after the page's own layout effects, so an instant page is already mounted.
@@ -51,6 +57,23 @@ export function LoadingOverlay() {
     const t = window.setInterval(() => setNow(Date.now()), 120);
     return () => window.clearInterval(t);
   }, [s.active, ready]);
+
+  // Real numbers from the site (specs/dashboard-loading §8): fetched once per load, ~3 KB, never blocks.
+  // Arrives after the first card, so the cards are spliced in right after the one being read.
+  useEffect(() => {
+    if (!s.active || optOut || statsRequested.current) return;
+    statsRequested.current = true;
+    fetch("/api/site-stats")
+      .then((r) => (r.ok ? (r.json() as Promise<SiteStats>) : null))
+      .then((stats) => {
+        if (!stats || !Array.isArray(stats.top_speakers_current)) return;
+        const extra = order(buildStatsCards(stats), readSeen());
+        setDeck((d) => mergeAfter(d, cardIdxRef.current % Math.max(1, d.length), extra));
+      })
+      .catch(() => {
+        /* the static cards are enough */
+      });
+  }, [s.active, optOut]);
 
   const elapsed = Math.max(0, (ready ? s.readyAt! : now) - s.shownAt);
   const { stage, pct } = progressAt(elapsed);

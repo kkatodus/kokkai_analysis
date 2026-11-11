@@ -15,7 +15,7 @@ function shuffle<T>(xs: T[]): T[] {
 }
 
 /** Unseen first (in random order), then the seen ones, oldest-seen first. */
-function order<T extends { id: string }>(xs: T[], seen: string[]): T[] {
+export function order<T extends { id: string }>(xs: T[], seen: string[]): T[] {
   const seenIdx = new Map(seen.map((id, i) => [id, i]));
   const fresh = shuffle(xs.filter((x) => !seenIdx.has(x.id)));
   const old = xs.filter((x) => seenIdx.has(x.id)).sort((a, b) => seenIdx.get(a.id)! - seenIdx.get(b.id)!);
@@ -36,3 +36,22 @@ export function buildDeck(seen: string[]): LoadingCardItem[] {
   }
   return deck;
 }
+
+/**
+ * Splice site-stats cards into a deck that is already being shown: right after the current card,
+ * then every other slot, so the visitor meets them next without losing their place.
+ */
+export function mergeAfter(deck: LoadingCardItem[], current: number, extra: LoadingCardItem[]): LoadingCardItem[] {
+  if (!extra.length) return deck;
+  const have = new Set(deck.map((c) => c.id));
+  const add = extra.filter((c) => !have.has(c.id));
+  const head = deck.slice(0, current + 1);
+  const tail = deck.slice(current + 1);
+  const out = [...head];
+  while (add.length || tail.length) {
+    if (add.length) out.push(add.shift()!);
+    if (tail.length) out.push(tail.shift()!);
+  }
+  return out;
+}
+

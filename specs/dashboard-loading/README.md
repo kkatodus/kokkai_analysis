@@ -1,6 +1,6 @@
 # Dashboard loading: a fast `/app` and an interactive wait
 
-**Status:** loading screen (§5) built 2026-11-11 on `dashboard-loading`, PR to `dev` (see §14 for what differs from the plan); site stats cards (§8), caching (§6) and the ideology split (§7) not built. **Priority: the loading screen (§5) ships first and alone; the caching quick wins (§6) are optional and come after; the ideology split (§7) is postponed indefinitely.**
+**Status:** loading screen (§5) and site stats cards (§8) built 2026-11-11 on `dashboard-loading`, PR #70 to `dev` (see §14 for what differs from the plan); caching (§6) and the ideology split (§7) not built. **Priority: the loading screen (§5) ships first and alone; the caching quick wins (§6) are optional and come after; the ideology split (§7) is postponed indefinitely.**
 **Branch / worktree:** `dashboard-loading` in `../kokkai_analysis-loading` (off `origin/dev`)
 **Related specs:** [landing-page](../landing-page/README.md) (the buttons that lead here), [topic-scaling-refresh](../topic-scaling-refresh/README.md) (writes `ideology.json.gz`), [stance-summaries-panel](../stance-summaries-panel/README.md) (also splits ideology output; see §9 — that spec is still only in `../kokkai_analysis-stance`, not yet on `dev`), [speech-quality-ui](../speech-quality-ui/README.md) (aggregate + proxy pattern this copies)
 **Related guides:** [FRONTEND.md](../../docs/agents/FRONTEND.md), [BACKEND.md](../../docs/agents/BACKEND.md), [CONTRACTS.md](../../docs/agents/CONTRACTS.md), [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md), [DATA-LAYOUT.md](../../docs/agents/DATA-LAYOUT.md)
@@ -351,7 +351,20 @@ Tasks 1–4 of §13 are done; the quiz wording was approved by the owner on 2026
 - **Checklist labels** are short forms (議員データ / 立場推定 / AI判定の集計 / 地図とグラフ); the long
   stage label stays as the heading.
 - `page.tsx` still reads `searchParams`; `/app` stays dynamic as agreed (§6 is optional, later).
-- Site stats cards (§8) are not in this PR; the deck is tips + 13 facts + 11 quiz questions.
+- **Site stats cards (§8) were added to the same PR on request.** Differences from §8:
+  `top_speakers_current` (発言数 since 2000) replaces `most_meetings_current`, and
+  `top_terms_lower_current` (衆院当選回数 from the member snapshot) and `outcome_share` are added.
+  `issue_share` adds questioner- and answerer-side flags (so 答弁のはぐらかし counts). `rebuild()` writes
+  the file after the aggregate (~7 s, two scans of `speeches`), wrapped so a failure never breaks the
+  label publish; `--site-stats` rewrites it alone. Ranking questions are only asked when first place is
+  unique. `/api/site-stats` is `force-dynamic`: a route with no input is otherwise prerendered at build
+  and bakes in whatever the backend said then (seen locally as a cached 404).
+- The deck is 8 tips + 13 facts + 11 quiz questions, plus up to 7 quiz and 4 fact cards from the stats,
+  spliced in right after the card being read once `/api/site-stats` answers.
+- **First publish:** the nightly job writes and uploads `site_stats.json` once this reaches `prd`
+  (the launchd job runs from the prd checkout). To have the cards before that, run from the prd
+  checkout after the merge: `python -m speech_quality.publish --site-stats` then
+  `python -m speech_update upload`. Until then `/api/site-stats` returns 404 and only the static cards show.
 
 Local check: production build against a mock backend that serves `s3_mirror` with a 6 s delay
 (reproduces the 34 MB page). Playwright + Chrome:
