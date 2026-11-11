@@ -5,11 +5,13 @@
  */
 
 import { LoadingOverlay } from "@/app/components/loading/LoadingOverlay";
+import { MobileNotice } from "@/app/components/MobileNotice";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
+      <MobileNotice />
       <LoadingOverlay />
     </>
   );

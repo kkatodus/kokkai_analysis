@@ -163,12 +163,14 @@ def _top(scores: Dict[int, int], current: Dict[int, dict], names: Dict[int, str]
 
 
 def site_stats(agg: dict, current: Dict[int, dict], names: Dict[int, str], speech_counts: Dict[int, int],
-		corpus: dict, n_persons_total: int, generated_at: Optional[datetime] = None) -> dict:
+		corpus: dict, n_persons_total: int, generated_at: Optional[datetime] = None,
+		data_bytes: Optional[int] = None) -> dict:
 	"""The site_stats.json document.
 
 	current       person_id → {"house": "lower" | "upper", "group": short party name, "terms_lower": int | None}
 	speech_counts person_id → speeches since CORPUS_FROM (current members only is enough)
 	corpus        {"speeches": int, "meetings": int, "from": "YYYY-MM-DD"} for speeches since CORPUS_FROM
+	data_bytes    total size of the data bucket (None when unknown; the field is then left out)
 	"""
 	tq = agg["totals"]["as_questioner"]
 	n = tq["n"]
@@ -180,7 +182,7 @@ def site_stats(agg: dict, current: Dict[int, dict], names: Dict[int, str], speec
 	ta_issues = agg["totals"]["as_answerer"].get("issues", {})
 	issue_any = {k: min(n, v["part"] + v["most"] + ta_issues.get(k, {}).get("part", 0) + ta_issues.get(k, {}).get("most", 0))
 		for k, v in tq["issues"].items()}
-	return {
+	doc = {
 		"version": VERSION,
 		"generated_at": (generated_at or datetime.now().astimezone()).isoformat(timespec="seconds"),
 		"corpus": corpus,
@@ -199,6 +201,9 @@ def site_stats(agg: dict, current: Dict[int, dict], names: Dict[int, str], speec
 		"top_answerers_current": _top(a_scores, current, names),
 		"top_terms_lower_current": _top(terms, current, names),
 	}
+	if data_bytes:
+		doc["data_bytes"] = data_bytes
+	return doc
 
 
 def current_members(mirror_root: Path) -> Dict[int, dict]:
@@ -228,13 +233,33 @@ def speech_counts(cur, since: str = CORPUS_FROM) -> tuple:
 		"from": str(first) if first else None}
 
 
+def bucket_bytes() -> Optional[int]:
+	"""Size of the data bucket from S3's daily CloudWatch metric (one cheap call; listing the bucket would
+	take thousands). Needs cloudwatch:GetMetricStatistics on the job's AWS user; None when that fails."""
+	try:
+		import boto3
+		from datetime import timedelta, timezone
+		from speech_update.config import load_config
+		cfg = load_config()
+		cw = boto3.Session(profile_name=cfg.aws_profile or None).client("cloudwatch", region_name="ap-northeast-1")
+		end = datetime.now(timezone.utc)
+		res = cw.get_metric_statistics(Namespace="AWS/S3", MetricName="BucketSizeBytes",
+			Dimensions=[{"Name": "BucketName", "Value": cfg.bucket}, {"Name": "StorageType", "Value": "StandardStorage"}],
+			StartTime=end - timedelta(days=3), EndTime=end, Period=86400, Statistics=["Average"])
+		points = sorted(res.get("Datapoints", []), key=lambda p: p["Timestamp"])
+		return int(points[-1]["Average"]) if points else None
+	except Exception as e:
+		log.warning("bucket size unavailable: %s", e)
+		return None
+
+
 def write_site_stats(cur, mirror_root: Path, agg: dict) -> str:
 	current = current_members(mirror_root)
 	per_person, corpus = speech_counts(cur)
 	names = person_names(cur, current)
 	cur.execute("SELECT count(*) FROM person")
 	n_total = int(cur.fetchone()[0])
-	doc = site_stats(agg, current, names, per_person, corpus, n_total)
+	doc = site_stats(agg, current, names, per_person, corpus, n_total, data_bytes=bucket_bytes())
 	write_atomic(mirror_root / SITE_STATS_PATH, json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
 	return SITE_STATS_PATH
 

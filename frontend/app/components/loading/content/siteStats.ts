@@ -25,6 +25,8 @@ export type SiteStats = {
   top_questioners_current: Ranked[];
   top_answerers_current: Ranked[];
   top_terms_lower_current: Ranked[];
+  /** total size of the data bucket in bytes; absent when the publisher could not read it */
+  data_bytes?: number;
 };
 
 const int = (n: number) => n.toLocaleString("ja-JP");
@@ -153,6 +155,10 @@ export function buildStatsCards(s: SiteStats): LoadingCardItem[] {
   if (s.labels.exchanges > 0) {
     cards.push({ kind: "fact", id: "stats-fact-labels", title: "AI が読んだやり取り",
       body: `${ymd(s.labels.from)}〜${ymd(s.labels.to)}の会議${int(s.labels.meetings)}回から、${int(s.labels.exchanges)}件の質疑のやり取りを AI が分類しました。登場する議員は${int(s.labels.persons)}人です。`, source });
+  }
+  if (s.data_bytes) {
+    cards.push({ kind: "fact", id: "stats-fact-bytes", title: "集めたデータの量",
+      body: `会議録、議員情報、投票記録、AI による分析結果など、このサイトのために集めて分析したデータは合わせて約${Math.round(s.data_bytes / 1e9).toLocaleString("ja-JP")} GB です。`, source });
   }
   if (s.n_persons_total > 0) {
     cards.push({ kind: "fact", id: "stats-fact-members", title: "データベースの議員",

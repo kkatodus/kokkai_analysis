@@ -24,6 +24,9 @@ import { progressAt } from "./stages";
 
 const isClient = () => typeof window !== "undefined";
 
+/** 41_234_567_890 → "41.2 GB" (decimal GB, as storage is usually quoted). */
+const formatGB = (bytes: number) => `${(bytes / 1e9).toLocaleString("ja-JP", { maximumFractionDigits: bytes >= 1e11 ? 0 : 1 })} GB`;
+
 export function LoadingOverlay() {
   const s = useSyncExternalStore(loadingStore.subscribe, loadingStore.get, loadingStore.getServer);
   const reducedMotion = Boolean(useReducedMotion());
@@ -38,6 +41,7 @@ export function LoadingOverlay() {
     cardIdxRef.current = cardIdx;
   }, [cardIdx]);
   const statsRequested = useRef(false);
+  const [dataBytes, setDataBytes] = useState<number | null>(null);
 
   // Start the clock if the dashboard is not here yet (the only way to notice a direct visit, see
   // loadingStore). Runs after the page's own layout effects, so an instant page is already mounted.
@@ -67,6 +71,7 @@ export function LoadingOverlay() {
       .then((r) => (r.ok ? (r.json() as Promise<SiteStats>) : null))
       .then((stats) => {
         if (!stats || !Array.isArray(stats.top_speakers_current)) return;
+        if (typeof stats.data_bytes === "number" && stats.data_bytes > 0) setDataBytes(stats.data_bytes);
         const extra = order(buildStatsCards(stats), readSeen());
         setDeck((d) => mergeAfter(d, cardIdxRef.current % Math.max(1, d.length), extra));
       })
@@ -143,6 +148,11 @@ export function LoadingOverlay() {
             <div className="mb-5 flex items-center gap-2 text-sm font-semibold text-gray-200">
               <span className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-cyan-400 to-indigo-600 shadow-lg shadow-cyan-400/90" />
               KOKKAI DOC
+              {dataBytes !== null && (
+                <span className="ml-auto text-xs font-normal text-gray-400">
+                  収集・分析したデータ <span className="font-semibold tabular-nums text-cyan-200">{formatGB(dataBytes)}</span>
+                </span>
+              )}
             </div>
 
             <LoadingProgress stage={stage} pct={pct} ready={ready} slow={slow} reducedMotion={reducedMotion} />
