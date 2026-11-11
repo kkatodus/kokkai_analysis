@@ -5,6 +5,7 @@ import type { ParliamentMemberData } from "@/app/types";
 import VoteDistrictMap from "./components/VoteDistrictMap";
 import PoliticianPreviewWindow from "./components/PoliticianPreviewWindow";
 import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
+import { Button } from "@/app/components/shared/Button";
 import { PARTY2RGBCOLOR, PARTY_FALLBACK_RGB } from "@/app/lib/config/parties";
 
 interface JapanMapProps {
@@ -81,15 +82,13 @@ export function JapanMap({
 	}, [ku2Party]);
 
   return (
-    <div className="relative" id="japan-map">
-		<div className="absolute right-3 top-3 z-30">
-			<button
-				type="button"
-				onClick={() => setMapResetCounter((c) => c + 1)}
-				className="rounded-full border border-white/10 bg-slate-900/80 px-3 py-1 text-[11px] text-slate-100 shadow-sm backdrop-blur hover:bg-slate-900"
-			>
+    <div id="japan-map">
+		{/* map, preview and reset share one box so the preview stops above the legend */}
+		<div className="relative">
+		<div className="mb-2 flex justify-end sm:absolute sm:top-3 sm:right-3 sm:z-30 sm:mb-0">
+			<Button size="sm" onClick={() => setMapResetCounter((c) => c + 1)}>
 				地図をリセット
-			</button>
+			</Button>
 		</div>
 		<PoliticianPreviewWindow
 			selectedDistrict={selectedDistrict}
@@ -106,7 +105,8 @@ export function JapanMap({
 			ku2Party={ku2Party}
 			resetCounter={mapResetCounter}
 		/>
-		<PartyLegend items={legendItems} caption="色＝小選挙区の当選者の会派" className="mt-2" />
+		</div>
+		<PartyLegend items={legendItems} caption="色＝小選挙区の当選者の会派" unit="区" className="mt-2" />
     </div>
   );
 }

@@ -116,17 +116,18 @@ export function DialSelector({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {label ? <div className="text-[11px] font-semibold text-gray-200">{label}</div> : null}
+      {label ? <div className="text-label-sm text-ink">{label}</div> : null}
 
       <div
         ref={discRef}
-        className="relative touch-none select-none"
+        className="relative touch-none select-none rounded-full"
         style={{ width: `${size}px`, height: `${size}px` }}
         role="slider"
-        aria-label={label ?? "Issue dial selector"}
+        aria-label={label ?? "発言ダイアル"}
         aria-valuemin={0}
         aria-valuemax={Math.max(0, count - 1)}
         aria-valuenow={clamp(selectedIndex, 0, Math.max(0, count - 1))}
+        aria-valuetext={count ? `${clamp(selectedIndex, 0, count - 1) + 1}番目の発言（全${count.toLocaleString("ja-JP")}件）` : "発言なし"}
         tabIndex={0}
         onKeyDown={(e) => {
           if (count <= 1) return;
@@ -140,17 +141,17 @@ export function DialSelector({
           }
         }}
       >
-        <svg width={size} height={size} className="block">
+        <svg width={size} height={size} className="block" aria-hidden>
           {/* Base disc */}
-          <circle cx={cx} cy={cy} r={rOuter} fill="rgba(2,6,23,0.55)" stroke="rgba(148,163,184,0.25)" />
-          <circle cx={cx} cy={cy} r={rInner} fill="rgba(2,6,23,0.9)" stroke="rgba(148,163,184,0.12)" />
+          <circle cx={cx} cy={cy} r={rOuter} className="fill-surface-raised stroke-line" />
+          <circle cx={cx} cy={cy} r={rInner} className="fill-surface stroke-line-subtle" />
 
           {/* Colored segments (ring) */}
           {segments?.map((seg, i) => {
             if (count <= 0) return null;
             const startT = seg.startIndex / count;
             const endT = seg.endIndex / count;
-            let startA = startT * Math.PI * 2;
+            const startA = startT * Math.PI * 2;
             let endA = endT * Math.PI * 2;
             // Avoid SVG "full circle" arc edge case when endA==2π.
             if (seg.endIndex === count) endA = Math.PI * 2 - 1e-4;
@@ -159,7 +160,8 @@ export function DialSelector({
               <path
                 key={i}
                 d={arcPath(cx, cy, rRing, startA, endA)}
-                stroke={seg.ringCss}
+                style={{ stroke: seg.ringCss }}
+                strokeOpacity={0.6}
                 strokeWidth={ringWidth}
                 strokeLinecap="butt"
                 fill="none"
@@ -182,16 +184,17 @@ export function DialSelector({
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke="rgba(148,163,184,0.25)"
+                className="stroke-line-strong"
+                strokeOpacity={0.5}
                 strokeWidth={1}
               />
             );
           })}
 
           {/* Handle + glow */}
-          <circle cx={hx} cy={hy} r={handleR + 7} fill="rgba(34,211,238,0.12)" />
-          <circle cx={hx} cy={hy} r={handleR + 2} fill="rgba(34,211,238,0.25)" />
-          <circle cx={hx} cy={hy} r={handleR} fill="rgba(34,211,238,0.95)" />
+          <circle cx={hx} cy={hy} r={handleR + 7} className="fill-primary" fillOpacity={0.12} />
+          <circle cx={hx} cy={hy} r={handleR + 2} className="fill-primary" fillOpacity={0.25} />
+          <circle cx={hx} cy={hy} r={handleR} className="fill-primary" />
 
           {/* Center label */}
           <text
@@ -199,18 +202,16 @@ export function DialSelector({
             y={cy + 4}
             textAnchor="middle"
             fontSize="12"
-            fill="rgba(226,232,240,0.85)"
-            fontWeight={700}
+            fontWeight={600}
+            className="fill-ink"
+            style={{ fontVariantNumeric: "tabular-nums" }}
           >
             {count ? `${selectedIndex + 1}/${count}` : "—"}
           </text>
         </svg>
-
-        {/* hover glow */}
-        <div className="pointer-events-none absolute inset-0 rounded-full opacity-0 ring-1 ring-cyan-400/30 transition-opacity group-hover:opacity-100" />
       </div>
 
-      <div className="text-[10px] text-gray-400">ドラッグで発言を選択</div>
+      <div className="text-caption text-ink-muted">ドラッグで発言を選択</div>
     </div>
   );
 }

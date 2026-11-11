@@ -78,7 +78,7 @@ export function Cursor({
     >
       <motion.div
         key={click}
-        className="-ml-[7px] -mt-[7px] h-3.5 w-3.5 rounded-full border border-white bg-cyan-400/25 shadow-[0_0_14px_rgba(34,211,238,0.55)]"
+        className="-ml-[7px] -mt-[7px] size-3.5 rounded-full border border-ink-strong bg-primary/25"
         animate={click > 0 ? { scale: [1, 0.8, 1] } : { scale: 1 }}
         transition={{ duration: 0.15 }}
       />
@@ -86,7 +86,7 @@ export function Cursor({
         {click > 0 && (
           <motion.div
             key={`ring-${click}`}
-            className="absolute left-0 top-0 -ml-3 -mt-3 h-6 w-6 rounded-full border border-cyan-300/70"
+            className="absolute left-0 top-0 -ml-3 -mt-3 size-6 rounded-full border border-primary/70"
             initial={{ scale: 0.3, opacity: 0.9 }}
             animate={{ scale: 1.7, opacity: 0 }}
             exit={{ opacity: 0 }}

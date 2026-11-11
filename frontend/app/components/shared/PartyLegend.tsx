@@ -1,5 +1,8 @@
 "use client";
 
+import { Legend } from "./Legend";
+import { cx } from "./cx";
+
 export interface PartyLegendItem {
   /** Party label as shown to the user (short name). */
   label: string;
@@ -13,32 +16,26 @@ interface PartyLegendProps {
   items: PartyLegendItem[];
   /** Short caption shown before the chips, e.g. 「色＝政党」. */
   caption?: string;
+  /** Unit after each count, e.g. 人 or 区. */
+  unit?: string;
   className?: string;
 }
 
 /**
  * Explicit colour → party legend shared by the scaling scatter and the district map.
  * Items are shown in the order given; callers sort by count so the big parties come first.
+ * Swatches keep a thin ring so dark party colours stay visible until the phase-4 palette lands.
  */
-export function PartyLegend({ items, caption, className = "" }: PartyLegendProps) {
+export function PartyLegend({ items, caption, unit = "", className }: PartyLegendProps) {
   if (!items.length) return null;
   return (
-    <div
-      className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-gray-300 ${className}`}
-      aria-label="政党の凡例"
-    >
-      {caption && <span className="text-gray-400">{caption}</span>}
-      {items.map((it) => (
-        <span key={`${it.label}:${it.color}`} className="inline-flex items-center gap-1 whitespace-nowrap">
-          <span
-            className="inline-block h-2.5 w-2.5 shrink-0 rounded-full border border-white/50"
-            style={{ backgroundColor: it.color }}
-            aria-hidden
-          />
-          <span>{it.label}</span>
-          {it.count != null && <span className="text-gray-500">{it.count}</span>}
-        </span>
-      ))}
+    <div role="group" aria-label="政党の凡例" className={className}>
+      <Legend
+        items={items}
+        title={caption}
+        unit={unit}
+        className={cx("[&_li>span:first-child]:ring-1 [&_li>span:first-child]:ring-ink-muted")}
+      />
     </div>
   );
 }
