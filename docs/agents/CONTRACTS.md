@@ -33,6 +33,21 @@ point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point:
 
 `1d.x` is the projection onto the sub-topic axis (0 = midpoint, positive = pro); the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
 
+### Per-person stance summaries (`/ideology/person`, spec `specs/stance-summaries-panel/`)
+
+`GET /ideology/person?person_id=268` → `kokkai-doc/ideology/persons/{person_id}.json`, or `{ version: 1, person_id, topics: [] }` when the file is missing (never 500). Written by the same `topic_scaling` publish call as the ideology file; proxied by `app/api/ideology/person`; read by the detail pane's 立場 tab.
+
+```
+{ version: 1, person_id, generated_at, ideology_generated_at,
+  topics: [ { topic: "defence", topic_en: "Defence", topic_jp: "防衛", window: {from, to},
+              n_speeches, n_opinions, first_speech, last_speech,
+              model, prompt_version, summarised_at,      # model may be "a, b" when runs fell back
+              summaries: [run1, run2, run3],              # preamble already stripped
+              speech_ids?: [...] } ] }                    # contributing speeches; absent when not reproducible
+```
+
+Topics are in `experiment_config.json` order. Only (person, topic) pairs plotted in the ideology file are written; orphan files are never deleted, so the frontend shows a topic only when the loaded ideology data plots the person on it. TypeScript: `PersonStances` / `PersonStanceTopic` in `frontend/app/types/index.ts`.
+
 ### Exchange quality labels (`/speeches/quality/*`, spec `specs/speech-quality-ui/`)
 
 - `GET /speeches/quality/aggregate` → `kokkai-doc/speech_quality/aggregate.json`: `{ version, generated_at, prompt_version, models, coverage: {from, to, exchanges, meetings}, totals: {as_questioner, as_answerer}, persons: [{ person_id, name, group, as_questioner: Counts|null, as_answerer: AnswerCounts|null }] }`. Fetched server-side in `page.tsx` (raw, >1 MB) and passed to `SpeechQualityBarList` and `DetailPane`.
@@ -45,6 +60,7 @@ point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point:
 Some browser-facing calls go through Next.js route handlers instead of hitting FastAPI directly:
 
 - `app/api/speeches/*` — speech fetch, availability, first page of topics, issue by ID, a person's labelled exchanges (`quality_person`)
+- `app/api/ideology/person` — a person's stance summaries (`/ideology/person`)
 - `app/api/electionHistory/route.ts`
 - `app/api/donors/route.ts`
 - `app/api/payment/*` — create payment intent / session

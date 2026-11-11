@@ -1,12 +1,24 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { AllParliamentMemberTableData, ElectionHistoryData, QualityAggregate, QualityExchange, SpeechRecord } from "@/app/types";
+import { track } from "@vercel/analytics";
+import type {
+  AllParliamentMemberTableData,
+  ElectionHistoryData,
+  IdeologyData,
+  PersonStances,
+  PersonStanceTopic,
+  QualityAggregate,
+  QualityExchange,
+  SpeechRecord,
+} from "@/app/types";
 import { fetchElectionHistory } from "@/app/lib/services/electionHistoryService";
+import { fetchPersonStances } from "@/app/lib/services/ideologyService";
 import { fetchFirstPageOfAllTopics, fetchPersonQuality, fetchSpeechPage } from "@/app/lib/services/speechesService";
 import { ElectionHistoryCard } from "@/app/components/features/ElectionHistoryCard";
 import { SpeechRecordCard, type SpeechTopicState } from "@/app/components/features/SpeechRecordCard";
 import { PersonQualityPanel } from "@/app/components/features/PersonQualityPanel";
+import { PersonStancePanel } from "@/app/components/features/PersonStancePanel";
 import { ContributionBar } from "@/app/components/visualizations/SpeechQualityBarList";
 import { indexExchanges, issueTotal, pct, rate } from "@/app/lib/quality";
 
@@ -16,10 +28,15 @@ interface DetailPaneProps {
   onClose: () => void;
   allParliamentMemberTable?: AllParliamentMemberTableData[] | null;
   qualityAggregate: QualityAggregate | null;
+  /** the loaded ideology file: percentile bars and the stale-file guard for the 立場 tab */
+  ideologyData?: IdeologyData | null;
+  /** 立場 tab's 「手法と限界」 link: show the ideology card's methodology slides */
+  onOpenMethodology?: () => void;
   setSelectedIssueId: (issueId: string | null) => void;
   setSelectedIssueSpeechId: (speechId: string | null) => void;
-  /** the guided tour asks for a tab; `nonce` changes on every request */
-  panelRequest?: { panel: (typeof PANEL_ORDER)[number]; nonce: number } | null;
+  /** the guided tour or the scatter plot asks for a tab; `nonce` changes on every request; `topic` (a topic
+   * slug) scrolls the 立場 tab to that card */
+  panelRequest?: { panel: (typeof PANEL_ORDER)[number]; nonce: number; topic?: string | null } | null;
   onPanelChange?: (panel: (typeof PANEL_ORDER)[number]) => void;
 }
 
@@ -33,7 +50,10 @@ function topicDisplayName(topic: string): string {
 }
 
 
-const PANEL_ORDER = ["speeches", "quality", "history"] as const;
+const PANEL_ORDER = ["speeches", "quality", "history", "stances"] as const;
+const PANEL_COUNT = PANEL_ORDER.length;
+/** each panel takes 1/N of the strip; written out so Tailwind sees the class */
+const panelClass = "flex h-full w-1/4 min-w-0 flex-col gap-2 overflow-hidden";
 
 export function DetailPane({
   personId,
@@ -41,6 +61,8 @@ export function DetailPane({
   onClose,
   allParliamentMemberTable,
   qualityAggregate,
+  ideologyData = null,
+  onOpenMethodology,
   setSelectedIssueId,
   setSelectedIssueSpeechId,
   panelRequest,
@@ -54,12 +76,31 @@ export function DetailPane({
 
   const [activePanel, setActivePanel] = useState<(typeof PANEL_ORDER)[number]>("speeches");
 
+  const [stanceFocus, setStanceFocus] = useState<{ topic: string | null; nonce: number } | null>(null);
+  const handledRequestRef = useRef<number | null>(null);
+  const lastPersonRef = useRef<string | null>(null);
+  // One effect decides the tab, so a new person opened together with a request (a scatter click) lands on
+  // the requested tab, and any other new person resets to 発言.
   useEffect(() => {
-    if (panelRequest) setActivePanel(panelRequest.panel);
-  }, [panelRequest]);
+    if (!isOpen || !personId) {
+      lastPersonRef.current = null;
+      return;
+    }
+    if (panelRequest && panelRequest.nonce !== handledRequestRef.current) {
+      handledRequestRef.current = panelRequest.nonce;
+      setActivePanel(panelRequest.panel);
+      if (panelRequest.panel === "stances") setStanceFocus({ topic: panelRequest.topic ?? null, nonce: panelRequest.nonce });
+    } else if (lastPersonRef.current !== personId) {
+      setActivePanel("speeches");
+    }
+    lastPersonRef.current = personId;
+  }, [isOpen, personId, panelRequest]);
   useEffect(() => {
     onPanelChange?.(activePanel);
   }, [activePanel, onPanelChange]);
+  useEffect(() => {
+    if (isOpen && personId) track("DetailPanelView", { panel: activePanel });
+  }, [activePanel, isOpen, personId]);
   const [history, setHistory] = useState<ElectionHistoryData[] | null>(null);
   const [historyError, setHistoryError] = useState<string | null>(null);
 
@@ -71,6 +112,11 @@ export function DetailPane({
   const [exchanges, setExchanges] = useState<QualityExchange[] | null>(null);
   const [exchangesError, setExchangesError] = useState<string | null>(null);
   const [exchangesLoading, setExchangesLoading] = useState(false);
+
+  const [stances, setStances] = useState<PersonStances | null>(null);
+  const [stancesError, setStancesError] = useState<string | null>(null);
+  const [stancesLoading, setStancesLoading] = useState(false);
+  const [markedSpeeches, setMarkedSpeeches] = useState<{ topicKey: string; topicJp: string; ids: Set<string> } | null>(null);
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -169,6 +215,28 @@ export function DetailPane({
   useEffect(() => {
     if (!isOpen || !personId) return;
     let cancelled = false;
+    setStances(null);
+    setStancesError(null);
+    setStancesLoading(true);
+    setMarkedSpeeches(null);
+    (async () => {
+      try {
+        const data = await fetchPersonStances(personId);
+        if (!cancelled) setStances(data);
+      } catch (e) {
+        if (!cancelled) setStancesError(e instanceof Error ? e.message : "Unknown error");
+      } finally {
+        if (!cancelled) setStancesLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, personId]);
+
+  useEffect(() => {
+    if (!isOpen || !personId) return;
+    let cancelled = false;
     setHistory(null);
     setHistoryError(null);
     (async () => {
@@ -190,7 +258,6 @@ export function DetailPane({
     setSpeechTopics(null);
     setSpeechError(null);
     setSelectedTopicKey(null);
-    setActivePanel("speeches");
     (async () => {
       try {
         const data = await fetchFirstPageOfAllTopics(personId);
@@ -293,6 +360,15 @@ export function DetailPane({
 
   const setSelectedTopicKeySafe = (topicKey: string) => setSelectedTopicKey(topicKey);
 
+  // 「元になった発言を見る」: switch to 発言 on that topic, first page, with the contributing speeches marked
+  const showStanceSpeeches = (topic: PersonStanceTopic) => {
+    track("StanceProvenanceClick", { topic: topic.topic });
+    setMarkedSpeeches({ topicKey: topic.topic_en, topicJp: topic.topic_jp, ids: new Set(topic.speech_ids ?? []) });
+    setSelectedTopicKey(topic.topic_en);
+    setActivePanel("speeches");
+    void ensureSpeechPage(topic.topic_en, 0);
+  };
+
   if (!isOpen || !personId) {
     return null;
   }
@@ -382,6 +458,20 @@ export function DetailPane({
               >
                 選挙履歴
               </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activePanel === "stances"}
+                onClick={() => setActivePanel("stances")}
+                className={
+                  "rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors " +
+                  (activePanel === "stances"
+                    ? "bg-cyan-500/20 text-cyan-100"
+                    : "text-gray-300 hover:bg-slate-900/50")
+                }
+              >
+                立場
+              </button>
             </div>
           </div>
           <div className="text-[11px] text-gray-400">
@@ -448,13 +538,13 @@ export function DetailPane({
           ) : null}
         </div>
 
-        {/* The three views sit side by side and slide, so switching reads as a tab change, not a collapse. */}
+        {/* The views sit side by side and slide, so switching reads as a tab change, not a collapse. */}
         <div className="min-h-0 flex-1 overflow-hidden pr-1">
           <div
-            className="flex h-full w-[300%] transition-transform duration-300 ease-out motion-reduce:transition-none"
-            style={{ transform: `translateX(-${PANEL_ORDER.indexOf(activePanel) * (100 / 3)}%)` }}
+            className="flex h-full transition-transform duration-300 ease-out motion-reduce:transition-none"
+            style={{ width: `${PANEL_COUNT * 100}%`, transform: `translateX(-${PANEL_ORDER.indexOf(activePanel) * (100 / PANEL_COUNT)}%)` }}
           >
-            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "speeches"} inert={activePanel !== "speeches"}>
+            <div className={panelClass} aria-hidden={activePanel !== "speeches"} inert={activePanel !== "speeches"}>
               <SpeechRecordCard
                 exchangeIndex={exchangeIndex}
                 speechTopics={speechTopics}
@@ -468,9 +558,11 @@ export function DetailPane({
                   setSelectedIssueId(issueId);
                   setSelectedIssueSpeechId(speechId ?? null);
                 }}
+                markedSpeeches={markedSpeeches}
+                onClearMarked={() => setMarkedSpeeches(null)}
               />
             </div>
-            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "quality"} inert={activePanel !== "quality"}>
+            <div className={panelClass} aria-hidden={activePanel !== "quality"} inert={activePanel !== "quality"}>
               <PersonQualityPanel
                 person={qualityPerson}
                 totals={qualityAggregate?.totals ?? null}
@@ -483,8 +575,21 @@ export function DetailPane({
                 }}
               />
             </div>
-            <div className="flex h-full w-1/3 min-w-0 flex-col gap-2 overflow-hidden" aria-hidden={activePanel !== "history"} inert={activePanel !== "history"}>
+            <div className={panelClass} aria-hidden={activePanel !== "history"} inert={activePanel !== "history"}>
               <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
+            </div>
+            <div className={panelClass} aria-hidden={activePanel !== "stances"} inert={activePanel !== "stances"}>
+              <PersonStancePanel
+                key={personId}
+                personId={personId}
+                stances={stances}
+                loading={stancesLoading}
+                error={stancesError}
+                ideologyData={ideologyData}
+                focus={stanceFocus}
+                onShowSpeeches={showStanceSpeeches}
+                onOpenMethodology={onOpenMethodology}
+              />
             </div>
           </div>
         </div>

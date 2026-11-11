@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { THIN_EVIDENCE_OPINIONS } from "@/app/lib/stances";
 import * as d3 from "d3";
 import type { IdeologyData, PersonIdeologyData } from "@/app/types";
 
@@ -30,8 +31,9 @@ type AvailableConfig = { availability: AvailableTopic[] };
 interface IdeologicalScatterPlotProps {
   ideologyData: IdeologyData | null;
   selectedPersonId: string | null;
-  onPoliticianSelect: (id: string) => void;
-  onTooltipShow: (data: { title: string; meta: string }, x: number, y: number) => void;
+  /** `topic` is the plot's selected topic slug, so the detail pane can open on its 立場 card */
+  onPoliticianSelect: (id: string, meta: { topic: string | null }) => void;
+  onTooltipShow: (data: { title: string; meta: string; warning?: string }, x: number, y: number) => void;
   onTooltipHide: () => void;
 }
 
@@ -131,6 +133,10 @@ export function IdeologicalScatterPlot({
   }, [selectedTopicIdx, filteredTopics]);
 
   const selectedTopic = filteredTopics[selectedTopicIdx] ?? null;
+  const selectedTopicSlugRef = useRef<string | null>(null);
+  useEffect(() => {
+    selectedTopicSlugRef.current = selectedTopic?.topic ?? null;
+  }, [selectedTopic?.topic]);
 
   const filteredSubTopics = useMemo(() => {
     const base = selectedTopic?.sub_topics ?? [];
@@ -314,12 +320,13 @@ export function IdeologicalScatterPlot({
           (mode === "2d"
             ? `${d.party} • x:${d.x.toFixed(2)} y:${d.y.toFixed(2)}`
             : `${d.party} • x:${d.x.toFixed(2)}`) + (extra ? ` • ${extra}` : "");
-        onTooltipShowRef.current({ title: d.repr, meta }, event.clientX, event.clientY);
+        const warning = d.n_opinions != null && d.n_opinions < THIN_EVIDENCE_OPINIONS ? "根拠が少ない" : undefined;
+        onTooltipShowRef.current({ title: d.repr, meta, warning }, event.clientX, event.clientY);
       })
       .on("mouseleave", () => onTooltipHideRef.current())
       .on("click", (_event, d) => {
         const id = d.person_id != null ? String(d.person_id) : d.repr;
-        onPoliticianSelectRef.current(id);
+        onPoliticianSelectRef.current(id, { topic: selectedTopicSlugRef.current });
       });
 
     // Zoom behavior (pan/zoom the points + guides)

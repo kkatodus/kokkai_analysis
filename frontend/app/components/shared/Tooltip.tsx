@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 interface TooltipData {
   title: string;
   meta?: string;
+  /** short amber note, e.g. 根拠が少ない */
+  warning?: string;
 }
 
 interface TooltipProps {
@@ -35,6 +37,7 @@ export function Tooltip({ data, x, y }: TooltipProps) {
     >
       <div className="font-semibold">{data.title}</div>
       {data.meta && <div className="mt-0.5 text-[10px] text-gray-400">{data.meta}</div>}
+      {data.warning && <div className="mt-0.5 text-[10px] font-semibold text-amber-300">{data.warning}</div>}
     </div>
   );
 }

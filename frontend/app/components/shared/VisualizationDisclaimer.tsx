@@ -103,6 +103,9 @@ export function IdeologyDisclaimerContent({ ideologyData }: { ideologyData?: Ide
             <div>③ LLMがその人の意見を論点ごとに要約します（複数回行い平均します）</div>
             <div>④ 要約文を埋め込みモデルで数値ベクトルにします</div>
             <div className="sm:col-span-2">⑤ 「賛成」「反対」の基準となる文章（生成した模範発言）との位置関係で1次元に、議員どうしの近さで2次元に配置します</div>
+            <div className="sm:col-span-2 text-cyan-200/90">
+              ③ の要約の本文は議員の詳細パネル「立場」タブで読めます。要約には氏名を含めないよう指示していますが、役職名が残ることがあります。
+            </div>
           </div>
         </div>
       </Slide>

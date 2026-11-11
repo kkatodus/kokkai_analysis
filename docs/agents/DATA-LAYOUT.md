@@ -24,6 +24,7 @@ Raw and intermediate pipeline outputs stay in `data/data/`. The FastAPI backend 
 | (derived from repr/geo pipelines) | `parliamentMembers/`, `politicians/`, `geo/`, `ideology/` | `routers/parliamentMember.py`, etc. |
 | (fetched by `data/person_images/`) | `person_images/{person_id}.jpg` + `person_images/index.json` (source, licence, attribution) | none yet; frontend can read the index |
 | `s3_mirror/.topic-scaling/` (summaries, embeddings, opinion cache) | `ideology/ideology.json.gz` + `ideology/history/ideology-YYYY-MM-DD.json.gz` | `routers/ideology.py` (written by `data/topic_scaling`) |
+| `s3_mirror/.topic-scaling/summaries/` + `select.json` + opinion cache | `ideology/persons/{person_id}.json` (stance summaries, counts, contributing speech IDs; only changed files uploaded, never deleted) | `routers/ideology.py` `/ideology/person` (spec `specs/stance-summaries-panel/`) |
 
 When adding a new dataset the frontend should consume, expect a pipeline step under `data/data/` **and** an upload/sync into `s3_mirror/kokkai-doc/`.
 
@@ -48,10 +49,6 @@ Keyed by Postgres `person_id`.
 - `all_speeches.jsonl` — **complete** speech archive for that politician
 - Topic files (`Defence.jsonl`, etc.) — subsets matching `resource/experiment_config.json` search words
 - Built by `reorganize_all_repr_speeches.py`; kept current in `s3_mirror/` by `data/speech_update/` (lines sorted newest meeting first, keyed by `speechID`)
-
-### Per-politician topic summaries — `idea_summaries/`
-
-`{person_id}/{TopicNameEn}/opinions.json` + `summary.json`. Produced by `create_idea_summaries.ipynb`.
 
 ### Exchange quality labels — `s3_mirror/kokkai-doc/speech_quality/`
 
