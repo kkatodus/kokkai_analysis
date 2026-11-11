@@ -63,6 +63,34 @@ export interface IdeologyData {
 	data: IdeologyTopic[];
 }
 
+/** One topic of a person's stance file, kokkai-doc/ideology/persons/{person_id}.json (specs/stance-summaries-panel §4.2) */
+export interface PersonStanceTopic {
+	topic: string;
+	topic_en: string;
+	topic_jp: string;
+	window: IdeologyWindow;
+	n_speeches: number | null;
+	n_opinions: number | null;
+	first_speech: string | null;
+	last_speech: string | null;
+	/** may hold two models joined by ", " when runs fell back to the other provider */
+	model: string | null;
+	prompt_version: string | null;
+	summarised_at: string | null;
+	/** three runs in run order */
+	summaries: string[];
+	/** contributing speech IDs, sorted; absent when the opinion cache could not reproduce them */
+	speech_ids?: string[];
+}
+
+export interface PersonStances {
+	version: number;
+	person_id: number;
+	generated_at?: string;
+	ideology_generated_at?: string;
+	topics: PersonStanceTopic[];
+}
+
 
 export interface AllParliamentMemberTableData {
 	person_id: string;

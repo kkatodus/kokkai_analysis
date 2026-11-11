@@ -79,7 +79,7 @@ function ParliamentExplorerClientInner({
   
   const [selectedIssueIdState, setSelectedIssueId] = useState<string | null>(null);
   const [selectedIssueSpeechIdState, setSelectedIssueSpeechId] = useState<string | null>(null);
-  const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
+  const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string; warning?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
   const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
@@ -89,7 +89,7 @@ function ParliamentExplorerClientInner({
   // guided tour (specs/speech-quality-ui follow-up): state lives here so steps can drive the panes
   const [tourStep, setTourStep] = useState<number | null>(null);
   const [detailPanel, setDetailPanel] = useState<DetailPanel | null>(null);
-  const [panelRequest, setPanelRequest] = useState<{ panel: DetailPanel; nonce: number } | null>(null);
+  const [panelRequest, setPanelRequest] = useState<{ panel: DetailPanel; nonce: number; topic?: string | null } | null>(null);
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
   useEffect(() => {
@@ -117,7 +117,7 @@ function ParliamentExplorerClientInner({
   const handlePoliticianSelect = useCallback(
     (
       id: string | null,
-      meta?: { source?: string; queryLength?: number | null }
+      meta?: { source?: string; queryLength?: number | null; topic?: string | null }
     ) => {
       const source = meta?.source ?? "unknown";
 
@@ -141,6 +141,12 @@ function ParliamentExplorerClientInner({
         track("ClosePoliticianDetail", { source });
       }
 
+    // A click on the scatter plot came from a position: open on its explanation, the 立場 card for the
+    // plot's topic (specs/stance-summaries-panel §6.4). Every other entry keeps the reset to 発言.
+    if (id && source === "ideology_scatter") {
+      setPanelRequest((r) => ({ panel: "stances", nonce: (r?.nonce ?? 0) + 1, topic: meta?.topic ?? null }));
+    }
+
     // Update local state
     setSelectedPersonId(id);
 
@@ -157,7 +163,7 @@ function ParliamentExplorerClientInner({
   );
 
   const handleTooltipShow = useCallback(
-    (data: { title: string; meta?: string }, x: number, y: number) => {
+    (data: { title: string; meta?: string; warning?: string }, x: number, y: number) => {
       setTooltipData(data);
       setTooltipPos({ x, y });
     },
@@ -325,8 +331,8 @@ function ParliamentExplorerClientInner({
                       <IdeologicalScatterPlot
                         ideologyData={ideologyData}
                         selectedPersonId={selectedPersonId}
-                        onPoliticianSelect={(id) =>
-                          handlePoliticianSelect(id, { source: "ideology_scatter" })
+                        onPoliticianSelect={(id, meta) =>
+                          handlePoliticianSelect(id, { source: "ideology_scatter", topic: meta.topic })
                         }
                         onTooltipShow={handleTooltipShow}
                         onTooltipHide={handleTooltipHide}
@@ -456,6 +462,11 @@ function ParliamentExplorerClientInner({
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
         qualityAggregate={qualityAggregate}
+        ideologyData={ideologyData}
+        onOpenMethodology={() => {
+          setShowIdeologyDisclaimer(true);
+          document.querySelector('[data-tour="ideology-card"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
 		setSelectedIssueId={setSelectedIssueId}
         setSelectedIssueSpeechId={setSelectedIssueSpeechId}
         panelRequest={panelRequest}

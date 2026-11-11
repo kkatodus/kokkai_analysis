@@ -3,7 +3,7 @@
  * Action steps read TourState and advance when `isDone` turns true; `fallback` does it for the user.
  */
 
-export type DetailPanel = "speeches" | "quality" | "history";
+export type DetailPanel = "speeches" | "quality" | "history" | "stances";
 
 export interface TourState {
   personOpen: boolean;
@@ -145,6 +145,17 @@ export const TOUR_STEPS: TourStep[] = [
     placement: "left",
     scrollBlock: "nearest",
     onEnter: (a) => a.setDetailPanel("history"),
+  },
+  {
+    id: "stances-tab",
+    target: '[data-tour="detail-pane"]',
+    title: "立場タブ",
+    body:
+      "国会での発言を AI が論点ごとに要約し、各論点での位置と並べています。" +
+      "「元になった発言を見る」で根拠の発言に飛べます。",
+    placement: "left",
+    scrollBlock: "nearest",
+    onEnter: (a) => a.setDetailPanel("stances"),
   },
   {
     id: "ideology",
