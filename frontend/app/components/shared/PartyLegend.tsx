@@ -24,7 +24,6 @@ interface PartyLegendProps {
 /**
  * Explicit colour → party legend shared by the scaling scatter and the district map.
  * Items are shown in the order given; callers sort by count so the big parties come first.
- * Swatches keep a thin ring so dark party colours stay visible until the phase-4 palette lands.
  */
 export function PartyLegend({ items, caption, unit = "", className }: PartyLegendProps) {
   if (!items.length) return null;
@@ -34,7 +33,6 @@ export function PartyLegend({ items, caption, unit = "", className }: PartyLegen
         items={items}
         title={caption}
         unit={unit}
-        className={cx("[&_li>span:first-child]:ring-1 [&_li>span:first-child]:ring-ink-muted")}
       />
     </div>
   );

@@ -13,6 +13,21 @@ import { Field, Select } from "@/app/components/shared/inputs";
 import { SegmentedControl } from "@/app/components/shared/Tabs";
 import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
 import availableConfig from "@/app/data/available.json";
+import { PARTY2RGBCOLOR, canonicalParty, partyCss } from "@/app/lib/config/parties";
+
+// Point colour comes from the site palette (specs/design-system §7 "Party palette"), not from the
+// ideology file's `color` field. 民進 keeps sharing 国民's colour as it always has on this chart.
+const SCATTER_LINEAGE: Record<string, string> = { 民進: "国民" };
+const OTHER_COLOR = partyCss(null);
+
+function pointColor(d: PersonIdeologyData): string {
+  if (d.ref_point && d.ref_point !== "none") return d.color || OTHER_COLOR;
+  const party = SCATTER_LINEAGE[d.party] ?? d.party;
+  if (PARTY2RGBCOLOR[canonicalParty(party)]) return partyCss(party);
+  // past parties the palette does not cover keep their own colour unless the file marks them grey
+  if (d.color && d.color !== "grey") return d.color;
+  return OTHER_COLOR;
+}
 
 type AvailableAxis = { pro: string; con: string };
 type AvailableSubtopic = {
@@ -212,22 +227,22 @@ export function IdeologicalScatterPlot({
   }, [selectedSubTopic, mode, effectiveScope]);
 
   // Legend for the plotted points: one chip per colour. Several parties can share a colour
-  // (e.g. 民主 → 民進 → 国民 are all blue); the chip lists them. Grey marks small or defunct
-  // parties the scaling job does not colour individually, shown as その他.
+  // (e.g. 国民 and 民進); the chip lists them. Parties without a colour are shown as その他.
   const legendItems = useMemo<PartyLegendItem[]>(() => {
     const byColor = new Map<string, Map<string, number>>();
     for (const d of points) {
       if (d.ref_point && d.ref_point !== "none") continue; // reference points are not politicians
-      const color = d.color || "#38bdf8";
+      const color = pointColor(d);
       const parties = byColor.get(color) ?? new Map<string, number>();
-      parties.set(d.party, (parties.get(d.party) ?? 0) + 1);
+      const name = canonicalParty(d.party);
+      parties.set(name, (parties.get(name) ?? 0) + 1);
       byColor.set(color, parties);
     }
     const items: PartyLegendItem[] = [];
     for (const [color, parties] of byColor) {
       const count = Array.from(parties.values()).reduce((a, b) => a + b, 0);
       const names = Array.from(parties.entries()).sort((a, b) => b[1] - a[1]).map(([p]) => p);
-      const label = color === "grey" ? "その他" : names.join("・");
+      const label = color === OTHER_COLOR ? "その他" : names.join("・");
       items.push({ label, color, count });
     }
     return items.sort((a, b) => (a.label === "その他" ? 1 : b.label === "その他" ? -1 : b.count! - a.count!));
@@ -342,7 +357,7 @@ export function IdeologicalScatterPlot({
     // Points
     const baseR = 4;
     const UNSELECTED_STROKE = "rgba(255,255,255,0.55)";
-    const SELECTED_STROKE = "rgba(255,255,255,0.95)";
+    const SELECTED_STROKE = "#22d3ee"; // primary: the cyan selection ring
     const circles = g
       .selectAll("circle")
       .data(points)
@@ -352,7 +367,7 @@ export function IdeologicalScatterPlot({
       // In 1D mode we still use y for separation (prevents overlap / improves clickability)
       .attr("cy", (d) => yScale(d.y))
       .attr("r", baseR)
-      .attr("fill", (d) => d.color || "#38bdf8")
+      .attr("fill", (d) => pointColor(d))
       .attr("opacity", 0.9)
       // Slightly brighter outline so dark/black dots remain visible.
       .attr("stroke", UNSELECTED_STROKE)

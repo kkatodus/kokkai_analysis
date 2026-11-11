@@ -6,7 +6,7 @@ import VoteDistrictMap from "./components/VoteDistrictMap";
 import PoliticianPreviewWindow from "./components/PoliticianPreviewWindow";
 import { PartyLegend, type PartyLegendItem } from "@/app/components/shared/PartyLegend";
 import { Button } from "@/app/components/shared/Button";
-import { PARTY2RGBCOLOR, PARTY_FALLBACK_RGB } from "@/app/lib/config/parties";
+import { PARTY2RGBCOLOR, PARTY_FALLBACK_RGB, canonicalParty } from "@/app/lib/config/parties";
 
 interface JapanMapProps {
   votingDistrictGeoJsonData: any;
@@ -72,7 +72,8 @@ export function JapanMap({
 		let other = 0;
 		for (const [district, { kaiha }] of Object.entries(ku2Party)) {
 			if (/比例|[（(]比[）)]/.test(district)) continue; // proportional blocks (e.g. 「（比）北関東」) are not on the map
-			if (PARTY2RGBCOLOR[kaiha]) counts.set(kaiha, (counts.get(kaiha) ?? 0) + 1);
+			const party = canonicalParty(kaiha);
+			if (PARTY2RGBCOLOR[party]) counts.set(party, (counts.get(party) ?? 0) + 1);
 			else other += 1;
 		}
 		const items = Array.from(counts, ([label, count]) => ({ label, color: rgb(PARTY2RGBCOLOR[label]), count }))

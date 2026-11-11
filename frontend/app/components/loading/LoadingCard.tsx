@@ -6,7 +6,7 @@ import { useState } from "react";
 import type { LoadingCardItem } from "./content";
 
 const KIND_LABEL: Record<LoadingCardItem["kind"], string> = { tip: "使い方", fact: "豆知識", quiz: "クイズ" };
-const KIND_TONE: Record<LoadingCardItem["kind"], BadgeTone> = { tip: "accent", fact: "info", quiz: "warning" };
+const KIND_TONE: Record<LoadingCardItem["kind"], BadgeTone> = { tip: "accent", fact: "info", quiz: "neutral" };
 
 type Props = {
   item: LoadingCardItem;
