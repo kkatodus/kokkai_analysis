@@ -120,7 +120,7 @@ function VoteDistrictMap({
     pickable: true,
   });
   return (
-    <div className="relative h-[500px] ">
+    <div className="relative h-[500px] overflow-hidden rounded-lg">
       <DeckGL
         viewState={viewState as any}
         onViewStateChange={({ viewState: next, interactionState }) => {
