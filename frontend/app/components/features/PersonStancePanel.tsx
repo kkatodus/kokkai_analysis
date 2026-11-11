@@ -64,9 +64,14 @@ function SummaryText({ text }: { text: string }) {
 }
 
 function PositionBar({ pos }: { pos: SubTopicPosition }) {
-  const right = pos.percentile >= pos.median;
+  const right = pos.side ? pos.side === "pro" : pos.percentile >= pos.cut;
   const share = Math.max(1, Math.round((right ? 1 - pos.percentile : pos.percentile) * 100));
-  const caption = `${right ? "賛成側" : "反対側"}の上位 ${share} %`;
+  const caption =
+    pos.side === "neutral"
+      ? "中立付近"
+      : pos.side
+        ? `${right ? "賛成寄り" : "反対寄り"}（${right ? "賛成" : "反対"}側の端から ${share} %）`
+        : `${right ? "賛成側" : "反対側"}の上位 ${share} %`;
   const left = `${(pos.percentile * 100).toFixed(1)}%`;
   return (
     <div className="space-y-0.5">
@@ -85,10 +90,17 @@ function PositionBar({ pos }: { pos: SubTopicPosition }) {
           role="img"
           aria-label={`${pos.label}：${caption}（${pos.n.toLocaleString()} 人中）`}
         >
+          {pos.band && pos.band[1] > pos.band[0] && (
+            <div
+              className="absolute inset-y-0.5 bg-white/15"
+              style={{ left: `${(pos.band[0] * 100).toFixed(1)}%`, width: `${((pos.band[1] - pos.band[0]) * 100).toFixed(1)}%` }}
+              title="中立帯（賛否が混在する範囲）"
+            />
+          )}
           <div
             className="absolute inset-y-0.5 w-px bg-white/50"
-            style={{ left: `${(pos.median * 100).toFixed(1)}%` }}
-            title="中央値"
+            style={{ left: `${(pos.cut * 100).toFixed(1)}%` }}
+            title={pos.side ? "賛否の分かれ目（発言の要約から推定）" : "中央値"}
           />
           <div
             className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow ring-2 ring-[#020617]"

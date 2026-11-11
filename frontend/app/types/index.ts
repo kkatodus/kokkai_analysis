@@ -27,11 +27,23 @@ export interface IdeologyWindow {
 	to: string | null;
 }
 
+/** Pro/con reference sentences; calibrated axes also carry where stances really switch (data/axis/midpoints.json). */
+export interface IdeologyAxis {
+	pro: string;
+	con: string;
+	/** 1D x where con turns into pro; absent on uncalibrated axes */
+	midpoint?: number;
+	/** 1D x band of mixed / neutral stances around the midpoint */
+	neutral_from?: number;
+	neutral_to?: number;
+	confidence?: "high" | "medium";
+}
+
 export interface IdeologySubTopic {
 	topic: string;
 	sub_topic: string;
 	sub_topic_jp?: string;
-	axis?: { pro: string; con: string };
+	axis?: IdeologyAxis;
 	"1d":{
 		data: PersonIdeologyData[]
 	}

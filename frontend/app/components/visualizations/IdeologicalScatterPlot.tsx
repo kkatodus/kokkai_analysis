@@ -165,11 +165,20 @@ export function IdeologicalScatterPlot({
     const rawTopic = selectedSubTopic?.topic ?? selectedTopic?.topic;
     const rawSub = selectedSubTopic?.sub_topic;
     const cfg = findSubtopicCfg(rawTopic, rawSub);
-    const axis = cfg?.axis;
+    // Text from available.json; the calibrated midpoint comes from the data file.
+    const dataAxis = selectedSubTopic?.axis;
+    const axis = cfg?.axis
+      ? {
+          ...cfg.axis,
+          midpoint: dataAxis?.midpoint,
+          neutral_from: dataAxis?.neutral_from,
+          neutral_to: dataAxis?.neutral_to,
+        }
+      : undefined;
     // default: show if not explicitly false
     const showSpectrum = cfg?.showSpectrum !== false && Boolean(axis);
     return { axis, showSpectrum };
-  }, [selectedTopic?.topic, selectedSubTopic?.topic, selectedSubTopic?.sub_topic]);
+  }, [selectedTopic?.topic, selectedSubTopic]);
 
   // v2 files flag each point with `current`; a v1 file has no flag, so the toggle is disabled.
   const hasScope = useMemo(
@@ -287,6 +296,38 @@ export function IdeologicalScatterPlot({
         .attr("text-anchor", "end")
         .attr("class", "fill-gray-400 text-[10px]")
         .text(xHighLabel);
+
+      // Where stances really switch from con to pro (hand-calibrated; raw x = 0 is not the political middle)
+      const ax = selectedAxis.showSpectrum ? selectedAxis.axis : null;
+      if (ax?.midpoint != null && ax.neutral_from != null && ax.neutral_to != null) {
+        const x0 = xScale(ax.neutral_from);
+        const x1 = xScale(ax.neutral_to);
+        if (x1 - x0 > 0.5) {
+          g.append("rect")
+            .attr("x", x0)
+            .attr("y", 0)
+            .attr("width", x1 - x0)
+            .attr("height", innerHeight)
+            .attr("fill", "rgba(255,255,255,0.06)")
+            .append("title")
+            .text("中立帯：賛否が混在する範囲");
+        }
+        const xm = xScale(ax.midpoint);
+        g.append("line")
+          .attr("x1", xm)
+          .attr("x2", xm)
+          .attr("y1", 0)
+          .attr("y2", innerHeight)
+          .attr("stroke", "rgba(255,255,255,0.45)")
+          .attr("stroke-dasharray", "4 3")
+          .attr("stroke-width", 1);
+        g.append("text")
+          .attr("x", xm)
+          .attr("y", 10)
+          .attr("text-anchor", "middle")
+          .attr("class", "fill-gray-300 text-[10px]")
+          .text("賛否の分かれ目");
+      }
     }
 
     // Points
@@ -350,7 +391,7 @@ export function IdeologicalScatterPlot({
       onTooltipHideRef.current();
       circles.on("mousemove", null).on("mouseleave", null).on("click", null);
     };
-  }, [points, mode, selectedAxis.showSpectrum]);
+  }, [points, mode, selectedAxis.showSpectrum, selectedAxis.axis]);
 
   // Important: update selection styling WITHOUT rebuilding the SVG.
   // Rebuilding the SVG resets the d3-zoom transform, which feels like an "automatic zoom-out"
