@@ -1,6 +1,6 @@
 # Dashboard loading: a fast `/app` and an interactive wait
 
-**Status:** draft 2026-11-11 (decisions agreed in a grilling session; nothing built yet). **Priority: the loading screen (§5) ships first and alone; the caching quick wins (§6) are optional and come after; the ideology split (§7) is postponed indefinitely.**
+**Status:** loading screen (§5) built 2026-11-11 on `dashboard-loading`, PR to `dev` (see §14 for what differs from the plan); site stats cards (§8), caching (§6) and the ideology split (§7) not built. **Priority: the loading screen (§5) ships first and alone; the caching quick wins (§6) are optional and come after; the ideology split (§7) is postponed indefinitely.**
 **Branch / worktree:** `dashboard-loading` in `../kokkai_analysis-loading` (off `origin/dev`)
 **Related specs:** [landing-page](../landing-page/README.md) (the buttons that lead here), [topic-scaling-refresh](../topic-scaling-refresh/README.md) (writes `ideology.json.gz`), [stance-summaries-panel](../stance-summaries-panel/README.md) (also splits ideology output; see §9 — that spec is still only in `../kokkai_analysis-stance`, not yet on `dev`), [speech-quality-ui](../speech-quality-ui/README.md) (aggregate + proxy pattern this copies)
 **Related guides:** [FRONTEND.md](../../docs/agents/FRONTEND.md), [BACKEND.md](../../docs/agents/BACKEND.md), [CONTRACTS.md](../../docs/agents/CONTRACTS.md), [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md), [DATA-LAYOUT.md](../../docs/agents/DATA-LAYOUT.md)
@@ -332,3 +332,35 @@ Later, if wanted (§6): `vercel.json` regions; drop `searchParams`; confirm ISR;
 
 Postponed (§7): the ideology split, in the order publish → backend → frontend, with the
 `docs/agents` updates listed there.
+
+## 14. As built (2026-11-11)
+
+Tasks 1–3 of §13 are done; task 4 (your review of the fact/quiz list) is open on the PR.
+
+- **Direct visits start the clock from the layout, not from `loading.tsx`.** React never hydrates a
+  server-rendered Suspense fallback, so on a direct hit `LoadingSignal` inside `loading.tsx` never
+  runs. `LoadingOverlay` therefore calls `loadingStore.start()` in its own layout effect when no
+  dashboard is mounted, and on the first load of the document counts from `performance.timeOrigin`.
+  `loading.tsx` keeps a static backdrop with the stage-1 label for the ~0.5 s before hydration and
+  still signals client-side navigations. On a direct hit, scripts only run once the browser has the
+  shell, so the interactive overlay appears about 0.1 s after navigation in local tests.
+- **Deep links are read when the dashboard mounts** (`markReady`), not when the overlay mounts:
+  during a client navigation the address still shows `/` when the layout first renders.
+- **Fast path** is decided from `dashboardMounted`: if the page is already mounted when the overlay
+  mounts (cached or router-cache navigation), nothing is shown.
+- **Checklist labels** are short forms (議員データ / 立場推定 / AI判定の集計 / 地図とグラフ); the long
+  stage label stays as the heading.
+- `page.tsx` still reads `searchParams`; `/app` stays dynamic as agreed (§6 is optional, later).
+- Site stats cards (§8) are not in this PR; the deck is tips + 13 facts + 11 quiz questions.
+
+Local check: production build against a mock backend that serves `s3_mirror` with a 6 s delay
+(reproduces the 34 MB page). Playwright + Chrome:
+
+| Scenario | Result |
+|---|---|
+| Landing → 「ダッシュボードを開く」 | overlay 0.1 s after click; dashboard mounted at 7.0 s; overlay held after answering a quiz; 「ダッシュボードへ」 closes it |
+| Opt-out set | bar only, no cards; gone on ready |
+| 「使い方を見ながら試す」 (`?tour=1`) | overlay during load, not held after ready |
+| Direct hit on a phone viewport | overlay 0.1 s; ready 7.6 s; held; Esc closes |
+| Back to `/`, forward to `/app` | dashboard from router cache, overlay never shown |
+
