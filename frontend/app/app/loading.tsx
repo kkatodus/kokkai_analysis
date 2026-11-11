@@ -11,7 +11,7 @@ import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 
 export default function DashboardLoading() {
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-linear-to-b from-[#111827] to-[#020617]">
+    <div className="fixed inset-0 z-(--z-loading) flex items-center justify-center bg-linear-to-b from-[#111827] to-[#020617]">
       <LoadingSignal />
       <div className="flex flex-col items-center gap-3 text-center">
         <LoadingIndicator size="lg" />

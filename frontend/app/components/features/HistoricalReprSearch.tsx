@@ -124,7 +124,7 @@ export function HistoricalReprSearch({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="歴代議員を検索（例：山田 / やまだ）"
-          className="w-full rounded-full border border-slate-400/60 bg-slate-900/95 px-3 py-2 text-[12px] text-gray-100 outline-none placeholder:text-gray-500"
+          className="w-full rounded-full border border-slate-400/60 bg-slate-900/95 px-3 py-2 text-[12px] text-gray-100 placeholder:text-gray-500"
         />
         {query ? (
           <button

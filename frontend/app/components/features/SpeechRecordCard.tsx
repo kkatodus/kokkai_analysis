@@ -116,7 +116,7 @@ export function SpeechRecordCard({
 
   const topicTabClassName = (_topicKey: string, active: boolean) => {
     const base =
-      "rounded-full border px-2 py-0.5 text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/30 ";
+      "rounded-full border px-2 py-0.5 text-[11px] transition-colors ";
     if (active) return base + "border-cyan-400/60 bg-cyan-500/15 text-cyan-100";
     return base + "border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-slate-400/40 hover:bg-white/5";
   };
@@ -145,7 +145,7 @@ export function SpeechRecordCard({
       {!speechError && speechTopics && speechTopics.length > 0 && (
         <div className="min-h-0 flex-1 overflow-y-auto">
           {/* Sticky topic selection + paging */}
-          <div className="sticky top-0 z-10 border-b border-slate-400/15 bg-slate-900/85 px-2 pb-2 pt-2 backdrop-blur">
+          <div className="sticky top-0 z-(--z-sticky) border-b border-slate-400/15 bg-slate-900/85 px-2 pb-2 pt-2 backdrop-blur">
             <div className="mb-2 flex flex-wrap gap-1.5">
               {topicsForTabs.map((t) => {
                 const active = t.topicKey === selectedTopicKey;
@@ -270,7 +270,7 @@ export function SpeechRecordCard({
                         }}
                         disabled={!(s.meta?.issueID ?? s.issueID)}
                         className={
-                          "shrink-0 rounded-lg border px-2 py-1 text-[11px] font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400/40 " +
+                          "shrink-0 rounded-lg border px-2 py-1 text-[11px] font-semibold transition-all " +
                           (s.meta?.issueID ?? s.issueID
                             ? "cursor-pointer border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_18px_rgba(34,211,238,0.18)]"
                             : "cursor-not-allowed border-slate-400/10 bg-slate-950/10 text-gray-500 opacity-60")

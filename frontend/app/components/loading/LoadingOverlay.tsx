@@ -134,7 +134,7 @@ export function LoadingOverlay() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={fade}
-          className={`fixed inset-0 z-[100] flex overflow-y-auto px-4 py-8 ${
+          className={`fixed inset-0 z-(--z-loading) flex overflow-y-auto px-4 py-8 ${
             ready ? "bg-[#020617]/75 backdrop-blur-sm" : "bg-linear-to-b from-[#111827] to-[#020617]"
           }`}
           onClick={ready ? (e) => e.target === e.currentTarget && close("close") : undefined}

@@ -153,7 +153,7 @@ export function SpeechQualityBarList({
                 setMinCount(Number.isFinite(next) ? next : 0);
                 setPageIndex(0);
               }}
-              className="h-8 w-24 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 outline-none focus:border-cyan-400/60"
+              className="h-8 w-24 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
             />
           </div>
         </div>
@@ -169,7 +169,7 @@ export function SpeechQualityBarList({
               setMetricKey(e.target.value as QualityMetricKey);
               setPageIndex(0);
             }}
-            className="h-8 max-w-[260px] rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 outline-none focus:border-cyan-400/60"
+            className="h-8 max-w-[260px] rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
           >
             {metricGroups().map((g) => (
               <optgroup key={g.group} label={g.group}>
@@ -203,7 +203,7 @@ export function SpeechQualityBarList({
               setPageSize(Number(e.target.value));
               setPageIndex(0);
             }}
-            className="h-8 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 outline-none focus:border-cyan-400/60"
+            className="h-8 rounded-lg border border-slate-400/30 bg-slate-950/40 px-2 text-[12px] text-gray-100 focus:border-cyan-400/60"
           >
             {[10, 25, 50, 100].map((n) => (
               <option key={n} value={n}>

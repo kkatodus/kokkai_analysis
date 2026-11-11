@@ -375,7 +375,7 @@ export function DetailPane({
 
   return (
       <div
-        className="fixed inset-y-4 right-4 z-40 max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
+        className="fixed inset-y-4 right-4 z-(--z-pane) max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
         style={{ width: isNarrow ? "100%" : `${paneWidthPx}px` }}
         data-tour="detail-pane"
       >
@@ -406,7 +406,7 @@ export function DetailPane({
           </button>
         </div>
         <div className="mb-1.5">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="min-w-0 text-base font-semibold text-gray-50">
               {personMeta?.name_kanji ?? "（氏名不明）"}
             </div>
