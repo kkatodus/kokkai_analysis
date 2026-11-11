@@ -158,7 +158,7 @@ export function FeatureTour() {
                 variant="primary"
                 size="lg"
                 onClick={() => track("LandingCTA", { cta: "open_app", location: "hero" })}
-                className="flex-1 max-sm:px-3 sm:flex-none"
+                className="min-w-0 flex-1 max-sm:px-3 max-sm:text-label-md sm:flex-none"
               >
                 <LinkPending>ダッシュボードを開く</LinkPending>
               </ButtonLink>
@@ -167,7 +167,7 @@ export function FeatureTour() {
                 variant="secondary"
                 size="lg"
                 onClick={() => track("LandingCTA", { cta: "tour", location: "hero" })}
-                className="flex-1 max-sm:px-3 sm:flex-none"
+                className="min-w-0 flex-1 max-sm:px-3 max-sm:text-label-md sm:flex-none"
               >
                 <LinkPending>使い方を見ながら試す</LinkPending>
               </ButtonLink>
