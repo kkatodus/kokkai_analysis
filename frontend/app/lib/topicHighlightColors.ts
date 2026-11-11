@@ -35,10 +35,10 @@ export const TOPIC_HIGHLIGHT_COLORS: Record<string, TopicHighlightColor> = {
   LGBT: PALETTE[11],
 };
 
-/** Topic tab: one topic, amber. */
-export const TOPIC_TAB_MARK = "bg-amber-400/20 text-amber-100";
+/** Topic tab: one topic, the primary tint (amber is left to warnings and 参政). */
+export const TOPIC_TAB_MARK = "bg-primary-soft text-on-primary-soft";
 /** 全発言: a span whose words belong to more than one topic. */
-export const SHARED_MARK = "bg-slate-400/25 text-slate-100 underline decoration-dashed decoration-slate-300/70 underline-offset-2";
+export const SHARED_MARK = "bg-surface-hover text-ink-strong underline decoration-dashed decoration-ink-muted underline-offset-2";
 
 export function topicHighlightColor(topicEn: string): TopicHighlightColor {
   const known = TOPIC_HIGHLIGHT_COLORS[topicEn];

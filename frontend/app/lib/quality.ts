@@ -165,29 +165,30 @@ export const CONTRIBUTION_STYLE: Record<
   QualityContribution,
   { bar: string; chip: string; dot: string; item: string; ring: string; note: string }
 > = {
+  // semantic tokens (frontend/DESIGN.md): success / warning / error
   substantive: {
-    bar: "bg-emerald-500/80",
-    chip: "border-emerald-400/30 bg-emerald-500/15 text-emerald-100",
-    dot: "bg-emerald-500/80",
-    item: "border-emerald-400/30 border-l-emerald-400/70 bg-emerald-500/10",
-    ring: "rgba(16,185,129,0.55)",
-    note: "border-emerald-400/25 bg-emerald-500/10",
+    bar: "bg-success",
+    chip: "border-transparent bg-success-soft text-on-success-soft",
+    dot: "bg-success",
+    item: "border-line border-l-success bg-success-soft",
+    ring: "var(--color-success)",
+    note: "border-transparent bg-success-soft",
   },
   limited: {
-    bar: "bg-amber-500/80",
-    chip: "border-amber-400/30 bg-amber-500/15 text-amber-100",
-    dot: "bg-amber-500/80",
-    item: "border-amber-400/30 border-l-amber-400/70 bg-amber-500/10",
-    ring: "rgba(245,158,11,0.55)",
-    note: "border-amber-400/25 bg-amber-500/10",
+    bar: "bg-warning",
+    chip: "border-transparent bg-warning-soft text-on-warning-soft",
+    dot: "bg-warning",
+    item: "border-line border-l-warning bg-warning-soft",
+    ring: "var(--color-warning)",
+    note: "border-transparent bg-warning-soft",
   },
   none: {
-    bar: "bg-rose-500/80",
-    chip: "border-rose-400/30 bg-rose-500/15 text-rose-100",
-    dot: "bg-rose-500/80",
-    item: "border-rose-400/30 border-l-rose-400/70 bg-rose-500/10",
-    ring: "rgba(244,63,94,0.55)",
-    note: "border-rose-400/25 bg-rose-500/10",
+    bar: "bg-error",
+    chip: "border-transparent bg-error-soft text-on-error-soft",
+    dot: "bg-error",
+    item: "border-line border-l-error bg-error-soft",
+    ring: "var(--color-error)",
+    note: "border-transparent bg-error-soft",
   },
 };
 
@@ -196,13 +197,13 @@ export const FUNCTION_STYLE: Record<QualityFunction, { bar: string; chip: string
   oversight: { bar: "bg-violet-500/80", chip: "border-violet-400/30 bg-violet-500/15 text-violet-100", dot: "bg-violet-500/80" },
   policy: { bar: "bg-cyan-500/80", chip: "border-cyan-400/30 bg-cyan-500/15 text-cyan-100", dot: "bg-cyan-500/80" },
   representation: { bar: "bg-teal-500/80", chip: "border-teal-400/30 bg-teal-500/15 text-teal-100", dot: "bg-teal-500/80" },
-  procedural: { bar: "bg-slate-400/70", chip: "border-slate-400/30 bg-slate-500/15 text-slate-100", dot: "bg-slate-400/70" },
-  none: { bar: "bg-gray-500/60", chip: "border-gray-400/30 bg-gray-500/15 text-gray-200", dot: "bg-gray-500/60" },
+  procedural: { bar: "bg-ink-muted", chip: "border-line bg-surface-raised text-ink", dot: "bg-ink-muted" },
+  none: { bar: "bg-ink-disabled", chip: "border-line bg-surface-raised text-ink-muted", dot: "bg-ink-disabled" },
 };
 
-export const ISSUE_CHIP = "border-rose-400/30 bg-rose-500/10 text-rose-100";
-export const ISSUE_CHIP_PART = "border-amber-400/30 bg-amber-500/10 text-amber-100";
-export const OUTCOME_CHIP = "border-sky-400/30 bg-sky-500/10 text-sky-100";
+export const ISSUE_CHIP = "border-transparent bg-error-soft text-on-error-soft";
+export const ISSUE_CHIP_PART = "border-transparent bg-warning-soft text-on-warning-soft";
+export const OUTCOME_CHIP = "border-transparent bg-info-soft text-on-info-soft";
 
 export function rate(n: number | undefined | null, d: number | undefined | null): number {
   if (!n || !d || !Number.isFinite(n) || !Number.isFinite(d) || d <= 0) return 0;

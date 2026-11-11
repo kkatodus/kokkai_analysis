@@ -19,7 +19,7 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 | [db-backup](db-backup/README.md) | in-progress | Weekly `pg_dump` of the local `kokkaidoc` Postgres to `s3://kokkai-doc-bucket-dev/backups/postgres/` (STANDARD_IA, 60-day lifecycle), Sundays 06:00 via launchd |
 | [dashboard-loading](dashboard-loading/README.md) | in-progress | Landing → `/app` takes ~8 s (34 MB page rendered per request in `iad1`): `loading.tsx` + layout overlay with dataset-named progress stages, usage tips and quiz/fact cards (real counts from a nightly `site_stats.json`); caching quick wins optional later; ideology split per sub-topic postponed |
 | [topic-keyword-highlight](topic-keyword-highlight/README.md) | done | Highlight the `search_words` that filed each speech under its topic in 発言（トピック別）: `topics/topics.json` published by `speech_update`, `GET /speeches/topics`, KWIC excerpt when collapsed, per-topic colours on 全発言 |
-| [design-system](design-system/README.md) | phase 0 built | `frontend/DESIGN.md` (tokens + rules in the DESIGN.md format) and the plan to adopt it: `@theme` token layer in `globals.css`, shared components (Button, Tabs, Chip, Pager, states, Dialog), area-by-area migration with a ratchet check; from the 2026-11-11 design audit |
+| [design-system](design-system/README.md) | phases 0–4 on dev | `frontend/DESIGN.md` (tokens + rules in the DESIGN.md format) and the plan to adopt it: `@theme` token layer in `globals.css`, shared components (Button, Tabs, Chip, Pager, states, Dialog), area-by-area migration with a ratchet check; from the 2026-11-11 design audit |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 

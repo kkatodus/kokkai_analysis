@@ -215,7 +215,7 @@ export function Tutorial({
           <div
             className={
               "mt-3 rounded-xl border p-2.5 transition-colors " +
-              (done ? "border-transparent bg-success-soft text-on-success-soft" : "border-transparent bg-warning-soft text-on-warning-soft")
+              (done ? "border-transparent bg-success-soft text-on-success-soft" : "border-transparent bg-info-soft text-on-info-soft")
             }
           >
             <div className="text-label-sm">

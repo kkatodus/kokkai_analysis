@@ -13,8 +13,9 @@ Next.js App Router application. Deployed as static export or SSR depending on bu
 
 - [`frontend/DESIGN.md`](../../frontend/DESIGN.md) — target colours, type scale, radii, spacing, component recipes and content rules (DESIGN.md format: YAML tokens + prose). Read it before adding or restyling UI.
 - Tokens are Tailwind utilities from `@theme` in `app/globals.css` (`bg-surface-raised`, `text-body-md`, `z-(--z-modal)`); use them in new code. Older UI is migrated area by area: [`specs/design-system/`](../../specs/design-system/README.md).
-- Shared components (`components/shared/`): `Button`/`ButtonLink`/`IconButton`, `Tabs`/`SegmentedControl`, `Chip`, `Badge`, `TextInput`/`SearchInput`/`Select`/`Field`, `Pager`, `Card`/`CardHeader`/`Panel`/`Heading`, `Loading`/`Empty`/`ErrorState`, `ExpandableText`, `Legend`, `Dialog`/`SidePane`. Every one is shown in every state at `/dev/ui` (development only).
-- `npm run lint` runs `scripts/check-design-tokens.mjs` first: it fails if off-system class counts rise above `design-baseline.json`. After a migration lowers them, run it with `--update`.
+- Shared components (`components/shared/`): `Button`/`ButtonLink`/`IconButton`, `Tabs`/`SegmentedControl`, `Chip`, `Badge`, `TextInput`/`SearchInput`/`Select`/`Field`, `Pager`, `Card`/`CardHeader`/`Panel`/`Heading`, `Loading`/`Empty`/`ErrorState`, `ExpandableText`, `Legend`, `Dialog`/`SidePane`. Static pages use `PageShell`/`SiteHeader`/`SiteFooter`/`ProseSection`. Every component is shown in every state at `/dev/ui` (development only).
+- Party colours: always `partyRgb()` / `partyCss()` / `canonicalParty()` from `lib/config/parties.ts` (aliases 民主→国民, 無→無所属, みら→みらい, い党→れ新; unknown → その他). Never read the ideology file's `color` field.
+- `npm run lint` runs `scripts/check-design-tokens.mjs` first: it bans off-system classes (raw sizes, `gray-*`, `blue-*`, hex, opacity-suffixed slate, `outline-none`, English `aria-label`…); every count in `design-baseline.json` is 0.
 
 ## Main experience
 
