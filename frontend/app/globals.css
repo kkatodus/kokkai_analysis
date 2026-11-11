@@ -99,6 +99,11 @@ h1, h2, h3 {
   outline-offset: 2px;
 }
 
+/* containers that receive focus from code (dialogs, panes) are not controls: no ring */
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
 .text-data {
   font-variant-numeric: tabular-nums;
 }

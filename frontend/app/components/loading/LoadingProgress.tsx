@@ -18,14 +18,14 @@ export function LoadingProgress({ stage, pct, ready, slow, reducedMotion }: Prop
     <div className="w-full">
       <div role="status" aria-live="polite" className="flex items-baseline justify-between gap-3">
         <div className="min-w-0">
-          <div className="truncate text-base font-semibold text-gray-50 sm:text-lg">{current ? current.label : READY_LABEL}</div>
-          <div className="mt-0.5 truncate text-xs text-gray-400 sm:text-sm">{current ? current.caption : READY_CAPTION}</div>
+          <div className="truncate text-title-md text-ink-strong sm:text-headline-sm">{current ? current.label : READY_LABEL}</div>
+          <div className="mt-0.5 truncate text-body-sm text-ink-muted">{current ? current.caption : READY_CAPTION}</div>
         </div>
-        <div className="shrink-0 font-mono text-sm tabular-nums text-cyan-200">{Math.floor(shown)}%</div>
+        <div className="shrink-0 text-data text-link">{Math.floor(shown)}%</div>
       </div>
 
       <div
-        className="relative mt-3 h-1.5 w-full overflow-hidden rounded-full bg-slate-800"
+        className="relative mt-3 h-1.5 w-full overflow-hidden rounded-full bg-surface-hover"
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={100}
@@ -33,24 +33,24 @@ export function LoadingProgress({ stage, pct, ready, slow, reducedMotion }: Prop
         aria-label="ダッシュボードの準備状況"
       >
         <div
-          className={`h-full rounded-full bg-linear-to-r from-cyan-400 to-indigo-500 shadow-[0_0_12px_rgba(34,211,238,0.6)] ${reducedMotion ? "" : "transition-[width] duration-200 ease-out"}`}
+          className={`h-full rounded-full bg-linear-to-r from-primary to-secondary ${reducedMotion ? "" : "transition-[width] duration-200 ease-out"}`}
           style={{ width: `${shown}%` }}
         />
         {!ready && !reducedMotion && (
-          <div className="loading-shimmer pointer-events-none absolute inset-y-0 w-1/4 bg-linear-to-r from-transparent via-white/25 to-transparent" />
+          <div className="loading-shimmer pointer-events-none absolute inset-y-0 w-1/4 bg-linear-to-r from-transparent via-ink-strong/25 to-transparent" />
         )}
       </div>
 
-      <ol className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs sm:grid-cols-4">
+      <ol className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 text-caption sm:grid-cols-4">
         {STAGES.map((s, i) => {
           const done = ready || i < stage;
           const active = !ready && i === stage;
           return (
-            <li key={s.label} className={`flex items-center gap-1.5 ${done ? "text-cyan-200" : active ? "text-gray-100" : "text-gray-500"}`}>
+            <li key={s.label} className={`flex items-center gap-1.5 ${done ? "text-link" : active ? "text-ink-strong" : "text-ink-muted"}`}>
               <span
                 aria-hidden="true"
-                className={`inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border text-[9px] ${
-                  done ? "border-cyan-400/60 bg-cyan-500/20" : active ? `border-indigo-300/70 ${reducedMotion ? "" : "animate-pulse"}` : "border-slate-600"
+                className={`inline-flex size-4 shrink-0 items-center justify-center rounded-full border text-caption leading-none ${
+                  done ? "border-primary-line bg-primary-soft" : active ? `border-secondary ${reducedMotion ? "" : "animate-pulse"}` : "border-line-strong"
                 }`}
               >
                 {done ? "✓" : ""}
@@ -62,9 +62,9 @@ export function LoadingProgress({ stage, pct, ready, slow, reducedMotion }: Prop
       </ol>
 
       {slow && !ready && (
-        <p className="mt-4 text-xs text-amber-200/90">
+        <p className="mt-4 text-body-sm text-on-warning-soft">
           時間がかかっています。もう少しお待ちいただくか、
-          <button type="button" onClick={() => window.location.reload()} className="underline underline-offset-2 hover:text-amber-100">
+          <button type="button" onClick={() => window.location.reload()} className="underline underline-offset-2 hover:text-ink-strong">
             再読み込み
           </button>
           してください。
