@@ -77,13 +77,13 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
         transition={{ type: "spring", stiffness: 150, damping: 22 }}
         className="absolute bottom-3 left-3 top-3 w-[420px] max-w-[calc(100%-24px)]"
       >
-        <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-[#020617] p-3.5 shadow-2xl">
+        <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface p-3.5 shadow-2xl">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <div className="text-sm font-semibold text-gray-50">{ISSUE_TITLE}</div>
-              <div className="text-[10px] text-gray-400">発言 {N_ROWS} 件・やり取り {ISSUE_GROUPS.length} 件</div>
+              <div className="text-title-sm text-ink-strong">{ISSUE_TITLE}</div>
+              <div className="text-caption text-ink-muted">発言 {N_ROWS} 件・やり取り {ISSUE_GROUPS.length} 件</div>
             </div>
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-900/90 text-xs text-gray-400">×</span>
+            <span className="flex size-5 items-center justify-center rounded-full bg-surface-raised text-caption text-ink-muted">×</span>
           </div>
 
           <div className="mt-2 flex items-center gap-3">
@@ -125,16 +125,16 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
                 <motion.circle cx={kx} cy={ky} r={8} fill="rgba(34,211,238,0.25)" />
                 <motion.circle cx={kx} cy={ky} r={6} fill="rgba(34,211,238,0.95)" />
               </svg>
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-[10px] text-gray-400">
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center text-caption text-ink-muted">
                 {focus + 1}/{N_ROWS}
               </div>
             </div>
-            <div className="text-[10px] leading-relaxed text-gray-400">
+            <div className="text-caption leading-relaxed text-ink-muted">
               ドラッグで発言を選択
               <div className="mt-1 flex flex-wrap gap-x-2 gap-y-0.5">
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-500/80" />成果あり</span>
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-amber-500/80" />限定的</span>
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-rose-500/80" />成果なし</span>
+                <span className="flex items-center gap-1"><span className="size-2 rounded-full bg-success" />成果あり</span>
+                <span className="flex items-center gap-1"><span className="size-2 rounded-full bg-warning" />限定的</span>
+                <span className="flex items-center gap-1"><span className="size-2 rounded-full bg-error" />成果なし</span>
               </div>
             </div>
           </div>
@@ -148,9 +148,9 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
                       initial={from({ opacity: 0, y: 6 })}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: gi * 0.18 }}
-                      className={`rounded-lg border px-2 py-1 text-[10px] text-gray-300 ${CONTRIBUTION_STYLE[g.contribution].note}`}
+                      className={`rounded-lg border px-2 py-1 text-caption text-ink ${CONTRIBUTION_STYLE[g.contribution].note}`}
                     >
-                      <span className="mr-1 font-semibold text-gray-200">判定理由</span>
+                      <span className="mr-1 font-semibold text-ink">判定理由</span>
                       {g.note}
                     </motion.div>
                     {g.rows.map((r) => {
@@ -163,15 +163,15 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
                           initial={from({ opacity: 0, y: 6 })}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: gi * 0.18 + 0.06 * idx }}
-                          className={`relative rounded-lg border border-l-[3px] px-2 py-1.5 ${CONTRIBUTION_STYLE[g.contribution].item} ${focused ? "ring-1 ring-cyan-400/70" : ""}`}
+                          className={`relative rounded-lg border border-l-[3px] px-2 py-1.5 ${CONTRIBUTION_STYLE[g.contribution].item} ${focused ? "ring-1 ring-primary" : ""}`}
                         >
                           <div className="flex items-center justify-between gap-2">
-                            <span className="text-[11px] font-semibold text-gray-100">{r.speaker}</span>
+                            <span className="text-label-sm text-ink-strong">{r.speaker}</span>
                             {focused && (
                               <motion.span
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                className={`flex items-center gap-0.5 text-[10px] ${linkLit ? "text-cyan-200" : "text-gray-400"}`}
+                                className={`flex items-center gap-0.5 text-caption ${linkLit ? "text-link" : "text-ink-muted"}`}
                               >
                                 原文を開く
                                 <motion.span animate={linkLit && pb.playing ? { x: [0, 3, 0] } : undefined} transition={{ duration: 0.5, repeat: 2 }} className="inline-flex">
@@ -180,7 +180,7 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
                               </motion.span>
                             )}
                           </div>
-                          <div className="truncate text-[11px] text-gray-300">{r.excerpt}</div>
+                          <div className="truncate text-caption text-ink">{r.excerpt}</div>
                         </motion.div>
                       );
                     })}
@@ -188,7 +188,7 @@ export function IssuePaneStage({ pb }: { pb: Playback }) {
                 ))}
               </motion.div>
             )}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-[#020617] to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-surface to-transparent" />
           </div>
         </div>
       </motion.div>

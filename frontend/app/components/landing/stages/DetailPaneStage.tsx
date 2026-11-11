@@ -45,31 +45,31 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
         transition={{ type: "spring", stiffness: 150, damping: 22 }}
         className="absolute bottom-3 right-3 top-3 w-[360px] max-w-[calc(100%-24px)]"
       >
-        <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-[#020617] p-3.5 shadow-2xl">
+        <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface p-3.5 shadow-2xl">
           <div className="mb-1 flex items-center justify-end">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-900/90 text-xs text-gray-400">×</span>
+            <span className="flex size-5 items-center justify-center rounded-full bg-surface-raised text-caption text-ink-muted">×</span>
           </div>
-          <div className="text-base font-semibold text-gray-50">{TARO.name}</div>
-          <div className="text-[11px] text-gray-400">
+          <div className="text-headline-sm text-ink-strong">{TARO.name}</div>
+          <div className="text-caption text-ink-muted">
             {TARO.party}・{TARO.house}
           </div>
 
-          <div className="mt-2 rounded-xl border border-slate-400/15 bg-slate-950/20 p-2">
+          <div className="mt-2 rounded-xl border border-line-subtle bg-surface p-2">
             <div className="mb-1 flex items-center justify-between gap-2">
-              <div className="text-[11px] font-semibold text-gray-200">やり取りの評価（AI判定）</div>
-              <div className="text-[11px] text-gray-400">質問 {q.n} 件</div>
+              <div className="text-label-sm text-ink">やり取りの評価（AI判定）</div>
+              <div className="text-caption text-ink-muted">質問 {q.n} 件</div>
             </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-900/70 ring-1 ring-slate-400/10">
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-surface-raised ring-1 ring-line-subtle">
               <div className="flex h-full w-full">
                 <motion.div className={`h-full ${CONTRIBUTION_STYLE.substantive.bar}`} initial={from({ width: 0 })} animate={{ width: `${shares.substantive * 100}%` }} transition={{ duration: 0.6, delay: 0.3 }} />
                 <motion.div className={`h-full ${CONTRIBUTION_STYLE.limited.bar}`} initial={from({ width: 0 })} animate={{ width: `${shares.limited * 100}%` }} transition={{ duration: 0.6, delay: 0.3 }} />
                 <motion.div className={`h-full ${CONTRIBUTION_STYLE.none.bar}`} initial={from({ width: 0 })} animate={{ width: `${shares.none * 100}%` }} transition={{ duration: 0.6, delay: 0.3 }} />
               </div>
             </div>
-            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-gray-400">
+            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-caption text-ink-muted">
               {(["substantive", "limited", "none"] as const).map((c) => (
                 <div key={c} className="flex items-center gap-1">
-                  <span className={`inline-block h-2 w-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
+                  <span className={`inline-block size-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
                   {CONTRIBUTION_SHORT_JA[c]} {pct(shares[c])}
                 </div>
               ))}
@@ -78,9 +78,9 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
 
           <div className="mt-2 h-7">
             {tabs && (
-              <motion.div initial={from({ opacity: 0, y: 4 })} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-1 rounded-full border border-slate-400/20 bg-slate-950/30 p-0.5 text-[11px]">
+              <motion.div initial={from({ opacity: 0, y: 4 })} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-1 rounded-full border border-line bg-surface-raised p-0.5 text-caption">
                 {["発言", "やり取り", "選挙履歴"].map((t, i) => (
-                  <span key={t} className={`flex-1 rounded-full px-2 py-0.5 text-center ${i === 0 ? "bg-cyan-500/15 text-cyan-100" : "text-gray-400"}`}>
+                  <span key={t} className={`flex-1 rounded-full px-2 py-0.5 text-center ${i === 0 ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>
                     {t}
                   </span>
                 ))}
@@ -99,7 +99,7 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
                     initial={from({ opacity: 0, scale: 0.9 })}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.05 }}
-                    className={`rounded-full border px-2 py-0.5 text-[10px] transition-colors ${active ? "border-cyan-400/40 bg-cyan-500/15 text-cyan-100" : "border-slate-400/25 text-gray-300"}`}
+                    className={`rounded-full border px-2 py-0.5 text-caption transition-colors ${active ? "border-primary-line bg-primary-soft text-on-primary-soft" : "border-line text-ink"}`}
                   >
                     {t}
                   </motion.span>
@@ -107,7 +107,7 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
               })}
           </div>
 
-          <div className="mt-2 flex items-center justify-between text-[10px] text-gray-500">
+          <div className="mt-2 flex items-center justify-between text-caption text-ink-muted">
             <span>{topicPicked ? `${ACTIVE_TOPIC}の発言` : "すべての発言"}</span>
             <span className="flex items-center gap-1.5">
               <span>‹</span>
@@ -126,13 +126,13 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
                       initial={from({ opacity: 0, y: 10 })}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08, duration: 0.3 }}
-                      className="rounded-xl border border-slate-400/15 bg-slate-950/30 p-2.5"
+                      className="rounded-xl border border-line-subtle bg-surface p-2.5"
                     >
-                      <div className="flex items-center justify-between text-[10px] text-gray-400">
+                      <div className="flex items-center justify-between text-caption text-ink-muted">
                         <span>{s.date}</span>
                         <span>{s.meeting}</span>
                       </div>
-                      <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-gray-200">{s.excerpt}</p>
+                      <p className="mt-1 line-clamp-2 text-body-sm text-ink">{s.excerpt}</p>
                       <div className="mt-1.5 flex min-h-5 flex-wrap gap-1">
                         {i === 0 && chips1 && (
                           <>
@@ -153,7 +153,7 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
                         <motion.div
                           animate={glow && pb.playing ? { boxShadow: ["0 0 0 0 rgba(34,211,238,0)", "0 0 0 5px rgba(34,211,238,0.35)", "0 0 0 0 rgba(34,211,238,0)"] } : undefined}
                           transition={{ duration: 1.1, repeat: 1 }}
-                          className={`mt-2 inline-block rounded-full border px-2 py-0.5 text-[10px] ${glow ? "border-cyan-400/50 bg-cyan-500/15 text-cyan-100" : "border-slate-400/25 text-gray-300"}`}
+                          className={`mt-2 inline-block rounded-full border px-2 py-0.5 text-caption ${glow ? "border-primary-line bg-primary-soft text-on-primary-soft" : "border-line text-ink"}`}
                         >
                           会議を閲覧する
                         </motion.div>
