@@ -64,6 +64,9 @@ interface SpeechRecordCardProps {
   onSelectIssueId?: (issueId: string, speechId?: string | null) => void;
   /** speechID → the labelled exchange it belongs to (specs/speech-quality-ui §4) */
   exchangeIndex?: Map<string, QualityExchange>;
+  /** speeches a 立場 summary was built from, marked in the list (specs/stance-summaries-panel §6.3) */
+  markedSpeeches?: { topicKey: string; topicJp: string; ids: Set<string> } | null;
+  onClearMarked?: () => void;
 }
 
 export function SpeechRecordCard({
@@ -76,7 +79,10 @@ export function SpeechRecordCard({
   ensureSpeechPage,
   onSelectIssueId,
   exchangeIndex,
+  markedSpeeches,
+  onClearMarked,
 }: SpeechRecordCardProps) {
+  const showMarks = !!markedSpeeches && markedSpeeches.topicKey === selectedTopicKey;
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
 
   const topicsForTabs = [...(speechTopics ?? [])].sort((a, b) => {
@@ -136,6 +142,19 @@ export function SpeechRecordCard({
               })}
             </div>
 
+            {showMarks && markedSpeeches ? (
+              <div className="mb-2 flex items-center justify-between gap-2 rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-2 py-1 text-[10px] text-cyan-100">
+                <span>
+                  「{markedSpeeches.topicJp}」の要約の根拠になった発言 {markedSpeeches.ids.size.toLocaleString()} 件に印を付けています
+                </span>
+                {onClearMarked ? (
+                  <button type="button" onClick={onClearMarked} className="shrink-0 font-semibold text-cyan-200 hover:underline">
+                    解除
+                  </button>
+                ) : null}
+              </div>
+            ) : null}
+
             {selectedTopic && (
               <div className="flex items-center justify-between">
                 <div className="text-[11px] text-gray-400">
@@ -182,16 +201,25 @@ export function SpeechRecordCard({
                   const isExpanded = expandedKeys.has(key);
                   const speechText = String(s.speech ?? "");
                   const isLong = speechText.length > 220;
+                  const isMarked = showMarks && !!s.speechID && !!markedSpeeches?.ids.has(String(s.speechID));
 
                   return (
                 <div
                   key={key}
-                  className="rounded-lg border border-slate-400/15 bg-[#020617] p-2"
+                  className={
+                    "rounded-lg border bg-[#020617] p-2 " +
+                    (isMarked ? "border-slate-400/15 border-l-2 border-l-cyan-400" : "border-slate-400/15")
+                  }
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <div className="truncate text-[12px] font-semibold text-gray-50">{s.speaker}</div>
+                        {isMarked ? (
+                          <span className="rounded-full border border-cyan-400/40 bg-cyan-500/15 px-1.5 py-px text-[10px] font-semibold text-cyan-100">
+                            要約の根拠
+                          </span>
+                        ) : null}
                         {(() => {
                           const ex = exchangeIndex?.get(String(s.speechID));
                           if (!ex) return null;

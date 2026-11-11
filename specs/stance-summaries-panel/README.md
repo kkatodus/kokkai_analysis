@@ -1,6 +1,6 @@
 # Stance summaries in the representative detail pane (立場 tab)
 
-**Status:** draft 2026-11-11 (decisions agreed in a grilling session; nothing built yet)
+**Status:** built 2026-11-11 on this branch (pipeline, backend, frontend, docs); first publish to S3 waits for the merge (§8). Deviations from the draft are listed in §12.
 **Branch / worktree:** `stance-summaries-panel` in `../kokkai_analysis-stance` (off `origin/dev`)
 **Related specs:** [topic-scaling-refresh](../topic-scaling-refresh/README.md) (produces the summaries), [speech-quality-ui](../speech-quality-ui/README.md) (per-person file + proxy pattern this copies)
 **Related guides:** [DATA-PIPELINES.md](../../docs/agents/DATA-PIPELINES.md), [CONTRACTS.md](../../docs/agents/CONTRACTS.md), [BACKEND.md](../../docs/agents/BACKEND.md), [FRONTEND.md](../../docs/agents/FRONTEND.md)
@@ -240,15 +240,15 @@ Add the same amber 「根拠が少ない」 marker to the tooltip when `n_opinio
 
 ## 10. Task list
 
-- [ ] `publish.write_person_files` + `run_project` wiring, `--dry-run` / `--no-upload` honoured, Slack line, unit test on a fixture summary dir (hash match, hash mismatch, missing summary)
-- [ ] `GET /ideology/person` + test for the missing-file case
-- [ ] Proxy route, service, types
-- [ ] `DetailPane`: four-panel strip, fetch, tab note, cards, run toggle, percentile bars, provenance marking in `SpeechRecordCard`, stale-file guard, empty state
-- [ ] Scatter plot: report topic on select; tooltip marker; `handlePoliticianSelect` routing to 立場
-- [ ] Tutorial step, analytics events
-- [ ] Disclaimer + about copy
-- [ ] Docs (§7), `specs/README.md` row
-- [ ] Lint, type-check, `next build`; screenshots at desktop and 390 px
+- [x] `publish.write_person_files` + `run_project` wiring, `--dry-run` / `--no-upload` honoured, Slack line, unit test on a fixture summary dir (hash match, hash mismatch, missing summary)
+- [x] `GET /ideology/person` + test for the missing-file case (`backend/tests/test_ideology_person.py`)
+- [x] Proxy route, service, types
+- [x] `DetailPane`: four-panel strip, fetch, tab note, cards, run toggle, percentile bars, provenance marking in `SpeechRecordCard`, stale-file guard, empty state
+- [x] Scatter plot: report topic on select; tooltip marker; `handlePoliticianSelect` routing to 立場
+- [x] Tutorial step, analytics events
+- [x] Disclaimer + about copy
+- [x] Docs (§7), `specs/README.md` row
+- [x] Lint, type-check, `next build`; screenshots at desktop and 390 px
 - [ ] After merge to prd: first hand-run publish and the production checks in §8
 
 ## 11. Open questions
@@ -258,3 +258,16 @@ None blocking. Two things to look at once it is live:
 - Whether the three runs ever disagree enough that showing run 1 alone misleads; if so, prefer the run whose
   embedding is closest to the mean (computable at publish time from the cached `.npz`).
 - Whether readers use the provenance link at all (`StanceProvenanceClick`); if not, the 発言-tab marking can go.
+
+## 12. As built (2026-11-11)
+
+- **Provenance helper.** `select_pair(..., classifier=None)` is not read-only: it asserts on any uncached speech and writes cache entries. Publish uses a new `select.contributing_speech_ids()` instead, a cache-only replay of the same rule that never classifies or writes. A speech missing from the cache simply contributes nothing, so the hash check catches drift.
+- **Change detection.** Files are compared on content with `generated_at` / `ideology_generated_at` ignored, not on bytes; a byte compare would rewrite all files every month because of the stamps.
+- **Dry run.** `project --dry-run` reports the person-file line ("would change") without writing.
+- **Real-data check.** Run against the prd mirror and the live ideology file: 2,011 person files in 12 s, 0 without provenance, 0 stale. Total 61 MB (speech IDs add ~14 MB to the 47 MB of text); largest file 708.json.
+- **Bars.** At the pane's default 320 px content width, end labels and caption next to the track left it no room. Each bar is two lines: sub-topic name and caption (「賛成側の上位 N %」) above, then 反対側 ─●─┼── 賛成側. The full axis sentences are the hover titles of the end labels, not truncated clauses.
+- **Card state.** First card open; the card requested by the scatter plot is also open and scrolled to the top. Toggles reset per person (the panel is keyed by person).
+- **Tab selection.** One effect in `DetailPane` decides the tab, so a scatter click that opens a new person lands on 立場 and any other new person resets to 発言.
+- **About page.** There is no methodology section, so the pointer sentence sits in 趣旨.
+- **「手法と限界 →」** opens the ideology card's 注意事項 slides and scrolls the page to it.
+
