@@ -335,7 +335,7 @@ Postponed (§7): the ideology split, in the order publish → backend → fronte
 
 ## 14. As built (2026-11-11)
 
-Tasks 1–3 of §13 are done; task 4 (your review of the fact/quiz list) is open on the PR.
+Tasks 1–4 of §13 are done; the quiz wording was approved by the owner on 2026-11-11.
 
 - **Direct visits start the clock from the layout, not from `loading.tsx`.** React never hydrates a
   server-rendered Suspense fallback, so on a direct hit `LoadingSignal` inside `loading.tsx` never
