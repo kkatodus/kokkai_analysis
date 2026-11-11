@@ -24,13 +24,12 @@ const READING_MS = 1800;
 
 function ChapterStage({ index }: { index: number }) {
   const ch = CHAPTERS[index];
-  const [frame, pb] = useStagePlayback(ch.durationMs, { threshold: 0.2 });
+  const [frame, pb] = useStagePlayback(ch.durationMs);
   const { Component } = ch;
   return (
     <Stage
       frame={frame}
       pb={pb}
-      section={ch.id}
       description={ch.description}
       sample
       className="flex h-full flex-col"

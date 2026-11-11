@@ -23,7 +23,7 @@ tour (「使い方」) helps, but only after they have already landed in the mid
 | Audience / tone | Young Japanese adults, casual but trustworthy (です・ます, short lines, no slang) | Politics site: personality without losing credibility. Disclaimers stay but move to a calm section near the end. |
 | Hero promise | 「その議員、国会で何してる？」 accountability angle | The exchange-quality labels are the differentiator; the page is sequenced to pay this question off. |
 | Sample data | Fictional member 「国会 太郎」, party 「サンプル党」, fictional exchanges, small 「サンプル」 badge | No real politician carries an AI verdict on a marketing page; data never goes stale. |
-| Playback | Each chapter plays once when it becomes active, then idles; 「もう一度見る」 replay per chapter; 「最初から再生」 autoplays the whole panel; reduced-motion shows the final frame | Works on phones, predictable to build, accessible. |
+| Playback | Each chapter loops while its stage is visible (play, idle ~2.5 s, play again), starting on load without a scroll; 「最初から再生」 autoplays the whole panel; reduced-motion shows the final frame | Works on phones, predictable to build, accessible. |
 | Sections | Eight, in the order of §5 — **revised 2026-11-11:** §5.2–5.6 are chapters of one pinned 「機能ツアー」 panel (§5.9) rather than separate sections | Thorough as requested; seat charts are mentioned inside the map section rather than getting their own. |
 | Return visits | Always show the landing; sticky 「ダッシュボードへ」 button | No cookie logic, SEO-stable, one click for regulars. |
 | Map replica | Inline simplified SVG of Japan with ~10 highlighted districts | Avoids pulling deck.gl + maplibre + multi-MB GeoJSON into the landing bundle. |
@@ -267,7 +267,7 @@ frontend/app/
     MethodSection.tsx             §5.7
     SupportSection.tsx            §5.8
     Cursor.tsx                    fake pointer that moves between targets (motion.div, spring)
-    useStagePlayback.ts           play-once / idle / replay state machine
+    useStagePlayback.ts           visibility-driven play / idle loop
     sampleData.ts                 国会 太郎 et al., exchanges, ranking rows, scatter points
 ```
 
@@ -275,7 +275,7 @@ Rules:
 
 - Stages import label maps and colour tokens from `app/lib/quality.ts` and `app/lib/config/parties.ts`. They do **not** import the real visualisation components (which pull d3/deck.gl/maplibre).
 - Animation library: `motion` (Framer Motion v12 package name). Add to `package.json`. Use `useReducedMotion()` to short-circuit every stage to its final frame.
-- `useStagePlayback`: states `idle-before` → `playing` → `idle-after`; entering `playing` on first `IntersectionObserver` hit at 40 % visibility; `replay()` resets to `playing`. Idle loops are CSS keyframes or `repeat: Infinity` with low amplitude.
+- `useStagePlayback`: states `idle-before` → `playing` → `idle-after`; entering `playing` whenever the `IntersectionObserver` reports the frame visible (including its initial report at load), returning to `playing` 2.5 s after each `idle-after`, and dropping to `idle-before` when the frame leaves the viewport. Idle loops are CSS keyframes or `repeat: Infinity` with low amplitude.
 - `Cursor` is a single shared component per stage: a 14 px circle with a 1 px white ring and a 25 % cyan fill; moves with `animate={{ x, y }}` spring; "click" = scale 0.8 → 1 in 150 ms plus a 24 px expanding ring.
 - All text in stages is real DOM text (not SVG where avoidable) so it scales with the phone root font size (globals.css sets 10 px on ≤ 480 px).
 
@@ -292,10 +292,10 @@ Rules:
 - Landing JS (route-level, gz): ≤ 120 KB on top of the Next runtime. `motion` ≈ 35 KB gz; no d3, deck.gl, maplibre, mapbox on this route (verify with `next build` output).
 - LCP target < 1.5 s on a mid-range phone; the hero's LCP element is the H1 text, not an image.
 - No layout shift from stages: every Stage has a fixed aspect ratio (`aspect-[4/3]` desktop, `aspect-[3/4]` phone) and renders its final frame as the SSR output.
-- `prefers-reduced-motion`: final frames only, replay buttons hidden, cursor hidden.
+- `prefers-reduced-motion`: final frames only, no loop, cursor hidden.
 - Every stage has `aria-hidden="true"` and a visually-hidden one-sentence description of what it shows, since the copy already explains it.
 - Contrast: body text `text-gray-300` on `#020617` passes AA; captions `text-gray-400` at ≥ 13 px.
-- Keyboard: header links, CTAs, replay buttons reachable; stages are not focusable.
+- Keyboard: header links, CTAs and the 「最初から再生」 button reachable; stages are not focusable.
 
 ## 9. Analytics (Vercel Analytics, existing `track` helper)
 
@@ -303,7 +303,7 @@ Rules:
 |---|---|---|
 | `LandingView` | — | once per page load |
 | `LandingSectionView` | `{ section }` | first time each section reaches 40 % |
-| `LandingReplay` | `{ section }` | replay button |
+| `LandingReplay` | `{ section: "tour" }` | 「最初から再生」 button |
 | `LandingCTA` | `{ cta: "open_app" \| "tour" \| "donate" \| "about", location }` | every CTA / header link |
 | `Navigate` (existing) | `{ destination: "/", location: "dashboard_header" }` | dashboard → landing link |
 
