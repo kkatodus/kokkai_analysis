@@ -11,8 +11,9 @@ Next.js App Router application. Deployed as static export or SSR depending on bu
 
 ## Main experience
 
-- **Landing / explorer:** `app/page.tsx` + `components/ParliamentExplorerClient.tsx`
-- **Static pages:** `about/`, `privacy/`, `terms/`, `payment-success/`, `payment-cancel/`
+- **Landing page (`/`):** `app/page.tsx` + `components/landing/` — static intro with animated replicas of the dashboard cards (Framer Motion via the `motion` package, fictional sample data in `components/landing/sampleData.ts`); spec in `specs/landing-page/`
+- **Explorer / dashboard (`/app`):** `app/app/page.tsx` + `components/ParliamentExplorerClient.tsx`. Old root links are redirected in `next.config.ts` (`/?person_id`, `/?open=donate`, `/?code&state` Cognito callback, `/?tour=1` starts the guided tour)
+- **Static pages:** `about/`, `privacy/`, `terms/`, `payment-success/`, `payment-cancel/`; `app/sitemap.ts` lists the public routes
 - **Visualizations:** ideological scatter, Japan map, seat charts, relevance/productivity bars — under `components/visualizations/`
 
 ## Data fetching
