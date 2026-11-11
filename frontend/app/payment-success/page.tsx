@@ -15,13 +15,13 @@ export default function PaymentSuccessPage() {
 
         <div className="mt-5 flex flex-col gap-2">
           <Link
-            href="/"
+            href="/app"
             className="w-full rounded-xl border border-blue-500/60 bg-blue-600/40 px-4 py-2 text-center text-sm font-semibold text-blue-50 hover:bg-blue-600/55"
           >
-            トップへ戻る
+            ダッシュボードへ戻る
           </Link>
           <Link
-            href="/?open=donate"
+            href="/app?open=donate"
             className="w-full rounded-xl border border-slate-400/30 bg-slate-900/50 px-4 py-2 text-center text-sm font-semibold text-gray-200 hover:bg-slate-800/60"
           >
             もう一度募金する

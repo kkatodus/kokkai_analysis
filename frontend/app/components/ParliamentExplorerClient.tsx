@@ -223,6 +223,21 @@ function ParliamentExplorerClientInner({
     return () => window.clearTimeout(t);
   }, [currentModals, tourStep, startTutorial]);
 
+  // `/app?tour=1` (landing page CTA, specs/landing-page §4): start the tour and strip the param,
+  // same pattern as `open=donate` below.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("tour") !== "1") return;
+    url.searchParams.delete("tour");
+    window.history.replaceState({}, "", url.toString());
+    const t = window.setTimeout(() => {
+      track("StartTutorial", { location: "url_param_tour=1" });
+      startTutorial();
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [startTutorial]);
+
   // Auto-open donation modal for first-time visitors or when URL requests it (e.g. from /payment-cancel).
   useEffect(() => {
     if (typeof window === "undefined") return;

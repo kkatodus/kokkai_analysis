@@ -16,6 +16,14 @@ export function Header() {
         <h1 className="flex items-center gap-2 text-xl font-semibold text-gray-200">
           <span className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-cyan-400 to-indigo-600 shadow-lg shadow-cyan-400/90" />
           KOKKAI DOC
+          <Link
+            href="/"
+            onClick={() => track("Navigate", { destination: "/", location: "dashboard_header" })}
+            className="ml-1 rounded-full border border-slate-400/20 px-2 py-0.5 text-[11px] font-medium text-gray-400 transition hover:border-slate-400/45 hover:text-gray-200"
+            title="トップページへ"
+          >
+            トップ
+          </Link>
         </h1>
         <div className="text-[11px] text-gray-400 sm:text-[13px]">
           日本の政治を調べやすく、わかりやすく、身近に。
