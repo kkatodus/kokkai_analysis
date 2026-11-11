@@ -6,9 +6,11 @@
 import type { Metadata } from "next";
 import { TrackOnMount } from "@/app/components/analytics/TrackOnMount";
 import { FeatureTour } from "@/app/components/landing/FeatureTour";
+import { LandingFooter } from "@/app/components/landing/LandingFooter";
 import { LandingHeader } from "@/app/components/landing/LandingHeader";
 import { MethodSection } from "@/app/components/landing/MethodSection";
 import { SupportSection } from "@/app/components/landing/SupportSection";
+import { PageShell } from "@/app/components/shared/PageShell";
 
 export const metadata: Metadata = {
   title: "KOKKAI DOC ｜ その議員、国会で何してる？",
@@ -29,14 +31,11 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] text-gray-100">
+    <PageShell header={<LandingHeader />} footer={<LandingFooter />} contained={false}>
       <TrackOnMount event="LandingView" />
-      <LandingHeader />
-      <main>
-        <FeatureTour />
-        <MethodSection />
-        <SupportSection />
-      </main>
-    </div>
+      <FeatureTour />
+      <MethodSection />
+      <SupportSection />
+    </PageShell>
   );
 }

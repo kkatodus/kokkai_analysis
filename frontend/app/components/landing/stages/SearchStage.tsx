@@ -29,38 +29,38 @@ export function SearchStage({ pb, frame }: { pb: Playback; frame: StageFrame }) 
         initial={from({ opacity: 0, y: 12 })}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full max-w-sm rounded-2xl border border-white/5 bg-[#020617]/85 p-3.5 shadow-xl"
+        className="relative w-full max-w-sm rounded-2xl border border-line-subtle bg-surface p-3.5"
       >
         <div className="mb-2">
-          <div className="flex items-center gap-1.5 text-sm font-semibold text-gray-200">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+          <div className="flex items-center gap-1.5 text-title-sm text-ink-strong">
+            <span className="size-1.5 rounded-full bg-primary" />
             歴代議員検索
           </div>
-          <div className="text-xs text-gray-400">名前で探す（現職・元職）</div>
+          <div className="text-caption text-ink-muted">名前で探す（現職・元職）</div>
         </div>
 
         <motion.div
           key={`input-${pulse}`}
           animate={pulse > 0 ? { boxShadow: ["0 0 0 0 rgba(34,211,238,0)", "0 0 0 4px rgba(34,211,238,0.18)", "0 0 0 0 rgba(34,211,238,0)"] } : undefined}
           transition={{ duration: 1.2 }}
-          className="flex h-9 items-center gap-2 rounded-xl border border-slate-400/25 bg-slate-950/60 px-3 text-sm"
+          className="flex h-9 items-center gap-2 rounded-full border border-line-strong bg-surface-control px-3 text-body-md"
         >
           {picked ? (
             <motion.span
               initial={from({ scale: 0.8, opacity: 0 })}
               animate={{ scale: 1, opacity: 1 }}
-              className="flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-500/15 px-2 py-0.5 text-xs text-cyan-100"
+              className="flex items-center gap-1.5 rounded-full border border-primary-line bg-primary-soft px-2 py-0.5 text-label-sm text-on-primary-soft"
             >
-              <span className="h-2 w-2 rounded-full" style={{ background: partyColor(TARO.party) }} />
+              <span className="size-2 rounded-full" style={{ background: partyColor(TARO.party) }} />
               {TARO.name}
-              <span className="text-cyan-200/70">×</span>
+              <span className="text-link">×</span>
             </motion.span>
           ) : typed ? (
-            <span className="text-gray-100">{typed}</span>
+            <span className="text-ink-strong">{typed}</span>
           ) : (
-            <span className="text-gray-500">議員名（漢字・かな）</span>
+            <span className="text-ink-muted">議員名（漢字・かな）</span>
           )}
-          {!picked && step >= 1 && <span className="h-4 w-px animate-pulse bg-cyan-300" />}
+          {!picked && step >= 1 && <span className="h-4 w-px animate-pulse bg-primary" />}
         </motion.div>
 
         <AnimatePresence>
@@ -71,18 +71,18 @@ export function SearchStage({ pb, frame }: { pb: Playback; frame: StageFrame }) 
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.22 }}
               style={{ transformOrigin: "top" }}
-              className="mt-1.5 overflow-hidden rounded-xl border border-slate-400/20 bg-[#0b1220]"
+              className="mt-1.5 overflow-hidden rounded-lg border border-line bg-surface-control"
             >
               {SEARCH_ROWS.map((m, i) => (
                 <li
                   key={m.name}
                   data-cursor={`search-row-${i}`}
-                  className={`flex items-center gap-2 px-3 py-2 text-xs transition-colors ${hover && i === 0 ? "bg-slate-900/65" : ""}`}
+                  className={`flex items-center gap-2 px-3 py-2 text-caption transition-colors ${hover && i === 0 ? "bg-surface-hover" : ""}`}
                 >
-                  <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: partyColor(m.party) }} />
-                  <span className="font-medium text-gray-100">{m.name}</span>
-                  <span className="text-gray-400">／ {m.party}</span>
-                  <span className="ml-auto text-[10px] text-gray-500">{m.house}</span>
+                  <span className="size-2 shrink-0 rounded-full" style={{ background: partyColor(m.party) }} />
+                  <span className="text-ink-strong">{m.name}</span>
+                  <span className="text-ink-muted">／ {m.party}</span>
+                  <span className="ml-auto text-caption text-ink-muted">{m.house}</span>
                 </li>
               ))}
             </motion.ul>
@@ -90,7 +90,7 @@ export function SearchStage({ pb, frame }: { pb: Playback; frame: StageFrame }) 
         </AnimatePresence>
 
         {picked && (
-          <motion.div initial={from({ opacity: 0 })} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mt-2 text-[10px] text-gray-500">
+          <motion.div initial={from({ opacity: 0 })} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mt-2 text-caption text-ink-muted">
             クリックで詳細パネルが開きます →
           </motion.div>
         )}
@@ -103,12 +103,12 @@ export function SearchStage({ pb, frame }: { pb: Playback; frame: StageFrame }) 
             initial={from({ x: "100%" })}
             animate={{ x: "58%" }}
             transition={{ type: "spring", stiffness: 140, damping: 20 }}
-            className="absolute bottom-6 right-0 top-6 w-40 rounded-l-[18px] border border-slate-400/35 bg-[#020617] p-3 shadow-2xl"
+            className="absolute bottom-6 right-0 top-6 w-40 rounded-l-2xl border border-line-strong bg-surface p-3 shadow-2xl"
           >
-            <div className="text-xs font-semibold text-gray-50">{TARO.name}</div>
-            <div className="text-[10px] text-gray-400">{TARO.party}・{TARO.house}</div>
-            <div className="mt-2 h-1.5 w-20 rounded-full bg-slate-800" />
-            <div className="mt-1.5 h-1.5 w-14 rounded-full bg-slate-800" />
+            <div className="text-title-sm text-ink-strong">{TARO.name}</div>
+            <div className="text-caption text-ink-muted">{TARO.party}・{TARO.house}</div>
+            <div className="mt-2 h-1.5 w-20 rounded-full bg-surface-hover" />
+            <div className="mt-1.5 h-1.5 w-14 rounded-full bg-surface-hover" />
           </motion.div>
         )}
       </AnimatePresence>
