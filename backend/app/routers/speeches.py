@@ -96,6 +96,18 @@ async def quality_aggregate(
 	return storage.read_json("kokkai-doc/speech_quality/aggregate.json")
 
 
+@router.get("/quality/site_stats", summary="Site-wide numbers for the dashboard loading cards (specs/dashboard-loading §8)")
+async def quality_site_stats(
+	storage: Storage = Depends(get_storage)
+	):
+	try:
+		return storage.read_json("kokkai-doc/speech_quality/site_stats.json")
+	except Exception as e:
+		# optional file: the loading screen works without it
+		print(f"[INFO: quality_site_stats] no site_stats.json: {e}")
+		raise HTTPException(status_code=404, detail="site_stats.json not published yet")
+
+
 @router.get("/quality/person", summary="One politician's labelled exchanges, newest first (specs/speech-quality-ui §2.2)")
 async def quality_person(
 	person_id: str,

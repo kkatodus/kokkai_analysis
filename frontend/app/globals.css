@@ -66,9 +66,18 @@ html {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-1px); }
 }
+/* dashboard loading overlay (specs/dashboard-loading §5.2) */
+.loading-shimmer {
+  animation: loading-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes loading-shimmer {
+  from { left: -25%; }
+  to { left: 100%; }
+}
 @media (prefers-reduced-motion: reduce) {
   .landing-drift,
-  .landing-breathe {
+  .landing-breathe,
+  .loading-shimmer {
     animation: none;
   }
 }

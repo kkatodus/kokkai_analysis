@@ -2,11 +2,14 @@
 
   speech_quality/aggregate.json          every labelled person's counts, plus corpus totals and coverage
   speech_quality/persons/{person_id}.jsonl   one line per exchange the person took part in, newest first
+  speech_quality/site_stats.json         small site-wide numbers for the dashboard loading cards
+                                         (specs/dashboard-loading §8)
 
 From data/:
   python -m speech_quality.publish --all              # rebuild everything (also backfills questioner_group)
   python -m speech_quality.publish PERSON_ID...       # rewrite these persons' files and the aggregate
   python -m speech_quality.publish --backfill-groups  # only fill label_result.questioner_group from the issue files
+  python -m speech_quality.publish --site-stats       # only rewrite site_stats.json
 
 The nightly `label` stage calls `rebuild()` for the persons whose exchanges got labels. Changed
 paths are queued for the next upload, like the issue files.
@@ -30,6 +33,10 @@ log = logging.getLogger("speech_quality.publish")
 
 AGGREGATE_PATH = "speech_quality/aggregate.json"
 PERSONS_DIR = "speech_quality/persons"
+SITE_STATS_PATH = "speech_quality/site_stats.json"
+MEMBERS_DIR = "parliamentMembers"
+CORPUS_FROM = "2000-01-01"
+TOP_N = 5
 VERSION = 1
 
 ROW_COLS = ("start_speech_id", "issue_id", "speech_ids", "date", "questioner", "questioner_group",
@@ -137,6 +144,99 @@ def aggregate(rows: List[dict], names: Dict[int, str], generated_at: Optional[da
 		"totals": {"as_questioner": tq, "as_answerer": ta},
 		"persons": persons,
 	}
+
+
+# --- site stats (specs/dashboard-loading §8) ---
+#
+# Named politicians appear only with neutral counts (speeches, exchanges taken part in, terms).
+# AI-label numbers are site-wide shares only, never per person.
+
+def _shares(counts: Dict[str, int], n: int) -> Dict[str, float]:
+	return {k: round(v / n, 4) if n else 0.0 for k, v in counts.items()}
+
+
+def _top(scores: Dict[int, int], current: Dict[int, dict], names: Dict[int, str], n: int = TOP_N) -> List[dict]:
+	"""Top `n` current members by score (ties broken by person_id so the file is stable)."""
+	ranked = sorted(((v, pid) for pid, v in scores.items() if pid in current and v), key=lambda t: (-t[0], t[1]))
+	return [{"person_id": pid, "name": names.get(pid) or current[pid].get("name"), "group": current[pid].get("group"),
+		"n": v} for v, pid in ranked[:n]]
+
+
+def site_stats(agg: dict, current: Dict[int, dict], names: Dict[int, str], speech_counts: Dict[int, int],
+		corpus: dict, n_persons_total: int, generated_at: Optional[datetime] = None) -> dict:
+	"""The site_stats.json document.
+
+	current       person_id → {"house": "lower" | "upper", "group": short party name, "terms_lower": int | None}
+	speech_counts person_id → speeches since CORPUS_FROM (current members only is enough)
+	corpus        {"speeches": int, "meetings": int, "from": "YYYY-MM-DD"} for speeches since CORPUS_FROM
+	"""
+	tq = agg["totals"]["as_questioner"]
+	n = tq["n"]
+	q_scores = {p["person_id"]: (p["as_questioner"] or {}).get("n", 0) for p in agg["persons"]}
+	a_scores = {p["person_id"]: (p["as_answerer"] or {}).get("n", 0) for p in agg["persons"]}
+	terms = {pid: c["terms_lower"] for pid, c in current.items() if c.get("house") == "lower" and c.get("terms_lower")}
+	# questioner-side issues are counted in the questioner totals, answerer-side (evasive, …) in the
+	# answerer totals; an exchange flagged with the same type on both sides is rare, so sum and cap
+	ta_issues = agg["totals"]["as_answerer"].get("issues", {})
+	issue_any = {k: min(n, v["part"] + v["most"] + ta_issues.get(k, {}).get("part", 0) + ta_issues.get(k, {}).get("most", 0))
+		for k, v in tq["issues"].items()}
+	return {
+		"version": VERSION,
+		"generated_at": (generated_at or datetime.now().astimezone()).isoformat(timespec="seconds"),
+		"corpus": corpus,
+		"labels": {**agg["coverage"], "persons": len(agg["persons"])},
+		"n_persons_total": n_persons_total,
+		"current_members": {
+			"lower": sum(1 for c in current.values() if c.get("house") == "lower"),
+			"upper": sum(1 for c in current.values() if c.get("house") == "upper"),
+		},
+		"function_share": _shares(tq["function"], n),
+		"contribution_share": _shares(tq["contribution"], n),
+		"issue_share": _shares(issue_any, n),
+		"outcome_share": _shares(tq["outcomes"], n),
+		"top_speakers_current": _top(speech_counts, current, names),
+		"top_questioners_current": _top(q_scores, current, names),
+		"top_answerers_current": _top(a_scores, current, names),
+		"top_terms_lower_current": _top(terms, current, names),
+	}
+
+
+def current_members(mirror_root: Path) -> Dict[int, dict]:
+	"""Sitting members from the newest 衆/参 snapshot in parliamentMembers/ (member-auto-update)."""
+	out: Dict[int, dict] = {}
+	for prefix, house in (("shugiin", "lower"), ("sangiin", "upper")):
+		files = sorted((mirror_root / MEMBERS_DIR).glob(f"{prefix}_*.json"))
+		if not files:
+			continue
+		for r in json.loads(files[-1].read_text(encoding="utf-8")).get("reprs", []):
+			pid = r.get("person_id")
+			if pid is None:
+				continue
+			out[int(pid)] = {"house": house, "group": r.get("kaiha") or None,
+				"name": " ".join((r.get("name") or "").split()) or None,
+				"terms_lower": r.get("number_of_terms_lower") if house == "lower" else None}
+	return out
+
+
+def speech_counts(cur, since: str = CORPUS_FROM) -> tuple:
+	"""(person_id → speeches, corpus totals) for speeches since `since`. Two scans of `speeches` (~8 s)."""
+	cur.execute("SELECT person_id, count(*) FROM speeches WHERE date >= %s GROUP BY person_id", (since,))
+	per_person = {int(pid): int(c) for pid, c in cur.fetchall()}
+	cur.execute("SELECT count(DISTINCT issue_id), min(date) FROM speeches WHERE date >= %s", (since,))
+	meetings, first = cur.fetchone()
+	return per_person, {"speeches": sum(per_person.values()), "meetings": int(meetings or 0),
+		"from": str(first) if first else None}
+
+
+def write_site_stats(cur, mirror_root: Path, agg: dict) -> str:
+	current = current_members(mirror_root)
+	per_person, corpus = speech_counts(cur)
+	names = person_names(cur, current)
+	cur.execute("SELECT count(*) FROM person")
+	n_total = int(cur.fetchone()[0])
+	doc = site_stats(agg, current, names, per_person, corpus, n_total)
+	write_atomic(mirror_root / SITE_STATS_PATH, json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
+	return SITE_STATS_PATH
 
 
 def _order(speech_id: str) -> Optional[int]:
@@ -265,6 +365,10 @@ def rebuild(cur, mirror_root: Path, persons: Optional[Iterable[int]] = None, iss
 	agg = aggregate(rows, names)
 	write_atomic(mirror_root / AGGREGATE_PATH, _dump(agg) + "\n")
 	paths.append(AGGREGATE_PATH)
+	try:
+		paths.append(write_site_stats(cur, mirror_root, agg))
+	except Exception:  # the loading cards are optional; never fail the label publish over them
+		log.exception("site_stats.json not written")
 
 	if targets:
 		needed = {r["issue_id"] for r in rows if r["questioner_person_id"] in targets or targets & set(r["answerer_person_ids"] or [])}
@@ -278,7 +382,7 @@ def rebuild(cur, mirror_root: Path, persons: Optional[Iterable[int]] = None, iss
 			rel = f"{PERSONS_DIR}/{pid}.jsonl"
 			write_atomic(mirror_root / rel, "".join(_dump(l) + "\n" for l in lines))
 			paths.append(rel)
-	log.info("published %d person file(s) and the aggregate (%d exchanges, %d persons)", len(paths) - 1,
+	log.info("published %d file(s) incl. the aggregate (%d exchanges, %d persons)", len(paths),
 		agg["coverage"]["exchanges"], len(agg["persons"]))
 	return paths
 
@@ -294,9 +398,10 @@ def main(argv: Optional[List[str]] = None) -> int:
 	p.add_argument("person_ids", nargs="*", type=int)
 	p.add_argument("--all", action="store_true")
 	p.add_argument("--backfill-groups", action="store_true")
+	p.add_argument("--site-stats", action="store_true", help="only rewrite site_stats.json from the current aggregate")
 	args = p.parse_args(argv)
-	if not (args.all or args.backfill_groups or args.person_ids):
-		p.error("give PERSON_ID..., --all or --backfill-groups")
+	if not (args.all or args.backfill_groups or args.person_ids or args.site_stats):
+		p.error("give PERSON_ID..., --all, --backfill-groups or --site-stats")
 
 	cfg = load_config()
 	load_dotenv(cfg.env_file)
@@ -318,6 +423,11 @@ def main(argv: Optional[List[str]] = None) -> int:
 			if args.all or args.backfill_groups:
 				n = backfill_groups(cur, cfg.issues_dir)
 				print(f"questioner_group filled on {n} row(s)")
+			if args.site_stats and not (args.all or args.person_ids):
+				agg = json.loads((cfg.mirror_root / AGGREGATE_PATH).read_text(encoding="utf-8"))
+				path = write_site_stats(cur, cfg.mirror_root, agg)
+				state.add_pending_paths([path])
+				print(f"{path} written; upload with `python -m speech_update upload`")
 			if args.all or args.person_ids:
 				paths = rebuild(cur, cfg.mirror_root, None if args.all else args.person_ids, cfg.issues_dir)
 				state.add_pending_paths(paths)

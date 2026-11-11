@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { LinkPending } from "./LinkPending";
 import { track } from "./track";
 
 export function LandingHeader() {
@@ -34,7 +35,7 @@ export function LandingHeader() {
             onClick={() => track("LandingCTA", { cta: "open_app", location: "header" })}
             className="inline-flex items-center rounded-full border border-cyan-400/20 bg-linear-to-br from-cyan-500/20 to-indigo-600/20 px-3.5 py-1.5 text-xs font-semibold text-cyan-100 shadow-lg shadow-cyan-500/10 transition hover:border-cyan-400/40 hover:bg-cyan-500/25 hover:text-cyan-50"
           >
-            ダッシュボードへ
+            <LinkPending>ダッシュボードへ</LinkPending>
           </Link>
         </nav>
       </div>
