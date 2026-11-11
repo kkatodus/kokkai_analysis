@@ -16,6 +16,7 @@ Future project plans and design documents live under `specs/`. Each subdirectory
 | [speech-quality-ui](speech-quality-ui/README.md) | in-progress | Site rebuilt around the new exchange labels: per-person aggregate + exchange files from `label_result`, `/speeches/quality/*`, ranking card, やり取り tab, meeting-view segments, new 注意事項 |
 | [topic-scaling-refresh](topic-scaling-refresh/README.md) | in-progress | Monthly re-summarise/re-embed/re-project of politicians per topic inside per-topic time windows; all-vs-current toggle in the scatter plot; topic and window suggestions posted to Slack for manual editing |
 | [db-backup](db-backup/README.md) | in-progress | Weekly `pg_dump` of the local `kokkaidoc` Postgres to `s3://kokkai-doc-bucket-dev/backups/postgres/` (STANDARD_IA, 60-day lifecycle), Sundays 06:00 via launchd |
+| [topic-keyword-highlight](topic-keyword-highlight/README.md) | planned | Highlight the `search_words` that filed each speech under its topic in 発言（トピック別）: `topics/topics.json` published by `speech_update`, `GET /speeches/topics`, KWIC excerpt when collapsed, per-topic colours on 全発言 |
 
 **Status values:** `draft` · `planned` · `in-progress` · `blocked` · `done` · `archived`
 
