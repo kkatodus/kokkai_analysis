@@ -273,3 +273,19 @@ def test_agenda_items_parsing():
 	assert items == ["特別委員長互選", "理事選任の件", "防災庁設置法案（閣法第一三号）（衆議院送付）"]
 	assert [i for i in items if not PROCEDURAL.search(i)] == ["防災庁設置法案（閣法第一三号）（衆議院送付）"]
 	assert agenda_items("no agenda here") == []
+
+
+def test_midpoints_axis_block(tmp_path):
+	from topic_scaling.project import axis_block, load_midpoints
+	f = tmp_path / "midpoints.json"
+	f.write_text(json.dumps({"topics": {"defence": {
+		"constitution": {"status": "calibrated", "midpoint": -1.1, "neutral_from": -1.2, "neutral_to": -1.0, "confidence": "high"},
+		"foodsecurity": {"status": "one_sided_pro"}}}}), encoding="utf-8")
+	mp = load_midpoints(f)["defence"]
+
+	class Sub:
+		pro, con = "p", "c"
+	assert axis_block(Sub, mp["constitution"]) == {"pro": "p", "con": "c", "midpoint": -1.1, "neutral_from": -1.2, "neutral_to": -1.0, "confidence": "high"}
+	assert axis_block(Sub, mp["foodsecurity"]) == {"pro": "p", "con": "c"}
+	assert axis_block(Sub, None) == {"pro": "p", "con": "c"}
+	assert load_midpoints(tmp_path / "missing.json") == {}

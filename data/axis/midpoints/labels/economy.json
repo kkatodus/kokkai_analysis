@@ -1,0 +1,1053 @@
+{
+ "topic": "economy",
+ "axis_notes": {
+  "smallbusinesssupport": "pro = strengthen SME support (funding, price pass-through, subsidies); con = selective/limited support, avoid propping up uncompetitive firms or excessive intervention.",
+  "consumptiontaxreduction": "pro = cut/abolish consumption tax or clearly oppose hikes on regressivity/demand grounds; con = support raising/maintaining it as social-security revenue; conditional/mixed = neutral.",
+  "foreignworkers": "pro = expand acceptance of foreign workers; con = cautious/restrictive. Rarely addressed in economy summaries.",
+  "monetarypolicyreview": "Inverted framing: pro = review/normalise/exit easing (side effects, weak yen); con = maintain or strengthen easing / avoid hasty rate hikes.",
+  "governmentintervention": "pro = active state role (fiscal stimulus, industrial policy, public works, labour/market regulation); con = deregulation, structural reform, private-led, fiscal restraint over stimulus."
+ },
+ "labels": {
+  "6": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "22": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "con",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "50": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "neutral"
+  },
+  "178": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "230": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "pro",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "256": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "345": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "con",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "con"
+  },
+  "381": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "388": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "na"
+  },
+  "414": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "509": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "593": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "606": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "711": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "pro",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "741": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "876": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1031": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1102": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1135": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "1144": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1145": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "1206": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1214": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1224": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1276": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1343": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1348": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "1351": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "1385": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "1433": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1460": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "pro",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "1483": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "1487": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "1505": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "1524": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1619": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "1645": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1669": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1716": {
+   "smallbusinesssupport": "neutral",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "1759": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "neutral"
+  },
+  "1843": {
+   "smallbusinesssupport": "neutral",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "1872": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "1874": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "1887": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1910": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "1916": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2056": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2069": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2116": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2205": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2207": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2268": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "pro",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2352": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2377": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2382": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2439": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2454": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2495": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "neutral",
+   "governmentintervention": "pro"
+  },
+  "2527": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2696": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "na"
+  },
+  "2732": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2747": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2824": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "2863": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2865": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "con"
+  },
+  "2931": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2955": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "2972": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "neutral"
+  },
+  "2973": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "2976": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "2985": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3023": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3101": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3129": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "3169": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3198": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3212": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3273": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3305": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3359": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "3364": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3365": {
+   "smallbusinesssupport": "con",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "3378": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3438": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3444": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3465": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "3475": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3613": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3631": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3653": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3678": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3690": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3767": {
+   "smallbusinesssupport": "neutral",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3817": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "3819": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "3842": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3965": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "3977": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4021": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "con",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "4151": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4153": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4168": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4178": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "4194": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4216": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4224": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4267": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "neutral",
+   "governmentintervention": "neutral"
+  },
+  "4276": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "neutral",
+   "governmentintervention": "neutral"
+  },
+  "4290": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4307": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4330": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "pro",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4343": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "4422": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4512": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4528": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4563": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "4578": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "pro",
+   "governmentintervention": "pro"
+  },
+  "4656": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4714": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4725": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "4732": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4740": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4896": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "4943": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "5064": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5181": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "5194": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5203": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5306": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5509": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "con"
+  },
+  "5541": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "neutral",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "con"
+  },
+  "5643": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5696": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "5708": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5710": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "pro"
+  },
+  "5718": {
+   "smallbusinesssupport": "na",
+   "consumptiontaxreduction": "na",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "5722": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "con",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "na",
+   "governmentintervention": "neutral"
+  },
+  "5844": {
+   "smallbusinesssupport": "pro",
+   "consumptiontaxreduction": "pro",
+   "foreignworkers": "na",
+   "monetarypolicyreview": "con",
+   "governmentintervention": "pro"
+  },
+  "5": {
+   "monetarypolicyreview": "na"
+  },
+  "71": {
+   "monetarypolicyreview": "pro"
+  },
+  "108": {
+   "monetarypolicyreview": "na"
+  },
+  "186": {
+   "monetarypolicyreview": "na"
+  },
+  "312": {
+   "monetarypolicyreview": "na"
+  },
+  "532": {
+   "monetarypolicyreview": "na"
+  },
+  "579": {
+   "monetarypolicyreview": "na"
+  },
+  "617": {
+   "monetarypolicyreview": "na"
+  },
+  "630": {
+   "monetarypolicyreview": "pro"
+  },
+  "1422": {
+   "monetarypolicyreview": "na"
+  },
+  "1470": {
+   "monetarypolicyreview": "na"
+  },
+  "1934": {
+   "monetarypolicyreview": "pro"
+  },
+  "2147": {
+   "monetarypolicyreview": "na"
+  },
+  "2155": {
+   "monetarypolicyreview": "na"
+  },
+  "2758": {
+   "monetarypolicyreview": "na"
+  },
+  "3611": {
+   "monetarypolicyreview": "na"
+  },
+  "4437": {
+   "monetarypolicyreview": "na"
+  },
+  "4554": {
+   "monetarypolicyreview": "na"
+  },
+  "4779": {
+   "monetarypolicyreview": "con"
+  },
+  "4853": {
+   "monetarypolicyreview": "pro"
+  },
+  "4941": {
+   "monetarypolicyreview": "na"
+  },
+  "5080": {
+   "monetarypolicyreview": "con"
+  },
+  "5426": {
+   "monetarypolicyreview": "na"
+  },
+  "5699": {
+   "monetarypolicyreview": "na"
+  },
+  "5723": {
+   "monetarypolicyreview": "pro"
+  }
+ }
+}

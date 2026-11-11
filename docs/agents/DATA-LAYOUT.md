@@ -115,7 +115,7 @@ ideological-scaling outputs (see [RESEARCHER.md](./RESEARCHER.md),
 | Directory | Role |
 |---|---|
 | `results/` | Stance-quantification outputs (embeddings, UMAP, logs) |
-| `axis/` | Per-topic controversy-axis artifacts |
+| `axis/` | Per-topic controversy-axis artifacts; `axis/midpoints.json` = calibrated con→pro cut per sub-topic (which sub-topics get published) |
 | `unused/` | Deprecated scripts (may reference `data_prepping/`) |
 | `data_venv/`, `mecab-ipadic-neologd/` | Local tooling — not project data |
 

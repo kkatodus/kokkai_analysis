@@ -25,13 +25,13 @@ Written by `data/topic_scaling` (spec `specs/topic-scaling-refresh/`). v2 is a s
 { version: 2, generated_at, embed_model, summary_model, current_members_as_of,
   data: [ { topic: "nuclear", topic_en: "NuclearPower", topic_jp: "原発",
             window: {from: "2011-03-11", to: null}, n_scaled, n_current,
-            sub_topics: [ { topic, sub_topic: "restart", sub_topic_jp, axis: {pro, con},
+            sub_topics: [ { topic, sub_topic: "restart", sub_topic_jp, axis: {pro, con, midpoint?, neutral_from?, neutral_to?, confidence?},
                             "1d": {data: [point]}, "2d": {data: [point]}, "2d_current": {data: [point]} } ] } ] }
 point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point: "none"|"for"|"against",
           person_id, current: bool, n_opinions, n_speeches, last_speech }
 ```
 
-`1d.x` is the projection onto the sub-topic axis (0 = midpoint, positive = pro); the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
+`1d.x` is the projection onto the sub-topic axis (0 = halfway between the two reference texts, positive = pro). Raw 0 is not the political middle: `axis.midpoint` is the hand-calibrated x where stances switch from con to pro, with `neutral_from`/`neutral_to` the mixed band (from `data/axis/midpoints.json`; sub-topics found to have no real split are left out of the file; see `data/axis/midpoints/README.md`); the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
 
 ### Per-person stance summaries (`/ideology/person`, spec `specs/stance-summaries-panel/`)
 

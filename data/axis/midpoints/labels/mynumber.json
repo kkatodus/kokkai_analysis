@@ -1,0 +1,853 @@
+{
+ "topic": "mynumber",
+ "axis_notes": {
+  "popularizationconcerns": "pro = supports spreading/using the My Number system and card; con = primarily concerned/opposed (privacy, forced uptake)",
+  "onlinequalificationconfirmation": "pro = supports card-based online insurance qualification checks in clinics; con = opposes / stresses harm to clinics, elderly, disabled",
+  "privacysecurity": "pro = system is/can be made safe, concerns are misunderstanding or fixable human error; con = leaks/trust loss show serious unresolved privacy risk",
+  "mandatory": "pro = supports mandatory card acquisition or mandatory My Number linkage (e.g. bank accounts); con = insists acquisition stay voluntary / opposes de facto compulsion",
+  "healthinsuranceintegration": "pro = supports merging insurance card into My Number card / abolishing paper card; con = opposes abolition or wants paper card kept",
+  "digitalization": "pro = My Number-driven digitalisation is key to efficiency; con = card-centred/formal digitalisation insufficient, risks leaving people behind"
+ },
+ "labels": {
+  "56": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "152": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "pro",
+   "mandatory": "con",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "345": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "374": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "con"
+  },
+  "457": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "514": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "559": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "568": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "689": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "708": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "767": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "neutral"
+  },
+  "780": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "793": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "con",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "813": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "824": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "911": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "917": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1126": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "con",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "1214": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "1234": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "1279": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1483": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "pro",
+   "mandatory": "con",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1549": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "1655": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "pro"
+  },
+  "1711": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1819": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "1827": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1925": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "1974": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "1977": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "2010": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "na"
+  },
+  "2093": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "2111": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "2181": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2239": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "pro",
+   "mandatory": "con",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "na"
+  },
+  "2306": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "neutral"
+  },
+  "2321": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "2324": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2377": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "2494": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "2813": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2835": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2869": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "2932": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "3109": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3214": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "3282": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3507": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "neutral"
+  },
+  "3553": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "3631": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "3659": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3723": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3732": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "3819": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "na",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "neutral"
+  },
+  "3907": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "3908": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3922": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "neutral"
+  },
+  "3969": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "con",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "3975": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "4008": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "pro"
+  },
+  "4021": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "4036": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "4060": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "4167": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "pro",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "4340": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "4578": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "4694": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "neutral",
+   "mandatory": "con",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "na"
+  },
+  "4848": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "5030": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "5279": {
+   "popularizationconcerns": "neutral",
+   "onlinequalificationconfirmation": "pro",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "na"
+  },
+  "5496": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "5541": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "5712": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "5715": {
+   "popularizationconcerns": "con",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "con",
+   "mandatory": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "5852": {
+   "popularizationconcerns": "pro",
+   "onlinequalificationconfirmation": "na",
+   "privacysecurity": "na",
+   "mandatory": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "neutral"
+  },
+  "221": {
+   "popularizationconcerns": "neutral",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "254": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "410": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "pro"
+  },
+  "516": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "593": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "681": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "neutral"
+  },
+  "1277": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "neutral",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "pro"
+  },
+  "1345": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "1630": {
+   "popularizationconcerns": "neutral",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "1746": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "1822": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "1938": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2052": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "2131": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "2172": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "2192": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "neutral",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "2338": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "neutral",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "pro"
+  },
+  "2471": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "2623": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "con"
+  },
+  "2655": {
+   "popularizationconcerns": "neutral",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "2732": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "na"
+  },
+  "2837": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "3095": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "3192": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "con",
+   "digitalization": "pro"
+  },
+  "3496": {
+   "popularizationconcerns": "neutral",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "na"
+  },
+  "3613": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "na",
+   "digitalization": "con"
+  },
+  "3857": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "neutral",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "3871": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "con",
+   "digitalization": "pro"
+  },
+  "4288": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "con"
+  },
+  "4437": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "4445": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "con",
+   "healthinsuranceintegration": "con",
+   "digitalization": "neutral"
+  },
+  "4626": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "con",
+   "digitalization": "neutral"
+  },
+  "4740": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "4946": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "5063": {
+   "popularizationconcerns": "neutral",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "na",
+   "digitalization": "pro"
+  },
+  "5091": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "neutral",
+   "healthinsuranceintegration": "neutral",
+   "digitalization": "pro"
+  },
+  "5131": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "5183": {
+   "popularizationconcerns": "con",
+   "privacysecurity": "na",
+   "healthinsuranceintegration": "con",
+   "digitalization": "con"
+  },
+  "5699": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  },
+  "5701": {
+   "popularizationconcerns": "pro",
+   "privacysecurity": "pro",
+   "healthinsuranceintegration": "pro",
+   "digitalization": "pro"
+  }
+ }
+}

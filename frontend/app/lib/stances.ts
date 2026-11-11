@@ -58,8 +58,12 @@ export interface SubTopicPosition {
   con: string;
   /** share of scaled people with x strictly below this person's, 0…1 */
   percentile: number;
-  /** same measure for the median person */
-  median: number;
+  /** where the bar's tick goes: the calibrated midpoint, or the median person on uncalibrated axes */
+  cut: number;
+  /** neutral band as percentiles, calibrated axes only */
+  band: [number, number] | null;
+  /** which side of the calibrated midpoint this person is on; null on uncalibrated axes */
+  side: "pro" | "con" | "neutral" | null;
   n: number;
 }
 
@@ -75,14 +79,19 @@ function subTopicPosition(sub: IdeologySubTopic, personId: number): SubTopicPosi
   const me = pts.find((p) => p.person_id === personId);
   if (!me) return null;
   const xs = pts.map((p) => p.x).sort((a, b) => a - b);
-  const mid = xs.length % 2 ? xs[(xs.length - 1) / 2] : (xs[xs.length / 2 - 1] + xs[xs.length / 2]) / 2;
+  const ax = sub.axis;
+  const calibrated = ax?.midpoint != null && ax.neutral_from != null && ax.neutral_to != null;
+  const median = xs.length % 2 ? xs[(xs.length - 1) / 2] : (xs[xs.length / 2 - 1] + xs[xs.length / 2]) / 2;
+  const side = !calibrated ? null : me.x >= ax.neutral_to! ? "pro" : me.x < ax.neutral_from! ? "con" : "neutral";
   return {
     subTopic: sub.sub_topic,
     label: sub.sub_topic_jp ?? sub.sub_topic,
     pro: sub.axis?.pro ?? "賛成",
     con: sub.axis?.con ?? "反対",
     percentile: percentileOf(xs, me.x),
-    median: percentileOf(xs, mid),
+    cut: percentileOf(xs, calibrated ? ax.midpoint! : median),
+    band: calibrated ? [percentileOf(xs, ax.neutral_from!), percentileOf(xs, ax.neutral_to!)] : null,
+    side,
     n: xs.length,
   };
 }

@@ -129,6 +129,8 @@ Per sub-topic in `data/axis/{topic}/{topic}_axis.json`:
 - **Current members:** the union of `person_id`s in the latest `parliamentMembers/shugiin_*.json` and `sangiin_*.json` (the files the member job writes; take the lexically last per house). Stored per point as `current: true|false`, so the 1D view is a client-side filter.
 - Point metadata comes from Postgres `person` (name, kana) and the member snapshot (house, kaiha → `party` via the same party mapping the old script used; politicians not in a snapshot get their last `election_result` party and house). `party` and `color` keep today's values (kaiha abbreviation such as れ新, plain colour name) so the frontend needs no change; `party_full` is added, and aligning colours with `frontend/app/lib/config/parties.ts` (full party names, Tailwind classes) is a frontend follow-up.
 
+Midpoints (2026-11-11): `project` reads `data/axis/midpoints.json` and adds `axis.midpoint` / `neutral_from` / `neutral_to` to calibrated sub-topics and drops those marked `one_sided_pro` or `unclear`; method in `data/axis/midpoints/README.md`. Re-calibrate when an axis or its reference texts change.
+
 ### 4.7 Publish: file format, versions, upload
 
 > Follow-up spec [stance-summaries-panel](../stance-summaries-panel/README.md) adds per-person files `ideology/persons/{person_id}.json` (the summary texts, counts, contributing speech IDs) written by the same publish call, for the detail pane's 立場 tab.
