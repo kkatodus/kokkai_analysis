@@ -4,8 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { IssueSpeechRecord } from "@/app/types";
 import type { SegmentKind } from "@/app/components/features/issue/speechSegmentation";
 import { SEGMENT_PALETTES, type SpeechSegment } from "@/app/components/features/issue/speechSegmentation";
+import { FiExternalLink } from "react-icons/fi";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
-import { CONTRIBUTION_STYLE } from "@/app/lib/quality";
+import { Button, ButtonLink } from "@/app/components/shared/Button";
+import { selectedClass } from "@/app/components/shared/Chip";
+import { Empty } from "@/app/components/shared/states";
+import { cx } from "@/app/components/shared/cx";
 
 function clamp(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n));
@@ -53,32 +57,31 @@ export function IssueSpeechList({
   }, [safeIndex]);
 
   if (!speeches.length) {
-    return <div className="p-2 text-[12px] text-gray-400">発言がありません。</div>;
+    return <Empty message="この会議の発言はありません。" />;
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-0 flex-1 overflow-auto rounded-xl border border-slate-400/15 bg-slate-950/20"
-    >
-      <div className="grid gap-2 p-2">
+    <div ref={containerRef} className="min-h-0 flex-1 overflow-y-auto">
+      <ul className="flex flex-col gap-2">
         {speeches.map((s, i) => {
           const active = i === safeIndex;
           const key = makeSpeechKey(s, i);
           const accent = accentByIndex?.[i] ?? null;
-          const accentClasses = accent ? SEGMENT_PALETTES[accent].itemClassName : "";
           const isExpanded = expandedKeys.has(key);
           const note = segmentNoteByStartIndex.get(i) ?? null;
+          const textId = `${key}-text`;
           return (
-            <div key={key} className="grid gap-1.5">
+            <li key={key} className="flex flex-col gap-2">
               {note && note.quality ? (
                 <div
-                  className={
-                    "rounded-lg border px-2 py-1.5 text-[11px] text-gray-200 " + CONTRIBUTION_STYLE[note.quality.contribution].note
-                  }
+                  className={cx(
+                    "rounded-lg border border-line border-l-2 p-3 text-body-sm",
+                    SEGMENT_PALETTES[note.quality.contribution].itemClassName,
+                    SEGMENT_PALETTES[note.quality.contribution].noteClassName,
+                  )}
                 >
                   <div className="mb-1 flex flex-wrap items-center gap-1">
-                    <span className="mr-1 font-semibold">AI判定</span>
+                    <span className="mr-1 text-label-sm">AI判定</span>
                     <ExchangeChips
                       fn={note.quality.function}
                       contribution={note.quality.contribution}
@@ -87,68 +90,65 @@ export function IssueSpeechList({
                       prefixed
                     />
                   </div>
-                  <div className="text-gray-100/90">{note.quality.reason}</div>
+                  <p>{note.quality.reason}</p>
                 </div>
               ) : null}
 
+              {/* The whole row selects the speech: a full-size button sits under the row's own controls. */}
               <div
                 ref={(node) => {
                   itemRefs.current[i] = node;
                 }}
-                className={
-                  "rounded-lg border border-l-4 p-2 transition-colors " +
-                  (accent
-                    ? ` ${accentClasses} `
-                    : " border-slate-400/15 border-l-slate-400/10 bg-[#020617] hover:bg-white/5 ") +
-                  (active ? " ring-2 ring-cyan-400/35" : "")
-                }
-                role="button"
-                tabIndex={0}
-                onClick={() => onSelectIndex(i)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onSelectIndex(i);
-                  }
-                }}
+                className={cx(
+                  "relative rounded-lg border p-3 text-body-md transition-colors",
+                  accent && cx("border-l-2", SEGMENT_PALETTES[accent].itemClassName),
+                  active ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised text-ink hover:bg-surface-hover",
+                )}
               >
+                <button
+                  type="button"
+                  aria-current={active ? "true" : undefined}
+                  aria-describedby={textId}
+                  aria-label={`${i + 1}番目の発言：${s.speaker}`}
+                  onClick={() => onSelectIndex(i)}
+                  className="absolute inset-0 cursor-pointer rounded-lg"
+                />
+
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <div className="truncate text-[12px] font-semibold text-gray-50">{s.speaker}</div>
-                      <div className="text-[10px] text-gray-400">#{s.speechOrder}</div>
+                    <div className="flex flex-wrap items-baseline gap-x-2">
+                      <span className={cx("truncate text-title-sm", active ? "text-on-primary-soft" : "text-ink-strong")}>{s.speaker}</span>
+                      <span className="text-data text-ink-muted">#{s.speechOrder}</span>
                     </div>
-                    <div className="mt-0.5 text-[11px] text-gray-400">{s.speakerGroup}</div>
+                    {s.speakerGroup && <div className="text-caption text-ink-muted">{s.speakerGroup}</div>}
                   </div>
 
-                  <div className="flex shrink-0 items-center gap-2">
-                    <a
-                      href={s.speechURL}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 transition-all hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_18px_rgba(34,211,238,0.18)]"
-                      title="国会会議録の原文ページを開く"
-                    >
-                      原文を開く
-                    </a>
-                    <div className="text-[10px] text-gray-400">{i + 1}</div>
+                  <div className="relative flex shrink-0 items-center gap-2">
+                    {s.speechURL && (
+                      <ButtonLink
+                        href={s.speechURL}
+                        variant="ghost"
+                        size="sm"
+                        icon={<FiExternalLink aria-hidden className="size-3.5" />}
+                        title="国会会議録の原文ページを開く"
+                      >
+                        原文を開く
+                      </ButtonLink>
+                    )}
+                    <span className="text-data text-ink-muted">{i + 1}</span>
                   </div>
                 </div>
 
-                <div
-                  className={
-                    "mt-1 whitespace-pre-wrap text-[12px] leading-relaxed text-gray-200 " + (isExpanded ? "" : "line-clamp-4")
-                  }
-                >
+                <div id={textId} className={cx("mt-2 whitespace-pre-wrap", !isExpanded && "line-clamp-4")}>
                   {s.speech}
                 </div>
 
-                <div className="mt-2 flex items-center justify-end">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
+                <div className="relative mt-2 flex justify-end">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    aria-expanded={isExpanded}
+                    onClick={() => {
                       setExpandedKeys((prev) => {
                         const next = new Set(prev);
                         if (next.has(key)) next.delete(key);
@@ -156,17 +156,15 @@ export function IssueSpeechList({
                         return next;
                       });
                     }}
-                    className="cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 hover:bg-white/5"
                   >
                     {isExpanded ? "折りたたむ" : "全文を表示"}
-                  </button>
+                  </Button>
                 </div>
               </div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }
-

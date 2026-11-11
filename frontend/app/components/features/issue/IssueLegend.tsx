@@ -1,20 +1,14 @@
 "use client";
 
-import { CONTRIBUTION_JA, CONTRIBUTION_STYLE, CONTRIBUTIONS } from "@/app/lib/quality";
+import { Legend, type LegendItem } from "@/app/components/shared/Legend";
+import { CONTRIBUTION_JA, CONTRIBUTIONS } from "@/app/lib/quality";
+import { SEGMENT_PALETTES } from "@/app/components/features/issue/speechSegmentation";
 
-export function IssueLegend() {
-  return (
-    <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-gray-400">
-      {CONTRIBUTIONS.map((c) => (
-        <div key={c} className="flex items-center gap-1">
-          <span className={`inline-block h-2 w-2 rounded-full ${CONTRIBUTION_STYLE[c].dot}`} />
-          {CONTRIBUTION_JA[c]}
-        </div>
-      ))}
-      <div className="flex items-center gap-1">
-        <span className="inline-block h-2 w-2 rounded-full bg-slate-600/80" />
-        AI判定なし
-      </div>
-    </div>
-  );
+const ITEMS: LegendItem[] = [
+  ...CONTRIBUTIONS.map((c) => ({ label: CONTRIBUTION_JA[c], color: SEGMENT_PALETTES[c].ringCss })),
+  { label: "AI判定なし", color: "var(--color-line-strong)" },
+];
+
+export function IssueLegend({ className }: { className?: string }) {
+  return <Legend items={ITEMS} className={className} />;
 }

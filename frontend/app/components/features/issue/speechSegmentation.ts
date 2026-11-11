@@ -1,7 +1,6 @@
 "use client";
 
 import type { IssueSpeechRecord, QualityContribution, SpeechQuality } from "@/app/types";
-import { CONTRIBUTION_STYLE } from "@/app/lib/quality";
 
 export type SegmentKind = QualityContribution | "unknown";
 
@@ -16,14 +15,16 @@ export type SpeechSegment = {
 };
 
 export type SegmentPalette = {
-  ringCss: string; // for SVG strokes
-  itemClassName: string; // tailwind classes for list items
+  ringCss: string; // CSS colour for SVG strokes (the dial ring)
+  itemClassName: string; // leading edge of the list rows in the exchange
+  noteClassName: string; // the AI判定 note above the exchange
 };
 
+// Quality scale on the semantic tokens (DESIGN.md "Quality scale"): success / warning / error.
 export const SEGMENT_PALETTES: Record<Exclude<SegmentKind, "unknown">, SegmentPalette> = {
-  substantive: { ringCss: CONTRIBUTION_STYLE.substantive.ring, itemClassName: CONTRIBUTION_STYLE.substantive.item },
-  limited: { ringCss: CONTRIBUTION_STYLE.limited.ring, itemClassName: CONTRIBUTION_STYLE.limited.item },
-  none: { ringCss: CONTRIBUTION_STYLE.none.ring, itemClassName: CONTRIBUTION_STYLE.none.item },
+  substantive: { ringCss: "var(--color-success)", itemClassName: "border-l-success", noteClassName: "bg-success-soft text-on-success-soft" },
+  limited: { ringCss: "var(--color-warning)", itemClassName: "border-l-warning", noteClassName: "bg-warning-soft text-on-warning-soft" },
+  none: { ringCss: "var(--color-error)", itemClassName: "border-l-error", noteClassName: "bg-error-soft text-on-error-soft" },
 };
 
 function qualityOf(s: IssueSpeechRecord): SpeechQuality | null {
