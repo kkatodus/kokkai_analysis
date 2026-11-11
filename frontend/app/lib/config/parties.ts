@@ -137,30 +137,61 @@ export const PARTY2PARTY: { [key: string]: string } = {
 	CRA: '中道改革連合',
   };
   
+  /**
+   * Party colours (frontend/DESIGN.md "Data colours", specs/design-system §7 "Party palette", approved 2026-11-11).
+   * Keyed by the canonical short name; look colours up with `partyRgb()` so the aliases below resolve.
+   */
   export const PARTY2RGBCOLOR: { [key: string]: [number, number, number] } = {
-	// Neon palette for the site's dark navy background (#111827 → #020617).
-	自民: [224, 231, 255],   // neon periwinkle (stands out vs dark, still "neutral-ish")
-	公明: [0, 255, 255],     // neon cyan
-	立憲: [255, 140, 0],     // neon orange
-	維新: [255, 230, 0],     // neon yellow
-	民主: [0, 160, 255],     // electric blue
-	共産: [255, 45, 85],     // neon red/pink
-	れ新: [0, 255, 140],     // neon green
-	沖縄: [0, 255, 200],     // aqua-mint
-	女子: [255, 0, 200],     // hot magenta
-	無所属: [180, 190, 210], // bright slate
-	無: [176, 0, 255],       // electric purple
-	国民: [0, 110, 255],     // vivid blue
-	維教: [190, 255, 0],     // lime neon
-	Ｎ党: [255, 0, 140],     // neon fuchsia
-	中道: [190, 210, 40],    // olive-lime (kept apart from 無's purple)
-	参政: [255, 170, 60],    // amber (kept apart from 立憲's orange and 維新's yellow)
-	みらい: [0, 210, 180],   // teal
-	みら: [0, 210, 180],     // teal (Sangiin short form of みらい)
-	志士: [200, 200, 200],   // light grey
-	保守: [170, 110, 60],    // brown
-	社民: [255, 105, 180],   // hot pink
+	自民: [224, 231, 255], // #e0e7ff periwinkle
+	維新: [255, 230, 0], // #ffe600 yellow
+	国民: [61, 135, 245], // #3d87f5 blue
+	中道: [174, 155, 251], // #ae9bfb violet
+	立憲: [238, 136, 87], // #ee8857 soft orange
+	参政: [243, 179, 14], // #f3b30e gold
+	公明: [244, 169, 204], // #f4a9cc light pink
+	みらい: [11, 190, 139], // #0bbe8b green teal
+	共産: [247, 40, 73], // #f72849 red
+	無所属: [142, 151, 169], // #8e97a9 mid grey
+	れ新: [44, 230, 117], // #2ce675 green
+	沖縄: [93, 254, 209], // #5dfed1 mint
+	社民: [224, 72, 216], // #e048d8 orchid
+	保守: [172, 112, 47], // #ac702f brown
+	志士: [149, 249, 125], // #95f97d light green
+	// past sessions only; unchanged
+	女子: [255, 0, 200],
+	Ｎ党: [255, 0, 140],
+	維教: [190, 255, 0],
+	// aliases: the two houses' lists abbreviate some parties differently (one colour per party)
+	民主: [61, 135, 245],
+	無: [142, 151, 169],
+	みら: [11, 190, 139],
+	い党: [44, 230, 117],
   };
 
+  /** Short names that mean the same group as another short name (colour and label lookups). */
+  export const PARTY_ALIASES: { [key: string]: string } = {
+	民主: "国民",
+	無: "無所属",
+	みら: "みらい",
+	い党: "れ新", // the five former れ新 参議院 members, listed as い党 since 2026-10-15
+  };
+
+  /** The canonical short name for a short name from either house's list. */
+  export function canonicalParty(party: string): string {
+	return PARTY_ALIASES[party] ?? party;
+  }
+
   /** Districts whose party has no entry above are drawn in this colour (and listed as その他 in legends). */
-  export const PARTY_FALLBACK_RGB: [number, number, number] = [255, 255, 255];
+  export const PARTY_FALLBACK_RGB: [number, number, number] = [100, 116, 139]; // #64748b
+
+  /** Colour for a party short name, via its alias, falling back to その他. */
+  export function partyRgb(party: string | null | undefined): [number, number, number] {
+	if (!party) return PARTY_FALLBACK_RGB;
+	return PARTY2RGBCOLOR[canonicalParty(party)] ?? PARTY_FALLBACK_RGB;
+  }
+
+  /** CSS colour string for a party short name. */
+  export function partyCss(party: string | null | undefined, alpha = 1): string {
+	const [r, g, b] = partyRgb(party);
+	return alpha === 1 ? `rgb(${r} ${g} ${b})` : `rgb(${r} ${g} ${b} / ${alpha})`;
+  }
