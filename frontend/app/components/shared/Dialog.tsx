@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, type KeyboardEvent, type ReactNode } from "re
 import { IoClose } from "react-icons/io5";
 import { cx } from "./cx";
 import { IconButton } from "./Button";
+import { useRegisterOverlay } from "./overlayStore";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -58,6 +59,7 @@ export function Dialog({
   const ref = useRef<HTMLDivElement>(null);
   const titleId = useId();
   useFocusOnOpen(ref);
+  useRegisterOverlay();
 
   useEffect(() => {
     const prev = document.body.style.overflow;

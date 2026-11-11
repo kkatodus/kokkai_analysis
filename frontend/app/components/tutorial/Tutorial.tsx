@@ -7,6 +7,8 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/app/components/shared/Button";
+import { useRegisterOverlay } from "@/app/components/shared/overlayStore";
 import type { TourActions, TourState, TourStep } from "@/app/components/tutorial/tutorialSteps";
 
 const PAD = 8; // spotlight padding around the target
@@ -42,6 +44,7 @@ export function Tutorial({
 }) {
   const step = steps[stepIndex];
   const isLast = stepIndex === steps.length - 1;
+  useRegisterOverlay();
   const [rect, setRect] = useState<Rect | null>(null);
   const [viewport, setViewport] = useState({ w: 0, h: 0 });
   const [doneFlash, setDoneFlash] = useState(false);
@@ -113,6 +116,9 @@ export function Tutorial({
   // keyboard
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // leave keys alone while the user types in a field (search box, selects)
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
       if (e.key === "Escape") onSkip();
       else if (e.key === "ArrowRight") (isLast ? onFinish : onNext)();
       else if (e.key === "ArrowLeft" && stepIndex > 0) onBack();
@@ -164,40 +170,42 @@ export function Tutorial({
       {/* dim everything except the hole; the four blocks swallow clicks, the hole lets them through */}
       {hole ? (
         <>
-          <div className="pointer-events-auto absolute left-0 right-0 top-0 bg-black/65" style={{ height: Math.max(0, hole.y) }} />
-          <div className="pointer-events-auto absolute left-0 right-0 bottom-0 bg-black/65" style={{ top: hole.y + hole.h }} />
-          <div className="pointer-events-auto absolute left-0 bg-black/65" style={{ top: hole.y, height: hole.h, width: Math.max(0, hole.x) }} />
-          <div className="pointer-events-auto absolute right-0 bg-black/65" style={{ top: hole.y, height: hole.h, left: hole.x + hole.w }} />
+          <div className="pointer-events-auto absolute left-0 right-0 top-0 bg-scrim" style={{ height: Math.max(0, hole.y) }} />
+          <div className="pointer-events-auto absolute left-0 right-0 bottom-0 bg-scrim" style={{ top: hole.y + hole.h }} />
+          <div className="pointer-events-auto absolute left-0 bg-scrim" style={{ top: hole.y, height: hole.h, width: Math.max(0, hole.x) }} />
+          <div className="pointer-events-auto absolute right-0 bg-scrim" style={{ top: hole.y, height: hole.h, left: hole.x + hole.w }} />
           <div
-            className="absolute rounded-2xl ring-2 ring-cyan-300/90 shadow-[0_0_0_4px_rgba(34,211,238,0.25),0_0_40px_rgba(34,211,238,0.35)] transition-all duration-200"
+            className="absolute rounded-2xl shadow-spotlight ring-2 ring-primary transition-all duration-200 motion-reduce:transition-none"
             style={{ left: hole.x, top: hole.y, width: hole.w, height: hole.h }}
           />
         </>
       ) : (
-        <div className="pointer-events-auto absolute inset-0 bg-black/70" />
+        <div className="pointer-events-auto absolute inset-0 bg-scrim" />
       )}
 
       {/* the card */}
       <div
         ref={cardRef}
-        className="pointer-events-auto absolute rounded-2xl border border-cyan-400/30 bg-[#0b1220] p-4 text-gray-100 shadow-2xl shadow-black/60 transition-all duration-200"
+        className="pointer-events-auto absolute rounded-2xl border border-primary-line bg-surface-raised p-4 text-ink shadow-2xl transition-all duration-200 motion-reduce:transition-none"
         style={cardStyle}
         role="dialog"
-        aria-label={step.title}
+        aria-labelledby="tour-step-title"
       >
-        <div className="mb-1 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-cyan-300/80">
+        <div className="mb-1 flex items-center justify-between text-label-sm text-link">
           <span>使い方ガイド</span>
-          <span>
+          <span className="text-data">
             {stepIndex + 1} / {steps.length}
           </span>
         </div>
         <div className="mb-1.5 flex gap-0.5">
           {steps.map((s, i) => (
-            <span key={s.id} className={"h-1 flex-1 rounded-full " + (i <= stepIndex ? "bg-cyan-400/80" : "bg-slate-700")} />
+            <span key={s.id} className={"h-1 flex-1 rounded-full " + (i <= stepIndex ? "bg-primary" : "bg-surface-hover")} />
           ))}
         </div>
-        <div className="text-[15px] font-semibold leading-snug text-gray-50">{step.title}</div>
-        <div className="mt-1.5 space-y-1.5 text-[12px] leading-relaxed text-gray-200">
+        <h2 id="tour-step-title" className="text-title-md text-ink-strong">
+          {step.title}
+        </h2>
+        <div className="mt-1.5 space-y-1.5 text-body-sm text-ink">
           {paragraphs.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
@@ -207,55 +215,38 @@ export function Tutorial({
           <div
             className={
               "mt-3 rounded-xl border p-2.5 transition-colors " +
-              (done ? "border-emerald-400/40 bg-emerald-500/10" : "border-amber-400/40 bg-amber-500/10")
+              (done ? "border-transparent bg-success-soft text-on-success-soft" : "border-transparent bg-warning-soft text-on-warning-soft")
             }
           >
-            <div className="text-[10px] font-semibold uppercase tracking-wider text-amber-200/90">
+            <div className="text-label-sm">
               {done ? "できました ✓" : "やってみましょう"}
             </div>
-            <div className="mt-0.5 text-[12px] text-gray-100">{step.action.prompt}</div>
+            <div className="mt-0.5 text-body-sm">{step.action.prompt}</div>
             {!done && step.action.fallback && (
-              <button
-                type="button"
-                onClick={() => step.action?.fallback?.(actions)}
-                className="mt-2 rounded-lg border border-slate-400/30 bg-slate-900/60 px-2.5 py-1 text-[11px] font-semibold text-gray-100 hover:bg-white/5"
-              >
+              <Button size="sm" className="mt-2" onClick={() => step.action?.fallback?.(actions)}>
                 {step.action.fallbackLabel ?? "代わりにサンプルを開く"}
-              </button>
+              </Button>
             )}
           </div>
         )}
 
         {step.cta && (
-          <button
-            type="button"
-            onClick={() => step.cta?.run(actions)}
-            className="mt-3 w-full rounded-xl border border-cyan-400/30 bg-linear-to-br from-cyan-500/20 to-indigo-600/20 px-3 py-2 text-[12px] font-semibold text-cyan-50 hover:border-cyan-400/50 hover:bg-cyan-500/25"
-          >
+          <Button variant="primary" className="mt-3 w-full" onClick={() => step.cta?.run(actions)}>
             {step.cta.label}
-          </button>
+          </Button>
         )}
 
         <div className="mt-3 flex items-center justify-between gap-2">
-          <button type="button" onClick={stop} className="text-[11px] text-gray-400 hover:text-gray-200">
+          <Button variant="ghost" size="sm" onClick={stop}>
             {isLast ? "閉じる" : "スキップ"}
-          </button>
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={onBack}
-              disabled={stepIndex === 0}
-              className="rounded-lg border border-slate-400/30 bg-slate-900/60 px-3 py-1.5 text-[12px] font-semibold text-gray-100 enabled:hover:bg-white/5 disabled:opacity-40"
-            >
+          </Button>
+          <div className="flex items-center gap-2">
+            <Button size="sm" onClick={onBack} disabled={stepIndex === 0}>
               戻る
-            </button>
-            <button
-              type="button"
-              onClick={isLast ? onFinish : onNext}
-              className="rounded-lg border border-cyan-400/50 bg-cyan-500/20 px-3 py-1.5 text-[12px] font-semibold text-cyan-50 hover:bg-cyan-500/30"
-            >
+            </Button>
+            <Button size="sm" variant={step.cta ? "secondary" : "primary"} onClick={isLast ? onFinish : onNext}>
               {isLast ? "完了" : step.action && !done && !doneFlash ? "飛ばして次へ" : "次へ"}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
