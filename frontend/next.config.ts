@@ -29,6 +29,23 @@ const nextConfig: NextConfig = {
    * Disable trailing slash for cleaner URLs.
    */
   trailingSlash: false,
+
+  /**
+   * The landing page lives at `/`; the dashboard moved to `/app` (specs/landing-page §4).
+   * Old root links keep working: shares (`?person_id`), payment returns (`?open=donate`),
+   * the Cognito OIDC callback (`?code&state`, redirect URI stays the root) and `?tour`.
+   * Next.js preserves the full query string on the destination.
+   * Temporary (307) so the mapping can be revisited.
+   */
+  async redirects() {
+    const toApp = (keys: string[]) => ({
+      source: "/",
+      has: keys.map((key) => ({ type: "query" as const, key })),
+      destination: "/app",
+      permanent: false,
+    });
+    return [toApp(["person_id"]), toApp(["open"]), toApp(["code", "state"]), toApp(["tour"])];
+  },
 };
 
 export default nextConfig;

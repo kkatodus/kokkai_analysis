@@ -183,6 +183,64 @@ def test_projection_sign_and_current_flag(tmp_path: Path, monkeypatch):
 	assert one_d[1]["color"] == "black" and one_d[2]["color"] == "red"
 
 
+
+# --- per-person stance files ---
+
+def test_write_person_files(tmp_path: Path, monkeypatch):
+	import dataclasses
+	from topic_scaling.publish import write_person_files
+	from topic_scaling.state import write_json
+	cfg = dataclasses.replace(tsconfig.load_config(), mirror_root=tmp_path / "mirror", state_dir=tmp_path / "state")
+	state = State(cfg.state_dir)
+	t = make_topic()
+	t2 = make_topic(topic_id=1, name_jp="防衛", name_en="Defence", slug="defence", search_words=["防衛"])
+	clf = FakeClassifier()
+	speeches = [
+		{"speechID": "b", "speaker": "山田太郎", "speech": "再稼働に賛成。", "meta": {"date": "2012-05-05"}},
+		{"speechID": "c", "speaker": "山田太郎", "speech": "原発は賛成だ。", "meta": {"date": "2013-05-05"}},
+		{"speechID": "e", "speaker": "山田太郎", "speech": "天気。", "meta": {"date": "2013-06-05"}},
+	]
+	recs = {}
+	for pid in ("10", "11", "12"):
+		_write_topic_file(cfg.persons_dir, pid, "NuclearPower", speeches)
+		recs[pid] = select_pair(t, pid, cfg.persons_dir / pid / "NuclearPower.jsonl", state, clf, estimate=False).record()
+	_write_topic_file(cfg.persons_dir, "10", "Defence", [{"speechID": "z", "speaker": "山田太郎", "speech": "防衛に賛成。", "meta": {"date": "2012-01-01"}}])
+	recs_def = select_pair(t2, "10", cfg.persons_dir / "10" / "Defence.jsonl", state, clf, estimate=False).record()
+	state.save_selection({"topics": {"NuclearPower": {"pairs": list(recs.values())}, "Defence": {"pairs": [recs_def]}}})
+	def summary(pid, topic, h):
+		write_json(state.summary_path(pid, topic.name_en), {"opinion_hash": h, "model": "claude-sonnet-5-5",
+			"prompt_version": "s1", "generated_at": "2026-10-22T23:58:49+09:00", "summaries": ["１．a", "１．b", "１．c"]})
+	summary("10", t, recs["10"]["opinion_hash"])        # hash match
+	summary("11", t, "stale")                           # summary older than the selection
+	summary("10", t2, recs_def["opinion_hash"])         # second topic for 10
+	# 12 has no summary at all; 13 is plotted but not in the selection
+	doc = {"generated_at": "2026-11-02T05:40:00+09:00", "data": [
+		{"topic_en": "Defence", "sub_topics": [{"1d": {"data": [{"person_id": 10}]}}]},
+		{"topic_en": "NuclearPower", "sub_topics": [{"1d": {"data": [{"person_id": p} for p in (10, 11, 12, 13)] + [{"person_id": None}]}}]},
+	]}
+	pf = write_person_files(cfg, state, doc, [t2, t])
+	assert pf.persons == 1 and pf.changed == ["ideology/persons/10.json"]
+	assert pf.stale == 1 and pf.missing == 2 and pf.no_provenance == 0
+	body = json.loads((cfg.ideology_dir / "persons" / "10.json").read_text(encoding="utf-8"))
+	assert body["person_id"] == 10 and [e["topic_en"] for e in body["topics"]] == ["Defence", "NuclearPower"]
+	nuc = body["topics"][1]
+	assert nuc["speech_ids"] == ["b", "c"] and nuc["n_opinions"] == 2 and nuc["n_speeches"] == 3
+	assert nuc["summaries"] == ["１．a", "１．b", "１．c"] and nuc["summarised_at"].startswith("2026-10-22")
+	assert not (cfg.ideology_dir / "persons" / "11.json").exists()
+	# unchanged content (only the stamps differ) → nothing to upload
+	doc["generated_at"] = "2026-12-02T05:40:00+09:00"
+	assert write_person_files(cfg, state, doc, [t2, t]).changed == []
+	# cache no longer reproduces the hash → published without speech_ids, counted
+	(state.opinions_cache_path("10", "NuclearPower")).unlink()
+	pf = write_person_files(cfg, state, doc, [t2, t])
+	assert pf.no_provenance == 1 and pf.changed == ["ideology/persons/10.json"]
+	body = json.loads((cfg.ideology_dir / "persons" / "10.json").read_text(encoding="utf-8"))
+	assert "speech_ids" not in body["topics"][1] and body["topics"][0]["speech_ids"] == ["z"]
+	# dry run reports but writes nothing
+	(cfg.ideology_dir / "persons" / "10.json").unlink()
+	pf = write_person_files(cfg, state, doc, [t2, t], dry_run=True)
+	assert pf.changed == ["ideology/persons/10.json"] and not (cfg.ideology_dir / "persons" / "10.json").exists()
+
 # --- members ---
 
 def test_short_party():
@@ -215,3 +273,19 @@ def test_agenda_items_parsing():
 	assert items == ["特別委員長互選", "理事選任の件", "防災庁設置法案（閣法第一三号）（衆議院送付）"]
 	assert [i for i in items if not PROCEDURAL.search(i)] == ["防災庁設置法案（閣法第一三号）（衆議院送付）"]
 	assert agenda_items("no agenda here") == []
+
+
+def test_midpoints_axis_block(tmp_path):
+	from topic_scaling.project import axis_block, load_midpoints
+	f = tmp_path / "midpoints.json"
+	f.write_text(json.dumps({"topics": {"defence": {
+		"constitution": {"status": "calibrated", "midpoint": -1.1, "neutral_from": -1.2, "neutral_to": -1.0, "confidence": "high"},
+		"foodsecurity": {"status": "one_sided_pro"}}}}), encoding="utf-8")
+	mp = load_midpoints(f)["defence"]
+
+	class Sub:
+		pro, con = "p", "c"
+	assert axis_block(Sub, mp["constitution"]) == {"pro": "p", "con": "c", "midpoint": -1.1, "neutral_from": -1.2, "neutral_to": -1.0, "confidence": "high"}
+	assert axis_block(Sub, mp["foodsecurity"]) == {"pro": "p", "con": "c"}
+	assert axis_block(Sub, None) == {"pro": "p", "con": "c"}
+	assert load_midpoints(tmp_path / "missing.json") == {}

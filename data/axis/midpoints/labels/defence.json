@@ -1,0 +1,1052 @@
+{
+ "topic": "defence",
+ "axis_notes": {
+  "constitution": "Core: support writing the SDF (or self-defence/国防軍) into the constitution vs opposing 9条 amendment/明記.",
+  "defencebudget": "Core: support increasing defence spending/strengthening capability; opposing only the tax-financing while backing the increase counted as pro; supporting need but criticising scale/priority roughly equally = neutral.",
+  "collectiveselfdefence": "Core: support exercising (incl. limited) collective self-defence / 平和安全法制. Pro statement oddly adds 憲法に明記; ignored. Opposing overseas dispatch alone not counted.",
+  "foodsecurity": "Ill-defined con: con statement is not opposition to food security (it is crowding-out worry / private role). Pro = treats food self-sufficiency as a security priority; con essentially unused; most members na."
+ },
+ "labels": {
+  "5": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "79": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "167": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "170": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "196": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "221": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "pro"
+  },
+  "246": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "285": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "na"
+  },
+  "345": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "pro"
+  },
+  "379": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "480": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "505": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "519": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "590": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "625": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "650": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "689": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "709": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "711": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "753": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "761": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "821": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "823": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "839": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "854": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "863": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "942": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "969": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1023": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1038": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1050": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1170": {
+   "constitution": "pro",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "1293": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "1387": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "1420": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1483": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1496": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1576": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "pro"
+  },
+  "1622": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1641": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "1735": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1905": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "1921": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "2055": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2207": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "2239": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "pro"
+  },
+  "2245": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "2268": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "2277": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2289": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "2324": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2360": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "2376": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "2392": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2494": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "2564": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "2596": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "2741": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "2743": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "2813": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2831": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "2865": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "neutral"
+  },
+  "2945": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "na"
+  },
+  "2955": {
+   "constitution": "neutral",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "2963": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "2972": {
+   "constitution": "neutral",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "3047": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "3161": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "3292": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "3500": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "3566": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "pro"
+  },
+  "3587": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "3599": {
+   "constitution": "pro",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "neutral",
+   "foodsecurity": "pro"
+  },
+  "3678": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "3696": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "pro"
+  },
+  "3763": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "3842": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "3846": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "3864": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "3951": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "3977": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4036": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4167": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "4191": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "4236": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "4239": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4251": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "4270": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4385": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4413": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "4422": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "4542": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "4644": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "pro"
+  },
+  "4852": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "4897": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "4915": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "4936": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "5022": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "pro"
+  },
+  "5026": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "pro"
+  },
+  "5051": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "5063": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "5064": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "5067": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "5091": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "5146": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "5183": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "na"
+  },
+  "5464": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "5495": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "5496": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "pro"
+  },
+  "5505": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "5509": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro",
+   "foodsecurity": "na"
+  },
+  "5544": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "5659": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "5709": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na",
+   "foodsecurity": "pro"
+  },
+  "5710": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "pro"
+  },
+  "5712": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con",
+   "foodsecurity": "na"
+  },
+  "21": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "178": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "neutral"
+  },
+  "266": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "369": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "415": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro"
+  },
+  "440": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "481": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "552": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "599": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "630": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "648": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro"
+  },
+  "664": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "667": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro"
+  },
+  "708": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro"
+  },
+  "832": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "879": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1077": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1173": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1310": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1501": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro"
+  },
+  "1536": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1566": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "1593": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "1605": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na"
+  },
+  "1651": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "1711": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro"
+  },
+  "1765": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "1910": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "1977": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "2044": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro"
+  },
+  "2162": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "2379": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "neutral"
+  },
+  "2389": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na"
+  },
+  "2522": {
+   "constitution": "pro",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro"
+  },
+  "2527": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "2604": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "2718": {
+   "constitution": "con",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "2751": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "2826": {
+   "constitution": "pro",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "pro"
+  },
+  "3051": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "3087": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "pro"
+  },
+  "3188": {
+   "constitution": "na",
+   "defencebudget": "neutral",
+   "collectiveselfdefence": "na"
+  },
+  "3189": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "3399": {
+   "constitution": "na",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "3421": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "neutral"
+  },
+  "3426": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "3702": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "3751": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "3768": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "neutral"
+  },
+  "3832": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "3847": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "3988": {
+   "constitution": "neutral",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "na"
+  },
+  "4188": {
+   "constitution": "pro",
+   "defencebudget": "pro",
+   "collectiveselfdefence": "pro"
+  },
+  "4279": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "4540": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "4578": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "4592": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "4653": {
+   "constitution": "neutral",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "4763": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "4780": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "con"
+  },
+  "4865": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "5141": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "5203": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "5218": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "na"
+  },
+  "5254": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "5647": {
+   "constitution": "con",
+   "defencebudget": "na",
+   "collectiveselfdefence": "con"
+  },
+  "5696": {
+   "constitution": "na",
+   "defencebudget": "con",
+   "collectiveselfdefence": "neutral"
+  },
+  "5833": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  },
+  "5860": {
+   "constitution": "na",
+   "defencebudget": "na",
+   "collectiveselfdefence": "na"
+  }
+ }
+}

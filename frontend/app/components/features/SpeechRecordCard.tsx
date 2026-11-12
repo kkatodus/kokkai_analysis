@@ -1,12 +1,18 @@
-import { EmptyState } from "@/app/components/shared/EmptyState";
-import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
 import type { QualityExchange, SpeechRecord } from "@/app/types";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/app/components/shared/Button";
+import { Heading } from "@/app/components/shared/Card";
+import { Chip } from "@/app/components/shared/Chip";
+import { Badge } from "@/app/components/shared/Badge";
+import { Pager } from "@/app/components/shared/Pager";
+import { Empty, ErrorState, Loading, Spinner } from "@/app/components/shared/states";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
+import { HighlightedSpeech } from "@/app/components/features/HighlightedSpeech";
+import { useSpeechTopics } from "@/app/lib/hooks/useSpeechTopics";
+import { topicHighlightColor } from "@/app/lib/topicHighlightColors";
 
 const TOPIC_NAME_JA_BY_EN: Record<string, string> = {
-  // From `data/resource/experiment_config.json` (topic_name_en -> topic_name)
+  // Fallback until /api/speeches/topics loads (`data/resource/experiment_config.json` topic_name_en -> topic_name)
   Defence: "防衛",
   DecliningBirthrate: "少子化",
   NuclearPower: "原発",
@@ -27,13 +33,17 @@ function normalizeTopicLabelKey(raw: string): string {
   return noExt.replace(/\s+/g, "");
 }
 
-function translateTopicName(raw: string): string {
+function isAllSpeechesKey(key: string): boolean {
+  return key === "all_speeches" || key === "allSpeeches";
+}
+
+function translateTopicName(raw: string, namesFromApi?: Map<string, string>): string {
   const key = normalizeTopicLabelKey(raw);
   if (!key) return raw;
 
-  if (key === "all_speeches" || key === "allSpeeches") return "全発言";
+  if (isAllSpeechesKey(key)) return "全発言";
 
-  const direct = TOPIC_NAME_JA_BY_EN[key];
+  const direct = namesFromApi?.get(key) ?? TOPIC_NAME_JA_BY_EN[key];
   if (direct) return direct;
 
   const lower = key.toLowerCase();
@@ -42,6 +52,13 @@ function translateTopicName(raw: string): string {
 
   // Fallback: make it readable (e.g. snake_case -> "snake case")
   return key.replace(/_/g, " ");
+}
+
+/** "2025-08-05" → "2025年8月5日"; anything else is returned unchanged. */
+export function formatJaDate(raw: string | null | undefined): string {
+  const s = String(raw ?? "");
+  const m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  return m ? `${Number(m[1])}年${Number(m[2])}月${Number(m[3])}日` : s;
 }
 
 export type SpeechTopicState = {
@@ -64,6 +81,12 @@ interface SpeechRecordCardProps {
   onSelectIssueId?: (issueId: string, speechId?: string | null) => void;
   /** speechID → the labelled exchange it belongs to (specs/speech-quality-ui §4) */
   exchangeIndex?: Map<string, QualityExchange>;
+  /** speeches a 立場 summary was built from, marked in the list (specs/stance-summaries-panel §6.3) */
+  markedSpeeches?: { topicKey: string; topicJp: string; ids: Set<string> } | null;
+  onClearMarked?: () => void;
+  /** the list fills the whole pane (the pane hides its header and tabs); the toggle shows only when this is set */
+  expanded?: boolean;
+  onToggleExpanded?: () => void;
 }
 
 export function SpeechRecordCard({
@@ -76,199 +99,241 @@ export function SpeechRecordCard({
   ensureSpeechPage,
   onSelectIssueId,
   exchangeIndex,
+  markedSpeeches,
+  onClearMarked,
+  expanded = false,
+  onToggleExpanded,
 }: SpeechRecordCardProps) {
+  const showMarks = !!markedSpeeches && markedSpeeches.topicKey === selectedTopicKey;
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
+  // the page last asked for, so 再試行 can ask again after a failed page load
+  const [requestedPage, setRequestedPage] = useState<{ topicKey: string; page: number } | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const keywordTopics = useSpeechTopics();
+  const topicNamesJa = useMemo(
+    () => new Map((keywordTopics ?? []).map((t) => [t.topic_name_en, t.topic_name])),
+    [keywordTopics]
+  );
+  const selectedKey = selectedTopic ? normalizeTopicLabelKey(selectedTopic.topicKey) : "";
+  const highlightMode: "topic" | "all" = isAllSpeechesKey(selectedKey) ? "all" : "topic";
+  // topic tab: that topic's words only; 全発言: every topic (specs/topic-keyword-highlight §6)
+  const highlightTopics = useMemo(
+    () => (highlightMode === "all" ? keywordTopics ?? [] : (keywordTopics ?? []).filter((t) => t.topic_name_en === selectedKey)),
+    [keywordTopics, highlightMode, selectedKey]
+  );
+
+  // a new page or topic starts at the top of the list (the pager sits below it)
+  const currentPage = selectedTopic?.currentPage ?? 0;
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [currentPage, selectedTopicKey]);
 
   const topicsForTabs = [...(speechTopics ?? [])].sort((a, b) => {
     const aKey = normalizeTopicLabelKey(a.topicKey);
     const bKey = normalizeTopicLabelKey(b.topicKey);
-    const isAll = (k: string) => k === "all_speeches" || k === "allSpeeches";
-    if (isAll(aKey) !== isAll(bKey)) return isAll(aKey) ? -1 : 1;
-    return translateTopicName(a.topicKey || a.displayName).localeCompare(translateTopicName(b.topicKey || b.displayName), "ja");
+    if (isAllSpeechesKey(aKey) !== isAllSpeechesKey(bKey)) return isAllSpeechesKey(aKey) ? -1 : 1;
+    return translateTopicName(a.topicKey || a.displayName, topicNamesJa).localeCompare(
+      translateTopicName(b.topicKey || b.displayName, topicNamesJa),
+      "ja"
+    );
   });
 
-  const topicTabClassName = (_topicKey: string, active: boolean) => {
-    const base =
-      "rounded-full border px-2 py-0.5 text-[11px] transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400/30 ";
-    if (active) return base + "border-cyan-400/60 bg-cyan-500/15 text-cyan-100";
-    return base + "border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-slate-400/40 hover:bg-white/5";
+  const goToPage = (topicKey: string, page: number) => {
+    setRequestedPage({ topicKey, page });
+    void ensureSpeechPage(topicKey, page);
   };
 
+  // A failed page load keeps the current page on screen (DESIGN.md "Lists and pagers").
+  const pageError = !!speechError && speechTopics !== null;
+
   return (
-    <div className="flex min-h-0 flex-1 flex-col rounded-xl border border-slate-400/15 bg-slate-900/40" data-tour="speech-card">
-      <div className="flex items-center justify-between px-2 pb-1 pt-2">
-        <div className="text-[13px] font-semibold text-gray-50">発言（トピック別）</div>
-        {speechLoading && <LoadingIndicator variant="dots" size="sm" />}
+    <section aria-labelledby="speech-card-heading" className="flex min-h-0 flex-1 flex-col" data-tour="speech-card">
+      {/* expanded, the pane header is gone, so this row clears the pane's close button */}
+      <div className={"flex items-center justify-between gap-2 pb-2" + (expanded ? " pr-10" : "")}>
+        <Heading level={3} size="title-sm" id="speech-card-heading">
+          発言（トピック別）
+        </Heading>
+        <span className="flex items-center gap-1">
+          {speechLoading && (
+            <span role="status" className="text-ink-muted">
+              <Spinner />
+              <span className="sr-only">読み込み中…</span>
+            </span>
+          )}
+          {onToggleExpanded ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-pressed={expanded}
+              onClick={onToggleExpanded}
+              icon={<ExpandIcon expanded={expanded} />}
+            >
+              {expanded ? "元の表示に戻す" : "全体に広げる"}
+            </Button>
+          ) : null}
+        </span>
       </div>
 
-      {speechError && <div className="px-2 pb-2 text-xs text-red-300">発言データが見つかりませんでした</div>}
+      {speechError && speechTopics === null && <ErrorState message={speechError} />}
 
-      {!speechError && speechTopics === null && (
-        <div className="px-2 pb-2">
-          <LoadingIndicator label="読み込み中" size="sm" />
-        </div>
-      )}
+      {!speechError && speechTopics === null && <Loading rows={4} label="発言を読み込み中…" />}
 
-      {!speechError && speechTopics !== null && speechTopics.length === 0 && (
-        <div className="px-2 pb-2">
-          <EmptyState message="発言データが見つかりません。" className="py-2" />
-        </div>
-      )}
+      {speechTopics !== null && speechTopics.length === 0 && <Empty message="この議員の発言データは見つかりませんでした。" />}
 
-      {!speechError && speechTopics && speechTopics.length > 0 && (
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          {/* Sticky topic selection + paging */}
-          <div className="sticky top-0 z-10 border-b border-slate-400/15 bg-slate-900/85 px-2 pb-2 pt-2 backdrop-blur">
-            <div className="mb-2 flex flex-wrap gap-1.5">
+      {speechTopics && speechTopics.length > 0 && (
+        <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
+          {/* Sticky topic selection */}
+          <div className="sticky top-0 z-(--z-sticky) border-b border-line-subtle bg-surface pb-2">
+            <div role="group" aria-label="トピック" className="-mx-1 -mt-1 flex gap-1.5 overflow-x-auto p-1 max-md:flex-nowrap md:flex-wrap">
               {topicsForTabs.map((t) => {
                 const active = t.topicKey === selectedTopicKey;
-                const label = translateTopicName(t.topicKey || t.displayName);
+                const label = translateTopicName(t.topicKey || t.displayName, topicNamesJa);
+                const tabKey = normalizeTopicLabelKey(t.topicKey);
+                // colour dot = legend for the 全発言 highlights (the palette is Tailwind classes, so the dot is drawn here)
+                const dot = !isAllSpeechesKey(tabKey) && keywordTopics?.length ? topicHighlightColor(tabKey).dot : null;
                 return (
-                  <button
-                    key={t.topicKey}
-                    type="button"
-                    onClick={() => setSelectedTopicKey(t.topicKey)}
-                    className={topicTabClassName(t.topicKey, active)}
-                  >
+                  <Chip key={t.topicKey} selected={active} title={label} onClick={() => setSelectedTopicKey(t.topicKey)}>
+                    {dot ? <span aria-hidden className={"mr-1.5 inline-block size-2 rounded-full align-middle " + dot} /> : null}
                     {label}
-                  </button>
+                  </Chip>
                 );
               })}
             </div>
 
-            {selectedTopic && (
-              <div className="flex items-center justify-between">
-                <div className="text-[11px] text-gray-400">
-                  Page {selectedTopic.currentPage + 1}
-                  {selectedTopic.totalPages !== null ? ` / ${selectedTopic.totalPages}` : ""}
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    className="rounded border border-slate-400/20 bg-slate-950/20 px-2 py-0.5 text-[11px] text-gray-200 disabled:opacity-50"
-                    disabled={selectedTopic.currentPage <= 0 || speechLoading}
-                    onClick={() => {
-                      const prev = Math.max(0, selectedTopic.currentPage - 1);
-                      void ensureSpeechPage(selectedTopic.topicKey, prev);
-                    }}
-                  >
-                    <FaArrowLeft />
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded border border-slate-400/20 bg-slate-950/20 px-2 py-0.5 text-[11px] text-gray-200 disabled:opacity-50"
-                    disabled={
-                      speechLoading ||
-                      (selectedTopic.totalPages !== null && selectedTopic.currentPage >= selectedTopic.totalPages - 1)
-                    }
-                    onClick={() => {
-                      const next = selectedTopic.currentPage + 1;
-                      void ensureSpeechPage(selectedTopic.topicKey, next);
-                    }}
-                  >
-                    <FaArrowRight />
-                  </button>
-                </div>
+            {showMarks && markedSpeeches ? (
+              <div className="mt-2 flex items-center justify-between gap-2 rounded-lg border border-primary-line bg-primary-soft py-1 pr-1 pl-3 text-body-sm text-on-primary-soft">
+                <span>
+                  「{markedSpeeches.topicJp}」の要約の根拠になった発言{markedSpeeches.ids.size.toLocaleString()}件に印を付けています
+                </span>
+                {onClearMarked ? (
+                  <Button variant="ghost" size="sm" onClick={onClearMarked}>
+                    解除
+                  </Button>
+                ) : null}
               </div>
-            )}
+            ) : null}
           </div>
 
           {/* Speech list */}
           {selectedTopic && (
-            <div className="grid gap-2 p-2">
-              {(selectedTopic.pagesByNumber[selectedTopic.currentPage] ?? []).map((s, idx) => (
-                (() => {
-                  const key = `${selectedTopic.topicKey}-${selectedTopic.currentPage}-${s.speechID ?? "speech"}-${idx}`;
-                  const isExpanded = expandedKeys.has(key);
-                  const speechText = String(s.speech ?? "");
-                  const isLong = speechText.length > 220;
+            <ul className="grid gap-2 py-2">
+              {(selectedTopic.pagesByNumber[selectedTopic.currentPage] ?? []).map((s, idx) => {
+                const key = `${selectedTopic.topicKey}-${selectedTopic.currentPage}-${s.speechID ?? "speech"}-${idx}`;
+                const isExpanded = expandedKeys.has(key);
+                const speechText = String(s.speech ?? "");
+                const isLong = speechText.length > 220;
+                const isMarked = showMarks && !!s.speechID && !!markedSpeeches?.ids.has(String(s.speechID));
+                const issueId = s.meta?.issueID ?? s.issueID ?? null;
+                const ex = exchangeIndex?.get(String(s.speechID));
 
-                  return (
-                <div
-                  key={key}
-                  className="rounded-lg border border-slate-400/15 bg-[#020617] p-2"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <div className="truncate text-[12px] font-semibold text-gray-50">{s.speaker}</div>
-                        {(() => {
-                          const ex = exchangeIndex?.get(String(s.speechID));
-                          if (!ex) return null;
-                          return (
-                            <div title={`AI判定: ${ex.reason}`}>
+                return (
+                  <li
+                    key={key}
+                    className={"rounded-lg border border-line bg-surface-raised p-3 " + (isMarked ? "edge-primary" : "")}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <div className="truncate text-title-sm text-ink-strong">{s.speaker}</div>
+                          {isMarked ? <Badge tone="accent">要約の根拠</Badge> : null}
+                          {ex ? (
+                            <div title={`AI判定：${ex.reason}`}>
                               <ExchangeChips fn={ex.function} contribution={ex.contribution} issues={ex.issues} outcomes={ex.outcomes} compact prefixed />
                             </div>
-                          );
-                        })()}
+                          ) : null}
+                        </div>
+                        <div className="mt-0.5 text-caption text-ink-muted">
+                          {formatJaDate(s.meta?.date)}
+                          {s.meta?.nameOfMeeting ? `・${s.meta.nameOfMeeting}` : ""}
+                        </div>
                       </div>
-                      <div className="mt-0.5 text-[11px] text-gray-400">
-                        {s.meta?.date ?? ""} {s.meta?.nameOfMeeting ? `・ ${s.meta.nameOfMeeting}` : ""}
-                      </div>
-                    </div>
 
-                    {onSelectIssueId && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const issueId = s.meta?.issueID ?? s.issueID ?? null;
-                          if (!issueId) return;
-                          onSelectIssueId(String(issueId), s.speechID ?? null);
-                        }}
-                        disabled={!(s.meta?.issueID ?? s.issueID)}
-                        className={
-                          "shrink-0 rounded-lg border px-2 py-1 text-[11px] font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400/40 " +
-                          (s.meta?.issueID ?? s.issueID
-                            ? "cursor-pointer border-slate-400/20 bg-slate-950/20 text-gray-200 hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-50 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_18px_rgba(34,211,238,0.18)]"
-                            : "cursor-not-allowed border-slate-400/10 bg-slate-950/10 text-gray-500 opacity-60")
-                        }
-                        title={
-                          s.meta?.issueID ?? s.issueID
-                            ? `この発言の issueID を選択: ${String(s.meta?.issueID ?? s.issueID)}`
-                            : "issueID が見つかりません"
-                        }
-                      >
-                        会議を閲覧する
-                      </button>
+                      {onSelectIssueId && (
+                        <Button
+                          size="sm"
+                          disabled={!issueId}
+                          onClick={() => {
+                            if (!issueId) return;
+                            onSelectIssueId(String(issueId), s.speechID ?? null);
+                          }}
+                          title={issueId ? "この発言が行われた会議を開く" : "この発言の会議情報が見つかりません"}
+                        >
+                          会議を閲覧する
+                        </Button>
+                      )}
+                    </div>
+                    <HighlightedSpeech
+                      text={speechText}
+                      topics={highlightTopics}
+                      mode={highlightMode}
+                      collapsed={isLong && !isExpanded}
+                      className="mt-2 text-body-md text-ink"
+                    />
+
+                    {/* The collapsed view is a keyword-in-context excerpt, not a plain clamp, so the toggle
+                        is ExpandableText's ghost button rather than ExpandableText itself. */}
+                    {isLong && (
+                      <div className="mt-1 flex justify-end">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          aria-expanded={isExpanded}
+                          onClick={() => {
+                            setExpandedKeys((prev) => {
+                              const next = new Set(prev);
+                              if (next.has(key)) next.delete(key);
+                              else next.add(key);
+                              return next;
+                            });
+                          }}
+                        >
+                          {isExpanded ? "折りたたむ" : "全文を表示"}
+                        </Button>
+                      </div>
                     )}
-                  </div>
-                  <div
-                    className={
-                      "mt-1 whitespace-pre-wrap text-[12px] leading-relaxed text-gray-200 " +
-                      (isExpanded ? "" : "line-clamp-6")
-                    }
-                  >
-                    {speechText}
-                  </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
 
-                  {isLong && (
-                    <div className="mt-2 flex items-center justify-end">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setExpandedKeys((prev) => {
-                            const next = new Set(prev);
-                            if (next.has(key)) next.delete(key);
-                            else next.add(key);
-                            return next;
-                          });
-                        }}
-                        className="cursor-pointer rounded-lg border border-slate-400/20 bg-slate-950/20 px-2 py-1 text-[11px] font-semibold text-gray-200 hover:bg-white/5"
-                      >
-                        {isExpanded ? "折りたたむ" : "全文を表示"}
-                      </button>
-                    </div>
-                  )}
-                </div>
-                  );
-                })()
-              ))}
-            </div>
+          {pageError && speechError && (
+            <ErrorState
+              className="py-3"
+              message={speechError}
+              onRetry={
+                requestedPage && selectedTopic && requestedPage.topicKey === selectedTopic.topicKey
+                  ? () => goToPage(requestedPage.topicKey, requestedPage.page)
+                  : undefined
+              }
+            />
+          )}
+
+          {selectedTopic && (
+            <Pager
+              className="pt-1 pb-3"
+              page={selectedTopic.currentPage + 1}
+              // totalPages is unknown only when the API leaves it out: then allow one more page
+              pageCount={selectedTopic.totalPages ?? selectedTopic.currentPage + 2}
+              busy={speechLoading}
+              onChange={(p) => goToPage(selectedTopic.topicKey, p - 1)}
+            />
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
-
+/** arrows out (expand) / arrows in (collapse) */
+function ExpandIcon({ expanded }: { expanded: boolean }) {
+  return (
+    <svg aria-hidden viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      {expanded ? (
+        <path d="M6 2v4H2M10 2v4h4M6 14v-4H2M10 14v-4h4" />
+      ) : (
+        <path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" />
+      )}
+    </svg>
+  );
+}

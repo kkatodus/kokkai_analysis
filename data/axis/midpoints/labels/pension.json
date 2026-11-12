@@ -1,0 +1,584 @@
+{
+ "topic": "pension",
+ "axis_notes": {
+  "basicpensionsubsidy": "pro = supports raising/securing the state (tax) share of the basic pension (1/3 -> 1/2 or more), even if objecting to a particular tax source; con = doubts/opposes raising it on fiscal grounds",
+  "basicpensionbottomup": "pro = wants basic pension level raised/protected (stop macro slide on basic pension, minimum-guarantee top-ups); con = holds current level adequate or opposes top-up schemes (e.g. tax-funded minimum pension) for fiscal reasons",
+  "employeespensionissue": "pro = extend employees' pension coverage (part-timers, unenrolled firms); con = resists expansion (burden on firms etc.); support conditional mainly on SME burden = neutral",
+  "pensionsystemunification": "pro = supports unifying schemes (KNK/kyosai, or all incl. national pension); con = cautious/opposed to unification",
+  "pensionreformtransparency": "ILL-DEFINED: both statements call for transparency; read as pro = constructive call for clearer explanation/information to restore trust, con = accuses reform process of being opaque/untrustworthy (misleading figures, forced votes, hidden decisions)"
+ },
+ "labels": {
+  "76": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "95": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "con",
+   "pensionreformtransparency": "na"
+  },
+  "255": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "296": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "499": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "584": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "617": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "681": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "neutral",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "708": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "709": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "776": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "808": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "neutral"
+  },
+  "844": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "901": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "1023": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "1060": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "1087": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "1112": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "con",
+   "pensionreformtransparency": "con"
+  },
+  "1173": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "1313": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "1343": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "neutral",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "1385": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "1387": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "neutral",
+   "pensionreformtransparency": "con"
+  },
+  "1524": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "1536": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "1595": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "1711": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "con",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "1746": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "1800": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "1826": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "2041": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "2062": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "2093": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "con",
+   "pensionreformtransparency": "pro"
+  },
+  "2131": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "2239": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "neutral",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "con",
+   "pensionreformtransparency": "na"
+  },
+  "2286": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "2287": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "2289": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "2355": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "2366": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "2663": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "2671": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "2732": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "2744": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "neutral",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "2775": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "2899": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "2928": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "3025": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "neutral",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "3307": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "neutral",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "3429": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "3465": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "3479": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "3631": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "con"
+  },
+  "3797": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "3835": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "pro"
+  },
+  "3868": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "3969": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "4020": {
+   "basicpensionsubsidy": "con",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "4021": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "4320": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "4626": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "4636": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "4773": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "4801": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "5133": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "5494": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "con",
+   "employeespensionissue": "neutral",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "5515": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "con"
+  },
+  "5701": {
+   "basicpensionsubsidy": "neutral",
+   "basicpensionbottomup": "neutral",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "5703": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "na"
+  },
+  "5705": {
+   "basicpensionsubsidy": "pro",
+   "basicpensionbottomup": "pro",
+   "employeespensionissue": "pro",
+   "pensionsystemunification": "pro",
+   "pensionreformtransparency": "pro"
+  },
+  "5707": {
+   "basicpensionsubsidy": "na",
+   "basicpensionbottomup": "na",
+   "employeespensionissue": "na",
+   "pensionsystemunification": "na",
+   "pensionreformtransparency": "na"
+  },
+  "22": {
+   "pensionreformtransparency": "pro"
+  },
+  "104": {
+   "pensionreformtransparency": "na"
+  },
+  "457": {
+   "pensionreformtransparency": "na"
+  },
+  "1084": {
+   "pensionreformtransparency": "na"
+  },
+  "1100": {
+   "pensionreformtransparency": "pro"
+  },
+  "1446": {
+   "pensionreformtransparency": "pro"
+  },
+  "2141": {
+   "pensionreformtransparency": "na"
+  },
+  "2267": {
+   "pensionreformtransparency": "pro"
+  },
+  "2547": {
+   "pensionreformtransparency": "con"
+  },
+  "2619": {
+   "pensionreformtransparency": "na"
+  },
+  "2735": {
+   "pensionreformtransparency": "na"
+  },
+  "2824": {
+   "pensionreformtransparency": "na"
+  },
+  "3021": {
+   "pensionreformtransparency": "na"
+  },
+  "3283": {
+   "pensionreformtransparency": "na"
+  },
+  "3613": {
+   "pensionreformtransparency": "na"
+  },
+  "4139": {
+   "pensionreformtransparency": "na"
+  },
+  "4194": {
+   "pensionreformtransparency": "pro"
+  },
+  "4227": {
+   "pensionreformtransparency": "na"
+  },
+  "4780": {
+   "pensionreformtransparency": "con"
+  },
+  "4887": {
+   "pensionreformtransparency": "pro"
+  },
+  "4890": {
+   "pensionreformtransparency": "na"
+  },
+  "5204": {
+   "pensionreformtransparency": "na"
+  },
+  "5514": {
+   "pensionreformtransparency": "na"
+  },
+  "5518": {
+   "pensionreformtransparency": "na"
+  },
+  "5544": {
+   "pensionreformtransparency": "pro"
+  }
+ }
+}

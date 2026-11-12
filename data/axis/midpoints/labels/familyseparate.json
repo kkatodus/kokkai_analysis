@@ -1,0 +1,321 @@
+{
+ "topic": "familyseparate",
+ "axis_notes": {
+  "selectivefamilyseparate": "pro = supports introducing selective separate surnames; con = opposes/cautious",
+  "oldnameuse": "pro = favours expanding/legalising maiden-name (通称/婚前氏) use as the remedy; con = says old-name use is insufficient/opposes legalising it (both pro-別姓 'insufficient' and anti-legal-basis views)",
+  "governmentstance": "ill-defined (both statements criticise govt); read pro = criticises govt/LDP inaction and demands it act toward 別姓, con = defends cautious govt stance / wait for public consensus"
+ },
+ "labels": {
+  "76": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "256": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "260": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "con",
+   "governmentstance": "na"
+  },
+  "277": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "291": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "neutral",
+   "governmentstance": "pro"
+  },
+  "650": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "con"
+  },
+  "813": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "969": {
+   "selectivefamilyseparate": "neutral",
+   "oldnameuse": "neutral",
+   "governmentstance": "na"
+  },
+  "1095": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "1214": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "1221": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "1229": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "1279": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "con"
+  },
+  "1425": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "con"
+  },
+  "1558": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "na"
+  },
+  "1655": {
+   "selectivefamilyseparate": "na",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "1711": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "1827": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "1841": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "1921": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "1974": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "2197": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "neutral"
+  },
+  "2289": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "2382": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "2392": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "na",
+   "governmentstance": "con"
+  },
+  "2584": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "2623": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "2760": {
+   "selectivefamilyseparate": "neutral",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "2841": {
+   "selectivefamilyseparate": "neutral",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "2950": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "2979": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "3023": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "3077": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "3096": {
+   "selectivefamilyseparate": "neutral",
+   "oldnameuse": "pro",
+   "governmentstance": "neutral"
+  },
+  "3285": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "na"
+  },
+  "3619": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "3631": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "3689": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "3789": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "3968": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "na",
+   "governmentstance": "con"
+  },
+  "4156": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "4198": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "4258": {
+   "selectivefamilyseparate": "con",
+   "oldnameuse": "pro",
+   "governmentstance": "con"
+  },
+  "4555": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "4571": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "4592": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "4608": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "4780": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "5183": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "con",
+   "governmentstance": "pro"
+  },
+  "5502": {
+   "selectivefamilyseparate": "neutral",
+   "oldnameuse": "na",
+   "governmentstance": "na"
+  },
+  "5694": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "5723": {
+   "selectivefamilyseparate": "pro",
+   "oldnameuse": "na",
+   "governmentstance": "pro"
+  },
+  "510": {
+   "selectivefamilyseparate": "con"
+  },
+  "844": {
+   "selectivefamilyseparate": "con"
+  },
+  "1126": {
+   "selectivefamilyseparate": "pro"
+  },
+  "1345": {
+   "selectivefamilyseparate": "pro"
+  },
+  "1395": {
+   "selectivefamilyseparate": "pro"
+  },
+  "2025": {
+   "selectivefamilyseparate": "pro"
+  },
+  "2118": {
+   "selectivefamilyseparate": "pro"
+  },
+  "2342": {
+   "selectivefamilyseparate": "pro"
+  },
+  "2376": {
+   "selectivefamilyseparate": "con"
+  },
+  "3040": {
+   "selectivefamilyseparate": "con"
+  },
+  "3243": {
+   "selectivefamilyseparate": "pro"
+  },
+  "4036": {
+   "selectivefamilyseparate": "pro"
+  },
+  "5131": {
+   "selectivefamilyseparate": "con"
+  },
+  "5544": {
+   "selectivefamilyseparate": "pro"
+  },
+  "5673": {
+   "selectivefamilyseparate": "na"
+  },
+  "5712": {
+   "selectivefamilyseparate": "pro"
+  },
+  "5831": {
+   "selectivefamilyseparate": "pro"
+  }
+ }
+}

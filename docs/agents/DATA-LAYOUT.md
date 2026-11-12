@@ -20,10 +20,12 @@ Raw and intermediate pipeline outputs stay in `data/data/`. The FastAPI backend 
 | `repr_speeches_id_organized/` | `repr_speeches_id_organized/` | `routers/speeches.py` |
 | `election_history/` | `electionHistory/` | `routers/electionHistory.py` |
 | `data_all_speeches/` (per issue) | `issues/{issueID}/` | `routers/speeches.py` |
-| Postgres `label_result` (via `data/speech_quality/publish.py`) | `speech_quality/aggregate.json` + `speech_quality/persons/{person_id}.jsonl`; `quality` object on exchange-starting lines in `issues/{id}/speeches.jsonl` | `routers/speeches.py` (`/speeches/quality/*`, `/speeches/get_issue_by_id`) |
+| Postgres `label_result` (via `data/speech_quality/publish.py`) | `speech_quality/aggregate.json` + `speech_quality/persons/{person_id}.jsonl` + `speech_quality/site_stats.json`; `quality` object on exchange-starting lines in `issues/{id}/speeches.jsonl` | `routers/speeches.py` (`/speeches/quality/*`, `/speeches/get_issue_by_id`) |
 | (derived from repr/geo pipelines) | `parliamentMembers/`, `politicians/`, `geo/`, `ideology/` | `routers/parliamentMember.py`, etc. |
+| `data/resource/experiment_config.json` (via `speech_update/topics.py`) | `topics/topics.json` — `{ version, generated_at, topics: [{ topic_name_en, topic_name, search_words }] }` | `routers/speeches.py` (`/speeches/topics`) |
 | (fetched by `data/person_images/`) | `person_images/{person_id}.jpg` + `person_images/index.json` (source, licence, attribution) | none yet; frontend can read the index |
 | `s3_mirror/.topic-scaling/` (summaries, embeddings, opinion cache) | `ideology/ideology.json.gz` + `ideology/history/ideology-YYYY-MM-DD.json.gz` | `routers/ideology.py` (written by `data/topic_scaling`) |
+| `s3_mirror/.topic-scaling/summaries/` + `select.json` + opinion cache | `ideology/persons/{person_id}.json` (stance summaries, counts, contributing speech IDs; only changed files uploaded, never deleted) | `routers/ideology.py` `/ideology/person` (spec `specs/stance-summaries-panel/`) |
 
 When adding a new dataset the frontend should consume, expect a pipeline step under `data/data/` **and** an upload/sync into `s3_mirror/kokkai-doc/`.
 
@@ -49,13 +51,9 @@ Keyed by Postgres `person_id`.
 - Topic files (`Defence.jsonl`, etc.) — subsets matching `resource/experiment_config.json` search words
 - Built by `reorganize_all_repr_speeches.py`; kept current in `s3_mirror/` by `data/speech_update/` (lines sorted newest meeting first, keyed by `speechID`)
 
-### Per-politician topic summaries — `idea_summaries/`
-
-`{person_id}/{TopicNameEn}/opinions.json` + `summary.json`. Produced by `create_idea_summaries.ipynb`.
-
 ### Exchange quality labels — `s3_mirror/kokkai-doc/speech_quality/`
 
-Not under `data/data/`: built straight from Postgres `label_result` by `python -m speech_quality.publish` (spec `specs/speech-quality-ui/`). `aggregate.json` holds per-person counts (function, contribution, issues, outcomes, as questioner and as answerer) plus corpus totals and the coverage window; `persons/{person_id}.jsonl` lists one person's labelled exchanges newest first. The old relevance copies (`*_with_prd_and_rl/`, `relevance_data/`) are legacy and no longer read.
+Not under `data/data/`: built straight from Postgres `label_result` by `python -m speech_quality.publish` (spec `specs/speech-quality-ui/`). `aggregate.json` holds per-person counts (function, contribution, issues, outcomes, as questioner and as answerer) plus corpus totals and the coverage window; `persons/{person_id}.jsonl` lists one person's labelled exchanges newest first. `site_stats.json` (~3 KB, spec `specs/dashboard-loading/` §8) holds site-wide numbers for the dashboard loading cards: corpus size from the `speeches` table since 2000, label coverage and site-wide shares, and top-5 current members by neutral counts (speeches, exchanges, lower-house terms; current = newest `parliamentMembers/` snapshot). Rewritten on every `rebuild()`; alone with `--site-stats`. The old relevance copies (`*_with_prd_and_rl/`, `relevance_data/`) are legacy and no longer read.
 
 ### Topic-classified opinions — `data_repr_speeches/` (often gitignored)
 
@@ -117,7 +115,7 @@ ideological-scaling outputs (see [RESEARCHER.md](./RESEARCHER.md),
 | Directory | Role |
 |---|---|
 | `results/` | Stance-quantification outputs (embeddings, UMAP, logs) |
-| `axis/` | Per-topic controversy-axis artifacts |
+| `axis/` | Per-topic controversy-axis artifacts; `axis/midpoints.json` = calibrated con→pro cut per sub-topic (which sub-topics get published) |
 | `unused/` | Deprecated scripts (may reference `data_prepping/`) |
 | `data_venv/`, `mecab-ipadic-neologd/` | Local tooling — not project data |
 

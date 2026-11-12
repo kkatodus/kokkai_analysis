@@ -196,6 +196,28 @@ def select_pair(topic: Topic, person_id: str, path: Path, state: State, classifi
 	)
 
 
+def contributing_speech_ids(topic: Topic, person_id: str, path: Path, state: State) -> Optional[Tuple[List[str], str]]:
+	"""Cache-only, read-only replay of select_pair's provenance: the sorted in-window speechIDs whose cached
+	opinions are non-empty, and their sha1 (comparable to opinion_hash). Never runs the classifier and never
+	writes the cache; returns None when the topic file or the cache is missing. A speech with no cache entry
+	(or one for other search words) counts as contributing nothing, so the hash check catches drift."""
+	cache_path = state.opinions_cache_path(person_id, topic.name_en)
+	if not path.exists() or not cache_path.exists():
+		return None
+	wh = words_hash(topic.search_words)
+	cache = load_cache(cache_path)
+	ids = set()
+	for s in iter_topic_speeches(path):
+		sid = s.get("speechID")
+		if not sid or not topic.in_window((s.get("meta") or {}).get("date") or s.get("date") or ""):
+			continue
+		c = cache.get(sid)
+		if c and c.get("words") == wh and c.get("opinions"):
+			ids.add(sid)
+	contributing = sorted(ids)
+	return contributing, hashlib.sha1("\n".join(contributing).encode()).hexdigest()
+
+
 def summary_hash(state: State, person_id: str, topic_en: str) -> Optional[str]:
 	d = read_json(state.summary_path(person_id, topic_en))
 	return d.get("opinion_hash") if d else None

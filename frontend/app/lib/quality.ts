@@ -59,15 +59,22 @@ export const FUNCTION_DESC_JA: Record<QualityFunction, string> = {
 };
 
 export const CONTRIBUTION_JA: Record<QualityContribution, string> = {
-  substantive: "実質的な成果あり",
+  substantive: "成果あり",
   limited: "成果は限定的",
   none: "成果なし",
 };
 
 export const CONTRIBUTION_SHORT_JA: Record<QualityContribution, string> = {
-  substantive: "実質的",
+  substantive: "成果あり",
   limited: "限定的",
   none: "成果なし",
+};
+
+/** Metric labels in the ranking "並び替え" menu ("成果は限定的の割合" would not read naturally). */
+export const CONTRIBUTION_METRIC_JA: Record<QualityContribution, string> = {
+  substantive: "成果ありの割合",
+  limited: "成果が限定的な割合",
+  none: "成果なしの割合",
 };
 
 export const CONTRIBUTION_DESC_JA: Record<QualityContribution, string> = {
@@ -100,6 +107,12 @@ export const OUTCOME_JA: Record<QualityOutcome, string> = {
   new_information: "新事実が出た",
   commitment: "具体的な約束",
   proposal: "新しい提案",
+};
+
+export const OUTCOME_METRIC_JA: Record<QualityOutcome, string> = {
+  new_information: "新事実が出た割合",
+  commitment: "具体的な約束を引き出した割合",
+  proposal: "新しい提案をした割合",
 };
 
 export const OUTCOME_SHORT_JA: Record<QualityOutcome, string> = {
@@ -152,29 +165,30 @@ export const CONTRIBUTION_STYLE: Record<
   QualityContribution,
   { bar: string; chip: string; dot: string; item: string; ring: string; note: string }
 > = {
+  // semantic tokens (frontend/DESIGN.md): success / warning / error
   substantive: {
-    bar: "bg-emerald-500/80",
-    chip: "border-emerald-400/30 bg-emerald-500/15 text-emerald-100",
-    dot: "bg-emerald-500/80",
-    item: "border-emerald-400/30 border-l-emerald-400/70 bg-emerald-500/10",
-    ring: "rgba(16,185,129,0.55)",
-    note: "border-emerald-400/25 bg-emerald-500/10",
+    bar: "bg-success",
+    chip: "border-transparent bg-success-soft text-on-success-soft",
+    dot: "bg-success",
+    item: "border-line border-l-success bg-success-soft",
+    ring: "var(--color-success)",
+    note: "border-transparent bg-success-soft",
   },
   limited: {
-    bar: "bg-amber-500/80",
-    chip: "border-amber-400/30 bg-amber-500/15 text-amber-100",
-    dot: "bg-amber-500/80",
-    item: "border-amber-400/30 border-l-amber-400/70 bg-amber-500/10",
-    ring: "rgba(245,158,11,0.55)",
-    note: "border-amber-400/25 bg-amber-500/10",
+    bar: "bg-warning",
+    chip: "border-transparent bg-warning-soft text-on-warning-soft",
+    dot: "bg-warning",
+    item: "border-line border-l-warning bg-warning-soft",
+    ring: "var(--color-warning)",
+    note: "border-transparent bg-warning-soft",
   },
   none: {
-    bar: "bg-rose-500/80",
-    chip: "border-rose-400/30 bg-rose-500/15 text-rose-100",
-    dot: "bg-rose-500/80",
-    item: "border-rose-400/30 border-l-rose-400/70 bg-rose-500/10",
-    ring: "rgba(244,63,94,0.55)",
-    note: "border-rose-400/25 bg-rose-500/10",
+    bar: "bg-error",
+    chip: "border-transparent bg-error-soft text-on-error-soft",
+    dot: "bg-error",
+    item: "border-line border-l-error bg-error-soft",
+    ring: "var(--color-error)",
+    note: "border-transparent bg-error-soft",
   },
 };
 
@@ -183,22 +197,24 @@ export const FUNCTION_STYLE: Record<QualityFunction, { bar: string; chip: string
   oversight: { bar: "bg-violet-500/80", chip: "border-violet-400/30 bg-violet-500/15 text-violet-100", dot: "bg-violet-500/80" },
   policy: { bar: "bg-cyan-500/80", chip: "border-cyan-400/30 bg-cyan-500/15 text-cyan-100", dot: "bg-cyan-500/80" },
   representation: { bar: "bg-teal-500/80", chip: "border-teal-400/30 bg-teal-500/15 text-teal-100", dot: "bg-teal-500/80" },
-  procedural: { bar: "bg-slate-400/70", chip: "border-slate-400/30 bg-slate-500/15 text-slate-100", dot: "bg-slate-400/70" },
-  none: { bar: "bg-gray-500/60", chip: "border-gray-400/30 bg-gray-500/15 text-gray-200", dot: "bg-gray-500/60" },
+  procedural: { bar: "bg-ink-muted", chip: "border-line bg-surface-raised text-ink", dot: "bg-ink-muted" },
+  none: { bar: "bg-ink-disabled", chip: "border-line bg-surface-raised text-ink-muted", dot: "bg-ink-disabled" },
 };
 
-export const ISSUE_CHIP = "border-rose-400/30 bg-rose-500/10 text-rose-100";
-export const ISSUE_CHIP_PART = "border-amber-400/30 bg-amber-500/10 text-amber-100";
-export const OUTCOME_CHIP = "border-sky-400/30 bg-sky-500/10 text-sky-100";
+export const ISSUE_CHIP = "border-transparent bg-error-soft text-on-error-soft";
+export const ISSUE_CHIP_PART = "border-transparent bg-warning-soft text-on-warning-soft";
+export const OUTCOME_CHIP = "border-transparent bg-info-soft text-on-info-soft";
 
 export function rate(n: number | undefined | null, d: number | undefined | null): number {
   if (!n || !d || !Number.isFinite(n) || !Number.isFinite(d) || d <= 0) return 0;
   return Math.max(0, Math.min(1, n / d));
 }
 
+/** Share as a percent. Below 1% reads 1%未満; a column keeps one number of decimals (DESIGN.md "Data Visualisation"). */
 export function pct(x: number, digits = 0): string {
-  const f = Math.pow(10, digits);
-  return `${Math.round(x * 100 * f) / f}%`;
+  if (x > 0 && x < 0.01) return "1%未満";
+  if (x <= 0 || x >= 1) return `${Math.round(x * 100)}%`;
+  return `${(x * 100).toFixed(digits)}%`;
 }
 
 export function issueTotal(c: { part: number; most: number } | undefined): number {
@@ -255,11 +271,11 @@ export const QUALITY_METRICS: QualityMetric[] = [
   { key: "n_a", label: "やり取り数（答弁者として）", group: "件数", role: "answerer", kind: "count", hint: "答弁者として関わったやり取りの数", value: (_q, a) => (a ? { num: a.n, den: 1 } : null) },
 
   ...CONTRIBUTIONS.map((c): QualityMetric => ({
-    key: `contribution_${c}`, label: `${CONTRIBUTION_JA[c]}の割合`, group: "成果（質問者として）", role: "questioner", kind: "share",
+    key: `contribution_${c}`, label: CONTRIBUTION_METRIC_JA[c], group: "成果（質問者として）", role: "questioner", kind: "share",
     hint: CONTRIBUTION_DESC_JA[c], value: qShare((q) => q.contribution[c]),
   })),
   ...OUTCOMES.map((o): QualityMetric => ({
-    key: `outcome_${o}`, label: `${OUTCOME_JA[o]}割合`, group: "成果の内訳（質問者として）", role: "questioner", kind: "share",
+    key: `outcome_${o}`, label: OUTCOME_METRIC_JA[o], group: "成果の内訳（質問者として）", role: "questioner", kind: "share",
     hint: OUTCOME_JA[o], value: qShare((q) => q.outcomes[o]),
   })),
 

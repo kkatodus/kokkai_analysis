@@ -3,7 +3,7 @@
  * Action steps read TourState and advance when `isDone` turns true; `fallback` does it for the user.
  */
 
-export type DetailPanel = "speeches" | "quality" | "history";
+export type DetailPanel = "speeches" | "quality" | "history" | "stances";
 
 export interface TourState {
   personOpen: boolean;
@@ -115,7 +115,7 @@ export const TOUR_STEPS: TourStep[] = [
     title: "会議の全体を読む",
     body:
       "左に会議全体が開きます。ダイヤルをドラッグすると発言を素早く移動できます。\n" +
-      "色の帯は AI が判定した「やり取り」の区切りと成果（緑＝実質的、橙＝限定的、赤＝成果なし）。各やり取りの先頭に判定理由が付きます。\n" +
+      "色の帯は AI が判定した「やり取り」の区切りと成果（緑＝成果あり、橙＝限定的、赤＝成果なし）。各やり取りの先頭に判定理由が付きます。\n" +
       "「原文を開く」で国会会議録の該当ページに飛べます。",
     placement: "right",
     scrollBlock: "nearest",
@@ -147,6 +147,17 @@ export const TOUR_STEPS: TourStep[] = [
     onEnter: (a) => a.setDetailPanel("history"),
   },
   {
+    id: "stances-tab",
+    target: '[data-tour="detail-pane"]',
+    title: "立場タブ",
+    body:
+      "国会での発言を AI が論点ごとに要約し、各論点での位置と並べています。" +
+      "「元になった発言を見る」で根拠の発言に飛べます。",
+    placement: "left",
+    scrollBlock: "nearest",
+    onEnter: (a) => a.setDetailPanel("stances"),
+  },
+  {
     id: "ideology",
     target: '[data-tour="ideology-card"]',
     title: "政治的な立場の推定",
@@ -175,7 +186,7 @@ export const TOUR_STEPS: TourStep[] = [
     title: "やり取りの評価（AI判定）",
     body:
       "委員会での質疑を「やり取り」単位で AI が判定し、議員ごとに集計したランキングです。\n" +
-      "「並び替え」で実質的な成果・お膳立て質問・答弁のはぐらかしなど28の指標から選べ、「最低やり取り数」で件数の少ない人を除けます。\n" +
+      "「並び替え」で成果あり・お膳立て質問・答弁のはぐらかしなど28の指標から選べ、「最低やり取り数」で件数の少ない人を除けます。\n" +
       "推定であることを忘れずに。必ず「注意事項」をご覧ください。",
     placement: "left",
   },

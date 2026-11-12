@@ -11,7 +11,8 @@ import { track } from "@vercel/analytics";
 
 import { Header } from "@/app/components/layout/Header";
 import { ResizableContainer } from "@/app/components/layout/ResizableContainer";
-import { Card, CardHeader } from "@/app/components/shared/Card";
+import { Card, CardHeader, Panel } from "@/app/components/shared/Card";
+import { SegmentedControl } from "@/app/components/shared/Tabs";
 import { Tooltip } from "@/app/components/shared/Tooltip";
 import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
@@ -20,6 +21,7 @@ import { DetailPane } from "@/app/components/features/DetailPane";
 import { IssuePane } from "@/app/components/features/IssuePane";
 import { HistoricalReprSearch } from "@/app/components/features/HistoricalReprSearch";
 import { ModalProvider } from "@/app/lib/hooks/useModal";
+import { DashboardReadySignal } from "@/app/components/loading/LoadingSignal";
 import type { ParliamentMemberData, IdeologyData, AllParliamentMemberTableData, QualityAggregate } from "@/app/types";
 import { SeatDistributionChart } from "@/app/components/visualizations/SeatDistributionCharts";
 import { ProportionalReprList } from "@/app/components/visualizations/ProportionalReprList";
@@ -54,6 +56,7 @@ export function ParliamentExplorerClient({
 }: ParliamentExplorerClientProps) {
   return (
     <ModalProvider>
+      <DashboardReadySignal />
       <ParliamentExplorerClientInner
         parliamentMemberData={parliamentMemberData}
         votingDistrictGeoJsonData={votingDistrictGeoJsonData}
@@ -79,7 +82,7 @@ function ParliamentExplorerClientInner({
   
   const [selectedIssueIdState, setSelectedIssueId] = useState<string | null>(null);
   const [selectedIssueSpeechIdState, setSelectedIssueSpeechId] = useState<string | null>(null);
-  const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string } | null>(null);
+  const [tooltipData, setTooltipData] = useState<{ title: string; meta?: string; warning?: string } | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [mapPane, setMapPane] = useState<"districts" | "proportional">("districts");
   const [showIdeologyDisclaimer, setShowIdeologyDisclaimer] = useState(false);
@@ -89,7 +92,7 @@ function ParliamentExplorerClientInner({
   // guided tour (specs/speech-quality-ui follow-up): state lives here so steps can drive the panes
   const [tourStep, setTourStep] = useState<number | null>(null);
   const [detailPanel, setDetailPanel] = useState<DetailPanel | null>(null);
-  const [panelRequest, setPanelRequest] = useState<{ panel: DetailPanel; nonce: number } | null>(null);
+  const [panelRequest, setPanelRequest] = useState<{ panel: DetailPanel; nonce: number; topic?: string | null } | null>(null);
 
   // Keep local selection in sync with browser back/forward without triggering Next.js navigation.
   useEffect(() => {
@@ -117,7 +120,7 @@ function ParliamentExplorerClientInner({
   const handlePoliticianSelect = useCallback(
     (
       id: string | null,
-      meta?: { source?: string; queryLength?: number | null }
+      meta?: { source?: string; queryLength?: number | null; topic?: string | null }
     ) => {
       const source = meta?.source ?? "unknown";
 
@@ -141,6 +144,12 @@ function ParliamentExplorerClientInner({
         track("ClosePoliticianDetail", { source });
       }
 
+    // A click on the scatter plot came from a position: open on its explanation, the 立場 card for the
+    // plot's topic (specs/stance-summaries-panel §6.4). Every other entry keeps the reset to 発言.
+    if (id && source === "ideology_scatter") {
+      setPanelRequest((r) => ({ panel: "stances", nonce: (r?.nonce ?? 0) + 1, topic: meta?.topic ?? null }));
+    }
+
     // Update local state
     setSelectedPersonId(id);
 
@@ -157,7 +166,7 @@ function ParliamentExplorerClientInner({
   );
 
   const handleTooltipShow = useCallback(
-    (data: { title: string; meta?: string }, x: number, y: number) => {
+    (data: { title: string; meta?: string; warning?: string }, x: number, y: number) => {
       setTooltipData(data);
       setTooltipPos({ x, y });
     },
@@ -223,6 +232,21 @@ function ParliamentExplorerClientInner({
     return () => window.clearTimeout(t);
   }, [currentModals, tourStep, startTutorial]);
 
+  // `/app?tour=1` (landing page CTA, specs/landing-page §4): start the tour and strip the param,
+  // same pattern as `open=donate` below.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("tour") !== "1") return;
+    url.searchParams.delete("tour");
+    window.history.replaceState({}, "", url.toString());
+    const t = window.setTimeout(() => {
+      track("StartTutorial", { location: "url_param_tour=1" });
+      startTutorial();
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, [startTutorial]);
+
   // Auto-open donation modal for first-time visitors or when URL requests it (e.g. from /payment-cancel).
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -262,7 +286,7 @@ function ParliamentExplorerClientInner({
 
   return (
     <TutorialContext.Provider value={tutorialContext}>
-      <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
+      <div className="min-h-screen bg-linear-to-b from-page to-surface p-4">
         <div className="w-full">
           <div className="flex flex-col gap-4">
             <Header />
@@ -276,7 +300,7 @@ function ParliamentExplorerClientInner({
                     title="歴代議員検索"
                     subtitle="漢字・かな表記で検索できます。クリックで選択します。"
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel className="relative">
                     <HistoricalReprSearch
                       allParliamentMemberTable={allParliamentMemberTable}
                       selectedPersonId={selectedPersonId}
@@ -287,13 +311,13 @@ function ParliamentExplorerClientInner({
                         })
                       }
                     />
-                  </div>
+                  </Panel>
                 </Card>
 
                 <Card data-tour="ideology-card">
                   <CardHeader
-                    title="政治的な立場の推定（AIの埋め込みベクトルによる推定）"
-                    subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
+                    title="政治的な立場の推定（発言の埋め込みベクトルから算出）"
+                    subtitle="各点は議員を表しています。クリックすると詳細パネルが開きます。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showIdeologyDisclaimer}
@@ -301,67 +325,44 @@ function ParliamentExplorerClientInner({
                       />
                     }
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showIdeologyDisclaimer ? (
-                      <DisclaimerPanel>
-                        <IdeologyDisclaimerContent ideologyData={ideologyData} />
-                      </DisclaimerPanel>
-                    ) : (
+                  {showIdeologyDisclaimer ? (
+                    <DisclaimerPanel>
+                      <IdeologyDisclaimerContent ideologyData={ideologyData} />
+                    </DisclaimerPanel>
+                  ) : (
+                    <Panel className="relative">
                       <IdeologicalScatterPlot
                         ideologyData={ideologyData}
                         selectedPersonId={selectedPersonId}
-                        onPoliticianSelect={(id) =>
-                          handlePoliticianSelect(id, { source: "ideology_scatter" })
+                        onPoliticianSelect={(id, meta) =>
+                          handlePoliticianSelect(id, { source: "ideology_scatter", topic: meta.topic })
                         }
                         onTooltipShow={handleTooltipShow}
                         onTooltipHide={handleTooltipHide}
                       />
-                    )}
-                  </div>
-                
+                    </Panel>
+                  )}
                 </Card>
                 <Card data-tour="map-card">
                   <CardHeader
                     title="選挙区地図"
-                    subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
+                    subtitle="選挙区を選択すると、その選挙区の議員が表示されます。"
                     action={
-                      <div className="flex items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (mapPane !== "districts") {
-                              track("MapPaneChange", { pane: "districts" });
-                              setMapPane("districts");
-                            }
-                          }}
-                          className={`px-3 py-1 text-[11px] ${
-                            mapPane === "districts"
-                              ? "bg-blue-600/90 text-white"
-                              : "text-gray-200 hover:bg-white/5"
-                          }`}
-                        >
-                          地図
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (mapPane !== "proportional") {
-                              track("MapPaneChange", { pane: "proportional" });
-                              setMapPane("proportional");
-                            }
-                          }}
-                          className={`px-3 py-1 text-[11px] ${
-                            mapPane === "proportional"
-                              ? "bg-blue-600/90 text-white"
-                              : "text-gray-200 hover:bg-white/5"
-                          }`}
-                        >
-                          比例
-                        </button>
-                      </div>
+                      <SegmentedControl
+                        label="地図の表示"
+                        items={[
+                          { value: "districts", label: "地図" },
+                          { value: "proportional", label: "比例" },
+                        ]}
+                        value={mapPane}
+                        onChange={(pane) => {
+                          track("MapPaneChange", { pane });
+                          setMapPane(pane);
+                        }}
+                      />
                     }
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel className="relative">
                     {mapPane === "districts" ? (
                       <JapanMap
                         votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
@@ -381,7 +382,7 @@ function ParliamentExplorerClientInner({
                         }
                       />
                     )}
-                  </div>
+                  </Panel>
                 </Card>
               </>
             }
@@ -390,7 +391,7 @@ function ParliamentExplorerClientInner({
                 <Card data-tour="quality-card">
                   <CardHeader
                     title="やり取りの評価（AI判定）"
-                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、かならず注意事項をご確認ください。"
+                    subtitle="委員会での質問とそれへの答弁をひとまとまり（やり取り）として、何のための議論か・成果があったか・問題点があったかをAIが判定しています。クリックすると議員詳細が開きます。参考にする前に、必ず注意事項をご確認ください。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showQualityDisclaimer}
@@ -398,12 +399,12 @@ function ParliamentExplorerClientInner({
                       />
                     }
                   />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showQualityDisclaimer ? (
-                      <DisclaimerPanel>
-                        <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
-                      </DisclaimerPanel>
-                    ) : (
+                  {showQualityDisclaimer ? (
+                    <DisclaimerPanel>
+                      <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
+                    </DisclaimerPanel>
+                  ) : (
+                    <Panel>
                       <SpeechQualityBarList
                         aggregate={qualityAggregate}
                         allParliamentMemberTable={allParliamentMemberTable}
@@ -412,22 +413,22 @@ function ParliamentExplorerClientInner({
                           handlePoliticianSelect(id, { source: "speech_quality_bars" })
                         }
                       />
-                    )}
-                  </div>
+                    </Panel>
+                  )}
                 </Card>
 
                 <Card data-tour="seats">
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel>
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
-                  </div>
+                  </Panel>
                 </Card>
 
                 <Card>
                   <CardHeader title="衆議院 議席配分" subtitle="党派別（現職）" />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel>
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="lower" />
-                  </div>
+                  </Panel>
                 </Card>
               </>
             }
@@ -441,6 +442,11 @@ function ParliamentExplorerClientInner({
         onClose={() => handlePoliticianSelect(null, { source: "detail_pane_close" })}
         allParliamentMemberTable={allParliamentMemberTable}
         qualityAggregate={qualityAggregate}
+        ideologyData={ideologyData}
+        onOpenMethodology={() => {
+          setShowIdeologyDisclaimer(true);
+          document.querySelector('[data-tour="ideology-card"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
 		setSelectedIssueId={setSelectedIssueId}
         setSelectedIssueSpeechId={setSelectedIssueSpeechId}
         panelRequest={panelRequest}

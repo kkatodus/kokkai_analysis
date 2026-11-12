@@ -111,7 +111,7 @@ def run_project(cfg: Config, state: State, topics: List[Topic], axes, args, conn
 	"""Project every scalable topic; returns (document, notes). Publishes unless --dry-run."""
 	from .members import current_members, persons_from_db, snapshot_date
 	from .project import project_topic
-	from .publish import build_document, upload, write_document
+	from .publish import build_document, upload, write_document, write_person_files
 	sel = state.selection()
 	if not sel:
 		raise RuntimeError("no select.json; run select first")
@@ -140,8 +140,12 @@ def run_project(cfg: Config, state: State, topics: List[Topic], axes, args, conn
 	doc = build_document(cfg, blocks, snapshot_date(cfg.members_dir))
 	if args.dry_run:
 		log.info("dry run: not writing ideology file (%d topics)", len(blocks))
+		notes.append(write_person_files(cfg, state, doc, topics, dry_run=True).line())
 		return doc, notes
 	paths = write_document(cfg, doc)
+	person_files = write_person_files(cfg, state, doc, topics)
+	notes.append(person_files.line())
+	paths += person_files.changed
 	if getattr(args, "no_upload", False):
 		notes.append("upload skipped (--no-upload)")
 	else:
@@ -237,6 +241,7 @@ def slack_report(report: dict, dry_run: bool) -> str:
 		tp = report.get("topics_published") or []
 		lines.append(f"Published: {len(tp)} topics, {sum(n for _, _, _, n in tp)} sub-topics, "
 			f"{sum(s for _, s, _, _ in tp)} scaled pairs, {sum(c for _, _, c, _ in tp)} current")
+		lines += report.get("publish_notes") or []
 	else:
 		lines.append("Not published: " + "; ".join(report.get("publish_notes") or ["nothing to publish"]))
 	if report.get("summaries"):
