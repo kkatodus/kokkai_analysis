@@ -20,6 +20,12 @@ import { PARTY2RGBCOLOR, canonicalParty, partyCss } from "@/app/lib/config/parti
 const SCATTER_LINEAGE: Record<string, string> = { 民進: "国民" };
 const OTHER_COLOR = partyCss(null);
 
+// Dot radius and outline in screen pixels (counter-scaled by the zoom level).
+const DOT_R = 2.5;
+const DOT_R_SELECTED = 4.5;
+const DOT_STROKE = 0.75;
+const DOT_STROKE_SELECTED = 2;
+
 function pointColor(d: PersonIdeologyData): string {
   if (d.ref_point && d.ref_point !== "none") return d.color || OTHER_COLOR;
   const party = SCATTER_LINEAGE[d.party] ?? d.party;
@@ -72,6 +78,9 @@ export function IdeologicalScatterPlot({
   const containerRef = useRef<HTMLDivElement>(null);
   const fieldId = useId();
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  // Current zoom scale; dots are drawn at r / k so they keep their screen size
+  // and zooming in separates overlapping points instead of enlarging them.
+  const zoomKRef = useRef(1);
   // Keep callback refs so D3 handlers don't force a full redraw when parent re-renders.
   const onPoliticianSelectRef = useRef(onPoliticianSelect);
   const onTooltipShowRef = useRef(onTooltipShow);
@@ -355,7 +364,7 @@ export function IdeologicalScatterPlot({
     }
 
     // Points
-    const baseR = 4;
+    const baseR = DOT_R;
     const UNSELECTED_STROKE = "rgba(255,255,255,0.55)";
     const SELECTED_STROKE = "#22d3ee"; // primary: the cyan selection ring
     const circles = g
@@ -371,7 +380,7 @@ export function IdeologicalScatterPlot({
       .attr("opacity", 0.9)
       // Slightly brighter outline so dark/black dots remain visible.
       .attr("stroke", UNSELECTED_STROKE)
-      .attr("stroke-width", 1.25)
+      .attr("stroke-width", DOT_STROKE)
       .style("cursor", "pointer")
       .on("mousemove", (event, d) => {
         const extra = [
@@ -400,9 +409,19 @@ export function IdeologicalScatterPlot({
       .scaleExtent([0.8, 15])
       .on("zoom", (event) => {
         zoomContainer.attr("transform", event.transform.toString());
+        const k = event.transform.k;
+        zoomKRef.current = k;
+        circles
+          .attr("r", function () {
+            return Number(this.dataset.r ?? baseR) / k;
+          })
+          .attr("stroke-width", function () {
+            return Number(this.dataset.sw ?? DOT_STROKE) / k;
+          });
       });
 
     zoomRef.current = zoom;
+    zoomKRef.current = 1;
     svg.call(zoom as any);
 
     // Prevent wheel from scrolling the page while zooming the plot
@@ -425,21 +444,24 @@ export function IdeologicalScatterPlot({
     const svg = d3.select(svgRef.current);
     const circles = svg.selectAll<SVGCircleElement, PersonIdeologyData>(".plot-content circle");
 
+    const k = zoomKRef.current;
+    const isSelected = (d: PersonIdeologyData) => {
+      const id = d.person_id != null ? String(d.person_id) : d.repr;
+      return !!selectedPersonId && selectedPersonId === id;
+    };
     circles
-      .attr("r", (d) => {
-        const id = d.person_id != null ? String(d.person_id) : d.repr;
-        return selectedPersonId && selectedPersonId === id ? 6 : 4;
+      .each(function (d) {
+        this.dataset.r = String(isSelected(d) ? DOT_R_SELECTED : DOT_R);
+        this.dataset.sw = String(isSelected(d) ? DOT_STROKE_SELECTED : DOT_STROKE);
       })
+      .attr("r", (d) => (isSelected(d) ? DOT_R_SELECTED : DOT_R) / k)
       .attr("stroke", (d) => {
         const id = d.person_id != null ? String(d.person_id) : d.repr;
         return selectedPersonId && selectedPersonId === id
           ? "rgba(255,255,255,0.95)"
           : "rgba(255,255,255,0.55)";
       })
-      .attr("stroke-width", (d) => {
-        const id = d.person_id != null ? String(d.person_id) : d.repr;
-        return selectedPersonId && selectedPersonId === id ? 2.5 : 1.25;
-      });
+      .attr("stroke-width", (d) => (isSelected(d) ? DOT_STROKE_SELECTED : DOT_STROKE) / k);
   }, [selectedPersonId]);
 
   const handleZoomIn = () => {
