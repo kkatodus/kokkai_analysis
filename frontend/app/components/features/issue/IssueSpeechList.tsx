@@ -7,7 +7,7 @@ import { SEGMENT_PALETTES, type SpeechSegment } from "@/app/components/features/
 import { FiExternalLink } from "react-icons/fi";
 import { ExchangeChips } from "@/app/components/features/QualityChips";
 import { Button, ButtonLink } from "@/app/components/shared/Button";
-import { selectedClass } from "@/app/components/shared/Chip";
+import { listRowClass, rowTitleClass } from "@/app/components/shared/ListRow";
 import { Empty } from "@/app/components/shared/states";
 import { cx } from "@/app/components/shared/cx";
 
@@ -100,9 +100,10 @@ export function IssueSpeechList({
                   itemRefs.current[i] = node;
                 }}
                 className={cx(
-                  "relative rounded-lg border p-3 text-body-md transition-colors",
+                  "relative p-3 text-body-md",
+                  listRowClass(active),
+                  !active && "text-ink",
                   accent && cx("border-l-2", SEGMENT_PALETTES[accent].itemClassName),
-                  active ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised text-ink hover:bg-surface-hover",
                 )}
               >
                 <button
@@ -117,7 +118,7 @@ export function IssueSpeechList({
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-2">
-                      <span className={cx("truncate text-title-sm", active ? "text-on-primary-soft" : "text-ink-strong")}>{s.speaker}</span>
+                      <span className={rowTitleClass(active)}>{s.speaker}</span>
                       <span className="text-data text-ink-muted">#{s.speechOrder}</span>
                     </div>
                     {s.speakerGroup && <div className="text-caption text-ink-muted">{s.speakerGroup}</div>}

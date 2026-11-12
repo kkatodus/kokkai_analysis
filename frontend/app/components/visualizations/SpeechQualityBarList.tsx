@@ -8,7 +8,7 @@ import { Pager } from "@/app/components/shared/Pager";
 import { Badge } from "@/app/components/shared/Badge";
 import { Field, Select, TextInput } from "@/app/components/shared/inputs";
 import { SegmentedControl } from "@/app/components/shared/Tabs";
-import { selectedClass } from "@/app/components/shared/Chip";
+import { ListRow, rowTitleClass } from "@/app/components/shared/ListRow";
 import { cx } from "@/app/components/shared/cx";
 import type { QualityContribution } from "@/app/types";
 import {
@@ -263,17 +263,10 @@ export function SpeechQualityBarList({
 
             return (
               <li key={personId}>
-                <button
-                  type="button"
-                  onClick={() => onSelectPersonId(personId)}
-                  className={cx(
-                    "w-full rounded-lg border p-3 text-left transition-colors duration-150",
-                    isSelected ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised hover:bg-surface-hover",
-                  )}
-                >
+                <ListRow selected={isSelected} onClick={() => onSelectPersonId(personId)}>
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <div className={cx("truncate text-title-sm", isSelected ? "text-on-primary-soft" : "text-ink-strong")}>{name}</div>
+                      <div className={rowTitleClass(isSelected)}>{name}</div>
                       <div className="truncate text-caption text-ink-muted">{p.group ?? ""}</div>
                     </div>
                     <div className="shrink-0 text-right">
@@ -302,7 +295,7 @@ export function SpeechQualityBarList({
                       </div>
                     </div>
                   </div>
-                </button>
+                </ListRow>
               </li>
             );
           })}

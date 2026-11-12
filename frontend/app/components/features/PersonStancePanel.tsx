@@ -199,7 +199,7 @@ function StanceCard({
 
           {positions.length ? (
             <div className="space-y-2 border-t border-line-subtle pt-3">
-              <h4 className="text-label-md text-ink">論点ごとの位置</h4>
+              <Heading level={4}>論点ごとの位置</Heading>
               {positions.map((p) => (
                 <PositionBar key={p.subTopic} pos={p} />
               ))}

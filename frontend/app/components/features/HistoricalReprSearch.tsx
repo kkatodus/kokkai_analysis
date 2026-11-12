@@ -5,8 +5,7 @@ import type { AllParliamentMemberTableData } from "@/app/types";
 import { Empty, Loading } from "@/app/components/shared/states";
 import { SearchInput } from "@/app/components/shared/inputs";
 import { Heading } from "@/app/components/shared/Card";
-import { selectedClass } from "@/app/components/shared/Chip";
-import { cx } from "@/app/components/shared/cx";
+import { ListRow, rowTitleClass } from "@/app/components/shared/ListRow";
 
 const POPULAR_LIMIT = 10;
 
@@ -41,22 +40,15 @@ function MemberRow({
   onClick: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cx(
-        "w-full rounded-lg border px-3 py-2 text-left transition-colors duration-150",
-        isSelected ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised hover:bg-surface-hover",
-      )}
-    >
+    <ListRow selected={isSelected} onClick={onClick}>
       <div className="flex min-w-0 items-start gap-2">
         {rank !== undefined ? <span className="mt-0.5 w-5 shrink-0 text-right text-data text-link">{rank}</span> : null}
         <div className="min-w-0">
-          <div className={cx("truncate text-title-sm", isSelected ? "text-on-primary-soft" : "text-ink-strong")}>{member.name_kanji}</div>
+          <div className={rowTitleClass(isSelected)}>{member.name_kanji}</div>
           <div className="truncate text-caption text-ink-muted">{member.name_kana}</div>
         </div>
       </div>
-    </button>
+    </ListRow>
   );
 }
 

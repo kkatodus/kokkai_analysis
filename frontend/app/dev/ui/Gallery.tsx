@@ -12,6 +12,7 @@ import { Dialog, SidePane } from "@/app/components/shared/Dialog";
 import { ExpandableText } from "@/app/components/shared/ExpandableText";
 import { Field, SearchInput, Select, TextInput } from "@/app/components/shared/inputs";
 import { Legend } from "@/app/components/shared/Legend";
+import { ListRow, rowTitleClass } from "@/app/components/shared/ListRow";
 import { Pager } from "@/app/components/shared/Pager";
 import { Empty, ErrorState, Loading } from "@/app/components/shared/states";
 import { SegmentedControl, TabPanel, Tabs } from "@/app/components/shared/Tabs";
@@ -199,18 +200,10 @@ export function Gallery() {
             <CardHeader title="パネル、リスト、ページ送り" subtitle="カードの中はパネルまで" />
             <Panel className="flex flex-col gap-2">
               {["倉林明子", "田村貴昭", "山添拓"].map((n, i) => (
-                <button
-                  key={n}
-                  type="button"
-                  className={`rounded-lg border px-3 py-2 text-left text-body-md transition-colors ${
-                    i === 1
-                      ? "border-primary-line bg-primary-soft text-on-primary-soft edge-primary"
-                      : "border-line bg-surface-raised text-ink hover:bg-surface-hover hover:text-ink-strong"
-                  }`}
-                >
-                  {n}
-                  <span className="ml-2 text-data text-ink-muted">質問 407件</span>
-                </button>
+                <ListRow key={n} selected={i === 1} disabled={i === 2}>
+                  <span className={rowTitleClass(i === 1)}>{n}</span>
+                  <span className="block text-data text-ink-muted">質問 407件</span>
+                </ListRow>
               ))}
               <Pager page={page} pageCount={1248} onChange={setPage} className="pt-2" />
             </Panel>

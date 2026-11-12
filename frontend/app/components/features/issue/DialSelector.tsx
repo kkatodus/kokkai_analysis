@@ -115,13 +115,12 @@ export function DialSelector({
   const hy = cy - rOuter * Math.cos(angle);
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      {label ? <div className="text-label-sm text-ink">{label}</div> : null}
-
+    // Stacked above the list (narrow pane, bottom sheet) the dial shrinks and its label and hint sit beside it,
+    // so the speech list keeps most of the height; from @xl it is a full-size column next to the list.
+    <div className="flex items-center gap-3 @xl:flex-col @xl:gap-2">
       <div
         ref={discRef}
-        className="relative touch-none select-none rounded-full"
-        style={{ width: `${size}px`, height: `${size}px` }}
+        className="relative size-30 shrink-0 touch-none select-none rounded-full @xl:order-2 @xl:size-45"
         role="slider"
         aria-label={label ?? "発言ダイアル"}
         aria-valuemin={0}
@@ -141,7 +140,7 @@ export function DialSelector({
           }
         }}
       >
-        <svg width={size} height={size} className="block" aria-hidden>
+        <svg viewBox={`0 0 ${size} ${size}`} className="block size-full" aria-hidden>
           {/* Base disc */}
           <circle cx={cx} cy={cy} r={rOuter} className="fill-surface-raised stroke-line" />
           <circle cx={cx} cy={cy} r={rInner} className="fill-surface stroke-line-subtle" />
@@ -195,23 +194,17 @@ export function DialSelector({
           <circle cx={hx} cy={hy} r={handleR + 7} className="fill-primary" fillOpacity={0.12} />
           <circle cx={hx} cy={hy} r={handleR + 2} className="fill-primary" fillOpacity={0.25} />
           <circle cx={hx} cy={hy} r={handleR} className="fill-primary" />
-
-          {/* Center label */}
-          <text
-            x={cx}
-            y={cy + 4}
-            textAnchor="middle"
-            fontSize="12"
-            fontWeight={600}
-            className="fill-ink"
-            style={{ fontVariantNumeric: "tabular-nums" }}
-          >
-            {count ? `${selectedIndex + 1}/${count}` : "—"}
-          </text>
         </svg>
+        {/* centre label in HTML so it stays at 12px whatever size the disc is drawn at */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center text-data font-semibold text-ink tabular-nums">
+          {count ? `${selectedIndex + 1}/${count}` : "—"}
+        </div>
       </div>
 
-      <div className="text-caption text-ink-muted">ドラッグで発言を選択</div>
+      <div className="flex flex-col gap-1 @xl:contents">
+        {label ? <div className="text-label-sm text-ink @xl:order-1">{label}</div> : null}
+        <div className="text-caption text-ink-muted @xl:order-3">ドラッグで発言を選択</div>
+      </div>
     </div>
   );
 }

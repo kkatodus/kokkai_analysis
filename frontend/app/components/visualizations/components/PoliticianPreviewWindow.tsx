@@ -1,9 +1,9 @@
 import type { SangiinPolitician, ShugiinPolitician } from "@/app/types";
+import { canonicalParty } from "@/app/lib/config/parties";
 import { Badge } from "@/app/components/shared/Badge";
 import { Card, Heading } from "@/app/components/shared/Card";
 import { Empty } from "@/app/components/shared/states";
-import { selectedClass } from "@/app/components/shared/Chip";
-import { cx } from "@/app/components/shared/cx";
+import { ListRowFrame, rowTitleClass } from "@/app/components/shared/ListRow";
 
 interface PoliticianPreviewWindowProps {
 	selectedDistrict?: string | null;
@@ -196,12 +196,7 @@ function PoliticianRow({
 	const isSelected = Boolean(personId && selectedPersonId && personId === selectedPersonId);
 
 	return (
-		<div
-			className={cx(
-				"rounded-lg border transition-colors duration-150",
-				isSelected ? cx(selectedClass, "edge-primary") : "border-line bg-surface-raised hover:bg-surface-hover",
-			)}
-		>
+		<ListRowFrame selected={isSelected}>
 			<button
 				type="button"
 				aria-pressed={isSelected}
@@ -211,14 +206,14 @@ function PoliticianRow({
 					if (!id) return;
 					onPoliticianSelect(id);
 				}}
-				className="w-full rounded-lg px-3 pt-2 pb-2 text-left"
+				className="w-full rounded-lg px-3 pt-3 pb-2 text-left"
 			>
 				<div className="flex items-start justify-between gap-2">
 					<div className="min-w-0">
-						<div className={cx("truncate text-title-sm", isSelected ? "text-on-primary-soft" : "text-ink-strong")}>{name}</div>
+						<div className={rowTitleClass(isSelected)}>{name}</div>
 						{yomikata ? <div className="truncate text-caption text-ink-muted">{yomikata}</div> : null}
 					</div>
-					{kaiha ? <Badge className="shrink-0">{kaiha}</Badge> : null}
+					{kaiha ? <Badge className="shrink-0">{canonicalParty(kaiha)}</Badge> : null}
 				</div>
 
 				{metaItems.length > 0 ? (
@@ -239,6 +234,6 @@ function PoliticianRow({
 					</a>
 				</div>
 			) : null}
-		</div>
+		</ListRowFrame>
 	);
 }

@@ -117,7 +117,7 @@ function Group({ title, note, children }: { title: string; note?: string; childr
   return (
     <div className="mt-2 first:mt-0">
       <div className="mb-1 flex flex-wrap items-baseline justify-between gap-x-2">
-        <h4 className="text-label-md text-ink">{title}</h4>
+        <Heading level={4}>{title}</Heading>
         {note && <div className="text-caption text-ink-muted">{note}</div>}
       </div>
       <div className="grid gap-1">{children}</div>
