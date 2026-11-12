@@ -98,7 +98,7 @@ export default function AboutPage() {
           <p>
             加藤賢、日本で生まれ、ドイツのデュッセルドルフで幼少期から高校卒業までを過ごす。
             トロント大学工学部（Engineering Science）に進学し、AI を学ぶ。
-            卒業後に帰国し、デジタル庁の AI 関連部署に勤務するが、当サイトの運営をやめるよう求められ、4か月で退職。
+            卒業後に帰国し、デジタル庁の AI 関連部署に勤務。
             現在はスタートアップでエンジニア（Member of Technical Staff）として働く。
           </p>
         </ProseSection>
