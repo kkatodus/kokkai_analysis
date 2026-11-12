@@ -35,7 +35,7 @@ node build.js kokkaidoc_walkthrough.mp4
 | `record.js` | The walkthrough itself: scripted clicks, scrolls and clips, screencast to `frames/` |
 | `titles.js` | Renders each clip title as a transparent PNG |
 | `build.js` | ffmpeg: frames → video, title overlays, music loop extension and fades |
-| `analyze.js`, `loopfind.js` | One-off music analysis (tempo; the 8-bar loop at 64.56–79.33 s hard-coded in `build.js`). They read `band1–4.raw`: the track split into four frequency bands as 8 kHz mono float32 PCM |
+| `analyze.js`, `loopfind.js` | One-off music analysis (tempo; the 16-bar loop at 45.57–75.11 s hard-coded in `build.js`). They read `band1–4.raw`: the track split into four frequency bands as 8 kHz mono float32 PCM |
 
 The camera zoom in `record.js` (`cam()`) is switched off by an early `return`;
 `build.js` only applies zoompan when camera keyframes exist.
