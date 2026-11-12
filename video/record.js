@@ -38,6 +38,7 @@ const clips = []; const cap = async (n, t) => { clips.push({ n, t, start: Date.n
   await p.waitForLoadState('networkidle', { timeout: 60000 }).catch(() => {});
   await p.addStyleTag({ content: '::-webkit-scrollbar{display:none}*{scrollbar-width:none}' });
   await p.evaluate(() => __v.setup());
+  p.setDefaultTimeout(10000);
   await p.evaluate(() => { __v.cursor(false); });
   await p.mouse.move(mx, my);
   await wait(1500);
@@ -99,15 +100,15 @@ const clips = []; const cap = async (n, t) => { clips.push({ n, t, start: Date.n
   // 2. speeches: widen the side panel, pick 少子化, scroll to a meeting with mixed AI results
   await slide(2, 'SPEECHES', '気になるテーマから、本人の言葉へ。', ['防衛、物価、子育て。関心のあるテーマから', '切り抜きではなく、発言の全文で']);
   await cap('2', '発言をトピック別に');
-  const sep = p.locator('[role="separator"][aria-label="Resize detail pane"]');
+  const sep = dp.locator('[role="separator"]');
   const sb = await sep.boundingBox();
   await moveTo(sb.x + 4, sb.y + 330, 900); await wait(250); await p.mouse.down();
   await moveTo(330, sb.y + 330, 1100); await p.mouse.up(); await wait(700);
   await clickLoc(dp.locator('button', { hasText: /^少子化$/ }).first(), 900);
   await wait(2200);
   const meetBtns = p.locator('[data-tour="speech-card"] button[title="この発言が行われた会議を開く"]');
-  const infos = await meetBtns.evaluateAll(bs => bs.map(b => b.closest('.flex.items-start').parentElement.innerText));
-  let ti = infos.findIndex(t => t.includes('2023-02-22') && t.includes('予算委員会'));
+  const infos = await meetBtns.evaluateAll(bs => bs.map(b => (b.closest('.flex.items-start')?.parentElement ?? b.parentElement?.parentElement?.parentElement ?? b).innerText));
+  let ti = infos.findIndex(t => (t.includes('2023-02-22') || t.includes('2023年2月22日')) && t.includes('予算委員会'));
   if (ti < 0) ti = infos.findIndex(t => t.includes('成果：'));
   const target = meetBtns.nth(Math.max(ti, 0));
   const lb = await p.locator('[data-tour="speech-card"]').boundingBox();
@@ -121,18 +122,18 @@ const clips = []; const cap = async (n, t) => { clips.push({ n, t, start: Date.n
   await clickLoc(target, 900);
   const dial = p.locator('[role="slider"]').first();
   await dial.waitFor({ timeout: 60000 }); await wait(1200);
-  const isep = p.locator('[role="separator"][aria-label="Resize issue pane"]');
+  const isep = p.locator('[data-tour="issue-pane"] [role="separator"]');
   const ib0 = await isep.boundingBox();
   await moveTo(ib0.x + 4, ib0.y + 330, 900); await wait(250); await p.mouse.down();
   await moveTo(1100, ib0.y + 330, 1100); await p.mouse.up(); await wait(1000);
-  const db = await dial.boundingBox(); const dcx = db.x + db.width / 2, dcy = db.y + db.height / 2, R = 62;
+  const db = await dial.boundingBox(); const dcx = db.x + db.width / 2, dcy = db.y + db.height / 2, R = db.width * 0.345;
   await moveTo(dcx, dcy - R, 900); await wait(200); await p.mouse.down();
   for (let i = 0; i <= 120; i++) { const a = (i / 120) * Math.PI * 1.9; mx = dcx + R * Math.sin(a); my = dcy - R * Math.cos(a); await p.mouse.move(mx, my); await wait(30); }
   await p.mouse.up(); await wait(1400);
 
   // 4. exchange evaluation
   await slide(4, 'AI EVALUATION', 'その質疑に、成果はあったか。', ['新たな事実は出たか、具体的な約束はあったか', '質疑の中身を見極める手がかりに'], async () => {
-    await p.locator('[data-tour="issue-pane"] button', { hasText: '×' }).first().click().catch(() => {});
+    await p.locator('[data-tour="issue-pane"] button[aria-label="閉じる"]').first().click().catch(() => {});
     await tab('やり取り').click(); await wait(800);
   });
   await cap('4', 'やり取りの評価（AI判定）');
@@ -147,13 +148,13 @@ const clips = []; const cap = async (n, t) => { clips.push({ n, t, start: Date.n
   });
   await cap('5', '論点ごとの立場');
   cam(1220, 400, 2.1, 1000);
-  await clickLoc(dp.locator('button', { hasText: /経済対策\s*\d{4}\// }).first(), 1000).catch(() => {});
+  await clickLoc(dp.locator('button[aria-expanded]', { hasText: /^経済対策/ }).first(), 1000).catch(e => console.error('stance click', e.message));
   await wait(2600);
 
   // 6. ideology
   const ic = p.locator('[data-tour="ideology-card"]');
   await slide(6, 'IDEOLOGY MAP', '党の看板だけでは、わからないこと。', ['同じ党でも、考え方は人それぞれ', '発言から推定する、一人ひとりの立ち位置'], async () => {
-    await dp.locator('button', { hasText: '×' }).first().click().catch(() => {});
+    await dp.locator('button[aria-label="閉じる"]').first().click().catch(() => {});
     const top = await ic.evaluate(e => e.getBoundingClientRect().top + scrollY);
     await p.evaluate(y => scrollTo(0, y), top - 20);
   });
@@ -195,7 +196,7 @@ const clips = []; const cap = async (n, t) => { clips.push({ n, t, start: Date.n
   const mb = await mc.boundingBox();
   await moveTo(mb.x + mb.width * 0.86, mb.y + mb.height * 0.43, 1000); await wait(200); await p.mouse.down(); await wait(90); await p.mouse.up();
   await wait(2600);
-  await clickLoc(mc.getByRole('button', { name: '比例', exact: true }), 900).catch(() => {});
+  await clickLoc(mc.getByRole('button', { name: '比例', exact: true }), 900).catch(e => console.error('map click', e.message));
   await wait(2000);
 
   // outro
