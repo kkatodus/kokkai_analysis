@@ -94,6 +94,14 @@ export default function AboutPage() {
           </p>
         </ProseSection>
 
+        <ProseSection title="製作者について">
+          <p>
+            製作者は日本で生まれ、ドイツのデュッセルドルフで育ちました。トロント大学の Engineering Science（工学部）で AI を専攻して卒業したのち、日本に戻り、デジタル庁の AI 関連部署で働きました。
+            当サイトの運営をやめるよう求められたため、4か月で退職しました。
+          </p>
+          <p>現在はスタートアップでエンジニア（Member of Technical Staff）として働いています。</p>
+        </ProseSection>
+
         <ProseSection title="引用">
           <div className="overflow-hidden rounded-xl border border-line-subtle bg-surface">
             <table className="w-full table-fixed border-collapse break-words text-left text-body-md">
