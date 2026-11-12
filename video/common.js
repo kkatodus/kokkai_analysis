@@ -1,0 +1,1 @@
+exports.init = `try{localStorage.setItem('kokkai_doc_seen_at',String(Date.now()));localStorage.setItem('kokkai_doc_tutorial_seen','1');localStorage.setItem('kokkaidoc.loading.optout','1');}catch(e){}`;
