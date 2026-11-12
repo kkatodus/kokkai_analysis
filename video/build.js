@@ -27,8 +27,10 @@ const ins=['-safe','0','-f','concat','-i','list.txt'];const total=(frames.at(-1)
 T.forEach(c=>ins.push('-loop','1','-framerate','30','-t',total.toFixed(2),'-i',c.f));
 const music=fs.readdirSync('music').find(f=>/\.(mp3|m4a|wav|aac)$/i.test(f));
 if(music){ins.push('-i','music/'+music);
-  // extend the track: repeat 8 bars (64.56s–79.33s, found by loopfind.js) once, beat-matched, 60ms crossfade
-  fc+=`;[${T.length+1}:a]asplit[m1][m2];[m1]atrim=0:79.33[p1];[m2]atrim=start=64.56,asetpts=PTS-STARTPTS[p2];[p1][p2]acrossfade=d=0.06[mx]`;
+  // extend the track: repeat 16 bars once (45.57s–75.11s, two 8-bar phrases starting on a phrase
+  // downbeat, found by loopfind.js), 60ms crossfade. Track 102s + 29.5s, so the outro lands on the closing card.
+  const LOOP_A=45.57, LOOP_B=75.11;
+  fc+=`;[${T.length+1}:a]asplit[m1][m2];[m1]atrim=0:${LOOP_B}[p1];[m2]atrim=start=${LOOP_A},asetpts=PTS-STARTPTS[p2];[p1][p2]acrossfade=d=0.06[mx]`;
   fc+=`;[mx]atrim=0:${total.toFixed(2)},asetpts=PTS-STARTPTS,afade=t=in:st=0:d=1,afade=t=out:st=${(total-3).toFixed(2)}:d=3,volume=0.85[aout]`;
   fs.writeFileSync('fc.txt',fc);}
 execFileSync(ff,['-y','-loglevel','error',...ins,'-filter_complex_script','fc.txt','-map','[out]',...(music?['-map','[aout]','-c:a','aac','-b:a','192k']:[]),'-t',total.toFixed(2),'-c:v','libx264','-preset','medium','-crf','20','-movflags','+faststart',out],{stdio:'inherit'});
