@@ -1,9 +1,11 @@
 "use client";
+import { canonicalParty } from "@/app/lib/config/parties";
 
 import type { ParliamentMemberData, ShugiinPolitician, SangiinPolitician } from "@/app/types";
 import { Empty } from "@/app/components/shared/states";
 import { Heading } from "@/app/components/shared/Card";
 import { Badge } from "@/app/components/shared/Badge";
+import { ListRow, rowTitleClass } from "@/app/components/shared/ListRow";
 
 function isProportionalDistrict(district: string | undefined | null): boolean {
   if (!district) return false;
@@ -30,18 +32,14 @@ function Row({
   onClick?: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex w-full items-start justify-between gap-2 rounded-lg border border-line bg-surface-raised px-3 py-2 text-left transition-colors duration-150 hover:bg-surface-hover"
-    >
+    <ListRow onClick={onClick} className="flex items-start justify-between gap-2">
       <div className="min-w-0">
-        <div className="truncate text-title-sm text-ink-strong">{name}</div>
+        <div className={rowTitleClass()}>{name}</div>
         {yomikata ? <div className="truncate text-caption text-ink-muted">{yomikata}</div> : null}
         {district ? <div className="mt-1 truncate text-caption text-ink-muted">{district}</div> : null}
       </div>
-      {kaiha ? <Badge className="shrink-0">{kaiha}</Badge> : null}
-    </button>
+      {kaiha ? <Badge className="shrink-0">{canonicalParty(kaiha)}</Badge> : null}
+    </ListRow>
   );
 }
 

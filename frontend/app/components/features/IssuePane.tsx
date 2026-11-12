@@ -217,7 +217,7 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
             <ErrorState message="会議の発言を読み込めませんでした。" onRetry={() => setReloadKey((k) => k + 1)} />
           ) : issueData && issueData.meta && Array.isArray(issueData.speeches) ? (
             <div className="flex min-h-0 flex-1 flex-col gap-3 @xl:flex-row">
-              <div className="flex shrink-0 flex-col items-center justify-start gap-3 @xl:w-55">
+              <div className="flex shrink-0 flex-col items-center justify-start gap-3 border-b border-line-subtle pb-3 @xl:w-55 @xl:border-b-0 @xl:pb-0">
                 <DialSelector
                   count={orderedSpeeches.length}
                   selectedIndex={selectedSpeechIndex}

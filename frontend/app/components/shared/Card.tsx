@@ -33,8 +33,9 @@ export function CardHeader({ title, subtitle, action, level = 2, id }: CardHeade
   return (
     <div className="mb-3 flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
       <div className="min-w-0 flex-1 basis-60">
-        <H id={id} className="flex items-center gap-2 text-title-md text-ink-strong">
-          <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-primary" />
+        <H id={id} className="flex items-start gap-2 text-title-md text-ink-strong">
+          {/* aligned to the first line when the title wraps */}
+          <span aria-hidden className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />
           {title}
         </H>
         {subtitle && <p className="mt-0.5 text-body-sm text-ink-muted">{subtitle}</p>}
@@ -53,7 +54,7 @@ export function Panel({ children, className, ...rest }: HTMLAttributes<HTMLDivEl
   );
 }
 
-const levelSize = { 1: "text-headline-md", 2: "text-title-md", 3: "text-title-sm" } as const;
+const levelSize = { 1: "text-headline-md", 2: "text-title-md", 3: "text-title-sm", 4: "text-label-md" } as const;
 const namedSize = {
   display: "text-display",
   "headline-lg": "text-headline-lg",
@@ -72,13 +73,13 @@ export function Heading({
   className,
   id,
 }: {
-  level: 1 | 2 | 3;
+  level: 1 | 2 | 3 | 4;
   size?: keyof typeof namedSize;
   children: ReactNode;
   className?: string;
   id?: string;
 }) {
-  const H = `h${level}` as "h1" | "h2" | "h3";
+  const H = `h${level}` as "h1" | "h2" | "h3" | "h4";
   return (
     <H id={id} className={cx(size ? namedSize[size] : levelSize[level], "text-ink-strong", className)}>
       {children}

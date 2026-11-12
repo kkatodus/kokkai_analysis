@@ -25,6 +25,7 @@ import { SidePane } from "@/app/components/shared/Dialog";
 import { Tabs, TabPanel } from "@/app/components/shared/Tabs";
 import { Badge } from "@/app/components/shared/Badge";
 import { Heading } from "@/app/components/shared/Card";
+import { ListRow } from "@/app/components/shared/ListRow";
 
 interface DetailPaneProps {
   personId: string;
@@ -418,11 +419,10 @@ export function DetailPane({
         </header>
 
         {qualityPerson && hasQuality ? (
-          <button
-            type="button"
+          <ListRow
             onClick={() => setActivePanel("quality")}
             // the やり取り tab is one tap away, so the sheet below md keeps its height for the list
-            className="mb-3 hidden w-full rounded-lg border border-line bg-surface-raised p-3 text-left transition-colors duration-150 hover:bg-surface-hover md:block"
+            className="mb-3 hidden md:block"
           >
             <span className="flex items-center justify-between gap-2">
               <span className="text-title-sm text-ink-strong">やり取りの評価（AI判定）</span>
@@ -471,7 +471,7 @@ export function DetailPane({
               }
               return null;
             })()}
-          </button>
+          </ListRow>
         ) : null}
 
         <Tabs

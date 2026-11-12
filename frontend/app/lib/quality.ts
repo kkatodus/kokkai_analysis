@@ -210,9 +210,11 @@ export function rate(n: number | undefined | null, d: number | undefined | null)
   return Math.max(0, Math.min(1, n / d));
 }
 
+/** Share as a percent. Below 1% reads 1%未満; a column keeps one number of decimals (DESIGN.md "Data Visualisation"). */
 export function pct(x: number, digits = 0): string {
-  const f = Math.pow(10, digits);
-  return `${Math.round(x * 100 * f) / f}%`;
+  if (x > 0 && x < 0.01) return "1%未満";
+  if (x <= 0 || x >= 1) return `${Math.round(x * 100)}%`;
+  return `${(x * 100).toFixed(digits)}%`;
 }
 
 export function issueTotal(c: { part: number; most: number } | undefined): number {

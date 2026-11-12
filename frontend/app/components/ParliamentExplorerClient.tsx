@@ -317,7 +317,7 @@ function ParliamentExplorerClientInner({
                 <Card data-tour="ideology-card">
                   <CardHeader
                     title="政治的な立場の推定（発言の埋め込みベクトルから算出）"
-                    subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
+                    subtitle="各点は議員を表しています。クリックすると詳細パネルが開きます。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showIdeologyDisclaimer}
@@ -346,7 +346,7 @@ function ParliamentExplorerClientInner({
                 <Card data-tour="map-card">
                   <CardHeader
                     title="選挙区地図"
-                    subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
+                    subtitle="選挙区を選択すると、その選挙区の議員が表示されます。"
                     action={
                       <SegmentedControl
                         label="地図の表示"
