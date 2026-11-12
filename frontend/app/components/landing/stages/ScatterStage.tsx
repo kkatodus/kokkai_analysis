@@ -37,20 +37,20 @@ export function ScatterStage({ pb, frame }: { pb: Playback; frame: StageFrame })
 
   return (
     <div className="absolute inset-0 flex flex-col p-3 sm:p-5">
-      <motion.div initial={from({ opacity: 0, y: 10 })} animate={{ opacity: 1, y: 0 }} className="flex h-full w-full flex-col rounded-2xl border border-white/5 bg-[#020617]/85 p-3.5">
-        <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-gray-200">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+      <motion.div initial={from({ opacity: 0, y: 10 })} animate={{ opacity: 1, y: 0 }} className="flex h-full w-full flex-col rounded-2xl border border-line-subtle bg-surface p-3.5">
+        <div className="mb-2 flex items-center gap-1.5 text-title-sm text-ink-strong">
+          <span className="size-1.5 rounded-full bg-primary" />
           発言から推定した立場
         </div>
-        <div className="flex flex-wrap items-center gap-2 text-[10px] text-gray-400">
-          <span className="rounded-lg border border-slate-400/25 bg-slate-950/60 px-2 py-1 text-[11px] text-gray-100">トピック：原発 ▾</span>
-          <span className="rounded-lg border border-slate-400/25 bg-slate-950/60 px-2 py-1 text-[11px] text-gray-100">論点：原発の再稼働 ▾</span>
-          <span className="ml-auto flex items-center rounded-full border border-slate-400/20 bg-slate-950/30 p-0.5 text-[11px]">
-            <span className={`rounded-full px-2 py-0.5 ${!twoD ? "bg-cyan-500/15 text-cyan-100" : "text-gray-400"}`}>1D</span>
-            <span data-cursor="toggle-2d" className={`rounded-full px-2 py-0.5 ${twoD ? "bg-cyan-500/15 text-cyan-100" : "text-gray-400"}`}>2D</span>
+        <div className="flex flex-wrap items-center gap-2 text-caption text-ink-muted">
+          <span className="rounded-full border border-line-strong bg-surface-control px-2 py-1 text-caption text-ink-strong">トピック：原発 ▾</span>
+          <span className="rounded-full border border-line-strong bg-surface-control px-2 py-1 text-caption text-ink-strong">論点：原発の再稼働 ▾</span>
+          <span className="ml-auto flex items-center rounded-full border border-line bg-surface-raised p-0.5 text-caption">
+            <span className={`rounded-full px-2 py-0.5 ${!twoD ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>1D</span>
+            <span data-cursor="toggle-2d" className={`rounded-full px-2 py-0.5 ${twoD ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>2D</span>
           </span>
-          <label data-cursor="incumbent-check" className="flex items-center gap-1 text-[11px] text-gray-300">
-            <span className={`flex h-3 w-3 items-center justify-center rounded border ${onlyIncumbent ? "border-cyan-400/60 bg-cyan-500/30 text-cyan-100" : "border-slate-400/40"}`}>{onlyIncumbent ? "✓" : ""}</span>
+          <label data-cursor="incumbent-check" className="flex items-center gap-1 text-caption text-ink">
+            <span className={`flex h-3 w-3 items-center justify-center rounded-sm border ${onlyIncumbent ? "border-primary bg-primary-soft text-on-primary-soft" : "border-line-strong"}`}>{onlyIncumbent ? "✓" : ""}</span>
             現職のみ
           </label>
         </div>
@@ -85,7 +85,7 @@ export function ScatterStage({ pb, frame }: { pb: Playback; frame: StageFrame })
           </svg>
           <AnimatePresence>
             {!twoD && (
-              <motion.div key="labels" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pointer-events-none absolute inset-x-3 bottom-2 flex justify-between text-[10px] text-gray-400">
+              <motion.div key="labels" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pointer-events-none absolute inset-x-3 bottom-2 flex justify-between text-caption text-ink-muted">
                 <span>反対（左）</span>
                 <span>賛成（右）</span>
               </motion.div>
@@ -95,7 +95,7 @@ export function ScatterStage({ pb, frame }: { pb: Playback; frame: StageFrame })
             <motion.div
               initial={from({ opacity: 0, y: 4 })}
               animate={{ opacity: 1, y: 0 }}
-              className="pointer-events-none absolute z-10 -translate-x-1/2 rounded-lg border border-slate-400/25 bg-[#0b1220] px-2 py-1 text-[10px] text-gray-100 shadow-xl"
+              className="pointer-events-none absolute z-10 -translate-x-1/2 whitespace-nowrap rounded-lg border border-line bg-surface-control px-2 py-1 text-caption text-ink shadow-lg"
               style={{ left: `${(hp.cx / W) * 100}%`, top: `calc(${(hp.cy / H) * 100}% - 34px)` }}
             >
               {TARO.name} ／ {TARO.party}

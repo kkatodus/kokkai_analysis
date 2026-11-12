@@ -7,15 +7,15 @@
  */
 
 import { LoadingSignal } from "@/app/components/loading/LoadingSignal";
-import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { Spinner } from "@/app/components/shared/states";
 
 export default function DashboardLoading() {
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-linear-to-b from-[#111827] to-[#020617]">
+    <div className="fixed inset-0 z-(--z-loading) flex items-center justify-center bg-linear-to-b from-page to-surface">
       <LoadingSignal />
-      <div className="flex flex-col items-center gap-3 text-center">
-        <LoadingIndicator size="lg" />
-        <div className="text-sm font-medium text-gray-200">議員データを呼び出し中</div>
+      <div role="status" className="flex flex-col items-center gap-3 text-center">
+        <Spinner className="size-7 text-primary" />
+        <p className="text-body-md text-ink">議員データを呼び出し中</p>
       </div>
     </div>
   );

@@ -23,9 +23,11 @@ import {
   OUTCOME_JA,
   OUTCOMES,
 } from "@/app/lib/quality";
+import { Panel } from "@/app/components/shared/Card";
 import { track } from "./track";
 
-const CHIP = "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap";
+const CHIP = "inline-flex items-center rounded-full border px-2 py-0.5 text-label-sm whitespace-nowrap";
+const LINK = "mx-1 rounded-sm text-link underline underline-offset-2 hover:text-on-primary-soft";
 
 function Step({ n, icon, title, children }: { n: number; icon: ReactNode; title: string; children: ReactNode }) {
   const reduced = useReducedMotion();
@@ -35,7 +37,7 @@ function Step({ n, icon, title, children }: { n: number; icon: ReactNode; title:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5 }}
-      className="relative rounded-2xl border border-slate-400/15 bg-slate-900/30 p-5 sm:p-6"
+      className="relative rounded-2xl border border-line-subtle bg-surface p-4 sm:p-6"
     >
       <div className="flex items-start gap-4">
         <motion.div
@@ -43,14 +45,14 @@ function Step({ n, icon, title, children }: { n: number; icon: ReactNode; title:
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.15, type: "spring", stiffness: 200, damping: 16 }}
-          className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 text-cyan-200"
+          className="relative flex size-11 shrink-0 items-center justify-center rounded-xl border border-primary-line bg-primary-soft text-on-primary-soft"
         >
           {icon}
-          <span className="absolute -left-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#020617] text-[10px] font-bold text-cyan-200 ring-1 ring-cyan-400/40">{n}</span>
+          <span className="absolute -left-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-surface text-label-sm text-on-primary-soft ring-1 ring-primary-line">{n}</span>
         </motion.div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-base font-semibold text-gray-50 sm:text-lg">{title}</h3>
-          <div className="mt-2 space-y-3 text-sm leading-relaxed text-gray-300">{children}</div>
+          <h3 className="text-title-md text-ink-strong">{title}</h3>
+          <div className="mt-2 max-w-2xl space-y-3 text-body-lg text-ink">{children}</div>
         </div>
       </div>
     </motion.li>
@@ -60,7 +62,7 @@ function Step({ n, icon, title, children }: { n: number; icon: ReactNode; title:
 function Vocab({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
-      <div className="mb-1 text-[11px] font-semibold text-gray-400">{label}</div>
+      <div className="mb-1 text-label-sm text-ink-muted">{label}</div>
       <div className="flex flex-wrap gap-1">{children}</div>
     </div>
   );
@@ -68,11 +70,11 @@ function Vocab({ label, children }: { label: string; children: ReactNode }) {
 
 export function MethodSection() {
   return (
-    <section id="method" className="mx-auto w-full max-w-4xl px-4 py-14 sm:py-20">
-      <h2 className="text-2xl font-semibold text-gray-50 sm:text-3xl">どうやって？</h2>
-      <p className="mt-3 text-base text-gray-400">会議録がラベルと図になるまでの手順と、できないこと。</p>
+    <section id="method" aria-labelledby="method-title" className="mx-auto w-full max-w-6xl px-4 pt-16">
+      <h2 id="method-title" className="text-headline-md text-ink-strong md:text-headline-lg">どうやって？</h2>
+      <p className="mt-3 text-body-lg text-ink-muted">会議録がラベルと図になるまでの手順と、できないこと。</p>
 
-      <ol className="mt-8 grid gap-4">
+      <ol className="mt-8 grid max-w-4xl gap-4">
         <Step n={1} icon={<FiDatabase className="h-5 w-5" />} title="会議録と議員の情報を集める">
           <p>
             発言はすべて国会会議録検索システム（国立国会図書館）から取得しています。新しい会議は毎晩取り込み、やり取りの評価は2000年以降の委員会質疑を対象に順次さかのぼっています（本会議は対象外）。
@@ -94,7 +96,7 @@ export function MethodSection() {
 
         <Step n={4} icon={<FiCpu className="h-5 w-5" />} title="AIが3つの軸でラベルを付ける">
           <p>やり取りごとに、何のための議論か・成果があったか・問題点があったかを大規模言語モデルが読んで判定します。語彙は次のとおりで、ダッシュボードの表示と同じものです。</p>
-          <div className="space-y-2.5 rounded-xl border border-slate-400/10 bg-slate-950/30 p-3">
+          <Panel className="space-y-2.5">
             <Vocab label="何のため">
               {FUNCTIONS.map((f) => (
                 <span key={f} className={`${CHIP} ${FUNCTION_STYLE[f].chip}`}>{FUNCTION_JA[f]}</span>
@@ -113,7 +115,7 @@ export function MethodSection() {
                 <span key={t} className={`${CHIP} ${ISSUE_CHIP}`}>{ISSUE_JA[t]}</span>
               ))}
             </Vocab>
-          </div>
+          </Panel>
           <ul className="ml-4 list-disc space-y-1">
             <li>党派によって基準を変えません。同じプロンプト、同じモデルで全員を読みます。</li>
             <li>疑わしきは本人に有利に。問題点は明らかなときだけ付け、迷ったら付けません。</li>
@@ -133,7 +135,7 @@ export function MethodSection() {
           </ol>
           <p>
             期間内にその論点で意見を述べていない議員は図に現れません。沈黙は「中立」ではなく「不明」です。手法の詳細と検証は
-            <a href="https://arxiv.org/abs/2505.07118" target="_blank" rel="noreferrer" className="mx-1 text-cyan-300 underline-offset-2 hover:underline">
+            <a href="https://arxiv.org/abs/2505.07118" target="_blank" rel="noreferrer" className={LINK}>
               論文（arXiv）
             </a>
             にまとめています。
@@ -149,7 +151,7 @@ export function MethodSection() {
           </ul>
           <p>
             データの出典や免責事項は
-            <Link href="/about" onClick={() => track("LandingCTA", { cta: "about", location: "method" })} className="mx-1 text-cyan-300 underline-offset-2 hover:underline">
+            <Link href="/about" onClick={() => track("LandingCTA", { cta: "about", location: "method" })} className={LINK}>
               「このプロジェクトについて」
             </Link>
             、詳しい注意事項はダッシュボードの「注意事項」ボタンから読めます。

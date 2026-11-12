@@ -11,7 +11,8 @@ import { track } from "@vercel/analytics";
 
 import { Header } from "@/app/components/layout/Header";
 import { ResizableContainer } from "@/app/components/layout/ResizableContainer";
-import { Card, CardHeader } from "@/app/components/shared/Card";
+import { Card, CardHeader, Panel } from "@/app/components/shared/Card";
+import { SegmentedControl } from "@/app/components/shared/Tabs";
 import { Tooltip } from "@/app/components/shared/Tooltip";
 import { ModalManager } from "@/app/components/modal/ModalManager";
 import { IdeologicalScatterPlot } from "@/app/components/visualizations/IdeologicalScatterPlot";
@@ -285,7 +286,7 @@ function ParliamentExplorerClientInner({
 
   return (
     <TutorialContext.Provider value={tutorialContext}>
-      <div className="min-h-screen bg-linear-to-b from-[#111827] to-[#020617] p-4">
+      <div className="min-h-screen bg-linear-to-b from-page to-surface p-4">
         <div className="w-full">
           <div className="flex flex-col gap-4">
             <Header />
@@ -299,7 +300,7 @@ function ParliamentExplorerClientInner({
                     title="歴代議員検索"
                     subtitle="漢字・かな表記で検索できます。クリックで選択します。"
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel className="relative">
                     <HistoricalReprSearch
                       allParliamentMemberTable={allParliamentMemberTable}
                       selectedPersonId={selectedPersonId}
@@ -310,13 +311,13 @@ function ParliamentExplorerClientInner({
                         })
                       }
                     />
-                  </div>
+                  </Panel>
                 </Card>
 
                 <Card data-tour="ideology-card">
                   <CardHeader
                     title="政治的な立場の推定（発言の埋め込みベクトルから算出）"
-                    subtitle="各点は政治家を表しています。クリックすると詳細パネルが開きます。"
+                    subtitle="各点は議員を表しています。クリックすると詳細パネルが開きます。"
                     action={
                       <DisclaimerToggleButton
                         pressed={showIdeologyDisclaimer}
@@ -324,12 +325,12 @@ function ParliamentExplorerClientInner({
                       />
                     }
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showIdeologyDisclaimer ? (
-                      <DisclaimerPanel>
-                        <IdeologyDisclaimerContent ideologyData={ideologyData} />
-                      </DisclaimerPanel>
-                    ) : (
+                  {showIdeologyDisclaimer ? (
+                    <DisclaimerPanel>
+                      <IdeologyDisclaimerContent ideologyData={ideologyData} />
+                    </DisclaimerPanel>
+                  ) : (
+                    <Panel className="relative">
                       <IdeologicalScatterPlot
                         ideologyData={ideologyData}
                         selectedPersonId={selectedPersonId}
@@ -339,52 +340,29 @@ function ParliamentExplorerClientInner({
                         onTooltipShow={handleTooltipShow}
                         onTooltipHide={handleTooltipHide}
                       />
-                    )}
-                  </div>
-                
+                    </Panel>
+                  )}
                 </Card>
                 <Card data-tour="map-card">
                   <CardHeader
                     title="選挙区地図"
-                    subtitle="選挙区を選択すると、その選挙区の政治家が表示されます。"
+                    subtitle="選挙区を選択すると、その選挙区の議員が表示されます。"
                     action={
-                      <div className="flex items-center overflow-hidden rounded-full border border-slate-400/60 bg-slate-900/95">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (mapPane !== "districts") {
-                              track("MapPaneChange", { pane: "districts" });
-                              setMapPane("districts");
-                            }
-                          }}
-                          className={`px-3 py-1 text-[11px] ${
-                            mapPane === "districts"
-                              ? "bg-blue-600/90 text-white"
-                              : "text-gray-200 hover:bg-white/5"
-                          }`}
-                        >
-                          地図
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (mapPane !== "proportional") {
-                              track("MapPaneChange", { pane: "proportional" });
-                              setMapPane("proportional");
-                            }
-                          }}
-                          className={`px-3 py-1 text-[11px] ${
-                            mapPane === "proportional"
-                              ? "bg-blue-600/90 text-white"
-                              : "text-gray-200 hover:bg-white/5"
-                          }`}
-                        >
-                          比例
-                        </button>
-                      </div>
+                      <SegmentedControl
+                        label="地図の表示"
+                        items={[
+                          { value: "districts", label: "地図" },
+                          { value: "proportional", label: "比例" },
+                        ]}
+                        value={mapPane}
+                        onChange={(pane) => {
+                          track("MapPaneChange", { pane });
+                          setMapPane(pane);
+                        }}
+                      />
                     }
                   />
-                  <div className="relative rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel className="relative">
                     {mapPane === "districts" ? (
                       <JapanMap
                         votingDistrictGeoJsonData={votingDistrictGeoJsonData as any}
@@ -404,7 +382,7 @@ function ParliamentExplorerClientInner({
                         }
                       />
                     )}
-                  </div>
+                  </Panel>
                 </Card>
               </>
             }
@@ -421,12 +399,12 @@ function ParliamentExplorerClientInner({
                       />
                     }
                   />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
-                    {showQualityDisclaimer ? (
-                      <DisclaimerPanel>
-                        <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
-                      </DisclaimerPanel>
-                    ) : (
+                  {showQualityDisclaimer ? (
+                    <DisclaimerPanel>
+                      <SpeechQualityDisclaimerContent aggregate={qualityAggregate} />
+                    </DisclaimerPanel>
+                  ) : (
+                    <Panel>
                       <SpeechQualityBarList
                         aggregate={qualityAggregate}
                         allParliamentMemberTable={allParliamentMemberTable}
@@ -435,22 +413,22 @@ function ParliamentExplorerClientInner({
                           handlePoliticianSelect(id, { source: "speech_quality_bars" })
                         }
                       />
-                    )}
-                  </div>
+                    </Panel>
+                  )}
                 </Card>
 
                 <Card data-tour="seats">
                   <CardHeader title="参議院 議席配分" subtitle="党派別（現職）" />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel>
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="upper" />
-                  </div>
+                  </Panel>
                 </Card>
 
                 <Card>
                   <CardHeader title="衆議院 議席配分" subtitle="党派別（現職）" />
-                  <div className="rounded-xl border border-slate-400/15 bg-[#020617] p-2">
+                  <Panel>
                     <SeatDistributionChart parliamentMemberData={parliamentMemberData} house="lower" />
-                  </div>
+                  </Panel>
                 </Card>
               </>
             }

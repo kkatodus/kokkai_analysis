@@ -30,9 +30,9 @@ export function MapStage({ pb, frame }: { pb: Playback; frame: StageFrame }) {
 
   return (
     <div className="absolute inset-0 overflow-hidden p-3 sm:p-4">
-      <div className="absolute left-4 top-4 z-10 flex items-center rounded-full border border-slate-400/20 bg-slate-950/60 p-0.5 text-[11px]">
-        <span className={`rounded-full px-2.5 py-0.5 ${!proportional ? "bg-cyan-500/15 text-cyan-100" : "text-gray-400"}`}>選挙区</span>
-        <span data-cursor="toggle-pr" className={`rounded-full px-2.5 py-0.5 ${proportional ? "bg-cyan-500/15 text-cyan-100" : "text-gray-400"}`}>比例</span>
+      <div className="absolute left-4 top-4 z-10 flex items-center rounded-full border border-line bg-surface-raised p-0.5 text-caption">
+        <span className={`rounded-full px-2.5 py-0.5 ${!proportional ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>選挙区</span>
+        <span data-cursor="toggle-pr" className={`rounded-full px-2.5 py-0.5 ${proportional ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>比例</span>
       </div>
 
       <svg viewBox={JAPAN_VIEWBOX} preserveAspectRatio="xMidYMid meet" className="h-full w-full">
@@ -47,7 +47,7 @@ export function MapStage({ pb, frame }: { pb: Playback; frame: StageFrame }) {
                 initial={from({ pathLength: 0, fillOpacity: 0 })}
                 animate={{ pathLength: 1, fillOpacity: 1 }}
                 transition={{ pathLength: { duration: 1.2, delay: (i % 8) * 0.03, ease: "easeInOut" }, fillOpacity: { duration: 0.6, delay: 1.2 } }}
-                fill={party ? partyColor(party, 0.8) : "#1e293b"}
+                fill={party ? partyColor(party, 0.8) : "var(--color-surface-hover)"}
                 stroke={party ? partyColor(party, 1) : "rgba(148,163,184,0.45)"}
                 strokeWidth={party ? 1.2 : 0.8}
                 strokeLinejoin="round"
@@ -78,18 +78,18 @@ export function MapStage({ pb, frame }: { pb: Playback; frame: StageFrame }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 20, opacity: 0 }}
             transition={{ type: "spring", stiffness: 180, damping: 22 }}
-            className="absolute bottom-4 right-4 z-10 w-[58%] max-w-[240px] rounded-xl border border-slate-400/25 bg-[#020617]/95 p-2.5 shadow-2xl"
+            className="absolute bottom-4 right-4 z-10 w-[58%] max-w-[240px] rounded-xl border border-line-strong bg-surface p-2.5 shadow-2xl"
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={proportional ? "pr" : "district"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                <div className="text-xs font-semibold text-gray-50">{proportional ? PR_LABEL : DISTRICT_LABEL}</div>
-                <div className="text-[10px] text-gray-400">{proportional ? "名簿から探す" : "この選挙区の議員"}</div>
+                <div className="text-title-sm text-ink-strong">{proportional ? PR_LABEL : DISTRICT_LABEL}</div>
+                <div className="text-caption text-ink-muted">{proportional ? "名簿から探す" : "この選挙区の議員"}</div>
                 <ul className="mt-1.5 flex flex-col gap-1">
                   {members.map((m, i) => (
-                    <li key={m.name} data-cursor={`member-${i}`} className={`flex items-center gap-1.5 rounded-lg px-1.5 py-1 text-[11px] ${historyOpen && i === 0 ? "bg-slate-900/70 ring-1 ring-cyan-400/50" : ""}`}>
-                      <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: partyColor(m.party) }} />
-                      <span className="text-gray-100">{m.name}</span>
-                      <span className="ml-auto text-[10px] text-gray-500">{m.house === "衆議院" ? "衆" : "参"}</span>
+                    <li key={m.name} data-cursor={`member-${i}`} className={`flex items-center gap-1.5 rounded-lg px-1.5 py-1 text-caption ${historyOpen && i === 0 ? "bg-surface-hover ring-1 ring-primary" : ""}`}>
+                      <span className="size-2 shrink-0 rounded-full" style={{ background: partyColor(m.party) }} />
+                      <span className="text-ink-strong">{m.name}</span>
+                      <span className="ml-auto text-caption text-ink-muted">{m.house === "衆議院" ? "衆" : "参"}</span>
                     </li>
                   ))}
                 </ul>
@@ -98,15 +98,15 @@ export function MapStage({ pb, frame }: { pb: Playback; frame: StageFrame }) {
             <AnimatePresence>
               {historyOpen && (
                 <motion.div key="history" initial={from({ opacity: 0, height: 0 })} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                  <div className="mt-2 border-t border-slate-400/15 pt-1.5 text-[10px] font-semibold text-gray-300">選挙履歴</div>
-                  <table className="mt-1 w-full text-[10px] text-gray-300">
+                  <div className="mt-2 border-t border-line-subtle pt-1.5 text-label-sm text-ink">選挙履歴</div>
+                  <table className="mt-1 w-full text-caption text-ink">
                     <tbody>
                       {ELECTION_HISTORY.map((h) => (
                         <tr key={h.year}>
-                          <td className="py-0.5 pr-1 tabular-nums text-gray-400">{h.year}</td>
+                          <td className="py-0.5 pr-1 tabular-nums text-ink-muted">{h.year}</td>
                           <td className="py-0.5 pr-1">{h.election}</td>
                           <td className="py-0.5 pr-1">{h.district}</td>
-                          <td className={`py-0.5 text-right ${h.won ? "text-emerald-200" : "text-amber-200"}`}>{h.result}</td>
+                          <td className={`py-0.5 text-right ${h.won ? "text-success" : "text-warning"}`}>{h.result}</td>
                         </tr>
                       ))}
                     </tbody>

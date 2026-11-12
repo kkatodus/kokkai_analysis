@@ -1,5 +1,9 @@
 "use client";
 
+import { IoClose } from "react-icons/io5";
+import { IconButton } from "@/app/components/shared/Button";
+import { useAnyOverlayOpen } from "@/app/components/shared/overlayStore";
+
 /**
  * Small-screen notice for the dashboard: the 3D map, charts and side panels are built for a wide
  * screen, so phone visitors are told once per browser session that a larger monitor works better.
@@ -30,7 +34,10 @@ export function MobileNotice() {
   const small = useSyncExternalStore(subscribeSmall, () => window.matchMedia(SMALL).matches, () => false);
   const [dismissed, setDismissed] = useState(() => typeof window !== "undefined" && readDismissed());
 
-  if (!small || dismissed) return null;
+  const overlayOpen = useAnyOverlayOpen();
+
+  // waits until the loading screen, modals and the tour are closed
+  if (!small || dismissed || overlayOpen) return null;
 
   const close = () => {
     setDismissed(true);
@@ -44,21 +51,16 @@ export function MobileNotice() {
   return (
     <div
       role="status"
-      className="fixed inset-x-3 bottom-3 z-[90] flex items-start gap-3 rounded-2xl border border-cyan-400/30 bg-[#0b1220]/95 p-4 text-sm text-gray-200 shadow-xl shadow-black/40 backdrop-blur"
+      className="fixed inset-x-3 bottom-3 z-(--z-notice) flex items-start gap-3 rounded-2xl border border-line-strong bg-surface p-4 text-body-md text-ink shadow-2xl"
     >
       <span aria-hidden="true" className="mt-0.5 text-lg leading-none">🖥️</span>
-      <p className="flex-1 leading-relaxed">
+      <p className="flex-1">
         KOKKAI DOC のダッシュボードは、3D マップやグラフを大きな画面で見るように作られています。
-        <span className="font-semibold text-cyan-100">パソコンなど大きなモニターでの閲覧がおすすめです。</span>
+        <span className="text-title-sm text-on-primary-soft">パソコンなど大きなモニターでの閲覧がおすすめです。</span>
       </p>
-      <button
-        type="button"
-        onClick={close}
-        aria-label="閉じる"
-        className="-mr-1 -mt-1 rounded-full px-2 py-1 text-gray-400 transition hover:bg-white/10 hover:text-gray-100"
-      >
-        ✕
-      </button>
+      <IconButton label="閉じる" onClick={close} className="-mt-1 -mr-1">
+        <IoClose className="size-4" />
+      </IconButton>
     </div>
   );
 }

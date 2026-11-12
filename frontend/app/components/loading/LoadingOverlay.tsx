@@ -18,6 +18,8 @@ import { track } from "@/app/components/landing/track";
 import { buildDeck, mergeAfter, order, type LoadingCardItem } from "./content";
 import { buildStatsCards, type SiteStats } from "./content/siteStats";
 import { LoadingCard } from "./LoadingCard";
+import { Button } from "@/app/components/shared/Button";
+import { useRegisterOverlay } from "@/app/components/shared/overlayStore";
 import { LoadingProgress } from "./LoadingProgress";
 import { CARD_DELAY_MS, FAST_PATH_MS, SLOW_MS, loadingStore, readOptOut, readSeen, writeOptOut, writeSeen } from "./loadingStore";
 import { progressAt } from "./stages";
@@ -54,6 +56,7 @@ export function LoadingOverlay() {
   const ready = s.readyAt !== null;
   const hold = ready && !optOut && !s.deepLink && (s.touched || s.readyAt! - s.shownAt >= FAST_PATH_MS);
   const visible = s.active && !s.dismissed && (!ready || hold);
+  useRegisterOverlay(visible);
 
   // tick the progress curve while loading
   useEffect(() => {
@@ -134,8 +137,8 @@ export function LoadingOverlay() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={fade}
-          className={`fixed inset-0 z-[100] flex overflow-y-auto px-4 py-8 ${
-            ready ? "bg-[#020617]/75 backdrop-blur-sm" : "bg-linear-to-b from-[#111827] to-[#020617]"
+          className={`fixed inset-0 z-(--z-loading) flex overflow-y-auto px-4 py-8 ${
+            ready ? "bg-scrim backdrop-blur-sm" : "bg-linear-to-b from-page to-surface"
           }`}
           onClick={ready ? (e) => e.target === e.currentTarget && close("close") : undefined}
           role={ready ? "dialog" : undefined}
@@ -145,12 +148,12 @@ export function LoadingOverlay() {
           {!ready && <div aria-hidden="true" className="landing-drift pointer-events-none absolute inset-0" />}
 
           <div className="relative m-auto w-full max-w-xl">
-            <div className="mb-5 flex items-center gap-2 text-sm font-semibold text-gray-200">
-              <span className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-cyan-400 to-indigo-600 shadow-lg shadow-cyan-400/90" />
+            <div className="mb-5 flex flex-wrap items-center gap-2 text-title-sm text-ink">
+              <span aria-hidden className="size-2.5 rounded-full bg-linear-to-br from-primary to-secondary" />
               KOKKAI DOC
               {dataBytes !== null && (
-                <span className="ml-auto text-xs font-normal text-gray-400">
-                  収集・分析したデータ <span className="font-semibold tabular-nums text-cyan-200">{formatGB(dataBytes)}</span>
+                <span className="ml-auto text-caption text-ink-muted">
+                  収集・分析したデータ <span className="text-data text-link">{formatGB(dataBytes)}</span>
                 </span>
               )}
             </div>
@@ -177,34 +180,23 @@ export function LoadingOverlay() {
                   </motion.div>
                 )}
               </AnimatePresence>
-              {!showCards && !optOut && <p className="text-center text-xs text-gray-500">大量の会議録データを準備しています…</p>}
+              {!showCards && !optOut && <p className="text-center text-body-sm text-ink-muted">大量の会議録データを準備しています…</p>}
             </div>
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               {!optOut ? (
-                <button type="button" onClick={onOptOut} className="text-[11px] text-gray-500 underline-offset-2 hover:text-gray-300 hover:underline">
+                <Button variant="ghost" size="sm" onClick={onOptOut}>
                   次回から表示しない
-                </button>
+                </Button>
               ) : (
                 <span />
               )}
               {ready && (
                 <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => close("close")}
-                    className="rounded-full border border-slate-400/25 bg-slate-900/40 px-4 py-2 text-sm font-semibold text-gray-200 transition hover:border-slate-400/45 hover:bg-slate-900/65"
-                  >
-                    閉じる
-                  </button>
-                  <button
-                    type="button"
-                    autoFocus
-                    onClick={() => close("done")}
-                    className="rounded-full border border-cyan-400/30 bg-linear-to-br from-cyan-500/30 to-indigo-600/30 px-5 py-2 text-sm font-semibold text-cyan-50 shadow-lg shadow-cyan-500/20 transition hover:border-cyan-400/50 hover:from-cyan-500/40 hover:to-indigo-600/40"
-                  >
+                  <Button onClick={() => close("close")}>閉じる</Button>
+                  <Button variant="primary" autoFocus onClick={() => close("done")}>
                     ダッシュボードへ
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

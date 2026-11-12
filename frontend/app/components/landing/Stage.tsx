@@ -7,6 +7,7 @@
  */
 
 import type { ReactNode } from "react";
+import { Badge } from "@/app/components/shared/Badge";
 import type { Playback, StageFrame } from "./useStagePlayback";
 
 export function Stage({
@@ -33,19 +34,17 @@ export function Stage({
       <div
         ref={frame}
         aria-hidden="true"
-        className={`relative w-full overflow-hidden rounded-2xl border border-white/5 bg-linear-to-br from-gray-800 to-[#020617] shadow-2xl ${frameClassName}`}
+        className={`relative w-full overflow-hidden rounded-2xl border border-line-subtle bg-linear-to-br from-surface-hover to-surface ${frameClassName}`}
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-60"
-          style={{ background: "radial-gradient(circle at top left, rgba(79,70,229,0.14), transparent 60%)" }}
+          style={{ background: "radial-gradient(circle at top left, color-mix(in srgb, var(--color-secondary) 14%, transparent), transparent 60%)" }}
         />
         <div key={pb.runId} className="absolute inset-0">
           {children}
         </div>
         {sample && (
-          <span className="absolute right-3 top-3 z-20 rounded-full border border-slate-400/25 bg-[#020617]/70 px-1.5 py-0.5 text-[10px] text-gray-400">
-            サンプル
-          </span>
+          <Badge className="absolute right-3 top-3 z-20">サンプル</Badge>
         )}
       </div>
       <p className="sr-only">{description}</p>

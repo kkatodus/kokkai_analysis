@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "node scripts/check-design-tokens.mjs && eslint",
     "test": "node --test app/lib/*.test.ts"
   },
   "dependencies": {

@@ -61,7 +61,7 @@ export function ResizableContainer({ left, right }: ResizableContainerProps) {
         {left}
       </div>
       <div
-        className="w-1.5 cursor-col-resize bg-slate-400/20 transition-colors hover:bg-slate-400/40 shrink-0 max-md:hidden"
+        className="w-1.5 shrink-0 cursor-col-resize rounded-full bg-line transition-colors duration-150 hover:bg-line-strong max-md:hidden"
         onMouseDown={() => setIsDragging(true)}
       />
       <div

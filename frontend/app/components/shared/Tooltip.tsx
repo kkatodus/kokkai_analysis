@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 interface TooltipData {
   title: string;
   meta?: string;
@@ -15,30 +13,23 @@ interface TooltipProps {
   y: number;
 }
 
+const MAX_W = 280;
+
+/** DESIGN.md "Tooltips": surface-control, caption type, at most 280px wide, kept inside the viewport. */
 export function Tooltip({ data, x, y }: TooltipProps) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (data) {
-      setPosition({ x: x + 10, y: y + 10 });
-    }
-  }, [data, x, y]);
-
   if (!data) return null;
+  const vw = typeof window === "undefined" ? Infinity : window.innerWidth;
+  const left = Math.max(8, Math.min(x + 10, vw - MAX_W - 8));
 
   return (
     <div
-      className="pointer-events-none fixed z-50 max-w-[220px] rounded-lg border border-slate-400/35 bg-[#020617] p-1.5 text-xs text-gray-50 shadow-2xl"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        display: data ? "block" : "none",
-      }}
+      role="tooltip"
+      className="pointer-events-none fixed z-(--z-tooltip) max-w-[280px] rounded-lg border border-line bg-surface-control p-2 text-caption text-ink shadow-lg"
+      style={{ left: `${left}px`, top: `${y + 10}px` }}
     >
-      <div className="font-semibold">{data.title}</div>
-      {data.meta && <div className="mt-0.5 text-[10px] text-gray-400">{data.meta}</div>}
-      {data.warning && <div className="mt-0.5 text-[10px] font-semibold text-amber-300">{data.warning}</div>}
+      <div className="text-label-sm text-ink-strong">{data.title}</div>
+      {data.meta && <div className="mt-0.5 text-ink-muted">{data.meta}</div>}
+      {data.warning && <div className="mt-0.5 text-label-sm text-on-warning-soft">{data.warning}</div>}
     </div>
   );
 }
-
