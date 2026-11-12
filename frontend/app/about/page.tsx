@@ -96,10 +96,11 @@ export default function AboutPage() {
 
         <ProseSection title="製作者について">
           <p>
-            製作者は日本で生まれ、ドイツのデュッセルドルフで育ちました。トロント大学の Engineering Science（工学部）で AI を専攻して卒業したのち、日本に戻り、デジタル庁の AI 関連部署で働きました。
-            当サイトの運営をやめるよう求められたため、4か月で退職しました。
+            加藤賢、日本で生まれ、ドイツのデュッセルドルフで幼少期から高校卒業までを過ごす。
+            トロント大学工学部（Engineering Science）に進学し、AI を学ぶ。
+            卒業後に帰国し、デジタル庁の AI 関連部署に勤務するが、当サイトの運営をやめるよう求められ、4か月で退職。
+            現在はスタートアップでエンジニア（Member of Technical Staff）として働く。
           </p>
-          <p>現在はスタートアップでエンジニア（Member of Technical Staff）として働いています。</p>
         </ProseSection>
 
         <ProseSection title="引用">
