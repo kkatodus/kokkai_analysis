@@ -94,6 +94,16 @@ export default function AboutPage() {
           </p>
         </ProseSection>
 
+        <ProseSection title="製作者について">
+          <p>
+            加藤賢、日本で生まれ、ドイツのデュッセルドルフで幼少期から高校卒業までを過ごす。
+            トロント大学工学部（Engineering Science）に進学し、AI を学ぶ。
+            卒業後に帰国し、デジタル庁の AI 関連部署に勤務。
+            現在はスタートアップでエンジニア（Member of Technical Staff）として働く。
+            趣味はサッカー、好きな食べ物は餃子。
+          </p>
+        </ProseSection>
+
         <ProseSection title="引用">
           <div className="overflow-hidden rounded-xl border border-line-subtle bg-surface">
             <table className="w-full table-fixed border-collapse break-words text-left text-body-md">
