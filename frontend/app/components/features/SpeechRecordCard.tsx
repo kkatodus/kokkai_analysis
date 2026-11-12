@@ -84,6 +84,9 @@ interface SpeechRecordCardProps {
   /** speeches a 立場 summary was built from, marked in the list (specs/stance-summaries-panel §6.3) */
   markedSpeeches?: { topicKey: string; topicJp: string; ids: Set<string> } | null;
   onClearMarked?: () => void;
+  /** the list fills the whole pane (the pane hides its header and tabs); the toggle shows only when this is set */
+  expanded?: boolean;
+  onToggleExpanded?: () => void;
 }
 
 export function SpeechRecordCard({
@@ -98,6 +101,8 @@ export function SpeechRecordCard({
   exchangeIndex,
   markedSpeeches,
   onClearMarked,
+  expanded = false,
+  onToggleExpanded,
 }: SpeechRecordCardProps) {
   const showMarks = !!markedSpeeches && markedSpeeches.topicKey === selectedTopicKey;
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(() => new Set());
@@ -143,16 +148,30 @@ export function SpeechRecordCard({
 
   return (
     <section aria-labelledby="speech-card-heading" className="flex min-h-0 flex-1 flex-col" data-tour="speech-card">
-      <div className="flex items-center justify-between gap-2 pb-2">
+      {/* expanded, the pane header is gone, so this row clears the pane's close button */}
+      <div className={"flex items-center justify-between gap-2 pb-2" + (expanded ? " pr-10" : "")}>
         <Heading level={3} size="title-sm" id="speech-card-heading">
           発言（トピック別）
         </Heading>
-        {speechLoading && (
-          <span role="status" className="text-ink-muted">
-            <Spinner />
-            <span className="sr-only">読み込み中…</span>
-          </span>
-        )}
+        <span className="flex items-center gap-1">
+          {speechLoading && (
+            <span role="status" className="text-ink-muted">
+              <Spinner />
+              <span className="sr-only">読み込み中…</span>
+            </span>
+          )}
+          {onToggleExpanded ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-pressed={expanded}
+              onClick={onToggleExpanded}
+              icon={<ExpandIcon expanded={expanded} />}
+            >
+              {expanded ? "元の表示に戻す" : "全体に広げる"}
+            </Button>
+          ) : null}
+        </span>
       </div>
 
       {speechError && speechTopics === null && <ErrorState message={speechError} />}
@@ -303,5 +322,18 @@ export function SpeechRecordCard({
         </div>
       )}
     </section>
+  );
+}
+
+/** arrows out (expand) / arrows in (collapse) */
+function ExpandIcon({ expanded }: { expanded: boolean }) {
+  return (
+    <svg aria-hidden viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      {expanded ? (
+        <path d="M6 2v4H2M10 2v4h4M6 14v-4H2M10 14v-4h4" />
+      ) : (
+        <path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" />
+      )}
+    </svg>
   );
 }

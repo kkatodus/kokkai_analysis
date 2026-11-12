@@ -122,6 +122,8 @@ export function DetailPane({
   const [speechError, setSpeechError] = useState<string | null>(null);
   const [selectedTopicKey, setSelectedTopicKey] = useState<string | null>(null);
   const [speechLoading, setSpeechLoading] = useState(false);
+  // 発言 list fills the pane: header, やり取り summary and tabs hide while the 発言 tab shows
+  const [speechesExpanded, setSpeechesExpanded] = useState(false);
 
   const [exchanges, setExchanges] = useState<QualityExchange[] | null>(null);
   const [exchangesError, setExchangesError] = useState<string | null>(null);
@@ -387,6 +389,7 @@ export function DetailPane({
   const q = qualityPerson?.as_questioner;
   const a = qualityPerson?.as_answerer;
   const hasQuality = !!(q?.n || a?.n);
+  const expanded = speechesExpanded && activePanel === "speeches";
 
   return (
     <SidePane
@@ -405,7 +408,7 @@ export function DetailPane({
       data-tour="detail-pane"
     >
       <div className="flex min-h-0 flex-1 flex-col p-4">
-        <header className="mb-3 pr-10">
+        <header className="mb-3 pr-10" hidden={expanded}>
           <Heading level={2} size="headline-sm" id={headingId}>
             {personMeta?.name_kanji ?? "（氏名不明）"}
           </Heading>
@@ -418,7 +421,7 @@ export function DetailPane({
           ) : null}
         </header>
 
-        {qualityPerson && hasQuality ? (
+        {qualityPerson && hasQuality && !expanded ? (
           <ListRow
             onClick={() => setActivePanel("quality")}
             // the やり取り tab is one tap away, so the sheet below md keeps its height for the list
@@ -474,14 +477,16 @@ export function DetailPane({
           </ListRow>
         ) : null}
 
-        <Tabs
-          items={PANEL_ORDER.map((p) => ({ value: p, label: PANEL_LABEL[p] }))}
-          value={activePanel}
-          onChange={setActivePanel}
-          label="詳細パネルの表示内容"
-          idBase={tabsId}
-          className="mb-3 self-start"
-        />
+        {/* a wrapper, since the tab track's inline-flex would override a `hidden` class */}
+        <div className="mb-3 self-start" hidden={expanded}>
+          <Tabs
+            items={PANEL_ORDER.map((p) => ({ value: p, label: PANEL_LABEL[p] }))}
+            value={activePanel}
+            onChange={setActivePanel}
+            label="詳細パネルの表示内容"
+            idBase={tabsId}
+          />
+        </div>
 
         {/* The views sit side by side and slide, so switching reads as a tab change, not a collapse. */}
         <div className="min-h-0 flex-1 overflow-hidden">
@@ -506,6 +511,11 @@ export function DetailPane({
                   }}
                   markedSpeeches={markedSpeeches}
                   onClearMarked={() => setMarkedSpeeches(null)}
+                  expanded={expanded}
+                  onToggleExpanded={() => {
+                    track("SpeechListExpandToggle", { expanded: !speechesExpanded });
+                    setSpeechesExpanded((v) => !v);
+                  }}
                 />
               </TabPanel>
             </div>
