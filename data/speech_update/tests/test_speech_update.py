@@ -16,6 +16,7 @@ from speech_update.resolver import SpeakerResolver, party_matches
 from speech_update.review_store import Decision, ReviewKey
 from speech_update.route import Router, merge_person_file, remove_from_person_dir, sort_lines
 from speech_update.state import State
+from speech_update.topics import TOPICS_REL_PATH, write_topics_if_changed
 from speech_update.upload import Uploader, upload_order
 from speech_update.variants import normalise_name, same_name
 
@@ -495,6 +496,21 @@ class UploadTest(unittest.TestCase):
 		with self.assertRaises(RuntimeError):
 			u.upload(["issues/X/meta.json", "issues/X/speeches.jsonl", "repr_speeches_id_organized/1/all_speeches.jsonl"], on_done=done.extend)
 		self.assertEqual(done, ["issues/X/speeches.jsonl"])
+
+
+class TopicsTest(unittest.TestCase):
+	CONFIG = [{"topic_id": 1, "topic_name": "防衛", "topic_name_en": "Defence", "search_words": ["防衛", "自衛隊"], "prompts": {"x": "y"}}]
+
+	def test_writes_public_fields_only_then_skips_unchanged(self):
+		with tempfile.TemporaryDirectory() as d:
+			root = Path(d)
+			self.assertEqual(write_topics_if_changed(root, self.CONFIG), TOPICS_REL_PATH)
+			doc = json.loads((root / TOPICS_REL_PATH).read_text(encoding="utf-8"))
+			self.assertEqual(doc["version"], 1)
+			self.assertEqual(doc["topics"], [{"topic_name_en": "Defence", "topic_name": "防衛", "search_words": ["防衛", "自衛隊"]}])
+			self.assertIsNone(write_topics_if_changed(root, self.CONFIG))
+			changed = [dict(self.CONFIG[0], search_words=["防衛"])]
+			self.assertEqual(write_topics_if_changed(root, changed), TOPICS_REL_PATH)
 
 
 if __name__ == "__main__":

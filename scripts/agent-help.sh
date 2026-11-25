@@ -36,6 +36,7 @@ Data
   update-speeches.sh         Incremental NDL speech update → s3_mirror + S3 (--dry-run)
   update-members.sh          Monthly Diet member list refresh → parliamentMembers/ + S3 (--dry-run)
   update-topic-scaling.sh    Monthly ideology rescale (summaries → embeddings → ideology.json.gz + S3) (--dry-run)
+  backup-db.sh               Weekly pg_dump of kokkaidoc → s3://…/backups/postgres/ (STANDARD_IA, 60-day expiry) (--dry-run)
 
 Typical flow
   1. ./scripts/route-task.sh "fix speech API pagination"

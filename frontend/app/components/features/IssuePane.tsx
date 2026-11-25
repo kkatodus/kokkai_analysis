@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { FiExternalLink } from "react-icons/fi";
 import type { IssueSpeechRecord, IssueMeta } from "@/app/types";
 import { DialSelector } from "@/app/components/features/issue/DialSelector";
 import { IssueSpeechList } from "@/app/components/features/issue/IssueSpeechList";
 import { IssueLegend } from "@/app/components/features/issue/IssueLegend";
+import { SidePane } from "@/app/components/shared/Dialog";
+import { ButtonLink } from "@/app/components/shared/Button";
+import { Empty, ErrorState, Loading } from "@/app/components/shared/states";
 import {
   buildAccentByIndex,
   buildSpeechSegments,
@@ -26,7 +30,6 @@ type IssueByIdResponse = {
 
 export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }: IssuePaneProps) {
   const [paneWidthPx, setPaneWidthPx] = useState<number>(420);
-  const [isNarrow, setIsNarrow] = useState(false);
   const resizeStartXRef = useRef<number>(0);
   const resizeStartWidthRef = useRef<number>(420);
   const resizingRef = useRef<boolean>(false);
@@ -36,6 +39,8 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
   const [issueLoading, setIssueLoading] = useState(false);
   const [issueError, setIssueError] = useState<string | null>(null);
   const [selectedSpeechIndex, setSelectedSpeechIndex] = useState<number>(0);
+  const [reloadKey, setReloadKey] = useState(0);
+  const titleId = useId();
 
   const orderedSpeeches: IssueSpeechRecord[] = (() => {
     const speeches = issueData?.speeches;
@@ -70,19 +75,6 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
     return buildAccentByIndex(orderedSpeeches, segments);
   })();
 
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 767px)");
-    const update = () => setIsNarrow(mql.matches);
-    update();
-    // Safari fallback
-    if (typeof mql.addEventListener === "function") {
-      mql.addEventListener("change", update);
-      return () => mql.removeEventListener("change", update);
-    }
-    mql.addListener(update);
-    return () => mql.removeListener(update);
-  }, []);
-
   // Fetch issue detail when opened / issueId changes.
   useEffect(() => {
     if (!isOpen || !issueId) return;
@@ -114,7 +106,7 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
     return () => {
       cancelled = true;
     };
-  }, [isOpen, issueId]);
+  }, [isOpen, issueId, reloadKey]);
 
   // Preselect the originating speech (from DetailPane) once we have the meeting speeches loaded.
   useEffect(() => {
@@ -174,63 +166,58 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
 
   if (!isOpen || !issueId) return null;
 
+  const meta = issueData?.meta ?? null;
+
+  const onResizeStart = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    resizingRef.current = true;
+    resizeStartXRef.current = e.clientX;
+    resizeStartWidthRef.current = paneWidthPx;
+    document.body.style.userSelect = "none";
+    document.body.style.cursor = "ew-resize";
+  };
+
   return (
-    <div
-      className="fixed inset-y-4 left-4 z-40 max-w-[calc(100%-32px)] translate-x-0 opacity-100 transition-all duration-200 max-md:inset-x-0 max-md:bottom-0 max-md:top-auto max-md:h-[70%] max-md:w-full max-md:max-w-full max-md:translate-y-0"
-      style={{ width: isNarrow ? "100%" : `${paneWidthPx}px` }}
+    <SidePane
+      side="left"
+      width={paneWidthPx}
+      onClose={onClose}
+      labelledBy={titleId}
+      onResizeStart={onResizeStart}
+      resizeLabel="会議パネルの幅を変える"
       data-tour="issue-pane"
     >
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[18px] border border-slate-400/35 bg-linear-to-br from-[#020617] to-[#020617] p-3.5 shadow-2xl">
-        {/* Right resize handle (desktop only) */}
-        <div
-          className="absolute inset-y-4 right-0 z-50 hidden w-2 cursor-ew-resize rounded-r-[18px] hover:bg-slate-400/10 md:block"
-          role="separator"
-          aria-orientation="vertical"
-          aria-label="Resize issue pane"
-          onPointerDown={(e) => {
-            if (e.button !== 0) return;
-            resizingRef.current = true;
-            resizeStartXRef.current = e.clientX;
-            resizeStartWidthRef.current = paneWidthPx;
-            document.body.style.userSelect = "none";
-            document.body.style.cursor = "ew-resize";
-          }}
-        />
+      <div className="@container flex min-h-0 flex-1 flex-col gap-3 p-4">
+        <header className="flex flex-col gap-2 pr-10">
+          <h2 id={titleId} className="text-headline-sm text-ink-strong">
+            {meta?.nameOfMeeting ? `会議：${meta.nameOfMeeting}` : "会議"}
+          </h2>
+          {(meta?.date || meta?.pdfURL) && (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              {meta?.date && <span className="text-body-sm text-ink-muted">会議日：{formatDateJa(meta.date)}</span>}
+              {meta?.pdfURL && (
+                <ButtonLink
+                  href={meta.pdfURL}
+                  size="sm"
+                  icon={<FiExternalLink aria-hidden className="size-3.5" />}
+                  title="国会会議録の会議録ページを開く"
+                >
+                  会議録を開く
+                </ButtonLink>
+              )}
+            </div>
+          )}
+          <IssueLegend />
+        </header>
 
-        <div className="mb-1 flex items-center justify-end">
-          <button
-            onClick={onClose}
-            className="flex h-5.5 w-5.5 items-center justify-center rounded-full border-0 bg-slate-900/90 text-sm text-gray-400 transition-colors hover:bg-blue-700/90 hover:text-gray-200"
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
-
-        <div className="mb-2">
-          <div className="flex flex-col gap-1">
-            <div className="text-base font-semibold text-gray-50">会議：{issueData?.meta?.nameOfMeeting}</div>
-			{issueData?.meta?.pdfURL && (
-				<span className="text-[11px] text-gray-400">PDFリンク: <a href={issueData?.meta?.pdfURL} target="_blank" rel="noopener noreferrer">{issueData?.meta?.pdfURL}</a></span>
-			)}
-			{issueData?.meta?.date && (
-				<span className="text-[11px] text-gray-400">会議日: {issueData?.meta?.date}</span>
-			)}
-			{issueId && (
-				<span className="text-[11px] text-gray-400">会議ID: {issueId}</span>
-			)}
-            <IssueLegend />
-          </div>
-        </div>
-
-        <div className="min-h-0 flex-1 overflow-hidden text-[12px] text-gray-300">
+        <div className="flex min-h-0 flex-1 flex-col">
           {issueLoading ? (
-            <div className="rounded-xl border border-slate-400/15 bg-slate-950/20 p-2 text-gray-400">読み込み中…</div>
+            <Loading rows={4} label="会議の発言を読み込み中…" />
           ) : issueError ? (
-            <div className="rounded-xl border border-slate-400/15 bg-slate-950/20 p-2 text-red-300">{issueError}</div>
+            <ErrorState message="会議の発言を読み込めませんでした。" onRetry={() => setReloadKey((k) => k + 1)} />
           ) : issueData && issueData.meta && Array.isArray(issueData.speeches) ? (
-            <div className="flex h-full flex-col gap-3 md:flex-row">
-              <div className="flex shrink-0 flex-col items-center justify-start gap-3 md:w-[220px]">
+            <div className="flex min-h-0 flex-1 flex-col gap-3 @xl:flex-row">
+              <div className="flex shrink-0 flex-col items-center justify-start gap-3 border-b border-line-subtle pb-3 @xl:w-55 @xl:border-b-0 @xl:pb-0">
                 <DialSelector
                   count={orderedSpeeches.length}
                   selectedIndex={selectedSpeechIndex}
@@ -249,11 +236,16 @@ export function IssuePane({ issueId, isOpen, onClose, initialSelectedSpeechId }:
               />
             </div>
           ) : (
-            <div className="rounded-xl border border-slate-400/15 bg-slate-950/20 p-2 text-gray-400">データなし</div>
+            <Empty message="この会議のデータが見つかりませんでした。" />
           )}
         </div>
       </div>
-    </div>
+    </SidePane>
   );
 }
 
+/** "2026-07-16" → "2026年7月16日"; anything else is shown as given. */
+function formatDateJa(date: string): string {
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(date);
+  return m ? `${m[1]}年${Number(m[2])}月${Number(m[3])}日` : date;
+}

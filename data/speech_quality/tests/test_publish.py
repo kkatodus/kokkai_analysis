@@ -67,3 +67,57 @@ class PublishTest(unittest.TestCase):
 
 if __name__ == "__main__":
 	unittest.main()
+
+
+class SiteStatsTest(unittest.TestCase):
+	def test_counts_shares_and_current_only_rankings(self):
+		agg = publish.aggregate(ROWS, {1: "甲", 2: "乙", 9: "大臣"})
+		current = {
+			1: {"house": "lower", "group": "A党", "name": "甲 太郎", "terms_lower": 3},
+			9: {"house": "lower", "group": "与党", "name": "大臣", "terms_lower": 8},
+			7: {"house": "upper", "group": "C党", "name": "丙", "terms_lower": None},
+		}
+		doc = publish.site_stats(agg, current, {1: "甲", 9: "大臣", 7: "丙"}, {1: 40, 7: 90, 2: 500},
+			{"speeches": 630, "meetings": 12, "from": "2000-01-20"}, 4815)
+		self.assertEqual(doc["current_members"], {"lower": 2, "upper": 1})
+		self.assertNotIn("data_bytes", doc)
+		self.assertEqual(publish.site_stats(agg, current, {}, {}, {"speeches": 0, "meetings": 0, "from": None}, 0,
+			data_bytes=123)["data_bytes"], 123)
+		self.assertEqual(doc["labels"]["exchanges"], 4)
+		self.assertEqual(doc["labels"]["persons"], 3)
+		self.assertEqual(doc["function_share"]["oversight"], 0.25)
+		self.assertEqual(doc["contribution_share"]["substantive"], 0.75)
+		# softball (most) + evasive (part) on different rows: each counted once
+		self.assertEqual(doc["issue_share"]["softball"], 0.25)
+		self.assertEqual(doc["issue_share"]["evasive"], 0.25)
+		# person 2 is not sitting: excluded from every ranking even with the most speeches
+		self.assertEqual([p["person_id"] for p in doc["top_speakers_current"]], [7, 1])
+		self.assertEqual(doc["top_speakers_current"][0], {"person_id": 7, "name": "丙", "group": "C党", "n": 90})
+		self.assertEqual([p["person_id"] for p in doc["top_questioners_current"]], [1])
+		self.assertEqual([(p["person_id"], p["n"]) for p in doc["top_answerers_current"]], [(9, 3), (1, 1)])
+		# terms only for the lower house
+		self.assertEqual([(p["person_id"], p["n"]) for p in doc["top_terms_lower_current"]], [(9, 8), (1, 3)])
+
+	def test_mirror_bytes_sums_files(self):
+		with tempfile.TemporaryDirectory() as d:
+			(Path(d) / "a").mkdir()
+			(Path(d) / "a" / "x.json").write_bytes(b"12345")
+			(Path(d) / "y.json").write_bytes(b"678")
+			self.assertEqual(publish.mirror_bytes(Path(d)), 8)
+			self.assertIsNone(publish.mirror_bytes(Path(d) / "a" / "missing"))
+
+	def test_current_members_reads_newest_snapshot(self):
+		with tempfile.TemporaryDirectory() as d:
+			m = Path(d) / "parliamentMembers"
+			m.mkdir()
+			(m / "shugiin_20250101.json").write_text(json.dumps({"reprs": [{"person_id": 1, "kaiha": "旧", "name": "x"}]}))
+			(m / "shugiin_20260101.json").write_text(json.dumps({"reprs": [
+				{"person_id": 2, "kaiha": "自民", "name": "逢沢  一郎", "number_of_terms_lower": 14},
+				{"person_id": None, "kaiha": "無", "name": "y"}]}), encoding="utf-8")
+			(m / "sangiin_20260101.json").write_text(json.dumps({"reprs": [{"person_id": "5", "kaiha": "立憲", "name": "z"}]}))
+			cur = publish.current_members(Path(d))
+		self.assertEqual(sorted(cur), [2, 5])
+		self.assertEqual(cur[2], {"house": "lower", "group": "自民", "name": "逢沢 一郎", "terms_lower": 14})
+		self.assertEqual(cur[5]["house"], "upper")
+		self.assertIsNone(cur[5]["terms_lower"])
+

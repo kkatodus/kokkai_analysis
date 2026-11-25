@@ -1,41 +1,174 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Design tokens: names match frontend/DESIGN.md (colors.surface-raised → bg-surface-raised). Plan: specs/design-system §4. */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* the Geist variables are set on <html> in layout.tsx, where --font-sans resolves */
+  --font-sans: var(--font-geist-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* accent */
+  --color-primary: #22d3ee;
+  --color-on-primary: #020617;
+  --color-primary-soft: #03293d;
+  --color-primary-soft-hover: #033b50;
+  --color-on-primary-soft: #cffafe;
+  --color-primary-line: #0f586d;
+  --color-link: #67e8f9;
+  --color-secondary: #4f46e5;
+  --color-secondary-soft: #111340;
+  --color-secondary-soft-hover: #191955;
+
+  /* surfaces */
+  --color-page: #111827;
+  --color-surface: #020617;
+  --color-surface-raised: #0b1220;
+  --color-surface-control: #0f172a;
+  --color-surface-hover: #1e293b;
+  --color-scrim: rgb(0 0 0 / 0.6);
+
+  /* ink and lines */
+  --color-ink-strong: #f8fafc;
+  --color-ink: #e2e8f0;
+  --color-ink-muted: #94a3b8;
+  --color-ink-disabled: #64748b;
+  --color-line-subtle: #181e2f;
+  --color-line: #262d3f;
+  --color-line-strong: #64748b;
+
+  /* semantic */
+  --color-success: #10b981;
+  --color-success-soft: #042127;
+  --color-on-success-soft: #d1fae5;
+  --color-warning: #f59e0b;
+  --color-warning-soft: #261d15;
+  --color-on-warning-soft: #fef3c7;
+  --color-error: #f43f5e;
+  --color-error-soft: #260f22;
+  --color-on-error-soft: #ffe4e6;
+  --color-info: #0ea5e9;
+  --color-info-soft: #041e36;
+  --color-on-info-soft: #e0f2fe;
+
+  /* type: size, line height, weight */
+  --text-display: 3rem;         --text-display--line-height: 1.2;      --text-display--font-weight: 700;
+  --text-headline-lg: 1.875rem; --text-headline-lg--line-height: 1.35; --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.5rem;   --text-headline-md--line-height: 1.4;  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 1.25rem;  --text-headline-sm--line-height: 1.4;  --text-headline-sm--font-weight: 600;
+  --text-title-md: 1rem;        --text-title-md--line-height: 1.5;     --text-title-md--font-weight: 600;
+  --text-title-sm: 0.875rem;    --text-title-sm--line-height: 1.5;     --text-title-sm--font-weight: 600;
+  --text-body-lg: 1rem;         --text-body-lg--line-height: 1.8;
+  --text-body-md: 0.875rem;     --text-body-md--line-height: 1.7;
+  --text-body-sm: 0.8125rem;    --text-body-sm--line-height: 1.6;
+  --text-label-md: 0.8125rem;   --text-label-md--line-height: 1.4;     --text-label-md--font-weight: 600;
+  --text-label-sm: 0.75rem;     --text-label-sm--line-height: 1.4;     --text-label-sm--font-weight: 600;
+  --text-caption: 0.75rem;      --text-caption--line-height: 1.5;
+  --text-data: 0.75rem;         --text-data--line-height: 1.4;
+
+  /* the one glow */
+  --shadow-spotlight: 0 0 0 1px rgb(34 211 238 / 0.25), 0 0 18px rgb(34 211 238 / 0.18);
+}
+
+:root {
+  color-scheme: dark;
+  --z-sticky: 10;
+  --z-pane: 40;
+  --z-modal: 50;
+  --z-tour: 60;
+  --z-notice: 70;
+  --z-tooltip: 80;
+  --z-loading: 100;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  line-break: strict;
 }
 
-/* Condense UI on iPhone/small screens by scaling down the root font size. */
-@media (max-width: 480px) {
+h1, h2, h3 {
+  text-wrap: balance;
+  word-break: auto-phrase;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* containers that receive focus from code (dialogs, panes) are not controls: no ring */
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+.text-data {
+  font-variant-numeric: tabular-nums;
+}
+
+/* selected list row: 2px primary leading edge (DESIGN.md "Lists and pagers") */
+@utility edge-primary {
+  box-shadow: inset 2px 0 0 var(--color-primary);
+}
+
+/* Landing page (specs/landing-page §5.1, §5.5): anchor scrolling, slow background drift and the scatter's idle "breathing". */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
   html {
-    font-size: 10px;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
+}
+.landing-drift {
+  background:
+    radial-gradient(40rem 40rem at 20% 20%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(36rem 36rem at 80% 70%, rgba(79, 70, 229, 0.08), transparent 60%);
+  animation: landing-drift 20s ease-in-out infinite alternate;
+}
+@keyframes landing-drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+.landing-breathe {
+  animation: landing-breathe 3s ease-in-out infinite;
+}
+@keyframes landing-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+/* dashboard loading overlay (specs/dashboard-loading §5.2) */
+.loading-shimmer {
+  animation: loading-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes loading-shimmer {
+  from { left: -25%; }
+  to { left: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing-drift,
+  .landing-breathe,
+  .loading-shimmer {
+    animation: none;
   }
 }
 
-@media (max-width: 360px) {
-  html {
-    font-size: 10px;
+/* DESIGN.md "Layout": controls reach 44px on coarse pointers through an invisible hit area. */
+@layer components {
+  @media (pointer: coarse) {
+    .hit-target {
+      position: relative;
+    }
+    .hit-target::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
   }
 }

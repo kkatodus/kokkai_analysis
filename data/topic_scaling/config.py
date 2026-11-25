@@ -3,8 +3,9 @@
 Every path/setting can be overridden with an environment variable (TOPIC_SCALING_*).
 Topics come from data/resource/experiment_config.json; each needs `slug`, `window.from`
 and (optionally) `scaling.enabled` / `scaling.min_opinions`. Sub-topic axes come from
-data/axis/{topic_jp}/{topic_jp}_axis.json (`slug`, `topic`, `pro`, `con`) with the generated
-reference speeches in examples/{topic}_example_speeches.json.
+data/axis/{topic_jp}/{topic_jp}_axis.json (`slug`, `topic`, `pro`, `con`, optional `keywords`) with the
+generated reference speeches in examples/{topic}_example_speeches.json. A sub-topic with `keywords` only scales
+people whose summary for the topic contains at least one of them (see project.py).
 """
 from __future__ import annotations
 
@@ -14,7 +15,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = REPO_ROOT / "data"
@@ -201,6 +202,8 @@ class SubTopic:
 	pro: str
 	con: str
 	examples_path: Path
+	# a person is placed on this axis only when one of these appears in their summary; empty = everyone
+	keywords: Tuple[str, ...] = ()
 
 	@property
 	def key(self) -> str:
@@ -246,8 +249,11 @@ def load_axes(axis_dir: Path, topic: Topic) -> List[SubTopic]:
 		examples_path = topic_dir / "examples" / f"{e['topic']}_example_speeches.json"
 		if not examples_path.exists():
 			raise AxisError(f"{topic.name_en}/{slug}: missing reference speeches {examples_path}")
+		keywords = e.get("keywords") or []
+		if not isinstance(keywords, list) or not all(isinstance(k, str) and k.strip() for k in keywords):
+			raise AxisError(f"{topic.name_en}/{slug}: keywords must be a list of non-empty strings in {axis_path}")
 		subs.append(SubTopic(topic=topic, slug=slug, name_jp=e["topic"], pro=e.get("pro", ""), con=e.get("con", ""),
-			examples_path=examples_path))
+			examples_path=examples_path, keywords=tuple(keywords)))
 	if not subs:
 		raise AxisError(f"{topic.name_en}: axis file {axis_path} is empty")
 	return subs

@@ -2,7 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import * as d3 from "d3";
-import { LoadingIndicator } from "@/app/components/shared/LoadingIndicator";
+import { Empty, Loading } from "@/app/components/shared/states";
+
+/** Share as a whole percent; below 1% reads 1%未満 (DESIGN.md "Data Visualisation"). */
+function sharePct(value: number, total: number): string {
+  if (!total) return "0%";
+  const p = (value / total) * 100;
+  if (p > 0 && p < 1) return "1%未満";
+  return `${Math.round(p)}%`;
+}
 
 export type PieDatum = {
   label: string;
@@ -38,20 +46,15 @@ export function PartyPieChart({ data, size = 220, innerRadius = 64 }: PartyPieCh
 
   if (!mounted) {
     return (
-      <div
-        className="flex w-full items-center justify-center rounded-xl border border-slate-400/10 bg-slate-900/20 text-xs text-gray-400"
-        style={{ height: size }}
-      >
-        <LoadingIndicator label="読み込み中" size="sm" />
+      <div className="flex w-full items-center justify-center" style={{ height: size }}>
+        <Loading />
       </div>
     );
   }
 
   if (!arcs.length) {
     return (
-      <div className="flex h-[220px] w-full items-center justify-center text-xs text-gray-400">
-        No data
-      </div>
+      <Empty message="議席のデータがありません。" className="h-[220px]" />
     );
   }
 
@@ -69,7 +72,7 @@ export function PartyPieChart({ data, size = 220, innerRadius = 64 }: PartyPieCh
                 strokeWidth={1}
               >
                 <title>
-                  {a.data.label}: {a.data.value}（{total ? Math.round((a.data.value / total) * 100) : 0}%）
+                  {a.data.label}：{a.data.value.toLocaleString()}議席（{sharePct(a.data.value, total)}）
                 </title>
               </path>
             ))}
@@ -78,34 +81,32 @@ export function PartyPieChart({ data, size = 220, innerRadius = 64 }: PartyPieCh
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <div className="text-[10px] text-gray-400">Total</div>
-            <div className="text-lg font-semibold text-gray-50">{total}</div>
+            <div className="text-caption text-ink-muted">合計</div>
+            <div className="text-headline-sm text-ink-strong tabular-nums">
+              {total.toLocaleString()}
+              <span className="ml-0.5 text-caption text-ink-muted">議席</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid gap-1.5 text-xs text-gray-200">
+      <ul aria-label="議席の凡例" className="grid gap-1 text-body-sm text-ink">
         {arcs
           .slice()
           .sort((a, b) => b.data.value - a.data.value)
           .map((a) => (
-            <div key={`legend-${a.data.label}`} className="flex items-center justify-between gap-2">
+            <li key={`legend-${a.data.label}`} className="flex items-center justify-between gap-2">
               <div className="flex min-w-0 items-center gap-2">
-                <span
-                  className="h-2.5 w-2.5 shrink-0 rounded-sm"
-                  style={{ backgroundColor: a.data.color }}
-                />
+                <span aria-hidden className="size-2.5 shrink-0 rounded-full" style={{ backgroundColor: a.data.color }} />
                 <span className="truncate">{a.data.label}</span>
               </div>
-              <div className="shrink-0 text-gray-300">
-                {a.data.value}
-                <span className="ml-1 text-[10px] text-gray-500">
-                  ({total ? Math.round((a.data.value / total) * 100) : 0}%)
-                </span>
+              <div className="shrink-0 text-data text-ink">
+                {a.data.value.toLocaleString()}議席
+                <span className="ml-1 text-ink-muted">（{sharePct(a.data.value, total)}）</span>
               </div>
-            </div>
+            </li>
           ))}
-      </div>
+      </ul>
     </div>
   );
 }

@@ -1,0 +1,569 @@
+{
+ "topic": "aging",
+ "axis_notes": {
+  "workemployment": "Ill-defined: pro and con are compatible (con only says employment alone is insufficient). Read as: pro = treats stable employment/wages/work-environment as a key fertility lever; con = doubts economic/employment causes of low fertility (only 3553).",
+  "educationcost": "Core: support free/cheaper education (preschool to university) as child policy. Con = cautious/opposes free education; members who say waitlist (待機児童) must come before preschool 無償化 were labelled con (priority/quality objection, not cost), neutral if they also back other free education.",
+  "budgetpriority": "Core: prioritise childcare/child budget over defence spending (pro) vs defence is essential first (con). Members worried about burden of both defence and childcare without choosing = na/neutral. No con found.",
+  "parentalleave": "Core: expand/promote parental leave for both parents (pro) vs concern about burden on firms (con). Members critical only of design or skeptical of fertility effect but backing uptake still pro; no con found."
+ },
+ "labels": {
+  "56": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "69": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "74": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "170": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "pro",
+   "parentalleave": "na"
+  },
+  "225": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "255": {
+   "workemployment": "na",
+   "educationcost": "con",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "457": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "neutral",
+   "parentalleave": "pro"
+  },
+  "484": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "486": {
+   "workemployment": "na",
+   "educationcost": "neutral",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "628": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "708": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "709": {
+   "workemployment": "pro",
+   "educationcost": "con",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "717": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "808": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1023": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1060": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1084": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1112": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1214": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1343": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1349": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1385": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1423": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1505": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1524": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1536": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1544": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1576": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1595": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "1654": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1749": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1822": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "1917": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2013": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2041": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2048": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "2062": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2093": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2131": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2177": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2205": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2338": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2353": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2355": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "2379": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "2494": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "2732": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "2790": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "2865": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "na"
+  },
+  "2932": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2955": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "2974": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "3077": {
+   "workemployment": "na",
+   "educationcost": "con",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "3129": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3192": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3243": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3282": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3307": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3321": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3390": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "3398": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3528": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3553": {
+   "workemployment": "con",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "3555": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3613": {
+   "workemployment": "na",
+   "educationcost": "con",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3631": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3798": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3806": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3811": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "3835": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "3908": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "neutral"
+  },
+  "3969": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4008": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "4036": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "4151": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4168": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4227": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "4342": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "4408": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4445": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "4563": {
+   "workemployment": "na",
+   "educationcost": "neutral",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4578": {
+   "workemployment": "na",
+   "educationcost": "con",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4592": {
+   "workemployment": "pro",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4780": {
+   "workemployment": "pro",
+   "educationcost": "con",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "4870": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "4941": {
+   "workemployment": "na",
+   "educationcost": "na",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "5025": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "5108": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "pro",
+   "parentalleave": "pro"
+  },
+  "5131": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "5501": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  },
+  "5654": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "5710": {
+   "workemployment": "na",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "pro"
+  },
+  "5831": {
+   "workemployment": "pro",
+   "educationcost": "pro",
+   "budgetpriority": "na",
+   "parentalleave": "na"
+  }
+ }
+}

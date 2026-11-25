@@ -1,0 +1,22 @@
+# Only the scripts are committed. Everything below is input material or build
+# output and stays local in this directory.
+node_modules/
+*.mp4
+*.mp3
+*.m4a
+*.wav
+*.png
+*.jpg
+*.raw
+.DS_Store
+frames/
+titles/
+music/
+frames.json
+feat.json
+list.txt
+fc.txt
+vf.txt
+# one-off exploration scripts used while planning the shots
+scout*.js
+devtest.js

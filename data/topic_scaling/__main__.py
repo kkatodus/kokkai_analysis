@@ -110,8 +110,8 @@ def run_embed(cfg: Config, state: State, topics: List[Topic], axes, args):
 def run_project(cfg: Config, state: State, topics: List[Topic], axes, args, conn) -> Tuple[Optional[dict], List[str]]:
 	"""Project every scalable topic; returns (document, notes). Publishes unless --dry-run."""
 	from .members import current_members, persons_from_db, snapshot_date
-	from .project import project_topic
-	from .publish import build_document, upload, write_document
+	from .project import EMBEDDED_KEY, project_topic
+	from .publish import build_document, upload, write_document, write_person_files
 	sel = state.selection()
 	if not sel:
 		raise RuntimeError("no select.json; run select first")
@@ -125,6 +125,7 @@ def run_project(cfg: Config, state: State, topics: List[Topic], axes, args, conn
 	if missing:
 		notes.append(f"{len(missing)} scaled person(s) have no name (Postgres down?)")
 	blocks = []
+	embedded: Dict[str, set] = {}
 	for t in topics:
 		if not t.scalable or t.name_en not in axes or (args.topic and t.name_en not in args.topic):
 			continue
@@ -133,15 +134,21 @@ def run_project(cfg: Config, state: State, topics: List[Topic], axes, args, conn
 		if block is None:
 			notes.append(f"{t.name_en}: nothing embedded yet")
 			continue
+		embedded[t.name_en] = set(block.pop(EMBEDDED_KEY))
 		blocks.append(block)
-		log.info("%s: %d scaled (%d current), %d sub-topics", t.name_en, block["n_scaled"], block["n_current"], len(block["sub_topics"]))
+		log.info("%s: %d on an axis (%d current), %d embedded, %d sub-topics", t.name_en, block["n_scaled"], block["n_current"],
+			len(embedded[t.name_en]), len(block["sub_topics"]))
 	if not blocks:
 		return None, notes + ["nothing to publish"]
 	doc = build_document(cfg, blocks, snapshot_date(cfg.members_dir))
 	if args.dry_run:
 		log.info("dry run: not writing ideology file (%d topics)", len(blocks))
+		notes.append(write_person_files(cfg, state, doc, topics, dry_run=True, eligible=embedded).line())
 		return doc, notes
 	paths = write_document(cfg, doc)
+	person_files = write_person_files(cfg, state, doc, topics, eligible=embedded)
+	notes.append(person_files.line())
+	paths += person_files.changed
 	if getattr(args, "no_upload", False):
 		notes.append("upload skipped (--no-upload)")
 	else:
@@ -237,6 +244,7 @@ def slack_report(report: dict, dry_run: bool) -> str:
 		tp = report.get("topics_published") or []
 		lines.append(f"Published: {len(tp)} topics, {sum(n for _, _, _, n in tp)} sub-topics, "
 			f"{sum(s for _, s, _, _ in tp)} scaled pairs, {sum(c for _, _, c, _ in tp)} current")
+		lines += report.get("publish_notes") or []
 	else:
 		lines.append("Not published: " + "; ".join(report.get("publish_notes") or ["nothing to publish"]))
 	if report.get("summaries"):

@@ -23,7 +23,7 @@ Before this, the lists were refreshed by hand: Selenium in `collect_repr_list.py
 
 State lives in `s3_mirror/.member-update/`: `lock`, `last_run.json`, `changed_paths.txt`, `pending_members.json`, `links.json`, `new_members/` (templates), `backups/` (table.csv before each `add`), `logs/`.
 
-Schedule: launchd `com.kokkaidoc.member-update` runs on the 1st of each month at 05:00 (an hour after the daily speech update), from the `../kokkai_analysis-dev` worktree like the speech job.
+Schedule: launchd `com.kokkaidoc.member-update` runs on the 1st of each month at 05:00 (an hour after the daily speech update), from the main `kokkai_analysis` checkout on the `prd` branch, like the speech job (moved from the `../kokkai_analysis-dev` worktree on 2026-11-10).
 
 ## 3. Adding a member who isn't in `person`
 
@@ -41,7 +41,7 @@ $PY -m speech_update route --retry-unmatched && $PY -m speech_update upload   # 
 
 ## 4. Not done / follow-ups
 
-- **Install the schedule**: `./scripts/install-member-update-schedule.sh install` from `../kokkai_analysis-dev`.
+- **Install the schedule**: `./scripts/install-member-update-schedule.sh install` from the main `kokkai_analysis` checkout (branch `prd`). Re-run it after pulling `prd` if the wrapper or venv requirements change.
 - `backend/app/routers/parliamentMember.py` takes the *last listed* file per house. That's fine on S3 (keys come back sorted), but `LocalStorage` uses `os.listdir` (unordered), so a local backend may serve an older snapshot. A `sorted()` would fix it. That's a backend change, and pushing it to `dev` deploys.
 - New 会派 short names (志士, い党, みら) have no entry in the frontend's `PARTY2PARTY` / `PARTY2RGBCOLOR`, so they get a hashed colour in the seat charts.
 - After a general election the 衆 list changes almost entirely. Most winners are former members and match automatically, but expect a batch of `pending` first-timers.

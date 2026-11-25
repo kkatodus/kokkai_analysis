@@ -78,11 +78,34 @@ async def get_first_page_of_all_topics(
 		"first_pages_of_all_topics": first_pages_of_all_topics,
 	}
 
+@router.get("/topics", summary="Topic names and search words used to file speeches (specs/topic-keyword-highlight §5)")
+async def speech_topics(
+	storage: Storage = Depends(get_storage)
+	):
+	try:
+		return storage.read_json("kokkai-doc/topics/topics.json")
+	except Exception as e:
+		print(f"[ERROR: speech_topics] could not read topics.json: {e}")
+		raise HTTPException(status_code=404, detail="topics.json not found")
+
+
 @router.get("/quality/aggregate", summary="Exchange-label counts for every labelled politician (specs/speech-quality-ui §2.1)")
 async def quality_aggregate(
 	storage: Storage = Depends(get_storage)
 	):
 	return storage.read_json("kokkai-doc/speech_quality/aggregate.json")
+
+
+@router.get("/quality/site_stats", summary="Site-wide numbers for the dashboard loading cards (specs/dashboard-loading §8)")
+async def quality_site_stats(
+	storage: Storage = Depends(get_storage)
+	):
+	try:
+		return storage.read_json("kokkai-doc/speech_quality/site_stats.json")
+	except Exception as e:
+		# optional file: the loading screen works without it
+		print(f"[INFO: quality_site_stats] no site_stats.json: {e}")
+		raise HTTPException(status_code=404, detail="site_stats.json not published yet")
 
 
 @router.get("/quality/person", summary="One politician's labelled exchanges, newest first (specs/speech-quality-ui §2.2)")

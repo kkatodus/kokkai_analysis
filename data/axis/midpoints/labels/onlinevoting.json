@@ -1,0 +1,250 @@
+{
+ "topic": "onlinevoting",
+ "axis_notes": {
+  "introduction": "pro = supports introducing online/internet voting; con = cautious/opposed (persons 1605 and 4540 talk about online betting for horse racing (ネット投票), not elections -> all na)",
+  "electoralsystemimpact": "pro = sees online voting as positive reform (participation, overseas voters, resilience); con = sees it as threatening the foundations/fairness of the electoral system",
+  "technicalchallenges": "vague; pro = technical issues (security, ID) solvable and benefits (speed, cost) outweigh; con = security/ID risks too high for now",
+  "transparencyfairness": "vague; pro = fairness/transparency can be secured (or online voting improves it); con = absence of 立会人/管理者 endangers fairness, needs caution",
+  "gradualintroduction": "pro = supports staged rollout (overseas voters first, pilots, e-voting first); con = opposes overseas-first/stepwise path or using it as a stepping stone"
+ },
+ "labels": {
+  "433": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "pro",
+   "gradualintroduction": "pro"
+  },
+  "516": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "552": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "559": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "578": {
+   "introduction": "pro",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "839": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "911": {
+   "introduction": "neutral",
+   "electoralsystemimpact": "neutral",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "neutral"
+  },
+  "1101": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "1140": {
+   "introduction": "con",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "na"
+  },
+  "1165": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "pro",
+   "gradualintroduction": "pro"
+  },
+  "1234": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "pro",
+   "gradualintroduction": "pro"
+  },
+  "1279": {
+   "introduction": "neutral",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "neutral",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "1345": {
+   "introduction": "pro",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "neutral",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "1483": {
+   "introduction": "pro",
+   "electoralsystemimpact": "neutral",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "1593": {
+   "introduction": "neutral",
+   "electoralsystemimpact": "neutral",
+   "technicalchallenges": "na",
+   "transparencyfairness": "con",
+   "gradualintroduction": "neutral"
+  },
+  "1605": {
+   "introduction": "na",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "1655": {
+   "introduction": "pro",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "neutral",
+   "transparencyfairness": "neutral",
+   "gradualintroduction": "pro"
+  },
+  "1711": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "1870": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "1958": {
+   "introduction": "con",
+   "electoralsystemimpact": "con",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "neutral"
+  },
+  "1994": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "2377": {
+   "introduction": "neutral",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "con"
+  },
+  "2932": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "3042": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "3153": {
+   "introduction": "con",
+   "electoralsystemimpact": "con",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "na"
+  },
+  "3198": {
+   "introduction": "con",
+   "electoralsystemimpact": "con",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "con"
+  },
+  "4292": {
+   "introduction": "con",
+   "electoralsystemimpact": "con",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "na"
+  },
+  "4540": {
+   "introduction": "na",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "4578": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "4763": {
+   "introduction": "neutral",
+   "electoralsystemimpact": "na",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "5030": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "pro",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  },
+  "5505": {
+   "introduction": "con",
+   "electoralsystemimpact": "con",
+   "technicalchallenges": "con",
+   "transparencyfairness": "con",
+   "gradualintroduction": "neutral"
+  },
+  "5843": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "na"
+  },
+  "5850": {
+   "introduction": "pro",
+   "electoralsystemimpact": "pro",
+   "technicalchallenges": "na",
+   "transparencyfairness": "na",
+   "gradualintroduction": "pro"
+  }
+ }
+}

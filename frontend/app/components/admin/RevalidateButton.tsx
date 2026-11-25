@@ -13,6 +13,7 @@
 import { useState } from "react";
 import { revalidateHomePage, revalidateParliamentRoutes } from "@/app/actions/revalidate";
 import { Card, CardHeader } from "@/app/components/shared/Card";
+import { Button } from "@/app/components/shared/Button";
 
 export function RevalidateButton() {
   const [isRevalidating, setIsRevalidating] = useState(false);
@@ -52,23 +53,15 @@ export function RevalidateButton() {
       />
       <div className="space-y-2">
         <div className="flex gap-2">
-          <button
-            onClick={handleRevalidateHome}
-            disabled={isRevalidating}
-            className="rounded-full border border-slate-400/40 bg-slate-900/90 px-3 py-1.5 text-xs text-gray-400 transition-colors hover:bg-slate-800 hover:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <Button size="sm" onClick={handleRevalidateHome} busy={isRevalidating}>
             {isRevalidating ? "Revalidating..." : "Revalidate Home Page"}
-          </button>
-          <button
-            onClick={handleRevalidateAll}
-            disabled={isRevalidating}
-            className="rounded-full border border-slate-400/40 bg-slate-900/90 px-3 py-1.5 text-xs text-gray-400 transition-colors hover:bg-slate-800 hover:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          </Button>
+          <Button size="sm" onClick={handleRevalidateAll} busy={isRevalidating}>
             {isRevalidating ? "Revalidating..." : "Revalidate All Routes"}
-          </button>
+          </Button>
         </div>
         {message && (
-          <div className="text-xs text-gray-400">{message}</div>
+          <div className="text-body-sm text-ink-muted">{message}</div>
         )}
       </div>
     </Card>

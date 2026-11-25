@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "node scripts/check-design-tokens.mjs && eslint",
+    "test": "node --test app/lib/*.test.ts"
   },
   "dependencies": {
     "@types/d3": "^7.4.3",
@@ -18,6 +19,7 @@
     "jose": "^6.1.3",
     "mapbox-gl": "^3.17.0",
     "maplibre-gl": "^5.15.0",
+    "motion": "^14.12.0",
     "next": "16.0.7",
     "oidc-client-ts": "^3.4.1",
     "papaparse": "^5.5.3",

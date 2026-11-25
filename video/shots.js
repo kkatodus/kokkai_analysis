@@ -1,0 +1,25 @@
+const { chromium } = require('playwright-core');
+const { init } = require('./common');
+(async () => {
+  const b = await chromium.launch({ channel: 'chrome' });
+  const m = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });
+  await m.addInitScript(init + "try{sessionStorage.setItem('kokkai.mobileNoticeDismissed','1')}catch(e){}");
+  const p = await m.newPage();
+  await p.goto('https://www.kokkaidoc.com/app?person_id=268', { waitUntil: 'domcontentloaded', timeout: 180000 });
+  await p.waitForSelector('[data-tour="speech-card"]', { timeout: 180000 }).catch(() => {});
+  await p.waitForTimeout(5000);
+  await p.screenshot({ path: 'mob_app.png' });
+  await p.screenshot({ path: 'mob_app_full.png', fullPage: true });
+  await p.goto('https://www.kokkaidoc.com/', { waitUntil: 'networkidle', timeout: 120000 });
+  await p.waitForTimeout(2500);
+  await p.screenshot({ path: 'mob_land.png' });
+  await p.screenshot({ path: 'mob_land_full.png', fullPage: true });
+  const d = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
+  await d.addInitScript(init);
+  const q = await d.newPage();
+  await q.goto('https://www.kokkaidoc.com/app?person_id=268', { waitUntil: 'domcontentloaded', timeout: 180000 });
+  await q.waitForSelector('[data-tour="speech-card"]', { timeout: 180000 }).catch(() => {});
+  await q.waitForTimeout(5000);
+  await q.screenshot({ path: 'desk_app.png' });
+  await b.close();
+})();

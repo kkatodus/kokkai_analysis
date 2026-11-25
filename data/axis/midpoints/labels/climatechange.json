@@ -1,0 +1,675 @@
+{
+ "topic": "climatechange",
+ "axis_notes": {
+  "fossilfuelreduction": "pro = rapid shift off fossil fuels / maximise renewables, coal phase-out; con = fossil reduction must be gradual, keep thermal/coal for stable supply; 'all options incl. LNG/thermal transition' coded neutral",
+  "nuclearenergyuse": "pro = use/restart nuclear for decarbonisation; con = reduce/oppose nuclear dependence in favour of renewables",
+  "carbonneutralgoal": "SOMEWHAT ILL-DEFINED: both sides accept CN; read as pro = accelerate/ambitious CN via investment, tech, renewables (incl. H2/ammonia); con = prioritise economic realism, avoid rapid transition, stress burden/costs. Left critics of H2/ammonia who want faster cuts coded pro",
+  "localvsnatinalrole": "pro = local governments/communities lead (local production-consumption of renewables) with national financial support; con = national-led uniform policy, local role complementary; almost nobody argues the con side, so most are pro or na"
+ },
+ "labels": {
+  "11": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "na"
+  },
+  "56": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "74": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "152": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "311": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "366": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "394": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "422": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "con",
+   "localvsnatinalrole": "na"
+  },
+  "433": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "con",
+   "localvsnatinalrole": "na"
+  },
+  "457": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "501": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "648": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "708": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "761": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "790": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "844": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "950": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1124": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "1188": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "neutral",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "1387": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "1483": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1782": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "con",
+   "localvsnatinalrole": "na"
+  },
+  "1797": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1861": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1889": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1914": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "1916": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "1958": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "pro"
+  },
+  "1977": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "1994": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "2093": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "na"
+  },
+  "2120": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "2177": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2377": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2439": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2454": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2612": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2670": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "2948": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "2956": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "pro"
+  },
+  "3047": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "3187": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "3246": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "3282": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "3512": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "con",
+   "localvsnatinalrole": "na"
+  },
+  "3786": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "3833": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "3958": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4056": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4128": {
+   "fossilfuelreduction": "na",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4143": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4267": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4279": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4292": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4318": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4340": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "neutral",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4342": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4448": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "neutral",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "na"
+  },
+  "4491": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "neutral",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "neutral"
+  },
+  "4540": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "pro"
+  },
+  "4618": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4733": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4870": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4878": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "4897": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "4983": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "5070": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "5091": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5184": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "con",
+   "localvsnatinalrole": "na"
+  },
+  "5426": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5494": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5505": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "5517": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "neutral",
+   "localvsnatinalrole": "na"
+  },
+  "5695": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5696": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5703": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "5707": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "na"
+  },
+  "5710": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con",
+   "carbonneutralgoal": "pro",
+   "localvsnatinalrole": "pro"
+  },
+  "6": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "69": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "268": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "neutral"
+  },
+  "579": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "589": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "625": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "666": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "925": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "1587": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "na"
+  },
+  "1879": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "1991": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "2124": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "2189": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "2264": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "2289": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "2338": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "2356": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "2500": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na"
+  },
+  "2604": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro"
+  },
+  "2704": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro"
+  },
+  "2826": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na"
+  },
+  "2865": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "neutral"
+  },
+  "3059": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro"
+  },
+  "3096": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "3158": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "3259": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "3659": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro"
+  },
+  "3827": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "3846": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na"
+  },
+  "4008": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "4047": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "4083": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "4147": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "4578": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "4626": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5064": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "5183": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5194": {
+   "fossilfuelreduction": "neutral",
+   "nuclearenergyuse": "pro"
+  },
+  "5246": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro"
+  },
+  "5260": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "pro"
+  },
+  "5287": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5304": {
+   "fossilfuelreduction": "con",
+   "nuclearenergyuse": "na"
+  },
+  "5520": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5535": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5613": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro"
+  },
+  "5659": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "con"
+  },
+  "5671": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  },
+  "5698": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "pro"
+  },
+  "5711": {
+   "fossilfuelreduction": "pro",
+   "nuclearenergyuse": "na"
+  }
+ }
+}

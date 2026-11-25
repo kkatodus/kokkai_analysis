@@ -1,4 +1,4 @@
-"""CLI: python -m speech_update [fetch|route|upload|all] (run from data/).
+"""CLI: python -m speech_update [fetch|route|upload|publish-topics|all] (run from data/).
 
   all                      fetch → route → label → upload (what the scheduler runs)
   fetch  [--from D] [--until D]
@@ -6,6 +6,7 @@
   route --retry-unmatched  re-resolve issues with unmatched member speakers
   route --db-only --all-issues   rebuild Postgres `speeches` from every issue (§4.10)
   upload                   upload changed_paths.txt
+  publish-topics           write topics/topics.json if it changed and upload only that file
 
 The label stage collects and submits Gemini batches of exchange labels under the
 monthly cap (python -m speech_quality.label_job; specs/speech-quality-labels §4.8).
@@ -35,6 +36,7 @@ from .fetch import FetchResult, default_window, fetch, issue_paths
 from .ndl_client import NdlClient
 from .notify import Notifier, from_env
 from .state import LockHeld, State
+from .topics import TOPICS_REL_PATH
 
 log = logging.getLogger("speech_update")
 
@@ -239,6 +241,19 @@ def run_label(cfg: Config, state: State, issue_ids: List[str]):
 	return summary
 
 
+def run_publish_topics(cfg: Config, state: State, args) -> Optional[str]:
+	"""Queue topics/topics.json for upload when the config's topics changed (specs/topic-keyword-highlight §4)."""
+	from utils.speech_topics import load_topics
+	from .topics import write_topics_if_changed
+	if args.dry_run:
+		log.info("dry run: would refresh %s", TOPICS_REL_PATH)
+		return None
+	rel = write_topics_if_changed(cfg.mirror_root, load_topics(str(cfg.topics_file)))
+	if rel:
+		state.add_pending_paths([rel])
+	return rel
+
+
 def run_upload(cfg: Config, state: State, args, dry_paths: Optional[List[str]] = None) -> int:
 	from .upload import Uploader, upload_order
 	if args.dry_run:
@@ -305,6 +320,11 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 				notifier.send(alert)
 
 	try:
+		run_publish_topics(cfg, state, args)
+	except Exception:  # the highlight word list must not hold up the speech upload
+		log.exception("topics.json refresh failed")
+
+	try:
 		uploaded = run_upload(cfg, state, args, dry_paths=dry_paths)
 	except Exception as e:
 		raise StageError("upload", e) from e
@@ -340,7 +360,7 @@ def run_all(cfg: Config, state: State, args, notifier: Notifier) -> dict:
 
 def main(argv: Optional[List[str]] = None) -> int:
 	parser = argparse.ArgumentParser(prog="speech_update", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-	parser.add_argument("command", choices=["fetch", "route", "upload", "all"])
+	parser.add_argument("command", choices=["fetch", "route", "upload", "publish-topics", "all"])
 	parser.add_argument("--from", dest="date_from", help="window start (YYYY-MM-DD); default last run − lookback")
 	parser.add_argument("--until", dest="date_until", help="window end (YYYY-MM-DD); default today")
 	parser.add_argument("--dry-run", action="store_true")
@@ -376,6 +396,15 @@ def main(argv: Optional[List[str]] = None) -> int:
 				raise RuntimeError("Postgres is not reachable")
 		elif args.command == "upload":
 			run_upload(cfg, state, args)
+		elif args.command == "publish-topics":
+			if run_publish_topics(cfg, state, args):
+				from .upload import Uploader
+				Uploader(cfg.mirror_root, cfg.bucket, cfg.s3_prefix, cfg.aws_profile).upload(
+					[TOPICS_REL_PATH], on_done=state.clear_pending_paths,
+				)
+				log.info("uploaded %s", TOPICS_REL_PATH)
+			else:
+				log.info("%s unchanged; nothing to upload", TOPICS_REL_PATH)
 		return 0
 	except StageError as e:
 		log.exception("stage %s failed", e.stage)

@@ -1,7 +1,9 @@
 import type { SangiinPolitician, ShugiinPolitician } from "@/app/types";
+import { canonicalParty } from "@/app/lib/config/parties";
 import { Badge } from "@/app/components/shared/Badge";
-import { Card } from "@/app/components/shared/Card";
-import { EmptyState } from "@/app/components/shared/EmptyState";
+import { Card, Heading } from "@/app/components/shared/Card";
+import { Empty } from "@/app/components/shared/states";
+import { ListRowFrame, rowTitleClass } from "@/app/components/shared/ListRow";
 
 interface PoliticianPreviewWindowProps {
 	selectedDistrict?: string | null;
@@ -60,14 +62,10 @@ function PoliticianPreviewWindow({
 					>
 						<div className="flex items-start justify-between gap-2">
 							<div>
-								<div className="text-[11px] font-semibold text-slate-200 sm:text-xs">
-									選挙区
-								</div>
-								<div className="text-[10px] text-slate-400 sm:text-[11px]">
-									地図で選択した選挙区の議員を表示します
-								</div>
+								<Heading level={3}>選挙区</Heading>
+								<p className="text-body-sm text-ink-muted">地図で選択した選挙区の議員を表示します</p>
 							</div>
-							<Badge className="shrink-0">
+							<Badge className="shrink-0" tone={hasDistrict ? "accent" : "neutral"}>
 								{hasDistrict ? selectedDistrict : "未選択"}
 							</Badge>
 						</div>
@@ -77,7 +75,7 @@ function PoliticianPreviewWindow({
 							className="mt-3 max-h-[160px] min-h-0 overflow-y-auto overscroll-contain pr-2 sm:max-h-none sm:flex-1"
 							id="politician-preview-window-card-content-scrollable"
 						>
-							<div className="grid gap-3">
+							<div className="grid gap-4">
 								<HouseSection
 									title="衆議院"
 									subtitle="小選挙区"
@@ -95,7 +93,7 @@ function PoliticianPreviewWindow({
 											kaiha={p.kaiha}
 											personId={p.person_id}
 											meta={[
-												p.district ? `選挙区: ${p.district}` : null,
+												p.district ? `選挙区：${p.district}` : null,
 												p.number_of_terms_lower
 													? `衆議院 当選${p.number_of_terms_lower}回`
 													: null,
@@ -114,7 +112,7 @@ function PoliticianPreviewWindow({
 									subtitle="都道府県選挙区"
 									emptyMessage={
 										hasDistrict
-											? "この選挙区に紐づく参議院（都道府県）の議員が見つかりません。"
+											? "この都道府県選出の参議院議員が見つかりません。"
 											: "地図上で選挙区をクリックしてください。"
 									}
 								>
@@ -126,8 +124,8 @@ function PoliticianPreviewWindow({
 											kaiha={p.kaiha}
 											personId={p.person_id}
 											meta={[
-												p.district ? `選挙区: ${p.district}` : null,
-												p.period ? `任期: ${p.period}` : null,
+												p.district ? `選挙区：${p.district}` : null,
+												p.period ? `任期：${p.period}` : null,
 											]}
 											link={p.link}
 											onPoliticianSelect={onPoliticianSelect}
@@ -163,21 +161,15 @@ function HouseSection({
 		(Array.isArray(children) && children.length === 0);
 
 	return (
-		<div className="rounded-xl border border-white/5 bg-[#0b1220] p-2.5">
+		<section>
 			<div className="mb-2 flex items-baseline justify-between gap-2">
-				<div className="text-[11px] font-semibold text-slate-200 sm:text-xs">
-					{title}
-				</div>
-				<div className="text-[9px] text-slate-500 sm:text-[10px]">{subtitle}</div>
+				<p className="text-title-sm text-ink-strong">{title}</p>
+				<p className="text-caption text-ink-muted">{subtitle}</p>
 			</div>
 			<div className="grid gap-2">
-				{isEmpty ? (
-					<EmptyState className="py-2" message={emptyMessage} />
-				) : (
-					children
-				)}
+				{isEmpty ? <Empty className="py-2" message={emptyMessage} /> : children}
 			</div>
-		</div>
+		</section>
 	);
 }
 
@@ -204,64 +196,44 @@ function PoliticianRow({
 	const isSelected = Boolean(personId && selectedPersonId && personId === selectedPersonId);
 
 	return (
-		<button
-			type="button"
-			onClick={() => {
-				if (!onPoliticianSelect) return;
-				const id = personId ?? "";
-				if (!id) return;
-				onPoliticianSelect(id);
-			}}
-			className={`w-full rounded-xl border bg-[#020617] px-2.5 py-2 text-left transition ${
-				isSelected
-					? "border-cyan-300/40 shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_28px_rgba(34,211,238,0.18)]"
-					: "border-white/5 hover:border-cyan-300/25 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_22px_rgba(34,211,238,0.12)]"
-			}`}
-		>
-			<div className="flex items-start justify-between gap-2">
-				<div className="min-w-0">
-					<div className="truncate text-[13px] font-semibold text-slate-100 sm:text-sm">
-						{name}
+		<ListRowFrame selected={isSelected}>
+			<button
+				type="button"
+				aria-pressed={isSelected}
+				onClick={() => {
+					if (!onPoliticianSelect) return;
+					const id = personId ?? "";
+					if (!id) return;
+					onPoliticianSelect(id);
+				}}
+				className="w-full rounded-lg px-3 pt-3 pb-2 text-left"
+			>
+				<div className="flex items-start justify-between gap-2">
+					<div className="min-w-0">
+						<div className={rowTitleClass(isSelected)}>{name}</div>
+						{yomikata ? <div className="truncate text-caption text-ink-muted">{yomikata}</div> : null}
 					</div>
-					{yomikata ? (
-						<div className="truncate text-[10px] text-slate-400 sm:text-[11px]">
-							{yomikata}
-						</div>
-					) : null}
+					{kaiha ? <Badge className="shrink-0">{canonicalParty(kaiha)}</Badge> : null}
 				</div>
-				<div className="flex shrink-0 flex-col items-end gap-1">
-					{kaiha ? <Badge className="shrink-0">{kaiha}</Badge> : null}
-					{personId ? (
-						<div className="max-w-[160px] truncate font-mono text-[10px] text-slate-500">
-							{personId}
-						</div>
-					) : null}
-				</div>
-			</div>
 
-			{metaItems.length > 0 ? (
-				<div className="mt-1.5 space-y-0.5 text-[10px] text-slate-400 sm:text-[11px]">
-					{metaItems.map((m) => (
-						<div key={m} className="truncate">
-							{m}
-						</div>
-					))}
-				</div>
-			) : null}
+				{metaItems.length > 0 ? (
+					<div className="mt-1 space-y-0.5 text-caption text-ink-muted">
+						{metaItems.map((m) => (
+							<div key={m} className="truncate">
+								{m}
+							</div>
+						))}
+					</div>
+				) : null}
+			</button>
 
 			{link ? (
-				<div className="mt-1.5">
-					<a
-						href={link}
-						target="_blank"
-						rel="noreferrer"
-						onClick={(e) => e.stopPropagation()}
-						className="text-[10px] text-cyan-300 hover:text-cyan-200 hover:underline sm:text-[11px]"
-					>
+				<div className="px-3 pb-2">
+					<a href={link} target="_blank" rel="noreferrer" className="text-caption text-link underline underline-offset-2">
 						公式ページを見る
 					</a>
 				</div>
 			) : null}
-		</button>
+		</ListRowFrame>
 	);
 }

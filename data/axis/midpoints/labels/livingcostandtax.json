@@ -1,0 +1,578 @@
+{
+ "topic": "livingcostandtax",
+ "axis_notes": {
+  "taxreductionmeasures": "pro = supports tax cuts (esp. consumption-tax cut) as a cost-of-living measure; con = opposes/cautious on tax cuts for fiscal reasons; opposing consumption-tax cut while backing a one-off income-tax cut = neutral",
+  "wageincreasepromotion": "pro = wants wage rises actively promoted/supported by policy; con = caution because of the burden on firms; doubts about specific tools (wage tax credit) alone are not con",
+  "consumptionhaxincrease": "pro = defends/raises consumption tax as stable social-security revenue; con = opposes consumption-tax increases or wants it cut",
+  "smallbusinesssupport": "ILL-DEFINED: con statement still calls for (better) SME support; read as pro = calls for SME support, con = skeptical of/opposes SME support; criticism of big-firm favouritism counted as pro"
+ },
+ "labels": {
+  "56": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "69": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "152": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "205": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "na"
+  },
+  "221": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "256": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "268": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "335": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "394": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "410": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "433": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "568": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "681": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "689": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "neutral",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "808": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "844": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "911": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "neutral",
+   "smallbusinesssupport": "pro"
+  },
+  "1178": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "na"
+  },
+  "1496": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "1619": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "1642": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "1655": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "1711": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "1902": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "1921": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "1958": {
+   "taxreductionmeasures": "na",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "1974": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "1977": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "2010": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "2062": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "2118": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2143": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "neutral",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "2172": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "2177": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "2239": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "2376": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "2377": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "2399": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "neutral",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "2454": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2591": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2655": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "2732": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2776": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2837": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "2865": {
+   "taxreductionmeasures": "na",
+   "wageincreasepromotion": "neutral",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "na"
+  },
+  "2869": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "2943": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "2948": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "pro"
+  },
+  "3040": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "3042": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "neutral"
+  },
+  "3095": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "3400": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "3465": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "3507": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "3512": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "3553": {
+   "taxreductionmeasures": "con",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "pro",
+   "smallbusinesssupport": "na"
+  },
+  "3659": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "neutral",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "3832": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "3857": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "3871": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "3922": {
+   "taxreductionmeasures": "neutral",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "3969": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4008": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4119": {
+   "taxreductionmeasures": "na",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "4290": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4292": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4320": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "4342": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4448": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "4694": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "4733": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "4946": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "5025": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "5112": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "5183": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "na",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "na"
+  },
+  "5184": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "5279": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "5297": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "na"
+  },
+  "5510": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "5541": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "na",
+   "smallbusinesssupport": "pro"
+  },
+  "5712": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "5844": {
+   "taxreductionmeasures": "pro",
+   "wageincreasepromotion": "pro",
+   "consumptionhaxincrease": "con",
+   "smallbusinesssupport": "pro"
+  },
+  "273": {
+   "consumptionhaxincrease": "na"
+  },
+  "452": {
+   "consumptionhaxincrease": "na"
+  },
+  "484": {
+   "consumptionhaxincrease": "pro"
+  },
+  "709": {
+   "consumptionhaxincrease": "con"
+  },
+  "833": {
+   "consumptionhaxincrease": "pro"
+  },
+  "1279": {
+   "consumptionhaxincrease": "neutral"
+  },
+  "1433": {
+   "consumptionhaxincrease": "na"
+  },
+  "1645": {
+   "consumptionhaxincrease": "pro"
+  },
+  "1945": {
+   "consumptionhaxincrease": "pro"
+  },
+  "2083": {
+   "consumptionhaxincrease": "na"
+  },
+  "2338": {
+   "consumptionhaxincrease": "neutral"
+  },
+  "2438": {
+   "consumptionhaxincrease": "na"
+  },
+  "2542": {
+   "consumptionhaxincrease": "na"
+  },
+  "2824": {
+   "consumptionhaxincrease": "na"
+  },
+  "2831": {
+   "consumptionhaxincrease": "na"
+  },
+  "3205": {
+   "consumptionhaxincrease": "con"
+  },
+  "3378": {
+   "consumptionhaxincrease": "na"
+  },
+  "3528": {
+   "consumptionhaxincrease": "na"
+  },
+  "3636": {
+   "consumptionhaxincrease": "na"
+  },
+  "3835": {
+   "consumptionhaxincrease": "na"
+  },
+  "4763": {
+   "consumptionhaxincrease": "con"
+  },
+  "4853": {
+   "consumptionhaxincrease": "na"
+  },
+  "5049": {
+   "consumptionhaxincrease": "na"
+  },
+  "5219": {
+   "consumptionhaxincrease": "na"
+  },
+  "5706": {
+   "consumptionhaxincrease": "na"
+  }
+ }
+}

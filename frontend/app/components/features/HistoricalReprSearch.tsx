@@ -2,7 +2,10 @@
 
 import { useEffect, useMemo, useState, useDeferredValue } from "react";
 import type { AllParliamentMemberTableData } from "@/app/types";
-import { EmptyState } from "@/app/components/shared/EmptyState";
+import { Empty, Loading } from "@/app/components/shared/states";
+import { SearchInput } from "@/app/components/shared/inputs";
+import { Heading } from "@/app/components/shared/Card";
+import { ListRow, rowTitleClass } from "@/app/components/shared/ListRow";
 
 const POPULAR_LIMIT = 10;
 
@@ -37,30 +40,15 @@ function MemberRow({
   onClick: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`w-full rounded-xl border bg-[#020617] px-2.5 py-2 text-left transition ${
-        isSelected
-          ? "border-cyan-300/40 shadow-[0_0_0_1px_rgba(34,211,238,0.35),0_0_28px_rgba(34,211,238,0.18)]"
-          : "border-white/5 hover:border-cyan-300/25 hover:shadow-[0_0_0_1px_rgba(34,211,238,0.25),0_0_22px_rgba(34,211,238,0.12)]"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex min-w-0 items-start gap-2">
-          {rank !== undefined ? (
-            <span className="mt-0.5 w-4 shrink-0 text-right text-[11px] tabular-nums text-cyan-300/70">
-              {rank}
-            </span>
-          ) : null}
-          <div className="min-w-0">
-            <div className="truncate text-[13px] font-semibold text-gray-50">{member.name_kanji}</div>
-            <div className="truncate text-[11px] text-gray-400">{member.name_kana}</div>
-          </div>
+    <ListRow selected={isSelected} onClick={onClick}>
+      <div className="flex min-w-0 items-start gap-2">
+        {rank !== undefined ? <span className="mt-0.5 w-5 shrink-0 text-right text-data text-link">{rank}</span> : null}
+        <div className="min-w-0">
+          <div className={rowTitleClass(isSelected)}>{member.name_kanji}</div>
+          <div className="truncate text-caption text-ink-muted">{member.name_kana}</div>
         </div>
-        <div className="shrink-0 text-[10px] text-gray-500">{member.person_id}</div>
       </div>
-    </button>
+    </ListRow>
   );
 }
 
@@ -118,34 +106,23 @@ export function HistoricalReprSearch({
   }, [allParliamentMemberTable, normalizedQuery]);
 
   return (
-    <div className="rounded-xl border border-slate-400/15 bg-slate-900/40 p-2">
-      <div className="flex items-center gap-2">
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="歴代議員を検索（例：山田 / やまだ）"
-          className="w-full rounded-full border border-slate-400/60 bg-slate-900/95 px-3 py-2 text-[12px] text-gray-100 outline-none placeholder:text-gray-500"
-        />
-        {query ? (
-          <button
-            type="button"
-            onClick={() => setQuery("")}
-            className="shrink-0 rounded-full border border-slate-400/40 bg-slate-900/90 px-3 py-2 text-[11px] text-gray-300 hover:bg-slate-800 hover:text-gray-100"
-          >
-            クリア
-          </button>
-        ) : null}
-      </div>
+    <div>
+      <SearchInput
+        value={query}
+        onValueChange={setQuery}
+        aria-label="歴代議員を検索"
+        placeholder="例：山田／やまだ"
+      />
 
-      <div className="mt-2 max-h-[220px] overflow-y-auto overscroll-contain pr-1">
+      <div className="mt-3 max-h-[260px] overflow-y-auto overscroll-contain pr-1">
         {!allParliamentMemberTable ? (
-          <EmptyState message="歴代議員データが未読み込みです。" className="py-2" />
+          <Loading label="歴代議員データを読み込んでいます…" />
         ) : !normalizedQuery ? (
           popularRows.length > 0 ? (
             <div>
-              <div className="px-1 pb-1.5 text-[10px] font-medium tracking-wide text-gray-400">
+              <Heading level={3} size="label-md" className="pb-2">
                 よく検索されている議員
-              </div>
+              </Heading>
               <div className="grid gap-2">
                 {popularRows.map((r, i) => (
                   <MemberRow
@@ -159,12 +136,10 @@ export function HistoricalReprSearch({
               </div>
             </div>
           ) : (
-            <div className="py-2 text-center text-[11px] text-gray-400">
-              漢字・かな表記で検索できます。
-            </div>
+            <p className="py-2 text-center text-body-sm text-ink-muted">漢字・かな表記で検索できます。</p>
           )
         ) : results && results.length === 0 ? (
-          <EmptyState message="該当する議員が見つかりません。" className="py-2" />
+          <Empty message="該当する議員が見つかりません。別の表記（漢字・かな）でもお試しください。" />
         ) : (
           <div className="grid gap-2">
             {results?.map((r) => (
