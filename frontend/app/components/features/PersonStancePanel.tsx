@@ -17,6 +17,7 @@ import {
   THIN_EVIDENCE_OPINIONS,
   modelDisplayName,
   parseSummary,
+  firstClause,
   personPositions,
   yearMonth,
   type SubTopicPosition,
@@ -78,53 +79,46 @@ function SummaryText({ text }: { text: string }) {
 }
 
 function PositionBar({ pos }: { pos: SubTopicPosition }) {
+  // The bar is centred on the split, so left of centre always reads 反対側 and right of it 賛成側.
   const right = pos.side ? pos.side === "pro" : pos.percentile >= pos.cut;
-  const share = Math.max(1, Math.round((right ? 1 - pos.percentile : pos.percentile) * 100));
+  const share = Math.max(1, Math.round(pos.sideShare * 100));
   const caption =
-    pos.side === "neutral"
-      ? "中立付近"
-      : pos.side
-        ? `${right ? "賛成寄り" : "反対寄り"}（${right ? "賛成" : "反対"}側の端から${share}%）`
-        : `${right ? "賛成側" : "反対側"}の上位${share}%`;
-  const left = `${(pos.percentile * 100).toFixed(1)}%`;
+    pos.side === "neutral" ? "中立付近" : `${right ? "賛成" : "反対"}${pos.side ? "寄り" : "側"}（${right ? "賛成" : "反対"}側の上位${share}%）`;
+  const left = `${(pos.bar * 100).toFixed(1)}%`;
   return (
-    <div className="space-y-0.5">
-      <div className="flex items-baseline justify-between gap-2">
-        <div className="min-w-0 truncate text-caption text-ink" title={pos.label}>
-          {pos.label}
-        </div>
-        <span className="shrink-0 text-data text-ink-muted">{caption}</span>
-      </div>
-      <div className="flex items-center gap-1.5">
-        <span className="shrink-0 text-caption text-ink-muted" title={`反対側の基準文：${pos.con}`}>
-          反対側
-        </span>
+    <div className="space-y-1.5 rounded-lg bg-surface-raised/50 p-2.5">
+      <div className="text-body-sm font-medium text-ink">{pos.label}</div>
+      <div
+        className="relative h-6 w-full rounded-full bg-surface-raised ring-1 ring-line"
+        role="img"
+        aria-label={`${pos.label}：${caption}（${pos.n.toLocaleString()}人中）`}
+      >
+        {pos.band && pos.band[1] > pos.band[0] && (
+          <div
+            className="absolute inset-y-1 bg-surface-hover"
+            style={{ left: `${(pos.band[0] * 100).toFixed(1)}%`, width: `${((pos.band[1] - pos.band[0]) * 100).toFixed(1)}%` }}
+            title="中立帯（賛否が混在する範囲）"
+          />
+        )}
         <div
-          className="relative h-3.5 min-w-0 flex-1 rounded-full bg-surface-raised ring-1 ring-line"
-          role="img"
-          aria-label={`${pos.label}：${caption}（${pos.n.toLocaleString()}人中）`}
-        >
-          {pos.band && pos.band[1] > pos.band[0] && (
-            <div
-              className="absolute inset-y-0.5 bg-surface-hover"
-              style={{ left: `${(pos.band[0] * 100).toFixed(1)}%`, width: `${((pos.band[1] - pos.band[0]) * 100).toFixed(1)}%` }}
-              title="中立帯（賛否が混在する範囲）"
-            />
-          )}
-          <div
-            className="absolute inset-y-0.5 w-px bg-line-strong"
-            style={{ left: `${(pos.cut * 100).toFixed(1)}%` }}
-            title={pos.side ? "賛否の分かれ目（発言の要約から推定）" : "中央値"}
-          />
-          <div
-            className="absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary ring-2 ring-surface"
-            style={{ left }}
-          />
-        </div>
-        <span className="shrink-0 text-caption text-ink-muted" title={`賛成側の基準文：${pos.pro}`}>
-          賛成側
+          className="absolute inset-y-0.5 w-0.5 -translate-x-1/2 bg-line-strong"
+          style={{ left: "50%" }}
+          title={pos.side ? "賛否の分かれ目（発言の要約から推定）" : "中央値"}
+        />
+        <div
+          className="absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary ring-2 ring-surface"
+          style={{ left }}
+        />
+      </div>
+      <div className="flex items-baseline justify-between gap-2 text-caption text-ink-muted">
+        <span className="min-w-0 flex-1 truncate" title={`反対側の基準文：${pos.con}`}>
+          ← 反対：{firstClause(pos.con)}
+        </span>
+        <span className="min-w-0 flex-1 truncate text-right" title={`賛成側の基準文：${pos.pro}`}>
+          {firstClause(pos.pro)}：賛成 →
         </span>
       </div>
+      <div className="text-data text-ink">{caption}</div>
     </div>
   );
 }
@@ -150,80 +144,82 @@ function StanceCard({
   return (
     // Panel does not forward a ref, so the scroll target is a plain wrapper.
     <div ref={cardRef} className="scroll-mt-1">
-    <Panel className="p-0">
+    <Panel className="space-y-3 p-3">
       <Heading level={3} size="title-sm">
-        <button
-          type="button"
-          onClick={onToggle}
-          aria-expanded={open}
-          className="flex w-full items-center justify-between gap-2 rounded-xl p-3 text-left transition-colors duration-150 hover:bg-surface-raised"
-        >
-          <span className="block min-w-0">
-            <span className="flex flex-wrap items-baseline gap-x-2">
-              <span>{topic.topic_jp}</span>
-              <span className="text-caption text-ink-muted">{formatWindow(topic.window)}</span>
-            </span>
-            <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-ink-muted">
-              <span>
-                発言{topic.n_speeches?.toLocaleString() ?? "—"}件・意見文{topic.n_opinions?.toLocaleString() ?? "—"}件
-              </span>
-              {thin ? (
-                <Badge tone="warning" title={`意見文が${THIN_EVIDENCE_OPINIONS}件未満のため、要約と位置の信頼性は低めです`}>
-                  根拠が少ない
-                </Badge>
-              ) : null}
-            </span>
+        <span className="flex flex-wrap items-baseline gap-x-2">
+          <span>{topic.topic_jp}</span>
+          <span className="text-caption text-ink-muted">{formatWindow(topic.window)}</span>
+        </span>
+        <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-caption font-normal text-ink-muted">
+          <span>
+            発言{topic.n_speeches?.toLocaleString() ?? "—"}件・意見文{topic.n_opinions?.toLocaleString() ?? "—"}件
           </span>
-          <IoChevronForward
-            aria-hidden
-            className={"size-4 shrink-0 text-ink-muted transition-transform duration-200 motion-reduce:transition-none " + (open ? "rotate-90" : "")}
-          />
-        </button>
+          {thin ? (
+            <Badge tone="warning" title={`意見文が${THIN_EVIDENCE_OPINIONS}件未満のため、要約と位置の信頼性は低めです`}>
+              根拠が少ない
+            </Badge>
+          ) : null}
+        </span>
       </Heading>
 
-      {open ? (
-        <div className="space-y-3 px-3 pb-3">
-          {runs.length ? <SummaryText text={runs[Math.min(run, runs.length - 1)]} /> : null}
-
-          {runs.length > 1 ? (
-            <div className="flex items-center gap-2 text-caption text-ink-muted">
-              <span>別の要約を見る</span>
-              <SegmentedControl
-                label="要約の実行回"
-                value={String(run)}
-                onChange={(v) => setRun(Number(v))}
-                items={runs.map((_, i) => ({ value: String(i), label: <span className="tabular-nums">{i + 1}</span> }))}
-              />
-            </div>
-          ) : null}
-
-          {positions.length ? (
-            <div className="space-y-2 border-t border-line-subtle pt-3">
-              <Heading level={4}>論点ごとの位置</Heading>
-              {positions.map((p) => (
-                <PositionBar key={p.subTopic} pos={p} />
-              ))}
-              <p className="text-caption text-ink-muted">
-                要約はトピック全体、位置は論点ごとの推定です。位置は推定された議員の中での順位（中央の線が中央値）です。
-              </p>
-            </div>
-          ) : null}
-
-          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line-subtle pt-3">
-            {topic.speech_ids?.length ? (
-              <Button size="sm" onClick={onShowSpeeches}>
-                元になった発言を見る
-              </Button>
-            ) : (
-              <span />
-            )}
-            <span className="text-caption text-ink-muted">
-              要約：{modelDisplayName(topic.model)}
-              {topic.summarised_at ? `・${yearMonth(topic.summarised_at)}` : ""}
-            </span>
-          </div>
+      {positions.length ? (
+        <div className="space-y-2">
+          <Heading level={4}>論点ごとの位置</Heading>
+          {positions.map((p) => (
+            <PositionBar key={p.subTopic} pos={p} />
+          ))}
+          <p className="text-caption text-ink-muted">
+            推定された議員の中での順位です。中央の線が賛否の分かれ目（未較正の論点では中央値）で、左半分が反対側、右半分が賛成側です。
+          </p>
         </div>
       ) : null}
+
+      {runs.length ? (
+        <div className="border-t border-line-subtle pt-2">
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-expanded={open}
+            className="flex w-full items-center justify-between gap-2 rounded-lg px-1 py-1.5 text-left text-body-sm text-ink transition-colors duration-150 hover:bg-surface-raised"
+          >
+            <span>{open ? "AIによる要約を閉じる" : "AIによる要約を見る"}</span>
+            <IoChevronForward
+              aria-hidden
+              className={"size-4 shrink-0 text-ink-muted transition-transform duration-200 motion-reduce:transition-none " + (open ? "rotate-90" : "")}
+            />
+          </button>
+          {open ? (
+            <div className="mt-2 space-y-3">
+              <SummaryText text={runs[Math.min(run, runs.length - 1)]} />
+              {runs.length > 1 ? (
+                <div className="flex items-center gap-2 text-caption text-ink-muted">
+                  <span>別の要約を見る</span>
+                  <SegmentedControl
+                    label="要約の実行回"
+                    value={String(run)}
+                    onChange={(v) => setRun(Number(v))}
+                    items={runs.map((_, i) => ({ value: String(i), label: <span className="tabular-nums">{i + 1}</span> }))}
+                  />
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line-subtle pt-3">
+        {topic.speech_ids?.length ? (
+          <Button size="sm" onClick={onShowSpeeches}>
+            元になった発言を見る
+          </Button>
+        ) : (
+          <span />
+        )}
+        <span className="text-caption text-ink-muted">
+          要約：{modelDisplayName(topic.model)}
+          {topic.summarised_at ? `・${yearMonth(topic.summarised_at)}` : ""}
+        </span>
+      </div>
     </Panel>
     </div>
   );
@@ -247,11 +243,11 @@ export function PersonStancePanel({
     [stances, positions]
   );
 
-  // Open state: the first card and the card the scatter plot asked for are open unless the reader toggled
-  // them. The parent keys this component by person, so toggles reset per person.
+  // Summary open state: every summary starts hidden so the position bars get the room; the reader opens
+  // them per card. The parent keys this component by person, so toggles reset per person.
   const [toggled, setToggled] = useState<Map<string, boolean>>(() => new Map());
   const focusTopic = focus?.topic ?? null;
-  const isOpen = (slug: string) => toggled.get(slug) ?? (slug === topics[0]?.topic || slug === focusTopic);
+  const isOpen = (slug: string) => toggled.get(slug) ?? false;
   const toggle = (slug: string) => setToggled((prev) => new Map(prev).set(slug, !isOpen(slug)));
 
   const cardRefs = useRef(new Map<string, HTMLDivElement>());
