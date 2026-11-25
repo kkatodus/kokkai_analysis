@@ -84,12 +84,37 @@ export const TOUR_STEPS: TourStep[] = [
     title: "議員の詳細パネル",
     body:
       "上部に名前と、AIによる「やり取りの評価」の要約が出ます。\n" +
-      "その下の3つのタブで、発言／やり取り／選挙履歴を切り替えます。左端をドラッグすると幅を変えられます。",
+      "その下の4つのタブで、立場／やり取り／発言／選挙履歴を切り替えます。左端をドラッグすると幅を変えられます。",
     placement: "left",
     scrollBlock: "nearest",
     onEnter: (a, s) => {
       if (!s.personOpen) a.openSamplePerson();
-      a.setDetailPanel("speeches");
+      a.setDetailPanel("stances");
+    },
+  },
+  {
+    id: "stances-tab",
+    target: '[data-tour="detail-pane"]',
+    title: "立場タブ",
+    body:
+      "トピックごとに、各論点での位置をバーで示します。中央の線が賛否の分かれ目で、左が反対側、右が賛成側です。\n" +
+      "「AIによる要約を見る」で発言の要約を開け、「元になった発言を見る」で根拠の発言に飛べます。",
+    placement: "left",
+    scrollBlock: "nearest",
+    onEnter: (a) => a.setDetailPanel("stances"),
+  },
+  {
+    id: "quality-tab",
+    target: '[data-tour="detail-pane"]',
+    title: "やり取りタブ",
+    body:
+      "質問者として・答弁者としての記録を、全議員の平均（白い縦線）と並べて見られます。\n" +
+      "下の一覧は種類・成果・問題点で絞り込め、各行の「会議を閲覧する」でその場面に飛べます。",
+    placement: "left",
+    scrollBlock: "nearest",
+    onEnter: (a) => {
+      a.closeIssue();
+      a.setDetailPanel("quality");
     },
   },
   {
@@ -124,38 +149,16 @@ export const TOUR_STEPS: TourStep[] = [
     },
   },
   {
-    id: "quality-tab",
-    target: '[data-tour="detail-pane"]',
-    title: "やり取りタブ",
-    body:
-      "質問者として・答弁者としての記録を、全議員の平均（白い縦線）と並べて見られます。\n" +
-      "下の一覧は種類・成果・問題点で絞り込め、各行の「会議を閲覧する」でその場面に飛べます。",
-    placement: "left",
-    scrollBlock: "nearest",
-    onEnter: (a) => {
-      a.closeIssue();
-      a.setDetailPanel("quality");
-    },
-  },
-  {
     id: "history-tab",
     target: '[data-tour="detail-pane"]',
     title: "選挙履歴タブ",
     body: "これまでの選挙での当落、選挙区、所属政党を新しい順に並べています。",
     placement: "left",
     scrollBlock: "nearest",
-    onEnter: (a) => a.setDetailPanel("history"),
-  },
-  {
-    id: "stances-tab",
-    target: '[data-tour="detail-pane"]',
-    title: "立場タブ",
-    body:
-      "国会での発言を AI が論点ごとに要約し、各論点での位置と並べています。" +
-      "「元になった発言を見る」で根拠の発言に飛べます。",
-    placement: "left",
-    scrollBlock: "nearest",
-    onEnter: (a) => a.setDetailPanel("stances"),
+    onEnter: (a) => {
+      a.closeIssue();
+      a.setDetailPanel("history");
+    },
   },
   {
     id: "ideology",
