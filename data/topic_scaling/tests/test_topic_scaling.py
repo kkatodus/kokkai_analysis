@@ -184,6 +184,47 @@ def test_projection_sign_and_current_flag(tmp_path: Path, monkeypatch):
 
 
 
+def test_projection_keyword_filter(tmp_path: Path, monkeypatch):
+	"""Only people whose summary mentions an axis keyword are placed on it; x is unchanged by the filter."""
+	from topic_scaling import project as prj
+	from topic_scaling.state import write_json
+	cfg = tsconfig.load_config()
+	state = State(tmp_path / "state")
+	t = make_topic()
+	pro, con = np.array([1.0, 0.0]), np.array([-1.0, 0.0])
+	vecs = {"1": np.array([0.8, 0.1]), "2": np.array([-0.5, 0.3]), "3": np.array([0.0, 1.0])}
+	monkeypatch.setattr(prj, "person_vector", lambda cfg, state, topic, pid, emb: (vecs[pid], {}))
+	monkeypatch.setattr(prj, "reference_vectors", lambda cfg, state, sub, emb: (pro, con))
+	monkeypatch.setattr(prj, "umap_2d", lambda M, k, seed: np.zeros((len(M), 2)))
+	monkeypatch.setattr(prj, "load_midpoints", lambda path: {})
+	write_json(state.summary_path("1", t.name_en), {"summaries": ["再稼働に賛成", "安全確保を重視"]})
+	write_json(state.summary_path("2", t.name_en), {"summaries": ["輸出に反対"]})
+	write_json(state.summary_path("3", t.name_en), {"summaries": ["電気料金の高騰を懸念"]})  # on no axis
+	restart = tsconfig.SubTopic(topic=t, slug="restart", name_jp="再稼働", pro="p", con="c",
+		examples_path=tmp_path / "x.json", keywords=("再稼働",))
+	export = tsconfig.SubTopic(topic=t, slug="export", name_jp="輸出", pro="p", con="c",
+		examples_path=tmp_path / "x.json", keywords=("輸出", "海外展開"))
+	nobody = tsconfig.SubTopic(topic=t, slug="newbuild", name_jp="新設", pro="p", con="c",
+		examples_path=tmp_path / "x.json", keywords=("新設",))
+	pairs = [{"person_id": "1"}, {"person_id": "2"}, {"person_id": "3"}]
+	metas = {1: {"party": "自民"}, 2: {"party": "共産"}, 3: {"party": "自民"}}
+	block = prj.project_topic(cfg, state, t, [restart, export, nobody], pairs, metas, current_ids={1})
+	subs = {s["sub_topic"]: s for s in block["sub_topics"]}
+	assert set(subs) == {"restart", "export"}  # an axis nobody mentions is skipped
+	ids = lambda s: sorted(p["person_id"] for p in s["1d"]["data"])
+	assert ids(subs["restart"]) == [1] and ids(subs["export"]) == [2]
+	assert {p["person_id"]: p["x"] for p in subs["export"]["1d"]["data"]}[2] == pytest.approx(-0.5)
+	assert len(subs["restart"]["2d"]["data"]) == 3 and subs["export"]["2d_current"]["data"] == []
+	assert block["n_scaled"] == 2 and block["n_current"] == 1  # person 3 is on no axis
+	assert block[prj.EMBEDDED_KEY] == ["1", "2", "3"]  # …but keeps the 立場 summary
+	assert prj.on_axis(restart, None) and prj.on_axis(dataclasses_replace(restart, keywords=()), "何でも")
+
+
+def dataclasses_replace(obj, **kw):
+	import dataclasses
+	return dataclasses.replace(obj, **kw)
+
+
 # --- per-person stance files ---
 
 def test_write_person_files(tmp_path: Path, monkeypatch):
@@ -240,6 +281,17 @@ def test_write_person_files(tmp_path: Path, monkeypatch):
 	(cfg.ideology_dir / "persons" / "10.json").unlink()
 	pf = write_person_files(cfg, state, doc, [t2, t], dry_run=True)
 	assert pf.changed == ["ideology/persons/10.json"] and not (cfg.ideology_dir / "persons" / "10.json").exists()
+	# eligible (embedded) people keep a topic's summary even when they are on none of its axes
+	doc_axisless = {"generated_at": doc["generated_at"], "data": [
+		{"topic_en": "Defence", "sub_topics": [{"1d": {"data": [{"person_id": 10}]}}]},
+		{"topic_en": "NuclearPower", "sub_topics": [{"1d": {"data": []}}]}]}
+	write_person_files(cfg, state, doc_axisless, [t2, t], eligible={"Defence": {"10"}, "NuclearPower": {"10"}})
+	body = json.loads((cfg.ideology_dir / "persons" / "10.json").read_text(encoding="utf-8"))
+	assert [e["topic_en"] for e in body["topics"]] == ["Defence", "NuclearPower"]
+	# a topic missing from the document is not published, whatever eligible says
+	write_person_files(cfg, state, {"data": doc_axisless["data"][:1]}, [t2, t], eligible={"Defence": {"10"}, "NuclearPower": {"10"}})
+	body = json.loads((cfg.ideology_dir / "persons" / "10.json").read_text(encoding="utf-8"))
+	assert [e["topic_en"] for e in body["topics"]] == ["Defence"]
 
 # --- members ---
 

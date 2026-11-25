@@ -176,10 +176,14 @@ function StanceCard({
             ))}
           </div>
           <p className="text-caption text-ink-muted">
-            推定された議員の中での順位です。中央の線が賛否の分かれ目（未較正の論点では中央値）で、左半分が反対側、右半分が賛成側です。
+            その論点に触れた議員の中での順位です。中央の線が賛否の分かれ目（未較正の論点では中央値）で、左半分が反対側、右半分が賛成側です。
           </p>
         </div>
-      ) : null}
+      ) : (
+        <p className="rounded-lg bg-surface-raised p-2.5 text-caption text-ink-muted">
+          この議員の発言は、このトピックのどの論点にも当てはまらないため、位置は推定していません。下の要約で発言の内容を確認できます。
+        </p>
+      )}
 
       {runs.length ? (
         <div className="border-t border-line-subtle pt-2">
@@ -244,17 +248,20 @@ export function PersonStancePanel({
 }: PersonStancePanelProps) {
   const positions = useMemo(() => personPositions(ideologyData, Number(personId)), [ideologyData, personId]);
 
-  // Stale-file guard: a topic shows only when the loaded ideology file plots this person on it.
+  // Stale-file guard: a topic shows only when it is in the loaded ideology file. A person can have a summary for
+  // a topic but sit on none of its axes (axes keep only people whose summary mentions their keywords).
+  const loadedTopics = useMemo(() => new Set((ideologyData?.data ?? []).map((t) => t.topic)), [ideologyData]);
   const topics = useMemo(
-    () => (stances?.topics ?? []).filter((t) => positions.has(t.topic) && (t.summaries?.length ?? 0) > 0),
-    [stances, positions]
+    () => (stances?.topics ?? []).filter((t) => loadedTopics.has(t.topic) && (t.summaries?.length ?? 0) > 0),
+    [stances, loadedTopics]
   );
 
-  // Summary open state: every summary starts hidden so the position bars get the room; the reader opens
+  // Summary open state: summaries start hidden so the position bars get the room; the reader opens
   // them per card. The parent keys this component by person, so toggles reset per person.
   const [toggled, setToggled] = useState<Map<string, boolean>>(() => new Map());
   const focusTopic = focus?.topic ?? null;
-  const isOpen = (slug: string) => toggled.get(slug) ?? false;
+  // closed by default, except where there are no position bars and the summary is all the card has
+  const isOpen = (slug: string) => toggled.get(slug) ?? !positions.has(slug);
   const toggle = (slug: string) => setToggled((prev) => new Map(prev).set(slug, !isOpen(slug)));
 
   const cardRefs = useRef(new Map<string, HTMLDivElement>());
