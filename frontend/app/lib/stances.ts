@@ -58,10 +58,14 @@ export interface SubTopicPosition {
   con: string;
   /** share of scaled people with x strictly below this person's, 0…1 */
   percentile: number;
-  /** where the bar's tick goes: the calibrated midpoint, or the median person on uncalibrated axes */
+  /** percentile of the split: the calibrated midpoint, or the median person on uncalibrated axes */
   cut: number;
-  /** neutral band as percentiles, calibrated axes only */
+  /** dot position on the bar, 0…1: rank rescaled so the split sits at the centre (0.5) */
+  bar: number;
+  /** neutral band in bar coordinates, calibrated axes only */
   band: [number, number] | null;
+  /** share of this person's side that sits further toward that side's end, 0…1 */
+  sideShare: number;
   /** which side of the calibrated midpoint this person is on; null on uncalibrated axes */
   side: "pro" | "con" | "neutral" | null;
   n: number;
@@ -74,6 +78,12 @@ function percentileOf(xs: number[], x: number): number {
   return below / (xs.length - 1);
 }
 
+/** Rank → bar: everyone below the split fills the left half, everyone above it the right half. */
+function toBar(p: number, cut: number): number {
+  if (p < cut) return cut > 0 ? (0.5 * p) / cut : 0;
+  return cut < 1 ? 0.5 + (0.5 * (p - cut)) / (1 - cut) : 1;
+}
+
 function subTopicPosition(sub: IdeologySubTopic, personId: number): SubTopicPosition | null {
   const pts = (sub["1d"]?.data ?? []).filter((p) => p.person_id != null && p.ref_point === "none");
   const me = pts.find((p) => p.person_id === personId);
@@ -83,14 +93,20 @@ function subTopicPosition(sub: IdeologySubTopic, personId: number): SubTopicPosi
   const calibrated = ax?.midpoint != null && ax.neutral_from != null && ax.neutral_to != null;
   const median = xs.length % 2 ? xs[(xs.length - 1) / 2] : (xs[xs.length / 2 - 1] + xs[xs.length / 2]) / 2;
   const side = !calibrated ? null : me.x >= ax.neutral_to! ? "pro" : me.x < ax.neutral_from! ? "con" : "neutral";
+  const percentile = percentileOf(xs, me.x);
+  const cut = percentileOf(xs, calibrated ? ax.midpoint! : median);
+  const onPro = side ? side === "pro" || (side === "neutral" && me.x >= ax.midpoint!) : percentile >= cut;
+  const sideShare = onPro ? (cut < 1 ? (1 - percentile) / (1 - cut) : 0) : cut > 0 ? percentile / cut : 0;
   return {
     subTopic: sub.sub_topic,
     label: sub.sub_topic_jp ?? sub.sub_topic,
     pro: sub.axis?.pro ?? "賛成",
     con: sub.axis?.con ?? "反対",
-    percentile: percentileOf(xs, me.x),
-    cut: percentileOf(xs, calibrated ? ax.midpoint! : median),
-    band: calibrated ? [percentileOf(xs, ax.neutral_from!), percentileOf(xs, ax.neutral_to!)] : null,
+    percentile,
+    cut,
+    bar: toBar(percentile, cut),
+    band: calibrated ? [toBar(percentileOf(xs, ax.neutral_from!), cut), toBar(percentileOf(xs, ax.neutral_to!), cut)] : null,
+    sideShare: Math.min(1, Math.max(0, sideShare)),
     side,
     n: xs.length,
   };

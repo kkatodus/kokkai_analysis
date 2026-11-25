@@ -78,15 +78,12 @@ function SummaryText({ text }: { text: string }) {
 }
 
 function PositionBar({ pos }: { pos: SubTopicPosition }) {
+  // The bar is centred on the split, so left of centre always reads 反対側 and right of it 賛成側.
   const right = pos.side ? pos.side === "pro" : pos.percentile >= pos.cut;
-  const share = Math.max(1, Math.round((right ? 1 - pos.percentile : pos.percentile) * 100));
+  const share = Math.max(1, Math.round(pos.sideShare * 100));
   const caption =
-    pos.side === "neutral"
-      ? "中立付近"
-      : pos.side
-        ? `${right ? "賛成寄り" : "反対寄り"}（${right ? "賛成" : "反対"}側の端から${share}%）`
-        : `${right ? "賛成側" : "反対側"}の上位${share}%`;
-  const left = `${(pos.percentile * 100).toFixed(1)}%`;
+    pos.side === "neutral" ? "中立付近" : `${right ? "賛成" : "反対"}${pos.side ? "寄り" : "側"}（${right ? "賛成" : "反対"}側の上位${share}%）`;
+  const left = `${(pos.bar * 100).toFixed(1)}%`;
   return (
     <div className="space-y-0.5">
       <div className="flex items-baseline justify-between gap-2">
@@ -113,7 +110,7 @@ function PositionBar({ pos }: { pos: SubTopicPosition }) {
           )}
           <div
             className="absolute inset-y-0.5 w-px bg-line-strong"
-            style={{ left: `${(pos.cut * 100).toFixed(1)}%` }}
+            style={{ left: "50%" }}
             title={pos.side ? "賛否の分かれ目（発言の要約から推定）" : "中央値"}
           />
           <div
@@ -204,7 +201,7 @@ function StanceCard({
                 <PositionBar key={p.subTopic} pos={p} />
               ))}
               <p className="text-caption text-ink-muted">
-                要約はトピック全体、位置は論点ごとの推定です。位置は推定された議員の中での順位（中央の線が中央値）です。
+                要約はトピック全体、位置は論点ごとの推定です。位置は推定された議員の中での順位で、中央の線が賛否の分かれ目（未較正の論点では中央値）です。左半分が反対側、右半分が賛成側の議員です。
               </p>
             </div>
           ) : null}
