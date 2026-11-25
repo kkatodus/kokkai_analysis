@@ -55,7 +55,7 @@ function topicDisplayName(topic: string): string {
 }
 
 
-const PANEL_ORDER = ["speeches", "quality", "history", "stances"] as const;
+const PANEL_ORDER = ["stances", "quality", "speeches", "history"] as const;
 const PANEL_COUNT = PANEL_ORDER.length;
 /** each panel takes 1/N of the strip; written out so Tailwind sees the class */
 const panelClass = "flex h-full w-1/4 min-w-0 flex-col gap-2 overflow-hidden";
@@ -88,13 +88,13 @@ export function DetailPane({
   const tabsId = useId();
   const resizingRef = useRef<boolean>(false);
 
-  const [activePanel, setActivePanel] = useState<(typeof PANEL_ORDER)[number]>("speeches");
+  const [activePanel, setActivePanel] = useState<(typeof PANEL_ORDER)[number]>(PANEL_ORDER[0]);
 
   const [stanceFocus, setStanceFocus] = useState<{ topic: string | null; nonce: number } | null>(null);
   const handledRequestRef = useRef<number | null>(null);
   const lastPersonRef = useRef<string | null>(null);
   // One effect decides the tab, so a new person opened together with a request (a scatter click) lands on
-  // the requested tab, and any other new person resets to 発言.
+  // the requested tab, and any other new person resets to the first tab (立場).
   useEffect(() => {
     if (!isOpen || !personId) {
       lastPersonRef.current = null;
@@ -105,7 +105,7 @@ export function DetailPane({
       setActivePanel(panelRequest.panel);
       if (panelRequest.panel === "stances") setStanceFocus({ topic: panelRequest.topic ?? null, nonce: panelRequest.nonce });
     } else if (lastPersonRef.current !== personId) {
-      setActivePanel("speeches");
+      setActivePanel(PANEL_ORDER[0]);
     }
     lastPersonRef.current = personId;
   }, [isOpen, personId, panelRequest]);
@@ -494,6 +494,36 @@ export function DetailPane({
             className="flex h-full transition-transform duration-200 ease-out motion-reduce:transition-none"
             style={{ width: `${PANEL_COUNT * 100}%`, transform: `translateX(-${PANEL_ORDER.indexOf(activePanel) * (100 / PANEL_COUNT)}%)` }}
           >
+            <div className={panelClass} aria-hidden={activePanel !== "stances"} inert={activePanel !== "stances"}>
+              <TabPanel idBase={tabsId} value="stances" className="flex h-full min-h-0 flex-col">
+                <PersonStancePanel
+                  key={personId}
+                  personId={personId}
+                  stances={stances}
+                  loading={stancesLoading}
+                  error={stancesError}
+                  ideologyData={ideologyData}
+                  focus={stanceFocus}
+                  onShowSpeeches={showStanceSpeeches}
+                  onOpenMethodology={onOpenMethodology}
+                />
+              </TabPanel>
+            </div>
+            <div className={panelClass} aria-hidden={activePanel !== "quality"} inert={activePanel !== "quality"}>
+              <TabPanel idBase={tabsId} value="quality" className="flex h-full min-h-0 flex-col">
+                <PersonQualityPanel
+                  person={qualityPerson}
+                  totals={qualityAggregate?.totals ?? null}
+                  exchanges={exchanges}
+                  loading={exchangesLoading}
+                  error={exchangesError}
+                  onSelectIssueId={(issueId, speechId) => {
+                    setSelectedIssueId(issueId);
+                    setSelectedIssueSpeechId(speechId ?? null);
+                  }}
+                />
+              </TabPanel>
+            </div>
             <div className={panelClass} aria-hidden={activePanel !== "speeches"} inert={activePanel !== "speeches"}>
               <TabPanel idBase={tabsId} value="speeches" className="flex h-full min-h-0 flex-col">
                 <SpeechRecordCard
@@ -519,39 +549,9 @@ export function DetailPane({
                 />
               </TabPanel>
             </div>
-            <div className={panelClass} aria-hidden={activePanel !== "quality"} inert={activePanel !== "quality"}>
-              <TabPanel idBase={tabsId} value="quality" className="flex h-full min-h-0 flex-col">
-                <PersonQualityPanel
-                  person={qualityPerson}
-                  totals={qualityAggregate?.totals ?? null}
-                  exchanges={exchanges}
-                  loading={exchangesLoading}
-                  error={exchangesError}
-                  onSelectIssueId={(issueId, speechId) => {
-                    setSelectedIssueId(issueId);
-                    setSelectedIssueSpeechId(speechId ?? null);
-                  }}
-                />
-              </TabPanel>
-            </div>
             <div className={panelClass} aria-hidden={activePanel !== "history"} inert={activePanel !== "history"}>
               <TabPanel idBase={tabsId} value="history" className="flex h-full min-h-0 flex-col">
                 <ElectionHistoryCard history={history} historyError={historyError} sorted={sorted} />
-              </TabPanel>
-            </div>
-            <div className={panelClass} aria-hidden={activePanel !== "stances"} inert={activePanel !== "stances"}>
-              <TabPanel idBase={tabsId} value="stances" className="flex h-full min-h-0 flex-col">
-                <PersonStancePanel
-                  key={personId}
-                  personId={personId}
-                  stances={stances}
-                  loading={stancesLoading}
-                  error={stancesError}
-                  ideologyData={ideologyData}
-                  focus={stanceFocus}
-                  onShowSpeeches={showStanceSpeeches}
-                  onOpenMethodology={onOpenMethodology}
-                />
               </TabPanel>
             </div>
           </div>
