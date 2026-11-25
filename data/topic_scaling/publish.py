@@ -124,12 +124,17 @@ def person_topic_entry(cfg: Config, state: State, topic: Topic, pid: str, rec: d
 	return entry
 
 
-def write_person_files(cfg: Config, state: State, doc: dict, topics: List[Topic], dry_run: bool = False) -> PersonFiles:
-	"""Builds ideology/persons/{pid}.json for every plotted person; writes (unless dry_run) only files whose
-	bytes changed and returns them in .changed for the uploader. Never deletes orphans: nothing links to them,
-	and the frontend shows a topic only when the person is in the loaded ideology data for it."""
+def write_person_files(cfg: Config, state: State, doc: dict, topics: List[Topic], dry_run: bool = False,
+		eligible: Optional[Dict[str, set]] = None) -> PersonFiles:
+	"""Builds ideology/persons/{pid}.json for every eligible person; writes (unless dry_run) only files whose
+	bytes changed and returns them in .changed for the uploader. `eligible` is topic_en -> person ids embedded
+	for that topic (run_project passes it, so someone on none of a topic's keyword-filtered axes keeps the
+	summary); default: people plotted in the document. Only topics in the document count. Never deletes orphans:
+	nothing links to them, and the frontend shows a topic only when it is in the loaded ideology data."""
 	pf = PersonFiles(dry_run=dry_run)
 	plotted = plotted_pairs(doc)
+	if eligible is not None:
+		plotted = {te: {str(p) for p in eligible.get(te, ())} for te in plotted}
 	sel = state.selection() or {}
 	by_person: Dict[str, List[Tuple[int, dict]]] = {}
 	for order, topic in enumerate(topics):
