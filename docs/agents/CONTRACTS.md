@@ -31,7 +31,7 @@ point = { idx, x, y, repr, hiragana, house, party, party_full, color, ref_point:
           person_id, current: bool, n_opinions, n_speeches, last_speech }
 ```
 
-`1d.x` is the projection onto the sub-topic axis (0 = halfway between the two reference texts, positive = pro). Raw 0 is not the political middle: `axis.midpoint` is the hand-calibrated x where stances switch from con to pro, with `neutral_from`/`neutral_to` the mixed band (from `data/axis/midpoints.json`; sub-topics found to have no real split are left out of the file; see `data/axis/midpoints/README.md`); the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
+`1d.x` is the projection onto the sub-topic axis (0 = halfway between the two reference texts, positive = pro). Raw 0 is not the political middle: `axis.midpoint` is the hand-calibrated x where stances switch from con to pro, with `neutral_from`/`neutral_to` the mixed band (from `data/axis/midpoints.json`; sub-topics found to have no real split are left out of the file; see `data/axis/midpoints/README.md`); each sub-topic lists only people whose summary mentions one of its `keywords` (axis file), so sub-topics of one topic have different people and `n_scaled`/`n_current` count people on at least one axis; the frontend filters on `current` for the 現職のみ view and swaps `2d` for `2d_current`. Topic/sub-topic keys match `frontend/app/data/available.json`, which stays the manual on/off switch.
 
 ### Per-person stance summaries (`/ideology/person`, spec `specs/stance-summaries-panel/`)
 

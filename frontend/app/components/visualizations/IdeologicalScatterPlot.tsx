@@ -261,11 +261,13 @@ export function IdeologicalScatterPlot({
     const w = selectedTopic?.window;
     if (!w || !w.from) return "";
     const span = `${jaDate(w.from)}〜${w.to ? jaDate(w.to) : "現在"}`;
-    const n = selectedTopic?.n_scaled;
-    const c = selectedTopic?.n_current;
+    // People on this axis: a sub-topic only lists those whose summary mentions its keywords.
+    const pts = selectedSubTopic?.["1d"]?.data?.filter((d) => d.person_id != null && d.ref_point === "none");
+    const n = pts ? pts.length : selectedTopic?.n_scaled;
+    const c = pts ? (pts.some((d) => typeof d.current === "boolean") ? pts.filter((d) => d.current).length : undefined) : selectedTopic?.n_current;
     const counts = n != null ? `・${n.toLocaleString()}人${c != null ? `（現職${c.toLocaleString()}人）` : ""}` : "";
     return `対象期間：${span}${counts}`;
-  }, [selectedTopic]);
+  }, [selectedTopic, selectedSubTopic]);
 
   const titleLabel = useMemo(() => {
     if (!selectedSubTopic) return "";

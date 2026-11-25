@@ -26,5 +26,11 @@ Status per axis:
 The thresholds are fixed `x` values on fixed reference axes, so they stay valid while a person's summary is
 unchanged; re-run after an axis or reference text changes. Applies to the 1D view only (UMAP 2D is not linear).
 
+Keyword filter (2026-11-25): the axis files now carry `keywords`, and `project.py` only places people whose summary
+mentions one of them. `x` does not change, so these midpoints stay valid. Refitting on keyword-matched labels only moved
+them within the bootstrap noise (labels were already `na` for off-topic people, and the fit ignores `na`), so the file
+was left as is. Against the labels, the keywords keep 90–100 % of on-topic people on most axes (71–79 % on
+pensionreformtransparency and benefitburdenbalance, whose labels read the axis broadly).
+
 Rerun the fit: `python3 data/axis/midpoints/fit.py <dir containing labels/>` from the repo root (needs the mirror's
 `ideology.json.gz`).
