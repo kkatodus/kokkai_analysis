@@ -95,7 +95,7 @@ function subTopicPosition(sub: IdeologySubTopic, personId: number): SubTopicPosi
   const side = !calibrated ? null : me.x >= ax.neutral_to! ? "pro" : me.x < ax.neutral_from! ? "con" : "neutral";
   const percentile = percentileOf(xs, me.x);
   const cut = percentileOf(xs, calibrated ? ax.midpoint! : median);
-  const onPro = side ? side === "pro" || (side === "neutral" && me.x >= ax.midpoint!) : percentile >= cut;
+  const onPro = side ? side === "pro" || (side === "neutral" && me.x >= ax!.midpoint!) : percentile >= cut;
   const sideShare = onPro ? (cut < 1 ? (1 - percentile) / (1 - cut) : 0) : cut > 0 ? percentile / cut : 0;
   return {
     subTopic: sub.sub_topic,
