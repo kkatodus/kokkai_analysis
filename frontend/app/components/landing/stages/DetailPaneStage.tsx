@@ -79,8 +79,8 @@ export function DetailPaneStage({ pb, frame }: { pb: Playback; frame: StageFrame
           <div className="mt-2 h-7">
             {tabs && (
               <motion.div initial={from({ opacity: 0, y: 4 })} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-1 rounded-full border border-line bg-surface-raised p-0.5 text-caption">
-                {["発言", "やり取り", "選挙履歴"].map((t, i) => (
-                  <span key={t} className={`flex-1 rounded-full px-2 py-0.5 text-center ${i === 0 ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>
+                {["立場", "やり取り", "発言", "選挙履歴"].map((t) => (
+                  <span key={t} className={`flex-1 rounded-full px-1.5 py-0.5 text-center ${t === "発言" ? "bg-primary-soft text-on-primary-soft" : "text-ink-muted"}`}>
                     {t}
                   </span>
                 ))}
