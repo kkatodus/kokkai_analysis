@@ -10,7 +10,7 @@ import { IoChevronForward } from "react-icons/io5";
 import type { IdeologyData, PersonStances, PersonStanceTopic } from "@/app/types";
 import { Badge } from "@/app/components/shared/Badge";
 import { Button } from "@/app/components/shared/Button";
-import { Heading, Panel } from "@/app/components/shared/Card";
+import { Heading } from "@/app/components/shared/Card";
 import { SegmentedControl } from "@/app/components/shared/Tabs";
 import { Empty, ErrorState, Loading } from "@/app/components/shared/states";
 import {
@@ -86,7 +86,7 @@ function PositionBar({ pos }: { pos: SubTopicPosition }) {
     pos.side === "neutral" ? "中立付近" : `${right ? "賛成" : "反対"}${pos.side ? "寄り" : "側"}（${right ? "賛成" : "反対"}側の上位${share}%）`;
   const left = `${(pos.bar * 100).toFixed(1)}%`;
   return (
-    <div className="space-y-1.5 rounded-lg bg-surface-raised/50 p-2.5">
+    <div className="space-y-1.5 py-2.5">
       <div className="text-body-sm font-medium text-ink">{pos.label}</div>
       <div
         className="relative h-6 w-full rounded-full bg-surface-raised ring-1 ring-line"
@@ -142,10 +142,15 @@ function StanceCard({
   const runs = topic.summaries ?? [];
   const thin = topic.n_opinions != null && topic.n_opinions < THIN_EVIDENCE_OPINIONS;
   return (
-    // Panel does not forward a ref, so the scroll target is a plain wrapper.
+    // Outer wrapper is the scroll target for the scatter plot focus.
     <div ref={cardRef} className="scroll-mt-1">
-    <Panel className="space-y-3 p-3">
-      <Heading level={3} size="title-sm">
+    <div className="space-y-3 rounded-xl border border-line bg-surface p-3">
+      {/* Solid header band with an accent stripe; it sticks while the card scrolls so the topic is always clear. */}
+      <Heading
+        level={3}
+        size="title-md"
+        className="sticky top-0 z-10 -mx-3 -mt-3 rounded-t-xl border-b border-line bg-surface-raised px-3 py-2.5 shadow-[inset_4px_0_0_var(--color-primary)]"
+      >
         <span className="flex flex-wrap items-baseline gap-x-2">
           <span>{topic.topic_jp}</span>
           <span className="text-caption text-ink-muted">{formatWindow(topic.window)}</span>
@@ -165,9 +170,11 @@ function StanceCard({
       {positions.length ? (
         <div className="space-y-2">
           <Heading level={4}>論点ごとの位置</Heading>
-          {positions.map((p) => (
-            <PositionBar key={p.subTopic} pos={p} />
-          ))}
+          <div className="divide-y divide-line-subtle">
+            {positions.map((p) => (
+              <PositionBar key={p.subTopic} pos={p} />
+            ))}
+          </div>
           <p className="text-caption text-ink-muted">
             推定された議員の中での順位です。中央の線が賛否の分かれ目（未較正の論点では中央値）で、左半分が反対側、右半分が賛成側です。
           </p>
@@ -220,7 +227,7 @@ function StanceCard({
           {topic.summarised_at ? `・${yearMonth(topic.summarised_at)}` : ""}
         </span>
       </div>
-    </Panel>
+    </div>
     </div>
   );
 }
@@ -265,7 +272,7 @@ export function PersonStancePanel({
   }, [focusTopic, focus?.nonce, topics]);
 
   return (
-    <div ref={scrollRef} className="relative flex h-full min-h-0 flex-col gap-2 overflow-y-auto pr-1 pb-3">
+    <div ref={scrollRef} className="relative flex h-full min-h-0 flex-col gap-5 overflow-y-auto pr-1 pb-3">
       <div className="rounded-xl bg-info-soft p-3 text-body-sm text-on-info-soft">
         国会での発言から抽出した意見文をAIが論点ごとに要約したものです。氏名は除いて要約しており、
         言い回しが実際の発言と異なることがあります。
